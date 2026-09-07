@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "development_plan",
+  "revision": "foundation-r1",
+  "runtime_schema_implemented": false,
+  "mission": "Reproducible AI-assisted design and testing of nanostructures, components and future nanomachines",
+  "mvp_stage": "NL4",
+  "first_specialization": "DNA_NANOMECHANICS",
+  "stages": [
+    {"id": "NL0", "title": "Scientific scope and references", "depends_on": []},
+    {"id": "NL1", "title": "Executable reference without AI", "depends_on": ["NL0"]},
+    {"id": "NL2", "title": "Validation and provenance", "depends_on": ["NL1"]},
+    {"id": "NL3", "title": "Parameterized nanocomponent lab", "depends_on": ["NL2"]},
+    {"id": "NL4", "title": "AI NanoLab MVP", "depends_on": ["NL3"]},
+    {"id": "NL5", "title": "Validated library and external reproduction", "depends_on": ["NL4"]},
+    {"id": "NL6", "title": "One additional scientific capability", "depends_on": ["NL5"]},
+    {"id": "NL7", "title": "Composition and validated reduced models", "depends_on": ["NL6"]},
+    {"id": "NL8", "title": "Specialized nanomachine research", "depends_on": ["NL7"]}
+  ],
+  "experiments": [
+    {"id": "E0", "acceptance_stage": "NL2", "doc": "docs/experiments/E0_PIPELINE_VALIDATION.md", "required_for_mvp": true},
+    {"id": "E1", "acceptance_stage": "NL2", "doc": "docs/experiments/E1_REFERENCE_REPRODUCTION.md", "required_for_mvp": true},
+    {"id": "E2", "acceptance_stage": "NL3", "doc": "docs/experiments/E2_HINGE_COMPONENT.md", "required_for_mvp": true},
+    {"id": "E3", "acceptance_stage": "NL4", "doc": "docs/experiments/E3_AI_BENCHMARK.md", "required_for_mvp": true},
+    {"id": "E4", "acceptance_stage": "NL6", "doc": "docs/experiments/E4_FREE_ENERGY_CHALLENGE.md", "required_for_mvp": false},
+    {"id": "E5", "acceptance_stage": "NL6", "doc": "docs/experiments/E5_DRIVEN_COMPONENT.md", "required_for_mvp": false},
+    {"id": "E6", "acceptance_stage": "NL6", "doc": "docs/experiments/E6_ATOMISTIC_ADAPTER.md", "required_for_mvp": false}
+  ],
+  "tasks": [
+    {"id": "NL0-001", "stage": "NL0", "title": "Select accessible references", "depends_on": [], "doc": "docs/work/WO-NL0-001.md"},
+    {"id": "NL0-002", "stage": "NL0", "title": "Audit dependencies and licenses", "depends_on": ["NL0-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL0-003", "stage": "NL0", "title": "Preregister reference protocol", "depends_on": ["NL0-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL1-001", "stage": "NL1", "title": "Pin environment and upstream smoke", "depends_on": ["NL0-002", "NL0-003"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL1-002", "stage": "NL1", "title": "Run vertical reference path", "depends_on": ["NL1-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL2-001", "stage": "NL2", "title": "Implement contracts and E0", "depends_on": ["NL1-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL2-002", "stage": "NL2", "title": "Validate statistics and E1", "depends_on": ["NL2-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL2-003", "stage": "NL2", "title": "Integrate workflow provenance and recovery", "depends_on": ["NL2-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL3-001", "stage": "NL3", "title": "Register hinge design family", "depends_on": ["NL2-003"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL3-002", "stage": "NL3", "title": "Execute E2 component campaign", "depends_on": ["NL3-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL4-001", "stage": "NL4", "title": "Implement bounded researcher agent", "depends_on": ["NL3-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL4-002", "stage": "NL4", "title": "Execute E3 AI benchmark", "depends_on": ["NL4-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL4-003", "stage": "NL4", "title": "Package user-facing MVP", "depends_on": ["NL4-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL5-001", "stage": "NL5", "title": "Publish validated component library", "depends_on": ["NL4-003"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL5-002", "stage": "NL5", "title": "Obtain external reproduction", "depends_on": ["NL5-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL6-001", "stage": "NL6", "title": "Select and validate one extension", "depends_on": ["NL5-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL7-001", "stage": "NL7", "title": "Validate composition and reduced models", "depends_on": ["NL6-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL8-001", "stage": "NL8", "title": "Specify nanomachine energy and control study", "depends_on": ["NL7-001"], "doc": "docs/work/WORK_QUEUE.md"}
+  ]
+}

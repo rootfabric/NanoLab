@@ -1,0 +1,21 @@
+{
+  "subject_commit": "2f3a491cab4fedcf2c2fa54d7d70451c13fccfa0",
+  "subject_tree": "f4c512d644a0e5113d03bce93f2e366bb90eea81",
+  "verified_blob_shas": {
+    "plan.json": "c3e854dacbcac9dd0b50fc611a01aef3f2008f4b",
+    "state.json": "1ffbabcb6c0f1eb331403a6fad2173aa80400164"
+  },
+  "json_parse": "PASS",
+  "stage_graph": "PASS",
+  "task_graph": "PASS",
+  "state_id_consistency": "PASS",
+  "initial_status_consistency": "PASS",
+  "mvp_boundary": "PASS",
+  "registry_doc_targets": "PASS_MANUAL_REMOTE_MANIFEST",
+  "stages": 9,
+  "tasks": 18,
+  "experiments": 7,
+  "full_checkout": "NOT_AVAILABLE_DNS_FAILURE",
+  "full_markdown_link_scan": "NOT_RUN",
+  "physics_tests": "NOT_RUN"
+}

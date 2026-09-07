@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "project_state",
+  "foundation": "DOCUMENTED",
+  "frontier": "NL0",
+  "next_work_order": "NL0-001",
+  "completed_tasks": [],
+  "active_tasks": [],
+  "task_status": {
+    "NL0-001": "READY",
+    "NL0-002": "PLANNED",
+    "NL0-003": "PLANNED",
+    "NL1-001": "PLANNED",
+    "NL1-002": "PLANNED",
+    "NL2-001": "PLANNED",
+    "NL2-002": "PLANNED",
+    "NL2-003": "PLANNED",
+    "NL3-001": "PLANNED",
+    "NL3-002": "PLANNED",
+    "NL4-001": "PLANNED",
+    "NL4-002": "PLANNED",
+    "NL4-003": "PLANNED",
+    "NL5-001": "PLANNED",
+    "NL5-002": "PLANNED",
+    "NL6-001": "PLANNED",
+    "NL7-001": "PLANNED",
+    "NL8-001": "PLANNED"
+  },
+  "stage_status": {
+    "NL0": "PLANNED",
+    "NL1": "PLANNED",
+    "NL2": "PLANNED",
+    "NL3": "PLANNED",
+    "NL4": "PLANNED",
+    "NL5": "PLANNED",
+    "NL6": "PLANNED",
+    "NL7": "PLANNED",
+    "NL8": "PLANNED"
+  },
+  "experiment_status": {
+    "E0": "NOT_RUN",
+    "E1": "NOT_RUN",
+    "E2": "NOT_RUN",
+    "E3": "NOT_RUN",
+    "E4": "NOT_RUN",
+    "E5": "NOT_RUN",
+    "E6": "NOT_RUN"
+  },
+  "execution": {
+    "runtime_implemented": false,
+    "physics_runs": 0,
+    "ai_campaigns": 0,
+    "external_reproductions": 0,
+    "paid_compute_authorized": false
+  },
+  "open_decisions": [
+    "Exact E1 reference and E2 design files",
+    "Source redistribution rights and NanoLab license",
+    "Pinned engine environment and model version",
+    "Preregistered numerical and statistical tolerances",
+    "Measured resource budget"
+  ],
+  "github_tracking": {
+    "roadmap_issue": 1,
+    "task_issues": {
+      "NL0-001": 2,
+      "NL0-002": 3,
+      "NL0-003": 4
+    },
+    "stage_issues": {
+      "NL1": 5,
+      "NL2": 6,
+      "NL3": 7,
+      "NL4": 8
+    }
+  }
+}
