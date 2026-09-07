@@ -27,13 +27,24 @@
     "NL8-001": "PLANNED"
   },
   "stage_status": {
-    "NL0": "PLANNED", "NL1": "PLANNED", "NL2": "PLANNED",
-    "NL3": "PLANNED", "NL4": "PLANNED", "NL5": "PLANNED",
-    "NL6": "PLANNED", "NL7": "PLANNED", "NL8": "PLANNED"
+    "NL0": "PLANNED",
+    "NL1": "PLANNED",
+    "NL2": "PLANNED",
+    "NL3": "PLANNED",
+    "NL4": "PLANNED",
+    "NL5": "PLANNED",
+    "NL6": "PLANNED",
+    "NL7": "PLANNED",
+    "NL8": "PLANNED"
   },
   "experiment_status": {
-    "E0": "NOT_RUN", "E1": "NOT_RUN", "E2": "NOT_RUN",
-    "E3": "NOT_RUN", "E4": "NOT_RUN", "E5": "NOT_RUN", "E6": "NOT_RUN"
+    "E0": "NOT_RUN",
+    "E1": "NOT_RUN",
+    "E2": "NOT_RUN",
+    "E3": "NOT_RUN",
+    "E4": "NOT_RUN",
+    "E5": "NOT_RUN",
+    "E6": "NOT_RUN"
   },
   "execution": {
     "runtime_implemented": false,
@@ -49,5 +60,18 @@
     "Preregistered numerical and statistical tolerances",
     "Measured resource budget"
   ],
-  "github_tracking": {}
+  "github_tracking": {
+    "roadmap_issue": 1,
+    "task_issues": {
+      "NL0-001": 2,
+      "NL0-002": 3,
+      "NL0-003": 4
+    },
+    "stage_issues": {
+      "NL1": 5,
+      "NL2": 6,
+      "NL3": 7,
+      "NL4": 8
+    }
+  }
 }

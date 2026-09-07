@@ -18,7 +18,9 @@
 ## Работа и доказательства
 
 - [Очередь работ](work/WORK_QUEUE.md), [первое задание](work/WO-NL0-001.md), [старт агента](work/AGENT_START.md).
+- [GitHub Issues и связь с планом](work/GITHUB_TRACKING.md).
 - [Машиночитаемый план](../project/plan.json), [текущее состояние](../project/state.json), [журнал передачи работы](work/SESSION_LOG.md).
-- [Требования к evidence](evidence/README.md), [участие](../CONTRIBUTING.md), [лицензирование](../LICENSE_POLICY.md).
+- [Требования к evidence](evidence/README.md), [проверка фундамента](evidence/FOUNDATION_R1_CHECKS.md).
+- [Участие](../CONTRIBUTING.md), [лицензирование](../LICENSE_POLICY.md).
 
 Документы задают замысел и критерии. `project/state.json` задаёт текущую стадию. `project/plan.json` задаёт идентификаторы и зависимости работ. GitHub Issues служат рабочими обсуждениями, но не подменяют научные доказательства.
