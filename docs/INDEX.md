@@ -13,6 +13,14 @@
 - [Branching & Git](control/BRANCHING_AND_GIT_RU.md) — ветки, commits и PR.
 - [Источник harness](control/HARNESS_SOURCE_NOTE.md) — какие части DWS использованы как база.
 
+## Инфраструктура
+
+- [INFRA overview](infra/README.md) — отдельная parallel capability line.
+- [INFRA roadmap](infra/ROADMAP.md) — INFRA0–INFRA7 и граница INFRA MVP.
+- [Security model](infra/SECURITY_MODEL.md) — публичный repo, trust zones и self-hosted runner policy.
+- [Execution backends](infra/EXECUTION_BACKENDS.md) — hosted/CPU/GPU/HPC executor contracts.
+- [INFRA plan](../project/infra-plan.json), [INFRA state](../project/infra-state.json), [первый Work Order](work/WO-INFRA0-001.md).
+
 ## Система
 
 - [Архитектура](ARCHITECTURE.md), [контракты данных](DATA_CONTRACTS.md), [ИИ и управление исследованиями](AI_ORCHESTRATION.md).
@@ -28,13 +36,13 @@
 
 ## Работа и доказательства
 
-- [Очередь работ](work/WORK_QUEUE.md), [первое задание](work/WO-NL0-001.md), [старт агента](work/AGENT_START.md).
+- [Очередь работ](work/WORK_QUEUE.md), [первое научное задание](work/WO-NL0-001.md), [старт агента](work/AGENT_START.md).
 - [Шаблон Work Order](work/templates/WORK_ORDER_TEMPLATE.md), [Branch Passport](work/templates/BRANCH_PASSPORT_TEMPLATE.md).
 - [GitHub Issues и связь с планом](work/GITHUB_TRACKING.md).
-- [Машиночитаемый план](../project/plan.json), [текущее состояние](../project/state.json), [журнал передачи работы](work/SESSION_LOG.md).
+- [Машиночитаемый научный план](../project/plan.json), [текущее научное состояние](../project/state.json), [журнал передачи работы](work/SESSION_LOG.md).
 - [Требования к evidence](evidence/README.md), [Evidence Map template](evidence/EVIDENCE_MAP_TEMPLATE.md), [Scientific Review template](review/SCIENTIFIC_REVIEW_TEMPLATE.md).
 - [Участие](../CONTRIBUTING.md), [лицензирование](../LICENSE_POLICY.md).
 
-Machine contracts находятся в `config/control/harness/`, исполняемый lightweight controller — в `scripts/harness/`.
+Machine contracts Harness находятся в `config/control/harness/`, исполняемый lightweight controller — в `scripts/harness/`.
 
-Документы задают замысел и критерии. `project/state.json` задаёт текущую стадию. `project/plan.json` задаёт идентификаторы и зависимости работ. GitHub Issues служат рабочими обсуждениями, но не подменяют научные доказательства.
+Научный `project/state.json` и инфраструктурный `project/infra-state.json` принадлежат `main`, но отвечают за разные плоскости: первый — scientific/product frontier, второй — compute capability frontier. INFRA не может самостоятельно повысить scientific claim или закрыть NL checkpoint.

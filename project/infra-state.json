@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "parallel_capability_state",
+  "track": "INFRA",
+  "revision": "infra-roadmap-r1",
+  "frontier": "INFRA0",
+  "next_work_order": "INFRA0-001",
+  "checkpoint_status": {
+    "INFRA0":"PLANNED",
+    "INFRA1":"PLANNED",
+    "INFRA2":"PLANNED",
+    "INFRA3":"PLANNED",
+    "INFRA4":"PLANNED",
+    "INFRA5":"PLANNED",
+    "INFRA6":"PLANNED",
+    "INFRA7":"PLANNED"
+  },
+  "task_status": {
+    "INFRA0-001":"READY",
+    "INFRA1-001":"PLANNED",
+    "INFRA1-002":"PLANNED",
+    "INFRA2-001":"PLANNED",
+    "INFRA2-002":"PLANNED",
+    "INFRA3-001":"PLANNED",
+    "INFRA3-002":"PLANNED",
+    "INFRA4-001":"PLANNED",
+    "INFRA4-002":"PLANNED",
+    "INFRA5-001":"PLANNED",
+    "INFRA5-002":"PLANNED",
+    "INFRA6-001":"PLANNED",
+    "INFRA6-002":"PLANNED",
+    "INFRA7-001":"PLANNED"
+  },
+  "capabilities": {
+    "hosted_ci": false,
+    "self_hosted_cpu": false,
+    "reproducible_scientific_executor": false,
+    "artifact_store": false,
+    "self_hosted_gpu": false,
+    "scheduler": false,
+    "hpc_federation": false
+  },
+  "scientific_state_owned": false,
+  "open_decisions": [
+    "self-hosted server OS and isolation technology",
+    "artifact storage backend",
+    "runner registration and access policy",
+    "GPU node availability and CUDA baseline",
+    "AiiDA integration timing"
+  ],
+  "github_tracking": {}
+}
