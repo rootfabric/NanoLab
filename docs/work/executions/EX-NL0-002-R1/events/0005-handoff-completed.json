@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-08T07:00:00Z",
+  "execution_id": "EX-NL0-002-R1",
+  "work_order_id": "NL0-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "26a5adc79d0d4f3ed5e3ddf634c816d3596d1dbf",
+  "summary": "Implementer scope complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 26a5adc79d0d4f3ed5e3ddf634c816d3596d1dbf (tree 17bbba3d2b6807fe8fc23730972f4b5eccb1bf17) — коммиту, содержащему все substantive артефакты (matrix, audit, evidence, updates, summary). Единственный commit после terminal event содержит только этот event и статус passport/branch-passport и не меняет substantive result. Права: E1 CLEAR (GPL-3.0, DOWNLOAD_ON_SETUP); E2 UNKNOWN (REFERENCE_ONLY, owner decision); лицензия NanoLab не назначена; сторонние файлы не копировались; симуляции не запускались. ACCEPTED не выставлен.",
+  "command_refs": [],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL0-002-R1/summary.md",
+    "docs/evidence/NL0-002/IMPLEMENTER_EVIDENCE.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md"
+  ],
+  "next_action": "VERIFIER: независимая проверка матрицы/аудита по exact substantive HEAD 26a5adc; владелец: решения по лицензии NanoLab и E2-запросу авторам. Merge — Human Gate.",
+  "blocker": null
+}

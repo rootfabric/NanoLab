@@ -6,8 +6,8 @@
 
 ```text
 BASE_SHA            = 95b1319600bcc64572d84c0456acb927802ab806
-START_COMMIT        = 6a35586642bc9162e5b6f02ab4071a4332a30b45 (harness: start NL0-002 rights audit)
-CORE_RIGHTS_COMMIT  = 57fea0628df0126ace877c81bdd60b8ad476536f3 (research: checkpoint NL0-002 core rights audit)
+START_COMMIT        = 6a355862039dbfb085079fe875718c07be3a9b2f (harness: start NL0-002 rights audit)
+CORE_RIGHTS_COMMIT  = 57fea0628df0126ace877c81bdd60b8ad476536f (research: checkpoint NL0-002 core rights audit)
 ```
 
 Live state на старте: `main` = `95b1319`, `project/state.json`: frontier NL0, NL0-001 ACCEPTED, NL0-002 READY, next_work_order NL0-002, E0..E6 NOT_RUN, physics_runs 0 — совпало с ожидаемым.

@@ -9,8 +9,8 @@ TREE     = фиксируется terminal event 0005 и PR (candidate head)
 ## Binding (hardening: terminal event ↔ final handoff HEAD)
 
 ```text
-START_COMMIT              = 6a35586642bc9162e5b6f02ab4071a4332a30b45  (harness: start)
-CORE_RIGHTS_COMMIT        = 57fea0628df0126ace877c81bdd60b8ad476536f3  (research: core rights checkpoint)
+START_COMMIT              = 6a355862039dbfb085079fe875718c07be3a9b2f  (harness: start)
+CORE_RIGHTS_COMMIT        = 57fea0628df0126ace877c81bdd60b8ad476536f  (research: core rights checkpoint)
 IMPLEMENTATION_COMMIT     = 0b51aa179342ae73c6a81db3a5eaf4c77e92ffe7  (research: evidence package)
 EVENT_SHA_BINDING_COMMIT  = 73ac4c1cfcc813d88f61a5e3e5e94c5f1f4ede23  (harness: event sha fix)
 SUBSTANTIVE_HEAD          = коммит, непосредственно предшествующий terminal event
