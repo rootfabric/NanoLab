@@ -108,6 +108,8 @@ Repository: [lorenzo-rovigatti/oxDNA](https://github.com/lorenzo-rovigatti/oxDNA
 
 Root repository license на inspected commit: GNU GPL v3. Exact paths, Git object identities и SHA-256 выбранного DSDNA8 пакета находятся в `INPUT_AVAILABILITY.md`.
 
+NL0-002 подтвердил независимо (GitHub API на pinned commit): root `LICENSE` = полный текст GPL-3.0, blob `94a9ed024d3859793618152ea559a168bbcbb5e2`; отдельных лицензий для `test/` нет → fixtures покрыты GPLv3. Обязательные citation: Poppleton JOSS 2023, Rovigatti JCC 2015, Poppleton NAR 2020. Режим: `DOWNLOAD_ON_SETUP`; подробности — [RIGHTS_AND_REDISTRIBUTION_AUDIT.md](RIGHTS_AND_REDISTRIBUTION_AUDIT.md) §1.
+
 ## S16 — Shi–Castro–Arya compliant DNA hinges — выбранный E2 source
 
 Shi, Castro, Arya, *Conformational Dynamics of Mechanically Compliant DNA Nanostructures from Coarse-Grained Molecular Dynamics Simulations*, DOI **10.1021/acsnano.7b00242**.
@@ -117,6 +119,8 @@ Shi, Castro, Arya, *Conformational Dynamics of Mechanically Compliant DNA Nanost
 NL0-001 подтвердил прямую связь статьи с repository и pinned repository commit `23fd1ff7731e9017bd776f49206dc42d70d9fe91`, tree `b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9`. В нём реально присутствуют caDNAno designs `0b/11b/32b/53b/74b`, подготовительные scripts, pre-equilibrated `.conf`, `.top` и CPU/GPU input files. Статья сообщает oxDNA2 и параметрическое семейство compliant springs, поэтому этот источник выбран executable seed для E2.
 
 Ограничение: в полном inspected tree отдельный `LICENSE` файл не обнаружен. Public repository visibility не считается лицензией; redistribution/use audit перед копированием — NL0-002.
+
+NL0-002 подтвердил независимо (GitHub API, полный live-tree перечёт pinned commit): LICENSE/COPYING/NOTICE отсутствуют во всём tree; GitHub license detection пустая; репозиторий статичен с 2017-04-04; все README прочитаны — правовых statements нет. `REDISTRIBUTION_RIGHTS = UNKNOWN`; режим `REFERENCE_ONLY` + user-side download by exact commit; `MovieS1.mp4` и статья — отдельные copyright, в NanoLab не переносятся. Решение за владельцем (контакт авторов); подробности — [RIGHTS_AND_REDISTRIBUTION_AUDIT.md](RIGHTS_AND_REDISTRIBUTION_AUDIT.md) §2.
 
 ## S17 — Leaf-spring nanoengine — будущий rich benchmark
 

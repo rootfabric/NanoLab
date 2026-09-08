@@ -49,3 +49,15 @@ Director decision: `NL0-001 = ACCEPTED`. Канонически приняты E
 State transition: `NL0` остаётся `IN_PROGRESS`; `NL0-002` и `NL0-003` становятся `READY`; scheduler priority — `NL0-002`. Полный acceptance record: `docs/evidence/NL0-001/DIRECTOR_ACCEPTANCE_R1.md`.
 
 Следующее действие: выполнить `NL0-002` license/redistribution audit; `NL0-003` может готовиться параллельно отдельным Work Order при отсутствии file/scope conflict.
+
+## EX-NL0-002-R1 — аудит прав и лицензий
+
+Canonical base: `95b1319600bcc64572d84c0456acb927802ab806`. Branch: `work/nl0-002-license-rights-audit-r1`. Durable START commit: `6a35586` (pushed до substantive work). Core rights checkpoint: `57fea06`.
+
+Независимая live-проверка через GitHub API на pinned commits. E1: root LICENSE репозитория oxDNA — полный GPL-3.0 текст (blob `94a9ed0`), fixtures покрыты root license, citation-обязанности в README; `E1_RIGHTS = CLEAR`, режим `DOWNLOAD_ON_SETUP`. E2: полный tree `DNA-hinge-simulations@23fd1ff` не содержит LICENSE нигде, GitHub license detection пустая, README без правовых statements; `REDISTRIBUTION_RIGHTS = UNKNOWN`, режим `REFERENCE_ONLY` + user-side download by exact commit, решение за владельцем (контакт авторов). S08 — `RESTRICTED` (cite-only). NANOBASE — per-record UNKNOWN. MVP-зависимости: MIT (scadnano, PyMBAR, AiiDA, aiida-shell, Ax, BoTorch) и GPL-3.0 (oxDNA stack, oxView); всё CLEAR как отдельно устанавливаемые зависимости. Варианты лицензии NanoLab (Apache-2.0/MIT/GPL-3.0-or-later + CC BY/CC BY-SA для документации) подготовлены, лицензия не назначена.
+
+Incident (environment, не scientific): внешняя реструктуризация workspace в середине исполнения заменила одиночный checkout на клоны main/nl0-002; два несоммиченных research-файла потеряны из working tree и восстановлены дословно из сессионного содержимого; remote branch и все push-коммиты не пострадали.
+
+Ни один physics run не запускался; E0–E6 остаются `NOT_RUN`; сторонние научные файлы в NanoLab не копировались. Implementer не выставляет ACCEPTED; результат передаётся независимому Verifier (LOW risk) с явными owner decisions.
+
+Следующее действие: independent Verifier проверяет матрицу/audit по exact HEAD; владелец решает лицензию NanoLab и судьбу E2-запроса авторам.

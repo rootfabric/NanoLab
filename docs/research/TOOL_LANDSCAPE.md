@@ -18,6 +18,8 @@
 
 Источники: [S01–S13](SOURCES.md). Все статусы интеграции: NOT_IMPLEMENTED. Предпочтение библиотеки не является зависимостью, уже установленной в репозитории.
 
+NL0-002 проверил первичные лицензии первой группы: scadnano — MIT; oxDNA/oxpy и analysis tools — GPL-3.0; oxView — GPL-3.0; PyMBAR — MIT; AiiDA — MIT; aiida-shell — MIT; Ax и BoTorch — MIT (planned, E3). GPL-компоненты подключаются как отдельно устанавливаемые зависимости, не vendored-код. Полная матрица с evidence и режимами доступа: [DEPENDENCY_LICENSE_MATRIX.md](DEPENDENCY_LICENSE_MATRIX.md). NANOBASE — per-record права UNKNOWN, режим `REFERENCE_ONLY`.
+
 ## Сохранённые кандидаты следующих специализаций
 
 | Направление | Проекты для проверки | Исследовательский вопрос |
