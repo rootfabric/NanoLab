@@ -10,7 +10,7 @@
 - Allowed paths: see `passport.json`
 - Status: `HANDOFF_READY`
 - Active experiment campaigns: none
-- Substantive HEAD (terminal binding): `26a5adc79d0d4f3ed5e3ddf634c816d3596d1dbf` (tree `17bbba3d2b6807fe8fc23730972f4b5eccb1bf17`)
+- Substantive HEAD (terminal binding): `712dab78170b2ac50c088cda4265905e3b77a12a` (tree `968aafd9e538835419070a7b75da579f8e33ef8e`)
 - Last durable event: `0005-handoff-completed`
 - Next action: independent VERIFIER (LOW risk); owner decisions on license and E2
 - Blocking issue: none
