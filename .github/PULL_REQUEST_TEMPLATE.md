@@ -1,23 +1,42 @@
-## Цель
+## Identity
 
-Work ID, стадия и результат. Указать scope и незатронутые направления.
+- Work Order / checkpoint:
+- Execution ID:
+- Risk class / claim class:
+- Exact base SHA:
+- Exact head SHA / tree:
 
-## Изменения
+## Goal and scope
 
-Код, документация, данные или протокол. Изменился ли критерий приёмки?
+Что должно быть доказано/реализовано. Allowed paths и явно незатронутые направления.
 
-## Проверки
+## Durable execution report
 
-Точные команды и результаты; subject commit; ссылки на evidence. Отдельно указать невыполненные проверки.
+- START commit/passport:
+- CONTINUATION checkpoints:
+- HANDOFF/BLOCKED event:
+- `CONTROL_WORK close` result:
 
-## Научный статус
+## Changes
 
-Различить documentation check, software check, physics reproduction и scientific campaign. Не утверждать независимость собственного повторного прогона.
+Код, документация, data contracts или protocol. Изменился ли scientific observable/acceptance criterion/model?
 
-## Риски и права
+## Validation
 
-Модельные ограничения, лицензии, вычислительные расходы, секреты/крупные артефакты.
+Точные команды, exit codes, test summaries и evidence paths. Отдельно указать невыполненные проверки и skips.
 
-## Передача работы
+## Experiments
 
-Обновлены ли project/state.json и SESSION_LOG только в подтверждённой части? Одно следующее действие.
+Campaign/run IDs, frozen subjects, protocol revisions, artifact manifests/digests. Разделить execution outcome и scientific outcome. Отрицательные/inconclusive runs перечислить явно.
+
+## Review
+
+Reviewer/Verifier verdict, freshness exact-head evidence, remaining required fixes и claim ceiling.
+
+## Risks / rights / resources
+
+Model limitations, licenses, compute cost, secrets, large artifacts и external storage.
+
+## Handoff
+
+Обновлены только подтверждённые project/state поля. Одно следующее действие. Merge в `main` — Human Gate, если явно не разрешён текущей mission.
