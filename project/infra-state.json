@@ -48,5 +48,10 @@
     "GPU node availability and CUDA baseline",
     "AiiDA integration timing"
   ],
-  "github_tracking": {}
+  "github_tracking": {
+    "roadmap_issue": 12,
+    "task_issues": {
+      "INFRA0-001": 13
+    }
+  }
 }
