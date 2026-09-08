@@ -6,7 +6,7 @@
   "work_order_id": "NL0-002",
   "event_type": "IMPLEMENTATION_COMMITTED",
   "actor_role": "IMPLEMENTER",
-  "subject_sha": "PENDING-COMMIT",
+  "subject_sha": "0b51aa179342ae73c6a81db3a5eaf4c77e92ffe7",
   "summary": "Полный NL0-002 package закоммичен: DEPENDENCY_LICENSE_MATRIX (9 CLEAR / 1 RESTRICTED / 3 UNKNOWN), RIGHTS_AND_REDISTRIBUTION_AUDIT, обновления LICENSE_POLICY/SOURCES/TOOL_LANDSCAPE/SESSION_LOG, IMPLEMENTER_EVIDENCE. project/state.json и plan.json не изменялись. Лицензия NanoLab не назначена; сторонние файлы не копировались; симуляции не запускались.",
   "command_refs": [
     "git add -A; git commit (updates + evidence)"
