@@ -8,11 +8,11 @@
 - Risk class: `HIGH` (`candidate_selection`)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json`
-- Current durable subject: `3c94662340f1885d4aa6fe4360d4f4676bfe9bb8`
-- Status: `IN_PROGRESS`
+- Implementer research subject: `dd5cef3c8bd7212c64da4c80fedb5ca03169eac9`
+- Status: `HANDOFF_READY`
 - Active experiment campaigns: none
-- Last durable event: `0002-continuation-checkpoint`
-- Next action: write bounded source-selection evidence and hand off for independent review
-- Blocking issue: S08 machine-readable design/topology/config pack not yet located; this does not block selecting E1
+- Last durable event: `0005-handoff-completed`
+- Next action: independent Reviewer → Verifier
+- Blocking issue: none for handoff; licensing/protocol questions are explicit next Work Orders
 
-No scientific simulation has been run. Current findings are source/input availability facts and candidate-selection analysis.
+No scientific simulation has been run. This branch is not ACCEPTED by its implementer.

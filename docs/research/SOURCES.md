@@ -1,6 +1,6 @@
 # Источники и границы проверки
 
-Версия: foundation-r1. Ниже — первичные документации и публикации, проверенные при подготовке фундамента. Проверка описания инструмента не означает проверку установки, лицензий всех артефактов, исходных файлов статьи или совместной интеграции. Запуски NanoLab по этим источникам ещё не выполнялись.
+Версия: foundation-r1 + NL0-001 source-selection update. Проверка описания инструмента или наличие публичного repository не означает проверку интеграции, всех прав или физическую валидацию. Запуски E0–E6 NanoLab по этим источникам ещё не выполнялись.
 
 ## S01 — oxDNA, oxpy и analysis tools
 
@@ -48,15 +48,13 @@
 
 Средства оценки корреляций, области после уравновешивания и эффективного размера выборки. Автоматическая эвристика не гарантирует, что траектория исследовала все медленные состояния.
 
-## S08 — Подвижные ДНК-компоненты
+## S08 — Подвижные ДНК-компоненты Sharma et al.
 
 Sharma et al., *Characterizing the Motion of Jointed DNA Nanostructures Using a Coarse-Grained Model*.
 
-[Издатель](https://pubs.acs.org/doi/10.1021/acsnano.7b06470), [библиографическая запись](https://pubmed.ncbi.nlm.nih.gov/29083876/), [страница авторов в Oxford](https://www.physics.ox.ac.uk/our-people/louis/publications?page=15).
+[Издатель](https://pubs.acs.org/doi/10.1021/acsnano.7b06470), DOI: **10.1021/acsnano.7b06470**.
 
-DOI: **10.1021/acsnano.7b06470**. Проверены название, DOI и описание исследования шарниров/сочленений в oxDNA по доступным библиографическим и авторским данным. Полный reproducibility pack и права ещё не проверены. Прямая загрузка полной издательской страницы при подготовке не дала читаемого результата.
-
-Не смешивать с Shi, Castro, Arya, *Conformational Dynamics of Mechanically Compliant DNA Nanostructures from Coarse-Grained Molecular Dynamics Simulations*, DOI **10.1021/acsnano.7b00242**: это другая статья, [запись](https://pubmed.ncbi.nlm.nih.gov/28423273/). Раннюю ссылку из обсуждения нельзя использовать как подтверждение метода oxDNA без уточнения конкретной работы.
+Подтверждены hinge/sliding/coupled joints в oxDNA и заявленное авторами хорошее согласие с experiments. В NL0-001 повторно проверена Supporting Information: публично перечислены PDF с definitions/additional simulation results и movies. Отдельный machine-readable caDNAno/oxDNA topology/config/input pack в ограниченном поиске **не найден**. Это статус `INPUT_PACK_NOT_LOCATED`, а не доказательство отсутствия данных вообще. Поэтому S08 сохранён как scientific reference, но не выбран executable E2 seed.
 
 ## S09 — Спорная двухстабильность
 
@@ -64,7 +62,7 @@ Wong, Doye, *The free-energy landscape of a mechanically bistable DNA origami*.
 
 [Авторская запись и аннотация](https://arxiv.org/abs/2201.08920), DOI: 10.3390/app12125875.
 
-Авторы сообщают один минимум для бездефектной структуры в oxDNA, несмотря на ожидавшуюся двухстабильность; возможная роль дефектов обсуждается как вопрос, не доказанная причина. На стадии foundation проверена постановка и аннотация; полный протокол, данные и воспроизведение E4 остаются будущей работой.
+Авторы сообщают один минимум для бездефектной структуры в oxDNA, несмотря на ожидавшуюся двухстабильность; возможная роль дефектов обсуждается как вопрос, не доказанная причина. Полное воспроизведение E4 остаётся будущей работой.
 
 ## S10 — NANOBASE
 
@@ -72,32 +70,62 @@ Wong, Doye, *The free-energy landscape of a mechanically bistable DNA origami*.
 
 [Публикация](https://pmc.ncbi.nlm.nih.gov/articles/PMC8728195/), [проект](https://nanobase.org/).
 
-Источник кандидатов конструкций. Наличие базы не означает доступности конкретного эталона или разрешения на его перераспространение.
+Источник кандидатов конструкций. Наличие базы не означает разрешения на перераспространение конкретного deposited design; Nanobase указывает, что copyright deposited structures остаётся у авторов соответствующих публикаций.
 
 ## S11 — BoTorch / constrained optimization
 
 [Официальная документация ограничений](https://botorch.org/docs/constraints), [архивный пример замкнутого цикла](https://archive.botorch.org/tutorials/closed_loop_botorch_only).
 
-Подтверждена возможность ограниченной BO; для простого случая документация предлагает рассмотреть Ax. Архивный пример — концептуальная справка, не зафиксированная актуальная установка.
+Подтверждена возможность ограниченной BO; для простого случая документация предлагает рассмотреть Ax. Это будущая E3 инфраструктура.
 
 ## S12 — OpenKIM
 
 [Verification checks](https://openkim.org/browse/verification-checks/alphabetical), [Getting started](https://openkim.org/doc/overview/getting-started/).
 
-Проверки корректности реализации потенциалов отделены от вычисления физических свойств. Это кандидат инфраструктуры для E6, не доказательство пригодности любого потенциала для поверхности или наночастицы.
+Кандидат инфраструктуры E6. Проверка реализации потенциала не доказывает его применимость к выбранной наноструктуре.
 
 ## S13 — oxView
 
 [Официальный репозиторий](https://github.com/sulcgroup/oxdna-viewer).
 
-Подтверждены просмотр и редактирование конструкций/траекторий. Визуальная согласованность не заменяет численную и научную проверку.
+Просмотр/редактирование конструкций и траекторий; визуальная согласованность не заменяет численную/научную проверку.
 
 ## S14 — ASE
 
 [Официальная документация](https://docs.ase-lib.org/).
 
-Кандидат общего интерфейса атомистических структур и калькуляторов для следующей специализации. Не предназначен для автоматического доказательства эквивалентности разных физических представлений.
+Кандидат интерфейса атомистических структур и калькуляторов для следующей специализации.
+
+## S15 — oxDNA upstream regression fixtures — выбранный E1 source
+
+Repository: [lorenzo-rovigatti/oxDNA](https://github.com/lorenzo-rovigatti/oxDNA), pinned commit `00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591`.
+
+В NL0-001 проверены официальные fixtures:
+
+- `test/DNA/DSDNA8/MD` — выбран E1; topology/config/input + `quick_compare` numerical oracle;
+- `test/DNA/SSDNA15/MD` — fallback;
+- `examples/HAIRPIN` — более богатый, но существенно более дорогой conformational example.
+
+Root repository license на inspected commit: GNU GPL v3. Exact paths, Git object identities и SHA-256 выбранного DSDNA8 пакета находятся в `INPUT_AVAILABILITY.md`.
+
+## S16 — Shi–Castro–Arya compliant DNA hinges — выбранный E2 source
+
+Shi, Castro, Arya, *Conformational Dynamics of Mechanically Compliant DNA Nanostructures from Coarse-Grained Molecular Dynamics Simulations*, DOI **10.1021/acsnano.7b00242**.
+
+[Статья](https://pubs.acs.org/doi/10.1021/acsnano.7b00242), [авторский simulation repository](https://github.com/gauravarya77/DNA-hinge-simulations).
+
+NL0-001 подтвердил прямую связь статьи с repository и pinned repository commit `23fd1ff7731e9017bd776f49206dc42d70d9fe91`, tree `b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9`. В нём реально присутствуют caDNAno designs `0b/11b/32b/53b/74b`, подготовительные scripts, pre-equilibrated `.conf`, `.top` и CPU/GPU input files. Статья сообщает oxDNA2 и параметрическое семейство compliant springs, поэтому этот источник выбран executable seed для E2.
+
+Ограничение: в полном inspected tree отдельный `LICENSE` файл не обнаружен. Public repository visibility не считается лицензией; redistribution/use audit перед копированием — NL0-002.
+
+## S17 — Leaf-spring nanoengine — будущий rich benchmark
+
+Centola et al., *A rhythmically pulsing leaf-spring DNA-origami nanoengine that drives a passive follower*, Nature Nanotechnology, article `s41565-023-01516-x`.
+
+[Статья](https://www.nature.com/articles/s41565-023-01516-x), [Zenodo MD data](https://doi.org/10.5281/zenodo.8248808), [analysis repository](https://github.com/sulcgroup/hinges).
+
+Статья ссылается на Nanobase structure 196 для design/starting structures, Zenodo для generated MD trajectories и `sulcgroup/hinges` для processed data/analysis. Zenodo dataset содержит десятки гигабайт, поэтому это не E1 и не первый E2, а будущий benchmark для driven/composite mechanisms.
 
 ## Как расширять реестр
 
-Для нового источника: первичная ссылка/DOI, прочитанный объём, версия, поддерживаемое утверждение, недостающие данные, права и связь с экспериментом. Не переносить цифры бюджетов, версии, лицензии, рекламу ускорения и даты релизов из старого обсуждения без новой проверки.
+Для нового источника: первичная ссылка/DOI, inspected version/ref, поддерживаемое утверждение, machine inputs, missing data, rights и связь с experiment. Не переносить цифры, лицензии или scientific claims из старого обсуждения без новой проверки.
