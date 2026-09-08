@@ -232,6 +232,14 @@
       "id": "a6ec0a90a95845e8b04616e538abc90f",
       "op": "finish",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "verifier-a",
+      "at": 1788877189,
+      "data": {},
+      "id": "0864997fe3f645068f7086b1ae2d28c2",
+      "op": "claim",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
