@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-implementation-committed",
+  "timestamp_utc": "2026-09-08T13:55:00Z",
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9e481258a4736ebaec2ee304933aecef40032d6e",
+  "summary": "FIX 2 и FIX 3 закоммичены: 9e481258a4736ebaec2ee304933aecef40032d6e. FIX 2: категоричная формулировка «вендоринг GPL рядом с MIT/Apache создаст конфликт с Option A/B» заменена на различение AGGREGATE / SEPARATE_EXECUTABLE / SAME_PROCESS_BINDING / MODIFIED_GPL_CODE; зафиксировано, что независимые MIT/Apache-2.0 файлы могут сосуществовать с GPLv3-материалом при корректной структуре распространения, а обязанности combined covered work зависят от фактической интеграции и conveyance; oxDNA executable и oxpy binding явно разделены как разные packaging situations; будущая same-process oxpy integration помечена REQUIRES_OWNER_DECISION + REQUIRES_LEGAL_REVIEW; безопасная политика DOWNLOAD_ON_SETUP / NO_VENDORING_YET сохранена до решений. FIX 3: «allowed under GPLv3 (+NOTICE)» заменено на точную нейтральную формулировку (preserve applicable copyright/license/no-warranty notices; provide a copy of GPLv3 when conveying covered source; corresponding-source obligations apply where relevant); citation policy отделена от license obligations (§4 / §4.1 матрицы). Создан REPAIR_MAP_R1.md. E1/E2/S08/NANOBASE факты и все EX-NL0-002-R1 events не изменялись.",
+  "command_refs": [
+    "git commit -m 'repair: correct GPL compatibility guidance' -> 9e481258a4736ebaec2ee304933aecef40032d6e"
+  ],
+  "evidence_refs": [
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md",
+    "docs/evidence/NL0-002/REPAIR_MAP_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: validation (json.tool, check-consistency, CONTROL_WORK), затем summary + terminal handoff.",
+  "blocker": null
+}
