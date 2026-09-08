@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-08T14:35:00Z",
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9372b79e1406ffd2d0853bcd3c8f2232062f737c",
+  "summary": "Входы E1 повторно верифицированы live на pinned upstream commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591: все четыре файла DSDNA8/MD скачаны и их SHA-256 совпали с пинами INPUT_AVAILABILITY.md (dsdna8.top f1aded90..., init.dat 0ff76d54..., MD/quick_input 8935c4bc..., MD/quick_compare 86a8b6ac...); tree-listing GitHub API подтвердил те же blob SHA-1. Содержимое quick_input и quick_compare прочитано дословно и использовано в PREREGISTRATION_E1_R1 как единственный источник условий и критерия. E2-файлы не скачивались (права UNKNOWN, режим REFERENCE_ONLY) — использованы только принятые в NL0-001/NL0-002 факты (blob SHA-1, tree). Симуляции не запускались.",
+  "command_refs": [
+    "GET api.github.com/repos/lorenzo-rovigatti/oxDNA/contents/test/DNA/DSDNA8?ref=00dc7fb... -> dsdna8.top 1811af7e / init.dat 856be187 / MD/quick_compare 74a088ec / MD/quick_input 07eef592",
+    "raw download + Get-FileHash SHA256 -> 4/4 MATCH против INPUT_AVAILABILITY.md (один transient 404 raw.githubusercontent, устранён повтором/переключением на contents API)",
+    "print quick_input/quick_compare/dsdna8.top/init.dat header -> verbatim params в PREREGISTRATION_E1_R1 §2-§5"
+  ],
+  "evidence_refs": [
+    "docs/research/PREREGISTRATION_E1_R1.md",
+    "docs/research/INPUT_AVAILABILITY.md",
+    "docs/research/SOURCES.md"
+  ],
+  "next_action": "IMPLEMENTER: коммит пререгистрации E1-PROTO-R1 и постановки E2-SETUP-R1, затем validation и handoff.",
+  "blocker": null
+}

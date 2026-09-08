@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "checkpoint": "NL0",
+  "base_sha": "81e299f1924e50bcff1bc5c893bccd934ef2883d",
+  "branch": "work/nl0-003-preregister-reference-protocol-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL0-003.md",
+    "docs/research/PREREGISTRATION_E1_R1.md",
+    "docs/research/E2_SETUP_R1.md",
+    "docs/research/SOURCES.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/executions/EX-NL0-003-R1/**",
+    "docs/evidence/NL0-003/**"
+  ],
+  "started_at_utc": "2026-09-08T14:15:20Z",
+  "status": "HANDOFF_READY"
+}

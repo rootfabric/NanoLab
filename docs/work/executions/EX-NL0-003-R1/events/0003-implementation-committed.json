@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-implementation-committed",
+  "timestamp_utc": "2026-09-08T14:50:00Z",
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "53379e4973158e38531e346461d625b421f93cdf",
+  "summary": "Опубликован полный научный package NL0-003: PREREGISTRATION_E1_R1.md (E1-PROTO-R1: subject/inputs с SHA-256, verbatim условия quick_input, механическое определение observable и upstream-критерий |avg(col2)-(-1.37970256144)|<=0.15 из quick_compare, двухуровневая схема T1/T2, пилот-процедура и freeze для R_confirm, разделение статистической/физической/модельной неопределённостей, семантика исходов SUPPORTED/NOT_SUPPORTED/FAILED_TECHNICAL/INCONCLUSIVE/BLOCKED_ENVIRONMENT) и E2_SETUP_R1.md (первый шарнир 0b, требования к определению угла и целостности из первоисточника, decision rule 298K-vs-300K: reproduction arm = авторские inputs verbatim, family = пять опубликованных вариантов). Число повторов, целевой угол, tolerances E2, engine version и measured budget НЕ выдуманы — процедуры их закрытия зафиксированы. Симуляции не запускались; state.json/plan.json не изменялись.",
+  "command_refs": [
+    "git add docs/research/PREREGISTRATION_E1_R1.md docs/research/E2_SETUP_R1.md docs/work/executions/EX-NL0-003-R1/events/0003-implementation-committed.json; git commit (research: preregister E1 protocol R1 and E2 setup R1)"
+  ],
+  "evidence_refs": [
+    "docs/research/PREREGISTRATION_E1_R1.md",
+    "docs/research/E2_SETUP_R1.md",
+    "docs/work/WO-NL0-003.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "next_action": "IMPLEMENTER: validation (json.tool, CONTROL_DEVELOPMENT --check-consistency, CONTROL_WORK validate/close), затем evidence package и terminal handoff.",
+  "blocker": null
+}

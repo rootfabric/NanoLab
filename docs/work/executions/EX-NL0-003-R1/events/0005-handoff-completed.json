@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-08T15:20:00Z",
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9404a422166cb07efd98443a5f208f078a4ab2c4",
+  "summary": "Implementer scope NL0-003 complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 9404a422166cb07efd98443a5f208f078a4ab2c4 (tree b8b1bd992f15f9093ea4338255858e94d0bc06ad) — коммиту, содержащему все substantive артефакты (PREREGISTRATION_E1_R1.md, E2_SETUP_R1.md, SOURCES/SESSION_LOG updates, IMPLEMENTER_EVIDENCE, summary, events 0001-0004). Финальный handoff-коммит после terminal event содержит только этот event и статусы passport/branch-passport. Пререгистрация E1 (E1-PROTO-R1) и постановка E2 (E2-SETUP-R1) опубликованы без выдуманных значений; неизвестные величины помечены UNKNOWN с процедурами закрытия. Симуляции не запускались: E0-E6 NOT_RUN, physics_runs=0. ACCEPTED не выставлен.",
+  "command_refs": [],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL0-003-R1/summary.md",
+    "docs/research/PREREGISTRATION_E1_R1.md",
+    "docs/research/E2_SETUP_R1.md",
+    "docs/evidence/NL0-003/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "REVIEWER, затем VERIFIER: независимая проверка по exact substantive HEAD 9404a42 (HIGH routing); затем Director checkpoint proposal; merge PR — Human Gate.",
+  "blocker": null
+}
