@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Work Order v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "work_order_id", "checkpoint", "base_sha", "goal", "risk_class", "claim_class", "allowed_paths", "forbidden_paths", "required_outputs", "validation_plan", "resource_budget", "stop_conditions", "status"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "work_order_id": {"type": "string", "minLength": 3},
+    "checkpoint": {"type": "string", "pattern": "^NL[0-8]$"},
+    "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "goal": {"type": "string", "minLength": 1},
+    "risk_class": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "claim_class": {"enum": ["C0_SOFTWARE_ONLY", "C1_COMPUTATIONAL_REPRODUCTION", "C2_COMPUTATIONAL_PREDICTION", "C3_CROSS_MODEL_OR_EXTERNAL_CORRELATION", "C4_PHYSICAL_EXPERIMENTAL_VALIDATION", "C5_REPLICATED_PHYSICAL_VALIDATION"]},
+    "allowed_paths": {"type": "array", "items": {"type": "string"}},
+    "forbidden_paths": {"type": "array", "items": {"type": "string"}},
+    "dependencies": {"type": "array", "items": {"type": "string"}},
+    "required_outputs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "validation_plan": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "experiment_ids": {"type": "array", "items": {"type": "string"}},
+    "resource_budget": {"type": "object"},
+    "stop_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "human_gates": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["PLANNED", "DISPATCHED", "IN_PROGRESS", "IMPLEMENTED", "VERIFYING", "VERIFIED", "REVIEWING", "AUDITED", "CHECKPOINT_PROPOSED", "FIX_REQUIRED", "INCONCLUSIVE", "BLOCKED", "WAITING_HUMAN", "EPOCH_INVALIDATED", "CANCELLED", "ACCEPTED"]}
+  }
+}

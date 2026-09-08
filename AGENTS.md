@@ -1,53 +1,92 @@
-# Правила работы агентов NanoLab
+# NanoLab — Agent Router
 
-## Канонический репозиторий проекта
+Канонический репозиторий: `rootfabric/NanoLab`. Root `AGENTS.md` маршрутизирует работу; roadmap и scientific truth берутся из `main`.
 
-Ключевой и канонический репозиторий NanoLab: `rootfabric/NanoLab` — https://github.com/rootfabric/NanoLab. Для любой работы по NanoLab использовать этот репозиторий как основную точку истины для кода, документации, дорожной карты, экспериментов, Work Orders, evidence и текущего состояния разработки.
+## Mandatory read order
 
-Перед началом работы проверить, что открытый remote/repository действительно соответствует `rootfabric/NanoLab`, и прочитать актуальный `main`. Не подменять состояние NanoLab данными из других репозиториев пользователя, включая `rootfabric/distributed-world-simulator`. Если в задаче не указано иное, все ссылки на «проект», «репозиторий NanoLab», «main», roadmap и состояние разработки относятся к `rootfabric/NanoLab`.
+Перед изменением кода, запуском эксперимента, review или объявлением checkpoint читать:
 
-## Сначала установить реальное состояние
+```text
+PROJECT_CONTROL.md
+HARNESS_CONTROL.md
+docs/control/DEVELOPMENT_HARNESS_RU.md
+docs/control/HARNESS_REVIEW_AND_EVIDENCE_RU.md
+docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md
+docs/control/EXPERIMENT_HARNESS_RU.md
+docs/control/BRANCHING_AND_GIT_RU.md
+project/state.json
+project/plan.json
+config/control/harness/project-goals.v1.json
+config/control/harness/checkpoint-catalog.v1.json
+```
 
-Прочитать README.md, project/state.json, project/plan.json, docs/ROADMAP.md, docs/work/WORK_QUEUE.md и конкретный Work Order. Проверить текущий remote HEAD, локальный status, доступные инструкции и зависимые работы. Не переносить версии Godot, правила runner или дорожную карту из других репозиториев пользователя.
+Затем читать `docs/SCIENTIFIC_METHOD.md`, активный Work Order, паспорт эксперимента и ближайшие scoped инструкции.
 
-Сейчас создан только документальный фундамент. Научные эксперименты NOT_RUN. Нельзя объявлять NL0–NL8 закрытыми на основании этих файлов.
+## Hard rules
 
-## Единица работы
+```text
+MAIN DECLARES PROJECT STATE
+BRANCHES REPORT EXECUTION FACTS
+GIT IS DURABLE MEMORY; CHAT IS NOT
+WORK ORDER IS THE EXECUTION UNIT
+EXPERIMENT RUN IS THE SCIENTIFIC EXECUTION UNIT
+COMMIT IS THE RECOVERY UNIT
+EVIDENCE MAP IS THE REVIEW UNIT
+IMPLEMENTER CANNOT SELF-ACCEPT
+EXIT CODE 0 IS NOT A SCIENTIFIC PASS
+SCIENTIFIC CLAIM MUST NOT EXCEED EVIDENCE
+NEGATIVE / FAILED / INCONCLUSIVE RESULTS MUST BE PRESERVED
+DO NOT CHANGE ACCEPTANCE CRITERIA AFTER SEEING RESULTS WITHOUT A NEW PROTOCOL REVISION
+DO NOT REUSE A FAILED RUN ID
+RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE
+```
 
-Один ограниченный Work Order, одна цель, один ответственный за изменяемые контракты, отдельная ветка. Перед кодом зафиксировать входной commit, scope, зависимости, критерии и ресурсы. Работа, не указанная в разрешённом задании, не запускается автоматически.
+## Work protocol
 
-Разрешённый старт: docs/work/WO-NL0-001.md. Сначала доступный эталон и протокол, затем физический smoke без ИИ. Не начинать с большого UI, десятков движков, foundation model training или многоагентного оркестратора.
+1. Проверить fresh `main`, `project/state.json` и next Work Order.
+2. Создать scoped branch от exact main; записать base SHA.
+3. До substantive work создать durable START record и commit/push.
+4. Выполнять только bounded scope и утверждённый resource budget.
+5. После смыслового этапа/batch/blocker/handoff публиковать CONTINUATION checkpoint.
+6. Для experiment campaign до запуска freeze protocol, code/model subject, inputs/digests, observables, statistics, exclusions, budget и stop conditions.
+7. Каждый run получает уникальный ID; технический outcome и научный conclusion фиксируются отдельно.
+8. Большие raw outputs не обязаны жить в Git, но manifest с SHA-256, размером и location обязателен.
+9. MEDIUM+ получает Reviewer; HIGH scientific work — Reviewer + Verifier + Director. Implementer не self-accept.
+10. `FIX_REQUIRED` исправляется с Repair Map и новым evidence, а не повторением того же действия.
+11. Перед handoff оставить exact HEAD/TREE, commands, results, evidence paths, open risks и одно next action.
+12. Merge в `main` остаётся Human Gate, если владелец явно не разрешил его в текущей mission.
 
-## Научные правила
+## Experiment Git checkpoints
 
-Следовать docs/SCIENTIFIC_METHOD.md. Exit code 0 не означает физическую правильность. Не менять допуски после просмотра ответа, не скрывать отрицательные результаты, не смешивать реальные и синтетические данные. UNKNOWN, NOT_RUN и INCONCLUSIVE допустимы.
+Обязательные точки:
 
-Каждый результат связан с входами, кодом, моделью, протоколом и анализом. Смена одного из них требует новой версии и повторения затронутых проверок. Стохастический replay оценивается по заранее выбранной статистике; одинаковый seed не обещает битового совпадения на другом оборудовании.
+```text
+START
+  manifest + protocol + frozen subject + inputs
 
-Не называть повторную работу того же агента независимым review. Не требовать недоступного внешнего reviewer для простого документационного исправления; для научного claim честно указать фактический уровень проверки.
+CONTINUATION
+  phase/batch completed, blocker, repair, role handoff
 
-## Исполнение и ресурсы
+END_EXECUTION
+  completed/failed/aborted/blocked + artifact manifest
 
-Не выполнять дорогие/платные/внешние кампании без явного бюджета. Не запускать GitHub Actions, self-hosted runner, облачные GPU или физические приборы только потому, что они технически доступны. Не устанавливать глобально пакеты и не изменять систему владельца без разрешённой задачи.
+END_ANALYSIS
+  observable/statistics + scientific outcome
 
-Фиксировать команды, версии, return codes, логи и артефакты. Прежде чем повторить job, проверить состояние первой попытки. Каждый retry ограничен и объяснён. Научно отрицательный ответ не исправляется бесконечным перезапуском.
+REVIEW
+  independent verdict + claim ceiling
+```
 
-## Работа с Git и инструментами
+Старые experiment events не редактировать; corrections/superseding — новым event.
 
-Использовать доступный GitHub connector либо разрешённый локальный Git. Отсутствие credentials в shell не доказывает невозможность connector write. Не выводить секреты. Не объявлять GitHub недоступным по отсутствию читаемого ответа: различать отказ доступа, transport failure и неизвестное состояние.
+## Resources and safety
 
-Не делать force-push, reset чужой работы, удаление веток/данных или изменение защит. Повторно проверять base перед публикацией. Если main изменился, перечитать изменения и интегрировать, а не перезаписывать. После публикации прочитать remote HEAD и файлы.
+Не запускать платные GPU/CI/внешние сервисы сверх budget. Не запускать физический wet-lab/hardware experiment по правилам вычислительного harness: такие работы `CRITICAL` и требуют отдельного human/domain gate. Не скрывать секреты и не изменять систему владельца глобальными установками без scope.
 
-Кодовые изменения направляются в PR. Merge — при выполненных проверках и имеющемся разрешении владельца; если задан настоящий human gate, остановиться на нём. Первичная публикация документации в пустой репозиторий разрешена исходным запросом владельца.
+## Git authority
 
-## Ограниченный процесс без зависаний
+Внутри активного Work Order без нового запроса разрешены: scoped branch/worktree, stage, commit, non-force push, draft PR, evidence publication, review request. Не разрешены: direct push main, force-push/history rewrite, destructive remote deletion, foundation authority change.
 
-После содержательного шага обновить журнал: что прочитано/изменено, что выполнено, где evidence, что дальше. Не создавать бесконечную цепочку агентов, review и новых control-веток. Один диагностический цикл должен дать новую проверяемую информацию; повтор без неё прекращается с точным blocker.
+## Language
 
-При остановке оставить проверенный commit, полный status, выполненные команды, результаты, невыполненное и одно следующее действие в docs/work/SESSION_LOG.md. Недоступность инструмента не является разрешением придумать результат. Не обещать невыполнимую фоновую работу.
-
-## Стиль и область полномочий
-
-Документы — на русском, код/поля/идентификаторы — на английском. Компактный читаемый код с проверками ошибок. Не копировать сторонние данные до проверки прав. Не выбирать лицензию владельца самостоятельно. Исследовательский runtime не может переписывать валидаторы и evidence.
-
-В конце задания обновить только подтверждённые статусы и выдать: commit, scope, проверки, ограничения, следующую работу. Документальный прогресс не считать процентом научной готовности.
+Проектные документы и отчёты — русский. Code identifiers, schemas, event/status names и commit type — английский. Conventional Commits обязателен для обычных development commits.

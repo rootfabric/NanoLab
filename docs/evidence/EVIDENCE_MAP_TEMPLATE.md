@@ -1,0 +1,23 @@
+# Evidence Map `<Work Order>`
+
+- Checkpoint:
+- Risk:
+- Claim class:
+- Exact HEAD/TREE:
+- Intent:
+- Changed surfaces:
+- Protocol/model revisions:
+- Experiment campaigns/runs:
+- Inputs/digests:
+- Commands/exit codes:
+- Artifacts/SHA-256:
+- Observables/statistics:
+- Negative controls:
+- Failed/inconclusive runs:
+- Focused validation:
+- Regression:
+- Remaining risks:
+- Required fixes:
+- Reviewer verdict:
+- Scientific conclusion:
+- Claim ceiling:

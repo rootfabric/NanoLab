@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "revision": "NL-H0-2026-09-08-R1",
+  "checkpoints": [
+    {"id": "NL0", "depends_on": [], "acceptance": "references, access, rights and preregistered E1/E2 scope are durable"},
+    {"id": "NL1", "depends_on": ["NL0"], "acceptance": "one frozen non-AI reference path executes end-to-end with measured resources"},
+    {"id": "NL2", "depends_on": ["NL1"], "acceptance": "E0/E1 validation, statistics, provenance and recovery are accepted"},
+    {"id": "NL3", "depends_on": ["NL2"], "acceptance": "E2 yields a reproducible parameterized nanocomponent study"},
+    {"id": "NL4", "depends_on": ["NL3"], "acceptance": "bounded AI loop and E3 benchmark produce a reproducible user-facing MVP"},
+    {"id": "NL5", "depends_on": ["NL4"], "acceptance": "validated component package receives external reproduction"},
+    {"id": "NL6", "depends_on": ["NL5"], "acceptance": "one new scientific adapter/capability passes its own reference validation"},
+    {"id": "NL7", "depends_on": ["NL6"], "acceptance": "component composition and reduced models are checked against detailed evidence"},
+    {"id": "NL8", "depends_on": ["NL7"], "acceptance": "a specific nanomachine study has explicit energy, control, cycle, failure and validation contracts"}
+  ]
+}

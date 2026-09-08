@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "revision": "NL-H0-2026-09-08-R1",
+  "canonical_branch": "main",
+  "git_is_durable_memory": true,
+  "implementer_self_accept_forbidden": true,
+  "default_autonomy_ceiling": "A3_INTEGRATE_CANDIDATE",
+  "preauthorized": ["create_scoped_branch", "create_worktree", "edit_allowed_paths", "run_approved_validation", "commit", "non_force_push", "open_or_update_draft_pr", "publish_evidence", "request_review"],
+  "human_gates": ["merge_main", "direct_push_main", "force_push", "history_rewrite", "destructive_remote_delete", "foundation_authority_change", "critical_scientific_experiment", "budget_expansion"],
+  "work_order_states": ["PLANNED", "DISPATCHED", "IN_PROGRESS", "IMPLEMENTED", "VERIFYING", "VERIFIED", "REVIEWING", "AUDITED", "CHECKPOINT_PROPOSED", "FIX_REQUIRED", "INCONCLUSIVE", "BLOCKED", "WAITING_HUMAN", "EPOCH_INVALIDATED", "CANCELLED", "ACCEPTED"],
+  "experiment_execution_outcomes": ["COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT"],
+  "scientific_outcomes": ["SUPPORTED", "NOT_SUPPORTED", "INCONCLUSIVE", "NOT_EVALUATED", "INVALIDATED"]
+}

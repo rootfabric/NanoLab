@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Experiment Run v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "experiment_id", "campaign_id", "run_id", "work_order_id", "protocol_revision", "subject_sha", "claim_ceiling", "model", "inputs", "observables", "resource_budget", "stop_conditions", "status"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "experiment_id": {"type": "string", "minLength": 2},
+    "campaign_id": {"type": "string", "minLength": 3},
+    "run_id": {"type": "string", "minLength": 3},
+    "work_order_id": {"type": "string", "minLength": 3},
+    "protocol_revision": {"type": "string", "minLength": 1},
+    "subject_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "claim_ceiling": {"type": "string"},
+    "model": {"type": "object"},
+    "inputs": {"type": "array", "items": {"type": "object"}, "minItems": 1},
+    "observables": {"type": "array", "items": {"type": "object"}, "minItems": 1},
+    "environment": {"type": "object"},
+    "seed_policy": {"type": "object"},
+    "resource_budget": {"type": "object"},
+    "stop_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "status": {"enum": ["PRE_REGISTERED", "READY", "STARTED", "PREPARING", "RUNNING", "CHECKPOINTED", "ANALYZING", "COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT", "REVIEWING", "ACCEPTED", "REJECTED", "INCONCLUSIVE"]}
+  }
+}
