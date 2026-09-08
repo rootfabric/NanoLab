@@ -39,6 +39,83 @@
       "id": "b35442c44da646e89b766e096c047f47",
       "op": "claim",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "implementer-b",
+      "at": 1788876699,
+      "data": {
+        "report": {
+          "actor": "implementer-b",
+          "candidate_ref": "work/bus-smoke-001-r1",
+          "checks": [
+            {
+              "command": "python tools/task_bus.py --actor implementer-b status",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "BUS-SMOKE-001 phase IMPLEMENTER, claims 0, lease null"
+            },
+            {
+              "command": "python tools/task_bus.py --actor implementer-b claim BUS-SMOKE-001",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "committed=true; lease actor=implementer-b token=b35442c44da646e89b766e096c047f47 until=1788877961"
+            },
+            {
+              "command": "python -c \"import json; d=json.load(open('docs/work/pilots/BUS-SMOKE-001/receipt.json', encoding='utf-8')); assert d['sum'] == sum(d['values']) == 6 and d['scientific_claim'] is False and d['schema_version'] == 1\"",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "JSON valid; sum(values)=6 == sum field; scientific_claim false"
+            },
+            {
+              "command": "git worktree add --force ../impl-b-candidate work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "candidate worktree at d5bfc55956722e241151e0ef6db5299ee7e55123 contains receipt.json (first attempt without --force exited 1: branch already checked out)"
+            },
+            {
+              "command": "python tools/task_bus.py smoke-check ../impl-b-candidate",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b-control",
+              "exit_code": 0,
+              "result": "verdict=PASS sha256=2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6 size=179"
+            },
+            {
+              "command": "git push -u origin work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "[new branch] work/bus-smoke-001-r1 -> work/bus-smoke-001-r1 (non-force)"
+            },
+            {
+              "command": "git ls-remote origin refs/heads/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "remote d5bfc55956722e241151e0ef6db5299ee7e55123 == local HEAD"
+            },
+            {
+              "command": "git status --porcelain",
+              "cwd": "C:\\NanoLab\\bus-agents\\impl-b",
+              "exit_code": 0,
+              "result": "clean (empty output)"
+            }
+          ],
+          "remote": "https://github.com/rootfabric/NanoLab.git",
+          "remote_head_confirmed": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "schema_version": 1,
+          "subject_head": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "subject_tree": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3",
+          "summary": "Claim won by implementer-b (claims 0 -> 1; lease token b35442c44da646e89b766e096c047f47, until 1788877961; bus_head at claim 7621940886216ce4e02913bc42e889db0e2185bb). Session identity: isolated clone C:\\NanoLab\\bus-agents\\impl-b, control branch control/git-task-bus-r1. Work: branch work/bus-smoke-001-r1 created from base 95b1319600bcc64572d84c0456acb927802ab806; single allowed file docs/work/pilots/BUS-SMOKE-001/receipt.json (schema_version 1, values [1,2,3], sum 6, scientific_claim false); JSON and sum verified via Python; smoke-check of candidate worktree ../impl-b-candidate at d5bfc55956722e241151e0ef6db5299ee7e55123 returned verdict PASS (sha256 2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6, size 179); committed d5bfc55956722e241151e0ef6db5299ee7e55123 (tree 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3); non-force push succeeded; remote HEAD verified equal to local HEAD via ls-remote. Procedural notes, no scope violations: (1) first 'git worktree add' attempt without --force exited 1 because the branch was checked out in the primary worktree; retried with --force, exit 0 — read-only checkout of my own work branch, no bus lock bypassed; (2) tools/task_bus.py lives on control/git-task-bus-r1 and is absent at base 95b1319, so post-branching bus commands were executed from a separate control worktree C:\\NanoLab\\bus-agents\\impl-b-control of the same repository; (3) finish initially exited 2 (claim receipt resolvable only from the primary worktree git-dir; then REPORT_REQUIRED under verdict DONE), so the report was aligned to the bus report schema (verdict PASS, string summary, zero-exit checks) and the documented --token option was used with my own lease token; the failed finish attempts occurred before transact and did not mutate the queue. scientific_claim: false. No scientific progress and no canonical acceptance are claimed. queue.json never edited manually; no force-push; main untouched; working tree clean.",
+          "task_id": "BUS-SMOKE-001",
+          "verdict": "PASS"
+        },
+        "subject": {
+          "head": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "ref": "work/bus-smoke-001-r1",
+          "tree": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3"
+        },
+        "token": "b35442c44da646e89b766e096c047f47"
+      },
+      "id": "096c5b5113274e329a0544fb60fb41ff",
+      "op": "finish",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
