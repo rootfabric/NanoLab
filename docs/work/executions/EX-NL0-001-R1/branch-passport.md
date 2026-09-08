@@ -8,11 +8,11 @@
 - Risk class: `HIGH` (`candidate_selection`)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json`
-- Current HEAD: start commit is created by this durable record
-- Status: `STARTED`
+- Current durable subject: `3c94662340f1885d4aa6fe4360d4f4676bfe9bb8`
+- Status: `IN_PROGRESS`
 - Active experiment campaigns: none
-- Last durable event: `0001-work-order-started`
-- Next action: inspect accessible E1/E2 reference inputs and primary sources
-- Blocking issue: none
+- Last durable event: `0002-continuation-checkpoint`
+- Next action: write bounded source-selection evidence and hand off for independent review
+- Blocking issue: S08 machine-readable design/topology/config pack not yet located; this does not block selecting E1
 
-No scientific experiment has been run. This branch records source selection only.
+No scientific simulation has been run. Current findings are source/input availability facts and candidate-selection analysis.
