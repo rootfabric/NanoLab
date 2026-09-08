@@ -373,6 +373,59 @@
       "id": "258337c40a814c61ada830fc1ef7acee",
       "op": "claim",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "director-pilot",
+      "at": 1788877595,
+      "data": {
+        "report": {
+          "checks": [
+            {
+              "command": "python -m unittest discover -s tests/task_bus (with safe.bareRepository=all for bare test repos)",
+              "exit_code": 0,
+              "result": "40 ran, OK, skipped=1 (platform symlink)"
+            },
+            {
+              "command": "python tools/task_bus.py --actor director-pilot status",
+              "exit_code": 0,
+              "result": "phase progression observed DIRECTOR open -> IMPLEMENTER -> REVIEWER -> VERIFIER -> DIRECTOR; repairs=0"
+            },
+            {
+              "command": "python tools/task_bus.py --actor director-pilot history BUS-SMOKE-001",
+              "exit_code": 0,
+              "result": "7 events: open(director-pilot), claim+finish(implementer-b), claim+finish(reviewer-a), claim+finish(verifier-a); all three finish events reference same subject head d5bfc55956722e241151e0ef6db5299ee7e55123"
+            },
+            {
+              "command": "python -c audit of history JSON: distinct actors per finish",
+              "exit_code": 0,
+              "result": "finish actors: implementer-b, reviewer-a, verifier-a — all distinct; implementer-a recorded no events (lost claim race, as intended)"
+            },
+            {
+              "command": "git ls-remote origin work/bus-smoke-001-r1",
+              "exit_code": 0,
+              "result": "d5bfc55956722e241151e0ef6db5299ee7e55123 — matches bus subject, stable before and after verification"
+            },
+            {
+              "command": "git rev-parse origin/main",
+              "exit_code": 0,
+              "result": "81e299f1924e50bcff1bc5c893bccd934ef2883d — unchanged from pre-pilot snapshot"
+            },
+            {
+              "command": "python tools/task_bus.py --actor director-pilot claim BUS-SMOKE-001",
+              "exit_code": 0,
+              "result": "committed=true, claims=4, lease token 258337c40a814c61ada830fc1ef7acee"
+            }
+          ],
+          "subject_head": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "subject_tree": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3",
+          "summary": "Director closure of BUS-SMOKE-001 live multi-agent pilot. Session identity: central Director agent (actor director-pilot, DSH harness session, clone C:/NanoLab/bus-agents/director, tooling control/git-task-bus-r1 @ ae8b91d467e745e9d2bd8aa6c8e255210fba9071). Roles were executed by genuinely separate background subagent sessions with isolated clones: implementer-a (lost live claim race, no changes), implementer-b (won race, created candidate), reviewer-a (independent PASS), verifier-a (independent PASS with fresh detached checkout and negative controls). All handoffs went through Git queue commits only; no role context was passed via chat. Pre-launch unit tests: 40 ran, 39 pass, 1 platform skip (symlink); initial full-suite failure was environmental (git 2.53 safe.bareRepository=explicit default vs bare test repos), all 40 OK with that config overridden. Negative control executed by verifier-a: sum=7 copy and scientific_claim=0 copy both rejected with raw exit 2 SMOKE_CONTRACT_MISMATCH (assertion-wrapped exit 0 in checks), corrupted copies not pushed. main unchanged during pilot: origin/main = 81e299f1924e50bcff1bc5c893bccd934ef2883d before and after. Result is COMPLETED_SANDBOX under claim_class C0_SOFTWARE_ONLY; no scientific progress, no canonical acceptance, no NL/INFRA checkpoint closure, implementation branch not merged (Human Gate).",
+          "verdict": "PASS"
+        },
+        "token": "258337c40a814c61ada830fc1ef7acee"
+      },
+      "id": "be70a9f3886947419e8b739d6b988389",
+      "op": "finish",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
