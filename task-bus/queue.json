@@ -365,6 +365,14 @@
       "id": "63a25daec8734277891cd023f087b093",
       "op": "finish",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "director-pilot",
+      "at": 1788877571,
+      "data": {},
+      "id": "258337c40a814c61ada830fc1ef7acee",
+      "op": "claim",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
