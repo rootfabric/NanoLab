@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-repair-evidence-committed",
+  "timestamp_utc": "2026-09-08T13:40:00Z",
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "2e551d31c7d12e2ddca01b93f72f7c10f5696839",
+  "summary": "FIX 1 (immutable license evidence) закоммичен: 2e551d31c7d12e2ddca01b93f72f7c10f5696839. Для scadnano, oxView, PyMBAR, AiiDA (aiida-core), aiida-shell, Ax, BoTorch зафиксированы canonical repository (+ GitHub repo id), checked commit 2026-09-08, license path, Git blob SHA-1 и SHA-256 содержимого лицензии, SPDX-результат; целостность подтверждена локальным git-style blob hashing (7/7 byte-exact). BoTorch перепривязан к canonical meta-pytorch/botorch (repo id 142940093); pytorch/botorch записан как исторический alias с server-side redirect (live-проверка). Runtime-пины версий делегированы NL1-001, license audit привязан к immutable license subject.",
+  "command_refs": [
+    "gh api repos/<owner>/<repo> | commits/<branch> | git/trees/<sha> | git/blobs/<sha> — 7 зависимостей, 2026-09-08",
+    "gh api repos/pytorch/botorch -> full_name=meta-pytorch/botorch, id=142940093 (redirect подтверждён)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL0-002/LICENSE_EVIDENCE_PINS_R1.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md"
+  ],
+  "next_action": "IMPLEMENTER: FIX 2 (GPL boundary wording) и FIX 3 (GPL obligations wording) в матрице и аудите; затем REPAIR_MAP_R1.md.",
+  "blocker": null
+}

@@ -9,3 +9,15 @@
 До проверки прав исходные научные файлы не копируются в репозиторий. Допускается хранить библиографическую ссылку и статус доступа. Нельзя обещать открытый downloadable benchmark, если входные файлы нельзя законно передать другим.
 
 Это рабочая политика проекта, а не юридическое заключение. Вопрос выбора и совместимости лицензий остаётся отдельным пунктом NL0-002.
+
+## Обновление NL0-002 (EX-NL0-002-R1)
+
+Аудит прав выполнен и передан на review: [DEPENDENCY_LICENSE_MATRIX.md](docs/research/DEPENDENCY_LICENSE_MATRIX.md), [RIGHTS_AND_REDISTRIBUTION_AUDIT.md](docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md). Установленные режимы до решения владельца:
+
+- E1 (oxDNA DSDNA8 fixtures): GPL-3.0 — `DOWNLOAD_ON_SETUP`, вендоринг не рекомендуется до выбора лицензии NanoLab.
+- E2 (DNA-hinge-simulations): LICENSE в pinned tree отсутствует — права `UNKNOWN`; режим `REFERENCE_ONLY` + user-side download by exact commit; никакое копирование/mirror/release до разрешения авторов или решения владельца.
+- S08 (ACS article/SI/movies): `RESTRICTED` — только ссылка и цитирование.
+- NANOBASE: права конкретной записи ≠ условия сайта; per-record `REFERENCE_ONLY`.
+- Варианты собственной лицензии (Apache-2.0 / MIT / GPL-3.0-or-later; документация CC BY 4.0 / CC BY-SA 4.0) подготовлены в матрице §3; лицензия по-прежнему не назначена и не будет назначена агентом.
+
+`UNKNOWN` не является разрешением; отсутствие явного запрета не является разрешением.

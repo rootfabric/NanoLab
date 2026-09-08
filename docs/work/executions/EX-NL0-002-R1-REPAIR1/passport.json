@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "checkpoint": "NL0",
+  "base_sha": "495b03391e7eff72bbfbb5c5912e35ef9035b868",
+  "branch": "work/nl0-002-license-rights-audit-r1",
+  "risk_class": "LOW",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "repair_of": "EX-NL0-002-R1",
+  "verdict_repaired": "FAIL/FIX_REQUIRED (FRESH_VERIFIER_R1, commit 48d6d0c0089d985118e629ac459c7aa9d85e85eb)",
+  "allowed_paths": [
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md",
+    "docs/evidence/NL0-002/REPAIR_MAP_R1.md",
+    "docs/evidence/NL0-002/LICENSE_EVIDENCE_PINS_R1.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/executions/EX-NL0-002-R1-REPAIR1/**"
+  ],
+  "started_at_utc": "2026-09-08T12:50:00Z",
+  "status": "HANDOFF_READY"
+}

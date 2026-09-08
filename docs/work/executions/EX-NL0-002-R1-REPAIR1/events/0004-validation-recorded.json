@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-08T14:05:00Z",
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9e481258a4736ebaec2ee304933aecef40032d6e",
+  "summary": "Pre-terminal validation на рабочем дереве head 9e481258a4736ebaec2ee304933aecef40032d6e (tree 957775150bee4a4442a4dc7d109421a2d2709972): python -m json.tool на passport.json и events/0001 — OK; CONTROL_DEVELOPMENT.ps1 -CheckConsistency — ok=true, errors=[], warnings=[], exit 0; CONTROL_WORK.ps1 validate docs/work/executions/EX-NL0-002-R1-REPAIR1 — ok=true, exit 0 (has_terminal_handoff=false, has_summary=false — ожидаемое pre-terminal состояние, структурных errors нет). Повторный json.tool по полному набору JSON и CONTROL_WORK close выполняются после terminal event; точные outputs фиксируются в PR #17 и финальном отчёте repair.",
+  "command_refs": [
+    "python -m json.tool docs/work/executions/EX-NL0-002-R1-REPAIR1/passport.json -> OK",
+    "python -m json.tool docs/work/executions/EX-NL0-002-R1-REPAIR1/events/0001-work-order-started.json -> OK",
+    "./CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> ok=true, exit 0",
+    "./CONTROL_WORK.ps1 validate docs/work/executions/EX-NL0-002-R1-REPAIR1 -> ok=true, exit 0 (pre-terminal)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL0-002-R1-REPAIR1/summary.md",
+    "docs/evidence/NL0-002/REPAIR_MAP_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: summary.md (literal BASE_HEAD / REPAIRED_CANDIDATE_HEAD / REPAIRED_CANDIDATE_TREE), terminal HANDOFF_COMPLETED, flip passport/branch-passport status -> HANDOFF_READY, затем CONTROL_WORK close.",
+  "blocker": null
+}

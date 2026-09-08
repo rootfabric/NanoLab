@@ -49,3 +49,25 @@ Director decision: `NL0-001 = ACCEPTED`. Канонически приняты E
 State transition: `NL0` остаётся `IN_PROGRESS`; `NL0-002` и `NL0-003` становятся `READY`; scheduler priority — `NL0-002`. Полный acceptance record: `docs/evidence/NL0-001/DIRECTOR_ACCEPTANCE_R1.md`.
 
 Следующее действие: выполнить `NL0-002` license/redistribution audit; `NL0-003` может готовиться параллельно отдельным Work Order при отсутствии file/scope conflict.
+
+## EX-NL0-002-R1 — аудит прав и лицензий
+
+Canonical base: `95b1319600bcc64572d84c0456acb927802ab806`. Branch: `work/nl0-002-license-rights-audit-r1`. Durable START commit: `6a35586` (pushed до substantive work). Core rights checkpoint: `57fea06`.
+
+Независимая live-проверка через GitHub API на pinned commits. E1: root LICENSE репозитория oxDNA — полный GPL-3.0 текст (blob `94a9ed0`), fixtures покрыты root license, citation-обязанности в README; `E1_RIGHTS = CLEAR`, режим `DOWNLOAD_ON_SETUP`. E2: полный tree `DNA-hinge-simulations@23fd1ff` не содержит LICENSE нигде, GitHub license detection пустая, README без правовых statements; `REDISTRIBUTION_RIGHTS = UNKNOWN`, режим `REFERENCE_ONLY` + user-side download by exact commit, решение за владельцем (контакт авторов). S08 — `RESTRICTED` (cite-only). NANOBASE — per-record UNKNOWN. MVP-зависимости: MIT (scadnano, PyMBAR, AiiDA, aiida-shell, Ax, BoTorch) и GPL-3.0 (oxDNA stack, oxView); всё CLEAR как отдельно устанавливаемые зависимости. Варианты лицензии NanoLab (Apache-2.0/MIT/GPL-3.0-or-later + CC BY/CC BY-SA для документации) подготовлены, лицензия не назначена.
+
+Incident (environment, не scientific): внешняя реструктуризация workspace в середине исполнения заменила одиночный checkout на клоны main/nl0-002; два несоммиченных research-файла потеряны из working tree и восстановлены дословно из сессионного содержимого; remote branch и все push-коммиты не пострадали.
+
+Ни один physics run не запускался; E0–E6 остаются `NOT_RUN`; сторонние научные файлы в NanoLab не копировались. Implementer не выставляет ACCEPTED; результат передаётся независимому Verifier (LOW risk) с явными owner decisions.
+
+Следующее действие: independent Verifier проверяет матрицу/audit по exact HEAD; владелец решает лицензию NanoLab и судьбу E2-запроса авторам.
+
+## EX-NL0-002-R1-REPAIR1 — bounded repair по Fresh Verifier R1
+
+Вход: FRESH_VERIFIER_R1 verdict FAIL / FIX_REQUIRED (evidence `48d6d0c`, ветка `control/nl0-002-fresh-verifier-r1`), verified head `495b0339`. База repair подтверждена live: PR #17 OPEN/MERGEABLE на `495b0339`, ff-only pull без изменений.
+
+Закрыты ровно три verifier fix: FIX 1 — immutable license pins для 7 software dependencies (canonical repo + checked commit 2026-09-08 + license path + Git blob SHA-1 + SHA-256 + SPDX; git-style blob verify 7/7 byte-exact; BoTorch canonical `meta-pytorch/botorch`, `pytorch/botorch` → redirect, тот же repo id) в `LICENSE_EVIDENCE_PINS_R1.md` + матрице; FIX 2 — GPL boundary wording (AGGREGATE / SEPARATE_EXECUTABLE / SAME_PROCESS_BINDING / MODIFIED_GPL_CODE; MIT/Apache-файлы могут сосуществовать с GPLv3-материалом; обязанности combined work зависят от интеграции и conveyance; oxDNA executable ≠ oxpy binding; будущая same-process oxpy integration → REQUIRES_OWNER_DECISION + REQUIRES_LEGAL_REVIEW; политика DOWNLOAD_ON_SETUP / NO_VENDORING_YET сохранена); FIX 3 — «GPLv3 (+NOTICE)» заменено на точную нейтральную формулировку obligations, citation policy отделена от license obligations (§4/§4.1). Non-blocking: literal BASE_HEAD/REPAIRED_CANDIDATE_HEAD/REPAIRED_CANDIDATE_TREE в summary; раздельный подсчёт «9 software dependencies CLEAR» vs «E1 fixture CLEAR».
+
+Связка repair: BASE_HEAD `495b0339`, REPAIRED_CANDIDATE_HEAD `cd55320441c2c904f8e406870c902fbff587c602` (tree `131a54fe787294dbf43c45279270521326d4f939`, terminal event 0005 subject). Коммиты: `ba38958` start → `2e551d3` pins → `9e48125` GPL wording → `cd55320` validation → handoff. Замороженные факты (E1 GPL-3.0/DOWNLOAD_ON_SETUP; E2 UNKNOWN/REFERENCE_ONLY; NANOBASE per-record UNKNOWN; S08 RESTRICTED) и все EX-NL0-002-R1 events не изменялись. Симуляции не запускались; сторонние файлы не копировались; state.json не изменён; NL0 не закрыт; PR #17 не merged; PASS/ACCEPTED не выставлен.
+
+Следующее действие: fresh exact-head Verifier по repaired candidate; merge PR #17 — Human Gate.

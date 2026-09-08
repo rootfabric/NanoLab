@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL0-002-R1",
+  "work_order_id": "NL0-002",
+  "checkpoint": "NL0",
+  "base_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+  "branch": "work/nl0-002-license-rights-audit-r1",
+  "risk_class": "LOW",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL0-002.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md",
+    "docs/research/SOURCES.md",
+    "docs/research/TOOL_LANDSCAPE.md",
+    "LICENSE_POLICY.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/executions/EX-NL0-002-R1/**",
+    "docs/evidence/NL0-002/**"
+  ],
+  "started_at_utc": "2026-09-08T05:05:00Z",
+  "status": "HANDOFF_READY"
+}

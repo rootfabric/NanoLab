@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-08T06:45:00Z",
+  "execution_id": "EX-NL0-002-R1",
+  "work_order_id": "NL0-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "73ac4c1cfcc813d88f61a5e3e5e94c5f1f4ede23",
+  "summary": "Валидация пакета выполнена. python -m json.tool: state.json OK, plan.json OK, все events + passport OK. CONTROL_DEVELOPMENT.ps1 -CheckConsistency: ok=true, errors=[], warnings=[], exit 0. CONTROL_WORK.ps1 validate (до handoff): ok=true по структуре, exit 3 только из-за отсутствия terminal handoff/summary на тот момент — ожидаемо на этой фазе; отдельная проверка показала также, что placeholders PENDING-COMMIT в events 0002/0003 нарушали схему subject_sha (40 hex) — исправлены и привязаны к опубликованным коммитам (57fea06 / 0b51aa1) в коммите 73ac4c1. Это harness-фикс, не изменение substantive результата. Environment incident (workspace restructure) зафиксирован в 0002 и evidence; отличён от NL0-002 результата.",
+  "command_refs": [
+    "python -m json.tool project/state.json; project/plan.json; docs/work/executions/EX-NL0-002-R1/events/*.json; passport.json",
+    "pwsh -File CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> ok=true exit 0",
+    "pwsh -File CONTROL_WORK.ps1 validate docs/work/executions/EX-NL0-002-R1 -> exit 3 (pre-handoff, expected)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL0-002/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "IMPLEMENTER: записать summary.md, terminal HANDOFF_COMPLETED с subject_sha = exact substantive HEAD, финальный handoff commit без изменения substantive result, затем CONTROL_WORK close, PR и комментарий в issue #3.",
+  "blocker": null
+}

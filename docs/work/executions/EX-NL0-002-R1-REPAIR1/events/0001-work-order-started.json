@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-08T12:50:00Z",
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "495b03391e7eff72bbfbb5c5912e35ef9035b868",
+  "summary": "Начат bounded repair по Fresh Verifier R1 (FAIL/FIX_REQUIRED, evidence 48d6d0c0089d985118e629ac459c7aa9d85e85eb). База repair — exact original candidate HEAD 495b03391e7eff72bbfbb5c5912e35ef9035b868. Объём: ровно три verifier fix — (1) immutable license evidence для scadnano/oxView/PyMBAR/AiiDA/aiida-shell/Ax/BoTorch + BoTorch canonical meta-pytorch/botorch; (2) нейтральная GPL-формулировка границ aggregate/separate executable/same-process binding; (3) замена 'GPLv3 (+NOTICE)' на точное описание GPLv3 obligations. Плюс два non-blocking уточнения (literal HEAD/TREE binding в summary; раздельный подсчёт '9 software dependencies CLEAR' и 'E1 fixture CLEAR'). E1/E2 core facts не пересматриваются; EX-NL0-002-R1 events не изменяются (terminal 0005 остаётся последним в своём execution).",
+  "command_refs": [
+    "git fetch --all --prune -> ok",
+    "git switch work/nl0-002-license-rights-audit-r1; git pull --ff-only -> Already up to date",
+    "git rev-parse HEAD -> 495b03391e7eff72bbfbb5c5912e35ef9035b868 (ожидаемая база подтверждена)",
+    "gh pr view 17 -> OPEN, MERGEABLE, head 495b03391e7eff72bbfbb5c5912e35ef9035b868"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL0-002/FRESH_VERIFIER_R1.md (на origin/control/nl0-002-fresh-verifier-r1, commit 48d6d0c)",
+    "docs/work/executions/EX-NL0-002-R1-REPAIR1/passport.json"
+  ],
+  "next_action": "IMPLEMENTER: FIX 1 — собрать и зафиксировать immutable license pins через GitHub API; затем FIX 2/FIX 3 wording.",
+  "blocker": null
+}

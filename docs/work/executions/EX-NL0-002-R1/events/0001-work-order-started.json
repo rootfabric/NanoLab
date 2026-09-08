@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-08T05:05:00Z",
+  "execution_id": "EX-NL0-002-R1",
+  "work_order_id": "NL0-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+  "summary": "Начат аудит зависимостей, прав на исходные данные и вариантов лицензирования. Base — свежий canonical main 95b1319. WO-NL0-002.md создан из содержания issue #3 без изменения acceptance criteria.",
+  "command_refs": [
+    "git fetch --all --prune; git switch main; git pull --ff-only; git rev-parse HEAD -> 95b1319600bcc64572d84c0456acb927802ab806",
+    "git status --short -> clean",
+    "gh issue view 3 -> read live acceptance criteria",
+    "git switch -c work/nl0-002-license-rights-audit-r1 (from 95b1319)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL0-002.md",
+    "project/state.json (NL0-002 = READY, next_work_order = NL0-002)",
+    "config/control/harness/risk-policy.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: независимо проверить права E1 (oxDNA DSDNA8 fixtures) и E2 (DNA-hinge-simulations), затем собрать dependency license matrix.",
+  "blocker": null
+}
