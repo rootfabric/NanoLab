@@ -61,3 +61,13 @@ Incident (environment, не scientific): внешняя реструктуриз
 Ни один physics run не запускался; E0–E6 остаются `NOT_RUN`; сторонние научные файлы в NanoLab не копировались. Implementer не выставляет ACCEPTED; результат передаётся независимому Verifier (LOW risk) с явными owner decisions.
 
 Следующее действие: independent Verifier проверяет матрицу/audit по exact HEAD; владелец решает лицензию NanoLab и судьбу E2-запроса авторам.
+
+## EX-NL0-002-R1-REPAIR1 — bounded repair по Fresh Verifier R1
+
+Вход: FRESH_VERIFIER_R1 verdict FAIL / FIX_REQUIRED (evidence `48d6d0c`, ветка `control/nl0-002-fresh-verifier-r1`), verified head `495b0339`. База repair подтверждена live: PR #17 OPEN/MERGEABLE на `495b0339`, ff-only pull без изменений.
+
+Закрыты ровно три verifier fix: FIX 1 — immutable license pins для 7 software dependencies (canonical repo + checked commit 2026-09-08 + license path + Git blob SHA-1 + SHA-256 + SPDX; git-style blob verify 7/7 byte-exact; BoTorch canonical `meta-pytorch/botorch`, `pytorch/botorch` → redirect, тот же repo id) в `LICENSE_EVIDENCE_PINS_R1.md` + матрице; FIX 2 — GPL boundary wording (AGGREGATE / SEPARATE_EXECUTABLE / SAME_PROCESS_BINDING / MODIFIED_GPL_CODE; MIT/Apache-файлы могут сосуществовать с GPLv3-материалом; обязанности combined work зависят от интеграции и conveyance; oxDNA executable ≠ oxpy binding; будущая same-process oxpy integration → REQUIRES_OWNER_DECISION + REQUIRES_LEGAL_REVIEW; политика DOWNLOAD_ON_SETUP / NO_VENDORING_YET сохранена); FIX 3 — «GPLv3 (+NOTICE)» заменено на точную нейтральную формулировку obligations, citation policy отделена от license obligations (§4/§4.1). Non-blocking: literal BASE_HEAD/REPAIRED_CANDIDATE_HEAD/REPAIRED_CANDIDATE_TREE в summary; раздельный подсчёт «9 software dependencies CLEAR» vs «E1 fixture CLEAR».
+
+Связка repair: BASE_HEAD `495b0339`, REPAIRED_CANDIDATE_HEAD `cd55320441c2c904f8e406870c902fbff587c602` (tree `131a54fe787294dbf43c45279270521326d4f939`, terminal event 0005 subject). Коммиты: `ba38958` start → `2e551d3` pins → `9e48125` GPL wording → `cd55320` validation → handoff. Замороженные факты (E1 GPL-3.0/DOWNLOAD_ON_SETUP; E2 UNKNOWN/REFERENCE_ONLY; NANOBASE per-record UNKNOWN; S08 RESTRICTED) и все EX-NL0-002-R1 events не изменялись. Симуляции не запускались; сторонние файлы не копировались; state.json не изменён; NL0 не закрыт; PR #17 не merged; PASS/ACCEPTED не выставлен.
+
+Следующее действие: fresh exact-head Verifier по repaired candidate; merge PR #17 — Human Gate.

@@ -8,11 +8,13 @@
 - Risk class: `LOW` (documentation / metadata / license evidence pinning)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json`
-- Status: `IN_PROGRESS`
-- Scope: только три verifier fix (FIX 1 immutable license evidence; FIX 2 GPL boundary wording; FIX 3 GPL obligations wording) + два non-blocking уточнения. E1/E2 audit заново не повторяется.
+- Status: `HANDOFF_READY`
+- Scope: ровно три verifier fix (FIX 1 immutable license evidence; FIX 2 GPL boundary wording; FIX 3 GPL obligations wording) + два non-blocking уточнения. E1/E2 audit заново не повторяется.
+- Repaired candidate binding: HEAD `cd55320441c2c904f8e406870c902fbff587c602`, tree `131a54fe787294dbf43c45279270521326d4f939` (= subject_sha terminal event 0005); HANDOFF_COMMIT после terminal не меняет substantive результат.
+- Commits: `ba38958` harness start → `2e551d3` repair: pin NL0-002 license evidence → `9e48125` repair: correct GPL compatibility guidance → `cd55320` harness: record NL0-002 repair validation → handoff.
 - Frozen by verifier: E1 = GPL-3.0 / DOWNLOAD_ON_SETUP; E2 = UNKNOWN / REFERENCE_ONLY; NANOBASE = UNKNOWN per-record; S08 = RESTRICTED / reference-only — не меняются.
 - Active experiment campaigns: none
-- Next action: fresh exact-head VERIFIER после repair
+- Next action: fresh exact-head VERIFIER по repaired candidate; merge PR #17 — Human Gate
 - Blocking issue: none
 
 Правила прав: `UNKNOWN` не превращается в разрешение; юридически неоднозначные вопросы помечаются `REQUIRES_OWNER_DECISION` / `REQUIRES_LEGAL_REVIEW`, а не решаются агентом. Документы не являются юридическим заключением.

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-08T14:25:00Z",
+  "execution_id": "EX-NL0-002-R1-REPAIR1",
+  "work_order_id": "NL0-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "cd55320441c2c904f8e406870c902fbff587c602",
+  "summary": "Bounded repair завершён, status HANDOFF_READY. Terminal event привязан к exact repaired substantive HEAD cd55320441c2c904f8e406870c902fbff587c602 (tree 131a54fe787294dbf43c45279270521326d4f939) — последнему коммиту перед terminal, содержащему все substantive repair-артефакты (FIX 1 pins: 2e551d3; FIX 2+3 wording + REPAIR_MAP: 9e48125; validation events: cd55320). Финальный handoff-коммит после terminal event добавляет только этот event, summary.md со literal BASE_HEAD/REPAIRED_CANDIDATE_HEAD/REPAIRED_CANDIDATE_TREE и статусы passport/branch-passport. Все три verifier fix из FRESH_VERIFIER_R1 закрыты; два non-blocking замечания (literal binding, раздельный подсчёт 9 software dependencies CLEAR vs E1 fixture CLEAR) закрыты в summary. E1 = GPL-3.0/DOWNLOAD_ON_SETUP, E2 = UNKNOWN/REFERENCE_ONLY, NANOBASE per-record UNKNOWN, S08 RESTRICTED — не изменены; EX-NL0-002-R1 events не изменялись (0005 того execution остаётся последним); сторонние файлы не копировались; симуляции не запускались; project/state.json не изменён; NL0 не закрыт; PR #17 не merged. PASS/ACCEPTED не выставляется — следующий actor: fresh exact-head VERIFIER.",
+  "command_refs": [
+    "git log --oneline 495b0339..cd553204 -> ba38958 harness start; 2e551d3 repair: pin NL0-002 license evidence; 9e48125 repair: correct GPL compatibility guidance; cd55320 harness: record NL0-002 repair validation"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL0-002/REPAIR_MAP_R1.md",
+    "docs/evidence/NL0-002/LICENSE_EVIDENCE_PINS_R1.md",
+    "docs/evidence/NL0-002/FRESH_VERIFIER_R1.md (на origin/control/nl0-002-fresh-verifier-r1, 48d6d0c)",
+    "docs/work/executions/EX-NL0-002-R1-REPAIR1/summary.md"
+  ],
+  "next_action": "FRESH_VERIFIER: независимая проверка repaired candidate по exact HEAD cd55320/binding terminal event; merge PR #17 — Human Gate.",
+  "blocker": null
+}
