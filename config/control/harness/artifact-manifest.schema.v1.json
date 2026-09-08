@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Artifact Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifacts"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "sha256", "size_bytes", "producer_run_id", "subject_sha", "storage_location"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "size_bytes": {"type": "integer", "minimum": 0},
+          "producer_run_id": {"type": "string", "minLength": 1},
+          "subject_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "storage_location": {"type": "string", "minLength": 1},
+          "media_type": {"type": ["string", "null"]},
+          "producer_command": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

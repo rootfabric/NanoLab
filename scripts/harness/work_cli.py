@@ -3,10 +3,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
 TERMINAL = {"HANDOFF_COMPLETED", "WORK_ORDER_BLOCKED", "WORK_ORDER_CANCELLED"}
+ALLOWED_EVENTS = {"WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", *TERMINAL}
+ALLOWED_ROLES = {"IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"}
+SHA40 = re.compile(r"^[0-9a-f]{40}$")
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -17,7 +21,7 @@ def load(path: Path) -> dict[str, Any]:
     return value
 
 
-def sha256(path: Path) -> str:
+def digest_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
@@ -38,6 +42,8 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
     for key in required:
         if key not in passport:
             errors.append(f"passport missing {key}")
+    if not SHA40.fullmatch(str(passport.get("base_sha", ""))):
+        errors.append("passport base_sha must be 40 lowercase hex characters")
 
     event_files = sorted(events_dir.glob("*.json")) if events_dir.is_dir() else []
     if not event_files:
@@ -45,25 +51,40 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
 
     ids: list[str] = []
     event_types: list[str] = []
+    required_event = ["event_id", "event_type", "execution_id", "work_order_id", "actor_role", "subject_sha", "summary"]
     for path in event_files:
         event = load(path)
         ids.append(str(event.get("event_id", "")))
         event_types.append(str(event.get("event_type", "")))
+        for key in required_event:
+            if key not in event:
+                errors.append(f"{path.name}: missing {key}")
         if path.stem != event.get("event_id"):
             errors.append(f"{path.name}: filename must equal event_id + .json")
         if event.get("execution_id") != passport.get("execution_id"):
             errors.append(f"{path.name}: execution_id differs from passport")
         if event.get("work_order_id") != passport.get("work_order_id"):
             errors.append(f"{path.name}: work_order_id differs from passport")
+        if event.get("event_type") not in ALLOWED_EVENTS:
+            errors.append(f"{path.name}: unsupported event_type")
+        if event.get("actor_role") not in ALLOWED_ROLES:
+            errors.append(f"{path.name}: unsupported actor_role")
+        if not SHA40.fullmatch(str(event.get("subject_sha", ""))):
+            errors.append(f"{path.name}: invalid subject_sha")
 
     if ids != sorted(ids):
         errors.append("events are not lexically ordered")
     if len(ids) != len(set(ids)):
         errors.append("duplicate event_id")
-    if "WORK_ORDER_STARTED" not in event_types:
-        errors.append("WORK_ORDER_STARTED event missing")
-    if sum(1 for item in event_types if item in TERMINAL) > 1:
+    if event_types and event_types[0] != "WORK_ORDER_STARTED":
+        errors.append("WORK_ORDER_STARTED must be the first event")
+    if event_types.count("WORK_ORDER_STARTED") != 1:
+        errors.append("exactly one WORK_ORDER_STARTED event is required")
+    terminal_positions = [idx for idx, item in enumerate(event_types) if item in TERMINAL]
+    if len(terminal_positions) > 1:
         errors.append("more than one terminal/handoff event")
+    if terminal_positions and terminal_positions[0] != len(event_types) - 1:
+        errors.append("terminal/handoff event must be last")
 
     return {
         "ok": not errors,
@@ -71,9 +92,9 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         "execution_id": passport.get("execution_id"),
         "work_order_id": passport.get("work_order_id"),
         "status": passport.get("status"),
-        "passport_sha256": sha256(passport_path),
+        "passport_sha256": digest_file(passport_path),
         "event_types": event_types,
-        "has_terminal_handoff": any(item in TERMINAL for item in event_types),
+        "has_terminal_handoff": bool(terminal_positions),
         "has_summary": summary_path.is_file(),
     }
 
