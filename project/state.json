@@ -3,13 +3,15 @@
   "kind": "project_state",
   "foundation": "DOCUMENTED",
   "frontier": "NL0",
-  "next_work_order": "NL0-001",
-  "completed_tasks": [],
+  "next_work_order": "NL0-002",
+  "completed_tasks": [
+    "NL0-001"
+  ],
   "active_tasks": [],
   "task_status": {
-    "NL0-001": "READY",
-    "NL0-002": "PLANNED",
-    "NL0-003": "PLANNED",
+    "NL0-001": "ACCEPTED",
+    "NL0-002": "READY",
+    "NL0-003": "READY",
     "NL1-001": "PLANNED",
     "NL1-002": "PLANNED",
     "NL2-001": "PLANNED",
@@ -27,7 +29,7 @@
     "NL8-001": "PLANNED"
   },
   "stage_status": {
-    "NL0": "PLANNED",
+    "NL0": "IN_PROGRESS",
     "NL1": "PLANNED",
     "NL2": "PLANNED",
     "NL3": "PLANNED",
@@ -54,10 +56,9 @@
     "paid_compute_authorized": false
   },
   "open_decisions": [
-    "Exact E1 reference and E2 design files",
     "Source redistribution rights and NanoLab license",
     "Pinned engine environment and model version",
-    "Preregistered numerical and statistical tolerances",
+    "Preregistered numerical and statistical tolerances including the E2 298 K vs 300 K discrepancy",
     "Measured resource budget"
   ],
   "github_tracking": {

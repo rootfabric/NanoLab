@@ -33,3 +33,19 @@ Canonical base: `9d8ea394c6c037b0560908689e2ce932bf0c511c`. Branch: `work/nl0-00
 Ни один physics run не запускался; E0–E6 остаются `NOT_RUN`. Work Order передаётся независимому Reviewer/Verifier как HIGH-risk candidate selection; implementer не выставляет ACCEPTED.
 
 Следующее действие после review: NL0-002 license/redistribution audit и NL0-003 preregistration E1/E2 protocols. NL0 целиком не закрыт.
+
+## NL0-001-DIRECTOR-R1 — каноническая приёмка
+
+Exact Implementer candidate: `f738bff77f2406552b4383c05989ffc6e56a3bd5`.
+
+Fresh Reviewer evidence: `e0303aa05bbcc3f6839c3af31d7a28ecbd66a932`, verdict `PASS`, epoch drift `CONTINUE`.
+
+Fresh Verifier evidence: `1a9bf9ca2288021b0371b858c77bd648dac2faaf`, verdict `PASS`, exact candidate/review binding `YES`, E1 hash/E2 tree/Harness close/state safety checks `PASS`.
+
+PR #11 merged с expected-head guard в `142ed2df0a971763567d6cc672a218d04ee85201`; текущий INFRA drift не изменил scientific contracts NL0-001.
+
+Director decision: `NL0-001 = ACCEPTED`. Канонически приняты E1 reference DSDNA8/MD и E2 Shi–Castro–Arya hinge family как входы для следующих protocol/runtime работ. Это не означает, что E1/E2 выполнены: E0–E6 остаются `NOT_RUN`, `physics_runs=0`.
+
+State transition: `NL0` остаётся `IN_PROGRESS`; `NL0-002` и `NL0-003` становятся `READY`; scheduler priority — `NL0-002`. Полный acceptance record: `docs/evidence/NL0-001/DIRECTOR_ACCEPTANCE_R1.md`.
+
+Следующее действие: выполнить `NL0-002` license/redistribution audit; `NL0-003` может готовиться параллельно отдельным Work Order при отсутствии file/scope conflict.
