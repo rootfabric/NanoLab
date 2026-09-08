@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-implementation-committed",
+  "timestamp_utc": "2026-09-08T03:56:45Z",
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "73997369d7f83ef7d60585223c1128eef729204c",
+  "summary": "Сформировано bounded решение: E1 = oxDNA DSDNA8/MD quick fixture; E2 = published five-hinge family from DOI 10.1021/acsnano.7b00242 with pinned author data repository. S08 retained as scientific reference but not executable seed. Rights and protocol details deferred to NL0-002/003.",
+  "command_refs": [
+    "Primary-source/web inspection of ACS DOI 10.1021/acsnano.7b06470 and 10.1021/acsnano.7b00242",
+    "GitHub recursive tree inspection of gauravarya77/DNA-hinge-simulations@23fd1ff7731e9017bd776f49206dc42d70d9fe91"
+  ],
+  "evidence_refs": [
+    "docs/research/REFERENCE_SELECTION.md",
+    "docs/research/INPUT_AVAILABILITY.md",
+    "docs/evidence/NL0-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "Validate published branch content, record source-registry/session updates, then HANDOFF to independent REVIEWER/VERIFIER.",
+  "blocker": null
+}
