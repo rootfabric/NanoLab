@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff",
+  "timestamp_utc": "2026-09-08T13:27:41Z",
+  "execution_id": "EX-BUS-001-R1",
+  "work_order_id": "BUS-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "99a93c0f44d0cbc3c0a4ab5cca1f6d5095963024",
+  "summary": "Protocol, CLI, role prompts and live unclaimed sandbox task published. Independent review and live cycle remain pending.",
+  "evidence_refs": [
+    "docs/work/executions/EX-BUS-001-R1/evidence/validation.json"
+  ],
+  "next_action": "DIRECTOR reads BUS-SMOKE-001 and dispatches or waits for IMPLEMENTER; do not merge main."
+}
