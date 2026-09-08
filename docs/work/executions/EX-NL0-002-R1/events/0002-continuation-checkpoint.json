@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-08T05:40:00Z",
+  "execution_id": "EX-NL0-002-R1",
+  "work_order_id": "NL0-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "PENDING-COMMIT",
+  "summary": "E1+E2 rights audit completed. E1: GPLv3 подтверждена на pinned commit через GitHub API (LICENSE blob 94a9ed0, GPL-3.0, fixtures покрыты root license) -> CLEAR, рекомендован DOWNLOAD_ON_SETUP. E2: полный pinned tree перечитан live — LICENSE/NOTICE отсутствуют везде, GitHub license detection пустая, README правовых statements не содержат -> REDISTRIBUTION_RIGHTS = UNKNOWN, режим REFERENCE_ONLY + user-side download by exact commit, решение за владельцем (контакт авторов). S08 = RESTRICTED (cite-only), NANOBASE = per-record UNKNOWN. INCIDENT (environment, не NL0-002): внешняя реструктуризация workspace заменила одиночный checkout на клоны main/nl0-002; два несоммиченных research-файла были потеряны из working tree и восстановлены из сессионного содержимого в клоне nl0-002; remote branch и START commit 6a35586 не пострадали.",
+  "command_refs": [
+    "GitHub API: /repos/lorenzo-rovigatti/oxDNA/license?ref=00dc7fb -> GPL-3.0",
+    "GitHub API: /repos/lorenzo-rovigatti/oxDNA/contents/README.md?ref=00dc7fb -> citation list",
+    "GitHub API: /repos/gauravarya77/DNA-hinge-simulations/git/trees/23fd1ff -> root + all subdirs, no LICENSE",
+    "GitHub API: /repos/gauravarya77/DNA-hinge-simulations -> license: none, pushed_at 2017-04-04",
+    "GitHub API: license endpoints for oxdna-viewer, scadnano, choderalab/pymbar, aiida-core, aiida-shell, facebook/Ax, pytorch/botorch"
+  ],
+  "evidence_refs": [
+    "docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md"
+  ],
+  "next_action": "IMPLEMENTER: обновить LICENSE_POLICY/SOURCES/TOOL_LANDSCAPE/SESSION_LOG, записать IMPLEMENTER_EVIDENCE, валидация + close + terminal handoff.",
+  "blocker": null
+}
