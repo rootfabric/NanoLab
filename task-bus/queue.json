@@ -31,6 +31,14 @@
       "id": "bootstrap-bus-smoke-001-r1",
       "op": "open",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "implementer-b",
+      "at": 1788876161,
+      "data": {},
+      "id": "b35442c44da646e89b766e096c047f47",
+      "op": "claim",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
