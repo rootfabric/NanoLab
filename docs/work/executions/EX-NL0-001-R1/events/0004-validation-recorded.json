@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-08T03:58:48Z",
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "dd5cef3c8bd7212c64da4c80fedb5ca03169eac9",
+  "summary": "Remote readback подтверждает research artifacts; exact upstream objects and candidate family were cross-checked. Negative source/rights findings are preserved. No physics run was performed.",
+  "command_refs": [
+    "GitHub remote readback of docs/research/REFERENCE_SELECTION.md@dd5cef3c8bd7212c64da4c80fedb5ca03169eac9",
+    "GitHub source tree inspections recorded in IMPLEMENTER_EVIDENCE.md"
+  ],
+  "evidence_refs": [
+    "docs/research/REFERENCE_SELECTION.md",
+    "docs/research/INPUT_AVAILABILITY.md",
+    "docs/evidence/NL0-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "Publish terminal handoff for independent REVIEWER/VERIFIER.",
+  "blocker": null
+}

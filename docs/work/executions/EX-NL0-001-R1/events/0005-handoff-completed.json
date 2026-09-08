@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-08T03:58:48Z",
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "dd5cef3c8bd7212c64da4c80fedb5ca03169eac9",
+  "summary": "Implementer scope complete. Candidate-selection evidence is ready for independent review; no ACCEPTED verdict is claimed.",
+  "command_refs": [],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL0-001-R1/summary.md",
+    "docs/evidence/NL0-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "REVIEWER: attack E1/E2 selection, provenance, physical relevance and rights statements; VERIFIER: verify exact source identities and harness completeness.",
+  "blocker": null
+}

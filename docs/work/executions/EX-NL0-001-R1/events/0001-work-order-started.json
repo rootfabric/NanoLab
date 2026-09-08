@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-08T03:50:26Z",
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "9d8ea394c6c037b0560908689e2ce932bf0c511c",
+  "summary": "Начато первое исполнение NanoLab Harness: выбрать до трёх воспроизводимых кандидатов E1 и приоритетного кандидата E2, не запуская физические кампании.",
+  "command_refs": [
+    "GitHub: read canonical main 9d8ea394c6c037b0560908689e2ce932bf0c511c",
+    "GitHub: create work/nl0-001-reference-selection-r1 from exact main"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL0-001.md",
+    "config/control/harness/risk-policy.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: проверить реальные upstream/primary-source inputs для E1/E2 и сохранить первый continuation checkpoint.",
+  "blocker": null
+}

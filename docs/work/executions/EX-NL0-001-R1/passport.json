@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "checkpoint": "NL0",
+  "base_sha": "9d8ea394c6c037b0560908689e2ce932bf0c511c",
+  "branch": "work/nl0-001-reference-selection-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/research/REFERENCE_SELECTION.md",
+    "docs/research/INPUT_AVAILABILITY.md",
+    "docs/research/SOURCES.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/GITHUB_TRACKING.md",
+    "docs/work/executions/EX-NL0-001-R1/**",
+    "docs/evidence/NL0-001/**",
+    "project/state.json"
+  ],
+  "started_at_utc": "2026-09-08T03:50:26Z",
+  "status": "HANDOFF_READY"
+}

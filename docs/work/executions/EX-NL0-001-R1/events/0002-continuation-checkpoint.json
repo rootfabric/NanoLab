@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-08T03:55:07Z",
+  "execution_id": "EX-NL0-001-R1",
+  "work_order_id": "NL0-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3c94662340f1885d4aa6fe4360d4f4676bfe9bb8",
+  "summary": "Проверены реальные upstream-входы. Для E1 найден малый официальный oxDNA regression fixture DSDNA8/MD с topology, configuration, input и quick_compare на pinned upstream commit. SSDNA15/MD и HAIRPIN сохранены как альтернативы. Для S08 машинно-читаемый reproducibility pack пока не найден; найден более новый публичный leaf-spring dataset/repository как исполняемый E2 fallback.",
+  "command_refs": [
+    "GitHub connector: inspect lorenzo-rovigatti/oxDNA@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "Web/primary-source inspection: DOI 10.1021/acsnano.7b06470 and Nature Nanotechnology s41565-023-01516-x",
+    "GitHub connector: inspect sulcgroup/hinges@7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+  ],
+  "evidence_refs": [
+    "lorenzo-rovigatti/oxDNA:test/DNA/DSDNA8@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "lorenzo-rovigatti/oxDNA:test/DNA/SSDNA15/MD@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "lorenzo-rovigatti/oxDNA:examples/HAIRPIN@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "sulcgroup/hinges@7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+  ],
+  "next_action": "Сформировать REFERENCE_SELECTION/INPUT_AVAILABILITY с REPORTED/OBSERVED/UNKNOWN, зафиксировать выбранный E1 и точный E2 blocker/fallback, затем передать HIGH-risk решение Reviewer/Verifier.",
+  "blocker": null
+}
