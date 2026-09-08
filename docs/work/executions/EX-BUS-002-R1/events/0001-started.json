@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-08T13:44:00Z",
+  "execution_id": "EX-BUS-002-R1",
+  "work_order_id": "BUS-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "90eb244e27b538d0955852ec5f6b3e5caf2e5d13",
+  "summary": "Owner requested that a newly assigned central agent can immediately discover the distributed-workflow instructions from the repository root.",
+  "next_action": "Add DIRECTOR.md and route central/director assignments to it from AGENTS.md."
+}

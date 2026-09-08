@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-BUS-002-R1",
+  "work_order_id": "BUS-002",
+  "checkpoint": "NL0",
+  "base_sha": "90eb244e27b538d0955852ec5f6b3e5caf2e5d13",
+  "branch": "control/git-task-bus-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "AGENTS.md",
+    "DIRECTOR.md",
+    "docs/control/GIT_TASK_BUS_PROMPTS_RU.md",
+    "docs/work/executions/EX-BUS-002-R1/"
+  ],
+  "started_at_utc": "2026-09-08T13:44:00Z",
+  "status": "STARTED"
+}

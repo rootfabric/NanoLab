@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "work_order_id": "BUS-002",
+  "checkpoint": "NL0",
+  "base_sha": "90eb244e27b538d0955852ec5f6b3e5caf2e5d13",
+  "goal": "Make the distributed-workflow Director entry point obvious from the repository root so a newly assigned central agent can recover the protocol and next action quickly without prior chat context.",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "AGENTS.md",
+    "DIRECTOR.md",
+    "docs/control/GIT_TASK_BUS_PROMPTS_RU.md",
+    "docs/work/executions/EX-BUS-002-R1/"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "project/infra-plan.json",
+    "tools/task_bus.py",
+    "tests/task_bus/",
+    "task-bus/",
+    ".github/workflows/"
+  ],
+  "dependencies": ["BUS-001"],
+  "required_outputs": [
+    "Root DIRECTOR.md quick entry point",
+    "AGENTS.md routing rule for central/director assignments",
+    "Durable BUS-002 execution record"
+  ],
+  "validation_plan": [
+    "Verify AGENTS.md points to DIRECTOR.md before scoped work",
+    "Verify DIRECTOR.md contains deterministic recovery commands and role-routing rules",
+    "Verify no canonical project/scientific state is modified"
+  ],
+  "resource_budget": {"paid_compute": false, "external_agent_jobs": 0, "physical_experiments": 0},
+  "stop_conditions": [
+    "Need to alter canonical scientific state",
+    "Need to bypass Human merge gate",
+    "Need to change task-bus implementation semantics"
+  ],
+  "human_gates": ["Merge PR into main"],
+  "status": "IN_PROGRESS"
+}
