@@ -6,9 +6,9 @@
 
 | Component | Exact source/version | Role | Code license | Data/model license | Redistribution | Modification | Citation | Access mode | Evidence | Status |
 |---|---|---|---|---|---|---|---|---|---|---|
-| oxDNA / oxpy | github.com/lorenzo-rovigatti/oxDNA @ `00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591` (E1-пин; runtime-версию выбирает NL1) | Physics engine + Python bindings | GPL-3.0 (root LICENSE, blob `94a9ed0`, проверено GitHub API на pinned commit) | Force field — научные публикации (oxDNA1/2, RNA); параметры в коде под GPL | Сама зависимость: N/A (не перераспространяем). Копирование кода/файлов: allowed under GPLv3 | GPLv3 terms | Poppleton JOSS 2023 (10.21105/joss.04693); Rovigatti JCC 2015 (10.1002/jcc.23763) | dependency (build/install) | RIGHTS_AND_REDISTRIBUTION_AUDIT.md §1 | CLEAR |
+| oxDNA / oxpy | github.com/lorenzo-rovigatti/oxDNA @ `00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591` (E1-пин; runtime-версию выбирает NL1) | Physics engine + Python bindings | GPL-3.0 (root LICENSE, blob `94a9ed0`, проверено GitHub API на pinned commit) | Force field — научные публикации (oxDNA1/2, RNA); параметры в коде под GPL | Сама зависимость: N/A (не перераспространяем). Копирование кода/файлов: under GPLv3 terms (preserve applicable copyright/license/no-warranty notices; provide a copy of GPLv3 when conveying covered source; corresponding-source obligations apply where relevant) | GPLv3 terms | Poppleton JOSS 2023 (10.21105/joss.04693); Rovigatti JCC 2015 (10.1002/jcc.23763) | dependency (build/install) | RIGHTS_AND_REDISTRIBUTION_AUDIT.md §1 | CLEAR |
 | oxDNA analysis tools | входит в lorenzo-rovigatti/oxDNA (`analysis/`, incl. `paper_examples`) | Анализ траекторий | GPL-3.0 (та же лицензия репозитория) | — | under GPLv3 | GPLv3 terms | Poppleton NAR 2020 (10.1093/nar/gkab324) | dependency | README pinned commit | CLEAR |
-| E1 fixtures (DSDNA8) | тот же repo/commit, 4 файла test/DNA/DSDNA8 | Regression oracle E1 | GPL-3.0 (покрыты root LICENSE) | — | allowed under GPLv3 (+NOTICE) | GPLv3 terms | те же, что oxDNA | DOWNLOAD_ON_SETUP (метаданные в Git, загрузка по pinned commit + SHA-256) | INPUT_AVAILABILITY.md; AUDIT §1 | CLEAR |
+| E1 fixtures (DSDNA8) | тот же repo/commit, 4 файла test/DNA/DSDNA8 | Regression oracle E1 | GPL-3.0 (покрыты root LICENSE) | — | under GPLv3 terms; preserve applicable copyright/license/no-warranty notices; provide a copy of GPLv3 when conveying covered source; corresponding-source obligations apply where relevant | GPLv3 terms | те же, что oxDNA | DOWNLOAD_ON_SETUP (метаданные в Git, загрузка по pinned commit + SHA-256) | INPUT_AVAILABILITY.md; AUDIT §1 | CLEAR |
 | E2 hinge pack | github.com/gauravarya77/DNA-hinge-simulations @ `23fd1ff7731e9017bd776f49206dc42d70d9fe91` | E2 executable seed | **нет LICENSE** → UNKNOWN | designs/inputs — UNKNOWN | not established | not established | Shi–Castro–Arya, 10.1021/acsnano.7b00242 | REFERENCE_ONLY + user-side download by exact commit | AUDIT §2 | UNKNOWN → OWNER_DECISION |
 | scadnano (+ python package) | github.com/UC-Davis-molecular-computing/scadnano @ `70f0e4bde70025cd43abfce1e390095f0d86625a` (checked 2026-09-08); pypi: scadnano | Программный дизайн конструкций, экспорт oxDNA | MIT (`LICENSE.txt` blob `191a099d5d32c0399669cd7b7df9aaadeeeb2331`, SHA-256 `1573dffcff6a09abe8e5369e5299377b9f43b8fa89ef9f48bcda976cabac1e15`) | — | MIT terms | MIT terms | научное использование: cite scadnano paper (Conway et al., 10.1016/j.jmb.2022.167360 рекомендуется авторами) | dependency (pip) | LICENSE_EVIDENCE_PINS_R1.md (GitHub API; blob verify byte-exact) | CLEAR |
 | oxView | github.com/sulcgroup/oxdna-viewer @ `047e0bf718f315577556de2ba5a6be64dede48dc` (checked 2026-09-08) | Просмотр/редактирование конструкций и траекторий | GPL-3.0 (`LICENSE` blob `94a9ed024d3859793618152ea559a168bbcbb5e2` — тот же канонический GPLv3 blob, что у oxDNA; SHA-256 `8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903`) | — | under GPLv3 terms (см. §2 о границах) | GPLv3 terms | sulc group / oxView paper при научном использовании | dependency (web app / release) | LICENSE_EVIDENCE_PINS_R1.md | CLEAR (copyleft — учитывать при bundling) |
@@ -21,18 +21,52 @@
 
 Пины в колонке 2 — immutable identity проверенных в этом аудите subjects (checked commit + license path + Git blob SHA-1 + SHA-256, метод и полная таблица: `LICENSE_EVIDENCE_PINS_R1.md`, проверка 2026-09-08). Runtime-пин конкретных PyPI-версий и сборки oxDNA выполняет NL1-001; он не нужен для воспроизводимости license audit, который привязан к immutable license subject.
 
-## 2. Выводы для MVP-стека
+## 2. Выводы для MVP-стека и границы GPL
+
+Это не юридическое заключение. Ниже — рабочая классификация ситуаций распространения, чтобы не подменять анализ одной фразой «конфликт / не конфликт».
 
 ```text
-DEPENDENCIES_CLEAR       = oxDNA/oxpy, oxDNA analysis tools, scadnano, oxView, PyMBAR, AiiDA, aiida-shell, Ax, BoTorch
-DEPENDENCIES_RESTRICTED  = S08 article/SI/movies (publisher copyright; cite-only)
-DEPENDENCIES_UNKNOWN     = DNA-hinge-simulations (E2 pack), NANOBASE per-record, sulcgroup/hinges (S17, deferred)
+AGGREGATE            = независимые работы, распространяемые рядом (отдельные репозитории/пакеты/каталоги,
+                       отдельные исполняемые файлы), каждая под своей лицензией; GPL не распространяется
+                       на соседние самостоятельные работы
+SEPARATE_EXECUTABLE  = oxDNA/analysis tools или oxView как отдельный executable, взаимодействующий с
+                       NanoLab через CLI/files/pipes — объединения кода нет; по умолчанию ближе к
+                       aggregate, чем к combined work
+SAME_PROCESS_BINDING = import/linking oxpy внутри процесса NanoLab — потенциальный combined/derivative
+                       work вопрос; зависит от фактической интеграции и conveyance; НЕ эквивалентно
+                       отдельному executable
+MODIFIED_GPL_CODE    = модификация GPL-файлов и распространение изменённых версий — обязанности GPLv3
+                       применимы к изменённому материалу в любом сценарии
 ```
 
-- Все запланированные программные зависимости MVP пермиссивны (MIT), кроме oxDNA/oxpy/analysis-tools и oxView — GPL-3.0. GPL-компоненты используются как отдельно устанавливаемые зависимости/executables, а не vendored-код → copyleft на собственный код NanoLab не распространяется автоматически. Это делает Option A/B (Apache-2.0/MIT) практически совместимыми со стеком; Option C (GPL-3.0) — тоже совместима.
-- Если будущий MVP распространяется как bundle, включающий oxView — соответствующие части остаются GPLv3.
+```text
+DEPENDENCIES_CLEAR       = 9 software dependencies: oxDNA/oxpy, oxDNA analysis tools, scadnano, oxView, PyMBAR, AiiDA, aiida-shell, Ax, BoTorch
+DEPENDENCIES_RESTRICTED  = S08 article/SI/movies (publisher copyright; cite-only)
+DEPENDENCIES_UNKNOWN     = DNA-hinge-simulations (E2 pack), NANOBASE per-record, sulcgroup/hinges (S17, deferred)
+NOTE                     = E1 fixture (DSDNA8) — отдельная строка матрицы, тоже CLEAR; не входит в «9 software
+                           dependencies», это научный вход, а не программная зависимость
+```
+
+- Все запланированные программные зависимости MVP пермиссивны (MIT), кроме oxDNA/oxpy/analysis tools и oxView — GPL-3.0. Независимые MIT/Apache-2.0 файлы и модули NanoLab могут сосуществовать с GPLv3-материалом при корректной структуре распространения (aggregate): само наличие GPL-файла рядом с пермиссивным кодом не делает пермиссивный код GPL-covered.
+- Обязанности для combined covered work определяются фактической интеграцией и conveyance, а не названиями зависимостей.
+- `oxDNA executable` и `oxpy binding` — не одна и та же packaging situation: запуск отдельного oxDNA/oxView процесса (SEPARATE_EXECUTABLE) и будущий same-process import/linking `oxpy` (SAME_PROCESS_BINDING) оцениваются по-разному.
+- Любая будущая same-process `oxpy` integration до фиксации release-архитектуры:
+
+```text
+REQUIRES_OWNER_DECISION
+REQUIRES_LEGAL_REVIEW
+```
+
+- До этого решения безопасная политика проекта:
+
+```text
+DOWNLOAD_ON_SETUP   — GPL-компоненты не хранятся в Git NanoLab, скачиваются на setup
+NO_VENDORING_YET    — GPL-код не вендорится в дерево NanoLab
+```
+
+- Если будущий MVP распространяется как bundle, включающий oxView или иные GPL-компоненты, — соответствующие части остаются under GPLv3 terms; обязанности (preserve applicable notices, provide license copy, corresponding source where relevant) применяются к conveyed GPL-материалу.
 - Ax/BoTorch — planned только; в E1 не входит (подтверждает формулировку NL0-001).
-- Вендорить GPL-код в дерево NanoLab при permissive-лицензии — `VENDOR_NOT_RECOMMENDED`; режим доступа — pip/build/dependency.
+- `VENDOR_NOT_RECOMMENDED` для GPL-кода в дереве NanoLab — консервативная проектная политика до решения владельца/legal review, а не утверждение о юридической невозможности; режим доступа — pip/build/dependency.
 
 ## 3. Варианты лицензии NanoLab (решение за владельцем, агент не назначает)
 
@@ -44,13 +78,25 @@ DEPENDENCIES_UNKNOWN     = DNA-hinge-simulations (E2 pack), NANOBASE per-record,
 
 Документация (отдельно от кода): CC BY 4.0 (свободное переиспользование с атрибуцией — удобнее для научной документации) либо CC BY-SA 4.0 (share-alike для производных документов). Данные/научные артефакты NanoLab — третий, отдельный класс; режим выбирается вместе с решением о публикации benchmark-пакетов (зависит и от прав E2).
 
-Принципиально: **лицензия NanoLab ≠ лицензии сторонних научных входов**. Собственная лицензия не легализует ни E2-файлы (UNKNOWN), ни S08-материалы (ACS copyright), ни NANOBASE-записи; наоборот, permissive Option A/B делает вендоринг GPLv3-fixtures в основном дереве нежелательным.
+Принципиально: **лицензия NanoLab ≠ лицензии сторонних научных входов**. Собственная лицензия не легализует ни E2-файлы (UNKNOWN), ни S08-материалы (ACS copyright), ни NANOBASE-записи. Выбор permissive Option A/B не запрещает вендоринг GPLv3-fixtures автоматически и не разрешает его автоматически: вендоринг — архитектурное решение (`REQUIRES_OWNER_DECISION`, при нестандартной структуре — `REQUIRES_LEGAL_REVIEW`); текущая безопасная политика — `NO_VENDORING_YET`.
 
 Рекомендация (не решение): Apache-2.0 (A) для кода + CC BY 4.0 для документации — лучший баланс patent-grant/permissiveness для заявленной миссии; окончательный выбор — владелец.
 
-## 4. Citation/NOTICE обязанности (сводно для будущего NOTICE-файла)
+## 4. Citation policy (научная атрибуция; отдельно от license obligations)
 
-- oxDNA stack: три DOI из README (код/CUDA/analysis tools) + GPLv3 notice при любом распространении включённых файлов.
+Научное цитирование — академическая обязанность; она не заменяет, не отменяет и не расширяет условия лицензий.
+
+- oxDNA stack: три DOI из README (код/CUDA/analysis tools).
 - Shi–Castro–Arya: 10.1021/acsnano.7b00242 при любом использовании hinge-пакета.
 - PyMBAR: 10.1063/1.2978177 (при использовании MBAR).
 - scadnano/AiiDA/Ax/BoTorch: paper-citation по документации проектов при научном использовании.
+
+### 4.1 License obligations (GPLv3, нейтральная сводка)
+
+Если в будущем состоится conveyance GPLv3-материала (fixtures/oxDNA/oxView) со стороны NanoLab, применяются — без привязки к отдельному генерическому файлу NOTICE:
+
+- preserve applicable copyright/license/no-warranty notices в соответствующих файлах;
+- provide a copy of GPLv3 when conveying covered source;
+- corresponding-source obligations применяются там, где уместно (выбранный способ object-code conveyance определяет их объём).
+
+Отдельный standalone `NOTICE`-файл сам по себе не является определяющей обязанностью GPLv3. Решение о наличии такого файла в репозитории NanoLab связано с выбором собственной лицензии (у Apache-2.0 — собственные NOTICE-требования) и практикой атрибуции, а не с GPLv3 по умолчанию.

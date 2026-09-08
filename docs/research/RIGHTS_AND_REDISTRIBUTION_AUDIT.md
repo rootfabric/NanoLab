@@ -17,8 +17,9 @@
 
 ### Анализ
 
-- GPLv3 — strong copyleft: распространение fixtures вместе с производными/связанными в единое произведение обязывает распространять соответствующий источник под GPLv3-совместимыми условиями. Если NanoLab выберет пермиссивную лицензию собственного кода, вендоринг GPLv3-файлов внутрь репозитория создаст смешанное произведение и конфликт с Option A/B (см. матрицу).
-- Цитирование: обязанность научная/академическая (README), не юридическая блокировка; фиксируется в NOTICE/citation policy.
+- GPLv3 — strong copyleft, но лицензия сама различает **aggregate** независимых работ и **combined covered work**. Само по себе наличие GPLv3-файла рядом с MIT/Apache-кодом — в одном репозитории или дистрибутиве — не создаёт «конфликта» и не делает независимый пермиссивный код GPL-covered: независимые MIT/Apache-2.0 файлы могут сосуществовать с GPLv3-материалом при корректной структуре распространения (отдельные компоненты/каталоги/пакеты, каждая работа под своей лицензией).
+- Обязанности **combined covered work** зависят от фактической интеграции и conveyance: same-process binding/linking, объединение кода в одно произведение или распространение модифицированного GPL-кода — иные ситуации, чем aggregate или запуск отдельного executable. Рабочая классификация: `DEPENDENCY_LICENSE_MATRIX.md` §2 (AGGREGATE / SEPARATE_EXECUTABLE / SAME_PROCESS_BINDING / MODIFIED_GPL_CODE).
+- Цитирование: обязанность научная/академическая (README), не юридическая блокировка; фиксируется в citation policy отдельно от license obligations (`DEPENDENCY_LICENSE_MATRIX.md` §4).
 - Файлы крошечные (4 файла, ~5.2 КБ суммарно), но вопрос не в размере, а в правовом режиме.
 
 ### Рекомендация
@@ -27,13 +28,32 @@
 E1_ACCESS_MODE = DOWNLOAD_ON_SETUP
 ```
 
-Причина: лицензия известна и разрешает копирование/модификацию/распространение под GPLv3, но NanoLab ещё не выбрал собственную лицензию. До решения владельца безопасный режим — хранить в NanoLab только метаданные (upstream repo, exact commit, exact paths, SHA-256 — уже сохранены в INPUT_AVAILABILITY.md) и загружать файлы в setup/runtime напрямую из upstream по pinned commit с верификацией SHA-256. Вендоринг (`VENDOR_ALLOWED`) возможен позже, если владелец выберет GPL-3.0-совместимую лицензию NanoLab или согласится держать fixtures как изолированный GPLv3-submodule/подкаталог с NOTICE; при Option A/B (Apache/MIT) вендоринг в основное дерево `VENDOR_NOT_RECOMMENDED`.
+Причина: лицензия известна и разрешает копирование/модификацию/распространение под GPLv3, но NanoLab ещё не выбрал собственную лицензию. До решения владельца безопасный режим — хранить в NanoLab только метаданные (upstream repo, exact commit, exact paths, SHA-256 — уже сохранены в INPUT_AVAILABILITY.md) и загружать файлы в setup/runtime напрямую из upstream по pinned commit с верификацией SHA-256. Вендоринг (`VENDOR_ALLOWED`) возможен позже — это архитектурное решение, а не автоматический конфликт: если владелец выберет GPL-3.0-совместимую лицензию NanoLab или согласится держать fixtures как изолированный GPLv3-подкаталог/submodule с сохранением применимых copyright/license/no-warranty notices и копией GPLv3; такое решение — `REQUIRES_OWNER_DECISION`, а при permissive-лицензии NanoLab и нестандартной структуре распространения — плюс `REQUIRES_LEGAL_REVIEW`. До решения действует `NO_VENDORING_YET`: при Option A/B (Apache/MIT) вендоринг в основное дерево проектной политикой не рекомендуется.
 
 ```text
 E1_RIGHTS = CLEAR (GPL-3.0; redistribution allowed under GPLv3 terms; attribution/citation required)
 ```
 
 Влияние на NL1: setup-скрипт NL1-001 должен скачивать 4 файла по exact commit и сверять SHA-256; это уже соответствует сохранённым identities.
+
+### Границы для будущих packaging-решений (не юридическое заключение)
+
+- `oxDNA executable` (и `oxView`) как отдельные процессы — одна packaging situation (SEPARATE_EXECUTABLE); interaction через CLI/files/pipes, объединения кода нет.
+- `oxpy binding` — другая ситуация: будущий same-process import/linking `oxpy` внутри NanoLab (SAME_PROCESS_BINDING) — потенциально combined/derivative work вопрос. Перед фиксацией release-архитектуры такой интеграции:
+
+```text
+REQUIRES_OWNER_DECISION
+REQUIRES_LEGAL_REVIEW
+```
+
+- До этих решений безопасная политика проекта остаётся:
+
+```text
+DOWNLOAD_ON_SETUP   (E1 fixtures; метаданные в Git)
+NO_VENDORING_YET    (GPL-код не вендорится в дерево NanoLab)
+```
+
+- Вендоринг GPL-fixtures в репозиторий с permissive лицензией NanoLab — не «автоматический конфликт» (см. Анализ выше), а architecture choice: допустимость определяется структурой распространения (aggregate vs combined), способом интеграции и conveyance. Решение — за владельцем; документ не является юридическим заключением.
 
 ## 2. E2 — DNA-hinge-simulations (Shi–Castro–Arya)
 
