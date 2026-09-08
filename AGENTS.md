@@ -20,6 +20,19 @@ config/control/harness/project-goals.v1.json
 config/control/harness/checkpoint-catalog.v1.json
 ```
 
+Если задача относится к CI, runner, GPU, artifact storage, scheduler, AiiDA/HPC или другой вычислительной инфраструктуре, дополнительно читать:
+
+```text
+docs/infra/README.md
+docs/infra/ROADMAP.md
+docs/infra/SECURITY_MODEL.md
+docs/infra/EXECUTION_BACKENDS.md
+project/infra-plan.json
+project/infra-state.json
+```
+
+Научный frontier и INFRA frontier независимы. INFRA не может самостоятельно закрывать `NL*` checkpoint или повышать scientific claim. Конкретный scientific Work Order объявляет зависимость от INFRA capability только явно.
+
 Затем читать `docs/SCIENTIFIC_METHOD.md`, активный Work Order, паспорт эксперимента и ближайшие scoped инструкции.
 
 ## Hard rules
@@ -39,11 +52,13 @@ NEGATIVE / FAILED / INCONCLUSIVE RESULTS MUST BE PRESERVED
 DO NOT CHANGE ACCEPTANCE CRITERIA AFTER SEEING RESULTS WITHOUT A NEW PROTOCOL REVISION
 DO NOT REUSE A FAILED RUN ID
 RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE
+INFRASTRUCTURE PROVIDES CAPABILITY; IT DOES NOT DECLARE SCIENTIFIC TRUTH
+PUBLIC PR CODE MUST NOT AUTOMATICALLY RUN ON TRUSTED SELF-HOSTED SCIENTIFIC NODES
 ```
 
 ## Work protocol
 
-1. Проверить fresh `main`, `project/state.json` и next Work Order.
+1. Проверить fresh `main`, соответствующий state (`project/state.json` или `project/infra-state.json`) и next Work Order.
 2. Создать scoped branch от exact main; записать base SHA.
 3. До substantive work создать durable START record и commit/push.
 4. Выполнять только bounded scope и утверждённый resource budget.
@@ -55,6 +70,12 @@ RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE
 10. `FIX_REQUIRED` исправляется с Repair Map и новым evidence, а не повторением того же действия.
 11. Перед handoff оставить exact HEAD/TREE, commands, results, evidence paths, open risks и одно next action.
 12. Merge в `main` остаётся Human Gate, если владелец явно не разрешил его в текущей mission.
+
+## INFRA work protocol
+
+INFRA — отдельный parallel capability train `INFRA0..INFRA7`. Каждая крупная стадия выполняется отдельной bounded веткой `infra/<checkpoint>-<slug>-rN` от свежего `main`; не поддерживать бесконечную long-lived infra branch.
+
+До self-hosted execution сначала закрывается security/control baseline. Для публичного repository PR checks используют untrusted/ephemeral route; trusted self-hosted runner выбирается только explicit protected dispatch с exact subject и budget.
 
 ## Experiment Git checkpoints
 
