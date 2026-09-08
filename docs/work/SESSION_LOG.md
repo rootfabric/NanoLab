@@ -85,3 +85,17 @@ Issue #4 восстановлен через GitHub API дословно, accept
 Validation: json.tool 6/6 OK; CONTROL_DEVELOPMENT -CheckConsistency ok=true exit 0; CONTROL_WORK validate ok=true. Симуляции не запускались (`E0–E6 NOT_RUN`, `physics_runs=0`); state.json/plan.json не изменялись; ACCEPTED не выставлен. Риск HIGH → независимый REVIEWER, затем VERIFIER, затем Director checkpoint; merge — Human Gate.
 
 Следующее действие: независимый review/verify по exact substantive HEAD; после PASS — checkpoint proposal владельцу (merge).
+
+## NL0-003-DIRECTOR-R1 — каноническая приёмка
+
+Exact subjects: base `81e299f…`, START `9372b79e`, substantive `9404a422` (tree `b8b1bd99`), PR head `6e30aee7`.
+
+Fresh Reviewer R1: **PASS** (0 blocking / 2 minor), evidence `36c68e15` (ветка `review/nl0-003-preregistration-r1`): критерии зафиксированы до кампании (verbatim upstream-оракул), пилот-дисциплина freeze корректна, семантика исходов различена, 298 K vs 300 K решён decision rule без замалчивания, числа не выдуманы, overclaim'ов нет.
+
+Fresh Verifier R1: **PASS**, evidence `ecc5dabf` (ветка `verify/nl0-003-preregistration-r1`): независимо 4/4 SHA-256 и 4/4 git blob upstream входов, verbatim `quick_input`/`quick_compare`, binding `9404a422`/tree `b8b1bd99`, diff в allowed_paths, state/plan/policies не тронуты, JSON по схемам, контролы exit 0, числа без трассировки не найдены.
+
+Checkpoint proposal: `ebafd1e4` (ветка `control/nl0-003-director-checkpoint-r1`). Владелец явно разрешил публикацию в сессии; PR #21 merged с race-guard `expectedHeadOid=6e30aee7` (origin/main оставался на base до merge), merge commit `678be065`. MINOR findings сохранены с dispositions: §6.1 маркировка ASSUMED → `E1-PROTO-R2`; label SUBSTANTIVE_HEAD в evidence → авторитетен terminal binding `9404a422`.
+
+Director decision: `NL0-003 = ACCEPTED`; `NL0 = ACCEPTED` (checkpoint-catalog: references ✓, access/rights ✓, preregistered E1 scope + E2 постановка ✓); frontier → `NL1`; `NL1-001 = READY`, scheduler priority. `E0–E6` остаются `NOT_RUN`, `physics_runs = 0`. Полный acceptance record: `docs/evidence/NL0-003/DIRECTOR_ACCEPTANCE_R1.md`.
+
+Следующее действие: `NL1-001 — pin environment and upstream smoke`; владельцу: права `DNA-hinge-simulations` (контакт авторов) и лицензия NanoLab остаются открытыми owner decisions.

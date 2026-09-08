@@ -6,7 +6,7 @@
 
 ## Текущее состояние
 
-**Документальный фундамент создан; `NL0-001` канонически принят после Fresh Reviewer + Fresh Verifier. Научные симуляции ещё не запускались.** Канонические статусы: [project/state.json](project/state.json). Следующий приоритет: `NL0-002` — аудит зависимостей/прав; `NL0-003` — пререгистрация E1/E2 — также READY и может готовиться параллельно в отдельном scope. Принятый выбор reference: [REFERENCE_SELECTION](docs/research/REFERENCE_SELECTION.md), exact inputs/provenance: [INPUT_AVAILABILITY](docs/research/INPUT_AVAILABILITY.md).
+**Научная стадия `NL0` канонически завершена: `NL0-001` (эталоны), `NL0-002` (права/лицензии), `NL0-003` (пререгистрация `E1-PROTO-R1` и постановка `E2-SETUP-R1`) приняты после Fresh Reviewer + Fresh Verifier. Научные симуляции ещё не запускались.** Канонические статусы: [project/state.json](project/state.json). Следующий приоритет: `NL1-001` — зафиксировать среду и upstream smoke. Выбор reference: [REFERENCE_SELECTION](docs/research/REFERENCE_SELECTION.md), exact inputs/provenance: [INPUT_AVAILABILITY](docs/research/INPUT_AVAILABILITY.md), протокол E1: [PREREGISTRATION_E1_R1](docs/research/PREREGISTRATION_E1_R1.md), постановка E2: [E2_SETUP_R1](docs/research/E2_SETUP_R1.md).
 
 С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
 

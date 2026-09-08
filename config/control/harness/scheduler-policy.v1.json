@@ -2,8 +2,8 @@
   "schema_version": 1,
   "revision": "NL-H0-2026-09-08-R1",
   "canonical_source": "project/state.json",
-  "current_checkpoint": "NL0",
-  "next_work_order": "NL0-003",
+  "current_checkpoint": "NL1",
+  "next_work_order": "NL1-001",
   "parallel_scientific_runtime_limit": 1,
-  "notes": "NL0-002 accepted after bounded repair and exact-head verifier PASS. NL0-003 is the remaining NL0 work and is now scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
+  "notes": "NL0 accepted in full: NL0-001 (references), NL0-002 (rights/licensing), NL0-003 (E1-PROTO-R1 preregistration + E2-SETUP-R1 setup) with fresh Reviewer/Verifier PASS and owner-authorized merge of PR #21. NL1-001 (pin environment and upstream smoke) is scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
 }
