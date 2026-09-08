@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-entrypoint-added",
+  "timestamp_utc": "2026-09-08T13:47:30Z",
+  "execution_id": "EX-BUS-002-R1",
+  "work_order_id": "BUS-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "a57fd73d7d49a6ec79c13c2bb197fffade198060",
+  "summary": "Added root DIRECTOR.md and an early AGENTS.md route so a newly assigned central agent can discover task-bus recovery and dispatch instructions without prior chat context.",
+  "evidence_refs": ["DIRECTOR.md", "AGENTS.md"],
+  "next_action": "Validate discoverability and publish handoff in the existing draft PR."
+}

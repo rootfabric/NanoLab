@@ -2,6 +2,20 @@
 
 Канонический репозиторий: `rootfabric/NanoLab`. Root `AGENTS.md` маршрутизирует работу; roadmap и scientific truth берутся из `main`.
 
+## Central agent / Director fast path
+
+Если владелец назначил тебя **центральным/главным агентом**, `DIRECTOR`, попросил организовать распределённое выполнение дорожной карты, запускать/ожидать других агентов или продолжить task-bus workflow, **сразу после этого файла читай `DIRECTOR.md`**.
+
+```text
+CENTRAL / MAIN AGENT / DIRECTOR / DISTRIBUTED WORKFLOW
+    -> DIRECTOR.md
+    -> fresh canonical state
+    -> fresh Git Task Bus status/history
+    -> dispatch real role session OR WAIT_EXTERNAL
+```
+
+Не пытайся восстановить распределённый workflow из чата и не выполняй независимые роли под разными именами в одной сессии. `DIRECTOR.md` является коротким входом; полные правила находятся в `docs/control/GIT_TASK_BUS_RU.md` и `docs/control/GIT_TASK_BUS_PROMPTS_RU.md`.
+
 ## Mandatory read order
 
 Перед изменением кода, запуском эксперимента, review или объявлением checkpoint читать:
