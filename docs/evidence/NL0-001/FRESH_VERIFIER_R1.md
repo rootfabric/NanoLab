@@ -1,6 +1,8 @@
 # NL0-001 — Fresh Independent Verifier R1
 
-Исполнение: `EX-NL0-001-R1`. Роль: `VERIFIER` (fresh, независимая сессия; не Implementer, не Reviewer). PR: `rootfabric/NanoLab#11`. Все SHA проверены live в день verification; выводы Reviewer не принимались на веру — все проверяемые факты перепроверены с нуля.
+Исполнение: `EX-NL0-001-R1`. Роль: `VERIFIER` — независимая fresh-проверка; не Implementer и не Reviewer. PR: `rootfabric/NanoLab#11`.
+
+Этот документ является **superseding fresh verification** для текущей сессии. Ветка `verify/nl0-001-reference-selection-r1` уже существовала до начала этой проверки на commit `5582ad765d7e43f50f48f3764ca054ad45ea2a77`; live ancestry подтверждает, что этот commit имеет прямым родителем exact candidate `f738bff77f2406552b4383c05989ffc6e56a3bd5` и до настоящего обновления ветка отличалась от candidate только этим verifier-report. Ветка не reset/force-push/delete; настоящий отчёт публикуется новым non-force commit.
 
 ```text
 VERIFIED_HEAD        = f738bff77f2406552b4383c05989ffc6e56a3bd5
@@ -20,52 +22,101 @@ STATE_SAFETY_CHECK   = PASS
 NEXT_ACTOR           = DIRECTOR
 ```
 
-Ветка настоящего отчёта `verify/nl0-001-reference-selection-r1` создана от exact candidate HEAD `f738bff`; файлы кандидата не изменены; PR не смержен; `project/state.json` не тронут; NL0 не закрыт.
+## Mandatory read
+
+Live на exact candidate прочитаны `AGENTS.md`, `PROJECT_CONTROL.md`, `HARNESS_CONTROL.md`, `docs/work/WO-NL0-001.md`, `docs/research/REFERENCE_SELECTION.md`, `docs/research/INPUT_AVAILABILITY.md`, `docs/evidence/NL0-001/IMPLEMENTER_EVIDENCE.md`, execution package `docs/work/executions/EX-NL0-001-R1/`, `config/control/harness/review-policy.v1.json`, `config/control/harness/risk-policy.v1.json`, `scripts/harness/work_cli.py`. Fresh Reviewer evidence прочитан на exact `REVIEW_COMMIT=e0303aa05bbcc3f6839c3af31d7a28ecbd66a932`, а не с moving branch как источника истины.
 
 ## V1 — Candidate / Review binding
 
-- PR #11 live (GitHub API): `state=open`, `head.sha = f738bff77f2406552b4383c05989ffc6e56a3bd5`, `base.sha = 9d8ea394c6c037b0560908689e2ce932bf0c511c`, 4 commits, 13 files. PR HEAD не менялся после Reviewer.
-- `origin/work/nl0-001-reference-selection-r1` (fetch) = `f738bff` — совпадает с PR HEAD и REVIEWED_HEAD.
-- `origin/review/nl0-001-reference-selection-r1` = `e0303aa` (= REVIEW_COMMIT); цепочка `f738bff → 25c6d19 → f3990dc → e0303aa` подтверждает инициализацию от exact subject.
-- Durable PASS: `docs/evidence/NL0-001/FRESH_REVIEW_R1.md` добавлен именно в `e0303aa` и содержит `REVIEWED_HEAD = f738bff…`, `VERDICT = PASS`, `EPOCH_DRIFT = CONTINUE`. Diff review-ветки против кандидата — только 3 review-файла (assignment, status, verdict); candidate tree не тронут Reviewer.
+Финальный race-check перед публикацией:
 
 ```text
-PR_HEAD == REVIEWED_HEAD → OK; REVIEW_STALE не применим.
+PR #11 state        = OPEN
+PR_HEAD             = f738bff77f2406552b4383c05989ffc6e56a3bd5
+REVIEWED_HEAD       = f738bff77f2406552b4383c05989ffc6e56a3bd5
+REVIEW_COMMIT       = e0303aa05bbcc3f6839c3af31d7a28ecbd66a932
+review branch HEAD  = e0303aa05bbcc3f6839c3af31d7a28ecbd66a932
 ```
 
-## V2 — E1 independently fetched evidence (oxDNA)
+`f738bff → e0303aa` имеет merge-base ровно `f738bff`; review-ветка на 3 commits впереди и меняет только:
 
-Upstream `lorenzo-rovigatti/oxDNA@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591` существует (API); tree commit = `f03ce1de5c0f3a336cb00ad363686c4841600d10` — совпадает с записанным; license на commit = GPL-3.0 (API).
+```text
+docs/evidence/NL0-001/FRESH_REVIEW_R1.md
+docs/review/NL0-001_REVIEW_ASSIGNMENT.md
+docs/review/NL0-001_REVIEW_STATUS.md
+```
 
-Четыре файла скачаны независимо (raw.githubusercontent на pinned SHA) и SHA-256 вычислены заново:
+Durable report на `e0303aa` содержит `REVIEWED_HEAD=f738bff…`, `VERDICT=PASS`, `EPOCH_DRIFT=CONTINUE`, `NEXT_ACTOR=FRESH VERIFIER`.
 
-| Файл | Размер (live) | SHA-256 (live, независимый) | = INPUT_AVAILABILITY.md |
+```text
+PR_HEAD == REVIEWED_HEAD → PASS
+REVIEW_STALE              → FALSE
+```
+
+## V2 — E1 independently fetched evidence
+
+Upstream: `lorenzo-rovigatti/oxDNA@00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591`; live commit tree: `f03ce1de5c0f3a336cb00ad363686c4841600d10`.
+
+Четыре exact upstream files получены на pinned SHA, их SHA-256 вычислены независимо от NanoLab evidence, после чего сравнены с `INPUT_AVAILABILITY.md`:
+
+| Path | Size | Independently computed SHA-256 | Match |
 |---|---:|---|---|
-| `test/DNA/DSDNA8/dsdna8.top` | 148 B | `f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4` | да |
-| `test/DNA/DSDNA8/init.dat` | 4498 B | `0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0` | да |
-| `test/DNA/DSDNA8/MD/quick_input` | 533 B | `8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2` | да |
-| `test/DNA/DSDNA8/MD/quick_compare` | 51 B | `86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27` | да |
+| `test/DNA/DSDNA8/dsdna8.top` | 148 B | `f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4` | YES |
+| `test/DNA/DSDNA8/init.dat` | 4498 B | `0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0` | YES |
+| `test/DNA/DSDNA8/MD/quick_input` | 533 B | `8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2` | YES |
+| `test/DNA/DSDNA8/MD/quick_compare` | 51 B | `86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27` | YES |
 
-Содержание проверено побайтово (файлы прочитаны целиком):
+Содержание upstream подтверждает:
 
-- `dsdna8.top`: заголовок `16 2` — 16 nucleotides / 2 strands (две комплементарные 8-nt цепочки). Подтверждено.
-- `quick_input`: `backend = CPU`, `steps = 1e6`, `thermostat = john`, `T = 20C`, `dt = 0.005`, `topology = ../dsdna8.top`, `conf_file = ../init.dat`. Подтверждено дословно.
-- `quick_compare`: ровно одна строка `ColumnAverage::energy.dat::2::-1.37970256144::0.15`. Подтверждено дословно; `REFERENCE_SELECTION.md` цитирует oracle без искажений.
+```text
+dsdna8.top       = header "16 2" → 16 nucleotides / 2 strands
+quick_input       = backend CPU
+                    steps 1e6
+                    thermostat john
+                    T = 20C
+                    dt = 0.005
+quick_compare     = ColumnAverage::energy.dat::2::-1.37970256144::0.15
+```
 
-E1 physics simulation Verifier-ом не запускался (вне scope WO).
+E1 physics simulation в этом Work Order Verifier не запускал.
 
-## V3 — E2 exact upstream tree (DNA-hinge-simulations)
+## V3 — E2 exact upstream tree
 
-Upstream `gauravarya77/DNA-hinge-simulations@23fd1ff7731e9017bd776f49206dc42d70d9fe91` существует; commit tree SHA = `b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9` — совпадает с записанным pinned tree. Pinned commit = HEAD `master` (pushed_at 2017-04-04 = дате commit), т.е. более поздних изменений нет.
+Upstream: `gauravarya77/DNA-hinge-simulations@23fd1ff7731e9017bd776f49206dc42d70d9fe91`.
 
-Полный recursive tree (API, `truncated=false`, 33 entries) содержит ровно заявленное:
+Live commit tree:
 
-- `Design_Hinges/{0b,11b,32b,53b,74b}.json` — все 5; blob SHA-1 `0ed4075c…`, `7f193697…`, `6adb55af…`, `3ffdb753…`, `776725c1…` и размеры 173059/173145/173315/173481/173595 B совпали с записанными всеми пятью.
-- `MD_Hinges/{0b,11b,32b,53b,74b}.top` и `.conf` — все 10 пар; `0b.conf` = 2 294 162 B (≈2.29 MB, как записано).
-- `MD_Hinges/pro_CPU.in` (blob `89d76310ce726eaec9e7acb312bd7b0fc43fa735` — совпал) и `pro_GPU.in`.
-- `Init_Hinges/` с `cadnano_interface.py`, `init_generator.py`, `ini_demo/…`.
+```text
+b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9
+```
 
-`pro_CPU.in` прочитан целиком; параметры подтверждены дословно:
+Recursive tree возвращён как `truncated=false` и содержит все требуемые machine inputs:
+
+```text
+Design_Hinges/
+  0b.json
+  11b.json
+  32b.json
+  53b.json
+  74b.json
+
+MD_Hinges/
+  0b.top / 0b.conf
+  11b.top / 11b.conf
+  32b.top / 32b.conf
+  53b.top / 53b.conf
+  74b.top / 74b.conf
+  pro_CPU.in
+  pro_GPU.in
+
+Init_Hinges/
+  README.md
+  cadnano_interface.py
+  init_generator.py
+  ini_demo/...
+```
+
+Пять design blob SHA-1 и sizes совпали с NanoLab evidence. `MD_Hinges/pro_CPU.in` blob = `89d76310ce726eaec9e7acb312bd7b0fc43fa735`; live content:
 
 ```text
 backend = CPU
@@ -76,36 +127,98 @@ salt_concentration = 0.5
 T = 300K
 ```
 
-`pro_GPU.in` проверен дополнительно: `backend = CUDA`, `backend_precision = mixed`, те же DNA2/0.5/`T = 300K`/2e7 — оба авторских входа используют 300 K.
+Pinned `MD_Hinges/README.md` прямо описывает каждый `.conf` как input restart file, содержащий structure and velocity data of an equilibrated hinge. Следовательно, формулировка NanoLab `equilibrated/restart structures` поддержана upstream.
 
-`MD_Hinges/README.md` (pinned SHA) дословно описывает каждый `.conf` как «Input restart file (containing structure and velocity data of an equilibrated hinge)» — заявление о equilibrated/restart structures подтверждено первоисточником.
+## V4 — Known discrepancies remain unresolved correctly
 
-## V4 — Known discrepancies remain correctly unresolved
+### 298 K article vs 300 K upstream input
 
-1. **298 K (статья) vs 300 K (upstream input):** upstream-сторона проверена независимо и побайтово — оба авторских входа (`pro_CPU.in`, `pro_GPU.in`) задают `T = 300K`. Candidate НЕ «исправил» расхождение: `REFERENCE_SELECTION.md` фиксирует его явно и передаёт явное разрешение в NL0-003; ни одна температура не выбрана молча. Статья-сторона (298 K в Methods) из этого окружения неперечитываема (ACS full text paywalled/bot-blocked; Europe PMC `pmcid=None`, Unpaywall `is_oa=false`) — принимается по full-text-цитате Reviewer и вторичным свидетельствам; для вердикта NL0-001 некритично, т.к. Work Order требует именно зарегистрировать и делегировать конфликт, что сделано.
-2. **LICENSE:** полный pinned tree (33 entries) не содержит `LICENSE`/`COPYING`/`NOTICE`; GitHub API `license = None`. Candidate не назначил лицензию и не заявил право копирования: права зафиксированы как UNKNOWN, решение делегировано в NL0-002; upstream data в NanoLab не копировались (в diff кандидата входят только 13 docs/json файлов, ни одного `.top/.conf/.in/.dat`).
-3. **S08 (`10.1021/acsnano.7b06470`):** статус записан как `INPUT_PACK_NOT_LOCATED`, не `NO_DATA_EXISTS`; UNKNOWN про непроверенные поверхности и recovery path (запрос авторам) сохранены. Независимый bounded check согласуется: GitHub repo-search «jointed DNA nanostructures» → 0 результатов; Europe PMC — нет PMCID/full-text data-ссылок; статья не OA.
+Primary ACS article DOI `10.1021/acsnano.7b00242` проверена live в этой verifier-сессии. Methods сообщает `298 K` и `500 mM Na+`, а секция `Simulation Codes and Data` прямо связывает статью с `gauravarya77/DNA-hinge-simulations` и перечисляет caDNAno designs, scripts, input options, topology/configuration files. Pinned `pro_CPU.in` независимо показывает `T = 300K`.
+
+Candidate не подменяет одно значение другим: расхождение явно сохранено и передано в `NL0-003`. Это корректно.
+
+### E2 rights
+
+Полный pinned recursive tree из 33 entries не содержит `LICENSE`, `COPYING` или `NOTICE`. Candidate не выводит право redistribution из public visibility: rights остаются `UNKNOWN`, решение передано в `NL0-002`. PR #11 содержит только docs/json evidence; upstream `.top/.conf/.in/.dat` в NanoLab не скопированы.
+
+### S08
+
+Для DOI `10.1021/acsnano.7b06470` primary ACS Supporting Information live перечисляет PDF с definitions/additional simulation results и пять MPG movies. Bounded inspection не устанавливает существование публичного machine-input pack. Accepted manuscript также благодарит Carlos Castro за предоставление original caDNAno files. Поэтому корректный статус остаётся:
+
+```text
+INPUT_PACK_NOT_LOCATED
+```
+
+а не `NO_DATA_EXISTS`.
 
 ## V5 — Harness execution package
 
-`docs/work/executions/EX-NL0-001-R1/`: `passport.json` (risk `HIGH`, claim `C0_SOFTWARE_ONLY`, base `9d8ea394…`, allowed_paths покрывают все 13 изменённых файлов), `summary.md`, `branch-passport.md`, события 0001–0005 ровно в порядке `WORK_ORDER_STARTED → CONTINUATION_CHECKPOINT → IMPLEMENTATION_COMMITTED → VALIDATION_RECORDED → HANDOFF_COMPLETED`; все `subject_sha` — 40 hex, `execution_id`/`work_order_id` консистентны с паспортом.
+На exact candidate существуют `passport.json`, `summary.md`, `branch-passport.md` и ровно пять event files:
 
-Реально выполнено на candidate worktree (`f738bff`):
-
-```bash
-python3 scripts/harness/work_cli.py close docs/work/executions/EX-NL0-001-R1
-# → ok=true, errors=[], status=HANDOFF_READY, exit 0
+```text
+0001 WORK_ORDER_STARTED
+0002 CONTINUATION_CHECKPOINT
+0003 IMPLEMENTATION_COMMITTED
+0004 VALIDATION_RECORDED
+0005 HANDOFF_COMPLETED
 ```
 
-Predicates `work_cli.py` проверены и кодом, и исполнением: ровно один START, START первый, ровно один terminal/handoff, terminal последний, `summary.md` существует.
+Текущий `scripts/harness/work_cli.py` независимо прочитан. Его predicates воспроизведены против live execution package:
+
+- exactly one `WORK_ORDER_STARTED` — PASS;
+- START first — PASS;
+- exactly one terminal/handoff — PASS;
+- terminal/handoff last — PASS;
+- `execution_id == EX-NL0-001-R1` во всех events — PASS;
+- `work_order_id == NL0-001` во всех events — PASS;
+- все `subject_sha` соответствуют `^[0-9a-f]{40}$` — PASS;
+- event ids unique и lexically ordered — PASS;
+- event types/actor roles допустимы — PASS;
+- `summary.md` существует — PASS.
+
+Эквивалент `close` даёт:
+
+```text
+ok = true
+errors = []
+status = HANDOFF_READY
+has_terminal_handoff = true
+has_summary = true
+```
+
+Прямой запуск `./CONTROL_WORK.sh close ...` / `python3 scripts/harness/work_cli.py close ...` в clean clone в этой verifier-сессии выполнить не удалось: container DNS не разрешал `github.com`, поэтому clone завершался `Could not resolve host: github.com`. Это explicit environment limitation; PASS здесь относится к независимому воспроизведению exact current predicates и live package, а не к заявлению о выполненном shell-wrapper.
+
+Также зафиксирован non-blocking harness detail: terminal event `subject_sha=dd5cef3c8bd7212c64da4c80fedb5ca03169eac9`, а финальный PR HEAD = `f738bff…`; текущий `work_cli.py` не требует их равенства. Это не нарушает нынешние predicates, но является разумным будущим harness hardening.
 
 ## V6 — Scientific state safety
 
-`project/state.json` не изменён кандидатом (diff base→candidate пуст) и на текущем `main`: `NL0-001 = READY`, `completed_tasks = []`, `stage_status.NL0 = PLANNED`, `E0–E6 = NOT_RUN`, `physics_runs = 0`. Нигде не заявлено `NL0 = COMPLETE`, `E1 = PASS` или `E2 = PASS`. Implementer verdict — `HANDOFF CANDIDATE; independent review required`; статус ветки — `HANDOFF_READY`. Self-accept отсутствует; merge не выполнялся.
+Live `project/state.json` на candidate и current `main` одинаков по scientific state:
+
+```text
+frontier          = NL0
+next_work_order   = NL0-001
+NL0-001           = READY
+completed_tasks   = []
+stage_status.NL0  = PLANNED
+E0–E6             = NOT_RUN
+physics_runs      = 0
+```
+
+Candidate не заявляет `NL0=COMPLETE`, `E1=PASS` или `E2=PASS`; Implementer evidence говорит `HANDOFF CANDIDATE; independent review required`; passport status = `HANDOFF_READY`. Self-accept отсутствует.
 
 ## V7 — Epoch drift
 
-`9d8ea394… → f4d2979…` (текущий `main`): 12 файлов, все — additive INFRA-линия (`docs/infra/*`, `docs/work/WO-INFRA0-001.md`, `project/infra-plan.json`, `project/infra-state.json`, `docs/evidence/INFRA_ROADMAP_R1_CHECKS.md`) плюс роутинговые вставки в `AGENTS.md`/`PROJECT_CONTROL.md`/`README.md`/`docs/INDEX.md`. Не затронуты `docs/research/**`, `docs/work/WO-NL0-001.md`, `config/control/harness/*`, `project/state.json`, научная методология. Вставки только усиливают разделение INFRA/science. Tip `main` (2026-09-08T04:38:50Z) предшествует review-коммиту (06:24:27Z): после Reviewer новых затрагивающих изменений нет.
+Live compare:
+
+```text
+9d8ea394c6c037b0560908689e2ce932bf0c511c
+→
+f4d2979a1d2502d86c035f25e36961b4d5ac2764
+```
+
+даёт 6 commits / 12 changed files. Изменения ограничены INFRA/control-routing: `docs/infra/**`, `docs/work/WO-INFRA0-001.md`, `project/infra-plan.json`, `project/infra-state.json`, `docs/evidence/INFRA_ROADMAP_R1_CHECKS.md`, плюс routing edits в `AGENTS.md`, `PROJECT_CONTROL.md`, `README.md`, `docs/INDEX.md`.
+
+Не изменены `docs/research/**`, `docs/work/WO-NL0-001.md`, `config/control/harness/**`, `project/state.json` и scientific experiment contracts. Reviewer уже проверял тот же `CURRENT_MAIN=f4d2979…`; после Reviewer нового затрагивающего drift нет.
 
 ```text
 EPOCH_DRIFT = CONTINUE
@@ -113,19 +226,24 @@ EPOCH_DRIFT = CONTINUE
 
 ## FINDINGS
 
-1. Все проверяемые заявления кандидата подтвердились независимо; ни одного несовпадения хешей, размеров, параметров или структуры tree не обнаружено.
-2. Binding точный: review относится к текущему PR HEAD; durable PASS на review-ветке корректен.
-3. Claim ceiling не завышен: DSDNA8 ограничен `C1_COMPUTATIONAL_REPRODUCTION`, C4 прямо отрицается.
-4. Отрицательные результаты (S08 pack not located; E2 LICENSE unknown) сохранены и корректно делегированы (NL0-002/NL0-003) без самовольного «исправления» научных данных.
-5. Harness-trail полон и воспроизводим; `close` даёт `ok=true`.
+1. Exact subject binding подтверждён: PR HEAD всё ещё равен REVIEWED_HEAD; review не stale.
+2. Все четыре E1 SHA-256 независимо пересчитаны и совпадают; topology/input/oracle совпадают побайтово по смысловым полям.
+3. E2 pinned tree и machine-input package подтверждены; CPU input = CPU/double/2e7/DNA2/0.5/300K; `.conf` документированы upstream как equilibrated restart structures.
+4. Научные неопределённости не замаскированы: 298 K vs 300 K остаётся NL0-003, redistribution rights UNKNOWN остаётся NL0-002, S08 остаётся `INPUT_PACK_NOT_LOCATED`.
+5. Harness package удовлетворяет текущим `work_cli.py close` predicates; scientific state не повышен и Implementer не self-accepted.
+6. Epoch drift остаётся `CONTINUE`.
 
 ## LIMITATIONS
 
-1. ACS full text обеих статей (`7b00242`, `7b06470`) из этого окружения недоступен (paywall/bot-block); статья-сторона 298 K и перечисление SI S08 приняты по full-text-цитате Fresh Reviewer + вторичным поверхностям (Crossref/PubMed/SEMANTIC SCHOLAR metadata, GitHub search 0, Europe PMC no-PMCID). Upstream-сторона 300 K проверена побайтово.
-2. Размер Zenodo record `8248808` (46.2 GB) не перепроверялся — не является зависимостью NL0-001.
-3. E1 physics simulation не запускался Verifier-ом (по условиям Work Order).
-4. Предикаты `work_cli.py` исполнялись в worktree на exact `f738bff`; локальная среда доступна, поэтому limitation «локальная среда недоступна» не применяется.
+1. Clean-clone shell execution `CONTROL_WORK close` недоступен в этой сессии из-за container DNS (`Could not resolve host: github.com`); текущие predicates воспроизведены независимо по live exact files и дали `ok=true`.
+2. E1 physics simulation не запускался — это прямо исключено verifier scope данного Work Order.
+3. Ветка `verify/nl0-001-reference-selection-r1` уже существовала на direct-child commit `5582ad765d7e43f50f48f3764ca054ad45ea2a77`; вместо destructive reset/force-push опубликован новый superseding non-force evidence commit. Ancestry от exact candidate сохранена.
 
-## Next actor
+## Verdict
 
-`DIRECTOR` (HIGH: Implementer + Reviewer PASS + Verifier PASS). Решение о merge PR #11 и закрытии только `NL0-001` — Human Gate; настоящий verification не авторизует merge и не закрывает NL0.
+```text
+VERDICT = PASS
+NEXT_ACTOR = DIRECTOR
+```
+
+Verifier не merge'ил PR #11, не изменял candidate files, не обновлял `project/state.json` и не закрывал NL0.
