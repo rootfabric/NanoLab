@@ -240,6 +240,131 @@
       "id": "0864997fe3f645068f7086b1ae2d28c2",
       "op": "claim",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "verifier-a",
+      "at": 1788877506,
+      "data": {
+        "report": {
+          "actor": "verifier-a",
+          "checks": [
+            {
+              "command": "python tools/task_bus.py --actor verifier-a status",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "BUS-SMOKE-001 phase=VERIFIER, claims=2; subject head d5bfc55956722e241151e0ef6db5299ee7e55123, tree 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3, ref work/bus-smoke-001-r1; base_sha 95b1319600bcc64572d84c0456acb927802ab806 — matches expected frozen values"
+            },
+            {
+              "command": "python tools/task_bus.py --actor verifier-a history BUS-SMOKE-001",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "5 events: open by director-pilot; claim+finish by implementer-b; claim+finish by reviewer-a. Prior reports read as facts only; no verdict inherited without own verification"
+            },
+            {
+              "command": "python tools/task_bus.py --actor verifier-a claim BUS-SMOKE-001",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "committed=true; lease actor=verifier-a token=0864997fe3f645068f7086b1ae2d28c2 until=1788878989; claims 2 -> 3"
+            },
+            {
+              "command": "git fetch origin work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "FETCH_HEAD and origin/work/bus-smoke-001-r1 updated"
+            },
+            {
+              "command": "git worktree add --detach ../verifier-a-candidate d5bfc55956722e241151e0ef6db5299ee7e55123",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "fresh detached checkout 'HEAD is now at d5bfc55 docs: add BUS-SMOKE-001 receipt (implementer-b)'"
+            },
+            {
+              "command": "git -C ../verifier-a-candidate rev-parse HEAD",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "d5bfc55956722e241151e0ef6db5299ee7e55123 == subject head"
+            },
+            {
+              "command": "git -C ../verifier-a-candidate rev-parse 'HEAD^{tree}'",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3 == subject tree"
+            },
+            {
+              "command": "git -C ../verifier-a-candidate merge-base --is-ancestor 95b1319600bcc64572d84c0456acb927802ab806 HEAD",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "frozen base 95b1319600bcc64572d84c0456acb927802ab806 is an ancestor of candidate HEAD"
+            },
+            {
+              "command": "git ls-remote origin refs/heads/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "remote tip d5bfc55956722e241151e0ef6db5299ee7e55123 == subject head"
+            },
+            {
+              "command": "python tools/task_bus.py smoke-check ../verifier-a-candidate",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "POSITIVE CONTROL: verdict=PASS sha256=2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6 size=179"
+            },
+            {
+              "command": "python -c \"import json, hashlib; raw = open(r'..\\verifier-a-candidate\\docs\\work\\pilots\\BUS-SMOKE-001\\receipt.json','rb').read(); d = json.loads(raw.decode('utf-8')); assert d['sum'] == sum(d['values']) == 6 and d['scientific_claim'] is False; print(hashlib.sha256(raw).hexdigest())\"",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "independent recomputation: values [1,2,3], sum field 6 == computed 6, scientific_claim False; SHA256 2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6 == tool output"
+            },
+            {
+              "command": "Get-FileHash -Algorithm SHA256 ..\\verifier-a-candidate\\docs\\work\\pilots\\BUS-SMOKE-001\\receipt.json",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "2393D4EEEA591B3896FA34EE45FA42A6C697CF17B336B4D8188D437BA257C9D6 (case-insensitive match with tool and hashlib values)"
+            },
+            {
+              "command": "python tools/task_bus.py smoke-check ../verifier-a-negative 2>$null; if ($LASTEXITCODE -eq 2) { exit 0 } else { exit 1 }",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "NEGATIVE CONTROL 1, assertion form: disposable copy ../verifier-a-negative with 'sum': 6 replaced by 'sum': 7 (values still [1,2,3]); RAW_SMOKE_EXIT=2 recorded in output with stderr {\"error\": \"SMOKE_CONTRACT_MISMATCH\"} — the tampered copy was rejected with exactly the expected exit code 2, wrapper exit 0 proves the assertion held. This assertion command was first executed live before the report and re-executed after the bus rejected raw exit_code-2 check entries (PASS_WITH_FAILED_CHECK); both runs gave raw exit 2. Tampered copy never pushed, never made candidate"
+            },
+            {
+              "command": "python tools/task_bus.py smoke-check ../verifier-a-negative 2>$null; if ($LASTEXITCODE -eq 2) { exit 0 } else { exit 1 }",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "NEGATIVE CONTROL 2, assertion form: restored copy with 'scientific_claim': false replaced by 0, integer (sum still 6); RAW_SMOKE_EXIT=2 recorded in output with stderr {\"error\": \"SMOKE_CONTRACT_MISMATCH\"} — expected rejection with exit code 2, wrapper exit 0 proves the assertion held. First run and re-run after PASS_WITH_FAILED_CHECK feedback both gave raw exit 2"
+            },
+            {
+              "command": "git worktree remove ../verifier-a-candidate; Remove-Item -Recurse -Force ..\\verifier-a-negative; Test-Path ..\\verifier-a-candidate; Test-Path ..\\verifier-a-negative",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "both temporary copies removed twice (after the first control pass and again after the assertion re-runs forced by PASS_WITH_FAILED_CHECK; Test-Path False, False both times); worktree list shows only primary tooling checkout; tampered copy destroyed after control"
+            },
+            {
+              "command": "git ls-remote origin refs/heads/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "final re-check: remote tip still d5bfc55956722e241151e0ef6db5299ee7e55123 — candidate ref did not move"
+            },
+            {
+              "command": "git status --porcelain",
+              "cwd": "C:\\NanoLab\\bus-agents\\verifier-a",
+              "exit_code": 0,
+              "result": "clean (empty output); queue.json never edited manually; main untouched; candidate ref untouched"
+            }
+          ],
+          "schema_version": 1,
+          "scientific_claim": false,
+          "subject_head": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "subject_ref": "work/bus-smoke-001-r1",
+          "subject_tree": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3",
+          "summary": "Independent verification by subagent verifier-a in its own isolated clone C:\\NanoLab\\bus-agents\\verifier-a (branch control/git-task-bus-r1, remote origin https://github.com/rootfabric/NanoLab.git), a separate session from implementer-b and reviewer-a; prior PASS verdicts were read from bus history as facts but not inherited as my own result — every check below was executed fresh by me. Status at start: phase=VERIFIER, subject head d5bfc55956722e241151e0ef6db5299ee7e55123, tree 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3, base 95b1319600bcc64572d84c0456acb927802ab806, ref work/bus-smoke-001-r1 — all matched expected frozen values. Fresh detached worktree ../verifier-a-candidate was created at the exact candidate HEAD; live rev-parse confirmed HEAD and HEAD^{tree} equal the subject, merge-base --is-ancestor confirmed the frozen base is an ancestor (exit 0), and git ls-remote confirmed the remote tip equals d5bfc55956722e241151e0ef6db5299ee7e55123. POSITIVE CONTROL: python tools/task_bus.py smoke-check ../verifier-a-candidate from the tooling checkout exited 0 with verdict PASS. I did not trust the tool output alone: I independently read docs/work/pilots/BUS-SMOKE-001/receipt.json with Python, computed sum(values)=6 equal to the sum field 6, confirmed scientific_claim is the boolean False, and computed SHA-256 of the artifact file myself with hashlib and separately with PowerShell Get-FileHash: 2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6 (size 179 bytes as checked out on Windows) — identical to the smoke-check output. NEGATIVE CONTROL (both performed, not hidden): (1) in a disposable copy ../verifier-a-negative I replaced \"sum\": 6 with \"sum\": 7; smoke-check on the tampered copy exited with code 2 and stderr {\"error\": \"SMOKE_CONTRACT_MISMATCH\"} — a PowerShell assertion wrapper (exit 0 iff raw exit is 2) confirmed the raw exit was exactly 2; (2) restored copy with \"scientific_claim\": false replaced by 0 also exited 2 SMOKE_CONTRACT_MISMATCH. Both controls were first run as raw commands and both exited 2; after the bus rejected raw exit_code-2 entries in a PASS report (finish error PASS_WITH_FAILED_CHECK), each control was re-executed live as an assertion command (exit 0 iff raw exit is 2) — raw exit 2 again in every run. The tampered copies were never pushed and never made candidates; they were deleted after the controls (Test-Path false on both temporary copies, checked twice). Final re-check: git ls-remote still returns d5bfc55956722e241151e0ef6db5299ee7e55123 for refs/heads/work/bus-smoke-001-r1, so the remote candidate ref did not move; my tooling worktree is clean (git status --porcelain empty). Verdict PASS covers software/procedural verification only under claim_class C0_SOFTWARE_ONLY; scientific_claim remains false; no scientific progress and no canonical acceptance are claimed; queue.json was never edited manually; main and the candidate ref were not modified.",
+          "task_id": "BUS-SMOKE-001",
+          "verdict": "PASS"
+        },
+        "token": "0864997fe3f645068f7086b1ae2d28c2"
+      },
+      "id": "63a25daec8734277891cd023f087b093",
+      "op": "finish",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
