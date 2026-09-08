@@ -12,10 +12,11 @@
 
 Распределённая работа / несколько ролей / центральный агент
     -> этот DIRECTOR.md
+    -> docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md
     -> затем Git Task Bus
 ```
 
-Если `tools/task_bus.py` и документы Git Task Bus ещё не находятся в текущем `main`, значит механизм ещё проходит пилот/merge gate. Не имитируй его вручную. Для текущего пилота используй опубликованную implementation branch `control/git-task-bus-r1` и live queue branch `control/task-bus-pilot-r1`.
+Если `tools/task_bus.py` и документы Git Task Bus ещё не находятся в текущем `main`, значит механизм ещё проходит pilot/review/merge gate. Не имитируй его вручную. Пока механизм не принят канонически, используй опубликованную implementation branch `control/git-task-bus-r1` и live queue branch `control/task-bus-pilot-r1` только согласно текущему Harness и Human Gate.
 
 ## 1. Обязательное восстановление состояния
 
@@ -36,12 +37,15 @@ project/infra-state.json
 project/infra-plan.json
 ```
 
-Затем для распределённого workflow прочитай:
+Затем для распределённого workflow обязательно прочитай:
 
 ```text
 docs/control/GIT_TASK_BUS_RU.md
+docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md
 docs/control/GIT_TASK_BUS_PROMPTS_RU.md
 ```
+
+`GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md` является обязательной поправкой к pilot revision и имеет приоритет над устаревшими статусами P1/live trial в старых текстах этой ветки.
 
 Не продолжай задачу на основании текста предыдущего агента, если Git показывает другое состояние.
 
@@ -72,6 +76,8 @@ python tools/task_bus.py --actor director-pilot history BUS-SMOKE-001
 ```
 
 Для production-версии actor/task берутся из активной policy/Work Order, а не копируются из пилота.
+
+Для `BUS-SMOKE-001` ожидаемый terminal уже достигнут. Не выполнять `init`, `open`, новый `claim` или повтор пилота без нового explicit Work Order.
 
 ## 4. Как читать `status`
 
@@ -130,6 +136,8 @@ Reviewer -> Verifier -> Director gate
 
 **Director не выполняет роли Reviewer/Verifier под другими именами ради PASS.** Если среда не умеет реально создать отдельную сессию, задача остаётся в Git до прихода другого агента.
 
+Разные `actor_id` доказывают только protocol role separation. Они не являются доказательством независимой модели/процесса/credential. Production identity proof — отдельный gate.
+
 ## 6. Что передавать запускаемому агенту
 
 Минимальный пакет, без пересказа истории чата:
@@ -170,33 +178,54 @@ NO DIRECT MAIN WRITE
 NO FAKE SUBAGENT / SESSION ID
 NO BACKGROUND PROMISE WITHOUT A REAL EXECUTOR
 NO SCIENTIFIC ACCEPTANCE FROM BUS STATUS ALONE
+COMPLETED_SANDBOX != ACCEPTED
+ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF
+NO P2 BEFORE P1.1-P1.4
 ```
 
-## 8. Текущий пилот BUS-SMOKE-001
+## 8. Текущее состояние BUS-SMOKE-001 / BUS-001
 
-Пока Git Task Bus не принят в `main`, живое испытание находится здесь:
+Live pilot уже завершён. Не считать старые `READY_FOR_LIVE_TRIAL`, `NOT_RUN` или `P1 pending` актуальным состоянием.
 
 ```text
-implementation/tooling:
-control/git-task-bus-r1
+BUS-SMOKE-001 LIVE PILOT = PASS
+BUS-SMOKE-001 TERMINAL   = COMPLETED_SANDBOX
+BUS-001 ACCEPTANCE       = NOT YET
+```
 
-live queue:
+Frozen pilot subject:
+
+```text
+BASE = 95b1319600bcc64572d84c0456acb927802ab806
+HEAD = d5bfc55956722e241151e0ef6db5299ee7e55123
+TREE = 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3
+```
+
+Live queue:
+
+```text
 control/task-bus-pilot-r1
+```
 
-task:
-BUS-SMOKE-001
+Последний известный завершивший bus HEAD:
 
-tracking:
+```text
+6e95891db110438c3a888aec9af7721ccdb63ceb
+```
+
+Перед использованием всё равно сверяй live ref.
+
+Tracking:
+
+```text
 Issue #19
 Implementation draft PR #20
 ```
 
-Не выполнять `init` или `open` повторно: задача уже создана. Сначала `status/history`.
-
-Ожидаемый живой цикл:
+Пилот подтвердил:
 
 ```text
-DIRECTOR
+DIRECTOR open
   -> IMPLEMENTER
   -> REVIEWER
   -> VERIFIER
@@ -204,8 +233,116 @@ DIRECTOR
   -> COMPLETED_SANDBOX
 ```
 
-Это проверка механизма распределённой разработки. Она **не закрывает NL checkpoint и не является INFRA6 acceptance**.
+Но он не заменяет independent review реализации broker и не закрывает canonical acceptance.
 
-## 9. Когда этот файл можно считать устаревшим
+## 9. Обязательный post-pilot маршрут
 
-Если canonical `AGENTS.md` или более новая revision Task Bus явно указывает новый Director entry point, используй более новую canonical инструкцию. Старые ветки и чаты не имеют приоритета над свежим `main`.
+Текущая последовательность:
+
+```text
+P0  Mechanical implementation/tests              DONE
+P1  Real BUS-SMOKE-001 multi-agent pilot          PASS
+P1.1 State/evidence synchronization               NEXT
+P1.2 Fresh BUS-001 implementation Reviewer        REQUIRED
+P1.3 Fresh exact-head BUS-001 Verifier             REQUIRED
+P1.4 Human Gate / canonical activation             REQUIRED
+P2  Production policy + protected writer          LOCKED
+P3  Roadmap -> Work Order adapters                 LATER
+P4  Bounded launcher + identity proofs + budgets   LATER
+P5  Parallel tasks / conflicts / scale campaign    LATER
+```
+
+Не начинать P2, пока P1.1-P1.4 не закрыты.
+
+### P1.1 State/evidence synchronization
+
+Привести human-facing state в соответствие authoritative bus:
+
+```text
+Issue #19
+PR #20
+docs/control/GIT_TASK_BUS_RU.md
+связанные BUS evidence/status records
+```
+
+Старые отрицательные/промежуточные evidence не удалять; stale status supersede новым фактом.
+
+Также применять hash terminology из correction R1:
+
+```text
+GIT_BLOB_SHA1
+CANONICAL_BLOB_SHA256
+CHECKOUT_SHA256
+```
+
+Working-tree SHA-256 не объявлять canonical blob hash.
+
+### P1.2 Fresh implementation Reviewer
+
+Reviewer проверяет сам broker/tooling, а не только `receipt.json`:
+
+```text
+tools/task_bus.py
+tests/task_bus/
+config/control/task-bus/
+docs/control/GIT_TASK_BUS_RU.md
+docs/control/GIT_TASK_BUS_PROMPTS_RU.md
+DIRECTOR.md
+AGENTS.md integration
+```
+
+Перед review: `git fetch`, resolve live tooling HEAD/TREE и PR #20 exact head. Старые SHA и PASS являются только историей.
+
+### P1.3 Fresh exact-head Verifier
+
+Verifier выполняет fresh checkout того же exact subject, rerun tests/positive/negative/concurrency/recovery controls. Любой новый commit после review/verification требует новой проверки для нового HEAD.
+
+### P1.4 Human Gate
+
+Merge eligible только при:
+
+```text
+LIVE_PILOT = PASS
+HOUSEKEEPING_SYNC = PASS
+IMPLEMENTATION_REVIEW = PASS
+EXACT_HEAD_VERIFICATION = PASS
+PR_HEAD == VERIFIED_HEAD
+NO_UNRESOLVED_BLOCKERS
+HUMAN_GATE = APPROVED
+```
+
+После merge обязательно fresh main + ancestry + canonical regression + проверка `AGENTS.md -> DIRECTOR.md` и доступности tooling из `main`.
+
+## 10. Evidence hash rule
+
+Для exact artifacts хранить отдельно:
+
+```text
+GIT_BLOB_SHA1
+CANONICAL_BLOB_SHA256
+CHECKOUT_SHA256
+```
+
+Для `BUS-SMOKE-001/receipt.json` Git blob:
+
+```text
+379c597d940fa9ded54ed9549d63a68ad48ead48
+```
+
+`2393d4eeea591b3896fa34ee45fa42a6c697cf17b336b4d8188d437ba257c9d6` — Windows checkout hash и должен маркироваться как `CHECKOUT_SHA256`.
+
+## 11. Допустимые итоги до Human Gate
+
+После P1.1-P1.3 Director может объявить только:
+
+```text
+BUS-001 = READY_FOR_HUMAN_GATE
+BUS-001 = FIX_REQUIRED
+BUS-001 = NOT_VERIFIED
+```
+
+Не объявлять `BUS-001 = ACCEPTED` до фактического Human Gate, canonical merge и post-merge verification.
+
+## 12. Когда этот файл можно считать устаревшим
+
+Если canonical `AGENTS.md` или более новая revision Task Bus явно указывает новый Director entry point или superseding correction, используй более новую canonical инструкцию. Старые ветки и чаты не имеют приоритета над свежим `main`.
