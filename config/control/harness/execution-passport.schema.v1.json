@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Execution Passport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_id", "work_order_id", "checkpoint", "base_sha", "branch", "risk_class", "claim_class", "allowed_paths", "started_at_utc", "status"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "execution_id": {"type": "string", "minLength": 3},
+    "work_order_id": {"type": "string", "minLength": 3},
+    "checkpoint": {"type": "string", "pattern": "^NL[0-8]$"},
+    "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "branch": {"type": "string", "minLength": 3},
+    "risk_class": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "claim_class": {"type": "string"},
+    "allowed_paths": {"type": "array", "items": {"type": "string"}},
+    "started_at_utc": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["STARTED", "IN_PROGRESS", "IMPLEMENTED", "VERIFYING", "REVIEWING", "HANDOFF_READY", "BLOCKED", "CANCELLED"]}
+  }
+}

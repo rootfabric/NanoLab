@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Work Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "timestamp_utc", "execution_id", "work_order_id", "event_type", "actor_role", "subject_sha", "summary"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_id": {"type": "string", "pattern": "^[0-9]{4}-[a-z0-9-]+$"},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "execution_id": {"type": "string"},
+    "work_order_id": {"type": "string"},
+    "event_type": {"enum": ["WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", "HANDOFF_COMPLETED", "WORK_ORDER_BLOCKED", "WORK_ORDER_CANCELLED"]},
+    "actor_role": {"enum": ["IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"]},
+    "subject_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "summary": {"type": "string", "minLength": 1},
+    "command_refs": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "next_action": {"type": ["string", "null"]},
+    "blocker": {"type": ["string", "null"]}
+  }
+}

@@ -3,64 +3,40 @@
 **Revision:** `NL-H0-2026-09-08-R1`  
 **Canonical owner:** `main`
 
-Это короткая точка входа для работы агентов. Полные правила:
-
-```text
-PROJECT_CONTROL.md
-docs/control/DEVELOPMENT_HARNESS_RU.md
-docs/control/HARNESS_REVIEW_AND_EVIDENCE_RU.md
-docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md
-docs/control/EXPERIMENT_HARNESS_RU.md
-docs/control/BRANCHING_AND_GIT_RU.md
-```
+Точка входа для работы агентов. Полные правила находятся в `PROJECT_CONTROL.md` и `docs/control/`.
 
 Machine contracts находятся в `config/control/harness/`.
 
-## Жизненный цикл Work Order
+## Work Order lifecycle
 
 ```text
 PLANNED → DISPATCHED → IN_PROGRESS → IMPLEMENTED → VERIFYING → VERIFIED
 → REVIEWING → AUDITED → CHECKPOINT_PROPOSED → ACCEPTED
 ```
 
-Допустимые ответвления: `FIX_REQUIRED`, `INCONCLUSIVE`, `BLOCKED`, `WAITING_HUMAN`, `EPOCH_INVALIDATED`, `CANCELLED`.
+Допустимы `FIX_REQUIRED`, `INCONCLUSIVE`, `BLOCKED`, `WAITING_HUMAN`, `EPOCH_INVALIDATED`, `CANCELLED`.
 
-## Жизненный цикл Experiment Run
+## Experiment Run lifecycle
 
 ```text
-PRE_REGISTERED → READY → STARTED → PREPARING → RUNNING
-→ CHECKPOINTED* → ANALYZING → COMPLETED → REVIEWING
-→ ACCEPTED | REJECTED | INCONCLUSIVE
+PRE_REGISTERED → READY → STARTED → PREPARING → RUNNING → CHECKPOINTED*
+→ ANALYZING → COMPLETED → REVIEWING → ACCEPTED | REJECTED | INCONCLUSIVE
 ```
 
-Технические аварии идут в `FAILED_TECHNICAL`, недоступная среда — в `BLOCKED_ENVIRONMENT`. Старые события не редактируются: исправление публикуется новым event.
+Технические аварии: `FAILED_TECHNICAL`; недоступная среда: `BLOCKED_ENVIRONMENT`.
 
 ## Control surface
 
 ```text
-./CONTROL_DEVELOPMENT.sh --overview
-./CONTROL_DEVELOPMENT.sh --check-consistency
-./CONTROL_DEVELOPMENT.sh --status
-./CONTROL_DEVELOPMENT.sh --plan
-./CONTROL_DEVELOPMENT.sh --drive
-
-.\CONTROL_DEVELOPMENT.ps1 -Overview
-.\CONTROL_DEVELOPMENT.ps1 -CheckConsistency
-.\CONTROL_DEVELOPMENT.ps1 -Status
-.\CONTROL_DEVELOPMENT.ps1 -Plan
-.\CONTROL_DEVELOPMENT.ps1 -Drive
+./CONTROL_DEVELOPMENT.sh --overview|--check-consistency|--status|--plan|--drive
+./CONTROL_WORK.sh validate|status|close <execution-dir>
+./CONTROL_EXPERIMENT.sh validate|status|close <run-dir>
 ```
 
-Experiment evidence:
+Windows: аналогичные `CONTROL_DEVELOPMENT.ps1`, `CONTROL_WORK.ps1`, `CONTROL_EXPERIMENT.ps1`.
 
-```text
-./CONTROL_EXPERIMENT.sh validate <run-dir>
-./CONTROL_EXPERIMENT.sh status <run-dir>
-./CONTROL_EXPERIMENT.sh close <run-dir>
-```
-
-`close` проверяет полноту evidence; он не объявляет научный результат истинным.
+`CONTROL_WORK close` требует durable START и terminal handoff + `summary.md`. `CONTROL_EXPERIMENT close` требует terminal execution, analysis и review. Эти команды проверяют completeness evidence, но не self-accept scientific truth.
 
 ## Human gates
 
-По умолчанию требуют человека: merge/direct push `main`, force-push/history rewrite, destructive deletion, foundation authority change, CRITICAL scientific work, новый физический wet-lab/hardware experiment и выход за утверждённый budget.
+По умолчанию: merge/direct push `main`, force-push/history rewrite, destructive deletion, foundation authority change, CRITICAL scientific work, новый physical wet-lab/hardware experiment и budget expansion.
