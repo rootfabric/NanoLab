@@ -116,6 +116,14 @@
       "id": "096c5b5113274e329a0544fb60fb41ff",
       "op": "finish",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "reviewer-a",
+      "at": 1788876846,
+      "data": {},
+      "id": "46725cd0ff0b40c1ae6dcdb31fafe10f",
+      "op": "claim",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
