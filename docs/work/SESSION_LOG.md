@@ -71,3 +71,17 @@ Incident (environment, не scientific): внешняя реструктуриз
 Связка repair: BASE_HEAD `495b0339`, REPAIRED_CANDIDATE_HEAD `cd55320441c2c904f8e406870c902fbff587c602` (tree `131a54fe787294dbf43c45279270521326d4f939`, terminal event 0005 subject). Коммиты: `ba38958` start → `2e551d3` pins → `9e48125` GPL wording → `cd55320` validation → handoff. Замороженные факты (E1 GPL-3.0/DOWNLOAD_ON_SETUP; E2 UNKNOWN/REFERENCE_ONLY; NANOBASE per-record UNKNOWN; S08 RESTRICTED) и все EX-NL0-002-R1 events не изменялись. Симуляции не запускались; сторонние файлы не копировались; state.json не изменён; NL0 не закрыт; PR #17 не merged; PASS/ACCEPTED не выставлен.
 
 Следующее действие: fresh exact-head Verifier по repaired candidate; merge PR #17 — Human Gate.
+
+## EX-NL0-003-R1 — пререгистрация протокола E1 и постановка E2
+
+Canonical base: `81e299f1924e50bcff1bc5c893bccd934ef2883d` (origin/main совпал live). Branch: `work/nl0-003-preregister-reference-protocol-r1` (отдельный worktree). Durable START commit: `9372b79e1406ffd2d0853bcd3c8f2232062f737c` (pushed до substantive work). Source checkpoint: `53379e4973158e38531e346461d625b421f93cdf`. Substantive HEAD: `3450866925ce49fc81ee658806d3ec81b2e1bc81` (tree `a18762b9bc577a92eb10b923801b974f42fd4273`).
+
+Issue #4 восстановлен через GitHub API дословно, acceptance criteria не расширены. Входы E1 повторно верифицированы на pinned upstream commit `00dc7fb9…`: 4/4 SHA-256 MATCH против пинов INPUT_AVAILABILITY (один transient raw-404, устранён повтором; файлы во временный каталог ОС, в репозиторий не копировались).
+
+Опубликован `E1-PROTO-R1` (`PREREGISTRATION_E1_R1.md`): subject/SHA-256, verbatim условия из `quick_input` (CPU, 1e6 steps, john, T 20C, dt 0.005 и т.д.), observable = среднее колонки 2 `energy.dat` с upstream-оракулом `ColumnAverage::energy.dat::2::-1.37970256144::0.15` из `quick_compare` (критерий не подгоняется), схема T1 (upstream-equivalent) + T2 (robustness), пилот-процедура и freeze для `R_confirm`, разделение статистической/физической/модельной неопределённостей, семантика SUPPORTED / NOT_SUPPORTED / FAILED_TECHNICAL / INCONCLUSIVE / BLOCKED_ENVIRONMENT. Не выдуманы и помечены UNKNOWN: effective interaction_type/salt/thermostat-delta (defaults engine), семантика колонки 2, R_confirm, engine pin (NL1-001), measured budget.
+
+Опубликован `E2-SETUP-R1` (`E2_SETUP_R1.md`): первый шарнир `0b`, требования к определению угла/целостности (числа — только из спиненного SI перед E2-PROTO), decision rule 298 K vs 300 K (reproduction arm = авторские inputs verbatim по exact commit; расхождение документируется, не замалчивается), family = пять опубликованных вариантов, hard dependencies: права `DNA-hinge-simulations` (owner decision с NL0-002), методология E0/E1 (NL2), engine pin (NL1-001). E2-файлы не скачивались (REFERENCE_ONLY).
+
+Validation: json.tool 6/6 OK; CONTROL_DEVELOPMENT -CheckConsistency ok=true exit 0; CONTROL_WORK validate ok=true. Симуляции не запускались (`E0–E6 NOT_RUN`, `physics_runs=0`); state.json/plan.json не изменялись; ACCEPTED не выставлен. Риск HIGH → независимый REVIEWER, затем VERIFIER, затем Director checkpoint; merge — Human Gate.
+
+Следующее действие: независимый review/verify по exact substantive HEAD; после PASS — checkpoint proposal владельцу (merge).

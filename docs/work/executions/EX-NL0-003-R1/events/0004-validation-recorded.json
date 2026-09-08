@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-08T15:05:00Z",
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3450866925ce49fc81ee658806d3ec81b2e1bc81",
+  "summary": "Validation выполнена на substantive HEAD 3450866925ce49fc81ee658806d3ec81b2e1bc81: python -m json.tool OK по passport.json, events 0001-0003, project/state.json, project/plan.json (6/6); CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> ok=true, errors [], warnings [], exit 0 (head 34508669, tree a18762b9); CONTROL_WORK.ps1 validate -> ok=true, errors [], has_terminal_handoff=false и has_summary=false на тот момент ожидаемо. Scope-контроль: изменённые пути внутри allowed_paths паспорта; state.json/plan.json не менялись; симуляций нет.",
+  "command_refs": [
+    "python -m json.tool <6 files> -> OK",
+    "./CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> ok=true exit=0",
+    "./CONTROL_WORK.ps1 validate docs/work/executions/EX-NL0-003-R1 -> ok=true exit=0"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL0-003/IMPLEMENTER_EVIDENCE.md",
+    "docs/work/executions/EX-NL0-003-R1/summary.md"
+  ],
+  "next_action": "IMPLEMENTER: terminal handoff event с exact substantive HEAD binding; затем независимый REVIEWER/VERIFIER (HIGH routing).",
+  "blocker": null
+}
