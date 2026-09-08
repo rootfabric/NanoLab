@@ -10,6 +10,8 @@
 
 С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
 
+Параллельно научной линии запланирован отдельный [INFRA track](docs/infra/README.md): safe CI → self-hosted CPU → reproducible executor → artifact store → GPU → scheduler/AiiDA → HPC. INFRA предоставляет вычислительные возможности, но по умолчанию не является hard gate научной дорожной карты и не владеет scientific truth.
+
 ## К чему идём
 
 ```text
@@ -37,6 +39,7 @@
 |---|---|
 | [VISION](docs/VISION.md) | Миссия, дальняя цель и измеримый вклад |
 | [ROADMAP](docs/ROADMAP.md) | NL0–NL8, зависимости и условия завершения |
+| [INFRA ROADMAP](docs/infra/ROADMAP.md) | Параллельная вычислительная линия INFRA0–INFRA7 |
 | [MVP](docs/MVP.md) | Первый пользовательский сценарий и приёмка |
 | [PROJECT CONTROL](PROJECT_CONTROL.md) | Каноническое состояние, ветвление и control invariants |
 | [HARNESS CONTROL](HARNESS_CONTROL.md) | Короткая точка входа для агентов |

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "parallel_capability_plan",
+  "track": "INFRA",
+  "revision": "infra-roadmap-r1",
+  "canonical_owner": "main",
+  "purpose": "Provide safe reproducible compute, CI, artifact and scale infrastructure without owning scientific truth",
+  "mvp_checkpoint": "INFRA3",
+  "science_gate_policy": "NOT_A_HARD_GATE_BY_DEFAULT",
+  "checkpoints": [
+    {"id":"INFRA0","title":"Control and security baseline","depends_on":[]},
+    {"id":"INFRA1","title":"Safe GitHub-hosted CI","depends_on":["INFRA0"]},
+    {"id":"INFRA2","title":"Protected self-hosted CPU runner","depends_on":["INFRA1"]},
+    {"id":"INFRA3","title":"Reproducible scientific executor","depends_on":["INFRA2"]},
+    {"id":"INFRA4","title":"Artifact store and provenance cache","depends_on":["INFRA3"]},
+    {"id":"INFRA5","title":"GPU/CUDA scientific runner","depends_on":["INFRA3"]},
+    {"id":"INFRA6","title":"Queue quotas scheduler and AiiDA bridge","depends_on":["INFRA4","INFRA5"]},
+    {"id":"INFRA7","title":"Multi-node HPC and compute federation","depends_on":["INFRA6"]}
+  ],
+  "tasks": [
+    {"id":"INFRA0-001","checkpoint":"INFRA0","title":"Define compute trust and execution baseline","depends_on":[],"doc":"docs/work/WO-INFRA0-001.md"},
+    {"id":"INFRA1-001","checkpoint":"INFRA1","title":"Add hosted harness CI","depends_on":["INFRA0-001"]},
+    {"id":"INFRA1-002","checkpoint":"INFRA1","title":"Add PR validation gates","depends_on":["INFRA1-001"]},
+    {"id":"INFRA2-001","checkpoint":"INFRA2","title":"Bootstrap isolated self-hosted CPU runner","depends_on":["INFRA1-002"]},
+    {"id":"INFRA2-002","checkpoint":"INFRA2","title":"Harden trusted scientific dispatch","depends_on":["INFRA2-001"]},
+    {"id":"INFRA3-001","checkpoint":"INFRA3","title":"Build pinned reproducible compute image","depends_on":["INFRA2-002"]},
+    {"id":"INFRA3-002","checkpoint":"INFRA3","title":"Execute non-scientific E1-path infrastructure dry run","depends_on":["INFRA3-001"]},
+    {"id":"INFRA4-001","checkpoint":"INFRA4","title":"Implement artifact store and manifest transport","depends_on":["INFRA3-002"]},
+    {"id":"INFRA4-002","checkpoint":"INFRA4","title":"Define retention caching and garbage collection","depends_on":["INFRA4-001"]},
+    {"id":"INFRA5-001","checkpoint":"INFRA5","title":"Bootstrap isolated GPU CUDA runner","depends_on":["INFRA3-002"]},
+    {"id":"INFRA5-002","checkpoint":"INFRA5","title":"Validate CPU GPU execution comparability path","depends_on":["INFRA5-001"]},
+    {"id":"INFRA6-001","checkpoint":"INFRA6","title":"Add queue budgets cancellation and duplicate detection","depends_on":["INFRA4-002","INFRA5-002"]},
+    {"id":"INFRA6-002","checkpoint":"INFRA6","title":"Integrate AiiDA or selected provenance scheduler","depends_on":["INFRA6-001"]},
+    {"id":"INFRA7-001","checkpoint":"INFRA7","title":"Add multi-node HPC provider interface","depends_on":["INFRA6-002"]}
+  ],
+  "science_links": [
+    {"science":"NL1","infra":"INFRA3","relationship":"preferred_reproducible_executor_not_default_gate"},
+    {"science":"NL2","infra":"INFRA4","relationship":"provenance_accelerator"},
+    {"science":"NL3","infra":"INFRA5","relationship":"gpu_scale_capability_when_required"},
+    {"science":"NL4","infra":"INFRA6","relationship":"bounded_ai_campaign_compute"},
+    {"science":"NL5+","infra":"INFRA7","relationship":"external_reproduction_and_scale"}
+  ]
+}
