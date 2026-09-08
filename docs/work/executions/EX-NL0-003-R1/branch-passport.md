@@ -8,10 +8,11 @@
 - Risk class: `HIGH` (scientific_protocol / observable_definition / acceptance_threshold)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json`
-- Status: `STARTED`
+- Status: `HANDOFF_READY`
 - Active experiment campaigns: none (пререгистрация не является запуском кампании)
-- Last durable event: `0001-work-order-started`
-- Next action: IMPLEMENTER — проверка входов E1 и написание PREREGISTRATION_E1_R1 + E2_SETUP_R1
+- Substantive HEAD (terminal binding): `9404a422166cb07efd98443a5f208f078a4ab2c4` (tree `b8b1bd992f15f9093ea4338255858e94d0bc06ad`)
+- Last durable event: `0005-handoff-completed`
+- Next action: независимый REVIEWER, затем VERIFIER (HIGH routing); затем Director checkpoint proposal; merge — Human Gate
 - Blocking issue: none
 
-Правило неизвестных значений: число повторов, целевой угол, точность и tolerance E2 не выдумываются; всё, что не зафиксировано upstream-источником, помечается UNKNOWN с процедурой пилота и моментом freeze.
+Правило неизвестных значений: число повторов, целевой угол, точность и tolerance E2 не выдуманы; всё, что не зафиксировано upstream-источником, помечено UNKNOWN с процедурой пилота и моментом freeze.
