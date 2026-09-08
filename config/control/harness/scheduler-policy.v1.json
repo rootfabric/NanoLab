@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "revision": "NL-H0-2026-09-08-R1",
+  "canonical_source": "project/state.json",
+  "current_checkpoint": "NL0",
+  "next_work_order": "NL0-001",
+  "parallel_scientific_runtime_limit": 1,
+  "notes": "Increase parallel scientific campaigns only after explicit checkpoint/policy change."
+}

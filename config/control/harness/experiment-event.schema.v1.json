@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NanoLab Experiment Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "timestamp_utc", "experiment_id", "campaign_id", "run_id", "event_type", "actor_role", "subject_sha", "summary"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_id": {"type": "string", "pattern": "^[0-9]{4}-[a-z0-9-]+$"},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "experiment_id": {"type": "string"},
+    "campaign_id": {"type": "string"},
+    "run_id": {"type": "string"},
+    "event_type": {"enum": ["RUN_STARTED", "INPUTS_FROZEN", "PREPARATION_COMPLETED", "RUN_CHECKPOINT", "RUN_COMPLETED", "RUN_FAILED_TECHNICAL", "RUN_ABORTED", "RUN_BLOCKED_ENVIRONMENT", "ANALYSIS_STARTED", "ANALYSIS_COMPLETED", "PROTOCOL_SUPERSEDED", "ANALYSIS_SUPERSEDED", "REVIEW_COMPLETED"]},
+    "actor_role": {"enum": ["IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"]},
+    "subject_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "summary": {"type": "string", "minLength": 1},
+    "command": {"type": ["string", "null"]},
+    "exit_code": {"type": ["integer", "null"]},
+    "artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "resource_usage": {"type": "object"},
+    "scientific_outcome": {"enum": ["SUPPORTED", "NOT_SUPPORTED", "INCONCLUSIVE", "NOT_EVALUATED", "INVALIDATED", null]}
+  }
+}

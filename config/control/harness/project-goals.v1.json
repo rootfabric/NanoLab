@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "revision": "NL-H0-2026-09-08-R1",
+  "canonical_branch": "main",
+  "mission": "Reproducible AI-assisted design and testing of nanostructures, nanocomponents and future nanomachines",
+  "mvp_checkpoint": "NL4",
+  "goals": [
+    {"id": "NL0", "title": "Scientific scope and accessible references"},
+    {"id": "NL1", "title": "Executable reference experiment without AI"},
+    {"id": "NL2", "title": "Validation, statistics and provenance"},
+    {"id": "NL3", "title": "Parameterized nanocomponent laboratory"},
+    {"id": "NL4", "title": "AI NanoLab MVP"},
+    {"id": "NL5", "title": "Validated library and external reproduction"},
+    {"id": "NL6", "title": "One validated scientific extension"},
+    {"id": "NL7", "title": "Composed systems and validated reduced models"},
+    {"id": "NL8", "title": "Specialized nanomachine research"}
+  ]
+}

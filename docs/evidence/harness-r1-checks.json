@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "harness_bootstrap_check",
+  "base_main": "3714ae7d7dacb7ba90eedea4c1d6539c9d80225b",
+  "subject_sha": "253b44262001bf36779a2c4ea2cd5bff9bfbe5b2",
+  "subject_tree": "94b46bfb76ab5a3eb63af5d5cfeaf877a2427bfd",
+  "branch": "control/nanolab-harness-r1",
+  "project_state": {"frontier": "NL0", "next_work_order": "NL0-001", "scientific_experiments_run": false},
+  "checks": [
+    {"id": "python_compile", "result": "PASS"},
+    {"id": "experiment_valid_close", "result": "PASS"},
+    {"id": "experiment_review_before_analysis", "result": "EXPECTED_FAIL", "exit_code": 3},
+    {"id": "work_valid_close", "result": "PASS"},
+    {"id": "work_event_after_handoff", "result": "EXPECTED_FAIL", "exit_code": 3},
+    {"id": "plan_state_scheduler_alignment", "result": "PASS_BY_REMOTE_READBACK"}
+  ],
+  "environment_limits": ["full git clone unavailable in execution container because github.com DNS resolution failed", "Windows PowerShell wrappers not executed", "GitHub Actions not executed"],
+  "verdict": "PASS_WITH_DECLARED_ENV_LIMITATION"
+}

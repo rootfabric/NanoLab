@@ -14,5 +14,8 @@ dist/
 /local-runs/
 /local-models/
 /local-secrets/
+/experiments/raw/
+/experiments/cache/
+/artifacts/large/
 .DS_Store
 Thumbs.db

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "revision": "NL-H0-2026-09-08-R1",
+  "classes": {
+    "LOW": {"minimum_roles": ["IMPLEMENTER", "VERIFIER"], "triggers": ["documentation", "metadata", "non_executable_planning"]},
+    "MEDIUM": {"minimum_roles": ["IMPLEMENTER", "REVIEWER", "VERIFIER"], "triggers": ["harness_runtime", "tooling", "non_claim_runtime", "repository_automation"]},
+    "HIGH": {"minimum_roles": ["IMPLEMENTER_OR_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"], "triggers": ["scientific_protocol", "observable_definition", "analysis_method", "physics_model_choice", "scientific_data_transform", "scientific_claim", "candidate_selection", "acceptance_threshold"]},
+    "CRITICAL": {"minimum_roles": ["IMPLEMENTER_OR_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR", "HUMAN"], "triggers": ["physical_lab_or_hardware_experiment", "hazardous_material", "bio_or_medical", "regulated_procedure", "foundation_authority_change", "material_external_budget_expansion"]}
+  },
+  "claim_classes": ["C0_SOFTWARE_ONLY", "C1_COMPUTATIONAL_REPRODUCTION", "C2_COMPUTATIONAL_PREDICTION", "C3_CROSS_MODEL_OR_EXTERNAL_CORRELATION", "C4_PHYSICAL_EXPERIMENTAL_VALIDATION", "C5_REPLICATED_PHYSICAL_VALIDATION"]
+}
