@@ -124,6 +124,114 @@
       "id": "46725cd0ff0b40c1ae6dcdb31fafe10f",
       "op": "claim",
       "task": "BUS-SMOKE-001"
+    },
+    {
+      "actor": "reviewer-a",
+      "at": 1788877081,
+      "data": {
+        "report": {
+          "actor": "reviewer-a",
+          "base_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+          "checks": [
+            {
+              "command": "python tools/task_bus.py --actor reviewer-a status",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "BUS-SMOKE-001 phase=REVIEWER, claims=1; subject head d5bfc55956722e241151e0ef6db5299ee7e55123, tree 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3, ref work/bus-smoke-001-r1; matches expected frozen values"
+            },
+            {
+              "command": "python tools/task_bus.py --actor reviewer-a history BUS-SMOKE-001",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "3 events: open by director-pilot (spec, base_sha 95b1319600bcc64572d84c0456acb927802ab806, allowed_paths [docs/work/pilots/BUS-SMOKE-001/receipt.json]), claim and finish by implementer-b with report; implementer report summary read and found free of scientific-acceptance or canonical-acceptance claims"
+            },
+            {
+              "command": "python tools/task_bus.py --actor reviewer-a claim BUS-SMOKE-001",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "committed=true; lease actor=reviewer-a token=46725cd0ff0b40c1ae6dcdb31fafe10f until=1788878646; claims 1 -> 2"
+            },
+            {
+              "command": "git fetch origin",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "[new branch] work/bus-smoke-001-r1 -> origin/work/bus-smoke-001-r1"
+            },
+            {
+              "command": "git rev-parse refs/remotes/origin/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "d5bfc55956722e241151e0ef6db5299ee7e55123 == subject head from queue"
+            },
+            {
+              "command": "git show -s --format='%H %T' refs/remotes/origin/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "d5bfc55956722e241151e0ef6db5299ee7e55123 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3 == subject head and tree from queue"
+            },
+            {
+              "command": "git ls-remote origin refs/heads/work/bus-smoke-001-r1",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "remote tip d5bfc55956722e241151e0ef6db5299ee7e55123 == local fetched ref == subject head"
+            },
+            {
+              "command": "git merge-base --is-ancestor 95b1319600bcc64572d84c0456acb927802ab806 d5bfc55956722e241151e0ef6db5299ee7e55123",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "frozen base is an ancestor of candidate HEAD"
+            },
+            {
+              "command": "git diff --stat 95b1319600bcc64572d84c0456acb927802ab806...d5bfc55956722e241151e0ef6db5299ee7e55123",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "docs/work/pilots/BUS-SMOKE-001/receipt.json | 8 ++++++++ ; 1 file changed, 8 insertions(+) — exactly the single allowed file"
+            },
+            {
+              "command": "git diff --name-status 95b1319600bcc64572d84c0456acb927802ab806...d5bfc55956722e241151e0ef6db5299ee7e55123",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "A\tdocs/work/pilots/BUS-SMOKE-001/receipt.json — single added file, no other changes"
+            },
+            {
+              "command": "git ls-tree d5bfc55956722e241151e0ef6db5299ee7e55123 docs/work/pilots/BUS-SMOKE-001/receipt.json",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "100644 blob 379c597d940fa9ded54ed9549d63a68ad48ead48\tdocs/work/pilots/BUS-SMOKE-001/receipt.json — regular non-executable file, not a symlink (120000) and not executable (100755)"
+            },
+            {
+              "command": "git cat-file -s 379c597d940fa9ded54ed9549d63a68ad48ead48",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "171 bytes"
+            },
+            {
+              "command": "python strict JSON type-check script over `git cat-file blob 379c597d940fa9ded54ed9549d63a68ad48ead48` (temp script receipt_check_tmp.py, removed after run)",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "ALL_JSON_CHECKS_OK: schema_version int 1; task_id str 'BUS-SMOKE-001'; message non-empty str; values [1,2,3] ints; sum int 6 == 1+2+3 == sum(values); scientific_claim isinstance(x,bool) and x is False, raw bytes contain '\"scientific_claim\": false' so it is the boolean literal, not 0 and not a string; key set exactly {schema_version, task_id, message, values, sum, scientific_claim}; blob_size_bytes 171"
+            },
+            {
+              "command": "git status --porcelain",
+              "cwd": "C:\\NanoLab\\bus-agents\\reviewer-a",
+              "exit_code": 0,
+              "result": "clean (empty output) after review; temp review files removed; candidate ref and queue.json never modified"
+            }
+          ],
+          "schema_version": 1,
+          "scientific_claim": false,
+          "subject_head": "d5bfc55956722e241151e0ef6db5299ee7e55123",
+          "subject_ref": "work/bus-smoke-001-r1",
+          "subject_tree": "07dc90857bb40f9bb7e4d991ff782d5ebbc044c3",
+          "summary": "Independent review by subagent reviewer-a in its own isolated clone C:\\NanoLab\\bus-agents\\reviewer-a (branch control/git-task-bus-r1, remote origin https://github.com/rootfabric/NanoLab.git), a separate session from implementer-b and not the Verifier. All observations are from live Git after a fresh `git fetch origin`: candidate ref work/bus-smoke-001-r1 exists on origin and its HEAD is d5bfc55956722e241151e0ef6db5299ee7e55123 with tree 07dc90857bb40f9bb7e4d991ff782d5ebbc044c3, exactly matching the subject published in the bus queue (ls-remote re-confirmed the remote tip). Frozen base 95b1319600bcc64572d84c0456acb927802ab806 is an ancestor of the candidate HEAD (merge-base --is-ancestor, exit 0). The full base...HEAD diff is exactly one added file docs/work/pilots/BUS-SMOKE-001/receipt.json (8 insertions, no other changes); ls-tree shows mode 100644 regular blob 379c597d940fa9ded54ed9549d63a68ad48ead48 (not a symlink 120000, not executable 100755). The blob was type-checked strictly in Python 3.11 directly from the git object (git cat-file blob, 171 bytes): schema_version is int 1 (not bool), task_id is string 'BUS-SMOKE-001', message is a non-empty string, values is [1,2,3] of ints, sum is int 6 equal to 1+2+3 and to sum(values), scientific_claim is strictly the JSON boolean literal false (raw bytes contain '\"scientific_claim\": false'; parsed value type is bool, not 0 and not a string), and the key set is exactly the six expected keys. Implementer report and summary from the bus history were reviewed: they describe only procedural work facts, explicitly state scientific_claim false and claim neither scientific progress nor canonical acceptance. Procedural honesty notes, no candidate defects: (1) a first `git rev-parse <ref>^{tree}` attempt was mangled by PowerShell caret handling and produced unusable output; it was superseded by `git show -s --format='%H %T'`, which matched the queue subject; (2) one intermediate strict-check run exited 1 due to a Python check-design flaw in my own test script (`False != 0` is False in Python), corrected to a raw-literal byte check; candidate blob was never modified. Verdict PASS covers software/procedural review only under claim_class C0_SOFTWARE_ONLY; scientific_claim remains false; canonical_acceptance of the bus is false and merge to main is not performed or claimed. Candidate not modified; queue.json not edited manually; main untouched; reviewer working tree clean.",
+          "task_id": "BUS-SMOKE-001",
+          "verdict": "PASS"
+        },
+        "token": "46725cd0ff0b40c1ae6dcdb31fafe10f"
+      },
+      "id": "a6ec0a90a95845e8b04616e538abc90f",
+      "op": "finish",
+      "task": "BUS-SMOKE-001"
     }
   ],
   "policy": {
