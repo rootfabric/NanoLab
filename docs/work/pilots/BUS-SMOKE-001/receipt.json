@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "task_id": "BUS-SMOKE-001",
+  "message": "NanoLab distributed workflow smoke",
+  "values": [1, 2, 3],
+  "sum": 6,
+  "scientific_claim": false
+}
