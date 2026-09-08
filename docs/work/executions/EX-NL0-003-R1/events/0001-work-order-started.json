@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-08T14:16:00Z",
+  "execution_id": "EX-NL0-003-R1",
+  "work_order_id": "NL0-003",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "81e299f1924e50bcff1bc5c893bccd934ef2883d",
+  "summary": "Начата пререгистрация протокола E1 и постановка E2. Base — свежий canonical main 81e299f (origin/main совпадает с локальным HEAD до старта). WO-NL0-003.md восстановлен из содержания issue #4 без изменения acceptance criteria. Risk HIGH (scientific_protocol/observable_definition/acceptance_threshold), claim C0_SOFTWARE_ONLY. Рабочее дерево изолировано в отдельном worktree; симуляции не запускаются.",
+  "command_refs": [
+    "git fetch origin --prune -> origin/main = 81e299f1924e50bcff1bc5c893bccd934ef2883d",
+    "git rev-parse HEAD -> 81e299f1924e50bcff1bc5c893bccd934ef2883d; git status --short -> clean",
+    "gh-api GET /repos/rootfabric/NanoLab/issues/4 -> восстановлено тело WO",
+    "git worktree add C:\\NanoLab\\nl0-003 -b work/nl0-003-preregister-reference-protocol-r1 81e299f1924e50bcff1bc5c893bccd934ef2883d"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL0-003.md",
+    "project/state.json (NL0-003 = READY, next_work_order = NL0-003)",
+    "config/control/harness/risk-policy.v1.json",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "next_action": "IMPLEMENTER: повторно верифицировать pinned входы E1 (SHA-256), написать PREREGISTRATION_E1_R1.md и E2_SETUP_R1.md без выдуманных значений.",
+  "blocker": null
+}
