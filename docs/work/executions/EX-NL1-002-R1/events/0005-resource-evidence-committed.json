@@ -1,0 +1,22 @@
+{
+  "summary": "Post-handoff publication of derived run-resource evidence: docs/evidence/NL1-002/run-resources/{E1-R1-S001,E1-R1-P001,E1-R1-P002,E1-R1-P003}/{time.log,stdout.log} закоммичены (ea465ac). Это производные артефакты прогонов (/usr/bin/time -v вывод и захваченный stdout), НЕ upstream-фикстуры — правило vendoring FORBIDDEN (protocol.json protocol_subject) не нарушено. Верификация согласованности перед коммитом: time.log каждого прогона точно совпадает с таблицей IMPLEMENTER_EVIDENCE (S001 13.13 s / 6304 KB; P001 11.08 / 6328; P002 11.74 / 6700; P003 12.56 / 6520; все Exit status 0); stdout.log = 0 B во всех прогонах, что согласуется с no_stdout_energy = 1 и '0.000 B written to stdout/stderr' в log.dat. Frozen subject не менялся (9cc83e8); новые claims не выставляются, campaign-level scientific_outcome остаётся NOT_EVALUATED. Точный HEAD для review: ea465ac.",
+  "blocker": null,
+  "evidence_refs": [
+    "docs/evidence/NL1-002/run-resources/E1-R1-S001/time.log",
+    "docs/evidence/NL1-002/run-resources/E1-R1-S001/stdout.log",
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/log.dat",
+    "docs/evidence/NL1-002/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "subject_sha": "9cc83e8",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "timestamp_utc": "2026-09-09T11:16:30Z",
+  "actor_role": "IMPLEMENTER",
+  "schema_version": 1,
+  "command_refs": [
+    "git show ec67752 --stat; верификация time.log (Elapsed/MaxRSS/Exit status) против IMPLEMENTER_EVIDENCE; git add docs/evidence/NL1-002/run-resources; commit ea465ac 'experiment(E1): record run resource evidence'; push"
+  ],
+  "execution_id": "EX-NL1-002-R1",
+  "next_action": "REVIEWER: independent review -> docs/evidence/NL1-002/REVIEWER_VERDICT.md (exact HEAD ea465ac)",
+  "work_order_id": "NL1-002",
+  "event_id": "0005-resource-evidence-committed"
+}
