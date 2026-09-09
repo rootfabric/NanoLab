@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-review-corrections",
+  "timestamp_utc": "2026-09-09T09:40:00Z",
+  "execution_id": "EX-NL1-001-R1",
+  "work_order_id": "NL1-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "462050fa3ef93f53f74209bbde7dc152afa0dafb",
+  "summary": "Corrections по findings независимых вердиктов (REVIEWER PASS: MINOR-1..3, NOTE-1..2; VERIFIER PASS: F-1 MINOR, F-2 OBSERVATION). (1) SESSION_LOG.md: байт-починка порчи от PowerShell here-string escaping — NUL 0x00 -> '0' в пине движка и ESC 0x1b -> 'e' в 'energy /= N'; backticks абзаца консистентно убраны (все были поглощены escaping'ем при исходной записи). (2) ENGINE_ENVIRONMENT_R1 §7: erratum формулировки — smoke-вход отличается функционально ровно двумя параметрами (steps, print_conf_interval) плюс байт-косметикой (комментарии/пустые строки/trailing-space), нефункционально для парсера pinned engine. (3) passport.json status IN_PROGRESS -> HANDOFF_READY — исправлен отдельным коммитом 462050f ДО вердиктов (reviewer смотрел 39b3448, где статус ещё не был обновлён; расхождение признано и закрыто). Старые events не редактируются; настоящая запись — единственное superseding описание. Вердикты влиты в ветку merge-коммитами; научные claims отсутствуют; merge в main — Human Gate с явной авторизацией владельца.",
+  "command_refs": [
+    "git show HEAD:docs/work/SESSION_LOG.md -> control bytes at pos 17087 (0x00), 18307 (0x1b); byte-repair + backtick cleanup -> commit d81bf63",
+    "git merge --no-ff origin/rv-review (737b3eb) -> 578469e; git merge --no-ff origin/rv-verify (ea486e2) -> c3b0799"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-001/REVIEWER_VERDICT.md",
+    "docs/evidence/NL1-001/VERIFIER_VERDICT.md",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md §7 (erratum)"
+  ],
+  "next_action": "DIRECTOR: checkpoint proposal control/nl1-001-director-checkpoint-r1 (acceptance record + state advance), PR и merge по авторизации владельца.",
+  "blocker": null
+}
