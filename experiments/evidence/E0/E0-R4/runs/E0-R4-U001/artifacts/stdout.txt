@@ -1,0 +1,14 @@
+{
+  "verdicts": [
+    {
+      "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R4-U001\\units\\u001_accepted.json",
+      "input_T": "20C",
+      "claimed_T_oxDNA": 0.097717,
+      "reference_T_oxDNA": 0.097717,
+      "delta": 0.0,
+      "tolerance": 5e-07,
+      "verdict": "ACCEPTED"
+    }
+  ],
+  "reference_provenance": "docs/research/ENGINE_ENVIRONMENT_R1.md section 6 (oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, log OBSERVED)"
+}

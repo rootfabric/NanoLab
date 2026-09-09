@@ -1,0 +1,28 @@
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "passport missing schema_version",
+    "passport missing execution_id",
+    "passport missing work_order_id",
+    "passport missing checkpoint",
+    "passport missing base_sha",
+    "passport missing branch",
+    "passport missing risk_class",
+    "passport missing claim_class",
+    "passport missing allowed_paths",
+    "passport missing started_at_utc",
+    "passport missing status",
+    "passport base_sha must be 40 lowercase hex characters",
+    "no work events",
+    "exactly one WORK_ORDER_STARTED event is required"
+  ],
+  "execution_id": null,
+  "work_order_id": null,
+  "status": null,
+  "passport_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+  "event_types": [],
+  "has_terminal_handoff": false,
+  "has_summary": false
+}

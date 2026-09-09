@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\NanoLab\nl2-001\scripts\harness\experiment_cli.py", line 161, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\NanoLab\nl2-001\scripts\harness\experiment_cli.py", line 144, in main
+    result = inspect_run(Path(args.run_dir).resolve())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\NanoLab\nl2-001\scripts\harness\experiment_cli.py", line 112, in inspect_run
+    if not SHA256.fullmatch(str(item.get("sha256", ""))):
+                                ^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
