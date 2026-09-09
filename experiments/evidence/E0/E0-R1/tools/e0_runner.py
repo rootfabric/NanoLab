@@ -154,10 +154,11 @@ def exec_validator_case(case: dict, subject: str, digests: dict, case_scratch: P
     stdout = cmd["stdout"]
     expected = case["expected"]
     checks = {}
-    if expected["exit_code"] == "nonzero":
-        checks["exit_nonzero"] = cmd["exit_code"] != 0
-    else:
-        checks["exit_code_pinned_3"] = cmd["exit_code"] == expected["exit_code"]
+    if "exit_code" in expected:
+        if expected["exit_code"] == "nonzero":
+            checks["exit_nonzero"] = cmd["exit_code"] != 0
+        else:
+            checks["exit_code_pinned_3"] = cmd["exit_code"] == expected["exit_code"]
     for needle in expected.get("stdout_must_contain", []):
         checks[f"stdout_contains:{needle}"] = needle in stdout
     for needle in expected.get("stdout_must_not_contain", []):
@@ -493,6 +494,12 @@ def main() -> int:
         "(campaign-execution repair path; used to close a failed attempt after an infrastructure bug)",
     )
     parser.add_argument("--failure-cause", default=None, help="recorded cause for --record-failed-protocol")
+    parser.add_argument(
+        "--retry-of",
+        help="authorized technical retry: execute the frozen protocol case with this run_id "
+        "(per E0-PROTO SS8: a RUN_FAILED_TECHNICAL run may be retried only under a NEW run id with recorded cause)",
+    )
+    parser.add_argument("--retry-run-id", help="new run id for the --retry-of execution")
     args = parser.parse_args()
 
     RUNS_DIR = Path(args.runs_dir)
@@ -528,7 +535,16 @@ def main() -> int:
                 return 3
         return 0
 
-    if args.only:
+    if args.retry_of:
+        if not args.retry_run_id:
+            print("--retry-run-id is required with --retry-of", file=sys.stderr)
+            return 2
+        cases = [c for c in cases if c["run_id"] == args.retry_of]
+        if not cases:
+            print("retry source case not found", file=sys.stderr)
+            return 2
+        cases = [dict(cases[0], run_id=args.retry_run_id)]
+    elif args.only:
         cases = [c for c in cases if c["run_id"] == args.only]
     if not cases:
         print("no cases selected", file=sys.stderr)
