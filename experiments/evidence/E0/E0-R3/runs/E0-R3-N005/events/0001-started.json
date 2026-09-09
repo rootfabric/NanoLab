@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T15:35:00Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-N005",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject 6c366e0df4822d39572362356bc65279f5a762d1; case E0-R3-N005 (family NEG): Последовательность событий без WORK_ORDER_STARTED (первое событие — CONTINUATION_CHECKPOINT) обязана отвергаться Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python -m harness.work_cli validate <fixture execution dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/negative/n005_started_not_first/execution/passport.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}
