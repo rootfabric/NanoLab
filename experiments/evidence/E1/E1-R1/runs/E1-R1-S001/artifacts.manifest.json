@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "run_id": "E1-R1-S001",
+  "artifacts": {
+    "log.dat": {
+      "sha256": "2c493f655a7fc3519e9bdcb0775910c74b6da44b2a82b220c103b4ee4a9052e2",
+      "size_bytes": 2197,
+      "producer_run": "E1-R1-S001",
+      "producer_tool": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f)",
+      "storage": "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/log.dat (in Git)"
+    },
+    "energy.dat": {
+      "sha256": "ff26bad5b3dbedb2bbe14091ffa096fbda643579ef31ce539d4432154b654f90",
+      "size_bytes": 49049,
+      "producer_run": "E1-R1-S001",
+      "producer_tool": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f)",
+      "storage": "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/energy.dat (in Git)"
+    },
+    "trajectory.dat": {
+      "sha256": "e51bc59d74a8f4f86eeac5eedf69a5eeff70887a049c992112e20311a71a57e6",
+      "size_bytes": 44677,
+      "producer_run": "E1-R1-S001",
+      "producer_tool": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f)",
+      "storage": "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/trajectory.dat (in Git)"
+    },
+    "last_conf.dat": {
+      "sha256": "f9af73bc4351fd4a57389b9d9753717e60e0c0b7c0e514f407b5738a3fc5e497",
+      "size_bytes": 4472,
+      "producer_run": "E1-R1-S001",
+      "producer_tool": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f)",
+      "storage": "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/last_conf.dat (in Git)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T11:10:00Z",
+  "run_id": "E1-R1-S001",
+  "campaign_id": "E1-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "analysis_tool": "analyze_energy.sh (механическое среднее колонки 2 по всем строкам; одинаковый для всех прогонов кампании)",
+  "observable": {
+    "name": "ColumnAverage::energy.dat::2",
+    "value": -1.39393635864,
+    "rows": 1001
+  },
+  "comparison": {
+    "oracle": -1.37970256144,
+    "band": 0.15,
+    "delta_from_oracle": -0.0142337972,
+    "result": "IN_BAND"
+  },
+  "scientific_outcome": "NOT_EVALUATED",
+  "summary": "Механический анализ §5.1: среднее колонки 2 = -1.39393635864; отклонение от upstream-оракула −1.37970256144 составляет -0.01423379720 (полоса ±0.15) -> факт IN_BAND. Факт публикуется как execution fact: campaign-level scientific_outcome остаётся NOT_EVALUATED до T2-кампании (критерий §9 требует T1 PASS и все T2-реплики в полосе). T1 production run.",
+  "blocker": null
+}
