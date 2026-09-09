@@ -54,6 +54,15 @@ SCHEMA_FILES = {
 
 OXDNA_PIN = "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591"
 
+# campaign-execution context, set in main() from CLI args + protocol (never hardcoded):
+_CTX = {
+    "campaign_id": None,
+    "experiment_id": None,
+    "fixture_base": None,  # repo-relative posix dir containing the "fixtures/..." digest keys
+    "tools_dir": None,     # repo-relative posix dir containing units_check/geometry_check
+    "runs_rel": None,      # repo-relative posix dir of the campaign runs/ output
+}
+
 
 def now_iso() -> str:
     return _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -91,7 +100,7 @@ def materialize(subject: str, rel_paths: list[str], digests: dict[str, dict], ca
     case_scratch.mkdir(parents=True, exist_ok=True)
     out: dict[str, Path] = {}
     for rel in rel_paths:
-        blob = git_blob(subject, rel)
+        blob = git_blob(subject, f"{_CTX['fixture_base']}/{rel}")
         expected = digests[rel]
         actual = sha256_of(blob)
         if actual != expected["sha256"] or len(blob) != expected["size_bytes"]:
@@ -183,7 +192,7 @@ def exec_validator_case(case: dict, subject: str, digests: dict, case_scratch: P
 
 def exec_units_case(case: dict, subject: str, digests: dict, case_scratch: Path, tier2: bool) -> dict:
     fixtures = materialize(subject, case["input_refs"], digests, case_scratch)
-    tool = REPO_ROOT / "experiments/evidence/E0/E0-R1/tools/units_check.py"
+    tool = REPO_ROOT / _CTX["tools_dir"] / "units_check.py"
     argv = [sys.executable, str(tool)] + [str(fixtures[rel]) for rel in case["input_refs"]]
     cmd = run_command(argv)
     extra: dict[str, bytes] = {}
@@ -201,7 +210,7 @@ def exec_units_case(case: dict, subject: str, digests: dict, case_scratch: Path,
     else:
         observed["stdout_excerpt"] = cmd["stdout"][:2000]
 
-    if case["run_id"] == "E0-R1-U001" and tier2:
+    if case["run_id"].endswith("-U001") and tier2:
         # Supplementary provenance tier (preregistered as NON-GATING): locate the
         # temperature-conversion branch in the pinned engine sources. Network
         # failure => documented inconclusive note; tier-1 result unaffected.
@@ -238,7 +247,7 @@ def exec_units_case(case: dict, subject: str, digests: dict, case_scratch: Path,
         except Exception as exc:  # noqa: BLE001 - any failure is a documented non-gating note
             fetch_log.append(f"tier2 exception: {type(exc).__name__}: {exc}")
         extra["pinned_source_excerpt.txt"] = (
-            "E0-R1 U001 supplementary (non-gating) provenance artifact: pinned-engine temperature conversion, located mechanically.\n"
+            f"{_CTX['campaign_id']} U001 supplementary (non-gating) provenance artifact: pinned-engine temperature conversion, located mechanically.\n"
             + excerpt + "\n".join(fetch_log) + "\n"
         ).encode("utf-8")
 
@@ -247,7 +256,7 @@ def exec_units_case(case: dict, subject: str, digests: dict, case_scratch: Path,
 
 def exec_geometry_case(case: dict, subject: str, digests: dict, case_scratch: Path, tier2: bool) -> dict:
     fixtures = materialize(subject, case["input_refs"], digests, case_scratch)
-    tool = REPO_ROOT / "experiments/evidence/E0/E0-R1/tools/geometry_check.py"
+    tool = REPO_ROOT / _CTX["tools_dir"] / "geometry_check.py"
     rel = case["input_refs"][0]
     cmd = run_command([sys.executable, str(tool), str(fixtures[rel])])
     observed: dict = {"exit_code": cmd["exit_code"], "stderr_excerpt": cmd["stderr"][:2000]}
@@ -346,6 +355,7 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
         "schema": "nanolab.e0.case_record.v1",
         "run_id": run_id,
         "family": case["family"],
+        "campaign_id": _CTX["campaign_id"],
         "subject_sha": subject,
         "synthetic": True,
         "expected_frozen_in_protocol": True,
@@ -377,8 +387,8 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
         "schema_version": 1,
         "event_id": f"0002-{terminal_slug}",
         "timestamp_utc": now_iso(),
-        "experiment_id": "E0",
-        "campaign_id": "E0-R1",
+        "experiment_id": _CTX["experiment_id"],
+        "campaign_id": _CTX["campaign_id"],
         "run_id": run_id,
         "event_type": terminal_type,
         "actor_role": "IMPLEMENTER",
@@ -405,8 +415,8 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
         "schema_version": 1,
         "event_id": "0003-analysis-completed",
         "timestamp_utc": now_iso(),
-        "experiment_id": "E0",
-        "campaign_id": "E0-R1",
+        "experiment_id": _CTX["experiment_id"],
+        "campaign_id": _CTX["campaign_id"],
         "run_id": run_id,
         "event_type": "ANALYSIS_COMPLETED",
         "actor_role": "IMPLEMENTER",
@@ -433,9 +443,9 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
                 "size_bytes": len(blob),
                 "producer_run_id": run_id,
                 "subject_sha": subject,
-                "storage_location": f"experiments/evidence/E0/E0-R1/runs/{run_id}/artifacts/{name} (in Git)",
+                "storage_location": f"{_CTX['runs_rel']}/{run_id}/artifacts/{name} (in Git)",
                 "media_type": "application/json" if name.endswith(".json") else "text/plain",
-                "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)",
+                "producer_command": f"{_CTX['tools_dir']}/e0_runner.py (mechanical; argv in case_record.json)",
             }
         )
     write_json(run_dir / "artifacts.manifest.json", artifacts_manifest)
@@ -444,7 +454,7 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
 
     write_text(
         run_dir / "summary.md",
-        f"""# Run {run_id} — E0-R1 control case
+        f"""# Run {run_id} — {_CTX['campaign_id']} control case
 
 - Family: {case['family']} (SYNTHETIC software control, no physics content)
 - Subject: `{subject}`
@@ -470,9 +480,17 @@ def main() -> int:
     parser.add_argument("--digests", default=str(CAMPAIGN_DIR / "input_digests.json"), help="input_digests.json path")
     parser.add_argument("--runs-dir", default=str(RUNS_DIR), help="runs output directory")
     parser.add_argument(
+        "--fixture-base", default="experiments/evidence/E0/E0-R1",
+        help="repo-relative dir whose subtree matches the 'fixtures/...' digest keys (fixtures are reused from the frozen E0-R1 surface)",
+    )
+    parser.add_argument(
+        "--tools-dir", default="experiments/evidence/E0/E0-R1/tools",
+        help="repo-relative dir containing units_check.py/geometry_check.py (frozen E0-R1 tool surface)",
+    )
+    parser.add_argument(
         "--record-failed-protocol",
         help="do not execute: emit RUN_FAILED_TECHNICAL records for every case of the given protocol "
-        "(campaign-execution repair path; used to close the E0-R1 attempt after the emit-path bug)",
+        "(campaign-execution repair path; used to close a failed attempt after an infrastructure bug)",
     )
     parser.add_argument("--failure-cause", default=None, help="recorded cause for --record-failed-protocol")
     args = parser.parse_args()
@@ -484,6 +502,11 @@ def main() -> int:
     if len(args.subject) != 40:
         print("subject must be 40 hex chars", file=sys.stderr)
         return 2
+    _CTX["campaign_id"] = protocol["campaign_id"]
+    _CTX["experiment_id"] = protocol["experiment_id"]
+    _CTX["fixture_base"] = args.fixture_base.replace("\\", "/").strip("/")
+    _CTX["tools_dir"] = args.tools_dir.replace("\\", "/").strip("/")
+    _CTX["runs_rel"] = str(RUNS_DIR.resolve().relative_to(REPO_ROOT)).replace("\\", "/")
 
     cases = protocol["cases"]
     if args.record_failed_protocol:
@@ -539,7 +562,7 @@ def main() -> int:
         summary_rows.append((run_id, case["family"], outcome, sci))
         print(f"{run_id}: {outcome}, scientific={sci}")
 
-    print("\n=== E0-R1 execution summary ===")
+    print(f"\n=== {_CTX['campaign_id']} execution summary ===")
     for row in summary_rows:
         print(f"{row[0]:<14} {row[1]:<20} {row[2]:<22} {row[3]}")
     return 3 if fatal else 0
