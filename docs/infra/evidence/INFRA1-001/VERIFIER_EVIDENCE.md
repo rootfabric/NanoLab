@@ -135,4 +135,73 @@ git ls-remote --tags … 'refs/tags/v5.0.1^{}' / 'refs/tags/v5.0.0^{}' → пу�
 
 ---
 
-(Разделы 4–6 добавляются последующими коммитами.)
+## 4. Локальное воспроизведение чеков workflow
+
+Среда верификатора: Windows, `Python 3.11.8` (анлог `python3` из workflow). Рабочий каталог — verify-worktree.
+
+### 4.1 Check 1 — JSON-syntax по всем tracked `*.json`
+
+```
+$files = git ls-files '*.json'                    → 59 файлов
+foreach: python -m json.tool <file> (stdout > null)
+итог: json-tool-ok=59 failed=0                    → все 59 OK, exit 0 у каждого
+```
+
+### 4.2 Check 2 — harness control consistency
+
+```
+PYTHONPATH=scripts python -m harness.cli check-consistency --root .
+→ exit 0
+{"schema":"nanolab.control_development_output.v1","command":"CHECK_CONSISTENCY","ok":true,
+ "errors":[],"warnings":[],"frontier":"NL1","next_work_order":"NL1-002",
+ "head":"<verify-HEAD>","tree":"<tree>", "counts":{"stages":9,"tasks":18,"experiments":7}}
+```
+
+Примечание: команда исполнена на verify-ветке (HEAD сместился на evidence-коммиты верификатора относительно subject); верифицируемые контракты (`project/plan.json`, `project/state.json`, goals/catalog/scheduler) не менялись (blob-доказательство в §1.5, changes покрыты только `docs/infra/evidence/INFRA1-001/**`).
+
+### 4.3 Check 3 — work events integrity (`work_cli validate EX-INFRA1-001-R1`)
+
+```
+PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-INFRA1-001-R1
+→ exit 0
+{"schema":"nanolab.control_work_output.v1","command":"VALIDATE","ok":true,"errors":[],
+ "execution_id":"EX-INFRA1-001-R1","work_order_id":"INFRA1-001","status":"STARTED",
+ "passport_sha256":"7b5a831fc5ba6888b128554d00ed9efb6e59be1e61446450d19839497bb1e37e",
+ "event_types":["WORK_ORDER_STARTED"],"has_terminal_handoff":false,"has_summary":false}
+```
+
+Валидация прямой директорией (без diff-scope из workflow Check 3) — результат корректен: исполнение на subject-этапе содержит только событие STARTED; терминального handoff/summary ещё нет — это факты subject, а не дефект. Задокументированное расхождение «terminal-last vs review-corrections» (HOSTED_CI_R1.md §7.1, `known_discrepancies` в конфиге) верификатором подтверждено как корректно описанное: каталоги `EX-INFRA0-001-R1`/`EX-NL1-001-R1` на `main` содержат пост-терминальный `0005-review-corrections.json`, поэтому blanket-валидация в CI была бы вечно красной; Check 3 в workflow корректно скоупит только изменённые EX-* каталоги.
+
+## 5. Схемы (jsonschema, Draft 2020-12 + FormatChecker)
+
+Валидатор: `jsonschema 4.22.0`, `Draft202012Validator(..., format_checker=FormatChecker())`.
+
+| Документ | Схема | Результат |
+|---|---|---|
+| `events/0001-work-order-started.json` (subject) | `work-event.schema.v1.json` | **PASS** (0 ошибок; `timestamp_utc` валиден как date-time; `subject_sha` = base `7f17e9a…` — корректно для START-события) |
+| `events/0002-implementation-committed.json` (tip `ff8d86a`, вне subject) | `work-event.schema.v1.json` | **PASS** |
+| `events/0003-validation-recorded.json` (tip, вне subject) | `work-event.schema.v1.json` | **PASS** |
+| `events/0004-handoff-completed.json` (tip, вне subject) | `work-event.schema.v1.json` | **PASS** |
+| `passport.json` (subject) | `execution-passport.schema.v1.json` | **1 отклонение — известное, задокументированное**: `checkpoint: "INFRA1"` не матчится паттерном `^NL[0-8]$` |
+
+Отклонение паспорта: схема написана только для научного трека `NL0–NL8` и не покрывает INFRA; значение `INFRA1` семантически корректно (= `project/infra-state.json.frontier`); отклонение задокументировано Implementer'ом в `branch-passport.md` (отклонение №1) и в event 0001, того же класса, что принятый прецедент `EX-INFRA0-001-R1`; практический валидатор `work_cli` паттерн checkpoint не проверяет (§4.3 — ok=true). Расширение схемы вынесено в отдельный control WO (кандидат), схема в этом исполнении не менялась (и не могла — вне allowed_paths). Верификатор классифицирует как **известное, задокументированное, не блокирующее** отклонение.
+
+## 6. Отсутствие capability-заявки и self-accept
+
+### 6.1 `hosted_ci` нигде не `true`
+
+```
+git grep -n 'hosted_ci' 0ab044b --  → 8 вхождений, из них с "true" — 0
+```
+
+Единственная декларация capability: `project/infra-state.json: "hosted_ci": false` (blob идентичен base, §1.5). Остальные 7 вхождений — имена схем/артефактов (`hosted_ci_debug_bundle`, `nanolab.hosted_ci_debug_manifest.v1`, `infra_hosted_ci_config`) и текст документации, не заявления capability.
+
+### 6.2 `ACCEPTED` не объявлен
+
+Добавленные subject-строки с `ACCEPTED` (4) — все ссылочные/негативные:
+1. workflow-комментарий «Authority: EXECUTION-BASELINE-R1, ACCEPTED» — ссылка на факт приёмки baseline (Director, INFRA0), не заявка по INFRA1-001;
+2. HOSTED_CI_R1.md — та же authority-ссылка;
+3. «Статус: PROPOSED — Implementer не выставляет ACCEPTED» — явный запрет self-accept;
+4. event 0001 summary — «INFRA0-001 ACCEPTED» (факт предыдущей задачи из `infra-state.json`).
+
+Машиночитаемый статус нового конфига: `config/infra/hosted-ci.v1.json → "status": "PROPOSED"`; документ: `HOSTED_CI_R1.md → Статус: PROPOSED`. `project/infra-state.json`: `INFRA1-001 = READY`, `INFRA1 = IN_PROGRESS`, `next_work_order = INFRA1-001` — фронт не продвинут (blob идентичен base). **Capability-заявки нет, self-accept нет.**
