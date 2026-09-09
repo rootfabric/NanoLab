@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T10:19:06Z",
+  "execution_id": "EX-INFRA0-001-R1",
+  "work_order_id": "INFRA0-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+  "summary": "Начат документальный Work Order INFRA0-001 (compute trust and execution baseline). Base — exact canonical main 57c1e63733ea3b10f991c0f9609c426dc75b17a5, live-проверено: origin/main = local main = base до старта; рабочее дерево чистое. Ветка infra/infra0-execution-baseline-r1 создана в отдельном worktree C:\\NanoLab\\infra-0-001. WO уже существует в main (docs/work/WO-INFRA0-001.md, создан вместе с INFRA roadmap bd5f0d2); создание WO-файла не требуется. Risk MEDIUM (repository_automation/security control policy, no scientific claim), claim C0_SOFTWARE_ONLY. Scope строго документальный: security baseline doc + machine-readable конфиг; runner-установки, secrets, workflows, scientific campaigns и изменения project/infra-state.json запрещены (infra-state — Director gate). Паспорт: checkpoint 'INFRA0' записан как есть; паттерн ^NL[0-8]$ в execution-passport.schema.v1.json не покрывает INFRA-трек — отклонение задокументировано в branch-passport и summary, практический валидатор CONTROL_WORK паттерн checkpoint не проверяет.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin --prune -> origin/main = 57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+    "git -C C:\\NanoLab\\main rev-parse HEAD -> 57c1e63733ea3b10f991c0f9609c426dc75b17a5; git status --short -> clean",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\infra-0-001 -b infra/infra0-execution-baseline-r1 57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+    "git -C C:\\NanoLab\\infra-0-001 rev-parse HEAD -> 57c1e63733ea3b10f991c0f9609c426dc75b17a5"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-INFRA0-001.md",
+    "project/infra-plan.json (INFRA0-001, doc -> docs/work/WO-INFRA0-001.md)",
+    "project/infra-state.json (frontier INFRA0, next_work_order INFRA0-001, task READY)",
+    "docs/infra/SECURITY_MODEL.md",
+    "docs/infra/EXECUTION_BACKENDS.md",
+    "config/control/harness/risk-policy.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: опубликовать docs/infra/EXECUTION_BASELINE_R1.md и config/infra/execution-baseline.v1.json в allowed_paths, прогнать JSON/control validation, зафиксировать validation и handoff events.",
+  "blocker": null
+}
