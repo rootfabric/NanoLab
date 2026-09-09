@@ -1,13 +1,13 @@
 # Очередь запланированных работ
 
-Канонические ID и зависимости — [plan.json](../../project/plan.json); состояния — [state.json](../../project/state.json). Стадия `NL0` принята целиком: `NL0-001`, `NL0-002`, `NL0-003` = **ACCEPTED**. Сейчас разрешён старт: **NL1-001** (scheduler priority); `NL1` = IN_PROGRESS. Научные симуляции по-прежнему не запускались (`E0–E6 = NOT_RUN`).
+Канонические ID и зависимости — [plan.json](../../project/plan.json); состояния — [state.json](../../project/state.json). Стадия `NL0` принята целиком; `NL1-001` = **ACCEPTED** (environment pin `ENGINE_ENVIRONMENT_R1` + smoke `EX-NL1-001-SMOKE-001`; вердикты Reviewer/Verifier PASS; science-claims нет). Сейчас разрешён старт: **NL1-002** (scheduler priority); `NL1` = IN_PROGRESS. Научные прогоны E1 ещё не начинались (`E0–E6 = NOT_RUN`); verbatim-прогоны E1 разблокированы принятием NL1-001.
 
 | Work ID | Результат | Приёмка |
 |---|---|---|
 | NL0-001 | Проверить до трёх небольших эталонов E1 и кандидата шарнира E2 | **ACCEPTED** — выбран DSDNA8/MD для E1 и Shi–Castro–Arya hinge family для E2; exact sources/evidence сохранены |
 | NL0-002 | Аудит зависимостей, входных данных и прав | **ACCEPTED** — E1 CLEAR (GPL-3.0, DOWNLOAD_ON_SETUP), E2 UNKNOWN (REFERENCE_ONLY); матрица лицензий и owner-варианты опубликованы |
 | NL0-003 | Пререгистрировать E1 и подготовить постановку E2 | **ACCEPTED** — `E1-PROTO-R1` пререгистрирован (условия verbatim, критерий из upstream `quick_compare`), `E2-SETUP-R1` подготовлен (первый шарнир `0b`, требования угла/целостности, decision rule 298 K vs 300 K); недостающие значения не выдуманы |
-| NL1-001 | Зафиксировать среду и upstream smoke | Чистая установка, версии/hashes, команды, измеренный CPU/GPU-путь и стоимость |
+| NL1-001 | Зафиксировать среду и upstream smoke | **ACCEPTED** — oxDNA `00dc7fb9` CPU-сборка зафиксирована (`ENGINE_ENVIRONMENT_R1`: WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6 user-local; fixture 4/4 SHA-256; smoke exit 0, 0.13 s / 6424 KB; effective defaults §11.1–2 закрыты) |
 | NL1-002 | Выполнить первый вертикальный E1 без ИИ | Подготовка → расчёт → анализ → архив; smoke отделён от научной приёмки |
 | NL2-001 | Реализовать схемы, manifest и E0 | Отрицательные/геометрические тесты, корректные единицы и статусы |
 | NL2-002 | Реализовать статистику и принять E1 | Повторы, корреляции, чувствительность, сравнение и ограничения |
