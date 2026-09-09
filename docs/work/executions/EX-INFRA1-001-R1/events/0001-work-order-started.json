@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T11:37:39Z",
+  "execution_id": "EX-INFRA1-001-R1",
+  "work_order_id": "INFRA1-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+  "summary": "Начат Work Order INFRA1-001 «Add hosted harness CI» — первый hosted workflow по контрактам EXECUTION-BASELINE-R1 §4–§8 (TR-PR/TR-PUSH-MAIN → только H0 ubuntu-latest, минимальные permissions contents:read, pinned actions по full commit SHA, бюджет RC0 ≤15 мин, артефакты по artifact policy). Base — exact canonical main 7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de, live-проверено: origin/main = local main = base до старта; рабочее дерево чистое. Ветка infra/infra1-hosted-ci-r1 создана в отдельном worktree C:\\NanoLab\\infra-1-001. Отклонение задокументировано: docs/work/WO-INFRA1-001.md в main отсутствует (авторство WO — Director authority, создание вне allowed_paths); scope ведётся по тексту миссии Implementer'а + project/infra-plan.json (INFRA1-001 «Add hosted harness CI», depends_on INFRA0-001 ACCEPTED) + baseline §13.3. Risk MEDIUM (первый исполняемый CI surface, repository automation, no scientific claim), claim C0_SOFTWARE_ONLY. Bounded scope: только untrusted hosted route H0; запрещены self-hosted runners, secrets, GPU, paid compute, TR-PRT (pull_request_target) и TR-WFRUN (workflow_run) маршруты по FORBIDDEN_R1; project/infra-state.json и project/state.json не изменяются (Director gate). Паспорт: checkpoint 'INFRA1' записан как есть; паттерн ^NL[0-8]$ в execution-passport.schema.v1.json не покрывает INFRA-трек — отклонение задокументировано в branch-passport (тот же класс, что EX-INFRA0-001-R1), практический валидатор CONTROL_WORK паттерн checkpoint не проверяет. Выбранный подмножество чеков задокументируется в docs/infra/HOSTED_CI_R1.md после обнаружения существующих дешёвых проверок репозитория.",
+  "command_refs": [
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git fetch origin --prune -> origin/main = 7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+    "git -C C:\\NanoLab\\main status --short -> clean; git rev-parse main -> 7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git worktree add C:\\NanoLab\\infra-1-001 -b infra/infra1-hosted-ci-r1 7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+    "git -C C:\\NanoLab\\infra-1-001 rev-parse HEAD -> 7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de; branch -> infra/infra1-hosted-ci-r1"
+  ],
+  "evidence_refs": [
+    "docs/infra/EXECUTION_BASELINE_R1.md (§4–§8, §13.3)",
+    "config/infra/execution-baseline.v1.json",
+    "project/infra-plan.json (INFRA1-001)",
+    "project/infra-state.json (frontier INFRA1, next_work_order INFRA1-001, task READY)",
+    "docs/infra/SECURITY_MODEL.md",
+    "docs/infra/EXECUTION_BACKENDS.md",
+    "docs/work/executions/EX-INFRA0-001-R1 (прецедент INFRA-исполнения)"
+  ],
+  "next_action": "IMPLEMENTER: опубликовать .github/workflows (hosted RC0 validation: H0 only, permissions contents:read, pinned actions, timeout RC0), docs/infra/HOSTED_CI_R1.md и config/infra/hosted-ci.v1.json в allowed_paths; зафиксировать implementation и validation events.",
+  "blocker": null
+}
