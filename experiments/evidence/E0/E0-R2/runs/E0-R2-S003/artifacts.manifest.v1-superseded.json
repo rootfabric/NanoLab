@@ -3,21 +3,21 @@
   "artifacts": [
     {
       "name": "case_record.json",
-      "sha256": "d90c0b20202125a05f917940c300357114afea3172b08845090d4f94b80249ea",
-      "size_bytes": 990,
-      "producer_run_id": "E0-R2-U001",
+      "sha256": "db2af8684fd7aa707f391bbc7f535d66abb21db9cdb9edf237bb5f70032b99eb",
+      "size_bytes": 973,
+      "producer_run_id": "E0-R2-S003",
       "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
-      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-U001/artifacts/case_record.json (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-S003/artifacts/case_record.json (in Git)",
       "media_type": "application/json",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     },
     {
       "name": "stderr.txt",
-      "sha256": "b3c014f0da51327b2b87dcc1c101670ddae6c5adbce70bf50420866c018ac58a",
-      "size_bytes": 200,
-      "producer_run_id": "E0-R2-U001",
+      "sha256": "2b3a76b669b58fe71d70f99a1a39171596b8959a386d9f10ba7ca51d0d36bf12",
+      "size_bytes": 225,
+      "producer_run_id": "E0-R2-S003",
       "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
-      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-U001/artifacts/stderr.txt (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-S003/artifacts/stderr.txt (in Git)",
       "media_type": "text/plain",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     },
@@ -25,9 +25,9 @@
       "name": "stdout.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size_bytes": 0,
-      "producer_run_id": "E0-R2-U001",
+      "producer_run_id": "E0-R2-S003",
       "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
-      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-U001/artifacts/stdout.txt (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-S003/artifacts/stdout.txt (in Git)",
       "media_type": "text/plain",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     }

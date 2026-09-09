@@ -3,8 +3,8 @@
   "artifacts": [
     {
       "name": "case_record.json",
-      "sha256": "db2af8684fd7aa707f391bbc7f535d66abb21db9cdb9edf237bb5f70032b99eb",
-      "size_bytes": 973,
+      "sha256": "974e94b4ffcb9f898b165cdfd71c13a44bc638a6a3c5a5557463301b62e8fb29",
+      "size_bytes": 1008,
       "producer_run_id": "E0-R2-S003",
       "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
       "storage_location": "experiments/evidence/E0/E0-R1/runs/E0-R2-S003/artifacts/case_record.json (in Git)",

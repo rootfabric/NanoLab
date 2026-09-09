@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-erratum-f1-manifest-digests",
+  "timestamp_utc": "2026-09-09T14:29:35Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R2",
+  "run_id": "E0-R2",
+  "event_type": "RUN_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
+  "summary": "Campaign-level erratum (REVIEWER F1): tot zhe mehanizm, chto i v E0-R1 - emit_run serializoval artifacts.manifest.json DO finalnoj perezapisi case_record.json (schema_validation[artifacts.manifest.json], +35 bajt), poetomu zapisi case_record.json soderzhali digest predyduschej versii. Remont: original sohranyon byte-equal kak artifacts.manifest.v1-superseded.json, kanonicheskij manifest perepisan s pereschitannymi sha256/size_bytes (18/18 ispravleno tolko case_record.json). Soderzhanie case_record/sobytiya/nauchnye ishody NE izmeneny; run ID ne ispolzovalis povtorno; novyh pragonov net. Details: docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md.",
+  "command_refs": [
+    "python (repair): superseded copy + recompute digests from artifacts/* bytes",
+    "python -m harness.experiment_cli validate <run-dir> -> 18/18 ok=true (posle remonta)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md"
+  ],
+  "scientific_outcome": null
+}
