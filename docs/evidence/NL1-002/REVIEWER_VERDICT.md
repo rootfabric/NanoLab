@@ -1,97 +1,117 @@
-# NL1-002 — Независимый Reviewer Verdict (R1)
+# NL1-002 — Независимый Fresh Reviewer Verdict (R2)
 
 **Verdict: PASS**
 
-- Reviewer: независимая fresh-сессия (REVIEWER). Дата: 2026-09-09.
-- Reviewed subject: `work/nl1-002-reference-run-r1` @ **`ec67752d98856383c9c9301ecd0488f40e1c5a7f`** (на момент завершения review `git ls-remote origin work/nl1-002-reference-run-r1` = `ec67752` — ветка не продвинулась в ходе review).
-- Base: `71535d00a2e729349eea2337217a2c591ed9317d` (fresh canonical main, ACCEPTED NL1-001); проверено `git merge-base --is-ancestor 71535d0 HEAD` → exit 0.
-- Evidence-пакет: `docs/work/WO-NL1-002.md`, `docs/work/executions/EX-NL1-002-R1/**`, `experiments/evidence/E1/E1-R1/**`, `docs/research/PREREGISTRATION_E1_R1.md` (§2.2, §3, §5, §6, §7, §9, §10), `docs/research/PREREGISTRATION_E1_R2.md`, `docs/research/ENGINE_ENVIRONMENT_R1.md`, `docs/experiments/E1_REFERENCE_REPRODUCTION.md`, `docs/evidence/NL1-002/IMPLEMENTER_EVIDENCE.md`, `project/state.json`.
-- Campaign-level scientific_outcome остаётся **NOT_EVALUATED**; настоящий verdict — оценка дисциплины design/метода/статистики/evidence, не научная приёмка E1.
+- Reviewer: независимая fresh-сессия (REVIEWER, R2). Дата: 2026-09-09. Контекст имплементёра не использовался — только Git-факты и документы ветки.
+- Reviewed subject: `work/nl1-002-reference-run-r1` @ **`ea465acf27c33c087fab0a4fa54328377c7314a6`** (base `71535d00a2e729349eea2337217a2c591ed9317d` = canonical main c ACCEPTED NL1-001; `git merge-base --is-ancestor 71535d0 HEAD` → exit 0).
+- Дельта к R1: коммит `ea465ac` добавляет ровно 8 файлов `docs/evidence/NL1-002/run-resources/<run>/{time.log,stdout.log}` (§4); всё остальное идентично диапазону, проверенному R1-вердиктом (`7b12012`, subject `ec67752`, PASS). Настоящий R2 **не** является продолжением той же сессии: все проверки ниже воспроизведены независимо собственными скриптами (пересчёт SHA-256 из git-blob'ов, механический анализ energy.dat, статистика пилота); вывод R1 PASS подтверждается и расширяется на `ea465ac`.
+- Среда ревью: путь `C:\NanoLab\review-nl1-002` и ветка `review/nl1-002-reference-run-r1` заняты worktree R1-сессии (HEAD `7b12012`, чужой gitdir) — R2 выполнен в `review-nl1-002-r2`, ветка `review/nl1-002-reference-run-r2` от exact `ea465ac`. Push на `review/nl1-002-reference-run-r1` невозможен без force (наверху чужой `7b12012`, не входящий в subject-историю) — force запрещён, публикуется новая ветка.
+- Campaign-level scientific_outcome остаётся **NOT_EVALUATED**; настоящий вердикт — оценка дисциплины scope/метода/статистики/evidence, не научная приёмка E1.
 
-## 1. Проверки и результаты
+## 1. Scope и границы (PASS)
 
-### 1.1 Scope и границы (PASS)
+- `git diff --name-status 71535d0..ea465ac` → 64 пути; механическая проверка по `allowed_paths` паспорта EX-NL1-002-R1: **64/64 внутри** (WO-NL1-002, PREREGISTRATION_E1_R2, E1_REFERENCE_REPRODUCTION, SESSION_LOG, EX-NL1-002-R1/**, docs/evidence/NL1-002/**, experiments/evidence/E1/E1-R1/**).
+- Протокол **E1-PROTO-R1 не изменён**: blob `docs/research/PREREGISTRATION_E1_R1.md` идентичен на base и subject (`e04c6882…` = `e04c6882…`).
+- `project/state.json`, `project/plan.json`, policies, `config/control/**` — не в diff (статусы объявляет main; E0–E6 не тронуты).
+- `docs/work/SESSION_LOG.md` — append-only (+8/−0). `docs/experiments/E1_REFERENCE_REPRODUCTION.md` — статус NOT_RUN → RUN с явным «campaign-level scientific_outcome = NOT_EVALUATED» (превышения claim нет).
+- Upstream-файлы не вендорены: в дереве отсутствуют `dsdna8.top`/`init.dat`/`quick_input`/`quick_compare` как файлы; только дайджесты и команды (правило DOWNLOAD_ON_SETUP соблюдено).
 
-- `git diff --name-status 71535d0 HEAD` → 52 пути, все внутри `allowed_paths` паспорта EX-NL1-002-R1 (WO, PREREGISTRATION_E1_R2, E1_REFERENCE_REPRODUCTION, SESSION_LOG, EX-NL1-002-R1/**, docs/evidence/NL1-002/**, experiments/evidence/E1/E1-R1/**).
-- `project/state.json`, `project/plan.json`, policies — **не изменены** (отсутствуют в diff; E0–E6 остаются NOT_RUN, physics_runs=0 — консистентно с правилом «статусы объявляет main»).
-- Upstream-файлы (`dsdna8.top`, `init.dat`, `quick_input`, `quick_compare`) **не вендорены**: `git ls-tree -r HEAD` + поиск по именам → единственное совпадение `docs/evidence/NL1-001/smoke-run/quick_input_smoke` — pre-existing артефакт NL1-001 (blob `1c31ab64`, модифицированная smoke-копия; ≠ pinned blob `07eef592`; в этом diff не менялся).
-- `docs/work/SESSION_LOG.md` — append-only (+8/−0).
+## 2. Протокольная дисциплина (PASS)
 
-### 1.2 Verbatim-дисциплина входов (PASS, верифицировано против upstream)
+- **Verbatim-входы**: `protocol.json input_digests_sha256` = пинам E1-PROTO-R1 §2.2 (4/4); в манифестах всех 4 прогонов те же дайджесты; `modifications: NONE`; правило `git cat-file blob` (не working-tree) задокументировано в protocol.json и events. Независимую сверку с upstream-объектами (fetch pinned commit) делит с VERIFIER — см. §6 NOT_CHECKED.
+- **Критерий применён как пререгистрирован**: оракул `ColumnAverage::energy.dat::2::-1.37970256144::0.15` байт-согласован в E1-PROTO-R1 §5.1, protocol.json и `analyze_energy.sh`; колонка/усреднение/полоса не менялись; критерий механический (среднее колонки 2 по всем строкам).
+- **Уникальные run ID**: в evidence-дереве ровно `E1-R1-S001, P001, P002, P003`; на base main ID кампании E1-R1 отсутствуют; failed-прогонов нет (failed/excluded = 0) — повторное использование ID исключено. (Строки `E1-R1-S002/S003` в дереве — только иллюстративный пример структуры кампании в docs/control/EXPERIMENT_HARNESS_RU.md; коллизии нет — NOTE-3.)
+- **Technical vs scientific**: терминальные события `RUN_COMPLETED` (`0002`, terminal_execution_event=true) не содержат scientific_outcome; scientific_outcome=`NOT_EVALUATED` публикуется только в `0003-analysis-completed`, evidence-map и summaries. Смешения нет.
+- **Никаких ACCEPTED/self-acceptance**: все вхождения «ACCEPTED» в добавленных строках diff относятся к статусу NL1-001 из main; паспорта/протоколы/summary статус NL1-002 не повышают (passport status=IN_PROGRESS, implementation summary=IMPLEMENTED/handoff).
+- **Статистика по пререгистрации**: pilot ровно 3 (§6.4.1), distinct seeds из log.dat (−473348953 / −547126645 / −1610133928), `counts_toward_evidence=false` в protocol.json/манифестах/evidence-map; повторное использование пилотов как T2 явно запрещено (E1-PROTO-R2 §3). Между-репликационная статистика опубликована полностью (все значения + mean/SD/range), малое n оговорено (§6.3).
+- **R_confirm freeze**: `E1-PROTO-R2` superseding **только §6.4**; R_confirm=3 ≥ минимум §6.4.3 (2) — консервативность не снижена; обоснование (SD 0.00833 = 5.6% полосы, 3/3 IN_BAND, ~12 c/прогон) зафиксировано **до** confirmatory кампании NL2-002; полоса §5.1 и семантика §9 R1 не тронуты (blob R1 неизменен).
+- **Frozen-before-run**: порядок коммитов `1fa43e9` (START, 10:19:21Z) → `5c8774f` (freeze, 10:23:16Z) → `9cc83e8` (repair S001-event, 10:23:51Z) → `ec67752` (артефакты/terminal/analysis, 10:30:57Z); repair одного пропущенного started-event — отдельным коммитом до прогона, прозрачно задокументирован в самом event. На уровне порядка коммитов гарантия «subject в Git до запуска» выполняется (метки времени внутри событий — см. MINOR-1).
+- **Claim ceiling**: публикуются execution facts (C0-дисциплина текстов), потолок кампании C1_COMPUTATIONAL_REPRODUCTION; T1-факт IN_BAND везде сформулирован как execution fact, не acceptance; полный критерий §9 (T1 + все T2) отложен в NL2-002. Превышения claim не обнаружено.
 
-- Дайджесты консистентны во всех документах: `protocol.json input_digests_sha256` = пины `E1-PROTO-R1` §2.2 = `inputs` всех 4 run-манифестов (4/4 позиции).
-- **Независимая upstream-верификация**: `git fetch --depth 1 origin 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591` в probe-clone `lorenzo-rovigatti/oxDNA`; SHA-256 сырых blob'ов, извлечённых `git cat-file blob` + cmd-redirect: 4/4 MATCH пинам §2.2 (размеры 148/4498/533/51 B); blob SHA-1 в pinned tree 4/4 MATCH (`1811af7e`, `856be187`, `07eef592`, `74a088ec`).
-- `quick_compare` verbatim: `ColumnAverage::energy.dat::2::-1.37970256144::0.15` — оракул в `analyze_energy.sh` и документах совпадает байт-в-байт.
-- `quick_input` (533 B) соответствует расшифровке §3 R1: `steps=1e6`, `print_energy_every=1e3`, `print_conf_interval=1e5`, `thermostat=john`, `#seed`/`#pt` закомментированы и др.
-- Заявление modifications=NONE подтверждаемо по evidence: манифесты (4/4 одинаковые дайджесты входов), started-events (команда `git cat-file blob` + sha256sum 4/4 на месте перед прогоном), независимая внутренняя согласованность: начальная строка energy.dat (t=0, U/N=−1.345520) идентична во всех 4 прогонах при различных кинетических колонках — ожидаемая картина verbatim-входов + случайных скоростей (`refresh_vel=1`) по разным seed.
-- Полоса/оракул/критерий §5.1 не менялись: `E1-PROTO-R1` отсутствует в diff.
+## 3. Консистентность и независимый пересчёт (PASS)
 
-### 1.3 Frozen-before-run (PASS; см. MINOR-1)
+- **SHA-256 артефактов**: 16/16 (4 прогона × log/energy/trajectory/last_conf) извлечены байт-точно из git-blob'ов `ea465ac`; SHA-256 и размер **16/16 MATCH** `artifacts.manifest.json` **и** `0002-run-completed.artifacts_sha256` (двойная сверка).
+- **Пересчёт observable** (независимый скрипт ревьюера, math.fsum, полная точность): среднее колонки 2 совпало с опубликованным до всех 11 знаков 4/4; delta от оракула совпала 4/4; |Δ|max = 0.01423379720 ≤ 0.15 → IN_BAND 4/4 (S001 −1.39393635864; P001 −1.37730121179; P002 −1.39389370430; P003 −1.38687945155).
+- **Целостность §5.2**: energy.dat 1001 строка (protocol note: 1 initial + 1000 prints; критерий не менялся) и 10 конфигураций trajectory — 4/4; NaN/Inf = 0 — 4/4; seed из log.dat = опубликованному — 4/4; в логах `GIT COMMIT: 00dc7fb`, `END OF THE SIMULATION, everything went OK!`, `N: 16, N molecules: 2` — 4/4.
+- **Пилот-статистика пересчитана**: mean −1.38602478921, выборочное SD 0.00832919790, размах 0.01659249251, SD/полоса 0.0555 — 4/4 поля совпадают с evidence-map и E1-PROTO-R2 §1.
+- **Ресурсы**: time.log дельты (§4) согласованы с событиями, evidence-map, IMPLEMENTER_EVIDENCE и run-summaries: 13.13 s/6304 KB; 11.08/6328; 11.74/6700; 12.56/6520; Exit status 0 — 4/4; суммарно 48.51 s ≈ «~48.5 c», budget 1 core-hour не превышен.
+- **События**: 27/27 JSON-файлов diff валидны; EX-цепочка 0001→0004 монотонна; run-цепочки 0001→0003 × 4; паспорт EX-NL1-002-R1 полностью валиден против `execution-passport.schema.v1.json` (все required, без лишних полей). Конформность остальных JSON схемам — MINOR-2.
 
-- Порядок коммитов: `1fa43e9` 20:19:21 +1000 (START: WO + passport + WO-started event) → `5c8774f` 20:23:16 (freeze: campaign.md, protocol.json, analyze_energy.sh, манифесты + started-events P001–P003, S001 manifest) → `9cc83e8` 20:23:51 (+35 c: пропущенный S001 `events/0001-started.json`, только этот файл) → `ec67752` 20:30:57 (артефакты, terminal/analysis events, R2 freeze, handoff).
-- Пропуск S001-event в freeze-коммите починен **отдельным коммитом до запуска прогона** (по заявленной хронологии) и прозрачно задокументирован в самом event (NOTE-поле), IMPLEMENTER_EVIDENCE, summary и SESSION_LOG — требование EXPERIMENT_HARNESS_RU «subject в Git до запуска» на уровне Git-коммитов соблюдено; ремонт аудируем, история не переписывалась.
+## 4. Дельта ec67752..ea465ac — run-resources (PASS, с MINOR-3)
 
-### 1.4 Целостность артефактов и пересчёт чисел (PASS)
+- `git diff --stat ec67752 ea465ac`: ровно 8 новых файлов `docs/evidence/NL1-002/run-resources/<run>/{time.log,stdout.log}`; events/protocol/manifests/analysis/артефакты **не тронуты** — все проверки §2–§3 (включая 16/16 дайджестов и пересчёт средних) выполнены на `ea465ac` и остаются в силе.
+- Файлы — **производные evidence** прогонов (raw-вывод `/usr/bin/time -v`, захваченный stdout), не upstream-фикстуры: правило vendoring FORBIDDEN не затронуто; allowed_paths паспорта покрывают `docs/evidence/NL1-002/**`.
+- time.log 4/4 совпадают с задокументированными wall/RSS/exit (см. §3); команда в `Command being timed` соответствует задокументированной (`/usr/bin/time -v …/bin/oxDNA quick_input`).
+- stdout.log 4/4 пустые (0 B) — согласовано с `no_stdout_energy = 1` и строкой log.dat `0.000  B written to stdout/stderr` (проверено в blob'ах); это осмысленная фиксация факта, не дефект (NOTE-1).
+- Дельта адресует NOTE-1 R1 (raw time-output не архивировались) в правильном направлении. **MINOR-3**: на subject `ea465ac` файлы run-resources не включены ни в один манифест/документ (нет ссылок в events/evidence-map/IMPLEMENTER_EVIDENCE/SESSION_LOG — проверено `git grep`). После subject, на work-ветке (`ec7e3ed`, вне данного ревью), появился event `0005-resource-evidence-committed`, процессно закрывающий этот gap.
 
-- 16/16 артефактов (4 прогона × log/energy/trajectory/last_conf) извлечены байт-точно `cmd /c "git show HEAD:<path> > file"`; SHA-256 и размер **16/16 MATCH** `artifacts.manifest.json`; дайджесты в `0002-run-completed` events 16/16 консистентны с манифестами; файлы LF-only (CRLF не обнаружен).
-- Пересчёт собственным скриптом репозитория `analyze_energy.sh` (WSL bash) на байт-точных `energy.dat`:
+## 5. Findings
 
-| Run | rows | avg col2 (пересчёт) | опубликовано | NaN/Inf | конфигураций | seed из log.dat |
-|---|---|---|---|---|---|---|
-| E1-R1-S001 | 1001 | **−1.39393635864** | −1.39393635864 ✓ | 0 | 10 | −200619630 ✓ |
-| E1-R1-P001 | 1001 | **−1.37730121179** | −1.37730121179 ✓ | 0 | 10 | −473348953 ✓ |
-| E1-R1-P002 | 1001 | **−1.39389370430** | −1.39389370430 ✓ | 0 | 10 | −547126645 ✓ |
-| E1-R1-P003 | 1001 | **−1.38687945155** | −1.38687945155 ✓ | 0 | 10 | −1610133928 ✓ |
-
-- Независимый пересчёт вторым методом (python3, `math.fsum`) совпал 4/4 с опубликованными значениями до всех 11 знаков; delta от оракула и IN_BAND 4/4 подтверждены.
-- Pilot-статистика пересчитана: mean −1.38602478921, выборочное SD 0.00832919790, размах 0.01659249251, SD/полоса 0.0555 — 4/4 совпадают с evidence-map и E1-PROTO-R2 §1.
-- Логи всех 4 прогонов: `GIT COMMIT: 00dc7fb`, «END OF THE SIMULATION, everything went OK!», `N: 16, N molecules: 2`.
-
-### 1.5 Критерий, статистика, claim-дисциплина (PASS)
-
-- `E1-PROTO-R2` superseding **только §6.4** (назначение R_confirm); §5.1/§3/§9/§10 R1 наследуются без изменений; полоса и оракул не тронуты.
-- R_confirm = 3 ≥ минимум §6.4.3 (2) — консервативность не уменьшена; обоснование использует пилот-факты (SD, 3/3 IN_BAND, стоимость ~12 c) и зафиксировано ДО confirmatory кампании; §5.1 R1 не затронут.
-- Запрет повторного использования пилотов как T2 сформулирован явно (R2 §3); пилоты помечены `counts_toward_evidence=false` в protocol.json, манифестах и evidence-map; использование пилот-данных для обоснования R_confirm — разрешённая §6.4 функция пилота, не «превращение в evidence».
-- campaign-level scientific_outcome = NOT_EVALUATED проведён консистентно: все 4 `0003-analysis-completed`, evidence-map.json, campaign.md, protocol.json, summaries, IMPLEMENTER_EVIDENCE. T1 IN_BAND везде сформулирован как execution fact, не acceptance; превышения claim не обнаружено (публикуются C0-факты, потолок C1).
-
-### 1.6 События, схемы, ресурсы (PASS; см. MINOR-1, NOTE-2)
-
-- 27/27 JSON-файлов diff валидны (`ConvertFrom-Json`); execution events 0001→0004 монотонны; run events 0001→0003 во всех 4 директориях; terminal event один (`RUN_COMPLETED`, `terminal_execution_event: true`), scientific outcome не смешивается с техническим.
-- ACCEPTED от implementer нет: все вхождения «ACCEPTED» относятся к статусу NL1-001 из main.
-- Elapsed/RSS согласованы между событиями, run-summary, evidence-map и IMPLEMENTER_EVIDENCE (13.13 s/6304 KB; 11.08/6328; 11.74/6700; 12.56/6520; суммарно ~48.5 c ≪ 1 core-hour budget; stop conditions не активированы; failed/excluded = 0).
-
-## 2. Findings
-
-### BLOCKER
-
-Нет.
-
-### MAJOR
+### BLOCKER / MAJOR
 
 Нет.
 
 ### MINOR
 
-- **MINOR-1 (transparentность времени событий):** заявленные `timestamp_utc` событий систематически не согласуются с временем Git-коммитов, их содержащих. Примеры: `0001-work-order-started` (10:26Z) закоммичен в `1fa43e9` в 10:19:21 UTC; S001 `0001-started` (10:50Z) закоммичен в `9cc83e8` в 10:23:51 UTC; `0002-run-completed` (11:05Z) и `0004-handoff-completed` (11:30Z) содержатся в `ec67752`, закоммиченном в 10:30:57 UTC. По заявленным временам P001 стартовал (10:41Z) раньше S001 (10:50Z), хотя WO перечисляет T1 первым (порядок протоколом не mandate — нарушений нет, но это ещё один признак ручного ввода времён). Вывод: внутриминутная хронология кампании из событий невоспроизводима и частично противоречит Git; claim «subject в Git до запуска» подтверждается на уровне порядка коммитов (проверяемого), но точные declare-минуты следует считать оценочными. Рекомендация: генерировать `timestamp_utc` машиной (`date -u`) в момент записи события. На научные результаты не влияет (артефакты/дайджесты/анализ воспроизводятся независимо).
+- **MINOR-1 (метки времени событий; наследован от R1 MINOR-1, на `ea465ac` не устранён):** заявленные `timestamp_utc` систематически не согласуются с датами содержащих их коммитов: `0001-work-order-started` (10:26:00Z) закоммичен в `1fa43e9` в 10:19:21Z; S001 `0001-started` (10:50:00Z) — в `9cc83e8` в 10:23:51Z; `0002/0003/0004` (11:15/11:20/11:30Z) — в `ec67752` в 10:30:57Z. Внутриминутная хронология из событий невоспроизводима и частично противоречит Git; гарантия freeze-before-run подтверждается порядком коммитов (проверяемо), точные declare-минуты считать оценочными. Рекомендация: машинные `date -u` метки в момент записи. Научные результаты не затронуты.
+- **MINOR-2 (конформность схем campaign-слоя):** (a) EX-события `0002/0003/0004` используют `subject_sha: "9cc83e8"` — нарушение паттерна `^[0-9a-f]{40}$` схемы `work-event.schema.v1.json` (`0001` валиден; принятый прецедент NL1-001 везде использовал полный SHA); (b) 12 run-событий не соответствуют `experiment-event.schema.v1.json`: отсутствуют обязательные `experiment_id` и `subject_sha`, присутствуют поля вне схемы (`work_order_id`, `command_refs`, `evidence_refs`, `blocker`, `lifecycle_state`, `run_type`, `terminal_execution_event`, `execution_outcome`, `engine_observations`, `artifacts_sha256`, `analysis_tool`, `observable`, `comparison`); (c) 4 × `artifacts.manifest.json` не соответствуют `artifact-manifest.schema.v1.json` и `review-policy.v1.json artifact_reuse_requires`: `artifacts` — map вместо массива, `producer_run` вместо `producer_run_id`, отсутствует per-artifact `subject_sha`; (d) `evidence-map.json` структурно не соответствует `evidence-map.schema.v1.json` (нет `checkpoint`, `claim_class`, `subject_sha`, `changed_surfaces`, `experiment_runs`, `validation`, `artifacts`, `review_verdict`, `scientific_conclusion`, `claim_ceiling`). Смягчение: это первая experiment-кампания в истории репозитория (прецедента нет), provenance прослеживается по существу (producer_run + producer_tool с SHA бинаря + storage + дайджесты; манифесты сами лежат в subject-дереве), научное содержание не затронуто. Рекомендация: в NL2-002 либо нормализовать campaign-файлы к схемам, либо явно ревизовать схемы под campaign-слой (добавив недостающие поля в схемы), не постфактум перекраивая существующие events.
+- **MINOR-3 (ссылочная целостность дельты):** run-resources на subject не упоминаются ни одним событием/документом/манифестом (детали в §4); рекомендуется сохранять адресацию нового evidence в event/SESSION_LOG в момент коммита (что и сделано позже в `0005` на work-ветке).
 
 ### NOTE
 
-- **NOTE-1:** сырые выводы `/usr/bin/time -v` не заархивированы как артефакты (wall/RSS присутствуют как цитаты в `command_refs` событий). Значения кросс-документно согласованы; рекомендуется в NL2-002 сохранять raw time-лог в artifacts.manifest.
-- **NOTE-2:** двухкоммитный freeze (пропуск S001-event в `5c8774f`, ремонт `9cc83e8`) — задокументирован честно и не ослабляет гарантию subject-in-Git до запуска; учитывать при подготовке NL2-002 (чек-лист START-коммита).
-- **NOTE-3:** energy.dat не имеет заголовка; семантика колонки 2 = U/N подтверждена ссылкой `ENGINE_ENVIRONMENT_R1` §6 (OBSERVED-in-source), критерий от интерпретации не зависит (механическое правило §5.1) — корректная обработка ASSUMED→подтверждено без изменения критерия.
-- **NOTE-4:** в пересчитанных артефактах начальная строка (t=0) идентична по позициям во всех 4 прогонах при разных скоростях/seed — косвенное подтверждение verbatim-входов и заявленной seed-политики.
+- **NOTE-1:** пустые stdout.log — согласованы с `no_stdout_energy=1` и log.dat (`0.000 B written to stdout/stderr`); проверено по blob'ам.
+- **NOTE-2:** `core.autocrlf=true`: рабочие копии evidence-артефактов на Windows отличаются от blob'ов (CRLF; например energy.dat 50050 B в дереве vs 49049 B в blob). Hash-верификация корректна только через `git cat-file`/`git show` (как сделано в этом ревью); наивная сверка Get-FileHash по рабочему дереву даст ложные несовпадения. Рекомендация: `.gitattributes` (`*-dat text eol=lf` или `binary`) для evidence-путей.
+- **NOTE-3:** `E1-R1-S002/S003` встречаются в дереве только как иллюстрация структуры кампании в control-документе; реальных run с этими ID нет, коллизии/переиспользования ID нет.
+- **NOTE-4 (среда ревью):** ветка/путь R1 заняты чужим worktree; в 21:30:05 внешний процесс выполнил `git reset` ветки R2 на `ec7e3ed` (reflog); ветка возвращена на exact `ea465ac` перед фиксацией вердикта. На вердикт не влияет (все проверки — по blob'ам `ea465ac`).
 
-## 3. NOT_CHECKED (вне reviewer-scope, передаётся VERIFIER)
+## 6. NOT_CHECKED (зона VERIFIER, вне reviewer-scope)
 
-- Пересборка engine из pinned commit `00dc7fb9` и воспроизведение/проверка SHA-256 бинаря `ffc80b1a…579f` — **NOT_CHECKED** (зона VERIFIER per WO-маршрут; текстовые факты логов проверены).
-- Физическое повторное исполнение прогонов и проверка на campaign-машине — **NOT_CHECKED** (невозможно и не требуется для reviewer; прогоны не запускались).
-- Время push'ей (публичность freeze до прогона на стороне GitHub) — **NOT_CHECKED** локально; проверен порядок коммитов.
-- Сверка цитируемых wall/RSS с engine-внутренними таймерами — **NOT_CHECKED** (второстепенно; внутренние I/O-статы в логах присутствуют).
+- Независимый fetch upstream pinned commit `00dc7fb9` и сверка 4 входных blob'ов с пинами §2.2 (здесь приняты по внутренней согласованности документов/манифестов).
+- Пересборка engine по `ENGINE_ENVIRONMENT_R1` §3 и проверка бинаря `ffc80b1a…579f`; физическое повторное исполнение прогонов.
+- Время push'ей (публичность freeze на стороне GitHub); сверка wall/RSS с внутренними таймерами engine.
 
-## 4. Claim ceiling
+## 7. Claim ceiling и следующее действие
 
-Публикуются execution facts (C0-дисциплина). Потолок кампании: **C1_COMPUTATIONAL_REPRODUCTION** — достижим только по полному критерию §9 R1 (T1 PASS + все T2-реплики в полосе) в NL2-002 с R_confirm=3. Настоящий PASS — вердикт по evidence-дисциплине NL1-002, не научная приёмка E1; merge в `main` — Human Gate.
+- Публикуются execution facts; campaign-level scientific_outcome = **NOT_EVALUATED**; потолок кампании **C1_COMPUTATIONAL_REPRODUCTION** достижим только по полному критерию §9 R1 (T1 PASS + все T2-реплики в полосе при R_confirm=3) в NL2-002. Настоящий **PASS** — вердикт по evidence-дисциплине NL1-002 @ `ea465ac`; merge в `main` — Human Gate.
+- Следующее действие (одно): независимый VERIFIER — fresh checkout `ea465ac` → upstream-пины, пересборка engine, повторение `analyze_energy.sh`, дайджесты → `docs/evidence/NL1-002/VERIFIER_VERDICT.md`; затем Director checkpoint.
 
-## 5. Следующее действие (одно)
+---
 
-Независимый VERIFIER: fresh checkout `ec67752d98856383c9c9301ecd0488f40e1c5a7f` → перепроверка дайджестов артефактов и upstream-пинов, пересборка engine по `ENGINE_ENVIRONMENT_R1` §3, повторение `analyze_energy.sh` → `docs/evidence/NL1-002/VERIFIER_VERDICT.md`; затем Director checkpoint.
+## 8. Addendum R2a — расширение вердикта на дельту `ec67752..ec7e3ed`
+
+По контрольному распоряжению вердикт расширяется на пост-хендоффную дельту work-ветки до `ec7e3ed` (subject предыдущих разделов остаётся `ea465ac`; здесь — только дельта). Проверено независимо, по blob'ам:
+
+- **Состав дельты** (`git diff --stat ec67752 ec7e3ed`): ровно 10 файлов — 8 × `run-resources/<run>/{time.log,stdout.log}` (полностью проверены в §4), + `docs/work/executions/EX-NL1-002-R1/events/0005-resource-evidence-committed.json` (+22), + `docs/work/SESSION_LOG.md` (+2/−0, append-only сохранён). Frozen subject, events 0001–0004, артефакты, манифесты, анализ — не тронуты; все проверки §2–§3 остаются в силе.
+- **Event 0005** (`CONTINUATION_CHECKPOINT`, IMPLEMENTER): корректно документирует post-handoff публикацию run-resources; содержимое сверено с независимыми проверками — wall/RSS 4/4 (13.13/6304; 11.08/6328; 11.74/6700; 12.56/6520), Exit status 0, «stdout.log = 0 B» согласован с `no_stdout_energy=1` и log.dat («0.000 B written to stdout/stderr»), upstream-фикстур в дельте нет (vendoring FORBIDDEN соблюдён), новых claims нет, scientific_outcome остаётся NOT_EVALUATED.
+- **MINOR-3 (ссылочная целостность) — исправлен процессно после subject**: publication run-resources получил событие и запись в SESSION_LOG (`ec7e3ed`); в границах subject `ea465ac` gap исторически оставался (как зафиксировано в §4/MINOR-3) — вердикт по subject не меняется.
+- **MINOR-1 / MINOR-2 паттерны сохраняются и в 0005**: `timestamp_utc` = 11:16:30Z при дате содержащего коммита `ec7e3ed` = 11:16:27Z (метка «позже» коммита — та же сигнатура ручных времён); `subject_sha` снова сокращён (`9cc83e8` вместо 40-hex). На выводы не влияет.
+- **Итог дельты: PASS подтверждается и расширяется на `ec7e3ed`** (execution-дисциплина; NOT_EVALUATED; потолок C1 без изменений).
+- **Границы роли этой сессии**: настоящим документом исчерпывается вклад сессии REVIEWER (worktree `review-nl1-002-r2`, ветка `review/nl1-002-reference-run-r2`, коммиты вердикта). `VERIFIER_VERDICT.md` (коммит `b405a7e` и его копия на work-ветке `c44b209`) этой сессией не создавался, не проверялся на содержание и не редактируется — верификация обязана быть fresh-сессией.
+
+---
+
+## 9. Addendum R2b — формальная schema-проверка event 0005 и подтверждение распространения вердикта на exact `ec7e3ed`
+
+По контрольному распоряжению — финальный формальный шаг REVIEWER. Дельта `ea465ac..ec7e3ed` перепроверена по blob'ам: ровно 2 файла — `M docs/work/SESSION_LOG.md` (+2/−0, append-only) и `A …/EX-NL1-002-R1/events/0005-resource-evidence-committed.json` (+22). Содержание SESSION_LOG-добавления согласовано с независимыми проверками §4 (wall/RSS 4/4, Exit status 0, stdout 0 B, vendoring не затронут, frozen subject не менялся).
+
+**Schema-проверка event 0005 против `config/control/harness/work-event.schema.v1.json` (поле-в-поле):**
+
+| Поле | Значение | Результат |
+|---|---|---|
+| schema_version | `1` | OK (const 1) |
+| event_id | `0005-resource-evidence-committed` | OK (pattern `^[0-9]{4}-[a-z0-9-]+$`) |
+| timestamp_utc | `2026-09-09T11:16:30Z` | OK (format date-time); содержательно — MINOR-1: на 3 c ПОЗЖЕ даты содержащего коммита `ec7e3ed` (11:16:27Z) |
+| execution_id | `EX-NL1-002-R1` | OK |
+| work_order_id | `NL1-002` | OK |
+| event_type | `CONTINUATION_CHECKPOINT` | OK (в enum) |
+| actor_role | `IMPLEMENTER` | OK (в enum) |
+| subject_sha | `9cc83e8` | **VIOLATION** — не соответствует `^[0-9a-f]{40}$` (сокращён; тот же класс, что events 0002–0004 → MINOR-2) |
+| summary | непустой | OK |
+| command_refs / evidence_refs / next_action / blocker | массивы строк / строка / null | OK (типы и допустимость полей) |
+| additionalProperties | лишних полей нет (13/13 ключей из схемы) | OK |
+
+Итог schema-проверки: **единственное нарушение — сокращённый `subject_sha`** (несущественно для однозначности ссылки; усиливает MINOR-2, рекомендация — полные SHA в будущих событиях; существующие events не переписывать). Содержание события сверено с независимыми проверками ревьюера: значения wall/RSS/exit в summary 4/4 совпадают с time.log и IMPLEMENTER_EVIDENCE; утверждение о пустом stdout подтверждено строкой log.dat; новых claims нет; scientific_outcome остаётся NOT_EVALUATED; `next_action` соответствует фактическому исполнению review.
+
+**Подтверждение распространения вердикта:** verdict **R2 = PASS** распространяется на exact `ec7e3edc83a3434d96222a0a8a94b03f7fa10e23` в части execution-дисциплины: frozen subject и артефакты прогонов не затронуты (совпадают с проверенными на `ea465ac`), MINOR-3 процессно закрыт событием 0005, MINOR-1/MINOR-2 паттерны сохраняются без влияния на выводы. Campaign-level scientific_outcome = NOT_EVALUATED; потолок C1_COMPUTATIONAL_REPRODUCTION без изменений; merge — Human Gate.
+
+**Роль REVIEWER этой сессии настоящим завершена**; иных веток/коммитов/артефактов (verify/director и пр.) сессия не создаёт.
