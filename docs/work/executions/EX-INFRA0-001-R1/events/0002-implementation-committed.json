@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-09T10:25:02Z",
+  "execution_id": "EX-INFRA0-001-R1",
+  "work_order_id": "INFRA0-001",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "870f52e309a85da1dd5fb95c0d67498f2f573898",
+  "summary": "Опубликован security/control baseline INFRA0 (EXECUTION-BASELINE-R1). docs/infra/EXECUTION_BASELINE_R1.md: trust zones и инвариант границы (переход в trusted-зону по происхождению кода canonical main + explicit protected dispatch, не по авторству PR); runner classes H0/C0/G0/H1 с зарезервированными labels nanolab-cpu/nanolab-gpu/nanolab-hpc-* (никто не зарегистрирован, self-hosted labels запрещены в runs-on PR-маршрутов, self-hosted runner не носит стандартные hosted labels); trigger routes TR-PR/TR-PUSH-MAIN (hosted-only) / TR-DISPATCH (protected, exact subject + work_order_id + budget, RESERVED_NOT_ACTIVE) / TR-SCHEDULE, TR-TAG (deferred) / TR-PRT pull_request_target и TR-WFRUN workflow_run — FORBIDDEN_R1; контракт маршрутизации public PR vs trusted self-hosted; GITHUB_TOKEN policy (repo default read-only, PR route contents:read, fork PR без secrets, без долгоживущих credentials); resource classes RC0/RC1/RC2/RC3 с правилами бюджетов (unbounded jobs запрещены, rerun не увеличивает бюджет, paid compute forbidden); artifact policy по полям review-policy (sha256/size_bytes/producer_run_id/subject_sha/storage_location), hosted CI артефакты не scientific evidence; negative controls NC-1..NC-7 (включая NC-1: untrusted PR route не может выбрать self-hosted scientific label — механическая проверка отнесена в INFRA1-002 по зависимостям плана); threat validation matrix; 11 явных запретов этапа (без runner-установок, workflows, secrets, изменений infra-state.json, scientific claims); соответствие hard rules; следующие шаги INFRA1-001/INFRA1-002. config/infra/execution-baseline.v1.json — машинно-читаемая проекция (status PROPOSED). Расхождение с WO scope учтено: конфиг размещён в config/infra/ по явному указанию миссии (WO разрешает config/control/infra/**) — отклонение задокументировано в summary для reviewer. Все ограничения соблюдены: runners/workflows/secrets не создавались, scientific campaigns не запускались, project/infra-state.json и project/state.json не изменялись.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\infra-0-001 add docs/infra/EXECUTION_BASELINE_R1.md config/infra/execution-baseline.v1.json",
+    "git -C C:\\NanoLab\\infra-0-001 commit -> 870f52e309a85da1dd5fb95c0d67498f2f573898 (tree aba753e218eba949270957dbcc9628060a53f6a3)"
+  ],
+  "evidence_refs": [
+    "docs/infra/EXECUTION_BASELINE_R1.md",
+    "config/infra/execution-baseline.v1.json",
+    "docs/work/WO-INFRA0-001.md",
+    "docs/infra/SECURITY_MODEL.md",
+    "docs/infra/EXECUTION_BACKENDS.md"
+  ],
+  "next_action": "IMPLEMENTER: прогнать контрольные валидации (json.tool, CONTROL_WORK validate, CONTROL_DEVELOPMENT -CheckConsistency) и зафиксировать validation record.",
+  "blocker": null
+}
