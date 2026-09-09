@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-repair-completed",
+  "timestamp_utc": "2026-09-09T12:35:00Z",
+  "execution_id": "EX-NL1-002-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9cc83e8599c76366a6ba8c5bc49f7398f5fca64f",
+  "summary": "Repair по VERIFIER VERDICT R2 (FIX_REQUIRED; ветка verify/nl1-002-reference-run-r2 @ 149feda3fe16ce63afaecf52a4d4b8ae83325dd7, superseding R1-вердикты). Erratum (F-2): в событиях 0002-0005 этого execution subject_sha опубликован сокращённо как 9cc83e8; полная 40-hex форма значения — 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f (freeze-commit 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f, дерево frozen subject кампании). Опубликованные события не редактируются — полная форма фиксируется настоящим событием и во всех новых событиях. Fix F-1: контрактная форма artifacts.manifest.json и завершение машинных полей манифестов/событий во всех 4 run-каталогах E1-R1 (коммиты ac5c6cb, 6b6dab4); CONTROL_EXPERIMENT validate x4 -> ok=true, exit 0. Признание F-3: 0004-handoff-completed остаётся последним TERMINAL-событием этого execution, но не последним событием файла (0005, 0006 — post-handoff checkpoints по паттерну corrections-new-event); механическое отклонение CONTROL_WORK validate для этого execution документировано как остаточное в Repair Map, контракт-чистая последовательность событий публикации — в новом execution EX-NL1-002-R1-REPAIR1 (superseding surface для валидации, не для научных фактов). Научные артефакты, дайджесты, статистика и protocol.json не менялись.",
+  "command_refs": [
+    "git log --oneline ac5c6cb 6b6dab4 -> experiment(E1) manifest/events contract repair",
+    "CONTROL_EXPERIMENT.ps1 validate experiments/evidence/E1/E1-R1/runs/E1-R1-{S001,P001,P002,P003} -> ok=true, exit 0 (4/4)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-002/VERIFIER_VERDICT_R2.md",
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md",
+    "docs/work/executions/EX-NL1-002-R1-REPAIR1/passport.json",
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/events/0004-repair-manifest-contract.json"
+  ],
+  "next_action": "IMPLEMENTER: завершить repair execution EX-NL1-002-R1-REPAIR1 (Repair Map, валидация, terminal handoff); затем независимая re-verification исправленных поверхностей.",
+  "blocker": null
+}
