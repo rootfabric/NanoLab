@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T10:41:00Z",
+  "run_id": "E1-R1-P003",
+  "campaign_id": "E1-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "RUN_STARTED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "lifecycle_state": "STARTED",
+  "run_type": "PILOT",
+  "summary": "Frozen subject до запуска: manifest.json (engine commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f), входы - raw blobs pinned commit с дайджестами (4/4 SHA-256 верифицированы), budget и stop conditions в protocol.json. Прогон выполняется в scratch вне репозитория; выходы публикуются с artifacts.manifest. Seed случайный по upstream-семантике.",
+  "command_refs": [
+    "git cat-file blob -> 4 fixture файла, sha256sum 4/4 MATCH пинам E1-PROTO-R1 SS2.2",
+    "cmake+make пересборка по ENGINE_ENVIRONMENT_R1 SS3 -> BUILD_EXIT=0"
+  ],
+  "evidence_refs": ["../manifest.json", "../../protocol.json", "../../campaign.md"],
+  "blocker": null
+}
