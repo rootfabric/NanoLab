@@ -281,8 +281,13 @@ class GitIntegrationTests(unittest.TestCase):
         self.director.transact("director-pilot", "open", "BUS-SMOKE-001", spec(self.base), "open-smoke")
 
     @staticmethod
-    def run_git(cwd, *args):
-        p = subprocess.run(["git", "-C", str(cwd), *args], text=True, capture_output=True, timeout=20)
+    def run_git(cwd, *args, git_dir=None):
+        # git_dir: address a bare repository explicitly. safe.bareRepository=explicit
+        # (default in recent Git for Windows) rejects discovering a bare repo via
+        # `git -C <bare>`, while explicit --git-dir access stays allowed; this mirrors
+        # how the broker itself addresses remotes (URL/path argument, no discovery).
+        prefix = ["git", "-C", str(cwd)] if git_dir is None else ["git", "--git-dir", str(git_dir)]
+        p = subprocess.run([*prefix, *args], text=True, capture_output=True, timeout=20)
         if p.returncode:
             raise AssertionError(p.stderr)
         return p.stdout.rstrip("\n")
@@ -323,7 +328,7 @@ class GitIntegrationTests(unittest.TestCase):
                 data["subject"] = s
             result = client.transact(actor, "finish", "BUS-SMOKE-001", data)
         self.assertEqual(result["task"]["phase"], "COMPLETED_SANDBOX")
-        self.assertEqual(self.run_git(self.remote, "rev-parse", "main"), self.base)
+        self.assertEqual(self.run_git(None, "rev-parse", "main", git_dir=self.remote), self.base)
         self.assertFalse(self.client("director-pilot").inbox("director-pilot")["canonical_acceptance"])
 
     def race(self, items):
