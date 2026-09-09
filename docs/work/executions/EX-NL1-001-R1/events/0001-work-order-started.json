@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T07:02:00Z",
+  "execution_id": "EX-NL1-001-R1",
+  "work_order_id": "NL1-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+  "summary": "Старт NL1-001 (pin environment and upstream smoke). Base — свежий canonical main 57c1e63 (origin/main совпадает с локальным HEAD, worktree чист). Engine-субъект зафиксирован заранее: oxDNA pinned upstream commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (тот же, что E1-PROTO-R1 §2.1). Среда исполнения: WSL2 Ubuntu 24.04.2 (gcc 13.3.0, make 4.3, python 3.12.3, 20 core, 15 GiB RAM), cmake будет установлен user-local без sudo; глобальные изменения системы владельца запрещены. Smoke — только технический go/no-go на сокращённом steps-прогоне в scratch вне репозитория; quick_input verbatim (1e6 steps) не запускается до принятия NL1-001 (E1-PROTO-R1 §7). Risk HIGH (protocol/environment pin), claim C0_SOFTWARE_ONLY. Merge в main — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = 57c1e63733ea3b10f991c0f9609c426dc75b17a5 (совпадает с HEAD)",
+    "git -C C:\\NanoLab\\main status -sb -> ## main...origin/main, clean",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl1-001 -b work/nl1-001-env-pin-smoke-r1 57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+    "wsl -d Ubuntu --exec bash -lc 'gcc --version / make --version / python3 --version / nproc / free -h' -> gcc 13.3.0, make 4.3, python 3.12.3, 20 cores, 15GiB",
+    "wsl -d Ubuntu --exec bash -lc 'curl -sI https://github.com' -> недоступен напрямую (прокси-маршрут только на Windows-стороне; закупка исходников через Windows git/curl в scratch)",
+    "gh auth status -> logged in as rootfabric (для PR после review)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL1-001.md",
+    "docs/work/executions/EX-NL1-001-R1/passport.json",
+    "project/state.json (NL1-001 = READY, next_work_order = NL1-001)",
+    "config/control/harness/scheduler-policy.v1.json (current_checkpoint = NL1)",
+    "docs/research/PREREGISTRATION_E1_R1.md §2.1, §4, §7, §11"
+  ],
+  "next_action": "IMPLEMENTER: склонировать oxDNA exact commit 00dc7fb9 в scratch, верифицировать 4 fixture-файла SHA-256 против пинов E1-PROTO-R1 §2.2, установить user-local cmake, собрать CPU engine в WSL.",
+  "blocker": null
+}
