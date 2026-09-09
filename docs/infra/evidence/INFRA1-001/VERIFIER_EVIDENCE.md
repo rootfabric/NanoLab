@@ -87,4 +87,52 @@ git rev-parse 0ab044b:project/infra-state.json → 17bb432f9e8666cacbd5b2a01c118
 
 ---
 
-(Разделы 2–6 добавляются последующими коммитами.)
+## 2. Workflow-инварианты (механическая проверка hosted-ci.yml)
+
+Метод: парсинг `.github/workflows/hosted-ci.yml` через PyYAML (`yaml.safe_load`, ключ `on` извлечён с учётом YAML 1.1 boolean-коэрции) + перекрёстная сверка с `config/infra/hosted-ci.v1.json` и `config/infra/execution-baseline.v1.json`. Скрипт верификатора: `python check_workflow.py <worktree>` → **TOTAL=52 PASS=52 FAIL=0, exit 0**.
+
+Ключевые инварианты (все PASS):
+
+| Инвариант | Факт в workflow |
+|---|---|
+| Запрещённые триггеры | `pull_request_target`, `workflow_run`, `schedule`, `release`, `workflow_dispatch` отсутствуют в `on:` (5/5 absent) |
+| Разрешённые триггеры | ровно `pull_request` (branches `["main"]`, types `["opened","synchronize","reopened"]`) и `push` (branches `["main"]`, ключ `tags` отсутствует, прочих ключей нет) |
+| `runs-on` | единственный job `rc0-hosted-validation`: `ubuntu-latest`; self-hosted/`nanolab-*` labels — 0 |
+| Permissions | workflow-level ровно `{contents: read}`; job-level permissions-блоков нет |
+| `timeout-minutes` | 15 (единственный job) |
+| Checkout | `actions/checkout@93cb6efe…` (full 40-hex SHA), `persist-credentials: false`, `fetch-depth: 0` |
+| Артефакты | `actions/upload-artifact@330a01c4…` только при `if: failure()`, `retention-days: 7` |
+| Concurrency | `cancel-in-progress: true` |
+| Secrets | литеральное `${{ secrets` в тексте workflow — 0 вхождений |
+| `uses`-шаги | ровно 2 (checkout, upload-artifact), оба pinned по full SHA |
+
+Сверка `config/infra/hosted-ci.v1.json` ↔ workflow (все PASS): name, triggers (по-полю), `forbidden_triggers_absent`, permissions, routes `[TR-PR, TR-PUSH-MAIN]`, `runs_on ["ubuntu-latest"]`, `timeout_minutes 15`, `resource_class RC0_HOSTED_VALIDATION`, `runner_class H0`, pins checkout/upload (SHA+version+persist_credentials+fetch_depth+retention_days), `status: PROPOSED`, `secrets_used: []`, `fork_pr_secrets_available: false`, `write_permissions_granted: false`.
+
+Сверка с EXECUTION-BASELINE-R1 (machine-readable `execution-baseline.v1.json`, все PASS):
+
+- Маршруты: `TR-PR` (events `pull_request`) → `allowed_runner_classes ["H0"]`; `TR-PUSH-MAIN` (refs `refs/heads/main`) → `["H0"]`; workflow обслуживает ровно эти два маршрута.
+- Запреты: `TR-PRT` и `TR-WFRUN` = `FORBIDDEN_R1` — соответствующие триггеры в workflow физически отсутствуют.
+- Labels: класс `H0` = `["ubuntu-latest","ubuntu-24.04"]`; workflow использует `ubuntu-latest` ∈ H0; self-hosted labels отсутствуют (NC-1 конструктивно).
+- Resource class: `RC0_HOSTED_VALIDATION` (runner `H0`, `max_wall_clock_minutes = 15`) ↔ `timeout-minutes: 15`; `resource_classes_used = ["RC0_HOSTED_VALIDATION"]`, `RC1_HOSTED_EXTENDED` объявлен не используемым.
+
+## 3. Пины actions (live `git ls-remote --tags` GitHub)
+
+```
+git ls-remote --tags https://github.com/actions/checkout refs/tags/v5.0.1
+93cb6efe18208431cddfb8368fd83d5badbf9bfd   refs/tags/v5.0.1      → exit 0
+
+git ls-remote --tags https://github.com/actions/upload-artifact refs/tags/v5.0.0
+330a01c490aca151604b8cf639adc76d48f6c5d4   refs/tags/v5.0.0      → exit 0
+
+git ls-remote --tags … 'refs/tags/v5.0.1^{}' / 'refs/tags/v5.0.0^{}' → пусто (теги lightweight,
+указывают точно на коммит; аннотированного объекта-тега нет)
+```
+
+| Action | Ожидание в workflow/config | ls-remote | Совпадение |
+|---|---|---|---|
+| `actions/checkout` v5.0.1 | `93cb6efe18208431cddfb8368fd83d5badbf9bfd` | `93cb6efe18208431cddfb8368fd83d5badbf9bfd` | ✅ точное |
+| `actions/upload-artifact` v5.0.0 | `330a01c490aca151604b8cf639adc76d48f6c5d4` | `330a01c490aca151604b8cf639adc76d48f6c5d4` | ✅ точное |
+
+---
+
+(Разделы 4–6 добавляются последующими коммитами.)
