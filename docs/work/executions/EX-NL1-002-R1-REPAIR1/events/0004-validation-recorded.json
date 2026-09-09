@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-09T13:10:00Z",
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4a1b5d5a8d1b41ef4bd95a68cd33394d5a5055b8",
+  "summary": "Pre-terminal validation полного набора на рабочем дереве HEAD 4a1b5d5a8d1b41ef4bd95a68cd33394d5a5055b8 + Repair Map 1461d6d (docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md): CONTROL_EXPERIMENT validate на всех 4 run-каталогах E1-R1 -> ok=true, errors=[], warnings=[], exit 0 (4/4; до ремонта — AttributeError, exit 1, совпадает с F-1); CONTROL_WORK validate EX-NL1-002-R1-REPAIR1 -> ok=true, errors=[], exit 0 (pre-terminal, has_terminal_handoff=false — ожидаемо); CONTROL_WORK validate EX-NL1-002-R1 -> ok=false, exit 3 — ровно 5 задокументированных остаточных ошибок в неизменяемых опубликованных событиях 0002-0005 (4x сокращённый subject_sha 9cc83e8, полная форма 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f опубликована erratum-ом 0006; terminal-not-last) — execution superseded данным для контрактной валидации (см. REPAIR_MAP_R2_R1.md §5); CONTROL_DEVELOPMENT -CheckConsistency -> ok=true, errors=[], warnings=[], exit 0. Целостность: 16/16 SHA-256+size артефактов совпадают с сырыми git-blob байтами после ремонта (критерий R2 D1); архивы artifacts.manifest.v1-superseded.json 4/4 byte-equal к состоянию до ремонта; диффы событий строго аддитивные (+24 строки, 0 удалений). Научные артефакты, protocol.json, статистика, старые события — без изменений.",
+  "command_refs": [
+    ".\\CONTROL_EXPERIMENT.ps1 validate experiments/evidence/E1/E1-R1/runs/E1-R1-{S001,P001,P002,P003} -> exit 0 (4/4)",
+    ".\\CONTROL_WORK.ps1 validate docs/work/executions/EX-NL1-002-R1-REPAIR1 -> exit 0 (pre-terminal)",
+    ".\\CONTROL_WORK.ps1 validate docs/work/executions/EX-NL1-002-R1 -> exit 3 (5 documented residuals, superseded)",
+    ".\\CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> exit 0",
+    "git cat-file blob HEAD:<artifact> x16 -> SHA-256/size == artifacts.manifest.json (16/16 MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md",
+    "docs/work/executions/EX-NL1-002-R1/events/0006-repair-completed.json",
+    "docs/work/executions/EX-NL1-002-R1-REPAIR1/summary.md"
+  ],
+  "next_action": "IMPLEMENTER: summary.md с literal HEAD-binding, terminal HANDOFF_COMPLETED (последним событием), flip passport -> HANDOFF_READY, финальный validate+close.",
+  "blocker": null
+}
