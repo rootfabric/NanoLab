@@ -28,5 +28,22 @@
     "stop_if_exceeded": true
   },
   "status": "STARTED",
-  "started_at_utc": "2026-09-09T10:40:00Z"
+  "started_at_utc": "2026-09-09T10:40:00Z",
+  "subject_sha": "9cc83e8599c76366a6ba8c5bc49f7398f5fca64f",
+  "claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION_CEILING_NOT_EVALUATED: публикуются только execution facts (IN_BAND относительно upstream-оракула); campaign-level scientific_outcome = NOT_EVALUATED до T2 confirmatory кампании (NL2-002); T1-факт не является acceptance",
+  "model": "oxDNA v3.7 @ pinned upstream 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f); fixture test/DNA/DSDNA8 verbatim (16 nucleotides / 2 molecules); build: WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6, Release, DOUBLE=ON, CUDA=OFF, MPI=OFF, NATIVE=ON (ENGINE_ENVIRONMENT_R1)",
+  "observables": [
+    {
+      "name": "ColumnAverage::energy.dat::2",
+      "definition": "арифметическое среднее колонки 2 energy.dat по всем строкам прогона (analyze_energy.sh, механически)",
+      "reference_oracle": "ColumnAverage::energy.dat::2::-1.37970256144::0.15",
+      "criterion_T1": "|ColumnAvg - (-1.37970256144)| <= 0.15"
+    }
+  ],
+  "stop_conditions": {
+    "budget": "1 core-hour суммарно, локальный CPU только; превышение -> остановка",
+    "technical_failures": ">= 2 технических сбоя на одном этапе -> BLOCKED + repair analysis",
+    "inputs": "недоступность pinned upstream objects -> BLOCKED",
+    "integrity": "NaN/Inf в выходах или несоответствие §5.2 (1001 строка, 10 конфигураций) -> прогон не публикуется как PASS"
+  }
 }
