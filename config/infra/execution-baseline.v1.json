@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "infra_execution_baseline",
+  "revision": "EXECUTION-BASELINE-R1",
+  "canonical_owner": "main",
+  "status": "PROPOSED",
+  "baseline_work_order": "INFRA0-001",
+  "baseline_execution": "EX-INFRA0-001-R1",
+  "base_sha": "57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+  "baseline_doc": "docs/infra/EXECUTION_BASELINE_R1.md",
+  "precedence": "canonical_main_hard_rules > baseline_doc > this_config",
+  "trust_zones": [
+    {"id": "UNTRUSTED", "contains": "public fork and external PR code", "execution": "github_hosted_ephemeral_only"},
+    {"id": "TRUSTED_CONTROL", "contains": "canonical main plus explicit protected dispatch", "execution": "protected_self_hosted_allowed"},
+    {"id": "SCIENTIFIC_ARTIFACTS", "contains": "raw trajectories checkpoints models", "execution": "separate_digest_storage", "store_status": "NOT_DEPLOYED_INFRA4"}
+  ],
+  "routing_invariant": "transition_to_trusted_zone_is_decided_by_code_origin_canonical_main_plus_explicit_protected_dispatch_never_by_pr_authorship_or_content",
+  "runner_classes": [
+    {"id": "H0", "kind": "github_hosted_ephemeral", "labels": ["ubuntu-latest", "ubuntu-24.04"], "status": "AVAILABLE_PLATFORM", "activation": "INFRA1-001"},
+    {"id": "C0", "kind": "self_hosted_cpu", "reserved_label": "nanolab-cpu", "registration_status": "NOT_REGISTERED", "activation": "INFRA2-001", "isolation_target": "non_root_disposable_workspace_no_user_secrets"},
+    {"id": "G0", "kind": "self_hosted_gpu", "reserved_label": "nanolab-gpu", "registration_status": "NOT_REGISTERED", "activation": "INFRA5-001"},
+    {"id": "H1", "kind": "hpc_remote_scheduler", "reserved_label_prefix": "nanolab-hpc-", "registration_status": "NOT_REGISTERED", "activation": "INFRA7-001"}
+  ],
+  "label_rules": [
+    "reserved_self_hosted_labels_allowed_only_in_TR-DISPATCH_workflows",
+    "self_hosted_runner_must_not_carry_standard_hosted_labels",
+    "self_hosted_labels_forbidden_in_runs_on_of_pull_request_pull_request_target_push_schedule_and_tag_workflows"
+  ],
+  "trigger_routes": [
+    {"id": "TR-PR", "events": ["pull_request"], "code_origin": "any_public_pr", "allowed_runner_classes": ["H0"], "self_hosted_allowed": false, "max_resource_class": "RC0_HOSTED_VALIDATION", "token_permissions": {"contents": "read"}, "secrets_available": false, "status": "CONTRACT_BASELINE_R1", "mechanical_enforcement": "INFRA1-002"},
+    {"id": "TR-PUSH-MAIN", "events": ["push"], "refs": ["refs/heads/main"], "code_origin": "canonical_main", "allowed_runner_classes": ["H0"], "self_hosted_allowed": false, "max_resource_class": "RC0_HOSTED_VALIDATION", "token_permissions": {"contents": "read"}, "status": "CONTRACT_BASELINE_R1", "mechanical_enforcement": "INFRA1-001"},
+    {"id": "TR-DISPATCH", "events": ["workflow_dispatch"], "code_origin": "canonical_main_only", "allowed_runner_classes": ["H0", "C0"], "self_hosted_allowed": true, "guards": ["protected_environment_required_reviewers", "subject_sha_required", "work_order_id_required", "resource_budget_required", "fail_closed_on_missing_fields"], "status": "RESERVED_NOT_ACTIVE", "mechanical_enforcement": "INFRA2-002"},
+    {"id": "TR-SCHEDULE", "events": ["schedule"], "code_origin": "canonical_main", "allowed_runner_classes": ["H0"], "self_hosted_allowed": false, "status": "DEFERRED_SEPARATE_REVISION"},
+    {"id": "TR-TAG", "events": ["push_tags"], "code_origin": "canonical_main", "allowed_runner_classes": ["H0"], "self_hosted_allowed": false, "status": "DEFERRED"},
+    {"id": "TR-PRT", "events": ["pull_request_target"], "status": "FORBIDDEN_R1", "reason": "known_secret_leak_and_privileged_untrusted_execution_vector", "lift_condition": "explicit_new_work_order_with_pinned_controls_pattern"},
+    {"id": "TR-WFRUN", "events": ["workflow_run"], "status": "FORBIDDEN_R1", "reason": "untrusted_to_trusted_transit_bridge_forbidden"}
+  ],
+  "github_token_policy": {
+    "repo_default": "READ_ONLY_TARGET_STATE_AT_INFRA1",
+    "per_workflow": "explicit_minimal_permissions_block_required",
+    "pr_route": {"contents": "read", "write_permissions_forbidden": true},
+    "fork_pr_secrets": "NOT_AVAILABLE_INVARIANT_NEVER_BYPASSED",
+    "long_lived_credentials_in_compute_jobs": "FORBIDDEN",
+    "scientific_job_repo_access": "READ_ONLY_PREFERRED",
+    "new_secrets_in_INFRA0-001": "FORBIDDEN_BY_WO_SCOPE"
+  },
+  "resource_classes": [
+    {"id": "RC0_HOSTED_VALIDATION", "runner": "H0", "max_wall_clock_minutes": 15, "purpose": "harness_schema_unit_checks", "status": "CONTRACT", "activation": "INFRA1-001"},
+    {"id": "RC1_HOSTED_EXTENDED", "runner": "H0", "max_wall_clock_minutes": 60, "purpose": "extended_hosted_validation", "must_be_declared": true, "status": "CONTRACT"},
+    {"id": "RC2_TRUSTED_CPU", "runner": "C0", "budget_required_in_dispatch": ["wall_clock", "ram", "disk", "cpu"], "numeric_values": "FIXED_BY_INFRA2_INFRA3_MEASUREMENTS_NOT_GUESSES", "status": "RESERVED_NOT_ACTIVE"},
+    {"id": "RC3_TRUSTED_GPU", "runner": "G0", "requires_fingerprint": ["gpu_model", "gpu_uuid_where_available", "driver", "cuda_runtime_toolkit", "container_runtime", "engine_commit_build_flags"], "status": "FORBIDDEN_UNTIL_INFRA5"}
+  ],
+  "budget_rules": [
+    "unbounded_jobs_forbidden_every_route_needs_wall_clock_timeout_and_stop_conditions",
+    "trusted_job_carries_job_id_work_order_id_subject_sha_budget_command_expected_outputs",
+    "rerun_inherits_budget_increase_requires_new_dispatch_or_human_gate",
+    "paid_compute_forbidden_paid_compute_authorized_false_budget_expansion_is_human_gate",
+    "trusted_compute_respects_parallel_scientific_runtime_limit_1"
+  ],
+  "executor_contract_required_fields": ["job_id", "work_order_id", "subject_sha", "upstream_refs_and_input_sha256", "container_or_environment_revision", "resource_budget", "command", "expected_outputs", "stop_conditions"],
+  "artifact_policy": {
+    "required_provenance_fields": ["sha256", "size_bytes", "producer_run_id", "subject_sha", "storage_location"],
+    "hosted_ci_artifacts_are_scientific_evidence": false,
+    "raw_out_of_git_requires_git_manifest": true,
+    "reuse_requires_digest_and_provenance": true,
+    "rerun_checks_existing_run_or_manifest_before_compute": true,
+    "secrets_in_logs_or_artifacts": "FORBIDDEN",
+    "durable_store": "NOT_DEPLOYED_UNTIL_INFRA4"
+  },
+  "negative_controls": [
+    {"id": "NC-1", "threat": "external_pr_runs_on_personal_machine", "invariant": "no_self_hosted_labels_in_runs_on_of_TR-PR_or_TR-PUSH-MAIN_workflows", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA1-002"},
+    {"id": "NC-2", "threat": "trust_boundary_bypass_via_workflow_chaining", "invariant": "untrusted_code_or_artifacts_never_transit_to_trusted_route_pull_request_target_and_workflow_run_bridges_forbidden", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA1-002"},
+    {"id": "NC-3", "threat": "unaccountable_trusted_execution", "invariant": "TR-DISPATCH_without_subject_sha_work_order_id_and_budget_is_rejected_fail_closed", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA2-002"},
+    {"id": "NC-4", "threat": "privilege_escalation_from_pr_route", "invariant": "pr_route_token_cannot_write_contents_events_releases", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA1-002"},
+    {"id": "NC-5", "threat": "silent_fail_open_to_other_executor", "invariant": "hosted_runner_unavailability_never_falls_back_to_self_hosted_fail_closed", "status": "DOCUMENTED_R1", "mechanical_validation": "REVIEW_AT_INFRA1_INFRA2"},
+    {"id": "NC-6", "threat": "budget_escalation_via_retries", "invariant": "rerun_inherits_budget_increase_requires_new_dispatch_or_gate", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA6"},
+    {"id": "NC-7", "threat": "secret_leak_to_external_pr", "invariant": "fork_pr_has_no_secrets_and_pull_request_target_bypass_is_forbidden", "status": "DOCUMENTED_R1", "mechanical_validation": "INFRA1-002"}
+  ],
+  "explicit_non_goals": [
+    "no_self_hosted_runner_installation_or_registration_INFRA2-001",
+    "no_workflow_files_added_or_activated_INFRA1-001",
+    "no_repository_secrets_or_credentials",
+    "no_automatic_self_hosted_execution_for_public_PR_forbidden_in_principle",
+    "no_artifact_store_INFRA4",
+    "no_gpu_INFRA5_no_scheduler_or_aiida_INFRA6_no_hpc_INFRA7",
+    "no_paid_or_cloud_compute",
+    "no_physical_wet_lab_or_hardware_experiments_CRITICAL_human_gate",
+    "no_scientific_campaigns_E0_to_E6_remain_NOT_RUN",
+    "implementer_does_not_modify_project_infra_state_json_or_project_state_json_director_gate",
+    "implementer_does_not_set_ACCEPTED"
+  ],
+  "hard_rule_bindings": {
+    "PUBLIC_PR_CODE_MUST_NOT_AUTOMATICALLY_RUN_ON_TRUSTED_SELF_HOSTED_SCIENTIFIC_NODES": "TR-PR_HOSTED_ONLY_plus_NC-1_NC-2",
+    "INFRASTRUCTURE_PROVIDES_CAPABILITY_IT_DOES_NOT_DECLARE_SCIENTIFIC_TRUTH": "green_job_is_not_scientific_pass",
+    "RAW_ARTIFACT_REUSE_REQUIRES_DIGEST_AND_PROVENANCE": "artifact_policy.required_provenance_fields"
+  },
+  "next_work_orders": {
+    "INFRA1-001": "Add hosted harness CI on H0 per TR-PR and TR-PUSH-MAIN contracts",
+    "INFRA1-002": "Add PR validation gates and mechanical negative controls NC-1..NC-7",
+    "INFRA2-001": "Bootstrap isolated self-hosted CPU runner",
+    "INFRA2-002": "Harden trusted scientific dispatch validator"
+  },
+  "acceptance_path": "independent_reviewer_then_verifier_then_director_checkpoint_then_human_merge_gate_updates_project_infra_state_json"
+}
