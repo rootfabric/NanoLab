@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-09T07:45:00Z",
+  "execution_id": "EX-NL1-001-R1",
+  "work_order_id": "NL1-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "dd4692d62850ffe897ada99a920b3b4d2e81caa8",
+  "summary": "Этап acquisition+build завершён. oxDNA pinned commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 получен точечным fetch --depth 1 (полный clone упёрся в прокси-таймаут 300 c; объект коммита идентичен, rev-parse подтверждён). Fixture DSDNA8 извлечён сырыми blob'ами в WSL: 4/4 SHA-256 MATCH против пинов E1-PROTO-R1 §2.2. Негативная находка зафиксирована и сохранена: Windows working-tree checkout с core.autocrlf=true искажает байты (4/4 mismatch), PowerShell-пайплайн тоже; канонический путь — git cat-file blob + bash redirect. cmake 3.31.6 user-local (SHA-256 совпадает с официальным checksum Kitware), сборка CPU Release в WSL Ubuntu 24.04.2 (gcc 13.3.0): CONFIGURE_EXIT=0, BUILD_EXIT=0, 14.1 s wall, бинари oxDNA/DNAnalysis/confGenerator с записанными SHA-256. Бинари и исходники остаются в disposable scratch, в Git не вендорятся.",
+  "command_refs": [
+    "git fetch --depth 1 origin 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 -> FETCH_HEAD; checkout --detach -> HEAD = 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "git ls-tree 00dc7fb9 -- <4 fixture paths> -> blob SHA-1 4/4 = пины E1-PROTO-R1 §2.2",
+    "wsl bash: git cat-file blob <sha> > fixture/<name>; sha256sum -> 4/4 MATCH (148/4498/533/51 B)",
+    "curl.exe cmake-3.31.6-linux-x86_64.tar.gz -> sha256 5a1133ff...67bf = официальный checksum Kitware",
+    "cmake ../oxdna-src -DCMAKE_BUILD_TYPE=Release -DCUDA=OFF -DMPI=OFF -> CONFIGURE_EXIT=0",
+    "make -j20 -> BUILD_EXIT=0; sha256sum bin/* -> oxDNA 73b6cfb0..., DNAnalysis f5fc9da2..., confGenerator b4d420e1..."
+  ],
+  "evidence_refs": [
+    "docs/research/ENGINE_ENVIRONMENT_R1.md §1-§5",
+    "docs/evidence/NL1-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "IMPLEMENTER: выполнить технический smoke go/no-go на сокращённом steps-входе, записать measured resources и effective defaults.",
+  "blocker": null
+}

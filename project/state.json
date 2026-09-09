@@ -3,19 +3,20 @@
   "kind": "project_state",
   "foundation": "DOCUMENTED",
   "frontier": "NL1",
-  "next_work_order": "NL1-001",
+  "next_work_order": "NL1-002",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
-    "NL0-003"
+    "NL0-003",
+    "NL1-001"
   ],
   "active_tasks": [],
   "task_status": {
     "NL0-001": "ACCEPTED",
     "NL0-002": "ACCEPTED",
     "NL0-003": "ACCEPTED",
-    "NL1-001": "READY",
-    "NL1-002": "PLANNED",
+    "NL1-001": "ACCEPTED",
+    "NL1-002": "READY",
     "NL2-001": "PLANNED",
     "NL2-002": "PLANNED",
     "NL2-003": "PLANNED",
@@ -61,7 +62,6 @@
     "NanoLab code/documentation/data license choice (owner decision)",
     "E2 DNA-hinge-simulations explicit license/permission or replacement seed",
     "Policy for durable private caching of UNKNOWN-rights files",
-    "Pinned engine environment and model version",
     "Preregistered E2 numerical and statistical tolerances and target hinge-angle interval (fixed in E2-PROTO after pilot, before the NL3 campaign); E1 tolerances preregistered in E1-PROTO-R1, 298 K vs 300 K resolved by the E2-SETUP-R1 decision rule",
     "Measured resource budget"
   ],

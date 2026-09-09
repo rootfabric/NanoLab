@@ -99,3 +99,17 @@ Checkpoint proposal: `ebafd1e4` (ветка `control/nl0-003-director-checkpoint
 Director decision: `NL0-003 = ACCEPTED`; `NL0 = ACCEPTED` (checkpoint-catalog: references ✓, access/rights ✓, preregistered E1 scope + E2 постановка ✓); frontier → `NL1`; `NL1-001 = READY`, scheduler priority. `E0–E6` остаются `NOT_RUN`, `physics_runs = 0`. Полный acceptance record: `docs/evidence/NL0-003/DIRECTOR_ACCEPTANCE_R1.md`.
 
 Следующее действие: `NL1-001 — pin environment and upstream smoke`; владельцу: права `DNA-hinge-simulations` (контакт авторов) и лицензия NanoLab остаются открытыми owner decisions.
+
+## 2026-09-09 — NL1-001 (EX-NL1-001-R1) — environment pin + upstream smoke, IMPLEMENTER handoff
+
+Mission владельца: «выполняй NL1» (главный агент сессии DSH harness). Base = 57c1e63733ea3b10f991c0f9609c426dc75b17a5 (fresh origin/main), ветка work/nl1-001-env-pin-smoke-r1, START dd4692d.
+
+Опубликован environment pin ENGINE_ENVIRONMENT_R1: WSL2 Ubuntu 24.04.2 (gcc 13.3.0, cmake 3.31.6 user-local с проверкой SHA-256 против Kitware, без sudo и без глобальных изменений системы); oxDNA собран из pinned upstream commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (CPU Release, DOUBLE=ON, CUDA/MPI=OFF; build 14.1 s; SHA-256 бинарей записаны). Fixture DSDNA8 верифицирован 4/4 SHA-256 против пинов E1-PROTO-R1 §2.2 через сырые blob'ы. Негативная находка сохранена: Windows working-tree checkout с core.autocrlf=true искажает fixture-байты (4/4 mismatch; PowerShell-пайплайн тоже) — канонический путь для всех будущих прогонов: git cat-file blob + bash redirect в Linux.
+
+Upstream smoke EX-NL1-001-SMOKE-001 (вход с сокращённым steps=1e4, не E1-прогон): COMPLETED, exit 0, wall 0.13 s, max RSS 6424 KB, 0.0100 ms/step, NaN/Inf=0, «everything went OK». Effective defaults закрыты из лога/исходников pinned commit: interaction_type=dna (default, average-режим, seq-файл не загружен), john = alias BrownianThermostat (pt=0.019929118, pr=0.006687465), T 20C → 0.097717, salt NOT_APPLICABLE, seed случайный; колонка 2 energy.dat = потенциальная энергия на нуклеотид (PotentialEnergy.cpp: energy /= N) — ASSUMED §5.1 → OBSERVED-in-source. Verbatim 1e6-step прогон НЕ выполнялся (запрет E1-PROTO-R1 §7). Claim C0, научные утверждения отсутствуют. Planning-оценка бюджета E1: ~10–15 c/прогон на ядро.
+
+Handoff: независимый REVIEWER → независимый VERIFIER → Director checkpoint → PR (merge — Human Gate).
+
+Director decision (2026-09-09): NL1-001 = ACCEPTED. Основание: EX-NL1-001-R1 (environment pin ENGINE_ENVIRONMENT_R1: oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6 user-local; fixture 4/4 SHA-256; smoke EX-NL1-001-SMOKE-001 COMPLETED exit 0, 0.13 s / 6424 KB, NaN/Inf=0) + независимые REVIEWER PASS (737b3eb) и VERIFIER PASS (ea486e2) на exact subject 39b3448. Findings MINOR исправлены (d81bf63: байт-починка SESSION_LOG после PowerShell-escaping и erratum формулировки smoke-отклонений; 462050f: passport HANDOFF_READY). Claim C0_SOFTWARE_ONLY; E0-E6 остаются NOT_RUN, physics_runs = 0. UNKNOWN E1-PROTO-R1 SS11.1-3 закрыты (effective defaults; колонка 2 = U/N). Verbatim-прогоны E1 разблокированы. Полный acceptance record: docs/evidence/NL1-001/DIRECTOR_ACCEPTANCE_R1.md.
+
+Следующее действие: NL1-002 - первый вертикальный E1 путь (T1 verbatim + 3 PILOT + анализ + архив + freeze R_confirm в E1-PROTO-R2); merge - Human Gate (авторизация владельца запрашивается отдельно после review NL1-002).

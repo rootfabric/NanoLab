@@ -3,7 +3,7 @@
   "revision": "NL-H0-2026-09-08-R1",
   "canonical_source": "project/state.json",
   "current_checkpoint": "NL1",
-  "next_work_order": "NL1-001",
+  "next_work_order": "NL1-002",
   "parallel_scientific_runtime_limit": 1,
-  "notes": "NL0 accepted in full: NL0-001 (references), NL0-002 (rights/licensing), NL0-003 (E1-PROTO-R1 preregistration + E2-SETUP-R1 setup) with fresh Reviewer/Verifier PASS and owner-authorized merge of PR #21. NL1-001 (pin environment and upstream smoke) is scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
+  "notes": "NL1-001 ACCEPTED (environment pin ENGINE_ENVIRONMENT_R1 + upstream smoke EX-NL1-001-SMOKE-001, fresh Reviewer/Verifier PASS, owner-authorized merge). NL1-002 (first vertical E1 path per E1-PROTO-R1: T1 verbatim + 3 PILOT + analysis + archive + R_confirm freeze) is scheduler priority. Verbatim E1 runs are now unblocked; E1 acceptance remains NL2-002. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
 }
