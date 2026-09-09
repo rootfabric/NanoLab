@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-implementation-committed",
+  "timestamp_utc": "2026-09-09T12:55:00Z",
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f78a182ebc3167a0a8b99d2d3f248b4188263fed",
+  "summary": "Erratum F-2/F-3 закоммичен: f78a182ebc3167a0a8b99d2d3f248b4188263fed — новый event 0006-repair-completed (CONTINUATION_CHECKPOINT) в docs/work/executions/EX-NL1-002-R1/events с полной 40-hex формой subject_sha 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f (erratum для сокращённой формы 9cc83e8 в событиях 0002-0005; старые события не редактировались) и признанием отклонения terminal-last (0004-handoff-completed остаётся последним TERMINAL-событием; 0005/0006 — post-handoff checkpoints по паттерну corrections-new-event). Остаточное механическое отклонение CONTROL_WORK validate для EX-NL1-002-R1 (4x invalid subject_sha в неизменяемых старых событиях + terminal-not-last) документируется в Repair Map как superseded данным execution: контракт-чистая последовательность публикации событий — здесь, в EX-NL1-002-R1-REPAIR1 (терминальное событие будет последним, все subject_sha полные 40-hex). События EX-NL1-002-R1 0001-0005 и его summary не изменялись. Следующий шаг: REPAIR_MAP_R2_R1.md с полными результатами обоих валидаторов.",
+  "command_refs": [
+    "git commit f78a182ebc3167a0a8b99d2d3f248b4188263fed 'work(NL1-002): erratum event 0006-repair-completed in EX-NL1-002-R1 (R2 F-2/F-3)'"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL1-002-R1/events/0006-repair-completed.json",
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: полный прогон валидаторов на рабочем дереве, публикация REPAIR_MAP_R2_R1.md, validation event, terminal handoff.",
+  "blocker": null
+}

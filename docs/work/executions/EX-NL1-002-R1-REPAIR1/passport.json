@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "checkpoint": "NL1",
+  "base_sha": "ec7e3edc83a3434d96222a0a8a94b03f7fa10e23",
+  "branch": "work/nl1-002-reference-run-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION_CEILING_NOT_EVALUATED",
+  "repair_of": "EX-NL1-002-R1",
+  "verdict_repaired": "FIX_REQUIRED (VERIFIER R2, verify/nl1-002-reference-run-r2 @ 149feda3fe16ce63afaecf52a4d4b8ae83325dd7, superseding R1 verdicts)",
+  "allowed_paths": [
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md",
+    "docs/work/executions/EX-NL1-002-R1-REPAIR1/**",
+    "docs/work/executions/EX-NL1-002-R1/events/0006-repair-completed.json",
+    "experiments/evidence/E1/E1-R1/**"
+  ],
+  "started_at_utc": "2026-09-09T12:05:00Z",
+  "status": "IN_PROGRESS"
+}

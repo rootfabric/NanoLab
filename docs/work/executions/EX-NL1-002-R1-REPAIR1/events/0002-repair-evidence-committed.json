@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-repair-evidence-committed",
+  "timestamp_utc": "2026-09-09T12:40:00Z",
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6b6dab46c6020632ed6751767c1dfbd03aa1624e",
+  "summary": "F-1 контрактный ремонт экспериментального пакета E1-R1 закоммичен: ac5c6cbe761532918dd3f43f5722fa6996d55910 (run-манифесты) + 6b6dab46c6020632ed6751767c1dfbd03aa1624e (события). artifacts.manifest.json во всех 4 run-каталогах приведён к контрактной форме-массиву (name/sha256/size_bytes/producer_run_id/subject_sha/storage_location/producer_command) по artifact-manifest.schema.v1.json; исходные объектные формы сохранены бит-в-бит как artifacts.manifest.v1-superseded.json (4/4 byte-equal к blob до ремонта); все sha256/size_bytes сохранены 1:1 (программная проверка). manifest.json дополнены контрактными полями (subject_sha, claim_ceiling, model, observables, stop_conditions; resource_budget на пилотах) — строго аддитивно. События 0001-0003 всех прогонов дополнены experiment_id/subject_sha (+2 строки x 12 файлов, 0 удалений). В каждом run-каталоге опубликован новый event 0004-repair-manifest-contract (RUN_CHECKPOINT). Результат: CONTROL_EXPERIMENT validate x4 -> ok=true, warnings=[], exit 0 (до ремонта: AttributeError 'str' object has no attribute 'get', exit 1 на всех 4).",
+  "command_refs": [
+    "git commit ac5c6cbe761532918dd3f43f5722fa6996d55910 'experiment(E1): complete run manifests to machine contract (R2 F-1)'",
+    "git commit 6b6dab46c6020632ed6751767c1dfbd03aa1624e 'experiment(E1): annotate run events with contract identifiers (R2 F-1)'",
+    "CONTROL_EXPERIMENT.ps1 validate experiments/evidence/E1/E1-R1/runs/E1-R1-{S001,P001,P002,P003} -> ok=true, exit 0 (4/4)"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts.manifest.v1-superseded.json",
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/events/0004-repair-manifest-contract.json",
+    "config/control/harness/artifact-manifest.schema.v1.json",
+    "config/control/harness/experiment-event.schema.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: erratum 0006-repair-completed в EX-NL1-002-R1, затем Repair Map и валидация.",
+  "blocker": null
+}
