@@ -1,14 +1,18 @@
-"""Corrections-aware work-event validator tests (INFRA1-002).
+"""Corrections-aware work-event validator tests (INFRA1-002, incl. repair R1).
 
 Acceptance targets:
 - legacy case EX-NL1-002-R1: 5 residual errors must become OK;
 - negative: a post-terminal event without the corrections marker must FAIL;
-- terminal-last stays enforced for the normal (non-corrections) flow.
+- terminal-last stays enforced for the normal (non-corrections) flow;
+- repair R1 (MINOR-2): abbreviated subject_sha only for whitelisted legacy events;
+- repair R1 (MINOR-3): corrections timestamp >= terminal timestamp;
+  REVIEW_CORRECTIONS must not be authored by IMPLEMENTER.
 
 Run: python -m unittest discover -s tests -t .
 """
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 import unittest
@@ -22,18 +26,18 @@ from harness.work_cli import inspect_execution  # noqa: E402
 
 FULL_SHA = "0123456789abcdef0123456789abcdef01234567"
 FULL_SHA_B = "fedcba9876543210fedcba9876543210fedcba98"
-ABBR_SHA = "9cc83e8"
+LEGACY_SHA = "9cc83e8"
 EXECUTION_ID = "EX-TEST-R1"
 WORK_ORDER_ID = "INFRA1-002"
 
 
-def event(event_id: str, event_type: str, *, subject_sha: str = FULL_SHA, timestamp: str = "2026-09-09T13:00:00Z", actor_role: str = "IMPLEMENTER", **extra: Any) -> dict[str, Any]:
+def event(event_id: str, event_type: str, *, subject_sha: str = FULL_SHA, timestamp: str = "2026-09-09T13:00:00Z", actor_role: str = "IMPLEMENTER", execution_id: str = EXECUTION_ID, work_order_id: str = WORK_ORDER_ID, **extra: Any) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "schema_version": 1,
         "event_id": event_id,
         "timestamp_utc": timestamp,
-        "execution_id": EXECUTION_ID,
-        "work_order_id": WORK_ORDER_ID,
+        "execution_id": execution_id,
+        "work_order_id": work_order_id,
         "event_type": event_type,
         "actor_role": actor_role,
         "subject_sha": subject_sha,
@@ -44,13 +48,13 @@ def event(event_id: str, event_type: str, *, subject_sha: str = FULL_SHA, timest
     return payload
 
 
-def build_execution(events: list[dict[str, Any]], with_summary: bool = True) -> Path:
-    root = Path(tempfile.mkdtemp()) / "EX-TEST-R1"
+def build_execution(events: list[dict[str, Any]], with_summary: bool = True, execution_id: str = EXECUTION_ID, work_order_id: str = WORK_ORDER_ID) -> Path:
+    root = Path(tempfile.mkdtemp()) / execution_id
     (root / "events").mkdir(parents=True)
     passport = {
         "schema_version": 1,
-        "execution_id": EXECUTION_ID,
-        "work_order_id": WORK_ORDER_ID,
+        "execution_id": execution_id,
+        "work_order_id": work_order_id,
         "checkpoint": "INFRA1",
         "base_sha": FULL_SHA,
         "branch": "infra/test-r1",
@@ -60,17 +64,17 @@ def build_execution(events: list[dict[str, Any]], with_summary: bool = True) -> 
         "started_at_utc": "2026-09-09T12:00:00Z",
         "status": "IN_PROGRESS",
     }
-    (root / "passport.json").write_text(__import__("json").dumps(passport, indent=2) + "\n", encoding="utf-8")
+    (root / "passport.json").write_text(json.dumps(passport, indent=2) + "\n", encoding="utf-8")
     for item in events:
         target = root / "events" / f"{item['event_id']}.json"
-        target.write_text(__import__("json").dumps(item, indent=2) + "\n", encoding="utf-8")
+        target.write_text(json.dumps(item, indent=2) + "\n", encoding="utf-8")
     if with_summary:
         (root / "summary.md").write_text("test summary\n", encoding="utf-8")
     return root
 
 
-def validate(events: list[dict[str, Any]]) -> dict[str, Any]:
-    return inspect_execution(build_execution(events))
+def validate(events: list[dict[str, Any]], **kwargs: Any) -> dict[str, Any]:
+    return inspect_execution(build_execution(events, **kwargs))
 
 
 class TerminalLastNormalFlowTests(unittest.TestCase):
@@ -108,7 +112,7 @@ class PostTerminalCorrectionsTests(unittest.TestCase):
         result = validate([
             event("0001-work-order-started", "WORK_ORDER_STARTED"),
             event("0002-handoff-completed", "HANDOFF_COMPLETED"),
-            event("0003-review-corrections", "REVIEW_CORRECTIONS", subject_sha=FULL_SHA_B),
+            event("0003-review-corrections", "REVIEW_CORRECTIONS", subject_sha=FULL_SHA_B, actor_role="REVIEWER"),
         ])
         self.assertTrue(result["ok"], result["errors"])
 
@@ -125,7 +129,7 @@ class PostTerminalCorrectionsTests(unittest.TestCase):
     def test_review_corrections_before_terminal_fails(self) -> None:
         result = validate([
             event("0001-work-order-started", "WORK_ORDER_STARTED"),
-            event("0002-review-corrections", "REVIEW_CORRECTIONS"),
+            event("0002-review-corrections", "REVIEW_CORRECTIONS", actor_role="REVIEWER"),
             event("0003-handoff-completed", "HANDOFF_COMPLETED"),
         ])
         self.assertFalse(result["ok"])
@@ -166,22 +170,126 @@ class CorrectionsSemanticValidityTests(unittest.TestCase):
             event("0001-work-order-started", "WORK_ORDER_STARTED"),
             event("0002-handoff-completed", "HANDOFF_COMPLETED"),
             event("0003-review-corrections", "CONTINUATION_CHECKPOINT", subject_sha=FULL_SHA_B, timestamp="2026-09-09T14:00:00Z"),
-            event("0004-review-corrections-2", "REVIEW_CORRECTIONS", timestamp="2026-09-09T13:30:00Z"),
+            event("0004-review-corrections-2", "REVIEW_CORRECTIONS", timestamp="2026-09-09T13:30:00Z", actor_role="REVIEWER"),
         ])
         self.assertFalse(result["ok"])
         self.assertTrue(any("non-decreasing" in item for item in result["errors"]), result["errors"])
 
-    def test_subject_sha_format_bounds(self) -> None:
-        self.assertTrue(validate([
-            event("0001-work-order-started", "WORK_ORDER_STARTED"),
-            event("0002-implementation-committed", "IMPLEMENTATION_COMMITTED", subject_sha=ABBR_SHA),
-        ])["ok"])
+
+class SubjectShaLegacyScopeTests(unittest.TestCase):
+    """MINOR-2 repair: abbreviated SHAs are reserved for whitelisted legacy events."""
+
+    def test_new_event_with_arbitrary_abbreviated_sha_fails(self) -> None:
         result = validate([
             event("0001-work-order-started", "WORK_ORDER_STARTED"),
-            event("0002-implementation-committed", "IMPLEMENTATION_COMMITTED", subject_sha="9cc83"),
+            event("0002-implementation-committed", "IMPLEMENTATION_COMMITTED", subject_sha="abc1234"),
         ])
         self.assertFalse(result["ok"])
         self.assertTrue(any("invalid subject_sha" in item for item in result["errors"]), result["errors"])
+
+    def test_new_event_with_8_to_39_hex_sha_fails(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0002-implementation-committed", "IMPLEMENTATION_COMMITTED", subject_sha="abc1234a"),
+        ])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("invalid subject_sha" in item for item in result["errors"]), result["errors"])
+
+    def test_legacy_whitelisted_event_still_accepts_abbreviated_sha(self) -> None:
+        result = validate(
+            [
+                event("0001-work-order-started", "WORK_ORDER_STARTED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002"),
+                event("0002-handoff-completed", "HANDOFF_COMPLETED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002"),
+                event("0005-resource-evidence-committed", "CONTINUATION_CHECKPOINT", subject_sha=LEGACY_SHA, execution_id="EX-NL1-002-R1", work_order_id="NL1-002"),
+            ],
+            execution_id="EX-NL1-002-R1",
+            work_order_id="NL1-002",
+        )
+        self.assertTrue(result["ok"], result["errors"])
+
+    def test_legacy_value_reused_by_other_execution_fails(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0002-implementation-committed", "IMPLEMENTATION_COMMITTED", subject_sha=LEGACY_SHA),
+        ])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("invalid subject_sha" in item for item in result["errors"]), result["errors"])
+
+    def test_legacy_event_id_in_other_execution_fails(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0005-resource-evidence-committed", "CONTINUATION_CHECKPOINT", subject_sha=LEGACY_SHA, timestamp="2026-09-09T13:30:00Z"),
+            event("0006-handoff-completed", "HANDOFF_COMPLETED", timestamp="2026-09-09T14:00:00Z"),
+        ])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("invalid subject_sha" in item for item in result["errors"]), result["errors"])
+
+
+class CorrectionsTimestampVsTerminalTests(unittest.TestCase):
+    """MINOR-3 repair: corrections timestamps must not precede the terminal event."""
+
+    def test_corrections_before_terminal_timestamp_fails(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0002-handoff-completed", "HANDOFF_COMPLETED", timestamp="2026-09-09T14:00:00Z"),
+            event("0003-review-corrections", "CONTINUATION_CHECKPOINT", subject_sha=FULL_SHA_B, timestamp="2026-09-09T13:00:00Z"),
+        ])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any(">= terminal event timestamp" in item for item in result["errors"]), result["errors"])
+
+    def test_corrections_at_or_after_terminal_timestamp_passes(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED", timestamp="2026-09-09T12:00:00Z"),
+            event("0002-handoff-completed", "HANDOFF_COMPLETED", timestamp="2026-09-09T14:00:00Z"),
+            event("0003-review-corrections", "CONTINUATION_CHECKPOINT", subject_sha=FULL_SHA_B, timestamp="2026-09-09T14:00:00Z"),
+        ])
+        self.assertTrue(result["ok"], result["errors"])
+
+    def test_legacy_exempt_event_may_precede_terminal_timestamp(self) -> None:
+        result = validate(
+            [
+                event("0001-work-order-started", "WORK_ORDER_STARTED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T10:00:00Z"),
+                event("0004-handoff-completed", "HANDOFF_COMPLETED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T11:30:00Z"),
+                event("0005-resource-evidence-committed", "CONTINUATION_CHECKPOINT", subject_sha=LEGACY_SHA, execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T11:16:30Z"),
+            ],
+            execution_id="EX-NL1-002-R1",
+            work_order_id="NL1-002",
+        )
+        self.assertTrue(result["ok"], result["errors"])
+
+    def test_non_exempt_new_event_in_legacy_execution_still_fails(self) -> None:
+        result = validate(
+            [
+                event("0001-work-order-started", "WORK_ORDER_STARTED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T10:00:00Z"),
+                event("0004-handoff-completed", "HANDOFF_COMPLETED", execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T11:30:00Z"),
+                event("0005-some-new-correction", "CONTINUATION_CHECKPOINT", subject_sha=FULL_SHA_B, execution_id="EX-NL1-002-R1", work_order_id="NL1-002", timestamp="2026-09-09T11:16:30Z"),
+            ],
+            execution_id="EX-NL1-002-R1",
+            work_order_id="NL1-002",
+        )
+        self.assertFalse(result["ok"])
+        self.assertTrue(any(">= terminal event timestamp" in item for item in result["errors"]), result["errors"])
+
+
+class ReviewCorrectionsRoleTests(unittest.TestCase):
+    """MINOR-3 repair: REVIEW_CORRECTIONS is reserved for review authority."""
+
+    def test_review_corrections_from_implementer_fails(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0002-handoff-completed", "HANDOFF_COMPLETED"),
+            event("0003-review-corrections", "REVIEW_CORRECTIONS", subject_sha=FULL_SHA_B, actor_role="IMPLEMENTER"),
+        ])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("REVIEWER, VERIFIER or DIRECTOR" in item for item in result["errors"]), result["errors"])
+
+    def test_review_corrections_from_verifier_passes(self) -> None:
+        result = validate([
+            event("0001-work-order-started", "WORK_ORDER_STARTED"),
+            event("0002-handoff-completed", "HANDOFF_COMPLETED"),
+            event("0003-review-corrections", "REVIEW_CORRECTIONS", subject_sha=FULL_SHA_B, actor_role="VERIFIER"),
+        ])
+        self.assertTrue(result["ok"], result["errors"])
 
 
 class LegacyCanonicalCasesTests(unittest.TestCase):
