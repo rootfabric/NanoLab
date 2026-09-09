@@ -40,7 +40,8 @@ import sys
 from pathlib import Path
 
 CAMPAIGN_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = CAMPAIGN_DIR.parents[2]
+# repo root = worktree root: <root>/experiments/evidence/E0/<campaign>/tools/<this file>
+REPO_ROOT = CAMPAIGN_DIR.parents[3]
 SCRATCH_ROOT = Path(r"C:\NanoLab\scratch\nl2-001")
 RUNS_DIR = CAMPAIGN_DIR / "runs"
 SCHEMA_DIR = REPO_ROOT / "config" / "control" / "harness"
@@ -460,19 +461,50 @@ NOT_SUPPORTED означает, что валидатор пропустил н�
 
 
 def main() -> int:
+    global RUNS_DIR
     parser = argparse.ArgumentParser()
     parser.add_argument("--subject", required=True, help="40-hex freeze-commit sha (campaign subject)")
     parser.add_argument("--only", help="execute a single case by run_id (diagnostics only)")
     parser.add_argument("--skip-tier2", action="store_true", help="skip non-gating pinned-source fetch for U001")
+    parser.add_argument("--protocol", default=str(CAMPAIGN_DIR / "protocol.json"), help="protocol.json path (defaults to this campaign dir)")
+    parser.add_argument("--digests", default=str(CAMPAIGN_DIR / "input_digests.json"), help="input_digests.json path")
+    parser.add_argument("--runs-dir", default=str(RUNS_DIR), help="runs output directory")
+    parser.add_argument(
+        "--record-failed-protocol",
+        help="do not execute: emit RUN_FAILED_TECHNICAL records for every case of the given protocol "
+        "(campaign-execution repair path; used to close the E0-R1 attempt after the emit-path bug)",
+    )
+    parser.add_argument("--failure-cause", default=None, help="recorded cause for --record-failed-protocol")
     args = parser.parse_args()
 
-    protocol = load_json(CAMPAIGN_DIR / "protocol.json")
-    digests = {e["path"]: e for e in load_json(CAMPAIGN_DIR / "input_digests.json")["files"]}
+    RUNS_DIR = Path(args.runs_dir)
+
+    protocol = load_json(Path(args.protocol))
+    digests = {e["path"]: e for e in load_json(Path(args.digests))["files"]}
     if len(args.subject) != 40:
         print("subject must be 40 hex chars", file=sys.stderr)
         return 2
 
     cases = protocol["cases"]
+    if args.record_failed_protocol:
+        cause = args.failure_cause or (
+            "campaign-execution infrastructure failure: runner emit path crashed before any result could be persisted; no scientific evaluation performed"
+        )
+        for case in cases:
+            result = {
+                "command": {"argv": [case["command"]], "exit_code": None, "stdout": "", "stderr": cause, "duration_seconds": None},
+                "observed": {"technical_failure": cause},
+                "scientific": "NOT_EVALUATED",
+                "extra_artifacts": {},
+            }
+            try:
+                emit_run(case, args.subject, result, cause)
+                print(f"{case['run_id']}: RUN_FAILED_TECHNICAL recorded")
+            except Exception as exc:  # noqa: BLE001
+                print(f"{case['run_id']}: record failure {type(exc).__name__}: {exc}", file=sys.stderr)
+                return 3
+        return 0
+
     if args.only:
         cases = [c for c in cases if c["run_id"] == args.only]
     if not cases:

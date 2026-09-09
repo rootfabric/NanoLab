@@ -25,7 +25,7 @@ import sys
 from pathlib import Path
 
 CAMPAIGN_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = CAMPAIGN_DIR.parents[2]
+REPO_ROOT = CAMPAIGN_DIR.parents[3]
 
 SYNTHETIC_STAMP = {
     "kind": "SYNTHETIC_TEST_GEOMETRY",
@@ -338,9 +338,11 @@ def mode_fixtures() -> None:
         print(f"wrote {rel} ({len(blob)} B)")
 
 
-def mode_digests(rev: str) -> None:
+def mode_digests(rev: str, out_path: Path, extra_files: list[str]) -> None:
     entries = []
     for rel in INSTRUMENT_FILES:
+        entries.append(git_blob_digest(REPO_ROOT, rev, rel))
+    for rel in extra_files:
         entries.append(git_blob_digest(REPO_ROOT, rev, rel))
     for rel in sorted(fixture_specs()):
         blob = (CAMPAIGN_DIR / rel).read_bytes()
@@ -352,21 +354,25 @@ def mode_digests(rev: str) -> None:
         "digest_rev": rev,
         "files": entries,
     }
-    write_json(CAMPAIGN_DIR / "input_digests.json", payload)
-    print(f"wrote input_digests.json ({len(entries)} entries, rev {rev})")
+    write_json(out_path, payload)
+    print(f"wrote {out_path} ({len(entries)} entries, rev {rev})")
 
 
-def mode_scaffolds(subject: str) -> None:
+def mode_scaffolds(subject: str, runs_dir: Path) -> None:
     protocol = json.loads((CAMPAIGN_DIR / "protocol.json").read_text(encoding="utf-8"))
+    campaign_id = protocol["campaign_id"]
+    protocol_revision = protocol["protocol_revision"]
+    work_order_id = protocol["work_order_id"]
     for case in protocol["cases"]:
         run_id = case["run_id"]
+        digests_path = runs_dir.parent / "input_digests.json"
         manifest = {
             "schema_version": 1,
             "experiment_id": "E0",
-            "campaign_id": "E0-R1",
+            "campaign_id": campaign_id,
             "run_id": run_id,
-            "work_order_id": "NL2-001",
-            "protocol_revision": "E0-PROTO-R1",
+            "work_order_id": work_order_id,
+            "protocol_revision": protocol_revision,
             "subject_sha": subject,
             "claim_ceiling": "C0_SOFTWARE_ONLY",
             "model": {
@@ -376,13 +382,13 @@ def mode_scaffolds(subject: str) -> None:
             "inputs": [
                 {
                     "name": "instrument_bundle",
-                    "ref": "experiments/evidence/E0/E0-R1/input_digests.json",
+                    "ref": str(runs_dir.parent.relative_to(REPO_ROOT) / "input_digests.json").replace("\\", "/"),
                     "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha",
                 }
             ]
             + [
                 {"name": entry["path"], "role": "fixture input", "sha256": entry["sha256"], "size_bytes": entry["size_bytes"]}
-                for entry in json.loads((CAMPAIGN_DIR / "input_digests.json").read_text(encoding="utf-8"))["files"]
+                for entry in json.loads(digests_path.read_text(encoding="utf-8"))["files"]
                 if entry["path"] in set(case.get("input_refs", []))
             ],
             "observables": [
@@ -407,13 +413,13 @@ def mode_scaffolds(subject: str) -> None:
             ],
             "status": "STARTED",
         }
-        write_json(CAMPAIGN_DIR / "runs" / run_id / "manifest.json", manifest)
+        write_json(runs_dir / run_id / "manifest.json", manifest)
         started_event = {
             "schema_version": 1,
             "event_id": "0001-started",
             "timestamp_utc": case["frozen_at_utc"],
             "experiment_id": "E0",
-            "campaign_id": "E0-R1",
+            "campaign_id": campaign_id,
             "run_id": run_id,
             "event_type": "RUN_STARTED",
             "actor_role": "IMPLEMENTER",
@@ -429,7 +435,7 @@ def mode_scaffolds(subject: str) -> None:
             "resource_usage": {},
             "scientific_outcome": None,
         }
-        write_json(CAMPAIGN_DIR / "runs" / run_id / "events" / "0001-started.json", started_event)
+        write_json(runs_dir / run_id / "events" / "0001-started.json", started_event)
         print(f"scaffolded {run_id}")
 
 
@@ -437,17 +443,20 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=["fixtures", "digests", "scaffolds"])
     parser.add_argument("--rev", default="HEAD", help="git rev for instrument blob digests (mode=digests)")
+    parser.add_argument("--out", help="output path for input_digests.json (mode=digests)")
+    parser.add_argument("--extra", nargs="*", default=[], help="extra repo-relative files to digest (mode=digests)")
     parser.add_argument("--subject", help="40-hex campaign subject sha (mode=scaffolds)")
+    parser.add_argument("--runs-dir", help="runs output directory (mode=scaffolds)")
     args = parser.parse_args()
     if args.mode == "fixtures":
         mode_fixtures()
     elif args.mode == "digests":
-        mode_digests(args.rev)
+        mode_digests(args.rev, Path(args.out), list(args.extra))
     else:
-        if not args.subject:
-            print("--subject is required for scaffolds", file=sys.stderr)
+        if not args.subject or not args.runs_dir:
+            print("--subject and --runs-dir are required for scaffolds", file=sys.stderr)
             return 2
-        mode_scaffolds(args.subject)
+        mode_scaffolds(args.subject, Path(args.runs_dir))
     return 0
 
 
