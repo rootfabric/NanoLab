@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-erratum-f1-manifest-digests",
+  "timestamp_utc": "2026-09-09T14:29:13Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1",
+  "event_type": "RUN_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5a151f751f7d60c1902e43fa503efd9a6037b236",
+  "summary": "Campaign-level erratum (REVIEWER VERDICT FIX_REQUIRED F1, review/nl2-001-contracts-e0-r1 @ 2c3b485): vo vseh 18 run-katalogah E0-R1 zapis case_record.json v artifacts.manifest.json soderzhala digest/size predyduschej versii faila (emit_run serializoval manifest DO finalnoj perezapisi case_record, dobavlyayuschej schema_validation[artifacts.manifest.json]; +35 bajt v Git). Remont: v kazhdom run-kataloge ishodnyj artifacts.manifest.json sohranyon byte-equal kak artifacts.manifest.v1-superseded.json, kanonicheskij artifacts.manifest.json perepisan s pereschitannymi sha256/size_bytes (18/18 ispravleno tolko case_record.json; ostalnye zapisi sovpali). Soderzhanie case_record/sobytiya/nauchnye ishody NE izmeneny (pre-image vosproizvedyon 73/73 po liniyu, sm. REPAIR_MAP_F1_R1). Run IDs ne ispolzovalis povtorno; novyh pragonov net.",
+  "command_refs": [
+    "python (repair): per-run copy artifacts.manifest.json -> artifacts.manifest.v1-superseded.json (byte-equal); recompute sha256/size_bytes from artifacts/* bytes; rewrite canonical artifacts.manifest.json",
+    "python -m harness.experiment_cli validate <run-dir> -> 18/18 ok=true (posle remonta)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md",
+    "experiments/evidence/E0/E0-R1/runs/E0-R1-N001/artifacts.manifest.v1-superseded.json",
+    "experiments/evidence/E0/E0-R1/runs/E0-R1-N001/artifacts.manifest.json"
+  ],
+  "scientific_outcome": null
+}
