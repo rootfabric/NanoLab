@@ -96,19 +96,34 @@ def git_blob(subject: str, rel_path: str) -> bytes:
 
 
 def materialize(subject: str, rel_paths: list[str], digests: dict[str, dict], case_scratch: Path) -> dict[str, Path]:
-    """Byte-exact fixture materialization from subject blobs + digest verification."""
+    """Byte-exact fixture materialization from subject blobs + digest verification.
+
+    Each input_ref identifies a file INSIDE its fixture directory; the ENTIRE
+    fixture directory subtree (every digested file under it) is materialized so
+    that directory-shaped fixtures (execution/run dirs with events and artifact
+    manifests) are tested as complete surfaces, not as lone files.
+    """
     case_scratch.mkdir(parents=True, exist_ok=True)
-    out: dict[str, Path] = {}
+    wanted: set[str] = set()
     for rel in rel_paths:
-        blob = git_blob(subject, f"{_CTX['fixture_base']}/{rel}")
-        expected = digests[rel]
+        fixture_dir = rel.rsplit("/", 1)[0]
+        for key in digests:
+            if key == rel or key.startswith(fixture_dir + "/"):
+                wanted.add(key)
+    missing = [rel for rel in rel_paths if rel not in digests]
+    if missing:
+        raise RuntimeError(f"input refs absent from input_digests.json: {missing}")
+    out: dict[str, Path] = {}
+    for key in sorted(wanted):
+        blob = git_blob(subject, f"{_CTX['fixture_base']}/{key}")
+        expected = digests[key]
         actual = sha256_of(blob)
         if actual != expected["sha256"] or len(blob) != expected["size_bytes"]:
-            raise RuntimeError(f"fixture digest mismatch for {rel}: {actual} != {expected['sha256']}")
-        target = case_scratch / rel.replace("fixtures/", "")
+            raise RuntimeError(f"fixture digest mismatch for {key}: {actual} != {expected['sha256']}")
+        target = case_scratch / key.replace("fixtures/", "")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(blob)
-        out[rel] = target
+        out[key] = target
     return out
 
 
@@ -169,7 +184,7 @@ def exec_validator_case(case: dict, subject: str, digests: dict, case_scratch: P
             checks["ok_field_false"] = parsed.get("ok") is False and len(parsed.get("errors", [])) > 0
         except json.JSONDecodeError:
             checks["ok_field_false"] = False
-    if case.get("separation_probe"):
+    if expected.get("separation_probe"):
         # S003: contract expectation is that the instrument flags a scientific
         # claim attached to a technical terminal event.
         enforced = cmd["exit_code"] != 0
