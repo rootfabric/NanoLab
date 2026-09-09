@@ -36,9 +36,9 @@ Verifier: отдельная fresh-сессия. Worktree: `C:\NanoLab\verify-bu
 ## 5. Статус
 
 - [x] Чтение диффа и документов
-- [ ] pytest
-- [ ] Негативные CLI-пробы
-- [ ] Сверка subject/хэшей
-- [ ] VERIFIER_VERDICT.md (финальный коммит)
+- [x] pytest (Run A: 1 failed/38 passed/1 skipped из-за safe.bareRepository=explicit; Run B: 39 passed/1 skipped с GIT_CONFIG_GLOBAL=NUL)
+- [x] Негативные CLI-пробы (run1: 8 отказов + happy-path до COMPLETED_SANDBOX; run2: 5 отказов, включая idempotent retry и lease-expiry цепочку; см. VERIFIER_VERDICT.md §3)
+- [x] Сверка subject/хэшей (ls-remote = 60bdca6…; blob SHA1 и канонические SHA256 — MATCH; Windows checkout-хэши = CHECKOUT_SHA256, как в correction §3)
+- [x] VERIFIER_VERDICT.md (финальный коммит)
 
-CONTINUATION: заметки материализованы до pytest-прогона.
+Итог вердикта: PASS (см. VERIFIER_VERDICT.md).
