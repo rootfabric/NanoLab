@@ -210,5 +210,139 @@ class FailClosedTests(unittest.TestCase):
         self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
 
 
+class MAJOR1TriggerFormTests(unittest.TestCase):
+    """Repair R1 MAJOR-1: non-dict or missing `on:` must fail closed."""
+
+    def test_on_flow_form_with_forbidden_trigger_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]\n  push:\n    branches: [main]",
+            "on: [push, pull_request_target]",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGERS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_on_scalar_form_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]\n  push:\n    branches: [main]",
+            "on: push",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGERS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_missing_on_block_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]\n  push:\n    branches: [main]\n\n",
+            "",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGERS_BLOCK_MISSING", rule_ids(report))
+
+    def test_null_on_block_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]\n  push:\n    branches: [main]",
+            "on:",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGERS_BLOCK_MISSING", rule_ids(report))
+
+
+class MAJOR2AnchorAliasTests(unittest.TestCase):
+    """Repair R1 MAJOR-2: YAML anchors/aliases must fail closed."""
+
+    def test_anchor_and_alias_in_runs_on_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: &cpu nanolab-cpu")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+        message = report["workflows"][0]["violations"][0]["message"]
+        self.assertIn("anchor/alias", message)
+
+    def test_alias_dereference_in_runs_on_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: *cpu")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_anchor_in_non_runner_field_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("timeout-minutes: 15", "timeout-minutes: &t 15")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_merge_key_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("jobs:\n", "jobs:\n  <<: *defaults\n")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_ampersand_inside_run_script_is_not_an_anchor(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('echo "ok"', 'echo "a" && echo "b"')
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+
+
+class MINOR1SecretsBracketTests(unittest.TestCase):
+    """Repair R1 MINOR-1: bracket-form secret expressions must be caught."""
+
+    def test_bracket_single_quote_form_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('echo "ok"', 'echo "${{ secrets[\'DEPLOY_TOKEN\'] }}"')
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC7_SECRETS_REFERENCE", rule_ids(report))
+
+    def test_bracket_double_quote_form_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('echo "ok"', 'echo "${{ secrets[\\"DEPLOY_TOKEN\\"] }}"')
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC7_SECRETS_REFERENCE", rule_ids(report))
+
+    def test_dot_form_still_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('echo "ok"', 'echo "$DEPLOY_TOKEN" # via ${{ secrets.DEPLOY_TOKEN }}')
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC7_SECRETS_REFERENCE", rule_ids(report))
+
+
+class NOTE1TriggerGuardTests(unittest.TestCase):
+    """Repair R1 NOTE-1: the ready_for_review rule applies only to pull_request workflows."""
+
+    def test_push_only_workflow_does_not_trigger_note3(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]\n  push:\n    branches: [main]",
+            "on:\n  push:\n    branches: [main]",
+        )
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+        self.assertNotIn("NOTE3_PR_TYPES_READY_FOR_REVIEW", rule_ids(report))
+
+    def test_bare_pull_request_trigger_still_fails_note3(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "on:\n  pull_request:\n    branches: [main]\n    types: [opened, synchronize, reopened, ready_for_review]",
+            "on:\n  pull_request:",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NOTE3_PR_TYPES_READY_FOR_REVIEW", rule_ids(report))
+
+
+class MultiDocumentTests(unittest.TestCase):
+    """Repair R1 NOTE-3: multi-document files are rejected instead of merged."""
+
+    def test_multi_document_workflow_fails(self) -> None:
+        second_doc = (
+            "---\nname: second\non:\n  pull_request_target:\n    branches: [main]\n"
+            "permissions:\n  contents: write\njobs:\n  evil:\n    runs-on: nanolab-cpu\n    timeout-minutes: 15\n    steps:\n      - run: echo\n"
+        )
+        report = lint_yaml(COMPLIANT_WORKFLOW + second_doc)
+        self.assertFalse(report["ok"])
+        rules = rule_ids(report)
+        self.assertIn("WORKFLOW_UNPARSEABLE", rules)
+        self.assertNotIn("NC2_FORBIDDEN_TRIGGER", rules)
+
+
 if __name__ == "__main__":
     unittest.main()

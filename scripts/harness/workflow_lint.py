@@ -15,7 +15,10 @@ as blocking lint rules over `.github/workflows/*.y*ml`:
 The reference values live in config/infra/validation-gates.v1.json; this module
 only implements the checks. YAML is read with a minimal workflow-subset parser
 (stdlib-only, no network, no third-party dependencies). Anything the parser
-cannot understand is reported as an unparseable workflow (fail closed).
+cannot understand is reported as an unparseable workflow (fail closed), as are
+multi-document files and YAML anchors/aliases/merge keys (repair R1: MAJOR-2,
+NOTE-3); a missing or non-mapping `on:` block also fails closed (repair R1:
+MAJOR-1) so no trigger form can bypass the NC-2 rules.
 
 Exit codes: 0 = no violations, 1 = violations found, 2 = environment/config error.
 """
@@ -31,9 +34,11 @@ SCHEMA = "nanolab.infra_workflow_lint_output.v1"
 DEFAULT_CONFIG = "config/infra/validation-gates.v1.json"
 WORKFLOW_GLOB_PATTERNS = ("*.yml", "*.yaml")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
-SECRETS_REFERENCE = re.compile(r"secrets\.[A-Za-z_][A-Za-z0-9_]*")
+# MINOR-1 repair: covers both the dot form (secrets.X) and the bracket form
+# (secrets['X'] / secrets["X"]). Indirection through env: remains out of lint
+# scope (accepted and documented limitation).
+SECRETS_REFERENCE = re.compile(r"\bsecrets\s*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[)")
 BLOCK_SCALAR_STYLES = ("|", "|-", "|+", ">", ">-", ">+")
-_BLOCK_SCALAR_STYLES = ("|", "|-", "|+", ">", ">-", ">+")
 _INT_SCALAR = re.compile(r"^-?\d{1,9}$")
 _FLOAT_SCALAR = re.compile(r"^-?\d{1,9}\.\d{1,9}$")
 
@@ -133,6 +138,11 @@ def _parse_scalar(text: str) -> Any:
         return text[1:-1].replace("''", "'")
     if len(text) >= 2 and text[0] == '"' and text[-1] == '"':
         return text[1:-1].replace('\\"', '"')
+    # MAJOR-2 repair: unquoted scalars starting with '&' (anchor) or '*'
+    # (alias) are rejected at parse level, fail closed. GitHub resolves them,
+    # so a lint pass would silently mis-read the effective value.
+    if text.startswith(("&", "*")):
+        raise WorkflowParseError(f"YAML anchor/alias token {text!r} is not supported by the lint parser (fail closed)")
     if text in ("true", "True"):
         return True
     if text in ("false", "False"):
@@ -178,8 +188,6 @@ def _content_lines(text: str) -> list[_Line]:
         stripped_comment = _strip_comment(raw)
         if not stripped_comment.strip():
             continue
-        if stripped_comment.strip() in ("---", "..."):
-            continue
         content = stripped_comment.strip()
         indent = len(stripped_comment) - len(stripped_comment.lstrip(" "))
         if "\t" in stripped_comment[:indent]:
@@ -188,7 +196,23 @@ def _content_lines(text: str) -> list[_Line]:
     return lines
 
 
+def _reject_multi_document(text: str) -> None:
+    """NOTE-3 repair: GitHub workflows are single-document; a second document
+    marker is rejected instead of silently merging documents."""
+    seen_content = False
+    for raw in text.splitlines():
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if stripped in ("---", "...") and not raw.startswith((" ", "\t")):
+            if seen_content:
+                raise WorkflowParseError("multi-document workflow files are not supported (fail closed)")
+            continue
+        seen_content = True
+
+
 def parse_workflow_yaml(text: str) -> dict[str, Any]:
+    _reject_multi_document(text)
     lines = _content_lines(text)
     if not lines:
         raise WorkflowParseError("empty workflow document")
@@ -240,6 +264,10 @@ def _parse_mapping(lines: list[_Line], idx: int, indent: int, source: str) -> tu
         key, sep, inline = _split_key(line.content)
         if not sep:
             raise WorkflowParseError(f"expected 'key:' at line {line.number}")
+        # MAJOR-2 repair: anchors on mapping keys and YAML merge keys ('<<')
+        # are rejected, fail closed.
+        if key.startswith(("&", "*")) or key == "<<":
+            raise WorkflowParseError(f"YAML anchor/alias/merge key {key!r} is not supported by the lint parser (fail closed) at line {line.number}")
         idx += 1
         if inline == "":
             if idx < len(lines) and lines[idx].indent > indent:
@@ -345,22 +373,33 @@ def lint_document(doc: dict[str, Any], policy: dict[str, Any]) -> list[dict[str,
     timeout_required = bool(timeout_policy.get("required", True))
     timeout_min = int(timeout_policy.get("min", 1))
     timeout_max = int(timeout_policy.get("max", 60))
+    required_types = set(policy.get("pull_request_types_required", ["ready_for_review"]))
 
+    # MAJOR-1 repair: the trigger surface must be an explicit mapping. A
+    # missing 'on:' or a scalar/flow form ('on: push', 'on: [push,
+    # pull_request_target]') is not lintable and fails closed instead of
+    # silently skipping the NC-2/NC-7/NOTE-3 trigger rules.
     triggers = doc.get("on")
-    if isinstance(triggers, dict):
+    if triggers is None:
+        violations.append(_violation("NC2_TRIGGERS_BLOCK_MISSING", "fail-closed", "workflow has no explicit 'on:' trigger mapping; the trigger surface must be declared and lintable"))
+    elif not isinstance(triggers, dict):
+        violations.append(_violation("NC2_TRIGGERS_UNSUPPORTED_FORM", "NC-2/NC-7", f"'on:' must be a mapping of trigger names; scalar/flow form is not lintable and fails closed, got: {triggers!r}"))
+    else:
         for name in triggers:
             if name in forbidden_triggers:
                 violations.append(_violation("NC2_FORBIDDEN_TRIGGER", "NC-2/NC-7", f"trigger '{name}' is FORBIDDEN_R1 (baseline section 4) and must not appear in any workflow"))
             elif name in reserved_triggers:
                 violations.append(_violation("NC2_TRIGGER_NEEDS_BASELINE_REVISION", "NC-2", f"trigger '{name}' is reserved and forbidden until a new baseline revision activates it"))
-        required_types = set(policy.get("pull_request_types_required", ["ready_for_review"]))
-        pr = triggers.get("pull_request")
-        pr_types: list[str] | None = None
-        if isinstance(pr, dict) and isinstance(pr.get("types"), list) and all(isinstance(item, str) for item in pr["types"]):
-            pr_types = [str(item) for item in pr["types"]]
-        if pr_types is None or not required_types.issubset(set(pr_types)):
-            missing = sorted(required_types - set(pr_types or []))
-            violations.append(_violation("NOTE3_PR_TYPES_READY_FOR_REVIEW", "NOTE-3", f"pull_request.types must explicitly include {missing or sorted(required_types)}: draft-to-ready transitions must run validation (NOTE-3, DIRECTOR_ACCEPTANCE_R1 INFRA1-001)"))
+        # NOTE-1 repair: the ready_for_review reference applies only when the
+        # workflow actually declares a pull_request trigger.
+        if "pull_request" in triggers:
+            pr = triggers["pull_request"]
+            pr_types: list[str] | None = None
+            if isinstance(pr, dict) and isinstance(pr.get("types"), list) and all(isinstance(item, str) for item in pr["types"]):
+                pr_types = [str(item) for item in pr["types"]]
+            if pr_types is None or not required_types.issubset(set(pr_types)):
+                missing = sorted(required_types - set(pr_types or []))
+                violations.append(_violation("NOTE3_PR_TYPES_READY_FOR_REVIEW", "NOTE-3", f"pull_request.types must explicitly include {missing or sorted(required_types)}: draft-to-ready transitions must run validation (NOTE-3, DIRECTOR_ACCEPTANCE_R1 INFRA1-001)"))
 
     jobs = doc.get("jobs")
     if isinstance(jobs, dict):
