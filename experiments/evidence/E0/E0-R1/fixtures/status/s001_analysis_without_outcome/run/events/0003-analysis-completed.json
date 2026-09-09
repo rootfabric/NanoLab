@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T00:00:00Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-FIXTURE",
+  "run_id": "E0-R1-FIXTURE-000",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0",
+  "summary": "SYNTHETIC fixture event for E0-R1 negative control; not a real execution record."
+}

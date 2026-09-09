@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-FIXTURE",
+  "run_id": "E0-R1-FIXTURE-000",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R1",
+  "subject_sha": "e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "SYNTHETIC fixture object; no physics model"
+  },
+  "inputs": [
+    {
+      "name": "synthetic",
+      "note": "fixture input"
+    }
+  ],
+  "observables": [
+    {
+      "name": "synthetic",
+      "note": "fixture observable"
+    }
+  ],
+  "resource_budget": {
+    "cap_cpu_seconds": 1
+  },
+  "stop_conditions": [
+    "synthetic fixture stop condition"
+  ],
+  "status": "STARTED"
+}

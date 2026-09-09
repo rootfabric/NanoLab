@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "artifacts": {
+    "log.txt": {
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "size_bytes": 4,
+      "producer_run": "E0-R1-FIXTURE-000",
+      "producer_tool": "synthetic",
+      "storage": "fixtures/synthetic"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "name": "corrupted.txt",
+      "sha256": "deadbeef",
+      "size_bytes": -1,
+      "producer_run_id": "E0-R1-OTHER-RUN",
+      "subject_sha": "abc123",
+      "storage_location": "fixtures/synthetic"
+    }
+  ]
+}

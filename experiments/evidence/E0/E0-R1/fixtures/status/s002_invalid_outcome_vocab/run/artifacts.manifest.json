@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "name": "synthetic.txt",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "size_bytes": 4,
+      "producer_run_id": "E0-R1-FIXTURE-000",
+      "subject_sha": "e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0",
+      "storage_location": "fixtures/synthetic"
+    }
+  ]
+}

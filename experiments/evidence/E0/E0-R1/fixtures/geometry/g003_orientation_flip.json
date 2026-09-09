@@ -1,0 +1,48 @@
+{
+  "kind": "SYNTHETIC_TEST_GEOMETRY",
+  "synthetic": true,
+  "note": "Synthetic test fixture with analytically known values. NOT a physical trajectory; must never be published as physics data.",
+  "case": "g003_orientation_flip",
+  "vertices": {
+    "O": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "P": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "Q": [
+      0.5,
+      0.8660254037844386,
+      0.0
+    ],
+    "R": [
+      2.0,
+      0.0,
+      0.0
+    ]
+  },
+  "queries": [
+    {
+      "id": "q1_angle_P_O_Q",
+      "type": "angle_deg",
+      "vertex": "P",
+      "arms": [
+        "O",
+        "Q"
+      ]
+    },
+    {
+      "id": "q2_angle_P_R_Q",
+      "type": "angle_deg",
+      "vertex": "P",
+      "arms": [
+        "R",
+        "Q"
+      ]
+    }
+  ]
+}
