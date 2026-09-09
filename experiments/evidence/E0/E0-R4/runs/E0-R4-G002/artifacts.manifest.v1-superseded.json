@@ -3,31 +3,31 @@
   "artifacts": [
     {
       "name": "case_record.json",
-      "sha256": "2eb31bed850400ceaec77abdf558caaf8d2e8c29d5c6e5a09956e1f6148534cf",
-      "size_bytes": 1525,
-      "producer_run_id": "E0-R4-N007",
+      "sha256": "2a72ed7dad69a7df0622cd4d1ea31aa13ea5256fd31bb2d283c248203ba12689",
+      "size_bytes": 1203,
+      "producer_run_id": "E0-R4-G002",
       "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
-      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-N007/artifacts/case_record.json (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G002/artifacts/case_record.json (in Git)",
       "media_type": "application/json",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     },
     {
       "name": "stderr.txt",
-      "sha256": "03ddbd7fa91f979031e6521e463f0c2b21d96687bb5c614d59c77de6c980cbbf",
-      "size_bytes": 712,
-      "producer_run_id": "E0-R4-N007",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "producer_run_id": "E0-R4-G002",
       "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
-      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-N007/artifacts/stderr.txt (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G002/artifacts/stderr.txt (in Git)",
       "media_type": "text/plain",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     },
     {
       "name": "stdout.txt",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size_bytes": 0,
-      "producer_run_id": "E0-R4-N007",
+      "sha256": "39ca508f2cc645ecfa69a7425b7207e9ab59dc56106d04d4be58d7c7980bef81",
+      "size_bytes": 447,
+      "producer_run_id": "E0-R4-G002",
       "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
-      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-N007/artifacts/stdout.txt (in Git)",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G002/artifacts/stdout.txt (in Git)",
       "media_type": "text/plain",
       "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
     }
