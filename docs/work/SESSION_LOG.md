@@ -158,3 +158,11 @@ Mission владельца: Director-приёмка NL1-002 и merge в main (а
 Director decision (2026-09-09): NL1-002 = ACCEPTED (WO-уровень, исполнительская приёмка; НЕ научная валидация E1 — статусы E1 объявляет NL2-002); checkpoint NL1 = ACCEPTED; frontier = NL2; next_work_order = NL2-001 (READY); stage NL2 = IN_PROGRESS; E1 = RUN; execution.physics_runs = 4 (E1-R1-S001 + P001..P003 COMPLETED); campaign-level scientific_outcome = NOT_EVALUATED; claim ceiling C1_COMPUTATIONAL_REPRODUCTION не превышен. Полный acceptance record: docs/evidence/NL1-002/DIRECTOR_ACCEPTANCE_R1.md.
 
 Следующее действие: NL2-001 — реализовать схемы, manifest и E0; затем NL2-002 — T2 confirm (3 реплики по E1-PROTO-R2) + статистика + научная приёмка E1.
+
+## 2026-09-09 — NL1-002 — Director acceptance ADDENDUM (коррекция провенанса)
+
+Контроль-проверка владельца: PR #23 (fake `55954ab`) смержен в main (`0e048da`, 12:22:24Z) без контроля владельца; на тот момент ни `09aae04`, ни `23c6c15`, ни `86aeab1` не были предками main (merge-base) — state был переведён при отсутствии канонических артефактов в истории. Коррекция: PR #26 (`control/nl1-002-director-checkpoint-r2`, merge `15a2c9b`, 12:42:25Z) внёс каноническую цепочку в main; настоящая ветка control/nl1-002-acceptance-correction-r1 от 15a2c9b выполняет формальные merge `09aae04`/`23c6c15`/`86aeab1` = «Already up to date» ×3 (машинное подтверждение ancestry).
+
+Director decision (2026-09-09): приёмка NL1-002 ПОДТВЕРЖДАЕТСЯ; каноническое основание — REVIEWER R2 PASS (`23c6c15`), VERIFIER R2 FIX_REQUIRED (`149feda`) + RECHECK PASS (`86aeab1`) на repair tip `09aae04` (substantive `ab78759`, tree `849d7d7f`); R1-вердикты (`7b12012`, `b405a7e`) и запись `55954ab` аннулированы (role-mixing), сохранены в истории как задокументированный инцидент (non-destructive). Состояние проекта без изменений: NL1 = ACCEPTED, frontier = NL2, next_work_order = NL2-001 (READY), physics_runs = 4. Полный аддендум: docs/evidence/NL1-002/DIRECTOR_ACCEPTANCE_ADDENDUM_R1.md.
+
+Следующее действие: NL2-001 — реализовать схемы, manifest и E0.
