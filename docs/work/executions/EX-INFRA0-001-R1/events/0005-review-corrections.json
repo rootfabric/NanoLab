@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-review-corrections",
+  "timestamp_utc": "2026-09-09T11:27:06Z",
+  "execution_id": "EX-INFRA0-001-R1",
+  "work_order_id": "INFRA0-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "42db4cc25cc259df304a15abb863583fd6c2acba",
+  "summary": "Director corrections по findings независимых вердиктов (REVIEWER PASS 41c1382: MINOR-1..4, NOTE-1..3; VERIFIER PASS 40d6c4a: FINDING-1..3). Erratum-коммит 42db4cc EXECUTION_BASELINE_R1.md: (1) MINOR-2 — исправлена инвертированная формулировка вводной фразы §8 на «Инварианты, нарушение которых обязано быть технически невозможным» и удалён артефакт U+00AD; (2) MINOR-3 (= verifier FINDING-1) — строка TR-DISPATCH §4 синхронизирована с config/infra/execution-baseline.v1.json (allowed_runner_classes [H0,C0]; G0 только после активации INFRA5-001); в текст добавлен блок Erratum R1a. MINOR-1 (= verifier FINDING-3): принято с условием — механический NC-1-тест (untrusted PR route не может выбрать self-hosted scientific label) становится блокирующим критерием приёмки INFRA1-002; решение зафиксировано в docs/infra/evidence/INFRA0-001/DIRECTOR_ACCEPTANCE_R1.md. MINOR-4 и NOTE-1..3 (верifier FINDING-2) приняты к сведению без правок. Старые events 0001-0004 не редактировались; настоящая запись — единственное superseding описание. Известное поведение CONTROL_WORK validate для пост-handoff corrections: 'terminal/handoff event must be last' — тот же паттерн event 0005 EX-NL1-001-R1 уже находится в canonical main (PR #22) и принят владельцем; pre-handoff validation этой ветки (event 0004) проходила ok=true. Вердикты влиты merge-коммитами; capabilities.* остаются false (runner/CI не установлены); merge в main — Human Gate с явной авторизацией владельца в миссии.",
+  "command_refs": [
+    "git merge --no-ff origin/review/infra0-execution-baseline-r1 -> 3063a0f",
+    "git merge --no-ff origin/verify/infra0-execution-baseline-r1 -> f77204f",
+    "edit docs/infra/EXECUTION_BASELINE_R1.md (§8 wording + §4 TR-DISPATCH + Erratum R1a block); U+00AD scan -> 0 -> commit 42db4cc"
+  ],
+  "evidence_refs": [
+    "docs/infra/evidence/INFRA0-001/REVIEWER_VERDICT.md",
+    "docs/infra/evidence/INFRA0-001/VERIFIER_VERDICT.md",
+    "docs/infra/evidence/INFRA0-001/VERIFIER_EVIDENCE.md",
+    "docs/infra/EXECUTION_BASELINE_R1.md (Erratum R1a)"
+  ],
+  "next_action": "DIRECTOR: acceptance commit (DIRECTOR_ACCEPTANCE_R1.md + project/infra-state.json INFRA0-001 -> ACCEPTED, frontier -> INFRA1), PR и merge в main по авторизации владельца.",
+  "blocker": null
+}
