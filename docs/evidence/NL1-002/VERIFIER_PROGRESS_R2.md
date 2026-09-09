@@ -66,12 +66,25 @@ Status log — дополняется коммитами по мере заве�
 - Паспорт `E1_REFERENCE_REPRODUCTION.md`: статус `RUN`, campaign scientific_outcome `NOT_EVALUATED`; слово ACCEPTED в пакете встречается только как ссылка на внешний уже принятый main-факт NL1-001 (environment state) — само-acceptance NL1-002 отсутствует.
 - IMPLEMENTER самопроверка явно помечена «самопроверка implementer'а, не acceptance» — допустимо.
 
+### 11. Пересборка engine §3 (проверка D6) — OK (BUILD_EXIT=0, размеры/флаги 1:1)
+- См. `verify-r2/ENGINE_REBUILD_AND_SMOKE_R2.md`: fetch exact `00dc7fb9` (rev-parse HEAD совпал), cmake 3.31.6 re-acquired SHA MATCH пину, CMAKE_EXIT=0, BUILD_EXIT=0; размеры бинарей 3375976/2957400/2201664 B — 1:1 с §4 и campaign-пином; флаги Release/-O3/-DNDEBUG/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE=ON/JSON=ON/`-D_FORCE_INLINES`, `GIT_COMMIT="00dc7fb"` — 1:1. SHA бинаря `a4810960…` ≠ campaign `ffc80b1a…` — ожидаемо (встроенный BUILD_TIME), критерий protocol.json соблюдён.
+
+### 12. Независимый smoke-прогон (проверка D7) — OK, полоса совместима
+- Run ID `EX-VERIFY-NL1-002-R2-SMOKE-001` (новый, не переиспользован): на собственной пересборке, вход = raw blobs (fixture 2/2 SHA MATCH пинам + опубликованный `quick_input_smoke` 414 B, steps=1e4/print_conf_interval=1e4 подтверждены).
+- RUN_EXIT=0; wall 0.14 s; RSS 6620 KB; «END OF THE SIMULATION, everything went OK!»; 11 строк energy.dat; NaN/Inf=0; 1 конфигурация; RELEASE v3.7; GIT COMMIT 00dc7fb; N=16/molecules=2; seed −588845438.
+- avg_col2 (тот же `analyze_energy.sh`) = **−1.36689954545** → IN_BAND; NL1-001 опубликованный smoke = **−1.36018000000** → IN_BAND; расхождение 0.0067 ≪ полоса 0.15 — energy-полоса СОВМЕСТИМА (compatibility-факт, не scientific claim).
+- Артефакты verify-прогона опубликованы в `verify-r2/smoke-run/EX-VERIFY-NL1-002-R2-SMOKE-001/`.
+
+### 13. Ресурсы прогонов (проверка D8) — OK
+- Опубликованные `docs/evidence/NL1-002/run-resources/<run>/time.log` сверены с заявленным: S001 13.13 s/6304 KB, P001 11.08/6328, P002 11.74/6700, P003 12.56/6520 — все значения = IMPLEMENTER_EVIDENCE/evidence-map. Бюджет ~48.5 c ≪ 1 core-hour.
+
 ## Ещё НЕ выполнено (план)
 
 - [x] SHA-256 всех файлов `experiments/evidence/E1/E1-R1/**` и `docs/evidence/NL1-002/**` по git-blob байтам vs манифесты (§6).
 - [x] Воспроизведение `analyze_energy.sh` на опубликованных energy.dat S001/P001–P003 — до последнего знака (§7).
 - [x] Пересчёт статистики повторов (SD 0.00832919790 и др.) своими командами (§8).
-- [ ] Пересборка oxDNA CPU по §3 в WSL (после восстановления cmake; критерий: BUILD_EXIT=0 + размеры/флаги).
-- [ ] Собственный verify-smoke-прогон (НОВЫЙ run ID, 1e4 steps) + сравнение energy-полосы с NL1-001 smoke.
-- [ ] Проверка отсутствия ACCEPTED/self-acceptance в пакете (state.json/plan.json нетронуты vs base).
-- [ ] `VERIFIER_VERDICT_R2.md` + push.
+- [x] Пересборка oxDNA CPU по §3 в WSL: BUILD_EXIT=0 + размеры/флаги 1:1 (§11).
+- [x] Собственный verify-smoke-прогон (НОВЫЙ run ID, 1e4 steps) + сравнение energy-полосы с NL1-001 smoke (§12).
+- [x] Проверка отсутствия ACCEPTED/self-acceptance в пакете (state.json/plan.json нетронуты vs base) (§10).
+- [x] Схема-валидация событий/паспорта (§4, §9 — зафиксированы отклонения машинных контрактов).
+- [ ] `VERIFIER_VERDICT_R2.md` + push (последний коммит).
