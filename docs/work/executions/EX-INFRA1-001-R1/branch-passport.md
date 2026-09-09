@@ -8,10 +8,13 @@
 - Risk class: `MEDIUM` (repository automation / CI security surface — первый исполняемый workflow; no scientific claim → Implementer + Reviewer + Verifier по risk-policy)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json` (`.github/workflows/**`, `docs/infra/HOSTED_CI_R1.md`, `config/infra/hosted-ci.v1.json`, `docs/work/executions/EX-INFRA1-001-R1/**`)
-- Status: `STARTED`
+- Status: `HANDOFF_READY`
 - Active experiment campaigns: none (инфраструктурный Work Order; E0–E6 остаются `NOT_RUN`)
-- START commit: фиксируется после commit/push до substantive work
-- Next action: реализовать hosted RC0 workflow (H0 only, pinned actions, минимальные permissions) + HOSTED_CI_R1.md + hosted-ci.v1.json
+- START commit: `a689711b0c7d55e3cff0e146a484a51862262e75` (pushed до substantive work)
+- Implementation commits: `ed2d5961cb24cda692e8a5f722a73caf8db80573` (workflow), `0ab044b87e3e296942da3307f1b1c5ed0c34f5f1` (config + doc; substantive tree `a10573f73a4e409d68b9b82b5fd15efbcbede3ff`)
+- Events commit: `5a7370787bf21bab88045dc380c08db2449e1323` (0002-implementation-committed, 0003-validation-recorded)
+- Substantive HEAD: `0ab044b87e3e296942da3307f1b1c5ed0c34f5f1` (= 0004-handoff-completed.subject_sha)
+- Next action: независимый REVIEWER, затем VERIFIER (MEDIUM routing); затем Director checkpoint proposal; merge PR — Human Gate (первый live hosted-прогон — evidence); обновление `project/infra-state.json` — только Director gate; затем `INFRA1-002`
 - Blocking issue: none
 
 ## Документированные отклонения (для reviewer)
