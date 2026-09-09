@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-09T10:28:20Z",
+  "execution_id": "EX-INFRA0-001-R1",
+  "work_order_id": "INFRA0-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "41cd55ca4d3bf20eac7cd8c0f6edb879825dcdfe",
+  "summary": "Implementer scope INFRA0-001 complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 41cd55ca4d3bf20eac7cd8c0f6edb879825dcdfe (tree db4ea4548f42aa87fbfe7c12ccf1c52c297171ce) — merge-коммиту с origin/main 71535d00a2e729349eea2337217a2c591ed9317d (main продвинулся: принята NL1-001; конфликтов с allowed_paths нет, diff ветки ограничен docs/infra/EXECUTION_BASELINE_R1.md, config/infra/execution-baseline.v1.json, docs/work/executions/EX-INFRA0-001-R1/**). Опубликован security/control baseline EXECUTION-BASELINE-R1: trust zones и инвариант границы по происхождению кода; trigger routes TR-PR/TR-PUSH-MAIN (только hosted H0), TR-DISPATCH (protected self-hosted c exact subject + work_order_id + budget, RESERVED_NOT_ACTIVE), TR-PRT pull_request_target и TR-WFRUN workflow_run = FORBIDDEN_R1; runner labels nanolab-cpu/nanolab-gpu/nanolab-hpc-* зарезервированы и не зарегистрированы; GITHUB_TOKEN read-only policy; resource classes RC0-RC3 с бюджетами и запретом unbounded jobs; artifact policy по полям review-policy; negative controls NC-1..NC-7; threat matrix; 11 явных non-goals; машинно-читаемая проекция config/infra/execution-baseline.v1.json (PROPOSED). Baseline статус PROPOSED: capability не объявлена принятой, project/infra-state.json и project/state.json не изменены (Director gate), ACCEPTED не выставлен. Runners/workflows/secrets не создавались; E0-E6 NOT_RUN. Post-merge re-validation: json.tool OK, CONTROL_WORK validate ok=true, CONTROL_DEVELOPMENT -CheckConsistency ok=true.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\infra-0-001 push origin infra/infra0-execution-baseline-r1 -> ff68c12..f880ff6",
+    "git -C C:\\NanoLab\\infra-0-001 fetch origin --prune -> origin/main = 71535d00a2e729349eea2337217a2c591ed9317d",
+    "git -C C:\\NanoLab\\infra-0-001 merge origin/main --no-edit -> 41cd55ca4d3bf20eac7cd8c0f6edb879825dcdfe (ort, без конфликтов)",
+    ".\\CONTROL_WORK.ps1 validate docs/work/executions/EX-INFRA0-001-R1 -> ok=true, errors=[]",
+    ".\\CONTROL_DEVELOPMENT.ps1 -CheckConsistency -> ok=true, errors=[], warnings=[]"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA0-001-R1/summary.md",
+    "docs/work/executions/EX-INFRA0-001-R1/branch-passport.md",
+    "docs/infra/EXECUTION_BASELINE_R1.md",
+    "config/infra/execution-baseline.v1.json"
+  ],
+  "next_action": "REVIEWER, затем VERIFIER: независимая проверка baseline по exact substantive HEAD 41cd55c (MEDIUM routing); затем Director checkpoint proposal INFRA0; merge PR — Human Gate; обновление project/infra-state.json — только после принятого merge (Director gate).",
+  "blocker": null
+}
