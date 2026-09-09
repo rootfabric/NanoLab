@@ -1,0 +1,109 @@
+=== BUS-001 fresh reviewer CLI probes 2026-09-09T20:29:31.4339117+10:00 ===
+host: git version 2.53.0.windows.1 / Python 3.11.8 / Windows
+scratch root: C:\Users\root\AppData\Local\Temp\bus-review-820ba58e
+bare-repo access via -C with user gitconfig: exit=128 out=fatal: cannot use bare repository 'C:/Users/root/AppData/Local/Temp/bus-review-820ba58e/envtest.git' (safe.bareRepository is 'explicit')
+bare-repo access via -C with empty global config: exit=0 out=HEAD
+user safe.bareRepository: explicit
+seed base: e01474ad10a7e6e88e8a8c9d78b6748bf71aaeb2
+init: exit=0 {
+  "bus_head": "24fe2465ea9e5809ac1a6f61ce5e5031f2701890"
+}
+open: exit=0 {
+  "bus_head": "3950779096e299db14250524abc2aa6a749a0547",
+  "committed": true,
+  "duplicate": false,
+  "event": {
+    "actor": "director-pilot",
+    "at": 1788949773,
+    "data": {
+      "allowed_paths": [
+        "docs/work/pilots/BUS-PROBE-1/receipt.json"
+      ],
+      "base_sha": "e01474ad10a7e6e88e8a8c9d78b6748bf71aaeb2",
+      "capabilities": {
+        "DIRECTOR": [
+          "control"
+        ],
+        "IMPLEMENTER": [
+          "json"
+        ],
+        "REVIEWER": [
+          "review"
+        ],
+        "VERIFIER": [
+          "python"
+        ]
+      },
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "depends_on": [],
+      "goal": "reviewer negative probes",
+      "id": "BUS-PROBE-1",
+      "kind": "PILOT"
+    },
+    "id": "c8d3a47d53b64d3bb2b7e439d4be4d41",
+    "op": "open",
+    "task": "BUS-PROBE-1"
+  },
+  "task": {
+    "approvals": {},
+    "blocker": null,
+    "claims": 0,
+    "lease": null,
+    "phase": "IMPLEMENTER",
+    "repairs": 0,
+    "resume_phase": null,
+    "spec": {
+      "allowed_paths": [
+        "docs/work/pilots/BUS-PROBE-1/receipt.json"
+      ],
+      "base_sha": "e01474ad10a7e6e88e8a8c9d78b6748bf71aaeb2",
+      "capabilities": {
+        "DIRECTOR": [
+          "control"
+        ],
+        "IMPLEMENTER": [
+          "json"
+        ],
+        "REVIEWER": [
+          "review"
+        ],
+        "VERIFIER": [
+          "python"
+        ]
+      },
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "depends_on": [],
+      "goal": "reviewer negative probes",
+      "id": "BUS-PROBE-1",
+      "kind": "PILOT"
+    },
+    "subject": null
+  }
+}
+PROBE dup-init: exit=2 expected=BUS_ALREADY_EXISTS -> OK
+PROBE open-by-implementer: exit=2 expected=OPEN_DENIED -> OK
+PROBE unknown-actor: exit=2 expected=ACTOR_NOT_ALLOWED -> OK
+PROBE wrong-role-claim: exit=2 expected=TASK_NOT_CLAIMABLE -> OK
+claim-a: exit=0
+token: b654e4f603e44e3ba1af0a5013ce5757
+PROBE competing-claim: exit=2 expected=TASK_NOT_CLAIMABLE -> OK
+PROBE foreign-actor-with-stolen-token: exit=2 expected=STALE_OR_FOREIGN_LEASE -> UNEXPECTED: { |   "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\root\\\\AppData\\\\Local\\\\Temp\\\\bus-review-820ba58e\\\\r.json'" | }
+PROBE wrong-token-heartbeat: exit=2 expected=STALE_OR_FOREIGN_LEASE -> OK
+PROBE heartbeat-no-receipt: exit=2 expected=BusError|error -> OK
+PROBE early-reclaim: exit=2 expected=LEASE_NOT_EXPIRED -> OK
+PROBE pass-with-failed-check: exit=2 expected=PASS_WITH_FAILED_CHECK -> OK
+finish-a-positive: exit=0
+claim-reviewer: exit=0
+PROBE reviewer-subject-drift: exit=2 expected=SUBJECT_MISMATCH -> OK
+finish-reviewer-positive: exit=0
+claim-verifier: exit=0
+PROBE candidate-ref-drift: exit=2 expected=CANDIDATE_REF_DRIFT -> OK
+open-2: exit=0
+PROBE cli-claim-race: winner exits: a=0 b=2 winners=1 -> OK (single winner)
+  loser stderr: {
+  "error": "TASK_NOT_CLAIMABLE"
+}
+final-status: exit=0
+journal events after all probes: 8
+scratch root kept for inspection: C:\Users\root\AppData\Local\Temp\bus-review-820ba58e
+=== end of probes ===
