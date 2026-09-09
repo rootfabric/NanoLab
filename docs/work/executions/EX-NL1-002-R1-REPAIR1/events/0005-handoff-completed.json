@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-09T13:25:00Z",
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ab78759b717d21eccf80950ec29613fbe1e74224",
+  "summary": "Bounded repair по VERIFIER VERDICT R2 (FIX_REQUIRED) завершён, status HANDOFF_READY. Terminal event привязан к exact repaired substantive HEAD ab78759b717d21eccf80950ec29613fbe1e74224 (tree 849d7d7fa8134de7117238dbd9c0fb9eb4d925a7) — последнему коммиту перед terminal, содержащему все substantive repair-артефакты (F-1 пакет: ac5c6cb + 6b6dab4; erratum 0006: f78a182; открытие REPAIR1: 4a1b5d5; Repair Map: 1461d6d; validation event: ab78759). Handoff-коммит после terminal добавляет только этот event, summary.md с literal BASE_HEAD/REPAIRED_CANDIDATE_HEAD/REPAIRED_CANDIDATE_TREE и статус passport HANDOFF_READY. Итог: CONTROL_EXPERIMENT validate x4 -> exit 0; CONTROL_WORK validate этого execution -> exit 0 (terminal последним, все subject_sha полные 40-hex); остаточное отклонение EX-NL1-002-R1 (5 ошибок в неизменяемых событиях 0002-0005) задокументировано в REPAIR_MAP_R2_R1.md §5 и superseded этим execution. Научные артефакты/дайджесты/статистика/protocol.json не менялись (16/16 digest match); симуляции не запускались; claims не повышались; project/state.json не изменён. PASS/ACCEPTED не выставляется — следующий actor: fresh VERIFIER, повторная проверка только исправленных поверхностей (R2 §5); merge в main — Human Gate.",
+  "command_refs": [
+    "git log --oneline c44b209..ab78759 -> ac5c6cb, 6b6dab4, f78a182, 4a1b5d5, 1461d6d, ab78759",
+    ".\\CONTROL_WORK.ps1 validate docs/work/executions/EX-NL1-002-R1-REPAIR1 -> ok=true, exit 0 (terminal последним)",
+    ".\\CONTROL_WORK.ps1 close docs/work/executions/EX-NL1-002-R1-REPAIR1 -> ok=true, exit 0"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md",
+    "docs/evidence/NL1-002/VERIFIER_VERDICT_R2.md (verify/nl1-002-reference-run-r2 @ 149feda3)",
+    "docs/work/executions/EX-NL1-002-R1-REPAIR1/summary.md"
+  ],
+  "next_action": "FRESH_VERIFIER: независимая повторная проверка исправленных поверхностей по exact HEAD ab78759 (binding terminal event); merge в main — Human Gate.",
+  "blocker": null
+}
