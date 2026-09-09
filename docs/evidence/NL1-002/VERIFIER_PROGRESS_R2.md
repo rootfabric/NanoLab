@@ -50,6 +50,22 @@ Status log — дополняется коммитами по мере заве�
 - Пересчёт delta_from_oracle для всех 4 прогонов (avg − (−1.37970256144)) — 4/4 до 11 знаков; band-классификация 4/4 IN_BAND при полосе ±0.15.
 - Оракул верифицирован verbatim из upstream pinned tree: `git cat-file blob 00dc7fb9…:test/DNA/DSDNA8/MD/quick_compare` = `ColumnAverage::energy.dat::2::-1.37970256144::0.15`, SHA-256 `86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27` = пин protocol.json — полоса/значение не подбирались NanoLab.
 
+### 9. Схема-валидация и паспорт (проверка D4) — ОТКЛОНЕНИЯ ОТ МАШИННЫХ КОНТРАКТОВ
+Валидаторы (`scripts/harness/*_cli.py`) бит-в-бит идентичны base `71535d0` (subject их не менял) — контракт действовал в этой форме во время исполнения.
+- `CONTROL_WORK validate docs/work/executions/EX-NL1-002-R1` → **ok=false, exit 3**, 5 ошибок:
+  1. `invalid subject_sha` в событиях `0002-campaign-runs-completed`, `0003-validation-recorded`, `0004-handoff-completed`, `0005-resource-evidence-committed` — указано `"9cc83e8"` (7 знаков), контракт требует 40 lowercase hex;
+  2. `terminal/handoff event must be last` — после `0004-handoff-completed` (терминальный) опубликован `0005-resource-evidence-committed` (CONTINUATION_CHECKPOINT, post-handoff resource evidence, коммит `ec7e3ed`).
+- `CONTROL_EXPERIMENT validate` на всех 4 run-каталогах — **падение (AttributeError, exit 1)**: `artifacts.manifest.json` использует объект `{"artifacts": {имя: …}}` вместо контрактного массива `[ {sha256, size_bytes, producer_run_id, subject_sha, storage_location} ]`; кроме того по контракту отсутствуют поля: в `manifest.json` — `subject_sha`, `claim_ceiling`, `model`, `observables`, `stop_conditions`; в каждом event — `experiment_id`, `subject_sha`.
+- Прозаический контракт `EXPERIMENT_HARNESS_RU` (структура каталогов, типы событий, терминальные исходы, разделение technical/scientific) — СОБЛЮДЁН; содержательный provenance в пакете присутствует (см. §6: 16/16 артефактов с sha256/size/producer/storage). Отклонения — формально-контрактные, научную суть не затрагивают; классификация — в вердикте.
+- Прочие структурные проверки: filenames = event_id (все), событие `RUN_STARTED` первое и единственное (4/4 прогонов), ровно один терминальный execution-event и `ANALYSIS_COMPLETED` после него (4/4), `scientific_outcome = NOT_EVALUATED` ∈ допустимых значений, лексический порядок event_id (4/4) — OK.
+
+### 10. Отсутствие ACCEPTED/self-acceptance (проверка D5) — OK
+- `git diff 71535d0..ec7e3ed -- project/state.json project/plan.json config/ docs/control/ scripts/` — ПУСТО (state/plan/policies/контроль не тронуты веткой; `NL1-002` в state.json остаётся `READY`).
+- `docs/evidence/NL1-002/` на subject: только `IMPLEMENTER_EVIDENCE.md` + `run-resources/**` — вердикт-файлов REVIEWER/VERIFIER/DIRECTOR и acceptance-record НЕТ.
+- Паспорт `EX-NL1-002-R1/passport.json`: `status: IN_PROGRESS`, accept-статусов нет; события handoff маршрутизируют REVIEWER → VERIFIER → Director, merge = Human Gate.
+- Паспорт `E1_REFERENCE_REPRODUCTION.md`: статус `RUN`, campaign scientific_outcome `NOT_EVALUATED`; слово ACCEPTED в пакете встречается только как ссылка на внешний уже принятый main-факт NL1-001 (environment state) — само-acceptance NL1-002 отсутствует.
+- IMPLEMENTER самопроверка явно помечена «самопроверка implementer'а, не acceptance» — допустимо.
+
 ## Ещё НЕ выполнено (план)
 
 - [x] SHA-256 всех файлов `experiments/evidence/E1/E1-R1/**` и `docs/evidence/NL1-002/**` по git-blob байтам vs манифесты (§6).
