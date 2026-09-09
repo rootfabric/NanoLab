@@ -6,7 +6,7 @@
   "work_order_id": "NL1-001",
   "event_type": "HANDOFF_COMPLETED",
   "actor_role": "IMPLEMENTER",
-  "subject_sha": "BRANCH_HEAD_AT_COMMIT",
+  "subject_sha": "60db6b7cae8d7995fde53f7be9a9e78ab9ca7f70",
   "summary": "Implementer handoff NL1-001. Весь scope dispatch выполнен: environment pin опубликован (ENGINE_ENVIRONMENT_R1), fixture 4/4 SHA-256 MATCH, CPU-сборка pinned oxDNA воспроизводима по командам, smoke go/no-go COMPLETED с measured resources, effective defaults §11.1-2 закрыты, семантика колонки 2 подтверждена. Научные claims не выставлялись (C0). Verbatim E1-прогон не выполнялся (запрет §7 соблюдён). Границы: state.json/plan.json/policies/E1-PROTO-R1 не изменены; бинари/исходники engine в Git не вендорятся; глобальных изменений системы владельца нет (user-local инструменты). Точная следующая роль: независимый REVIEWER (fresh session), затем независимый VERIFIER, затем Director checkpoint и PR. Merge в main — Human Gate.",
   "command_refs": [
     "git -C C:\\NanoLab\\nl1-001 log --oneline -3 -> см. branch HEAD в PR description (subject_sha фиксируется в commit, создающем этот event)"
