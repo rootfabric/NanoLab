@@ -1,6 +1,6 @@
 # Очередь запланированных работ
 
-Канонические ID и зависимости — [plan.json](../../project/plan.json); состояния — [state.json](../../project/state.json). Стадия `NL0` принята целиком; `NL1-001` = **ACCEPTED** (environment pin `ENGINE_ENVIRONMENT_R1` + smoke `EX-NL1-001-SMOKE-001`; вердикты Reviewer/Verifier PASS; science-claims нет). Сейчас разрешён старт: **NL1-002** (scheduler priority); `NL1` = IN_PROGRESS. Научные прогоны E1 ещё не начинались (`E0–E6 = NOT_RUN`); verbatim-прогоны E1 разблокированы принятием NL1-001.
+Канонические ID и зависимости — [plan.json](../../project/plan.json); состояния — [state.json](../../project/state.json). Стадии `NL0` и `NL1` приняты целиком. `NL1-002` = **ACCEPTED** (первый вертикальный E1 путь: T1 `E1-R1-S001` verbatim + 3 PILOT, все COMPLETED, T1-факт IN_BAND; `R_confirm = 3` зафиксирован в `E1-PROTO-R2`; campaign-level outcome = NOT_EVALUATED; канонические R2-вердикты — Reviewer PASS `23c6c15`, Verifier FIX_REQUIRED → RECHECK PASS `86aeab1`; superseding аннулированного role-mixing r1 checkpoint'а PR #23). Сейчас разрешён старт: **NL2-001** (scheduler priority); `NL1` = ACCEPTED, `NL2` = IN_PROGRESS. `E1 = RUN` (acceptance E1 — NL2-002: T2 confirm по frozen `R_confirm`).
 
 | Work ID | Результат | Приёмка |
 |---|---|---|
@@ -8,7 +8,7 @@
 | NL0-002 | Аудит зависимостей, входных данных и прав | **ACCEPTED** — E1 CLEAR (GPL-3.0, DOWNLOAD_ON_SETUP), E2 UNKNOWN (REFERENCE_ONLY); матрица лицензий и owner-варианты опубликованы |
 | NL0-003 | Пререгистрировать E1 и подготовить постановку E2 | **ACCEPTED** — `E1-PROTO-R1` пререгистрирован (условия verbatim, критерий из upstream `quick_compare`), `E2-SETUP-R1` подготовлен (первый шарнир `0b`, требования угла/целостности, decision rule 298 K vs 300 K); недостающие значения не выдуманы |
 | NL1-001 | Зафиксировать среду и upstream smoke | **ACCEPTED** — oxDNA `00dc7fb9` CPU-сборка зафиксирована (`ENGINE_ENVIRONMENT_R1`: WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6 user-local; fixture 4/4 SHA-256; smoke exit 0, 0.13 s / 6424 KB; effective defaults §11.1–2 закрыты) |
-| NL1-002 | Выполнить первый вертикальный E1 без ИИ | Подготовка → расчёт → анализ → архив; smoke отделён от научной приёмки |
+| NL1-002 | Выполнить первый вертикальный E1 без ИИ | **ACCEPTED** — кампания `E1-R1`: T1 `E1-R1-S001` (verbatim, seed −200619630, 13.13 s / 6304 KB) avg col2 = −1.39393635864, \|Δ\| 0.0142 от оракула → IN_BAND (execution fact); PILOT ×3 IN_BAND (SD 0.0083); `R_confirm = 3` frozen; campaign outcome NOT_EVALUATED (acceptance E1 → NL2-002). Приёмка — Director R2 (supersedes аннулированный PR #23) |
 | NL2-001 | Реализовать схемы, manifest и E0 | Отрицательные/геометрические тесты, корректные единицы и статусы |
 | NL2-002 | Реализовать статистику и принять E1 | Повторы, корреляции, чувствительность, сравнение и ограничения |
 | NL2-003 | Подключить AiiDA, хранение и восстановление | Provenance, остановка/resume, обнаружение дубликатов, readback evidence |

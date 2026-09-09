@@ -2,13 +2,14 @@
   "schema_version": 1,
   "kind": "project_state",
   "foundation": "DOCUMENTED",
-  "frontier": "NL1",
-  "next_work_order": "NL1-002",
+  "frontier": "NL2",
+  "next_work_order": "NL2-001",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
     "NL0-003",
-    "NL1-001"
+    "NL1-001",
+    "NL1-002"
   ],
   "active_tasks": [],
   "task_status": {
@@ -16,8 +17,8 @@
     "NL0-002": "ACCEPTED",
     "NL0-003": "ACCEPTED",
     "NL1-001": "ACCEPTED",
-    "NL1-002": "READY",
-    "NL2-001": "PLANNED",
+    "NL1-002": "ACCEPTED",
+    "NL2-001": "READY",
     "NL2-002": "PLANNED",
     "NL2-003": "PLANNED",
     "NL3-001": "PLANNED",
@@ -33,8 +34,8 @@
   },
   "stage_status": {
     "NL0": "ACCEPTED",
-    "NL1": "IN_PROGRESS",
-    "NL2": "PLANNED",
+    "NL1": "ACCEPTED",
+    "NL2": "IN_PROGRESS",
     "NL3": "PLANNED",
     "NL4": "PLANNED",
     "NL5": "PLANNED",
@@ -44,7 +45,7 @@
   },
   "experiment_status": {
     "E0": "NOT_RUN",
-    "E1": "NOT_RUN",
+    "E1": "RUN",
     "E2": "NOT_RUN",
     "E3": "NOT_RUN",
     "E4": "NOT_RUN",
@@ -53,7 +54,7 @@
   },
   "execution": {
     "runtime_implemented": false,
-    "physics_runs": 0,
+    "physics_runs": 4,
     "ai_campaigns": 0,
     "external_reproductions": 0,
     "paid_compute_authorized": false
