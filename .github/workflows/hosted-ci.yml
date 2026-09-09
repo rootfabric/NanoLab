@@ -1,0 +1,191 @@
+# NanoLab — Safe GitHub-hosted CI (INFRA1-001)
+#
+# Authority: docs/infra/EXECUTION_BASELINE_R1.md (EXECUTION-BASELINE-R1, ACCEPTED)
+# Machine projection of this workflow: config/infra/hosted-ci.v1.json
+# Documentation: docs/infra/HOSTED_CI_R1.md
+#
+# Trust route (baseline §4): this workflow serves ONLY
+#   - TR-PR         pull_request targeting main (fork and in-repo alike) -> H0 only
+#   - TR-PUSH-MAIN  push to refs/heads/main (canonical main)             -> H0 only
+#
+# FORBIDDEN_R1 routes are deliberately absent and must not be added here:
+#   pull_request_target (TR-PRT), workflow_run (TR-WFRUN) — see baseline §4, NC-2, NC-7.
+# Any self-hosted label in runs-on violates NC-1; hosted-unavailability must never
+# fall back to another executor (NC-5, fail closed).
+
+name: hosted-ci
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+# Baseline §5.2: explicit minimal permissions; PR route gets contents:read and nothing else.
+# Write permissions (contents/pull-requests/releases/events) are forbidden on this route (NC-4).
+permissions:
+  contents: read
+
+# Budget hygiene: superseded runs of the same ref are cancelled instead of queuing
+# (free-tier minutes are bounded; a re-run inherits the same RC0 budget — NC-6).
+concurrency:
+  group: hosted-ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rc0-hosted-validation:
+    # RC0_HOSTED_VALIDATION (baseline §6): GitHub-hosted ephemeral runner (class H0),
+    # wall-clock budget <= 15 minutes, debug artifacts only.
+    # runs-on carries ONLY standard hosted labels; reserved self-hosted labels
+    # (nanolab-cpu, nanolab-gpu, nanolab-hpc-*, self-hosted) are forbidden here.
+    name: RC0 hosted validation (H0)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out subject (action pinned to full commit SHA, no persisted credentials)
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: false
+          # Full history: Check 3 needs the merge-base with origin/main to scope
+          # validation to execution dirs actually changed by this PR/push.
+          fetch-depth: 0
+
+      - name: Environment fingerprint (executor-contract context, no secrets emitted)
+        run: |
+          set -euo pipefail
+          mkdir -p ci-debug
+          {
+            echo "runner_os=$RUNNER_OS"
+            echo "event_name=$GITHUB_EVENT_NAME"
+            echo "subject_sha=$GITHUB_SHA"
+            echo "python=$(python3 --version 2>&1)"
+            echo "git=$(git --version 2>&1)"
+          } | tee ci-debug/environment.txt
+
+      # Existing cheap repository checks, safe subset for hosted untrusted Linux
+      # (selection rationale: docs/infra/HOSTED_CI_R1.md §5).
+      - name: Check 1/3 — machine contracts JSON syntax (all tracked *.json)
+        run: |
+          set -euo pipefail
+          mapfile -d '' files < <(git ls-files -z '*.json')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "no tracked JSON files found" >&2
+            exit 1
+          fi
+          mkdir -p ci-debug
+          : > ci-debug/check-json-syntax.txt
+          for f in "${files[@]}"; do
+            python3 -m json.tool "$f" > /dev/null
+            echo "OK  $f" | tee -a ci-debug/check-json-syntax.txt
+          done
+          echo "json syntax: ${#files[@]} files OK"
+
+      - name: Check 2/3 — harness control consistency (plan/state/goals/catalog/scheduler)
+        run: |
+          set -euo pipefail
+          PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . | tee ci-debug/check-consistency.json
+
+      # Scope: only execution dirs changed by this PR/push. Canonical main already
+      # contains post-terminal CONTINUATION_CHECKPOINT (review-corrections) events in
+      # EX-INFRA0-001-R1 and EX-NL1-001-R1, which the current work_cli terminal-last
+      # rule flags; blanket validation would be permanently red independent of a PR.
+      # The discrepancy is documented in docs/infra/HOSTED_CI_R1.md for INFRA1-002.
+      - name: Check 3/3 — execution passports and work events integrity (changed EX-* only)
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          mkdir -p ci-debug
+          : > ci-debug/check-work-events.txt
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            base="$(git merge-base origin/main HEAD)"
+          else
+            base="$EVENT_BEFORE"
+            if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+              if git rev-parse --verify -q 'HEAD~1' > /dev/null; then base='HEAD~1'; else base=''; fi
+            fi
+          fi
+          if [ -z "$base" ]; then
+            echo "no diff base available; nothing to validate" | tee -a ci-debug/check-work-events.txt
+            exit 0
+          fi
+          mapfile -t changed < <(git diff --name-only "$base" HEAD | grep '^docs/work/executions/EX-' | cut -d/ -f4 | sort -u || true)
+          if [ "${#changed[@]}" -eq 0 ]; then
+            echo "no execution dirs changed by this change; check skipped" | tee -a ci-debug/check-work-events.txt
+            exit 0
+          fi
+          status=0
+          for name in "${changed[@]}"; do
+            dir="docs/work/executions/$name"
+            if [ ! -d "$dir" ]; then
+              echo "SKIP (deleted)  $dir" | tee -a ci-debug/check-work-events.txt
+              continue
+            fi
+            if PYTHONPATH=scripts python3 -m harness.work_cli validate "$dir" | tee -a ci-debug/check-work-events.txt; then
+              echo "OK  $dir" | tee -a ci-debug/check-work-events.txt
+            else
+              echo "FAIL  $dir" | tee -a ci-debug/check-work-events.txt
+              status=1
+            fi
+          done
+          exit "$status"
+
+      # Baseline §7 artifact policy: hosted CI artifacts are ephemeral debug material,
+      # NOT scientific evidence; every published artifact carries provenance fields
+      # sha256 / size_bytes / producer_run_id / subject_sha / storage_location.
+      - name: Build debug artifact manifest (failure only)
+        if: failure()
+        env:
+          ARTIFACT_NAME: hosted-ci-debug-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          mkdir -p ci-debug
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          debug_dir = Path("ci-debug")
+          artifact_name = os.environ["ARTIFACT_NAME"]
+          storage_location = f"github_actions_artifact:{artifact_name}"
+          entries = []
+          for path in sorted(p for p in debug_dir.rglob("*") if p.is_file() and p.name != "manifest.json"):
+              payload = path.read_bytes()
+              entries.append(
+                  {
+                      "path": path.name,
+                      "sha256": hashlib.sha256(payload).hexdigest(),
+                      "size_bytes": len(payload),
+                      "producer_run_id": os.environ["GITHUB_RUN_ID"],
+                      "subject_sha": os.environ["GITHUB_SHA"],
+                      "storage_location": storage_location,
+                  }
+              )
+          manifest = {
+              "schema": "nanolab.hosted_ci_debug_manifest.v1",
+              "artifact_policy": "docs/infra/EXECUTION_BASELINE_R1.md section 7",
+              "kind": "hosted_ci_debug_bundle",
+              "scientific_evidence": False,
+              "producer_run_id": os.environ["GITHUB_RUN_ID"],
+              "producer_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "1"),
+              "subject_sha": os.environ["GITHUB_SHA"],
+              "storage_location": storage_location,
+              "retention_days": 7,
+              "artifacts": entries,
+          }
+          (debug_dir / "manifest.json").write_text(
+              json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(manifest, indent=2))
+          PY
+
+      - name: Upload debug artifacts (failure only, ephemeral, no secrets)
+        if: failure()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: hosted-ci-debug-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-debug/
+          retention-days: 7
+          if-no-files-found: ignore
