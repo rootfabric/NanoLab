@@ -29,12 +29,33 @@ Status log — дополняется коммитами по мере заве�
 ### 5. Документы пакета — прочитаны (основа для проверок)
 - `IMPLEMENTER_EVIDENCE.md`, `campaign.md`, `protocol.json`, `evidence-map.json`, `analyze_energy.sh`, `PREREGISTRATION_E1_R1.md` (§2.2 пины, §5.1 критерий, §5.2 целостность, §6.4 пилот, §9 исходы), `PREREGISTRATION_E1_R2.md` (freeze R_confirm=3), `ENGINE_ENVIRONMENT_R1.md` (§2/§3/§5), `WO-NL1-002.md`, контрольные документы (`PROJECT_CONTROL.md`, `HARNESS_CONTROL.md`, `EXPERIMENT_HARNESS_RU.md`, `HARNESS_REVIEW_AND_EVIDENCE_RU.md`, `HARNESS_AUTONOMOUS_EXECUTION_RU.md`), `project/state.json`.
 
+### 6. Дайджесты всех файлов деревьев evidence — OK (проверка D1)
+- Метод: `git cat-file blob` (байты коммитов, byte-exact) → sha256sum в WSL; скрипт верификатора в disposable scratch (вне Git), ветка-ref `verify/nl1-002-reference-run-r2`.
+- Деревья: `experiments/evidence/E1/E1-R1/**` = 44 файла, `docs/evidence/NL1-002/**` = 10 файлов — все SHA-256 посчитаны из сырых blob-байтов.
+- Артефакты vs `artifacts.manifest.json` (по всем 4 прогонам): 16/16 sha256 MATCH, 16/16 size MATCH (log/energy/trajectory/last_conf × S001/P001–P003).
+- Кросс-проверка: `events/0002-run-completed.json.artifacts_sha256` = `artifacts.manifest.json` sha256 по всем 16 позициям — MATCH; engine binary pin `ffc80b1a…` во всех manifest.json — MATCH.
+- Манифест-дайджесты (пины): energy.dat S001 `ff26bad5…`, log.dat S001 `2c493f65…`, trajectory S001 `e51bc59d…`, last_conf S001 `f9af73bc…` — воспроизведены; полный список в scratch-отчёте верификатора.
+
+### 7. Воспроизведение анализа (проверка D2) — OK до последнего знака
+- Опубликованный `analyze_energy.sh` извлечён из blob (`747c5216589ab9270830a21eaf7f15d1aea742681360ac048f4392c2edfabd4d`) и исполнен в WSL на опубликованных `energy.dat` каждого прогона (байты из blob):
+  - E1-R1-S001: rows=1001, avg_col2=**-1.39393635864**, delta=**-0.01423379720**, IN_BAND — совпало с зафиксированным 11/11 знаков;
+  - E1-R1-P001: rows=1001, avg_col2=**-1.37730121179**, delta=**+0.00240134965**, IN_BAND — 11/11;
+  - E1-R1-P002: rows=1001, avg_col2=**-1.39389370430**, delta=**-0.01419114286**, IN_BAND — 11/11;
+  - E1-R1-P003: rows=1001, avg_col2=**-1.38687945155**, delta=**-0.00717689011**, IN_BAND — 11/11.
+- Целостность §5.2 на опубликованных файлах: 1001 строка energy.dat (4/4), 10 конфигураций trajectory (4/4), NaN/Inf = 0 (4/4), `END OF THE SIMULATION, everything went OK!` (4/4).
+- Лог-факты каждого прогона: `RELEASE: v3.7`, `GIT COMMIT: 00dc7fb`, seed из лога = опубликованному (S001 −200619630; P001 −473348953; P002 −547126645; P003 −1610133928), `T … (0.097717)`, `N: 16, N molecules: 2` — все совпали.
+
+### 8. Пересчёт статистики повторов (проверка D3) — OK бит-в-бит
+- Независимый пересчёт (python3 statistics.stdev, не awk) по pilot_values из evidence-map: mean **-1.38602478921**, выборочное SD **0.00832919790**, размах **0.01659249251**, SD/полоса **0.0555** — все 4 значения совпали с `pilot_statistics` evidence-map и с `PREREGISTRATION_E1_R2` §1.
+- Пересчёт delta_from_oracle для всех 4 прогонов (avg − (−1.37970256144)) — 4/4 до 11 знаков; band-классификация 4/4 IN_BAND при полосе ±0.15.
+- Оракул верифицирован verbatim из upstream pinned tree: `git cat-file blob 00dc7fb9…:test/DNA/DSDNA8/MD/quick_compare` = `ColumnAverage::energy.dat::2::-1.37970256144::0.15`, SHA-256 `86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27` = пин protocol.json — полоса/значение не подбирались NanoLab.
+
 ## Ещё НЕ выполнено (план)
 
+- [x] SHA-256 всех файлов `experiments/evidence/E1/E1-R1/**` и `docs/evidence/NL1-002/**` по git-blob байтам vs манифесты (§6).
+- [x] Воспроизведение `analyze_energy.sh` на опубликованных energy.dat S001/P001–P003 — до последнего знака (§7).
+- [x] Пересчёт статистики повторов (SD 0.00832919790 и др.) своими командами (§8).
 - [ ] Пересборка oxDNA CPU по §3 в WSL (после восстановления cmake; критерий: BUILD_EXIT=0 + размеры/флаги).
 - [ ] Собственный verify-smoke-прогон (НОВЫЙ run ID, 1e4 steps) + сравнение energy-полосы с NL1-001 smoke.
-- [ ] SHA-256 всех файлов `experiments/evidence/E1/E1-R1/**` и `docs/evidence/NL1-002/**` по git-blob байтам vs манифесты.
-- [ ] Воспроизведение `analyze_energy.sh` на опубликованных energy.dat S001/P001–P003 — до последнего знака.
-- [ ] Пересчёт статистики повторов (SD 0.00832919790 и др.) своими командами.
 - [ ] Проверка отсутствия ACCEPTED/self-acceptance в пакете (state.json/plan.json нетронуты vs base).
 - [ ] `VERIFIER_VERDICT_R2.md` + push.
