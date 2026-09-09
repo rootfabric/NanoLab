@@ -9,6 +9,8 @@
 
 ---
 
+> **Erratum R1a (2026-09-09, Director checkpoint `control/infra0-director-checkpoint-r1`):** точечные правки по findings независимого review (`docs/infra/evidence/INFRA0-001/REVIEWER_VERDICT.md`, commit `41c1382`): **MINOR-2** — исправлена инвертированная формулировка вводной фразы §8 и удалён артефакт U+00AD; **MINOR-3** — строка `TR-DISPATCH` в §4 синхронизирована с machine-readable конфигом (`allowed_runner_classes: ["H0","C0"]`; `G0` допускается только после активации `INFRA5-001`, согласовано с §4.1 и RC3 `FORBIDDEN_UNTIL_INFRA5`). Содержание контролей не меняется; прочая редакция R1 не затронута. Перевод статуса документа выполняется отдельно Director-приёмкой (`DIRECTOR_ACCEPTANCE_R1.md`), а не этим erratum.
+
 ## 0. Назначение и границы документа
 
 Этот документ фиксирует исполняемый security/control baseline вычислительной инфраструктуры NanoLab **до** создания любых GitHub workflows и self-hosted runners. Он определяет:
@@ -78,7 +80,7 @@ SCIENTIFIC ARTIFACTS
 |---|---|---|---|---|---|
 | `TR-PR` | `pull_request` (fork и in-repo) | любой публичный PR | `H0` только | `permissions: contents: read`; без secrets; без cache-инъекций в trusted-зону | контракт действует; механические gate — `INFRA1-002` |
 | `TR-PUSH-MAIN` | `push` в `main` | canonical main | `H0` только | минимальные permissions; тайм-ауты | контракт действует; механика — `INFRA1-001/002` |
-| `TR-DISPATCH` | `workflow_dispatch` из workflow в canonical `main` | canonical main | `H0` или защищённый `C0`/`G0` | protected environment с required reviewers; exact `subject_sha` + `work_order_id` + resource budget в payload; без них — fail closed | **RESERVED_NOT_ACTIVE** (нет workflows/runner'ов) |
+| `TR-DISPATCH` | `workflow_dispatch` из workflow в canonical `main` | canonical main | `H0` или защищённый `C0`; `G0` — только после активации `INFRA5-001` | protected environment с required reviewers; exact `subject_sha` + `work_order_id` + resource budget в payload; без них — fail closed | **RESERVED_NOT_ACTIVE** (нет workflows/runner'ов) |
 | `TR-SCHEDULE` | `schedule` | canonical main | `H0` только | фиксированный budget | отложено; при введении — отдельная ревизия baseline |
 | `TR-TAG` | `push` tag / release | canonical main | `H0` только | publishing flow — отдельно | отложено |
 | `TR-PRT` | `pull_request_target` | — | — | — | **FORBIDDEN_R1**: известный вектор утечки secrets/выполнения чужого кода с повышенными правами; снятие запрета — только explicit новый WO с pinned-controls паттерном |
@@ -132,7 +134,7 @@ Self-hosted scientific node никогда не является default PR exec
 
 ## 8. Negative controls
 
-Инварианты, которые обязаны быть технически необходи­мыми к нарушению. В R1 они зафиксированы документально; механические проверки (lint/CI-негативные тесты) — required output `INFRA1-002` (negative test из WO: «untrusted PR route не может выбрать self-hosted scientific label»).
+Инварианты, нарушение которых обязано быть технически невозможным. В R1 они зафиксированы документально; механические проверки (lint/CI-негативные тесты) — required output `INFRA1-002` (negative test из WO: «untrusted PR route не может выбрать self-hosted scientific label»).
 
 | ID | Угроза | Инвариант | Статус R1 | Механическая проверка |
 |---|---|---|---|---|
