@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-09T13:19:40Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0330d15b8af4858596664ed25a9317843c8389df",
+  "summary": "Локальная верификация всех пяти чеков hosted-ci на Windows/Python 3.11 (команды эквивалентны шагам workflow; exact HEAD 0330d15). Check 1/5 json syntax: 108 tracked *.json — 0 bad (python -m json.tool по каждому). Check 2/5: harness.cli check-consistency --root . — ok=true, errors=[], warnings=[], head=0330d15b8af4. Check 3/5: work_cli validate по всем 10 каталогам docs/work/executions/EX-* — 10/10 OK, включая легаси EX-INFRA0-001-R1 (было: terminal/handoff event must be last), EX-NL1-001-R1 (аналогично) и EX-NL1-002-R1 (было 5 residual ошибок: 4 invalid subject_sha + terminal-last) — все три теперь ok=true, has_post_terminal_corrections=true. Check 4/5: harness.workflow_lint --root . — ok=true, workflows=1, violations=0 (до подключения ready_for_review линт корректно давал NOTE3_PR_TYPES_READY_FOR_REVIEW — негативная демонстрация эталона). Check 5/5: unittest discover -s tests -t . — 34/34 OK (14 validator-тестов + 20 lint-тестов), включая обязательные негативы: пост-терминальное событие без corrections-marker → FAIL; fixture runs-on: nanolab-cpu → NC1_SELF_HOSTED_LABEL FAIL (exit 1); некорректные fixtures (pull_request_target, workflow_run, schedule, внешний reusable workflow, contents: write, secrets-референс, отсутствие таймаута, timeout 120, action по тегу @v5, missing ready_for_review, unparseable YAML) — все FAIL как ожидается. Негативные результаты сохранены в тестах (NEGATIVE/FAILED RESULTS MUST BE PRESERVED): механическая краснота легаси-каталогов на старом валидаторе зафиксирована в event 0001 и VALIDATION_GATES_R1 §2.3 как входные данные дизайна. Технический outcome: PASS всех пяти чеков; научного утверждения не содержит (EXIT CODE 0 IS NOT A SCIENTIFIC PASS).",
+  "command_refs": [
+    "git ls-files '*.json' + python -m json.tool -> 108 files, 0 bad",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok=true",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-* -> 10/10 OK",
+    "PYTHONPATH=scripts python -m harness.workflow_lint --root . -> ok=true violations=0",
+    "python -m unittest discover -s tests -t . -> Ran 34 tests, OK"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA1-002-R1/summary.md",
+    "tests/test_work_cli_corrections.py",
+    "tests/test_infra_workflow_lint.py",
+    "docs/infra/VALIDATION_GATES_R1.md (§5, §7)"
+  ],
+  "next_action": "IMPLEMENTER: handoff — event 0004, summary.md, passport status -> HANDOFF_READY, push; далее независимый review.",
+  "blocker": null
+}
