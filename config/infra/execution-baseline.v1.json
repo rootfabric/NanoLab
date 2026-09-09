@@ -3,7 +3,7 @@
   "kind": "infra_execution_baseline",
   "revision": "EXECUTION-BASELINE-R1",
   "canonical_owner": "main",
-  "status": "PROPOSED",
+  "status": "ACCEPTED",
   "baseline_work_order": "INFRA0-001",
   "baseline_execution": "EX-INFRA0-001-R1",
   "base_sha": "57c1e63733ea3b10f991c0f9609c426dc75b17a5",

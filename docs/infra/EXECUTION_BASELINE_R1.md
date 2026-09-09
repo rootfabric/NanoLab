@@ -5,7 +5,7 @@
 **Execution:** `EX-INFRA0-001-R1` (branch `infra/infra0-execution-baseline-r1`)
 **Base SHA:** `57c1e63733ea3b10f991c0f9609c426dc75b17a5` (exact canonical `main`)
 **Machine-readable counterpart:** [`config/infra/execution-baseline.v1.json`](../../config/infra/execution-baseline.v1.json)
-**Статус:** `PROPOSED` — документ предложен Implementer'ом и **не принят**: acceptance `INFRA0` — Director gate, обновление `project/infra-state.json` Implementer'ом запрещено.
+**Статус:** `ACCEPTED` (2026-09-09, Director gate — [`docs/infra/evidence/INFRA0-001/DIRECTOR_ACCEPTANCE_R1.md`](evidence/INFRA0-001/DIRECTOR_ACCEPTANCE_R1.md); `project/infra-state.json`: `INFRA0-001` и checkpoint `INFRA0` → `ACCEPTED`). В момент публикации Implementer'ом статус был `PROPOSED`: acceptance — Director gate, обновление `project/infra-state.json` Implementer'ом запрещено.
 
 ---
 
