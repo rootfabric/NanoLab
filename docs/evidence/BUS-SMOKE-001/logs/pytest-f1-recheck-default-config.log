@@ -1,0 +1,49 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.8, pytest-8.3.3, pluggy-1.5.0 -- C:\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: C:\NanoLab\verify-bus-001
+plugins: anyio-4.9.0, dash-2.17.1, hydra-core-1.3.2, langsmith-0.8.6
+collecting ... collected 40 items
+
+tests/task_bus/test_task_bus.py::ReducerTests::test_block_resume_and_cancel PASSED [  2%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_capability_filter_enforced PASSED [  5%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_claim_budget_is_enforced PASSED [  7%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_competing_claim_is_denied PASSED [ 10%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_dependency_must_exist_and_complete PASSED [ 12%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_director_invalidates_stale_candidate PASSED [ 15%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_early_or_worker_reclaim_denied PASSED [ 17%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_expired_lease_requires_director_reclaim PASSED [ 20%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_failed_command_cannot_have_pass_verdict PASSED [ 22%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_full_four_role_cycle_is_only_sandbox_complete PASSED [ 25%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_heartbeat_extends_current_lease PASSED [ 27%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_idempotency_collision_denied PASSED [ 30%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_idempotent_replay_preserves_original_receipt PASSED [ 32%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_insufficient_evidence_blocks_and_resumes_same_role PASSED [ 35%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_json_ambiguities_rejected PASSED [ 37%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_no_self_acceptance_or_skipped_stages PASSED [ 40%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_nonmonotonic_history_and_duplicate_ids_rejected PASSED [ 42%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_release_fences_old_token PASSED [ 45%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_repair_budget_is_enforced PASSED [ 47%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_repair_clears_approvals_but_preserves_failure PASSED [ 50%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_review_cannot_change_subject PASSED [ 52%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_scientific_tasks_and_broad_scopes_are_rejected PASSED [ 55%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_unknown_actor_denied PASSED [ 57%]
+tests/task_bus/test_task_bus.py::ReducerTests::test_wrong_role_cannot_claim PASSED [ 60%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_actual_concurrent_claim_has_exactly_one_winner PASSED [ 62%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_cli_claim_receipt_and_idempotent_retry PASSED [ 65%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_concurrent_different_tasks_retry_without_losing_events PASSED [ 67%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_dirty_worktree_and_index_are_preserved PASSED [ 70%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_drifted_remote_ref_blocks_handoff PASSED [ 72%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_duplicate_init_is_rejected PASSED [ 75%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_independent_clones_full_cycle_and_main_untouched PASSED [ 77%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_inherited_git_directory_cannot_redirect_bus_writes PASSED [ 80%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_lost_ack_at_final_attempt_is_recovered PASSED [ 82%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_lost_push_ack_is_recovered_without_duplicate PASSED [ 85%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_main_cannot_be_used_as_bus_branch PASSED [ 87%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_out_of_scope_change_rejected PASSED [ 90%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_smoke_negative_control_and_strict_boolean_types PASSED [ 92%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_symlink_candidate_and_local_smoke_are_rejected SKIPPED [ 95%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_whitespace_filename_cannot_bypass_scope PASSED [ 97%]
+tests/task_bus/test_task_bus.py::GitIntegrationTests::test_wrong_tree_is_rejected PASSED [100%]
+
+======================= 39 passed, 1 skipped in 42.45s ========================
