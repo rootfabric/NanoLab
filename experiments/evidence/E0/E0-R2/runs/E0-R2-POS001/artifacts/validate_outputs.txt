@@ -1,0 +1,617 @@
+### experiment_cli validate E0-R2-G001
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "791b130e37a7f8a2f0ebf8151f813f05de33db915a6ee7f45f5b099ec8bd735b",
+  "run_id": "E0-R2-G001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-G002
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "c0850039ced4419e0e32186c493154a3ae54d15607fff3e652e092a7fec8529e",
+  "run_id": "E0-R2-G002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-G003
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "4973336096a7cb1e60f59951c88d76957b76e876ce63471b4cdbcfa37b0b6ce8",
+  "run_id": "E0-R2-G003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N001
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "debb8a3f482f9e612c56997f2750a13a43e0f39159884d9557320f12966145a1",
+  "run_id": "E0-R2-N001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N002
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "9051c33af25718c5dff2ece5e456d04fd15466810b0ecb6a888fd0c5735531e8",
+  "run_id": "E0-R2-N002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N003
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "6263845440c9ef78c958a670c0fb5803e7928896762dbc92591394f510fd1352",
+  "run_id": "E0-R2-N003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N004
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "3518c489d3f64c78e14178552a730da77feff15482add7fc160603ee9a9d435e",
+  "run_id": "E0-R2-N004",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N005
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "e2756067c81372ac2ab80e9e0c782703c917156db4aad60ad8673ce4cc7a445c",
+  "run_id": "E0-R2-N005",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N006
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "5a095978b5154002e7cfde64ed2d726deeccb8a50927e1559e45dac8fd5ce3b4",
+  "run_id": "E0-R2-N006",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N007
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "66dffe66a2c9062f18061c91fea829f92ff34ef9ec2581bebfde53407086c5b3",
+  "run_id": "E0-R2-N007",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N008
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "2b68c750e286e567904c97254df432e37c1ceffd0525f42a7e1e7862725c349d",
+  "run_id": "E0-R2-N008",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-N009
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "ab691c3a3083fb962c9cd2907e8f3d3cfeac6378bf7cd16cb16587c9c9094097",
+  "run_id": "E0-R2-N009",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-S001
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "32340e5b116d4b7168bcadd31001d6cbf4e04252eec51e3562b995517be024cb",
+  "run_id": "E0-R2-S001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-S002
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "a4d1a55d068796fa270e5ea4a5aabe92da6ab9309f1a2a0c91b89e5fb91ba1da",
+  "run_id": "E0-R2-S002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-S003
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "a7e0117f71ae903140e9f293f6c23fcebd9f6c5ab0cb27d4d73ef353b362d4c6",
+  "run_id": "E0-R2-S003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-U001
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "d131ea5ccddbd8c0c4b325c47fd56d9c1eecf3ade5377deaf06785532e65d939",
+  "run_id": "E0-R2-U001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R2-U002
+exit=3
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0002-run-failed-technical.json: campaign_id differs from manifest",
+    "0003-analysis-completed.json: campaign_id differs from manifest"
+  ],
+  "warnings": [],
+  "manifest_sha256": "49958ac86ac98b337cb4de9d75bb01c3b66fb85d5aeac5fd23fdf8d16be555ad",
+  "run_id": "E0-R2-U002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-failed-technical",
+      "type": "RUN_FAILED_TECHNICAL"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### cli check-consistency
+exit=0
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "frontier": "NL2",
+  "next_work_order": "NL2-001",
+  "branch": "work/nl2-001-contracts-e0-r1",
+  "head": "af17935e2a9550c800700fe122290d3ac3c8e738",
+  "tree": "bb0602e0b7f2cd6e72606e89cdcf9f05c1d676b3",
+  "counts": {
+    "stages": 9,
+    "tasks": 18,
+    "experiments": 7
+  }
+}
+
+
+### work_cli validate EX-NL2-001-R1
+exit=0
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "status": "IN_PROGRESS",
+  "passport_sha256": "b917f1adc9f336e66e3397f03ac97ac16f04c1cda4d29af642b0aa313a2192b6",
+  "event_types": [
+    "WORK_ORDER_STARTED"
+  ],
+  "has_terminal_handoff": false,
+  "has_summary": false
+}
+
