@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T13:02:30Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "summary": "Начат Work Order INFRA1-002 «Add PR validation gates» — механические negative controls NC-1..NC-7 по EXECUTION-BASELINE-R1 §8/§13.4 и blocking-критериям приёмки из DIRECTOR_ACCEPTANCE_R1 (INFRA1-001): (a) MINOR-2 — corrections-aware политика work_cli (пост-терминальные review-corrections события), (b) MINOR-1 (наследовано от INFRA0-001) — механический NC-1-тест «untrusted PR route не может выбрать self-hosted label». Base — exact 15a2c9b1b5c095e24e2e1c24afd77feef5361102 (merge PR #26). Сверка состояния: миссия именует 15a2c9b «main»; фактически локальный ref main в worktree C:\\NanoLab\\main отстаёт (6796531, не тронут — вне скоупа), origin/main после fetch = a4533ab (base + PR #27 — science acceptance addendum NL1-002, INFRA-поверхность не затрагивает). Ветка infra/infra1-validation-gates-r1 срезана от exact 15a2c9b1b5c095e24e2e1c24afd77feef5361102 по директиве миссии; merge-base с origin/main останется 15a2c9b, diff PR чистый. Фиксация residual-состояния валидатора на base (входные данные дизайна): work_cli validate по всем EX-* — FAIL в 3 каталогах: EX-INFRA0-001-R1 и EX-NL1-001-R1 («terminal/handoff event must be last» — пост-терминальные CONTINUATION_CHECKPOINT corrections с полными SHA), EX-NL1-002-R1 — 5 residual ошибок (4× abbreviated subject_sha в 0002–0005 + terminal-last; 0006-repair-completed — пост-терминальный CONTINUATION_CHECKPOINT с полным SHA). План работ: (1) corrections-aware work_cli — правило-разрешение для явного класса corrections-событий (CONTINUATION_CHECKPOINT/REVIEW_CORRECTIONS) после terminal/handoff при семантической валидности (валидный git SHA, монотонность corrections-хвоста), без ослабления terminal-last для обычного потока; совместимость с legacy abbreviated SHA (7–40 hex) задокументировать как осознанное решение; unittest-тесты: EX-NL1-002-R1 (5 ошибок → OK), негатив «пост-терминальное событие вне corrections-класса → FAIL»; (2) механический workflow-линт (NC-1 блокирующий: запрещённые self-hosted labels в runs-on; NC-2/NC-4/NC-6/NC-7 по мере машинной выразимости: forbidden triggers pull_request_target/workflow_run, permissions write, secrets-референсы, timeout-бюджет, pin actions) в scripts/harness/workflow_lint.py + machine-эталон config/infra/validation-gates.v1.json + позитив/негатив тесты (runs-on: nanolab-cpu → MUST FAIL); (3) интеграция в hosted-ci.yml отдельным блокирующим чеком + NOTE-3 (ready_for_review в pull_request.types); (4) docs/infra/VALIDATION_GATES_R1.md; события 0002–0004, summary, handoff. Ограничения скоупа: только allowed_paths паспорта; project/infra-state.json и project/state.json НЕ изменяются (Director gate); science-файлы и существующие execution-каталоги не изменяются (events immutable); без secrets, self-hosted runners, paid compute; TR-PRT/TR-WFRUN не вводятся. Risk MEDIUM (repository automation/CI surface, без научного claim), claim C0_SOFTWARE_ONLY. Отклонение задокументировано: checkpoint 'INFRA1' против паттерна ^NL[0-8]$ в execution-passport.schema.v1.json (тот же класс, что EX-INFRA0-001-R1/EX-INFRA1-001-R1, NOTE-1 Director-вердикта).",
+  "command_refs": [
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git fetch origin --prune -> origin/main = a4533abc65f764b561b6671a8422c9a3844d8926 (base + PR #27)",
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git merge-base --is-ancestor 15a2c9b1b5c095e24e2e1c24afd77feef5361102 origin/main -> rc=0 (base на канонической линии main)",
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git worktree add C:\\NanoLab\\infra-1-002 -b infra/infra1-validation-gates-r1 15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+    "git -C C:\\NanoLab\\infra-1-002 rev-parse HEAD -> 15a2c9b1b5c095e24e2e1c24afd77feef5361102; status --short -> clean",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-* -> FAIL EX-INFRA0-001-R1, EX-NL1-001-R1 (terminal-last), EX-NL1-002-R1 (5 residual errors); остальные OK"
+  ],
+  "evidence_refs": [
+    "docs/infra/EXECUTION_BASELINE_R1.md (§4, §8 NC-1..NC-7, §13.4)",
+    "config/infra/execution-baseline.v1.json (negative_controls, trigger_routes)",
+    "docs/infra/evidence/INFRA1-001/DIRECTOR_ACCEPTANCE_R1.md (MINOR-1/MINOR-2 blocking criteria, NOTE-3)",
+    "docs/infra/HOSTED_CI_R1.md (§7.1 work_cli discrepancy, §10 next step)",
+    "project/infra-plan.json (INFRA1-002, depends_on INFRA1-001)",
+    "project/infra-state.json (next_work_order INFRA1-002, task READY)",
+    "config/control/harness/work-event.schema.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: corrections-aware work_cli + workflow NC lint + hosted-ci интеграция + VALIDATION_GATES_R1.md; локальные прогоны всех чеков; события 0002–0004 и handoff.",
+  "blocker": null
+}

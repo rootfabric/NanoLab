@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "checkpoint": "INFRA1",
+  "base_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "branch": "infra/infra1-validation-gates-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    ".github/workflows/hosted-ci.yml",
+    "config/infra/validation-gates.v1.json",
+    "docs/infra/VALIDATION_GATES_R1.md",
+    "docs/work/executions/EX-INFRA1-002-R1/**",
+    "scripts/harness/work_cli.py",
+    "scripts/harness/workflow_lint.py",
+    "tests/**"
+  ],
+  "started_at_utc": "2026-09-09T13:02:30Z",
+  "status": "IN_PROGRESS"
+}
