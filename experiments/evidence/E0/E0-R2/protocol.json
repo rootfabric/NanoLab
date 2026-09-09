@@ -11,10 +11,11 @@
   "claim_ceiling": "C0_SOFTWARE_ONLY",
   "campaign_scientific_outcome": "NOT_EVALUATED",
   "subject_rule": {
-    "subject_sha": "freeze-коммит данной кампании (пререгистрация + protocol.json + campaign.md + fixtures + tools); значение записывается в manifest/event/artifacts каждого прогона после того, как freeze-коммит существует",
-    "campaign_start_commit": "добавляет ТОЛЬКО runs/<id>/manifest.json + events/0001-started.json + input_digests.json; поверхности subject не модифицирует",
+    "subject_sha": "pre-execution commit кампании (пререгистрация + protocol.json + campaign.md + fixtures + tools + input_digests); значение записывается в manifest/event/artifacts каждого прогона; campaign START commit добавляет ТОЛЬКО scaffolds (manifests + started events)",
+    "campaign_start_commit": "добавляет ТОЛЬКО runs/<id>/manifest.json + events/0001-started.json; поверхности subject не модифицирует",
     "instrument_freeze": "scripts/harness/** и config/control/harness/** заморожены бит-в-бит на base ветки 15a2c9b1b5c095e24e2e1c24afd77feef5361102; любой drift прерывает кампанию (правило exact-head)",
-    "fixture_acquisition": "runner извлекает байты фикстур из сырых git-блобов subject (git cat-file blob) и сверяет sha256/size с input_digests.json; рабочие копии не считаются каноничными (правило ENGINE_ENVIRONMENT_R1 SS5)"
+    "fixture_acquisition": "runner извлекает байты фикстур из сырых git-блобов subject (git cat-file blob) и сверяет sha256/size с input_digests.json; рабочие копии не считаются каноничными (правило ENGINE_ENVIRONMENT_R1 SS5)",
+    "erratum_note": "subject_rule уточнён ДО первого исполнения (commit после af7eaf9): R2-попытка e87202e/8355f84 ошибочно создала скаффолды с R1-идентификаторами (инструмент читал protocol.json своей кампании); уточнение не затрагивает ни одного случая/ожидания/критерия"
   },
   "input_digests": "experiments/evidence/E0/E0-R2/input_digests.json (digest_rev = freeze-коммит; инструментальные поверхности идентичны в campaign START commit)",
   "environment_binding": {
