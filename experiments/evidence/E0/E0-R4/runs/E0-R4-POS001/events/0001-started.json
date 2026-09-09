@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T17:05:00Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R4",
+  "run_id": "E0-R4-POS001",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject ce477aad1e4a125c9e881fd9f6a741ec6d2fa876; case E0-R4-POS001 (family POS): Позитивный контроль: каждый опубликованный run-каталог E0-R4 (кроме самого POS001) и execution-каталог EX-NL2-001-R1 обязаны проходить замороженные валидаторы чисто (ok:true, без warnings, exit 0); check-consistency обязан проходить (state/plan не тронуты) Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python -m harness.experiment_cli validate <каждый run dir кроме E0-R4-POS001>; python -m harness.work_cli validate docs/work/executions/EX-NL2-001-R1; python -m harness.cli check-consistency",
+  "exit_code": null,
+  "artifact_refs": [],
+  "resource_usage": {},
+  "scientific_outcome": null
+}
