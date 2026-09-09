@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-09T13:21:10Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0330d15b8af4858596664ed25a9317843c8389df",
+  "summary": "Implementer scope INFRA1-002 complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 0330d15b8af4858596664ed25a9317843c8389df (tree c4a0e8283418f2f2fa94fe81891d08de263db7d6); tip отличается только bookkeeping-коммитами (docs, events 0002–0004, summary, статус паспорта) — прецедент INFRA1-001/VERIFIER FINDING-5. Оба blocking-критерия приёмки закрыты: (a) механический NC-1-тест — блокирующий Check 4/5 (workflow NC-линт, NC1_SELF_HOSTED_LABEL/DYNAMIC_RUNS_ON/RUNS_ON_MISSING) + обязательный негативный тест runs-on: nanolab-cpu MUST FAIL; (b) corrections-aware work_cli — класс corrections-событий {CONTINUATION_CHECKPOINT, REVIEW_CORRECTIONS} после terminal/handoff при семантической валидности, unmarked пост-терминальные события FAIL, terminal-last обычного потока сохранён, EX-NL1-002-R1 5→0, EX-INFRA0-001-R1/EX-NL1-001-R1 OK. Дополнительно: NC-2/NC-4/NC-6/NC-7/NOTE-3/pinning линты, Check 3 hosted-ci расширен до всех EX-* (10/10 OK), тесты самих гейтов в hosted-конвейере (34/34), эталон config/infra/validation-gates.v1.json (PROPOSED) с amends к ACCEPTED hosted-ci.v1.json (не редактировался), документация docs/infra/VALIDATION_GATES_R1.md (PROPOSED). Открытые риски/ограничения для review: (1) собственный YAML-subset парсер — fail-closed, но покрытие синтаксиса ограничено задокументированным подмножеством (VALIDATION_GATES §8.5); (2) abbreviated subject_sha tolerance 7..40 hex — legacy-compat, полная форма для новых событий обязательна схемой, сам schemas не синхронизированы (control WO, §8.2–8.3); (3) NC-5 не линтится (review при INFRA1/2), NC-3 — INFRA2-002, полный NC-6 — INFRA6; (4) base drift миссии задокументирован (event 0001, §8.1): ветка от exact 15a2c9b, origin/main = a4533ab (+1 science commit, merge-base = base, diff чистый); (5) branch protection / repo settings — owner actions, из git не выполнялись. Commands: локальные прогоны 5 чеков — event 0003; reproduction для reviewer: PYTHONPATH=scripts python3 -m harness.workflow_lint --root . ; python3 -m unittest discover -s tests -t . ; PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-<имя>. Merge в main — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\infra-1-002 push origin infra/infra1-validation-gates-r1 (c7930e5, 636ca82, 14c4c9c, 0330d15 опубликованы до handoff)",
+    "git show -s --format='commit=%H tree=%T' 0330d15b8af4858596664ed25a9317843c8389df -> tree c4a0e8283418f2f2fa94fe81891d08de263db7d6",
+    "LOCAL: json 108/108 OK; check-consistency ok=true; work_cli validate 10/10 EX-* OK; workflow_lint violations=0; unittest 34/34 OK"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA1-002-R1/summary.md",
+    "docs/infra/VALIDATION_GATES_R1.md",
+    "config/infra/validation-gates.v1.json",
+    "scripts/harness/work_cli.py",
+    "scripts/harness/workflow_lint.py",
+    ".github/workflows/hosted-ci.yml",
+    "tests/"
+  ],
+  "next_action": "REVIEWER, затем VERIFIER: независимая проверка на exact substantive HEAD 0330d15 (MEDIUM routing; воспроизвести 5 чеков + негативные тесты); затем Director checkpoint INFRA1-002; merge PR — Human Gate; после принятия Director решает закрытие checkpoint INFRA1 и вопрос флипа capabilities.hosted_ci при live-evidence; владелец — owner actions HOSTED_CI_R1 §6.",
+  "blocker": null
+}
