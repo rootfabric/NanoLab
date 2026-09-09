@@ -12,7 +12,8 @@
 - Active experiment campaigns: none (документальный Work Order; E0–E6 остаются `NOT_RUN`)
 - START commit: `ff68c12e6a8b5a2e09d32796f462f5ee6ba885e6` (pushed до substantive work)
 - Implementation commit: `870f52e309a85da1dd5fb95c0d67498f2f573898` (tree `aba753e218eba949270957dbcc9628060a53f6a3`)
-- Last durable event: `0004-handoff-completed`
+- Merge of fresh canonical main: `71535d00a2e729349eea2337217a2c591ed9317d` → merge commit `41cd55ca4d3bf20eac7cd8c0f6edb879825dcdfe` (tree `db4ea4548f42aa87fbfe7c12ccf1c52c297171ce`), без конфликтов в allowed_paths; main продвинулся принятием NL1-001, на baseline не влияет
+- Last durable event: `0004-handoff-completed` (subject_sha = substantive HEAD `41cd55ca4d3bf20eac7cd8c0f6edb879825dcdfe`)
 - Next action: независимый REVIEWER, затем VERIFIER (MEDIUM routing); затем Director checkpoint proposal; merge — Human Gate; обновление `project/infra-state.json` — только Director gate
 - Blocking issue: none
 
