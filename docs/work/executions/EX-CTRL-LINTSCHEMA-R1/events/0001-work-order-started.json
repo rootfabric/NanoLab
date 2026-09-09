@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T14:42:34Z",
+  "execution_id": "EX-CTRL-LINTSCHEMA-R1",
+  "work_order_id": "CTRL-LINTSCHEMA",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "51a479cf2b559d5a734dac0dec4d9933a13cc689",
+  "summary": "Начат пакетный контрольный Work Order CTRL-LINTSCHEMA «lint fail-closed hardening + schema sync» (execution EX-CTRL-LINTSCHEMA-R1) — обязательный follow-up приёмки INFRA1-002 и блокиратор старта INFRA2-001 по DIRECTOR_ACCEPTANCE_R1 (docs/infra/evidence/INFRA1-002/DIRECTOR_ACCEPTANCE_R1.md, «Решения по findings» + «Сводка по пакетному контрольному WO»). Базовая линия: exact 51a479cf2b559d5a734dac0dec4d9933a13cc689 (merge PR #29, capabilities.hosted_ci=true), origin/main = local main = base после fetch, дерево чистое. Скоуп из трёх зафиксированных findings + сопутствующее: (1) MINOR-4 (RE_REVIEW_R1 §6, верификатор V-1) — таб-чек _content_lines в workflow_lint.py мёртвый (indent = lstrip(' '), срез [:indent] не может содержать TAB), TAB-индентация под on: молча перестраивает документ (probe-tabs R1: стало exit 0) — ремонт: отклонять TAB в ведущем whitespace сырой строки → WorkflowParseError/WORKFLOW_UNPARSEABLE + негативные тесты обоих размещений (под on: и под job-ключом); (2) NOTE-5 (RE_REVIEW_R1 §6, верификатор V-2) — jobs: не-mapping (sequence/scalar/null) или отсутствующий молча пропускает job-правила (NC-1/NC-6/pin) — ремонт: fail-closed нарушение + тест sequence с nanolab-cpu → FAIL; (3) schema-sync (REVIEWER R1 NOTE-4, верификатор V-3, третий INFRA-прецедент) — work-event.schema.v1.json: event_type enum + REVIEW_CORRECTIONS, subject_sha строго 40-hex; execution-passport.schema.v1.json: checkpoint ^(NL[0-8]|INFRA[0-7])$; сверка с whitelist-легаси work_cli (4 события EX-NL1-002-R1 0002–0005, 7-hex 9cc83e8, LEGACY_ABBREVIATED_SHA_EVENTS) — остаются невалидными по схеме (валидатор = enforcement floor с explicit whitelist выше schema-ceiling), расхождение документируется в README схем; после изменения схемы — все валидаторы на всех EX-* должны дать 10/10 OK; (4) сопутствующее: полная негативная матрица линта (прежние + новые) + unittest до ~70+, все 5 чеков hosted-ci локально, push. Вне скоупа: state-файлы (project/state.json, project/infra-state.json — Director gate), science, вердикты, чужие EX-*, история. Границы: без self-hosted runners/secrets/GPU/paid compute; научный трек не затронут (E0–E6 NOT_RUN).",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = 51a479cf2b559d5a734dac0dec4d9933a13cc689 (= local main, clean)",
+    "git --git-dir C:\\NanoLab\\.git-store\\repo.git worktree add C:\\NanoLab\\control-lint-schema -b control/lint-schema-sync-r1 51a479cf2b559d5a734dac0dec4d9933a13cc689",
+    "git -C C:\\NanoLab\\control-lint-schema rev-parse HEAD -> 51a479cf2b559d5a734dac0dec4d9933a13cc689; status --short -> clean",
+    "PYTHONPATH=scripts python -m harness.workflow_lint --root . -> ok=true, 1 workflow, 0 violations (базовая линия)",
+    "python -m unittest discover -s tests -t . -> Ran 59 tests, OK (базовая линия: 35 lint + 24 corrections)"
+  ],
+  "evidence_refs": [
+    "docs/infra/evidence/INFRA1-002/DIRECTOR_ACCEPTANCE_R1.md (Решения по findings: MINOR-4, NOTE-5, Schema-sync; Сводка по пакетному контрольному WO)",
+    "docs/infra/evidence/INFRA1-002/RE_REVIEW_R1.md (§6 MINOR-4, NOTE-5)",
+    "docs/infra/evidence/INFRA1-002/REVIEWER_VERDICT.md (NOTE-4 schema sync, §2 subject_sha tolerance)",
+    "docs/infra/VALIDATION_GATES_R1.md (§2.2, §2.4, §3)",
+    "config/infra/validation-gates.v1.json (workflow_lint, work_cli_corrections_policy.legacy_abbreviated_sha_events, non_goals)",
+    "config/control/harness/work-event.schema.v1.json",
+    "config/control/harness/execution-passport.schema.v1.json",
+    "scripts/harness/work_cli.py (LEGACY_ABBREVIATED_SHA_EVENTS)",
+    "project/infra-state.json (INFRA1 ACCEPTED, INFRA2-001 READY — старт заблокирован до merge этого WO)"
+  ],
+  "next_action": "IMPLEMENTER: MINOR-4 + NOTE-5 в workflow_lint.py, schema-sync (2 схемы + README расхождения), негативная матрица + unittest, 5 чеков локально, события 0002–0004 + summary + handoff.",
+  "blocker": null
+}

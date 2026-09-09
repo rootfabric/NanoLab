@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-CTRL-LINTSCHEMA-R1",
+  "work_order_id": "CTRL-LINTSCHEMA",
+  "checkpoint": "INFRA1",
+  "base_sha": "51a479cf2b559d5a734dac0dec4d9933a13cc689",
+  "branch": "control/lint-schema-sync-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "scripts/harness/workflow_lint.py",
+    "tests/test_infra_workflow_lint.py",
+    "config/control/harness/work-event.schema.v1.json",
+    "config/control/harness/execution-passport.schema.v1.json",
+    "config/control/harness/README.md",
+    "config/infra/validation-gates.v1.json",
+    "docs/infra/VALIDATION_GATES_R1.md",
+    "docs/work/executions/EX-CTRL-LINTSCHEMA-R1/**"
+  ],
+  "started_at_utc": "2026-09-09T14:42:34Z",
+  "status": "IN_PROGRESS"
+}
