@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "infra_hosted_ci_config",
+  "revision": "HOSTED-CI-R1",
+  "canonical_owner": "main",
+  "status": "PROPOSED",
+  "work_order": "INFRA1-001",
+  "execution": "EX-INFRA1-001-R1",
+  "base_sha": "7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+  "doc": "docs/infra/HOSTED_CI_R1.md",
+  "authority": "docs/infra/EXECUTION_BASELINE_R1.md",
+  "precedence": "canonical_main_hard_rules > execution_baseline_doc > this_config",
+  "route_scope": ["TR-PR", "TR-PUSH-MAIN"],
+  "workflows": [
+    {
+      "path": ".github/workflows/hosted-ci.yml",
+      "name": "hosted-ci",
+      "routes": ["TR-PR", "TR-PUSH-MAIN"],
+      "triggers": {
+        "pull_request": {"branches": ["main"], "types": ["opened", "synchronize", "reopened"]},
+        "push": {"branches": ["main"]}
+      },
+      "forbidden_triggers_absent": ["pull_request_target", "workflow_run", "schedule", "push_tags", "release"],
+      "permissions": {"contents": "read"},
+      "write_permissions_granted": false,
+      "secrets_used": [],
+      "fork_pr_secrets_available": false,
+      "concurrency": {"group": "hosted-ci-${event_name}-${ref}", "cancel_in_progress": true},
+      "jobs": [
+        {
+          "id": "rc0-hosted-validation",
+          "resource_class": "RC0_HOSTED_VALIDATION",
+          "runner_class": "H0",
+          "runs_on": ["ubuntu-latest"],
+          "self_hosted_labels_present": false,
+          "timeout_minutes": 15,
+          "steps": [
+            {"name": "checkout", "action": "actions/checkout", "pinned_sha": "93cb6efe18208431cddfb8368fd83d5badbf9bfd", "version": "v5.0.1", "persist_credentials": false, "fetch_depth": 0},
+            {"name": "environment-fingerprint", "emits_secrets": false},
+            {"name": "check-json-syntax", "scope": "git ls-files '*.json'"},
+            {"name": "check-harness-consistency", "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root ."},
+            {"name": "check-work-events", "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate <dir>", "scope": "changed_execution_dirs_only", "scope_rationale": "canonical main contains post-terminal review-corrections events that the current validator flags; see known_discrepancies"},
+            {"name": "debug-artifact-manifest", "when": "failure"},
+            {"name": "debug-artifact-upload", "when": "failure", "action": "actions/upload-artifact", "pinned_sha": "330a01c490aca151604b8cf639adc76d48f6c5d4", "version": "v5.0.0", "retention_days": 7}
+          ]
+        }
+      ]
+    }
+  ],
+  "resource_classes_used": ["RC0_HOSTED_VALIDATION"],
+  "resource_classes_declared_not_used": ["RC1_HOSTED_EXTENDED"],
+  "checks": [
+    {
+      "id": "json-syntax",
+      "purpose": "machine contracts and evidence JSON are parseable",
+      "tool": "python3 -m json.tool",
+      "environment": "stdlib_only",
+      "network": false
+    },
+    {
+      "id": "harness-check-consistency",
+      "purpose": "plan/state/goals/catalog/scheduler cross-consistency",
+      "tool": "scripts/harness/cli.py check-consistency",
+      "environment": "stdlib_only",
+      "network": false
+    },
+    {
+      "id": "work-events-integrity",
+      "purpose": "execution passport and work event integrity for changed executions",
+      "tool": "scripts/harness/work_cli.py validate",
+      "environment": "stdlib_only",
+      "network": false
+    }
+  ],
+  "artifact_policy": {
+    "kind": "hosted_ci_debug_bundle",
+    "scientific_evidence": false,
+    "upload_when": "failure_only",
+    "manifest_schema": "nanolab.hosted_ci_debug_manifest.v1",
+    "required_provenance_fields": ["sha256", "size_bytes", "producer_run_id", "subject_sha", "storage_location"],
+    "retention_days": 7,
+    "secrets_in_artifacts": false
+  },
+  "repo_settings_owner_actions": [
+    "set repository default GITHUB_TOKEN permissions to read-only (EXECUTION-BASELINE-R1 section 5.1, target state at INFRA1-001; not committable via git)",
+    "restrict GitHub Actions permissions: no workflow write scope beyond per-workflow declarations",
+    "branch protection for main: require pull request, require hosted-ci check, forbid force push and history rewrite",
+    "do not register any self-hosted runner with standard hosted labels (baseline section 3 rule 2)"
+  ],
+  "known_discrepancies": [
+    {
+      "id": "WORK_EVENTS_TERMINAL_LAST_VS_REVIEW_CORRECTIONS",
+      "finding": "scripts/harness/work_cli.py enforces terminal-last event rule; canonical main contains post-terminal CONTINUATION_CHECKPOINT events (review corrections) in docs/work/executions/EX-INFRA0-001-R1 and EX-NL1-001-R1",
+      "ci_resolution": "check-work-events validates only execution dirs changed by the current PR/push",
+      "policy_resolution": "deferred to INFRA1-002: either validator gains a corrections-aware rule or the post-terminal convention is formalized"
+    },
+    {
+      "id": "WO_INFRA1_001_FILE_ABSENT",
+      "finding": "docs/work/WO-INFRA1-001.md does not exist in canonical main; scope executed from mission directive + project/infra-plan.json task INFRA1-001 + EXECUTION-BASELINE-R1 section 13.3",
+      "policy_resolution": "WO authoring is Director authority; to be backfilled by owner if desired"
+    }
+  ],
+  "non_goals": [
+    "no_self_hosted_runners_or_labels",
+    "no_repository_secrets_or_credentials",
+    "no_gpu_or_paid_compute_public_repo_free_tier_only",
+    "no_rc1_hosted_extended_job_this_work_order",
+    "no_schedule_tag_dispatch_release_triggers",
+    "no_workflow_lint_negative_controls_those_are_INFRA1_002",
+    "no_scientific_campaigns_E0_to_E6_remain_NOT_RUN",
+    "implementer_does_not_modify_project_infra_state_json_or_project_state_json"
+  ],
+  "next_work_orders": {
+    "INFRA1-002": "mechanical negative controls NC-1..NC-7, workflow lint (runs-on/permissions/forbidden triggers), concurrency and quota gates, repo settings verification, work-cli corrections policy"
+  }
+}
