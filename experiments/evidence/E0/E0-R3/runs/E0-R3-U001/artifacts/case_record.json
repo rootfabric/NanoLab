@@ -1,0 +1,46 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R3-U001",
+  "family": "UNIT",
+  "campaign_id": "E0-R3",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "verdicts": {
+      "u001_accepted.json": "ACCEPTED"
+    }
+  },
+  "observed": {
+    "exit_code": 0,
+    "stderr_excerpt": "",
+    "verdicts": {
+      "u001_accepted.json": "ACCEPTED"
+    },
+    "delta_detail": {
+      "verdicts": [
+        {
+          "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-U001\\units\\u001_accepted.json",
+          "input_T": "20C",
+          "claimed_T_oxDNA": 0.097717,
+          "reference_T_oxDNA": 0.097717,
+          "delta": 0.0,
+          "tolerance": 5e-07,
+          "verdict": "ACCEPTED"
+        }
+      ],
+      "reference_provenance": "docs/research/ENGINE_ENVIRONMENT_R1.md section 6 (oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, log OBSERVED)"
+    },
+    "checks": {
+      "verdict:u001_accepted.json": true
+    }
+  },
+  "scientific_outcome": "SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:45:36Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

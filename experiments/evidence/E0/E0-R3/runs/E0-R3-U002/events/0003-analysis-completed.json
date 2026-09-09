@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T13:45:36Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-U002",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Mechanical comparison of observed facts against expectations frozen in protocol.json (E0-PROTO-R1), case E0-R3-U002. Checks: {\"verdict:u002_wrong_20.json\": true, \"verdict:u002_wrong_293_15.json\": true, \"verdict:u002_wrong_0_29315.json\": true, \"verdict:u002_wrong_0_0978.json\": true} -> SUPPORTED. No tolerance was changed after seeing results; a NOT_SUPPORTED outcome is preserved as-is and is not retried under this run id.",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": "SUPPORTED"
+}
