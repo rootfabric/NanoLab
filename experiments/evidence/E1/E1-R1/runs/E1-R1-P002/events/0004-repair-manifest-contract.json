@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-repair-manifest-contract",
+  "timestamp_utc": "2026-09-09T12:20:00Z",
+  "experiment_id": "E1",
+  "run_id": "E1-R1-P002",
+  "campaign_id": "E1-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "RUN_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9cc83e8599c76366a6ba8c5bc49f7398f5fca64f",
+  "summary": "Contract-repair checkpoint по VERIFIER R2 FIX_REQUIRED (F-1); научное содержание прогона не пересматривается, все дайджесты/значения сохранены. (1) artifacts.manifest.json приведён к контрактной форме-массиву (name/sha256/size_bytes/producer_run_id/subject_sha/storage_location, +producer_command) по artifact-manifest.schema.v1.json; sha256/size_bytes сохранены 1:1, producer_run/producer_tool/storage отображены в producer_run_id/producer_command/storage_location без потерь; исходная объектная форма сохранена бит-в-бит в artifacts.manifest.v1-superseded.json. (2) manifest.json дополнен контрактными полями subject_sha/claim_ceiling/model/observables/stop_conditions — только добавление, существующие значения не менялись. (3) События 0001-0003 дополнены идентификаторами experiment_id/subject_sha (аддитивно); полная форма subject_sha = 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f (замороженный subject, в work-событиях фигурировал как 9cc83e8 — erratum опубликован в docs/work/executions/EX-NL1-002-R1/events/0006-repair-completed.json). CONTROL_EXPERIMENT validate: ok=true, exit 0. Детали: docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md.",
+  "command_refs": [
+    "CONTROL_EXPERIMENT.ps1 validate experiments/evidence/E1/E1-R1/runs/E1-R1-P002 -> ok=true, exit 0",
+    "python -m json.tool на всех изменённых/новых JSON -> OK"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-P002/artifacts.manifest.json",
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-P002/artifacts.manifest.v1-superseded.json",
+    "experiments/evidence/E1/E1-R1/runs/E1-R1-P002/manifest.json",
+    "config/control/harness/artifact-manifest.schema.v1.json",
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md"
+  ],
+  "blocker": null
+}
