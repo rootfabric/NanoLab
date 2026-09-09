@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-09T08:05:00Z",
+  "execution_id": "EX-NL1-001-R1",
+  "work_order_id": "NL1-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "dd4692d62850ffe897ada99a920b3b4d2e81caa8",
+  "summary": "Технический smoke EX-NL1-001-SMOKE-001: COMPLETED (exit 0), НЕ является E1-прогоном и научным результатом. Вход — копия верифицированного fixture с двумя задокументированными отклонениями (steps=1e4 вместо 1e6; print_conf_interval=1e4 вместо 1e5), чтобы smoke не подпадал под запрет E1-PROTO-R1 §7 на verbatim-прогоны до принятия NL1-001. go/no-go по §4 протокола: engine стартует без ошибок, N=16/molecules=2 соответствует top, energy.dat 11 строк, NaN/Inf=0, 1 конфигурация, 'END OF THE SIMULATION, everything went OK!'. Измеренные ресурсы: wall 0.13 s, max RSS 6424 KB, 0.0100 ms/step. Version string v3.7 + GIT COMMIT 00dc7fb из лога. Effective defaults зафиксированы из лога и исходников pinned commit: interaction_type=dna (default), use_average_seq=true (average-параметры, seq-файл не загружен), john=alias BrownianThermostat с pt=0.019929118/pr=0.006687465 (формулы исходников), T 20C -> 0.097717, salt NOT_APPLICABLE (DH не активен), seed случайный. Семантика колонки 2 energy.dat = потенциальная энергия на нуклеотид подтверждена исходником (PotentialEnergy.cpp: energy /= N) — ASSUMED E1-PROTO-R1 §5.1 повышен до OBSERVED-in-source. Артефакты smoke опубликованы в docs/evidence/NL1-001/smoke-run/ с SHA-256.",
+  "command_refs": [
+    "cd /mnt/c/NanoLab/scratch/nl1-001/smoke/EX-NL1-001-SMOKE-001 && /usr/bin/time -v ~/nl1-001/build-oxdna-cpu/bin/oxDNA quick_input_smoke -> SMOKE_EXIT=0; Elapsed 0:00.13; Maximum resident set size 6424 KB",
+    "wc -l energy.dat -> 11; grep -ciE 'nan|inf' energy.dat trajectory.dat -> 0/0",
+    "grep -E 'RELEASE|GIT COMMIT|seeding|Converting|N: 16' log.dat -> v3.7 / 00dc7fb / -807631765 / 0.097717 / 16,2",
+    "python: pt=(2*T*nst*dt)/(T*nst*dt+2*dc) -> 0.019929118; pr -> 0.006687465",
+    "Get-FileHash docs/evidence/NL1-001/smoke-run/* -> log.dat 85267114..., energy.dat ede2f7e2..., quick_input_smoke 579cc93a..., time.log b0638ed0..."
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-001/smoke-run/**",
+    "docs/evidence/NL1-001/IMPLEMENTER_EVIDENCE.md",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md §6-§8"
+  ],
+  "next_action": "IMPLEMENTER: опубликовать summary.md и HANDOFF_COMPLETED, передать evidence-пакет независимому REVIEWER.",
+  "blocker": null
+}
