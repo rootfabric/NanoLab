@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T13:31:12Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-S002",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5a151f751f7d60c1902e43fa503efd9a6037b236",
+  "summary": "Mechanical comparison of observed facts against expectations frozen in protocol.json (E0-PROTO-R1), case E0-R1-S002. Checks: {} -> NOT_EVALUATED. No tolerance was changed after seeing results; a NOT_SUPPORTED outcome is preserved as-is and is not retried under this run id.",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": "NOT_EVALUATED"
+}

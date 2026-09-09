@@ -1,0 +1,1 @@
+E0-R1 attempt failed technically: runner emit path used a wrong repo-root (parents[2] instead of parents[3]) and crashed before persisting any case result; case command executions were not scientifically evaluated. Repair: REPO_ROOT fixed, campaign surfaces parametrized; retry under new campaign E0-R2 with new run ids per the failed-run-id rule.
