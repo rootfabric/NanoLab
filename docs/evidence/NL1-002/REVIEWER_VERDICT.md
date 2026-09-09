@@ -87,3 +87,31 @@
 - **MINOR-1 / MINOR-2 паттерны сохраняются и в 0005**: `timestamp_utc` = 11:16:30Z при дате содержащего коммита `ec7e3ed` = 11:16:27Z (метка «позже» коммита — та же сигнатура ручных времён); `subject_sha` снова сокращён (`9cc83e8` вместо 40-hex). На выводы не влияет.
 - **Итог дельты: PASS подтверждается и расширяется на `ec7e3ed`** (execution-дисциплина; NOT_EVALUATED; потолок C1 без изменений).
 - **Границы роли этой сессии**: настоящим документом исчерпывается вклад сессии REVIEWER (worktree `review-nl1-002-r2`, ветка `review/nl1-002-reference-run-r2`, коммиты вердикта). `VERIFIER_VERDICT.md` (коммит `b405a7e` и его копия на work-ветке `c44b209`) этой сессией не создавался, не проверялся на содержание и не редактируется — верификация обязана быть fresh-сессией.
+
+---
+
+## 9. Addendum R2b — формальная schema-проверка event 0005 и подтверждение распространения вердикта на exact `ec7e3ed`
+
+По контрольному распоряжению — финальный формальный шаг REVIEWER. Дельта `ea465ac..ec7e3ed` перепроверена по blob'ам: ровно 2 файла — `M docs/work/SESSION_LOG.md` (+2/−0, append-only) и `A …/EX-NL1-002-R1/events/0005-resource-evidence-committed.json` (+22). Содержание SESSION_LOG-добавления согласовано с независимыми проверками §4 (wall/RSS 4/4, Exit status 0, stdout 0 B, vendoring не затронут, frozen subject не менялся).
+
+**Schema-проверка event 0005 против `config/control/harness/work-event.schema.v1.json` (поле-в-поле):**
+
+| Поле | Значение | Результат |
+|---|---|---|
+| schema_version | `1` | OK (const 1) |
+| event_id | `0005-resource-evidence-committed` | OK (pattern `^[0-9]{4}-[a-z0-9-]+$`) |
+| timestamp_utc | `2026-09-09T11:16:30Z` | OK (format date-time); содержательно — MINOR-1: на 3 c ПОЗЖЕ даты содержащего коммита `ec7e3ed` (11:16:27Z) |
+| execution_id | `EX-NL1-002-R1` | OK |
+| work_order_id | `NL1-002` | OK |
+| event_type | `CONTINUATION_CHECKPOINT` | OK (в enum) |
+| actor_role | `IMPLEMENTER` | OK (в enum) |
+| subject_sha | `9cc83e8` | **VIOLATION** — не соответствует `^[0-9a-f]{40}$` (сокращён; тот же класс, что events 0002–0004 → MINOR-2) |
+| summary | непустой | OK |
+| command_refs / evidence_refs / next_action / blocker | массивы строк / строка / null | OK (типы и допустимость полей) |
+| additionalProperties | лишних полей нет (13/13 ключей из схемы) | OK |
+
+Итог schema-проверки: **единственное нарушение — сокращённый `subject_sha`** (несущественно для однозначности ссылки; усиливает MINOR-2, рекомендация — полные SHA в будущих событиях; существующие events не переписывать). Содержание события сверено с независимыми проверками ревьюера: значения wall/RSS/exit в summary 4/4 совпадают с time.log и IMPLEMENTER_EVIDENCE; утверждение о пустом stdout подтверждено строкой log.dat; новых claims нет; scientific_outcome остаётся NOT_EVALUATED; `next_action` соответствует фактическому исполнению review.
+
+**Подтверждение распространения вердикта:** verdict **R2 = PASS** распространяется на exact `ec7e3edc83a3434d96222a0a8a94b03f7fa10e23` в части execution-дисциплины: frozen subject и артефакты прогонов не затронуты (совпадают с проверенными на `ea465ac`), MINOR-3 процессно закрыт событием 0005, MINOR-1/MINOR-2 паттерны сохраняются без влияния на выводы. Campaign-level scientific_outcome = NOT_EVALUATED; потолок C1_COMPUTATIONAL_REPRODUCTION без изменений; merge — Human Gate.
+
+**Роль REVIEWER этой сессии настоящим завершена**; иных веток/коммитов/артефактов (verify/director и пр.) сессия не создаёт.
