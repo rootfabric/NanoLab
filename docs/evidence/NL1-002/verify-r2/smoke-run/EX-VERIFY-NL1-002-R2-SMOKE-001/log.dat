@@ -1,0 +1,32 @@
+INFO: seeding the RNG with -588845438
+INFO: Initializing backend 
+INFO: Simulation type not specified, using MD
+INFO: The generator will try to take into account bonded interactions by choosing distances between bonded neighbours no larger than 2.000000
+INFO: Converting temperature from Celsius (20.000000 C°) to simulation units (0.097717)
+INFO: pid: 357
+INFO: (Cells.cpp) N_cells_side: 4, 4, 4; rcut=1.68377, IS_MC: 0
+INFO: N: 16, N molecules: 2
+INFO: Using randomly distributed velocities
+INFO: Initial kinetic energy: 5.115245
+INFO: RELEASE: v3.7
+INFO: GIT COMMIT: 00dc7fb
+INFO: COMPILED ON: 09/09/26
+
+INFO: Total Running Time: 0.107174 s, per step: 0.0107174 ms
+INFO: Timings, in seconds, by Timer (total, own, spent in children)
+> SimBackend                          0.107 (100.0%)        0.009 (  8.2%)        0.098 ( 91.8%)
+***> Lists                            0.003 (  2.9%)        0.003 (  2.9%)        0.000 (  0.0%)
+***> Thermostat                       0.002 (  1.5%)        0.002 (  1.5%)        0.000 (  0.0%)
+***> Forces                           0.084 ( 78.3%)        0.084 ( 78.3%)        0.000 (  0.0%)
+***> First Step                       0.006 (  5.6%)        0.006 (  5.6%)        0.000 (  0.0%)
+***> Observables                      0.004 (  3.5%)        0.004 (  3.5%)        0.000 (  0.0%)
+
+INFO: END OF THE SIMULATION, everything went OK!
+INFO: Lists updated 847 times (every ~11.806375 steps)
+INFO: Aggregated I/O statistics (set debug=1 for file-wise information)
+	 13.631 KB written to files
+	  0.000  B written to stdout/stderr
+	For a total of    0.124 MB/s
+
+Please cite at least the following publication for any work that uses the oxDNA simulation package
+  * E. Poppleton et al., J. Open Source Softw. 8, 4693 (2023), DOI: 10.21105/joss.04693
