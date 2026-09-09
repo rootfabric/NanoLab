@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-09T11:50:40Z",
+  "execution_id": "EX-INFRA1-001-R1",
+  "work_order_id": "INFRA1-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0ab044b87e3e296942da3307f1b1c5ed0c34f5f1",
+  "summary": "Implementer scope INFRA1-001 complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 0ab044b87e3e296942da3307f1b1c5ed0c34f5f1 (tree a10573f73a4e409d68b9b82b5fd15efbcbede3ff) — коммиту, предшествующему handoff-коммиту. Опубликован первый safe GitHub-hosted CI для untrusted route: .github/workflows/hosted-ci.yml — маршруты строго TR-PR (pull_request -> main, fork/in-repo равноправны) и TR-PUSH-MAIN (push -> main) на hosted runner класса H0 (runs-on exclusively ubuntu-latest, ни одного self-hosted/nanolab-* label); явный permissions contents:read без write-блоков; секреты не используются; timeout-minutes 15 = RC0_HOSTED_VALIDATION; concurrency cancel-in-progress (rerun наследует бюджет); нет fallback-исполнителя (fail closed); actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd (v5.0.1) и actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 (v5.0.0) запинены по full commit SHA (lightweight-теги верифицированы git ls-remote); checkout persist-credentials false. Чеки: JSON-syntax всех tracked *.json (58/58), harness check-consistency (stdlib-only, ok=true), work_cli validate изменённых EX-* каталогов (diff-scoped — сплошной validate невозможен из-за пост-терминальных review-corrections событий в EX-INFRA0-001-R1/EX-NL1-001-R1 против правила terminal-last; политика — INFRA1-002, HOSTED_CI_R1.md §7.1). Артефакты только при падении: retention 7 дней + manifest с provenance-полями sha256/size_bytes/producer_run_id/subject_sha/storage_location, scientific_evidence=false. Документация: docs/infra/HOSTED_CI_R1.md (включено/исключено, маппинг на baseline §3-§9, NC-мэппинг: NC-1/2/4/5/6/7 заложены конструктивно без механического lint, механика — INFRA1-002; owner actions по repo settings; free tier) и config/infra/hosted-ci.v1.json (машинно-читаемая проекция HOSTED-CI-R1, PROPOSED). Отклонения задокументированы: WO-файл отсутствует (Director authority), checkpoint INFRA1 против паттерна ^NL[0-8]$ (как в EX-INFRA0-001-R1). Статус PROPOSED: capability hosted_ci не объявлена принятой, project/infra-state.json и project/state.json не изменены (Director gate), ACCEPTED не выставлен. Runners/secrets/GPU/paid compute — нет; E0-E6 NOT_RUN; зелёный CI — технический факт, не научный PASS. Первый live hosted-прогон произойдёт при открытии PR этой ветки (первый TR-PR event после активации workflow).",
+  "command_refs": [
+    "git -C C:\\NanoLab\\infra-1-001 push origin infra/infra1-hosted-ci-r1 -> a689711..5a73707 (START/implementation/events опубликованы)",
+    "git show -s --format='commit=%H tree=%T' 0ab044b87e3e296942da3307f1b1c5ed0c34f5f1 -> tree a10573f73a4e409d68b9b82b5fd15efbcbede3ff",
+    "wsl bash scratch/ci-validate-impl.sh -> A 3/3 + 58/58 json OK; B ok=true errors=[] warnings=[]; C ok=true; E diff в allowed_paths",
+    "wsl bash scratch/ci-validate-yaml.sh -> YAML gate OK (triggers/permissions/runs-on/SHA-pins/persist-credentials/retention)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA1-001-R1/summary.md",
+    "docs/work/executions/EX-INFRA1-001-R1/branch-passport.md",
+    ".github/workflows/hosted-ci.yml",
+    "config/infra/hosted-ci.v1.json",
+    "docs/infra/HOSTED_CI_R1.md"
+  ],
+  "next_action": "REVIEWER, затем VERIFIER: независимая проверка hosted route по exact substantive HEAD 0ab044b (MEDIUM routing); затем Director checkpoint proposal INFRA1-001; merge PR — Human Gate (на PR проверить первый live hosted-прогон как evidence); обновление project/infra-state.json — только после принятого merge (Director gate); затем INFRA1-002 «Add PR validation gates».",
+  "blocker": null
+}

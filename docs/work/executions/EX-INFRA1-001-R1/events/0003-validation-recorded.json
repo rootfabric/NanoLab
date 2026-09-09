@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-09T11:47:57Z",
+  "execution_id": "EX-INFRA1-001-R1",
+  "work_order_id": "INFRA1-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0ab044b87e3e296942da3307f1b1c5ed0c34f5f1",
+  "summary": "Контрольные проверки implementation HEAD 0ab044b87e3e296942da3307f1b1c5ed0c34f5f1 (более ранний прогон check-consistency на промежуточном HEAD ed2d5961cb24cda692e8a5f722a73caf8db80573, tree 288cef212eec5cdd52e1b9c60b8ec41df1646018 — также ok=true). Локальная Linux-валидация в WSL Ubuntu 24.04 (python3 3.12.3) — эмуляция hosted-чека: (A) python3 -m json.tool — passport.json, events 0001, config/infra/hosted-ci.v1.json OK; все tracked *.json через git ls-files -z '*.json' — 58/58 OK; (B) PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . — ok=true, errors=[], warnings=[], head=0ab044b; (C) PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-INFRA1-001-R1 — ok=true, errors=[] (pre-handoff: WORK_ORDER_STARTED единственный event, terminal/summary добавляются следующими шагами; validate не требует их); (D) YAML structural gate: триггеры == {pull_request->main, push->main}, permissions == {contents: read}, runs-on == [ubuntu-latest], timeout == 15, checkout persist-credentials false + fetch-depth 0, upload retention 7, оба uses запинены 40-hex commit SHA, write-permission строк нет; (E) git diff --name-only 7f17e9a..HEAD вне allowed_paths — пусто; 6 files changed, 491 insertions. Diff-scope логика Check 3 проверена на обоих событиях: push-сценарий (base=START a689711) -> changed dirs none -> skip; pull_request-сценарий (merge-base origin/main HEAD) -> changed dirs EX-INFRA1-001-R1 -> validate ok. Обнаружено и задокументировано: сплошной validate всех EX-* невозможен (EX-INFRA0-001-R1 и EX-NL1-001-R1 несут пост-терминальные CONTINUATION_CHECKPOINT review-corrections события против правила terminal-last в work_cli) — потому Check 3 дифф-scoped, политика corrections — INFRA1-002 (HOSTED_CI_R1.md §7.1). Ограничение локальной валидации: реальный run workflow выполнится на GitHub-hosted runner при первом PR/push в main; для этого WO hosted-прогон вне ветки невозможен (workflow активируется только после merge). project/infra-state.json, project/state.json не изменялись; scientific claims не затронуты.",
+  "command_refs": [
+    "wsl bash scratch/ci-validate-impl.sh -> A: 3/3 JSON OK + 58/58 tracked json OK; B: ok=true errors=[] warnings=[] head=0ab044b; C: ok=true errors=[]; E: diff in allowed_paths OK (6 files, +491)",
+    "wsl bash scratch/ci-check-test.sh push -> check1 58/58 OK; check2 ok=true warnings=[]; check3 push-scope: none -> skip; check3b PR-scope: EX-INFRA1-001-R1 OK",
+    "wsl bash scratch/ci-validate-yaml.sh -> YAML gate OK (triggers/permissions/runs-on/pins/persist-credentials/retention)"
+  ],
+  "evidence_refs": [
+    ".github/workflows/hosted-ci.yml",
+    "config/infra/hosted-ci.v1.json",
+    "docs/infra/HOSTED_CI_R1.md",
+    "docs/work/executions/EX-INFRA1-001-R1/events/0002-implementation-committed.json"
+  ],
+  "next_action": "IMPLEMENTER: зафиксировать terminal HANDOFF_COMPLETED event, привязанный к substantive HEAD 0ab044b, обновить статусы паспорта и branch-passport, опубликовать summary.md и handoff commit.",
+  "blocker": null
+}

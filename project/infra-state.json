@@ -4,7 +4,7 @@
   "track": "INFRA",
   "revision": "infra-roadmap-r1",
   "frontier": "INFRA1",
-  "next_work_order": "INFRA1-001",
+  "next_work_order": "INFRA1-002",
   "checkpoint_status": {
     "INFRA0":"ACCEPTED",
     "INFRA1":"IN_PROGRESS",
@@ -17,8 +17,8 @@
   },
   "task_status": {
     "INFRA0-001":"ACCEPTED",
-    "INFRA1-001":"READY",
-    "INFRA1-002":"PLANNED",
+    "INFRA1-001":"ACCEPTED",
+    "INFRA1-002":"READY",
     "INFRA2-001":"PLANNED",
     "INFRA2-002":"PLANNED",
     "INFRA3-001":"PLANNED",

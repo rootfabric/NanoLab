@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INFRA1-001-R1",
+  "work_order_id": "INFRA1-001",
+  "checkpoint": "INFRA1",
+  "base_sha": "7f17e9a1b9f712648e241d9eb8b0d8c9c8db93de",
+  "branch": "infra/infra1-hosted-ci-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    ".github/workflows/**",
+    "docs/infra/HOSTED_CI_R1.md",
+    "config/infra/hosted-ci.v1.json",
+    "docs/work/executions/EX-INFRA1-001-R1/**"
+  ],
+  "started_at_utc": "2026-09-09T11:38:20Z",
+  "status": "HANDOFF_READY"
+}
