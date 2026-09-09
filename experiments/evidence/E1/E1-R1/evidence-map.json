@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "campaign_id": "E1-R1",
+  "experiment_id": "E1",
+  "work_order_id": "NL1-002",
+  "execution_id": "EX-NL1-002-R1",
+  "branch": "work/nl1-002-reference-run-r1",
+  "base_sha": "71535d00a2e729349eea2337217a2c591ed9317d",
+  "risk_class": "HIGH",
+  "claim": {
+    "class_published": "C0_SOFTWARE_ONLY execution facts + preregistered band-facts",
+    "campaign_ceiling": "C1_COMPUTATIONAL_REPRODUCTION",
+    "campaign_scientific_outcome": "NOT_EVALUATED",
+    "note": "Полный критерий §9 (T1 PASS + все T2-реплики в полосе) проверяется в NL2-002; этот WO публикует execution facts"
+  },
+  "exact_subject": {
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "campaign_binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "environment_ref": "docs/research/ENGINE_ENVIRONMENT_R1.md (NL1-001 ACCEPTED)"
+  },
+  "inputs": {
+    "acquisition": "raw blobs pinned tree (git cat-file), байт-точно; верификация 4/4 SHA-256 перед каждым прогоном",
+    "digests": "см. experiments/evidence/E1/E1-R1/protocol.json input_digests_sha256",
+    "modifications": "NONE для всех прогонов"
+  },
+  "runs": [
+    {"run_id": "E1-R1-S001", "type": "T1_PRODUCTION", "execution_outcome": "COMPLETED", "seed": -200619630, "wall_s": 13.13, "rss_kb": 6304, "col2_avg": -1.39393635864, "delta_from_oracle": -0.01423379720, "band_fact": "IN_BAND", "counts_toward_evidence": true},
+    {"run_id": "E1-R1-P001", "type": "PILOT", "execution_outcome": "COMPLETED", "seed": -473348953, "wall_s": 11.08, "rss_kb": 6328, "col2_avg": -1.37730121179, "delta_from_oracle": 0.00240134965, "band_fact": "IN_BAND", "counts_toward_evidence": false},
+    {"run_id": "E1-R1-P002", "type": "PILOT", "execution_outcome": "COMPLETED", "seed": -547126645, "wall_s": 11.74, "rss_kb": 6700, "col2_avg": -1.39389370430, "delta_from_oracle": -0.01419114286, "band_fact": "IN_BAND", "counts_toward_evidence": false},
+    {"run_id": "E1-R1-P003", "type": "PILOT", "execution_outcome": "COMPLETED", "seed": -1610133928, "wall_s": 12.56, "rss_kb": 6520, "col2_avg": -1.38687945155, "delta_from_oracle": -0.00717689011, "band_fact": "IN_BAND", "counts_toward_evidence": false}
+  ],
+  "failed_or_excluded_runs": [],
+  "pilot_statistics": {
+    "pilot_values": [-1.37730121179, -1.39389370430, -1.38687945155],
+    "pilot_mean": -1.38602478921,
+    "pilot_sd_sample": 0.00832919790,
+    "pilot_range": 0.01659249251,
+    "sd_to_band_ratio": 0.0555,
+    "note": "Малое n; без претензии на точный CI (E1-PROTO-R1 §6.3). Статистическая ошибка = между-репликационный разброс; физическая флуктуация и модельные ограничения разделены согласно §6.3 и не смешиваются."
+  },
+  "integrity": {
+    "rows_note": "§5.2 protocol note: 1001 строка = 1 initial + 1000 prints (OBSERVED upstream-семантика); критерий не менялся",
+    "configurations": 10,
+    "nan_inf": 0,
+    "engine_facts_recorded": true
+  },
+  "r_confirm_freeze": {
+    "doc": "docs/research/PREREGISTRATION_E1_R2.md",
+    "value": 3,
+    "basis": "разброс пилота SD=0.00833 (5.6% полосы), все реплики IN_BAND, стоимость ~12 c/прогон"
+  },
+  "remaining_risks": [
+    "NATIVE-сборка привязана к CPU campaign-машины; другой executor требует пересборки",
+    "4 прогона на одной машине/сборке; NL2-002 обязан проверить независимость повторов по правилам статистики",
+    "between-replicate SD на n=3 — грубая оценка; точные CI — предмет NL2-002"
+  ],
+  "next_action": "Независимый REVIEWER -> VERIFIER -> Director checkpoint; merge — Human Gate"
+}

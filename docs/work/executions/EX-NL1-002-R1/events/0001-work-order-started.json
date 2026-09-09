@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T10:26:00Z",
+  "execution_id": "EX-NL1-002-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "71535d00a2e729349eea2337217a2c591ed9317d",
+  "summary": "Старт NL1-002 (первый вертикальный E1 путь без ИИ). Base — свежий canonical main 71535d0 (merge PR #22: NL1-001 ACCEPTED; условие E1-PROTO-R1 §7 о запрете verbatim-прогонов до принятия NL1-001 снято). Кампании E1-R1: T1 production run E1-R1-S001 (verbatim quick_input, steps=1e6, seed случайный по upstream-семантике) + 3 PILOT прогона E1-R1-P001..P003 (не evidence, §6.4). Engine — только по pin NL1-001 (ENGINE_ENVIRONMENT_R1): пересборка из pinned commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 на campaign-машине, fixture только через raw blobs с SHA-256 4/4 до запуска. Frozen subject кампании (campaign.md, protocol.json, manifests, started-events) публикуется и пушится ДО первого запуска. Campaign-level scientific_outcome = NOT_EVALUATED (T2 confirm = NL2-002 после freeze R_confirm в E1-PROTO-R2). Budget ≤ 1 core-hour локального CPU. Risk HIGH, потолок claim кампании C1_COMPUTATIONAL_REPRODUCTION. Merge в main — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = 71535d00a2e729349eea2337217a2c591ed9317d (Merge pull request #22)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl1-002 -b work/nl1-002-reference-run-r1 origin/main",
+    "project/state.json @ 71535d0: NL1-001 = ACCEPTED, NL1-002 = READY, next_work_order = NL1-002"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL1-002.md",
+    "docs/work/executions/EX-NL1-002-R1/passport.json",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md (NL1-001, ACCEPTED)",
+    "docs/research/PREREGISTRATION_E1_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: опубликовать frozen subject кампании (campaign/protocol/manifests/started events, commit+push), пересобрать engine, верифицировать fixture 4/4, затем E1-R1-S001.",
+  "blocker": null
+}

@@ -1,0 +1,21 @@
+{
+  "summary": "Анализ §5.1 опубликован для всех прогонов (analyze_energy.sh, механически): S001 avg_col2 = -1.39393635864 (|дельта| 0.014234 от оракула -1.37970256144) -> IN_BAND; пилоты -1.37730121179 / -1.39389370430 / -1.38687945155, все IN_BAND, между-репликационное SD 0.00832919790 (5.6% полосы). Целостность §5.2: 1001 строка energy.dat (protocol note: 1 initial + 1000 prints), 10 конфигураций, NaN/Inf=0 во всех прогонах. R_confirm = 3 зафиксирован в PREREGISTRATION_E1_R2 (superseding только SS6.4) ДО confirmatory кампании. Campaign-level scientific_outcome = NOT_EVALUATED: полный критерий SS9 (T1 + все T2 в полосе) проверяет NL2-002. T1-факт IN_BAND публикуется как execution fact, не как acceptance.",
+  "blocker": null,
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R1/evidence-map.json",
+    "docs/research/PREREGISTRATION_E1_R2.md",
+    "docs/evidence/NL1-002/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "subject_sha": "9cc83e8",
+  "event_type": "VALIDATION_RECORDED",
+  "timestamp_utc": "2026-09-09T11:20:00Z",
+  "actor_role": "IMPLEMENTER",
+  "schema_version": 1,
+  "command_refs": [
+    "см. evidence-map.json и IMPLEMENTER_EVIDENCE.md"
+  ],
+  "execution_id": "EX-NL1-002-R1",
+  "next_action": "REVIEWER: independent review -> docs/evidence/NL1-002/REVIEWER_VERDICT.md",
+  "work_order_id": "NL1-002",
+  "event_id": "0003-validation-recorded"
+}

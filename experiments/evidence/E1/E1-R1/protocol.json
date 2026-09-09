@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "experiment_campaign_protocol",
+  "campaign_id": "E1-R1",
+  "experiment_id": "E1",
+  "protocol_revision": "E1-PROTO-R1",
+  "protocol_doc": "docs/research/PREREGISTRATION_E1_R1.md",
+  "protocol_subject": {
+    "upstream_repo": "https://github.com/lorenzo-rovigatti/oxDNA",
+    "pinned_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "fixture_paths": [
+      "test/DNA/DSDNA8/dsdna8.top",
+      "test/DNA/DSDNA8/init.dat",
+      "test/DNA/DSDNA8/MD/quick_input",
+      "test/DNA/DSDNA8/MD/quick_compare"
+    ],
+    "input_digests_sha256": {
+      "dsdna8.top": "f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4",
+      "init.dat": "0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0",
+      "quick_input": "8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2",
+      "quick_compare": "86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27"
+    },
+    "acquisition_rule": "raw blobs only (git cat-file blob), byte-exact; Windows working-tree checkout запрещён (ENGINE_ENVIRONMENT_R1 §5)",
+    "vendoring": "FORBIDDEN — upstream файлы не коммитятся в NanoLab (GPL-3.0, DOWNLOAD_ON_SETUP); в Git только дайджесты и команды"
+  },
+  "environment_binding": {
+    "doc": "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "work_order": "NL1-001",
+    "state": "ACCEPTED",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "engine_build": "WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6 user-local, Release, DOUBLE=ON, CUDA=OFF, MPI=OFF, NATIVE_COMPILATION=ON (пересборка §3 на campaign-машине)",
+    "campaign_binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "campaign_binary_size": 3375976,
+    "binary_hash_note": "SHA-256 бинаря не воспроизводим бит-в-бит между сборками (oxDNA встраивает дату 'COMPILED ON'); критерий — успешная пересборка по §3 + идентичные флаги/размер + commit строки лога"
+  },
+  "runs": {
+    "T1": {
+      "run_id": "E1-R1-S001",
+      "type": "T1_PRODUCTION",
+      "input": "quick_input verbatim, byte-exact raw blob (533 B)",
+      "seed_policy": "engine random per run (upstream semantics; '#seed = 4982' остаётся закомментированным); фактический seed фиксируется из log.dat каждого прогона",
+      "counts_toward_evidence": true
+    },
+    "PILOT": [
+      {"run_id": "E1-R1-P001", "input": "same as T1", "counts_toward_evidence": false},
+      {"run_id": "E1-R1-P002", "input": "same as T1", "counts_toward_evidence": false},
+      {"run_id": "E1-R1-P003", "input": "same as T1", "counts_toward_evidence": false}
+    ],
+    "T2_confirm": "OUT_OF_SCOPE для NL1-002; R_confirm фиксируется E1-PROTO-R2 до confirmatory кампании NL2-002"
+  },
+  "observable": {
+    "definition": "арифметическое среднее колонки 2 energy.dat по ВСЕМ строкам прогона (механически, включая initial row)",
+    "analysis_tool": "analyze_energy.sh (awk; опубликован в campaign-директории), одинаковый для T1 и пилотов",
+    "reference_oracle": "ColumnAverage::energy.dat::2::-1.37970256144::0.15",
+    "criterion_T1": "|ColumnAvg - (-1.37970256144)| <= 0.15",
+    "column2_semantics": "OBSERVED-in-source: потенциальная энергия на нуклеотид (PotentialEnergy.cpp: energy /= N); ASSUMED E1-PROTO-R1 §5.1 подтверждён, ENGINE_ENVIRONMENT_R1 §6"
+  },
+  "integrity": {
+    "expected_energy_rows_note": "E1-PROTO-R1 §5.2 заявляет steps/print_energy_every = 1000; OBSERVED upstream-семантика добавляет initial row (smoke EX-NL1-001-SMOKE-001: 11 = 1 + 10). Ожидание для production: 1001 строка = 1 initial + 1000 interval prints. Фиксируется как protocol note; критерий не меняется.",
+    "expected_configurations": 10,
+    "nan_inf": "обязаны отсутствовать во всех выходах",
+    "recorded_per_run": ["engine version string", "GIT COMMIT из лога", "фактический seed", "wall time", "max RSS"]
+  },
+  "budget": {
+    "cap": "1 core-hour суммарно, локальный CPU только",
+    "storage": "raw выходы в Git целиком (порядка сотен KB на прогон)"
+  },
+  "stop_conditions": [
+    "превышение budget",
+    ">= 2 технических сбоя на одном этапе -> BLOCKED + repair analysis",
+    "недоступность pinned upstream objects"
+  ],
+  "outcomes_semantics": "E1-PROTO-R1 §9; campaign-level scientific_outcome остаётся NOT_EVALUATED до T2 confirmatory кампании (NL2-002); T1 band-факт публикуется как execution fact, не как acceptance"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-completed",
+  "timestamp_utc": "2026-09-09T11:05:00Z",
+  "run_id": "E1-R1-P001",
+  "campaign_id": "E1-R1",
+  "work_order_id": "NL1-002",
+  "event_type": "RUN_COMPLETED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "terminal_execution_event": true,
+  "execution_outcome": "COMPLETED",
+  "summary": "Прогон завершён технически успешно: exit code 0, engine 'END OF THE SIMULATION, everything went OK!'. Входы верифицированы байт-точно перед запуском (quick_input 8935c4bc..., dsdna8.top f1aded90..., init.dat 0ff76d54...). Фактический seed (engine random): -473348953. Wall 11.08 s, max RSS 6328 KB. Целостность §5.2: energy.dat 1001 строка (1 initial + 1000 prints, protocol note в protocol.json), 10 конфигураций, NaN/Inf отсутствуют. Scientific_outcome по этому событию не выставляется.",
+  "command_refs": [
+    "cd <scratch>/E1-R1-P001 && /usr/bin/time -v ~/nl1-002/build-oxdna-cpu/bin/oxDNA quick_input -> RUN_EXIT=0",
+    "/usr/bin/time -v: Elapsed 0:11.08; Maximum resident set size: 6328 KB"
+  ],
+  "engine_observations": {
+    "RELEASE": "v3.7",
+    "GIT_COMMIT_log": "00dc7fb",
+    "seed": -473348953,
+    "T_sim_units": 0.097717,
+    "N": 16,
+    "molecules": 2
+  },
+  "artifacts_sha256": {
+    "log.dat": "1bb434803c3450f39e6c9a7859b4564d1d68c8f32461a84f57cc31c0aae7d8d4",
+    "energy.dat": "34231af7b015ad4965694e83673fc42adf4c1a7e9809c2b7335dc5cb4ece002c",
+    "trajectory.dat": "548cd7dbf17dfa9d0d57f73e35e4710a9e087d17b5873ba4a66692f95dfe5ca2",
+    "last_conf.dat": "8ac0d4d9c48a48353543963f80bccaede0258eee6de256e68b332421068d12b3"
+  },
+  "blocker": null
+}

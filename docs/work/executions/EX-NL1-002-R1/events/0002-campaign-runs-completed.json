@@ -1,0 +1,21 @@
+{
+  "summary": "Batch-этап кампании E1-R1 завершён: 4/4 прогонов (E1-R1-S001 T1 production + P001..P003 PILOT) COMPLETED, exit 0, без исключений и скрытых retries. Входы verbatim (4/4 SHA-256 верификация на месте перед каждым прогоном). Все фактические seed записаны из логов: S001 -200619630, P001 -473348953, P002 -547126645, P003 -1610133928. Артефакты всех прогонов заархивированы в Git с artifacts.manifest.json (SHA-256/size/producer). Суммарный wall ~48.5 c — бюджет 1 core-hour не превышен.",
+  "blocker": null,
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R1/evidence-map.json",
+    "docs/research/PREREGISTRATION_E1_R2.md",
+    "docs/evidence/NL1-002/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "subject_sha": "9cc83e8",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "timestamp_utc": "2026-09-09T11:15:00Z",
+  "actor_role": "IMPLEMENTER",
+  "schema_version": 1,
+  "command_refs": [
+    "см. evidence-map.json и IMPLEMENTER_EVIDENCE.md"
+  ],
+  "execution_id": "EX-NL1-002-R1",
+  "next_action": "REVIEWER: independent review -> docs/evidence/NL1-002/REVIEWER_VERDICT.md",
+  "work_order_id": "NL1-002",
+  "event_id": "0002-campaign-runs-completed"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "run_id": "E1-R1-S001",
+  "campaign_id": "E1-R1",
+  "experiment_id": "E1",
+  "type": "T1_PRODUCTION",
+  "protocol_revision": "E1-PROTO-R1",
+  "work_order_id": "NL1-002",
+  "execution_id": "EX-NL1-002-R1",
+  "branch_base_sha": "71535d00a2e729349eea2337217a2c591ed9317d",
+  "engine": {
+    "upstream_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "environment_ref": "docs/research/ENGINE_ENVIRONMENT_R1.md"
+  },
+  "inputs": {
+    "quick_input_sha256": "8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2",
+    "topology_sha256": "f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4",
+    "configuration_sha256": "0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0",
+    "oracle_sha256": "86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27",
+    "modifications": "NONE — verbatim byte-exact"
+  },
+  "seed_policy": "engine random; фактический seed публикуется из log.dat после прогона",
+  "command": "cd <run-dir> && /usr/bin/time -v <engine>/bin/oxDNA quick_input",
+  "resource_budget": {
+    "wall_expectation": "10-60 s (planning estimate from NL1-001 smoke)",
+    "cap": "1 core-hour for the whole campaign",
+    "stop_if_exceeded": true
+  },
+  "status": "STARTED",
+  "started_at_utc": "2026-09-09T10:40:00Z"
+}

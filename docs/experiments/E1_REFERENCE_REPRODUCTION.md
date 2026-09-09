@@ -1,6 +1,6 @@
 # E1 — Воспроизведение небольшого известного примера
 
-Статус: NOT_RUN. Этап: NL1 smoke, затем NL2 научная приёмка. Основные кандидаты источников: [S01–S03](../research/SOURCES.md).
+Статус: RUN (вертикальный путь исполнен в NL1-002: T1 + 3 PILOT, все technical COMPLETED, T1-факт IN_BAND; campaign-level scientific_outcome = NOT_EVALUATED). Этап: NL2 научная приёмка (T2 confirm по [E1-PROTO-R2](../research/PREREGISTRATION_E1_R2.md), R_confirm = 3). Evidence: [E1-R1](../../experiments/evidence/E1/E1-R1/campaign.md). Среда: [ENGINE_ENVIRONMENT_R1](../research/ENGINE_ENVIRONMENT_R1.md). Основные кандидаты источников: [S01–S03](../research/SOURCES.md).
 
 ## Вопрос
 

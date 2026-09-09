@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL1-002-R1",
+  "work_order_id": "NL1-002",
+  "checkpoint": "NL1",
+  "base_sha": "71535d00a2e729349eea2337217a2c591ed9317d",
+  "branch": "work/nl1-002-reference-run-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION_CEILING_NOT_EVALUATED",
+  "allowed_paths": [
+    "docs/work/WO-NL1-002.md",
+    "docs/research/PREREGISTRATION_E1_R2.md",
+    "docs/experiments/E1_REFERENCE_REPRODUCTION.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/executions/EX-NL1-002-R1/**",
+    "docs/evidence/NL1-002/**",
+    "experiments/evidence/E1/E1-R1/**"
+  ],
+  "started_at_utc": "2026-09-09T10:25:00Z",
+  "status": "IN_PROGRESS"
+}

@@ -1,0 +1,30 @@
+# E1-R1-P002 — summary
+
+Тип: PILOT. Протокол: E1-PROTO-R1 (verbatim quick_input, без модификаций).
+
+## Исполнение
+
+- execution_outcome: COMPLETED (exit 0)
+- wall: 11.74 s; max RSS: 6700 KB
+- seed (engine random): -547126645
+- engine: oxDNA v3.7 @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (лог: GIT COMMIT 00dc7fb), бинарь ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f
+
+## Целостность (§5.2)
+
+- energy.dat: 1001 строка (1 initial + 1000 prints; protocol note)
+- trajectory.dat: 10 конфигураций; last_conf.dat записан
+- NaN/Inf: 0
+- N=16, molecules=2 (совпадает с topology)
+
+## Анализ (§5.1, механический)
+
+- ColumnAverage(col2) = **-1.39389370430**
+- oracle = −1.37970256144, band = ±0.15
+- |Δ| = 0.01419114286 -> **IN_BAND** (факт, не acceptance)
+- scientific_outcome: NOT_EVALUATED (campaign-level решает NL2-002 по полному критерию §9)
+
+PILOT: прогон не засчитывается в evidence кампании (E1-PROTO-R1 §6.4); используется только для оценки разброса и стоимости.
+
+## Артефакты
+
+См. artifacts.manifest.json (SHA-256/size/producer); все файлы в Git.
