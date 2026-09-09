@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "e0_r1_input_digests",
   "digest_base_note": "instrument files are raw git blobs at the given rev; fixture files are campaign-dir bytes as committed in the freeze commit",
-  "digest_rev": "e0c3b6d99dcdff287ae7f777b11f1d91ce53f1de",
+  "digest_rev": "e87202e7e5aaefd1243d9295264562f45b4fe9b6",
   "files": [
     {
       "path": "config/control/harness/artifact-manifest.schema.v1.json",
@@ -56,8 +56,8 @@
     },
     {
       "path": "experiments/evidence/E0/E0-R1/tools/e0_freeze.py",
-      "sha256": "a20a5766e14dd013a574c3a66e3d595fb3d5087abe7f27cfd6d2216626c1cb8a",
-      "size_bytes": 19893
+      "sha256": "8cd23e0362afa82a1670c3eb38a7c44e97e343fd5f9f36a44a2d575270eb040a",
+      "size_bytes": 19927
     },
     {
       "path": "experiments/evidence/E0/E0-R1/tools/e0_runner.py",

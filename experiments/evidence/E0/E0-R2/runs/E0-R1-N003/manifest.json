@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-N003",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R1",
+  "subject_sha": "e87202e7e5aaefd1243d9295264562f45b4fe9b6",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "none - software contract validation of the frozen control harness (no physics model)",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas at subject_sha (digests: input_digests.json)"
+  },
+  "inputs": [
+    {
+      "name": "instrument_bundle",
+      "ref": "experiments/evidence/E0/E0-R2/input_digests.json",
+      "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha"
+    },
+    {
+      "name": "fixtures/negative/n003_missing_fields/execution/passport.json",
+      "role": "fixture input",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "size_bytes": 3
+    }
+  ],
+  "observables": [
+    {
+      "name": "validator_rejects_invalid_surface",
+      "expected": {
+        "exit_code": 3,
+        "stdout_must_contain": [
+          "\"ok\": false"
+        ],
+        "ok_field_false": true
+      },
+      "criterion": "exit code == 3 AND ok:false AND errors непуст"
+    }
+  ],
+  "environment": {
+    "family": "NEG",
+    "description": "Passport {} (отсутствуют все обязательные поля) — корректное мягкое отвержение: ok:false, непустой список ошибок, exit 3",
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "synthetic": true
+  },
+  "seed_policy": {
+    "policy": "NOT_APPLICABLE - fully deterministic software control, no RNG"
+  },
+  "resource_budget": {
+    "cap_cpu_seconds": 5,
+    "local_only": true
+  },
+  "stop_conditions": [
+    "runner or validator technical crash on an intact environment -> RUN_FAILED_TECHNICAL, new run id required for any retry",
+    "instrument file drift (sha256 differs from input_digests.json) -> campaign BLOCKED",
+    "cpu budget exceeded -> stop"
+  ],
+  "status": "STARTED"
+}

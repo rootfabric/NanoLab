@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T13:18:32Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-U002",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e87202e7e5aaefd1243d9295264562f45b4fe9b6",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject e87202e7e5aaefd1243d9295264562f45b4fe9b6; case E0-R1-U002 (family UNIT): Кандидаты-подделки единиц (20, 293.15, 0.29315, 0.0978) обязаны быть REJECTED все — неправильная единица не должна тихо проходить как pinned-конверсия Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python tools/units_check.py fixtures/units/u002_wrong_*.json (4 файла)",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/units/u002_wrong_20.json",
+    "fixtures/units/u002_wrong_293_15.json",
+    "fixtures/units/u002_wrong_0_29315.json",
+    "fixtures/units/u002_wrong_0_0978.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

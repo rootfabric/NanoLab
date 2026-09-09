@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T13:18:32Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-S002",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e87202e7e5aaefd1243d9295264562f45b4fe9b6",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject e87202e7e5aaefd1243d9295264562f45b4fe9b6; case E0-R1-S002 (family STATUS): ANALYSIS_COMPLETED с scientific_outcome 'PASS' (reviewer-вердикт, а не научный исход) обязан отвергаться — словарь исходов закрыт Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python -m harness.experiment_cli validate <fixture run dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/status/s002_invalid_outcome_vocab/run/manifest.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

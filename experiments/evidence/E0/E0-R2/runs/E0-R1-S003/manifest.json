@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-S003",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R1",
+  "subject_sha": "e87202e7e5aaefd1243d9295264562f45b4fe9b6",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "none - software contract validation of the frozen control harness (no physics model)",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas at subject_sha (digests: input_digests.json)"
+  },
+  "inputs": [
+    {
+      "name": "instrument_bundle",
+      "ref": "experiments/evidence/E0/E0-R2/input_digests.json",
+      "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha"
+    },
+    {
+      "name": "fixtures/status/s003_tech_with_sci_claim/run/manifest.json",
+      "role": "fixture input",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    }
+  ],
+  "observables": [
+    {
+      "name": "technical_vs_scientific_separation",
+      "expected": {
+        "separation_probe": true
+      },
+      "criterion": "SUPPORTED — только если инструмент отвергает/помечает событие; если принимает тихо (ok:true, exit 0) — случай NOT_SUPPORTED и сохраняется как задокументированный контрактный gap для review"
+    }
+  ],
+  "environment": {
+    "family": "STATUS",
+    "description": "Gap-проба: технический терминальный RUN_COMPLETED с scientific_outcome SUPPORTED — контрактное ожидание (PROJECT_CONTROL: технический успех не становится научным утверждением) в том, что инструмент помечает нарушение разделения; фактическое поведение фиксируется как есть",
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "synthetic": true
+  },
+  "seed_policy": {
+    "policy": "NOT_APPLICABLE - fully deterministic software control, no RNG"
+  },
+  "resource_budget": {
+    "cap_cpu_seconds": 5,
+    "local_only": true
+  },
+  "stop_conditions": [
+    "runner or validator technical crash on an intact environment -> RUN_FAILED_TECHNICAL, new run id required for any retry",
+    "instrument file drift (sha256 differs from input_digests.json) -> campaign BLOCKED",
+    "cpu budget exceeded -> stop"
+  ],
+  "status": "STARTED"
+}
