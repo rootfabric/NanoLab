@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "kind": "e0_r1_input_digests",
+  "digest_base_note": "instrument files are raw git blobs at the given rev; fixture files are campaign-dir bytes as committed in the freeze commit",
+  "digest_rev": "cc495fedec4cbd61bf3a4341a95c2580ee1cf2bf",
+  "files": [
+    {
+      "path": "config/control/harness/artifact-manifest.schema.v1.json",
+      "sha256": "f543cf86f5e0231005a0290e274979e7d4f34706f2ce5987deb26ca2892bcb1b",
+      "size_bytes": 1046
+    },
+    {
+      "path": "config/control/harness/experiment-event.schema.v1.json",
+      "sha256": "32bbdc0c7d9050ab85f92630a2baf9b22c1eebdd1524d8f91e85dbd78fdc6e7b",
+      "size_bytes": 1471
+    },
+    {
+      "path": "config/control/harness/experiment-run.schema.v1.json",
+      "sha256": "2d989bd5b407c4aabb6f767aac31d94cbf44cefbe52ac00524499d26d9140fbe",
+      "size_bytes": 1468
+    },
+    {
+      "path": "config/control/harness/work-event.schema.v1.json",
+      "sha256": "f2637bb61d63a8b16801a335ec0ac271540a489d0c6c3eddb3945ce9d444a2cc",
+      "size_bytes": 1306
+    },
+    {
+      "path": "config/control/harness/work-order.schema.v1.json",
+      "sha256": "8766601099c601edb832fe7918b4d8ea773a7961f190a3f93f210431bcaa9b33",
+      "size_bytes": 1886
+    },
+    {
+      "path": "config/control/harness/execution-passport.schema.v1.json",
+      "sha256": "4296ba813cf813ce48af30de8db54777b452bfc0a43ca3379915091698709f58",
+      "size_bytes": 1060
+    },
+    {
+      "path": "scripts/harness/cli.py",
+      "sha256": "e0f743e23438829607e9f2ba1076539d28be77adcb148ed491a83b1c17a2aefe",
+      "size_bytes": 2641
+    },
+    {
+      "path": "scripts/harness/contracts.py",
+      "sha256": "eca3f71d805920369c90b774bd2f602e01aaa50465e811e06aed95f1c8383fc8",
+      "size_bytes": 5210
+    },
+    {
+      "path": "scripts/harness/experiment_cli.py",
+      "sha256": "da090ed70b45cd61883ba6d587f9cf59c62f204c8954e5a4af856850e2f5a378",
+      "size_bytes": 7905
+    },
+    {
+      "path": "scripts/harness/work_cli.py",
+      "sha256": "b1693b1886ab383e66c94a482d5caca53d252e07c1e0f58e2f81c2a1811d67a0",
+      "size_bytes": 5342
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R1/tools/e0_freeze.py",
+      "sha256": "1561c4811a09da22cfc35f85b4e4c7be7e9940b6e8018a61347bca1b79d6db51",
+      "size_bytes": 20004
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R1/tools/e0_runner.py",
+      "sha256": "716e3e57dbf64642795bfe1b157b50cb6f7af6100f737add71453c3619f7e0e8",
+      "size_bytes": 27732
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R1/tools/geometry_check.py",
+      "sha256": "0319ad3727044e48b92cb54d657e6d9eb46a057ff3cb23001308d99e7dac3d22",
+      "size_bytes": 3664
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R1/tools/units_check.py",
+      "sha256": "5c2da41037cd1cd3557bd22609cc6890629f0ed4ca866d2f003b8d39f55fdd7b",
+      "size_bytes": 2938
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R3/protocol.json",
+      "sha256": "f58c88f9b27444d059a6515e2b1370834560fc91f1588f584f1ec671407783f7",
+      "size_bytes": 24749
+    },
+    {
+      "path": "experiments/evidence/E0/E0-R3/campaign.md",
+      "sha256": "5a3bead09f71daa497fd10c377cf987a3b24bfde0bb044be546ef2488b02138e",
+      "size_bytes": 2257
+    },
+    {
+      "path": "docs/research/PREREGISTRATION_E0_R3.md",
+      "sha256": "19bbdadbe9f2da8727e51fde9d636692561bfe1d1cccbbbff8fba78985c60f7e",
+      "size_bytes": 3403
+    },
+    {
+      "path": "fixtures/geometry/g001_right_angle.json",
+      "sha256": "3fe7ba3aeed753e20e1441b75308ae1b59cfbe5e6abbc7b3a6cb13b464c7aca2",
+      "size_bytes": 675
+    },
+    {
+      "path": "fixtures/geometry/g002_zero_axis.json",
+      "sha256": "429e1fe9ed74823b1fa3fc1bbee3d1b69ded1a5636c710b231d150e2278dab0f",
+      "size_bytes": 673
+    },
+    {
+      "path": "fixtures/geometry/g003_orientation_flip.json",
+      "sha256": "227d082ead7f7efccf0e9c7c75f2065d8da86e5f21b5bf354976d916fb97923f",
+      "size_bytes": 766
+    },
+    {
+      "path": "fixtures/negative/n001_empty_passport/execution/passport.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "fixtures/negative/n002_truncated_json/execution/passport.json",
+      "sha256": "1de18ae447d83f621e98f64ef928858e9c0b1456144f10b4870bfcea8a3c4a85",
+      "size_bytes": 80
+    },
+    {
+      "path": "fixtures/negative/n003_missing_fields/execution/passport.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "size_bytes": 3
+    },
+    {
+      "path": "fixtures/negative/n004_event_filename_mismatch/run/events/0001-started.json",
+      "sha256": "6ca5b4a3b6099993d07e139619a56fd047d8c1d1eed1700187ed9a66428b6ae2",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/negative/n004_event_filename_mismatch/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/negative/n005_started_not_first/execution/events/0001-continuation-checkpoint.json",
+      "sha256": "3cf0f02c626114b014484fa7732667a43f97e7dacaf1c1e0cfa1a9ef37df5a5f",
+      "size_bytes": 420
+    },
+    {
+      "path": "fixtures/negative/n005_started_not_first/execution/passport.json",
+      "sha256": "2b5d29b63b4915243e40a7f14401885d84d8947a0bed07992d673b0d94d08797",
+      "size_bytes": 419
+    },
+    {
+      "path": "fixtures/negative/n006_bad_artifact_digest/run/artifacts.manifest.json",
+      "sha256": "1e117f313e35f18b5533ad875bde9d57b8f7f3254d4214f798d9eedcded1782e",
+      "size_bytes": 265
+    },
+    {
+      "path": "fixtures/negative/n006_bad_artifact_digest/run/events/0001-started.json",
+      "sha256": "bb2d6280168b1df78532125cecdb510e0b8f35a92e9349c25a6769753e1ae777",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/negative/n006_bad_artifact_digest/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/negative/n007_legacy_map_manifest/run/artifacts.manifest.json",
+      "sha256": "b43eef161132ed7b0431a237073b47a779ad21f3b8d3bb3c5b033edd439fddbf",
+      "size_bytes": 295
+    },
+    {
+      "path": "fixtures/negative/n007_legacy_map_manifest/run/events/0001-started.json",
+      "sha256": "bb2d6280168b1df78532125cecdb510e0b8f35a92e9349c25a6769753e1ae777",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/negative/n007_legacy_map_manifest/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/negative/n008_terminal_not_last/execution/events/0001-work-order-started.json",
+      "sha256": "93d2f937b39c259d288c270b23d8af379f2bcb5033aa0bba0da033b6d45d59d6",
+      "size_bytes": 410
+    },
+    {
+      "path": "fixtures/negative/n008_terminal_not_last/execution/events/0002-handoff-completed.json",
+      "sha256": "3fd78fc7ab41c10490a5dfa0a7685324bf50e56dcb56c00636861c10ae06e4ad",
+      "size_bytes": 408
+    },
+    {
+      "path": "fixtures/negative/n008_terminal_not_last/execution/events/0003-continuation-checkpoint.json",
+      "sha256": "6a0175d67835255d744f9c591b71c3f2b2e3d0d1198308989c0d423c8568fb16",
+      "size_bytes": 420
+    },
+    {
+      "path": "fixtures/negative/n008_terminal_not_last/execution/passport.json",
+      "sha256": "2b5d29b63b4915243e40a7f14401885d84d8947a0bed07992d673b0d94d08797",
+      "size_bytes": 419
+    },
+    {
+      "path": "fixtures/negative/n009_exit_code_contract/execution/passport.json",
+      "sha256": "d8758c9170bc62dd69ad20056a37ee37a6f98eb0828b6870e2817a60568928ad",
+      "size_bytes": 388
+    },
+    {
+      "path": "fixtures/status/s001_analysis_without_outcome/run/artifacts.manifest.json",
+      "sha256": "8f2c9031ca8a2e6734d432a46d58da80217110a0f42d338434dade1a67ba4c20",
+      "size_bytes": 356
+    },
+    {
+      "path": "fixtures/status/s001_analysis_without_outcome/run/events/0001-started.json",
+      "sha256": "bb2d6280168b1df78532125cecdb510e0b8f35a92e9349c25a6769753e1ae777",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/status/s001_analysis_without_outcome/run/events/0002-run-completed.json",
+      "sha256": "a3e4b5ca03cbb8b82aa960713434c5767a0a21bdfd6e94841a63cff49ab2ab45",
+      "size_bytes": 446
+    },
+    {
+      "path": "fixtures/status/s001_analysis_without_outcome/run/events/0003-analysis-completed.json",
+      "sha256": "28fb385dff757453609769712fed2f0cc5c78a61fc78821afb8bd3ff217926a8",
+      "size_bytes": 426
+    },
+    {
+      "path": "fixtures/status/s001_analysis_without_outcome/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/status/s002_invalid_outcome_vocab/run/artifacts.manifest.json",
+      "sha256": "8f2c9031ca8a2e6734d432a46d58da80217110a0f42d338434dade1a67ba4c20",
+      "size_bytes": 356
+    },
+    {
+      "path": "fixtures/status/s002_invalid_outcome_vocab/run/events/0001-started.json",
+      "sha256": "bb2d6280168b1df78532125cecdb510e0b8f35a92e9349c25a6769753e1ae777",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/status/s002_invalid_outcome_vocab/run/events/0002-run-completed.json",
+      "sha256": "a3e4b5ca03cbb8b82aa960713434c5767a0a21bdfd6e94841a63cff49ab2ab45",
+      "size_bytes": 446
+    },
+    {
+      "path": "fixtures/status/s002_invalid_outcome_vocab/run/events/0003-analysis-completed.json",
+      "sha256": "696267e7e01bd22b6b0c7ec89fadfba5e2c8db3acd2d32b9333051248866f0e8",
+      "size_bytes": 458
+    },
+    {
+      "path": "fixtures/status/s002_invalid_outcome_vocab/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/status/s003_tech_with_sci_claim/run/artifacts.manifest.json",
+      "sha256": "8f2c9031ca8a2e6734d432a46d58da80217110a0f42d338434dade1a67ba4c20",
+      "size_bytes": 356
+    },
+    {
+      "path": "fixtures/status/s003_tech_with_sci_claim/run/events/0001-started.json",
+      "sha256": "bb2d6280168b1df78532125cecdb510e0b8f35a92e9349c25a6769753e1ae777",
+      "size_bytes": 438
+    },
+    {
+      "path": "fixtures/status/s003_tech_with_sci_claim/run/events/0002-run-completed.json",
+      "sha256": "015bf37b97abef78306cdf1aca11560ffaa4828ef49b9bede107efceab3a4699",
+      "size_bytes": 453
+    },
+    {
+      "path": "fixtures/status/s003_tech_with_sci_claim/run/manifest.json",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    },
+    {
+      "path": "fixtures/units/u001_accepted.json",
+      "sha256": "0cb4e2043061ed8a7699b7fea3999bc1d6be5842394c4a73a3244d073e5fa65c",
+      "size_bytes": 54
+    },
+    {
+      "path": "fixtures/units/u002_wrong_0_0978.json",
+      "sha256": "4dd8e51012764690444e0979cb821483621aa55d064946957ca25e4af256f758",
+      "size_bytes": 52
+    },
+    {
+      "path": "fixtures/units/u002_wrong_0_29315.json",
+      "sha256": "49e8955e9e2a2b17546a3d049139525d0355872fc78c06d2ddd10d68ed45e8ae",
+      "size_bytes": 53
+    },
+    {
+      "path": "fixtures/units/u002_wrong_20.json",
+      "sha256": "a5bfd0163008f1cab53a88e77e71bdb3c3dff3f263f7a3bc8ce4dbb2beb83663",
+      "size_bytes": 48
+    },
+    {
+      "path": "fixtures/units/u002_wrong_293_15.json",
+      "sha256": "8f5fad69a6bdbf19e4730318f6b4eac6c4480f56ae6df53338c7f29f4d01f270",
+      "size_bytes": 52
+    }
+  ]
+}
