@@ -421,7 +421,7 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
         "resource_usage": {},
         "scientific_outcome": case_record["scientific_outcome"],
     }
-    write_json(run_dir / "events" / analysis_event["event_id"], analysis_event)
+    write_json(run_dir / "events" / (analysis_event["event_id"] + ".json"), analysis_event)
 
     artifacts_manifest = {"schema_version": 1, "artifacts": []}
     for name in sorted(p.name for p in art_dir.iterdir() if p.is_file()):
