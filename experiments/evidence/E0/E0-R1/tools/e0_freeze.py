@@ -359,6 +359,7 @@ def mode_digests(rev: str, out_path: Path, extra_files: list[str]) -> None:
 
 
 def mode_scaffolds(subject: str, runs_dir: Path) -> None:
+    runs_dir = runs_dir.resolve()
     protocol = json.loads((CAMPAIGN_DIR / "protocol.json").read_text(encoding="utf-8"))
     campaign_id = protocol["campaign_id"]
     protocol_revision = protocol["protocol_revision"]
