@@ -4,9 +4,11 @@
   "timestamp_utc": "2026-09-09T11:10:00Z",
   "run_id": "E1-R1-P003",
   "campaign_id": "E1-R1",
+  "experiment_id": "E1",
   "work_order_id": "NL1-002",
   "event_type": "ANALYSIS_COMPLETED",
   "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "9cc83e8599c76366a6ba8c5bc49f7398f5fca64f",
   "analysis_tool": "analyze_energy.sh (механическое среднее колонки 2 по всем строкам; одинаковый для всех прогонов кампании)",
   "observable": {
     "name": "ColumnAverage::energy.dat::2",

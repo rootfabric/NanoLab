@@ -5,5 +5,5 @@
   "current_checkpoint": "NL2",
   "next_work_order": "NL2-001",
   "parallel_scientific_runtime_limit": 1,
-  "notes": "NL1 ACCEPTED in full: NL1-001 (environment pin ENGINE_ENVIRONMENT_R1 + upstream smoke) and NL1-002 (first vertical E1 path: T1 E1-R1-S001 verbatim + 3 PILOT, all COMPLETED, T1 band-fact IN_BAND vs upstream oracle; R_confirm=3 frozen in E1-PROTO-R2; fresh Reviewer/Verifier PASS). Campaign-level E1 scientific outcome NOT_EVALUATED; E1 acceptance = NL2-002 (T2 confirm + statistics). NL2-001 (schemes, manifest, E0) is scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
+  "notes": "NL1 ACCEPTED in full: NL1-001 (environment pin ENGINE_ENVIRONMENT_R1 + upstream smoke) and NL1-002 (first vertical E1 path: T1 E1-R1-S001 verbatim + 3 PILOT, all COMPLETED, T1 band-fact IN_BAND vs upstream oracle; R_confirm=3 frozen in E1-PROTO-R2; canonical fresh Reviewer R2 PASS 23c6c15 and Verifier R2 FIX_REQUIRED->RECHECK PASS 86aeab1 on repaired surfaces). NL1-002 acceptance supersedes the annulled role-mixing r1 checkpoint (PR #23). Campaign-level E1 scientific outcome NOT_EVALUATED; E1 acceptance = NL2-002. NL2-001 (schemes, manifest, E0) is scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
 }

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T12:05:00Z",
+  "execution_id": "EX-NL1-002-R1-REPAIR1",
+  "work_order_id": "NL1-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ec7e3edc83a3434d96222a0a8a94b03f7fa10e23",
+  "summary": "Начат bounded repair по VERIFIER VERDICT R2 (FIX_REQUIRED; verify/nl1-002-reference-run-r2 @ 149feda3fe16ce63afaecf52a4d4b8ae83325dd7; R2 superseding R1-вердикты по основанию role-mixing). Ремонтируемая база — exact verified subject ec7e3edc83a3434d96222a0a8a94b03f7fa10e23; фактическое продолжение работы — с HEAD ветки work/nl1-002-reference-run-r1 c44b2091d183be55e8accd47e845c0511c041083 (= subject + 4 коммита superseded R1-вердиктов; work-content бит-в-бит идентичен subject, R1-вердикт-файлы сохраняются как история, не используются). Объём ровно по находкам R2: F-1 — контрактная форма artifacts.manifest.json (объект -> массив записей) и завершение машинных полей run-манифестов/событий в 4 run-каталогах E1-R1 с сохранением всех дайджестов 1:1; F-2 — erratum с полной 40-hex формой subject_sha 9cc83e8599c76366a6ba8c5bc49f7398f5fca64f (сокращённые 9cc83e8 в старых событиях не редактируются); F-3 — признание отклонения terminal-last в EX-NL1-002-R1 + контракт-чистая последовательность публикации в этом execution (terminal event будет последним). Научные факты, дайджесты, статистика, protocol.json, вердикты, state.json не пересматриваются и не изменяются. Все изменения — новыми файлами/событиями либо строго аддитивным завершением полей; история не переписывается.",
+  "command_refs": [
+    "git fetch origin -> verify/nl1-002-reference-run-r2 @ 149feda3 (VERIFIER_VERDICT_R2.md, FIX_REQUIRED)",
+    "git worktree add C:\\NanoLab\\nl1-002-repair work/nl1-002-reference-run-r1 -> HEAD c44b2091, clean",
+    "git merge-base --is-ancestor 71535d0 ec7e3ed -> exit 0; git diff --stat ec7e3ed c44b209 -> только 2 R1-вердикт-файла"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL1-002/VERIFIER_VERDICT_R2.md (на verify/nl1-002-reference-run-r2 @ 149feda3)",
+    "docs/work/executions/EX-NL1-002-R1-REPAIR1/passport.json",
+    "docs/work/WO-NL1-002.md"
+  ],
+  "next_action": "IMPLEMENTER: F-1 контрактный ремонт пакета E1-R1 (манифесты + события, дайджесты 1:1), erratum 0006 в EX-NL1-002-R1, Repair Map, валидация обоих контролов, terminal handoff.",
+  "blocker": null
+}
