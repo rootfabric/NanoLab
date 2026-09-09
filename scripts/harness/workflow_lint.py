@@ -18,7 +18,11 @@ only implements the checks. YAML is read with a minimal workflow-subset parser
 cannot understand is reported as an unparseable workflow (fail closed), as are
 multi-document files and YAML anchors/aliases/merge keys (repair R1: MAJOR-2,
 NOTE-3); a missing or non-mapping `on:` block also fails closed (repair R1:
-MAJOR-1) so no trigger form can bypass the NC-2 rules.
+MAJOR-1) so no trigger form can bypass the NC-2 rules, and a missing or
+non-mapping `jobs:` block fails closed as well (control WO EX-CTRL-LINTSCHEMA-R1:
+NOTE-5) so job-level rules cannot be silently skipped. Tab characters in the
+leading whitespace of any line are rejected (control WO EX-CTRL-LINTSCHEMA-R1:
+MINOR-4) because YAML forbids tab indentation.
 
 Exit codes: 0 = no violations, 1 = violations found, 2 = environment/config error.
 """
@@ -185,13 +189,21 @@ class _Line:
 def _content_lines(text: str) -> list[_Line]:
     lines: list[_Line] = []
     for number, raw in enumerate(text.splitlines(), 1):
+        # MINOR-4 repair (control WO EX-CTRL-LINTSCHEMA-R1): YAML forbids tab
+        # indentation. The previous check compared a spaces-only prefix slice
+        # and could never fire (a TAB-led line produced indent=0 and an empty
+        # slice), so a TAB-indented key silently rebuilt the document instead
+        # of failing closed. Reject any TAB in the leading whitespace of any
+        # raw line (keys under on:/jobs:, block-scalar bodies, comments and
+        # blank lines alike).
+        leading = raw[:len(raw) - len(raw.lstrip())]
+        if "\t" in leading:
+            raise WorkflowParseError(f"tab character in leading whitespace at line {number} (YAML forbids tab indentation; fail closed)")
         stripped_comment = _strip_comment(raw)
         if not stripped_comment.strip():
             continue
         content = stripped_comment.strip()
         indent = len(stripped_comment) - len(stripped_comment.lstrip(" "))
-        if "\t" in stripped_comment[:indent]:
-            raise WorkflowParseError(f"tab character in indentation at line {number}")
         lines.append(_Line(number, indent, content))
     return lines
 
@@ -401,7 +413,14 @@ def lint_document(doc: dict[str, Any], policy: dict[str, Any]) -> list[dict[str,
                 missing = sorted(required_types - set(pr_types or []))
                 violations.append(_violation("NOTE3_PR_TYPES_READY_FOR_REVIEW", "NOTE-3", f"pull_request.types must explicitly include {missing or sorted(required_types)}: draft-to-ready transitions must run validation (NOTE-3, DIRECTOR_ACCEPTANCE_R1 INFRA1-001)"))
 
+    # NOTE-5 (control WO EX-CTRL-LINTSCHEMA-R1): job-level rules (NC-1 labels,
+    # NC-6 timeouts, supply-chain pinning) must not be silently skipped just
+    # because 'jobs:' is absent or written in a sequence/scalar form.
     jobs = doc.get("jobs")
+    if jobs is None:
+        violations.append(_violation("WORKFLOW_JOBS_BLOCK_MISSING", "fail-closed", "workflow has no explicit 'jobs:' mapping; job-level negative controls (NC-1/NC-6, action pinning) must not be silently skipped"))
+    elif not isinstance(jobs, dict):
+        violations.append(_violation("WORKFLOW_JOBS_UNSUPPORTED_FORM", "fail-closed", f"'jobs:' must be a mapping of job ids; sequence/scalar form is not lintable and fails closed, got: {jobs!r}"))
     if isinstance(jobs, dict):
         for job_id, job in jobs.items():
             if not isinstance(job, dict):
@@ -416,7 +435,9 @@ def lint_document(doc: dict[str, Any], policy: dict[str, Any]) -> list[dict[str,
             steps = job.get("steps")
             has_steps = isinstance(steps, list)
             labels = _runs_on_labels(job)
-            if labels is None:
+            # Control WO EX-CTRL-LINTSCHEMA-R1 (NOTE-5 family): an empty
+            # runs-on list selects no runner and must not bypass NC-1 either.
+            if not labels:
                 if has_steps:
                     violations.append(_violation("NC1_RUNS_ON_MISSING", "NC-1", f"{where}: missing runs-on; runner selection must be explicit"))
             else:
