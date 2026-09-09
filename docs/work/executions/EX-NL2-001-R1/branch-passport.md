@@ -14,3 +14,7 @@
 - Last durable event: 0001-work-order-started (создаётся этим START-коммитом)
 - Next action: freeze-коммит кампании E0-R1 (пререгистрация + protocol.json + fixtures + tools), затем campaign-START commit (manifests + started-events), затем прогоны
 - Blocking issue: нет
+
+## Documented deviations (post-review repair, F6 @ `2c3b485`)
+
+- `allowed_paths` паспорта дополнены (post-hoc): `docs/research/PREREGISTRATION_E0_R2/R3/R4.md` (superseding-пререгистрации, требовались §0.1 E0-PROTO-R1) и `experiments/evidence/E0/E0-R2|R3|R4/**` (evidence попыток-повторов по §8). Процедурное отклонение признано и задокументировано: docs/evidence/NL2-001/ERRATUM_F2_F5_R1.md (F6) + events/0001-repair-f1-f7.json.
