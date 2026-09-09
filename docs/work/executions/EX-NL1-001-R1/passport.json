@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL1-001-R1",
+  "work_order_id": "NL1-001",
+  "checkpoint": "NL1",
+  "base_sha": "57c1e63733ea3b10f991c0f9609c426dc75b17a5",
+  "branch": "work/nl1-001-env-pin-smoke-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL1-001.md",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "docs/work/SESSION_LOG.md",
+    "docs/work/executions/EX-NL1-001-R1/**",
+    "docs/evidence/NL1-001/**"
+  ],
+  "started_at_utc": "2026-09-09T07:00:00Z",
+  "status": "IN_PROGRESS"
+}
