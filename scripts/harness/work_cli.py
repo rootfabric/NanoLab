@@ -4,13 +4,40 @@ import argparse
 import hashlib
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 TERMINAL = {"HANDOFF_COMPLETED", "WORK_ORDER_BLOCKED", "WORK_ORDER_CANCELLED"}
-ALLOWED_EVENTS = {"WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", *TERMINAL}
+# Explicit post-terminal corrections class (docs/infra/VALIDATION_GATES_R1.md):
+# REVIEW_CORRECTIONS is the dedicated marker event type; CONTINUATION_CHECKPOINT
+# doubles as the legacy spelling used by already-published canonical executions.
+CORRECTIONS_EVENTS = {"CONTINUATION_CHECKPOINT", "REVIEW_CORRECTIONS"}
+ALLOWED_EVENTS = {"WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", "REVIEW_CORRECTIONS", *TERMINAL}
 ALLOWED_ROLES = {"IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"}
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
+# Event subject_sha accepts a full 40-hex commit SHA or a git abbreviated SHA
+# (7..39 hex). Abbreviations exist only in immutable legacy events already
+# published on canonical main (EX-NL1-002-R1 0002-0005); new events must use
+# the full 40-hex form required by work-event.schema.v1.json. The validator is
+# a floor, not a ceiling: see docs/infra/VALIDATION_GATES_R1.md.
+SUBJECT_SHA = re.compile(r"^[0-9a-f]{7,40}$")
+
+
+def parse_utc_timestamp(value: Any) -> datetime | None:
+    """Parse an ISO-8601 UTC timestamp; return None when absent or malformed."""
+    if not isinstance(value, str) or not value:
+        return None
+    text = value.strip()
+    if text.endswith(("Z", "z")):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -51,9 +78,11 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
 
     ids: list[str] = []
     event_types: list[str] = []
+    events: list[dict[str, Any]] = []
     required_event = ["event_id", "event_type", "execution_id", "work_order_id", "actor_role", "subject_sha", "summary"]
     for path in event_files:
         event = load(path)
+        events.append(event)
         ids.append(str(event.get("event_id", "")))
         event_types.append(str(event.get("event_type", "")))
         for key in required_event:
@@ -69,7 +98,7 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
             errors.append(f"{path.name}: unsupported event_type")
         if event.get("actor_role") not in ALLOWED_ROLES:
             errors.append(f"{path.name}: unsupported actor_role")
-        if not SHA40.fullmatch(str(event.get("subject_sha", ""))):
+        if not SUBJECT_SHA.fullmatch(str(event.get("subject_sha", ""))):
             errors.append(f"{path.name}: invalid subject_sha")
 
     if ids != sorted(ids):
@@ -83,8 +112,32 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
     terminal_positions = [idx for idx, item in enumerate(event_types) if item in TERMINAL]
     if len(terminal_positions) > 1:
         errors.append("more than one terminal/handoff event")
-    if terminal_positions and terminal_positions[0] != len(event_types) - 1:
-        errors.append("terminal/handoff event must be last")
+
+    # Terminal-last stays the rule for the normal flow; an explicit corrections
+    # class may follow the terminal/handoff event (AGENTS.md: corrections are
+    # recorded as new events, old events are never edited). Any post-terminal
+    # event outside the class is a hard error, so the marker cannot be skipped.
+    corrections_tail: list[int] = []
+    if terminal_positions:
+        terminal_idx = terminal_positions[0]
+        unmarked: list[str] = []
+        for idx in range(terminal_idx + 1, len(event_types)):
+            if event_types[idx] in CORRECTIONS_EVENTS:
+                corrections_tail.append(idx)
+            else:
+                unmarked.append(event_files[idx].name)
+        if unmarked:
+            errors.append("events after terminal/handoff must be review-corrections events (CONTINUATION_CHECKPOINT or REVIEW_CORRECTIONS): " + ", ".join(unmarked))
+    for idx, event_type in enumerate(event_types):
+        if event_type == "REVIEW_CORRECTIONS" and (not terminal_positions or idx < terminal_positions[0]):
+            errors.append(f"{event_files[idx].name}: REVIEW_CORRECTIONS is allowed only after the terminal/handoff event")
+    tail_times: list[tuple[str, datetime | None]] = [(event_files[idx].name, parse_utc_timestamp(events[idx].get("timestamp_utc"))) for idx in corrections_tail]
+    for name, moment in tail_times:
+        if moment is None:
+            errors.append(f"{name}: corrections event requires a parseable ISO-8601 timestamp_utc")
+    for (_, previous), (name, moment) in zip(tail_times, tail_times[1:]):
+        if previous is not None and moment is not None and moment < previous:
+            errors.append(f"{name}: corrections events timestamps must be non-decreasing")
 
     return {
         "ok": not errors,
@@ -95,6 +148,7 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         "passport_sha256": digest_file(passport_path),
         "event_types": event_types,
         "has_terminal_handoff": bool(terminal_positions),
+        "has_post_terminal_corrections": bool(corrections_tail),
         "has_summary": summary_path.is_file(),
     }
 
