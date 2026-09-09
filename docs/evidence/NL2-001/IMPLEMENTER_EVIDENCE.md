@@ -32,7 +32,7 @@
 | N007 | NEG | COMPLETED | SUPPORTED | legacy объектный манифест → fail-closed (crash exit 1; graceful-качество — заметка) |
 | N008 | NEG | COMPLETED | SUPPORTED | терминал не последним → exit 3 |
 | N009 | NEG | COMPLETED | SUPPORTED | контракт exit-кода: exit 3 + программный ok:false |
-| U001 | UNIT | COMPLETED | SUPPORTED | T=20C→0.097717 ACCEPTED (полоса 5e-7); tier-2: конверсия найдена в pinned-исходниках `src/Utilities/Utils.cpp:333` (негейтящий артефакт) |
+| U001 | UNIT | COMPLETED | SUPPORTED | T=20C→0.097717 ACCEPTED (полоса 5e-7); tier-2 НЕГАТЯЩИЙ: в R4 — NOT_OBTAINED (TimeoutExpired 300 c); hit `src/Utilities/Utils.cpp:333` получен в попытке R3 (`E0-R3-U001` артефакт) — erratum F2 |
 | U002 | UNIT | COMPLETED | SUPPORTED | кандидаты 20/293.15/0.29315/0.0978 → все REJECTED |
 | G001 | GEO | COMPLETED | SUPPORTED | √2 и 90° точно (1e-12) |
 | G002 | GEO | COMPLETED | SUPPORTED | нулевое плечо → ANGLE_UNDEFINED; 0.0 без NaN |
@@ -72,8 +72,17 @@ Run ID ни разу не переиспользовался; ожидания �
 
 ## Оставшиеся риски
 
-См. `evidence-map.json` remaining_risks: gap S003 (разделение статусов не enforced — кандидат NL2-003); crash-валидаторы fail-closed, но некрасиво; одна ОС/инструментальная цепочка; engine-coupled случаи E0 — после runtime.
+См. `evidence-map.json` remaining_risks: gap S003 (разделение статусов не enforced — кандидат NL2-003); **gap F1-класса: валидаторы не сверяют digest-vs-blob** (sha256/size манифестов против фактических байтов — не ловится POS001; кандидат NL2-003 вместе с S003); emit_run порядок — фикс отложен по инструкции dispatch и ОБЯЗАТЕЛЕН для будущих кампаний; crash-валидаторы fail-closed, но некрасиво; одна ОС/инструментальная цепочка; engine-coupled случаи E0 — после runtime.
+
+## Post-review erratum (REVIEWER FIX_REQUIRED @ `2c3b485`, findings F1–F7)
+
+- **F1**: 73/73 `artifacts.manifest.json` исправлены (записи `case_record.json` несли digest pre-image, +35 B; оригиналы byte-equal как `artifacts.manifest.v1-superseded.json`; post-repair byte-compare **225/225**, 0 mismatch) — см. [REPAIR_MAP_F1_R1](REPAIR_MAP_F1_R1.md); campaign-erratum-события: `experiments/evidence/E0/E0-R*/events/0001-erratum-f1-manifest-digests.json` (4 шт.).
+- **F2/F4**: атрибуция tier-2 (R4 NOT_OBTAINED; hit — R3) и счётчики попыток (R2: 17+1; R3: 19) исправлены — см. [ERRATUM_F2_F5_R1](ERRATUM_F2_F5_R1.md).
+- **F3/F5**: erratum в том же документе (frozen_at placeholder'ы R2–R4; фактический терминальный HEAD handoff = `2cee872`).
+- **F6**: `allowed_paths` паспорта дополнены пререгистрациями R2–R4; отклонение зафиксировано в branch-passport и repair-событии `events/0001-repair-f1-f7.json`.
+- **F7**: принято к сведению без правок.
+- Научные исходы E0-R4 не менялись; новых прогонов не было; run ID не переиспользовались.
 
 ## Next action (один)
 
-Независимый REVIEWER: проверить evidence-пакет E0 на exact HEAD (замороженные ожидания R1-линии, дисциплина четырёх попыток, сохранённый gap S003) → `docs/evidence/NL2-001/REVIEWER_VERDICT.md`; затем VERIFIER; merge — Human Gate.
+Независимый VERIFIER: проверить repair-поверхности (byte-equal superseded-оригиналы; пересчитанные дайджесты 225/225; неизменность case_record/событий/исходов; erratum F2–F6) на exact HEAD repair-коммита; merge — Human Gate. (REVIEWER VERDICT: `FIX_REQUIRED` @ `2c3b485` — научное содержание подтверждено; F1/F2 устранены этим ремонтом.)
