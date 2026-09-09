@@ -32,7 +32,7 @@
     "INFRA7-001":"PLANNED"
   },
   "capabilities": {
-    "hosted_ci": false,
+    "hosted_ci": true,
     "self_hosted_cpu": false,
     "reproducible_scientific_executor": false,
     "artifact_store": false,
