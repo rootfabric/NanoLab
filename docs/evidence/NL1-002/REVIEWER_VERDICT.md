@@ -74,3 +74,16 @@
 
 - Публикуются execution facts; campaign-level scientific_outcome = **NOT_EVALUATED**; потолок кампании **C1_COMPUTATIONAL_REPRODUCTION** достижим только по полному критерию §9 R1 (T1 PASS + все T2-реплики в полосе при R_confirm=3) в NL2-002. Настоящий **PASS** — вердикт по evidence-дисциплине NL1-002 @ `ea465ac`; merge в `main` — Human Gate.
 - Следующее действие (одно): независимый VERIFIER — fresh checkout `ea465ac` → upstream-пины, пересборка engine, повторение `analyze_energy.sh`, дайджесты → `docs/evidence/NL1-002/VERIFIER_VERDICT.md`; затем Director checkpoint.
+
+---
+
+## 8. Addendum R2a — расширение вердикта на дельту `ec67752..ec7e3ed`
+
+По контрольному распоряжению вердикт расширяется на пост-хендоффную дельту work-ветки до `ec7e3ed` (subject предыдущих разделов остаётся `ea465ac`; здесь — только дельта). Проверено независимо, по blob'ам:
+
+- **Состав дельты** (`git diff --stat ec67752 ec7e3ed`): ровно 10 файлов — 8 × `run-resources/<run>/{time.log,stdout.log}` (полностью проверены в §4), + `docs/work/executions/EX-NL1-002-R1/events/0005-resource-evidence-committed.json` (+22), + `docs/work/SESSION_LOG.md` (+2/−0, append-only сохранён). Frozen subject, events 0001–0004, артефакты, манифесты, анализ — не тронуты; все проверки §2–§3 остаются в силе.
+- **Event 0005** (`CONTINUATION_CHECKPOINT`, IMPLEMENTER): корректно документирует post-handoff публикацию run-resources; содержимое сверено с независимыми проверками — wall/RSS 4/4 (13.13/6304; 11.08/6328; 11.74/6700; 12.56/6520), Exit status 0, «stdout.log = 0 B» согласован с `no_stdout_energy=1` и log.dat («0.000 B written to stdout/stderr»), upstream-фикстур в дельте нет (vendoring FORBIDDEN соблюдён), новых claims нет, scientific_outcome остаётся NOT_EVALUATED.
+- **MINOR-3 (ссылочная целостность) — исправлен процессно после subject**: publication run-resources получил событие и запись в SESSION_LOG (`ec7e3ed`); в границах subject `ea465ac` gap исторически оставался (как зафиксировано в §4/MINOR-3) — вердикт по subject не меняется.
+- **MINOR-1 / MINOR-2 паттерны сохраняются и в 0005**: `timestamp_utc` = 11:16:30Z при дате содержащего коммита `ec7e3ed` = 11:16:27Z (метка «позже» коммита — та же сигнатура ручных времён); `subject_sha` снова сокращён (`9cc83e8` вместо 40-hex). На выводы не влияет.
+- **Итог дельты: PASS подтверждается и расширяется на `ec7e3ed`** (execution-дисциплина; NOT_EVALUATED; потолок C1 без изменений).
+- **Границы роли этой сессии**: настоящим документом исчерпывается вклад сессии REVIEWER (worktree `review-nl1-002-r2`, ветка `review/nl1-002-reference-run-r2`, коммиты вердикта). `VERIFIER_VERDICT.md` (коммит `b405a7e` и его копия на work-ветке `c44b209`) этой сессией не создавался, не проверялся на содержание и не редактируется — верификация обязана быть fresh-сессией.
