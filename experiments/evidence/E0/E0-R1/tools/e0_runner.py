@@ -528,7 +528,11 @@ def main() -> int:
     _CTX["experiment_id"] = protocol["experiment_id"]
     _CTX["fixture_base"] = args.fixture_base.replace("\\", "/").strip("/")
     _CTX["tools_dir"] = args.tools_dir.replace("\\", "/").strip("/")
-    _CTX["runs_rel"] = str(RUNS_DIR.resolve().relative_to(REPO_ROOT)).replace("\\", "/")
+    _CTX["runs_rel"] = RUNS_DIR.resolve().as_posix()
+    try:
+        _CTX["runs_rel"] = str(RUNS_DIR.resolve().relative_to(REPO_ROOT)).replace("\\", "/")
+    except ValueError:
+        pass  # diagnostic runs outside the repo: storage_location falls back to absolute path
 
     cases = protocol["cases"]
     if args.record_failed_protocol:
