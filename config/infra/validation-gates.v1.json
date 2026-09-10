@@ -24,8 +24,12 @@
     "runs_on_required": true,
     "yaml_anchors_aliases_merge_keys": "fail_closed_violation",
     "multi_document_files": "fail_closed_violation",
+    "leading_tab_indentation": "fail_closed_violation",
     "triggers_declaration_required": true,
     "triggers_form": "mapping_only_non_mapping_fails_closed",
+    "jobs_declaration_required": true,
+    "jobs_form": "mapping_only_non_mapping_fails_closed",
+    "runs_on_non_empty_required": true,
     "forbidden_triggers": ["pull_request_target", "workflow_run"],
     "triggers_forbidden_until_baseline_revision": ["schedule", "workflow_dispatch", "release"],
     "reusable_workflow_calls": "local_path_only",
@@ -74,7 +78,7 @@
     {"id": "gate-unit-tests", "purpose": "unittest coverage of the validation gates themselves", "tool": "python3 -m unittest discover -s tests -t .", "environment": "stdlib_only", "network": false}
   ],
   "negative_controls": {
-    "NC-1": {"invariant": "no workflow in TR-PR/TR-PUSH-MAIN routes carries self-hosted labels in runs-on", "rule_ids": ["NC1_SELF_HOSTED_LABEL", "NC1_DYNAMIC_RUNS_ON", "NC1_RUNS_ON_MISSING", "WORKFLOW_UNPARSEABLE"], "blocking": true, "mechanical_test": "tests/test_infra_workflow_lint.py (negative fixture: runs-on nanolab-cpu must fail)"},
+    "NC-1": {"invariant": "no workflow in TR-PR/TR-PUSH-MAIN routes carries self-hosted labels in runs-on", "rule_ids": ["NC1_SELF_HOSTED_LABEL", "NC1_DYNAMIC_RUNS_ON", "NC1_RUNS_ON_MISSING", "WORKFLOW_UNPARSEABLE", "WORKFLOW_JOBS_UNSUPPORTED_FORM", "WORKFLOW_JOBS_BLOCK_MISSING"], "blocking": true, "mechanical_test": "tests/test_infra_workflow_lint.py (negative fixture: runs-on nanolab-cpu must fail)", "note": "WORKFLOW_JOBS_* guard ids added by control WO EX-CTRL-LINTSCHEMA-R1 (NOTE-5): a missing or non-mapping jobs: block fails closed so job-level NC-1/NC-6/pinning checks cannot be silently skipped"},
     "NC-2": {"invariant": "no pull_request_target/workflow_run bridges; no external reusable workflow calls; trigger surface must be an explicit lintable mapping", "rule_ids": ["NC2_FORBIDDEN_TRIGGER", "NC2_TRIGGER_NEEDS_BASELINE_REVISION", "NC2_EXTERNAL_REUSABLE_WORKFLOW", "NC2_TRIGGERS_UNSUPPORTED_FORM", "NC2_TRIGGERS_BLOCK_MISSING"], "blocking": true},
     "NC-3": {"invariant": "TR-DISPATCH without subject_sha/work_order_id/budget is rejected", "mechanical": "not_lintable_here", "owner": "INFRA2-002 dispatch validator"},
     "NC-4": {"invariant": "PR route token cannot write contents/events/releases", "rule_ids": ["NC4_PERMISSIONS_BLOCK_MISSING", "NC4_WRITE_PERMISSION"], "blocking": true},

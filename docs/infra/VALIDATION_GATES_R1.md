@@ -55,9 +55,11 @@
 
 `work-event.schema.v1.json` (enum без `REVIEW_CORRECTIONS`, pattern 40-hex) и `execution-passport.schema.v1.json` (паттерн `^NL[0-8]$` против `checkpoint: INFRA1` — NOTE-1) не правились: control-схемы — отдельная authority (прецедент NOTE-1 Director-вердикта INFRA1-001: «расширение схемы — кандидат в отдельный control WO»). Ни один механизм сейчас не валидирует events против JSON-схемы механически; расхождение зафиксировано здесь и в конфиге (`non_goals`).
 
+> **Update — sync выполнен (control WO `EX-CTRL-LINTSCHEMA-R1`, branch `control/lint-schema-sync-r1`):** `work-event.schema.v1.json` — `event_type` enum дополнен `REVIEW_CORRECTIONS`, `subject_sha` строго 40-hex с описанием расхождения; `execution-passport.schema.v1.json` — паттерн `checkpoint` расширен до `^(NL[0-8]|INFRA[0-7])$` (третий INFRA-прецедент закрыт, четвёртый не накапливается). Расхождение floor/ceiling (валидатор с explicit whitelist'ом `LEGACY_ABBREVIATED_SHA_EVENTS` выше схемы; 4 легаси-события `EX-NL1-002-R1` с 7-hex `9cc83e8` остаются невалидными по схеме — приемлемо) задокументировано в `config/control/harness/README.md`. После sync все валидаторы на всех `EX-*` — 10/10 OK.
+
 ## 3. Механический NC-линт (`scripts/harness/workflow_lint.py`)
 
-Структурный линт всех `.github/workflows/*.y*ml`; эталон значений — `config/infra/validation-gates.v1.json` (`workflow_lint`-блок), сам скрипт значений не дублирует. Stdlib-only, без сети; YAML читается минимальным парсером workflow-подмножества (block/flow коллекции, quoted scalars, block scalars `|`/`>` для `run:`-скриптов, комментарии, `${{ }}` как opaque-текст). **Fail closed** (формулировка усилена по REVIEWER-вердикту §4.5): всё, что парсер не понимает, ИЛИ что резолвится GitHub иначе, чем видит линт, — блокирующее нарушение, а не пропуск. Конкретно: непарсируемый файл → `WORKFLOW_UNPARSEABLE`; YAML anchors/aliases/merge keys (`&`/`*`/`<<`) → fail-closed на уровне парсера (MAJOR-2: GitHub резолвит alias, линт обязан молчать только вместе с файлом); multi-document файлы → отклоняются (NOTE-3); `on:` отсутствует или не-mapping (`on: push`, `on: [push, pull_request_target]`) → блокирующее нарушение (MAJOR-1: scalar/flow-форма не линтабельна и не может обходить NC-2).
+Структурный линт всех `.github/workflows/*.y*ml`; эталон значений — `config/infra/validation-gates.v1.json` (`workflow_lint`-блок), сам скрипт значений не дублирует. Stdlib-only, без сети; YAML читается минимальным парсером workflow-подмножества (block/flow коллекции, quoted scalars, block scalars `|`/`>` для `run:`-скриптов, комментарии, `${{ }}` как opaque-текст). **Fail closed** (формулировка усилена по REVIEWER-вердикту §4.5): всё, что парсер не понимает, ИЛИ что резолвится GitHub иначе, чем видит линт, — блокирующее нарушение, а не пропуск. Конкретно: непарсируемый файл → `WORKFLOW_UNPARSEABLE`; YAML anchors/aliases/merge keys (`&`/`*`/`<<`) → fail-closed на уровне парсера (MAJOR-2: GitHub резолвит alias, линт обязан молчать только вместе с файлом); multi-document файлы → отклоняются (NOTE-3); `on:` отсутствует или не-mapping (`on: push`, `on: [push, pull_request_target]`) → блокирующее нарушение (MAJOR-1: scalar/flow-форма не линтабельна и не может обходить NC-2). TAB в ведущем whitespace любой строки → `WORKFLOW_UNPARSEABLE` (control WO EX-CTRL-LINTSCHEMA-R1, MINOR-4: прежний таб-чек был dead code — срез из ведущих пробелов не мог содержать TAB, TAB-ключ под `on:` молча перестраивал документ; YAML запрещает таб-индентацию); `jobs:` отсутствует или не-mapping (sequence/scalar/null) → блокирующее нарушение `WORKFLOW_JOBS_BLOCK_MISSING`/`WORKFLOW_JOBS_UNSUPPORTED_FORM` (тот же WO, NOTE-5: job-чеки NC-1/NC-6/pinning не могут молча пропускаться); пустой список `runs-on: []` эквивалентен отсутствию runs-on (`NC1_RUNS_ON_MISSING`).
 
 | Rule ID | NC | Суть | Блокирующий |
 |---|---|---|---|
@@ -75,7 +77,9 @@
 | `BUDGET_TIMEOUT_REQUIRED` / `BUDGET_TIMEOUT_BOUNDS` | NC-6 | каждый job обязан иметь целочисленный `timeout-minutes` в [1, 60] (unbounded jobs запрещены, §6 baseline) | да |
 | `PIN_ACTION_FULL_SHA` | supply-chain (§9) | внешние actions пинятся full 40-hex commit SHA; `docker://` — digest | да |
 | `NOTE3_PR_TYPES_READY_FOR_REVIEW` | NOTE-3 | при наличии `pull_request`-триггера: `types` явно содержит `ready_for_review` (scope уточнён repair R1 по NOTE-1: push-only workflow правило не задевает) | да |
-| `WORKFLOW_UNPARSEABLE` | NC-1/NC-2 | файл не разобран парсером, включая anchors/aliases/merge keys и multi-document (repair R1) | да |
+| `WORKFLOW_UNPARSEABLE` | NC-1/NC-2 | файл не разобран парсером, включая anchors/aliases/merge keys, multi-document (repair R1) и TAB в ведущем whitespace любой строки (EX-CTRL-LINTSCHEMA-R1, MINOR-4) | да |
+| `WORKFLOW_JOBS_BLOCK_MISSING` | fail-closed (EX-CTRL-LINTSCHEMA-R1, NOTE-5) | `jobs:` отсутствует / null — job-уровень обязан быть явным и линтабельным | да |
+| `WORKFLOW_JOBS_UNSUPPORTED_FORM` | fail-closed (EX-CTRL-LINTSCHEMA-R1, NOTE-5) | `jobs:` в sequence/scalar-форме — job-чеки (NC-1/NC-6/pin) не линтабельны, fail closed | да |
 
 Принятые не-линтабельные ограничения (документировано): индирекция секретов через `env:` не обнаруживается статически (MINOR-1, принято); NC-5 — review-пункт; NC-3 — INFRA2-002; полный NC-6 — INFRA6.
 
@@ -99,7 +103,7 @@ Checkout сохраняет `persist-credentials: false`, `fetch-depth: 0`; forb
 
 Файл R1 **не редактировался** («изменение содержимого — только новой ревизией»): он остаётся исторической проекцией INFRA1-001. Дельты (types, чеки 4–5, scope Check 3) зафиксированы как machine-readable поправки в `config/infra/validation-gates.v1.json` → `amends_hosted_ci_r1`. Приоритет: hard rules → baseline doc → `hosted-ci.v1.json` → `validation-gates.v1.json`.
 
-## 5. Тесты (`tests/`, stdlib `unittest`, 59 шт. после repair R1, `python3 -m unittest discover -s tests -t .`)
+## 5. Тесты (`tests/`, stdlib `unittest`, 102 шт. после control WO EX-CTRL-LINTSCHEMA-R1; 59 после repair R1, `python3 -m unittest discover -s tests -t .`)
 
 `tests/test_work_cli_corrections.py` (24):
 
@@ -110,7 +114,7 @@ Checkout сохраняет `persist-credentials: false`, `fetch-depth: 0`; forb
 - repair R1 (MINOR-3): corrections ts < terminal ts → FAIL (≥ terminal — OK); легаси-exempt событие с ранним ts → OK; новое событие в легаси-каталоге с ранним ts → FAIL; `REVIEW_CORRECTIONS` от `IMPLEMENTER` → FAIL, от `VERIFIER` → OK;
 - обычный поток: terminal-last OK; событие после terminal без corrections → FAIL.
 
-`tests/test_infra_workflow_lint.py` (35):
+`tests/test_infra_workflow_lint.py` (78):
 
 - **негатив (обязательный NC-1)**: fixture с `runs-on: nanolab-cpu` → MUST FAIL (`NC1_SELF_HOSTED_LABEL`); плюс `self-hosted`, префикс `nanolab-hpc-*`, динамическое `${{ }}`-выражение, отсутствующий `runs-on`;
 - repair R1 (MAJOR-1): `on: [push, pull_request_target]` → FAIL (`NC2_TRIGGERS_UNSUPPORTED_FORM`); `on: push` → FAIL; отсутствующий `on:` → FAIL (`NC2_TRIGGERS_BLOCK_MISSING`); `on:` null → FAIL;
@@ -121,6 +125,9 @@ Checkout сохраняет `persist-credentials: false`, `fetch-depth: 0`; forb
 - NOTE-3: `pull_request.types` без `ready_for_review` / без `types` / bare `pull_request:` → FAIL; repair R1 (NOTE-1): push-only workflow без `pull_request` → правило не срабатывает;
 - pinning: action по тегу `@v5` → FAIL;
 - fail-closed: нечитаемый YAML → `WORKFLOW_UNPARSEABLE`; repair R1 (NOTE-3): multi-document файл → FAIL (второй документ больше не сливается);
+- control WO EX-CTRL-LINTSCHEMA-R1 (MINOR-4): TAB в ведущем whitespace любой строки → FAIL `WORKFLOW_UNPARSEABLE` — под `on:` (исходная проба-обход), под job-ключом, top-level ключ, шаг внутри job, тело `run: |`, перед комментарием, tab-only строка, mixed space+TAB; TAB внутри скаляра-значения (`echo "a<TAB>b"`) → OK;
+- control WO EX-CTRL-LINTSCHEMA-R1 (NOTE-5): `jobs:` sequence — в т.ч. `- nanolab-cpu` — / scalar / null / отсутствующий → FAIL (`WORKFLOW_JOBS_UNSUPPORTED_FORM` / `WORKFLOW_JOBS_BLOCK_MISSING`); sequence с benign-содержимым и sequence из mapping'ов тоже FAIL (fail-closed не зависит от содержимого); `jobs:` в flow-mapping форме продолжает линтиться (NC-1 внутри срабатывает, compliant flow-mapping → OK); пустой `runs-on: []` → `NC1_RUNS_ON_MISSING`, форма-список `[ubuntu-latest]` → OK;
+- расширение матрицы (тот же WO): `nanolab-gpu`, case-варианты (`Nanolab-CPU`, `SELF-HOSTED`), forbidden label внутри списка, `workflow_run` с фильтрами, зарезервированные `workflow_dispatch`/`release`, `permissions: write-all`, job-level `contents: write`, `pull-requests: write`, не-скалярный уровень (`contents: [read]`), неизвестный уровень (`admin`), timeout 0 / 61 / строка `'15'` / boolean, `docker://alpine:3.19` без digest → FAIL, `docker://` с `sha256:` digest → OK, short-SHA pin `@93cb6ef` → FAIL, `types: opened` (scalar) и `types: []` → NOTE-3 FAIL, `secrets.TOKEN` в job `env:` → FAIL, `...`-конец документа с контентом → FAIL, unexpected indent → FAIL; CRLF-позитив;
 - позитив: минимальный compliant workflow → 0 нарушений; **реальный** `.github/workflows/hosted-ci.yml` → 0 нарушений.
 
 ## 6. Маппинг на blocking-критерии приёмки
@@ -137,9 +144,9 @@ Checkout сохраняет `persist-credentials: false`, `fetch-depth: 0`; forb
 ## 8. Находки и задокументированные отклонения
 
 1. **Base drift снимка миссии.** Миссия именует `15a2c9b` «main»; фактически: локальный ref `main` (worktree `C:\NanoLab\main`) = `6796531` (отстаёт, не обновлялся — вне скоупа), `origin/main` после fetch = `a4533ab` = base + PR #27 (science acceptance addendum NL1-002; INFRA-поверхность не затрагивает). Ветка срезана **от exact `15a2c9b1b5c095e24e2e1c24afd77feef5361102`** по директиве миссии; merge-base с `origin/main` = base → diff PR чистый, не содержит science-коммитов. Описание «INFRA1-001 ACCEPTED, next INFRA1-002» верно на base.
-2. **Сокращённые SHA в легаси-events** — repair R1 (MINOR-2): строго 40-hex для всех событий; abbreviated принимается только для exact 4 легаси-событий `EX-NL1-002-R1` (whitelist `(execution_id, event_id)`, §2.2); schema-sync — control WO (§2.4).
+2. **Сокращённые SHA в легаси-events** — repair R1 (MINOR-2): строго 40-hex для всех событий; abbreviated принимается только для exact 4 легаси-событий `EX-NL1-002-R1` (whitelist `(execution_id, event_id)`, §2.2); schema-sync — control WO (§2.4) — выполнен `EX-CTRL-LINTSCHEMA-R1` (схема осталась 40-hex, расхождение для 4 легаси-событий задокументировано в README схем).
 3. **`WO-INFRA1-002.md` отсутствует в `main`** — как в INFRA1-001 (NOTE-2), authorship Director.
-4. **`checkpoint: INFRA1` против `^NL[0-8]$`** — третий INFRA-прецедент подряд (NOTE-1), валидатор паттерн не проверяет; кандидат в control WO.
+4. **`checkpoint: INFRA1` против `^NL[0-8]$`** — третий INFRA-прецедент подряд (NOTE-1), валидатор паттерн не проверяет; кандидат в control WO — закрыт control WO `EX-CTRL-LINTSCHEMA-R1` (паттерн расширен до `^(NL[0-8]|INFRA[0-7])$`, см. §2.4 Update и `config/control/harness/README.md`).
 5. **Парсер YAML — собственный subset-парсер** (stdlib-only требование чеков). Непонятный синтаксис = блокирующее нарушение (fail closed), а не silent-skip; repair R1 дополнил rejection: anchors/aliases/merge keys (`&`/`*`/`<<`) и multi-document файлы отклоняются явно (GitHub резолвит их иначе, чем видел бы линт); расширение подмножества — новая ревизия конфига/кода.
 6. **NC-5 не линтится** — осознанно: mechanical validation по baseline — review при INFRA1/2; появление любого fallback-механизма должно добавить lint-правило до активации.
 
