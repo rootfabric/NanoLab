@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-10T15:13:37Z",
+  "execution_id": "EX-NL3-001-R1",
+  "work_order_id": "NL3-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5fbd6d54341947c890cc5aa5f8031de10a0de1eb",
+  "summary": "VALIDATION: структурное воспроизведение 0b выполнено на реальных pinned-объектах источника и полный чек-набор зелёный (subject 80aed84f9a48942829bde4f775760830e565f2c8, tree f437c3ae8d1725a2c3929135fc9ce976be800823). (1) Digest-gate источника: pinned commit 23fd1ff существует, его tree = preregistered b2d6ceb (полный API-перечёт, не truncated); preregistered blob'ы NL0-001 сошлись бит-в-бит (Design_Hinges/0b.json 0ed4075c, MD_Hinges/pro_CPU.in 89d76310); SHA-256 пяти поверхностей 0b вычислены и заморожены в pins. Файлы получены user-side в каталог вне репозитория и НЕ коммичены; durable-кэш не создавался. (2) Прогон замороженного валидатора на 0b: exit 0, 8/8 проверок PASS (pins_registry_contract, variant_registered, source_digests_match_pins, topology_structure, configuration_structure, design_structure, design_bases_equal_topology_nucleotides, sim_input_preregistered_values); отчёт docs/work/executions/EX-NL3-001-R1/evidence/hinge-0b-structural-report.json. Детерминизм: два прогона -> SHA-256 отчётов совпали (F8EF3EA4F9BA6CE5C9995894BF43743E853E9C582A596ABE9EE121C592D449A5). (3) Ключевые OBSERVED-факты 0b: топология 8378 нуклеотидов / 112 странд (103 linear + 9 circular ids 2-7,42-44), состав A2081/C2076/G2075/T2146, целостность n3/n5 = 0 ошибок; конфигурация 8378 частиц x 15 колонок, t = 2e7, NaN/Inf = 0, ориентации точные unit+ортогональные (max dev 2.15e-07 при допуске 1e-06), позиции в боксе 402.56^3, связанные дистанции: главный пик 0.5-0.6, длинных (>0.95) 456; дизайн 18 хеликсов, 4266 scaf + 4112 stap = 8378 == топология (точно), 1 + 117 путей, двунаправленная целостность указателей 0 ошибок, кроссоверы 46 + 413 = 459; pro_CPU.in machine-confirm E2-SETUP-R1 SS5 (DNA2/0.5/300K/2e7/CPU/double). Наблюдения (не критерии): 118 путей дизайна vs 112 странд топологии (соответствие не декомпозировано — gap G2, нужны авторские Init_Hinges/последовательности); 456 длинных связей ~ 459 кроссоверам (согласуется с кроссовер-непрерывной кодировкой цепей); ssDNA-серии {2:x16, 9:x6, 12:x6} не атрибутированы к spring layers без SI (G3); pro_CPU.in по умолчанию указывает 74b.top/74b.conf — подстановка на 0b зафиксирована как обязательное документируемое отклонение; семантика колонок 9:15 — интерпретация конвенций oxDNA до pre-E2 engine-input check (G4). (4) Полный чек-набор репозитория: JSON-гейт 717 tracked, unparseable ровно 2 designed-NEG фикстуры (n001 empty e3b0c442..., n002 truncated 1de18ae4... — sha256 = CI-пинам); check-consistency ok exit 0 (state/plan не тронуты); work_cli validate 15/15 EX OK (14 pre-existing + EX-NL3-001-R1); workflow lint 0 violations exit 0; unittest 160 OK (138 + 22 новых); verify-digests регрессия E1-R1/E1-R2/E0-R4 ok (0 mismatch). Научные прогоны не выполнялись; campaign-level scientific_outcome = NOT_EVALUATED; ACCEPTED не выставляется.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m hinge_family validate --source-dir <user-dir> --report <out.json> -> exit 0 (x2, отчёты байт-идентичны)",
+    "git ls-files '*.json' -> 717 tracked; unparseable ровно 2 designed-NEG (sha256 = CI pins)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok=true, exit 0",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-* -> 15/15 ok",
+    "PYTHONPATH=scripts python -m harness.workflow_lint --root . -> exit 0",
+    "python -m unittest discover -s tests -t . -> Ran 160 tests, OK",
+    "PYTHONPATH=scripts python -m harness.experiment_cli verify-digests experiments/evidence/{E1/E1-R1,E1/E1-R2,E0/E0-R4} -> ok=true x3 (0 mismatch)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-001-R1/evidence/hinge-0b-structural-report.json",
+    "docs/research/HINGE_FAMILY_R1.md",
+    "scripts/hinge_family/source_pins.json",
+    "tests/test_hinge_family.py",
+    "docs/work/executions/EX-NL3-001-R1/events/0002-continuation-checkpoint.json"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + терминальный handoff (0004), SESSION_LOG append, passport HANDOFF_READY, push -> независимый REVIEWER.",
+  "blocker": null
+}

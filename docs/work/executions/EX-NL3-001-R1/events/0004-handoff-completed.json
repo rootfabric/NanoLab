@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-10T15:15:11Z",
+  "execution_id": "EX-NL3-001-R1",
+  "work_order_id": "NL3-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5fbd6d54341947c890cc5aa5f8031de10a0de1eb",
+  "summary": "HANDOFF_COMPLETED: NL3-001 (register hinge design family; bounded: регистрация семейства + digest-gated процедура воспроизведения/экспорта + структурное воспроизведение первого экземпляра 0b без динамики) исполнен и терминально опубликован. Content-HEAD валидации: 80aed84f9a48942829bde4f775760830e565f2c8 (base 5fbd6d54341947c890cc5aa5f8031de10a0de1eb; substantive: 08585a2 pins+validator+tests, 80aed84 HINGE_FAMILY_R1); настоящий records-коммит добавляет только события 0003-0004, summary, паспорт-статус HANDOFF_READY и SESSION_LOG append — фактический tip публикуется push'ом и виден в git log (урок F5 NL2-001). Поставлено: (1) docs/research/HINGE_FAMILY_R1.md — регистрация family -> parameter space -> первый экземпляр 0b с классами данных REPORTED/OBSERVED/UNKNOWN, таблица UNKNOWN U1-U6, жёсткие правила можно/нельзя SS6, гэпы G1-G6; (2) scripts/hinge_family/ — замороженный детерминированный stdlib-only пакет (fail-closed pins, строгие парсеры oxDNA .top/.conf/caDNAno-дизайна, preregistered sim-input checks, канонический байт-детерминированный отчёт без wall-clock данных); (3) структурное воспроизведение 0b на реальных pinned-объектах: 8/8 PASS, точный кросс-чек 8378 баз дизайна == 8378 нуклеотидов топологии, целостность указателей и цепей 0 ошибок, preregistered blob'ы NL0-001 сошлись бит-в-бит, детерминизм двух прогонов байт-в-байт; (4) 22 unittest (детерминизм/тампер/структурные негативы/контракт реестра), полный набор 160 OK. Чеки: JSON 717 tracked (unparseable ровно 2 designed-NEG, sha256 = CI-пинам), check-consistency ok, work_cli 15/15 EX OK, lint 0, verify-digests E1-R1/E1-R2/E0-R4 ok. Научные прогоны не выполнялись; campaign-level scientific_outcome = NOT_EVALUATED; ACCEPTED не выставляется; state.json/plan.json не менялись (Director gate). Байты источника не вендорены, durable-кэш не создавался. Открытые гэпы G1-G6 (права, дизайн->топология соответствие, атрибуция spring layers, семантика колонок конфигурации, SHA-256 остальных вариантов, динамика) и open risks — в summary.md. Приёмка NL3-001 — независимый REVIEWER -> VERIFIER -> Director; merge — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\nl3-001 log --oneline 5fbd6d5..HEAD -> 01bef0b START, 08585a2 pins+validator+tests, 80aed84 HINGE_FAMILY_R1, <records> (content-HEAD валидации 80aed84f9a48942829bde4f775760830e565f2c8)",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-001-R1 -> ok=true (terminal + summary present)",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL3-001-R1 -> ok=true",
+    "git push (non-force) origin work/nl3-001-hinge-family-r1"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-001.md",
+    "docs/work/executions/EX-NL3-001-R1/passport.json",
+    "docs/work/executions/EX-NL3-001-R1/summary.md",
+    "docs/work/executions/EX-NL3-001-R1/branch-passport.md",
+    "docs/work/executions/EX-NL3-001-R1/evidence/hinge-0b-structural-report.json",
+    "docs/research/HINGE_FAMILY_R1.md",
+    "scripts/hinge_family/source_pins.json",
+    "tests/test_hinge_family.py",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "next_action": "Независимый REVIEWER (fresh-сессия): evidence-пакет EX-NL3-001-R1 на exact HEAD (пины vs NL0-001, воспроизводимость 8/8 PASS по процедуре HINGE_FAMILY_R1 SS4-SS5, 22 unittest, гэпы G1-G6 не закрыты без оснований, отсутствие вендоренных байтов источника) -> docs/evidence/NL3-001/REVIEWER_VERDICT.md; затем VERIFIER; merge — Human Gate.",
+  "blocker": null
+}
