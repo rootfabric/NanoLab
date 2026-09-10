@@ -26,6 +26,15 @@ Claim ceiling этого WO: C0_SOFTWARE_ONLY — не превышен ни о�
 
 `control/nl2-001-director-checkpoint-r1` от repaired tip `1d594f3`; влиты: `review/nl2-001-contracts-e0-r1` @ `a140b8e` и `verify/nl2-001-contracts-e0-r1` @ `b395d10` (merge-коммиты); свежий canonical main `51a479c` (дрейф 15a2c9b→51a479c: INFRA1-002 gates + hosted_ci flip) влит; конфликт только в `docs/work/SESSION_LOG.md` (два параллельных аппенда) — разрешён аддитивно, обе записи сохранены, хронология соблюдена. Коммитные инструменты (`config/**`, `scripts/**`, `.github/**`) на merged-дереве принадлежат main (corrections-aware `work_cli`, NC-линт); локальные прогоны на checkpoint-коммите: `work_cli validate EX-NL2-001-R1` ok=true exit 0, `check-consistency` ok=true exit 0.
 
+## Live-CI finding и Director control decision — синхронизация гейта с NEG-фикстурами
+
+Первый TR-PR прогон этого checkpoint (run `34468835012`) вскрыл **интеграционный конфликт двух механических контрактов**, не предсказанный ни одной вердиктной цепочкой (verifier проверял контрактные поверхности, а не гейт всей трекаемой JSON-популяции): Check 1 hosted-CI требует синтаксической валидности **всех** tracked `*.json`, а семейство E0 NEG по построению содержит **намеренно битые** поверхности (`n001_empty_passport` — 0 байт; `n002_truncated_json` — обрезанный JSON), на которых валидаторы обязаны fail-closed. Локальная перепроверка merged-дерева: **683 tracked JSON, ровно 2 невалидных — обе NEG-фикстуры** (681/681 остальных валидны); наука и вердикты не затронуты.
+
+- Изменять байты фикстур **нельзя**: они дайджест-контролируемая часть верифицированного subject `1d594f3` (фикстуры материализовались verifier'ом из git-блобов с digest-контролем).
+- Решение (Director control decision, 2026-09-09): **минимальная fail-closed правка Check 1** в `.github/workflows/hosted-ci.yml` — точечное исключение ровно двух файлов по **exact path + sha256** (n001 `e3b0c442…b7852b855` — известный sha256 пустой строки; n002 `1de18ae4…4a3c4a85`); любой дрейф содержимого пиненных фикстур = FAIL гейта; все остальные tracked `*.json` по-прежнему обязаны парситься `json.tool`. Гейт не ослаблен: случайная порча любого контрактного JSON по-прежнему ловится, а намеренная порча теперь ещё и **запинена дайджестом**.
+- Прозрачность: правка внесена в этот же checkpoint-коммит, документирована здесь и в SESSION_LOG; **независимое ревью этой CI-дельты** — в очередь control-WO (влить в пакет «lint fail-closed hardening + schema sync» / `control/lint-schema-sync-r1`, либо в NL2-003 hardening), включая перенос allowlist в `config/infra/validation-gates.v1.json` с линт-контролем. Реверс/ужесточение — обычным PR, история не переписывается.
+
+
 ## Findings — диспозиция
 
 - F1–F6 (REVIEWER): **закрыты**, подтверждены независимо re-review и verifier. F7 (OBSERVATION): принят к сведению.
