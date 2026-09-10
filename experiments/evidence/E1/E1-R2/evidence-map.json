@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "campaign_id": "E1-R2",
+  "experiment_id": "E1",
+  "work_order_id": "NL2-002",
+  "execution_id": "EX-NL2-002-R1",
+  "branch": "work/nl2-002-validate-e1-r1",
+  "base_sha": "0176098ed052ec29503ac5c353463be0cc8ea167",
+  "risk_class": "HIGH",
+  "claim": {
+    "class_published": "C0_SOFTWARE_ONLY execution facts + preregistered band-facts",
+    "campaign_ceiling": "C1_COMPUTATIONAL_REPRODUCTION",
+    "campaign_scientific_outcome": "NOT_EVALUATED",
+    "note": "Механический факт: критерий E1-PROTO-R1 S9 (T1 PASS и все T2 в полосе) на confirmatory set ВЫПОЛНЕН; объявление статуса E1/acceptance — Director после независимых REVIEWER + VERIFIER"
+  },
+  "protocol_lineage": {
+    "preregistered": "E1-PROTO-R1 (docs/research/PREREGISTRATION_E1_R1.md): verbatim quick_input S3, oracle/band S5.1, integrity S5.2, статистика S6, семантика S9, stop S10",
+    "superseding_chain": [
+      "E1-PROTO-R2 (docs/research/PREREGISTRATION_E1_R2.md): superseding только S6.4 — freeze R_confirm = 3 ДО confirmatory кампании; остальные пункты R1 наследуются без изменений"
+    ],
+    "protocol_changes_by_this_wo": "NONE — протоколы и полоса не менялись; этот WO исполняет T2 по frozen правилам"
+  },
+  "exact_subject": {
+    "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+    "subject_meaning": "pre-execution freeze-коммит кампании E1-R2: campaign.md + protocol.json + analyze_energy.sh (байт-в-бит из E1-R1, git blob 77cfcc637df7c75446736cf1c3a71ea219a260c5); manifests/started-events добавлены следующим коммитом 42cb851251ce69840856c121d7fe2891385d9a88 ДО первого прогона",
+    "instrument": "oxDNA pinned 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 + analyze_energy.sh (байт-в-бит из E1-R1)",
+    "inputs": "raw blobs pinned tree (git cat-file blob), 4/4 SHA-256 on-place MATCH перед каждым прогоном; modifications NONE"
+  },
+  "environment": {
+    "doc": "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "os": "WSL2 Ubuntu 24.04.2 (та же campaign-машина, что E1-R1)",
+    "engine_binary": "reuse бит-в-бит зафиксированной сборки E1-R1: ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f (3375976 B), флаги Release/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE_COMPILATION=ON/JSON_ENABLED=ON верифицированы CMakeCache перед кампанией; пересборки не было — конфаунд пересборки между точками confirmatory set устранён",
+    "toolchain": "gcc 13.3.0, cmake 3.31.6 user-local; Windows Python 3.11.8 + jsonschema 4.22.0 (валидация контрактов)"
+  },
+  "runs": [
+    {"run_id": "E1-R1-S001", "type": "T1_PRODUCTION", "execution_outcome": "COMPLETED", "seed": -200619630, "col2_avg": -1.39393635864, "delta_from_oracle": -0.01423379720, "band_fact": "IN_BAND", "counts_toward_evidence": true, "provenance": "опубликован в E1-R1 (NL1-002); energy.dat ff26bad5b3dbedb2bbe14091ffa096fbda643579ef31ce539d4432154b654f90; перезапуск не выполнялся; cross-check байт-в-бит инструментом воспроизводит значение"},
+    {"run_id": "E1-R2-C001", "type": "T2_CONFIRM_PRODUCTION", "execution_outcome": "COMPLETED", "seed": -1641386734, "wall_s": 11.00, "rss_kb": 6604, "col2_avg": -1.36722173127, "delta_from_oracle": 0.01248083017, "band_fact": "IN_BAND", "counts_toward_evidence": true},
+    {"run_id": "E1-R2-C002", "type": "T2_CONFIRM_PRODUCTION", "execution_outcome": "COMPLETED", "seed": 977680137, "wall_s": 10.88, "rss_kb": 6604, "col2_avg": -1.35818087512, "delta_from_oracle": 0.02152168632, "band_fact": "IN_BAND", "counts_toward_evidence": true},
+    {"run_id": "E1-R2-C003", "type": "T2_CONFIRM_PRODUCTION", "execution_outcome": "COMPLETED", "seed": -999572227, "wall_s": 11.03, "rss_kb": 6468, "col2_avg": -1.35653082817, "delta_from_oracle": 0.02317173327, "band_fact": "IN_BAND", "counts_toward_evidence": true}
+  ],
+  "seed_distinctness": {
+    "rule": "фактически записанные distinct seed (E1-PROTO-R2 S3); коллизия -> техническая классификация",
+    "fact": "C001 -1641386734, C002 977680137, C003 -999572227: попарно различны и отличны от S001 (-200619630) и P001-P003 (-473348953/-547126645/-1610133928)",
+    "source": "log.dat каждого прогона ('seeding the RNG with ...')"
+  },
+  "confirmatory_statistics": {
+    "confirmatory_set": ["E1-R1-S001", "E1-R2-C001", "E1-R2-C002", "E1-R2-C003"],
+    "n": 4,
+    "mean": -1.36896744830,
+    "sample_sd_n_minus_1": 0.01729656703,
+    "range": 0.03740553047,
+    "sd_to_band_ratio": 0.1153,
+    "oracle": -1.37970256144,
+    "band": 0.15,
+    "per_replica_band_fact": "4/4 IN_BAND (|Δ| 0.0142/0.0125/0.0215/0.0232)",
+    "aggregate_criterion_9": {
+      "rule": "T1 = PASS И все T2-реплики IN_BAND (E1-PROTO-R1 S9, консервативно)",
+      "evaluation": "MET — механический факт по данным confirmatory set",
+      "decision_authority": "объявление статуса E1/acceptance — Director после независимого REVIEWER + VERIFIER; до этого campaign-level scientific_outcome = NOT_EVALUATED"
+    },
+    "pilot_comparison": "пилотные P001-P003 в set не засчитаны (S6.4 R1); их SD 0.00832919790 опубликован в E1-PROTO-R2 S1",
+    "ci_note": "малое n — без претензии на точный CI (S6.3 R1)"
+  },
+  "uncertainty_separation": {
+    "statistical_error": "между-репликационный разброс: SD 0.0173 (n=4)",
+    "physical_fluctuation_diagnostics_best_effort_nongating": "ac(1) 0.59-0.83; tau_int ~ 10-60 prints; Neff ~ 8-48 из 1001 строки на траекторию; кадры НЕ независимые наблюдения; PyMBAR-level ESS — открытая задача (S4 R2)",
+    "model_limits": "S2.4 R1: применимость oxDNA; физическая валидность вне scope (S02)"
+  },
+  "integrity": {
+    "rows_note": "S5.2 protocol note: 1001 строка = 1 initial + 1000 prints (OBSERVED upstream-семантика)",
+    "configurations": 10,
+    "nan_inf": 0,
+    "engine_facts_recorded": true,
+    "exceptions": "НЕТ; технических сбоев НЕТ; повторных запусков НЕТ"
+  },
+  "measured_budget": {
+    "wall_total_confirm_s": 32.91,
+    "core_hours": "0.0091 core-hour (< cap 1 core-hour кампании E1)",
+    "storage": "raw выходы в Git целиком, artifacts.manifest.json на каждый прогон"
+  },
+  "changed_surfaces": [
+    "docs/work/WO-NL2-002.md",
+    "docs/work/executions/EX-NL2-002-R1/**",
+    "experiments/evidence/E1/E1-R2/**",
+    "docs/evidence/NL2-002/**",
+    "docs/work/SESSION_LOG.md (append)"
+  ],
+  "experiment_runs": [
+    "experiments/evidence/E1/E1-R2/runs/E1-R2-C001",
+    "experiments/evidence/E1/E1-R2/runs/E1-R2-C002",
+    "experiments/evidence/E1/E1-R2/runs/E1-R2-C003"
+  ],
+  "failed_or_excluded_runs": [],
+  "remaining_risks": [
+    "4 точки confirmatory set на одной машине/сборке; независимость повторов обеспечена distinct seed (upstream-семантика), не разными машинами/бинарями",
+    "between-replicate SD на n=4 — грубая оценка; точные CI и PyMBAR-level ESS/корреляции — открытая диагностика (S4 R2)",
+    "NATIVE_COMPILATION=ON: бинарь привязан к CPU campaign-машины; перенос требует пересборки и записи новых SHA-256",
+    "Seed случайный при каждом прогоне (upstream-семантика): точные значения невоспроизводимы, воспроизводима статистика повторов",
+    "SD confirmatory set (0.0173) вдвое выше пилотного (0.0083) на удвоившемся n — согласуется с малой выборкой, но подтверждает, что 5.6%-оценка пилота была оптимистичной"
+  ],
+  "recommendation_for_director": "SUPPORTED — механический критерий E1-PROTO-R1 S9 на confirmatory set выполнен (T1 PASS + 3/3 T2 IN_BAND, целостность OK, бюджет соблюдён, без исключений и повторов); acceptance и объявление статуса E1 — Director по процедуре (независимые REVIEWER + VERIFIER, merge Human Gate)",
+  "next_action": "Независимый REVIEWER: fresh-сессия, exact HEAD evidence-пакета (см. docs/work/executions/EX-NL2-002-R1/summary.md), surfaces: experiments/evidence/E1/E1-R2/** + docs/evidence/NL2-002/IMPLEMENTER_EVIDENCE.md -> docs/evidence/NL2-002/REVIEWER_VERDICT.md"
+}

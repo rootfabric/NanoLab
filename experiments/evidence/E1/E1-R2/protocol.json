@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "experiment_campaign_protocol",
+  "campaign_id": "E1-R2",
+  "experiment_id": "E1",
+  "protocol_revision": "E1-PROTO-R2",
+  "protocol_doc": "docs/research/PREREGISTRATION_E1_R2.md",
+  "protocol_inheritance": {
+    "base": "E1-PROTO-R1",
+    "base_doc": "docs/research/PREREGISTRATION_E1_R1.md",
+    "note": "R2 superseding только в части freeze R_confirm (S2); observables, критерий S5.1, условия S3, семантика S9, stop conditions S10 наследуются из R1 без изменений. Настоящий protocol.json — машинный биндинг confirmatory кампании NL2-002; протоколы не меняются."
+  },
+  "protocol_subject": {
+    "upstream_repo": "https://github.com/lorenzo-rovigatti/oxDNA",
+    "pinned_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "fixture_paths": [
+      "test/DNA/DSDNA8/dsdna8.top",
+      "test/DNA/DSDNA8/init.dat",
+      "test/DNA/DSDNA8/MD/quick_input",
+      "test/DNA/DSDNA8/MD/quick_compare"
+    ],
+    "input_blob_sha1": {
+      "dsdna8.top": "1811af7ea4bea8a86519456cba608d1e6d44ed3b",
+      "init.dat": "856be1878ece7115a91f988b2cbd7ad650daf2db",
+      "quick_input": "07eef592f070f9b8955f9001e0fd292de9862a4a",
+      "quick_compare": "74a088ec4ceb1bc01ab2e385e4700eb2d3907f40"
+    },
+    "input_digests_sha256": {
+      "dsdna8.top": "f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4",
+      "init.dat": "0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0",
+      "quick_input": "8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2",
+      "quick_compare": "86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27"
+    },
+    "acquisition_rule": "raw blobs only (git cat-file blob), byte-exact; Windows working-tree checkout запрещён (ENGINE_ENVIRONMENT_R1 S5); SHA-256 каждого файла сверяется с пином перед КАЖДЫМ прогоном",
+    "modifications": "NONE — verbatim byte-exact quick_input (533 B), отклонение любого параметра = новая protocol revision (S3 R1)",
+    "vendoring": "FORBIDDEN — upstream файлы не коммитятся в NanoLab (GPL-3.0, DOWNLOAD_ON_SETUP); в Git только дайджесты и команды"
+  },
+  "environment_binding": {
+    "doc": "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "work_order": "NL1-001",
+    "state": "ACCEPTED",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "engine_build": "WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6 user-local, Release, DOUBLE=ON, CUDA=OFF, MPI=OFF, NATIVE_COMPILATION=ON, JSON_ENABLED=ON, CMAKE_CXX_FLAGS пуст",
+    "engine_source": "reused fixed build: ~/nl1-002/build-oxdna-cpu (исходники ~/nl1-002/oxdna-src @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591)",
+    "campaign_binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "campaign_binary_size": 3375976,
+    "binary_reuse_rule": "reuse бит-в-бит зафиксированной сборки кампании E1-R1 (строго сильнее критерия пересборки); перед прогонами верифицируются: SHA-256 бинаря = ffc80b1a..., размер = 3375976 B, флаги CMakeCache, GIT COMMIT-строка в log.dat = 00dc7fb. Несовпадение любой позиции -> BLOCKED_ENVIRONMENT (тихая замена другой сборкой запрещена, S7 R1)",
+    "binary_hash_note": "SHA-256 бинаря не воспроизводим бит-в-бит между пересборками (oxDNA встраивает дату 'COMPILED ON'); fallback-критерий при недоступности reuse: успешная пересборка по S3 ENGINE_ENVIRONMENT_R1 + идентичные флаги/размер + commit строки лога, новые SHA-256 записываются"
+  },
+  "runs": {
+    "T1_reference": {
+      "run_id": "E1-R1-S001",
+      "campaign_id": "E1-R1",
+      "type": "T1_PRODUCTION",
+      "counts_toward_evidence": true,
+      "reuse_rule": "RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE: опубликованный energy.dat E1-R1 (SHA-256 ff26bad5b3dbedb2bbe14091ffa096fbda643579ef31ce539d4432154b654f90, 49049 B, artifacts.manifest.json E1-R1) повторно НЕ запускается, значение включается в confirmatory set как есть с provenance на исходный прогон; перезапуск T1 не предусмотрен протоколом (T1 = PASS — опубликованный execution fact NL1-002)"
+    },
+    "T2_confirm": [
+      {"run_id": "E1-R2-C001", "type": "T2_CONFIRM_PRODUCTION", "input": "quick_input verbatim, byte-exact raw blob (533 B)", "counts_toward_evidence": true},
+      {"run_id": "E1-R2-C002", "type": "T2_CONFIRM_PRODUCTION", "input": "quick_input verbatim, byte-exact raw blob (533 B)", "counts_toward_evidence": true},
+      {"run_id": "E1-R2-C003", "type": "T2_CONFIRM_PRODUCTION", "input": "quick_input verbatim, byte-exact raw blob (533 B)", "counts_toward_evidence": true}
+    ],
+    "seed_policy": "engine random per run (upstream semantics; '#seed = 4982' остаётся закомментированным); фактический seed фиксируется из log.dat каждого прогона; distinctness: C001-C003 попарно и относительно S001/P001-P003 (S001 -200619630, P001 -473348953, P002 -547126645, P003 -1610133928); коллизия -> техническая классификация, повтор только с новым run ID и записанной причиной",
+    "pilot_reuse": "FORBIDDEN — пилоты E1-R1-P001..P003 в confirmatory set не засчитываются (S6.4 R1, S3 R2)"
+  },
+  "observable": {
+    "definition": "арифметическое среднее колонки 2 energy.dat по ВСЕМ строкам прогона (механически, включая initial row) — идентично S5.1 R1",
+    "analysis_tool": "analyze_energy.sh (awk; байт-в-бит из E1-R1, git blob 77cfcc637df7c75446736cf1c3a71ea219a260c5, SHA-256 747c5216589ab9270830a21eaf7f15d1aea742681360ac048f4392c2edfabd4d), одинаковый для всех T2-реплик",
+    "reference_oracle": "ColumnAverage::energy.dat::2::-1.37970256144::0.15",
+    "criterion_T2_per_replica": "|ColumnAvg - (-1.37970256144)| <= 0.15",
+    "column2_semantics": "OBSERVED-in-source: потенциальная энергия на нуклеотид (PotentialEnergy.cpp: energy /= N); подтверждено ENGINE_ENVIRONMENT_R1 S6",
+    "forbidden_changes": "колонка, интервал усреднения, полоса, reference value не меняются (S5.3 R1)"
+  },
+  "statistics_frozen": {
+    "confirmatory_set": ["E1-R1-S001", "E1-R2-C001", "E1-R2-C002", "E1-R2-C003"],
+    "estimators": "mean, выборочное SD (n-1) — та же оценка, что в пилоте E1-PROTO-R2 S1; малое n — без претензии на точный CI (S6.3 R1)",
+    "per_replica": "IN_BAND iff |ColumnAvg - oracle| <= 0.15",
+    "aggregate_criterion": "S9 R1, механически: campaign-критерий выполнен <=> T1 = PASS И все T2-реплики IN_BAND; иначе NOT_SUPPORTED-путь, отрицательный результат сохраняется",
+    "publication": "все значения реплик публикуются полностью; пост-хок исключения запрещены (S10 R1)",
+    "uncertainty_separation": "статистическая ошибка = между-репликационный разброс; физическая флуктуация = внутри-траектории (time series колонки 2, диагностика, не gate); модельные ограничения = S2.4 R1 (S6.3 R1)",
+    "decision_authority": "механическая оценка критерия — execution/analysis fact; объявление статуса E1/acceptance — Director после независимого REVIEWER + VERIFIER; campaign-level scientific_outcome в момент публикации = NOT_EVALUATED"
+  },
+  "integrity": {
+    "expected_energy_rows_note": "S5.2 R1 protocol note: 1001 строка = 1 initial + 1000 prints (OBSERVED upstream-семантика); критерий не меняется",
+    "expected_configurations": 10,
+    "nan_inf": "обязаны отсутствовать во всех выходах",
+    "recorded_per_run": ["engine version string", "GIT COMMIT из лога", "фактический seed", "wall time (/usr/bin/time -v)", "max RSS"]
+  },
+  "budget": {
+    "cap": "1 core-hour суммарно для кампании E1 (унаследован), локальный CPU только; план: 3 прогона x ~10-15 c + запас",
+    "storage": "raw выходы в Git целиком (порядка сотен KB на прогон) + artifacts.manifest (SHA-256/size/producer)"
+  },
+  "stop_conditions": [
+    "превышение budget",
+    ">= 2 технических сбоя на одном этапе -> BLOCKED + repair analysis",
+    "недоступность pinned upstream objects или зафиксированной сборки без возможности верифицируемой пересборки S3 -> BLOCKED_ENVIRONMENT",
+    "коллизия seed -> техническая классификация прогона, новый run ID"
+  ],
+  "outcomes_semantics": "E1-PROTO-R1 S9; Reproduction (T1 PASS и все T2 IN_BAND и целостность OK) -> механический факт критерий-S9-выполнен; T1 или >=1 T2 вне полосы -> NOT_SUPPORTED (негатив сохраняется); технический сбой -> FAILED_TECHNICAL run с уникальным ID (сохраняется, в сравнение не идёт); среда -> BLOCKED_ENVIRONMENT; противоречие header/семантики -> INCONCLUSIVE. Объявление campaign-level статуса E1 — Director; implementer публикует recommendation"
+}

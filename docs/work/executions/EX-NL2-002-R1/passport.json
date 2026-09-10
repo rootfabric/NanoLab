@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL2-002-R1",
+  "work_order_id": "NL2-002",
+  "checkpoint": "NL2",
+  "base_sha": "0176098ed052ec29503ac5c353463be0cc8ea167",
+  "branch": "work/nl2-002-validate-e1-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION_CEILING (публикуются execution facts + preregistered band-facts; campaign-level scientific_outcome = NOT_EVALUATED, объявление статуса E1 — Director)",
+  "allowed_paths": [
+    "docs/work/WO-NL2-002.md",
+    "docs/work/executions/EX-NL2-002-R1/**",
+    "experiments/evidence/E1/E1-R2/**",
+    "docs/evidence/NL2-002/**",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "started_at_utc": "2026-09-10T11:17:00Z",
+  "status": "HANDOFF_READY"
+}

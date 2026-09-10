@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-10T11:37:54Z",
+  "execution_id": "EX-NL2-002-R1",
+  "work_order_id": "NL2-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "Валидация evidence-пакета NL2-002 (на рабочем дереве, байт-идентичном публикуемому коммиту). (1) experiment_cli validate: E1-R2-C001/C002/C003 -> ok=true, 0 errors, 0 warnings (run-каталоги: манифесты, события 0001-0003, массив-манифесты артефактов; close для run-каталогов невозможен до REVIEW_COMPLETED — review следующая роль, конвенция NL1-002/NL2-001). (2) jsonschema Draft 2020-12 + FormatChecker по v1-схемам: 15/15 контрактных JSON (3 манифеста + 3 массив-манифеста артефактов + 9 событий) — чисто, включая additionalProperties:false. (3) Дайджест-контроль: 15/15 published артефактов digest-vs-file MATCH; 15/15 committed blob'ов digest-vs-blob MATCH (binary-safe git cat-file; autocrlf не исказил байты). (4) cli check-consistency -> ok=true, exit 0 (frontier NL2, next NL2-002; state/plan не менялись). (5) work_cli close EX будет исполнен на терминальном коммите (нужен HANDOFF_COMPLETED + summary.md) и зафиксирован в summary.md. (6) Границы подтверждены: state.json/plan.json/config/scripts/протоколы E1/артефакты E1-R1 не менялись (git diff против base только allowed paths).",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.experiment_cli validate experiments/evidence/E1/E1-R2/runs/E1-R2-C00{1,2,3} -> 3x ok=true, 0 errors, 0 warnings",
+    "python jsonschema Draft202012Validator + FormatChecker -> 15/15 OK",
+    "python digest-vs-file + git cat-file blob digest-vs-blob -> 15/15 + 15/15 MATCH",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok=true, exit 0"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R2/evidence-map.json",
+    "experiments/evidence/E1/E1-R2/statistics.md",
+    "docs/evidence/NL2-002/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "IMPLEMENTER: terminal HANDOFF_COMPLETED + summary.md + passport HANDOFF_READY; work_cli validate+close на терминальном коммите; push.",
+  "blocker": null
+}

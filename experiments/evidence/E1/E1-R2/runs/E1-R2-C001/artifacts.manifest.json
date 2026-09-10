@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "name": "log.dat",
+      "sha256": "6f5de75172d27c9b1d6a5efff740d4e0dcc56ebbfd495db54f61f673883acb0b",
+      "size_bytes": 2203,
+      "producer_run_id": "E1-R2-C001",
+      "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+      "storage_location": "experiments/evidence/E1/E1-R2/runs/E1-R2-C001/artifacts/log.dat (in Git)",
+      "producer_command": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f), verbatim quick_input, seed from log.dat"
+    },
+    {
+      "name": "energy.dat",
+      "sha256": "102d5331a9dc093a9bc124115f7014e4068f522cdf42f335eeb732c4c33b9f3b",
+      "size_bytes": 49049,
+      "producer_run_id": "E1-R2-C001",
+      "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+      "storage_location": "experiments/evidence/E1/E1-R2/runs/E1-R2-C001/artifacts/energy.dat (in Git)",
+      "producer_command": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f), verbatim quick_input, seed from log.dat"
+    },
+    {
+      "name": "trajectory.dat",
+      "sha256": "6c3a6de98bc77e98b1aa05046d9548bf804ee39049a134885ec07154db7064ab",
+      "size_bytes": 44778,
+      "producer_run_id": "E1-R2-C001",
+      "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+      "storage_location": "experiments/evidence/E1/E1-R2/runs/E1-R2-C001/artifacts/trajectory.dat (in Git)",
+      "producer_command": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f), verbatim quick_input, seed from log.dat"
+    },
+    {
+      "name": "last_conf.dat",
+      "sha256": "106c59d606396d3b9c88dff9a2dae7c5d8ce7f0b0fd821b7602d514c1974632a",
+      "size_bytes": 4477,
+      "producer_run_id": "E1-R2-C001",
+      "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+      "storage_location": "experiments/evidence/E1/E1-R2/runs/E1-R2-C001/artifacts/last_conf.dat (in Git)",
+      "producer_command": "oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f), verbatim quick_input, seed from log.dat"
+    },
+    {
+      "name": "resource_time.txt",
+      "sha256": "0b6818167f1ae2bcb8f8cfa7e6055405fd94aff88373fcd2cbfbee7cbbe238fc",
+      "size_bytes": 777,
+      "producer_run_id": "E1-R2-C001",
+      "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+      "storage_location": "experiments/evidence/E1/E1-R2/runs/E1-R2-C001/artifacts/resource_time.txt (in Git)",
+      "producer_command": "/usr/bin/time -v oxDNA quick_input (binary ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f)"
+    }
+  ]
+}

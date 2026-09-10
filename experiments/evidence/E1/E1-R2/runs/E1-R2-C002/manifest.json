@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E1",
+  "campaign_id": "E1-R2",
+  "run_id": "E1-R2-C002",
+  "work_order_id": "NL2-002",
+  "protocol_revision": "E1-PROTO-R2",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION_CEILING_NOT_EVALUATED: публикуются execution facts (IN_BAND/OUT_OF_BAND относительно upstream-оракула per-replica + агрегат confirmatory set); campaign-level scientific_outcome = NOT_EVALUATED — объявление статуса E1 выполняет Director по E1-PROTO-R1 §9 после независимого review",
+  "model": {
+    "engine": "oxDNA v3.7 @ pinned upstream 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "binary_source": "reuse бит-в-бит зафиксированной сборки кампании E1-R1 (3375976 B)",
+    "fixture": "test/DNA/DSDNA8 verbatim (16 nucleotides / 2 molecules)",
+    "build": "WSL2 Ubuntu 24.04.2, gcc 13.3.0, cmake 3.31.6, Release, DOUBLE=ON, CUDA=OFF, MPI=OFF, NATIVE=ON, JSON_ENABLED=ON (ENGINE_ENVIRONMENT_R1)"
+  },
+  "inputs": [
+    {
+      "name": "quick_input",
+      "source_blob_sha1": "07eef592f070f9b8955f9001e0fd292de9862a4a",
+      "sha256": "8935c4bc623ca96d406429c3c5177901f12540ffe61bcd3299931f0689af74a2",
+      "size_bytes": 533,
+      "modifications": "NONE — verbatim byte-exact"
+    },
+    {
+      "name": "dsdna8.top",
+      "source_blob_sha1": "1811af7ea4bea8a86519456cba608d1e6d44ed3b",
+      "sha256": "f1aded90b5f6e1d9adab0e55925bba778477467be2957b4093d1264160c03fc4",
+      "size_bytes": 148,
+      "modifications": "NONE"
+    },
+    {
+      "name": "init.dat",
+      "source_blob_sha1": "856be1878ece7115a91f988b2cbd7ad650daf2db",
+      "sha256": "0ff76d541728e0925f199970ff6296254fe6116d23e44fdf0d361d0f8891a9e0",
+      "size_bytes": 4498,
+      "modifications": "NONE"
+    },
+    {
+      "name": "quick_compare",
+      "source_blob_sha1": "74a088ec4ceb1bc01ab2e385e4700eb2d3907f40",
+      "sha256": "86a8b6ac50f382ba25e5aacbbef629cc5a1788f44e6c28d113509c8448e3ce27",
+      "size_bytes": 51,
+      "modifications": "NONE (oracle, не вход engine)"
+    }
+  ],
+  "observables": [
+    {
+      "name": "ColumnAverage::energy.dat::2",
+      "definition": "арифметическое среднее колонки 2 energy.dat по всем строкам прогона (analyze_energy.sh, механически; байт-в-бит из E1-R1)",
+      "reference_oracle": "ColumnAverage::energy.dat::2::-1.37970256144::0.15",
+      "criterion": "|ColumnAvg - (-1.37970256144)| <= 0.15 (E1-PROTO-R1 §5.1, per-replica T2)"
+    }
+  ],
+  "environment": {
+    "doc": "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "os": "WSL2 Ubuntu 24.04.2 (campaign-машина, та же, что E1-R1)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "binary_sha256": "ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f",
+    "binary_size_bytes": 3375976,
+    "binary_source": "reuse fixed build ~/nl1-002/build-oxdna-cpu/bin/oxDNA (бит-в-бит сборка кампании E1-R1); верификация SHA-256/size/flags перед прогоном",
+    "command": "cd <scratch>/E1-R2-C002 && /usr/bin/time -v ~/nl1-002/build-oxdna-cpu/bin/oxDNA quick_input",
+    "scratch": "C:\\NanoLab\\scratch\\nl2-002 (disposable, вне Git)"
+  },
+  "seed_policy": {
+    "rule": "engine random per run (upstream semantics; '#seed = 4982' остаётся закомментированным); фактический seed публикуется из log.dat после прогона",
+    "distinctness": "фактические seed C001–C003 попарно различны и отличны от S001 (−200619630) и P001–P003; коллизия → техническая классификация, новый run ID"
+  },
+  "resource_budget": {
+    "wall_expectation": "10-15 s на прогон (измерено в E1-R1: 11-13 s)",
+    "cap": "1 core-hour для кампании E1 суммарно (унаследован), локальный CPU",
+    "stop_if_exceeded": true
+  },
+  "stop_conditions": [
+    "превышение budget (1 core-hour кампании E1) -> остановка",
+    ">= 2 технических сбоя на одном этапе -> BLOCKED + repair analysis",
+    "несовпадение SHA-256 любого входа с пином перед прогоном -> прогон не запускается",
+    "коллизия seed -> техническая классификация, повтор с новым run ID",
+    "недоступность pinned upstream objects / зафиксированной сборки -> BLOCKED_ENVIRONMENT"
+  ],
+  "status": "STARTED"
+}

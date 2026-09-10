@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-completed",
+  "timestamp_utc": "2026-09-10T11:29:05Z",
+  "experiment_id": "E1",
+  "campaign_id": "E1-R2",
+  "run_id": "E1-R2-C002",
+  "event_type": "RUN_COMPLETED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "T2-реплика 2/3 завершена технически успешно: exit code 0, engine 'END OF THE SIMULATION, everything went OK!' (log.dat). Подготовка go/no-go перед запуском: 4/4 входа извлечены сырыми blob'ами pinned tree (git cat-file blob) и верифицированы sha256sum на месте — quick_input 8935c4bc..., dsdna8.top f1aded90..., init.dat 0ff76d54..., quick_compare 86a8b6ac...; engine — reuse бит-в-бит сборки E1-R1, верифицирован перед кампанией: SHA-256 ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f, 3375976 B, флаги Release/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE_COMPILATION=ON/JSON_ENABLED=ON, исходники @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591. Фактический seed (engine random, log.dat): 977680137. Целостность §5.2: energy.dat 1001 строка (1 initial + 1000 prints, protocol note), trajectory.dat 10 конфигураций, last_conf.dat записан, NaN/Inf = 0; engine facts: RELEASE v3.7, GIT COMMIT 00dc7fb, T = 0.097717. Distinct seed подтверждается пост-фактум по логам (попарно C001-C003 и относительно S001/P001-P003). Scientific_outcome этим событием не выставляется — отдельный ANALYSIS_COMPLETED.",
+  "command": "cd /mnt/c/NanoLab/scratch/nl2-002/E1-R2-C002 && /usr/bin/time -v ~/nl1-002/build-oxdna-cpu/bin/oxDNA quick_input",
+  "exit_code": 0,
+  "artifact_refs": [
+    "artifacts/log.dat",
+    "artifacts/energy.dat",
+    "artifacts/trajectory.dat",
+    "artifacts/last_conf.dat",
+    "artifacts/resource_time.txt"
+  ],
+  "resource_usage": {
+    "elapsed_wall": "0:10.88",
+    "max_rss_kb": 6604,
+    "seed": 977680137,
+    "energy_dat_rows": 1001,
+    "trajectory_configurations": 10,
+    "nan_inf_hits": 0,
+    "engine_verdict": "END OF THE SIMULATION, everything went OK!",
+    "input_verification": "4/4 SHA-256 on-place MATCH before start"
+  },
+  "scientific_outcome": null
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-10T11:37:54Z",
+  "execution_id": "EX-NL2-002-R1",
+  "work_order_id": "NL2-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "CONTINUATION: T2 confirmatory кампания E1-R2 исполнена и проанализирована по frozen правилам (E1-PROTO-R2: R_confirm = 3, зафиксирован до кампании; полоса/оракул/статистика не менялись). Durable checkpoints: freeze-коммит f34e62ca67f12f0cffbd1823d584afc09900db6a (campaign.md + protocol.json + analyze_energy.sh байт-в-бит из E1-R1), campaign-START 42cb851251ce69840856c121d7fe2891385d9a88 (manifests + started-events, push ДО первого прогона), END_EXECUTION 63cd92d, END_ANALYSIS bd98147. Прогоны: E1-R2-C001 seed -1641386734 (exit 0, 11.00 s, 6604 KB), E1-R2-C002 seed 977680137 (exit 0, 10.88 s, 6604 KB), E1-R2-C003 seed -999572227 (exit 0, 11.03 s, 6468 KB); все технически COMPLETED с первого и единственного запуска, без исключений, повторов и коллизий seed (distinctness подтверждена фактами log.dat: попарно и относительно S001/P001-P003). Подготовка каждого прогона: 4/4 сырых blob'а pinned tree, sha256sum на месте MATCH; engine — reuse бит-в-бит зафиксированной сборки E1-R1 ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f (3375976 B), верифицирован SHA-256/size/CMakeCache-флаги перед кампанией — пересборка не потребовалась, конфаунд пересборки устранён. Целостность S5.2 каждой реплики: energy.dat 1001 строка, 10 конфигураций, NaN/Inf = 0. Анализ (analyze_energy.sh, механически): C001 -1.36722173127, C002 -1.35818087512, C003 -1.35653082817 — все per-replica IN_BAND (полоса -1.37970256144 ± 0.15); S001 cross-check тем же байт-в-бит инструментом воспроизводит published -1.39393635864. Frozen статистика confirmatory set S001+C001-C003 (n=4): mean -1.36896744830, выборочное SD 0.01729656703 (11.5% полосы). Агрегат S9 R1 (T1 PASS и все T2 in band): MET — механический факт; campaign-level scientific_outcome = NOT_EVALUATED, объявление статуса E1 — Director. Диагностика S4 R2 (best-effort, не gate): ac(1) 0.59-0.83, tau_int ~10-60 prints, Neff ~8-48 на траекторию; PyMBAR-level ESS остаётся открытой задачей. Бюджет: 32.91 s wall суммарно (~0.009 core-hour), << cap 1 core-hour. state.json/plan.json/config/scripts/протоколы/E1-R1-артефакты не менялись.",
+  "command_refs": [
+    "wsl bash run_campaign.sh: 3x [git cat-file blob 4/4 SHA-256 MATCH -> /usr/bin/time -v oxDNA quick_input -> exit 0 -> integrity 1001/10/0 NaN-Inf]",
+    "wsl bash run_analysis.sh: analyze_energy.sh x3 + S001 cross-check + frozen statistics (mean/SD/per-replica)",
+    "PYTHONPATH=scripts python -m harness.experiment_cli validate experiments/evidence/E1/E1-R2/runs/E1-R2-C00{1,2,3} -> ok=true, 0 errors, 0 warnings",
+    "digest-vs-blob: 15/15 published artifacts MATCH; 15/15 committed blobs MATCH (git cat-file blob, binary-safe)"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E1/E1-R2/campaign.md",
+    "experiments/evidence/E1/E1-R2/protocol.json",
+    "experiments/evidence/E1/E1-R2/statistics.md",
+    "experiments/evidence/E1/E1-R2/evidence-map.json",
+    "experiments/evidence/E1/E1-R2/runs/E1-R2-C001..C003/**"
+  ],
+  "next_action": "IMPLEMENTER: финальные валидации (work_cli validate+close EX, check-consistency, jsonschema всех контрактных JSON), publication docs/evidence/NL2-002/IMPLEMENTER_EVIDENCE.md, terminal HANDOFF_COMPLETED + summary.md.",
+  "blocker": null
+}

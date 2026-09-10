@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-10T11:17:00Z",
+  "execution_id": "EX-NL2-002-R1",
+  "work_order_id": "NL2-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0176098ed052ec29503ac5c353463be0cc8ea167",
+  "summary": "Старт NL2-002 (validate statistics and E1: T2 confirmatory кампания E1-R2 + confirmatory-статистика + evidence-пакет для Director). Base — canonical main 0176098ed052ec29503ac5c353463be0cc8ea167 (merge PR #30; NL2-001 ACCEPTED, frontier NL2, next NL2-002 READY, E1 = RUN, physics_runs = 4). Содержание: (1) T2 confirm — ровно 3 независимых production-прогона E1-R2-C001..C003 verbatim-конфигурации E1-PROTO-R1 SS3 (байт-точный quick_input 533 B из сырых blob'ов pinned commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, steps = 1e6), фактически записанные distinct seed (попарно и относительно S001/P001-P003); критерий каждой реплики SS5.1 R1 (|ColumnAvg(col2) − (−1.37970256144)| ≤ 0.15); повторное использование пилотов как T2 запрещено SS3 R2. (2) Preparation: git cat-file blob + sha256sum 4/4 против пинов SS2.2 R1 перед каждым прогоном; engine — reuse зафиксированной сборки кампании E1-R1 (бинарь ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f, 3375976 B, Release/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE_COMPILATION=ON — проверено на campaign-машине перед START), fallback — пересборка по ENGINE_ENVIRONMENT_R1 SS3; reuse бит-в-бит сборки S001 устраняет пересборку как конфаунд confirmatory set. (3) Статистика frozen: confirmatory set = S001 + C001-C003 (4 точки, все значения публикуются), mean + выборочное SD (n−1), per-replica IN_BAND + агрегат SS9 R1 (campaign-критерий: T1 PASS и все T2 в полосе); полоса/оракул/колонка/усреднение не меняются (SS5.3 R1); отрицательный результат сохраняется. (4) Analysis: analyze_energy.sh байт-в-бит из E1-R1 на published energy.dat; целостность SS5.2 (1001 строка, 10 конфигураций, NaN/Inf = 0). (5) Контрактная обвязка прогонов по урокам NL1-002 R2 и NL2-001: массив-манифесты (name/sha256/size_bytes/producer_run_id/subject_sha 40-hex/storage_location/producer_command), события с experiment_id и 40-hex subject_sha, event_id = имя файла, терминал последним, /usr/bin/time -v на каждом прогоне. Каждый run — уникальный ID, технический и научный исходы раздельно. Границы: project/state.json и plan.json не менять (объявление статуса E1 — Director, не implementer); протоколы E1, артефакты E1-R1, валидаторы (config/**, scripts/harness/**) не трогать; claim ceiling C1_COMPUTATIONAL_REPRODUCTION; campaign-level scientific_outcome = NOT_EVALUATED на момент публикации. Budget: 3 прогона x ~10-15 c + запас, локальный CPU (cap 1 core-hour кампании E1). Epoch drift: отсутствует (origin/main = base на момент fetch). Планируемая последовательность durable checkpoints: START (этот коммит) -> FREEZE кампании E1-R2 (campaign.md + protocol.json + analyze_energy.sh; SHA коммита = subject_sha run-поверхностей) -> CAMPAIGN-START (manifests + started-events, push ДО первого прогона) -> прогоны -> CONTINUATION -> END_EXECUTION -> END_ANALYSIS -> HANDOFF.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = 0176098ed052ec29503ac5c353463be0cc8ea167 (= base; merge pull request #30)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl2-002 -b work/nl2-002-validate-e1-r1 0176098ed052ec29503ac5c353463be0cc8ea167",
+    "wsl: sha256sum ~/nl1-002/build-oxdna-cpu/bin/oxDNA -> ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f (3375976 B; CMakeCache: Release/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE_COMPILATION=ON/JSON_ENABLED=ON; git -C ~/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591; pinned blobs 4/4 cat-file -e OK)",
+    "project/state.json @ 0176098: frontier NL2, next_work_order NL2-002, E1 = RUN, physics_runs = 4"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL2-002.md",
+    "docs/work/executions/EX-NL2-002-R1/passport.json",
+    "docs/work/executions/EX-NL2-002-R1/branch-passport.md",
+    "docs/research/PREREGISTRATION_E1_R1.md",
+    "docs/research/PREREGISTRATION_E1_R2.md (freeze R_confirm = 3)",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "experiments/evidence/E1/E1-R1/protocol.json (environment_binding, blob-правило)"
+  ],
+  "next_action": "IMPLEMENTER: freeze-коммит кампании E1-R2 (campaign.md + protocol.json + analyze_energy.sh байт-в-бит из E1-R1), затем campaign-START commit (manifests + started-events C001-C003, subject_sha = SHA freeze-коммита), commit+push ДО первого прогона.",
+  "blocker": null
+}
