@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "infra_provenance_recovery_config",
+  "revision": "PROVENANCE-RECOVERY-R1",
+  "canonical_owner": "main",
+  "status": "IMPLEMENTED",
+  "work_order": "NL2-003",
+  "execution": "EX-NL2-003-R1",
+  "doc": "docs/research/PROVENANCE_RECOVERY_R1.md",
+  "provenance_chain": [
+    {"link": "subject", "recorded_in": "experiments/evidence/<exp>/<campaign>/runs/<run-id>/manifest.json#subject_sha", "verified_by": "experiment_cli validate; freeze-commit precedes runs (git chronology)"},
+    {"link": "seeds", "recorded_in": "engine log (log.dat) + event resource_usage/seed_policy", "verified_by": "distinctness check per protocol; collision -> technical classification"},
+    {"link": "inputs", "recorded_in": "manifest.json#inputs[] (sha256/size/blob_ref/modifications)", "verified_by": "materialize from git cat-file blob + digest check before each run"},
+    {"link": "binaries", "recorded_in": "manifest.json#model/#environment (binary_sha256, size, build flags, upstream commit)", "verified_by": "sha256/size/flags verified before each run; rebuild -> new SHA in new subject"},
+    {"link": "runs", "recorded_in": "runs/<run-id>/ (array manifests, events terminal-before-analysis, artifacts.manifest.json)", "verified_by": "experiment_cli validate + experiment_cli verify-digests + O1 storage_location lint"},
+    {"link": "analysis", "recorded_in": "ANALYSIS_COMPLETED event + campaign statistics surfaces", "verified_by": "S003 rule: SUPPORTED only on analysis surface with verification surface"},
+    {"link": "evidence-map", "recorded_in": "experiments/evidence/<exp>/<campaign>/evidence-map.json", "verified_by": "evidence-map.schema.v1.json (campaign convention, F-1/O3 sync)"}
+  ],
+  "stop_resume": {
+    "run_id_reuse": "forbidden_after_any_terminal_event",
+    "stop_recording": "terminal event (RUN_ABORTED | RUN_FAILED_TECHNICAL | RUN_BLOCKED_ENVIRONMENT) with cause, consumed resources, partial artifact refs",
+    "resume_recording": "new run with new run_id; RESUMED marker on a RUN_CHECKPOINT event of the new run",
+    "resumed_marker_convention": {
+      "event_type": "RUN_CHECKPOINT",
+      "summary_prefix": "RESUMED:",
+      "required_resource_usage_fields": ["resumed_marker", "supersedes_run_id", "reuse_scope"],
+      "constraints": [
+        "interrupted run must already carry its terminal event before the resume run is published",
+        "reuse_scope values reference digests of the source run (raw artifact reuse requires digest + provenance)",
+        "resume point is a checkpoint boundary unless the protocol defines otherwise"
+      ],
+      "mechanical_enforcement": "convention (grep surface) in R1; automated check is a future candidate"
+    }
+  },
+  "deduplication": {
+    "rule": "identical frozen surface is never re-executed; evidence references the existing run",
+    "identity_links": ["subject_sha", "protocol_revision", "input digests", "binary", "seed"],
+    "decisions": {
+      "all_links_identical": "reference existing run (counts_toward_evidence + provenance note); no new run",
+      "only_seed_differs_and_protocol_requires_independence": "new run id + new execution",
+      "inputs_binaries_or_protocol_differ": "new run id + superseding subject/protocol revision",
+      "technical_failure": "new run id with recorded cause; authorized retry only under a new id"
+    },
+    "precedents": ["E1-R1-S001 reused in E1-R2 confirmatory set (counts_toward_evidence=true)", "E0-R3-S003-RETRY1 (new id, recorded cause)"]
+  },
+  "readback": {
+    "source_of_truth": "git blobs (git cat-file blob <rev>:<path>), never the working copy (autocrlf lesson, VERIFIER NL2-001 §3 / NL2-002 F-3)",
+    "digest_rule": "raw artifact reuse requires sha256/size from artifacts.manifest.json (hard rule)",
+    "mechanical_check": {
+      "command": "PYTHONPATH=scripts python3 -m harness.experiment_cli verify-digests <campaign-or-run-dir> [--rev HEAD]",
+      "exit_semantics": "0 only with 0 mismatches (CI-checkable)",
+      "r1_baseline": {"E1-R1": 16, "E1-R2": 15, "E0-R4": 56, "E0-R1": 55, "E0-R3": 59, "E0-R2": 55, "mismatches": 0}
+    },
+    "chronology": "commit dates + per-event machine timestamps; placeholder timestamps rejected by work_cli/experiment_cli"
+  },
+  "validator_hardening_r1": {
+    "S003": "scientific_outcome=SUPPORTED is rejected on non-analysis surfaces; ANALYSIS_COMPLETED requires non-empty artifact_refs resolving to existing artifacts",
+    "O1": "in-Git storage_location (experiments/ prefix) must contain manifest campaign_id and run_id as path segments",
+    "O2_F3": "midnight placeholder, unparseable/missing timestamp_utc, and constant copy stamps across >=3 events (legacy exact-whitelist) are errors; rationale: warnings are not gating (POS001 signature is 0 warnings) and placeholders defeat chronology reconstruction",
+    "emit_run_order": "artifacts.manifest.json is serialized after the final case_record.json write; digest-invariance of schema validation is asserted (REPAIR_MAP_F1_R1 §5.1)"
+  },
+  "non_goals": [
+    "aiida_or_hpc_workflow_engine_integration (future bounded WO)",
+    "new v1 event types (RESUMED stays a RUN_CHECKPOINT convention)",
+    "retroactive edits to published batch-timestamp events (immutable; exact whitelist only)"
+  ]
+}
