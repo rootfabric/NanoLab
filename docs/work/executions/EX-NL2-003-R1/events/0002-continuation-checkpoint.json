@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-10T13:30:32Z",
+  "execution_id": "EX-NL2-003-R1",
+  "work_order_id": "NL2-003",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d121119add4533c77c40db287c292d0c8e542188",
+  "summary": "CONTINUATION: validator hardening + provenance-контракт реализованы (коммиты 3d72712, 4d9832d, ce0f7de на base d121119). Закрытые дыры, каждая с механическими позитив/негатив-тестами (tests/test_nl2_003_hardening.py, 31 тест; полный набор 133 OK): (1) S003 — experiment_cli отвергает scientific_outcome=SUPPORTED вне ANALYSIS_COMPLETED (терминальные события и прочие поверхности -> ошибка; на ANALYSIS_COMPLETED требуется verification-поверхность: непустой artifact_refs, разрешающийся в существующий файл); негатив: синтетический gap-кейс и опубликованная фикстура s003_tech_with_sci_claim -> exit 3 с явной S003-ошибкой; позитив: verify-цепочка terminal(null) -> ANALYSIS_COMPLETED(SUPPORTED, artifacts/analysis.json) -> ok. Регрессия: все 18 run-каталогов E0-R4 остаются ok. (2) digest-vs-blob — новый режим experiment_cli verify-digests: sha256/size каждой записи artifacts.manifest.json против git-блобов HEAD (git cat-file, не working copy); graceful fail-closed на legacy object-манифестах и вне-репо путях. Прогон R1: E1-R1 16/16, E1-R2 15/15, E0-R4 56/56 — 0 mismatch (бонус: E0-R1 55, E0-R3 59, E0-R2 55 — 0 mismatch, суммарно 256/256). (3) emit_run порядок (REPAIR_MAP_F1_R1 SS5.1, обязательный фикс): финальный case_record.json пишется ДО сериализации манифеста, запись case_record патчится финальными байтами, digest-инвариантность schema-валидации утверждается runtime-проверкой; unittest воспроизводит инвариант «манифест описывает опубликованные байты» на синтетическом scaffold (пре-фикс кода этот тест валит — воспроизведение класса F1). Инструмент версионируется provenance-правилом: исторические subject'ы хранят старый блоб в git-истории, новая ревизия входит во freeze будущих кампаний. (4) O1 — experiment_cli проверяет сегменты campaign_id/run_id в storage_location in-Git формата; E0-R2 (superseded, документированно красная) теперь краснеет и по O1 — 55 stale записей именуются механически; 62 остальных run-каталога зелёные. (5) O2/F3 — work_cli: midnight-placeholder (T00:00:00Z), отсутствующий/непарсируемый timestamp_utc, константный copy-штамп на >=3 событиях -> ошибки; легаси batch-штампы EX-NL2-002-R1 0002-0004 grandfathered точным whitelist'ом (LEGACY_BATCH_TIMESTAMP_EVENTS, provenance-строка в коде); скан опубликованных поверхностей до введения: ровно один hit (EX-NL2-002-R1) —Director finding F-1. Обоснование error-vs-warning: POS001-сигнатура «0 warnings» означает, что warnings не гейтят; F3/O2 реально вводили хронологию в заблуждение; стоимость комплаенса околонулевая. (6) F-1/O3 — evidence-map.schema.v1.json синхронизирован с де-факто campaign-конвенцией (schema follow facts); все три published карты (E1-R1, E0-R4, E1-R2) валидны, 0 ошибок (jsonschema Draft 2020-12 + FormatChecker). (7) Provenance-контракт: docs/research/PROVENANCE_RECOVERY_R1.md (цепочка subject->seeds->inputs->binaries->runs->analysis->evidence-map; stop/resume — run ID не переиспользуется, RESUMED-маркер на RUN_CHECKPOINT нового run; дедупликация идентичной поверхности; readback из блобов, CRLF-урок F-3) + machine-readable config/infra/provenance-recovery.v1.json. Полный чек-набор зелёный: JSON 710 tracked (ровно 2 пинned NEG-фикстуры unparseable by design, sha256 = CI-пинам), check-consistency ok, work_cli 13/13 pre-existing EX OK, lint 0, unittest 133 OK. AiiDA-интеграция зафиксирована как будущий WO (не входит).",
+  "command_refs": [
+    "python -m harness.experiment_cli validate experiments/evidence/E0/E0-R1/fixtures/status/s003_tech_with_sci_claim/run -> exit 3, S003 error",
+    "python -m harness.experiment_cli verify-digests experiments/evidence/E1/E1-R2 -> ok=true, 15 entries, 0 mismatch (и E1-R1/E0-R4)",
+    "python -m unittest discover -s tests -t . -> 133 tests OK",
+    "python -c jsonschema Draft202012Validator(evidence-map.schema.v1.json) на E1-R1/E0-R4/E1-R2 -> 0 errors x3"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL2-003.md",
+    "tests/test_nl2_003_hardening.py",
+    "docs/research/PROVENANCE_RECOVERY_R1.md",
+    "config/infra/provenance-recovery.v1.json",
+    "config/control/harness/README.md (evidence-map sync note)",
+    "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md (SS5.1 mandate)"
+  ],
+  "next_action": "IMPLEMENTER: финальная валидационная запись (0003), summary.md + handoff (0004), SESSION_LOG append, push; затем независимый REVIEWER.",
+  "blocker": null
+}
