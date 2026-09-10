@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-10T14:37:34Z",
+  "execution_id": "EX-NL3-001-R1",
+  "work_order_id": "NL3-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5fbd6d54341947c890cc5aa5f8031de10a0de1eb",
+  "summary": "Старт NL3-001 (register hinge design family: проверенная параметризация семейства Shi-Castro-Arya, digest-gated процедура воспроизведения/экспорта первого экземпляра 0b, структурное воспроизведение без E2-прогонов). Base — canonical main 5fbd6d54341947c890cc5aa5f8031de10a0de1eb (merge PR #33; NL2-003 ACCEPTED, стадия NL2 закрыта, next_work_order = NL3-001 READY, frontier NL3, E2 = NOT_RUN, physics_runs = 7). Содержание (bounded, без научных прогонов): (1) docs/research/HINGE_FAMILY_R1.md — регистрация семейства по структуре family -> parameter space -> первый экземпляр 0b из E2-SETUP-R1; каждая числовая позиция с классом данных (REPORTED из статьи DOI 10.1021/acsnano.7b00242 / OBSERVED в pinned tree gauravarya77/DNA-hinge-simulations@23fd1ff7731e9017bd776f49206dc42d70d9fe91, tree b2d6ceb / UNKNOWN) и точной ссылкой; unknowns (определение угла из SI, права redistribution, durable-caching policy) не заполняются, место решения указывается. (2) scripts/hinge_family/ — замороженный детерминированный stdlib-only пакет: реестр pinned-дайджестов (blob SHA-1 preregistered из NL0-001: Design_Hinges/0b.json 0ed4075c..., MD_Hinges/pro_CPU.in 89d76310...; SHA-256 верифицируются в R1 где объекты получены; недостающее — явно NOT_VERIFIED), строгие парсеры oxDNA topology/configuration, структурные проверки (числа странд/нуклеотидов, связность, геометрические sanity-полосы, NaN/Inf), CLI с каноническим byte-детерминированным JSON-отчётом. Права источника UNKNOWN -> REFERENCE_ONLY: генерация 0b с нуля и вендоринг запрещены (E2-SETUP-R1 SS6: reproduction arm = авторские pre-equilibrated блобы verbatim по exact pinned commit; reconstruct != original), поэтому реализуется digest-gated user-side процедура воспроизведения, а не генератор структуры. (3) Структурное воспроизведение 0b: при доступности pinned-объектов из данной среды — верификация дайджестов + структурный отчёт как evidence (входные файлы вне Git, durable-кэш не создаётся); при недоступности — честный gap (S003-дисциплина), значения не выдумываются. (4) tests/test_hinge_family.py — детерминизм (два вызова -> байт-идентичный отчёт), позитив на синтетических фикстурах, негативы (битые параметры/файлы -> FAIL, tamper -> digest FAIL). Прогоны динамики НЕ входят (NL3-002/E2); state.json/plan.json не меняются; риск MEDIUM, claim C0_SOFTWARE_ONLY; приёмка — независимый REVIEWER -> VERIFIER -> Director, merge — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = 5fbd6d54341947c890cc5aa5f8031de10a0de1eb (= base; merge pull request #33)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-001 -b work/nl3-001-hinge-family-r1 5fbd6d54341947c890cc5aa5f8031de10a0de1eb",
+    "project/state.json @ 5fbd6d5: frontier NL3, next_work_order NL3-001 (READY), experiment_status E2 = NOT_RUN, physics_runs = 7"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-001.md",
+    "docs/work/executions/EX-NL3-001-R1/passport.json",
+    "docs/work/executions/EX-NL3-001-R1/branch-passport.md",
+    "docs/research/REFERENCE_SELECTION.md (NL0-001: выбор семейства, pinned source facts)",
+    "docs/research/INPUT_AVAILABILITY.md (verified design blobs, права boundary)",
+    "docs/research/E2_SETUP_R1.md (первый шарнир 0b, decision rule 298K/300K)",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md, docs/research/RIGHTS_AND_REDISTRIBUTION_AUDIT.md (REFERENCE_ONLY)"
+  ],
+  "next_action": "IMPLEMENTER: регистрация HINGE_FAMILY_R1 + scripts/hinge_family (pins/парсеры/валидатор/CLI) + unittest, затем digest-gated структурное воспроизведение 0b при доступности источника; CONTINUATION после каждого смыслового этапа.",
+  "blocker": null
+}

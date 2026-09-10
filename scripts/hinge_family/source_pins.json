@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "registry_id": "HINGE-FAMILY-SOURCE-PINS-R1",
+  "work_order": "NL3-001",
+  "execution_id": "EX-NL3-001-R1",
+  "source": {
+    "repository": "gauravarya77/DNA-hinge-simulations",
+    "commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "tree": "b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9",
+    "rights": "UNKNOWN",
+    "mode": "REFERENCE_ONLY",
+    "obtain_procedure": "user-side download by exact commit (raw.githubusercontent.com or equivalent), bytes verified against this registry before any use; files must never be committed to NanoLab Git and must not be durably cached (open owner decision since NL0-002)"
+  },
+  "digest_provenance_vocabulary": {
+    "NL0_001_PREREGISTERED": "git blob SHA-1 preregistered in docs/research/INPUT_AVAILABILITY.md (NL0-001)",
+    "R1_TREE_LISTING": "git blob SHA-1 taken from the GitHub tree listing of the pinned tree SHA during EX-NL3-001-R1",
+    "R1_CONTENT_VERIFIED": "digest computed from fetched content during EX-NL3-001-R1 and matched against the value above"
+  },
+  "files": {
+    "MD_Hinges/0b.top": {
+      "size_bytes": 120204,
+      "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+      "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "R1_CONTENT_VERIFIED"
+    },
+    "MD_Hinges/0b.conf": {
+      "size_bytes": 2294162,
+      "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+      "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "R1_CONTENT_VERIFIED"
+    },
+    "Design_Hinges/0b.json": {
+      "size_bytes": 173059,
+      "blob_sha1": "0ed4075c3a0d2f29601d35c5ce70f2df6b0be1ed",
+      "sha256": "e855097d51d994bf0aad3d526d410b73f46c7c0355de68bb73acac0efef2abcf",
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "R1_CONTENT_VERIFIED"
+    },
+    "MD_Hinges/pro_CPU.in": {
+      "size_bytes": 933,
+      "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "R1_CONTENT_VERIFIED"
+    },
+    "MD_Hinges/README.md": {
+      "size_bytes": 1335,
+      "blob_sha1": "16b747d15c6a86300512af3f62045bd717dc406b",
+      "sha256": "6627959e957d10a1d74d2d93f5ae1fb129441bc93496ab72cb53519b458b72bb",
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "R1_CONTENT_VERIFIED"
+    },
+    "MD_Hinges/11b.top": {
+      "size_bytes": 121176,
+      "blob_sha1": "c8d34a47e584cd43b1de3107e9c8e57a992f8688",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/11b.conf": {
+      "size_bytes": 2309610,
+      "blob_sha1": "ce9402560649d9337487371944ce15cd1b74b50d",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "Design_Hinges/11b.json": {
+      "size_bytes": 173145,
+      "blob_sha1": "7f1936970196ace1f9d30fc5da8f8387e80f9a3e",
+      "sha256": null,
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/32b.top": {
+      "size_bytes": 123024,
+      "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/32b.conf": {
+      "size_bytes": 2345114,
+      "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "Design_Hinges/32b.json": {
+      "size_bytes": 173315,
+      "blob_sha1": "6adb55af1d46f0a2f751b0bf1ba14ab17293ff28",
+      "sha256": null,
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/53b.top": {
+      "size_bytes": 124872,
+      "blob_sha1": "171fcb419b97dbb8099aff400bc5791ec47f4fc9",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/53b.conf": {
+      "size_bytes": 2379246,
+      "blob_sha1": "74fb97380b4099a7df6e3b0ee316224ac82b7d6a",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "Design_Hinges/53b.json": {
+      "size_bytes": 173481,
+      "blob_sha1": "3ffdb753a63f799e8d08f9e6b42846c8f4f53e69",
+      "sha256": null,
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/74b.top": {
+      "size_bytes": 126116,
+      "blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/74b.conf": {
+      "size_bytes": 2403188,
+      "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "Design_Hinges/74b.json": {
+      "size_bytes": 173595,
+      "blob_sha1": "776725c154457ff6b4001a4c150098d90347acf4",
+      "sha256": null,
+      "blob_sha1_provenance": "NL0_001_PREREGISTERED",
+      "sha256_provenance": "NOT_VERIFIED"
+    },
+    "MD_Hinges/pro_GPU.in": {
+      "size_bytes": 937,
+      "blob_sha1": "6e17c8be8be42c82e048c9f5c8c1024f89a51a64",
+      "sha256": null,
+      "blob_sha1_provenance": "R1_TREE_LISTING",
+      "sha256_provenance": "NOT_VERIFIED"
+    }
+  },
+  "variants": {
+    "0b": {
+      "role": "FIRST_INSTANCE_CONTROL (E2-SETUP-R1 section 2: zero-insertion control variant, smallest in family)",
+      "validated_in_R1": true,
+      "topology": "MD_Hinges/0b.top",
+      "configuration": "MD_Hinges/0b.conf",
+      "design": "Design_Hinges/0b.json",
+      "sim_input_cpu": "MD_Hinges/pro_CPU.in",
+      "spring_layers_reported_bases": [0, 24],
+      "spring_layers_source": "REPORTED (paper via NL0-001; machine check partial: design name '0bp_6x3_v2.json' corroborates the 0-insertion side; full check pending paper SI)"
+    },
+    "11b": {
+      "role": "REGISTERED_NOT_VALIDATED",
+      "topology": "MD_Hinges/11b.top",
+      "configuration": "MD_Hinges/11b.conf",
+      "design": "Design_Hinges/11b.json",
+      "spring_layers_reported_bases": [11, 35],
+      "spring_layers_source": "REPORTED (paper via NL0-001; not machine-checked in R1)"
+    },
+    "32b": {
+      "role": "REGISTERED_NOT_VALIDATED",
+      "topology": "MD_Hinges/32b.top",
+      "configuration": "MD_Hinges/32b.conf",
+      "design": "Design_Hinges/32b.json",
+      "spring_layers_reported_bases": [32, 56],
+      "spring_layers_source": "REPORTED (paper via NL0-001; not machine-checked in R1)"
+    },
+    "53b": {
+      "role": "REGISTERED_NOT_VALIDATED",
+      "topology": "MD_Hinges/53b.top",
+      "configuration": "MD_Hinges/53b.conf",
+      "design": "Design_Hinges/53b.json",
+      "spring_layers_reported_bases": [53, 77],
+      "spring_layers_source": "REPORTED (paper via NL0-001; not machine-checked in R1)"
+    },
+    "74b": {
+      "role": "REGISTERED_NOT_VALIDATED",
+      "topology": "MD_Hinges/74b.top",
+      "configuration": "MD_Hinges/74b.conf",
+      "design": "Design_Hinges/74b.json",
+      "spring_layers_reported_bases": [74, 84],
+      "spring_layers_source": "REPORTED (paper via NL0-001; not machine-checked in R1)"
+    }
+  },
+  "sim_input_preregistered_values": {
+    "interaction_type": "DNA2",
+    "salt_concentration": "0.5",
+    "T": "300K",
+    "steps": "2e7",
+    "backend": "CPU",
+    "backend_precision": "double",
+    "source": "E2-SETUP-R1 section 5 OBSERVED facts (pinned pro_CPU.in, NL0-001); machine-confirmed in R1"
+  }
+}

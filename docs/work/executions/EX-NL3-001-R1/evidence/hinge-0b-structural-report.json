@@ -1,0 +1,487 @@
+{
+  "checks": [
+    {
+      "detail": "registry satisfies the fail-closed contract",
+      "id": "pins_registry_contract",
+      "status": "PASS"
+    },
+    {
+      "detail": "variant 0b registered with role FIRST_INSTANCE_CONTROL (E2-SETUP-R1 section 2: zero-insertion control variant, smallest in family)",
+      "id": "variant_registered",
+      "status": "PASS"
+    },
+    {
+      "detail": "size, sha256 (where pinned) and git blob SHA-1 of every surface file match the frozen registry",
+      "id": "source_digests_match_pins",
+      "status": "PASS"
+    },
+    {
+      "detail": "header/rows/base letters/strand runs/chain integrity all consistent",
+      "id": "topology_structure",
+      "status": "PASS"
+    },
+    {
+      "detail": "particle count matches topology; 15 finite columns; orientations unit+orthogonal; positions inside box",
+      "id": "configuration_structure",
+      "status": "PASS"
+    },
+    {
+      "detail": "vstrand routing bidirectionally consistent; path walk covers every used cell",
+      "id": "design_structure",
+      "status": "PASS"
+    },
+    {
+      "detail": "design total bases 8378 == topology nucleotides 8378",
+      "id": "design_bases_equal_topology_nucleotides",
+      "status": "PASS"
+    },
+    {
+      "detail": "engine/model values machine-confirm E2-SETUP-R1 section 5 OBSERVED facts",
+      "id": "sim_input_preregistered_values",
+      "status": "PASS"
+    }
+  ],
+  "digest_verification": {
+    "configuration": {
+      "blob_sha1_ok": true,
+      "observed": {
+        "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+        "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+        "size_bytes": 2294162
+      },
+      "path": "MD_Hinges/0b.conf",
+      "read_error": null,
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    "design": {
+      "blob_sha1_ok": true,
+      "observed": {
+        "blob_sha1": "0ed4075c3a0d2f29601d35c5ce70f2df6b0be1ed",
+        "sha256": "e855097d51d994bf0aad3d526d410b73f46c7c0355de68bb73acac0efef2abcf",
+        "size_bytes": 173059
+      },
+      "path": "Design_Hinges/0b.json",
+      "read_error": null,
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    "sim_input_cpu": {
+      "blob_sha1_ok": true,
+      "observed": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "size_bytes": 933
+      },
+      "path": "MD_Hinges/pro_CPU.in",
+      "read_error": null,
+      "sha256_ok": true,
+      "size_ok": true
+    },
+    "topology": {
+      "blob_sha1_ok": true,
+      "observed": {
+        "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+        "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+        "size_bytes": 120204
+      },
+      "path": "MD_Hinges/0b.top",
+      "read_error": null,
+      "sha256_ok": true,
+      "size_ok": true
+    }
+  },
+  "facts": {
+    "configuration": {
+      "bonded_distances": {
+        "count": 8275,
+        "histogram_0_1_buckets": {
+          "0.4": 81,
+          "0.5": 4677,
+          "0.6": 2980,
+          "0.7": 71,
+          "0.8": 3,
+          "0.9": 7,
+          "1.0": 8,
+          "1.1": 8,
+          "1.2": 19,
+          "1.3": 41,
+          "1.4": 112,
+          "1.5": 159,
+          "1.6": 87,
+          "1.7": 22
+        },
+        "long_bond_count": 456,
+        "long_bond_threshold": 0.95,
+        "max": 1.724196761,
+        "mean": 0.591470857,
+        "min": 0.394902837
+      },
+      "box": [
+        402.559997559,
+        402.559997559,
+        402.559997559
+      ],
+      "columns_per_particle": 15,
+      "energy_line_fields": [
+        "-1.18529140949249",
+        "-1.48623609542847",
+        "0.300944715738297"
+      ],
+      "orientation_max_deviation": 2.15e-07,
+      "orientation_tolerance": 1e-06,
+      "particles": 8378,
+      "time": "20000000"
+    },
+    "design": {
+      "crossover_steps": {
+        "scaffold": 46,
+        "staple": 413
+      },
+      "design_name": "0bp_6x3_v2.json",
+      "paired_positions": 4110,
+      "scaffold_bases": 4266,
+      "scaffold_path_lengths_desc": [
+        4266
+      ],
+      "scaffold_paths": 1,
+      "single_stranded_positions": 158,
+      "ssdna_run_histogram": {
+        "12": 6,
+        "2": 16,
+        "9": 6
+      },
+      "staple_bases": 4112,
+      "staple_path_lengths_desc": [
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        41,
+        40,
+        38,
+        36,
+        36,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        34,
+        33,
+        33,
+        32,
+        30,
+        29,
+        28,
+        27,
+        27,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        24,
+        24,
+        24,
+        24,
+        24,
+        23,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18
+      ],
+      "staple_paths": 117,
+      "total_bases": 8378,
+      "virtual_helices": 18
+    },
+    "sim_input": {
+      "confirmed_keys": [
+        "T",
+        "backend",
+        "backend_precision",
+        "interaction_type",
+        "salt_concentration",
+        "steps"
+      ],
+      "default_conf_file": "74b.conf",
+      "default_topology": "74b.top"
+    },
+    "topology": {
+      "base_composition": {
+        "A": 2081,
+        "C": 2076,
+        "G": 2075,
+        "T": 2146
+      },
+      "circular_strand_ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        42,
+        43,
+        44
+      ],
+      "circular_strands": 9,
+      "linear_strands": 103,
+      "nucleotides": 8378,
+      "strand_lengths_desc": [
+        644,
+        568,
+        568,
+        568,
+        434,
+        434,
+        420,
+        210,
+        210,
+        210,
+        126,
+        126,
+        126,
+        103,
+        61,
+        61,
+        60,
+        54,
+        51,
+        51,
+        51,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        41,
+        40,
+        36,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        33,
+        28,
+        26,
+        26,
+        26,
+        26,
+        26,
+        24,
+        24,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        18,
+        18,
+        18,
+        18
+      ],
+      "strands": 112
+    }
+  },
+  "observations": [
+    {
+      "detail": {
+        "design_crossover_steps": 459,
+        "long_bond_count": 456,
+        "long_bond_threshold": 0.95,
+        "note": "within-strand bonded distances beyond the threshold are numerically close to the design crossover-step count; consistent with crossover-continuous chain encoding in the author topology. Recorded as an observation, not an acceptance criterion."
+      },
+      "id": "long_bonds_approx_design_crossover_steps"
+    },
+    {
+      "detail": {
+        "design_paths": 118,
+        "note": "exact design-path-to-topology-strand mapping is conversion-pipeline dependent and is NOT decomposed in this revision; the author Init_Hinges pipeline is REFERENCE_ONLY and the design carries no sequences. Assigned to the pre-E2 compatibility audit.",
+        "topology_strands": 112
+      },
+      "id": "strand_count_correspondence_pending"
+    },
+    {
+      "detail": {
+        "12": 6,
+        "2": 16,
+        "9": 6
+      },
+      "id": "ssdna_runs"
+    },
+    {
+      "detail": "REPORTED spring layers (E2-SETUP-R1 section 7) cannot be attributed to specific ssDNA runs without the paper SI angle/geometry definitions; design name corroborates the 0-insertion side of variant 0b",
+      "id": "ssdna_spring_layer_machine_check_inconclusive"
+    },
+    {
+      "detail": {
+        "default_conf_file": "74b.conf",
+        "default_topology": "74b.top",
+        "note": "the author CPU input points at 74b surfaces; running 0b requires pointing topology/conf at the 0b files - a substitution that E2-SETUP-R1 requires to be explicit, never silent"
+      },
+      "id": "sim_input_defaults_to_74b"
+    },
+    {
+      "detail": "columns 3:9 are two exact unit mutually orthogonal triples; columns 9:15 are bounded velocity-like triples; semantic labels follow oxDNA configuration conventions and await the pre-E2 engine-input check",
+      "id": "conf_column_semantics_interpretation"
+    }
+  ],
+  "registry_id": "HINGE-FAMILY-SOURCE-PINS-R1",
+  "source": {
+    "commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "mode": "REFERENCE_ONLY",
+    "repository": "gauravarya77/DNA-hinge-simulations",
+    "rights": "UNKNOWN",
+    "tree": "b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9"
+  },
+  "surface": {
+    "configuration": "MD_Hinges/0b.conf",
+    "design": "Design_Hinges/0b.json",
+    "sim_input_cpu": "MD_Hinges/pro_CPU.in",
+    "topology": "MD_Hinges/0b.top"
+  },
+  "tool_revision": "HINGE-FAMILY-R1",
+  "variant": "0b"
+}

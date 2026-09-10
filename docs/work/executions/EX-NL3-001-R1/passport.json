@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-001-R1",
+  "work_order_id": "NL3-001",
+  "checkpoint": "NL3",
+  "base_sha": "5fbd6d54341947c890cc5aa5f8031de10a0de1eb",
+  "branch": "work/nl3-001-hinge-family-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY (детерминированный валидатор + дайджест-контроль + регистрационная документация; структурные факты источника фиксируются как метаданные наблюдения; научные прогоны не выполняются, campaign-level scientific_outcome = NOT_EVALUATED)",
+  "allowed_paths": [
+    "docs/work/WO-NL3-001.md",
+    "docs/work/executions/EX-NL3-001-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "docs/research/HINGE_FAMILY_R1.md",
+    "scripts/hinge_family/**",
+    "tests/**"
+  ],
+  "started_at_utc": "2026-09-10T14:37:34Z",
+  "status": "HANDOFF_READY"
+}
