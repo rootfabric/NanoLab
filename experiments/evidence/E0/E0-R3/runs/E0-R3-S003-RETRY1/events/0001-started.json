@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T16:10:00Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-S003-RETRY1",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Authorized technical retry of E0-R3-S003 per E0-PROTO-R1 SS8 (RUN_FAILED_TECHNICAL -> new run id with recorded cause): runner bug KeyError exit_code in the separation-probe path (repair commit follows the frozen expectations unchanged). Frozen scaffold derived mechanically from the E0-R3-S003 manifest/started-event (identity replaced, expectations identical). Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject 6c366e0df4822d39572362356bc65279f5a762d1; case E0-R3-S003 (family STATUS): Gap-проба: технический терминальный RUN_COMPLETED с scientific_outcome SUPPORTED — контрактное ожидание (PROJECT_CONTROL: технический успех не становится научным утверждением) в том, что инструмент помечает нарушение разделения; фактическое поведение фиксируется как есть Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python -m harness.experiment_cli validate <fixture run dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/status/s003_tech_with_sci_claim/run/manifest.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

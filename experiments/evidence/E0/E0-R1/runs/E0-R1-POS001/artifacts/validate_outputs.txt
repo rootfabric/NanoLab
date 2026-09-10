@@ -1,0 +1,75 @@
+### experiment_cli validate E0-R1-G001
+exit=1
+
+
+### experiment_cli validate E0-R1-G002
+exit=1
+
+
+### experiment_cli validate E0-R1-G003
+exit=1
+
+
+### experiment_cli validate E0-R1-N001
+exit=1
+
+
+### experiment_cli validate E0-R1-N002
+exit=1
+
+
+### experiment_cli validate E0-R1-N003
+exit=1
+
+
+### experiment_cli validate E0-R1-N004
+exit=1
+
+
+### experiment_cli validate E0-R1-N005
+exit=1
+
+
+### experiment_cli validate E0-R1-N006
+exit=1
+
+
+### experiment_cli validate E0-R1-N007
+exit=1
+
+
+### experiment_cli validate E0-R1-N008
+exit=1
+
+
+### experiment_cli validate E0-R1-N009
+exit=1
+
+
+### experiment_cli validate E0-R1-S001
+exit=1
+
+
+### experiment_cli validate E0-R1-S002
+exit=1
+
+
+### experiment_cli validate E0-R1-S003
+exit=1
+
+
+### experiment_cli validate E0-R1-U001
+exit=1
+
+
+### experiment_cli validate E0-R1-U002
+exit=1
+
+
+### cli check-consistency
+exit=1
+
+
+### work_cli validate EX-NL2-001-R1
+exit=1
+

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-09T17:48:00Z",
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "24352f9dcc54e77472bdb8db827d2dc1fd0e1a1e",
+  "summary": "Валидация evidence-пакета NL2-001 (на рабочем дереве, байт-идентичном публикуемому коммиту). (1) experiment_cli validate: все 18 run-каталогов E0-R4 -> ok=true, errors=[], exit 0 (включая E0-R4-POS001). (2) work_cli validate EX-NL2-001-R1 (pre-terminal) -> ok=true, exit 0; work_cli close будет исполнен на терминальном коммите и зафиксирован в summary.md. (3) cli check-consistency -> ok=true, exit 0 (frontier NL2, next NL2-001; state/plan не менялись). (4) Каждый публикуемый JSON кампании E0-R4 машинно валидирован jsonschema Draft 2020-12 + FormatChecker по v1-схемам (отчёты в artifacts/case_record.json прогонов; 36 scaffold-файлов проверены до исполнения, все emits - после). (5) json.tool: все JSON синтаксически чисты. Замечание для review: gap S003 (отсутствие механического разделения технического/научного) - сохранённый NOT_SUPPORTED-результат, не дефект валидации.",
+  "command_refs": [
+    "for d in experiments/evidence/E0/E0-R4/runs/*: python -m harness.experiment_cli validate $d -> 18/18 ok=true exit 0",
+    "python -m harness.work_cli validate docs/work/executions/EX-NL2-001-R1 -> ok=true exit 0 (pre-terminal)",
+    "python -m harness.cli check-consistency --root . -> ok=true exit 0"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E0/E0-R4/evidence-map.json",
+    "experiments/evidence/E0/E0-R4/runs/E0-R4-POS001/artifacts/case_record.json",
+    "docs/evidence/NL2-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "IMPLEMENTER: terminal HANDOFF_COMPLETED + summary.md + passport HANDOFF_READY; затем work_cli validate+close на терминальном коммите.",
+  "blocker": null
+}

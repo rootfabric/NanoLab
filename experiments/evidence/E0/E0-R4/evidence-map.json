@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "campaign_id": "E0-R4",
+  "experiment_id": "E0",
+  "work_order_id": "NL2-001",
+  "execution_id": "EX-NL2-001-R1",
+  "branch": "work/nl2-001-contracts-e0-r1",
+  "base_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "risk_class": "MEDIUM",
+  "claim": {
+    "class_published": "C0_SOFTWARE_ONLY execution facts",
+    "campaign_ceiling": "C0_SOFTWARE_ONLY",
+    "campaign_scientific_outcome": "NOT_EVALUATED",
+    "note": "Приёмка E0 — независимые REVIEWER + VERIFIER и Director checkpoint; implementer публикует только execution facts"
+  },
+  "protocol_lineage": {
+    "preregistered": "E0-PROTO-R1 (docs/research/PREREGISTRATION_E0_R1.md) - 18 cases, expectations frozen before any execution",
+    "superseding_chain": [
+      "E0-PROTO-R2: R1 attempt 18x RUN_FAILED_TECHNICAL (runner emit repo-root bug; no scientific evaluation) - retry under new ids",
+      "E0-PROTO-R3: R2 attempt 17x RUN_FAILED_TECHNICAL (materialize fixture path bug; stale campaign id in emitted events) - retry under new ids",
+      "E0-PROTO-R4: R3 executed but erratum - materialize copied only listed input files instead of full fixture subtrees (8 directory-fixture cases tested incomplete surfaces) and separation-probe flag was misread (S003 KeyError, RETRY1 artifact); R4 re-executes every case with the fixed runner, dry-run verified in disposable scratch BEFORE this preregistration"
+    ],
+    "preserved_attempts": [
+      "experiments/evidence/E0/E0-R1/runs/*",
+      "experiments/evidence/E0/E0-R2/runs/*",
+      "experiments/evidence/E0/E0-R3/runs/*"
+    ],
+    "expectations_unchanged_since_R1": true
+  },
+  "exact_subject": {
+    "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+    "subject_meaning": "pre-execution commit: E0-R4 preregistration + protocol.json + campaign.md + input_digests.json (digests taken at this rev); fixtures/tools reused frozen from E0-R1 surface (experiments/evidence/E0/E0-R1/{fixtures,tools}), schemas/validators bit-exact at base",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas (bit-exact base) + E0 tools (units_check/geometry_check/e0_freeze/e0_runner)",
+    "digests": "experiments/evidence/E0/E0-R4/input_digests.json (57 entries)"
+  },
+  "environment": {
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "python": "3.11.8",
+    "jsonschema": "4.22.0 (strict Draft 2020-12 + format checks on every published contract JSON)",
+    "git": "2.53.0.windows.1",
+    "fixture_acquisition": "raw git blobs of the subject commit (git cat-file blob), digest-verified per file"
+  },
+  "runs": [
+    {
+      "run_id": "E0-R4-N001",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "empty passport (0 B) -> fail-closed exit 1, no ok:true"
+    },
+    {
+      "run_id": "E0-R4-N002",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "truncated JSON -> fail-closed exit 1, no ok:true"
+    },
+    {
+      "run_id": "E0-R4-N003",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "passport {} -> graceful exit 3, ok:false, errors non-empty"
+    },
+    {
+      "run_id": "E0-R4-N004",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "event filename != event_id -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-N005",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "first event != WORK_ORDER_STARTED -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-N006",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "corrupt artifact provenance (sha256/size/producer/subject) -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-N007",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "legacy OBJECT-form artifacts.manifest.json -> fail-closed crash exit 1, no ok:true (array contract enforced; graceful-error quality noted as gap for NL2-003)"
+    },
+    {
+      "run_id": "E0-R4-N008",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "terminal event not last -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-N009",
+      "family": "NEG",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "invalid base_sha -> programmatic failure signal: exit 3 + ok:false in stdout"
+    },
+    {
+      "run_id": "E0-R4-U001",
+      "family": "UNIT",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "pinned conversion T=20C -> 0.097717 ACCEPTED (band 5e-7); tier-2 (non-gating): NOT_OBTAINED (TimeoutExpired after 300 s on pinned fetch; artifact pinned_source_excerpt.txt); the conversion hit src/Utilities/Utils.cpp:333 was obtained in attempt R3 (E0-R3-U001 artifact) - erratum F2"
+    },
+    {
+      "run_id": "E0-R4-U002",
+      "family": "UNIT",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "wrong-unit candidates 20 / 293.15 / 0.29315 / 0.0978 -> all REJECTED"
+    },
+    {
+      "run_id": "E0-R4-G001",
+      "family": "GEO",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "SYNTHETIC right-angle fixture: distance sqrt(2) and 90 deg angle exact within 1e-12"
+    },
+    {
+      "run_id": "E0-R4-G002",
+      "family": "GEO",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "zero-length arm -> ANGLE_UNDEFINED with null value; zero distance reported as 0.0 (not NaN)"
+    },
+    {
+      "run_id": "E0-R4-G003",
+      "family": "GEO",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "orientation flip: 60 deg / 120 deg both exact within 1e-12, no silent branch flip"
+    },
+    {
+      "run_id": "E0-R4-S001",
+      "family": "STATUS",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "ANALYSIS_COMPLETED without scientific_outcome -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-S002",
+      "family": "STATUS",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "scientific_outcome 'PASS' (reviewer vocabulary) -> exit 3, ok:false"
+    },
+    {
+      "run_id": "E0-R4-S003",
+      "family": "STATUS",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "NOT_SUPPORTED",
+      "fact": "GAP CONFIRMED: technical terminal RUN_COMPLETED carrying scientific_outcome SUPPORTED is silently accepted (exit 0, ok:true, 0 warnings) - the instrument does NOT mechanically enforce technical/scientific separation; preserved as-is per preregistration",
+      "counts_toward_campaign_evidence": true,
+      "disposition": "documented contract gap for the next bounded WO (validator hardening, NL2-003 candidate)"
+    },
+    {
+      "run_id": "E0-R4-POS001",
+      "family": "POS",
+      "execution_outcome": "COMPLETED",
+      "scientific_outcome": "SUPPORTED",
+      "fact": "positive control: 19/19 checks passed - experiment_cli validate ok:true/0 warnings/exit 0 on all 17 other run dirs, work_cli validate EX ok, check-consistency ok (state/plan untouched)"
+    }
+  ],
+  "failed_or_excluded_runs": [],
+  "failed_prior_attempts_preserved": [
+    {
+      "campaign": "E0-R1",
+      "runs": 18,
+      "outcome": "RUN_FAILED_TECHNICAL",
+      "cause": "runner emit repo-root off-by-one; no scientific evaluation"
+    },
+    {
+      "campaign": "E0-R2",
+      "runs": 18,
+      "outcome": "17x RUN_FAILED_TECHNICAL + E0-R2-POS001 RUN_COMPLETED/NOT_SUPPORTED (artifact of the failure)",
+      "cause": "materialize passed campaign-relative fixture paths to git cat-file; emitted events carried stale hardcoded campaign id"
+    },
+    {
+      "campaign": "E0-R3",
+      "runs": 19,
+      "outcome": "COMPLETED with erratum (18 cases + authorized S003-RETRY1; 8 directory-fixture cases tested incomplete subtrees)",
+      "cause": "8 directory-fixture cases tested incomplete fixture subtrees; S003 crashed (KeyError); S003-RETRY1 NOT_SUPPORTED against incomplete surface - superseded by this campaign"
+    }
+  ],
+  "integrity": {
+    "single_execution": "each E0-R4 case executed exactly once; no retries, no post-hoc exclusions",
+    "tolerances": "units 5e-7 (half-ULP of engine print precision), geometry 1e-12 (float64 slack) - fixed before any execution, never adjusted",
+    "units_reference": "docs/research/ENGINE_ENVIRONMENT_R1.md SS6 (OBSERVED log fact, NL1-001 ACCEPTED), not re-derived",
+    "synthetic_marking": "all fixtures explicitly SYNTHETIC; never published as physics data",
+    "schema_validation": "every published manifest/event/artifacts JSON machine-validated against config/control/harness v1 schemas (jsonschema Draft 2020-12 + FormatChecker), results in artifacts/case_record.json of each run"
+  },
+  "resource_usage": {
+    "cpu_total": "all cases sub-second; far below the 120 s cap",
+    "storage": "~2 MB in Git",
+    "paid_compute": "none"
+  },
+  "remaining_risks": [
+    "S003 gap: technical/scientific separation is not mechanically enforced by the validators (schema permits scientific_outcome on terminal events; work_cli has no analogous rule) - candidate fix NL2-003",
+    "F1-class gap: validators do not verify artifact manifest digest-vs-blob (sha256/size against actual bytes) - POS001 could not catch the F1 mismatch; candidate fix NL2-003 together with S003",
+    "emit_run ordering defect (manifest serialized before final case_record write) is fixed ONLY in published manifests; the tool code change is deferred by dispatch instruction and is MANDATORY for any future E0 campaign tooling (NL2-003)",
+    "crash-path validators (N001/N002/N007) fail closed via unhandled exceptions (exit 1) - acceptable fail-closed behavior, graceful-error quality is a tooling improvement candidate",
+    "instrument executed on Windows/Python 3.11.8 only; Linux re-run possible when CI requires it",
+    "engine-coupled E0 cases (oxDNA topology/trajectory corruption) remain open until a runtime exists (NL2-003)"
+  ],
+  "next_action": "Независимый REVIEWER: проверить evidence-пакет E0 (exact HEAD, замороженные ожидания R1-линии, дисциплину четырёх попыток, сохранённые отрицательные результаты, gap S003) -> docs/evidence/NL2-001/REVIEWER_VERDICT.md; затем VERIFIER; merge - Human Gate",
+  "errata": {
+    "basis": "REVIEWER VERDICT FIX_REQUIRED @ review/nl2-001-contracts-e0-r1 2c3b485f5cd993f75336d966285958b25e97e08c (findings F1-F7)",
+    "documents": [
+      "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md",
+      "docs/evidence/NL2-001/ERRATUM_F2_F5_R1.md"
+    ],
+    "campaign_events": [
+      "experiments/evidence/E0/E0-R1/events/0001-erratum-f1-manifest-digests.json",
+      "experiments/evidence/E0/E0-R2/events/0001-erratum-f1-manifest-digests.json",
+      "experiments/evidence/E0/E0-R3/events/0001-erratum-f1-manifest-digests.json",
+      "experiments/evidence/E0/E0-R4/events/0001-erratum-f1-manifest-digests.json"
+    ],
+    "summary": "F1: 73/73 artifact manifests corrected (case_record digest pre-image +35 B; originals preserved byte-equal as artifacts.manifest.v1-superseded.json; post-repair byte-compare 225/225). F2: tier-2 attribution corrected (R4 NOT_OBTAINED; hit from R3). F4: counters corrected. F5/F3: see ERRATUM doc. F6: passport allowed_paths extended, deviation documented. F7: acknowledged.",
+    "scientific_outcomes_unchanged": true
+  }
+}

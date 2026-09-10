@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-failed-technical",
+  "timestamp_utc": "2026-09-09T13:31:12Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-N003",
+  "event_type": "RUN_FAILED_TECHNICAL",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5a151f751f7d60c1902e43fa503efd9a6037b236",
+  "summary": "Control case E0-R1-N003 (family NEG) executed mechanically by tools/e0_runner.py against frozen subject 5a151f751f7d60c1902e43fa503efd9a6037b236. Fixture bytes materialized from git blobs and digest-verified; validator/tool invoked as subprocess; observed exit code None. Technical failure: E0-R1 attempt failed technically: runner emit path used a wrong repo-root (parents[2] instead of parents[3]) and crashed before persisting any case result; case command executions were not scientifically evaluated. Repair: REPO_ROOT fixed, campaign surfaces parametrized; retry under new campaign E0-R2 with new run ids per the failed-run-id rule.",
+  "command": "python -m harness.work_cli validate <fixture execution dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json",
+    "artifacts/stdout.txt",
+    "artifacts/stderr.txt"
+  ],
+  "resource_usage": {
+    "duration_seconds": null,
+    "cpu_class": "sub-second local CPU"
+  },
+  "scientific_outcome": null
+}

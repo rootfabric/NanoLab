@@ -1,0 +1,566 @@
+### experiment_cli validate E0-R4-G001
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "a77d5bef492a0bf475e0b494d7f62a8bcfea7eafc57ee6d12b3e6e4fe4e7e772",
+  "run_id": "E0-R4-G001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-G002
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "8255fc3073c6b65b52b8875fe7be4adffe90fd6679f91152c615520653f049f2",
+  "run_id": "E0-R4-G002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-G003
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "c0a82cc72bb534c30457075acc4af465180922f34aec44918fea0e4a226c4728",
+  "run_id": "E0-R4-G003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N001
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "544c020245638dd302c40d8dfb78a1b1111f4e1726235a8329ffdde1b5685e31",
+  "run_id": "E0-R4-N001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N002
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "5a652a5dea446db071259d2f553548737b544fc3f454cd09d1622e31ea1ef988",
+  "run_id": "E0-R4-N002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N003
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "fc1f51f961adf1223d2200376044f1aff5376f07ebaab1d03bcc030c723b8da6",
+  "run_id": "E0-R4-N003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N004
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "81f08bcd11aec3e526fdfa0709e360be4f6ba93ba6f8412835175d7c0e5a7a0b",
+  "run_id": "E0-R4-N004",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N005
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "33cf7d6c2ed433e06b28db3403d71f193729f64b45a074bb016819d4ae6e72b8",
+  "run_id": "E0-R4-N005",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N006
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "7c2fb8a81932e3d2701fb015774a0ea63bff7d4293d6bd1edecb6991d8a976a7",
+  "run_id": "E0-R4-N006",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N007
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "57f552d715767db0933c66eb4b3606034fd1459139ecd511757fec16d9f63ba2",
+  "run_id": "E0-R4-N007",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N008
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "d3e04b1b62abdf19561d7c7235d5276f4cff4948af22b879d96edb1735c683ab",
+  "run_id": "E0-R4-N008",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-N009
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "739d19fb25f8e478bdb8a05965059017cfabeb2c47b6c62fb8c454db65f7102c",
+  "run_id": "E0-R4-N009",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-S001
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "a95951a760795b9dead3d2629f126a4b68cf26432523697f7f1f86af38578039",
+  "run_id": "E0-R4-S001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-S002
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "96c8d938f7c8d2823f05c9ec46b64b6bea3a9da92a991651e045408e43723dee",
+  "run_id": "E0-R4-S002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-S003
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "a401ce18a55c0f5e67e697a17d5f7e7235bdcc1a6715a8bd89e8034e5da58e57",
+  "run_id": "E0-R4-S003",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-U001
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "9129b6588bef9be79ee707bed4247a79e31e7d9645e29f4f83e7bddffcf2e1fc",
+  "run_id": "E0-R4-U001",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### experiment_cli validate E0-R4-U002
+exit=0
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "manifest_sha256": "c3fecff3e5498779ba389510527ff03b46cb2eb76b0edf26cdbc76a351e65c54",
+  "run_id": "E0-R4-U002",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0001-started",
+      "type": "RUN_STARTED"
+    },
+    {
+      "id": "0002-run-completed",
+      "type": "RUN_COMPLETED"
+    },
+    {
+      "id": "0003-analysis-completed",
+      "type": "ANALYSIS_COMPLETED"
+    }
+  ],
+  "has_terminal_execution": true,
+  "has_analysis": true,
+  "has_review": false
+}
+
+
+### cli check-consistency
+exit=0
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "frontier": "NL2",
+  "next_work_order": "NL2-001",
+  "branch": "work/nl2-001-contracts-e0-r1",
+  "head": "1688e716129e53c4c4feac35526c882ee47bb18d",
+  "tree": "5dc77636810b8125413b083abf78ee6a28622854",
+  "counts": {
+    "stages": 9,
+    "tasks": 18,
+    "experiments": 7
+  }
+}
+
+
+### work_cli validate EX-NL2-001-R1
+exit=0
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "status": "IN_PROGRESS",
+  "passport_sha256": "b917f1adc9f336e66e3397f03ac97ac16f04c1cda4d29af642b0aa313a2192b6",
+  "event_types": [
+    "WORK_ORDER_STARTED"
+  ],
+  "has_terminal_handoff": false,
+  "has_summary": false
+}
+

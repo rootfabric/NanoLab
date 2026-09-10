@@ -1,0 +1,26 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R2-S001",
+  "family": "STATUS",
+  "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "exit_code": 3,
+    "stdout_must_contain": [
+      "\"ok\": false"
+    ],
+    "ok_field_false": true
+  },
+  "observed": {
+    "technical_failure": "CalledProcessError: Command '['git', '-C', 'C:\\\\NanoLab\\\\nl2-001', 'cat-file', 'blob', '3a2d72bcd613289321608fb42b6b668d8224b5f0:fixtures/status/s001_analysis_without_outcome/run/manifest.json']' returned non-zero exit status 128."
+  },
+  "scientific_outcome": "NOT_EVALUATED",
+  "technical_failure": "CalledProcessError: Command '['git', '-C', 'C:\\\\NanoLab\\\\nl2-001', 'cat-file', 'blob', '3a2d72bcd613289321608fb42b6b668d8224b5f0:fixtures/status/s001_analysis_without_outcome/run/manifest.json']' returned non-zero exit status 128.",
+  "finished_at_utc": "2026-09-09T13:36:42Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

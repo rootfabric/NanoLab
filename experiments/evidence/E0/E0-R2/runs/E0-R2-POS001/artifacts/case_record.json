@@ -1,0 +1,44 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R2-POS001",
+  "family": "POS",
+  "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "all_run_dirs_ok": true,
+    "check_consistency_ok": true
+  },
+  "observed": {
+    "checks": {
+      "experiment_cli:E0-R2-G001": false,
+      "experiment_cli:E0-R2-G002": false,
+      "experiment_cli:E0-R2-G003": false,
+      "experiment_cli:E0-R2-N001": false,
+      "experiment_cli:E0-R2-N002": false,
+      "experiment_cli:E0-R2-N003": false,
+      "experiment_cli:E0-R2-N004": false,
+      "experiment_cli:E0-R2-N005": false,
+      "experiment_cli:E0-R2-N006": false,
+      "experiment_cli:E0-R2-N007": false,
+      "experiment_cli:E0-R2-N008": false,
+      "experiment_cli:E0-R2-N009": false,
+      "experiment_cli:E0-R2-S001": false,
+      "experiment_cli:E0-R2-S002": false,
+      "experiment_cli:E0-R2-S003": false,
+      "experiment_cli:E0-R2-U001": false,
+      "experiment_cli:E0-R2-U002": false,
+      "check_consistency": true,
+      "work_cli_EX_NL2_001_R1": true
+    },
+    "validator_runs": 18
+  },
+  "scientific_outcome": "NOT_SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:36:43Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

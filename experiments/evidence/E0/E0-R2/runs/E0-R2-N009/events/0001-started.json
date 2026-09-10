@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T14:25:00Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R2",
+  "run_id": "E0-R2-N009",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject 3a2d72bcd613289321608fb42b6b668d8224b5f0; case E0-R2-N009 (family NEG): Контракт exit-кода: невалидный base_sha обязан давать мягкое ok:false с exit 3 (программный сигнал отказа, не тишина и не только crash) Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python -m harness.work_cli validate <fixture execution dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/negative/n009_exit_code_contract/execution/passport.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

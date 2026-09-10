@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-U002",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R1",
+  "subject_sha": "5a151f751f7d60c1902e43fa503efd9a6037b236",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "none - software contract validation of the frozen control harness (no physics model)",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas at subject_sha (digests: input_digests.json)"
+  },
+  "inputs": [
+    {
+      "name": "instrument_bundle",
+      "ref": "experiments/evidence/E0/E0-R1/input_digests.json",
+      "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha"
+    },
+    {
+      "name": "fixtures/units/u002_wrong_0_0978.json",
+      "role": "fixture input",
+      "sha256": "4dd8e51012764690444e0979cb821483621aa55d064946957ca25e4af256f758",
+      "size_bytes": 52
+    },
+    {
+      "name": "fixtures/units/u002_wrong_0_29315.json",
+      "role": "fixture input",
+      "sha256": "49e8955e9e2a2b17546a3d049139525d0355872fc78c06d2ddd10d68ed45e8ae",
+      "size_bytes": 53
+    },
+    {
+      "name": "fixtures/units/u002_wrong_20.json",
+      "role": "fixture input",
+      "sha256": "a5bfd0163008f1cab53a88e77e71bdb3c3dff3f263f7a3bc8ce4dbb2beb83663",
+      "size_bytes": 48
+    },
+    {
+      "name": "fixtures/units/u002_wrong_293_15.json",
+      "role": "fixture input",
+      "sha256": "8f5fad69a6bdbf19e4730318f6b4eac6c4480f56ae6df53338c7f29f4d01f270",
+      "size_bytes": 52
+    }
+  ],
+  "observables": [
+    {
+      "name": "wrong_unit_values_rejected",
+      "expected": {
+        "verdicts": {
+          "u002_wrong_20.json": "REJECTED",
+          "u002_wrong_293_15.json": "REJECTED",
+          "u002_wrong_0_29315.json": "REJECTED",
+          "u002_wrong_0_0978.json": "REJECTED"
+        }
+      },
+      "criterion": "все четыре вердикта REJECTED"
+    }
+  ],
+  "environment": {
+    "family": "UNIT",
+    "description": "Кандидаты-подделки единиц (20, 293.15, 0.29315, 0.0978) обязаны быть REJECTED все — неправильная единица не должна тихо проходить как pinned-конверсия",
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "synthetic": true
+  },
+  "seed_policy": {
+    "policy": "NOT_APPLICABLE - fully deterministic software control, no RNG"
+  },
+  "resource_budget": {
+    "cap_cpu_seconds": 10,
+    "local_only": true
+  },
+  "stop_conditions": [
+    "runner or validator technical crash on an intact environment -> RUN_FAILED_TECHNICAL, new run id required for any retry",
+    "instrument file drift (sha256 differs from input_digests.json) -> campaign BLOCKED",
+    "cpu budget exceeded -> stop"
+  ],
+  "status": "STARTED"
+}

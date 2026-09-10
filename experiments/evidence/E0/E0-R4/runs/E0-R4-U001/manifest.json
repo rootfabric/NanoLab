@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-R4",
+  "run_id": "E0-R4-U001",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R4",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "none - software contract validation of the frozen control harness (no physics model)",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas at subject_sha (digests: input_digests.json)"
+  },
+  "inputs": [
+    {
+      "name": "instrument_bundle",
+      "ref": "experiments/evidence/E0/E0-R4/input_digests.json",
+      "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha"
+    },
+    {
+      "name": "fixtures/units/u001_accepted.json",
+      "role": "fixture input",
+      "sha256": "0cb4e2043061ed8a7699b7fea3999bc1d6be5842394c4a73a3244d073e5fa65c",
+      "size_bytes": 54
+    }
+  ],
+  "observables": [
+    {
+      "name": "pinned_engine_unit_conversion",
+      "expected": {
+        "verdicts": {
+          "u001_accepted.json": "ACCEPTED"
+        }
+      },
+      "criterion": "verdict ACCEPTED для pinned значения; пробы неправильных единиц — отдельный случай E0-R4-U002"
+    }
+  ],
+  "environment": {
+    "family": "UNIT",
+    "description": "Pinned-engine факт конверсии T=20C → 0.097717 обязан быть ACCEPTED замороженной табличной проверкой (полоса 5e-7); tier-2 (негейтящий): механически найти ветку конверсии в pinned-исходниках engine",
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "synthetic": true
+  },
+  "seed_policy": {
+    "policy": "NOT_APPLICABLE - fully deterministic software control, no RNG"
+  },
+  "resource_budget": {
+    "cap_cpu_seconds": 10,
+    "local_only": true
+  },
+  "stop_conditions": [
+    "runner or validator technical crash on an intact environment -> RUN_FAILED_TECHNICAL, new run id required for any retry",
+    "instrument file drift (sha256 differs from input_digests.json) -> campaign BLOCKED",
+    "cpu budget exceeded -> stop"
+  ],
+  "status": "STARTED"
+}

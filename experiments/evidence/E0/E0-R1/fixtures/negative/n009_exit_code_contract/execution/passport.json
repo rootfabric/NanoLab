@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-FIXTURE-000",
+  "work_order_id": "WO-FIXTURE-000",
+  "checkpoint": "NL2",
+  "base_sha": "not-a-sha",
+  "branch": "work/fixture-synthetic-r0",
+  "risk_class": "LOW",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/executions/EX-FIXTURE-000/**"
+  ],
+  "started_at_utc": "2026-09-09T00:00:00Z",
+  "status": "STARTED"
+}

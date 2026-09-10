@@ -1,0 +1,42 @@
+{
+  "kind": "SYNTHETIC_TEST_GEOMETRY",
+  "synthetic": true,
+  "note": "Synthetic test fixture with analytically known values. NOT a physical trajectory; must never be published as physics data.",
+  "case": "g002_zero_axis",
+  "vertices": {
+    "A": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "B": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "C": [
+      1.0,
+      0.0,
+      0.0
+    ]
+  },
+  "queries": [
+    {
+      "id": "q1_distance_AB",
+      "type": "distance",
+      "points": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "q2_angle_at_B",
+      "type": "angle_deg",
+      "vertex": "B",
+      "arms": [
+        "A",
+        "C"
+      ]
+    }
+  ]
+}

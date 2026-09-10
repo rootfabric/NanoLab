@@ -1,0 +1,34 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R4-N005",
+  "family": "NEG",
+  "campaign_id": "E0-R4",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "exit_code": 3,
+    "stdout_must_contain": [
+      "\"ok\": false"
+    ],
+    "ok_field_false": true
+  },
+  "observed": {
+    "exit_code": 3,
+    "stdout_excerpt": "{\n  \"schema\": \"nanolab.control_work_output.v1\",\n  \"command\": \"VALIDATE\",\n  \"ok\": false,\n  \"errors\": [\n    \"WORK_ORDER_STARTED must be the first event\",\n    \"exactly one WORK_ORDER_STARTED event is required\"\n  ],\n  \"execution_id\": \"EX-FIXTURE-000\",\n  \"work_order_id\": \"WO-FIXTURE-000\",\n  \"status\": \"STARTED\",\n  \"passport_sha256\": \"2b5d29b63b4915243e40a7f14401885d84d8947a0bed07992d673b0d94d08797\",\n  \"event_types\": [\n    \"CONTINUATION_CHECKPOINT\"\n  ],\n  \"has_terminal_handoff\": false,\n  \"has_summary\": false\n}\n",
+    "stderr_excerpt": "",
+    "checks": {
+      "exit_code_pinned_3": true,
+      "stdout_contains:\"ok\": false": true,
+      "ok_field_false": true
+    }
+  },
+  "scientific_outcome": "SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:53:02Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

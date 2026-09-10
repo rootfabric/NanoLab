@@ -1,0 +1,1 @@
+CalledProcessError: Command '['git', '-C', 'C:\\NanoLab\\nl2-001', 'cat-file', 'blob', '3a2d72bcd613289321608fb42b6b668d8224b5f0:fixtures/units/u002_wrong_20.json']' returned non-zero exit status 128.

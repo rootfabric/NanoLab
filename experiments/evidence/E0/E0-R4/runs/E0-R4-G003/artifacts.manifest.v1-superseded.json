@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "artifacts": [
+    {
+      "name": "case_record.json",
+      "sha256": "290300df5548fdceba875e94f56f135de5c71b6a513ff0b808f748ded202f1c6",
+      "size_bytes": 1199,
+      "producer_run_id": "E0-R4-G003",
+      "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G003/artifacts/case_record.json (in Git)",
+      "media_type": "application/json",
+      "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
+    },
+    {
+      "name": "stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "producer_run_id": "E0-R4-G003",
+      "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G003/artifacts/stderr.txt (in Git)",
+      "media_type": "text/plain",
+      "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
+    },
+    {
+      "name": "stdout.txt",
+      "sha256": "b6d8b84369e0822bdd61db2ba5d029748a025d7071831b84c7bcba3cc7153e89",
+      "size_bytes": 414,
+      "producer_run_id": "E0-R4-G003",
+      "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+      "storage_location": "experiments/evidence/E0/E0-R4/runs/E0-R4-G003/artifacts/stdout.txt (in Git)",
+      "media_type": "text/plain",
+      "producer_command": "experiments/evidence/E0/E0-R1/tools/e0_runner.py (mechanical; argv in case_record.json)"
+    }
+  ]
+}

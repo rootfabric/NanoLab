@@ -1,0 +1,16 @@
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "no work events",
+    "exactly one WORK_ORDER_STARTED event is required"
+  ],
+  "execution_id": "EX-FIXTURE-000",
+  "work_order_id": "WO-FIXTURE-000",
+  "status": "STARTED",
+  "passport_sha256": "2b5d29b63b4915243e40a7f14401885d84d8947a0bed07992d673b0d94d08797",
+  "event_types": [],
+  "has_terminal_handoff": false,
+  "has_summary": false
+}
