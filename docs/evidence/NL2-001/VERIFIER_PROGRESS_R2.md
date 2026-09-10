@@ -24,6 +24,15 @@
 
 Скрипт сверки (own script, `compare_case_records.py` в scratch): scientific_outcome + frozen expected + observed-ядро (exit_code/checks/verdicts/results) — **6/6 MATCH**; timestamps/durations сознательно не сравнивались (машинные). Исходы независимого воспроизведения совпали с published: **17 SUPPORTED + S003 NOT_SUPPORTED** подтверждается на выбранных 6 кейсах из 5 семей.
 
-## V3–V7
+## V3. Digest-vs-blob всех 4 кампаний + superseded byte-equal — ВЫПОЛНЕНО
 
-В процессе (см. следующие коммиты): digest-vs-blob 225 записей 4 кампаний + superseded byte-equal vs `2cee872`; gap S003 прямой CLI-пробой; jsonschema/CLI-пробы (R1/R3/R4 ok; R2 — 18 fail с текстом campaign_id); пререгистрация (freeze→run хронология, tolerances R1→R4); отсутствие self-acceptance/E-статусов.
+Собственный скрипт (`digest_vs_blob.py` в scratch; все байты читаются через `git cat-file blob 1d594f3:<path>` — published Git-содержимое, не autocrlf-конвертированную рабочую копию):
+
+- Канонические `artifacts.manifest.json` @ `1d594f3`: **225/225 записей** (R1 55, R2 55, R3 59, R4 56) — sha256+size каждой записи равны фактическим блобам `artifacts/*` в Git: **0 mismatches**.
+- `artifacts.manifest.v1-superseded.json` @ `1d594f3` vs канонический `artifacts.manifest.json` @ `2cee872`: **73/73 byte-equal** (blob-compare).
+- Хирургичность ремонта: **73/73** — в каждом манифесте ровно одна изменённая запись (`case_record.json`), ровно поля sha256/size_bytes; имена/порядок/прочие поля неизменны.
+- Замечание метода: первый вариант скрипта хэшировал рабочую копию и давал ложные 113 «mismatch» из-за autocrlf (CRLF в working tree); против блобов Git — 0. Зафиксировано как урок метода, не как дефект evidence.
+
+## V4–V7
+
+В процессе (см. следующие коммиты): gap S003 прямой CLI-пробой; jsonschema/CLI-пробы (R1/R3/R4 ok; R2 — 18 fail с текстом campaign_id); пререгистрация (freeze→run хронология, tolerances R1→R4); отсутствие self-acceptance/E-статусов.
