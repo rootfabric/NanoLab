@@ -14,6 +14,12 @@ ALLOWED_ROLES = {"IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "
 SCIENTIFIC_OUTCOMES = {"SUPPORTED", "NOT_SUPPORTED", "INCONCLUSIVE", "NOT_EVALUATED", "INVALIDATED"}
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
+# NL2-003 repair R1 (REVIEWER F-1): the explicit midnight placeholder stamp is
+# rejected for experiment events too — same rule, same regex as work_cli
+# (docs/research/PROVENANCE_RECOVERY_R1.md §6). The "constant copy across >= 3
+# events" rule is deliberately NOT carried over here: fast runs legitimately
+# stamp terminal+analysis within the same second (E0-R4 precedent).
+MIDNIGHT_PLACEHOLDER = re.compile(r"^\d{4}-\d{2}-\d{2}T00:00:00(\.0+)?(?:Z|z|\+00:00)$")
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -80,6 +86,12 @@ def inspect_run(run_dir: Path) -> dict[str, Any]:
             errors.append(f"{path.name}: invalid subject_sha")
         elif event.get("subject_sha") != manifest.get("subject_sha"):
             warnings.append(f"{path.name}: subject_sha differs; requires explicit superseding revision")
+        # NL2-003 repair R1 (REVIEWER F-1): midnight placeholder stamps are the
+        # explicit fabrication marker class (O2/F3); the git chronology
+        # cross-check used by review relies on machine stamps.
+        stamp_value = event.get("timestamp_utc")
+        if isinstance(stamp_value, str) and MIDNIGHT_PLACEHOLDER.match(stamp_value.strip()):
+            errors.append(f"{path.name}: timestamp_utc {stamp_value!r} is a midnight placeholder; record the actual machine time")
         if event.get("event_type") == "ANALYSIS_COMPLETED" and event.get("scientific_outcome") not in SCIENTIFIC_OUTCOMES:
             errors.append(f"{path.name}: ANALYSIS_COMPLETED requires scientific_outcome")
         # S003 hardening (NL2-003; gap preserved in NL2-001 evidence): SUPPORTED is

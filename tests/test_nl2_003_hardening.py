@@ -66,11 +66,11 @@ def experiment_manifest(run_id: str, campaign_id: str = "E0-RX") -> dict[str, An
     }
 
 
-def experiment_event(event_id: str, event_type: str, run_id: str, campaign_id: str = "E0-RX", **extra: Any) -> dict[str, Any]:
+def experiment_event(event_id: str, event_type: str, run_id: str, campaign_id: str = "E0-RX", timestamp: str = "2026-09-10T12:00:00Z", **extra: Any) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "schema_version": 1,
         "event_id": event_id,
-        "timestamp_utc": "2026-09-10T12:00:00Z",
+        "timestamp_utc": timestamp,
         "experiment_id": "E0",
         "campaign_id": campaign_id,
         "run_id": run_id,
@@ -168,6 +168,62 @@ class S003TechnicalScientificSeparationTests(unittest.TestCase):
             with self.subTest(run_dir=run_dir.name):
                 result = experiment_cli.inspect_run(run_dir)
                 self.assertTrue(result["ok"], result["errors"])
+
+
+class ExperimentCliMidnightPlaceholderTests(unittest.TestCase):
+    """Repair R1 (REVIEWER F-1, path a): the midnight placeholder rule is now
+    enforced for experiment events too — same regex as work_cli; the >=3-copy
+    rule is deliberately NOT carried over (fast runs stamp terminal+analysis
+    within the same second)."""
+
+    def test_valid_run_with_three_midnight_events_fails(self) -> None:
+        """A structurally valid run whose three events all carry T00:00:00Z."""
+        stamp = "2026-09-09T00:00:00Z"
+        result = validate_run([
+            experiment_event("0001-started", "RUN_STARTED", "E0-RX-MID", timestamp=stamp),
+            experiment_event("0002-run-completed", "RUN_COMPLETED", "E0-RX-MID", timestamp=stamp),
+            experiment_event("0003-analysis-completed", "ANALYSIS_COMPLETED", "E0-RX-MID", timestamp=stamp, scientific_outcome="NOT_EVALUATED"),
+        ], artifacts_manifest=[])
+        self.assertFalse(result["ok"])
+        midnight_errors = [item for item in result["errors"] if "midnight placeholder" in item]
+        self.assertEqual(len(midnight_errors), 3, result["errors"])
+
+    def test_machine_stamped_run_passes(self) -> None:
+        result = validate_run([
+            experiment_event("0001-started", "RUN_STARTED", "E0-RX-MIDOK", timestamp="2026-09-09T13:59:55Z"),
+            experiment_event("0002-run-completed", "RUN_COMPLETED", "E0-RX-MIDOK", timestamp="2026-09-09T13:59:56Z"),
+            experiment_event("0003-analysis-completed", "ANALYSIS_COMPLETED", "E0-RX-MIDOK", timestamp="2026-09-09T13:59:56Z", scientific_outcome="NOT_EVALUATED"),
+        ], artifacts_manifest=[])
+        self.assertTrue(result["ok"], result["errors"])
+
+    def test_midnight_offset_form_is_rejected_too(self) -> None:
+        result = validate_run([
+            experiment_event("0001-started", "RUN_STARTED", "E0-RX-MIDOFF", timestamp="2026-09-09T00:00:00+00:00"),
+        ], artifacts_manifest=[])
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("midnight placeholder" in item for item in result["errors"]), result["errors"])
+
+    def test_published_s003_fixture_also_flags_midnight(self) -> None:
+        fixture = REPO_ROOT / "experiments/evidence/E0/E0-R1/fixtures/status/s003_tech_with_sci_claim/run"
+        if not fixture.is_dir():
+            self.skipTest("canonical checkout required")
+        result = experiment_cli.inspect_run(fixture)
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("midnight placeholder" in item for item in result["errors"]), result["errors"])
+
+    def test_published_e1_e0_r4_events_are_machine_stamped(self) -> None:
+        """No regression: real campaign events carry real machine stamps."""
+        targets = [
+            REPO_ROOT / "experiments/evidence/E1/E1-R2/runs",
+            REPO_ROOT / "experiments/evidence/E0/E0-R4/runs",
+        ]
+        if not targets[0].is_dir():
+            self.skipTest("canonical checkout required")
+        for runs in targets:
+            for run_dir in sorted(runs.iterdir()):
+                with self.subTest(run_dir=run_dir.name):
+                    result = experiment_cli.inspect_run(run_dir)
+                    self.assertFalse(any("midnight placeholder" in item for item in result["errors"]), result["errors"])
 
 
 class O1StorageLocationTests(unittest.TestCase):

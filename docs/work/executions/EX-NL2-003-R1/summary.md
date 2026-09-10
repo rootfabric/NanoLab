@@ -22,7 +22,7 @@
 
 ## Результаты чеков (subject ce0f7de + events-коммит)
 
-- JSON syntax: 710 tracked, ровно 2 unparseable = pinned NEG-фикстуры (sha256 = CI-пинам).
+- JSON syntax: 710 tracked на момент прогона; erratum F-2 (Repair R1): на subject `757eb1e` — **713**; неизменно: ровно 2 unparseable = pinned NEG-фикстуры (sha256 = CI-пинам).
 - `check-consistency`: ok, exit 0. `workflow_lint`: 0 violations.
 - `work_cli validate`: 14/14 EX OK.
 - `unittest discover`: **133 OK** (102 pre-existing + 31 новый).
@@ -45,3 +45,21 @@
 ## Next action (одно)
 
 Независимый REVIEWER (fresh-сессия): проверить evidence-пакет EX-NL2-003-R1 на exact HEAD — каждая закрытая дыра с позитив/негатив-тестом, все чеки §«Результаты», отсутствие новых красных поверхностей → `docs/evidence/NL2-003/REVIEWER_VERDICT.md`; затем VERIFIER; merge — Human Gate.
+
+---
+
+## Repair R1 (2026-09-10) — по REVIEWER_VERDICT `FIX_REQUIRED` @ `b4e6758` (review/nl2-003-provenance-recovery-r1)
+
+**F-1 (MODERATE, единственная причина вердикта) — закрыт путём (a), реализация:** `experiment_cli` теперь отвергает midnight-placeholder `timestamp_utc` в experiment-событиях (тот же `MIDNIGHT_PLACEHOLDER`-паттерн, что в `work_cli`; правило «≥3 копий» сознательно не перенесено — sub-second прогоны легитимны). Исполнительная формулировка R1 («продублировано в experiment_cli») объявляла контроль до его реализации — тот самый класс «заявлено ≠ enforced»; теперь заявленное и реализованное совпадают. Тесты: валидный run с тремя `T00:00:00Z`-событиями → exit 3 (3 midnight-ошибки); легитимные машинные штампы → ok; offset-форма `+00:00` → ошибка; published-фикстура s003 дополнительно флагует midnight; published E0-R4/E1-R2 — 0 midnight-ошибок (регрессия).
+
+**Erratum F-2 (MINOR):** записи 0002/0003 и прежний текст настоящего summary утверждали «JSON 710 tracked». Фактически на subject `757eb1e` — **713** (base `d121119` = 707; ветка добавила 6: `provenance-recovery.v1.json` + 5 JSON-файлов EX-NL2-003-R1). Число 710 было истинным в момент измерения (до публикации событий 0002–0004), но в durable-записи устарело. Существенное утверждение верно и не меняется: unparseable ровно 2, оба — pinned NEG-фикстуры (sha256 = CI-пинам). События неизменяемы — исправление фиксируется настоящим erratum и repair-событием 0005.
+
+**Erratum F-3 (MINOR):** формулировка «11 идентичных ошибок на каждой кампанской карте» (config/control/harness/README.md + описание схемы) неточна: старая схема против опубликованных карт даёт **11 / 11 / 9** ошибок (E1-R1 / E0-R4 / E1-R2). Исправлено в обоих документах; существенное утверждение (все три карты старой схемой отвергаются, новой — 0 ошибок) подтверждено.
+
+**Erratum F-4 (INFO):** `scripts/harness/README.md` дополнен оговоркой: скан корня кампании, содержащей designed-negative фикстуры (E0-R1), даёт graceful errors и exit 3 при 0 mismatch на всех реальных прогонах — для таких кампаний сканировать поддерево `runs/`. Код не менялся (поведение fail-closed корректно).
+
+**F-5 (INFO) — задокументированное вынужденное отклонение:** изменение существующего `tests/test_work_cli_corrections.py` против буквы WO («новые unittest-файлы») зафиксировано в branch-passport как documented deviation (вынужденное: константный штамп генератора фикстур стал бы ошибкой нового валидатора; семантика проверяемых правил не менялась — подтверждено REVIEWER'ом).
+
+**Результаты после ремонта:** unittest **138 OK** (133 + 5 новых midnight-тестов); S003-фикстура → exit 3 (S003 + midnight по событиям); все 5 чеков зелёные (JSON 713 tracked на 757eb1e, unparseable ровно 2 pinned NEG; consistency ok; work_cli 14/14 EX; lint 0); verify-digests: E1-R1 16/16, E1-R2 15/15, E0-R4 56/56, E0-R1/runs 55/55 — 0 mismatch. Научные исходы не затронуты; campaign-level `NOT_EVALUATED`; приёмка NL2-003 остаётся за VERIFIER и Director.
+
+**Next action (обновлённый):** независимый VERIFIER: подтвердить repair R1 на exact HEAD (F-1 реализация + тесты, errata F-2/F-3/F-4, F-5 documented deviation, полный чек-набор) ; merge — Human Gate.
