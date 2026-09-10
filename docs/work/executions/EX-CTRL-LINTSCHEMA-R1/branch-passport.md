@@ -8,10 +8,12 @@
 - Risk class: `MEDIUM` (harness/tooling без scientific claim; routing по директиве миссии: один независимый REVIEWER — быстрый контрольный review)
 - Claim class: `C0_SOFTWARE_ONLY`
 - Allowed paths: see `passport.json` (`scripts/harness/workflow_lint.py`, `tests/test_infra_workflow_lint.py`, `config/control/harness/work-event.schema.v1.json`, `config/control/harness/execution-passport.schema.v1.json`, `config/control/harness/README.md`, `config/infra/validation-gates.v1.json`, `docs/infra/VALIDATION_GATES_R1.md`, `docs/work/executions/EX-CTRL-LINTSCHEMA-R1/**`)
-- Status: `IN_PROGRESS`
+- Status: `HANDOFF_READY`
 - Active experiment campaigns: none (control WO; E0–E6 остаются `NOT_RUN`)
-- START commit: см. git log ветки (pushed до substantive work)
-- Next action: реализация MINOR-4 (TAB fail-closed) и NOTE-5 (jobs fail-closed), schema-sync (enum `REVIEW_CORRECTIONS`, паспорт-паттерн `^(NL[0-8]|INFRA[0-7])$`, 40-hex), полная негативная матрица + unittest, все 5 чеков hosted-ci локально, handoff
+- START commit: `37a105d67e4de52663009ce2c55448fd488dc369` (pushed до substantive work)
+- Implementation commits: `c67546ce2eac11ab99cd6f6f9017da4f59bf275f` (MINOR-4 + NOTE-5 lint + тесты), `9d5829126afc30078bca1a59ea40fc0dee7535c8` (schema sync + README схем), `7a631d601f9f2d5b9ed5bce45bc035aeafda472b` (gates doc/config sync)
+- Substantive HEAD: `7a631d601f9f2d5b9ed5bce45bc035aeafda472b` (tree `e5b8249a765e51933aa04da82aa9a3658b32f985`; = 0004-handoff-completed.subject_sha)
+- Next action: один независимый REVIEWER (контрольный WO MEDIUM) на exact substantive HEAD; затем Human Gate merge; после merge — старт INFRA2-001 разблокирован
 - Blocking issue: none
 
 ## Scope (из директивы миссии / Director-вердикта)

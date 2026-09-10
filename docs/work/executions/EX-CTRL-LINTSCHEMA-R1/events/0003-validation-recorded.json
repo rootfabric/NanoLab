@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-10T10:45:00Z",
+  "execution_id": "EX-CTRL-LINTSCHEMA-R1",
+  "work_order_id": "CTRL-LINTSCHEMA",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7a631d601f9f2d5b9ed5bce45bc035aeafda472b",
+  "summary": "Локальная верификация substantive HEAD 7a631d601f9f2d5b9ed5bce45bc035aeafda472b (Windows, Python 3.11.8, stdlib-only). Все 5 чеков hosted-ci (эмуляция Check 1–5 из .github/workflows/hosted-ci.yml): (1) JSON-syntax всех tracked *.json — 115/115 OK, 0 bad; (2) PYTHONPATH=scripts python -m harness.cli check-consistency --root . — ok=true, errors=[], warnings=[], exit 0; (3) python -m harness.work_cli validate по всем docs/work/executions/EX-* — 11/11 OK (10 легаси-каталогов — требование WO «10/10 после изменения схем» — выполнено: whitelist LEGACY_ABBREVIATED_SHA_EVENTS в work_cli выше схемы, schema-sync не сломал ни один каталог; 11-й — собственный EX-CTRL-LINTSCHEMA-R1, ok=true на момент прогона с event 0001); (4) python -m harness.workflow_lint --root . — ok=true, 1 workflow, 0 violations, exit 0 (реальный hosted-ci.yml проходит обновлённый линт); (5) python -m unittest discover -s tests -t . — Ran 102 tests, OK (59 → 102: 78 lint + 24 corrections). Негативная матрица: штатные тесты 78 lint-негативов/позитивов зелёные; CLI-пробы (вне репозитория, %TEMP%\\ctrl-lintschema-probes, в репозиторий не вносятся — прецедент REVIEW_LOG_R1 §5): probe-tabs-on (TAB-ключ под on:) — было exit 0 (RE_REVIEW_R1 §6 MINOR-4), стало exit 1 WORKFLOW_UNPARSEABLE «tab character in leading whitespace at line 5»; probe-jobs-seq (jobs: [nanolab-cpu] — обязательная проба NOTE-5 из постановки) — exit 1 WORKFLOW_JOBS_UNSUPPORTED_FORM, ok=false (до ремонта была бы молча ok=true). Сверка схем с whitelist-легаси: 4 события EX-NL1-002-R1 (0002–0005, 9cc83e8) невалидны по схеме (40-hex ceiling) и валидны у work_cli (explicit whitelist) — расхождение задокументировано в config/control/harness/README.md и в description-полях схем; механической валидации events против JSON-схем нет (подтверждено), поэтому 10/10 не нарушено. git status перед bookkeeping — чисто. project/infra-state.json и project/state.json не изменялись; научные claims не затронуты; зелёные чеки — технический факт, не научный PASS.",
+  "command_refs": [
+    "Check 1: git ls-files -z '*.json' -> 115 файлов, python -m json.tool по каждому -> 115 OK / 0 bad",
+    "Check 2: PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok=true, exit 0",
+    "Check 3: foreach EX-* -> python -m harness.work_cli validate <dir> -> 11/11 exit 0 (10 легаси 10/10 + собственный каталог)",
+    "Check 4: PYTHONPATH=scripts python -m harness.workflow_lint --root . -> ok=true, violations=0, exit 0",
+    "Check 5: python -m unittest discover -s tests -t . -> Ran 102 tests, OK",
+    "Пробы: python -m harness.workflow_lint --workflow %TEMP%\\ctrl-lintschema-probes\\probe-tabs-on.yml -> exit 1; --workflow probe-jobs-seq.yml -> exit 1"
+  ],
+  "evidence_refs": [
+    "docs/infra/VALIDATION_GATES_R1.md (§7 обновлён настройками этого WO — см. коммит 7a631d6)",
+    "tests/test_infra_workflow_lint.py (102-тестовая матрица)",
+    "config/control/harness/README.md (сверка схем с whitelist)",
+    "docs/infra/evidence/INFRA1-002/RE_REVIEW_R1.md §6 (исходные пробы MINOR-4/NOTE-5)"
+  ],
+  "next_action": "IMPLEMENTER: events 0002–0004 + summary.md + паспорт → HANDOFF_READY, push, handoff.",
+  "blocker": null
+}

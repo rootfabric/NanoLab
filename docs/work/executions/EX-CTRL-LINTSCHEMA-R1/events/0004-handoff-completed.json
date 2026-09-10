@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-10T10:50:00Z",
+  "execution_id": "EX-CTRL-LINTSCHEMA-R1",
+  "work_order_id": "CTRL-LINTSCHEMA",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7a631d601f9f2d5b9ed5bce45bc035aeafda472b",
+  "summary": "Implementer scope контрольного WO CTRL-LINTSCHEMA «lint fail-closed hardening + schema sync» complete, status HANDOFF_READY. Terminal event привязан к exact substantive HEAD 7a631d601f9f2d5b9ed5bce45bc035aeafda472b (tree e5b8249a765e51933aa04da82aa9a3658b32f985; ветка control/lint-schema-sync-r1, base exact 51a479cf2b559d5a734dac0dec4d9933a13cc689 = origin/main на старт). Все три пункта постановки Director (DIRECTOR_ACCEPTANCE_R1, обязательный follow-up приёмки INFRA1-002 и блокиратор старта INFRA2-001) закрыты: MINOR-4 — TAB в ведущем whitespace любой строки отклоняется парсером (WORKFLOW_UNPARSEABLE), dead-code проверка удалена, негативы обоих размещений (под on: и под job-ключом) в тестах; NOTE-5 — jobs: отсутствующий/null/sequence/scalar → блокирующие WORKFLOW_JOBS_BLOCK_MISSING / WORKFLOW_JOBS_UNSUPPORTED_FORM, job-чеки не могут молча пропускаться, обязательная проба jobs:[nanolab-cpu] → FAIL; schema-sync — enum event_type + REVIEW_CORRECTIONS, subject_sha строго 40-hex, checkpoint-паттерн паспорта ^(NL[0-8]|INFRA[0-7])$, расхождение с 4 легаси-событиями (9cc83e8, whitelist work_cli выше схемы) задокументировано в config/control/harness/README.md; сопутствующе — пустой runs-on: [] → NC1_RUNS_ON_MISSING, конфиг/док гейтов синхронизированы без смены revision (прецедент repair R1). Верификация: 5/5 чеков зелёные (JSON 115/115; check-consistency ok; work_cli validate 10/10 легаси EX-* + собственный каталог; lint 0 violations; unittest 102/102). Границы соблюдены: state-файлы (project/state.json, project/infra-state.json — Director gate), science, вердикты, чужие EX-* не тронуты; runners/secrets/GPU/paid compute — нет; E0–E6 NOT_RUN; ACCEPTED не выставляется (implementer не self-accept). Известные ограничения: NC-линт остаётся subset-парсером (fail closed за пределами подмножества); schema — ceiling без механической валидации (work_cli — floor); обсуждавшийся при постановке вариант «ограничить tolerance легаси-каталогами в коде» уже реализован repair R1 (LEGACY_ABBREVIATED_SHA_EVENTS) и настоящим WO только задокументирован на уровне схем. Claim ceiling C0_SOFTWARE_ONLY.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\control-lint-schema status --short -> чисто перед bookkeeping; substantive HEAD 7a631d6 (tree e5b8249)",
+    "git -C C:\\NanoLab\\control-lint-schema push origin control/lint-schema-sync-r1 (START 37a105d..9d58291 опубликованы ранее; bookkeeping — этим коммитом)",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-CTRL-LINTSCHEMA-R1 -> ok=true (WORK_ORDER_STARTED первый, HANDOFF_COMPLETED терминальный, summary присутствует)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-CTRL-LINTSCHEMA-R1/summary.md",
+    "docs/work/executions/EX-CTRL-LINTSCHEMA-R1/branch-passport.md",
+    "docs/infra/VALIDATION_GATES_R1.md (§2.4 Update, §3, §5, §8)",
+    "docs/infra/evidence/INFRA1-002/DIRECTOR_ACCEPTANCE_R1.md (Сводка по пакетному контрольному WO: merge WO — условие старта INFRA2-001)"
+  ],
+  "next_action": "REVIEWER: один независимый быстрый review (контрольный WO MEDIUM — достаточно одного REVIEWER) на exact substantive HEAD 7a631d601f9f2d5b9ed5bce45bc035aeafda472b; затем Human Gate merge в main; после merge — разблокирован старт INFRA2-001.",
+  "blocker": null
+}

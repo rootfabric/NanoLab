@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-10T10:40:00Z",
+  "execution_id": "EX-CTRL-LINTSCHEMA-R1",
+  "work_order_id": "CTRL-LINTSCHEMA",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7a631d601f9f2d5b9ed5bce45bc035aeafda472b",
+  "summary": "Реализован пакетный контрольный WO «lint fail-closed hardening + schema sync» на substantive HEAD 7a631d601f9f2d5b9ed5bce45bc035aeafda472b (ветка control/lint-schema-sync-r1, base exact 51a479cf2b559d5a734dac0dec4d9933a13cc689). Три substantive-коммита после START 37a105d: (1) c67546c fix(harness): MINOR-4 — в scripts/harness/workflow_lint.py таб-чек _content_lines заменён с dead code (срез из ведущих пробелов не мог содержать TAB; TAB-ключ под on: молча перестраивал документ — воспроизведено, прежний probe-tabs-класс давал exit 0) на отклонение любого TAB в ведущем whitespace любой сырой строки → WorkflowParseError/WORKFLOW_UNPARSEABLE; NOTE-5 — jobs: отсутствующий/null → блокирующее WORKFLOW_JOBS_BLOCK_MISSING, sequence/scalar-форма → WORKFLOW_JOBS_UNSUPPORTED_FORM (job-чеки NC-1/NC-6/pinning больше не могут молча пропускаться); сопутствующий fail-closed: пустой runs-on: [] → NC1_RUNS_ON_MISSING; (2) 9d58291 fix(schema): schema-sync (третий INFRA-прецедент, REVIEWER R1 NOTE-4 / верификатор V-3) — config/control/harness/work-event.schema.v1.json: event_type enum + REVIEW_CORRECTIONS (синхронизирован с ALLOWED_EVENTS валидатора), subject_sha строго ^[0-9a-f]{40}$ с описанием расхождения; config/control/harness/execution-passport.schema.v1.json: checkpoint ^(NL[0-8]|INFRA[0-7])$; новый config/control/harness/README.md — документация floor/ceiling и известного расхождения: work_cli (enforcement floor) tolerant к 7-hex 9cc83e8 ТОЛЬКО для 4 immutable легаси-событий LEGACY_ABBREVIATED_SHA_EVENTS (EX-NL1-002-R1 0002–0005), которые остаются невалидными по схеме (ceiling) — приемлемо, whitelist выше схемы; (3) 7a631d6 docs(infra): фиксация новых правил в config/infra/validation-gates.v1.json (workflow_lint: leading_tab_indentation/jobs_declaration_required/jobs_form/runs_on_non_empty_required; NC-1 rule_ids + WORKFLOW_JOBS_* guards) и docs/infra/VALIDATION_GATES_R1.md (§2.4 Update — sync выполнен; §3 перечисление fail-closed + строки таблицы правил; §5 тесты 59→102; §8.2/§8.4 отклонения закрыты); revision VALIDATION-GATES-R1 и статус не тронуты (прецедент repair R1). Тесты: tests/test_infra_workflow_lint.py 35→78 — обязательные негативы MINOR-4 обоих размещений (TAB под on: и под job-ключом), NOTE-5 (jobs: sequence с nanolab-cpu / benign sequence / sequence-of-mappings / scalar / null / отсутствующий → FAIL; flow-mapping jobs продолжает линтиться), полная матрица расширения (case/prefix labels, workflow_dispatch/release, write-all/job-level write/pull-requests write/не-скалярный/неизвестный уровни, timeout 0/61/'15'/true, docker:// без digest/с digest/short-SHA pin, types scalar/empty, secrets в job env, ...-конец документа, unexpected indent, CRLF-позитив). Diff в allowed_paths паспорта; project/state.json, project/infra-state.json, science, вердикты, чужие EX-* — не тронуты; runners/secrets/GPU/paid compute — нет; E0–E6 NOT_RUN.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\control-lint-schema commit -m 'fix(harness): fail closed on tab indentation and non-mapping jobs in workflow lint' -> c67546ce2eac11ab99cd6f6f9017da4f59bf275f",
+    "git -C C:\\NanoLab\\control-lint-schema commit -m 'fix(schema): sync control schemas with corrections enum and INFRA checkpoint pattern' -> 9d58291…; push origin control/lint-schema-sync-r1 -> 37a105d..9d58291",
+    "git -C C:\\NanoLab\\control-lint-schema commit -m 'docs(infra): document fail-closed tab/jobs rules and schema sync in gates doc and config' -> 7a631d601f9f2d5b9ed5bce45bc035aeafda472b (substantive HEAD, tree e5b8249a765e51933aa04da82aa9a3658b32f985)",
+    "CLI-пробы (вне репозитория, %TEMP%): workflow с TAB-ключом под on: -> exit 1 WORKFLOW_UNPARSEABLE 'tab character in leading whitespace at line 5'; jobs: [nanolab-cpu] -> exit 1 WORKFLOW_JOBS_UNSUPPORTED_FORM"
+  ],
+  "evidence_refs": [
+    "scripts/harness/workflow_lint.py (_content_lines MINOR-4, lint_document NOTE-5)",
+    "tests/test_infra_workflow_lint.py (MINOR4TabIndentationTests, NOTE5JobsMappingTests, RunsOnEmptyListTests, NegativeMatrixExpansionTests)",
+    "config/control/harness/work-event.schema.v1.json",
+    "config/control/harness/execution-passport.schema.v1.json",
+    "config/control/harness/README.md (расхождение floor/ceiling, 4 легаси-события)",
+    "config/infra/validation-gates.v1.json",
+    "docs/infra/VALIDATION_GATES_R1.md",
+    "docs/infra/evidence/INFRA1-002/DIRECTOR_ACCEPTANCE_R1.md (постановка WO)"
+  ],
+  "next_action": "IMPLEMENTER: локальная верификация (5 чеков + негативная матрица) → event 0003.",
+  "blocker": null
+}
