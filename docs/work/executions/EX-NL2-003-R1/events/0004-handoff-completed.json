@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-10T13:32:40Z",
+  "execution_id": "EX-NL2-003-R1",
+  "work_order_id": "NL2-003",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d121119add4533c77c40db287c292d0c8e542188",
+  "summary": "HANDOFF_COMPLETED: NL2-003 (bounded: validator hardening + provenance/recovery контракт; AiiDA — будущий WO) исполнен и терминально опубликован. Exact content-HEAD: 4a7635bedea474a99c9d5afbbcd75cd230da2203 (весь substantive content: hardening 3d72712, schema sync 4d9832d, provenance docs ce0f7de, records 4a7635b на base d121119add4533c77c40db287c292d0c8e542188); настоящий records-коммит добавляет только это событие, паспорт-статус HANDOFF_READY и SESSION_LOG append — фактический tip ветки публикуется push'ом и виден в git log (урок F5 NL2-001: handoff фиксирует фактический HEAD, а не устаревший). Поставлено: S003 (SUPPORTED только на ANALYSIS_COMPLETED с verification-поверхностью, fail-closed), verify-digests (sha256/size vs git-блобы; E1-R1 16, E1-R2 15, E0-R4 56 — 0 mismatch), emit_run порядок (финальный case_record до манифеста + digest-инвариантность, REPAIR_MAP_F1_R1 SS5.1), O1 (storage_location сегменты campaign_id/run_id), O2/F3 (midnight/непарсируемый/копия-штампы >=3 событий -> ошибки; легаси EX-NL2-002-R1 whitelist), F-1/O3 (evidence-map схема = campaign-конвенция, 3/3 published карт -> 0 ошибок), PROVENANCE_RECOVERY_R1.md + config/infra/provenance-recovery.v1.json. Каждый пункт — с unittest позитив/негатив (31 новый, полный набор 133 OK). Все существующие чеки зелёные (JSON 710 с ровно 2 pinned NEG, consistency, work_cli 14/14 EX, lint 0); red ровно 18 = документированная superseded E0-R2 (на которой новый O1-линт корректно именует сохранённые 55 stale записей). Научные прогоны не выполнялись; научные исходы не менялись; campaign-level scientific_outcome = NOT_EVALUATED; ACCEPTED не выставляется; state.json/plan.json не менялись (Director gate). Открытые риски и один next action — в summary.md. Реализация не self-accept: приёмка NL2-003 и статус-изменения — независимый REVIEWER -> VERIFIER -> Director checkpoint; merge — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\nl2-003 log --oneline d121119..4a7635b -> 0ef0e97 START, 3d72712 hardening, 4d9832d schema sync, ce0f7de provenance docs, 4a7635b records",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL2-003-R1 -> ok=true (terminal + summary present)",
+    "git push -u origin work/nl2-003-provenance-recovery-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL2-003.md",
+    "docs/work/executions/EX-NL2-003-R1/passport.json",
+    "docs/work/executions/EX-NL2-003-R1/summary.md",
+    "docs/work/executions/EX-NL2-003-R1/branch-passport.md",
+    "tests/test_nl2_003_hardening.py",
+    "docs/research/PROVENANCE_RECOVERY_R1.md",
+    "config/infra/provenance-recovery.v1.json",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "next_action": "Независимый REVIEWER (fresh-сессия): evidence-пакет EX-NL2-003-R1 на exact HEAD (каждая дыра с позитив/негатив-тестом; чек-набор; отсутствие новых красных поверхностей) -> docs/evidence/NL2-003/REVIEWER_VERDICT.md; затем VERIFIER; merge — Human Gate.",
+  "blocker": null
+}
