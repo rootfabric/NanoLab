@@ -8,7 +8,7 @@
     "schema_version": {"const": 1},
     "execution_id": {"type": "string", "minLength": 3},
     "work_order_id": {"type": "string", "minLength": 3},
-    "checkpoint": {"type": "string", "pattern": "^NL[0-8]$"},
+    "checkpoint": {"description": "Scientific checkpoint NL0..NL8 or compute-capability checkpoint INFRA0..INFRA7. Pattern widened from ^NL[0-8]$ by control WO EX-CTRL-LINTSCHEMA-R1: INFRA executions (EX-INFRA0-001-R1, EX-INFRA1-001-R1, EX-INFRA1-002-R1) legitimately carry checkpoint INFRA<digit> (REVIEWER R1 NOTE-4, third INFRA precedent).", "type": "string", "pattern": "^(NL[0-8]|INFRA[0-7])$"},
     "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "branch": {"type": "string", "minLength": 3},
     "risk_class": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
