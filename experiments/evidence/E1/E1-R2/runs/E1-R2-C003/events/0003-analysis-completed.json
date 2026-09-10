@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-10T11:29:05Z",
+  "experiment_id": "E1",
+  "campaign_id": "E1-R2",
+  "run_id": "E1-R2-C003",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "Механический анализ §5.1 на published energy.dat (1001 строка, NaN/Inf = 0) инструментом analyze_energy.sh — байт-в-бит из E1-R1 (git blob 77cfcc637df7c75446736cf1c3a71ea219a260c5): среднее колонки 2 = -1.35653082817; отклонение от upstream-оракула -1.37970256144 составляет +0.02317173327 (полоса ±0.15) -> per-replica факт IN_BAND (T2-реплика 3/3, критерий E1-PROTO-R1 §5.1). Значение публикуется в evidence-map.json confirmatory set (S001 + C001-C003). Campaign-level scientific_outcome остаётся NOT_EVALUATED: агрегат по §9 R1 и объявление статуса E1 — Director после независимого REVIEWER + VERIFIER.",
+  "command": "bash experiments/evidence/E1/E1-R2/analyze_energy.sh experiments/evidence/E1/E1-R2/runs/E1-R2-C003/artifacts/energy.dat",
+  "exit_code": 0,
+  "artifact_refs": [
+    "artifacts/energy.dat",
+    "../artifacts.manifest.json"
+  ],
+  "resource_usage": {
+    "observable_value": -1.35653082817,
+    "oracle": -1.37970256144,
+    "band": 0.15,
+    "delta_from_oracle": 0.02317173327,
+    "band_fact": "IN_BAND",
+    "analysis_rows": 1001
+  },
+  "scientific_outcome": "NOT_EVALUATED"
+}
