@@ -55,6 +55,26 @@ CLI (замороженные валидаторы `scripts/harness/**` бит-�
 - `work_cli validate docs/work/executions/EX-NL2-001-R1` → `ok:true`, exit 0, статус HANDOFF_READY.
 - `cli check-consistency` → `ok:true`, exit 0 (state/plan консистентны).
 
-## V6–V7
+## V6. Пререгистрация — ВЫПОЛНЕНО (скрипт `prereg_check.py`)
 
-В процессе (следующие коммиты): пререгистрация (freeze→run хронология, tolerances/expectations R1→R4 идентичны); отсутствие self-acceptance/E-статусов.
+- Хронология git (author timestamps, monotone freeze → digests → campaign start) для всех четырёх попыток:
+  R1 `5a151f7` 13:25:27Z → start `e3c940c` 13:26:01Z (дайджесты в самом freeze-коммите);
+  R2 `e87202e` 13:34:22Z → `8355f84` 13:34:44Z; R3 `cc495fe`/`6c366e0` 13:40:40Z → `3dd0375` 13:40:49Z;
+  R4 `f2e17bc`/`ce477aa` 13:52:47Z → `1688e71` 13:52:57Z. Ожидания заморожены ДО стартов; результаты — спустя десятки минут (R4-результаты `24352f9` 14:00:21Z).
+- Ожидания не менялись R1→R4: все 18 кейсов protocol.json идентичны verbatim (модуль префикса run_id, кампания-само-ссылки в строках и документированный placeholder `frozen_at_utc` — erratum F3; в R1 — реальный машинный 13:18:32Z, в R2–R4 — круглые значения); `units_reference`, `geometry_tolerance`, `outcome_semantics` идентичны; литералы tolerances **5e-7 / 1e-12** присутствуют во всех ревизиях; `tools/units_check.py` (`ACCEPT_TOLERANCE=5e-7`) — frozen-поверхность E0-R1, не менялась.
+
+## V7. Self-acceptance / E-статусы — ВЫПОЛНЕНО
+
+- `ACCEPTED` в evidence-документах — только словарь механических вердиктов units-check (tier-1) и явное «ACCEPTED не выставляется»; campaign `claim.campaign_scientific_outcome = NOT_EVALUATED`, ceiling `C0_SOFTWARE_ONLY`; `failed_or_excluded_runs=[]`; per-run: 17× (COMPLETED, SUPPORTED) + 1× (COMPLETED, NOT_SUPPORTED) — совпадает с V2/V3.
+- `next_action` evidence-map — независимый REVIEWER → VERIFIER → Director; merge — Human Gate.
+- E1/E2 и `project/**` не тронуты (diff base..HEAD пуст по этим поверхностям); статус E0-дока — только execution fact (RUN), приёмка делегирована review.
+
+## V8. Дополнительные пробы (полнота чек-листа §1–§5)
+
+- Ремонт хирургичен: `git diff --name-status 2cee872 1d594f3` = **77 M** (73 `artifacts.manifest.json` + IMPLEMENTER_EVIDENCE, branch-passport, passport.json, evidence-map) + **80 A** (73 superseded + 4 campaign erratum-события + repair-событие + REPAIR_MAP + ERRATUM). Ни одного иного файла; `case_record.json`/события прогонов/summary/фикстуры/tools/protocol — не тронуты.
+- F2 атрибуция подтверждена артефактами: R4-U001 `pinned_source_excerpt.txt` = `NOT_OBTAINED` (TimeoutExpired 300 c); R3-U001 = hit `src/Utilities/Utils.cpp:333` («Converting temperature from Celsius …»).
+- F4 счётчики `failed_prior_attempts_preserved` соответствуют поверхностям (R1 18; R2 17+POS-артефакт; R3 19 каталогов).
+- **O1** подтверждён: 55/55 записей R2-манифестов несут stale `storage_location` (`E0-R1/runs/E0-R2-…`) — сохранённый дефект попытки, дайджесты при этом корректны (V3).
+- **O2** подтверждён: repair-событие `timestamp_utc=2026-09-09T18:25:00Z` — placeholder (коммит `5418f14` = 14:37:12Z).
+- **O3** подтверждён: campaign-формат `evidence-map.json` — 11 ошибок против `evidence-map.schema.v1.json` (идентично до/после ремонта, пре-существующее).
+- **Gap digest-vs-blob (F1-класс, кандидат NL2-003) воспроизведён пробой**: подмена байта `artifacts/stdout.txt` в scratch-копии E0-R4-U001 (sha256 `41b03f6d…` ≠ манифесту `b794d508…`) — `experiment_cli validate` отвечает `ok:true`, exit 0. Ни один валидатор не сверяет дайджесты с байтами (потому F1 и существовал во всех 73 каталогах) — мой digest-vs-blob (V3) потребовал собственного скрипта.
