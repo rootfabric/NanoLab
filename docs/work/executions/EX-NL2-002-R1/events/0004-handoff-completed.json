@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-10T11:37:54Z",
+  "execution_id": "EX-NL2-002-R1",
+  "work_order_id": "NL2-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "HANDOFF NL2-002 (implementer -> независимый REVIEWER, затем VERIFIER и Director). Исполнено: T2 confirmatory кампания E1-R2 по frozen E1-PROTO-R2 (R_confirm = 3): 3 реплики E1-R2-C001..C003 verbatim quick_input 1e6 steps, distinct seeds (-1641386734 / 977680137 / -999572227, факты log.dat), preparation байт-в-айт как E1-R1 (4/4 сырых blob'а pinned tree, sha256sum на месте перед каждым прогоном; engine — reuse бит-в-бит зафиксированной сборки E1-R1 ffc80b1a..., 3375976 B, флаги верифицированы, пересборка не потребовалась). Все 3 прогона технически COMPLETED с первого запуска (exit 0; wall 11.00/10.88/11.03 s; RSS 6604/6604/6468 KB), целостность S5.2 OK (1001 строка, 10 конфигураций, NaN/Inf = 0). Frozen статистика confirmatory set S001+C001-C003 (n=4): mean -1.36896744830, выборочное SD 0.01729656703 (11.5% полосы), per-replica 4/4 IN_BAND (полоса -1.37970256144 ± 0.15, оракул из pinned quick_compare), агрегат E1-PROTO-R1 S9 (T1 PASS и все T2 in band) — MET (механический факт). S001 reuse с provenance (published energy.dat ff26bad5..., cross-check воспроизводит значение); pilot в set не засчитан. Диагностика S4 R2 (не gate): ac(1) 0.59-0.83, tau_int ~10-60, Neff ~8-48; PyMBAR-level ESS остаётся открытой задачей. Технический/научный исходы раздельно: 3/3 RUN_COMPLETED; campaign-level scientific_outcome = NOT_EVALUATED. НЕ сделано (вне полномочий implementer): ACCEPTED/статус E1 не объявлялись — это Director по результатам независимого review; state.json/plan.json/протоколы/валидаторы/E1-R1 не менялись. Открытые вопросы для review: (a) достаточность между-репликационной независимости (distinct seed на одной машине/сборке — upstream-семантика); (b) трактовка роста SD 0.0083->0.0173 при n 3->4 (согласуется с малой выборкой; не влияет на gate); (c) маршрут PyMBAR-диагностики (NL2-003 или отдельная диагностическая задача). Recommendation для Director: SUPPORTED (claim ceiling C1_COMPUTATIONAL_REPRODUCTION). Budget: 32.91 s CPU wall суммарно, ~0.009 core-hour. Evidence: experiments/evidence/E1/E1-R2/**, docs/evidence/NL2-002/IMPLEMENTER_EVIDENCE.md, docs/work/executions/EX-NL2-002-R1/summary.md.",
+  "command_refs": [
+    "python -m harness.work_cli validate docs/work/executions/EX-NL2-002-R1 -> ok=true (см. summary.md для validate+close на терминальном коммите)",
+    "python -m harness.cli check-consistency --root . -> ok=true exit 0"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL2-002-R1/summary.md",
+    "docs/evidence/NL2-002/IMPLEMENTER_EVIDENCE.md",
+    "experiments/evidence/E1/E1-R2/evidence-map.json",
+    "experiments/evidence/E1/E1-R2/statistics.md",
+    "docs/work/WO-NL2-002.md"
+  ],
+  "next_action": "Независимый REVIEWER: fresh-сессия проверяет evidence-пакет NL2-002 на exact HEAD (см. summary.md) -> docs/evidence/NL2-002/REVIEWER_VERDICT.md; затем VERIFIER и Director checkpoint (объявление статуса E1); merge в main — Human Gate.",
+  "blocker": null
+}
