@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-10T11:22:30Z",
+  "experiment_id": "E1",
+  "campaign_id": "E1-R2",
+  "run_id": "E1-R2-C003",
+  "event_type": "RUN_STARTED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "f34e62ca67f12f0cffbd1823d584afc09900db6a",
+  "summary": "T2 confirm реплика 3/3 (frozen R_confirm = 3, E1-PROTO-R2 S2). Frozen subject в Git ДО прогона: manifest.json (engine reuse бит-в-бит сборки E1-R1 ffc80b1a7abe2a06bea601ac7f730e26c0e5c09c33a9e8c7c5f7a96a4848579f, 3375976 B; верификация SHA-256/size/CMakeCache-флагов Release/DOUBLE=ON/CUDA=OFF/MPI=OFF/NATIVE=ON/JSON=ON и GIT COMMIT 00dc7fb перед запуском), входы — сырые blob'ы pinned tree (git cat-file blob, sha256sum 4/4 против пинов E1-PROTO-R1 S2.2 непосредственно перед прогоном), budget и stop conditions в manifest/protocol. Seed — случайный по upstream-семантике (distinctness контролируется по фактам логов после прогонов). Прогон выполняется в disposable scratch вне репозитория; выходы публикуются с artifacts.manifest контрактного формата. Полоса/оракул/статистика frozen, менять запрещено.",
+  "command": "cd <scratch>/E1-R2-C003 && /usr/bin/time -v ~/nl1-002/build-oxdna-cpu/bin/oxDNA quick_input",
+  "artifact_refs": ["../manifest.json", "../../protocol.json", "../../campaign.md"],
+  "scientific_outcome": null
+}
