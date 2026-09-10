@@ -3,7 +3,7 @@
   "kind": "project_state",
   "foundation": "DOCUMENTED",
   "frontier": "NL3",
-  "next_work_order": "NL3-001",
+  "next_work_order": "NL3-002",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
@@ -12,7 +12,8 @@
     "NL1-002",
     "NL2-001",
     "NL2-002",
-    "NL2-003"
+    "NL2-003",
+    "NL3-001"
   ],
   "active_tasks": [],
   "task_status": {
@@ -24,8 +25,8 @@
     "NL2-001": "ACCEPTED",
     "NL2-002": "ACCEPTED",
     "NL2-003": "ACCEPTED",
-    "NL3-001": "READY",
-    "NL3-002": "PLANNED",
+    "NL3-001": "ACCEPTED",
+    "NL3-002": "READY",
     "NL4-001": "PLANNED",
     "NL4-002": "PLANNED",
     "NL4-003": "PLANNED",
