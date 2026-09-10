@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL2-003-R1",
+  "work_order_id": "NL2-003",
+  "checkpoint": "NL2",
+  "base_sha": "d121119add4533c77c40db287c292d0c8e542188",
+  "branch": "work/nl2-003-provenance-recovery-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY (validator hardening + provenance/recovery контракт-плоскость; научные прогоны не выполняются, научные утверждения не публикуются, campaign-level scientific_outcome = NOT_EVALUATED)",
+  "allowed_paths": [
+    "docs/work/WO-NL2-003.md",
+    "docs/work/executions/EX-NL2-003-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "scripts/harness/experiment_cli.py",
+    "scripts/harness/work_cli.py",
+    "scripts/harness/README.md",
+    "config/control/harness/evidence-map.schema.v1.json",
+    "config/control/harness/README.md",
+    "config/infra/provenance-recovery.v1.json",
+    "tests/**",
+    "docs/research/PROVENANCE_RECOVERY_R1.md",
+    "experiments/evidence/E0/E0-R1/tools/e0_runner.py",
+    "docs/control/EXPERIMENT_HARNESS_RU.md"
+  ],
+  "started_at_utc": "2026-09-10T13:04:53Z",
+  "status": "HANDOFF_READY"
+}

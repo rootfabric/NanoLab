@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-10T13:31:14Z",
+  "execution_id": "EX-NL2-003-R1",
+  "work_order_id": "NL2-003",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d121119add4533c77c40db287c292d0c8e542188",
+  "summary": "VALIDATION: полный чек-набор на subject ce0f7de6f61901f556029bb353492b454589f483 (tree 4d9832dac2e0e591fc3c285ef5635d80c4c96119, worktree C:\\NanoLab\\nl2-003, Python 3.11.8, jsonschema 4.22.0, git 2.53.0.windows.1). (1) JSON syntax: 710 tracked *.json, unparseable ровно 2 — pinned NEG-фикстуры n001/n002 (by design), sha256 совпадают с CI-пинами hosted-ci.yml (e3b0c442…, 1de18ae4…) — гейт не ослаблен. (2) check-consistency: ok=true, exit 0 (state/plan не тронуты). (3) work_cli validate: 14/14 EX-каталогов OK (13 pre-existing + EX-NL2-003-R1; легаси whitelist'ы MINOR-2/MINOR-3 не регрессировали — подтверждение требуемого 40-hex enforcement). (4) workflow NC lint: 0 violations, exit 0. (5) unittest: 133 OK (102 существующих + 31 новый в tests/test_nl2_003_hardening.py; корректировка генератора фикстур test_work_cli_corrections.py — per-event штампы вместо константного, суть проверяемых правил не менялась). (6) Негативы S003: синтетический gap-кейс и опубликованная фикстура s003_tech_with_sci_claim -> exit 3 с явной S003-ошибкой; позитив verify-цепочки -> ok. (7) verify-digests (HEAD-блобы): E1-R1 16/16, E1-R2 15/15, E0-R4 56/56 — 0 mismatch; бонус E0-R1 55/55, E0-R3 59/59, E0-R2 55/55 — 0 mismatch; graceful fail-closed на legacy object-манифесте (N007-класс). (8) evidence-map schema: E1-R1/E0-R4/E1-R2 -> 0 ошибок каждая. (9) Регрессионный обход всех published run-каталогов: 62 green; red ровно 18 — superseded-попытка E0-R2 (документированный дефект попытки: 2 stale campaign_id ошибки pre-existing + 3 новых O1-ошибки, именующих сохранённые 55 stale storage_location; новых красных поверхностей не появилось). Научные прогоны не выполнялись; научные исходы не менялись; campaign-level scientific_outcome = NOT_EVALUATED; ACCEPTED не выставляется.",
+  "command_refs": [
+    "git ls-files '*.json' -> 710; python -m json.tool -> 2 pinned NEG unparseable (sha256 = CI pins)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> exit 0",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-* -> 14/14 ok",
+    "PYTHONPATH=scripts python -m harness.workflow_lint --root . -> exit 0",
+    "python -m unittest discover -s tests -t . -> Ran 133 tests, OK",
+    "PYTHONPATH=scripts python -m harness.experiment_cli verify-digests experiments/evidence/{E1/E1-R1,E1/E1-R2,E0/E0-R4} -> ok=true, 0 mismatch",
+    "регрессионный обход runs: 62 green, 18 red (только E0/E0-R2, документировано)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL2-003-R1/events/0002-continuation-checkpoint.json",
+    "tests/test_nl2_003_hardening.py",
+    "scripts/harness/README.md",
+    ".github/workflows/hosted-ci.yml (NEG-пины сверены)"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + терминальный handoff (0004), SESSION_LOG append, push -> независимый REVIEWER.",
+  "blocker": null
+}

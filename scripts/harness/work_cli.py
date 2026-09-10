@@ -43,6 +43,30 @@ LEGACY_TIMESTAMP_EXEMPT_CORRECTIONS = frozenset({
 # MINOR-3 repair: REVIEW_CORRECTIONS is a review-authority marker; the
 # implementer of an execution cannot self-issue it.
 REVIEW_CORRECTIONS_ALLOWED_ROLES = {"REVIEWER", "VERIFIER", "DIRECTOR"}
+# NL2-003 hardening (O2/F3 class, "placeholder timestamps"): an explicit
+# midnight placeholder stamp (a date-only value pasted as a timestamp, e.g.
+# the E0 fixture convention "2026-09-09T00:00:00Z") is a machine-detectable
+# fabrication marker; it is rejected outright, no exemptions.
+MIDNIGHT_PLACEHOLDER = re.compile(r"^\d{4}-\d{2}-\d{2}T00:00:00(\.0+)?(?:Z|z|\+00:00)$")
+# NL2-003 hardening ("repeats"): a constant timestamp copied across >= 3 events
+# of one execution is a batch/copy artifact, not a per-event machine stamp
+# (Director acceptance NL2-002 finding F-1 "пакетные timestamps событий").
+# Published immutable events are grandfathered by exact (execution_id,
+# event_id) — the established LEGACY_* precedent. All NEW events must carry
+# per-event machine stamps; identical stamps across 1-2 events stay allowed
+# (legitimate sub-second sequences), and same-minute values are out of scope.
+LEGACY_BATCH_TIMESTAMP_EVENTS = frozenset({
+    ("EX-NL2-002-R1", "0002-continuation-checkpoint"),
+    ("EX-NL2-002-R1", "0003-validation-recorded"),
+    ("EX-NL2-002-R1", "0004-handoff-completed"),
+})
+LEGACY_BATCH_TIMESTAMP_PROVENANCE = (
+    "scanned docs/work/executions/EX-*/events/*.json on canonical main "
+    "d121119add4533c77c40db287c292d0c8e542188, 2026-09-10; EX-NL2-002-R1 events "
+    "0002-0004 share 2026-09-10T11:37:54Z (batch recording at handoff, Director "
+    "finding F-1 NL2-002); no other published execution repeats a timestamp "
+    "across 3+ events"
+)
 
 
 def parse_utc_timestamp(value: Any) -> datetime | None:
@@ -92,6 +116,9 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
             errors.append(f"passport missing {key}")
     if not SHA40.fullmatch(str(passport.get("base_sha", ""))):
         errors.append("passport base_sha must be 40 lowercase hex characters")
+    # NL2-003 (O2/F3 class): a date-only placeholder in the passport start stamp.
+    if MIDNIGHT_PLACEHOLDER.match(str(passport.get("started_at_utc", "") or "")):
+        errors.append("passport started_at_utc is a midnight placeholder timestamp; record the actual machine time")
 
     event_files = sorted(events_dir.glob("*.json")) if events_dir.is_dir() else []
     if not event_files:
@@ -123,11 +150,40 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
         if not SHA40.fullmatch(sha_value) and not (SUBJECT_SHA_ABBREV.fullmatch(sha_value) and legacy_key in LEGACY_ABBREVIATED_SHA_EVENTS):
             errors.append(f"{path.name}: invalid subject_sha (full 40-hex required; abbreviated values are reserved for pre-existing legacy events)")
+        # NL2-003 (O2/F3 class): timestamps must be present, machine-parseable,
+        # and explicit placeholders are rejected. The git chronology cross-check
+        # used by review relies on these values; a placeholder silently defeats it.
+        timestamp_value = event.get("timestamp_utc")
+        if not isinstance(timestamp_value, str) or not timestamp_value.strip():
+            errors.append(f"{path.name}: timestamp_utc is required (ISO-8601 machine stamp)")
+        else:
+            if parse_utc_timestamp(timestamp_value) is None:
+                errors.append(f"{path.name}: timestamp_utc {timestamp_value!r} is not a parseable ISO-8601 timestamp")
+            if MIDNIGHT_PLACEHOLDER.match(timestamp_value.strip()):
+                errors.append(f"{path.name}: timestamp_utc {timestamp_value!r} is a midnight placeholder; record the actual machine time")
 
     if ids != sorted(ids):
         errors.append("events are not lexically ordered")
     if len(ids) != len(set(ids)):
         errors.append("duplicate event_id")
+    # NL2-003 ("repeats"): one constant timestamp copied across >= 3 events is a
+    # batch/copy artifact. Published immutable events are grandfathered by exact
+    # (execution_id, event_id) and do not count toward the tally.
+    stamps: dict[str, list[str]] = {}
+    for path, event in zip(event_files, events):
+        value = event.get("timestamp_utc")
+        if isinstance(value, str) and value.strip():
+            legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
+            if legacy_key not in LEGACY_BATCH_TIMESTAMP_EVENTS:
+                stamps.setdefault(value.strip(), []).append(path.name)
+    for value, names in sorted(stamps.items()):
+        if len(names) >= 3:
+            errors.append(
+                "constant copy timestamp across " + str(len(names)) + " events ("
+                + ", ".join(names) + "): " + value
+                + ": record a per-event machine stamp (legacy batch events are whitelisted; "
+                + LEGACY_BATCH_TIMESTAMP_PROVENANCE + ")"
+            )
     if event_types and event_types[0] != "WORK_ORDER_STARTED":
         errors.append("WORK_ORDER_STARTED must be the first event")
     if event_types.count("WORK_ORDER_STARTED") != 1:

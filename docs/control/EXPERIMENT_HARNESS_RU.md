@@ -77,7 +77,13 @@ NOT_EVALUATED
 INVALIDATED
 ```
 
-Технический terminal event и scientific conclusion не смешиваются.
+Технический terminal event и scientific conclusion не смешиваются. С NL2-003 это правило enforced механически (`experiment_cli`): `SUPPORTED` допустим только на `ANALYSIS_COMPLETED` с verification-поверхностью (непустой `artifact_refs` на существующие артефакты анализа) — S003-правило, fail-closed.
+
+## Артефактные манифесты и provenance
+
+`artifacts.manifest.json` обязан описывать опубликованные байты: манифест сериализуется **после** финализации последнего изменяемого артефакта (урок F1: преждевременная сериализация дала 73 stale-дайджеста; фикс emit_run — REPAIR_MAP_F1_R1 §5.1, реализован NL2-003). `storage_location` in-Git формата обязан содержать сегменты `campaign_id` и `run_id` манифеста (O1). Сверка манифестов с блобами: `PYTHONPATH=scripts python3 -m harness.experiment_cli verify-digests <dir>` — читать данные только из git-блобов, не из рабочей копии (autocrlf).
+
+Цепочка provenance, stop/resume (run ID не переиспользуется, RESUMED-маркер), дедупликация идентичной поверхности и readback-требования: `docs/research/PROVENANCE_RECOVERY_R1.md` (+ machine-readable `config/infra/provenance-recovery.v1.json`).
 
 ## Изменение protocol/code
 

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-10T13:04:53Z",
+  "execution_id": "EX-NL2-003-R1",
+  "work_order_id": "NL2-003",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d121119add4533c77c40db287c292d0c8e542188",
+  "summary": "Старт NL2-003 (integrate workflow provenance and recovery: validator hardening + provenance/recovery контракт-плоскость; AiiDA вне scope). Base — canonical main d121119add4533c77c40db287c292d0c8e542188 (merge PR #32; NL2-002 ACCEPTED, E1 = SUPPORTED, next_work_order = NL2-003 READY, physics_runs = 7). Содержание (bounded, без новых experiment-прогонов): (1) S003 — experiment_cli отвергает scientific_outcome=SUPPORTED вне ANALYSIS_COMPLETED с verification-поверхностью (terminal RUN_COMPLETED+SUPPORTED фиксура s003_tech_with_sci_claim -> FAIL; легитимная verify-цепочка terminal null -> ANALYSIS_COMPLETED SUPPORTED с artifact evidence -> OK), fail-closed. (2) digest-vs-blob — новый режим experiment_cli verify-digests: сверка sha256/size каждой записи artifacts.manifest.json с git-блобами HEAD (не working copy, урок autocrlf VERIFIER NL2-001 SS3); CI-пригодная команда; прогон на E1-R1/E1-R2/E0-R4 -> 0 mismatch. (3) emit_run порядок (REPAIR_MAP_F1_R1 SS5.1, обязательный фикс) — финальный case_record.json ДО записи artifacts.manifest.json + digest-инвариантность schema-валидации; unittest инварианта 0 mismatch. (4) work_cli — placeholder-timestamps (O2/F3-класс): midnight-placeholder T00:00:00Z и константный copy-timestamp (>=3 события с одним значением) -> ошибка (обоснование error-vs-warning в PROVENANCE_RECOVERY_R1 SS6); полный 40-hex subject_sha уже enforced (MINOR-2 whitelist, тесты существуют) — подтверждается прогоном. (5) evidence-map.schema.v1.json — синхронизация с де-факто campaign-конвенцией принятых E1-R1/E0-R4/E1-R2 (schema follow facts; checkpoint-вид старой схемы не материализовался); прогон на всех трёх published картах -> 0 ошибок. (6) O1 — storage_location in-Git формата обязан содержать сегменты campaign_id/run_id манифеста (55 stale записей E0-R2). (7) docs/research/PROVENANCE_RECOVERY_R1.md (цепочка subject->seeds->inputs->binaries->runs->analysis->evidence-map; stop/resume: run ID не переиспользуется, RESUMED-маркер; дедупликация; readback из блобов с digest-верификацией, CRLF-урок F-3) + config/infra/provenance-recovery.v1.json. Риск MEDIUM, claim C0_SOFTWARE_ONLY, campaign-level scientific_outcome = NOT_EVALUATED; state.json/plan.json не меняются (Director). Все существующие чеки остаются зелёными, кроме документированно красной superseded-попытки E0-R2 (stale campaign_id опубликован как дефект попытки).",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = d121119add4533c77c40db287c292d0c8e542188 (= base; merge pull request #32)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl2-003 -b work/nl2-003-provenance-recovery-r1 d121119add4533c77c40db287c292d0c8e542188",
+    "project/state.json @ d121119: frontier NL2, next_work_order NL2-003, E1 = RUN (execution-facts конвенция; SUPPORTED объявлен вердиктными поверхностями NL2-002), physics_runs = 7"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL2-003.md",
+    "docs/work/executions/EX-NL2-003-R1/passport.json",
+    "docs/work/executions/EX-NL2-003-R1/branch-passport.md",
+    "docs/evidence/NL2-001/REVIEWER_VERDICT.md",
+    "docs/evidence/NL2-001/VERIFIER_VERDICT.md",
+    "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md",
+    "docs/evidence/NL2-002/VERIFIER_VERDICT.md",
+    "docs/evidence/NL2-002/DIRECTOR_ACCEPTANCE_R1.md (next action: NL2-003 + hardening-кандидаты)"
+  ],
+  "next_action": "IMPLEMENTER: validator hardening (S003, verify-digests, emit_run, work_cli placeholder-timestamps, evidence-map schema, O1) с unittest позитив/негатив на каждую дыру, затем PROVENANCE_RECOVERY_R1 + machine-readable конфиг; CONTINUATION после каждого смыслового этапа.",
+  "blocker": null
+}

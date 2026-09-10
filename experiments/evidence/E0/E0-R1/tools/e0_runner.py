@@ -5,6 +5,13 @@ Instrument of campaign E0-R1 (protocol E0-PROTO-R1, WO NL2-001).
 Frozen BEFORE any run (committed in the freeze commit); changes invalidate the
 campaign subject (exact-head rule).
 
+NL2-003 revision (work/nl2-003-provenance-recovery-r1): emit_run write-order
+fix mandated by docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md §5.1 — the artifacts
+manifest is serialized AFTER the final case_record.json write, so recorded
+digests always describe the published bytes. Historical campaign subjects keep
+the pre-fix blob in git history; this revision defines the instrument for any
+future E0-tooling campaign freeze.
+
 The runner:
   1. reads protocol.json cases (expectations frozen BEFORE any execution);
   2. materializes fixture bytes from git blobs of the subject commit
@@ -464,9 +471,29 @@ def emit_run(case: dict, subject: str, result: dict, technical_failure: str | No
                 "producer_command": f"{_CTX['tools_dir']}/e0_runner.py (mechanical; argv in case_record.json)",
             }
         )
-    write_json(run_dir / "artifacts.manifest.json", artifacts_manifest)
-    schema_issues["artifacts.manifest.json"] = validate_against_schema(artifacts_manifest, "artifacts")
+    # REPAIR_MAP_F1_R1 §5.1 (mandatory fix, implemented in NL2-003): the
+    # artifacts manifest must describe the PUBLISHED bytes. The pre-fix order
+    # serialized the manifest BEFORE the final case_record rewrite, so the
+    # case_record entry recorded the pre-image digest (+35 B in all 73 published
+    # run dirs of E0-R1..R4). Fixed order: (1) validate the manifest candidate,
+    # (2) write the FINAL case_record (including the manifest validation result),
+    # (3) patch only the case_record entry from the final bytes, (4) prove the
+    # schema validation is digest-invariant, (5) write the manifest.
+    first_validation = validate_against_schema(artifacts_manifest, "artifacts")
+    schema_issues["artifacts.manifest.json"] = first_validation
     write_json(art_dir / "case_record.json", case_record)
+    final_case_record_blob = (art_dir / "case_record.json").read_bytes()
+    for entry in artifacts_manifest["artifacts"]:
+        if entry["name"] == "case_record.json":
+            entry["sha256"] = sha256_of(final_case_record_blob)
+            entry["size_bytes"] = len(final_case_record_blob)
+    second_validation = validate_against_schema(artifacts_manifest, "artifacts")
+    if second_validation != first_validation:
+        raise RuntimeError(
+            "emit_run: artifacts manifest schema validation is not digest-invariant; "
+            "refusing to emit a manifest whose recorded validation may be stale"
+        )
+    write_json(run_dir / "artifacts.manifest.json", artifacts_manifest)
 
     write_text(
         run_dir / "summary.md",
