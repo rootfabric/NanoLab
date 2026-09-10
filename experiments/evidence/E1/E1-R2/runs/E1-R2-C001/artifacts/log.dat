@@ -1,0 +1,42 @@
+INFO: seeding the RNG with -1641386734
+INFO: Initializing backend 
+INFO: Simulation type not specified, using MD
+INFO: The generator will try to take into account bonded interactions by choosing distances between bonded neighbours no larger than 2.000000
+INFO: Converting temperature from Celsius (20.000000 C°) to simulation units (0.097717)
+INFO: pid: 412
+INFO: (Cells.cpp) N_cells_side: 4, 4, 4; rcut=1.68377, IS_MC: 0
+INFO: N: 16, N molecules: 2
+INFO: Using randomly distributed velocities
+INFO: Initial kinetic energy: 4.959152
+INFO: RELEASE: v3.7
+INFO: GIT COMMIT: 00dc7fb
+INFO: COMPILED ON: 09/09/26
+INFO: diffusion fixed.. -22.3115 -22.3115
+INFO: diffusion fixed.. -22.0867 -22.0867
+INFO: diffusion fixed.. -22.4934 -22.4934
+INFO: diffusion fixed.. -21.8051 -21.8051
+INFO: diffusion fixed.. -23.7738 -23.7738
+INFO: diffusion fixed.. -20.4407 -20.4407
+INFO: diffusion fixed.. -22.0507 -22.0507
+INFO: diffusion fixed.. -22.3246 -22.3246
+INFO: diffusion fixed.. -21.8719 -21.8719
+INFO: diffusion fixed.. -21.5932 -21.5932
+
+INFO: Total Running Time: 9.92887 s, per step: 0.00992887 ms
+INFO: Timings, in seconds, by Timer (total, own, spent in children)
+> SimBackend                          9.929 (100.0%)        0.807 (  8.1%)        9.122 ( 91.9%)
+***> Lists                            0.285 (  2.9%)        0.285 (  2.9%)        0.000 (  0.0%)
+***> Thermostat                       0.142 (  1.4%)        0.142 (  1.4%)        0.000 (  0.0%)
+***> Forces                           7.776 ( 78.3%)        7.776 ( 78.3%)        0.000 (  0.0%)
+***> First Step                       0.569 (  5.7%)        0.569 (  5.7%)        0.000 (  0.0%)
+***> Observables                      0.351 (  3.5%)        0.351 (  3.5%)        0.000 (  0.0%)
+
+INFO: END OF THE SIMULATION, everything went OK!
+INFO: Lists updated 82896 times (every ~12.063308 steps)
+INFO: Aggregated I/O statistics (set debug=1 for file-wise information)
+	139.729 KB written to files
+	  0.000  B written to stdout/stderr
+	For a total of   0.0137 MB/s
+
+Please cite at least the following publication for any work that uses the oxDNA simulation package
+  * E. Poppleton et al., J. Open Source Softw. 8, 4693 (2023), DOI: 10.21105/joss.04693
