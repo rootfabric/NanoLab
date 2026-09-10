@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-09T13:18:51Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0330d15b8af4858596664ed25a9317843c8389df",
+  "summary": "Substantive scope INFRA1-002 реализован на exact substantive HEAD 0330d15b8af4858596664ed25a9317843c8389df (tree c4a0e8283418f2f2fa94fe81891d08de263db7d6); событие публикуется bookkeeping-коммитом поверх (прецедент INFRA1-001, VERIFIER FINDING-5). (1) Corrections-aware work_cli (blocking-критерий (b) приёмки): явный класс CORRECTIONS_EVENTS = {CONTINUATION_CHECKPOINT, REVIEW_CORRECTIONS}; новый marker-тип REVIEW_CORRECTIONS (формализация «corrections — новым event»); события после terminal/handoff валидны только из класса, вне класса — hard error (маркер пропустить нельзя); REVIEW_CORRECTIONS до handoff — error; семантическая валидность corrections: валидный git subject_sha, парсимый ISO-8601 timestamp, неубывающие timestamps внутри corrections-хвоста; terminal-last для обычного потока сохранён (событие после handoff без класса — FAIL). subject_sha валидатора: 40-hex canonical, 7..39-hex abbreviated — осознанный legacy-compat для immutable событий EX-NL1-002-R1 0002–0005 (schema-sync — control WO, прецедент NOTE-1). Результат: EX-INFRA0-001-R1, EX-NL1-001-R1 (terminal-last), EX-NL1-002-R1 (5 residual ошибок) — все OK; вывод дополнен полем has_post_terminal_corrections. (2) Механический NC-линт (blocking-критерий (a)): scripts/harness/workflow_lint.py + эталон config/infra/validation-gates.v1.json; правила NC1_SELF_HOSTED_LABEL/DYNAMIC_RUNS_ON/RUNS_ON_MISSING (NC-1, blocking criterion «untrusted PR route не может выбрать self-hosted label»), NC2_FORBIDDEN_TRIGGER (pull_request_target/workflow_run) + reserved-триггеры + external reusable (NC-2), NC4 permissions (NC-4), BUDGET_TIMEOUT (NC-6 минимум), NC7_SECRETS_REFERENCE (NC-7), PIN_ACTION_FULL_SHA (§9), NOTE3_PR_TYPES_READY_FOR_REVIEW; собственный stdlib YAML-subset парсер, fail-closed (WORKFLOW_UNPARSEABLE — блокирующее нарушение). (3) hosted-ci.yml: types += ready_for_review (NOTE-3 закрыт); чеки 3→5: Check 3 scope расширен до всех EX-* ( Corrections-aware валидатор убрал причину diff-scope), новые блокирующие Check 4/5 workflow-NC-линт и Check 5/5 unittest; TR-PR/TR-PUSH-MAIN поверхность, H0-only runs-on, permissions contents:read, pinned actions — без изменений; hosted-ci.v1.json (ACCEPTED R1) не редактировался, дельты — в validation-gates.v1.json amends_hosted_ci_r1. (4) docs/infra/VALIDATION_GATES_R1.md (PROPOSED). project/infra-state.json, project/state.json, science-файлы, существующие execution-каталоги — не изменены.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\infra-1-002 add scripts/harness/work_cli.py tests/__init__.py tests/test_work_cli_corrections.py; commit 636ca82 'feat(harness): accept post-terminal review-corrections events in work validator'",
+    "git -C C:\\NanoLab\\infra-1-002 commit 14c4c9c 'feat(infra): add mechanical workflow negative-control lint NC-1..NC-7' (workflow_lint.py + validation-gates.v1.json + tests)",
+    "git -C C:\\NanoLab\\infra-1-002 commit 0330d15 'ci(infra1): integrate validation gates into hosted-ci (ready_for_review, NC lint, gate tests)'",
+    "git show -s --format='commit=%H tree=%T' 0330d15b8af4858596664ed25a9317843c8389df"
+  ],
+  "evidence_refs": [
+    "scripts/harness/work_cli.py",
+    "scripts/harness/workflow_lint.py",
+    "config/infra/validation-gates.v1.json",
+    ".github/workflows/hosted-ci.yml",
+    "docs/infra/VALIDATION_GATES_R1.md",
+    "tests/test_work_cli_corrections.py",
+    "tests/test_infra_workflow_lint.py"
+  ],
+  "next_action": "IMPLEMENTER: локальная верификация всех пяти чеков hosted-ci (event 0003), затем handoff (event 0004 + summary).",
+  "blocker": null
+}

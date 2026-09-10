@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-repair-completed",
+  "timestamp_utc": "2026-09-09T13:55:08Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "74e17c734d600b74e9d25209ab8f609c3ca40244",
+  "summary": "Ремонт INFRA1-002 по вердикту REVIEWER FIX_REQUIRED (docs/infra/evidence/INFRA1-002/REVIEWER_VERDICT.md @ 1ca40b6; вердикт влит merge-коммитом a6aba22). Repair Map: docs/infra/evidence/INFRA1-002/REPAIR_MAP_R1.md (путь задан директивой ремонта; вне исходных allowed_paths паспорта — авторизовано миссией/вердиктом §4.5, история событий не переписывалась). Точечные фиксы без пересмотра архитектуры. MAJOR-1 (обход NC-2 через non-dict on:): правила триггеров в scripts/harness/workflow_lint.py переписаны — on: отсутствует/null → NC2_TRIGGERS_BLOCK_MISSING; on: не-mapping (scalar 'on: push', flow 'on: [push, pull_request_target]') → NC2_TRIGGERS_UNSUPPORTED_FORM, fail closed. MAJOR-2 (обход NC-1 через anchors/aliases '&cpu'/'*cpu'): rejection на уровне парсера — plain scalar с префиксом &/* и key &anchor/*alias/merge '<<' → WorkflowParseError → WORKFLOW_UNPARSEABLE; покрывает все поля; '&'/ '*' внутри quoted scalars и run:| block scalars (shell &&, globs) не трогаются. MINOR-1: SECRETS_REFERENCE ловит dot- и bracket-формы (secrets['X']/secrets[\"X\"]); env-индирекция — задокументированное принятое ограничение. MINOR-2 (work_cli): subject_sha строго 40-hex для всех событий; abbreviated 7–39 hex только для exact-пары (execution_id, event_id) из LEGACY_ABBREVIATED_SHA_EVENTS — 4 события EX-NL1-002-R1 (все 9cc83e8); harvest — полный скан EX-*/events/*.json canonical a4533ab (2026-09-09), других сокращённых SHA нет; переиспользование легаси-значения/пары в другом исполнении — FAIL. MINOR-3: (a) corrections timestamp >= terminal event timestamp для новых corrections-событий, LEGACY_TIMESTAMP_EXEMPT_CORRECTIONS — 4 пре-существующих пост-терминальных события (фактически требование нарушало только EX-NL1-002-R1/0005 11:16:30Z < 11:30:00Z; EX-INFRA0-001-R1/0005 и EX-NL1-001-R1/0005 уже соответствовали); (b) REVIEW_CORRECTIONS authored только REVIEWER/VERIFIER/DIRECTOR, от IMPLEMENTER — hard error (легаси-событий типа REVIEW_CORRECTIONS нет). Дополнительно (рекомендации вердикта, вне обязательной директивы): NOTE-1 — правило ready_for_review применяется только при наличии pull_request-триггера (push-only не задевается, bare pull_request: по-прежнему FAIL); NOTE-3-парсер — multi-document файлы явно отклоняются вместо молчаливого слияния. Конфиг validation-gates.v1.json дополнен (новые правила, whitelist'ы с provenance, accepted limitation), док VALIDATION_GATES_R1.md обновлён (§2.1/§2.2/§3/§5/§7/§8) — только фиксация находок, история не переписывалась, ревизия и статус PROPOSED не менялись. Коммиты ремонта: 865ddbd (lint MAJOR-1/2 + MINOR-1 + NOTE-1 + multi-doc + тесты), bda74c9 (work_cli MINOR-2/3 + тесты), bd26483 (док+конфиг), 74e17c7 (repair map). Настоящее событие и 0006 — пост-терминальные corrections-события собственного класса (CONTINUATION_CHECKPOINT, ts >= terminal 0004 13:21:10Z, полный 40-hex subject_sha) — догфудинг repaired-валидатора.",
+  "command_refs": [
+    "git merge --no-ff origin/review/infra1-validation-gates-r1 -> a6aba22 (вердикт FIX_REQUIRED влит в ветку ремонта)",
+    "git commit 865ddbd 'fix(infra): fail closed on non-mapping on:, anchors/aliases and multi-doc in workflow lint'",
+    "git commit bda74c9 'fix(harness): restrict subject_sha tolerance to legacy events and tighten corrections semantics'",
+    "git commit bd26483 'docs(infra): update validation gates doc and config per reviewer findings'; git commit 74e17c7 'docs(infra): add INFRA1-002 repair map R1'",
+    "git show -s --format='commit=%H tree=%T' 74e17c734d600b74e9d25209ab8f609c3ca40244 -> tree c85a92772af750448a8cd50af1a40da475aae962"
+  ],
+  "evidence_refs": [
+    "docs/infra/evidence/INFRA1-002/REVIEWER_VERDICT.md",
+    "docs/infra/evidence/INFRA1-002/REVIEW_LOG_R1.md",
+    "docs/infra/evidence/INFRA1-002/REPAIR_MAP_R1.md",
+    "scripts/harness/workflow_lint.py",
+    "scripts/harness/work_cli.py",
+    "config/infra/validation-gates.v1.json",
+    "docs/infra/VALIDATION_GATES_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: повторная негативная матрица REVIEW_LOG §2–§3 + все 5 чеков (event 0006), push, независимый re-review.",
+  "blocker": null
+}

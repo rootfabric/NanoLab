@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "infra_validation_gates_config",
+  "revision": "VALIDATION-GATES-R1",
+  "canonical_owner": "main",
+  "status": "PROPOSED",
+  "work_order": "INFRA1-002",
+  "execution": "EX-INFRA1-002-R1",
+  "base_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "doc": "docs/infra/VALIDATION_GATES_R1.md",
+  "authority": "docs/infra/EXECUTION_BASELINE_R1.md",
+  "precedence": "canonical_main_hard_rules > execution_baseline_doc > hosted_ci_config_r1 > this_config",
+  "amends_hosted_ci_r1": [
+    {"target": "config/infra/hosted-ci.v1.json", "field": "workflows[0].triggers.pull_request.types", "change": "adds ready_for_review (NOTE-3, DIRECTOR_ACCEPTANCE_R1 INFRA1-001)"},
+    {"target": "config/infra/hosted-ci.v1.json", "field": "checks", "change": "adds workflow-nc-lint (blocking) and gate-unit-tests; work-events-integrity scope widens from changed_execution_dirs_only to all execution dirs (corrections-aware validator removes the false-red)"}
+  ],
+  "workflow_lint": {
+    "tool": "scripts/harness/workflow_lint.py",
+    "scope": [".github/workflows/*.yml", ".github/workflows/*.yaml"],
+    "blocking_by_default": true,
+    "forbidden_runner_labels": ["self-hosted", "nanolab-cpu", "nanolab-gpu"],
+    "forbidden_runner_label_prefixes": ["nanolab-hpc-"],
+    "dynamic_runs_on_expression_allowed": false,
+    "runs_on_required": true,
+    "yaml_anchors_aliases_merge_keys": "fail_closed_violation",
+    "multi_document_files": "fail_closed_violation",
+    "triggers_declaration_required": true,
+    "triggers_form": "mapping_only_non_mapping_fails_closed",
+    "forbidden_triggers": ["pull_request_target", "workflow_run"],
+    "triggers_forbidden_until_baseline_revision": ["schedule", "workflow_dispatch", "release"],
+    "reusable_workflow_calls": "local_path_only",
+    "permissions_block_required": true,
+    "allowed_permission_levels": ["read", "none"],
+    "forbidden_permission_levels": ["write"],
+    "secrets_references_allowed": false,
+    "secrets_reference_forms": ["dot_secrets.X", "bracket_secrets_bracket_X"],
+    "documented_non_lintable": ["secret indirection through env: (accepted limitation, REVIEWER MINOR-1)"],
+    "pull_request_types_required": ["ready_for_review"],
+    "pull_request_types_rule_scope": "only_when_pull_request_trigger_declared",
+    "job_timeout_minutes": {"required": true, "min": 1, "max": 60},
+    "external_actions_pin": "full_commit_sha_required",
+    "unparseable_workflow": "fail_closed_violation"
+  },
+  "work_cli_corrections_policy": {
+    "tool": "scripts/harness/work_cli.py",
+    "corrections_event_types": ["CONTINUATION_CHECKPOINT", "REVIEW_CORRECTIONS"],
+    "post_terminal_rule": "events_after_terminal_must_belong_to_corrections_class_unmarked_post_terminal_events_fail",
+    "review_corrections_placement": "post_terminal_only",
+    "review_corrections_actor_roles": ["REVIEWER", "VERIFIER", "DIRECTOR"],
+    "corrections_semantic_requirements": ["valid_git_subject_sha", "parseable_iso8601_timestamp", "corrections_timestamp_not_before_terminal_timestamp", "non_decreasing_timestamps_within_corrections_tail", "unique_lexically_ordered_event_ids", "execution_and_work_order_match_passport"],
+    "subject_sha_pattern": "^[0-9a-f]{40}$",
+    "subject_sha_note": "repair R1 (MINOR-2): strict 40-hex for all events; abbreviated 7-39 hex accepted ONLY for the exact whitelisted legacy events below (immutable, already published on canonical main)",
+    "legacy_abbreviated_sha_events": [
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0002-campaign-runs-completed", "subject_sha": "9cc83e8"},
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0003-validation-recorded", "subject_sha": "9cc83e8"},
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0004-handoff-completed", "subject_sha": "9cc83e8"},
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0005-resource-evidence-committed", "subject_sha": "9cc83e8"}
+    ],
+    "legacy_timestamp_exempt_post_terminal_corrections": [
+      {"execution_id": "EX-INFRA0-001-R1", "event_id": "0005-review-corrections"},
+      {"execution_id": "EX-NL1-001-R1", "event_id": "0005-review-corrections"},
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0005-resource-evidence-committed"},
+      {"execution_id": "EX-NL1-002-R1", "event_id": "0006-repair-completed"}
+    ],
+    "legacy_harvest_provenance": "scanned docs/work/executions/EX-*/events/*.json on canonical main a4533abc65f764b561b6671a8422c9a3844d8926, 2026-09-09",
+    "normal_flow_rule": "terminal_last_unchanged_for_executions_without_post_terminal_corrections",
+    "legacy_targets": ["EX-INFRA0-001-R1", "EX-NL1-001-R1", "EX-NL1-002-R1"]
+  },
+  "hosted_ci_checks": [
+    {"id": "json-syntax", "purpose": "machine contracts and evidence JSON are parseable", "tool": "python3 -m json.tool", "environment": "stdlib_only", "network": false},
+    {"id": "harness-check-consistency", "purpose": "plan/state/goals/catalog/scheduler cross-consistency", "tool": "scripts/harness/cli.py check-consistency", "environment": "stdlib_only", "network": false},
+    {"id": "work-events-integrity", "purpose": "execution passport and work event integrity for all executions", "tool": "scripts/harness/work_cli.py validate", "scope": "all_execution_dirs", "environment": "stdlib_only", "network": false},
+    {"id": "workflow-nc-lint", "purpose": "mechanical negative controls NC-1..NC-7 over all workflows", "tool": "scripts/harness/workflow_lint.py", "blocking": true, "negative_control": "NC-1 blocking criterion of INFRA1-002 acceptance", "environment": "stdlib_only", "network": false},
+    {"id": "gate-unit-tests", "purpose": "unittest coverage of the validation gates themselves", "tool": "python3 -m unittest discover -s tests -t .", "environment": "stdlib_only", "network": false}
+  ],
+  "negative_controls": {
+    "NC-1": {"invariant": "no workflow in TR-PR/TR-PUSH-MAIN routes carries self-hosted labels in runs-on", "rule_ids": ["NC1_SELF_HOSTED_LABEL", "NC1_DYNAMIC_RUNS_ON", "NC1_RUNS_ON_MISSING", "WORKFLOW_UNPARSEABLE"], "blocking": true, "mechanical_test": "tests/test_infra_workflow_lint.py (negative fixture: runs-on nanolab-cpu must fail)"},
+    "NC-2": {"invariant": "no pull_request_target/workflow_run bridges; no external reusable workflow calls; trigger surface must be an explicit lintable mapping", "rule_ids": ["NC2_FORBIDDEN_TRIGGER", "NC2_TRIGGER_NEEDS_BASELINE_REVISION", "NC2_EXTERNAL_REUSABLE_WORKFLOW", "NC2_TRIGGERS_UNSUPPORTED_FORM", "NC2_TRIGGERS_BLOCK_MISSING"], "blocking": true},
+    "NC-3": {"invariant": "TR-DISPATCH without subject_sha/work_order_id/budget is rejected", "mechanical": "not_lintable_here", "owner": "INFRA2-002 dispatch validator"},
+    "NC-4": {"invariant": "PR route token cannot write contents/events/releases", "rule_ids": ["NC4_PERMISSIONS_BLOCK_MISSING", "NC4_WRITE_PERMISSION"], "blocking": true},
+    "NC-5": {"invariant": "hosted unavailability never falls back to self-hosted", "mechanical": "review_item_at_INFRA1_INFRA2", "lint_note": "no fallback executor declarations exist in R1; any future fallback mechanism must be reviewed, lint follows"},
+    "NC-6": {"invariant": "rerun inherits budget; unbounded jobs forbidden", "rule_ids": ["BUDGET_TIMEOUT_REQUIRED", "BUDGET_TIMEOUT_BOUNDS"], "mechanical": "partial_here_full_policy_INFRA6", "blocking": true},
+    "NC-7": {"invariant": "fork PR has no secrets; pull_request_target bypass forbidden", "rule_ids": ["NC7_SECRETS_REFERENCE", "NC2_FORBIDDEN_TRIGGER"], "blocking": true}
+  },
+  "non_goals": [
+    "no_self_hosted_runners_or_labels_activated",
+    "no_repository_secrets_or_credentials",
+    "no_branch_protection_changes_from_git_repo_settings_remain_owner_actions",
+    "no_scheduler_or_quota_engine_INFRA6",
+    "no_dispatch_validator_INFRA2-002",
+    "no_control_schema_edits_work_event_and_passport_schema_sync_is_a_control_work_order",
+    "no_scientific_campaigns_E0_to_E6_remain_NOT_RUN",
+    "implementer_does_not_modify_project_infra_state_json_or_project_state_json"
+  ],
+  "next_work_orders": {
+    "INFRA2-001": "Bootstrap isolated self-hosted CPU runner (label namespace protected by NC-1 lint)",
+    "INFRA2-002": "Harden trusted scientific dispatch (NC-3 validator)"
+  }
+}

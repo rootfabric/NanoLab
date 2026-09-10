@@ -3,12 +3,12 @@
   "kind": "parallel_capability_state",
   "track": "INFRA",
   "revision": "infra-roadmap-r1",
-  "frontier": "INFRA1",
-  "next_work_order": "INFRA1-002",
+  "frontier": "INFRA2",
+  "next_work_order": "INFRA2-001",
   "checkpoint_status": {
     "INFRA0":"ACCEPTED",
-    "INFRA1":"IN_PROGRESS",
-    "INFRA2":"PLANNED",
+    "INFRA1":"ACCEPTED",
+    "INFRA2":"IN_PROGRESS",
     "INFRA3":"PLANNED",
     "INFRA4":"PLANNED",
     "INFRA5":"PLANNED",
@@ -18,8 +18,8 @@
   "task_status": {
     "INFRA0-001":"ACCEPTED",
     "INFRA1-001":"ACCEPTED",
-    "INFRA1-002":"READY",
-    "INFRA2-001":"PLANNED",
+    "INFRA1-002":"ACCEPTED",
+    "INFRA2-001":"READY",
     "INFRA2-002":"PLANNED",
     "INFRA3-001":"PLANNED",
     "INFRA3-002":"PLANNED",
@@ -32,7 +32,7 @@
     "INFRA7-001":"PLANNED"
   },
   "capabilities": {
-    "hosted_ci": false,
+    "hosted_ci": true,
     "self_hosted_cpu": false,
     "reproducible_scientific_executor": false,
     "artifact_store": false,

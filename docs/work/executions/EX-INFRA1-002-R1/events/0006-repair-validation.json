@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-repair-validation",
+  "timestamp_utc": "2026-09-09T13:58:30Z",
+  "execution_id": "EX-INFRA1-002-R1",
+  "work_order_id": "INFRA1-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "74e17c734d600b74e9d25209ab8f609c3ca40244",
+  "summary": "Повторная негативная матрица REVIEWER'а (REVIEW_LOG_R1.md §2–§3, те же probe-формы; fixtures во временном каталоге вне репозитория — метод reviewer'а) и все 5 чеков на ремонтном HEAD 74e17c734d600b74e9d25209ab8f609c3ca40244: МАТРИЦА 18/18 ожидаемых исходов. Бывшие обходы закрыты: probe-alias-valid (runs-on &cpu/*cpu) был exit 0 → exit 1 WORKFLOW_UNPARSEABLE (MAJOR-2); probe-on-list (on: [push, pull_request_target]) и probe-on-scalar (on: push) были exit 0 → exit 1 NC2_TRIGGERS_UNSUPPORTED_FORM (MAJOR-1); probe-secrets-bracket2 (secrets['DEPLOY_TOKEN']) был exit 0 → exit 1 NC7_SECRETS_REFERENCE (MINOR-1); probe-multidoc — exit 1 по explicit multi-doc rejection вместо слияния документов. Регрессии негативов нет: nanolab-cpu/self-hosted → exit 1 NC1_SELF_HOSTED_LABEL; probe-tabs → exit 1. Позитив: реальный hosted-ci.yml → exit 0, 0 violations. Валидатор: 10/10 EX-* OK (легаси-whitelist работают, blocking-критерий (b) сохранён); базовый валидатор 15a2c9b на EX-NL1-002-R1 — exit 3, ровно 5 residual ошибок (воспроизведено); пробы MINOR-2/MINOR-3, бывшие OK — теперь exit 3: новое событие с 7-hex abc1234 (invalid subject_sha), REVIEW_CORRECTIONS ts 2020 < handoff (>= terminal), REVIEW_CORRECTIONS от IMPLEMENTER (роль); негативы unmarked post-terminal / второй terminal / REVIEW_CORRECTIONS до handoff — FAIL без регрессии. Пять чеков: JSON 111/111 OK; check-consistency ok=true; work_cli validate 10/10 EX-* OK (включая собственный EX-INFRA1-002-R1 с пост-терминальными ремонтными событиями 0005/0006 — догфудинг repaired-валидатора: corrections-класс, ts >= terminal, полные 40-hex SHA); workflow_lint 0 violations; unittest 59/59 OK (34 → 59: +25 тестов на новые правила, включая обязательные негативы MAJOR-1/MAJOR-2/MINOR-1/MINOR-2/MINOR-3). Технический outcome ремонта: PASS всех проб матрицы и чеков; научного утверждения не содержит. Готово к независимому re-review (REVIEWER: те же пробы REVIEW_LOG §2–§3 + unittest; затем VERIFIER/Director; не merge'ить до повторного PASS).",
+  "command_refs": [
+    "python probe_matrix.py (временный каталог; fixtures probe-* вне репозитория) -> total=18 mismatch=0",
+    "python -m harness.workflow_lint --root . -> ok=true violations=0",
+    "python -m harness.work_cli validate docs/work/executions/EX-* -> 10/10 OK",
+    "python -m unittest discover -s tests -t . -> Ran 59 tests, OK",
+    "python -m harness.cli check-consistency --root . -> ok=true; json.tool по 111 tracked *.json -> 0 bad"
+  ],
+  "evidence_refs": [
+    "docs/infra/evidence/INFRA1-002/REPAIR_MAP_R1.md",
+    "docs/infra/evidence/INFRA1-002/REVIEW_LOG_R1.md",
+    "tests/test_infra_workflow_lint.py",
+    "tests/test_work_cli_corrections.py",
+    "docs/infra/VALIDATION_GATES_R1.md (§7)"
+  ],
+  "next_action": "REVIEWER: повторная независимая проверка ремонтного HEAD 74e17c734d600b74e9d25209ab8f609c3ca40244 (матрица §2–§3 + unittest 59); затем VERIFIER -> Director checkpoint INFRA1-002; merge PR — Human Gate.",
+  "blocker": null
+}
