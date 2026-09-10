@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "revision": "NL-H0-2026-09-08-R1",
+  "revision": "NL-H0-2026-09-09-R1",
   "canonical_source": "project/state.json",
   "current_checkpoint": "NL2",
-  "next_work_order": "NL2-001",
+  "next_work_order": "NL2-002",
   "parallel_scientific_runtime_limit": 1,
-  "notes": "NL1 ACCEPTED in full: NL1-001 (environment pin ENGINE_ENVIRONMENT_R1 + upstream smoke) and NL1-002 (first vertical E1 path: T1 E1-R1-S001 verbatim + 3 PILOT, all COMPLETED, T1 band-fact IN_BAND vs upstream oracle; R_confirm=3 frozen in E1-PROTO-R2; canonical fresh Reviewer R2 PASS 23c6c15 and Verifier R2 FIX_REQUIRED->RECHECK PASS 86aeab1 on repaired surfaces). NL1-002 acceptance supersedes the annulled role-mixing r1 checkpoint (PR #23). Campaign-level E1 scientific outcome NOT_EVALUATED; E1 acceptance = NL2-002. NL2-001 (schemes, manifest, E0) is scheduler priority. Increase parallel scientific campaigns only after explicit checkpoint/policy change."
+  "notes": "NL2-001 ACCEPTED (Director WO-level, docs/evidence/NL2-001/DIRECTOR_ACCEPTANCE_R1.md): contract evidence format (NL1-002 R2 lessons), E0 preregistration E0-PROTO-R1..R4, campaign E0-R4 executed 18/18 COMPLETED = 17 SUPPORTED + S003 NOT_SUPPORTED (preregistered gap probe preserved); independent Reviewer FIX_REQUIRED->RE-REVIEW PASS (2c3b485 -> a140b8e) and Verifier PASS (b395d10: 6/6 control runs, 225/225 digest-vs-blob, S003 + digest-vs-blob gaps reproduced as NL2-003 candidates). E0 = RUN (execution fact; campaign-level scientific_outcome NOT_EVALUATED; engine-coupled cases open until runtime NL2-003). Claim ceiling C0_SOFTWARE_ONLY. NL2-002 (statistics + E1 acceptance: T2 confirm, 3 replicas per frozen R_confirm=3 from E1-PROTO-R2, distinct seeds) is scheduler priority. NL2-003 queue: provenance/recovery + validator hardening (S003, digest-vs-blob, emit_run ordering, O1-O3). Increase parallel scientific campaigns only after explicit checkpoint/policy change."
 }
