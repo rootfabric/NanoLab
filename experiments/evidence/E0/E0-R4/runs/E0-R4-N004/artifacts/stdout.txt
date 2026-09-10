@@ -1,0 +1,21 @@
+{
+  "schema": "nanolab.control_experiment_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "0001-started.json: filename must equal event_id + .json"
+  ],
+  "warnings": [],
+  "manifest_sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+  "run_id": "E0-R1-FIXTURE-000",
+  "status": "STARTED",
+  "events": [
+    {
+      "id": "0002-started",
+      "type": "RUN_STARTED"
+    }
+  ],
+  "has_terminal_execution": false,
+  "has_analysis": false,
+  "has_review": false
+}

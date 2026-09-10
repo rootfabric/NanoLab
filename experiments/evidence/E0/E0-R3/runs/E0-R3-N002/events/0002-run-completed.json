@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-completed",
+  "timestamp_utc": "2026-09-09T13:41:02Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-N002",
+  "event_type": "RUN_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Control case E0-R3-N002 (family NEG) executed mechanically by tools/e0_runner.py against frozen subject 6c366e0df4822d39572362356bc65279f5a762d1. Fixture bytes materialized from git blobs and digest-verified; validator/tool invoked as subprocess; observed exit code 1. The control itself executed to completion; expected-vs-observed comparison is in the analysis event.",
+  "command": "C:\\Python311\\python.exe -m harness.work_cli validate C:\\NanoLab\\scratch\\nl2-001\\E0-R3-N002\\negative\\n002_truncated_json\\execution",
+  "exit_code": 1,
+  "artifact_refs": [
+    "artifacts/case_record.json",
+    "artifacts/stdout.txt",
+    "artifacts/stderr.txt"
+  ],
+  "resource_usage": {
+    "duration_seconds": 0.065,
+    "cpu_class": "sub-second local CPU"
+  },
+  "scientific_outcome": null
+}

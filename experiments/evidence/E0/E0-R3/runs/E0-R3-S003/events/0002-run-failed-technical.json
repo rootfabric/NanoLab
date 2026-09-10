@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-failed-technical",
+  "timestamp_utc": "2026-09-09T13:45:37Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-S003",
+  "event_type": "RUN_FAILED_TECHNICAL",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Control case E0-R3-S003 (family STATUS) executed mechanically by tools/e0_runner.py against frozen subject 6c366e0df4822d39572362356bc65279f5a762d1. Fixture bytes materialized from git blobs and digest-verified; validator/tool invoked as subprocess; observed exit code None. Technical failure: KeyError: 'exit_code'",
+  "command": "python -m harness.experiment_cli validate <fixture run dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json",
+    "artifacts/stdout.txt",
+    "artifacts/stderr.txt"
+  ],
+  "resource_usage": {
+    "duration_seconds": null,
+    "cpu_class": "sub-second local CPU"
+  },
+  "scientific_outcome": null
+}

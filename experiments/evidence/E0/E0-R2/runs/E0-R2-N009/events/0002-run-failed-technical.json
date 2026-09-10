@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-run-failed-technical",
+  "timestamp_utc": "2026-09-09T13:36:41Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R2-N009",
+  "event_type": "RUN_FAILED_TECHNICAL",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3a2d72bcd613289321608fb42b6b668d8224b5f0",
+  "summary": "Control case E0-R2-N009 (family NEG) executed mechanically by tools/e0_runner.py against frozen subject 3a2d72bcd613289321608fb42b6b668d8224b5f0. Fixture bytes materialized from git blobs and digest-verified; validator/tool invoked as subprocess; observed exit code None. Technical failure: CalledProcessError: Command '['git', '-C', 'C:\\\\NanoLab\\\\nl2-001', 'cat-file', 'blob', '3a2d72bcd613289321608fb42b6b668d8224b5f0:fixtures/negative/n009_exit_code_contract/execution/passport.json']' returned non-zero exit status 128.",
+  "command": "python -m harness.work_cli validate <fixture execution dir>",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json",
+    "artifacts/stdout.txt",
+    "artifacts/stderr.txt"
+  ],
+  "resource_usage": {
+    "duration_seconds": null,
+    "cpu_class": "sub-second local CPU"
+  },
+  "scientific_outcome": null
+}

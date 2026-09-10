@@ -1,0 +1,17 @@
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": false,
+  "errors": [
+    "passport base_sha must be 40 lowercase hex characters",
+    "no work events",
+    "exactly one WORK_ORDER_STARTED event is required"
+  ],
+  "execution_id": "EX-FIXTURE-000",
+  "work_order_id": "WO-FIXTURE-000",
+  "status": "STARTED",
+  "passport_sha256": "d8758c9170bc62dd69ad20056a37ee37a6f98eb0828b6870e2817a60568928ad",
+  "event_types": [],
+  "has_terminal_handoff": false,
+  "has_summary": false
+}

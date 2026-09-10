@@ -1,0 +1,18 @@
+{
+  "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-G001\\geometry\\g001_right_angle.json",
+  "synthetic": true,
+  "results": [
+    {
+      "query_id": "q1_distance_AC",
+      "type": "distance",
+      "value": 1.4142135623730951,
+      "verdict": "DEFINED"
+    },
+    {
+      "query_id": "q2_angle_at_B",
+      "type": "angle_deg",
+      "value": 90.0,
+      "verdict": "DEFINED"
+    }
+  ]
+}

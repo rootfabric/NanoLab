@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-09T17:55:00Z",
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "24352f9dcc54e77472bdb8db827d2dc1fd0e1a1e",
+  "summary": "HANDOFF NL2-001 (implementer -> независимый REVIEWER). Реализовано: (1) недостающий контракт E0 - пререгистрация E0-PROTO-R1 (18 случаев, критерии до прогонов) с superseding-линией R2/R3/R4 (только идентичность кампаний; ожидания неизменны); (2) контрактный формат evidence по ремонту NL1-002 R2 (манифесты-массивы producer_run_id/subject_sha, полные машинные поля, события с experiment_id и полным 40-hex subject_sha, терминал последним); (3) E0 исполнен: кампания E0-R4 (subject ce477aad1e4a125c9e881fd9f6a741ec6d2fa876) - 18/18 COMPLETED: 17 SUPPORTED + S003 NOT_SUPPORTED (ЗАДОКУМЕНТИРОВАННЫЙ GAP: валидатор не разделяет механически технический и научный статусы - scientific_outcome=SUPPORTED на техническом RUN_COMPLETED принимается тихо; сохранён как результат, кандидат на validator hardening в NL2-003). Единицы: pinned факт T=20C -> 0.097717 принимается, 4 подделки отвергаются, конверсия найдена в pinned-исходниках (Utils.cpp:333, негейтящий tier-2). Геометрия: аналитические значения точны до 1e-12, нулевое плечо -> ANGLE_UNDEFINED, ориентация предсказуема. Три предыдущие попытки (R1/R2 - техотказы, R3 - erratum) сохранены полностью с причинами; run ID не переиспользовались. Не сделано (вне scope): engine-coupled случаи E0 (топология/trajectory oxDNA - ждут runtime, NL2-003); ACCEPTED/E-статусы не выставлялись; state.json/plan.json/config/scripts не менялись; E1 не запускался. Открытые решения для review: (а) подтвердить трактовку S003 как gap и маршрут hardening (NL2-003 vs отдельный WO); (б) подтвердить достаточность фиксации четырёх попыток. Evidence: experiments/evidence/E0/E0-R4/** (+ R1-R3), docs/evidence/NL2-001/IMPLEMENTER_EVIDENCE.md, docs/work/executions/EX-NL2-001-R1/summary.md.",
+  "command_refs": [
+    "python -m harness.work_cli validate docs/work/executions/EX-NL2-001-R1 -> ok=true (pre-terminal; validate+close терминального коммита - в summary.md)",
+    "python -m harness.cli check-consistency --root . -> ok=true exit 0"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL2-001-R1/summary.md",
+    "docs/evidence/NL2-001/IMPLEMENTER_EVIDENCE.md",
+    "experiments/evidence/E0/E0-R4/evidence-map.json",
+    "docs/work/WO-NL2-001.md"
+  ],
+  "next_action": "Независимый REVIEWER: fresh-сессия проверяет evidence-пакет NL2-001 на exact HEAD (см. summary.md) -> docs/evidence/NL2-001/REVIEWER_VERDICT.md; merge в main - Human Gate.",
+  "blocker": null
+}

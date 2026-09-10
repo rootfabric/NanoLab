@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\NanoLab\nl2-001\scripts\harness\work_cli.py", line 122, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\NanoLab\nl2-001\scripts\harness\work_cli.py", line 107, in main
+    result = inspect_execution(Path(args.execution_dir).resolve())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\NanoLab\nl2-001\scripts\harness\work_cli.py", line 40, in inspect_execution
+    passport = load(passport_path)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\NanoLab\nl2-001\scripts\harness\work_cli.py", line 18, in load
+    value = json.load(handle)
+            ^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 74 (char 73)

@@ -1,0 +1,34 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R4-N004",
+  "family": "NEG",
+  "campaign_id": "E0-R4",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "exit_code": 3,
+    "stdout_must_contain": [
+      "\"ok\": false"
+    ],
+    "ok_field_false": true
+  },
+  "observed": {
+    "exit_code": 3,
+    "stdout_excerpt": "{\n  \"schema\": \"nanolab.control_experiment_output.v1\",\n  \"command\": \"VALIDATE\",\n  \"ok\": false,\n  \"errors\": [\n    \"0001-started.json: filename must equal event_id + .json\"\n  ],\n  \"warnings\": [],\n  \"manifest_sha256\": \"b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517\",\n  \"run_id\": \"E0-R1-FIXTURE-000\",\n  \"status\": \"STARTED\",\n  \"events\": [\n    {\n      \"id\": \"0002-started\",\n      \"type\": \"RUN_STARTED\"\n    }\n  ],\n  \"has_terminal_execution\": false,\n  \"has_analysis\": false,\n  \"has_review\": false\n}\n",
+    "stderr_excerpt": "",
+    "checks": {
+      "exit_code_pinned_3": true,
+      "stdout_contains:\"ok\": false": true,
+      "ok_field_false": true
+    }
+  },
+  "scientific_outcome": "SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:53:02Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

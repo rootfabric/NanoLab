@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-handoff-completed",
+  "timestamp_utc": "2026-09-09T00:00:00Z",
+  "execution_id": "EX-FIXTURE-000",
+  "work_order_id": "WO-FIXTURE-000",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0",
+  "summary": "SYNTHETIC fixture event for E0-R1 negative control; not a real execution record."
+}

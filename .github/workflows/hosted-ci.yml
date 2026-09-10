@@ -79,11 +79,32 @@ jobs:
           fi
           mkdir -p ci-debug
           : > ci-debug/check-json-syntax.txt
+          # Deliberately corrupt negative-control fixtures (E0 NEG family, NL2-001;
+          # see docs/evidence/NL2-001/DIRECTOR_ACCEPTANCE_R1.md) must remain
+          # unparseable: the validators under test are required to fail closed on
+          # them. The exception is pinned by exact path AND sha256 — any content
+          # drift fails this check and requires a reviewed evidence erratum.
+          # Every other tracked *.json must still parse (json.tool).
+          declare -A neg_fixtures=(
+            ["experiments/evidence/E0/E0-R1/fixtures/negative/n001_empty_passport/execution/passport.json"]="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            ["experiments/evidence/E0/E0-R1/fixtures/negative/n002_truncated_json/execution/passport.json"]="1de18ae447d83f621e98f64ef928858e9c0b1456144f10b4870bfcea8a3c4a85"
+          )
+          neg_pinned=0
           for f in "${files[@]}"; do
-            python3 -m json.tool "$f" > /dev/null
-            echo "OK  $f" | tee -a ci-debug/check-json-syntax.txt
+            if [[ -n "${neg_fixtures[$f]+x}" ]]; then
+              actual="$(sha256sum "$f" | cut -d' ' -f1)"
+              if [ "$actual" != "${neg_fixtures[$f]}" ]; then
+                echo "FAIL  $f (negative-control fixture drifted from pinned sha256; reviewed erratum required)" | tee -a ci-debug/check-json-syntax.txt
+                exit 1
+              fi
+              neg_pinned=$((neg_pinned + 1))
+              echo "NEG-OK (pinned unparseable fixture, sha256 match)  $f" | tee -a ci-debug/check-json-syntax.txt
+            else
+              python3 -m json.tool "$f" > /dev/null
+              echo "OK  $f" | tee -a ci-debug/check-json-syntax.txt
+            fi
           done
-          echo "json syntax: ${#files[@]} files OK"
+          echo "json syntax: ${#files[@]} files OK (${neg_pinned} pinned negative-control fixtures digest-checked)"
 
       - name: Check 2/5 — harness control consistency (plan/state/goals/catalog/scheduler)
         run: |

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-erratum-f1-manifest-digests",
+  "timestamp_utc": "2026-09-09T14:32:01Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R4",
+  "run_id": "E0-R4",
+  "event_type": "RUN_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "summary": "Campaign-level erratum (REVIEWER F1, review/nl2-001-contracts-e0-r1 @ 2c3b485): emit_run serializoval artifacts.manifest.json DO finalnoj perezapisi case_record.json (dobavlenie schema_validation[artifacts.manifest.json], +35 bajt), poetomu zapisi case_record.json soderzhali digest predyduschej versii faila. Remont: v kazhdom run-kataloge original sohranyon byte-equal kak artifacts.manifest.v1-superseded.json; kanonicheskij artifacts.manifest.json perepisan s pereschitannymi sha256/size_bytes (vse 18 katalogov; prochie zapisi uzhe sovpali). Soderzhanie case_record/sobytij/nauchnye ishody NE izmeneny (pre-image vosproizvedyon 73/73 po vsej linii R1-R4, sm. docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md). Run ID ne ispolzovalis povtorno; novyh pragonov net.",
+  "command": "python (repair): per-run superseded copy (byte-equal) + recompute sha256/size_bytes from artifacts/* bytes; digest-vs-bytes byte-compare post-repair: 0 mismatches",
+  "artifact_refs": [
+    "docs/evidence/NL2-001/REPAIR_MAP_F1_R1.md",
+    "experiments/evidence/E0/E0-R4/runs/E0-R4-N001/artifacts.manifest.v1-superseded.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

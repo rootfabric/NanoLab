@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T13:45:38Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-POS001",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "summary": "Mechanical comparison of observed facts against expectations frozen in protocol.json (E0-PROTO-R1), case E0-R3-POS001. Checks: {\"experiment_cli:E0-R3-G001\": true, \"experiment_cli:E0-R3-G002\": true, \"experiment_cli:E0-R3-G003\": true, \"experiment_cli:E0-R3-N001\": true, \"experiment_cli:E0-R3-N002\": true, \"experiment_cli:E0-R3-N003\": true, \"experiment_cli:E0-R3-N004\": true, \"experiment_cli:E0-R3-N005\": true, \"experiment_cli:E0-R3-N006\": true, \"experiment_cli:E0-R3-N007\": true, \"experiment_cli:E0-R3-N008\": true, \"experiment_cli:E0-R3-N009\": true, \"experiment_cli:E0-R3-S001\": true, \"experiment_cli:E0-R3-S002\": true, \"experiment_cli:E0-R3-S003\": true, \"experiment_cli:E0-R3-U001\": true, \"experiment_cli:E0-R3-U002\": true, \"check_consistency\": true, \"work_cli_EX_NL2_001_R1\": true} -> SUPPORTED. No tolerance was changed after seeing results; a NOT_SUPPORTED outcome is preserved as-is and is not retried under this run id.",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": "SUPPORTED"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-analysis-completed",
+  "timestamp_utc": "2026-09-09T13:53:02Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R4",
+  "run_id": "E0-R4-N007",
+  "event_type": "ANALYSIS_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "summary": "Mechanical comparison of observed facts against expectations frozen in protocol.json (E0-PROTO-R1), case E0-R4-N007. Checks: {\"exit_nonzero\": true, \"stdout_not_contains:\\\"ok\\\": true\": true} -> SUPPORTED. No tolerance was changed after seeing results; a NOT_SUPPORTED outcome is preserved as-is and is not retried under this run id.",
+  "exit_code": null,
+  "artifact_refs": [
+    "artifacts/case_record.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": "SUPPORTED"
+}

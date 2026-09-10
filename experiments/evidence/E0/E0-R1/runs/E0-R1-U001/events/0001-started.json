@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-09T13:18:32Z",
+  "experiment_id": "E0",
+  "campaign_id": "E0-R1",
+  "run_id": "E0-R1-U001",
+  "event_type": "RUN_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5a151f751f7d60c1902e43fa503efd9a6037b236",
+  "summary": "Frozen before execution: manifest.json + protocol.json + fixtures + tools committed at subject 5a151f751f7d60c1902e43fa503efd9a6037b236; case E0-R1-U001 (family UNIT): Pinned-engine факт конверсии T=20C → 0.097717 обязан быть ACCEPTED замороженной табличной проверкой (полоса 5e-7); tier-2 (негейтящий): механически найти ветку конверсии в pinned-исходниках engine Expected outcome is preregistered in protocol.json and was not changed after seeing any result. Synthetic software control; no physics content.",
+  "command": "python tools/units_check.py fixtures/units/u001_accepted.json [+ tier-2 pinned-source locate, non-gating]",
+  "exit_code": null,
+  "artifact_refs": [
+    "fixtures/units/u001_accepted.json"
+  ],
+  "resource_usage": {},
+  "scientific_outcome": null
+}

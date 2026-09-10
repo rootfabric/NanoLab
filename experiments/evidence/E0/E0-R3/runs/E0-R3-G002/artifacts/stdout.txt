@@ -1,0 +1,22 @@
+{
+  "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-G002\\geometry\\g002_zero_axis.json",
+  "synthetic": true,
+  "results": [
+    {
+      "query_id": "q1_distance_AB",
+      "type": "distance",
+      "value": 0.0,
+      "verdict": "DEFINED"
+    },
+    {
+      "query_id": "q2_angle_at_B",
+      "type": "angle_deg",
+      "value": null,
+      "verdict": "ANGLE_UNDEFINED",
+      "zero_arm_lengths": [
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

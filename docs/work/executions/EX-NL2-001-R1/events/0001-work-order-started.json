@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-09T12:57:30Z",
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "summary": "Старт NL2-001 (реализовать схемы, manifest и E0: отрицательные/геометрические тесты, корректные единицы и статусы). Base — canonical main 15a2c9b1b5c095e24e2e1c24afd77feef5361102 (merge PR #26; NL1 ACCEPTED, NL2-002 READY, E1 = RUN, physics_runs = 4). Содержание E0-R1: (1) недостающий контракт — пререгистрация E0-PROTO-R1 (критерии всех контрольных случаев ДО прогонов; новые схемы не создаются, только существующие v1-схемы, gaps документируются); (2) контрактный формат evidence по ремонту NL1-002 R2 (манифесты-массивы с producer_run_id/subject_sha, полные машинные поля manifest.json, события с experiment_id и полным 40-hex subject_sha, терминал последним); (3) 18 контрольных случаев пятью семьями: NEG (валидаторы обязаны fail-closed на дегенеративных/пустых/повреждённых входах), UNIT (конверсия T=20C -> 0.097717 как в pinned engine, ENGINE_ENVIRONMENT_R1 SS6; кандидаты-подделки отвергаются), GEO (синтетические геометрии с аналитически известными значениями, нулевое плечо -> ANGLE_UNDEFINED, смена ориентации предсказана заранее), STATUS (технический outcome != научный conclusion, включая gap-пробу S003), POS (позитивный контроль собственной evidence). Каждый случай — уникальный run ID E0-R1-<семья>NNN; отрицательные результаты сохраняются. Инструмент (schemas + scripts/harness/**) заморожен бит-в-бит на base — изменения mid-campaign запрещены (exact-head). E1-прогоны не выполняются (acceptance E1 = NL2-002). project/state.json не меняется ни в ветке, ни на main. Epoch drift: origin/main @ a4533ab (PR #27, director acceptance addendum NL1-002) после dispatch base — пересечений путей нет, решение CONTINUE. Risk MEDIUM, claim C0_SOFTWARE_ONLY, campaign-level scientific_outcome = NOT_EVALUATED; merge в main — Human Gate.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> origin/main = a4533ab (Merge pull request #27; base 15a2c9b — родитель этой линии, подтверждён git rev-parse '15a2c9b^{commit}')",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl2-001 -b work/nl2-001-contracts-e0-r1 15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+    "git -C C:\\NanoLab\\main diff --stat 6796531..15a2c9b -> только NL1-002 R2 repair/acceptance поверхности (в т.ч. artifacts.manifest.json -> контрактная форма-массив); пересечений с allowed_paths NL2-001 нет",
+    "project/state.json @ 15a2c9b: frontier NL2, next_work_order NL2-001, E0 = NOT_RUN, E1 = RUN"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL2-001.md",
+    "docs/work/executions/EX-NL2-001-R1/passport.json",
+    "docs/work/executions/EX-NL2-001-R1/branch-passport.md",
+    "docs/experiments/E0_PIPELINE_VALIDATION.md",
+    "docs/evidence/NL1-002/REPAIR_MAP_R2_R1.md (усвоенный контрактный формат)",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md SS6 (pinned факт T=20C -> 0.097717)"
+  ],
+  "next_action": "IMPLEMENTER: freeze-коммит кампании E0-R1 (docs/research/PREREGISTRATION_E0_R1.md + experiments/evidence/E0/E0-R1/{campaign.md, protocol.json, fixtures, tools}), затем campaign-START commit (manifests + started-events всех 18 случаев), commit+push ДО первого прогона.",
+  "blocker": null
+}

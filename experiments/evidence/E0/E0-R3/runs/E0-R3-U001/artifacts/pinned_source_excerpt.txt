@@ -1,0 +1,65 @@
+E0-R3 U001 supplementary (non-gating) provenance artifact: pinned-engine temperature conversion, located mechanically.
+pinned commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+hit: FETCH_HEAD:src/Utilities/Utils.cpp:333:				OX_LOG(Logger::LOG_INFO, "Converting temperature from Celsius (%lf CВ°) to simulation units (%lf)", tmp_T, T);
+---- src/Utilities/Utils.cpp lines 308..358 ----
+
+	input_file *ret = new input_file();
+	ret->init_from_string(real_inp);
+
+	return ret;
+}
+
+std::set<std::string> converted_temperatures;
+number get_temperature(std::string raw_T) {
+	bool print_output = false;
+	if(converted_temperatures.find(raw_T) == converted_temperatures.end()) {
+		converted_temperatures.insert(raw_T);
+		print_output = true;
+	}
+
+	char deg;
+	double tmp_T;
+	number T;
+	int res = sscanf(raw_T.c_str(), "%lf %c", &tmp_T, &deg);
+	if(res == 2) {
+		deg = tolower(deg);
+		switch(deg) {
+		case 'c':
+			T = (number) ((tmp_T + 273.15) * 0.1 / 300.); // convert to kelvin and then to simulation units
+			if(print_output) {
+				OX_LOG(Logger::LOG_INFO, "Converting temperature from Celsius (%lf CВ°) to simulation units (%lf)", tmp_T, T);
+			}
+			break;
+		case 'k':
+			T = (number) (tmp_T * 0.1 / 300.); // convert to simulation units
+			if(print_output) {
+				OX_LOG(Logger::LOG_INFO, "Converting temperature from Kelvin (%lf K) to simulation units (%lf)", tmp_T, T);
+			}
+			break;
+		default:
+			throw oxDNAException("Unrecognizable temperature '%s'", raw_T.c_str());
+			/* no break */
+		}
+	}
+	else {
+		T = (number) tmp_T;
+	}
+
+	return T;
+}
+
+std::string bytes_to_human(llint bytes) {
+	llint base = 1024;
+	int ctr = 0;
+	while(bytes / base > 0 && ctr < 4) {
+		base *= 1024;
+fetch exit=0
+
+From https://github.com/lorenzo-rovigatti/oxDNA
+ * branch            00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 -> FETCH_HEAD
+
+grep exit=0
+FETCH_HEAD:src/Utilities/Utils.cpp:333:				OX_LOG(Logger::LOG_INFO, "Converting temperature from Celsius (%lf CВ°) to simulation units (%lf)", tmp_T, T);
+FETCH_HEAD:src/Utilities/Utils.cpp:339:				OX_LOG(Logger::LOG_INFO, "Converting temperature from Kelvin (%lf K) to simulation units (%lf)", tmp_T, T);
+
+

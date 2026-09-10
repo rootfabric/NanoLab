@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E0",
+  "campaign_id": "E0-R3",
+  "run_id": "E0-R3-N007",
+  "work_order_id": "NL2-001",
+  "protocol_revision": "E0-PROTO-R3",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "model": {
+    "kind": "none - software contract validation of the frozen control harness (no physics model)",
+    "instrument": "scripts/harness validators + config/control/harness v1 schemas at subject_sha (digests: input_digests.json)"
+  },
+  "inputs": [
+    {
+      "name": "instrument_bundle",
+      "ref": "experiments/evidence/E0/E0-R3/input_digests.json",
+      "note": "sha256/size_bytes of every instrument file (schemas, validators, tools) as raw git blobs at subject_sha"
+    },
+    {
+      "name": "fixtures/negative/n007_legacy_map_manifest/run/manifest.json",
+      "role": "fixture input",
+      "sha256": "b64432c473802d40a783a420c3fb7ac155eab54ec07e9726e06881c880dbb517",
+      "size_bytes": 687
+    }
+  ],
+  "observables": [
+    {
+      "name": "validator_rejects_invalid_surface",
+      "expected": {
+        "exit_code": "nonzero",
+        "stdout_must_not_contain": [
+          "\"ok\": true"
+        ]
+      },
+      "criterion": "exit code != 0 AND в stdout нет ok:true (fail-closed; качество ошибки — заметка, не гейт)"
+    }
+  ],
+  "environment": {
+    "family": "NEG",
+    "description": "Legacy объектная форма artifacts.manifest.json (до-ремонтная форма NL1-002, cf. artifacts.manifest.v1-superseded.json) не должна проходить как ok:true против контрактной формы-массива",
+    "host": "local Windows workstation (DSH harness session), no paid compute",
+    "synthetic": true
+  },
+  "seed_policy": {
+    "policy": "NOT_APPLICABLE - fully deterministic software control, no RNG"
+  },
+  "resource_budget": {
+    "cap_cpu_seconds": 5,
+    "local_only": true
+  },
+  "stop_conditions": [
+    "runner or validator technical crash on an intact environment -> RUN_FAILED_TECHNICAL, new run id required for any retry",
+    "instrument file drift (sha256 differs from input_digests.json) -> campaign BLOCKED",
+    "cpu budget exceeded -> stop"
+  ],
+  "status": "STARTED"
+}

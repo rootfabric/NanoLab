@@ -1,0 +1,45 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R4-POS001",
+  "family": "POS",
+  "campaign_id": "E0-R4",
+  "subject_sha": "ce477aad1e4a125c9e881fd9f6a741ec6d2fa876",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "all_run_dirs_ok": true,
+    "check_consistency_ok": true
+  },
+  "observed": {
+    "checks": {
+      "experiment_cli:E0-R4-G001": true,
+      "experiment_cli:E0-R4-G002": true,
+      "experiment_cli:E0-R4-G003": true,
+      "experiment_cli:E0-R4-N001": true,
+      "experiment_cli:E0-R4-N002": true,
+      "experiment_cli:E0-R4-N003": true,
+      "experiment_cli:E0-R4-N004": true,
+      "experiment_cli:E0-R4-N005": true,
+      "experiment_cli:E0-R4-N006": true,
+      "experiment_cli:E0-R4-N007": true,
+      "experiment_cli:E0-R4-N008": true,
+      "experiment_cli:E0-R4-N009": true,
+      "experiment_cli:E0-R4-S001": true,
+      "experiment_cli:E0-R4-S002": true,
+      "experiment_cli:E0-R4-S003": true,
+      "experiment_cli:E0-R4-U001": true,
+      "experiment_cli:E0-R4-U002": true,
+      "check_consistency": true,
+      "work_cli_EX_NL2_001_R1": true
+    },
+    "validator_runs": 18
+  },
+  "scientific_outcome": "SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:59:59Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

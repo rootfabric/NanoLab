@@ -1,0 +1,32 @@
+{
+  "schema": "nanolab.e0.case_record.v1",
+  "run_id": "E0-R3-N002",
+  "family": "NEG",
+  "campaign_id": "E0-R3",
+  "subject_sha": "6c366e0df4822d39572362356bc65279f5a762d1",
+  "synthetic": true,
+  "expected_frozen_in_protocol": true,
+  "expected": {
+    "exit_code": "nonzero",
+    "stdout_must_not_contain": [
+      "\"ok\": true"
+    ]
+  },
+  "observed": {
+    "exit_code": 1,
+    "stdout_excerpt": "",
+    "stderr_excerpt": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\NanoLab\\nl2-001\\scripts\\harness\\work_cli.py\", line 122, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"C:\\NanoLab\\nl2-001\\scripts\\harness\\work_cli.py\", line 107, in main\n    result = inspect_execution(Path(args.execution_dir).resolve())\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\NanoLab\\nl2-001\\scripts\\harness\\work_cli.py\", line 40, in inspect_execution\n    passport = load(passport_path)\n               ^^^^^^^^^^^^^^^^^^^\n  File \"C:\\NanoLab\\nl2-001\\scripts\\harness\\work_cli.py\", line 18, in load\n    value = json.load(handle)\n            ^^^^^^^^^^^^^^^^^\n  File \"C:\\Python311\\Lib\\json\\__init__.py\", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File \"C:\\Python311\\Lib\\json\\__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python311\\Lib\\json\\decoder.py\", line 337, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python311\\Lib\\json\\decoder.py\", line 353, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\njson.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 74 (char 73)\n",
+    "checks": {
+      "exit_nonzero": true,
+      "stdout_not_contains:\"ok\": true": true
+    }
+  },
+  "scientific_outcome": "SUPPORTED",
+  "technical_failure": null,
+  "finished_at_utc": "2026-09-09T13:41:02Z",
+  "schema_validation": {
+    "manifest.json": [],
+    "events/0001-started.json": [],
+    "artifacts.manifest.json": []
+  }
+}

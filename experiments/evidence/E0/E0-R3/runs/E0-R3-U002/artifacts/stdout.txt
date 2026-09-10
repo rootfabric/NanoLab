@@ -1,0 +1,41 @@
+{
+  "verdicts": [
+    {
+      "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-U002\\units\\u002_wrong_20.json",
+      "input_T": "20C",
+      "claimed_T_oxDNA": 20,
+      "reference_T_oxDNA": 0.097717,
+      "delta": 19.902283,
+      "tolerance": 5e-07,
+      "verdict": "REJECTED"
+    },
+    {
+      "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-U002\\units\\u002_wrong_293_15.json",
+      "input_T": "20C",
+      "claimed_T_oxDNA": 293.15,
+      "reference_T_oxDNA": 0.097717,
+      "delta": 293.052283,
+      "tolerance": 5e-07,
+      "verdict": "REJECTED"
+    },
+    {
+      "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-U002\\units\\u002_wrong_0_29315.json",
+      "input_T": "20C",
+      "claimed_T_oxDNA": 0.29315,
+      "reference_T_oxDNA": 0.097717,
+      "delta": 0.19543300000000002,
+      "tolerance": 5e-07,
+      "verdict": "REJECTED"
+    },
+    {
+      "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R3-U002\\units\\u002_wrong_0_0978.json",
+      "input_T": "20C",
+      "claimed_T_oxDNA": 0.0978,
+      "reference_T_oxDNA": 0.097717,
+      "delta": 8.299999999999974e-05,
+      "tolerance": 5e-07,
+      "verdict": "REJECTED"
+    }
+  ],
+  "reference_provenance": "docs/research/ENGINE_ENVIRONMENT_R1.md section 6 (oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, log OBSERVED)"
+}

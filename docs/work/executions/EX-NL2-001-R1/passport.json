@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "checkpoint": "NL2",
+  "base_sha": "15a2c9b1b5c095e24e2e1c24afd77feef5361102",
+  "branch": "work/nl2-001-contracts-e0-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL2-001.md",
+    "docs/work/executions/EX-NL2-001-R1/**",
+    "docs/research/PREREGISTRATION_E0_R1.md",
+    "docs/research/PREREGISTRATION_E0_R2.md",
+    "docs/research/PREREGISTRATION_E0_R3.md",
+    "docs/research/PREREGISTRATION_E0_R4.md",
+    "docs/experiments/E0_PIPELINE_VALIDATION.md",
+    "experiments/evidence/E0/E0-R1/**",
+    "experiments/evidence/E0/E0-R2/**",
+    "experiments/evidence/E0/E0-R3/**",
+    "experiments/evidence/E0/E0-R4/**",
+    "docs/evidence/NL2-001/**",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "started_at_utc": "2026-09-09T12:55:15Z",
+  "status": "HANDOFF_READY"
+}

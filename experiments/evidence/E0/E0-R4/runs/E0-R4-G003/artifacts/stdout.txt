@@ -1,0 +1,18 @@
+{
+  "fixture": "C:\\NanoLab\\scratch\\nl2-001\\E0-R4-G003\\geometry\\g003_orientation_flip.json",
+  "synthetic": true,
+  "results": [
+    {
+      "query_id": "q1_angle_P_O_Q",
+      "type": "angle_deg",
+      "value": 59.99999999999999,
+      "verdict": "DEFINED"
+    },
+    {
+      "query_id": "q2_angle_P_R_Q",
+      "type": "angle_deg",
+      "value": 120.00000000000001,
+      "verdict": "DEFINED"
+    }
+  ]
+}

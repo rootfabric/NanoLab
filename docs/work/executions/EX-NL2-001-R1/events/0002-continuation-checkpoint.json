@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-09T17:40:00Z",
+  "execution_id": "EX-NL2-001-R1",
+  "work_order_id": "NL2-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "24352f9dcc54e77472bdb8db827d2dc1fd0e1a1e",
+  "summary": "CONTINUATION: E0 исполнен до конца за четыре пререгистрированных попытки (линия E0-PROTO-R1..R4), все отказы сохранены, run ID не переиспользовались, ожидания не менялись с R1. (1) E0-R1: 18x RUN_FAILED_TECHNICAL - runner emit repo-root off-by-one; научной оценки не было (evidence: experiments/evidence/E0/E0-R1/runs). (2) E0-R2: 17x RUN_FAILED_TECHNICAL + POS-артефакт - materialize передавал кампания-относительные пути фикстур в git cat-file; события несли зашитый campaign_id. (3) E0-R3: исполнена, НО erratum - materialize копировал только перечисленные файлы вместо полных поддеревьев каталогов-фикстур (8 случаев N004..N008/S001..S003 тестировали неполные поверхности), флаг gap-пробы читался не с того уровня (S003 KeyError; S003-RETRY1 - артефакт). (4) E0-R4 (subject ce477aad1e4a125c9e881fd9f6a741ec6d2fa876, START 1688e71): все 18 случаев COMPLETED - 17 SUPPORTED, S003 NOT_SUPPORTED (пререгистрированная gap-проба: валидатор ТИХО принимает scientific_outcome=SUPPORTED на техническом терминале RUN_COMPLETED - exit 0/ok:true; задокументированный контрактный gap, инструмент не патчился посреди кампании). Перед R4 исправленный runner верифицирован dry-run'ом в disposable scratch. U001 tier-2 (негейтящий): конверсия T=20C -> 0.097717 механически найдена в pinned-исходниках oxDNA 00dc7fb9 - src/Utilities/Utils.cpp:333. Результаты: experiments/evidence/E0/E0-R4/ + evidence-map.json. Бюджет: все случаи sub-second, << 120 c cap; state.json/plan.json/config/scripts не менялись; E1/E2 не тронуты.",
+  "command_refs": [
+    "python experiments/evidence/E0/E0-R1/tools/e0_runner.py --subject ce477aa... --protocol experiments/evidence/E0/E0-R4/protocol.json --digests .../input_digests.json --runs-dir .../E0-R4/runs -> 18/18 terminal",
+    "git log: ремонты d05da27/254d467/cf9365a (R1), 87bf408/f2fa411 (R2), 2b26e47/af7eaf9/4c39744 (R2 scaffolds erratum), 972382e/b3c79be (S003 retry), aabf4a5/27d627f (subtree materialization + dry-run guard)"
+  ],
+  "evidence_refs": [
+    "experiments/evidence/E0/E0-R4/evidence-map.json",
+    "experiments/evidence/E0/E0-R4/runs/E0-R4-S003/artifacts/case_record.json",
+    "experiments/evidence/E0/E0-R4/runs/E0-R4-U001/artifacts/pinned_source_excerpt.txt",
+    "docs/research/PREREGISTRATION_E0_R1.md",
+    "docs/research/PREREGISTRATION_E0_R4.md",
+    "docs/evidence/NL2-001/IMPLEMENTER_EVIDENCE.md"
+  ],
+  "next_action": "IMPLEMENTER: финальные валидации всей evidence (work_cli validate+close EX, experiment_cli все run-каталоги, check-consistency), publication VALIDATION_RECORDED и terminal HANDOFF_COMPLETED.",
+  "blocker": null
+}
