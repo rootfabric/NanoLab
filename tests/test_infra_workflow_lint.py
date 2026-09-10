@@ -1,7 +1,11 @@
-"""Workflow negative-control lint tests (INFRA1-002).
+"""Workflow negative-control lint tests (INFRA1-002, control WO EX-CTRL-LINTSCHEMA-R1).
 
 Required negative control: a workflow with `runs-on: nanolab-cpu` MUST FAIL
 (NC-1: an untrusted PR route cannot select a trusted self-hosted label).
+Control WO EX-CTRL-LINTSCHEMA-R1 adds the MINOR-4 tab-indentation negatives
+(TAB in leading whitespace of any line -> WORKFLOW_UNPARSEABLE) and the NOTE-5
+jobs-form negatives (missing/non-mapping `jobs:` -> fail closed), plus the
+full negative matrix across rule families.
 Run: python -m unittest discover -s tests -t .
 """
 from __future__ import annotations
@@ -342,6 +346,297 @@ class MultiDocumentTests(unittest.TestCase):
         rules = rule_ids(report)
         self.assertIn("WORKFLOW_UNPARSEABLE", rules)
         self.assertNotIn("NC2_FORBIDDEN_TRIGGER", rules)
+
+
+class MINOR4TabIndentationTests(unittest.TestCase):
+    """Control WO EX-CTRL-LINTSCHEMA-R1, MINOR-4: the parser must reject a TAB
+    in the leading whitespace of ANY raw line (YAML forbids tab indentation).
+    The old check compared a spaces-only prefix slice and could never fire, so
+    TAB-led keys silently rebuilt the document instead of failing closed."""
+
+    def test_tab_indented_key_under_on_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  push:", "\tpush:")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+        self.assertIn("tab character in leading whitespace", report["workflows"][0]["violations"][0]["message"])
+
+    def test_tab_indented_key_under_job_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("    runs-on: ubuntu-latest", "\truns-on: ubuntu-latest")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+        self.assertIn("tab character in leading whitespace", report["workflows"][0]["violations"][0]["message"])
+
+    def test_tab_indented_top_level_key_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("permissions:", "\tpermissions:")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_tab_indented_step_inside_job_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('          echo "ok"', '\t\techo "ok"')
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_tab_before_comment_line_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("name: compliant-fixture\n", "name: compliant-fixture\n\t# tab-indented comment\n")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_tab_only_blank_line_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("permissions:\n", "permissions:\n\t\n")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_mixed_space_tab_leading_whitespace_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  push:", " \tpush:")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_tab_inside_scalar_value_is_allowed(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace('echo "ok"', 'echo "a\tb"')
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+        self.assertNotIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+
+class NOTE5JobsMappingTests(unittest.TestCase):
+    """Control WO EX-CTRL-LINTSCHEMA-R1, NOTE-5: a missing or non-mapping
+    `jobs:` block must fail closed instead of silently skipping the job-level
+    rules (NC-1 labels, NC-6 timeouts, action pinning)."""
+
+    def jobs_only(self, block: str) -> str:
+        return COMPLIANT_WORKFLOW.split("jobs:", 1)[0] + block
+
+    def test_jobs_sequence_with_nanolab_cpu_fails(self) -> None:
+        report = lint_yaml(self.jobs_only("jobs:\n  - nanolab-cpu\n"))
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_jobs_sequence_benign_content_still_fails(self) -> None:
+        report = lint_yaml(self.jobs_only("jobs:\n  - ubuntu-latest\n"))
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_jobs_sequence_of_mappings_still_fails(self) -> None:
+        report = lint_yaml(self.jobs_only("jobs:\n  - validate:\n      runs-on: ubuntu-latest\n      timeout-minutes: 15\n"))
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_jobs_scalar_form_fails(self) -> None:
+        report = lint_yaml(self.jobs_only("jobs: validate\n"))
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_jobs_null_form_fails(self) -> None:
+        report = lint_yaml(self.jobs_only("jobs:\n"))
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_BLOCK_MISSING", rule_ids(report))
+
+    def test_jobs_missing_fails(self) -> None:
+        report = lint_yaml(COMPLIANT_WORKFLOW.split("jobs:", 1)[0])
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_JOBS_BLOCK_MISSING", rule_ids(report))
+
+    def test_jobs_flow_mapping_is_still_linted(self) -> None:
+        text = self.jobs_only("jobs: {validate: {runs-on: nanolab-cpu, timeout-minutes: 15, steps: [{run: echo ok}]}}\n")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_SELF_HOSTED_LABEL", rule_ids(report))
+        self.assertNotIn("WORKFLOW_JOBS_UNSUPPORTED_FORM", rule_ids(report))
+
+    def test_jobs_flow_mapping_compliant_passes(self) -> None:
+        text = self.jobs_only("jobs: {validate: {runs-on: ubuntu-latest, timeout-minutes: 15, steps: [{run: 'echo ok'}]}}\n")
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+
+
+class RunsOnEmptyListTests(unittest.TestCase):
+    """Control WO EX-CTRL-LINTSCHEMA-R1 (NOTE-5 family): an empty runs-on list
+    selects no runner and must not bypass NC-1."""
+
+    def test_empty_runs_on_list_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: []")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_RUNS_ON_MISSING", rule_ids(report))
+
+    def test_runs_on_list_form_passes(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: [ubuntu-latest]")
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+
+
+class NegativeMatrixExpansionTests(unittest.TestCase):
+    """Control WO EX-CTRL-LINTSCHEMA-R1: full negative matrix across rule
+    families (case/prefix label variants, reserved triggers, permission and
+    timeout edges, pinning forms, NOTE-3 type forms, parser rejects)."""
+
+    def test_nanolab_gpu_label_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: nanolab-gpu")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_SELF_HOSTED_LABEL", rule_ids(report))
+
+    def test_mixed_case_nanolab_cpu_label_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: Nanolab-CPU")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_SELF_HOSTED_LABEL", rule_ids(report))
+
+    def test_uppercase_self_hosted_label_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: SELF-HOSTED")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_SELF_HOSTED_LABEL", rule_ids(report))
+
+    def test_forbidden_label_inside_list_form_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("runs-on: ubuntu-latest", "runs-on: [ubuntu-latest, nanolab-cpu]")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC1_SELF_HOSTED_LABEL", rule_ids(report))
+
+    def test_workflow_run_with_filters_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "  push:\n    branches: [main]",
+            "  workflow_run:\n    workflows: [hosted-ci]\n    types: [completed]",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_FORBIDDEN_TRIGGER", rule_ids(report))
+
+    def test_workflow_dispatch_reserved_trigger_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  push:\n    branches: [main]", "  workflow_dispatch:\n    branches: [main]")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGER_NEEDS_BASELINE_REVISION", rule_ids(report))
+
+    def test_release_reserved_trigger_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  push:\n    branches: [main]", "  release:\n    types: [published]")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC2_TRIGGER_NEEDS_BASELINE_REVISION", rule_ids(report))
+
+    def test_workflow_level_write_all_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("permissions:\n  contents: read", "permissions: write-all")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC4_WRITE_PERMISSION", rule_ids(report))
+
+    def test_job_level_write_permission_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "    timeout-minutes: 15\n",
+            "    timeout-minutes: 15\n    permissions:\n      contents: write\n",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC4_WRITE_PERMISSION", rule_ids(report))
+
+    def test_pull_requests_write_scope_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  contents: read", "  contents: read\n  pull-requests: write")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC4_WRITE_PERMISSION", rule_ids(report))
+
+    def test_non_scalar_permission_level_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  contents: read", "  contents: [read]")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC4_WRITE_PERMISSION", rule_ids(report))
+
+    def test_unknown_permission_level_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("  contents: read", "  contents: admin")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC4_WRITE_PERMISSION", rule_ids(report))
+
+    def test_zero_timeout_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("timeout-minutes: 15", "timeout-minutes: 0")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("BUDGET_TIMEOUT_BOUNDS", rule_ids(report))
+
+    def test_timeout_above_max_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("timeout-minutes: 15", "timeout-minutes: 61")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("BUDGET_TIMEOUT_BOUNDS", rule_ids(report))
+
+    def test_string_timeout_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("timeout-minutes: 15", "timeout-minutes: '15'")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("BUDGET_TIMEOUT_BOUNDS", rule_ids(report))
+
+    def test_boolean_timeout_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("timeout-minutes: 15", "timeout-minutes: true")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("BUDGET_TIMEOUT_BOUNDS", rule_ids(report))
+
+    def test_docker_action_without_digest_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "      - name: Check\n",
+            "      - name: Pull\n        uses: docker://alpine:3.19\n      - name: Check\n",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("PIN_ACTION_FULL_SHA", rule_ids(report))
+
+    def test_docker_action_digest_pinned_passes(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "      - name: Check\n",
+            "      - name: Pull\n        uses: docker://alpine@sha256:6457d53fb065d6f250e1504b9bc42d5b6c65941d57532c072d929dd0628977d0\n      - name: Check\n",
+        )
+        report = lint_yaml(text)
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
+
+    def test_short_sha_pinned_action_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1", "@93cb6ef")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("PIN_ACTION_FULL_SHA", rule_ids(report))
+
+    def test_pr_types_scalar_form_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("    types: [opened, synchronize, reopened, ready_for_review]", "    types: opened")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NOTE3_PR_TYPES_READY_FOR_REVIEW", rule_ids(report))
+
+    def test_pr_types_empty_list_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("    types: [opened, synchronize, reopened, ready_for_review]", "    types: []")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NOTE3_PR_TYPES_READY_FOR_REVIEW", rule_ids(report))
+
+    def test_secrets_reference_in_job_env_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace(
+            "    timeout-minutes: 15\n",
+            "    timeout-minutes: 15\n    env:\n      TOKEN: ${{ secrets.TOKEN }}\n",
+        )
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("NC7_SECRETS_REFERENCE", rule_ids(report))
+
+    def test_document_end_marker_followed_by_content_fails(self) -> None:
+        report = lint_yaml(COMPLIANT_WORKFLOW + "...\nname: second\n")
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_unexpected_indent_fails(self) -> None:
+        text = COMPLIANT_WORKFLOW.replace("    runs-on: ubuntu-latest", "      runs-on: ubuntu-latest")
+        report = lint_yaml(text)
+        self.assertFalse(report["ok"])
+        self.assertIn("WORKFLOW_UNPARSEABLE", rule_ids(report))
+
+    def test_crlf_line_endings_pass(self) -> None:
+        report = lint_yaml(COMPLIANT_WORKFLOW.replace("\n", "\r\n"))
+        self.assertTrue(report["ok"], json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":
