@@ -33,6 +33,28 @@
 - Хирургичность ремонта: **73/73** — в каждом манифесте ровно одна изменённая запись (`case_record.json`), ровно поля sha256/size_bytes; имена/порядок/прочие поля неизменны.
 - Замечание метода: первый вариант скрипта хэшировал рабочую копию и давал ложные 113 «mismatch» из-за autocrlf (CRLF в working tree); против блобов Git — 0. Зафиксировано как урок метода, не как дефект evidence.
 
-## V4–V7
+## V4. Gap S003 — воспроизведён (валидатор молчит) — ВЫПОЛНЕНО
 
-В процессе (см. следующие коммиты): gap S003 прямой CLI-пробой; jsonschema/CLI-пробы (R1/R3/R4 ok; R2 — 18 fail с текстом campaign_id); пререгистрация (freeze→run хронология, tolerances R1→R4); отсутствие self-acceptance/E-статусов.
+Двойная репродукция:
+
+1. Через замороженный runner (кейс E0-R4-S003, см. V2): exit 0, `ok:true`, `separation_enforced=false` → научный исход NOT_SUPPORTED, совпадает с published.
+2. Прямой CLI-проб, независимый от runner'а: фикстура `E0-R1/fixtures/status/s003_tech_with_sci_claim/run` материализована байт-в-байт из блобов `1d594f3` в scratch; `python -m harness.experiment_cli validate` → **`ok:true`, errors [], warnings [], exit 0** при событии `0002-run-completed` (`event_type=RUN_COMPLETED`, `scientific_outcome="SUPPORTED"`).
+
+Контрактное ожидание пререгистрации (инструмент разделяет технический и научный статусы) не выполняется механически; gap сохранён и задокументирован как NOT_SUPPORTED — воспроизведён на `1d594f3` дословно.
+
+## V5. Схемы и CLI — ВЫПОЛНЕНО
+
+jsonschema (Draft 2020-12 + FormatChecker, схемы `config/control/harness/*.schema.v1.json` — бит-в-бит base; все payload — блобы `1d594f3`):
+
+- **447 файлов, 0 ошибок**: все `manifest.json` (run-схема), все `events/*.json` всех run-каталогов 4 кампаний (event-схема), все `artifacts.manifest.json` + `.v1-superseded.json` (artifacts-схема), 4 campaign erratum-события (`subject_sha` каждого = subject своей кампании по run-манифестам), repair-событие `docs/evidence/NL2-001/events/0001-repair-f1-f7.json` (work-event-схема, `subject_sha=2cee872…`), события `EX-NL2-001-R1` 0001–0004 (work-event-схема).
+
+CLI (замороженные валидаторы `scripts/harness/**` бит-в-бит base; PYTHONPATH=scripts):
+
+- `experiment_cli validate` по run-каталогам: **E0-R1 18/18 ok**, **E0-R3 19/19 ok**, **E0-R4 18/18 ok** (все exit 0, `ok:true`, warnings пусты).
+- **E0-R2: 18/18 fail** — ожидаемое задокументированное поведение; во всех 18 выходах присутствует текст `«0002-run-failed-technical.json: campaign_id differs from manifest»`, `«0003-analysis-completed.json: campaign_id differs from manifest»` (stale `campaign_id` зашит в событиях неудавшейся попытки; дефект emit-пути runner'а, задокументирован commit `f2fa411` и repair-документами; попытка superseded кампанией E0-R4). Не регресс ремонта.
+- `work_cli validate docs/work/executions/EX-NL2-001-R1` → `ok:true`, exit 0, статус HANDOFF_READY.
+- `cli check-consistency` → `ok:true`, exit 0 (state/plan консистентны).
+
+## V6–V7
+
+В процессе (следующие коммиты): пререгистрация (freeze→run хронология, tolerances/expectations R1→R4 идентичны); отсутствие self-acceptance/E-статусов.
