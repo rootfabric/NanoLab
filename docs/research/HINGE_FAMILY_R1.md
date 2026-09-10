@@ -37,7 +37,7 @@ R1-подтверждение (EX-NL3-001-R1): pinned commit существуе�
 
 Spring layers — REPORTED из статьи через NL0-001; в R1 машинно проверяется только косвенная корроборация стороны «0» варианта `0b`: имя caDNAno-дизайна внутри файла — `0bp_6x3_v2.json` (OBSERVED). Отнесение конкретных ssDNA-участков дизайна к «spring layers» без SI статьи невозможно — см. §7 (gap G3).
 
-OBSERVED-состав pinned tree (полный перечёт, R1): `Design_Hinges/{0b,11b,32b,53b,74b}.json`, `MD_Hinges/{0b,11b,32b,53b,74b}.{top,conf}`, `MD_Hinges/pro_CPU.in`, `MD_Hinges/pro_GPU.in`, `MD_Hinges/README.md`, `Init_Hinges/`, `MovieS1.mp4`, `README.md`. `MD_Hinges/README.md` (OBSERVED текст) описывает `.top` как input topology, `.conf` как restart-файл с координатами и скоростями equilibrated hinge, `pro_CPU.in`/`pro_GPU.in` — как входы MD.
+OBSERVED-состав pinned tree (ключевой состав, R1; полный перечень поверхности — GitHub API tree `b2d6ceb…`, `truncated=false`, 33 entries, включает и не вошедшее в перечень ниже: `Design_Hinges/README.md` (268 B) и конкретное содержимое `Init_Hinges/` — README.md, `cadnano_interface.py`, `init_generator.py`, `ini_demo/*`; errata F-2, Director r1-errata): `Design_Hinges/{0b,11b,32b,53b,74b}.json`, `MD_Hinges/{0b,11b,32b,53b,74b}.{top,conf}`, `MD_Hinges/pro_CPU.in`, `MD_Hinges/pro_GPU.in`, `MD_Hinges/README.md`, `Init_Hinges/`, `MovieS1.mp4`, `README.md`. `MD_Hinges/README.md` (OBSERVED текст) описывает `.top` как input topology, `.conf` как restart-файл с координатами и скоростями equilibrated hinge, `pro_CPU.in`/`pro_GPU.in` — как входы MD.
 
 Полный digest-реестр всех 18 зарегистрированных поверхностей — `scripts/hinge_family/source_pins.json` (заморожен): blob SHA-1 с provenance (`NL0_001_PREREGISTERED` / `R1_TREE_LISTING`), SHA-256 с provenance (`R1_CONTENT_VERIFIED` для пяти поверхностей `0b`; `NOT_VERIFIED` для остальных до их собственных процедур получения).
 
@@ -123,7 +123,7 @@ exit 0; отчёт: docs/work/executions/EX-NL3-001-R1/evidence/hinge-0b-structu
 | Странды: дизайн vs топология | 118 путей дизайна vs 112 страндов топологии — точное соответствие НЕ декомпозировано (gap G2) |
 | Длинные «связи» топологии (dist > 0.95) | 456 (все внутри одного странда) ≈ 459 шагам кроссоверов дизайна — согласуется с кодированием кроссовер-непрерывных цепей; порог 0.95 — конвенция инструмента, не характеристика источника |
 | ssDNA-участки дизайна | позиции с одной страндой: 158; серии по хеликсам: {2:×16, 9:×6, 12:×6} — атрибуция к spring layers без SI невозможна (U3/G3) |
-| Распределение связанных дистанций | главный пик 0.5–0.6 (4657 из 8275), вторая полоса 1.2–1.7 (≈448) — OBSERVED-факт авторского pre-equilibrated файла; интерпретация вне scope R1 |
+| Распределение связанных дистанций | главный пик 0.5–0.6 (4677 из 8275), вторая полоса 1.2–1.7 (440; сумма buckets «1.2»–«1.7» = 19+41+112+159+87+22; значение 448 соответствовало бы buckets ≥ 1.1, включая bucket «1.1» = 8) — OBSERVED-факт авторского pre-equilibrated файла; интерпретация вне scope R1 (errata F-1/V-1, Director r1-errata) |
 
 ## 6. Экспорт/воспроизведение: что можно и что нельзя (жёстко)
 
@@ -156,6 +156,16 @@ exit 0; отчёт: docs/work/executions/EX-NL3-001-R1/evidence/hinge-0b-structu
 | G4 | Семантика колонок 9:15 конфигурации (velocity-подобные) | наши метки — интерпретация конвенций oxDNA; проверка чтением pinned engine — вне R1 | pre-E2 engine-input check |
 | G5 | SHA-256 поверхностей `11b/32b/53b/74b` | содержимое в R1 не получалось (scope = первый экземпляр `0b`) | отдельные bounded шаги pre-E2 |
 | G6 | Целостность в ране (H-bonds, энергия, динамика) | прогоны динамики = NL3-002/E2 | NL3-002 |
+
+## Errata (r1-errata, Director checkpoint)
+
+Docs-правка от 2026-09-11 (Director; ветка `control/nl3-001-director-checkpoint-r1`) по findings независимого review (`84f71e7`, F-1/F-2) и verification (`a0687b5`, V-1) — класс LOW, точность durable-записи: на вердикты PASS, digest-реестр `source_pins.json` и published-отчёт не влияет (те заморожены и настоящей правкой не тронуты); затронут только prose этого документа:
+
+- **F-1**: §5 «главный пик 0.5–0.6» — 4657 → **4677** (bucket «0.5» published-отчёта `hinge-0b-structural-report.json`; ошибка перепечатки prose, ни один PASS-check на этом числе не стоит).
+- **F-2**: §2 «полный перечёт» → «ключевой состав»; полный перечень — GitHub API tree `b2d6ceb…` (`truncated=false`, 33 entries); вне перечня остаются `Design_Hinges/README.md` (268 B) и конкретное содержимое `Init_Hinges/`. На реестр «ровно 18 зарегистрированных поверхностей» не влияет.
+- **V-1**: §5 «вторая полоса 1.2–1.7 (≈448)» → **440** с уточнением bucket-семантики (448 = buckets ≥ 1.1, включая bucket «1.1» = 8).
+
+INFO-замечания F-3 (event 0004 перечисляет содержимое records-коммита не полностью), F-4 (CRLF-артефакт `autocrlf=true` — проверку воспроизводимости выполнять по `git cat-file`) и F-5 (два узких тест-пробела) приняты к сведению без правки; F-4/F-5 — кандидаты в pre-E2 инструментальную итерацию. Старые события не редактировались.
 
 ## 8. Связи
 
