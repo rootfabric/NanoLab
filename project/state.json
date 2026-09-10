@@ -2,8 +2,8 @@
   "schema_version": 1,
   "kind": "project_state",
   "foundation": "DOCUMENTED",
-  "frontier": "NL2",
-  "next_work_order": "NL2-003",
+  "frontier": "NL3",
+  "next_work_order": "NL3-001",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
@@ -11,7 +11,8 @@
     "NL1-001",
     "NL1-002",
     "NL2-001",
-    "NL2-002"
+    "NL2-002",
+    "NL2-003"
   ],
   "active_tasks": [],
   "task_status": {
@@ -22,8 +23,8 @@
     "NL1-002": "ACCEPTED",
     "NL2-001": "ACCEPTED",
     "NL2-002": "ACCEPTED",
-    "NL2-003": "READY",
-    "NL3-001": "PLANNED",
+    "NL2-003": "ACCEPTED",
+    "NL3-001": "READY",
     "NL3-002": "PLANNED",
     "NL4-001": "PLANNED",
     "NL4-002": "PLANNED",
@@ -37,8 +38,8 @@
   "stage_status": {
     "NL0": "ACCEPTED",
     "NL1": "ACCEPTED",
-    "NL2": "IN_PROGRESS",
-    "NL3": "PLANNED",
+    "NL2": "ACCEPTED",
+    "NL3": "IN_PROGRESS",
     "NL4": "PLANNED",
     "NL5": "PLANNED",
     "NL6": "PLANNED",

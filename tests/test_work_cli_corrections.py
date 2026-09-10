@@ -31,7 +31,13 @@ EXECUTION_ID = "EX-TEST-R1"
 WORK_ORDER_ID = "INFRA1-002"
 
 
-def event(event_id: str, event_type: str, *, subject_sha: str = FULL_SHA, timestamp: str = "2026-09-09T13:00:00Z", actor_role: str = "IMPLEMENTER", execution_id: str = EXECUTION_ID, work_order_id: str = WORK_ORDER_ID, **extra: Any) -> dict[str, Any]:
+def event(event_id: str, event_type: str, *, subject_sha: str = FULL_SHA, timestamp: str | None = None, actor_role: str = "IMPLEMENTER", execution_id: str = EXECUTION_ID, work_order_id: str = WORK_ORDER_ID, **extra: Any) -> dict[str, Any]:
+    if timestamp is None:
+        # NL2-003 hardening: a constant copy timestamp across 3+ events is now a
+        # validator error, so the fixture generator derives a distinct per-event
+        # machine stamp from the event-id sequence number by default.
+        seq = "".join(ch for ch in event_id.split("-")[0] if ch.isdigit()) or "0"
+        timestamp = "2026-09-09T13:00:{:02d}Z".format(int(seq) % 60)
     payload: dict[str, Any] = {
         "schema_version": 1,
         "event_id": event_id,
