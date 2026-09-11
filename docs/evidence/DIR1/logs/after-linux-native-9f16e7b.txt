@@ -1,0 +1,15 @@
+hosted-ci Check 5/5 AFTER-fix parity logs (fix commit)
+platform: native Linux clone in WSL Ubuntu (Python 3.12.3); git version 2.43.0
+subject: 9f16e7b (control/ci-taskbus-coverage-r1)
+recorded_utc: 2026-09-11T10:17:43Z
+
+== python3 -m unittest discover -s tests -t . ==
+........................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 200 tests in 2.897s
+
+OK
+
+== python3 -m pytest tests/task_bus -q ==
+........................................                                 [100%]
+40 passed in 2.70s

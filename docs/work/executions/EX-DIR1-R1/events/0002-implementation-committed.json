@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-11T10:19:14Z",
+  "execution_id": "EX-DIR1-R1",
+  "work_order_id": "DIR-1",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9f16e7ba5d216f4a3982b98177ad147e3bcfb712",
+  "summary": "Реализация DIR-1 закоммичена: fix-коммит 9f16e7ba5d216f4a3982b98177ad147e3bcfb712 «fix(tests): add tests/task_bus package marker so unittest discover collects broker suite» — единственный файл tests/task_bus/__init__.py (пустой package-маркер). Выбран кандидат A из двух предложенных директивой: (A) package-маркер против (B) pytest-чека в hosted-ci.yml. Обоснование A: tests/task_bus/test_task_bus.py — чистый unittest.TestCase без pytest-специфики (проверено: import unittest, unittest.mock.patch, ни fixtures/markers/tmp_path/monkeypatch), поэтому существующий Check 5/5 (stdlib unittest discover) начинает собирать и исполнять все 40 тестов брокера без изменения тестов, брокера и workflow; не требуется гейт на изменение .github/workflows/hosted-ci.yml (DIRECTOR_ACCEPTANCE_P14_R1 требует для него отдельный review/verify + NC-lint); не добавляется зависимостей в CI — контракт Check 5/5 «validator + lint, stdlib only» сохранён; pytest не гарантирован на runner'е и потребовал бы pip install (сетевой шаг + supply-chain поверхность). tests/__init__.py уже существует в main — добавление не требовалось. Бонус подтверждён: skip-условие symlink-негатива (OSError на symlink_to) на Linux не срабатывает — на ubuntu-агенте тест исполняется позитивно (SMOKE_SYMLINK_DENIED проверяется live), F-2 закрывается на Linux-стороне. Брокер tools/task_bus.py (blob a3d0556717f3320e885f4092f242bed53bf0584f), .github/workflows/**, state-файлы, science — не изменялись. Подробное обоснование и протокол: docs/evidence/DIR1/README.md.",
+  "command_refs": [
+    "grep 'import |unittest|pytest|fixture|tmp_path|monkeypatch' tests/task_bus/test_task_bus.py -> чистый unittest (40 тестов, pytest-специфики нет)",
+    "git -C C:\\NanoLab\\control-dir-1 add tests/task_bus/__init__.py && git commit -> 9f16e7ba5d216f4a3982b98177ad147e3bcfb712",
+    "git push -> 662e2ff..9f16e7b control/ci-taskbus-coverage-r1"
+  ],
+  "evidence_refs": [
+    "docs/evidence/DIR1/README.md (сравнение кандидатов A/B, протокол верификации)",
+    "tests/task_bus/__init__.py (весь дифф фикс-коммита)",
+    "docs/evidence/BUS-SMOKE-001/DIRECTOR_ACCEPTANCE_P14_R1.md (DIR-1, F-2; гейт на изменение workflow)"
+  ],
+  "next_action": "IMPLEMENTER: локальная верификация (unittest discover 200; WSL pytest 40 passed; нативный Linux-клон parity; 5 чеков hosted-ci локально) → событие 0003.",
+  "blocker": null
+}

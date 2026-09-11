@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-DIR1-R1",
+  "work_order_id": "DIR-1",
+  "checkpoint": "INFRA1",
+  "base_sha": "e26672c1a0e0344269ff0dc4d15374ec583c7192",
+  "branch": "control/ci-taskbus-coverage-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "tests/task_bus/__init__.py",
+    "docs/evidence/DIR1/**",
+    "docs/work/executions/EX-DIR1-R1/**"
+  ],
+  "started_at_utc": "2026-09-11T10:09:18Z",
+  "status": "HANDOFF_READY"
+}

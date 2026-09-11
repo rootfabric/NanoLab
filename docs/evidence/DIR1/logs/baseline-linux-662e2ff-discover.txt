@@ -1,0 +1,10 @@
+hosted-ci Check 5/5 baseline parity log (BEFORE fix, START commit)
+platform: native Linux clone in WSL Ubuntu (Python 3.12.3), git 
+command: git checkout 662e2ff && python3 -m unittest discover -s tests -t .
+recorded_utc: 2026-09-11T10:17:28Z
+---
+................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 160 tests in 0.274s
+
+OK
