@@ -1,0 +1,216 @@
+{
+  "bus_head": "f81d8ee0296fab00f886f52e36c58629f9e7700e",
+  "candidate": {
+    "head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+    "ref": "work/bus-smoke-001-r1",
+    "tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf"
+  },
+  "canonical_acceptance": false,
+  "event_count": 9,
+  "execution_mode": "SCRIPTED_ROLE_SIMULATION",
+  "final_phase": "COMPLETED_SANDBOX",
+  "independent_ai_review": false,
+  "queue": {
+    "events": [
+      {
+        "actor": "director-pilot",
+        "at": 1788873311,
+        "data": {
+          "allowed_paths": [
+            "docs/work/pilots/BUS-SMOKE-001/receipt.json"
+          ],
+          "base_sha": "3d8458d672e2095f3a1e9bb09f35f63c6ca21b3f",
+          "capabilities": {
+            "DIRECTOR": [
+              "control"
+            ],
+            "IMPLEMENTER": [
+              "json"
+            ],
+            "REVIEWER": [
+              "review"
+            ],
+            "VERIFIER": [
+              "python"
+            ]
+          },
+          "claim_class": "C0_SOFTWARE_ONLY",
+          "depends_on": [],
+          "goal": "Check distributed handoff, not scientific validity",
+          "id": "BUS-SMOKE-001",
+          "kind": "PILOT"
+        },
+        "id": "open-smoke",
+        "op": "open",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "implementer-a",
+        "at": 1788873311,
+        "data": {},
+        "id": "proof-claim-implementer-a",
+        "op": "claim",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "implementer-a",
+        "at": 1788873311,
+        "data": {
+          "report": {
+            "checks": [
+              {
+                "command": "scripted fixture assertion",
+                "exit_code": 0
+              }
+            ],
+            "subject_head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+            "subject_tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf",
+            "summary": "Scripted protocol fixture, not independent review",
+            "verdict": "PASS"
+          },
+          "subject": {
+            "head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+            "ref": "work/bus-smoke-001-r1",
+            "tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf"
+          },
+          "token": "proof-claim-implementer-a"
+        },
+        "id": "proof-finish-implementer-a",
+        "op": "finish",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "reviewer-a",
+        "at": 1788873312,
+        "data": {},
+        "id": "proof-claim-reviewer-a",
+        "op": "claim",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "reviewer-a",
+        "at": 1788873312,
+        "data": {
+          "report": {
+            "checks": [
+              {
+                "command": "scripted fixture assertion",
+                "exit_code": 0
+              }
+            ],
+            "subject_head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+            "subject_tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf",
+            "summary": "Scripted protocol fixture, not independent review",
+            "verdict": "PASS"
+          },
+          "token": "proof-claim-reviewer-a"
+        },
+        "id": "proof-finish-reviewer-a",
+        "op": "finish",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "verifier-a",
+        "at": 1788873312,
+        "data": {},
+        "id": "proof-claim-verifier-a",
+        "op": "claim",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "verifier-a",
+        "at": 1788873312,
+        "data": {
+          "report": {
+            "checks": [
+              {
+                "command": "scripted fixture assertion",
+                "exit_code": 0
+              }
+            ],
+            "subject_head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+            "subject_tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf",
+            "summary": "Scripted protocol fixture, not independent review",
+            "verdict": "PASS"
+          },
+          "token": "proof-claim-verifier-a"
+        },
+        "id": "proof-finish-verifier-a",
+        "op": "finish",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "director-pilot",
+        "at": 1788873312,
+        "data": {},
+        "id": "proof-claim-director-pilot",
+        "op": "claim",
+        "task": "BUS-SMOKE-001"
+      },
+      {
+        "actor": "director-pilot",
+        "at": 1788873312,
+        "data": {
+          "report": {
+            "checks": [
+              {
+                "command": "scripted fixture assertion",
+                "exit_code": 0
+              }
+            ],
+            "subject_head": "6c77fff1940689d4e821b6d99486cc7c3f1486e2",
+            "subject_tree": "b7018f061feca677a0bd5e79cc2faa0eb6f21bcf",
+            "summary": "Scripted protocol fixture, not independent review",
+            "verdict": "PASS"
+          },
+          "token": "proof-claim-director-pilot"
+        },
+        "id": "proof-finish-director-pilot",
+        "op": "finish",
+        "task": "BUS-SMOKE-001"
+      }
+    ],
+    "policy": {
+      "actors": {
+        "director-pilot": {
+          "capabilities": [
+            "control"
+          ],
+          "role": "DIRECTOR"
+        },
+        "implementer-a": {
+          "capabilities": [
+            "json"
+          ],
+          "role": "IMPLEMENTER"
+        },
+        "implementer-b": {
+          "capabilities": [
+            "json"
+          ],
+          "role": "IMPLEMENTER"
+        },
+        "reviewer-a": {
+          "capabilities": [
+            "review"
+          ],
+          "role": "REVIEWER"
+        },
+        "verifier-a": {
+          "capabilities": [
+            "python"
+          ],
+          "role": "VERIFIER"
+        }
+      },
+      "lease_seconds": 60,
+      "max_claims": 16,
+      "max_repairs": 2,
+      "mode": "SANDBOX"
+    },
+    "schema_version": 1
+  },
+  "synthetic_main_after": "3d8458d672e2095f3a1e9bb09f35f63c6ca21b3f",
+  "synthetic_main_before": "3d8458d672e2095f3a1e9bb09f35f63c6ca21b3f",
+  "transport": "local bare Git remote with separate clones"
+}

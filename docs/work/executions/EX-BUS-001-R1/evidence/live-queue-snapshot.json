@@ -1,0 +1,75 @@
+{
+  "events": [
+    {
+      "actor": "director-pilot",
+      "at": 1788873927,
+      "data": {
+        "allowed_paths": [
+          "docs/work/pilots/BUS-SMOKE-001/receipt.json"
+        ],
+        "base_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+        "capabilities": {
+          "DIRECTOR": [
+            "control"
+          ],
+          "IMPLEMENTER": [
+            "json"
+          ],
+          "REVIEWER": [
+            "review"
+          ],
+          "VERIFIER": [
+            "python"
+          ]
+        },
+        "claim_class": "C0_SOFTWARE_ONLY",
+        "depends_on": [],
+        "goal": "Create the frozen formal JSON receipt and pass it through independent Implementer, Reviewer, Verifier and Director sessions using only the Git queue for handoffs. Do not claim scientific progress or canonical acceptance.",
+        "id": "BUS-SMOKE-001",
+        "kind": "PILOT"
+      },
+      "id": "bootstrap-bus-smoke-001-r1",
+      "op": "open",
+      "task": "BUS-SMOKE-001"
+    }
+  ],
+  "policy": {
+    "actors": {
+      "director-pilot": {
+        "capabilities": [
+          "control"
+        ],
+        "role": "DIRECTOR"
+      },
+      "implementer-a": {
+        "capabilities": [
+          "json"
+        ],
+        "role": "IMPLEMENTER"
+      },
+      "implementer-b": {
+        "capabilities": [
+          "json"
+        ],
+        "role": "IMPLEMENTER"
+      },
+      "reviewer-a": {
+        "capabilities": [
+          "review"
+        ],
+        "role": "REVIEWER"
+      },
+      "verifier-a": {
+        "capabilities": [
+          "python"
+        ],
+        "role": "VERIFIER"
+      }
+    },
+    "lease_seconds": 1800,
+    "max_claims": 16,
+    "max_repairs": 2,
+    "mode": "SANDBOX"
+  },
+  "schema_version": 1
+}

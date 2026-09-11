@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation",
+  "timestamp_utc": "2026-09-08T13:27:41Z",
+  "execution_id": "EX-BUS-001-R1",
+  "work_order_id": "BUS-001",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "99a93c0f44d0cbc3c0a4ab5cca1f6d5095963024",
+  "summary": "40 unit/integration tests passed on source blobs matching the published code subject; synthetic roles are not independent AI review.",
+  "evidence_refs": [
+    "docs/work/executions/EX-BUS-001-R1/evidence/validation.json"
+  ],
+  "next_action": "Read evidence and start separate-role live pilot."
+}

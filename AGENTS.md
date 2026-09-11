@@ -2,6 +2,23 @@
 
 Канонический репозиторий: `rootfabric/NanoLab`. Root `AGENTS.md` маршрутизирует работу; roadmap и scientific truth берутся из `main`.
 
+## Central agent / Director fast path
+
+Если владелец назначил тебя **центральным/главным агентом**, `DIRECTOR`, попросил организовать распределённое выполнение дорожной карты, запускать/ожидать других агентов или продолжить task-bus workflow, **сразу после этого файла читай `DIRECTOR.md`**.
+
+```text
+CENTRAL / MAIN AGENT / DIRECTOR / DISTRIBUTED WORKFLOW
+    -> DIRECTOR.md
+    -> docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md
+    -> fresh canonical state
+    -> fresh Git Task Bus status/history
+    -> dispatch real role session OR WAIT_EXTERNAL
+```
+
+Не пытайся восстановить распределённый workflow из чата и не выполняй независимые роли под разными именами в одной сессии. `DIRECTOR.md` является коротким входом; полные правила находятся в `docs/control/GIT_TASK_BUS_RU.md`, `docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md` и `docs/control/GIT_TASK_BUS_PROMPTS_RU.md`.
+
+Текущее обязательное ограничение Task Bus: `BUS-SMOKE-001` уже завершён как `COMPLETED_SANDBOX`; это не `ACCEPTED`. До Fresh Reviewer + Fresh exact-head Verifier + Human Gate самого `BUS-001` **не начинать P2 production activation**.
+
 ## Mandatory read order
 
 Перед изменением кода, запуском эксперимента, review или объявлением checkpoint читать:
@@ -54,6 +71,9 @@ DO NOT REUSE A FAILED RUN ID
 RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE
 INFRASTRUCTURE PROVIDES CAPABILITY; IT DOES NOT DECLARE SCIENTIFIC TRUTH
 PUBLIC PR CODE MUST NOT AUTOMATICALLY RUN ON TRUSTED SELF-HOSTED SCIENTIFIC NODES
+COMPLETED_SANDBOX IS NOT CANONICAL ACCEPTANCE
+ROLE ACTOR IDENTITY IS NOT PROOF OF INDEPENDENT EXECUTOR IDENTITY
+DO NOT START TASK-BUS P2 BEFORE P1.1-P1.4 GATES
 ```
 
 ## Work protocol

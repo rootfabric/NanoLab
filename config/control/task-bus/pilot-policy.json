@@ -1,0 +1,13 @@
+{
+  "mode": "SANDBOX",
+  "lease_seconds": 1800,
+  "max_claims": 16,
+  "max_repairs": 2,
+  "actors": {
+    "director-pilot": {"role": "DIRECTOR", "capabilities": ["control"]},
+    "implementer-a": {"role": "IMPLEMENTER", "capabilities": ["json"]},
+    "implementer-b": {"role": "IMPLEMENTER", "capabilities": ["json"]},
+    "reviewer-a": {"role": "REVIEWER", "capabilities": ["review"]},
+    "verifier-a": {"role": "VERIFIER", "capabilities": ["python"]}
+  }
+}

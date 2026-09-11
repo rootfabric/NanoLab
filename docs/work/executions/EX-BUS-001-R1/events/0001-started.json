@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-started",
+  "timestamp_utc": "2026-09-08T13:02:07Z",
+  "execution_id": "EX-BUS-001-R1",
+  "work_order_id": "BUS-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+  "summary": "User requested a distributed roadmap workflow using Git as a message broker. Canonical controls read; ready to implement an isolated C0 pilot without changing main or scientific state.",
+  "next_action": "Implement and test the task-bus protocol, then publish an unclaimed formal pilot task."
+}

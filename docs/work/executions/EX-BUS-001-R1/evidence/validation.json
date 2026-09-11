@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-BUS-001-R1",
+  "recorded_at_utc": "2026-09-08T13:27:41Z",
+  "code_subject": {
+    "head": "99a93c0f44d0cbc3c0a4ab5cca1f6d5095963024",
+    "tree": "cc810266bc506917b738ca9bdccd789dfacfe698"
+  },
+  "files": [
+    {
+      "path": "tools/task_bus.py",
+      "size": 27313,
+      "git_blob": "a3d0556717f3320e885f4092f242bed53bf0584f",
+      "sha256": "191b0d3004eebf03ee2424df44a08c78001c82de005f58285a29bb674021f825"
+    },
+    {
+      "path": "tests/task_bus/test_task_bus.py",
+      "size": 22996,
+      "git_blob": "7f8c93972be0b4efe88204457eda92f15fa043b4",
+      "sha256": "3f1a5d8ebd054abe7416d44b76cc03059f88c434734c21126b1a78018e5be341"
+    }
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "git": "git version 2.47.3",
+    "os": "Linux"
+  },
+  "commands": [
+    {
+      "command": "python -m py_compile tools/task_bus.py tests/task_bus/test_task_bus.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m unittest discover -s tests/task_bus -v",
+      "exit_code": 0,
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "evidence/tests-published.log"
+    }
+  ],
+  "historical_failure": {
+    "stage": "initial test discovery",
+    "cause": "test loader resolved TOOL from wrong parent directory",
+    "repair": "ROOT uses parents[2]; subsequent full test runs pass",
+    "log": "evidence/tests-initial-failure.log"
+  },
+  "live_queue": {
+    "branch": "control/task-bus-pilot-r1",
+    "seed_head": "d23407843185391ec54de11f98c9211da95ecfce",
+    "queue_blob": "9995ca980ee1ac046c20c9ad8fd5c0d30f013c70",
+    "event_count": 1,
+    "phase": "IMPLEMENTER",
+    "lease": null
+  },
+  "epoch_drift": {
+    "initial_main": "95b1319600bcc64572d84c0456acb927802ab806",
+    "observed_main": "81e299f1924e50bcff1bc5c893bccd934ef2883d",
+    "decision": "CONTINUE",
+    "reason": "External NL0-002 rights/acceptance changes; no overlap with pilot files or role/merge policies. Scheduler now prioritizes NL0-003; pilot does not schedule science. Frozen base is not silently changed.",
+    "main_writes_by_this_execution": 0
+  },
+  "independent_ai_review": "NOT_RUN",
+  "live_independent_agent_cycle": "NOT_RUN",
+  "full_repository_harness_regression": "NOT_RUN",
+  "windows": "NOT_RUN",
+  "github_actions": "NOT_RUN",
+  "production_activation": false,
+  "canonical_acceptance": false
+}

@@ -1,0 +1,15 @@
+{
+  "id": "BUS-SMOKE-001",
+  "kind": "PILOT",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "base_sha": "95b1319600bcc64572d84c0456acb927802ab806",
+  "goal": "Create the frozen formal JSON receipt and pass it through independent Implementer, Reviewer, Verifier and Director sessions using only the Git queue for handoffs. Do not claim scientific progress or canonical acceptance.",
+  "depends_on": [],
+  "allowed_paths": ["docs/work/pilots/BUS-SMOKE-001/receipt.json"],
+  "capabilities": {
+    "IMPLEMENTER": ["json"],
+    "REVIEWER": ["review"],
+    "VERIFIER": ["python"],
+    "DIRECTOR": ["control"]
+  }
+}

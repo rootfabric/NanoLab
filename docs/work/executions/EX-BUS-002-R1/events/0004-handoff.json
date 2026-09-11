@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff",
+  "timestamp_utc": "2026-09-08T13:49:20Z",
+  "execution_id": "EX-BUS-002-R1",
+  "work_order_id": "BUS-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "77df4b2a7ba3b247f1d4c3c47af9c2bdda5c86ba",
+  "summary": "Director discoverability follow-up is published on control/git-task-bus-r1. A fresh central agent on this branch starts at AGENTS.md and is immediately routed to DIRECTOR.md; canonical main is intentionally not modified without the existing merge/review gate.",
+  "evidence_refs": ["AGENTS.md", "DIRECTOR.md", "docs/work/executions/EX-BUS-002-R1/summary.md"],
+  "next_action": "Independent review/live pilot, then Human Gate merge so the root entry point becomes visible from canonical main."
+}

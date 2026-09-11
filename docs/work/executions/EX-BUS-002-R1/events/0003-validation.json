@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation",
+  "timestamp_utc": "2026-09-08T13:49:20Z",
+  "execution_id": "EX-BUS-002-R1",
+  "work_order_id": "BUS-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "77df4b2a7ba3b247f1d4c3c47af9c2bdda5c86ba",
+  "summary": "Fresh Git reads confirm AGENTS.md routes central/director assignments to DIRECTOR.md; DIRECTOR.md contains deterministic state recovery, status interpretation, role dispatch, WAIT_EXTERNAL, failure/reclaim/invalidate handling and pilot entry commands. Diff from BUS-002 START changes only AGENTS.md, DIRECTOR.md and its durable event.",
+  "evidence_refs": ["AGENTS.md", "DIRECTOR.md"],
+  "next_action": "Publish handoff in draft PR #20; main remains unchanged until Human Gate."
+}
