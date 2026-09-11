@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-11T10:21:13Z",
+  "execution_id": "EX-DIR1-R1",
+  "work_order_id": "DIR-1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9f16e7ba5d216f4a3982b98177ad147e3bcfb712",
+  "summary": "Handoff EX-DIR1-R1 (IMPLEMENTER → быстрый control-review, merge — Human Gate оркестратора). Ветка control/ci-taskbus-coverage-r1 от exact main e26672c1a0e0344269ff0dc4d15374ec583c7192; HEAD на момент handoff 9f16e7ba5d216f4a3982b98177ad147e3bcfb712 (fix-коммит; следующим терминальным коммитом добавляются только docs/evidence/DIR1/** + события/summary этого EX — содержательная часть не меняется). Состав: (1) tests/task_bus/__init__.py — пустой package-маркер, единственный содержательный файл диффа; (2) docs/evidence/DIR1/README.md — обоснование выбора кандидата A (package-маркер) против B (pytest-чек в workflow) + протокол верификации; (3) docs/evidence/DIR1/logs/*.txt — логи прогонов (Windows discover 200 OK skipped=1; Linux baseline 160; нативный Linux parity 200 OK 0 skip + pytest 40 passed); (4) docs/work/executions/EX-DIR1-R1/** — паспорт, branch-passport, события 0001–0004. Все 5 чеков hosted-ci локально зелёные; ожидаемый итог Check 5/5 на ubuntu-агенте после merge: «Ran 200 tests, OK» без skip'ов (40 тестов брокера tools/task_bus.py, blob a3d0556717f3320e885f4092f242bed53bf0584f, реально исполняются в live-CI; symlink-негатив — позитивно, F-2 закрыт на Linux-стороне). Открытые риски/пункты: DIR-1 снимается из очереди findings решением Director после фактического зелёного CI на merge-коммите; Windows-эквивалент symlink-негатива (F-2) остаётся в очереди P2; вариант B (pytest в CI) не отклонён навсегда — отдельный workflow-гейт при необходимости. Границы соблюдены: брокер, политики, .github/workflows/**, state-файлы, science — не изменялись; force-push не выполнялся; claim ceiling C0_SOFTWARE_ONLY не менялся.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\control-dir-1 rev-parse HEAD -> 9f16e7ba5d216f4a3982b98177ad147e3bcfb712 (fix-коммит handoff-субъекта)",
+    "git -C C:\\NanoLab\\control-dir-1 status --short -> только запланированные docs/evidence/DIR1/** + docs/work/executions/EX-DIR1-R1/**",
+    "git push origin control/ci-taskbus-coverage-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/DIR1/README.md",
+    "docs/evidence/DIR1/logs/",
+    "docs/work/executions/EX-DIR1-R1/passport.json",
+    "docs/work/executions/EX-DIR1-R1/events/0001..0003"
+  ],
+  "next_action": "ORCHESTRATOR/REVIEWER: быстрый control-review PR (одобрение вариантов A и диффа 1 файл), затем merge (Human Gate) и контроль зелёного Check 5/5 «Ran 200 tests» на merge-коммите; после — Director снимает DIR-1 из очереди findings.",
+  "blocker": null
+}

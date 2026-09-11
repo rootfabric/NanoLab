@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-11T10:20:41Z",
+  "execution_id": "EX-DIR1-R1",
+  "work_order_id": "DIR-1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9f16e7ba5d216f4a3982b98177ad147e3bcfb712",
+  "summary": "Локальная верификация фикса EX-DIR1-R1 (все 5 чеков hosted-ci parity + WSL). Check 5/5 (ключевой): (1) Windows, Python 3.11.8, worktree @ 9f16e7b — python -m unittest discover -s tests -t . -v → «Ran 200 tests … OK (skipped=1)»: собраны все 40 task_bus-тестов (было 160), единственный skip — test_symlink_candidate_and_local_smoke_are_rejected ('Platform does not permit unprivileged symlinks', известный F-2 на Windows), счёт 39 passed + 1 skipped совпадает с локальной регрессией Director'а на merge-коммите PR #20; (2) нативный Linux-клон в WSL Ubuntu (Python 3.12.3, git 2.43.0) @ 9f16e7b — unittest discover → «Ran 200 tests, OK» БЕЗ skip'ов (symlink-тест исполняется позитивно — прямая CI-parity для ubuntu-агента), python3 -m pytest tests/task_bus -q → «40 passed»; (3) WSL worktree на /mnt/c — python3 -m pytest tests/task_bus -q → 40 passed. Базовая линия воспроизведена: Windows worktree @ e26672c → 160 tests OK; нативный Linux-клон @ 662e2ff → 160 tests OK (без __init__.py discovery не заходит в task_bus и на Linux — причина не платформенно-специфична). Примечание: skip 'blobs not committed at HEAD yet' (tests.test_nl2_003_hardening) наблюдался только в WSL-worktree прогоне из-за Windows-путей gitdir worktree — на нативном клоне и на обычном CI-checkout этот тест исполняется. Check 1/5: 739 tracked *.json — json.tool OK, 2 pinned negative-фикстуры digest-совпадают. Check 2/5: harness.cli check-consistency → ok=true. Check 3/5: 18 каталогов EX-* work_cli validate → 0 failures (включая новый EX-DIR1-R1). Check 4/5: harness.workflow_lint → ok=true, 0 violations (.github/workflows не изменялись). Логи: docs/evidence/DIR1/logs/ (after-windows-discover-python3118.txt, baseline-linux-662e2ff-discover.txt, after-linux-native-9f16e7b.txt).",
+  "command_refs": [
+    "python -m unittest discover -s tests -t . -v (Windows 3.11.8 @ 9f16e7b) -> Ran 200 tests, OK (skipped=1)",
+    "wsl: python3 -m unittest discover -s tests -t . (native clone @ 9f16e7b) -> Ran 200 tests, OK (0 skip)",
+    "wsl: python3 -m pytest tests/task_bus -q (native clone @ 9f16e7b) -> 40 passed",
+    "wsl: git checkout 662e2ff && python3 -m unittest discover -s tests -t . -> Ran 160 tests, OK (baseline Linux)",
+    "$env:PYTHONPATH='scripts'; python -m harness.cli check-consistency --root . -> ok=true",
+    "$env:PYTHONPATH='scripts'; python -m harness.workflow_lint --root . -> ok=true, 0 violations",
+    "foreach EX-*: python -m harness.work_cli validate -> 18/18 ok",
+    "git ls-files '*.json' + python -m json.tool + sha256 pinned fixtures -> 739 files ok, 2/2 pins"
+  ],
+  "evidence_refs": [
+    "docs/evidence/DIR1/README.md (таблица протокола верификации, интерпретация skip'ов)",
+    "docs/evidence/DIR1/logs/after-windows-discover-python3118.txt",
+    "docs/evidence/DIR1/logs/baseline-linux-662e2ff-discover.txt",
+    "docs/evidence/DIR1/logs/after-linux-native-9f16e7b.txt",
+    "docs/evidence/BUS-SMOKE-001/DIRECTOR_ACCEPTANCE_P14_R1.md (эталонная регрессия 160 / 39+1)"
+  ],
+  "next_action": "IMPLEMENTER: handoff (событие 0004 + summary.md + passport status HANDOFF_READY), push, PR без merge.",
+  "blocker": null
+}

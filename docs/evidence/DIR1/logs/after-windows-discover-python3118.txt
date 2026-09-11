@@ -1,0 +1,220 @@
+hosted-ci Check 5/5 parity log (AFTER fix)
+branch: control/ci-taskbus-coverage-r1 @ 9f16e7ba5d216f4a3982b98177ad147e3bcfb712
+platform: Windows, Python 3.11.8, git 2.53.0.windows.1
+command: python -m unittest discover -s tests -t . -v
+recorded_utc: 2026-09-11T10:16:25Z
+---
+test_actual_concurrent_claim_has_exactly_one_winner (tests.task_bus.test_task_bus.GitIntegrationTests.test_actual_concurrent_claim_has_exactly_one_winner) ... ok
+test_cli_claim_receipt_and_idempotent_retry (tests.task_bus.test_task_bus.GitIntegrationTests.test_cli_claim_receipt_and_idempotent_retry) ... ok
+test_concurrent_different_tasks_retry_without_losing_events (tests.task_bus.test_task_bus.GitIntegrationTests.test_concurrent_different_tasks_retry_without_losing_events) ... ok
+test_dirty_worktree_and_index_are_preserved (tests.task_bus.test_task_bus.GitIntegrationTests.test_dirty_worktree_and_index_are_preserved) ... ok
+test_drifted_remote_ref_blocks_handoff (tests.task_bus.test_task_bus.GitIntegrationTests.test_drifted_remote_ref_blocks_handoff) ... ok
+test_duplicate_init_is_rejected (tests.task_bus.test_task_bus.GitIntegrationTests.test_duplicate_init_is_rejected) ... ok
+test_independent_clones_full_cycle_and_main_untouched (tests.task_bus.test_task_bus.GitIntegrationTests.test_independent_clones_full_cycle_and_main_untouched) ... ok
+test_inherited_git_directory_cannot_redirect_bus_writes (tests.task_bus.test_task_bus.GitIntegrationTests.test_inherited_git_directory_cannot_redirect_bus_writes) ... ok
+test_lost_ack_at_final_attempt_is_recovered (tests.task_bus.test_task_bus.GitIntegrationTests.test_lost_ack_at_final_attempt_is_recovered) ... ok
+test_lost_push_ack_is_recovered_without_duplicate (tests.task_bus.test_task_bus.GitIntegrationTests.test_lost_push_ack_is_recovered_without_duplicate) ... ok
+test_main_cannot_be_used_as_bus_branch (tests.task_bus.test_task_bus.GitIntegrationTests.test_main_cannot_be_used_as_bus_branch) ... ok
+test_out_of_scope_change_rejected (tests.task_bus.test_task_bus.GitIntegrationTests.test_out_of_scope_change_rejected) ... ok
+test_smoke_negative_control_and_strict_boolean_types (tests.task_bus.test_task_bus.GitIntegrationTests.test_smoke_negative_control_and_strict_boolean_types) ... ok
+test_symlink_candidate_and_local_smoke_are_rejected (tests.task_bus.test_task_bus.GitIntegrationTests.test_symlink_candidate_and_local_smoke_are_rejected) ... skipped 'Platform does not permit unprivileged symlinks'
+test_whitespace_filename_cannot_bypass_scope (tests.task_bus.test_task_bus.GitIntegrationTests.test_whitespace_filename_cannot_bypass_scope) ... ok
+test_wrong_tree_is_rejected (tests.task_bus.test_task_bus.GitIntegrationTests.test_wrong_tree_is_rejected) ... ok
+test_block_resume_and_cancel (tests.task_bus.test_task_bus.ReducerTests.test_block_resume_and_cancel) ... ok
+test_capability_filter_enforced (tests.task_bus.test_task_bus.ReducerTests.test_capability_filter_enforced) ... ok
+test_claim_budget_is_enforced (tests.task_bus.test_task_bus.ReducerTests.test_claim_budget_is_enforced) ... ok
+test_competing_claim_is_denied (tests.task_bus.test_task_bus.ReducerTests.test_competing_claim_is_denied) ... ok
+test_dependency_must_exist_and_complete (tests.task_bus.test_task_bus.ReducerTests.test_dependency_must_exist_and_complete) ... ok
+test_director_invalidates_stale_candidate (tests.task_bus.test_task_bus.ReducerTests.test_director_invalidates_stale_candidate) ... ok
+test_early_or_worker_reclaim_denied (tests.task_bus.test_task_bus.ReducerTests.test_early_or_worker_reclaim_denied) ... ok
+test_expired_lease_requires_director_reclaim (tests.task_bus.test_task_bus.ReducerTests.test_expired_lease_requires_director_reclaim) ... ok
+test_failed_command_cannot_have_pass_verdict (tests.task_bus.test_task_bus.ReducerTests.test_failed_command_cannot_have_pass_verdict) ... ok
+test_full_four_role_cycle_is_only_sandbox_complete (tests.task_bus.test_task_bus.ReducerTests.test_full_four_role_cycle_is_only_sandbox_complete) ... ok
+test_heartbeat_extends_current_lease (tests.task_bus.test_task_bus.ReducerTests.test_heartbeat_extends_current_lease) ... ok
+test_idempotency_collision_denied (tests.task_bus.test_task_bus.ReducerTests.test_idempotency_collision_denied) ... ok
+test_idempotent_replay_preserves_original_receipt (tests.task_bus.test_task_bus.ReducerTests.test_idempotent_replay_preserves_original_receipt) ... ok
+test_insufficient_evidence_blocks_and_resumes_same_role (tests.task_bus.test_task_bus.ReducerTests.test_insufficient_evidence_blocks_and_resumes_same_role) ... ok
+test_json_ambiguities_rejected (tests.task_bus.test_task_bus.ReducerTests.test_json_ambiguities_rejected) ... ok
+test_no_self_acceptance_or_skipped_stages (tests.task_bus.test_task_bus.ReducerTests.test_no_self_acceptance_or_skipped_stages) ... ok
+test_nonmonotonic_history_and_duplicate_ids_rejected (tests.task_bus.test_task_bus.ReducerTests.test_nonmonotonic_history_and_duplicate_ids_rejected) ... ok
+test_release_fences_old_token (tests.task_bus.test_task_bus.ReducerTests.test_release_fences_old_token) ... ok
+test_repair_budget_is_enforced (tests.task_bus.test_task_bus.ReducerTests.test_repair_budget_is_enforced) ... ok
+test_repair_clears_approvals_but_preserves_failure (tests.task_bus.test_task_bus.ReducerTests.test_repair_clears_approvals_but_preserves_failure) ... ok
+test_review_cannot_change_subject (tests.task_bus.test_task_bus.ReducerTests.test_review_cannot_change_subject) ... ok
+test_scientific_tasks_and_broad_scopes_are_rejected (tests.task_bus.test_task_bus.ReducerTests.test_scientific_tasks_and_broad_scopes_are_rejected) ... ok
+test_unknown_actor_denied (tests.task_bus.test_task_bus.ReducerTests.test_unknown_actor_denied) ... ok
+test_wrong_role_cannot_claim (tests.task_bus.test_task_bus.ReducerTests.test_wrong_role_cannot_claim) ... ok
+test_known_vector (tests.test_hinge_family.GitBlobShaCase.test_known_vector) ... ok
+test_orientation_scale_is_unit (tests.test_hinge_family.GitBlobShaCase.test_orientation_scale_is_unit) ... ok
+test_bundled_pins_registry_satisfies_contract (tests.test_hinge_family.SyntheticSurfaceCase.test_bundled_pins_registry_satisfies_contract) ... ok
+test_conf_column_count_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_conf_column_count_fails) ... ok
+test_conf_nan_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_conf_nan_fails) ... ok
+test_conf_non_unit_orientation_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_conf_non_unit_orientation_fails) ... ok
+test_conf_particle_count_mismatch_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_conf_particle_count_mismatch_fails) ... ok
+test_consistent_surface_passes (tests.test_hinge_family.SyntheticSurfaceCase.test_consistent_surface_passes) ... ok
+test_design_base_count_mismatch_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_design_base_count_mismatch_fails) ... ok
+test_design_bases_equal_topology_nucleotides (tests.test_hinge_family.SyntheticSurfaceCase.test_design_bases_equal_topology_nucleotides) ... ok
+test_design_pointer_inconsistency_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_design_pointer_inconsistency_fails) ... ok
+test_determinism_byte_identical_reports (tests.test_hinge_family.SyntheticSurfaceCase.test_determinism_byte_identical_reports) ... ok
+test_missing_source_file_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_missing_source_file_fails) ... ok
+test_pins_registry_rejects_malformed_blob_sha (tests.test_hinge_family.SyntheticSurfaceCase.test_pins_registry_rejects_malformed_blob_sha) ... ok
+test_pins_registry_requires_reference_only_mode (tests.test_hinge_family.SyntheticSurfaceCase.test_pins_registry_requires_reference_only_mode) ... ok
+test_report_contains_no_wall_clock_fields (tests.test_hinge_family.SyntheticSurfaceCase.test_report_contains_no_wall_clock_fields) ... ok
+test_sim_input_wrong_temperature_fails (tests.test_hinge_family.SyntheticSurfaceCase.test_sim_input_wrong_temperature_fails) ... ok
+test_tampered_byte_fails_digest_gate (tests.test_hinge_family.SyntheticSurfaceCase.test_tampered_byte_fails_digest_gate) ... ok
+test_topology_broken_chain_links (tests.test_hinge_family.SyntheticSurfaceCase.test_topology_broken_chain_links) ... ok
+test_topology_invalid_base_letter (tests.test_hinge_family.SyntheticSurfaceCase.test_topology_invalid_base_letter) ... ok
+test_topology_row_count_mismatch (tests.test_hinge_family.SyntheticSurfaceCase.test_topology_row_count_mismatch) ... ok
+test_truncated_file_fails_size_gate (tests.test_hinge_family.SyntheticSurfaceCase.test_truncated_file_fails_size_gate) ... ok
+test_unparseable_workflow_fails (tests.test_infra_workflow_lint.FailClosedTests.test_unparseable_workflow_fails) ... ok
+test_missing_on_block_fails (tests.test_infra_workflow_lint.MAJOR1TriggerFormTests.test_missing_on_block_fails) ... ok
+test_null_on_block_fails (tests.test_infra_workflow_lint.MAJOR1TriggerFormTests.test_null_on_block_fails) ... ok
+test_on_flow_form_with_forbidden_trigger_fails (tests.test_infra_workflow_lint.MAJOR1TriggerFormTests.test_on_flow_form_with_forbidden_trigger_fails) ... ok
+test_on_scalar_form_fails (tests.test_infra_workflow_lint.MAJOR1TriggerFormTests.test_on_scalar_form_fails) ... ok
+test_alias_dereference_in_runs_on_fails (tests.test_infra_workflow_lint.MAJOR2AnchorAliasTests.test_alias_dereference_in_runs_on_fails) ... ok
+test_ampersand_inside_run_script_is_not_an_anchor (tests.test_infra_workflow_lint.MAJOR2AnchorAliasTests.test_ampersand_inside_run_script_is_not_an_anchor) ... ok
+test_anchor_and_alias_in_runs_on_fails (tests.test_infra_workflow_lint.MAJOR2AnchorAliasTests.test_anchor_and_alias_in_runs_on_fails) ... ok
+test_anchor_in_non_runner_field_fails (tests.test_infra_workflow_lint.MAJOR2AnchorAliasTests.test_anchor_in_non_runner_field_fails) ... ok
+test_merge_key_fails (tests.test_infra_workflow_lint.MAJOR2AnchorAliasTests.test_merge_key_fails) ... ok
+test_bracket_double_quote_form_fails (tests.test_infra_workflow_lint.MINOR1SecretsBracketTests.test_bracket_double_quote_form_fails) ... ok
+test_bracket_single_quote_form_fails (tests.test_infra_workflow_lint.MINOR1SecretsBracketTests.test_bracket_single_quote_form_fails) ... ok
+test_dot_form_still_fails (tests.test_infra_workflow_lint.MINOR1SecretsBracketTests.test_dot_form_still_fails) ... ok
+test_mixed_space_tab_leading_whitespace_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_mixed_space_tab_leading_whitespace_fails) ... ok
+test_tab_before_comment_line_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_before_comment_line_fails) ... ok
+test_tab_indented_key_under_job_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_indented_key_under_job_fails) ... ok
+test_tab_indented_key_under_on_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_indented_key_under_on_fails) ... ok
+test_tab_indented_step_inside_job_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_indented_step_inside_job_fails) ... ok
+test_tab_indented_top_level_key_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_indented_top_level_key_fails) ... ok
+test_tab_inside_scalar_value_is_allowed (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_inside_scalar_value_is_allowed) ... ok
+test_tab_only_blank_line_fails (tests.test_infra_workflow_lint.MINOR4TabIndentationTests.test_tab_only_blank_line_fails) ... ok
+test_multi_document_workflow_fails (tests.test_infra_workflow_lint.MultiDocumentTests.test_multi_document_workflow_fails) ... ok
+test_dynamic_runs_on_expression_fails (tests.test_infra_workflow_lint.NC1RunnerLabelTests.test_dynamic_runs_on_expression_fails) ... ok
+test_missing_runs_on_fails (tests.test_infra_workflow_lint.NC1RunnerLabelTests.test_missing_runs_on_fails) ... ok
+test_reserved_hpc_label_prefix_fails (tests.test_infra_workflow_lint.NC1RunnerLabelTests.test_reserved_hpc_label_prefix_fails) ... ok
+test_runs_on_nanolab_cpu_must_fail (tests.test_infra_workflow_lint.NC1RunnerLabelTests.test_runs_on_nanolab_cpu_must_fail) ... ok
+test_self_hosted_label_fails (tests.test_infra_workflow_lint.NC1RunnerLabelTests.test_self_hosted_label_fails) ... ok
+test_external_reusable_workflow_fails (tests.test_infra_workflow_lint.NC2TrustBoundaryTests.test_external_reusable_workflow_fails) ... ok
+test_pull_request_target_fails (tests.test_infra_workflow_lint.NC2TrustBoundaryTests.test_pull_request_target_fails) ... ok
+test_reserved_schedule_trigger_fails (tests.test_infra_workflow_lint.NC2TrustBoundaryTests.test_reserved_schedule_trigger_fails) ... ok
+test_workflow_run_fails (tests.test_infra_workflow_lint.NC2TrustBoundaryTests.test_workflow_run_fails) ... ok
+test_missing_permissions_block_fails (tests.test_infra_workflow_lint.NC4NC6NC7Tests.test_missing_permissions_block_fails) ... ok
+test_missing_timeout_fails (tests.test_infra_workflow_lint.NC4NC6NC7Tests.test_missing_timeout_fails) ... ok
+test_out_of_bounds_timeout_fails (tests.test_infra_workflow_lint.NC4NC6NC7Tests.test_out_of_bounds_timeout_fails) ... ok
+test_secrets_reference_fails (tests.test_infra_workflow_lint.NC4NC6NC7Tests.test_secrets_reference_fails) ... ok
+test_write_permission_fails (tests.test_infra_workflow_lint.NC4NC6NC7Tests.test_write_permission_fails) ... ok
+test_bare_pull_request_trigger_still_fails_note3 (tests.test_infra_workflow_lint.NOTE1TriggerGuardTests.test_bare_pull_request_trigger_still_fails_note3) ... ok
+test_push_only_workflow_does_not_trigger_note3 (tests.test_infra_workflow_lint.NOTE1TriggerGuardTests.test_push_only_workflow_does_not_trigger_note3) ... ok
+test_jobs_flow_mapping_compliant_passes (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_flow_mapping_compliant_passes) ... ok
+test_jobs_flow_mapping_is_still_linted (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_flow_mapping_is_still_linted) ... ok
+test_jobs_missing_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_missing_fails) ... ok
+test_jobs_null_form_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_null_form_fails) ... ok
+test_jobs_scalar_form_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_scalar_form_fails) ... ok
+test_jobs_sequence_benign_content_still_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_sequence_benign_content_still_fails) ... ok
+test_jobs_sequence_of_mappings_still_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_sequence_of_mappings_still_fails) ... ok
+test_jobs_sequence_with_nanolab_cpu_fails (tests.test_infra_workflow_lint.NOTE5JobsMappingTests.test_jobs_sequence_with_nanolab_cpu_fails) ... ok
+test_boolean_timeout_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_boolean_timeout_fails) ... ok
+test_crlf_line_endings_pass (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_crlf_line_endings_pass) ... ok
+test_docker_action_digest_pinned_passes (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_docker_action_digest_pinned_passes) ... ok
+test_docker_action_without_digest_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_docker_action_without_digest_fails) ... ok
+test_document_end_marker_followed_by_content_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_document_end_marker_followed_by_content_fails) ... ok
+test_forbidden_label_inside_list_form_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_forbidden_label_inside_list_form_fails) ... ok
+test_job_level_write_permission_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_job_level_write_permission_fails) ... ok
+test_mixed_case_nanolab_cpu_label_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_mixed_case_nanolab_cpu_label_fails) ... ok
+test_nanolab_gpu_label_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_nanolab_gpu_label_fails) ... ok
+test_non_scalar_permission_level_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_non_scalar_permission_level_fails) ... ok
+test_pr_types_empty_list_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_pr_types_empty_list_fails) ... ok
+test_pr_types_scalar_form_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_pr_types_scalar_form_fails) ... ok
+test_pull_requests_write_scope_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_pull_requests_write_scope_fails) ... ok
+test_release_reserved_trigger_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_release_reserved_trigger_fails) ... ok
+test_secrets_reference_in_job_env_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_secrets_reference_in_job_env_fails) ... ok
+test_short_sha_pinned_action_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_short_sha_pinned_action_fails) ... ok
+test_string_timeout_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_string_timeout_fails) ... ok
+test_timeout_above_max_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_timeout_above_max_fails) ... ok
+test_unexpected_indent_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_unexpected_indent_fails) ... ok
+test_unknown_permission_level_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_unknown_permission_level_fails) ... ok
+test_uppercase_self_hosted_label_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_uppercase_self_hosted_label_fails) ... ok
+test_workflow_dispatch_reserved_trigger_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_workflow_dispatch_reserved_trigger_fails) ... ok
+test_workflow_level_write_all_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_workflow_level_write_all_fails) ... ok
+test_workflow_run_with_filters_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_workflow_run_with_filters_fails) ... ok
+test_zero_timeout_fails (tests.test_infra_workflow_lint.NegativeMatrixExpansionTests.test_zero_timeout_fails) ... ok
+test_pull_request_without_ready_for_review_fails (tests.test_infra_workflow_lint.PinningAndNote3Tests.test_pull_request_without_ready_for_review_fails) ... ok
+test_pull_request_without_types_fails (tests.test_infra_workflow_lint.PinningAndNote3Tests.test_pull_request_without_types_fails) ... ok
+test_tag_pinned_action_fails (tests.test_infra_workflow_lint.PinningAndNote3Tests.test_tag_pinned_action_fails) ... ok
+test_compliant_workflow_passes (tests.test_infra_workflow_lint.PositiveLintTests.test_compliant_workflow_passes) ... ok
+test_real_hosted_ci_workflow_passes (tests.test_infra_workflow_lint.PositiveLintTests.test_real_hosted_ci_workflow_passes) ... ok
+test_empty_runs_on_list_fails (tests.test_infra_workflow_lint.RunsOnEmptyListTests.test_empty_runs_on_list_fails) ... ok
+test_runs_on_list_form_passes (tests.test_infra_workflow_lint.RunsOnEmptyListTests.test_runs_on_list_form_passes) ... ok
+test_entry_counts_match_artifacts (tests.test_nl2_003_hardening.EmitRunOrderingTests.test_entry_counts_match_artifacts) ... ok
+test_manifest_describes_published_bytes (tests.test_nl2_003_hardening.EmitRunOrderingTests.test_manifest_describes_published_bytes) ... ok
+test_broken_map_core_is_detected (tests.test_nl2_003_hardening.EvidenceMapSchemaSyncTests.test_broken_map_core_is_detected) ... ok
+test_published_campaign_maps_carry_schema_core (tests.test_nl2_003_hardening.EvidenceMapSchemaSyncTests.test_published_campaign_maps_carry_schema_core) ... ok
+test_schema_is_campaign_convention (tests.test_nl2_003_hardening.EvidenceMapSchemaSyncTests.test_schema_is_campaign_convention) ... ok
+test_machine_stamped_run_passes (tests.test_nl2_003_hardening.ExperimentCliMidnightPlaceholderTests.test_machine_stamped_run_passes) ... ok
+test_midnight_offset_form_is_rejected_too (tests.test_nl2_003_hardening.ExperimentCliMidnightPlaceholderTests.test_midnight_offset_form_is_rejected_too) ... ok
+test_published_e1_e0_r4_events_are_machine_stamped (tests.test_nl2_003_hardening.ExperimentCliMidnightPlaceholderTests.test_published_e1_e0_r4_events_are_machine_stamped)
+No regression: real campaign events carry real machine stamps. ... ok
+test_published_s003_fixture_also_flags_midnight (tests.test_nl2_003_hardening.ExperimentCliMidnightPlaceholderTests.test_published_s003_fixture_also_flags_midnight) ... ok
+test_valid_run_with_three_midnight_events_fails (tests.test_nl2_003_hardening.ExperimentCliMidnightPlaceholderTests.test_valid_run_with_three_midnight_events_fails)
+A structurally valid run whose three events all carry T00:00:00Z. ... ok
+test_correct_location_passes (tests.test_nl2_003_hardening.O1StorageLocationTests.test_correct_location_passes) ... ok
+test_external_storage_scheme_out_of_scope (tests.test_nl2_003_hardening.O1StorageLocationTests.test_external_storage_scheme_out_of_scope) ... ok
+test_missing_run_id_segment_fails (tests.test_nl2_003_hardening.O1StorageLocationTests.test_missing_run_id_segment_fails) ... ok
+test_published_e0_r4_and_e1_locations_are_not_stale (tests.test_nl2_003_hardening.O1StorageLocationTests.test_published_e0_r4_and_e1_locations_are_not_stale) ... ok
+test_stale_campaign_segment_fails (tests.test_nl2_003_hardening.O1StorageLocationTests.test_stale_campaign_segment_fails)
+The historical E0-R2 defect shape: campaign segment names another campaign. ... ok
+test_constant_copy_across_three_events_fails (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_constant_copy_across_three_events_fails) ... ok
+test_legacy_whitelisted_batch_execution_passes (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_legacy_whitelisted_batch_execution_passes)
+EX-NL2-002-R1 published batch events (0002-0004, one stamp) stay valid. ... ok
+test_midnight_placeholder_event_fails (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_midnight_placeholder_event_fails) ... ok
+test_midnight_placeholder_passport_fails (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_midnight_placeholder_passport_fails) ... ok
+test_missing_timestamp_fails (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_missing_timestamp_fails) ... ok
+test_published_ex_nl2_002_r1_still_valid (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_published_ex_nl2_002_r1_still_valid) ... ok
+test_same_event_ids_in_other_execution_get_no_exemption (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_same_event_ids_in_other_execution_get_no_exemption) ... ok
+test_two_identical_stamps_stay_allowed (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_two_identical_stamps_stay_allowed) ... ok
+test_unparseable_timestamp_fails (tests.test_nl2_003_hardening.PlaceholderTimestampTests.test_unparseable_timestamp_fails) ... ok
+test_published_e0_r4_supported_analyses_still_pass (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_published_e0_r4_supported_analyses_still_pass)
+No regression: all published E0-R4 run dirs must stay valid. ... ok
+test_published_gap_fixture_fails (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_published_gap_fixture_fails)
+The real published fixture (NL2-001 evidence) must now FAIL closed. ... ok
+test_supported_on_analysis_with_missing_artifact_fails (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_supported_on_analysis_with_missing_artifact_fails) ... ok
+test_supported_on_analysis_with_surface_passes (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_supported_on_analysis_with_surface_passes)
+Legitimate verify-chain: technical terminal (null) -> analysis SUPPORTED with evidence. ... ok
+test_supported_on_analysis_without_refs_fails (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_supported_on_analysis_without_refs_fails) ... ok
+test_supported_on_checkpoint_event_fails (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_supported_on_checkpoint_event_fails) ... ok
+test_supported_on_terminal_event_fails (tests.test_nl2_003_hardening.S003TechnicalScientificSeparationTests.test_supported_on_terminal_event_fails)
+The preserved S003 gap shape: RUN_COMPLETED carrying SUPPORTED. ... ok
+test_canonical_e1_e0_surfaces_zero_mismatch (tests.test_nl2_003_hardening.VerifyDigestsTests.test_canonical_e1_e0_surfaces_zero_mismatch)
+Mandated run: E1-R1/E1-R2/E0-R4 against real git blobs of HEAD. ... ok
+test_missing_blob_fails_closed (tests.test_nl2_003_hardening.VerifyDigestsTests.test_missing_blob_fails_closed) ... ok
+test_no_manifests_found_fails_closed (tests.test_nl2_003_hardening.VerifyDigestsTests.test_no_manifests_found_fails_closed) ... ok
+test_tampered_byte_is_reported (tests.test_nl2_003_hardening.VerifyDigestsTests.test_tampered_byte_is_reported) ... ok
+test_zero_mismatch_on_published_bytes (tests.test_nl2_003_hardening.VerifyDigestsTests.test_zero_mismatch_on_published_bytes) ... ok
+test_corrections_require_parseable_timestamp (tests.test_work_cli_corrections.CorrectionsSemanticValidityTests.test_corrections_require_parseable_timestamp) ... ok
+test_corrections_tail_timestamps_must_be_non_decreasing (tests.test_work_cli_corrections.CorrectionsSemanticValidityTests.test_corrections_tail_timestamps_must_be_non_decreasing) ... ok
+test_corrections_with_invalid_subject_sha_fails (tests.test_work_cli_corrections.CorrectionsSemanticValidityTests.test_corrections_with_invalid_subject_sha_fails) ... ok
+test_corrections_at_or_after_terminal_timestamp_passes (tests.test_work_cli_corrections.CorrectionsTimestampVsTerminalTests.test_corrections_at_or_after_terminal_timestamp_passes) ... ok
+test_corrections_before_terminal_timestamp_fails (tests.test_work_cli_corrections.CorrectionsTimestampVsTerminalTests.test_corrections_before_terminal_timestamp_fails) ... ok
+test_legacy_exempt_event_may_precede_terminal_timestamp (tests.test_work_cli_corrections.CorrectionsTimestampVsTerminalTests.test_legacy_exempt_event_may_precede_terminal_timestamp) ... ok
+test_non_exempt_new_event_in_legacy_execution_still_fails (tests.test_work_cli_corrections.CorrectionsTimestampVsTerminalTests.test_non_exempt_new_event_in_legacy_execution_still_fails) ... ok
+test_ex_infra0_001_r1_now_ok (tests.test_work_cli_corrections.LegacyCanonicalCasesTests.test_ex_infra0_001_r1_now_ok) ... ok
+test_ex_nl1_001_r1_now_ok (tests.test_work_cli_corrections.LegacyCanonicalCasesTests.test_ex_nl1_001_r1_now_ok) ... ok
+test_ex_nl1_002_r1_residual_errors_now_ok (tests.test_work_cli_corrections.LegacyCanonicalCasesTests.test_ex_nl1_002_r1_residual_errors_now_ok) ... ok
+test_continuation_checkpoint_after_handoff_is_accepted (tests.test_work_cli_corrections.PostTerminalCorrectionsTests.test_continuation_checkpoint_after_handoff_is_accepted) ... ok
+test_review_corrections_before_terminal_fails (tests.test_work_cli_corrections.PostTerminalCorrectionsTests.test_review_corrections_before_terminal_fails) ... ok
+test_review_corrections_marker_after_handoff_is_accepted (tests.test_work_cli_corrections.PostTerminalCorrectionsTests.test_review_corrections_marker_after_handoff_is_accepted) ... ok
+test_second_terminal_after_corrections_fails (tests.test_work_cli_corrections.PostTerminalCorrectionsTests.test_second_terminal_after_corrections_fails) ... ok
+test_unmarked_event_after_corrections_fails (tests.test_work_cli_corrections.PostTerminalCorrectionsTests.test_unmarked_event_after_corrections_fails) ... ok
+test_review_corrections_from_implementer_fails (tests.test_work_cli_corrections.ReviewCorrectionsRoleTests.test_review_corrections_from_implementer_fails) ... ok
+test_review_corrections_from_verifier_passes (tests.test_work_cli_corrections.ReviewCorrectionsRoleTests.test_review_corrections_from_verifier_passes) ... ok
+test_legacy_event_id_in_other_execution_fails (tests.test_work_cli_corrections.SubjectShaLegacyScopeTests.test_legacy_event_id_in_other_execution_fails) ... ok
+test_legacy_value_reused_by_other_execution_fails (tests.test_work_cli_corrections.SubjectShaLegacyScopeTests.test_legacy_value_reused_by_other_execution_fails) ... ok
+test_legacy_whitelisted_event_still_accepts_abbreviated_sha (tests.test_work_cli_corrections.SubjectShaLegacyScopeTests.test_legacy_whitelisted_event_still_accepts_abbreviated_sha) ... ok
+test_new_event_with_8_to_39_hex_sha_fails (tests.test_work_cli_corrections.SubjectShaLegacyScopeTests.test_new_event_with_8_to_39_hex_sha_fails) ... ok
+test_new_event_with_arbitrary_abbreviated_sha_fails (tests.test_work_cli_corrections.SubjectShaLegacyScopeTests.test_new_event_with_arbitrary_abbreviated_sha_fails) ... ok
+test_event_after_terminal_in_normal_flow_fails (tests.test_work_cli_corrections.TerminalLastNormalFlowTests.test_event_after_terminal_in_normal_flow_fails) ... ok
+test_terminal_last_flow_is_ok (tests.test_work_cli_corrections.TerminalLastNormalFlowTests.test_terminal_last_flow_is_ok) ... ok
+
+----------------------------------------------------------------------
+Ran 200 tests in 48.468s
+
+OK (skipped=1)
