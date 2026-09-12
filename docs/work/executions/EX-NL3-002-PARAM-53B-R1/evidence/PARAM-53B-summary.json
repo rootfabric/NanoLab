@@ -1,0 +1,203 @@
+{
+  "arm_manifest_53b": {
+    "angle_frame0_deg": 132.949606811,
+    "arm_a": 4318,
+    "arm_b": 3638,
+    "coverage_fraction_of_paired": 1.0,
+    "derivation": "arm-manifest-v1, byte-identical double run, definition-before-data"
+  },
+  "execution_id": "EX-NL3-002-PARAM-53B-R1",
+  "kind": "e2_param_summary",
+  "pooled_angle_stats_valid_frames": {
+    "bootstrap": {
+      "ci95": [
+        131.776207377,
+        132.988423322
+      ],
+      "resamples": 10000,
+      "seed": 424242,
+      "statistic": "median"
+    },
+    "iqr_deg": [
+      131.306849164,
+      134.406738791
+    ],
+    "max_deg": 136.34825654,
+    "mean_deg": 132.805736439,
+    "median_deg": 132.35778773,
+    "min_deg": 129.910486794,
+    "n_frames": 111,
+    "q05_deg": 130.488770052,
+    "q95_deg": 135.918211803
+  },
+  "pooled_valid_frames_total": 111,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited, incl. addendum s.8: steps=150000) + docs/work/WO-NL3-002-PARAM.md",
+  "run_reports": {
+    "PARAM-53B-S001": {
+      "budget_ok": true,
+      "end_epoch": 1789250745,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": "0",
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 7882.44,
+      "per_step_s": 0.052693,
+      "prefix": "s001",
+      "seed": 201004,
+      "start_epoch": 1789242841,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 7904,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S001"
+    },
+    "PARAM-53B-S002": {
+      "budget_ok": true,
+      "end_epoch": 1789250657,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": "0",
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 7794.18,
+      "per_step_s": 0.052107,
+      "prefix": "s002",
+      "seed": 202008,
+      "start_epoch": 1789242841,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 7816,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S002"
+    },
+    "PARAM-53B-S003": {
+      "budget_ok": true,
+      "end_epoch": 1789250497,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": "0",
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 7634.78,
+      "per_step_s": 0.05104,
+      "prefix": "s003",
+      "seed": 203012,
+      "start_epoch": 1789242841,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 7656,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S003"
+    }
+  },
+  "runs": {
+    "PARAM-53B-S001": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            131.527780332,
+            132.793084067
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          131.458858042,
+          132.988423322
+        ],
+        "max_deg": 133.982158972,
+        "mean_deg": 132.308252681,
+        "median_deg": 132.343978104,
+        "min_deg": 131.028963199,
+        "n_frames": 37,
+        "q05_deg": 131.134542686,
+        "q95_deg": 133.773415464
+      },
+      "displacement_max_max": 12.54000302,
+      "energy_max_abs_drift_total": 0.008218,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.058529206,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.986817903,
+      "pairs_fraction_v2_min": 0.979767014,
+      "reference_pairs_v2_count": 3262,
+      "seed": 201004,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-53B-S002": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            130.810138401,
+            131.381410476
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          130.5772807,
+          131.477652291
+        ],
+        "max_deg": 132.796557076,
+        "mean_deg": 131.091015535,
+        "median_deg": 131.049227687,
+        "min_deg": 129.910486794,
+        "n_frames": 37,
+        "q05_deg": 130.071739007,
+        "q95_deg": 132.023676602
+      },
+      "displacement_max_max": 13.132069056,
+      "energy_max_abs_drift_total": 0.008816,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.057714685,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.989014342,
+      "pairs_fraction_v2_min": 0.984742142,
+      "reference_pairs_v2_count": 3277,
+      "seed": 202008,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-53B-S003": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            134.652220355,
+            135.734579592
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          134.421299898,
+          135.800609076
+        ],
+        "max_deg": 136.34825654,
+        "mean_deg": 135.017941102,
+        "median_deg": 135.285186059,
+        "min_deg": 132.903152729,
+        "n_frames": 37,
+        "q05_deg": 133.229207791,
+        "q95_deg": 136.158505409
+      },
+      "displacement_max_max": 13.891569404,
+      "energy_max_abs_drift_total": 0.006144,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.057947405,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.983108108,
+      "pairs_fraction_v2_min": 0.981879607,
+      "reference_pairs_v2_count": 3256,
+      "seed": 203012,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (measured distributions; no scientific conclusions; no cross-variant comparisons here; acceptance — Director after review)",
+  "steps": 150000,
+  "variant": "53b"
+}
+

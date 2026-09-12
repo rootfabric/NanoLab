@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T15:38:00Z",
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "Старт EX-NL3-002-PARAM-32B-R1: параметрический батч варианта 32b по WO-NL3-002-PARAM (наследует frozen E2_PROTO_R1 без изменений + addendum §8: steps=150000 — единое окно сравнения вариантов t ≤ 150000; seeds 201004/202008/203012, print_conf_interval=4000, print_energy_every=100, гейты §4 lbf>0.1078 / pf_v2<0.50 / disp>20.0, статистика §6 median/IQR/q5-95 + bootstrap CI 10000 seed 424242, бюджет ≤3.5 ч/реплику — теперь выполняется: 150k при ~0.07+ s/step ≈ 3–3.3 ч). Входы: MD_Hinges/32b.top + MD_Hinges/32b.conf verbatim + MD_Hinges/pro_CPU.in, download-on-run по pinned commit 23fd1ff; digest-гейт: size_bytes + blob_sha1 обязательны (32b.top: 123024/a0891d65…; 32b.conf: 2345114/83dda807…), sha256-пины NOT_VERIFIED — вычислить при первой загрузке и записать в evidence как sha256_computed_at_first_download (без претензии к реестру); pro_CPU.in — полный пин (size 933, blob 89d76310…, sha256 bd6cd418…/933). ВСЕ входы копируются в каталог рана. До прогонов — деривация arm-manifest-32b.json (arm-manifest-v1, та же frozen деривация) на frame 0 32b.conf + байт-детерминизм двух прогонов; нет двух доминирующих блоков → BLOCKED варианта (честный gap), логи сохранить. Runs: PARAM-32B-S001..S003, steps=150000, 3 параллельных WSL-процесса в /home/yurig/nl3-002-param-32b/runs/ (надёжный запуск через отдельный bash-скрипт с setsid/nohup, exit-коды в файлы — уроки инцидентов 11b: без внешних киллеров обёртки). Отклонения от pro_CPU.in (steps/seed/имена outputs/print intervals/lastconf_file + subject 74b→32b) — в PARAM-32B-S00X_deviations.json. Outcome = измеренные распределения (scientific_outcome = MEASURED); интерпретаций нет (никаких сравнений с 11b/0b — Director после всех батчей); state.json не меняется. Engine: WSL oxDNA 00dc7fb9 (build-source verified, MATCH при старте). 2e7/200000 не запускать — ровно 150000.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002-param-32b -b work/nl3-002-param-32b-r1 bdbebfd",
+    "wsl -e bash -lc \"git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD\" -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002-PARAM.md",
+    "docs/research/E2_PROTO_R1.md (вкл. addendum §8)",
+    "docs/research/E2_OBSERVABLES_R2.md",
+    "scripts/e2/arm_manifest.py",
+    "scripts/e2/observables.py",
+    "scripts/hinge_family/source_pins.json",
+    "docs/work/executions/EX-NL3-002-R1/ (формат манифестов/deviations/analysis)",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/ (формат — по образцу; данные не переиспользуются)",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/passport.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/branch-passport.md"
+  ],
+  "next_action": "IMPLEMENTER: digest-gated download (32b.top/32b.conf/pro_CPU.in) во временный каталог вне Git → манифест рук 32b ДО прогонов → входы 3 ранов + deviations → 3 параллельные реплики WSL (setsid, exit-коды в файлы) → END_EXECUTION → анализ v2 → HANDOFF.",
+  "blocker": null
+}

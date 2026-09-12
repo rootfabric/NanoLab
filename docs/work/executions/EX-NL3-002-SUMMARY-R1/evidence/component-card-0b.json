@@ -1,0 +1,125 @@
+{
+  "angle_distribution_confirmatory_200k": {
+    "convention": "[0,180] deg, PCA axes, erratum R1 §2.5",
+    "detector": "v2 mutual-nearest + PCA hinge angle, frozen arm manifest",
+    "per_replica_median_deg": {
+      "E2-R1-C001": 65.095434789,
+      "E2-R1-C002": 65.708669763,
+      "E2-R1-C003": 67.236579608
+    },
+    "pooled": {
+      "bootstrap": {
+        "resamples": 10000,
+        "seed": 424242,
+        "statistic": "median"
+      },
+      "bootstrap_ci95_deg": [
+        65.674963662,
+        66.318271836
+      ],
+      "iqr_deg": [
+        64.93709665,
+        67.056610879
+      ],
+      "median_deg": 65.976921401,
+      "n_valid_frames": 150,
+      "q05_q95_deg": [
+        63.00066167,
+        68.408819824
+      ]
+    },
+    "source": "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json (frozen protocol E2_PROTO_R1)"
+  },
+  "component_id": "DNA Hinge / 0b",
+  "environment": {
+    "engine": "oxDNA @ 00dc7fb9 (CPU build, double precision)",
+    "model": "DNA2",
+    "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1; gcc 13.3.0, cmake 3.31.6 user-local)",
+    "print_conf_interval": 4000,
+    "print_energy_every": 100,
+    "salt_concentration": 0.5,
+    "steps_confirmatory": 200000,
+    "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)",
+    "thermostat": "author config verbatim (pro_CPU.in, incl. md/integration settings)"
+  },
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "family": "Shi–Castro–Arya DNA hinge family (DOI 10.1021/acsnano.7b00242; HINGE_FAMILY_R1)",
+  "geometry": {
+    "angle_frame0_deg": 66.886745865,
+    "arm_a_nucleotides": 4006,
+    "arm_b_nucleotides": 3942,
+    "arm_manifest": "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json (frozen, arm-manifest-v1, definition-before-data)",
+    "manifest_determinism": "arm-manifest-v1 derivation deterministic (frozen before any confirmatory run)",
+    "manifest_fraction_of_paired": 0.999748428,
+    "manifest_fraction_of_topology": 0.948675101,
+    "manifest_nucleotides": 7948,
+    "topology_nucleotides": 8378,
+    "topology_strands": 112
+  },
+  "kind": "e2_component_card",
+  "known_limitations": [
+    "конвенция угла [0,180] по PCA-осям не имеет прямого соответствия SI статьи (U-obs-1 закрыт first-principles решением E2_OBS1_SI_DECISION_R1, не подгонкой под SI)",
+    "v2-detector пар (mutual-nearest, window + antiparallel a1) — frozen-инструментальная конвенция, не авторский код",
+    "coarse-grained модель oxDNA DNA2: количественное соответствие эксперименту не claim'ится (ceiling C0_SOFTWARE_ONLY/measured-only)",
+    "long_bond_fraction baseline авторского конфига зафиксирован как есть (lbf max 0.0560 <= гейт 0.1078), денатюрация не моделировалась отдельно",
+    "T 300 K vs авторские 298 K в части конфигов закрыта decision rule E2-SETUP-R1 §5 (reproduction arm = verbatim)"
+  ],
+  "parameter_response_row_common_window_150k": {
+    "bootstrap_ci95_deg": [
+      65.607023682,
+      66.118300188
+    ],
+    "median_deg": 65.870460546,
+    "n_valid_frames_in_window": 111,
+    "note": "secondary cross-variant window (addendum §8 item 3); primary confirmatory 200k result NOT revised",
+    "parameter": "0b",
+    "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json"
+  },
+  "reproduction": {
+    "raw_artifacts": "trajectories вне Git (durable-cache запрещён); манифесты SHA-256+size в c00X-artifacts.manifest.json",
+    "steps": [
+      "1. download-on-run с digest-гейтом: python docs/work/executions/EX-NL3-002-R1/evidence/download_and_verify.py (size+blob_sha1+sha256 против scripts/hinge_family/source_pins.json; выход ненулевой при mismatch)",
+      "2. сборка входов реплик: python docs/work/executions/EX-NL3-002-R1/evidence/build_confirm_inputs.py (0b.top/0b.conf verbatim + pro_CPU.in; seeds 201004/202008/203012; copy-checks SHA-256)",
+      "3. прогоны (CPU oxDNA @ 00dc7fb9, WSL): python docs/work/executions/EX-NL3-002-R1/evidence/run_confirm.py (3 параллельные реплики, 200000 steps, бюджет 3.5 ч/реплику)",
+      "4. анализ (frozen протокол): python docs/work/executions/EX-NL3-002-R1/evidence/confirm_analysis.py (v2 mutual + гейты §4 + статистика §6, bootstrap 10000/seed 424242)",
+      "5. окно 150k: python docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/param_summary_build.py (ре-срез по времени кадра, тот же статистический метод)"
+    ]
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (measured distributions; интерпретации угла и соответствия статье запрещены до отдельного решения; claim ceiling C0_SOFTWARE_ONLY/measured-only)",
+  "simulation_confidence": {
+    "R_confirm": 3,
+    "all_numbers_provenance": "every number in this card is taken from frozen published evidence (see source fields); none estimated",
+    "protocol_frozen_before_runs": "docs/research/E2_PROTO_R1.md (incl. statistics §6 and gates §4); observables: docs/research/E2_OBSERVABLES_R2.md",
+    "seeds": [
+      201004,
+      202008,
+      203012
+    ]
+  },
+  "source_provenance": {
+    "digest_gate_result": "3/3 PASS (size + blob_sha1 обязательны; sha256 пин 0b верифицирован)",
+    "digest_gates": {
+      "MD_Hinges/0b.conf": {
+        "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+        "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+        "size_bytes": 2294162
+      },
+      "MD_Hinges/0b.top": {
+        "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+        "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+        "size_bytes": 120204
+      }
+    },
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "rights_mode": "REFERENCE_ONLY (G1 = B: download-on-run по exact pinned commit, без durable-кэша, удаление после execution)",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations"
+  },
+  "stability": {
+    "displacement_max_max": 8.401379567,
+    "energy_max_abs_drift_total_max_across_replicas": 0.009862,
+    "frames_valid": "150/150 (gates pass: long_bond_fraction <= 0.1078, pairs_fraction_v2 >= 0.50, displacement <= 20.0)",
+    "long_bond_fraction_max": 0.055951662,
+    "pairs_fraction_v2_min": 0.980874317
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "all_inputs_verified": true,
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "kind": "e2_param_input_build",
+  "print_conf_interval": 4000,
+  "print_energy_every": 100,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited)",
+  "runs": {
+    "PARAM-11B-S001": {
+      "copy_checks": {
+        "11b.conf": {
+          "copy_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "expected_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "match": true
+        },
+        "11b.top": {
+          "copy_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "expected_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "189a23be6e238690133966e1552ae3a2ed022a28f42b53d89a1d436961895fc1",
+          "expected_sha256": "189a23be6e238690133966e1552ae3a2ed022a28f42b53d89a1d436961895fc1",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s001",
+      "seed": 201004,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S001"
+    },
+    "PARAM-11B-S002": {
+      "copy_checks": {
+        "11b.conf": {
+          "copy_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "expected_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "match": true
+        },
+        "11b.top": {
+          "copy_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "expected_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "1823fa64ff282ce87d9880d66b4d78171811f6d78f8cca1fbd81d165c33064ff",
+          "expected_sha256": "1823fa64ff282ce87d9880d66b4d78171811f6d78f8cca1fbd81d165c33064ff",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s002",
+      "seed": 202008,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002"
+    },
+    "PARAM-11B-S003": {
+      "copy_checks": {
+        "11b.conf": {
+          "copy_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "expected_sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "match": true
+        },
+        "11b.top": {
+          "copy_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "expected_sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "7bc3777f8f24eab52b91341199442e396d5ab5b26328e54c8f9912fc52b04481",
+          "expected_sha256": "7bc3777f8f24eab52b91341199442e396d5ab5b26328e54c8f9912fc52b04481",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s003",
+      "seed": 203012,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S003"
+    }
+  },
+  "schema_version": 1,
+  "steps": 200000,
+  "variant": "11b"
+}
+

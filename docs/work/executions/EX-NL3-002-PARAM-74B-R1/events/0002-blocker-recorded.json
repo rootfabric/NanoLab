@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-blocker-recorded",
+  "timestamp_utc": "2026-09-12T22:41:00Z",
+  "execution_id": "EX-NL3-002-PARAM-74B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "BLOCKER_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "BLOCKER варианта 74b на этапе манифеста рук (ДО прогонов). (1) Digest-gated download во временный каталог вне Git (%TEMP%\\nl3-002-param-74b-src): 3/3 PASS по обязательным гейтам size+blob_sha1 (74b.top 126116/68e23a5f…, 74b.conf 2403188/70ea81cd…, pro_CPU.in 933/89d76310… + sha256 bd6cd418… MATCH полный пин); sha256-пины 74b.top/74b.conf NOT_VERIFIED — вычислены при первой загрузке и записаны в evidence как sha256_computed_at_first_download (74b.top 80477aca…, 74b.conf 711bb36a…; без претензии к реестру). pro_CPU.in подтверждает авторский дефолт 74b (topology=74b.top, conf_file=74b.conf) — подстановка не нужна. (2) Манифест рук 74b по arm-manifest-v1 (та же frozen деривация, scripts/e2/arm_manifest.py) на frame 0 74b.conf: FAILED — ни один порог PARALLEL_GRID (0.85/0.90/0.95/0.98) не даёт двух доминирующих блоков. Крупнейшие таблицы блоков: 0.85 → [1734, 960, 722, …] (third 722, second/third 960/722 < 3.0); 0.90 → [1660, 912, 594, …]; 0.95 → [748, 678, 512, …]; 0.98 → сильная фрагментация (все блоки < 10% парных). Отказ детерминирован: два прогона деривации дают идентичную ошибку (evidence/arm-manifest-74b-failure.json). По WO-NL3-002-PARAM per-variant addition 2 это BLOCKED варианта 74b (честный gap): рука 74b не разделяется на два доминирующих жёстких блока геометрией frame 0 в рамках замороженной деривации. (3) Симуляционные прогоны 74b НЕ запускались (runs NOT_RUN; правило definition-before-data: без замороженного манифеста рук угловая статистика не определена). Серия не затронута: 11b/32b/53b уже исполнены; решение по 74b (вкл. возможную ревизию деривации arm-manifest-v2 или frame-кандидат иной, чем frame 0) — вне этого исполнения, только новый протокол/ревизия (hard rule: не менять критерии после данных; данных 74b нет — блок наступил до данных).",
+  "command_refs": [
+    "python evidence/download_and_verify.py -> digest_gate_all=PASS (3/3)",
+    "python scripts/e2/arm_manifest.py --top %TEMP%\\nl3-002-param-74b-src\\MD_Hinges__74b.top --conf %TEMP%\\nl3-002-param-74b-src\\MD_Hinges__74b.conf --report evidence/arm-manifest-74b-run{1,2}.json -> ArmManifestError: no threshold in PARALLEL_GRID yields two dominant rigid blocks (x2, identical)",
+    "python evidence/manifest_failure_report.py -> outcome=FAILED_TWO_DOMINANT_BLOCKS, deterministic_identical_error=true"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/manifest_failure_report.py",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/download_and_verify.py"
+  ],
+  "next_action": "WORK_ORDER_BLOCKED (терминальное событие 0003): вариант 74b закрыт как BLOCKED (honest gap); итоги серии и решение — Director/батчевый REVIEWER.",
+  "blocker": "arm-manifest-v1 derivation on 74b frame 0: no two dominant rigid blocks at any PARALLEL_GRID threshold (deterministic, 2/2 identical failures); per WO-NL3-002-PARAM this blocks the 74b variant; no simulation runs started"
+}

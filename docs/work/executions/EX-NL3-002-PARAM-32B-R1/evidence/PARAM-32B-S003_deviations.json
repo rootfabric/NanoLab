@@ -1,0 +1,70 @@
+{
+  "deviations": [
+    {
+      "author": "74b.conf",
+      "key": "conf_file",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "32b.conf"
+    },
+    {
+      "author": "hinge_energy.dat",
+      "key": "energy_file",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "s003_energy.dat"
+    },
+    {
+      "author": null,
+      "key": "lastconf_file",
+      "reason": "author input has no lastconf_file; protocol records final configuration",
+      "run": "s003_last.dat"
+    },
+    {
+      "author": "log2.dat",
+      "key": "log_file",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "s003_log.dat"
+    },
+    {
+      "author": "4e3",
+      "key": "print_conf_interval",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "4000"
+    },
+    {
+      "author": "4e3",
+      "key": "print_energy_every",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "100"
+    },
+    {
+      "author": "7777",
+      "key": "seed",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "203012"
+    },
+    {
+      "author": "2e7",
+      "key": "steps",
+      "reason": "E2_PROTO_R1 addendum section 8 (parametric series window 150k; base 2e7 never run)",
+      "run": "150000"
+    },
+    {
+      "author": "74b.top",
+      "key": "topology",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "32b.top"
+    },
+    {
+      "author": "pro.dat",
+      "key": "trajectory_file",
+      "reason": "E2_PROTO_R1 frozen protocol (inherited by WO-NL3-002-PARAM) / per-run naming",
+      "run": "s003_traj.dat"
+    }
+  ],
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "kind": "e2_param_input_deviations",
+  "run_id": "PARAM-32B-S003",
+  "schema_version": 1,
+  "source_input": "MD_Hinges/pro_CPU.in @ 23fd1ff (digest-gated, verbatim base)"
+}
+

@@ -1,0 +1,81 @@
+{
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "files": [
+    {
+      "file": "11b.top",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "input",
+      "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+      "size_bytes": 121176
+    },
+    {
+      "file": "11b.conf",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "input",
+      "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+      "size_bytes": 2309610
+    },
+    {
+      "file": "pro_CPU.in",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "input",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "size_bytes": 933
+    },
+    {
+      "file": "input.in",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "input",
+      "sha256": "1823fa64ff282ce87d9880d66b4d78171811f6d78f8cca1fbd81d165c33064ff",
+      "size_bytes": 978
+    },
+    {
+      "file": "s002_traj.dat",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "92478387258ee7031dfb75326272f048b857d7970f003a37bd864073674879ed",
+      "size_bytes": 106248710
+    },
+    {
+      "file": "s002_energy.dat",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "30cde77f41c9523067318716058f5727b53569752cda568f591a1bd9413fad97",
+      "size_bytes": 91483
+    },
+    {
+      "file": "s002_last.dat",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "d0a54d823a420c8c111bb410f626a6e96e924c135b20910a8510bd3cd326d102",
+      "size_bytes": 2309700
+    },
+    {
+      "file": "s002_log.dat",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "57149e0bcfd9624c329bd2a4570014578466e6fe073b3d3894aa3a1cc19efcec",
+      "size_bytes": 184483
+    },
+    {
+      "file": "engine_stdout.txt",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "9a59327a4b5d137c0ce4259b654d1d89ec3dd809106019f9c617a4881680e98a",
+      "size_bytes": 115754
+    },
+    {
+      "file": "engine_stderr.txt",
+      "location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002",
+      "role": "output",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "kind": "e2_param_artifacts_manifest",
+  "run_id": "PARAM-11B-S002",
+  "schema_version": 1,
+  "seed": 202008,
+  "storage_location": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002 (WSL, outside Git; raw artifacts not committed)"
+}
+

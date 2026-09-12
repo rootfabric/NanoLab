@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "work_order_id": "NL3-002",
+  "checkpoint": "NL3",
+  "base_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "branch": "work/nl3-002-summary-r1",
+  "worktree": "C:\\NanoLab\\nl3-002-summary",
+  "risk_class": "MEDIUM",
+  "claim_class": "E2 параметрическая сводка по общему окну t <= 150000 + карточка компонента 0b; только чтение опубликованных evidence (интеграционная ветка), никаких новых прогонов физики; исходы — measured/aggregated; интерпретации и тренды запрещены (Director); acceptance — Director после review",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL3-002-SUMMARY-R1/**",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "parent_work_order": "NL3-002",
+  "protocol": "docs/research/E2_PROTO_R1.md (FROZEN, вкл. addendum §8: steps=150000, общее окно сравнения t <= 150000, 0b/11b ре-срез, первичный результат 0b не пересматривается) + docs/research/E2_OBSERVABLES_R2.md + docs/work/WO-NL3-002-PARAM.md",
+  "owner_decisions_applied": [
+    "G1 = B: download-on-run уже исполнен батчами; в этом execution источник не скачивается, только опубликованные JSON-evidence",
+    "Director amendment §8 (2026-09-12): параметрическая серия steps=150000, сравнение по общему окну t <= 150000; 11b ре-срезается; 0b для кросс-вариантной таблицы ре-срезается до того же окна",
+    "74b: BLOCKED (FAILED_TWO_DOMINANT_BLOCKS, honest gap) — строка NOT_MEASURED со ссылкой на failure-report",
+    "статистика §6 без изменений: median/IQR/q5-q95 + bootstrap CI95 10000 resamples seed 424242 (pooled и per-replica)"
+  ],
+  "integration_merges": [
+    "merge param-11b (data integration) — origin/work/nl3-002-param-11b-r1",
+    "merge param-32b (data integration) — origin/work/nl3-002-param-32b-r1",
+    "merge param-53b (data integration) — origin/work/nl3-002-param-53b-r1",
+    "merge param-74b (BLOCKED, honest gap) — origin/work/nl3-002-param-74b-r1"
+  ],
+  "data_sources": {
+    "0b_confirmatory": "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json + c001-003-analysis.json (200000 steps, 150 кадров)",
+    "11b": "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-analysis.json + PARAM-11B-summary.json (184000-truncated, 46 кадров/реплика)",
+    "32b": "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-analysis.json + PARAM-32B-summary.json (150000 steps, 37 кадров/реплика)",
+    "53b": "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/PARAM-53B-analysis.json (+ s001-003-analysis.json) + PARAM-53B-summary.json (150000 steps, 37 кадров/реплика)",
+    "74b": "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json (NOT_MEASURED, runs NOT_RUN)",
+    "frozen_manifest_0b": "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json"
+  },
+  "runs": [],
+  "physics_runs": 0,
+  "started_at_utc": "2026-09-12T22:33:40Z",
+  "completed_at_utc": "2026-09-12T23:09:45Z",
+  "status": "HANDOFF_READY"
+}

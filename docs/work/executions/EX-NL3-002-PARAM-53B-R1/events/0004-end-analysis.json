@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-12T22:40:00Z",
+  "execution_id": "EX-NL3-002-PARAM-53B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "scientific_outcome": "MEASURED",
+  "summary": "END_ANALYSIS EX-NL3-002-PARAM-53B-R1 (scientific_outcome = MEASURED). Observables v2 mutual-nearest (frozen) + integrity v1 + hinge angle по замороженному манифесту arm-manifest-53b.json (arm_a 4318 / arm_b 3638, derivation ДО прогонов, байт-детерминизм; coverage 100% парных / 91.49% топологии). Гейты §4: lbf_max по ранам 0.0577–0.0585 (≤ 0.1078 PASS), pf_v2_min 0.980–0.985 (≥ 0.50 PASS), disp_max 12.54–13.89 (≤ 20.0 PASS) → 0 невалидных кадров из 111 (37/37 на реплику, доля валидных 100%). Energy drift max_abs_total 0.0061–0.0088 (отн. ~0.7% уровня −1.16). Углы (конвенция [0,180]): S001 median 132.34° IQR [131.46, 132.99] CI95 [131.53, 132.79]; S002 median 131.05° IQR [130.58, 131.48] CI95 [130.81, 131.38]; S003 median 135.29° IQR [134.42, 135.80] CI95 [134.65, 135.74]; пул (n=111) median 132.36° IQR [131.31, 134.41] q5-95 [130.49, 135.92] bootstrap CI95 [131.78, 132.99] (10000 ресемплов, seed 424242). Reference pairs v2 (mutual) frame 0: 3256–3277. Интерпретаций и кросс-вариантных сравнений нет (Director после всех батчей серии). state.json не менялся.",
+  "command_refs": [
+    "PYTHONPATH=scripts python evidence/param_analysis.py -> s001/s002/s003-analysis.json + PARAM-53B-summary.json (canonical)",
+    "bootstrap: 10000 resamples, seed 424242 (frozen section 6); median/IQR/q5-95 per replica and pooled over VALID frames; all frames reported"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/PARAM-53B-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/PARAM-53B-summary.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s003-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/arm-manifest-53b.json"
+  ],
+  "next_action": "HANDOFF (0005): summary.md + passport HANDOFF_READY + SESSION_LOG append + work_cli validate/close + check-consistency + unittest → удаление временных исходников (U4 = NO).",
+  "blocker": null
+}

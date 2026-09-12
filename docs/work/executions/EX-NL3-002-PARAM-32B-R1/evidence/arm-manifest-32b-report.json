@@ -1,0 +1,65 @@
+{
+  "arms": {
+    "arm_a": 4814,
+    "arm_b": 3190
+  },
+  "coverage": {
+    "manifest_fraction_of_paired": 0.9995005,
+    "manifest_fraction_of_topology": 0.933955659,
+    "manifest_nucleotides": 8004,
+    "paired_nucleotides": 8008,
+    "topology_nucleotides": 8570,
+    "unassigned_chains": 1,
+    "unassigned_paired_nucleotides": 4
+  },
+  "derivation": "arm-manifest-v1 (frozen derivation, scripts/e2/arm_manifest.py) on frame 0 of MD_Hinges/32b.conf @ 23fd1ff; definition-before-data (before any 32b run)",
+  "determinism": {
+    "byte_identical": true,
+    "runs": 2,
+    "sha256_run1": "2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f",
+    "sha256_run2": "2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f"
+  },
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "gate": "two dominant rigid blocks derived -> PASS; variant NOT blocked",
+  "kind": "e2_arm_manifest_report",
+  "pair_graph": {
+    "crossover_covalent_edges": 2169,
+    "detector": "v2 geometry (window, antiparallel a1) + greedy matching, mutual_nearest=False",
+    "paired_fraction_of_topology": 0.934422404,
+    "paired_nucleotides": 8008,
+    "pairs": 4004,
+    "stack_continuation_edges": 5484
+  },
+  "schema_version": 1,
+  "selected_parallel_threshold": 0.9,
+  "two_dominant_blocks": "PASS",
+  "validation": {
+    "groups_disjoint": true,
+    "groups_nonempty": true,
+    "hinge_angle_frame0": {
+      "angle_deg": 77.477102136,
+      "angle_rad": 1.352230527,
+      "arm_a": {
+        "ambiguous_orientation": false,
+        "eigenvalues": [
+          305.995900969,
+          25.862506647,
+          19.703460505
+        ],
+        "ill_defined": false
+      },
+      "arm_b": {
+        "ambiguous_orientation": false,
+        "eigenvalues": [
+          111.266124771,
+          18.821071019,
+          12.972122161
+        ],
+        "ill_defined": false
+      },
+      "status": "OK"
+    },
+    "only_paired_nucleotides": true
+  },
+  "variant": "32b"
+}
