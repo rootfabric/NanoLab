@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T07:42:55Z",
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "summary": "CONTINUATION: confirmatory-прогоны завершены. Digest-гейт 3/3 PASS (0b.top/0b.conf/pro_CPU.in, size+blob_sha1+sha256, download-on-run G1=B, без durable-кэша; evidence/source-download-verification.json). Входы 3 ранов построены из verbatim pro_CPU.in с протокольными отклонениями (evidence/c00X_deviations.json: steps=200000, seed per-run, имена outputs, print_conf_interval=4000, print_energy_every=100, lastconf_file добавлен, topology/conf_file 74b→0b — предмет кампании); все входы скопированы в каталоги ранов и byte-verified (evidence/input-build.json, урок F-1). Запуски: 3 параллельных WSL-процесса oxDNA (pinned 00dc7fb9), старт 14:31:40 local, все завершились с exit 0 в бюджете ≤3.5 ч/реплика: E2-R1-C001 (seed 201004) wall 11146 s (0.0557 s/step), E2-R1-C002 (202008) 10885 s (0.0544), E2-R1-C003 (203012) 11134 s (0.0557). Каждый ран: 50 кадров траектории (print_conf_interval=4000), 2001 строка energy (print_energy_every=100), lastconf записан. Инцидент (не повлиял на раны): родительский Python-процесс упал на bookkeeping-баге ('del' на set) после финиша первой реплики — движки продолжили как осиротевшие WSL-процессы и завершились штатно (exit 0 ×3 проверен по exit_code.txt); wall-времени восстановлены по ФС (birth energy-файла → mtime exit_code.txt), кросс-чек C002: in-process 10710.2 s vs 10885 s восстановлено (дельта = WSL startup + загрузка конфига до первой записи energy). Общий calendar wall кампании ≈ 3.1 ч (бюджет ≤4 ч). Технический outcome: RUN_COMPLETED ×3; научные исходы не публикуются (измеренные распределения — в END_ANALYSIS).",
+  "command_refs": [
+    "python evidence/download_and_verify.py -> digest_gate_all PASS (3/3)",
+    "python evidence/build_confirm_inputs.py -> copy_verify PASS x3 (sha256 byte-identical)",
+    "python evidence/run_confirm.py -> 3 parallel WSL oxDNA processes; parent crashed on 'del on set' after first finish (bug fixed in place); engines completed: exit 0 x3",
+    "python evidence/collect_run_reports.py -> evidence/run-reports.json (walls 11146 / 10885 / 11134 s, all budget_ok)",
+    "grep -c '^t =' traj -> 50 frames x3; energy rows 2001 x3"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/input-build.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c001_deviations.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c002_deviations.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c003_deviations.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/run-reports.json"
+  ],
+  "next_action": "IMPLEMENTER: END_EXECUTION — манифесты артефактов (SHA-256+size всех входов/выходов, траектории вне Git) → анализ v2 (mutual) по замороженному arm-manifest + гейты §4 + статистика §6.",
+  "blocker": null
+}

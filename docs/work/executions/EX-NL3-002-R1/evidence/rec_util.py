@@ -41,7 +41,7 @@ def stamp(relpath: str) -> None:
     p = os.path.join(EX, relpath)
     text = open(p, "r", encoding="utf-8", newline="").read()
     ts = now_utc()
-    text = text.replace('"TS"', '"' + ts + '"').replace("TIMESTAMP", ts)
+    text = text.replace('"TS"', '"' + ts + '"').replace("TIMESTAMP", ts).replace("PLACEHOLDER", ts)
     with open(p, "w", encoding="utf-8", newline="\n") as h:
         h.write(text)
 

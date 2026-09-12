@@ -44,14 +44,14 @@ def main() -> int:
             if rc is not None:
                 print(f"finished {rid} rc={rc} wall={time.perf_counter() - started[rid]:.1f}s", flush=True)
                 interrupted[rid] = False
-                del pending[rid]
+                pending.discard(rid)
             elif time.perf_counter() - started[rid] > BUDGET_S:
                 # budget exceeded: interrupt this run and record it (measured fact)
                 subprocess.run(["wsl", "-e", "bash", "-c", f"pkill -f 'runs/{rid}' || true"], timeout=60)
                 procs[rid].wait()
                 print(f"BUDGET-INTERRUPTED {rid} wall={time.perf_counter() - started[rid]:.1f}s", flush=True)
                 interrupted[rid] = True
-                del pending[rid]
+                pending.discard(rid)
         if pending:
             time.sleep(30)
     walls = {rid: time.perf_counter() - started[rid] for rid in interrupted}
