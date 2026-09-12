@@ -25,5 +25,5 @@
   ],
   "preregistration_note": "WO-NL3-002-PROTO.md = preregistration (алгоритм манифеста, v2-подход, DRAFT-характер proposals); физика — максимум 500-step smoke при необходимости; confirmatory-прогоны (2e7) запрещены; E2 остаётся NOT_RUN; scientific_outcome = NOT_EVALUATED",
   "started_at_utc": "2026-09-12T03:36:30Z",
-  "status": "IN_PROGRESS"
+  "status": "HANDOFF_READY"
 }

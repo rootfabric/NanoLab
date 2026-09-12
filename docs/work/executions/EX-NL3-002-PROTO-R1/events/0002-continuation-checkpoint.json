@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T03:57:30Z",
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "summary": "Все три deliverable реализованы. (1) Arm manifest: scripts/e2/arm_manifest.py (arm-manifest-v1) — pair graph (v2-геометрия, greedy, 3975 пар, 94.9% нуклеотидов), дуплексные цепи (stacking-непрерывность, кроссоверы исключены, 1230 цепей), жёсткие блоки (параллельность осей + упаковочная близость 2.5, порог авто-выбран 0.9 по dominance-gap правилу: 2-й/3-й блок 1664/146), два доминирующих блока = arm_a/arm_b. Факты frame 0: arm_a=4006, arm_b=3942 нуклеотидов, 2 парных нуклеотида не назначены (1 цепь), покрытие 94.87% топологии / 99.97% парных; группы непересекаются, только парные нуклеотиды; hinge_angle (v1 def) = 66.89 deg (факт, не подгонка); деривация байт-детерминированна (2 прогона идентичны). (2) Observables v2: reference_pairs_v2 (окно (0.05,1.3], a1 антипараллельность <= -0.3, mutual-nearest + greedy) — 3300 пар на frame 0 (mutual) / 3975 (greedy); v1 = 26-29 (неадекватен); E2_OBSERVABLES_R2.md (pre-confirmatory, Director freeze pending); v1-функции/константы не тронуты. (3) proto-proposals.json (DRAFT): theta-варианты с обоснованием от пилотных baseline, таблица steps {2e5,1e6,2e7} x R_confirm 3 с measured wall-прогнозами, seeds policy, статистика. Digest-гейт download PASS (source-download-verification.json); исходные байты источника удалены после использования (U4=NO). Коммиты d38e248, 20e5bee. Физика не запускалась (не понадобилась).",
+  "command_refs": [
+    "python docs/work/executions/EX-NL3-002-PROTO-R1/evidence/run_arm_manifest.py -> digest PASS; angle 66.89; arms 4006/3942; v2 3300/3975; byte-determinism ok",
+    "git add/commit -> d38e248 (v2 detector), 20e5bee (arm manifest + evidence + proposals)",
+    "removed %TEMP%\\nl3-002-proto-src (all source bytes incl. design json used only for structure calibration)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/v2-frame0.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/proto-proposals.json",
+    "docs/research/E2_OBSERVABLES_R2.md"
+  ],
+  "next_action": "Полный unittest + check-consistency + terminal records + push.",
+  "blocker": null
+}
