@@ -15,7 +15,7 @@
     "NL2-003",
     "NL3-001"
   ],
-  "active_tasks": [],
+  "active_tasks": ["NL3-002"],
   "task_status": {
     "NL0-001": "ACCEPTED",
     "NL0-002": "ACCEPTED",
@@ -26,7 +26,7 @@
     "NL2-002": "ACCEPTED",
     "NL2-003": "ACCEPTED",
     "NL3-001": "ACCEPTED",
-    "NL3-002": "READY",
+    "NL3-002": "IN_PROGRESS",
     "NL4-001": "PLANNED",
     "NL4-002": "PLANNED",
     "NL4-003": "PLANNED",
@@ -50,7 +50,7 @@
   "experiment_status": {
     "E0": "RUN",
     "E1": "RUN",
-    "E2": "NOT_RUN",
+    "E2": "RUN",
     "E3": "NOT_RUN",
     "E4": "NOT_RUN",
     "E5": "NOT_RUN",
@@ -58,7 +58,7 @@
   },
   "execution": {
     "runtime_implemented": false,
-    "physics_runs": 7,
+    "physics_runs": 13,
     "ai_campaigns": 0,
     "external_reproductions": 0,
     "paid_compute_authorized": false
