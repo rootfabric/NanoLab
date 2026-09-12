@@ -1,0 +1,9 @@
+# Branch Passport — work/nl3-002-param-53b-r1 (EX-NL3-002-PARAM-53B-R1)
+
+- Base: `bdbebfd5856b8dbdb5073316ac076ab5b0f109e4` (main tip: 11b batch accepted; E2_PROTO_R1 addendum section 8 — parametric window 150k).
+- Worktree: `C:\NanoLab\nl3-002-param-53b`.
+- Work Order: NL3-002-PARAM (параметрическая серия E2, вариант 53b из четырёх); протокол — `docs/research/E2_PROTO_R1.md` (FROZEN, наследуется без изменений, вкл. addendum §8: **steps = 150000**, единое окно сравнения t ≤ 150000; гейты §4 / статистика §6 / seeds-тройка / бюджет ≤3.5 ч — без изменений) + per-variant добавления из `docs/work/WO-NL3-002-PARAM.md`.
+- Scope: научные прогоны PARAM-53B-S001..S003 на варианте `53b` (авторские `53b.top` + `53b.conf` verbatim, download-on-run по pinned commit `23fd1ff`, digest-гейт: size + blob SHA-1 обязательны; SHA-256 пин NOT_VERIFIED → вычислить и записать в evidence при первой загрузке); манифест рук `arm-manifest-53b.json` по arm-manifest-v1 ДО прогонов (definition-before-data; нет двух доминирующих блоков → BLOCKED варианта); observables v2 mutual + integrity v1; гейты §4; статистика §6. Outcome = измеренные распределения; интерпретаций нет (в т.ч. никаких сравнений с 0b/11b/32b — это делает Director после всех батчей); acceptance — Director после review.
+- Runtime: WSL Ubuntu engine `/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA` (source commit `00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591`, verified 2026-09-12 MATCH при старте этого батча); прогоны в `/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S00X/` (вне Git, манифесты SHA-256/size обязательны).
+- Budget: ≤ 3.5 ч wall/реплика (150k при ~0.06–0.07 s/step ≈ 2.5–3 ч; превышение → SIGTERM по §5 и ABORTED_BUDGET_INTERRUPT), 3 параллельные реплики, ≤ 4 ч на вариант + анализ ≤ 1 ч.
+- Роль сессии: IMPLEMENTER (fresh-сессия). Reviewer (батчевый, один на серию) и Director — отдельные сессии; merge в main — Human Gate; `project/state.json` не меняется.
