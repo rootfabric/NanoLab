@@ -1,0 +1,476 @@
+{
+  "angle_convention": "[0,180] deg, PCA axes, erratum R1 §2.5",
+  "angle_stats_valid_frames": {
+    "bootstrap": {
+      "ci95": [
+        76.951115414,
+        77.950171698
+      ],
+      "resamples": 10000,
+      "seed": 424242,
+      "statistic": "median"
+    },
+    "iqr_deg": [
+      76.700036749,
+      78.035476386
+    ],
+    "max_deg": 79.339070275,
+    "mean_deg": 77.430162663,
+    "median_deg": 77.4927314,
+    "min_deg": 75.859948479,
+    "n_frames": 37,
+    "q05_deg": 75.922352866,
+    "q95_deg": 78.817949287
+  },
+  "arm_manifest": "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b.json (arm-manifest-v1, derived before runs; arm_a 4814 / arm_b 3190)",
+  "detector": "v2 mutual-nearest (frozen, E2_OBSERVABLES_R2 + E2_PROTO_R1 §2)",
+  "displacement_max_max": 11.208107699,
+  "energy": {
+    "columns": [
+      "time",
+      "potential",
+      "kinetic",
+      "total"
+    ],
+    "max_abs_drift_total": 0.007969,
+    "rows_total": 1501,
+    "time_first": 0.0,
+    "time_last": 750.0,
+    "total_energy_first": -1.177107,
+    "total_energy_last": -1.173246,
+    "total_energy_max": -1.169138,
+    "total_energy_min": -1.179822
+  },
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "frames": [
+    {
+      "angle_deg": 76.980011993,
+      "angle_status": "OK",
+      "displacement_max": 0.0,
+      "frame": 0,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055857345,
+      "pairs_fraction_v2": 1.0,
+      "time": "4000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.162422214,
+      "angle_status": "OK",
+      "displacement_max": 4.92802084,
+      "frame": 1,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055857345,
+      "pairs_fraction_v2": 0.985809179,
+      "time": "8000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.951115414,
+      "angle_status": "OK",
+      "displacement_max": 5.050330364,
+      "frame": 2,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055975437,
+      "pairs_fraction_v2": 0.986413043,
+      "time": "12000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.300035969,
+      "angle_status": "OK",
+      "displacement_max": 7.052111761,
+      "frame": 3,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055739254,
+      "pairs_fraction_v2": 0.984299517,
+      "time": "16000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.814239735,
+      "angle_status": "OK",
+      "displacement_max": 5.945155145,
+      "frame": 4,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055621162,
+      "pairs_fraction_v2": 0.985507246,
+      "time": "20000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.406737898,
+      "angle_status": "OK",
+      "displacement_max": 8.888250039,
+      "frame": 5,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05550307,
+      "pairs_fraction_v2": 0.986413043,
+      "time": "24000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.22573882,
+      "angle_status": "OK",
+      "displacement_max": 10.147299755,
+      "frame": 6,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055857345,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "28000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.672789106,
+      "angle_status": "OK",
+      "displacement_max": 9.326863724,
+      "frame": 7,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05621162,
+      "pairs_fraction_v2": 0.985507246,
+      "time": "32000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.109167492,
+      "angle_status": "OK",
+      "displacement_max": 8.374240189,
+      "frame": 8,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055621162,
+      "pairs_fraction_v2": 0.9897343,
+      "time": "36000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.644055948,
+      "angle_status": "OK",
+      "displacement_max": 8.761517857,
+      "frame": 9,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055384979,
+      "pairs_fraction_v2": 0.988224638,
+      "time": "40000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.4927314,
+      "angle_status": "OK",
+      "displacement_max": 7.857792828,
+      "frame": 10,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055384979,
+      "pairs_fraction_v2": 0.98852657,
+      "time": "44000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.158236612,
+      "angle_status": "OK",
+      "displacement_max": 8.287369338,
+      "frame": 11,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055384979,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "48000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.682795201,
+      "angle_status": "OK",
+      "displacement_max": 9.080156607,
+      "frame": 12,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055148795,
+      "pairs_fraction_v2": 0.986111111,
+      "time": "52000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.035476386,
+      "angle_status": "OK",
+      "displacement_max": 6.947720098,
+      "frame": 13,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055384979,
+      "pairs_fraction_v2": 0.985205314,
+      "time": "56000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.158219287,
+      "angle_status": "OK",
+      "displacement_max": 9.742944168,
+      "frame": 14,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054085971,
+      "pairs_fraction_v2": 0.987318841,
+      "time": "60000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.950171698,
+      "angle_status": "OK",
+      "displacement_max": 10.818362022,
+      "frame": 15,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055266887,
+      "pairs_fraction_v2": 0.989130435,
+      "time": "64000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.938035147,
+      "angle_status": "OK",
+      "displacement_max": 11.201004866,
+      "frame": 16,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054676429,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "68000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.939365161,
+      "angle_status": "OK",
+      "displacement_max": 10.575396069,
+      "frame": 17,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055384979,
+      "pairs_fraction_v2": 0.984299517,
+      "time": "72000",
+      "valid": true
+    },
+    {
+      "angle_deg": 75.859948479,
+      "angle_status": "OK",
+      "displacement_max": 7.752655994,
+      "frame": 18,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054204062,
+      "pairs_fraction_v2": 0.986413043,
+      "time": "76000",
+      "valid": true
+    },
+    {
+      "angle_deg": 75.872066351,
+      "angle_status": "OK",
+      "displacement_max": 8.860081438,
+      "frame": 19,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054204062,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "80000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.479089417,
+      "angle_status": "OK",
+      "displacement_max": 8.557436943,
+      "frame": 20,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054794521,
+      "pairs_fraction_v2": 0.984299517,
+      "time": "84000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.625226259,
+      "angle_status": "OK",
+      "displacement_max": 8.212962097,
+      "frame": 21,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054558337,
+      "pairs_fraction_v2": 0.98218599,
+      "time": "88000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.406865461,
+      "angle_status": "OK",
+      "displacement_max": 9.359164182,
+      "frame": 22,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054085971,
+      "pairs_fraction_v2": 0.989432367,
+      "time": "92000",
+      "valid": true
+    },
+    {
+      "angle_deg": 75.934924494,
+      "angle_status": "OK",
+      "displacement_max": 8.658825895,
+      "frame": 23,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054558337,
+      "pairs_fraction_v2": 0.987922705,
+      "time": "96000",
+      "valid": true
+    },
+    {
+      "angle_deg": 76.700036749,
+      "angle_status": "OK",
+      "displacement_max": 8.433368786,
+      "frame": 24,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054322154,
+      "pairs_fraction_v2": 0.985809179,
+      "time": "100000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.958568055,
+      "angle_status": "OK",
+      "displacement_max": 9.756657897,
+      "frame": 25,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055030704,
+      "pairs_fraction_v2": 0.987016908,
+      "time": "104000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.232789866,
+      "angle_status": "OK",
+      "displacement_max": 10.356372513,
+      "frame": 26,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054440246,
+      "pairs_fraction_v2": 0.986111111,
+      "time": "108000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.931455403,
+      "angle_status": "OK",
+      "displacement_max": 9.977388927,
+      "frame": 27,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054676429,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "112000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.701085143,
+      "angle_status": "OK",
+      "displacement_max": 10.248669248,
+      "frame": 28,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05550307,
+      "pairs_fraction_v2": 0.987922705,
+      "time": "116000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.329921752,
+      "angle_status": "OK",
+      "displacement_max": 8.667811049,
+      "frame": 29,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054676429,
+      "pairs_fraction_v2": 0.988224638,
+      "time": "120000",
+      "valid": true
+    },
+    {
+      "angle_deg": 79.339070275,
+      "angle_status": "OK",
+      "displacement_max": 9.852440739,
+      "frame": 30,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054912612,
+      "pairs_fraction_v2": 0.985507246,
+      "time": "124000",
+      "valid": true
+    },
+    {
+      "angle_deg": 79.131484883,
+      "angle_status": "OK",
+      "displacement_max": 10.558452858,
+      "frame": 31,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054794521,
+      "pairs_fraction_v2": 0.984601449,
+      "time": "128000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.739565388,
+      "angle_status": "OK",
+      "displacement_max": 10.606432407,
+      "frame": 32,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054912612,
+      "pairs_fraction_v2": 0.986714976,
+      "time": "132000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.695292424,
+      "angle_status": "OK",
+      "displacement_max": 11.208107699,
+      "frame": 33,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054440246,
+      "pairs_fraction_v2": 0.983091787,
+      "time": "136000",
+      "valid": true
+    },
+    {
+      "angle_deg": 77.993735173,
+      "angle_status": "OK",
+      "displacement_max": 9.52718751,
+      "frame": 34,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05550307,
+      "pairs_fraction_v2": 0.984299517,
+      "time": "140000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.064735901,
+      "angle_status": "OK",
+      "displacement_max": 10.042749605,
+      "frame": 35,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.054204062,
+      "pairs_fraction_v2": 0.985205314,
+      "time": "144000",
+      "valid": true
+    },
+    {
+      "angle_deg": 78.298811567,
+      "angle_status": "OK",
+      "displacement_max": 9.786794555,
+      "frame": 36,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.053967879,
+      "pairs_fraction_v2": 0.987016908,
+      "time": "148000",
+      "valid": true
+    }
+  ],
+  "frames_total": 37,
+  "frames_valid": 37,
+  "gates": {
+    "displacement_max_max": 20.0,
+    "long_bond_fraction_max": 0.1078,
+    "pairs_fraction_v2_min": 0.5
+  },
+  "kind": "e2_param_replica_analysis",
+  "long_bond_fraction_max": 0.05621162,
+  "pairs_fraction_v2_first": 1.0,
+  "pairs_fraction_v2_last": 0.987016908,
+  "pairs_fraction_v2_min": 0.98218599,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited, incl. addendum s.8: steps=150000) + docs/work/WO-NL3-002-PARAM.md",
+  "reference_pairs_v2_count": 3312,
+  "run_id": "PARAM-32B-S002",
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (distributions; no interpretation; no cross-variant comparison in this execution; acceptance — Director after review)",
+  "seed": 202008,
+  "steps_requested": 150000,
+  "valid_frame_fraction": 1.0,
+  "variant": "32b"
+}
+

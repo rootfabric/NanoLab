@@ -1,0 +1,203 @@
+{
+  "arm_manifest_32b": {
+    "angle_frame0_deg": 77.477102136,
+    "arm_a": 4814,
+    "arm_b": 3190,
+    "coverage_fraction_of_paired": 0.9995005,
+    "derivation": "arm-manifest-v1, byte-identical double run, definition-before-data"
+  },
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "kind": "e2_param_summary",
+  "pooled_angle_stats_valid_frames": {
+    "bootstrap": {
+      "ci95": [
+        77.794798276,
+        78.66512915
+      ],
+      "resamples": 10000,
+      "seed": 424242,
+      "statistic": "median"
+    },
+    "iqr_deg": [
+      77.044589742,
+      79.781487257
+    ],
+    "max_deg": 81.544445205,
+    "mean_deg": 78.318096281,
+    "median_deg": 78.091845516,
+    "min_deg": 73.98267031,
+    "n_frames": 111,
+    "q05_deg": 75.753118174,
+    "q95_deg": 81.213081516
+  },
+  "pooled_valid_frames_total": 111,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited, incl. addendum s.8: steps=150000) + docs/work/WO-NL3-002-PARAM.md",
+  "run_reports": {
+    "PARAM-32B-S001": {
+      "budget_ok": true,
+      "end_epoch": 1789235737,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 8066.67,
+      "per_step_s": 0.053907,
+      "prefix": "s001",
+      "seed": 201004,
+      "start_epoch": 1789227651,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 8086,
+      "wsl_dir": "/home/yurig/nl3-002-param-32b/runs/PARAM-32B-S001"
+    },
+    "PARAM-32B-S002": {
+      "budget_ok": true,
+      "end_epoch": 1789235767,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 8096.08,
+      "per_step_s": 0.054107,
+      "prefix": "s002",
+      "seed": 202008,
+      "start_epoch": 1789227651,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 8116,
+      "wsl_dir": "/home/yurig/nl3-002-param-32b/runs/PARAM-32B-S002"
+    },
+    "PARAM-32B-S003": {
+      "budget_ok": true,
+      "end_epoch": 1789235729,
+      "energy_rows": 1501,
+      "energy_rows_expected_full_run": 1501,
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "log_time_passed_s_crosscheck": 8058.11,
+      "per_step_s": 0.053853,
+      "prefix": "s003",
+      "seed": 203012,
+      "start_epoch": 1789227651,
+      "steps_requested": 150000,
+      "traj_frames_expected_full_run": 38,
+      "traj_frames_written": 37,
+      "wall_time_s": 8078,
+      "wsl_dir": "/home/yurig/nl3-002-param-32b/runs/PARAM-32B-S003"
+    }
+  },
+  "runs": {
+    "PARAM-32B-S001": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            79.448763083,
+            80.253644739
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          79.058994972,
+          80.386488929
+        ],
+        "max_deg": 81.261668145,
+        "mean_deg": 79.637135549,
+        "median_deg": 79.877463339,
+        "min_deg": 76.888159701,
+        "n_frames": 37,
+        "q05_deg": 77.636006975,
+        "q95_deg": 81.227294159
+      },
+      "displacement_max_max": 11.322472084,
+      "energy_max_abs_drift_total": 0.014723,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.057510628,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.983596598,
+      "pairs_fraction_v2_min": 0.982381531,
+      "reference_pairs_v2_count": 3292,
+      "seed": 201004,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-32B-S002": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            76.951115414,
+            77.950171698
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          76.700036749,
+          78.035476386
+        ],
+        "max_deg": 79.339070275,
+        "mean_deg": 77.430162663,
+        "median_deg": 77.4927314,
+        "min_deg": 75.859948479,
+        "n_frames": 37,
+        "q05_deg": 75.922352866,
+        "q95_deg": 78.817949287
+      },
+      "displacement_max_max": 11.208107699,
+      "energy_max_abs_drift_total": 0.007969,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.05621162,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.987016908,
+      "pairs_fraction_v2_min": 0.98218599,
+      "reference_pairs_v2_count": 3312,
+      "seed": 202008,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-32B-S003": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            76.909285579,
+            78.312438191
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          76.564145458,
+          79.162966256
+        ],
+        "max_deg": 81.544445205,
+        "mean_deg": 77.886990633,
+        "median_deg": 77.794798276,
+        "min_deg": 73.98267031,
+        "n_frames": 37,
+        "q05_deg": 74.610465946,
+        "q95_deg": 81.311915368
+      },
+      "displacement_max_max": 12.75929613,
+      "energy_max_abs_drift_total": 0.01227,
+      "frames_total": 37,
+      "frames_valid": 37,
+      "long_bond_fraction_max": 0.057510628,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.982616651,
+      "pairs_fraction_v2_min": 0.980786825,
+      "reference_pairs_v2_count": 3279,
+      "seed": 203012,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (measured distributions; no scientific conclusions; no cross-variant comparisons here; acceptance — Director after review)",
+  "steps": 150000,
+  "variant": "32b"
+}
+

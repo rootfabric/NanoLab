@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-12T18:20:00Z",
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "scientific_outcome": "MEASURED",
+  "summary": "Анализ v2 (mutual-nearest, frozen) по всем записанным кадрам (37/ран, полные 150k шагов, без прерываний). Reference pairs frame 0: 3292/3312/3279. Гейты §4 (lbf > 0.1078 / pf_v2 < 0.50 / disp > 20.0): 0 STRUCTURALLY_INVALID из 111 кадров (доля валидных 1.00 в каждой реплике). Угол (манифест 32B: arm_a 4814 / arm_b 3190, конвенция [0,180]): S001 median 79.88° IQR [79.06, 80.39] CI95 [79.45, 80.25]; S002 77.49° IQR [76.70, 78.04] CI95 [76.95, 77.95]; S003 77.79° IQR [76.56, 79.16] CI95 [76.91, 78.31]. ПУЛ (111): median 78.09°, IQR [77.04, 79.78], q5–q95 [75.75, 81.21], bootstrap CI95 [77.79, 78.67] (10000, seed 424242), min 73.98 / max 81.54. pf_v2 ≥ 0.9808 (first 1.000); lbf max 0.0575 (< 0.1078); disp max 12.76 (< 20.0); energy drift ≤ 0.0147. Детерминизм: повторный полный прогон анализа S001 байт-идентичен (sha256 2bf78173…). Bootstrap/квантили — линейная интерполяция, no optional stopping, исключений по гейтам нет. Итог: измеренные распределения зафиксированы; интерпретаций нет (никаких сравнений с 11b/0b — Director после всех батчей серии).",
+  "command_refs": [
+    "python evidence/param_analysis.py -> s00X-analysis.json + PARAM-32B-summary.json (canonical)",
+    "python evidence/param_analysis.py --only s001 (determinism re-run, byte-identical, sha256 2bf78173ab4483059338215a68b330eade975d2394f200246ceaa6b5637cb217f)",
+    "combined record: evidence/PARAM-32B-analysis.json"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s003-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-summary.json"
+  ],
+  "next_action": "HANDOFF: summary.md + passport HANDOFF_READY + SESSION_LOG + validate/close + check-consistency + unittest (0005).",
+  "blocker": null
+}
