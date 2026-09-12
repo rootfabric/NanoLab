@@ -1,0 +1,46 @@
+##############################
+####  PROGRAM PARAMETERS  ####
+##############################
+backend = CPU
+backend_precision = double
+debug = 1
+seed = 203012
+CUDA_list = verlet
+CUDA_device = 4
+
+##############################
+####    SIM PARAMETERS    ####
+##############################
+steps = 150000
+newtonian_steps = 103
+diff_coeff = 2.5 
+thermostat = john
+interaction_type = DNA2
+salt_concentration = 0.5
+
+T = 300K
+dt = 0.005
+verlet_skin = 0.05
+
+##############################
+####     INTERACTIONS     ####
+##############################
+rcut = 2.0
+
+##############################
+####    INPUT / OUTPUT    ####
+##############################
+topology = 53b.top
+conf_file = 53b.conf
+trajectory_file = s003_traj.dat
+refresh_vel = 1
+log_file = s003_log.dat
+no_stdout_energy = 0
+restart_step_counter = 1
+energy_file = s003_energy.dat
+print_conf_interval = 4000
+print_conf_ppc = 51
+print_energy_every = 100
+time_scale = linear
+external_forces = 0
+lastconf_file = s003_last.dat

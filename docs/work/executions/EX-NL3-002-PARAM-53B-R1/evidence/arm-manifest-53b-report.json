@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "e2_arm_manifest_report",
+  "execution_id": "EX-NL3-002-PARAM-53B-R1",
+  "variant": "53b",
+  "derivation": "arm-manifest-v1 (frozen derivation, scripts/e2/arm_manifest.py) on frame 0 of MD_Hinges/53b.conf @ 23fd1ff; definition-before-data (before any 53b run)",
+  "gate": "two dominant rigid blocks derived -> PASS; variant NOT blocked",
+  "two_dominant_blocks": "PASS",
+  "arms": {
+    "arm_a": 4318,
+    "arm_b": 3638
+  },
+  "pair_graph": {
+    "detector": "v2 geometry (window, antiparallel a1) + greedy matching, mutual_nearest=False",
+    "paired_nucleotides": 7956,
+    "paired_fraction_of_topology": 0.914903404,
+    "pairs": 3978,
+    "stack_continuation_edges": 5336,
+    "crossover_covalent_edges": 2224
+  },
+  "clustering": {
+    "selected_parallel_threshold": 0.95,
+    "selection_rule": "max second/third block size ratio subject to dominance constraints",
+    "block_sizes_at_selected": [1386, 986, 140, 130, 126, 96, 88, 64, 60, 52],
+    "dominance_check": "cores 1386/986, both >= 10% of 7956 paired nucleotides (795.6); second/third = 986/140 ~ 7.04 >= 3.0"
+  },
+  "coverage": {
+    "topology_nucleotides": 8696,
+    "paired_nucleotides": 7956,
+    "manifest_nucleotides": 7956,
+    "manifest_fraction_of_topology": 0.914903404,
+    "manifest_fraction_of_paired": 1.0,
+    "unassigned_paired_nucleotides": 0,
+    "unassigned_chains": 0
+  },
+  "validation": {
+    "groups_nonempty": true,
+    "groups_disjoint": true,
+    "only_paired_nucleotides": true,
+    "hinge_angle_frame0": {
+      "status": "OK",
+      "angle_deg": 132.949606811,
+      "angle_rad": 2.320408378,
+      "convention": "[0,180] deg, PCA axes, erratum R1 section 2.5"
+    }
+  },
+  "determinism": {
+    "runs": 2,
+    "byte_identical": true,
+    "sha256_run1": "8e58eb8901a97dc7f0598a826b1e08d3ffe9cd879746860aa33d6cbbba6bbb324",
+    "sha256_run2": "8e58eb8901a97dc7f0598a826b1e08d3ffe9cd879746860aa33d6cbbba6bbb324"
+  }
+}

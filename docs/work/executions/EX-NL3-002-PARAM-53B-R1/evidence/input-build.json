@@ -1,0 +1,101 @@
+{
+  "all_inputs_verified": true,
+  "execution_id": "EX-NL3-002-PARAM-53B-R1",
+  "kind": "e2_param_input_build",
+  "print_conf_interval": 4000,
+  "print_energy_every": 100,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited, incl. addendum s.8)",
+  "runs": {
+    "PARAM-53B-S001": {
+      "copy_checks": {
+        "53b.conf": {
+          "copy_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "expected_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "match": true
+        },
+        "53b.top": {
+          "copy_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "expected_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "9ae6fb696ea883ff139edcd98a21069957037f0783148c86270b61932e59ab65",
+          "expected_sha256": "9ae6fb696ea883ff139edcd98a21069957037f0783148c86270b61932e59ab65",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s001",
+      "seed": 201004,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S001"
+    },
+    "PARAM-53B-S002": {
+      "copy_checks": {
+        "53b.conf": {
+          "copy_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "expected_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "match": true
+        },
+        "53b.top": {
+          "copy_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "expected_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "96e72555219d142d598c73a9d7e2faa5a359cf7d76e8ed6d866cc2a3ec075cf8",
+          "expected_sha256": "96e72555219d142d598c73a9d7e2faa5a359cf7d76e8ed6d866cc2a3ec075cf8",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s002",
+      "seed": 202008,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S002"
+    },
+    "PARAM-53B-S003": {
+      "copy_checks": {
+        "53b.conf": {
+          "copy_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "expected_sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "match": true
+        },
+        "53b.top": {
+          "copy_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "expected_sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "0c4ccf4d3104e4722d8406b4ef62581a4ceb139ae8c46546e92b9da93d6ab65d",
+          "expected_sha256": "0c4ccf4d3104e4722d8406b4ef62581a4ceb139ae8c46546e92b9da93d6ab65d",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "s003",
+      "seed": 203012,
+      "wsl_dir": "/home/yurig/nl3-002-param-53b/runs/PARAM-53B-S003"
+    }
+  },
+  "schema_version": 1,
+  "steps": 150000,
+  "variant": "53b"
+}
+
