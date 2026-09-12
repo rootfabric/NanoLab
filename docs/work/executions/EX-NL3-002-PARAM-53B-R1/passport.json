@@ -28,5 +28,5 @@
     {"run_id": "PARAM-53B-S003", "seed": 203012}
   ],
   "started_at_utc": "2026-09-12T19:50:00Z",
-  "status": "RUNNING"
+  "status": "HANDOFF_READY"
 }
