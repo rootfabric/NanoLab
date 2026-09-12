@@ -226,6 +226,85 @@ def reference_pairs(conf: Configuration, topology: Topology) -> list:
     return pairs
 
 
+def reference_pairs_bucketed(conf: Configuration, topology: Topology, cell_size: float = PAIR_D_MAX) -> list:
+    """Bucketed (spatial-grid + base-complement buckets) equivalent of reference_pairs.
+
+    Added additively in EX-NL3-002-PILOT-R1 for the 8378-nucleotide 0b subject,
+    where the naive O(N^2) double loop of ``reference_pairs`` is impractical
+    (WO-NL3-002-PILOT allows an additive bucketed algorithm when needed, with
+    an equivalence test against the naive definition — tests/test_e2_pilot.py).
+    The definition is NOT changed: the candidate set (i < j, complementary
+    bases, not bonded, PAIR_D_MIN < d <= PAIR_D_MAX) and the greedy
+    distance-sorted matching are identical to ``reference_pairs``.
+    """
+    if cell_size < PAIR_D_MAX:
+        raise ObservableError("cell_size must be >= PAIR_D_MAX")
+    n = topology.nucleotides
+    if len(conf.particles) != n:
+        raise ObservableError("configuration and topology nucleotide counts differ")
+    bases = [row[1] for row in topology.rows]
+    n3 = [row[2] for row in topology.rows]
+    n5 = [row[3] for row in topology.rows]
+    bonded = set()
+    for i in range(n):
+        for j in (n3[i], n5[i]):
+            if j != -1:
+                bonded.add((min(i, j), max(i, j)))
+    # base buckets: candidates only pair complementary buckets
+    buckets = {b: [] for b in "ATCG"}
+    for i in range(n):
+        if bases[i] in buckets:
+            buckets[bases[i]].append(i)
+    # spatial grid over the base-bucketed candidates (all bucketed particles;
+    # a non-ATCG base can never form a candidate, so it is excluded upfront)
+    box = conf.box
+    grid: dict = {}
+
+    def cell_key(pos):
+        return (
+            int(pos[0] // cell_size),
+            int(pos[1] // cell_size),
+            int(pos[2] // cell_size),
+        )
+
+    complement_of = {b: COMPLEMENT[b] for b in "ATCG"}
+    for idxs in buckets.values():
+        for i in idxs:
+            grid.setdefault(cell_key(conf.particles[i][0]), []).append(i)
+    candidates = []
+    offsets = [(dx, dy, dz) for dx in (-1, 0, 1) for dy in (-1, 0, 1) for dz in (-1, 0, 1)]
+    for b, idxs in buckets.items():
+        comp = complement_of[b]
+        for i in idxs:
+            pi = conf.particles[i][0]
+            key = cell_key(pi)
+            for dx, dy, dz in offsets:
+                neighbour = grid.get((key[0] + dx, key[1] + dy, key[2] + dz))
+                if not neighbour:
+                    continue
+                for j in neighbour:
+                    if j <= i:
+                        continue
+                    if bases[j] != comp:
+                        continue
+                    if (i, j) in bonded:
+                        continue
+                    d = dist_mic(pi, conf.particles[j][0], box)
+                    if PAIR_D_MIN < d <= PAIR_D_MAX:
+                        candidates.append((d, i, j))
+    candidates.sort()
+    used = set()
+    pairs = []
+    for d, i, j in candidates:
+        if i in used or j in used:
+            continue
+        used.add(i)
+        used.add(j)
+        pairs.append({"i": i, "j": j, "d_ref": d})
+    pairs.sort(key=lambda p: (p["i"], p["j"]))
+    return pairs
+
+
 def pairs_fraction(conf: Configuration, ref_pairs: list) -> dict:
     if not ref_pairs:
         return {"pairs_fraction": None, "status": "NO_REFERENCE_PAIRS", "broken": 0}

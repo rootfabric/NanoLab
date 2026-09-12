@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "checkpoint": "NL3",
+  "base_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "branch": "work/nl3-002-pilot-r1",
+  "worktree": "C:\\NanoLab\\nl3-002-pilot",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / outcome NOT_EVALUATED (калибровочные прогоны; научные исходы не публикуются)",
+  "allowed_paths": [
+    "docs/work/WO-NL3-002-PILOT.md",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "docs/experiments/E2_HINGE_COMPONENT.md (только если нужна пометка pilot)",
+    "scripts/e2/** (аддитивно: bucketed pairs при необходимости — с equivalence-тестом)",
+    "tests/**",
+    "experiments/evidence/E2/** (только pilot-манифесты/трейсы, если схема evidence это требует — иначе execution-каталог)"
+  ],
+  "parent_work_order": "NL3-002",
+  "owner_decisions_applied": [
+    "G1 = B (docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md): download-on-run по exact pinned commit, REFERENCE_ONLY, derived results публикуются",
+    "U4 = NO durable cache (re-download + digest перед каждым использованием, удаление после execution)"
+  ],
+  "preregistration_note": "WO-NL3-002-PILOT.md = preregistration; параметры (seeds 101001/102002/103003, процедура) заморожены до запуска ранов; никаких научных claim'ов; E2 остаётся NOT_RUN; campaign-level scientific_outcome = NOT_EVALUATED",
+  "started_at_utc": "2026-09-12T01:56:10Z",
+  "status": "HANDOFF_READY"
+}

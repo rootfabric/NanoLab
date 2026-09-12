@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-12T02:35:40Z",
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "summary": "END_EXECUTION: все 4 прогона завершены успешно. Rate run E2-PILOT-RATE (500 steps, seed 101001): exit 0, wall 25.93 s → per-step ≤ 0.0519 s. Реплики (steps=24000, print_conf_interval=400, print_energy_every=100, параллельные WSL-процессы): E2-PILOT-S001 (seed 101001) exit 0, wall 1441.16 s (0.0600 s/step); E2-PILOT-S002 (102002) exit 0, wall 1447.95 s (0.0603 s/step); E2-PILOT-S003 (103003) exit 0, wall 1449.27 s (0.0604 s/step). Все — в бюджете (≤25 мин/реплика, ≤3 ч общий). Артефакты (traj/energy/last/log + input) остались в WSL /home/yurig/nl3-002-pilot/runs/<run_id>/ (вне Git); манифесты с SHA-256+size каждого файла: evidence/{rate,s001,s002,s003}-artifacts.manifest.json. Отклонения от pro_CPU.in per-run: evidence/{s001,s002,s003}_deviations.json (steps/seed/имена файлов/topology+conf_file 74b→0b/print intervals/добавлен lastconf_file). Технический outcome: RUN_COMPLETED × 4; научный исход НЕ публикуется (NOT_EVALUATED, калибровка).",
+  "command_refs": [
+    "python evidence/run_engine.py x4 -> exit 0, walls 25.93 / 1441.16 / 1447.95 / 1449.27 s",
+    "python evidence/artifact_manifest.py x4 -> 10 files per run manifest (sha256+size)",
+    "per-step cost (replica, parallel): 0.0600 / 0.0603 / 0.0604 s/step"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/cost-summary.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/rate_run_report.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s001_run_report.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s002_run_report.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s003_run_report.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s001-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s002-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s003-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/rate-artifacts.manifest.json"
+  ],
+  "next_action": "IMPLEMENTER: non-confirmatory analysis (energy trace, integrity v1, DRAFT-proxy угол) → END_ANALYSIS records.",
+  "blocker": null
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-12T02:39:05Z",
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "summary": "Handoff NL3-002-PILOT: пилот E2 завершён в бюджете (общий calendar wall ~50 мин, лимит 3 ч). 4/4 прогона RUN_COMPLETED (rate 500 + 3 реплики 24000 steps). Калибровочные результаты: per-step cost 0.060 s (parallel) / ≤0.052 s (upper bound single); energy drift ≤0.0056 total units; integrity smoke: long_bond_fraction ~0.054-0.056 (присутствует уже в frame 0 — свойство авторского init-конфига vs BOND_D_MAX=1.0, вход в tolerance-решение E2-PROTO-R1); reference pairs 26-29 (мало для 8378 нуклеотидов — frozen window [0.05,0.55] на авторском init); DRAFT-proxy угол ~178.6 deg, изменения ≤0.5 deg. scientific_outcome = NOT_EVALUATED (калибровка, non-confirmatory; E2 остаётся NOT_RUN; никаких научных claim'ов). Валидации: work_cli validate ok (до handoff), check-consistency ok, unittest 231 OK (1 skip, включая 4 новых equivalence-теста bucketed pairs). Временные исходные файлы источника удалены (U4=NO durable cache). Отклонений от WO нет. Next: REVIEWER (fresh-сессия) на exact HEAD ветки work/nl3-002-pilot-r1, затем Director; merge — Human Gate.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PILOT-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok (frontier NL3, next NL3-002)",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> 231 OK (1 skip)",
+    "removed: %TEMP%\\nl3-002-pilot-src (source bytes; WSL run dirs kept until review, outside Git)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PILOT-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/cost-summary.json"
+  ],
+  "next_action": "REVIEWER fresh-сессия: review work/nl3-002-pilot-r1 exact HEAD; затем Director acceptance; merge в main — Human Gate.",
+  "blocker": null
+}

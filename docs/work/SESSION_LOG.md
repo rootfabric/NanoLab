@@ -326,3 +326,13 @@ Director decision (2026-09-12): NL3-002A = ACCEPTED (C0_SOFTWARE_ONLY, campaign 
 Merge: control/nl3-002a-director-checkpoint-r1 — merge-коммиты 3051972 (work), 15e38f4 (review), 2c078de (verify) + Director records; local main обновлён fast-forward. Публикация main (push origin) — Human Gate владельца. state.json/plan.json не менялись (frontier NL3, next NL3-002; E2 = NOT_RUN). Work Queue обновлена (NL3-002A ACCEPTED, следующая фаза — пилот).
 
 Следующее действие: IMPLEMENTER fresh-сессия — WO-NL3-002-PILOT (0b × 3 реплики bounded, seeds 101001/102002/103003, non-confirmatory, бюджет ≤ 3 ч wall) → REVIEWER → Director; после пилота — E2-PROTO-R1 freeze и confirmatory кампания.
+
+## 2026-09-12 — NL3-002-PILOT — E2 pilot: bounded прогоны 0b × 3 (non-confirmatory), HANDOFF_READY
+
+Mission владельца: исполнение WO-NL3-002-PILOT в fresh IMPLEMENTER-сессии. Base = 760901c (local main tip, совпал с ожиданием), ветка work/nl3-002-pilot-r1, START eba4758 (push до substantive). Engine oxDNA 00dc7fb9 (WSL, verified).
+
+Поставлено: digest-gated download 0b.top/0b.conf/pro_CPU.in по pinned commit 23fd1ff (G1=B, без durable-кэша, файлы вне Git, после execution удалены): digest-гейт 3/3 PASS. Rate run E2-PILOT-RATE (500 steps): exit 0, 25.93 s → per-step ≤ 0.0519 s; выбраны steps=24000 (прогноз 20.8 мин), print_conf_interval=400 (60 кадров). Реплики E2-PILOT-S001/S002/S003 (seeds 101001/102002/103003, параллельные WSL): все exit 0, wall 1441/1448/1449 s (~0.060 s/step). Analysis (non-confirmatory): energy drift ≤ 0.0056; long_bond_fraction 0.055-0.056 (уже в frame 0 — свойство авторского init vs BOND_D_MAX=1.0); reference pairs 26-29 (window [0.05,0.55] на init-конфиге); DRAFT-proxy PCA угол ~178.6 deg, Δ≤0.5 deg (DRAFT, не E2-PROTO манифест). Аддитив: reference_pairs_bucketed в observables.py + 4 equivalence-теста. scientific_outcome = NOT_EVALUATED; E2 = NOT_RUN; 2e7 steps не запускались; бюджет ≤ 3 ч соблюдён (~50 мин calendar).
+
+Чеки: unittest 231 OK (1 skip); check-consistency ok; work_cli validate/close EX-NL3-002-PILOT-R1 ok. Evidence: docs/work/executions/EX-NL3-002-PILOT-R1/{events 0001-0005, summary.md, evidence/ (manifests+digests, cost-summary, analyses, verification)}. Артефакты ранов в WSL вне Git; манифесты с SHA-256 в Git.
+
+Следующее действие: REVIEWER (fresh-сессия) на exact HEAD work/nl3-002-pilot-r1 → Director acceptance; merge — Human Gate; затем E2-PROTO-R1 freeze и confirmatory кампания.
