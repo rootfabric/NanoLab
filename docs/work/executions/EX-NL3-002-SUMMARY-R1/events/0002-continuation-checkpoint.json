@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T22:52:10Z",
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5a2fd309ee067ec79bc5c77b04c06953cd6a2ffa",
+  "summary": "Интеграционные merge завершены (11b/32b/53b/74b; конфликты SESSION_LOG.md разрешены union-ом). Прочитаны все источники: confirmatory 0b (150 кадров, 200k), 11b (138 кадров, truncated 184k), 32b/53b (по 111 кадров, 150k), 74b failure-report. Подтверждено: per-frame поле time есть во всех published analysis JSON → честный ре-срез без индексной реконструкции и без raw-траекторий. Построен evidence/parametric-summary.json: окна 0b/11b по 111 валидных кадров (last t=148000), 32b/53b — полное совпадение recomputed == published (cross-check ok); детерминизм билдера байт-в-байт. Далее: карточка компонента 0b, series-summary, валидации, records."
+}
