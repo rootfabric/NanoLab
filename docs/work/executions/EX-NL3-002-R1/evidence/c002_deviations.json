@@ -1,0 +1,69 @@
+{
+  "deviations": [
+    {
+      "author": "74b.conf",
+      "confirm": "0b.conf",
+      "key": "conf_file",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "hinge_energy.dat",
+      "confirm": "c002_energy.dat",
+      "key": "energy_file",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": null,
+      "confirm": "c002_last.dat",
+      "key": "lastconf_file",
+      "reason": "author input has no lastconf_file; protocol records final configuration"
+    },
+    {
+      "author": "log2.dat",
+      "confirm": "c002_log.dat",
+      "key": "log_file",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "4e3",
+      "confirm": "4000",
+      "key": "print_conf_interval",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "4e3",
+      "confirm": "100",
+      "key": "print_energy_every",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "7777",
+      "confirm": "202008",
+      "key": "seed",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "2e7",
+      "confirm": "200000",
+      "key": "steps",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "74b.top",
+      "confirm": "0b.top",
+      "key": "topology",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    },
+    {
+      "author": "pro.dat",
+      "confirm": "c002_traj.dat",
+      "key": "trajectory_file",
+      "reason": "E2_PROTO_R1 frozen confirmatory protocol / per-run naming"
+    }
+  ],
+  "kind": "e2_confirm_input_deviations",
+  "run_id": "E2-R1-C002",
+  "schema_version": 1,
+  "source_input": "MD_Hinges/pro_CPU.in @ 23fd1ff (digest-gated, verbatim base)"
+}
+

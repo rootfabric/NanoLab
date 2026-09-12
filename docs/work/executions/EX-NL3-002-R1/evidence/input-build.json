@@ -1,0 +1,100 @@
+{
+  "all_inputs_verified": true,
+  "execution_id": "EX-NL3-002-R1",
+  "kind": "e2_confirm_input_build",
+  "print_conf_interval": 4000,
+  "print_energy_every": 100,
+  "protocol": "docs/research/E2_PROTO_R1.md",
+  "runs": {
+    "E2-R1-C001": {
+      "copy_checks": {
+        "0b.conf": {
+          "copy_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "expected_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "match": true
+        },
+        "0b.top": {
+          "copy_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "expected_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "68535185af07bec9396fe2c3391b6baad76585486c49af2e7892de6ea79eb3f0",
+          "expected_sha256": "68535185af07bec9396fe2c3391b6baad76585486c49af2e7892de6ea79eb3f0",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "c001",
+      "seed": 201004,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C001"
+    },
+    "E2-R1-C002": {
+      "copy_checks": {
+        "0b.conf": {
+          "copy_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "expected_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "match": true
+        },
+        "0b.top": {
+          "copy_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "expected_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "d7d9adbb85c1a5399f274498cb3a26baac979401b35cd834e99b5a67b10747f4",
+          "expected_sha256": "d7d9adbb85c1a5399f274498cb3a26baac979401b35cd834e99b5a67b10747f4",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "c002",
+      "seed": 202008,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002"
+    },
+    "E2-R1-C003": {
+      "copy_checks": {
+        "0b.conf": {
+          "copy_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "expected_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "match": true
+        },
+        "0b.top": {
+          "copy_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "expected_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "match": true
+        },
+        "input.in": {
+          "copy_sha256": "b9ebed91803b2419767b6a04e9811b994b67414cbd80d252d824993e196a66bc",
+          "expected_sha256": "b9ebed91803b2419767b6a04e9811b994b67414cbd80d252d824993e196a66bc",
+          "match": true
+        },
+        "pro_CPU.in": {
+          "copy_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "expected_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "match": true
+        }
+      },
+      "deviations_count": 10,
+      "input_copied_and_verified": true,
+      "prefix": "c003",
+      "seed": 203012,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C003"
+    }
+  },
+  "schema_version": 1,
+  "steps": 200000
+}
+

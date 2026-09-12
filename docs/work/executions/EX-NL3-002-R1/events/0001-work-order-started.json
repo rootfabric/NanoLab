@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T04:29:26Z",
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "summary": "Старт EX-NL3-002-R1: confirmatory-кампания E2-R1 по замороженному протоколу docs/research/E2_PROTO_R1.md (FROZEN, единственный источник параметров; ничего в нём не меняется). 3 реплики E2-R1-C001/C002/C003, seeds 201004/202008/203012, steps=200000, print_conf_interval=4000 (50 кадров), print_energy_every=100. Входы: 0b.top + 0b.conf verbatim, download-on-run по pinned commit 23fd1ff с digest-гейтом (size+blob_sha1+sha256) по scripts/hinge_family/source_pins.json; pro_CPU.in — база для input (тоже download+digest); все входы копируются в каталог рана; временные каталоги вне Git, удалить после; durable-кэш запрещён. Отклонения от pro_CPU.in (steps/seed/имена outputs/print intervals/lastconf_file) — в c00X_deviations.json каждого рана. Observables: v2 mutual-nearest + integrity v1 + угол по ЗАМОРОЖЕННОМУ arm-manifest-0b.json (arm_a 4006 нт / arm_b 3942 нт), конвенция [0,180] (erratum R1 §2.5). Гейты §4: lbf > 0.1078 ИЛИ pairs_fraction_v2 < 0.50 ИЛИ displacement_max > 20.0 → STRUCTURALLY_INVALID. Статистика §6: median/IQR/q5–q95 + bootstrap CI (10000, seed 424242), per-replica и пул по валидным кадрам. Outcome = измеренные распределения (scientific_outcome = MEASURED); научные выводы и acceptance — Director после REVIEWER; state.json не меняется. Engine: WSL oxDNA 00dc7fb9 (build-source verified). Budget ≤3.5 ч/реплика, параллельно.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002-confirm -b work/nl3-002-confirm-r1 280104c",
+    "wsl bash git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/research/E2_PROTO_R1.md",
+    "docs/research/E2_OBSERVABLES_R2.md",
+    "scripts/e2/observables.py",
+    "scripts/hinge_family/source_pins.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json",
+    "docs/work/executions/EX-NL3-002-R1/passport.json",
+    "docs/work/executions/EX-NL3-002-R1/branch-passport.md"
+  ],
+  "next_action": "IMPLEMENTER: digest-gated download (0b.top/0b.conf/pro_CPU.in) → входы 3 ранов + deviations → 3 параллельные реплики WSL → END_EXECUTION → анализ v2 → HANDOFF.",
+  "blocker": null
+}

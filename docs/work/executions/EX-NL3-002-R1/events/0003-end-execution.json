@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-12T07:43:16Z",
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "summary": "END_EXECUTION: 3/3 confirmatory рана RUN_COMPLETED. E2-R1-C001 (seed 201004): exit 0, wall 11146 s, 50 кадров, 2001 energy-строк, lastconf 2293925 B. E2-R1-C002 (202008): exit 0, wall 10885 s, 50 кадров, 2001 строк, lastconf 2293814 B. E2-R1-C003 (203012): exit 0, wall 11134 s, 50 кадров, 2001 строк, lastconf 2294185 B. Все в бюджете ≤3.5 ч/реплика (бюджетный гейт не сработал ни разу). Артефакты: WSL /home/yurig/nl3-002-confirm/runs/E2-R1-C001..003/ (вне Git); манифесты SHA-256+size+location каждого входа (0b.top, 0b.conf, pro_CPU.in, input.in) и выхода (traj/energy/last/log, engine stdout/stderr): evidence/c001..c003-artifacts.manifest.json (10 файлов/ран). Отклонения от pro_CPU.in verbatim — evidence/c00X_deviations.json. Технический outcome: RUN_COMPLETED ×3; научный исход не публикуется на этом чекпойнте.",
+  "command_refs": [
+    "python evidence/artifact_manifest.py -> 3 manifests, 10 files each (sha256+size+location)",
+    "stat c00X_last.dat / grep -c energy rows -> 50 frames / 2001 rows x3"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-R1/evidence/run-reports.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c001-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c002-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c003-artifacts.manifest.json"
+  ],
+  "next_action": "IMPLEMENTER: анализ — observables v2 (mutual) + integrity + угол по ЗАМОРОЖЕННОМУ arm-manifest-0b.json; гейты §4; статистика §6 (median/IQR/q5–q95 + bootstrap CI 10000 seed 424242); per-replica + пул → END_ANALYSIS.",
+  "blocker": null
+}

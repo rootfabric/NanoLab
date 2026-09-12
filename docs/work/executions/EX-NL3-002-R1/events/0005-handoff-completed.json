@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-12T07:47:23Z",
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "summary": "Handoff EX-NL3-002-R1: confirmatory-кампания E2-R1 исполнена по замороженному E2_PROTO_R1 без изменений протокола. 3/3 рана RUN_COMPLETED в бюджете (11146/10885/11134 s ≤ 12600 s; параллельно; общий calendar wall ≈ 3.1 ч из ≤4 ч). scientific_outcome = MEASURED: угол (замороженный arm-manifest, конвенция [0,180]) — пул 150 валидных кадров: median 65.98°, IQR [64.94, 67.06], q5–q95 [63.00, 68.41], bootstrap 95% CI [65.67, 66.32]; per-replica 65.10/65.71/67.24°; гейты §4: 0 STRUCTURALLY_INVALID из 150; pairs_fraction_v2 ≥ 0.981; lbf ≤ 0.0560; displacement_max ≤ 8.40; energy drift ≤ 0.0099 total units. Интерпретаций нет; acceptance NL3-002 — Director после REVIEWER. Инцидент (задокументирован, без влияния на данные): крах родительской Python-обёртки на 'del on set' после финиша первой реплики — движки завершились штатно (exit 0 ×3), wall восстановлен по ФС с кросс-чеком. Валидации: work_cli validate ok; work_cli close ok; check-consistency ok (frontier NL3, next NL3-002); unittest discover 242 OK (1 skip). project/state.json НЕ менялся (E2-статус объявит Director). Временные исходники источника и read-кэш удалены (U4=NO durable cache); raw-артефакты в WSL вне Git с манифестами SHA-256+size. Отклонений от протокола нет.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL3-002-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok (frontier NL3, next NL3-002)",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> 242 OK (1 skip)",
+    "removed: %TEMP%\\nl3-002-confirm-src, %TEMP%\\nl3-002-confirm-read (source bytes; WSL run dirs kept until review, outside Git)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c001-analysis.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c002-analysis.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c003-analysis.json"
+  ],
+  "next_action": "REVIEWER fresh-сессия: review work/nl3-002-confirm-r1 exact HEAD; затем Director: E2-R1 outcome + NL3-002 acceptance; merge в main — Human Gate.",
+  "blocker": null
+}

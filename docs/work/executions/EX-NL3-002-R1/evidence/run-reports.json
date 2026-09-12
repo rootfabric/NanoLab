@@ -1,0 +1,53 @@
+{
+  "all_exit_zero": true,
+  "budget_s_per_replica": 12600,
+  "engine": "/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA",
+  "engine_source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "execution_id": "EX-NL3-002-R1",
+  "kind": "e2_confirm_run_reports",
+  "parallel": true,
+  "runs": {
+    "E2-R1-C001": {
+      "budget_ok": true,
+      "engine_end_local": "2026-09-12T17:37:26+10:00",
+      "engine_start_local": "2026-09-12T14:31:40+10:00",
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "per_step_s": 0.05573,
+      "prefix": "c001",
+      "seed": 201004,
+      "steps_requested": 200000,
+      "wall_time_s": 11146,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C001"
+    },
+    "E2-R1-C002": {
+      "budget_ok": true,
+      "engine_end_local": "2026-09-12T17:29:45+10:00",
+      "engine_start_local": "2026-09-12T14:31:40+10:00",
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "per_step_s": 0.054425,
+      "prefix": "c002",
+      "seed": 202008,
+      "steps_requested": 200000,
+      "wall_time_s": 10885,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002"
+    },
+    "E2-R1-C003": {
+      "budget_ok": true,
+      "engine_end_local": "2026-09-12T17:35:14+10:00",
+      "engine_start_local": "2026-09-12T14:31:40+10:00",
+      "exit_code": 0,
+      "interrupted_budget": false,
+      "per_step_s": 0.05567,
+      "prefix": "c003",
+      "seed": 203012,
+      "steps_requested": 200000,
+      "wall_time_s": 11134,
+      "wsl_dir": "/home/yurig/nl3-002-confirm/runs/E2-R1-C003"
+    }
+  },
+  "schema_version": 1,
+  "wall_measurement": "filesystem reconstruction: energy-file birth (engine start) to exit_code.txt mtime (wrapper bash write immediately after engine exit); parent-process bookkeeping bug 'del on set' crashed run_confirm.py after the first replica finished — engines unaffected, all completed; E2-R1-C002 cross-check: in-process perf_counter 10710.2 s vs 10885 s reconstructed (delta = WSL startup + config load before first energy write)"
+}
+

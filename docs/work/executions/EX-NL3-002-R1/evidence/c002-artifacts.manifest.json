@@ -1,0 +1,81 @@
+{
+  "execution_id": "EX-NL3-002-R1",
+  "files": [
+    {
+      "file": "0b.top",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "input",
+      "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "size_bytes": 120204
+    },
+    {
+      "file": "0b.conf",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "input",
+      "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "size_bytes": 2294162
+    },
+    {
+      "file": "pro_CPU.in",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "input",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "size_bytes": 933
+    },
+    {
+      "file": "input.in",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "input",
+      "sha256": "d7d9adbb85c1a5399f274498cb3a26baac979401b35cd834e99b5a67b10747f4",
+      "size_bytes": 976
+    },
+    {
+      "file": "c002_traj.dat",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "a19190d5fab533bee84beb8509850a7ba65b69b6d0ce27773c3d9842436cc6b4",
+      "size_bytes": 114694208
+    },
+    {
+      "file": "c002_energy.dat",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "9c015442e2de09fbaed9df6d02d3346df8ae3b03cde529aabc7d3249a30e18ea",
+      "size_bytes": 98049
+    },
+    {
+      "file": "c002_last.dat",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "58555e656fa8e849f6b9fc6906cdfb9046aa58139c1bbc7a3c189fd2c8c708c6",
+      "size_bytes": 2293814
+    },
+    {
+      "file": "c002_log.dat",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "de67f112e91953b383d78530e57f2fd9d0e11af0698f3f568c202ac6488f3388",
+      "size_bytes": 199280
+    },
+    {
+      "file": "engine_stdout.txt",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "04eff754bfe7587d6bd9469c6eb3691e1d23f6d2fb85cd5d7e988f00be110431",
+      "size_bytes": 124062
+    },
+    {
+      "file": "engine_stderr.txt",
+      "location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002",
+      "role": "output",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "kind": "e2_confirm_artifacts_manifest",
+  "run_id": "E2-R1-C002",
+  "schema_version": 1,
+  "seed": 202008,
+  "storage_location": "/home/yurig/nl3-002-confirm/runs/E2-R1-C002 (WSL, outside Git; raw artifacts not committed)"
+}
+
