@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-12T15:55:00Z",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5940c8ab3f5d90169a17c423c653f4c004a6efc8",
+  "scientific_outcome": "MEASURED",
+  "summary": "Анализ v2 (mutual-nearest, frozen) по фактически записанным кадрам (46/ран из-за бюджетного прерывания; помечено truncated во всех записях). Reference pairs frame 0: 3273/3269/3237. Гейты §4 (lbf > 0.1078 / pf_v2 < 0.50 / disp > 20.0): 0 STRUCTURALLY_INVALID из 138 кадров (доля валидных 1.00 в каждой реплике). Угол (манифест 11B: arm_a 4218 / arm_b 3722, конвенция [0,180]): S001 median 74.36° IQR [73.85, 74.75] CI95 [74.12, 74.57]; S002 71.90° IQR [71.25, 72.82] CI95 [71.43, 72.32]; S003 74.47° IQR [73.99, 74.97] CI95 [74.11, 74.69]. ПУЛ (138): median 73.98°, IQR [72.88, 74.59], q5–q95 [71.00, 75.22], bootstrap CI95 [73.77, 74.17] (10000, seed 424242), min 70.27 / max 75.68. pf_v2 ≥ 0.9808; lbf max 0.0560 (< 0.1078); disp max 8.04 (< 20.0); energy drift ≤ 0.0095. Детерминизм: повторный полный прогон анализа S001 байт-идентичен (sha256 c4811ab3…). Bootstrap/квантили — линейная интерполяция, no optional stopping, исключений по гейтам нет. Итог: измеренные распределения зафиксированы; статус данных из-за бюджетного прерывания (93% длины) — решение REVIEWER/Director; интерпретаций нет.",
+  "command_refs": [
+    "python evidence/param_analysis.py -> s00X-analysis.json + PARAM-11B-summary.json (canonical)",
+    "python evidence/param_analysis.py --only s001 (determinism re-run, byte-identical)",
+    "combined record: evidence/PARAM-11B-analysis.json"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s003-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-summary.json"
+  ],
+  "next_action": "HANDOFF: summary.md + passport HANDOFF_READY + SESSION_LOG + validate/close + check-consistency + unittest (0005).",
+  "blocker": null
+}

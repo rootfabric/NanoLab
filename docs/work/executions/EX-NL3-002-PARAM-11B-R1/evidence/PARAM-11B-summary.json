@@ -1,0 +1,196 @@
+{
+  "arm_manifest_11b": {
+    "angle_frame0_deg": 74.357957026,
+    "arm_a": 4218,
+    "arm_b": 3722,
+    "coverage_fraction_of_paired": 1.0,
+    "derivation": "arm-manifest-v1, byte-identical double run, definition-before-data"
+  },
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "kind": "e2_param_summary",
+  "pooled_angle_stats_valid_frames": {
+    "bootstrap": {
+      "ci95": [
+        73.767611183,
+        74.169269784
+      ],
+      "resamples": 10000,
+      "seed": 424242,
+      "statistic": "median"
+    },
+    "iqr_deg": [
+      72.875847673,
+      74.592549173
+    ],
+    "max_deg": 75.68164458,
+    "mean_deg": 73.597939668,
+    "median_deg": 73.979063396,
+    "min_deg": 70.267845979,
+    "n_frames": 138,
+    "q05_deg": 71.001788371,
+    "q95_deg": 75.220729355
+  },
+  "pooled_valid_frames_total": 138,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited) + docs/work/WO-NL3-002-PARAM.md",
+  "run_reports": {
+    "PARAM-11B-S001": {
+      "energy_rows": 1865,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12569.5,
+      "per_step_s_approx": 0.066874,
+      "prefix": "s001",
+      "seed": 201004,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12472,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S001"
+    },
+    "PARAM-11B-S002": {
+      "energy_rows": 1867,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12561.8,
+      "per_step_s_approx": 0.066674,
+      "prefix": "s002",
+      "seed": 202008,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12448,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002"
+    },
+    "PARAM-11B-S003": {
+      "energy_rows": 1878,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12568.0,
+      "per_step_s_approx": 0.066033,
+      "prefix": "s003",
+      "seed": 203012,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12401,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S003"
+    }
+  },
+  "runs": {
+    "PARAM-11B-S001": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            74.116753782,
+            74.56773248
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          73.847414031,
+          74.754721307
+        ],
+        "max_deg": 75.225792466,
+        "mean_deg": 74.300302294,
+        "median_deg": 74.363089522,
+        "min_deg": 73.00945776,
+        "n_frames": 46,
+        "q05_deg": 73.355804715,
+        "q95_deg": 75.117552027
+      },
+      "displacement_max_max": 7.324679454,
+      "energy_max_abs_drift_total": 0.009479,
+      "frames_total": 46,
+      "frames_valid": 46,
+      "long_bond_fraction_max": 0.055622153,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.985029025,
+      "pairs_fraction_v2_min": 0.981668194,
+      "reference_pairs_v2_count": 3273,
+      "seed": 201004,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-11B-S002": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            71.433354161,
+            72.31723788
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          71.249845288,
+          72.822787932
+        ],
+        "max_deg": 74.308728866,
+        "mean_deg": 72.04509475,
+        "median_deg": 71.897893752,
+        "min_deg": 70.267845979,
+        "n_frames": 46,
+        "q05_deg": 70.745345464,
+        "q95_deg": 73.899354395
+      },
+      "displacement_max_max": 7.464945469,
+      "energy_max_abs_drift_total": 0.006214,
+      "frames_total": 46,
+      "frames_valid": 46,
+      "long_bond_fraction_max": 0.055981779,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.983481187,
+      "pairs_fraction_v2_min": 0.983481187,
+      "reference_pairs_v2_count": 3269,
+      "seed": 202008,
+      "valid_frame_fraction": 1.0
+    },
+    "PARAM-11B-S003": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            74.11097547,
+            74.692414747
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          73.987793768,
+          74.973746008
+        ],
+        "max_deg": 75.68164458,
+        "mean_deg": 74.448421961,
+        "median_deg": 74.469555522,
+        "min_deg": 72.869012963,
+        "n_frames": 46,
+        "q05_deg": 73.49760176,
+        "q95_deg": 75.373200627
+      },
+      "displacement_max_max": 8.040343227,
+      "energy_max_abs_drift_total": 0.006526,
+      "frames_total": 46,
+      "frames_valid": 46,
+      "long_bond_fraction_max": 0.055981779,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.987951807,
+      "pairs_fraction_v2_min": 0.980846463,
+      "reference_pairs_v2_count": 3237,
+      "seed": 203012,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (measured distributions; no scientific conclusions; acceptance — Director after review)",
+  "variant": "11b"
+}
+

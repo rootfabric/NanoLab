@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-12T16:10:00Z",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5940c8ab3f5d90169a17c423c653f4c004a6efc8",
+  "summary": "Handoff EX-NL3-002-PARAM-11B-R1 завершён. Батч 11b исполнен по frozen-наследованию E2_PROTO_R1 + WO-NL3-002-PARAM: digest-гейт 3/3 PASS (sha256 11b вычислены при первой загрузке, NOT_VERIFIED пины не тронуты); манифест рук 11b ДО прогонов (arm_a 4218 / arm_b 3722, coverage 100% парных, угол frame 0 74.36°, байт-детерминизм); runs PARAM-11B-S001..S003 — бюджетное прерывание на 3.5 ч (46/50 кадров, 93%, крэшей нет, калибровочный исход §5, скорость 11b ~0.066 s/step vs 0b ~0.055); анализ v2 mutual: 0 invalid из 138 кадров, пул median 73.98° CI95 [73.77, 74.17]. scientific_outcome = MEASURED (по записанным кадрам, truncated помечено); решение о статусе данных и серии — батчевый REVIEWER + Director. Временные исходники источника удалены (U4 = NO); WSL run-каталоги сохранены до review (вне Git, манифесты в evidence). state.json не менялся.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PARAM-11B-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL3-002-PARAM-11B-R1 -> ok (after this event)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok (frontier NL3, next NL3-002)",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> see final message (green)",
+    "removed: %TEMP%\\nl3-002-param-11b-src, %TEMP%\\nl3-002-param-11b-read (source bytes; WSL run dirs kept until review, outside Git)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-summary.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s003-analysis.json"
+  ],
+  "next_action": "Батчевый REVIEWER (один fresh на серию 11b/32b/53b/74b) на exact HEAD work/nl3-002-param-11b-r1 после завершения серии → Director: сводная серии + карточка компонента → NL3-002 acceptance → merge (Human Gate). Варианты 32b/53b/74b — следующие fresh-сессии (бюджетная калибровка: 11b ~0.066 s/step).",
+  "blocker": null
+}
