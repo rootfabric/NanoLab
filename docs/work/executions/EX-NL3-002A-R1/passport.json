@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002A-R1",
+  "work_order_id": "NL3-002A",
+  "checkpoint": "NL3",
+  "base_sha": "ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+  "branch": "work/nl3-002a-pre-e2-r1",
+  "worktree": "C:\\NanoLab\\nl3-002a",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY (pre-E2 tooling/audits на синтетических фиксстурах; динамика на данных источника не выполняется, campaign-level scientific_outcome = NOT_EVALUATED, E2 = NOT_RUN)",
+  "allowed_paths": [
+    "docs/work/WO-NL3-002A.md",
+    "docs/work/executions/EX-NL3-002A-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "docs/research/E2_OBSERVABLES_R1.md",
+    "scripts/e2/**",
+    "scripts/hinge_family/** (только аддитивные расширения)",
+    "tests/**"
+  ],
+  "parent_work_order": "NL3-002",
+  "owner_decisions_applied": [
+    "G1 = B (docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md): download-on-run по exact pinned commit, REFERENCE_ONLY, derived results публикуются",
+    "U4 = NO durable cache (re-download + digest перед каждым использованием)"
+  ],
+  "started_at_utc": "2026-09-12T00:15:56Z",
+  "status": "HANDOFF_READY"
+}

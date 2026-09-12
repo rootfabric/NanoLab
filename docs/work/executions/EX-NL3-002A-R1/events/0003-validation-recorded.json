@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-12T00:52:40Z",
+  "execution_id": "EX-NL3-002A-R1",
+  "work_order_id": "NL3-002A",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+  "summary": "VALIDATION: (1) unittest discover 227 OK (1 skip; 27 новых test_e2_pre_e2). (2) CONTROL_DEVELOPMENT -CheckConsistency ok (frontier NL3, next NL3-002; state/plan не тронуты). (3) work_cli validate EX-NL3-002A-R1 — структурные чеки PASS (финальный валидейт после терминальных записей: has_summary/terminal complete). (4) Real-data cross-check (G1=B download-on-run, без durable-кэша): digest-гейт PASS 3/3 (0b.json 173059 B blob 0ed4075c/SHA-256 e855097d; 0b.top 120204 B blob 84edad43/SHA-256 cd046127; pro_CPU.in 933 B blob 89d76310/SHA-256 bd6cd418 — совпадение с source_pins.json бит-в-бит); скачанные байты удалены, в Git не попадали. Результаты: mapping 8378==8378 CONSERVED, 91 exact length-совпадений, scaffold 4266 -> split в 16 topology strands, merge-группы 19->568 и 3->126, остаточная неоднозначность 4 design lengths (36,42,49,49=176) vs 3 topology lengths (54,61,61=176) — статус PARTIAL_ASSOCIATION (честный residual G2-R1, length-only matching); рестраинты: pro_CPU.in содержит external_forces = 0 — EXPLICITLY_DISABLED, вердикт NO_RESTRAINTS_OBSERVED (production-прогон автора БЕЗ внешних рестраинтов; Init_Hinges скрипты не сканировались — не скачивались, отмечено как оставшийся пункт); compat audit: unknown_keys = 0, rcut классифицирован NOT_PARSED (нет getInput* в pinned source, движок молча игнорирует неизвестные ключи — U-compat-2), 4 ключа подтверждены по source (Logger.cpp, MDBackend.cpp). (5) Cost probe E2A-PROBE-S001: 5000-step MD pinned binary (build source 00dc7fb9 подтверждён rev-parse) на engine-owned DSDNA8 фикстуре (GPL-3.0 CLEAR, НЕ источник шарнира): completed, wall 2.02 s вкл. WSL/bash overhead, digests записаны; memory честно NOT_MEASURED. Научные прогоны не выполнялись: campaign NOT_EVALUATED, E2 = NOT_RUN.",
+  "command_refs": [
+    "python docs/work/executions/EX-NL3-002A-R1/evidence/run_real_data_checks.py -> exit 0, report written",
+    "python -c e2.cost_probe.run_probe(E2A-PROBE-S001) -> probe_completed True, wall 2.019s",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002A-R1/evidence/real-data-cross-check-report.json",
+    "docs/work/executions/EX-NL3-002A-R1/evidence/cost-probe-report.json",
+    "docs/work/executions/EX-NL3-002A-R1/evidence/run_real_data_checks.py"
+  ],
+  "next_action": "IMPLEMENTER: summary + HANDOFF_COMPLETED; затем независимый REVIEWER.",
+  "blocker": null
+}

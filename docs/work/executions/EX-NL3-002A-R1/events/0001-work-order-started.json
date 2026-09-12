@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T00:15:56Z",
+  "execution_id": "EX-NL3-002A-R1",
+  "work_order_id": "NL3-002A",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+  "summary": "Старт NL3-002A (pre-E2 technical readiness, child of NL3-002): (1) compatibility audit авторского sim-input против pinned engine oxDNA 00dc7fb9; (2) design-to-topology mapping (gap G2: 118 design paths vs 112 topology strands); (3) spring/restraint semantics (init-only vs production); (4) observables v1 — hinge angle + structural integrity с freeze определений ДО production данных (docs/research/E2_OBSERVABLES_R1.md); (5) synthetic cost probe (вход в measured resource budget). Base — local canonical main ba750af0f929f1b49aebe65ab6cc449fbc59a7b1 (docs sync + WO-NL3-002A + G1/U4 owner decisions; origin/main ff9e147 — прямой предок). Динамика на данных источника запрещена; все проверки на синтетических фиксстурах; реальный pinned source только digest-gated download-on-run по G1=B без durable-кэша. campaign-level scientific_outcome = NOT_EVALUATED; E2 = NOT_RUN; state.json/plan.json не меняются.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main rev-parse HEAD -> ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002a -b work/nl3-002a-pre-e2-r1 ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+    "project/state.json @ base: frontier NL3, next_work_order NL3-002 (READY), E2 = NOT_RUN, physics_runs = 7"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002A.md",
+    "docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md",
+    "docs/work/executions/EX-NL3-002A-R1/passport.json",
+    "docs/work/executions/EX-NL3-002A-R1/branch-passport.md"
+  ],
+  "next_action": "IMPLEMENTER: freeze docs/research/E2_OBSERVABLES_R1.md, затем scripts/e2 (compat_audit, topology_mapping, restraints_inventory, observables, cost_probe, fixtures) + tests; CONTINUATION после каждого смыслового этапа.",
+  "blocker": null
+}

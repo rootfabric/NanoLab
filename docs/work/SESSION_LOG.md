@@ -304,3 +304,13 @@ Mission владельца: «реализуй по пунктам. план» �
 Чеки после правок: CONTROL_DEVELOPMENT -CheckConsistency ok (frontier NL3, next NL3-002); unittest discover 200 tests OK (1 skip); state.json парсится. Старые evidence/acceptance records не редактировались. Push в origin не выполнялся (остаётся за владельцем).
 
 Следующее действие: dispatch NL3-002A (IMPLEMENTER, fresh-сессия, ветка work/nl3-002a-pre-e2-r1); после его приёмки — пилот E2 (0b × 1–3 реплики) → freeze E2-PROTO-R1 → confirmatory → параметрическая кампания.
+
+## 2026-09-12 — NL3-002A — IMPLEMENTER handoff: pre-E2 readiness готов (observables v1 frozen, G2 классифицирован, рестраинты: авторский production без внешних сил), next REVIEWER
+
+Mission владельца: «реализуй» — исполнение NL3-002A в этой сессии (та же сессия ранее вела control docs-sync; Reviewer/Verifier остаются отдельными fresh-сессиями). Base = ba750af (docs sync + WO-NL3-002A + G1/U4 decisions), ветка work/nl3-002a-pre-e2-r1, worktree C:\NanoLab\nl3-002a, START 6190a85 (push до substantive), substantive 98d2d1e.
+
+Поставлено: (1) docs/research/E2_OBSERVABLES_R1.md — freeze observables v1 ДО данных (first-principles, U-obs-1); коррекция R1.1 критерия вырожденности оси — до любых применений. (2) scripts/e2/: engine_options.json (222 опции, экстрактор из input_options.md pinned engine), compat_audit, topology_mapping, restraints_inventory, observables, fixtures, cost_probe, digests. (3) 27 новых тестов, полный набор 227 OK (1 skip). (4) Real-data cross-check (G1=B, download-on-run, без кэша): digest-гейт 3/3 PASS бит-в-бит к source_pins.json; G2: CONSERVED 8378, 91 exact, scaffold 4266→split 16, merges 19→568 и 3→126, residual 4↔3 (PARTIAL_ASSOCIATION — честный G2-R1); рестраинты: external_forces = 0 в pro_CPU.in → NO_RESTRAINTS_OBSERVED (production автора без внешних сил); compat: unknown 0, rcut NOT_PARSED (U-compat-2), dt/debug/log_file/refresh_vel подтверждены по source (U-compat-1). (5) Cost probe E2A-PROBE-S001: 5000-step MD pinned binary (00dc7fb9) на DSDNA8 (GPL CLEAR): completed, 2.02 s wall, memory NOT_MEASURED. Научных прогонов нет: campaign NOT_EVALUATED, E2 = NOT_RUN, state.json/plan.json не тронуты.
+
+Чеки: unittest 227 OK; check-consistency ok; work_cli validate/close EX-NL3-002A-R1 ok; детерминизм отчётов байт-в-байт; JSON-гейт в CI. Evidence: docs/work/executions/EX-NL3-002A-R1/{events 0001-0004, summary.md, evidence/real-data-cross-check-report.json, evidence/cost-probe-report.json}.
+
+Следующее действие: независимый REVIEWER (fresh-сессия) на exact HEAD → docs/evidence/NL3-002A/REVIEWER_VERDICT.md; затем Director: приёмка NL3-002A, решение по U-obs-1 (SI/манифест рук) и dispatch пилота E2.

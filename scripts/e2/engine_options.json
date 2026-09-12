@@ -1,0 +1,905 @@
+{
+  "engine": "oxDNA",
+  "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "extraction": {
+    "key_pattern": "^\\s{0,6}\\[?([A-Za-z_][A-Za-z0-9_]*)\\s*=",
+    "method": "regex-line-scan",
+    "note": "keys = '<name> = ...' lines (definition or example usage); optional = wrapped in []; section = nearest free-standing '...:' or markdown heading; keys used by the engine but absent from the documentation are handled by compat_audit.KNOWN_UNDOCUMENTED, not here"
+  },
+  "kind": "engine_options_registry",
+  "option_count": 222,
+  "options": {
+    "CUDA_device": {
+      "optional": true,
+      "section": "CUDA options"
+    },
+    "CUDA_list": {
+      "optional": true,
+      "section": "CUDA options"
+    },
+    "CUDA_sort_every": {
+      "optional": true,
+      "section": "CUDA options"
+    },
+    "DHS_eps": {
+      "optional": false,
+      "section": "Interactions/DHSInteraction.h options"
+    },
+    "DHS_rcut": {
+      "optional": false,
+      "section": "Interactions/DHSInteraction.h options"
+    },
+    "DPD_zeta": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "F0": {
+      "optional": false,
+      "section": "Forces/SawtoothForce.h options"
+    },
+    "JORDAN_N_patches": {
+      "optional": false,
+      "section": "Interactions/JordanInteraction.h options"
+    },
+    "JORDAN_int_k": {
+      "optional": true,
+      "section": "Interactions/JordanInteraction.h options"
+    },
+    "JORDAN_m": {
+      "optional": true,
+      "section": "Interactions/JordanInteraction.h options"
+    },
+    "JORDAN_phi": {
+      "optional": true,
+      "section": "Interactions/JordanInteraction.h options"
+    },
+    "JORDAN_s": {
+      "optional": true,
+      "section": "Interactions/JordanInteraction.h options"
+    },
+    "KF_N": {
+      "optional": false,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_N_B": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_continuous": {
+      "optional": false,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_cosmax": {
+      "optional": false,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_delta": {
+      "optional": false,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_epsilon_AA": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_epsilon_AB": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_epsilon_BB": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_sigma_AA": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_sigma_AB": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "KF_sigma_BB": {
+      "optional": true,
+      "section": "Interactions/KFInteraction.h options"
+    },
+    "LJ_kob_andersen": {
+      "optional": true,
+      "section": "Interactions/LJInteraction.h options"
+    },
+    "LJ_n": {
+      "optional": true,
+      "section": "Interactions/LJInteraction.h options"
+    },
+    "LJ_rcut": {
+      "optional": false,
+      "section": "Interactions/LJInteraction.h options"
+    },
+    "P": {
+      "optional": false,
+      "section": "MC options"
+    },
+    "PATCHY_N": {
+      "optional": false,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_N_B": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_alpha": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_epsilon_AA": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_epsilon_AB": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_epsilon_BB": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_sigma_AA": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_sigma_AB": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PATCHY_sigma_BB": {
+      "optional": true,
+      "section": "Interactions/PatchyInteraction.h options"
+    },
+    "PBC": {
+      "optional": true,
+      "section": "Observables/Distance.h options"
+    },
+    "T": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "TSP_attractive_anchor": {
+      "optional": true,
+      "section": "Interactions/TSPInteraction.h options"
+    },
+    "TSP_only_chains": {
+      "optional": true,
+      "section": "Interactions/TSPInteraction.h options"
+    },
+    "TSP_only_intra": {
+      "optional": true,
+      "section": "Interactions/TSPInteraction.h options"
+    },
+    "TSP_rfene": {
+      "optional": false,
+      "section": "Interactions/TSPInteraction.h options"
+    },
+    "_allow_broken_fene": {
+      "optional": true,
+      "section": "Interactions/TEPInteraction.h options"
+    },
+    "_prefer_harmonic_over_fene": {
+      "optional": true,
+      "section": "Interactions/TEPInteraction.h options"
+    },
+    "absolute": {
+      "optional": true,
+      "section": "Observables/ParticlePosition.h options"
+    },
+    "adjust_moves": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "analysis_confs_to_skip": {
+      "optional": true,
+      "section": "Analysis options"
+    },
+    "angle_index": {
+      "optional": true,
+      "section": "Observables/VectorAngle.h options"
+    },
+    "axes": {
+      "optional": true,
+      "section": "Observables/Rdf.h options"
+    },
+    "axis": {
+      "optional": false,
+      "section": "Observables/DensityProfile.h options"
+    },
+    "back_in_box": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "backend": {
+      "optional": false,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "backend_precision": {
+      "optional": false,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "base_file": {
+      "optional": true,
+      "section": "Observables/HBEnergy.h options"
+    },
+    "bead_minimum_distance": {
+      "optional": true,
+      "section": "Observables/TEPPlectonemePosition.h options"
+    },
+    "bending_angle_number_segments": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "bin_size": {
+      "optional": false,
+      "section": "Observables/Rdf.h options"
+    },
+    "binary": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "binary_initial_conf": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "box_sides": {
+      "optional": false,
+      "section": "Interactions/BoxInteraction.h options"
+    },
+    "bp1a_id": {
+      "optional": false,
+      "section": "Observables/Pitch.h options"
+    },
+    "bp1b_id": {
+      "optional": false,
+      "section": "Observables/Pitch.h options"
+    },
+    "bp2a_id": {
+      "optional": false,
+      "section": "Observables/Pitch.h options"
+    },
+    "bp2b_id": {
+      "optional": false,
+      "section": "Observables/Pitch.h options"
+    },
+    "bussi_tau": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "center": {
+      "optional": true,
+      "section": "Forces/RepulsiveSphere.h options"
+    },
+    "chain_id": {
+      "optional": false,
+      "section": "Observables/MeanVectorCosine.h options"
+    },
+    "check_energy_every": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "check_energy_threshold": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "check_initial_state": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "checkpoint_every": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "checkpoint_file": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "checkpoint_trajectory": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "colour_by_sequece": {
+      "optional": true,
+      "section": "Observables/Configurations/ChimeraOutput.h options"
+    },
+    "com_list": {
+      "optional": false,
+      "section": "Forces/COMForce.h options"
+    },
+    "conf_file": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "confs_to_skip": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "contact_distance": {
+      "optional": true,
+      "section": "Observables/Contacts.h options"
+    },
+    "contact_threshold": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "default_weight": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "delta_L": {
+      "optional": true,
+      "section": "MD options"
+    },
+    "delta_rotation": {
+      "optional": false,
+      "section": "MC options"
+    },
+    "delta_translation": {
+      "optional": false,
+      "section": "MC options"
+    },
+    "delta_volume": {
+      "optional": false,
+      "section": "MC options"
+    },
+    "dh_half_charged_ends": {
+      "optional": true,
+      "section": "Interactions/DNA2Interaction.h options"
+    },
+    "dh_lambda": {
+      "optional": true,
+      "section": "Interactions/DNA2Interaction.h options"
+    },
+    "dh_strength": {
+      "optional": true,
+      "section": "Interactions/DNA2Interaction.h options"
+    },
+    "die_on_unexpected_master": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "diff_coeff": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "dir": {
+      "optional": false,
+      "section": "Forces/HardWall.h options"
+    },
+    "dir_as_centre": {
+      "optional": true,
+      "section": "Forces/ConstantRateForce.h options"
+    },
+    "distance_threshold": {
+      "optional": true,
+      "section": "Observables/TEPPlectonemePosition.h options"
+    },
+    "ensemble": {
+      "optional": false,
+      "section": "MC options"
+    },
+    "equilibration_steps": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "external_forces": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "external_forces_file": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "external_model": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "extrapolate_hist": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "ffs_file": {
+      "optional": false,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "ffs_generate_flux": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "first_particle_index": {
+      "optional": true,
+      "section": "Observables/Contacts.h options"
+    },
+    "first_particle_position": {
+      "optional": false,
+      "section": "Observables/MeanVectorCosine.h options"
+    },
+    "fix_diffusion": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "gamma_trans": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "gen_flux_conf_prefix": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "gen_flux_debug": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "gen_flux_save_every": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "gen_flux_total_crossings": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "generate_inside": {
+      "optional": true,
+      "section": "Forces/LJWall.h options"
+    },
+    "go_around": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "hb_multiplier": {
+      "optional": true,
+      "section": "Interactions/DNAInteraction.h options"
+    },
+    "height": {
+      "optional": false,
+      "section": "Interactions/HardCylinderInteraction.h options"
+    },
+    "hide": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "increment": {
+      "optional": false,
+      "section": "Forces/SawtoothForce.h options"
+    },
+    "init_hist_file": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "interaction_type": {
+      "optional": true,
+      "section": "Interactions/InteractionFactory.h options"
+    },
+    "last_hist_file": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "last_particle_index": {
+      "optional": true,
+      "section": "Observables/Contacts.h options"
+    },
+    "last_particle_position": {
+      "optional": false,
+      "section": "Observables/MeanVectorCosine.h options"
+    },
+    "lastconf_file": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "lastconf_file_bin": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "length": {
+      "optional": false,
+      "section": "Interactions/HardSpheroCylinderInteraction.h options"
+    },
+    "linear": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "list_type": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "locate_plectonemes": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "max_backbone_force": {
+      "optional": true,
+      "section": "Interactions/DNAInteraction.h options"
+    },
+    "max_backbone_force_far": {
+      "optional": true,
+      "section": "Interactions/DNAInteraction.h options"
+    },
+    "max_q": {
+      "optional": false,
+      "section": "Observables/StructureFactor.h options"
+    },
+    "max_value": {
+      "optional": false,
+      "section": "Observables/Rdf.h options"
+    },
+    "maxclust": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "minimum_plectoneme_size": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "mismatch_repulsion": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "mismatch_repulsion_strength": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "n": {
+      "optional": true,
+      "section": "Forces/LJWall.h options"
+    },
+    "name": {
+      "optional": false,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "neighbours_to_ignore": {
+      "optional": true,
+      "section": "Observables/Contacts.h options"
+    },
+    "newtonian_steps": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "no_stdout_energy": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "only_count": {
+      "optional": false,
+      "section": "Observables/HBList.h options"
+    },
+    "only_last": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "only_outermost_contacts": {
+      "optional": true,
+      "section": "Observables/Contacts.h options"
+    },
+    "only_repulsive": {
+      "optional": true,
+      "section": "Forces/LJWall.h options"
+    },
+    "op_file": {
+      "optional": true,
+      "section": "Observables/SaltExtrapolation.h options"
+    },
+    "order_parameters_file": {
+      "optional": false,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "orientation": {
+      "optional": true,
+      "section": "Observables/ParticlePosition.h options"
+    },
+    "output_prefix": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "pairs_file": {
+      "optional": true,
+      "section": "Observables/HBEnergy.h options"
+    },
+    "particle": {
+      "optional": false,
+      "section": "Forces/HardWall.h options"
+    },
+    "particle1_id": {
+      "optional": false,
+      "section": "Observables/PairEnergy.h options"
+    },
+    "particle2_id": {
+      "optional": false,
+      "section": "Observables/PairEnergy.h options"
+    },
+    "particle_1": {
+      "optional": false,
+      "section": "Observables/Distance.h options"
+    },
+    "particle_2": {
+      "optional": false,
+      "section": "Observables/Distance.h options"
+    },
+    "particle_id": {
+      "optional": true,
+      "section": "Observables/PairForce.h options"
+    },
+    "position": {
+      "optional": false,
+      "section": "Forces/HardWall.h options"
+    },
+    "preserve_topology": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "print_conf_interval": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "print_conf_ppc": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "print_energy_every": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "print_every": {
+      "optional": false,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "print_group": {
+      "optional": true,
+      "section": "Observables/ForceEnergy.h options"
+    },
+    "print_input": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "print_labels": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "print_list": {
+      "optional": false,
+      "section": "Observables/StretchedBonds.h options"
+    },
+    "print_local_details": {
+      "optional": true,
+      "section": "Observables/VectorAngle.h options"
+    },
+    "print_reduced_conf_every": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "print_size": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "print_space_position": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "print_timings": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "pt": {
+      "optional": false,
+      "section": "MD options"
+    },
+    "r0": {
+      "optional": false,
+      "section": "Forces/RepulsiveSphere.h options"
+    },
+    "rate": {
+      "optional": false,
+      "section": "Forces/RepulsiveSphere.h options"
+    },
+    "reduced": {
+      "optional": true,
+      "section": "Observables/Configurations/Configuration.h options"
+    },
+    "reduced_conf_output_dir": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "ref_list": {
+      "optional": false,
+      "section": "Forces/COMForce.h options"
+    },
+    "ref_particle": {
+      "optional": false,
+      "section": "Forces/RepulsionPlaneMoving.h options"
+    },
+    "ref_strand": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "relax_strength": {
+      "optional": false,
+      "section": "Interactions/RNAInteraction_relax.h options"
+    },
+    "relax_type": {
+      "optional": false,
+      "section": "Interactions/RNAInteraction_relax.h options"
+    },
+    "reload_from": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "reset_com_momentum": {
+      "optional": true,
+      "section": "MD options"
+    },
+    "reset_initial_com_momentum": {
+      "optional": true,
+      "section": "MD options"
+    },
+    "resolution": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "restart_step_counter": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "safe_weights": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "salt": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "salt_concentration": {
+      "optional": false,
+      "section": "Interactions/DNA2Interaction.h options"
+    },
+    "salts": {
+      "optional": false,
+      "section": "Observables/SaltExtrapolation.h options"
+    },
+    "seed": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "seq_dep_file": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "show": {
+      "optional": true,
+      "section": "Observables/Configurations/TclOutput.h options"
+    },
+    "sigma": {
+      "optional": true,
+      "section": "Forces/HardWall.h options"
+    },
+    "sim_type": {
+      "optional": false,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "size_outer_threshold": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "skip_hist_zeros": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "small_system": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "split": {
+      "optional": true,
+      "section": "Observables/PotentialEnergy.h options"
+    },
+    "start_from": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "steps": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "stiff": {
+      "optional": false,
+      "section": "Forces/RepulsionPlaneMoving.h options"
+    },
+    "stop_at": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "stress_tensor": {
+      "optional": true,
+      "section": "Observables/Pressure.h options"
+    },
+    "subdomain_size": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    },
+    "temps": {
+      "optional": false,
+      "section": "Observables/SaltExtrapolation.h options"
+    },
+    "thermostat": {
+      "optional": true,
+      "section": "MD options"
+    },
+    "threads_per_block": {
+      "optional": true,
+      "section": "CUDA options"
+    },
+    "threshold": {
+      "optional": true,
+      "section": "Observables/StretchedBonds.h options"
+    },
+    "time_scale": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "timings_filename": {
+      "optional": true,
+      "section": "Core options"
+    },
+    "traj_hist_file": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "trajectory_file": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "type": {
+      "optional": false,
+      "section": "Observables/HBList.h options"
+    },
+    "umbrella_sampling": {
+      "optional": true,
+      "section": "MC options"
+    },
+    "unexpected_master_prefix": {
+      "optional": true,
+      "section": "Forward Flux Sampling (FFS) options"
+    },
+    "units": {
+      "optional": true,
+      "section": "Observables/Step.h options"
+    },
+    "update_name_with_time": {
+      "optional": true,
+      "section": "Observables/ObservableOutput.h options"
+    },
+    "use_average_seq": {
+      "optional": true,
+      "section": "Interactions/RNAInteraction2.h options"
+    },
+    "use_barostat": {
+      "optional": true,
+      "section": "MD options"
+    },
+    "vector_to_average": {
+      "optional": false,
+      "section": "Observables/MeanVectorCosine.h options"
+    },
+    "verlet_skin": {
+      "optional": false,
+      "section": "Core options"
+    },
+    "wait_time": {
+      "optional": false,
+      "section": "Forces/SawtoothForce.h options"
+    },
+    "weights_file": {
+      "optional": true,
+      "section": "Observables/SaltExtrapolation.h options"
+    },
+    "writhe_threshold": {
+      "optional": true,
+      "section": "Observables/Writhe.h options"
+    }
+  },
+  "schema_version": 1,
+  "source_bytes": 56079,
+  "source_file": "scratch_input_options.md",
+  "source_sha256": "eafdeee365202d143e51a1b7999b7693009dfa3b65b62b72addd6676fb8da32e"
+}

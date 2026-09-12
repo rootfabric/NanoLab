@@ -1,0 +1,697 @@
+{
+  "cleanup": {
+    "durable_cache": "none (U4 = NO)",
+    "workdir_removed": true
+  },
+  "files": {
+    "Design_Hinges/0b.json": {
+      "blob_match": true,
+      "blob_sha1_actual": "0ed4075c3a0d2f29601d35c5ce70f2df6b0be1ed",
+      "blob_sha1_expected": "0ed4075c3a0d2f29601d35c5ce70f2df6b0be1ed",
+      "digest_gate": true,
+      "retained": false,
+      "sha256_actual": "e855097d51d994bf0aad3d526d410b73f46c7c0355de68bb73acac0efef2abcf",
+      "sha256_expected": "e855097d51d994bf0aad3d526d410b73f46c7c0355de68bb73acac0efef2abcf",
+      "sha256_match": true,
+      "size_bytes_actual": 173059,
+      "size_bytes_expected": 173059,
+      "size_match": true,
+      "url": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/Design_Hinges/0b.json"
+    },
+    "MD_Hinges/0b.top": {
+      "blob_match": true,
+      "blob_sha1_actual": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+      "blob_sha1_expected": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+      "digest_gate": true,
+      "retained": false,
+      "sha256_actual": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "sha256_expected": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "sha256_match": true,
+      "size_bytes_actual": 120204,
+      "size_bytes_expected": 120204,
+      "size_match": true,
+      "url": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/MD_Hinges/0b.top"
+    },
+    "MD_Hinges/pro_CPU.in": {
+      "blob_match": true,
+      "blob_sha1_actual": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+      "blob_sha1_expected": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+      "digest_gate": true,
+      "retained": false,
+      "sha256_actual": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "sha256_expected": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "sha256_match": true,
+      "size_bytes_actual": 933,
+      "size_bytes_expected": 933,
+      "size_match": true,
+      "url": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/MD_Hinges/pro_CPU.in"
+    }
+  },
+  "kind": "e2a_real_data_cross_check",
+  "schema_version": 1,
+  "tools": {
+    "compat_audit": {
+      "conclusion": "EXTERNAL_FORCES_EXPLICITLY_DISABLED (external_forces = 0; the pinned production input declares no active external restraints)",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "force_related_keys": {
+        "external_forces": {
+          "semantics": "PRODUCTION_EXTERNAL_FORCES: when true, an external forces file is loaded and applied during the run (per pinned engine docs); any per-force init/end scoping inside that file is an open question (U-rest-1)",
+          "value": "0"
+        }
+      },
+      "input_keys_total": 29,
+      "input_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "keys": {
+        "CUDA_device": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "CUDA options",
+          "value": "4"
+        },
+        "CUDA_list": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "CUDA options",
+          "value": "verlet"
+        },
+        "T": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "300K"
+        },
+        "backend": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Forward Flux Sampling (FFS) options",
+          "value": "CPU"
+        },
+        "backend_precision": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Forward Flux Sampling (FFS) options",
+          "value": "double"
+        },
+        "conf_file": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "74b.conf"
+        },
+        "debug": {
+          "documented": false,
+          "known": true,
+          "note": "parsed by pinned engine source src/Utilities/Logger.cpp:74 (getInputBool \"debug\"); absent from input_options.md @ 00dc7fb9",
+          "value": "1"
+        },
+        "diff_coeff": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "MD options",
+          "value": "2.5"
+        },
+        "dt": {
+          "documented": false,
+          "known": true,
+          "note": "parsed by pinned engine source src/Backends/MDBackend.cpp:41 (getInputNumber \"dt\"); absent from input_options.md @ 00dc7fb9",
+          "value": "0.005"
+        },
+        "energy_file": {
+          "documented": false,
+          "known": true,
+          "note": "standard input key consumed by the engine (author pro_CPU.in, E1-R1 fixture runs); absent from input_options.md @ 00dc7fb9 (U-compat-1)",
+          "value": "hinge_energy.dat"
+        },
+        "external_forces": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "Core options",
+          "value": "0"
+        },
+        "interaction_type": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "Interactions/InteractionFactory.h options",
+          "value": "DNA2"
+        },
+        "log_file": {
+          "documented": false,
+          "known": true,
+          "note": "parsed by pinned engine source src/Utilities/Logger.cpp:73 (getInputString \"log_file\"); absent from input_options.md @ 00dc7fb9",
+          "value": "log2.dat"
+        },
+        "newtonian_steps": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "MD options",
+          "value": "103"
+        },
+        "no_stdout_energy": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "Core options",
+          "value": "0"
+        },
+        "print_conf_interval": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "4e3"
+        },
+        "print_conf_ppc": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "51"
+        },
+        "print_energy_every": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "Core options",
+          "value": "4e3"
+        },
+        "rcut": {
+          "known": false,
+          "note": "no getInput* call reads \"rcut\" in pinned engine source @ 00dc7fb9 (searched src/**); engine ignores unknown input keys; inert legacy key in the author input",
+          "value": "2.0"
+        },
+        "refresh_vel": {
+          "documented": false,
+          "known": true,
+          "note": "parsed by pinned engine source src/Backends/MDBackend.cpp:29 (getInputBool \"refresh_vel\"); absent from input_options.md @ 00dc7fb9",
+          "value": "1"
+        },
+        "restart_step_counter": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "1"
+        },
+        "salt_concentration": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Interactions/DNA2Interaction.h options",
+          "value": "0.5"
+        },
+        "seed": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "Core options",
+          "value": "7777"
+        },
+        "steps": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "2e7"
+        },
+        "thermostat": {
+          "documented": true,
+          "known": true,
+          "optional": true,
+          "section": "MD options",
+          "value": "john"
+        },
+        "time_scale": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "linear"
+        },
+        "topology": {
+          "documented": false,
+          "known": true,
+          "note": "standard input key consumed by the engine (author pro_CPU.in, E1-R1 fixture runs); absent from input_options.md @ 00dc7fb9 (U-compat-1)",
+          "value": "74b.top"
+        },
+        "trajectory_file": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "pro.dat"
+        },
+        "verlet_skin": {
+          "documented": true,
+          "known": true,
+          "optional": false,
+          "section": "Core options",
+          "value": "0.05"
+        }
+      },
+      "kind": "sim_input_compat_audit",
+      "not_parsed_keys": [
+        "rcut"
+      ],
+      "preregistered_values": {
+        "confirmed_keys": [
+          "T",
+          "backend",
+          "backend_precision",
+          "interaction_type",
+          "salt_concentration",
+          "steps"
+        ],
+        "default_conf_file": "74b.conf",
+        "default_topology": "74b.top",
+        "error": null,
+        "status": "CONFIRMED"
+      },
+      "registry_option_count": 222,
+      "registry_source_sha256": "eafdeee365202d143e51a1b7999b7693009dfa3b65b62b72addd6676fb8da32e",
+      "schema_version": 1,
+      "undocumented_keys": [
+        "debug",
+        "dt",
+        "energy_file",
+        "log_file",
+        "refresh_vel",
+        "topology"
+      ],
+      "unknown_keys": []
+    },
+    "restraints_inventory": {
+      "kind": "restraints_inventory",
+      "production_input": {
+        "input_keys_total": 29,
+        "input_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "open_questions": [],
+        "restraint_keys": {
+          "external_forces": {
+            "semantics": "PRODUCTION switch: loads the external forces file for the run",
+            "value": "0"
+          }
+        },
+        "status": "EXTERNAL_FORCES_EXPLICITLY_DISABLED"
+      },
+      "scanned_scripts": [],
+      "schema_version": 1,
+      "verdict": "NO_RESTRAINTS_OBSERVED: production input declares no active external restraints and scanned scripts contain no restraint keywords"
+    },
+    "topology_mapping": {
+      "association": {
+        "exact": [
+          {
+            "count": 4,
+            "length": 18
+          },
+          {
+            "count": 17,
+            "length": 21
+          },
+          {
+            "count": 2,
+            "length": 24
+          },
+          {
+            "count": 5,
+            "length": 26
+          },
+          {
+            "count": 1,
+            "length": 28
+          },
+          {
+            "count": 1,
+            "length": 33
+          },
+          {
+            "count": 13,
+            "length": 35
+          },
+          {
+            "count": 1,
+            "length": 36
+          },
+          {
+            "count": 1,
+            "length": 40
+          },
+          {
+            "count": 1,
+            "length": 41
+          },
+          {
+            "count": 29,
+            "length": 42
+          },
+          {
+            "count": 16,
+            "length": 49
+          }
+        ],
+        "merge_groups": [
+          {
+            "design_lengths": [
+              18,
+              18,
+              23,
+              24,
+              24,
+              24,
+              26,
+              27,
+              27,
+              29,
+              30,
+              32,
+              33,
+              34,
+              35,
+              35,
+              38,
+              42,
+              49
+            ],
+            "topology_length": 568
+          },
+          {
+            "design_lengths": [
+              35,
+              42,
+              49
+            ],
+            "topology_length": 126
+          }
+        ],
+        "split_groups": [
+          {
+            "design_length": 4266,
+            "topology_lengths": [
+              51,
+              51,
+              51,
+              60,
+              103,
+              126,
+              126,
+              210,
+              210,
+              210,
+              420,
+              434,
+              434,
+              568,
+              568,
+              644
+            ]
+          }
+        ],
+        "status": "PARTIAL_ASSOCIATION",
+        "unresolved_design_lengths": [
+          36,
+          42,
+          49,
+          49
+        ],
+        "unresolved_topology_lengths": [
+          54,
+          61,
+          61
+        ]
+      },
+      "base_conservation": {
+        "status": "CONSERVED",
+        "total": 8378
+      },
+      "design": {
+        "name": "0bp_6x3_v2.json",
+        "paths_total": 118,
+        "scaffold_paths": 1,
+        "staple_paths": 117,
+        "total_bases": 8378,
+        "virtual_helices": 18
+      },
+      "design_path_lengths": [
+        4266,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        41,
+        40,
+        38,
+        36,
+        36,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        34,
+        33,
+        33,
+        32,
+        30,
+        29,
+        28,
+        27,
+        27,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        24,
+        24,
+        24,
+        24,
+        24,
+        23,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18
+      ],
+      "inputs": {
+        "design": "Design_Hinges/0b.json",
+        "digest_gate": "PASS (see files)",
+        "topology": "MD_Hinges/0b.top"
+      },
+      "kind": "design_topology_mapping",
+      "limitations": [
+        "v1 associates by length multisets only; sequence-level correspondence is not asserted",
+        "split/merge classification answers the count transformation (118 -> 112 class of gaps); per-base identity is out of scope"
+      ],
+      "schema_version": 1,
+      "topology": {
+        "circular_strands": 9,
+        "linear_strands": 103,
+        "nucleotides": 8378,
+        "strands": 112
+      },
+      "topology_strand_lengths": [
+        644,
+        568,
+        568,
+        568,
+        434,
+        434,
+        420,
+        210,
+        210,
+        210,
+        126,
+        126,
+        126,
+        103,
+        61,
+        61,
+        60,
+        54,
+        51,
+        51,
+        51,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        49,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        41,
+        40,
+        36,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        35,
+        33,
+        28,
+        26,
+        26,
+        26,
+        26,
+        26,
+        24,
+        24,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        18,
+        18,
+        18,
+        18
+      ]
+    }
+  }
+}
