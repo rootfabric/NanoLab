@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T11:49:00Z",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5940c8ab3f5d90169a17c423c653f4c004a6efc8",
+  "summary": "Старт EX-NL3-002-PARAM-11B-R1: параметрический батч варианта 11b по WO-NL3-002-PARAM (наследует frozen E2_PROTO_R1 без изменений — steps=200000, seeds 201004/202008/203012, print_conf_interval=4000, print_energy_every=100, гейты §4 lbf>0.1078 / pf_v2<0.50 / disp>20.0, статистика §6 median/IQR/q5-95 + bootstrap CI 10000 seed 424242). Входы: MD_Hinges/11b.top + MD_Hinges/11b.conf verbatim + MD_Hinges/pro_CPU.in, download-on-run по pinned commit 23fd1ff; digest-гейт: size_bytes + blob_sha1 обязательны (11b.top: 121176/c8d34a47…; 11b.conf: 2309610/ce940256…), sha256-пины NOT_VERIFIED — вычислить при первой загрузке и записать в evidence как sha256_computed_at_first_download (без претензии к реестру); pro_CPU.in — полный пин (size 933, blob 89d76310…, sha256 bd6cd418…). ВСЕ входы копируются в каталог рана. До прогонов — деривация arm-manifest-11b.json (arm-manifest-v1, та же frozen деривация) на frame 0 11b.conf + байт-детерминизм двух прогонов; нет двух доминирующих блоков → BLOCKED варианта (честный gap), логи сохранить. Runs: PARAM-11B-S001..S003, 3 параллельных WSL-процесса в /home/yurig/nl3-002-param-11b/runs/, бюджет ≤3.5 ч/реплику. Отклонения от pro_CPU.in (steps/seed/имена outputs/print intervals/lastconf_file + subject 74b→11b) — в PARAM-11B-S00X_deviations.json. Outcome = измеренные распределения (scientific_outcome = MEASURED); интерпретаций нет; state.json не меняется. Engine: WSL oxDNA 00dc7fb9 (build-source verified). 2e7 не запускать.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002-param-11b -b work/nl3-002-param-11b-r1 5940c8a",
+    "wsl -e bash -lc \"git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD\" -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002-PARAM.md",
+    "docs/research/E2_PROTO_R1.md",
+    "docs/research/E2_OBSERVABLES_R2.md",
+    "scripts/e2/arm_manifest.py",
+    "scripts/e2/observables.py",
+    "scripts/hinge_family/source_pins.json",
+    "docs/work/executions/EX-NL3-002-R1/ (формат манифестов/deviations/analysis)",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/passport.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/branch-passport.md"
+  ],
+  "next_action": "IMPLEMENTER: digest-gated download (11b.top/11b.conf/pro_CPU.in) во временный каталог вне Git → манифест рук 11b ДО прогонов → входы 3 ранов + deviations → 3 параллельные реплики WSL → END_EXECUTION → анализ v2 → HANDOFF.",
+  "blocker": null
+}
