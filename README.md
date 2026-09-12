@@ -6,11 +6,17 @@
 
 ## Текущее состояние
 
-**Научная стадия `NL0` канонически завершена: `NL0-001` (эталоны), `NL0-002` (права/лицензии), `NL0-003` (пререгистрация `E1-PROTO-R1` и постановка `E2-SETUP-R1`) приняты после Fresh Reviewer + Fresh Verifier. Научные симуляции ещё не запускались.** Канонические статусы: [project/state.json](project/state.json). Следующий приоритет: `NL1-001` — зафиксировать среду и upstream smoke. Выбор reference: [REFERENCE_SELECTION](docs/research/REFERENCE_SELECTION.md), exact inputs/provenance: [INPUT_AVAILABILITY](docs/research/INPUT_AVAILABILITY.md), протокол E1: [PREREGISTRATION_E1_R1](docs/research/PREREGISTRATION_E1_R1.md), постановка E2: [E2_SETUP_R1](docs/research/E2_SETUP_R1.md).
+```text
+CURRENT FRONTIER = NL3
+NEXT = NL3-002 (провести E2)
+E0 = RUN · E1 = SUPPORTED · E2 = NOT_RUN
+```
+
+**Научная стадия `NL3` в работе: `NL0`–`NL2` приняты целиком; `NL3-001` (регистрация семейства шарниров Shi–Castro–Arya + структурное воспроизведение первого экземпляра `0b` без динамики) принята после Fresh Reviewer + Fresh Verifier. Кампания `E2` не стартовала.** Канонические статусы: [project/state.json](project/state.json), сводка приёмок: [WORK_QUEUE](docs/work/WORK_QUEUE.md). Следующий приоритет: `NL3-002` — провести E2 (первый шарнир `0b` по `E2-SETUP-R1`); при dispatch обязателен `E2-PROTO-*` freeze и фиксация прав источника G1 (открытое owner-решение). Регистрация семейства: [HINGE_FAMILY_R1](docs/research/HINGE_FAMILY_R1.md), выбор reference: [REFERENCE_SELECTION](docs/research/REFERENCE_SELECTION.md), exact inputs/provenance: [INPUT_AVAILABILITY](docs/research/INPUT_AVAILABILITY.md), протокол E1: [PREREGISTRATION_E1_R1](docs/research/PREREGISTRATION_E1_R1.md), постановка E2: [E2_SETUP_R1](docs/research/E2_SETUP_R1.md).
 
 С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
 
-Параллельно научной линии запланирован отдельный [INFRA track](docs/infra/README.md): safe CI → self-hosted CPU → reproducible executor → artifact store → GPU → scheduler/AiiDA → HPC. INFRA предоставляет вычислительные возможности, но по умолчанию не является hard gate научной дорожной карты и не владеет scientific truth.
+Параллельно научной линии ведётся отдельный [INFRA track](docs/infra/README.md): safe CI → self-hosted CPU → reproducible executor → artifact store → GPU → scheduler/AiiDA → HPC. Статус: `INFRA0–INFRA1` приняты, frontier `INFRA2-001` (self-hosted CPU executor). INFRA предоставляет вычислительные возможности, но по умолчанию не является hard gate научной дорожной карты и не владеет scientific truth. Git Task Bus: пилот `BUS-SMOKE-001` завершён как `COMPLETED_SANDBOX` (не ACCEPTED); P2 production activation заблокировано до отдельного owner-решения.
 
 ## К чему идём
 
