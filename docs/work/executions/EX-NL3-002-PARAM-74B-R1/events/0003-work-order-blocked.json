@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-work-order-blocked",
+  "timestamp_utc": "2026-09-12T22:48:00Z",
+  "execution_id": "EX-NL3-002-PARAM-74B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "WORK_ORDER_BLOCKED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "EX-NL3-002-PARAM-74B-R1 закрыт как BLOCKED (вариант 74b, honest gap, per-variant stop rule WO-NL3-002-PARAM addition 2). Хронология: digest-гейт 3/3 PASS (74b.top/74b.conf/pro_CPU.in; sha256 74b вычислены при первой загрузке, пины NOT_VERIFIED не тронуты); манифест рук 74b (arm-manifest-v1, ДО прогонов) — FAILED: нет двух доминирующих блоков ни при одном пороге PARALLEL_GRID (0.85: [1734,960,722,…] second/third < 3.0; 0.90: [1660,912,594,…]; 0.95: [748,678,512,…]; 0.98: фрагментация < 10%), отказ детерминирован (2/2 идентичных прогона). Симуляционные прогоны НЕ запускались (runs PARAM-74B-S001..S003 = NOT_RUN): без замороженного манифеста рук угловая observable для 74b не определена (definition-before-data). Научный итог: scientific_outcome = NOT_MEASURED (блок до данных; распределений 74b нет); интерпретаций нет. Серия 11b/32b/53b не затронута; возможные пути (ревизия деривации манифеста arm-manifest-v2, альтернативный референсный кадр, иные пороги доминирования) — только новая пререгистрированная ревизия протокола, решение Director. Временные исходники источника удалены (U4 = NO: %TEMP%\\nl3-002-param-74b-src после фиксации evidence); WSL run-каталоги не создавались. state.json не менялся.",
+  "command_refs": [
+    "removed: %TEMP%\\nl3-002-param-74b-src (digest-gated source bytes; evidence carries digests)",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PARAM-74B-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL3-002-PARAM-74B-R1 -> ok (after this event)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> green"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/passport.json"
+  ],
+  "next_action": "Director/батчевый REVIEWER серии: принять honest gap 74b (серия 11b/32b/53b исполнена) либо пререгистрировать ревизию деривации манифеста для 74b (arm-manifest-v2) отдельным control-WO; затем сводная серии и NL3-002 acceptance. Merge — Human Gate.",
+  "blocker": null
+}

@@ -1,0 +1,76 @@
+{
+  "algorithm": "arm-manifest-v1 (frozen, scripts/e2/arm_manifest.py, same derivation as 0b/11b/32b/53b)",
+  "attempts": 2,
+  "consequence": "no simulation runs started for 74b; runs NOT_RUN; BLOCKED per stop rules",
+  "deterministic_identical_error": true,
+  "error_message_head": "no threshold in PARALLEL_GRID yields two dominant rigid blocks; size tables: {0.85: [1734, 960, 722, 628, 350, 310, 268, 196, 180, 168, 168, 84, 74, 62, 58, 44, 42, 40, 32, 30, 30, 30, 28, 28, 28, 28,",
+  "execution_id": "EX-NL3-002-PARAM-74B-R1",
+  "inputs": {
+    "MD_Hinges/74b.conf": {
+      "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
+      "sha256": "711bb36a3e1d3113ef3cd8875020af30d1fdece8fb88f9a9e5134a77b4478bcb",
+      "size_bytes": 2403188
+    },
+    "MD_Hinges/74b.top": {
+      "blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5",
+      "sha256": "80477acacac3892590085cc6caee08f6b07ded64144ffc5732234569d36890b7",
+      "size_bytes": 126116
+    }
+  },
+  "kind": "e2_arm_manifest_derivation_failure",
+  "outcome": "FAILED_TWO_DOMINANT_BLOCKS",
+  "rule": "WO-NL3-002-PARAM per-variant addition 2: no two dominant blocks -> BLOCKED this variant (honest gap); series continues with other variants",
+  "schema_version": 1,
+  "size_tables_top10_per_threshold": {
+    "0.85": [
+      1734,
+      960,
+      722,
+      628,
+      350,
+      310,
+      268,
+      196,
+      180,
+      168
+    ],
+    "0.9": [
+      1660,
+      912,
+      594,
+      176,
+      152,
+      150,
+      106,
+      104,
+      78,
+      78
+    ],
+    "0.95": [
+      748,
+      678,
+      512,
+      190,
+      116,
+      88,
+      84,
+      66,
+      66,
+      66
+    ],
+    "0.98": [
+      150,
+      148,
+      138,
+      132,
+      128,
+      98,
+      88,
+      76,
+      68,
+      66
+    ]
+  },
+  "variant": "74b"
+}
+
