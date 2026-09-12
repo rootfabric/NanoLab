@@ -190,6 +190,163 @@ def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False,
     }
 
 
+def build_pairable(mode="parallel", angle_deg=None, arm_len=12, n_frames=1, broken=False, spacing=SPACING):
+    """Two-duplex fixtures compatible with the v2 base-pair detector (R2).
+
+    The default ``build`` fixtures give every nucleotide of one strand the
+    same a1 (strand direction), so paired bases carry PARALLEL a1 axes and
+    are invisible to the v2 antiparallel criterion. ``build_pairable``
+    mirrors the ``parallel``/``angled`` construction but reverses the second
+    strand of each duplex, so every Watson-Crick pair has antiparallel a1
+    axes at the v2 window distance (0.4 <= 1.3) while the geometry (and the
+    analytically known angle) is unchanged.
+
+    ``twoarm`` additionally builds a second, spatially separated duplex at
+    ``angle_deg`` to the first: two known rigid arms with no crossover
+    between them — the arm-manifest derivation must recover exactly the two
+    duplex nucleotide groups.
+    """
+    if mode == "twoarm":
+        if angle_deg is None or not 0.0 < angle_deg < 180.0:
+            raise FixtureError("twoarm mode requires 0 < angle_deg < 180")
+        return _build_twoarm(angle_deg, arm_len, n_frames, spacing)
+    if mode not in ("parallel", "angled"):
+        raise FixtureError(f"unknown mode {mode!r}")
+    sp = spacing
+    builder = _Builder()
+    if mode == "parallel":
+        coords_a = [(ORIGIN[0] + sp * i, ORIGIN[1], ORIGIN[2]) for i in range(arm_len)]
+        coords_b = [(ORIGIN[0] + sp * i, ORIGIN[1] + 0.4, ORIGIN[2]) for i in range(arm_len)]
+        idx_a = builder.add_strand("A", coords_a)
+        idx_b = builder.add_strand("T", list(reversed(coords_b)))
+        expected_pairs = arm_len
+        expected_angle = 0.0
+        manifest = {"arm_a": {"nucleotides": idx_a}, "arm_b": {"nucleotides": idx_b}}
+    else:
+        if angle_deg is None or not 0.0 < angle_deg < 180.0:
+            raise FixtureError("angled mode requires 0 < angle_deg < 180")
+        theta = math.radians(angle_deg)
+        u_a = (1.0, 0.0, 0.0)
+        u_b = (math.cos(theta), math.sin(theta), 0.0)
+        coords_a = [
+            (ORIGIN[0] + sp * i * u_a[0], ORIGIN[1] + sp * i * u_a[1], ORIGIN[2])
+            for i in range(arm_len)
+        ]
+        coords_b = [
+            (ORIGIN[0] + sp * j * u_b[0], ORIGIN[1] + sp * j * u_b[1], ORIGIN[2])
+            for j in range(arm_len)
+        ]
+        idx_a = builder.add_strand("A", coords_a)
+        idx_b = builder.add_strand("T", list(reversed(coords_b)))
+        k = 1
+        while True:
+            gap = 2.0 * sp * k * math.sin(theta / 2.0)
+            inset = gap / 2.0 - 0.2
+            if inset > 0.02 and gap <= 1.2:
+                break
+            k += 1
+            if k >= arm_len:
+                raise FixtureError("no brace placement found for this angle")
+        anchor_a = coords_a[k]
+        anchor_b = coords_b[k]
+        gap_vec = [anchor_b[axis] - anchor_a[axis] for axis in range(3)]
+        gap_len = math.sqrt(sum(x * x for x in gap_vec))
+        w = [x / gap_len for x in gap_vec]
+        inset = gap_len / 2.0 - 0.2
+        c0 = [anchor_a[axis] + inset * w[axis] for axis in range(3)]
+        c1 = [c0[axis] + sp * w[axis] for axis in range(3)]
+        d0 = [anchor_b[axis] - inset * w[axis] for axis in range(3)]
+        d1 = [d0[axis] - sp * w[axis] for axis in range(3)]
+        idx_c = builder.add_strand("G", [c0, c1])
+        idx_d = builder.add_strand("C", [d0, d1])
+        expected_pairs = arm_len + 2  # candidate geometry; only near-hinge arm pairs survive mutual-nearest
+        expected_angle = angle_deg
+        manifest = {
+            "arm_a": {"nucleotides": idx_a},
+            "arm_b": {"nucleotides": idx_b},
+            "_brace_c": {"nucleotides": idx_c},
+            "_brace_d": {"nucleotides": idx_d},
+        }
+    frames = _fixture_frames(builder, n_frames, broken, manifest)
+    return {
+        "mode": mode,
+        "angle_deg": expected_angle,
+        "topology_text": builder.topology_text(),
+        "frame_texts": frames,
+        "manifest": {k: v for k, v in manifest.items() if not k.startswith("_")},
+        "manifest_with_brace": manifest,
+        "expected": {
+            "angle_deg": expected_angle,
+            # parallel: all 12 arm pairs are mutual-nearest (analytic);
+            # angled: the exact mutual-nearest survivor set has no simple
+            # closed form (near-hinge diagonals compete), so no analytic
+            # v2 count is claimed for it
+            "reference_pairs_v2": expected_pairs if mode == "parallel" else None,
+            "reference_pairs_v1": arm_len if mode == "parallel" else 4,
+        },
+    }
+
+
+def _build_twoarm(angle_deg, arm_len, n_frames, sp):
+    """Two separated duplexes at a known mutual axis angle (known arms)."""
+    theta = math.radians(angle_deg)
+    builder = _Builder()
+
+    def duplex(base0, base1, start, direction):
+        coords_a = [
+            (start[0] + sp * i * direction[0], start[1] + sp * i * direction[1], start[2])
+            for i in range(arm_len)
+        ]
+        coords_b = [
+            (
+                start[0] + sp * i * direction[0] + 0.4 * direction[1],
+                start[1] + sp * i * direction[1] - 0.4 * direction[0],
+                start[2],
+            )
+            for i in range(arm_len)
+        ]
+        idx_a = builder.add_strand(base0, coords_a)
+        idx_b = builder.add_strand(base1, list(reversed(coords_b)))
+        return sorted(idx_a + idx_b)
+
+    u_a = (1.0, 0.0, 0.0)
+    u_b = (math.cos(theta), math.sin(theta), 0.0)
+    arm_a = duplex("A", "T", (ORIGIN[0], ORIGIN[1], ORIGIN[2]), u_a)
+    start_b = (
+        ORIGIN[0] + 6.0 * u_a[0] + 6.0 * u_b[0],
+        ORIGIN[1] + 6.0 * u_a[1] + 6.0 * u_b[1],
+        ORIGIN[2] + 20.0,
+    )
+    arm_b = duplex("G", "C", start_b, u_b)
+    manifest = {"arm_a": {"nucleotides": arm_a}, "arm_b": {"nucleotides": arm_b}}
+    frames = _fixture_frames(builder, n_frames, False, manifest)
+    return {
+        "mode": "twoarm",
+        "angle_deg": angle_deg,
+        "topology_text": builder.topology_text(),
+        "frame_texts": frames,
+        "manifest": manifest,
+        "manifest_with_brace": manifest,
+        "expected": {
+            "angle_deg": angle_deg,
+            "reference_pairs_v2": 2 * arm_len,
+        },
+    }
+
+
+def _fixture_frames(builder, n_frames, broken, manifest):
+    if n_frames < 1:
+        raise FixtureError("n_frames must be >= 1")
+    frames = [_conf_text(100 * (f + 1), builder.particles) for f in range(n_frames)]
+    if broken:
+        target = set(manifest["arm_b"]["nucleotides"]) | set(
+            manifest.get("_brace_d", {}).get("nucleotides", [])
+        )
+        builder.shift(target, (0.0, 0.0, JUMP))
+        frames.append(_conf_text(100 * (n_frames + 1), builder.particles))
+    return frames
+
+
 def write_fixture(directory, angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False):
     os.makedirs(directory, exist_ok=True)
     fixture = build(angle_deg=angle_deg, mode=mode, arm_len=arm_len, n_frames=n_frames, broken=broken)

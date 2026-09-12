@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-validation-recorded",
+  "timestamp_utc": "2026-09-12T03:58:40Z",
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "summary": "Валидации IMPLEMENTER-уровня (self-validation, не self-acceptance): полный unittest discover -> 242 OK (1 skip; +11 новых тестов proto: v2 detector exact counts на парных фиксстурах, pairs_fraction_v2 целостность/разрыв, байт-детерминизм v2 и манифеста, восстановление известных рук на twoarm-фиксстуре, негативы: усечённый conf -> ConfError, count-mismatch -> ошибка, single-blob -> ArmManifestError); harness.cli check-consistency -> ok (frontier NL3, next NL3-002); work_cli validate -> ok. На авторском frame 0: манифест байт-детерминирован (2 прогона), v2 байт-детерминирован (2 прогона).",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> 242 OK (1 skip)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok: true",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PROTO-R1 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/v2-frame0.json"
+  ],
+  "next_action": "Summary + HANDOFF_COMPLETED; push origin work/nl3-002-proto-r1; далее REVIEWER (fresh-сессия) и Director freeze E2-PROTO-R1.",
+  "blocker": null
+}

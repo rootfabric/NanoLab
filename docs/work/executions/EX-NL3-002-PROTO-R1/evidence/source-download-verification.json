@@ -1,0 +1,35 @@
+{
+  "dest_dir": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-proto-src\\run-arm-manifest",
+  "digest_gate_all": "PASS",
+  "download_base": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/",
+  "durable_cache": false,
+  "files": {
+    "MD_Hinges/0b.conf": {
+      "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+      "blob_sha1_expected": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-proto-src\\run-arm-manifest\\MD_Hinges__0b.conf",
+      "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "sha256_expected": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "sha256_match": true,
+      "size_bytes": 2294162,
+      "size_expected": 2294162,
+      "size_match": true
+    },
+    "MD_Hinges/0b.top": {
+      "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+      "blob_sha1_expected": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-proto-src\\run-arm-manifest\\MD_Hinges__0b.top",
+      "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "sha256_expected": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "sha256_match": true,
+      "size_bytes": 120204,
+      "size_expected": 120204,
+      "size_match": true
+    }
+  },
+  "kind": "e2_arm_manifest_source_download"
+}

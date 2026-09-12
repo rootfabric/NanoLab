@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-12T03:59:30Z",
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "summary": "Handoff NL3-002-PROTO: все материалы E2-PROTO-R1 подготовлены без confirmatory-прогонов (физика не запускалась). (1) First-principles манифест рук 0b (arm-manifest-v1): arm_a=4006 / arm_b=3942 нуклеотидов, покрытие 94.87% топологии, группы непересекаются, только парные нуклеотиды; hinge_angle frame 0 = 66.89 deg (факт, не подгонка); байт-детерминизм двух прогонов подтверждён; входы digest-gated, source bytes удалены (G1=B, U4=NO). (2) Observables v2 (окно + антипараллельность a1 + mutual-nearest): 3300 пар на авторском frame 0 (v1: 26-29, неадекватен); E2_OBSERVABLES_R2.md — pre-confirmatory, Director freeze pending; v1 не тронут. (3) DRAFT proto-proposals: theta-варианты (относительные критерии от пилотных baseline), таблица длин {2e5,1e6,2e7} x R_confirm 3 с measured wall-прогнозами (0.14/0.69/13.9 дней), seeds policy (201004/202008/203012), статистика (квантили, bootstrap CI). Валидации: unittest 242 OK (1 skip, +11 новых), check-consistency ok, work_cli validate ok. scientific_outcome = NOT_EVALUATED; E2 остаётся NOT_RUN; никаких научных claim'ов. Стэковая база 4d72ce0 (pilot tip) зафиксирована в WO и паспорте.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> 242 OK (1 skip)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok: true",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PROTO-R1 -> ok",
+    "git push -u origin work/nl3-002-proto-r1"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PROTO-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/proto-proposals.json"
+  ],
+  "next_action": "REVIEWER fresh-сессия на exact HEAD work/nl3-002-proto-r1; затем Director freeze E2-PROTO-R1 (открытые вопросы — summary.md); merge в main — Human Gate.",
+  "blocker": null
+}

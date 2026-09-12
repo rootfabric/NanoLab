@@ -1,0 +1,141 @@
+{
+  "confirmatory_length_options": {
+    "options": [
+      {
+        "assessment": "short confirmation: integrity + angle traces + v2 observables on a meaningful interval; NOT a claim about the paper timescale",
+        "calendar_all_replicas_s_parallel": 12000,
+        "calendar_days_parallel": 0.14,
+        "coverage_of_author_2e7": 0.01,
+        "risks": "far below the author's 2e7 steps; angle distribution may be dominated by the initial configuration",
+        "steps": 200000,
+        "wall_per_replica_s_parallel": 12000,
+        "wall_per_replica_s_single": 10400
+      },
+      {
+        "assessment": "middle option: ~0.7 calendar days for all three replicas in parallel; usable for distribution statistics",
+        "calendar_all_replicas_s_parallel": 60000,
+        "calendar_days_parallel": 0.69,
+        "coverage_of_author_2e7": 0.05,
+        "risks": "still 5% of the author's length; convergence of the angle distribution is not established",
+        "steps": 1000000,
+        "wall_per_replica_s_parallel": 60000,
+        "wall_per_replica_s_single": 52000
+      },
+      {
+        "assessment": "author-length reproduction; locally impractical on this host (~14 days calendar even with parallel replicas); requires an infra decision (GPU backend, HPC, or multi-week local budget)",
+        "calendar_all_replicas_s_parallel": 1200000,
+        "calendar_days_parallel": 13.9,
+        "coverage_of_author_2e7": 1.0,
+        "risks": "out of local budget; GPU/CUDA port of the pinned engine is a separate capability question; forbidden in this WO",
+        "steps": 20000000,
+        "wall_per_replica_s_parallel": 1200000,
+        "wall_per_replica_s_single": 1040000
+      }
+    ],
+    "r_confirm": 3,
+    "status": "DRAFT table; wall projections from measured per-step cost (0.052 s/step single, 0.060 s/step with 3 parallel replicas on this host); NO runs executed",
+    "wall_projection_formula": "wall_s = steps x per_step_cost_s (0.052 single / 0.060 parallel); calendar for 3 replicas assumes parallel execution on one host (pilot contention factor ~1.16x)"
+  },
+  "kind": "e2_proto_proposals",
+  "open_questions_for_director_freeze": [
+    "v2 detector mode for production observables: mutual-nearest (3300 pairs) vs greedy (3975 pairs)",
+    "which theta variant per gate (B-REL-2X vs B-REL-BASELINE-ABS-DELTA; P-V2-050 vs P-V2-080; D-REL-BOX vs D-REL-3X-PILOT)",
+    "confirmatory length: local 2e5/1e6 vs deferred 2e7 pending infra decision",
+    "arm manifest (evidence/arm-manifest-0b.json, arm-manifest-v1) acceptance as the frozen E2-PROTO manifest (U-obs-1 first-principles closure)"
+  ],
+  "pilot_baselines_measured": {
+    "displacement_max_pilot_range": [
+      0.0,
+      6.253789506
+    ],
+    "energy_max_abs_drift_total": 0.005649,
+    "long_bond_fraction_frame0": 0.053897281,
+    "long_bond_fraction_pilot_range": [
+      0.053897281,
+      0.05570997
+    ],
+    "pairs_fraction_v1_pilot_range": [
+      0.071428571,
+      1.0
+    ],
+    "pairs_v2_frame0": {
+      "greedy": 3975,
+      "mutual_nearest": 3300,
+      "v1_reference": "26-29 (inadequate; see E2_OBSERVABLES_R2.md)"
+    },
+    "per_step_cost_s": {
+      "parallel_replicas_measured": [
+        0.06004851,
+        0.060331193,
+        0.060386153
+      ],
+      "planning_value_parallel_s": 0.06,
+      "planning_value_s": 0.052,
+      "single_run_upper_bound": 0.0519
+    },
+    "source": "EX-NL3-002-PILOT-R1 (s001/s002/s003, 24000 steps each) + EX-NL3-002-PROTO-R1 frame-0 calibration"
+  },
+  "schema_version": 1,
+  "seeds_policy": {
+    "author_seed": 7777,
+    "proposal": "R_confirm = 3 replicas with seeds 201004, 202008, 203012: distinct from the author's 7777 and from the pilot's 101001/102002/103003 (documented provenance chain, no reuse across experiment classes)",
+    "rationale": "seed independence across pilot and confirmatory stages keeps the confirmatory ensemble clean of any selection effect from calibration",
+    "status": "DRAFT"
+  },
+  "statistics": {
+    "proposal": [
+      "per-replica angle distribution over valid frames only (STRUCTURALLY_INVALID frames excluded from the distribution, published separately as an integrity trace)",
+      "report quantiles q05/q25/median/q75/q95 per replica and pooled",
+      "95% CI for the median angle via basic bootstrap (deterministic seed, e.g. 10000 resamples, seed 777001, stdlib-only implementation)",
+      "report pairs_fraction_v2 / long_bond_fraction trajectories with min/max/final values; no distributional claim from pilots",
+      "pre-registration: no optional stopping; all launched replicas are reported regardless of outcome"
+    ],
+    "status": "DRAFT"
+  },
+  "status": "DRAFT — prepared by IMPLEMENTER (EX-NL3-002-PROTO-R1); final freeze is the Director's decision in E2-PROTO-R1; no confirmatory runs were executed for this file",
+  "theta_proposals": {
+    "status": "DRAFT: relative criteria anchored to measured frame-0 baselines (absolute thresholds avoided where the author's init config already sits at a non-zero baseline); all values are proposals, not frozen acceptance criteria",
+    "theta_bonds": [
+      {
+        "criterion": "long_bond_fraction(t) <= 2 x long_bond_fraction(frame 0) = 2 x 0.0539 = 0.1078",
+        "id": "B-REL-2X",
+        "rationale": "frame 0 of the AUTHOR's config already reads 0.054 against BOND_D_MAX=1.0 (property of the initial configuration, not damage); a doubling budget allows thermal fluctuation while catching catastrophic backbone failure",
+        "risk": "if the true dynamics drifts the bonded length distribution upward without structural failure, this flags false invalids; counter-check via pairs_v2 and displacement"
+      },
+      {
+        "criterion": "long_bond_fraction(t) <= long_bond_fraction(frame 0) + 0.02 (absolute delta over baseline)",
+        "id": "B-REL-BASELINE-ABS-DELTA",
+        "rationale": "pilot fluctuation band is only ~0.002 wide (0.0539-0.0557 over 24k steps), so +0.02 is an order of magnitude of headroom",
+        "risk": "slightly tighter than B-REL-2X; the two proposals bracket a reasonable band for the Director"
+      }
+    ],
+    "theta_disp": [
+      {
+        "criterion": "displacement_max(t) <= 20.0 oxDNA units (~17 nm, ~5% of the 402.56 box)",
+        "id": "D-REL-BOX",
+        "rationale": "pilot max displacement over 24k steps was 6.25 units with no structural failure; 20 units is ~3x that band",
+        "risk": "displacement grows with trajectory length; for 2e7 steps a purely displacement-based gate may misfire — combine with pairs/bonds gates"
+      },
+      {
+        "criterion": "displacement_max(t) <= 3 x max pilot displacement = 18.76",
+        "id": "D-REL-3X-PILOT",
+        "rationale": "equivalent band derived from the pilot envelope instead of the box size",
+        "risk": "anchored to a 24k-step pilot; extrapolation to 2e7 steps is an assumption, documented as such"
+      }
+    ],
+    "theta_pairs": [
+      {
+        "criterion": "pairs_fraction_v2(t) >= 0.50 (v2 detector, mutual-nearest reference of 3300 pairs on frame 0)",
+        "id": "P-V2-050",
+        "rationale": "half of the reference base pairs intact separates 'hinge opened' from 'origami melted'; the v2 detector finally makes this fraction meaningful (v1 was based on 26-29 pairs)",
+        "risk": "the reference set is built on the author frame 0 whose local geometry may relax in the first steps; Director may prefer a quantile-based criterion after inspecting a 2e5 run"
+      },
+      {
+        "criterion": "pairs_fraction_v2(t) >= 0.80",
+        "id": "P-V2-080",
+        "rationale": "stricter variant for a structure that should stay essentially intact on these timescales",
+        "risk": "may be too strict if the author's initial configuration is locally strained (long_bond baseline suggests some strain)"
+      }
+    ]
+  }
+}

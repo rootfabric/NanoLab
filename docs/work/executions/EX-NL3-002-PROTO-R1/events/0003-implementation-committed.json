@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-implementation-committed",
+  "timestamp_utc": "2026-09-12T03:58:10Z",
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "summary": "Реализация закоммичена на ветке work/nl3-002-proto-r1: d38e248 (feat(e2): base-pair detector v2 + E2_OBSERVABLES_R2 + fixtures + 11 тестов), 20e5bee (feat(e2): arm manifest derivation + evidence + DRAFT proto-proposals). Отклонений от WO нет: физика не запускалась, confirmatory-объёмы не запускались, байты источника вне Git, durable-кэша нет.",
+  "command_refs": [
+    "git log --oneline: 20e5bee, d38e248, a80c1f0 (base 4d72ce0)"
+  ],
+  "evidence_refs": [
+    "scripts/e2/arm_manifest.py",
+    "scripts/e2/observables.py",
+    "scripts/e2/fixtures.py",
+    "tests/test_e2_proto.py",
+    "docs/research/E2_OBSERVABLES_R2.md",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/**"
+  ],
+  "next_action": "VALIDATION_RECORDED: полный unittest + work_cli validate + check-consistency.",
+  "blocker": null
+}
