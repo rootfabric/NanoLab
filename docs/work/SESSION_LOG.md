@@ -314,3 +314,15 @@ Mission владельца: «реализуй» — исполнение NL3-00
 Чеки: unittest 227 OK; check-consistency ok; work_cli validate/close EX-NL3-002A-R1 ok; детерминизм отчётов байт-в-байт; JSON-гейт в CI. Evidence: docs/work/executions/EX-NL3-002A-R1/{events 0001-0004, summary.md, evidence/real-data-cross-check-report.json, evidence/cost-probe-report.json}.
 
 Следующее действие: независимый REVIEWER (fresh-сессия) на exact HEAD → docs/evidence/NL3-002A/REVIEWER_VERDICT.md; затем Director: приёмка NL3-002A, решение по U-obs-1 (SI/манифест рук) и dispatch пилота E2.
+
+## 2026-09-12 — NL3-002A — Director acceptance: ACCEPTED (pre-E2 readiness), U-obs-1 решено, пилот E2 задиспатчен
+
+Mission владельца: «реализуй саб агентами и проверь их результат» — Fresh Reviewer + Fresh Verifier (отдельные fresh-сессии DSH subagent'ов), проверка их результатов координирующей сессией, Director-checkpoint, dispatch пилота. Independence caveat зафиксирован в обоих вердиктах: fresh-сессии, тот же физический хост/исполнитель — actor identity не доказывает независимый executor identity.
+
+Execution: EX-NL3-002A-R1 @ exact HEAD b6e99269c7671343ff37de811014e35bd1685cad (work/nl3-002a-pre-e2-r1: 6190a85 START, 98d2d1e feat, b6e9926 records). REVIEWER PASS (780de75, 9/9, F1 LOW + F2-F4 INFO), VERIFIER PASS (5d28d82, 7/7 воспроизведений: 227 тестов, байт-идентичный real-data ре-ран, независимый digest-гейт пинов 0b.top/pro_CPU.in, cost probe ре-ран с бит-идентичными выходами, mapping-арифметика 118/112). Coordination check Director'а: обе ветки с origin, диффы ровно по файлу вердикта, содержимое сверено.
+
+Director decision (2026-09-12): NL3-002A = ACCEPTED (C0_SOFTWARE_ONLY, campaign NOT_EVALUATED, E2 = NOT_RUN). Findings: F1 LOW принят как урок (описание records-коммита = полный diff); F2-F4 INFO к сведению. U-obs-1: SI retrieval заблокирован publisher anti-bot (обход не предпринимался); SI-pinning отложен до ручной загрузки владельцем; E2-PROTO-R1 строит first-principles манифест рук 0b (детерминированный, помечен «не из SI»); пилот финальный манифест не требует. Records: docs/evidence/NL3-002A/DIRECTOR_ACCEPTANCE_R1.md, docs/control/E2_OBS1_SI_DECISION_R1.md.
+
+Merge: control/nl3-002a-director-checkpoint-r1 — merge-коммиты 3051972 (work), 15e38f4 (review), 2c078de (verify) + Director records; local main обновлён fast-forward. Публикация main (push origin) — Human Gate владельца. state.json/plan.json не менялись (frontier NL3, next NL3-002; E2 = NOT_RUN). Work Queue обновлена (NL3-002A ACCEPTED, следующая фаза — пилот).
+
+Следующее действие: IMPLEMENTER fresh-сессия — WO-NL3-002-PILOT (0b × 3 реплики bounded, seeds 101001/102002/103003, non-confirmatory, бюджет ≤ 3 ч wall) → REVIEWER → Director; после пилота — E2-PROTO-R1 freeze и confirmatory кампания.
