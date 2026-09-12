@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T01:56:24Z",
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "summary": "Старт NL3-002-PILOT (E2 pilot, child of NL3-002): первые калибровочные (non-confirmatory) прогоны динамики на реальном первом шарнире 0b — 3 реплики E2-PILOT-S001/S002/S003, seeds 101001/102002/103003. WO = preregistration: параметры заморожены до запуска. Процедура: digest-gated download (G1=B, без durable-кэша, удаление после execution) 0b.top/0b.conf/pro_CPU.in по pinned commit 23fd1ff; 500-step rate measurement → выбор bounded steps (≤25 мин/реплику, минимум 2000, общий бюджет ≤3 ч); 3 реплики; analysis non-confirmatory (energy trace, integrity v1, DRAFT-proxy PCA угол — помечен DRAFT, не манифест E2-PROTO). scientific_outcome = NOT_EVALUATED; E2 остаётся NOT_RUN; никаких научных claim'ов. Engine: WSL oxDNA 00dc7fb9 (verified). Base = local main tip 760901c (соответствует ожиданию WO).",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main rev-parse HEAD -> 760901c8d8c66d6440693dd73b6e3f5cabd0a723 (expected 760901c: MATCH)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002-pilot -b work/nl3-002-pilot-r1 760901c",
+    "wsl bash git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002-PILOT.md",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/passport.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/branch-passport.md",
+    "scripts/hinge_family/source_pins.json"
+  ],
+  "next_action": "IMPLEMENTER: digest-gated download исходников (0b.top/0b.conf/pro_CPU.in) во временный каталог вне Git → rate measurement 500 steps → выбор steps → 3 реплики → analysis → records.",
+  "blocker": null
+}
