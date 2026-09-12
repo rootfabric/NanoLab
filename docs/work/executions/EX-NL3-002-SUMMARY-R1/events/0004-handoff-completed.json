@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-12T23:09:45Z",
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "2c275b4005fe42e8c8affb09df78665d22ec608e",
+  "summary": "Handoff EX-NL3-002-SUMMARY-R1. Ветка work/nl3-002-summary-r1, substantive binding 2c275b4 (records-commit поверх него — terminal binding по git log). Evidence: docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/{parametric-summary.json, component-card-0b.md, component-card-0b.json, series-summary.md, param_summary_build.py}. Валидации: unittest 242 OK (1 skip), work_cli validate ok / close ok, check-consistency ok, state.json не менялся, physics_runs = 0. Открытые риски: (1) 74b — honest gap, для закрытия нужен отдельный protocol-revision WO (иная деривация рук или ручной манифест — решение Director); (2) 11b truncated (46/50 кадров) — покрытое §8 окно делает truncation несущественным для таблицы; (3) карточка 0b — конвенция [0,180] без SI-соответствия (U-obs-1 closed first-principles). NEXT (одно действие): батчевый REVIEWER параметрической серии + сводки → Director: NL3-002 acceptance (claim ceiling C0_SOFTWARE_ONLY/measured-only) → merge (Human Gate)."
+}
