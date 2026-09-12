@@ -1,0 +1,32 @@
+{
+  "adequacy_gate": "v2_mutual_nearest_pairs > 3000 expected plausible for ~8378-nt origami (measured fact)",
+  "class": "pre-confirmatory detector calibration; fact, not fitting",
+  "detector": "v2: window (0.05, 1.3], a1 antiparallel <= -0.3, mutual-nearest + greedy",
+  "determinism": {
+    "manifest_two_runs_byte_identical": true,
+    "mutual_two_runs_byte_identical": true
+  },
+  "frame": {
+    "nucleotides": 8378,
+    "time": "20000000"
+  },
+  "inputs": {
+    "digests": {
+      "MD_Hinges/0b.conf": {
+        "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+        "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+        "size_bytes": 2294162
+      },
+      "MD_Hinges/0b.top": {
+        "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+        "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+        "size_bytes": 120204
+      }
+    }
+  },
+  "kind": "e2_proto_v2_frame0",
+  "schema_version": 1,
+  "v1_window_pairs_reference": "26-29 (EX-NL3-002-PILOT-R1, window (0.05, 0.55])",
+  "v2_greedy_pairs": 3975,
+  "v2_mutual_nearest_pairs": 3300
+}
