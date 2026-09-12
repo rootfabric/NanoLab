@@ -13,9 +13,10 @@
     "NL2-001",
     "NL2-002",
     "NL2-003",
-    "NL3-001"
+    "NL3-001",
+    "NL3-002"
   ],
-  "active_tasks": ["NL3-002"],
+  "active_tasks": [],
   "task_status": {
     "NL0-001": "ACCEPTED",
     "NL0-002": "ACCEPTED",
@@ -26,7 +27,7 @@
     "NL2-002": "ACCEPTED",
     "NL2-003": "ACCEPTED",
     "NL3-001": "ACCEPTED",
-    "NL3-002": "IN_PROGRESS",
+    "NL3-002": "ACCEPTED",
     "NL4-001": "PLANNED",
     "NL4-002": "PLANNED",
     "NL4-003": "PLANNED",
