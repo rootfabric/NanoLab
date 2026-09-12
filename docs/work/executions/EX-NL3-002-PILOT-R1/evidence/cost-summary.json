@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "e2_pilot_cost_summary",
+  "class": "non-confirmatory calibration; scientific_outcome = NOT_EVALUATED",
+  "rate_measurement": {
+    "run": "E2-PILOT-RATE",
+    "steps": 500,
+    "seed": 101001,
+    "exit_code": 0,
+    "wall_time_s": 25.926933700000518,
+    "wall_time_includes": ["wsl startup", "input/conf load (8378 nucleotides)", "engine run", "wsl teardown"],
+    "per_step_cost_upper_bound_s": 0.0519
+  },
+  "steps_selection": {
+    "target_engine_wall_s": 1500,
+    "min_steps": 2000,
+    "chosen_steps": 24000,
+    "predicted_wall_s": 1245,
+    "print_conf_interval": 400,
+    "print_energy_every": 100,
+    "rationale": "24000 x 0.0519 = 1245 s <= 1500 s (25 min); 24000/400 = 60 frames <= 60 cap"
+  },
+  "replicas": [
+    {
+      "run_id": "E2-PILOT-S001",
+      "seed": 101001,
+      "steps": 24000,
+      "exit_code": 0,
+      "wall_time_s": 1441.1642438999988,
+      "per_step_cost_s": 0.06004851016249995
+    },
+    {
+      "run_id": "E2-PILOT-S002",
+      "seed": 102002,
+      "steps": 24000,
+      "exit_code": 0,
+      "wall_time_s": 1447.948632300002,
+      "per_step_cost_s": 0.060331192762500085
+    },
+    {
+      "run_id": "E2-PILOT-S003",
+      "seed": 103003,
+      "steps": 24000,
+      "exit_code": 0,
+      "wall_time_s": 1449.267646100001,
+      "per_step_cost_s": 0.06038615275416671
+    }
+  ],
+  "execution_mode": "3 parallel WSL processes (same host); contention factor vs single-run upper bound ~1.16x",
+  "total_replica_wall_s": 4338.380522400002,
+  "calendar_pilot_wall_note": "rate 26 s + replicas ~1449 s calendar (parallel) + analysis; well within the 3 h budget",
+  "confirmatory_cost_projection_not_a_claim": "at ~0.060 s/step, 2e7 steps x 3 replicas ~= 1e6 s engine wall on this host (recorded for budgeting only; 2e7 NOT run in the pilot; no scientific claim)"
+}

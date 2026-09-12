@@ -1,0 +1,270 @@
+{
+  "class": "non-confirmatory pilot calibration; scientific_outcome = NOT_EVALUATED",
+  "draft_angle_first_deg": 178.671949182,
+  "draft_angle_last_deg": 178.293927425,
+  "draft_angle_note": "DRAFT proxy, non-confirmatory, not the E2-PROTO manifest",
+  "energy": {
+    "columns": [
+      "time",
+      "potential",
+      "kinetic",
+      "total"
+    ],
+    "max_abs_drift_total": 0.005649,
+    "rows_total": 241,
+    "samples": [
+      [
+        0.0,
+        -1.485914,
+        0.303675,
+        -1.182239
+      ],
+      [
+        8.0,
+        -1.484777,
+        0.302001,
+        -1.182776
+      ],
+      [
+        16.0,
+        -1.48317,
+        0.301933,
+        -1.181237
+      ],
+      [
+        24.0,
+        -1.482833,
+        0.303758,
+        -1.179074
+      ],
+      [
+        32.0,
+        -1.483481,
+        0.305088,
+        -1.178393
+      ],
+      [
+        40.0,
+        -1.484453,
+        0.305257,
+        -1.179196
+      ],
+      [
+        48.0,
+        -1.481532,
+        0.302067,
+        -1.179464
+      ],
+      [
+        56.0,
+        -1.482934,
+        0.30317,
+        -1.179764
+      ],
+      [
+        64.0,
+        -1.485482,
+        0.303442,
+        -1.18204
+      ],
+      [
+        72.0,
+        -1.483467,
+        0.302464,
+        -1.181003
+      ],
+      [
+        80.0,
+        -1.482786,
+        0.300178,
+        -1.182608
+      ],
+      [
+        88.0,
+        -1.484156,
+        0.30128,
+        -1.182876
+      ],
+      [
+        96.0,
+        -1.486732,
+        0.302119,
+        -1.184613
+      ],
+      [
+        104.0,
+        -1.487332,
+        0.303108,
+        -1.184224
+      ],
+      [
+        112.0,
+        -1.483358,
+        0.298947,
+        -1.184411
+      ],
+      [
+        120.0,
+        -1.485885,
+        0.30144,
+        -1.184444
+      ]
+    ],
+    "time_first": 0.0,
+    "time_last": 120.0,
+    "total_energy_first": -1.182239,
+    "total_energy_last": -1.184444,
+    "total_energy_max": -1.17659,
+    "total_energy_min": -1.186205
+  },
+  "exit_code": 0,
+  "frames": [
+    {
+      "displacement_max": 0.0,
+      "draft_angle_deg": 178.671949182,
+      "draft_angle_status": "OK",
+      "frame_index": 0,
+      "long_bond_fraction": 0.053897281,
+      "pairs_fraction": 1.0,
+      "time": "400"
+    },
+    {
+      "displacement_max": 2.402476839,
+      "draft_angle_deg": 179.113443436,
+      "draft_angle_status": "OK",
+      "frame_index": 4,
+      "long_bond_fraction": 0.054864048,
+      "pairs_fraction": 0.392857143,
+      "time": "2000"
+    },
+    {
+      "displacement_max": 3.047221755,
+      "draft_angle_deg": 179.176362921,
+      "draft_angle_status": "OK",
+      "frame_index": 8,
+      "long_bond_fraction": 0.054380665,
+      "pairs_fraction": 0.214285714,
+      "time": "3600"
+    },
+    {
+      "displacement_max": 4.174285141,
+      "draft_angle_deg": 179.151100199,
+      "draft_angle_status": "OK",
+      "frame_index": 13,
+      "long_bond_fraction": 0.054864048,
+      "pairs_fraction": 0.285714286,
+      "time": "5600"
+    },
+    {
+      "displacement_max": 4.849235223,
+      "draft_angle_deg": 179.05247005,
+      "draft_angle_status": "OK",
+      "frame_index": 17,
+      "long_bond_fraction": 0.054501511,
+      "pairs_fraction": 0.178571429,
+      "time": "7200"
+    },
+    {
+      "displacement_max": 5.131393472,
+      "draft_angle_deg": 178.799818135,
+      "draft_angle_status": "OK",
+      "frame_index": 21,
+      "long_bond_fraction": 0.054864048,
+      "pairs_fraction": 0.178571429,
+      "time": "8800"
+    },
+    {
+      "displacement_max": 4.861745032,
+      "draft_angle_deg": 178.651261738,
+      "draft_angle_status": "OK",
+      "frame_index": 25,
+      "long_bond_fraction": 0.054501511,
+      "pairs_fraction": 0.321428571,
+      "time": "10400"
+    },
+    {
+      "displacement_max": 5.368111919,
+      "draft_angle_deg": 178.87416234,
+      "draft_angle_status": "OK",
+      "frame_index": 30,
+      "long_bond_fraction": 0.055347432,
+      "pairs_fraction": 0.142857143,
+      "time": "12400"
+    },
+    {
+      "displacement_max": 4.527011488,
+      "draft_angle_deg": 179.076624247,
+      "draft_angle_status": "OK",
+      "frame_index": 34,
+      "long_bond_fraction": 0.055347432,
+      "pairs_fraction": 0.25,
+      "time": "14000"
+    },
+    {
+      "displacement_max": 4.698787883,
+      "draft_angle_deg": 178.890285713,
+      "draft_angle_status": "OK",
+      "frame_index": 38,
+      "long_bond_fraction": 0.055347432,
+      "pairs_fraction": 0.285714286,
+      "time": "15600"
+    },
+    {
+      "displacement_max": 5.072033137,
+      "draft_angle_deg": 178.589904982,
+      "draft_angle_status": "OK",
+      "frame_index": 42,
+      "long_bond_fraction": 0.054984894,
+      "pairs_fraction": 0.071428571,
+      "time": "17200"
+    },
+    {
+      "displacement_max": 4.637607764,
+      "draft_angle_deg": 178.760897506,
+      "draft_angle_status": "OK",
+      "frame_index": 46,
+      "long_bond_fraction": 0.05570997,
+      "pairs_fraction": 0.321428571,
+      "time": "18800"
+    },
+    {
+      "displacement_max": 5.158378336,
+      "draft_angle_deg": 178.660040898,
+      "draft_angle_status": "OK",
+      "frame_index": 51,
+      "long_bond_fraction": 0.055226586,
+      "pairs_fraction": 0.25,
+      "time": "20800"
+    },
+    {
+      "displacement_max": 4.967216986,
+      "draft_angle_deg": 178.582987255,
+      "draft_angle_status": "OK",
+      "frame_index": 55,
+      "long_bond_fraction": 0.054864048,
+      "pairs_fraction": 0.25,
+      "time": "22400"
+    },
+    {
+      "displacement_max": 6.253789506,
+      "draft_angle_deg": 178.293927425,
+      "draft_angle_status": "OK",
+      "frame_index": 59,
+      "long_bond_fraction": 0.054622356,
+      "pairs_fraction": 0.142857143,
+      "time": "24000"
+    }
+  ],
+  "frames_analysed": 15,
+  "frames_total": 60,
+  "kind": "e2_pilot_replica_analysis",
+  "max_displacement": 6.253789506,
+  "max_long_bond_fraction": 0.05570997,
+  "min_pairs_fraction": 0.071428571,
+  "per_step_cost_s": 0.06004851,
+  "reference_pairs_count": 28,
+  "run_id": "E2-PILOT-S001",
+  "schema_version": 1,
+  "steps": 24000,
+  "wall_time_s": 1441.1642439
+}
