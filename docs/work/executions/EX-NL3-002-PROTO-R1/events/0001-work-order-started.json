@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T03:36:40Z",
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "summary": "Старт NL3-002-PROTO (E2-PROTO-R1 preparation, child of NL3-002): подготовка материалов для Director-freeze без confirmatory-прогонов (2e7 запрещено; физика — максимум 500-step smoke). Три deliverable: (1) детерминированный first-principles манифест рук 0b из авторских 0b.top+0b.conf (U-obs-1 путь по E2_OBS1_SI_DECISION_R1; download-on-run G1=B по pinned commit 23fd1ff, digest-гейт source_pins.json, temp-каталог вне Git, удаление после, durable-кэш запрещён); (2) ревизия base-pair детекции до v2 (пилот: v1 нашёл 26-29 пар на 8378 нуклеотидов — неадекватно) + E2_OBSERVABLES_R2.md, v1 не ломать; (3) DRAFT proto-proposals (θ_pairs/θ_bonds/θ_disp варианты, таблица steps {2e5,1e6,2e7} × R_confirm {3} с measured wall-прогнозами, seeds policy, статистика). Base = 4d72ce0 (tip work/nl3-002-pilot-r1, осознанная стэковая зависимость — зафиксирована в WO и паспорте). scientific_outcome = NOT_EVALUATED; E2 остаётся NOT_RUN.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin -> ok",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl3-002-proto -b work/nl3-002-proto-r1 4d72ce0 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002-PROTO.md",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/passport.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/branch-passport.md",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/cost-summary.json",
+    "docs/control/E2_OBS1_SI_DECISION_R1.md",
+    "docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: digest-gated download 0b.top/0b.conf во временный каталог → эмпирическая калибровка констант v2 (расстояния/ориентации frame 0) → arm_manifest.py + observables v2 + тесты → proto-proposals.json → records/records→handoff.",
+  "blocker": null
+}

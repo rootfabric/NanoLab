@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002-PROTO-R1",
+  "work_order_id": "NL3-002-PROTO",
+  "checkpoint": "NL3",
+  "base_sha": "4d72ce06e142083a1a7adb255628a821f28b9a66",
+  "base_sha_note": "stacked dependency: tip of work/nl3-002-pilot-r1 (pilot evidence needed for manifest derivation and v2 motivation), NOT canonical main; deliberate, recorded in WO-NL3-002-PROTO.md",
+  "branch": "work/nl3-002-proto-r1",
+  "worktree": "C:\\NanoLab\\nl3-002-proto",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / outcome NOT_EVALUATED (подготовка материалов E2-PROTO-R1; научные исходы не публикуются)",
+  "allowed_paths": [
+    "docs/work/WO-NL3-002-PROTO.md",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/**",
+    "docs/work/SESSION_LOG.md (append)",
+    "docs/research/E2_OBSERVABLES_R2.md (новый)",
+    "scripts/e2/** (аддитивно/расширяюще; v1-функции и константы R1 не ломать)",
+    "tests/**"
+  ],
+  "parent_work_order": "NL3-002",
+  "owner_decisions_applied": [
+    "G1 = B (docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md): download-on-run по exact pinned commit, REFERENCE_ONLY, derived results публикуются",
+    "U4 = NO durable cache (re-download + digest перед каждым использованием, удаление после)",
+    "U-obs-1 путь first-principles (docs/control/E2_OBS1_SI_DECISION_R1.md): манифест рук 0b строится детерминированным алгоритмом из 0b.top+0b.conf, помечается «не из SI»"
+  ],
+  "preregistration_note": "WO-NL3-002-PROTO.md = preregistration (алгоритм манифеста, v2-подход, DRAFT-характер proposals); физика — максимум 500-step smoke при необходимости; confirmatory-прогоны (2e7) запрещены; E2 остаётся NOT_RUN; scientific_outcome = NOT_EVALUATED",
+  "started_at_utc": "2026-09-12T03:36:30Z",
+  "status": "IN_PROGRESS"
+}
