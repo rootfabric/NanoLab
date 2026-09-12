@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-12T18:40:00Z",
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "Handoff EX-NL3-002-PARAM-32B-R1 завершён. Батч 32b исполнен по frozen-наследованию E2_PROTO_R1 + WO-NL3-002-PARAM + addendum §8 (steps=150000): digest-гейт 3/3 PASS (sha256 32b вычислены при первой загрузке, NOT_VERIFIED пины не тронуты); манифест рук 32b ДО прогонов (arm_a 4814 / arm_b 3190, coverage 99.95% парных, угол frame 0 77.48°, байт-детерминизм); runs PARAM-32B-S001..S003 — все завершены штатно (3/3 exit 0, wall 2.25 ч ≤ 3.5 ч бюджета, полные 150000 шагов, 1501/1501 energy строк, 37 кадров/реплику, крэшей нет, инцидентов обёртки нет — setsid/nohup-лаунчер); анализ v2 mutual: 0 invalid из 111 кадров, пул median 78.09° CI95 [77.79, 78.67]. scientific_outcome = MEASURED; интерпретаций и кросс-вариантных сравнений нет (Director после всех батчей). Временные исходники источника удалены (U4 = NO); WSL run-каталоги сохранены до review (вне Git, манифесты в evidence). state.json не менялся.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002-PARAM-32B-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.work_cli close docs/work/executions/EX-NL3-002-PARAM-32B-R1 -> ok (after this event)",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> green (see final message)",
+    "removed: %TEMP%\\nl3-002-param-32b-src, %TEMP%\\nl3-002-param-32b-read, C:\\NanoLab\\tmp-32b-launch (source bytes + launcher copy; WSL run dirs kept until review, outside Git)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/summary.md",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-summary.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/s003-analysis.json"
+  ],
+  "next_action": "Dispatch батча 53b (fresh-сессия, steps 150000; калибровка: 32b ~0.054 s/step при 3 параллельных) → 74b → батчевый REVIEWER серии (один fresh на 11b/32b/53b/74b) → Director: сводная серии + карточка компонента → NL3-002 acceptance → merge (Human Gate).",
+  "blocker": null
+}
