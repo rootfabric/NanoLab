@@ -1,0 +1,38 @@
+# REVIEWER VERDICT — EX-NL3-002A-R1
+
+- **Execution**: EX-NL3-002A-R1 (Work Order NL3-002A, pre-E2 readiness, child of NL3-002)
+- **Exact HEAD reviewed**: `b6e99269c7671343ff37de811014e35bd1685cad` (ветка `work/nl3-002a-pre-e2-r1`, verified `git rev-parse HEAD` == b6e9926 в worktree `C:\NanoLab\review-nl3-002a`; HEAD не сдвинулся)
+- **Дата review**: 2026-09-12 (fresh-сессия)
+- **Independance caveat**: ревью выполнено в fresh-сессии без доступа к работе implementer'а (только файлы и воспроизводимость). Fresh-сессия + тот же физический исполнитель — actor identity не доказывает независимый executor identity (hard rule проекта признан).
+- **Риск**: MEDIUM → Reviewer обязателен. **Claim class**: C0_SOFTWARE_ONLY.
+
+## Вердикт: **PASS** (с findings, ни один не блокирующий)
+
+## Таблица проверок
+
+| # | Проверка | Команда | Результат |
+|---|---|---|---|
+| 1 | Scope | `git diff --stat ff9e147..b6e9926`; `git diff --stat 6190a85..b6e9926 -- state.json plan.json`; `git diff --stat ba750af..b6e9926` | **PASS**. Execution-диапазон (`ba750af..b6e9926`) содержит только allowed paths паспорта (WO — добавлен owner'ом в ba750af, execution его не менял; SESSION_LOG, executions/**, E2_OBSERVABLES_R1.md, scripts/e2/**, tests/**). `state.json`/`plan.json` в `6190a85..b6e9926` не менялись. Внешние пути в `ff9e147..b6e9926` (README, ROADMAP, control, AGENT_START, WORK_QUEUE, project/state.json) целиком из owner-коммита `ba750af` (docs-sync + G1/U4 owner decisions, менял open_decisions в state.json: −2 закрытых пункта) — до START 6190a85, в scope ревью НЕ входит, зафиксировано как контекст. |
+| 2 | Frozen-before-data | `git log --follow -- docs/research/E2_OBSERVABLES_R1.md`; `git log -- docs/work/executions/EX-NL3-002A-R1/evidence/` | **PASS**. Observables появились в `98d2d1e` (feat e2 toolkit); real-data evidence — только в `b6e9926` (records). Содержательно: §3.3 явно оставляет θ_bonds/θ_pairs/θ_disp неназначенными («acceptance-параметры… freeze в E2-PROTO-R1») — дисциплина соблюдена. Коррекция R1.1 (порог вырожденности оси) честно задокументирована как внесённая до любого применения, включая синтетику. |
+| 3 | Тесты | `$env:PYTHONPATH='...\scripts'; python -m unittest discover -s tests -t .` | **PASS** — Ran 227 tests, OK (skipped=1). Ожидание 227 OK (1 skip) подтверждено. |
+| 4 | Воспроизводимость real-data отчёта | `python docs/work/executions/EX-NL3-002A-R1/evidence/run_real_data_checks.py` (PYTHONPATH=scripts, прокси установлен) → byte-compare с HEAD | **PASS**. exit 0; сгенерированный `real-data-cross-check-report.json` байт-идентичен версии в HEAD (python bytes compare: identical True, 16647 == 16647 bytes; «M»-статус git — только CRLF-предупреждение рабочей копии). Digest-гейт **PASS 3/3**: 0b.json blob `0ed4075c3a0d2f29601d35c5ce70f2df6b0be1ed`; 0b.top `84edad43593f1d5eb9debb9493a7bd86d743e44b`; pro_CPU.in `89d76310ce726eaec9e7acb312bd7b0fc43fa735` — совпадают с `scripts/hinge_family/source_pins.json` и с ожидаемыми в задании. Cleanup: workdir_removed=true, durable_cache=none (U4=NO соблюдён: временный каталог скрипта, удалён в `finally`). |
+| 5 | Отсутствие байтов источника в Git | `git ls-files \| Select-String '0b\.|pro_CPU'` | **PASS**. Tracked-файлов 0b.top/0b.conf/0b.json/pro_CPU.in нет. Выборочная проверка scripts/e2 и evidence: только дайджесты и числа (blob/SHA-256 из source_pins.json), длинных фрагментов исходного текста не обнаружено. |
+| 6 | Ре-ран cost probe (WSL Ubuntu доступен, Running) | Windows Python: `e2.cost_probe.run_probe('/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA','/home/yurig/review-nl3-002a-probe','/home/yurig/nl1-002/oxdna-src/test/DNA/DSDNA8',5000,'E2A-PROBE-REVIEW-R1')` | **PASS**. probe_completed=true, exit_code=0, stdout PROBE_OK. Структурное сравнение с `evidence/cost-probe-report.json`: digests совпадают полностью, включая выходные артефакты — dsdna8.top `a9e8cb7e…`, init.dat `354ccb3e…`, probe_last.dat `4028e5b3…`, probe_energy.dat `396f12af…`; engine_source_commit идентичен (00dc7fb9…). Wall time 0.164 s vs 2.019 s — ожидаемое расхождение (overhead WSL/bash), wall-поле некритично. |
+| 7 | Валидаторы | `PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002A-R1`; `python -m harness.cli check-consistency` | **PASS**. validate: ok=true, errors=[], HANDOFF_READY, terminal handoff present; check-consistency: ok=true, frontier NL3, state/plan консистентны. |
+| 8 | Честность записей | чтение events 0001–0004, summary.md; `git show --stat b6e9926` | **PASS с finding F1 (LOW)**. Events 0001–0004 согласованы с summary.md (тесты 227 OK, digest 3/3, mapping-числа, рестраинты external_forces=0, cost probe completed — всё совпадает). Но handoff event 0004 заявляет «records-коммит добавляет только события/summary/evidence/SESSION_LOG», тогда как `b6e9926` фактически также модифицировал код: compat_audit.py, cost_probe.py, fixtures.py, restraints_inventory.py и tests/test_e2_pre_e2.py (+31 строка) — см. findings. |
+| 9 | Claim ceiling | чтение summary.md, events, E2_OBSERVABLES_R1.md | **PASS**. Научных утверждений о реальном шарнире нет: угол/стабильность 0b нигде не заявляются; все числа source-data поданы как technical facts для входа в E2-PROTO-R1 с явной оговоркой length-only matching; residual G2-R1 (PARTIAL_ASSOCIATION 4↔3, 176==176) подан честно как открытый пункт; campaign NOT_EVALUATED, E2 = NOT_RUN везде последовательно; memory NOT_MEASURED не выдаётся за измерение; экстраполяция бюджета сознательно не делается. |
+
+## Findings
+
+- **F1 (LOW)** — Неверное описание records-коммита в handoff event 0004: заявлено «records-коммит добавляет только события/summary/evidence/SESSION_LOG», фактически `b6e9926` также изменил `scripts/e2/compat_audit.py`, `scripts/e2/cost_probe.py`, `scripts/e2/fixtures.py`, `scripts/e2/restraints_inventory.py` и `tests/test_e2_pre_e2.py` (合计 ~268 строк изменений). Изменения в allowed paths и покрыты тестами (227 OK на итоговом дереве), научной недостоверности нет — но характеристика коммита неточна. Рекомендация: в будущем фиксировать code-fixes в records-коммите отдельным event/correction или честно перечислять в handoff.
+- **F2 (INFO)** — Wall time cost probe при ре-ране 0.164 s vs 2.019 s в evidence: подтверждает, что поле wall_time_s чувствительно к overhead окружения и не должно использоваться как预算-число; implementer уже честно пометил состав wall_time и отказался от экстраполяции.
+- **F3 (INFO)** — Owner-коммит `ba750af` (base ветки) менял `project/state.json` (open_decisions: −2 закрытых G1/U4-пункта) и README/ROADMAP/control-доки — до START 6190a85, вне scope данного ревью; зафиксирован для полноты provenance.
+- **F4 (INFO)** — Passport allowed_paths включает `scripts/hinge_family/**` (аддитивно); фактических изменений hinge_family в execution-диапазоне нет — паспорт шире использованного, не нарушение.
+
+## Claim ceiling
+
+Вердикт подтверждает claim ceiling исполнения: **C0_SOFTWARE_ONLY**. Никакие результаты данного ревью не являются научными утверждениями о реальном шарнире 0b; E2 = NOT_RUN, campaign-level scientific_outcome = NOT_EVALUATED. Observables R1 заморожены до данных; acceptance-пороги (θ_bonds/θ_pairs/θ_disp) и манифест рук 0b обязаны быть пререгистрированы в E2-PROTO-R1 до production-анализа (U-obs-1 открыт).
+
+## Воспроизводимость проверок ревью
+
+Команды и окружение: Windows PowerShell, worktree `C:\NanoLab\review-nl3-002a` @ b6e9926, `PYTHONPATH=<worktree>\scripts`, прокси `http://192.168.0.27:8888` (для download-on-run), WSL Ubuntu (cost probe). Cost probe ре-ран использовал отдельный run_id `E2A-PROBE-REVIEW-R1` и отдельный probe-dir; исходный evidence не перезаписывался.
