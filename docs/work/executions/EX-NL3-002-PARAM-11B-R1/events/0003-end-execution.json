@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-12T15:35:00Z",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "END_EXECUTION",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5940c8ab3f5d90169a17c423c653f4c004a6efc8",
+  "execution_outcome": "ABORTED_BUDGET_INTERRUPT (3/3 реплики прерваны на границе бюджета 3.5 ч; крэша движка нет — это калибровочный исход по E2_PROTO_R1 §5, не провал протокола)",
+  "summary": "Runs PARAM-11B-S001..S003 запущены параллельно (WSL oxDNA 00dc7fb9, старт 11:51:52 UTC, seeds 201004/202008/203012, steps 200000, print_conf_interval 4000 → 50 кадров план, print_energy_every 100 → 2001 строка план). Фактическая скорость 11b ~0.066-0.067 s/step (0b был ~0.055) — полный ран требовал ~3.6-3.7 ч > бюджета 3.5 ч/реплику. По протоколу (§5: превышение → прерывание и фиксация) все 3 движка SIGTERM-прерваны реализатором точно на границе бюджета (15:21:52 UTC = старт + 12600 s). Зафиксировано: energy 1865/1867/1878 строк из 2001 (93%), траектории 46/50 кадров в каждой реплике, lastconf записан. Инциденты: (1) родительская Python-обёртка run_param.py погибла по таймауту harness-джоба после запуска движков — движки продолжили независимо; wall восстановлен по ФС (birth energy → mtime траектории, кросс-чек log time_passed 12562-12570 s, прецедент EX-NL3-002-R1 F-3); (2) pkill по бюджету убил и родительский bash → exit_code.txt не записан (exit_code = null, причина задокументирована). Крэша движка НЕТ (0 крэшей, stop-условие «крэш ≥2 реплик» не сработало). Дальше: анализ v2 по фактически записанным 46 кадрам/реплику с явной пометкой truncated — все кадры репортятся, научная интерпретация вне исполнения; решение о статусе данных — REVIEWER/Director.",
+  "command_refs": [
+    "python evidence/run_param.py (background; wrapper died at harness timeout, engines continued)",
+    "pkill -f runs/PARAM-11B-S00X at 2026-09-12T15:21:52Z (= start 11:51:52Z + 12600 s budget)",
+    "python evidence/reconstruct_run_reports.py -> evidence/run-reports.json (walls from FS + log crosscheck)",
+    "python evidence/artifact_manifest.py -> evidence/s00X-artifacts.manifest.json (10 файлов/ран, SHA-256+size+location)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/run-reports.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s001-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s002-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/s003-artifacts.manifest.json"
+  ],
+  "next_action": "Анализ (F): observables v2 mutual + frozen гейты + манифест 11B по 46 кадрам/реплику (truncated, помечено явно) → 0004-end-analysis → HANDOFF.",
+  "blocker": null
+}

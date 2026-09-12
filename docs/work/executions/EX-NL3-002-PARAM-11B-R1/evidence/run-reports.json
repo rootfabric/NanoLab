@@ -1,0 +1,62 @@
+{
+  "budget_s_per_replica": 12600.0,
+  "engine": "/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA",
+  "engine_source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "kind": "e2_param_run_reports",
+  "parallel": true,
+  "runs": {
+    "PARAM-11B-S001": {
+      "energy_rows": 1865,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12569.5,
+      "per_step_s_approx": 0.066874,
+      "prefix": "s001",
+      "seed": 201004,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12472,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S001"
+    },
+    "PARAM-11B-S002": {
+      "energy_rows": 1867,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12561.8,
+      "per_step_s_approx": 0.066674,
+      "prefix": "s002",
+      "seed": 202008,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12448,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S002"
+    },
+    "PARAM-11B-S003": {
+      "energy_rows": 1878,
+      "energy_rows_expected_full_run": 2001,
+      "exit_code": null,
+      "exit_condition": "SIGTERM budget interrupt at 3.5h deadline (engine + parent bash killed; no exit_code.txt written)",
+      "interrupted_budget": true,
+      "log_time_passed_s_crosscheck": 12568.0,
+      "per_step_s_approx": 0.066033,
+      "prefix": "s003",
+      "seed": 203012,
+      "steps_requested": 200000,
+      "traj_frames_expected_full_run": 50,
+      "traj_frames_written": 46,
+      "wall_time_s": 12401,
+      "wsl_dir": "/home/yurig/nl3-002-param-11b/runs/PARAM-11B-S003"
+    }
+  },
+  "schema_version": 1,
+  "variant": "11b",
+  "wall_reconstruction": "parent wrapper run_param.py was killed by the harness job timeout after engine launch; wall = energy-file birth -> exit_code.txt mtime (WSL stat), cross-checked vs log time_passed"
+}
+
