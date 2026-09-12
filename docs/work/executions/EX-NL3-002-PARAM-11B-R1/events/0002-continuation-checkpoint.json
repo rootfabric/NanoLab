@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T12:04:00Z",
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "CONTINUATION",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5940c8ab3f5d90169a17c423c653f4c004a6efc8",
+  "summary": "Continuation после запуска прогонов. (1) Digest-gated download во временный каталог вне Git (%TEMP%\\nl3-002-param-11b-src): 3/3 PASS по обязательным гейтам size+blob_sha1 (11b.top 121176/c8d34a47…, 11b.conf 2309610/ce940256…, pro_CPU.in 933/89d76310…); sha256-пины 11b.top/11b.conf NOT_VERIFIED — вычислены при первой загрузке и записаны в evidence как sha256_computed_at_first_download (0a71e29c…, 8a29b2ea…; без претензии к реестру); pro_CPU.in sha256 bd6cd418… MATCH. (2) Манифест рук 11b ДО прогонов (definition-before-data, arm-manifest-v1 на frame 0 11b.conf): ДВА доминирующих блока выделяются — PASS; arm_a 4218 нт / arm_b 3722 нт; coverage 7940/7940 парных = 100% (94.03% топологии 8444 нт); pair graph greedy 3970 пар; selected_parallel_threshold 0.95; два прогона деривации байт-идентичны (sha256 4078f285…). Угол frame 0 = 74.36° (конвенция [0,180]). evidence/arm-manifest-11b.json + arm-manifest-11b-report.json + run1/run2. (3) Входы 3 ранов собраны из verbatim pro_CPU.in: отклонения ровно протокольные (steps 200000/seed/имена outputs/print_conf_interval 4000/print_energy_every 100/lastconf_file + subject 74b→11b) — PARAM-11B-S00X_deviations.json; все входы (11b.top/11b.conf/pro_CPU.in/input.in) скопированы в /home/yurig/nl3-002-param-11b/runs/PARAM-11B-S00X/ и byte-verified (3/3 PASS). (4) Запущены 3 параллельных WSL-процесса PARAM-11B-S001..S003 (seeds 201004/202008/203012, oxDNA 00dc7fb9), движки пишут energy/traj (проверено); бюджет ≤3.5 ч/реплика, обёртка ждёт все три.",
+  "command_refs": [
+    "python evidence/download_and_verify.py -> digest_gate_all=PASS",
+    "python scripts/e2/arm_manifest.py --top MD_Hinges__11b.top --conf MD_Hinges__11b.conf --report evidence/arm-manifest-11b-run{1,2}.json -> byte-identical (sha256 4078f285609a49532382a174539B0BD705F3744412779FFA4EEA235FD10F84CD)",
+    "python evidence/build_run_inputs.py -> copy_verify PASS x3",
+    "python evidence/run_param.py (background; started PARAM-11B-S001..S003 parallel WSL)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/arm-manifest-11b.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/arm-manifest-11b-report.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-S00X_deviations.json",
+    "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/input-build.json"
+  ],
+  "next_action": "Дождаться всех 3 реплик (≤3.5 ч) → END_EXECUTION (0003) + манифесты артефактов → анализ v2 mutual + frozen гейты + статистика §6 → END_ANALYSIS (0004) → HANDOFF (0005).",
+  "blocker": null
+}

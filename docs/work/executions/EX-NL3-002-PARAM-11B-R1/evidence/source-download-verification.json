@@ -1,0 +1,55 @@
+{
+  "dest_dir": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-param-11b-src",
+  "digest_gate_all": "PASS",
+  "download_base": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/",
+  "durable_cache": false,
+  "execution_id": "EX-NL3-002-PARAM-11B-R1",
+  "files": {
+    "MD_Hinges/11b.conf": {
+      "blob_sha1": "ce9402560649d9337487371944ce15cd1b74b50d",
+      "blob_sha1_expected": "ce9402560649d9337487371944ce15cd1b74b50d",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-param-11b-src\\MD_Hinges__11b.conf",
+      "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+      "sha256_computed_at_first_download": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+      "sha256_gate": "COMPUTED_NOT_VERIFIED (recorded for future re-use; no registry claim)",
+      "sha256_pin_provenance": "NOT_VERIFIED",
+      "size_bytes": 2309610,
+      "size_expected": 2309610,
+      "size_match": true
+    },
+    "MD_Hinges/11b.top": {
+      "blob_sha1": "c8d34a47e584cd43b1de3107e9c8e57a992f8688",
+      "blob_sha1_expected": "c8d34a47e584cd43b1de3107e9c8e57a992f8688",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-param-11b-src\\MD_Hinges__11b.top",
+      "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+      "sha256_computed_at_first_download": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+      "sha256_gate": "COMPUTED_NOT_VERIFIED (recorded for future re-use; no registry claim)",
+      "sha256_pin_provenance": "NOT_VERIFIED",
+      "size_bytes": 121176,
+      "size_expected": 121176,
+      "size_match": true
+    },
+    "MD_Hinges/pro_CPU.in": {
+      "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+      "blob_sha1_expected": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-param-11b-src\\MD_Hinges__pro_CPU.in",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "sha256_expected": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "sha256_match": true,
+      "size_bytes": 933,
+      "size_expected": 933,
+      "size_match": true
+    }
+  },
+  "kind": "e2_param_source_download_verification",
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen, inherited) + docs/work/WO-NL3-002-PARAM.md",
+  "schema_version": 1,
+  "work_order": "NL3-002-PARAM"
+}
+
