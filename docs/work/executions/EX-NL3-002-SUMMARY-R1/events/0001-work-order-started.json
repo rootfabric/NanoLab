@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-12T22:33:41Z",
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "Старт EX-NL3-002-SUMMARY-R1: сводка параметрической серии E2 (таблица параметр → угол по общему окну t <= 150000, addendum §8) + карточка компонента 0b (требование acceptance NL3-002 в WORK_QUEUE). Интеграционная ветка work/nl3-002-summary-r1 от bdbebfd с merge origin/work/nl3-002-param-{11b,32b,53b,74b}-r1 (конфликты SESSION_LOG.md разрешены union-ом, обе записи сохранены). Без новых прогонов физики: только чтение опубликованных evidence JSON. Ре-срез общего окна: кадры с временем <= 150000 per-replica (в analysis JSON каждого кадра есть поле time в шагах oxDNA), пересчёт median/IQR/q5-q95/пул/bootstrap(10000, seed 424242) той же frozen-методикой §6; 32b/53b уже целиком <= 150k. 74b — строка NOT_MEASURED (arm-manifest-74b-failure.json: FAILED_TWO_DOMINANT_BLOCKS, детерминированный отказ до прогонов). Детерминизм сводки: два прогона скрипта → байт-идентичный JSON."
+}
