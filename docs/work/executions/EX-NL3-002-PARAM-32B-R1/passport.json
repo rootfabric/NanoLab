@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "checkpoint": "NL3",
+  "base_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "branch": "work/nl3-002-param-32b-r1",
+  "worktree": "C:\\NanoLab\\nl3-002-param-32b",
+  "risk_class": "MEDIUM",
+  "claim_class": "E2 parametric series variant 32b; outcome = measured distributions; acceptance — Director после review",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/**",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "parent_work_order": "NL3-002",
+  "protocol": "docs/research/E2_PROTO_R1.md (FROZEN; наследуется без изменений, вкл. addendum §8) + docs/work/WO-NL3-002-PARAM.md (per-variant добавления)",
+  "owner_decisions_applied": [
+    "owner authorization: «11b+32b+53b+74b × 3 (Recommended)»",
+    "G1 = B: download-on-run по exact pinned commit 23fd1ff7731e9017bd776f49206dc42d70d9fe91, digest-гейт (size+blob_sha1 обязательны; sha256 пины 32b NOT_VERIFIED — вычислить при первой загрузке, записать в evidence, без претензии к реестру), REFERENCE_ONLY, без durable-кэша, удаление после execution",
+    "Director decision №1 (унаследовано): pair detection v2 mutual-nearest",
+    "Addendum §8 (2026-09-12, до запуска 32b): параметрическая серия исполняется при steps = 150000, единое окно сравнения t ≤ 150000; гейты/статистика/seeds/бюджет ≤3.5 ч без изменений",
+    "seeds 201004/202008/203012 на каждый вариант (симметрия протокола, документированное решение)"
+  ],
+  "variant": "32b",
+  "runs": [
+    {"run_id": "PARAM-32B-S001", "seed": 201004},
+    {"run_id": "PARAM-32B-S002", "seed": 202008},
+    {"run_id": "PARAM-32B-S003", "seed": 203012}
+  ],
+  "started_at_utc": "2026-09-12T15:38:00Z",
+  "status": "IN_PROGRESS"
+}
