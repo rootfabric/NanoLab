@@ -1,0 +1,65 @@
+{
+  "input_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl3-002-pilot-src\\s003_input.in",
+  "deviations": [
+    {
+      "key": "seed",
+      "author": "7777",
+      "pilot": "103003",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "steps",
+      "author": "2e7",
+      "pilot": "24000",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "topology",
+      "author": "74b.top",
+      "pilot": "0b.top",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "conf_file",
+      "author": "74b.conf",
+      "pilot": "0b.conf",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "trajectory_file",
+      "author": "pro.dat",
+      "pilot": "s003_traj.dat",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "log_file",
+      "author": "log2.dat",
+      "pilot": "s003_log.dat",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "energy_file",
+      "author": "hinge_energy.dat",
+      "pilot": "s003_energy.dat",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "print_conf_interval",
+      "author": "4e3",
+      "pilot": "400",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "print_energy_every",
+      "author": "4e3",
+      "pilot": "100",
+      "reason": "WO NL3-002-PILOT bounded pilot / per-run naming"
+    },
+    {
+      "key": "lastconf_file",
+      "author": null,
+      "pilot": "s003_last.dat",
+      "reason": "author input has no lastconf_file; pilot records final configuration"
+    }
+  ]
+}

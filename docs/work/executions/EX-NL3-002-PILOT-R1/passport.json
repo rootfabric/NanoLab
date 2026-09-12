@@ -24,5 +24,5 @@
   ],
   "preregistration_note": "WO-NL3-002-PILOT.md = preregistration; параметры (seeds 101001/102002/103003, процедура) заморожены до запуска ранов; никаких научных claim'ов; E2 остаётся NOT_RUN; campaign-level scientific_outcome = NOT_EVALUATED",
   "started_at_utc": "2026-09-12T01:56:10Z",
-  "status": "IN_PROGRESS"
+  "status": "HANDOFF_READY"
 }

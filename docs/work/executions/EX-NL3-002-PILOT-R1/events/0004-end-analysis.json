@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-12T02:36:20Z",
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "summary": "END_ANALYSIS (non-confirmatory, sampling; scientific_outcome = NOT_EVALUATED — калибровочные прогоны, научные исходы не публикуются). Energy trace (total energy, oxDNA sim units): S001 first -1.1822 / last -1.1844, max|drift| 0.0056; S002 -1.1845/-1.1800, drift 0.0045; S003 -1.1851/-1.1844, drift 0.0039 — энергетический трек стабилен во всех репликах. Integrity v1 (подвыборка 15 из 60 кадров): long_bond_fraction max S001 0.0557 / S002 0.0553 / S003 0.0561 — ВАЖНО: уже frame 0 (t=400, первая печатаемая конфигурация) содержит lbf ≈ 0.054, т.е. это свойство авторской начальной конфигурации 0b.conf против замороженного порога BOND_D_MAX=1.0, а не продукт динамики; кандидат в tolerance-вход E2-PROTO-R1. displacement_max (vs frame 0): S001 6.25 / S002 5.53 / S003 6.95. pairs_fraction (bucketed reference-pairs, замороженное определение, эквивалентность naive доказана тестами): reference pairs count всего 26-29 на 8378 нуклеотидов (авторский init-конфиг даёт мало пар в окне [0.05, 0.55]); к последнему кадру fraction падает до 0.12/0.24/0.12 — калибровочное наблюдение для выбора observables/tolerances в E2-PROTO-R1, НЕ научный вывод. DRAFT-proxy PCA угол (arm_a=[0,2132], arm_b=[2133,4265]; DRAFT proxy, non-confirmatory, not the E2-PROTO manifest): first/last S001 178.67/178.29, S002 178.72/178.50, S003 178.62/178.41 deg — почти прямая конфигурация, изменений в пределах ~0.5 deg за 24000 шагов. Вывод калибровки: per-step ~0.06 s при параллельном режиме, стабильность треков ок, smoke observables работают; 2e7 confirmatory объём на этом хосте ≈ 1e6 s engine wall (только budgeting). Аддитивно в scripts/e2/observables.py добавлена reference_pairs_bucketed (пространственно-сеточный + комплементарные корзины эквивалент naive; тесты tests/test_e2_pilot.py 4 OK; определение observables не менялось).",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m unittest tests.test_e2_pilot -> 4 OK (bucketed equivalence)",
+    "python evidence/pilot_analysis.py x3 -> evidence/{s001,s002,s003}-analysis.json (canonical JSON)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s001-analysis.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s002-analysis.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/s003-analysis.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/pilot_analysis.py",
+    "scripts/e2/observables.py (additive reference_pairs_bucketed)",
+    "tests/test_e2_pilot.py"
+  ],
+  "next_action": "IMPLEMENTER: финальные валидации (work_cli validate/close, check-consistency, полный unittest), summary + HANDOFF.",
+  "blocker": null
+}

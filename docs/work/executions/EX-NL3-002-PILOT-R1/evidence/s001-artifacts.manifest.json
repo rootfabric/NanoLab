@@ -1,0 +1,65 @@
+{
+  "files": [
+    {
+      "file": "0b.top",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "size_bytes": 120204
+    },
+    {
+      "file": "0b.conf",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "size_bytes": 2294162
+    },
+    {
+      "file": "input.in",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "90651f37adb7c69c9aae6033291f07f82ac2a3964a208187a4cf136f028bf884",
+      "size_bytes": 974
+    },
+    {
+      "error": "sha256sum: pro_CPU.in: No such file or directory",
+      "file": "pro_CPU.in"
+    },
+    {
+      "file": "s001_traj.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "b8ca210af16b0fc9ee1872d6fb72cc02101751c8dbc174804eb683677776345d",
+      "size_bytes": 137635528
+    },
+    {
+      "file": "s001_energy.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "e4e20c7d2784741b8dfe8eafcda1fd7f9efaaecb61132cede3d9f4f9e4247dc6",
+      "size_bytes": 11809
+    },
+    {
+      "file": "s001_last.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "642191b42c903ba3a93b17fcd30efe35eb992dc055a927e4c1835b5be17507d2",
+      "size_bytes": 2294176
+    },
+    {
+      "file": "s001_log.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "6c719fc0a9bdb6398595c63f3d99fd0222a50e18ef8645f265940e41f255be0a",
+      "size_bytes": 26090
+    },
+    {
+      "file": "engine_stdout.txt",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "ee5597aa56bc3c3242d2fb8c583a861792bbc8945495bcc2c7b03b12e56a2cea",
+      "size_bytes": 14942
+    },
+    {
+      "file": "engine_stderr.txt",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "kind": "e2_pilot_artifacts_manifest",
+  "schema_version": 1,
+  "storage_location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-S001 (WSL, outside Git; raw artifacts not committed)"
+}

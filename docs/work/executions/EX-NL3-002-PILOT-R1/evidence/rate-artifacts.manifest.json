@@ -1,0 +1,67 @@
+{
+  "files": [
+    {
+      "file": "0b.top",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "size_bytes": 120204
+    },
+    {
+      "file": "0b.conf",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "size_bytes": 2294162
+    },
+    {
+      "file": "input.in",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "7f9dd9d5a19fd2de70da03510090c1df4931caf548f8407e1f24d550522283ca",
+      "size_bytes": 971
+    },
+    {
+      "file": "pro_CPU.in",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "size_bytes": 933
+    },
+    {
+      "file": "rate_traj.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "8a4a1a6b151435d7d3efe29a226eda65c51b8b4b66f6768a7416d939ef675650",
+      "size_bytes": 2293921
+    },
+    {
+      "file": "rate_energy.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "84c489bd87df6b276b9abc8c2a009652c1521019722daa127619e2a3b8e357d5",
+      "size_bytes": 539
+    },
+    {
+      "file": "rate_last.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "8a4a1a6b151435d7d3efe29a226eda65c51b8b4b66f6768a7416d939ef675650",
+      "size_bytes": 2293921
+    },
+    {
+      "file": "rate_log.dat",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "8d2c687381ce82d450885f64d32f871813772da398e7409f2af127744ae74799",
+      "size_bytes": 3194
+    },
+    {
+      "file": "engine_stdout.txt",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "db0ab68c4ce58fdd61e7d721cfaed9c525963ca53550028f971c854d6a09b1ec",
+      "size_bytes": 682
+    },
+    {
+      "file": "engine_stderr.txt",
+      "location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "kind": "e2_pilot_artifacts_manifest",
+  "schema_version": 1,
+  "storage_location": "/home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE (WSL, outside Git; raw artifacts not committed)"
+}

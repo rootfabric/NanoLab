@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T02:05:30Z",
+  "execution_id": "EX-NL3-002-PILOT-R1",
+  "work_order_id": "NL3-002-PILOT",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "760901c8d8c66d6440693dd73b6e3f5cabd0a723",
+  "summary": "Digest-gated download: PASS по всем 3 файлам (0b.top/0b.conf/pro_CPU.in; size+blob_sha1+sha256 совпали с source_pins.json; отчёт evidence/source-download-verification.json; временный каталог вне Git, durable-кэша нет). Rate measurement E2-PILOT-RATE: steps=500, seed=101001, exit=0, wall=25.93 s (включая WSL startup + загрузку 8378-частичной конфигурации) → per-step cost ≤ 0.0519 s/step (верхняя оценка, консервативная). Выбор steps (preregistered процедура WO): 24000 шагов → расчётная engine wall ≈ 24000×0.0519 ≈ 1245 s ≈ 20.8 мин/реплику ≤ 25 мин; ≥ 2000 минимум; print_conf_interval = 400 (60 кадров ≤ 60); print_energy_every = 100. Отклонения от pro_CPU.in (записаны в манифестах ранов): steps, seed, topology 74b.top→0b.top, conf_file 74b.conf→0b.conf (subject = 0b per WO; авторский input ссылается на 74b имена), имена output-файлов (traj/energy/log/last per-run), print_conf_interval 4e3→400, print_energy_every 4e3→100, добавлен lastconf_file (в авторском input отсутствует). Launches: E2-PILOT-S001 (seed 101001), E2-PILOT-S002 (102002), E2-PILOT-S003 (103003), steps=24000 у всех, параллельные WSL-процессы (RAM позволяет: система 32 ГБ, каждый ран ~сотни МБ).",
+  "command_refs": [
+    "python evidence/download_and_verify.py -> digest_gate_all = PASS",
+    "python evidence/run_engine.py --wsl-dir /home/yurig/nl3-002-pilot/runs/E2-PILOT-RATE --input input.in -> exit 0, wall 25.93 s, steps 500",
+    "per-step cost = 25.93/500 = 0.0519 s/step (upper bound); steps = floor(1500s/0.0519) -> 24000 chosen with margin"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/download_and_verify.py",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/build_pilot_input.py",
+    "docs/work/executions/EX-NL3-002-PILOT-R1/evidence/run_engine.py"
+  ],
+  "next_action": "IMPLEMENTER: дождаться 3 реплик, зафиксировать exit/wall/digests артефактов (END_EXECUTION), затем analysis.",
+  "blocker": null
+}
