@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "checkpoint": "NL3",
+  "base_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "branch": "work/nl3-002-confirm-r1",
+  "worktree": "C:\\NanoLab\\nl3-002-confirm",
+  "risk_class": "MEDIUM",
+  "claim_class": "E2-R1 confirmatory; outcome = measured distributions; acceptance — Director после review",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL3-002-R1/**",
+    "docs/work/SESSION_LOG.md"
+  ],
+  "parent_work_order": "NL3-002",
+  "protocol": "docs/research/E2_PROTO_R1.md (FROZEN; единственный источник параметров)",
+  "owner_decisions_applied": [
+    "G1 = B: download-on-run по exact pinned commit 23fd1ff7731e9017bd776f49206dc42d70d9fe91, digest-гейт (size+blob_sha1+sha256), REFERENCE_ONLY, без durable-кэша, удаление после execution",
+    "Director decision №1: pair detection v2 mutual-nearest",
+    "Owner decision 2026-09-12: steps = 200000 (из измеренных опций)",
+    "arm-manifest-0b.json заморожен (arm-manifest-v1)"
+  ],
+  "runs": [
+    {"run_id": "E2-R1-C001", "seed": 201004},
+    {"run_id": "E2-R1-C002", "seed": 202008},
+    {"run_id": "E2-R1-C003", "seed": 203012}
+  ],
+  "started_at_utc": "2026-09-12T04:29:26Z",
+  "status": "STARTED"
+}
