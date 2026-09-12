@@ -305,6 +305,180 @@ def reference_pairs_bucketed(conf: Configuration, topology: Topology, cell_size:
     return pairs
 
 
+# ------------------------------------------------------------------- v2 (R2)
+# Pre-confirmatory revision of the base-pair detector, defined in
+# docs/research/E2_OBSERVABLES_R2.md (Director freeze pending). The v1
+# functions and constants above are intentionally untouched (reference
+# regression). Pilot motivation (EX-NL3-002-PILOT-R1): on the author frame 0
+# of 0b the v1 window (0.05, 0.55] detected only 26-29 pairs for 8378
+# nucleotides; the measured nearest-complement distance distribution is
+# dominated by a sharp population at 1.0-1.3 oxDNA units with antiparallel
+# a1 axes (Watson-Crick geometry), which v1 cannot see.
+PAIR_D_MIN_V2 = 0.05
+PAIR_D_MAX_V2 = 1.3
+PAIR_A1_DOT_MAX_V2 = -0.3
+
+
+def _pair_candidates_v2(conf: Configuration, topology: Topology) -> dict:
+    """Orientation-qualified candidate base pairs (v2), bucketed for O(N).
+
+    Returns {i: [(d, j), ...]} for every nucleotide i whose complement
+    candidates (complementary base, not covalently bonded, PAIR_D_MIN_V2 <
+    d <= PAIR_D_MAX_V2, a1_i . a1_j <= PAIR_A1_DOT_MAX_V2) exist. The dict is
+    symmetric (j appears in i's list iff i appears in j's list).
+    """
+    n = topology.nucleotides
+    if len(conf.particles) != n:
+        raise ObservableError("configuration and topology nucleotide counts differ")
+    bases = [row[1] for row in topology.rows]
+    n3 = [row[2] for row in topology.rows]
+    n5 = [row[3] for row in topology.rows]
+    bonded = set()
+    for i in range(n):
+        for j in (n3[i], n5[i]):
+            if j != -1:
+                bonded.add((min(i, j), max(i, j)))
+    box = conf.box
+    cell = PAIR_D_MAX_V2
+    grid: dict = {}
+
+    def cell_key(pos):
+        return (int(pos[0] // cell), int(pos[1] // cell), int(pos[2] // cell))
+
+    for i in range(n):
+        if bases[i] in COMPLEMENT:
+            grid.setdefault(cell_key(conf.particles[i][0]), []).append(i)
+    offsets = [(dx, dy, dz) for dx in (-1, 0, 1) for dy in (-1, 0, 1) for dz in (-1, 0, 1)]
+    out: dict = {}
+    for i in range(n):
+        bi = bases[i]
+        comp = COMPLEMENT.get(bi)
+        if comp is None:
+            continue
+        pi = conf.particles[i][0]
+        ai = conf.particles[i][1]
+        key = cell_key(pi)
+        for dx, dy, dz in offsets:
+            for j in grid.get((key[0] + dx, key[1] + dy, key[2] + dz), []):
+                if j == i or bases[j] != comp:
+                    continue
+                if (min(i, j), max(i, j)) in bonded:
+                    continue
+                aj = conf.particles[j][1]
+                dot = sum(ai[axis] * aj[axis] for axis in range(3))
+                if dot > PAIR_A1_DOT_MAX_V2:
+                    continue
+                d = dist_mic(pi, conf.particles[j][0], box)
+                if PAIR_D_MIN_V2 < d <= PAIR_D_MAX_V2:
+                    out.setdefault(i, []).append((d, j))
+    return out
+
+
+def reference_pairs_v2(conf: Configuration, topology: Topology, mutual_nearest: bool = True) -> list:
+    """Reference base pairs, v2 detector (E2_OBSERVABLES_R2.md, pre-confirmatory).
+
+    Candidates: complementary bases, not covalently bonded, PAIR_D_MIN_V2 <
+    d <= PAIR_D_MAX_V2 (minimum image), a1 axes antiparallel within
+    PAIR_A1_DOT_MAX_V2. With ``mutual_nearest=True`` (the frozen v2 default)
+    each nucleotide keeps only its nearest qualified complement and a
+    candidate pair survives only if this is mutual; the surviving pairs then
+    pass the same deterministic greedy (d, i, j) matching as v1. With
+    ``mutual_nearest=False`` the greedy matching runs on the full candidate
+    set (higher coverage; used by the arm-manifest derivation where
+    completeness of the pair graph matters more than per-pair uniqueness).
+    """
+    candidates = _pair_candidates_v2(conf, topology)
+    nearest = {}
+    for i in sorted(candidates):
+        d, j = min(candidates[i])
+        nearest[i] = (j, d)
+    pairs = []
+    if mutual_nearest:
+        for i in sorted(nearest):
+            j, d = nearest[i]
+            if j > i and nearest.get(j, (None, None))[0] == i:
+                pairs.append((d, i, j))
+    else:
+        for i in sorted(candidates):
+            for d, j in sorted(candidates[i]):
+                if j > i:
+                    pairs.append((d, i, j))
+    pairs.sort()
+    used = set()
+    matched = []
+    for d, i, j in pairs:
+        if i in used or j in used:
+            continue
+        used.add(i)
+        used.add(j)
+        matched.append({"i": i, "j": j, "d_ref": d})
+    matched.sort(key=lambda p: (p["i"], p["j"]))
+    return matched
+
+
+def pairs_fraction_v2(conf: Configuration, ref_pairs: list) -> dict:
+    """Fraction of v2 reference pairs intact at d <= PAIR_D_MAX_V2."""
+    if not ref_pairs:
+        return {"pairs_fraction": None, "status": "NO_REFERENCE_PAIRS", "broken": 0}
+    box = conf.box
+    broken = 0
+    worst = 0.0
+    for pair in ref_pairs:
+        d = dist_mic(conf.particles[pair["i"]][0], conf.particles[pair["j"]][0], box)
+        worst = max(worst, d)
+        if d > PAIR_D_MAX_V2:
+            broken += 1
+    return {
+        "pairs_fraction": 1.0 - broken / len(ref_pairs),
+        "status": "OK",
+        "broken": broken,
+        "worst_pair_distance": worst,
+    }
+
+
+def analyse_v2(topology: Topology, frames: list, manifest: dict) -> dict:
+    """Full v2 analysis: v2 reference pairs + pairs_fraction_v2; the hinge
+    angle, bonded integrity and displacement components are the frozen v1
+    definitions (unchanged by R2)."""
+    ref = frames[0]
+    ref.check_orientation()
+    ref_pairs = reference_pairs_v2(ref, topology)
+    frame_reports = []
+    for pos, conf in enumerate(frames):
+        conf.check_orientation()
+        angle = hinge_angle(conf, manifest)
+        pairs = pairs_fraction_v2(conf, ref_pairs)
+        bonds = bonded_integrity(conf, topology)
+        disp = displacement_max(ref, conf)
+        frame_reports.append(
+            {
+                "frame": pos,
+                "time": conf.time,
+                "hinge_angle": angle,
+                "pairs_v2": pairs,
+                "bonded": bonds,
+                "displacement": disp,
+            }
+        )
+    ok_frames = [f for f in frame_reports if f["hinge_angle"]["status"] == "OK"]
+    angles = [f["hinge_angle"]["angle_deg"] for f in ok_frames]
+    return {
+        "schema_version": 2,
+        "kind": "e2_observables_v2_trace",
+        "definitions": "docs/research/E2_OBSERVABLES_R2.md (v2 base-pair detector, pre-confirmatory revision, Director freeze pending); angle/bonded/displacement = v1 (E2_OBSERVABLES_R1.md)",
+        "manifest": {
+            "arm_a": {"nucleotides": sorted(manifest["arm_a"]["nucleotides"])},
+            "arm_b": {"nucleotides": sorted(manifest["arm_b"]["nucleotides"])},
+        },
+        "reference_pairs_count": len(ref_pairs),
+        "reference_pairs_detector": "v2 (window (0.05, 1.3], a1 antiparallel <= -0.3, mutual-nearest, greedy)",
+        "frames_total": len(frame_reports),
+        "frames_ok_angle": len(ok_frames),
+        "angle_deg_all_frames": angles,
+        "frames": frame_reports,
+    }
+
+
 def pairs_fraction(conf: Configuration, ref_pairs: list) -> dict:
     if not ref_pairs:
         return {"pairs_fraction": None, "status": "NO_REFERENCE_PAIRS", "broken": 0}
@@ -431,13 +605,22 @@ def main(argv=None) -> int:
     parser.add_argument("trajectory_path")
     parser.add_argument("manifest_path")
     parser.add_argument("--report")
+    parser.add_argument(
+        "--detector",
+        choices=("v1", "v2"),
+        default="v1",
+        help="base-pair detector revision (v1 frozen R1; v2 pre-confirmatory R2)",
+    )
     args = parser.parse_args(argv)
     topology = Topology.from_file(args.topology_path)
     topology.check_chain_integrity()
     with open(args.trajectory_path, "r", encoding="utf-8", newline="") as handle:
         text = handle.read()
     manifest = load_manifest(args.manifest_path)
-    report = analyse(topology, list(iter_frames(text)), manifest)
+    if args.detector == "v2":
+        report = analyse_v2(topology, list(iter_frames(text)), manifest)
+    else:
+        report = analyse(topology, list(iter_frames(text)), manifest)
     rendered = canonical_json(report)
     if args.report:
         with open(args.report, "w", encoding="utf-8", newline="\n") as handle:
