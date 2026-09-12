@@ -336,3 +336,15 @@ Mission владельца: исполнение WO-NL3-002-PILOT в fresh IMPLE
 Чеки: unittest 231 OK (1 skip); check-consistency ok; work_cli validate/close EX-NL3-002-PILOT-R1 ok. Evidence: docs/work/executions/EX-NL3-002-PILOT-R1/{events 0001-0005, summary.md, evidence/ (manifests+digests, cost-summary, analyses, verification)}. Артефакты ранов в WSL вне Git; манифесты с SHA-256 в Git.
 
 Следующее действие: REVIEWER (fresh-сессия) на exact HEAD work/nl3-002-pilot-r1 → Director acceptance; merge — Human Gate; затем E2-PROTO-R1 freeze и confirmatory кампания.
+
+## 2026-09-12 — NL3-002-PILOT — Director acceptance: ACCEPTED (калибровочная фаза E2), пилот исполнен fresh-сессией
+
+Mission владельца: «делай следующий шаги» (пункт 2 — Fresh Reviewer пилота → Director merge). Execution: EX-NL3-002-PILOT-R1 @ 4d72ce0 (work/nl3-002-pilot-r1: eba4758 START, 82770d2 runs, 4d72ce0 records; fresh-сессия IMPLEMENTER). Пилот: 0b × 3 реплики (E2-PILOT-S001..S003, seeds 101001/102002/103003, 24000 steps), все exit 0; measured per-step ~0.052-0.060 s; общий wall ~50 мин (бюджет ≤3 ч); digest-гейт 3/3 PASS; U4 соблюдён; аддитивная bucketed pairs-детекция с equivalence-тестами; 231 тест OK.
+
+REVIEWER PASS (fresh-сессия, 5d60f08, 10/10; F-1/F-2 LOW, F-3 INFO — все приняты). Coordination check Director'а: ветка с origin, дифф = один файл вердикта; независимая сверка WSL-дайджестов артефактов выполнена координатором до review.
+
+Director decision (2026-09-12): NL3-002-PILOT = ACCEPTED как калибровочная фаза; NOT_EVALUATED, E2 = NOT_RUN; числа пилота (lbf 0.054 frame 0, pairs 26-29, DRAFT-угол 178.6) — НЕ научные результаты, кандидаты в E2-PROTO-R1. Принятые факты для E2-PROTO: cost-модель (2e7 ≈ 12 суток/реплику — full-length локально нереалистичен), engine-совместимость, v1-pairs inadequacy. Record: docs/evidence/NL3-002-PILOT/DIRECTOR_ACCEPTANCE_R1.md.
+
+Merge: work/nl3-002-pilot-r1 + review/nl3-002-pilot-r1 влиты в main (local+origin). Параллельно запущена fresh-сессия NL3-002-PROTO (ветка work/nl3-002-proto-r1 от 4d72ce0): манифест рук (U-obs-1 first-principles path), observables v2, draft-tolerances и length-options для freeze.
+
+Следующее действие: завершение NL3-002-PROTO → REVIEWER → Director freeze E2-PROTO-R1 (длина confirmatory — решение владельца по measured-опциям) → confirmatory WO.
