@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T15:47:00Z",
+  "execution_id": "EX-NL3-002-PARAM-32B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "summary": "Continuation после запуска прогонов. (1) Digest-gated download во временный каталог вне Git (%TEMP%\\nl3-002-param-32b-src): 3/3 PASS по обязательным гейтам size+blob_sha1 (32b.top 123024/a0891d65…, 32b.conf 2345114/83dda807…, pro_CPU.in 933/89d76310…); sha256-пины 32b.top/32b.conf NOT_VERIFIED — вычислены при первой загрузке и записаны в evidence как sha256_computed_at_first_download (b230ee96…, 9b9db169…; без претензии к реестру); pro_CPU.in sha256 bd6cd418… MATCH (полный пин). (2) Манифест рук 32b ДО прогонов (definition-before-data, arm-manifest-v1 на frame 0 32b.conf): ДВА доминирующих блока выделяются — PASS (selected_parallel_threshold 0.9; ядра 2552/1458; second/third = 1458/156 ≈ 9.35 ≥ 3.0; оба ≥ 10% парных); arm_a 4814 нт / arm_b 3190 нт; coverage 8004/8008 парных = 99.95% (93.40% топологии 8570 нт); pair graph greedy 4004 пар; два прогона деривации байт-идентичны (sha256 2e542a61…). Угол frame 0 = 77.48° (конвенция [0,180]). evidence/arm-manifest-32b.json + arm-manifest-32b-report.json + run1/run2. (3) Входы 3 ранов собраны из verbatim pro_CPU.in: отклонения ровно протокольные (steps 150000 по addendum §8 / seed / имена outputs / print_conf_interval 4000 / print_energy_every 100 / lastconf_file + subject 74b→32b) — PARAM-32B-S00X_deviations.json; все входы (32b.top/32b.conf/pro_CPU.in/input.in) скопированы в /home/yurig/nl3-002-param-32b/runs/PARAM-32B-S00X/ и byte-verified (3/3 PASS). (4) Запущены 3 параллельных WSL-процесса PARAM-32B-S001..S003 (seeds 201004/202008/203012, steps 150000, oxDNA 00dc7fb9): надёжный запуск через bash-скрипт с setsid/nohup (движки в собственных сессиях, независимы от обёрток; уроки инцидентов 11b), exit-коды и epoch-таймстемпы пишутся в файлы внутри каталогов ранов; движки пишут energy/traj (проверено на старте); бюджет ≤3.5 ч/реплика.",
+  "command_refs": [
+    "python evidence/download_and_verify.py -> digest_gate_all=PASS",
+    "python scripts/e2/arm_manifest.py --top MD_Hinges__32b.top --conf MD_Hinges__32b.conf --report evidence/arm-manifest-32b-run{1,2}.json -> byte-identical (sha256 2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f)",
+    "python evidence/build_run_inputs.py -> copy_verify PASS x3",
+    "wsl bash launch_32b.sh (setsid/nohup; started PARAM-32B-S001..S003 parallel; start_epoch 1789227651)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/source-download-verification.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b-report.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-S00X_deviations.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/input-build.json"
+  ],
+  "next_action": "Дождаться всех 3 реплик (ожидание ~3–3.3 ч; ≤3.5 ч бюджет) → END_EXECUTION (0003) + манифесты артефактов → анализ v2 mutual + frozen гейты + статистика §6 → END_ANALYSIS (0004) → HANDOFF (0005).",
+  "blocker": null
+}
