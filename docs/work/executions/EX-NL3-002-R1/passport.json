@@ -26,5 +26,5 @@
     {"run_id": "E2-R1-C003", "seed": 203012}
   ],
   "started_at_utc": "2026-09-12T04:29:26Z",
-  "status": "STARTED"
+  "status": "HANDOFF_READY"
 }

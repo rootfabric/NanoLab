@@ -197,7 +197,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="comma-separated prefixes, e.g. c001")
     args = parser.parse_args()
-    manifest = load_manifest(FROZEN_MANIFEST)
+    with open(FROZEN_MANIFEST, "r", encoding="utf-8", newline="") as h:
+        manifest = json.load(h)["arms"]  # frozen file stores arms under "arms"
+    for name in ("arm_a", "arm_b"):
+        if name not in manifest or "nucleotides" not in manifest[name]:
+            raise ValueError(f"frozen arm manifest missing {name}.nucleotides")
     topology_text = wsl_read(f"{WSL_ROOT}/E2-R1-C001/0b.top")
     selected = RUNS if not args.only else [r for r in RUNS if r["prefix"] in args.only.split(",")]
     reports = []

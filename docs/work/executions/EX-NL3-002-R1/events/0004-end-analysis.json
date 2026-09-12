@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-12T07:45:45Z",
+  "execution_id": "EX-NL3-002-R1",
+  "work_order_id": "NL3-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "280104c07849ebbd60be686af292679a88f66b40",
+  "summary": "END_ANALYSIS (E2_PROTO_R1 §2/§4/§6, frozen; scientific_outcome = MEASURED — измеренные распределения, научные выводы НЕ делаются; acceptance — Director после review). Detector v2 mutual-nearest (frozen), reference pairs на кадре 0: C001 3292 / C002 3301 / C003 3294 (калибровка PROTO: 3300). Угол — ЗАМОРОЖЕННЫЙ arm-manifest-0b.json (arm_a 4006 / arm_b 3942 нт), конвенция [0,180] (erratum R1 §2.5). Гейты §4 (lbf > 0.1078 / pairs_fraction_v2 < 0.50 / displacement_max > 20.0): НИ ОДИН кадр не признан STRUCTURALLY_INVALID — 150/150 валидны (50/50 в каждой реплике). Per-replica угол по валидным кадрам (median / IQR / q5–q95 / bootstrap 95% CI медианы, 10000 ресемплов, seed 424242): C001 65.10° / [63.47, 66.02] / CI [64.17, 65.57]; C002 65.71° / [64.90, 66.37] / CI [65.28, 66.17]; C003 67.24° / [66.31, 67.95] / CI [66.68, 67.52]. ПУЛ (150 валидных кадров): median 65.98° / IQR [64.94, 67.06] / q5–q95 [63.00, 68.41] / CI [65.67, 66.32]; min 61.77 / max 69.20. Integrity: long_bond_fraction max 0.0556/0.0560/0.0555 (порог 0.1078; baseline авторского init ~0.054 сохраняется, динамика его не наращивает); displacement_max max 7.43/7.91/8.40 (порог 20.0); pairs_fraction_v2 first→last: 1.000→0.986 (min 0.982) / 1.000→0.989 (min 0.985) / 1.000→0.988 (min 0.981) — порог 0.50 не приближён. Energy drift (total, oxDNA units, 2001 сэмпл/ран): max|drift| 0.0099 / 0.0066 / 0.0046 — стабильно. Доля валидных кадров 1.00 ×3. No optional stopping; никаких остановок по результату угла. Полные per-frame трейсы: evidence/c00X-analysis.json (canonical JSON, все 50 кадров/ран репортятся); сводка: evidence/confirmatory-summary.json.",
+  "command_refs": [
+    "PYTHONPATH=scripts python evidence/confirm_analysis.py -> c001/c002/c003-analysis.json + confirmatory-summary.json (canonical JSON)",
+    "gates checked per frame: 0 STRUCTURALLY_INVALID of 150",
+    "bootstrap: random.Random(424242), 10000 resamples, median statistic, percentile CI"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-R1/evidence/c001-analysis.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c002-analysis.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/c003-analysis.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/confirm_analysis.py",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json (frozen)"
+  ],
+  "next_action": "IMPLEMENTER: HANDOFF — summary.md, passport HANDOFF_READY, SESSION_LOG append, work_cli validate/close, check-consistency, unittest, удаление временных исходников, коммиты+push.",
+  "blocker": null
+}
