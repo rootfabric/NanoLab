@@ -61,23 +61,31 @@ def inventory_input(text: str) -> dict:
                     "SUSPECT (force-named key; not in frozen semantics table)",
                 ),
             }
-    external_active = values.get("external_forces", "0").lower() in ("1", "true", "yes")
+    external_raw = values.get("external_forces")
+    external_active = str(external_raw).lower() in ("1", "true", "yes")
+    force_keys_other = [k for k in declared if k not in FORCE_SEMANTICS]
     if external_active:
         status = "EXTERNAL_FORCES_DECLARED_ACTIVE"
+        open_questions = [
+            "U-rest-1: per-force init/end scoping inside the external forces file cannot be classified from the input file alone"
+        ]
+    elif external_raw is not None and not force_keys_other:
+        status = "EXTERNAL_FORCES_EXPLICITLY_DISABLED"
+        open_questions = []
     elif declared:
         status = "FORCE_KEYS_PRESENT_INACTIVE"
+        open_questions = [
+            "U-rest-1: force-named keys are present without an active external_forces switch; classify manually before any E2 run"
+        ]
     else:
         status = "NO_EXTERNAL_FORCES_DECLARED"
+        open_questions = []
     return {
         "input_sha256": sha256_text(text),
         "input_keys_total": len(values),
         "restraint_keys": declared,
         "status": status,
-        "open_questions": (
-            ["U-rest-1: per-force init/end scoping inside the external forces file cannot be classified from the input file alone"]
-            if external_active
-            else []
-        ),
+        "open_questions": open_questions,
     }
 
 
@@ -102,10 +110,11 @@ def combined(input_text: str, scripts: dict) -> dict:
         for r in script_reports
         for obs in r["keyword_observations"]
     ]
-    if inv["status"] == "EXTERNAL_FORCES_DECLARED_ACTIVE" or hits:
+    suspicious = inv["status"] in ("EXTERNAL_FORCES_DECLARED_ACTIVE", "FORCE_KEYS_PRESENT_INACTIVE")
+    if suspicious or hits:
         verdict = "RESTRAINTS_PRESENT: classify every listed occurrence before the E2 production run; a hinge angle held by external restraints is not a physical result"
     else:
-        verdict = "NO_RESTRAINTS_OBSERVED: production input declares no external forces and scanned scripts contain no restraint keywords"
+        verdict = "NO_RESTRAINTS_OBSERVED: production input declares no active external restraints and scanned scripts contain no restraint keywords"
     return {
         "schema_version": 1,
         "kind": "restraints_inventory",

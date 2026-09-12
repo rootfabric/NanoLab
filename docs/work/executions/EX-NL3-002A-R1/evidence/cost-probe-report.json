@@ -1,0 +1,32 @@
+{
+  "engine_path": "/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA",
+  "engine_source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (git rev-parse of the build source tree, verified before the probe)",
+  "exit_code": 0,
+  "fixture_subject": {
+    "conf": "init.dat",
+    "digests_sha256": {
+      "dsdna8.top": "a9e8cb7ecc6aa23c5715c34cd8c471da20548fb206fc1a292cd75ee81f124bd2",
+      "init.dat": "354ccb3e6a0ae40836a905cef5509397d9736a7ff68c40c4d16d05c53fdce3a6",
+      "probe_energy.dat": "396f12af0a27bd5b2b80ae6aaf00e0289595333d739259e13b3169617cf35c58",
+      "probe_last.dat": "4028e5b33a19f6bbcdd728190c281df5c1514106c9ba1aafa56fd3650569b24f"
+    },
+    "origin": "pinned oxDNA tree @ 00dc7fb9, test/DNA/DSDNA8 (engine-owned fixture; GPL-3.0, rights CLEAR per NL0-002)",
+    "topology": "dsdna8.top"
+  },
+  "kind": "e2_synthetic_cost_probe",
+  "memory": "NOT_MEASURED (stdlib-only; instrumentation owned by INFRA2-002 reproducible executor)",
+  "note": "technical probe on the engine-owned DSDNA8 fixture; NOT an experiment campaign run; scientific_outcome = NOT_APPLICABLE",
+  "probe_completed": true,
+  "run_id": "E2A-PROBE-S001",
+  "schema_version": 1,
+  "stderr_tail": "",
+  "stdout_tail": "PROBE_OK\n",
+  "steps": 5000,
+  "wall_time_includes": [
+    "wsl process startup",
+    "bash script",
+    "engine run",
+    "digest pass"
+  ],
+  "wall_time_s": 2.0191576
+}

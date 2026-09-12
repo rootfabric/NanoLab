@@ -210,6 +210,30 @@ class CompatAuditTests(unittest.TestCase):
         self.assertEqual(report["conclusion"].startswith("EXTERNAL_FORCES_ACTIVE"), True)
         self.assertIn("external_forces", report["force_related_keys"])
 
+    def test_external_forces_zero_explicitly_disabled(self):
+        registry = compat_audit.load_registry()
+        report = compat_audit.audit(self.CLEAN_INPUT + "external_forces = 0\n", registry)
+        self.assertEqual(
+            report["conclusion"].startswith("EXTERNAL_FORCES_EXPLICITLY_DISABLED"), True
+        )
+
+    def test_source_confirmed_undocumented_keys(self):
+        registry = compat_audit.load_registry()
+        report = compat_audit.audit(
+            self.CLEAN_INPUT + "dt = 0.002\nrefresh_vel = 0\ndebug = 0\nlog_file = log.txt\n", registry
+        )
+        self.assertEqual(report["unknown_keys"], [])
+        for key in ("dt", "refresh_vel", "debug", "log_file"):
+            self.assertIn(key, report["undocumented_keys"])
+            self.assertIn("pinned engine source", report["keys"][key]["note"])
+
+    def test_not_parsed_legacy_key_reported_separately(self):
+        registry = compat_audit.load_registry()
+        report = compat_audit.audit(self.CLEAN_INPUT + "rcut = 2.5\n", registry)
+        self.assertEqual(report["unknown_keys"], [])
+        self.assertEqual(report["not_parsed_keys"], ["rcut"])
+        self.assertIn("no getInput* call", report["keys"]["rcut"]["note"])
+
 
 class EngineRegistryTests(unittest.TestCase):
     SAMPLE = (
@@ -258,6 +282,13 @@ class RestraintsInventoryTests(unittest.TestCase):
         hits = [h for h in report["scanned_scripts"] if h["source_name"] == "init.py"]
         self.assertEqual(len(hits), 1)
         self.assertEqual(hits[0]["keyword_observations"][0]["line"], 2)
+
+    def test_explicitly_disabled_external_forces_is_clean(self):
+        report = restraints_inventory.combined(self.CLEAN_INPUT + "external_forces = 0\n", {})
+        self.assertEqual(
+            report["production_input"]["status"], "EXTERNAL_FORCES_EXPLICITLY_DISABLED"
+        )
+        self.assertEqual(report["verdict"].startswith("NO_RESTRAINTS_OBSERVED"), True)
 
 
 if __name__ == "__main__":

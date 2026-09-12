@@ -25,13 +25,25 @@ from hinge_family.sim_input import check_preregistered, parse_sim_input
 REGISTRY_PATH = os.path.join(os.path.dirname(__file__), "engine_options.json")
 
 # Keys the pinned engine demonstrably consumes but that are absent from
-# input_options.md @ 00dc7fb9 (registry documentation gap, U-compat-1):
-# both are used by the author's pinned pro_CPU.in (preregistered OBSERVED
-# facts, NL0-001) and by the accepted E1 fixture runs against this engine
-# build (E1-R1 evidence).
+# input_options.md @ 00dc7fb9 (registry documentation gap, U-compat-1).
+# Each entry is confirmed against the pinned engine SOURCE (getInput* calls),
+# not against examples: engine checkout oxDNA @ 00dc7fb9.
 KNOWN_UNDOCUMENTED = {
     "topology": "standard input key consumed by the engine (author pro_CPU.in, E1-R1 fixture runs); absent from input_options.md @ 00dc7fb9 (U-compat-1)",
     "energy_file": "standard input key consumed by the engine (author pro_CPU.in, E1-R1 fixture runs); absent from input_options.md @ 00dc7fb9 (U-compat-1)",
+    "debug": "parsed by pinned engine source src/Utilities/Logger.cpp:74 (getInputBool \"debug\"); absent from input_options.md @ 00dc7fb9",
+    "log_file": "parsed by pinned engine source src/Utilities/Logger.cpp:73 (getInputString \"log_file\"); absent from input_options.md @ 00dc7fb9",
+    "dt": "parsed by pinned engine source src/Backends/MDBackend.cpp:41 (getInputNumber \"dt\"); absent from input_options.md @ 00dc7fb9",
+    "refresh_vel": "parsed by pinned engine source src/Backends/MDBackend.cpp:29 (getInputBool \"refresh_vel\"); absent from input_options.md @ 00dc7fb9",
+}
+
+# Keys present in the author production input that are NOT read by any
+# getInput* call in the pinned engine source: the engine silently ignores
+# unknown keys, so they are inert legacy options. They are reported
+# separately (never silently accepted, never treated as errors).
+# U-compat-2: confirm against upstream documentation/SI if it ever matters.
+NOT_PARSED_KEYS = {
+    "rcut": "no getInput* call reads \"rcut\" in pinned engine source @ 00dc7fb9 (searched src/**); engine ignores unknown input keys; inert legacy key in the author input",
 }
 
 FORCE_SEMANTICS = {
@@ -64,6 +76,7 @@ def audit(text: str, registry: dict) -> dict:
     keys = {}
     unknown = []
     undocumented = []
+    not_parsed = []
     for key in sorted(values):
         if key in options:
             keys[key] = {
@@ -76,6 +89,9 @@ def audit(text: str, registry: dict) -> dict:
         elif key in KNOWN_UNDOCUMENTED:
             undocumented.append(key)
             keys[key] = {"value": values[key], "known": True, "documented": False, "note": KNOWN_UNDOCUMENTED[key]}
+        elif key in NOT_PARSED_KEYS:
+            not_parsed.append(key)
+            keys[key] = {"value": values[key], "known": False, "note": NOT_PARSED_KEYS[key]}
         else:
             unknown.append(key)
             keys[key] = {"value": values[key], "known": False}
@@ -90,9 +106,12 @@ def audit(text: str, registry: dict) -> dict:
                 "semantics": "SUSPECT (name contains 'trap'/'force'; not in frozen semantics table; classify manually)",
             }
 
-    external_active = values.get("external_forces", "0").lower() in ("1", "true", "yes")
+    external_raw = values.get("external_forces")
+    external_active = str(external_raw).lower() in ("1", "true", "yes")
     if external_active:
         conclusion = "EXTERNAL_FORCES_ACTIVE (production input declares external forces; inspect the forces file before any E2 run)"
+    elif external_raw is not None and len(force_related) == 1:
+        conclusion = "EXTERNAL_FORCES_EXPLICITLY_DISABLED (external_forces = 0; the pinned production input declares no active external restraints)"
     elif force_related:
         conclusion = "FORCE_RELATED_KEYS_PRESENT (no active external_forces switch, but force-named keys present)"
     else:
@@ -109,6 +128,7 @@ def audit(text: str, registry: dict) -> dict:
         "keys": keys,
         "unknown_keys": unknown,
         "undocumented_keys": undocumented,
+        "not_parsed_keys": not_parsed,
         "force_related_keys": force_related,
         "preregistered_values": {
             "status": preregistered_status,

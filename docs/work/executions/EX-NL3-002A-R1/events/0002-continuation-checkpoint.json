@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-12T00:52:10Z",
+  "execution_id": "EX-NL3-002A-R1",
+  "work_order_id": "NL3-002A",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+  "summary": "CONTINUATION: substantive-пакет NL3-002A реализован (commit 98d2d1e на work/nl3-002a-pre-e2-r1, base 6190a85 START). Поставлено: (1) docs/research/E2_OBSERVABLES_R1.md — freeze определений observables v1 ДО любых данных (first-principles PCA-оси, беззнаковый угол [0,90]deg, greedy-референсные пары, bonded/displacement integrity; пороги валидности кадра сознательно не назначены — E2-PROTO-R1; коррекция R1.1 критерия вырожденности оси внесена до любых применений, в т.ч. синтетики). (2) scripts/e2/ — замороженный stdlib-only пакет: engine_options.json (222 опции, экстрактор из input_options.md pinned engine @ 00dc7fb9, sha256 источника в реестре), compat_audit (registry + KNOWN_UNDOCUMENTED с source-подтверждением Logger.cpp:73-74/MDBackend.cpp:29,41 + NOT_PARSED_KEYS для rcut), topology_mapping (G2: length-multiset association exact/split/merge/unresolved с bounded subset-sum), restraints_inventory (init-vs-production семантика, U-rest-1), observables (angle+integrity), fixtures (детерминированные синтетические с аналитически известными наблюдаемыми), cost_probe, digests (git blob SHA-1 для digest-gate). (3) tests/test_e2_pre_e2.py — 27 тестов: 0/45/90 deg восстановление, beautiful-angle-of-broken-structure негатив, детерминизм байт-в-байт, тампер-дайджесты, NaN/усечённые траектории, mapping one-to-one + conservation violation, compat/restraints классификации. Полный набор 227 OK.",
+  "command_refs": [
+    "git log --oneline base..HEAD -> 6190a85 START, 98d2d1e feat(e2)",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -t . -> Ran 227 tests, OK (skipped=1)"
+  ],
+  "evidence_refs": [
+    "docs/research/E2_OBSERVABLES_R1.md",
+    "scripts/e2/engine_options.json",
+    "tests/test_e2_pre_e2.py"
+  ],
+  "next_action": "IMPLEMENTER: real-data cross-check (G1=B download-on-run) на 0b.json/0b.top/pro_CPU.in + cost probe; затем VALIDATION и END.",
+  "blocker": null
+}

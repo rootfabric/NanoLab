@@ -94,15 +94,23 @@ class _Builder:
         self.particles = new_particles
 
 
-def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False):
-    """Build fixture data: returns dict with topology text, frame texts, manifest, expected."""
+def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False, spacing=SPACING):
+    """Build fixture data: returns dict with topology text, frame texts, manifest, expected.
+
+    ``spacing`` overrides the inter-nucleotide distance along each arm. The
+    default (0.35, close to the oxDNA helical rise) is used for observables
+    validation; the cost probe passes a wider spacing because the engine's
+    FENE bonded check rejects near-nucleotide center distances for
+    backbone sites.
+    """
     if mode not in ("parallel", "angled"):
         raise FixtureError(f"unknown mode {mode!r}")
+    sp = spacing
     builder = _Builder()
 
     if mode == "parallel":
-        coords_a = [(ORIGIN[0] + SPACING * i, ORIGIN[1], ORIGIN[2]) for i in range(arm_len)]
-        coords_b = [(ORIGIN[0] + SPACING * i, ORIGIN[1] + 0.4, ORIGIN[2]) for i in range(arm_len)]
+        coords_a = [(ORIGIN[0] + sp * i, ORIGIN[1], ORIGIN[2]) for i in range(arm_len)]
+        coords_b = [(ORIGIN[0] + sp * i, ORIGIN[1] + 0.4, ORIGIN[2]) for i in range(arm_len)]
         idx_a = builder.add_strand("A", coords_a)
         idx_b = builder.add_strand("T", coords_b)
         expected_pairs = arm_len
@@ -115,11 +123,11 @@ def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False)
         u_a = (1.0, 0.0, 0.0)
         u_b = (math.cos(theta), math.sin(theta), 0.0)
         coords_a = [
-            (ORIGIN[0] + SPACING * i * u_a[0], ORIGIN[1] + SPACING * i * u_a[1], ORIGIN[2])
+            (ORIGIN[0] + sp * i * u_a[0], ORIGIN[1] + sp * i * u_a[1], ORIGIN[2])
             for i in range(arm_len)
         ]
         coords_b = [
-            (ORIGIN[0] + SPACING * j * u_b[0], ORIGIN[1] + SPACING * j * u_b[1], ORIGIN[2])
+            (ORIGIN[0] + sp * j * u_b[0], ORIGIN[1] + sp * j * u_b[1], ORIGIN[2])
             for j in range(arm_len)
         ]
         idx_a = builder.add_strand("A", coords_a)
@@ -127,9 +135,9 @@ def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False)
         # 2-base duplex brace between arm A (index k) and arm B (index k)
         k = 1
         while True:
-            gap = 2.0 * SPACING * k * math.sin(theta / 2.0)
+            gap = 2.0 * sp * k * math.sin(theta / 2.0)
             inset = gap / 2.0 - 0.2
-            if inset > 0.02 and gap <= 1.0:
+            if inset > 0.02 and gap <= 1.2:
                 break
             k += 1
             if k >= arm_len:
@@ -141,9 +149,9 @@ def build(angle_deg=None, mode="parallel", arm_len=12, n_frames=1, broken=False)
         w = [x / gap_len for x in gap_vec]
         inset = gap_len / 2.0 - 0.2
         c0 = [anchor_a[axis] + inset * w[axis] for axis in range(3)]
-        c1 = [c0[axis] + SPACING * w[axis] for axis in range(3)]
+        c1 = [c0[axis] + sp * w[axis] for axis in range(3)]
         d0 = [anchor_b[axis] - inset * w[axis] for axis in range(3)]
-        d1 = [d0[axis] - SPACING * w[axis] for axis in range(3)]
+        d1 = [d0[axis] - sp * w[axis] for axis in range(3)]
         idx_c = builder.add_strand("G", [c0, c1])
         idx_d = builder.add_strand("C", [d0, d1])
         expected_pairs = 4  # 2 brace pairs + 2 near-hinge arm/arm complementary pairs

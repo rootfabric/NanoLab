@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-12T00:53:00Z",
+  "execution_id": "EX-NL3-002A-R1",
+  "work_order_id": "NL3-002A",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ba750af0f929f1b49aebe65ab6cc449fbc59a7b1",
+  "summary": "HANDOFF_COMPLETED: NL3-002A (pre-E2 technical readiness, child of NL3-002) исполнен в полном bounded scope шести блоков WO. Содержание: (1) замороженный пакет scripts/e2 — compat_audit (реестр 222 опций из input_options.md pinned engine @ 00dc7fb9 + KNOWN_UNDOCUMENTED с source-подтверждением + NOT_PARSED_KEYS rcut), topology_mapping (G2), restraints_inventory (U-rest-1), observables v1 (angle+integrity), fixtures (аналитически известные синтетические), cost_probe, digests; (2) docs/research/E2_OBSERVABLES_R1.md — определения заморожены ДО данных, коррекция R1.1 (критерий вырожденности оси) внесена до любых применений; (3) 27 новых unittest, полный набор 227 OK (1 skip); (4) real-data cross-check G1=B: digest-гейт 3/3 PASS (0b.json/0b.top/pro_CPU.in бит-в-бит к source_pins.json), mapping: CONSERVED 8378, 91 exact, scaffold 4266->16 split, merges 19->568 + 3->126, residual 4<->3 = PARTIAL_ASSOCIATION (G2-R1); рестраинты: external_forces = 0 в авторском production input — NO_RESTRAINTS_OBSERVED; compat: unknown 0, rcut NOT_PARSED (U-compat-2); скачанные байты удалены, durable-кэш не создавался; (5) cost probe E2A-PROBE-S001: 5000-step MD pinned binary на DSDNA8 (GPL CLEAR): completed, wall 2.02 s, memory честно NOT_MEASURED. Научных прогонов нет: campaign NOT_EVALUATED, E2 = NOT_RUN; state.json/plan.json не менялись; ACCEPTED не выставляется (Implementer не self-accept). Гэпы/открытые: U-obs-1 (SI/манифест рук до E2-PROTO-R1), U-compat-1/2, U-rest-1, сканирование Init_Hinges при пилоте, residual G2-R1. Точные HEAD/TREE публикуются push'ом ветки (records-коммит добавляет только события/summary/evidence/SESSION_LOG).",
+  "command_refs": [
+    "git log --oneline ba750af..HEAD -> 6190a85 START, 98d2d1e feat(e2), <records commit>",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL3-002A-R1 -> ok (summary + terminal present)",
+    "git push origin work/nl3-002a-pre-e2-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL3-002A.md",
+    "docs/work/executions/EX-NL3-002A-R1/passport.json",
+    "docs/work/executions/EX-NL3-002A-R1/summary.md",
+    "docs/work/executions/EX-NL3-002A-R1/evidence/real-data-cross-check-report.json",
+    "docs/work/executions/EX-NL3-002A-R1/evidence/cost-probe-report.json",
+    "docs/research/E2_OBSERVABLES_R1.md",
+    "scripts/e2/",
+    "tests/test_e2_pre_e2.py",
+    "docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md"
+  ],
+  "next_action": "Независимый REVIEWER (fresh-сессия) на exact HEAD: verify E2_OBSERVABLES_R1 frozen-до-данных, воспроизведение 227 тестов и real-data cross-check (digest-гейт + mapping-классификация), отсутствие вендоренных байтов источника -> docs/evidence/NL3-002A/REVIEWER_VERDICT.md; затем Director: NL3-002A приёмка и dispatch пилота E2.",
+  "blocker": null
+}

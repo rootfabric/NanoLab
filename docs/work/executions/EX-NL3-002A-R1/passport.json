@@ -23,5 +23,5 @@
     "U4 = NO durable cache (re-download + digest перед каждым использованием)"
   ],
   "started_at_utc": "2026-09-12T00:15:56Z",
-  "status": "IN_PROGRESS"
+  "status": "HANDOFF_READY"
 }
