@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-12T22:10:00Z",
+  "execution_id": "EX-NL3-002-PARAM-53B-R1",
+  "work_order_id": "NL3-002-PARAM",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bdbebfd5856b8dbdb5073316ac076ab5b0f109e4",
+  "execution_outcome": "COMPLETED (3/3 реплики завершились штатно, exit 0, полные 150000 шагов, без прерываний по бюджету)",
+  "summary": "Runs PARAM-53B-S001..S003 исполнены параллельно (WSL oxDNA 00dc7fb9, старт start_epoch 1789242841, seeds 201004/202008/203012, steps=150000 по addendum §8, print_conf_interval 4000, print_energy_every 100). Надёжный запуск через setsid/nohup-лаунчер (уроки инцидентов 11b учтены): движки в собственных сессиях, exit-коды и epoch-таймстемпы записаны в файлы внутри каталогов ранов — обёртка не участвовала, инцидентов нет; detached budget watchdog (SIGTERM на 12600 s) не сработал — все завершились раньше. Результат: 3/3 exit=0; wall 7904/7816/7656 s (2.13–2.20 ч ≤ 3.5 ч бюджета — PASS; ~0.051–0.053 s/step на 8696 нт); energy 1501/1501 строк (полный ран); траектории 37 кадров (t=0..148000, движок не пишет кадр за финальным шагом 150000, т.к. 150000 не кратно 4000: последний напечатанный 148000); lastconf записан. Крэшей движка нет (0 < 2). Все артефакты вне Git в /home/yurig/nl3-002-param-53b/runs/PARAM-53B-S00X/, манифесты SHA-256+size+location — evidence/s00X-artifacts.manifest.json (11 файлов/ран, вкл. exit_code.txt).",
+  "command_refs": [
+    "wsl bash /home/yurig/launch_53b.sh (setsid/nohup; PARAM-53B-S001..S003 parallel; budget watchdog armed, not triggered)",
+    "per-run marker files: exit_code.txt (EXIT:0 x3), start_epoch 1789242841, end_epoch 1789250745/1789250657/1789250497",
+    "python evidence/make_run_reports.py -> evidence/run-reports.json (walls from epoch files; log time_passed crosscheck 7634.78-7882.44 s)",
+    "python evidence/artifact_manifest.py -> evidence/s00X-artifacts.manifest.json (11 files/run, SHA-256+size+location)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/run-reports.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s001-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s002-artifacts.manifest.json",
+    "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/s003-artifacts.manifest.json"
+  ],
+  "next_action": "Анализ (F): observables v2 mutual + frozen гейты §4 + замороженный манифест 53B (arm_a 4318 / arm_b 3638) по 37 кадрам/реплику → per-replica и пул median/IQR/q5-95/bootstrap(10000, seed 424242) → 0004-end-analysis → HANDOFF.",
+  "blocker": null
+}
