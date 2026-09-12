@@ -64,9 +64,7 @@
     "paid_compute_authorized": false
   },
   "open_decisions": [
-    "NanoLab code/documentation/data license choice (owner decision)",
-    "Preregistered E2 numerical and statistical tolerances and target hinge-angle interval (fixed in E2-PROTO after pilot, before the NL3 campaign); E1 tolerances preregistered in E1-PROTO-R1, 298 K vs 300 K resolved by the E2-SETUP-R1 decision rule",
-    "Measured resource budget"
+    "NanoLab code/documentation/data license choice (owner decision)"
   ],
   "github_tracking": {
     "roadmap_issue": 1,

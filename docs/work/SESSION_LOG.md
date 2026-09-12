@@ -357,3 +357,13 @@ Mission владельца: исполнение WO NL3-002-PROTO в fresh IMPLE
 Чеки: unittest 242 OK (1 skip; +11 новых tests/test_e2_proto.py — v2 exact counts, детерминизм, восстановление известных рук, негативы); check-consistency ok; work_cli validate ok. scientific_outcome = NOT_EVALUATED; E2 = NOT_RUN; claim class C0_SOFTWARE_ONLY.
 
 Следующее действие: REVIEWER (fresh-сессия) на exact HEAD work/nl3-002-proto-r1 → Director freeze E2-PROTO-R1 (открытые вопросы: v2 режим mutual/greedy; выбор θ; длина confirmatory; принятие манифеста; факт угла 66.9° при конвенции θ↔180°−θ); merge — Human Gate.
+
+## 2026-09-12 — NL3-002-PROTO + E2-PROTO-R1 — PROTO ACCEPTED, protocol FROZEN (2e5 × 3, seeds 201004/202008/203012), confirmatory dispatched
+
+Mission владельца: «делай следующий шаги» + интерактивное owner-решение длины confirmatory: выбран вариант «2e5 шагов × 3 (Recommended)». NL3-002-PROTO исполнен fresh-сессией (work/nl3-002-proto-r1, стэк от 4d72ce0: a80c1f0 WO+START, d38e248 v2 detector+R2, 20e5bee arm manifest+proposals, 9b3e1c5 records). REVIEWER PASS (5669307, 11/11; ключевая проверка — независимое воспроизведение деривации манифеста БАЙТ-В-БАЙТ через download-on-run; F1-F3 INFO, F4 LOW). Coordination check Director'а: ветки с origin, дифф review = один файл, 242 теста OK, validate ok.
+
+Director freeze E2-PROTO-R1 (docs/research/E2_PROTO_R1.md, FROZEN): observables = v2 mutual-nearest (greedy — только инструмент манифеста); integrity-гейты: lbf(t) > 0.1078 (= 2×baseline пилота) / pairs_fraction_v2 < 0.50 / displacement_max > 20.0; манифест arm-manifest-0b.json заморожен (arm_a 4006 / arm_b 3942; U-obs-1 ЗАКРЫТ first-principles путём); erratum к R1 §2.5: фактический диапазон угла [0,180] (без свёртки θ↔180−θ), данные не затронуты; кампания: E2-R1-C001..C003, seeds 201004/202008/203012, steps 200000 (owner), бюджет ≤4 ч wall + анализ ≤1 ч; статистика: median/IQR/5-95 квантили + bootstrap CI (10k, seed 424242), no optional stopping. state.json: open_decisions сокращены на два закрытых пункта (E2-tolerances, measured budget); frontier NL3, next NL3-002, E2 = NOT_RUN до факта прогонов (конвенция execution-facts).
+
+Merge: work/nl3-002-proto-r1 + review/nl3-002-proto-r1 влиты в main (58e41b3, 777f513; конфликт SESSION_LOG разрешён union-ом append-only записей). Confirmatory кампания (EX-NL3-002-R1) задиспатчена fresh-сессией IMPLEMENTER по frozen протоколу.
+
+Следующее действие: confirmatory E2-R1-C001..C003 → REVIEWER → Director acceptance NL3-002 (распределения, статистика, карточка компонента) → E2 outcome.
