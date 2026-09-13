@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-13T15:16:45Z",
+  "execution_id": "EX-NL5-001-A-R1",
+  "work_order_id": "NL5-001-A",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "2efbed379fce9d448ec24052724576a974ba2e05",
+  "summary": "Handoff EX-NL5-001-A-R1. Deliverables: контракт release v0.1 полностью реализован и валидирован — 3 нормативные схемы + fail-closed stdlib executor + линтер (card/rights/manifest/package, семантики S1-S4, инварианты I1/I2, перерасчёт digest манифеста), миниатюрный пример-пакет (0b measured verbatim из E2 evidence; 74b honest KNOWN_GAP), 28 новых тестов, контракт-документ §1-9, memo D2 без выбора лицензии. Валидации: unittest 338 OK; card_lint package ok (1 ожидаемый D2-warning UNDECIDED); check-consistency ok (frontier NL5, next NL5-001); canonical файлы не менялись; физика не запускалась. Соблюдения: stdlib-only (hosted CI совместимость, гвардеец-тест), UNKNOWN-политика DATA_CONTRACTS, G1 права (REFERENCE_ONLY -> upstream+pinned+durable_cache=FORBIDDEN), отсутствие проверки никогда не PASS. Open risks: (1) контракт-кандидат до review; при генерации реальных карточек в B может потребоваться ревизия контракта — только новой ревизией, не правкой; (2) лицензия UNDECIDED — пакет draft-only, публикация заблокирована до D2; (3) reproduce.py в v0.1 не исполняет физику (исполнение — NL5-001-C/NL5-002); (4) CI workflow намеренно не менялся — линт исполняется unittest-гейтом. Одно next action: REVIEWER на exact head; merge после Gate 0 PR #37.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 338 tests, OK",
+    "./CONTROL_WORK.sh validate docs/work/executions/EX-NL5-001-A-R1 -> ok",
+    "./CONTROL_WORK.sh close docs/work/executions/EX-NL5-001-A-R1 -> ok",
+    "./CONTROL_DEVELOPMENT.sh --check-consistency -> ok",
+    "PYTHONPATH=scripts python3 -m release.card_lint manifest verify examples/release/nanolab-components-v0.1 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-001-A-R1.md",
+    "docs/work/executions/EX-NL5-001-A-R1/evidence-map.json",
+    "docs/work/executions/EX-NL5-001-A-R1/summary.md",
+    "docs/release/RELEASE_CONTRACT_V0_1.md",
+    "docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md"
+  ],
+  "next_action": "REVIEWER: independent review of exact head 2efbed3 (схемы+линтер+пример+док+memo); затем merge после Gate 0 PR #37 (Human Gate); после merge — NL5-001-B сборка библиотеки на этом контракте.",
+  "blocker": null
+}
