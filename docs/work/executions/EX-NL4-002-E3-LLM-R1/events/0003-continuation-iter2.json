@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-continuation-iter2",
+  "timestamp_utc": "2026-09-13T07:58:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "summary": "Итерация 2/5: 32b seed 202008. E3-LLM-R002: exit 0, wall 2700 s, 12/12 кадров валидны, гейты §4 PASS (lbf 0.0557; pf_v2 0.9866; disp 8.07), median 77.04°, score 12.96. Две реплики 32b: 78.32/77.04 — меж-seed разброс ~1.3°; порядок вариантов неизменен, 32b остаётся доминирующим.",
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/E3-LLM-R002/analysis.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-decisions.json"
+  ],
+  "next_action": "Итерация 3: 32b seed 203012 (последняя реплика 32b).",
+  "blocker": null
+}

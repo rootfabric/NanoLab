@@ -20,8 +20,15 @@
     "steps": 50000,
     "max_wall_minutes_per_run": 72.0
   },
-  "runs": [],
-  "physics_runs": 0,
+  "runs": [
+    "E3-LLM-R001 (32b/201004, median 78.32, score 11.68, ANALYSED)",
+    "E3-LLM-R002 (32b/202008, median 77.04, score 12.96, ANALYSED)",
+    "E3-LLM-R003 (32b/203012, median 80.17, score 9.83, ANALYSED, BEST)",
+    "E3-LLM-R004 (11b/201004, median 73.77, score 16.23, ANALYSED)",
+    "E3-LLM-R005 (11b/202008, median 73.28, score 16.72, ANALYSED)"
+  ],
+  "physics_runs": 5,
   "started_at_utc": "2026-09-13T06:04:21Z",
-  "status": "IN_PROGRESS"
+  "completed_at_utc": "2026-09-13T10:00:00Z",
+  "status": "HANDOFF_READY"
 }

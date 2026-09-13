@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-end-execution-iter5",
+  "timestamp_utc": "2026-09-13T09:41:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "summary": "END_EXECUTION: итерация 5/5 — 11b seed 202008. E3-LLM-R005: exit 0, wall 2760 s, 12/12 кадров валидны, гейты §4 PASS (lbf 0.0544; pf_v2 0.9868; disp 4.76), median 73.28°, score 16.72. Бюджет исполнен точно: 5/5 ранов, все ANALYSED, 0 rejected, 0 STRUCTURALLY_INVALID, суммарный executor wall 12760 s (~3.5 ч <= 6 ч LLM-arm бюджета WO). Все артефакты в WSL /home/yurig/nl4-002-e3/runs/E3-LLM-R00{1..5}/ (вне Git), манифесты SHA-256+size в evidence/<RUN_ID>/analysis.json (поле artifacts). Canonical replay всего 5-ранного action-stream через frozen Controller (BoundedAgent + ReplayExecutor): budget 5/5, proposals 5/5 accepted, best E3-LLM-R003 score 9.832001928.",
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/E3-LLM-R005/analysis.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-runs-ledger.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-arm-session.json"
+  ],
+  "next_action": "END_ANALYSIS (0007): итоговая таблица, best, пост-фактум рассуждение.",
+  "blocker": null
+}

@@ -5,7 +5,8 @@
   "execution_id": "EX-NL4-002-E3-LLM-R1",
   "work_order_id": "NL4-002",
   "event_type": "WORK_ORDER_STARTED",
-  "actor_role": "LLM_AGENT (DSH fresh session via bounded interface)",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "agent_identity": "LLM_AGENT (DSH fresh session via bounded interface; actor_role по enum схемы work-event v1)",
   "subject_sha": "64b91635325ca8decc11e6f7abd0da832a133a5e",
   "summary": "Старт LLM arm E3 (EX-NL4-002-E3-LLM-R1): 5 последовательных прогонов oxDNA (50000 шагов, hard cap 1.2 ч/ран) через bounded-интерфейс (BoundedAgent, frozen allowlist nl4-allowlist-r1, runner-level narrowing: variants {0b,11b,32b,53b}, 74b исключён BLOCKED-статусом). Изоляция fair-comparison: EX-NL4-002-E3-MECH-R1/** не читается. Стратегия записана ДО первого рана в evidence/llm-decisions.json (iteration 1 proposal + rationale).",
   "strategy_predeclared": {
