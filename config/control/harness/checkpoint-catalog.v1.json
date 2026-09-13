@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": "NL-H0-2026-09-08-R1",
+  "revision": "post-mvp-route-r1",
   "checkpoints": [
     {"id": "NL0", "depends_on": [], "acceptance": "references, access, rights and preregistered E1/E2 scope are durable"},
     {"id": "NL1", "depends_on": ["NL0"], "acceptance": "one frozen non-AI reference path executes end-to-end with measured resources"},
