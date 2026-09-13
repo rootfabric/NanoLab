@@ -6,7 +6,11 @@ O(N^2) loop is impractical; equivalence with the frozen naive definition is
 asserted here on the deterministic synthetic fixtures (fixtures.build),
 including periodic (minimum-image) placements that force wrap-around.
 """
+import os
+import sys
 import unittest
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
 from e2.fixtures import build
 from e2.observables import reference_pairs, reference_pairs_bucketed

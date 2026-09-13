@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T01:51:47Z",
+  "execution_id": "EX-NL4-001-R1",
+  "work_order_id": "NL4-001",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "404618902734c56e0e5f853ee8e68bbd5f91ccb3",
+  "summary": "Старт EX-NL4-001-R1 (IMPLEMENTER fresh-сессия): контроллер экспериментов + ограниченный исследовательский агент + baselines (random/grid) как замороженный stdlib-only пакет scripts/nl4/ + allowlist-конфиг, по WO-NL4-001. Чисто software: вся логика на mock-исполнителе (детерминированные псевдо-результаты из фикстурных параметров, run IDs NL4-MOCK-*), без физики, LLM-ключей, сети и прогонов oxDNA. Ветка work/nl4-001-bounded-agent-r1 от exact base 404618902734c56e0e5f853ee8e68bbd5f91ccb3 (= свежий origin/main). Замороженные зависимости: integrity-гейты E2_PROTO_R1 §4 (lbf <= 0.1078, pf_v2 >= 0.50, disp <= 20.0) в scoring; канонический JSON — e2.canonical (только import). Boundary: implementation → CONTINUATION → END_ANALYSIS → HANDOFF."
+}

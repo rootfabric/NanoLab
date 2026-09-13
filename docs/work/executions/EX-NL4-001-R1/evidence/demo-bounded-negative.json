@@ -1,0 +1,126 @@
+{
+  "actions_log": [
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 201004,
+        "steps": 150000,
+        "variant": "0b"
+      },
+      "candidate_id": "CAND-0001",
+      "reason": null,
+      "seq": 1
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0001",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0001",
+      "seq": 2
+    },
+    {
+      "accepted": true,
+      "action": "stop",
+      "reason": null,
+      "seq": 3
+    }
+  ],
+  "agent": "bounded-agent-r1",
+  "allowlist_revision": "nl4-allowlist-r1",
+  "bounded_agent_rejected": [
+    {
+      "action": {
+        "action": "tune_protocol",
+        "temperature": 400
+      },
+      "reason": "ACTION_NOT_IN_ALLOWLIST"
+    },
+    {
+      "action": {
+        "action": "propose_candidate",
+        "candidate": {
+          "variant": "99b"
+        }
+      },
+      "reason": "CANDIDATE_PARAM_NOT_IN_ALLOWLIST"
+    },
+    {
+      "action": {
+        "action": "propose_candidate",
+        "candidate": {
+          "engine": "bypass",
+          "variant": "0b"
+        }
+      },
+      "reason": "FORBIDDEN_CANDIDATE_FIELD"
+    }
+  ],
+  "budget": {
+    "max_simulations": 5,
+    "max_wall_minutes": 30.0,
+    "simulations_used": 1,
+    "wall_seconds_used": 0.947
+  },
+  "candidates": {
+    "CAND-0001": {
+      "seed": 201004,
+      "steps": 150000,
+      "variant": "0b"
+    }
+  },
+  "controller_id": "nl4-controller-r1",
+  "executor": {
+    "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+    "executor_id": "mock-executor-r1"
+  },
+  "goal": {
+    "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+    "max_simulations": 5,
+    "max_wall_minutes": 30.0,
+    "target_angle_deg": 45.0
+  },
+  "kind": "nl4_session_report",
+  "runs": [
+    {
+      "analysis": {
+        "displacement_max": 12.9,
+        "long_bond_fraction": 0.0266,
+        "median_angle_deg": 77.04,
+        "pairs_fraction_v2": 0.35
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 201004,
+        "steps": 150000,
+        "variant": "0b"
+      },
+      "candidate_id": "CAND-0001",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "fcc9b1889bdee446147e480ffb05a310416b190331d0f7c67c28de7409c2436d",
+      "run_id": "NL4-MOCK-R0001",
+      "wall_seconds": 0.947
+    }
+  ],
+  "schema_version": 1,
+  "scoring": {
+    "best": null,
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 30.0,
+      "simulations_used": 1,
+      "wall_seconds_used": 0.947
+    },
+    "counts": {
+      "proposals_rejected": 0,
+      "proposals_total": 1,
+      "runs_executed": 1,
+      "runs_scored": 0,
+      "runs_structurally_invalid": 1
+    },
+    "target_angle_deg": 45.0
+  },
+  "stop_reason": "AGENT_STOPPED"
+}
+

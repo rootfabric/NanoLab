@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "revision": "nl4-allowlist-r1",
+  "frozen": true,
+  "frozen_at_commit_scope": "WO-NL4-001 (EX-NL4-001-R1); changes require a new allowlist revision + new Work Order",
+  "actions": {
+    "propose_candidate": {
+      "description": "register a candidate parameter set for evaluation; validated against candidate_params before any execution"
+    },
+    "request_run": {
+      "description": "ask the controller to execute one previously proposed candidate; consumes simulation/wall budget only on actual execution"
+    },
+    "read_analysis": {
+      "description": "read the analysis records published so far in this session; read-only, consumes no budget"
+    },
+    "stop": {
+      "description": "terminate the agent loop voluntarily"
+    }
+  },
+  "candidate_params": {
+    "variant": {
+      "type": "enum",
+      "values": ["0b", "11b", "32b", "53b", "74b"],
+      "required": true
+    },
+    "steps": {
+      "type": "enum",
+      "values": [50000, 100000, 150000],
+      "required": false,
+      "default": 150000
+    },
+    "seed": {
+      "type": "enum",
+      "values": [201004, 202008, 203012],
+      "required": false,
+      "default": 201004,
+      "seed_policy": "frozen E2 replica seed triple (E2_PROTO_R1 §3); one seed per run; a candidate is uniquely identified by (variant, steps, seed) and re-executing an identical candidate is rejected by the controller as CANDIDATE_ALREADY_RUN; the same seed on a different variant or length is legitimate (as in the E2 parametric series)"
+    }
+  },
+  "budgets": {
+    "max_simulations": {
+      "type": "integer",
+      "min": 1,
+      "description": "hard cap on executed runs per goal; excess request_run actions are rejected, never executed"
+    },
+    "max_wall_minutes": {
+      "type": "number",
+      "min": 0,
+      "description": "hard cap on cumulative executor wall time per goal; a run that would exceed it is rejected before execution"
+    }
+  },
+  "forbidden": {
+    "unknown_actions": "any action key outside actions is rejected with ACTION_NOT_IN_ALLOWLIST",
+    "unknown_candidate_fields": "any candidate field outside {variant, steps, seed} is rejected with FORBIDDEN_CANDIDATE_FIELD",
+    "forbidden_candidate_fields": [
+      "physics",
+      "force_field",
+      "protocol",
+      "engine",
+      "engine_options",
+      "criteria",
+      "integrity_gate",
+      "observable",
+      "analysis",
+      "target_angle",
+      "budget",
+      "code",
+      "command",
+      "network",
+      "llm",
+      "prompt"
+    ],
+    "engine_access": "the agent never invokes the simulation engine directly; only the controller talks to the ExecutorAdapter",
+    "gate_tampering": "integrity gates are frozen in scoring.py from E2_PROTO_R1 §4 and cannot be proposed or modified by any action"
+  }
+}

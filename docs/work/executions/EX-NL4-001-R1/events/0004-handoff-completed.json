@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-13T02:06:32Z",
+  "execution_id": "EX-NL4-001-R1",
+  "work_order_id": "NL4-001",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8009f16bc3828b498a3d5dacadd11d65e8ce9ad8",
+  "summary": "HANDOFF EX-NL4-001-R1 → REVIEWER (risk MEDIUM: Implementer + Reviewer + Verifier; implementer не self-accept). Ветка work/nl4-001-bounded-agent-r1 (base 4046189, HEAD после records — см. passport), всё запушено в origin. Состав: scripts/nl4/** (allowlist.json frozen r1; controller; mock_executor; agents/{baseline_random,baseline_grid,bounded_agent}; scoring; CLI), tests/test_nl4_*.py (45), evidence-демо в execution dir, + path-insert фикс tests/test_e2_pilot.py (единственный файл без него; CI-команда без PYTHONPATH теперь зелёная). Валидации: unittest 287 OK (1 skip); work_cli validate/close ok; check-consistency ok; state.json не менялся. Открытые риски: (a) mock-наблюдаемые — псевдо-данные из sha256, НЕ физика, к E3 не применяются; (b) wall-бюджет в mock исползует точную оценку estimate == факту (реальный адаптер NL4-002 должен декларировать консервативную оценку); (c) bounded_agent budget mirror дублирует контроллер (defense in depth, не единственная линия). Одно next action: REVIEWER fresh-сессия на exact HEAD → Director → merge (Human Gate); затем NL4-002 (E3 кампания с реальным движком через ExecutorAdapter)."
+}

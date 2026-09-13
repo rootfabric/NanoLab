@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-analysis",
+  "timestamp_utc": "2026-09-13T02:06:31Z",
+  "execution_id": "EX-NL4-001-R1",
+  "work_order_id": "NL4-001",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8009f16bc3828b498a3d5dacadd11d65e8ce9ad8",
+  "summary": "END_ANALYSIS EX-NL4-001-R1. execution_outcome = COMPLETED (software); scientific_outcome = NOT_EVALUATED (claim class C0_SOFTWARE_ONLY: инфраструктура, никаких прогонов физики; physics_runs = 0). Требования WO §1-6 выполнены и покрыты тестами (45 новых; полный suite 287 OK, 1 skip): (1) allowlist-негативы ≥3 классов — неизвестное действие ACTION_NOT_IN_ALLOWLIST, параметр вне allowlist CANDIDATE_PARAM_NOT_IN_ALLOWLIST (variant 99b / steps 12345 / seed 1), запрещённое поле FORBIDDEN_CANDIDATE_FIELD (engine/physics/protocol...), неизвестное поле UNKNOWN_CANDIDATE_FIELD; во всех случаях предложение отклонено, залогировано, исполнение НЕ произошло (тест-гарантия WO stop-condition); (2) бюджет-энфорсмент — max_simulations=2 при 3 запросах: исполнено ровно 2, stop BUDGET_EXHAUSTED_SIMULATIONS; wall-бюджет: request отклонён ДО исполнения BUDGET_EXHAUSTED_WALL, runs=0; budget mirror bounded-агента отклоняет излишек; (3) детерминизм baselines — два прогона random и grid → байт-идентичные canonical JSON; (4) контроллер end-to-end на mock: goal {target 45, budget 5} — random и grid дают воспроизводимые траектории 5 кандидатов (grid: 0b/50000×{201004,202008,203012}, 0b/100000×{201004,202008}; run IDs NL4-MOCK-R0001..R0005), честный учёт invalid (random: 1 scored / 4 STRUCTURALLY_INVALID, best 53b/50000/202008 score 90.36; grid: 2 scored / 3 invalid, best 0b/50000/202008 score 24.46 — псевдо-наблюдаемые, НЕ наука); (5) scoring-математика точными числами (|50−45|=5.0; |132.36−45|=87.36; гейты-границы 0.1078/0.50/20.0 включительно); (6) canonical JSON детерминизм и отсутствие wall-clock в отчётах. Валидации: unittest зелёный; work_cli validate ok; check-consistency ok; state.json НЕ менялся. Evidence: docs/work/executions/EX-NL4-001-R1/evidence/{demo-random-goal45-budget5.json, demo-grid-goal45-budget5.json, demo-bounded-negative.json, bounded-negative-proposals.json}."
+}
