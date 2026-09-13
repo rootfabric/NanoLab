@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-analysis",
+  "timestamp_utc": "2026-09-13T11:09:45Z",
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
+  "summary": "END_ANALYSIS: честный пересчёт финального claimed score победителя E3 (32b, claimed по seed 203012). Пул = все валидные кадры двух свежих ранов (24 кадра: R001 12 + R002 12; гейты E2_PROTO_R1 §4 во всех кадрах PASS). Pooled median = 75.109253050°; revalidated score = |75.109253050 − 90| = 14.89074695. СРАВНЕНИЕ: claimed 9.832001928 (32b/203012, observed median 80.168°) — ХУЖЕ на 5.059; published-implied 11.91 (32b 150k медиана 78.09°) — ХУЖЕ на 2.981. ВЕРДИКТ по WO-NL4-002 §Winner-критерий: заявленный скор кандидата 32b/203012 АННУЛИРОВАН (|median − 90| на свежих seeds вышел за пределы заявленного); финальный заявляемый скор = revalidated 14.89074695. Это ОЖИДАЕМОЕ срабатывание anti-selection-bias гейта (регрессия к среднему + меж-seed разброс 32b@50k; зафиксировано заранее в BATCH_REVIEWER_VERDICT.md §Winner recommendation), не провал кампании E3; вывод E3 о сравнении стратегий не аннулируется. Дополнительно честно: оба свежих seed дали медианы НИЖЕ всех четырёх прежних наблюдений 32b@50k (74.59/75.31 vs 77.04–80.17) и ниже published 150k-медианы 78.09 — разброс 32b@50k шире, чем предполагало предупреждение (~78°); интерпретация причин — вне claim ceiling (C0_SOFTWARE_ONLY), фиксируются только измеренные числа. Наилучший baseline random (32b/201004, 11.68) НЕ является заявляемым скором: re-validation проводилась только для winner-кандидата 32b/203012 по WO; финальный заявляемый скор = 14.891.",
+  "command_refs": [
+    "python %TEMP%\\nl4-002-e3-reval-analysis.py -> wrote evidence/E3-REVAL-analysis.json"
+  ],
+  "evidence_refs": [
+    "evidence/E3-REVAL-analysis.json",
+    "evidence/E3-REVAL-R001/analysis.json",
+    "evidence/E3-REVAL-R002/analysis.json",
+    "docs/evidence/NL4-002/BATCH_REVIEWER_VERDICT.md"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + passport HANDOFF_READY + SESSION_LOG + валидаторы → HANDOFF.",
+  "blocker": null
+}

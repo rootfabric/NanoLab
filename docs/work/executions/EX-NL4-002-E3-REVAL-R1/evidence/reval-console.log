@@ -1,0 +1,53 @@
+[reval] preparing E3-REVAL-R001 {'variant': '32b', 'steps': 50000, 'seed': 204016}
+[reval] preparing E3-REVAL-R002 {'variant': '32b', 'steps': 50000, 'seed': 205020}
+[reval] launched E3-REVAL-R001
+[reval] launched E3-REVAL-R002
+[reval] finished E3-REVAL-R001 exit=0 wall=2860.11s
+[reval] finished E3-REVAL-R002 exit=0 wall=2861.67s
+[reval] wrote C:\NanoLab\nl4-002-e3-reval\docs\work\executions\EX-NL4-002-E3-REVAL-R1\evidence\reval-runs.json
+{
+  "analysis": {
+    "displacement_max": 9.751180035,
+    "long_bond_fraction": 0.055739254,
+    "median_angle_deg": 75.307615785,
+    "pairs_fraction_v2": 0.987763842
+  },
+  "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+  "candidate": {
+    "seed": 204016,
+    "steps": 50000,
+    "variant": "32b"
+  },
+  "evidence": "evidence/E3-REVAL-R001/analysis.json",
+  "executor": "real-oxdna-wsl-r1",
+  "exit_code": 0,
+  "input_digest_sha256": "dad38dba973314d0da81cd1f6f938be644a5783a9806d07c9d8e22e316ab34bd",
+  "run_id": "E3-REVAL-R001",
+  "status": "ANALYSED",
+  "wall_seconds": 2860.11,
+  "wsl_dir": "/home/yurig/nl4-002-e3-reval/runs/E3-REVAL-R001"
+}
+
+{
+  "analysis": {
+    "displacement_max": 8.999534259,
+    "long_bond_fraction": 0.055680208,
+    "median_angle_deg": 74.586898437,
+    "pairs_fraction_v2": 0.985505035
+  },
+  "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+  "candidate": {
+    "seed": 205020,
+    "steps": 50000,
+    "variant": "32b"
+  },
+  "evidence": "evidence/E3-REVAL-R002/analysis.json",
+  "executor": "real-oxdna-wsl-r1",
+  "exit_code": 0,
+  "input_digest_sha256": "b0a621ae55645f7d37b36b228c285b4ef7d87fe830252d01e332ffeefda691fe",
+  "run_id": "E3-REVAL-R002",
+  "status": "ANALYSED",
+  "wall_seconds": 2861.67,
+  "wsl_dir": "/home/yurig/nl4-002-e3-reval/runs/E3-REVAL-R002"
+}
+

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-13T11:13:30Z",
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
+  "summary": "HANDOFF: EX-NL4-002-E3-REVAL-R1 завершён. Winner re-validation (anti-selection-bias) по WO-NL4-002 §Winner-критерий: 2 свежих рана 32b (seeds 204016/205020, 50000 шагов) — оба exit 0, 12/12 кадров валидны. Pooled median 24 кадров = 75.109253050°; revalidated score 14.89074695 ХУЖЕ claimed 9.832001928 (+5.059) и хуже published-implied 11.91 (+2.981) → заявленный скор 32b/203012 АННУЛИРОВАН, финальный заявляемый = 14.89074695. Ожидаемое срабатывание anti-bias гейта (регрессия к среднему), не провал кампании. Claim ceiling C0_SOFTWARE_ONLY: только измеренные числа, без интерпретаций. Валидации: unittest 292 OK (1 skip; F-1 fixed — 5 ранее несобираемых тестов теперь коллектятся), work_cli validate/close ok, check-consistency ok; state.json не менялся; temp-исходники удалены (U4=NO); main не пушен.",
+  "command_refs": [
+    "python -m unittest discover -s tests -t . -> Ran 292 tests, OK (skipped=1)",
+    "python scripts/harness/work_cli.py validate docs/work/executions/EX-NL4-002-E3-REVAL-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok"
+  ],
+  "evidence_refs": [
+    "evidence/E3-REVAL-analysis.json",
+    "evidence/reval-runs.json",
+    "evidence/reval-console.log",
+    "summary.md",
+    "passport.json"
+  ],
+  "next_action": "Director: принять re-validation вердикт (аннулирование claimed 9.832; финальный заявляемый скор E3-winner = 14.891) → acceptance NL4-002 (Human Gate merge).",
+  "blocker": null
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T10:10:32Z",
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
+  "summary": "Старт EX-NL4-002-E3-REVAL-R1 — winner re-validation (anti-selection-bias шаг WO-NL4-002 §Winner-критерий). Победитель кампании E3 по BATCH_REVIEWER_VERDICT.md: кандидат 32b/seed 203012 (E3-LLM-R003, observed median 80.168°, claimed score 9.832). Задача: 2 прогона 32b со СВЕЖИМИ seeds 204016 и 205020 (вне allowlist-тройки; авторизация: WO §winner re-validation, Director, пост-кампания, verification-шаг), 50000 шагов, через RealExecutorAdapter напрямую (digest-gated download 32b.top/conf по source_pins, input builder из verbatim pro_CPU.in, WSL oxDNA 00dc7fb9 CPU/double, frozen observables v2 mutual + arm-manifest-32b + гейты E2_PROTO_R1 §4). RUN_IDs: E3-REVAL-R001 (seed 204016), E3-REVAL-R002 (seed 205020); параллельно; run root WSL /home/yurig/nl4-002-e3-reval/runs/<RUN_ID>/ (переопределение frozen WSL_RUNS_ROOT на уровне драйвера — документированное отклонение: исключает смешение с рана́ми кампании E3). Отклонение-обход seed-фильтра: RealExecutorAdapter не применяет allowlist-фильтр сам (фильтр жил в controller/agent-слое механических arms); свежие seeds проходят с явной пометкой 'Director-authorized fresh seeds per WO winner re-validation' в deviations. Предупреждение о регрессии к среднему зафиксировано заранее: аннулирование claimed score при выходе re-validation за пределы — ОЖИДАЕМОЕ поведение anti-bias гейта, не провал кампании. Дополнительно в scope: фикс F-1 (5 module-level функций tests/test_nl4_real_executor.py без TestCase — обернуть в TestCase). state.json не меняется; main не пушится.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl4-002-e3-reval -b work/nl4-002-e3-reval-r1 e3f7e5c",
+    "wsl git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL4-002.md",
+    "docs/evidence/NL4-002/BATCH_REVIEWER_VERDICT.md",
+    "docs/research/E2_PROTO_R1.md",
+    "scripts/nl4/real_executor.py",
+    "scripts/hinge_family/source_pins.json",
+    "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b.json",
+    "docs/work/executions/EX-NL4-002-E3-MECH-R1/evidence/ (формат analysis)"
+  ],
+  "next_action": "IMPLEMENTER: фикс F-1 (tests) → запуск E3-REVAL-R001/R002 параллельно (32b, seeds 204016/205020, 50k) → пересчёт revalidated score (median пула 2 ранов, score = |median − 90|) → END_EXECUTION/END_ANALYSIS/HANDOFF.",
+  "blocker": null
+}

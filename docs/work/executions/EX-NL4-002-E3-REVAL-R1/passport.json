@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "work_order_id": "NL4-002",
+  "checkpoint": "NL4",
+  "base_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
+  "branch": "work/nl4-002-e3-reval-r1",
+  "worktree": "C:\\NanoLab\\nl4-002-e3-reval",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / anti-selection-bias re-validation measured, no physics-interpretation",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL4-002-E3-REVAL-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "tests/**"
+  ],
+  "parent_work_order": "NL4-002",
+  "protocol": "docs/work/WO-NL4-002.md §Winner-критерий (re-validation) + docs/work/executions review verdict docs/evidence/NL4-002/BATCH_REVIEWER_VERDICT.md + docs/research/E2_PROTO_R1.md (frozen gates/observables)",
+  "owner_decisions_applied": [
+    "winner candidate = 32b / seed 203012 (E3-LLM-R003, claimed score 9.832) per BATCH_REVIEWER_VERDICT.md §Winner recommendation",
+    "re-validation seeds 204016 and 205020 (outside the allowlist triple 201004/202008/203012) — Director-authorized post-campaign verification step per WO-NL4-002 §Winner-критерий",
+    "2 runs x 50000 steps; regression-to-the-mean warning preregistered: annulment of the claimed score on out-of-range re-validation is EXPECTED anti-bias gate behaviour, not a campaign failure"
+  ],
+  "runs": [
+    {"run_id": "E3-REVAL-R001", "variant": "32b", "seed": 204016},
+    {"run_id": "E3-REVAL-R002", "variant": "32b", "seed": 205020}
+  ],
+  "started_at_utc": "2026-09-13T10:10:32Z",
+  "completed_at_utc": "2026-09-13T11:11:00Z",
+  "status": "HANDOFF_READY"
+}
