@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL4-001-R1",
+  "work_order_id": "NL4-001",
+  "checkpoint": "NL4",
+  "base_sha": "404618902734c56e0e5f853ee8e68bbd5f91ccb3",
+  "branch": "work/nl4-001-bounded-agent-r1",
+  "worktree": "C:\\NanoLab\\nl4-001",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / infrastructure, no science runs: контроллер экспериментов + ограниченный исследовательский агент + baselines (random/grid) как замороженный stdlib-only пакет scripts/nl4 на mock-исполнителе; никакой физики, LLM-ключей, сети и прогонов oxDNA; campaign NOT_EVALUATED; E3 — отдельный WO (NL4-002)",
+  "allowed_paths": [
+    "docs/work/WO-NL4-001.md",
+    "docs/work/executions/EX-NL4-001-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "scripts/nl4/**",
+    "tests/**"
+  ],
+  "protocol": "docs/work/WO-NL4-001.md; integrity-гейты scoring — frozen docs/research/E2_PROTO_R1.md §4 (lbf <= 0.1078, pf_v2 >= 0.50, disp <= 20.0); канонический JSON — e2.canonical (hinge_family.canonical), import без изменений",
+  "owner_decisions_applied": [
+    "NL3 закрыта владельцем (2026-09-12): frontier NL4, next NL4-001 READY — dispatch IMPLEMENTER fresh-сессии разрешён",
+    "74b honest gap сохранён (arm-manifest-v1, NOT_MEASURED) — вне scope этого WO"
+  ],
+  "runs": [],
+  "physics_runs": 0,
+  "started_at_utc": "2026-09-13T01:51:46Z",
+  "status": "IN_PROGRESS"
+}
