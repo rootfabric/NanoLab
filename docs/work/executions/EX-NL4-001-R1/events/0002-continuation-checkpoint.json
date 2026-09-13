@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-13T02:06:30Z",
+  "execution_id": "EX-NL4-001-R1",
+  "work_order_id": "NL4-001",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8009f16bc3828b498a3d5dacadd11d65e8ce9ad8",
+  "summary": "Реализация WO-NL4-001 §1-5 завершена (commit 8009f16): замороженный allowlist.json (actions propose_candidate/request_run/read_analysis/stop; variant {0b,11b,32b,53b,74b}; steps {50000,100000,150000} опц.; seed triple 201004/202008/203012; бюджеты max_simulations/max_wall_minutes; явные forbidden-поля) + controller.py (goal-JSON → цикл candidates → ExecutorAdapter → analysis → evidence → score; rejects fail-closed, исполнение не происходит) + mock_executor.py (детерминированные псевдо-наблюдаемые из sha256 канонического JSON кандидата, run IDs NL4-MOCK-R000N, НИКАКОЙ физики) + agents (baseline_random: goal-seeded RNG без повторов; baseline_grid: полный перебор 45 комбинаций в каноническом порядке; bounded_agent: валидация внешних JSON-предложений против allowlist до контроллера + budget mirror + rejected_actions log + ScriptedBrain) + scoring.py (|median_angle − target| под frozen гейтами E2_PROTO_R1 §4: lbf ≤ 0.1078, pf_v2 ≥ 0.50, disp ≤ 20.0; invalid/rejected учтены честно) + CLI python -m nl4. Тесты tests/test_nl4_{allowlist,baselines,controller,scoring}.py: 45 новых, всего 287 OK (1 skip, как CI-команда discover -s tests -t . без PYTHONPATH; добавлен отсутствовавший path-insert в tests/test_e2_pilot.py — единственный файл без него). Демо-evidence в evidence/ (random/grid goal 45 budget 5; bounded-negative): байт-детерминизм ×2 подтверждён (fc /b no differences). work_cli validate ok; check-consistency ok."
+}

@@ -22,6 +22,12 @@
   ],
   "runs": [],
   "physics_runs": 0,
+  "mock_demos": [
+    "evidence/demo-random-goal45-budget5.json (baseline-random, goal target 45, budget 5; byte-identical x2)",
+    "evidence/demo-grid-goal45-budget5.json (baseline-grid, goal target 45, budget 5; byte-identical x2)",
+    "evidence/demo-bounded-negative.json (bounded agent: 3 out-of-allowlist proposals rejected+logged, 1 run executed)"
+  ],
   "started_at_utc": "2026-09-13T01:51:46Z",
-  "status": "IN_PROGRESS"
+  "completed_at_utc": "2026-09-13T02:06:32Z",
+  "status": "HANDOFF_READY"
 }
