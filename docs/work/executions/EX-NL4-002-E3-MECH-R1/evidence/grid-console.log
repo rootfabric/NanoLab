@@ -1,0 +1,61 @@
+[runner] baseline-grid-r1 candidates: [
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "0b"
+  },
+  {
+    "seed": 202008,
+    "steps": 50000,
+    "variant": "0b"
+  },
+  {
+    "seed": 203012,
+    "steps": 50000,
+    "variant": "0b"
+  },
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "11b"
+  },
+  {
+    "seed": 202008,
+    "steps": 50000,
+    "variant": "11b"
+  }
+]
+
+[real_executor] launched E3-GRID-R001
+[real_executor] launched E3-GRID-R002
+[real_executor] launched E3-GRID-R003
+[real_executor] launched E3-GRID-R004
+[real_executor] launched E3-GRID-R005
+[real_executor] finished E3-GRID-R001 exit=0 wall=4380.14s
+[real_executor] finished E3-GRID-R002 exit=0 wall=4381.74s
+[real_executor] finished E3-GRID-R003 exit=0 wall=4383.38s
+[real_executor] finished E3-GRID-R005 exit=0 wall=4545.04s
+[real_executor] finished E3-GRID-R004 exit=0 wall=4566.42s
+[runner] wrote C:\NanoLab\nl4-002-e3\docs\work\executions\EX-NL4-002-E3-MECH-R1\evidence\E3-GRID-arm.json
+{
+  "best": {
+    "candidate_id": "CAND-0004",
+    "run_id": "E3-GRID-R004",
+    "score": 16.231507902
+  },
+  "budget": {
+    "max_simulations": 5,
+    "max_wall_minutes": 400.0,
+    "simulations_used": 5,
+    "wall_seconds_used": 22256.72
+  },
+  "counts": {
+    "proposals_rejected": 0,
+    "proposals_total": 5,
+    "runs_executed": 5,
+    "runs_scored": 5,
+    "runs_structurally_invalid": 0
+  },
+  "target_angle_deg": 90.0
+}
+

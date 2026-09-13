@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-13T05:53:08Z",
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "summary": "END_EXECUTION: оба механических arms выполнены. RANDOM (baseline-random-r1, детерминированный draw из goal): E3-RANDOM-R001 11b/203012, R002 11b/201004, R003 0b/201004, R004 32b/201004, R005 53b/203012 — все 5 exit 0, 12/12 кадров валидны, wall 4280-4428 с. GRID (baseline-grid-r1, канонический порядок, обрезка бюджетом): E3-GRID-R001 0b/201004, R002 0b/202008, R003 0b/203012, R004 11b/201004, R005 11b/202008 — все 5 exit 0, 12/12 валидны, wall 4380-4566 с. Бюджет: 5/5 ранов на агент, 50000 шагов каждый; суммарный executor wall 44039.76 с (раны параллельно, оба arms одновременно — 10 процессов WSL). Digest-гейты всех входов PASS (source-download-verification.json); копии в каталоги ранов верифицированы sha256; манифесты артефактов (sha256+size+location) — в analysis.json каждого рана; траектории вне Git (WSL-каталоги ранов). ОТКЛОНЕНИЕ (wall-cap): кап 1.2 ч/ран калиброван под соло-прогон (~0.8 ч); параллельный контеншн 10 ранов замедлил каждый до 4280-4566 с, 9/10 ранов превысили 4320 с (макс +5.7%); ВСЕ раны завершили полные 50000 шагов с exit 0 (без усечения/потери данных), помечены wall_cap_breach в ledger; лаунчер run_parallel не энфорсил interrupt-path (implementation gap — исправлен пост-фактум в real_executor.py, данные не пересчитывались); условия обоих arms идентичны; финальное отношение — Director/REVIEWER. Крэшей движка 0, digest FAIL 0, WSL-инфра-отказов 0.",
+  "command_refs": [
+    "python scripts/nl4/e3_mech_runner.py --arm random -> exit 0 (5/5 runs exit 0)",
+    "python scripts/nl4/e3_mech_runner.py --arm grid -> exit 0 (5/5 runs exit 0)",
+    "evidence/random-console.log, evidence/grid-console.log"
+  ],
+  "evidence_refs": [
+    "evidence/E3-RANDOM-arm.json",
+    "evidence/E3-GRID-arm.json",
+    "evidence/E3-RANDOM-R001..R005/analysis.json (per-run: gates, frames, artifacts manifest)",
+    "evidence/E3-GRID-R001..R005/analysis.json",
+    "evidence/source-download-verification.json"
+  ],
+  "next_action": "IMPLEMENTER: агрегирующий анализ (E3-MECH-analysis.json + E3-MECH-summary.json) → END_ANALYSIS → HANDOFF.",
+  "blocker": null
+}

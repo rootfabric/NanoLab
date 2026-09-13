@@ -1,0 +1,166 @@
+{
+  "arms": {
+    "grid": {
+      "agent": "baseline-grid-r1",
+      "best": {
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "run_id": "E3-GRID-R004",
+        "score": 16.231507902
+      },
+      "runs_executed": 5,
+      "runs_failed": 0,
+      "runs_structurally_invalid": 0,
+      "runs_wall_cap_breach": 5,
+      "scores": [
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 65.926791285,
+          "run_id": "E3-GRID-R001",
+          "score": 24.073208715
+        },
+        {
+          "candidate": {
+            "seed": 202008,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 66.04154349,
+          "run_id": "E3-GRID-R002",
+          "score": 23.95845651
+        },
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 67.309388567,
+          "run_id": "E3-GRID-R003",
+          "score": 22.690611433
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.768492098,
+          "run_id": "E3-GRID-R004",
+          "score": 16.231507902
+        },
+        {
+          "candidate": {
+            "seed": 202008,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.279585565,
+          "run_id": "E3-GRID-R005",
+          "score": 16.720414435
+        }
+      ]
+    },
+    "random": {
+      "agent": "baseline-random-r1",
+      "best": {
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "run_id": "E3-RANDOM-R004",
+        "score": 11.677355151
+      },
+      "runs_executed": 5,
+      "runs_failed": 0,
+      "runs_structurally_invalid": 0,
+      "runs_wall_cap_breach": 4,
+      "scores": [
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.995884595,
+          "run_id": "E3-RANDOM-R001",
+          "score": 16.004115405
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.768492098,
+          "run_id": "E3-RANDOM-R002",
+          "score": 16.231507902
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 65.926791285,
+          "run_id": "E3-RANDOM-R003",
+          "score": 24.073208715
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "32b"
+          },
+          "median_angle_deg": 78.322644849,
+          "run_id": "E3-RANDOM-R004",
+          "score": 11.677355151
+        },
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "53b"
+          },
+          "median_angle_deg": 133.769341047,
+          "run_id": "E3-RANDOM-R005",
+          "score": 43.769341047
+        }
+      ]
+    }
+  },
+  "claim_class": "C0_SOFTWARE_ONLY / E3 comparison measured, no physics-interpretation",
+  "cumulative_executor_wall_seconds": 44039.76,
+  "deviations": [
+    {
+      "detail": "E3 space = {0b,11b,32b,53b} x {50000} x {201004,202008,203012}; 74b excluded by BLOCKED status (EX-NL3-002-PARAM-74B-R1); steps pinned to 50000 by the WO-NL4-002 budget; filtering at runner level only, scripts/nl4/allowlist.json NOT modified",
+      "key": "candidate_space_narrowing"
+    },
+    {
+      "detail": "verified present at base SHA 592c4a1 (merged from the parametric batch branches via main); no copying was required",
+      "key": "arm_manifests_11b_32b_53b"
+    },
+    {
+      "detail": "non-adaptive mechanical arms executed their 5 runs concurrently; canonical budget accounting via Controller replay with identical action order (ReplayExecutor)",
+      "key": "parallel_runs"
+    },
+    {
+      "detail": "WO-NL4-002 hard cap is 1.2 h (4320 s) per run, calibrated for solo execution (measured ~0.8 h). Running all 10 arm runs concurrently slowed every run (memory-bandwidth contention) to 4280-4566 s; runs exceeding 4320 s completed the FULL preregistered 50000 steps with exit 0 (no truncation, no data loss) and are flagged wall_cap_breach in the per-run ledger. The parallel launcher did not enforce the interrupt path (implementation gap, fixed post-execution in real_executor.run_parallel); runs are kept as MEASURED with this deviation, both arms faced identical conditions. Interruption was NOT applied retroactively: killing completed full-length runs would discard valid measured data without changing their scientific content; final treatment is a Director/REVIEWER decision.",
+      "key": "wall_cap_breach_parallel_contention"
+    }
+  ],
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "kind": "nl4_e3_mech_summary",
+  "runs_total": 10,
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (E3 mechanical arms; LLM arm NOT run here — separate execution EX-NL4-002-E3-LLM-R1)"
+}
+

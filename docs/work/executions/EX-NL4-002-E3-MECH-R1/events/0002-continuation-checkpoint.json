@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-13T04:44:10Z",
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "summary": "Smoke E3-SMOKE-R001 (0b / seed 201004 / 50000 шагов) ЗАВЕРШЁН: exit 0, wall 2360.06 с (≈39.3 мин, в рамках капа 1.2 ч), per_step ≈ 0.047 с. Digest-гейт входов PASS (0b.top/0b.conf/pro_CPU.in: size+blob_sha1+sha256 по source_pins). Анализ v2 (mutual) выполнен: 12 кадров, угол посчитан (median 65.93° по валидным кадрам; ср. E2 0b 65.87 в окне 150k — согласуется), гейты в норме (lbf 0.0550 ≤ 0.1078; pf_v2 0.9865 ≥ 0.50; disp 4.43 ≤ 20). Артефакты smoke-каталога очищены (оставлены exit_code.txt, engine_stdout/stderr); манифест артефактов — в evidence/E3-SMOKE-R001/analysis.json. RealExecutorAdapter (scripts/nl4/real_executor.py) готов: тот же интерфейс ExecutorAdapter, что MockExecutor; runner scripts/nl4/e3_mech_runner.py (--arm smoke|random|grid); offline-тесты tests/test_nl4_real_executor.py зелёные. Сужение пространства (runner-level): {0b,11b,32b,53b} × {50000} × {201004,202008,203012}; 74b исключён BLOCKED-статусом. Кандидаты RANDOM (детерминированный draw из goal): 11b/203012, 11b/201004, 0b/201004, 32b/201004, 53b/203012. Кандидаты GRID (канонический порядок): 0b/201004, 0b/202008, 0b/203012, 11b/201004, 11b/202008. Arms запускаются параллельно (10 процессов WSL, равный бюджет 5×50000 на агент).",
+  "command_refs": [
+    "python scripts/nl4/e3_mech_runner.py --arm smoke -> exit 0, wall 2360.06 s",
+    "python -m pytest tests/test_nl4_real_executor.py -q -> 5 passed",
+    "wsl rm (smoke traj/lastconf/energy/log + digest-gated inputs) — артефакты smoke очищены, манифест сохранён"
+  ],
+  "evidence_refs": [
+    "evidence/smoke-console.log",
+    "evidence/smoke-result.json",
+    "evidence/source-download-verification.json",
+    "evidence/E3-SMOKE-R001/input.in",
+    "evidence/E3-SMOKE-R001/deviations.json",
+    "evidence/E3-SMOKE-R001/analysis.json",
+    "scripts/nl4/real_executor.py",
+    "scripts/nl4/e3_mech_runner.py",
+    "scripts/nl4/e3_mech_analysis.py",
+    "tests/test_nl4_real_executor.py"
+  ],
+  "next_action": "IMPLEMENTER: arms RANDOM + GRID параллельно (5×50000 каждый) → анализ → END_EXECUTION → END_ANALYSIS → HANDOFF.",
+  "blocker": null
+}

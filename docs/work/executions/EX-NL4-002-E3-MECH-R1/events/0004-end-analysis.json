@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-end-analysis",
+  "timestamp_utc": "2026-09-13T05:53:08Z",
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "summary": "END_ANALYSIS: observables v2 (mutual) по замороженному протоколу E2_PROTO_R1 §2/§4 для всех 10 ранов; score = |median(valid frames) − 90|, конвенция [0,180]. RANDOM: 11b/203012 → 74.00° (score 16.00); 11b/201004 → 73.77° (16.23); 0b/201004 → 65.93° (24.07); 32b/201004 → 78.32° (11.68); 53b/203012 → 133.77° (43.77). Best RANDOM: E3-RANDOM-R004 (32b/201004), score 11.68. GRID: 0b/201004 → 65.93° (24.07); 0b/202008 → 66.04° (23.96); 0b/203012 → 67.31° (22.69); 11b/201004 → 73.77° (16.23); 11b/202008 → 73.28° (16.72). Best GRID: E3-GRID-R004 (11b/201004), score 16.23. Счётчики: invalid 0, failed 0, rejected 0 у обоих arms; wall-cap breach 4 (random) / 5 (grid) — см. отклонение в 0003. Углы согласуются с опубликованной серией E2 (0b 65.87 / 11b 73.93 / 32b 78.09 / 53b 132.36 в окне 150k). scientific_outcome = MEASURED — только данные двух механических arms; БЕЗ сравнения с LLM-arm (не запускался, отдельный execution EX-NL4-002-E3-LLM-R1) и БЕЗ physics-интерпретации (claim C0_SOFTWARE_ONLY). Контроллерный учёт: canonical session reports (Controller replay, идентичный порядок действий), scoring по frozen гейтам. state.json не менялся.",
+  "command_refs": [
+    "python scripts/nl4/e3_mech_analysis.py -> E3-MECH-analysis.json + E3-MECH-summary.json (canonical)"
+  ],
+  "evidence_refs": [
+    "evidence/E3-MECH-analysis.json",
+    "evidence/E3-MECH-summary.json"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + passport HANDOFF_READY + SESSION_LOG + валидации (work_cli, check-consistency, unittest) → HANDOFF.",
+  "blocker": null
+}

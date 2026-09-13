@@ -1,0 +1,467 @@
+{
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "kind": "nl4_e3_mech_analysis",
+  "per_arm": {
+    "grid": {
+      "arm": "grid",
+      "best": {
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "run_id": "E3-GRID-R004",
+        "score": 16.231507902
+      },
+      "candidates": [
+        {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "11b"
+        }
+      ],
+      "runs_executed": 5,
+      "runs_failed": 0,
+      "runs_scored": 5,
+      "runs_structurally_invalid": 0,
+      "runs_wall_cap_breach": 5,
+      "scores": [
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 65.926791285,
+          "run_id": "E3-GRID-R001",
+          "score": 24.073208715
+        },
+        {
+          "candidate": {
+            "seed": 202008,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 66.04154349,
+          "run_id": "E3-GRID-R002",
+          "score": 23.95845651
+        },
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 67.309388567,
+          "run_id": "E3-GRID-R003",
+          "score": 22.690611433
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.768492098,
+          "run_id": "E3-GRID-R004",
+          "score": 16.231507902
+        },
+        {
+          "candidate": {
+            "seed": 202008,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.279585565,
+          "run_id": "E3-GRID-R005",
+          "score": 16.720414435
+        }
+      ]
+    },
+    "random": {
+      "arm": "random",
+      "best": {
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "run_id": "E3-RANDOM-R004",
+        "score": 11.677355151
+      },
+      "candidates": [
+        {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "53b"
+        }
+      ],
+      "runs_executed": 5,
+      "runs_failed": 0,
+      "runs_scored": 5,
+      "runs_structurally_invalid": 0,
+      "runs_wall_cap_breach": 4,
+      "scores": [
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.995884595,
+          "run_id": "E3-RANDOM-R001",
+          "score": 16.004115405
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "11b"
+          },
+          "median_angle_deg": 73.768492098,
+          "run_id": "E3-RANDOM-R002",
+          "score": 16.231507902
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "0b"
+          },
+          "median_angle_deg": 65.926791285,
+          "run_id": "E3-RANDOM-R003",
+          "score": 24.073208715
+        },
+        {
+          "candidate": {
+            "seed": 201004,
+            "steps": 50000,
+            "variant": "32b"
+          },
+          "median_angle_deg": 78.322644849,
+          "run_id": "E3-RANDOM-R004",
+          "score": 11.677355151
+        },
+        {
+          "candidate": {
+            "seed": 203012,
+            "steps": 50000,
+            "variant": "53b"
+          },
+          "median_angle_deg": 133.769341047,
+          "run_id": "E3-RANDOM-R005",
+          "score": 43.769341047
+        }
+      ]
+    }
+  },
+  "protocol": "docs/work/WO-NL4-002.md + docs/research/E2_PROTO_R1.md (frozen §4 gates, v2 mutual detector)",
+  "runs": [
+    {
+      "candidate": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.951276353,
+        "long_bond_fraction": 0.054543275,
+        "pairs_fraction_v2": 0.984862527
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 73.995884595,
+      "reference_pairs_v2_count": 3237,
+      "run_id": "E3-RANDOM-R001",
+      "score": 16.004115405,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4365.0
+    },
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.204821504,
+        "long_bond_fraction": 0.054303524,
+        "pairs_fraction_v2": 0.986709441
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 73.768492098,
+      "reference_pairs_v2_count": 3273,
+      "run_id": "E3-RANDOM-R002",
+      "score": 16.231507902,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4386.75
+    },
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.430401912,
+        "long_bond_fraction": 0.055045317,
+        "pairs_fraction_v2": 0.986482382
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 65.926791285,
+      "reference_pairs_v2_count": 3292,
+      "run_id": "E3-RANDOM-R003",
+      "score": 24.073208715,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4322.86
+    },
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 9.242589828,
+        "long_bond_fraction": 0.05621162,
+        "pairs_fraction_v2": 0.986482382
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 78.322644849,
+      "reference_pairs_v2_count": 3292,
+      "run_id": "E3-RANDOM-R004",
+      "score": 11.677355151,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4428.32
+    },
+    {
+      "candidate": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "53b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 7.947616592,
+        "long_bond_fraction": 0.055852921,
+        "pairs_fraction_v2": 0.985718673
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 133.769341047,
+      "reference_pairs_v2_count": 3256,
+      "run_id": "E3-RANDOM-R005",
+      "score": 43.769341047,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": false,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4280.11
+    },
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.430401912,
+        "long_bond_fraction": 0.055045317,
+        "pairs_fraction_v2": 0.986482382
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 65.926791285,
+      "reference_pairs_v2_count": 3292,
+      "run_id": "E3-GRID-R001",
+      "score": 24.073208715,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4380.14
+    },
+    {
+      "candidate": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 5.093888758,
+        "long_bond_fraction": 0.05510574,
+        "pairs_fraction_v2": 0.987276583
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 66.04154349,
+      "reference_pairs_v2_count": 3301,
+      "run_id": "E3-GRID-R002",
+      "score": 23.95845651,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4381.74
+    },
+    {
+      "candidate": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 5.689181628,
+        "long_bond_fraction": 0.054622356,
+        "pairs_fraction_v2": 0.985428051
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 67.309388567,
+      "reference_pairs_v2_count": 3294,
+      "run_id": "E3-GRID-R003",
+      "score": 22.690611433,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4383.38
+    },
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.204821504,
+        "long_bond_fraction": 0.054303524,
+        "pairs_fraction_v2": 0.986709441
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 73.768492098,
+      "reference_pairs_v2_count": 3273,
+      "run_id": "E3-GRID-R004",
+      "score": 16.231507902,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4566.42
+    },
+    {
+      "candidate": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "gate_summary_valid_frames": {
+        "displacement_max": 4.756747179,
+        "long_bond_fraction": 0.0544234,
+        "pairs_fraction_v2": 0.98684613
+      },
+      "integrity_status": "OK",
+      "interrupted_budget": false,
+      "median_angle_deg_valid_frames": 73.279585565,
+      "reference_pairs_v2_count": 3269,
+      "run_id": "E3-GRID-R005",
+      "score": 16.720414435,
+      "status": "ANALYSED",
+      "valid_frame_fraction": 1.0,
+      "wall_cap_breach": true,
+      "wall_cap_s": 4320.0,
+      "wall_seconds": 4545.04
+    }
+  ],
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (mechanical arms only; no LLM-arm comparison in this execution)",
+  "scoring": "score = |median_angle(valid frames) - 90|, angle convention [0,180] deg",
+  "target_angle_deg": 90.0,
+  "work_order_id": "NL4-002"
+}
+

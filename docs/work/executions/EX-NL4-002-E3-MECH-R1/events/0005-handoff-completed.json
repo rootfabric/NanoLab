@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-13T05:56:30Z",
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "summary": "HANDOFF: фаза 1 E3 (NL4-002) завершена. (1) RealExecutorAdapter (scripts/nl4/real_executor.py) — реальный oxDNA/WSL за тем же интерфейсом ExecutorAdapter, что MockExecutor: подмена = инжект в Controller(goal, executor); digest-gated download-on-run (size+blob_sha1 обязательны, sha256 сверяется/записывается), input builder из verbatim pro_CPU.in с deviations, setsid/nohup-запуск с exit-кодом в файле, анализ observables v2 (mutual) по замороженному arm-манифесту варианта; параллельный батч + ReplayExecutor для canonical-учёта. (2) Smoke E3-SMOKE-R001: exit 0, wall 2360 с, угол 65.93°. (3) Оба arms: 10/10 ранов exit 0, 12/12 кадров валидны, invalid 0 / failed 0 / rejected 0. Best RANDOM: 32b/201004 score 11.68 (median 78.32°); best GRID: 11b/201004 score 16.23 (median 73.77°). scientific_outcome = MEASURED (без LLM-сравнения — LLM arm не запускался). Ключевые отклонения: сужение E3-пространства до {0b,11b,32b,53b} на runner-уровне (74b BLOCKED; allowlist.json не менялся); wall-cap breach 9/10 ранов (4280–4566 с при капе 4320 с; полные 50000 шагов, exit 0, без потери данных; лаунчер-доработка зафиксирована; финальное отношение — Director/REVIEWER). Валидации: unittest 291 passed (1 skip, вкл. 5 новых real_executor-тестов), work_cli validate ok, check-consistency ok. state.json не менялся. HEAD на момент handoff: см. passport/commit; ветка work/nl4-002-e3-mech-r1 запушена. Temp-исходники (digest-gated bytes) удалены из Windows TEMP после исполнения.",
+  "command_refs": [
+    "python -m pytest tests -q -> 291 passed, 1 skipped",
+    "python scripts/harness/work_cli.py validate docs/work/executions/EX-NL4-002-E3-MECH-R1 -> ok: true",
+    "python -m harness.cli check-consistency --root . -> ok",
+    "git push origin work/nl4-002-e3-mech-r1"
+  ],
+  "evidence_refs": [
+    "summary.md",
+    "passport.json",
+    "evidence/E3-MECH-analysis.json",
+    "evidence/E3-MECH-summary.json",
+    "evidence/E3-RANDOM-arm.json",
+    "evidence/E3-GRID-arm.json",
+    "evidence/smoke-result.json",
+    "scripts/nl4/real_executor.py",
+    "scripts/nl4/e3_mech_runner.py",
+    "scripts/nl4/e3_mech_analysis.py",
+    "tests/test_nl4_real_executor.py"
+  ],
+  "next_action": "Director: merge work/nl4-002-e3-mech-r1 → dispatch LLM arm (fresh-сессия, ветка work/nl4-002-e3-llm-r1, bounded-интерфейс, бюджет 5×50000) → батчевый REVIEWER → winner + re-validation (seeds 204016/205020).",
+  "blocker": null
+}
