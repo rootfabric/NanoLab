@@ -21,6 +21,7 @@
 
 - `docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md`
 - `docs/ROADMAP.md`
+- `docs/work/WORK_QUEUE.md`
 - `project/state.json`
 - `project/plan.json`
 - `config/control/harness/checkpoint-catalog.v1.json`
@@ -43,13 +44,14 @@
 3. Зафиксировать depth-first стратегию: DNA nanomechanics остаётся основной вертикалью до управляемого компонента и composition.
 4. Специализировать `NL6-001` на E5 driven component; E4 и E6 оставить отложенными условными направлениями.
 5. Зафиксировать E3-R2 как post-E5 benchmark ИИ на богатом параметрическом пространстве, а не как немедленный повтор E3.
-6. Определить ближайший operational sequence для NL5-001/NL5-002 и параллельного INFRA2→INFRA3.
+6. Синхронизировать `WORK_QUEUE` с новым plan/roadmap, чтобы не оставлять альтернативную старую трактовку NL6.
+7. Определить ближайший operational sequence для NL5-001/NL5-002 и параллельного INFRA2→INFRA3.
 
 ## Validation
 
 - JSON-файлы синтаксически корректны и не содержат duplicate keys.
 - `frontier = NL5`, `next_work_order = NL5-001`, `NL5-001 = READY` согласованы между state/roadmap/plan.
-- NL6/E5 route согласован между roadmap/plan/checkpoint catalog.
+- NL6/E5 route согласован между roadmap/plan/checkpoint catalog/work queue.
 - Существующие NL0–NL4 acceptance не понижены и не переписаны.
 - Отрицательный E3 result сохранён; никаких заявлений о доказанном преимуществе ИИ.
 
