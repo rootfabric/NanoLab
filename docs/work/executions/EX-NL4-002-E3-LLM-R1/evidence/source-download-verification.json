@@ -1,0 +1,46 @@
+{
+  "dest_dir": "C:\\Users\\root\\AppData\\Local\\Temp\\nl4-002-e3-src",
+  "digest_gate_all": "PASS",
+  "download_base": "https://raw.githubusercontent.com/gauravarya77/DNA-hinge-simulations/23fd1ff7731e9017bd776f49206dc42d70d9fe91/",
+  "durable_cache": false,
+  "files": {
+    "MD_Hinges/32b.conf": {
+      "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+      "blob_sha1_expected": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "file": "MD_Hinges/32b.conf",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl4-002-e3-src\\MD_Hinges__32b.conf",
+      "sha256": {
+        "computed": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+        "match": null,
+        "pinned": null,
+        "provenance": "NOT_VERIFIED"
+      },
+      "size_bytes": 2345114,
+      "size_expected": 2345114,
+      "size_match": true
+    },
+    "MD_Hinges/32b.top": {
+      "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+      "blob_sha1_expected": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+      "blob_sha1_match": true,
+      "digest_gate": "PASS",
+      "file": "MD_Hinges/32b.top",
+      "local_path": "C:\\Users\\root\\AppData\\Local\\Temp\\nl4-002-e3-src\\MD_Hinges__32b.top",
+      "sha256": {
+        "computed": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+        "match": null,
+        "pinned": null,
+        "provenance": "NOT_VERIFIED"
+      },
+      "size_bytes": 123024,
+      "size_expected": 123024,
+      "size_match": true
+    }
+  },
+  "gate_policy": "size + blob_sha1 mandatory; sha256 compared when pinned, else computed-at-first-download recorded",
+  "kind": "nl4_e3_source_download_verification",
+  "schema_version": 1
+}
+

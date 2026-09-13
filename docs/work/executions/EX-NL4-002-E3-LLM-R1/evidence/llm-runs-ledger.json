@@ -1,0 +1,69 @@
+[
+  {
+    "analysis": {
+      "displacement_max": 9.242589828,
+      "long_bond_fraction": 0.05621162,
+      "median_angle_deg": 78.322644849,
+      "pairs_fraction_v2": 0.986482382
+    },
+    "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+    "candidate": {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    "evidence": "evidence/E3-LLM-R001/analysis.json",
+    "executor": "real-oxdna-wsl-r1",
+    "exit_code": 0,
+    "input_digest_sha256": "1ae2273f99e18b21c8fa3d524bc10d53bb6378ba36d193be5777f73557a0116c",
+    "run_id": "E3-LLM-R001",
+    "status": "ANALYSED",
+    "wall_seconds": 2320.06,
+    "wsl_dir": "/home/yurig/nl4-002-e3/runs/E3-LLM-R001"
+  },
+  {
+    "analysis": {
+      "displacement_max": 8.072581083,
+      "long_bond_fraction": 0.055680208,
+      "median_angle_deg": 77.044589742,
+      "pairs_fraction_v2": 0.98656401
+    },
+    "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+    "candidate": {
+      "seed": 202008,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    "evidence": "evidence/E3-LLM-R002/analysis.json",
+    "executor": "real-oxdna-wsl-r1",
+    "exit_code": 0,
+    "input_digest_sha256": "06a972eabe82f10ff7f306c3de802656a765579c084ac12c52c16af591d1bd79",
+    "run_id": "E3-LLM-R002",
+    "status": "ANALYSED",
+    "wall_seconds": 2700.1,
+    "wsl_dir": "/home/yurig/nl4-002-e3/runs/E3-LLM-R002"
+  },
+  {
+    "analysis": {
+      "displacement_max": 8.401493691,
+      "long_bond_fraction": 0.056093529,
+      "median_angle_deg": 80.167998072,
+      "pairs_fraction_v2": 0.985361391
+    },
+    "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+    "candidate": {
+      "seed": 203012,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    "evidence": "evidence/E3-LLM-R003/analysis.json",
+    "executor": "real-oxdna-wsl-r1",
+    "exit_code": 0,
+    "input_digest_sha256": "cf5e9af3bf70d233abf6ba01e985a67a96d5f2f34b1f68ed63f6a4f9a463d557",
+    "run_id": "E3-LLM-R003",
+    "status": "ANALYSED",
+    "wall_seconds": 2440.07,
+    "wsl_dir": "/home/yurig/nl4-002-e3/runs/E3-LLM-R003"
+  }
+]
+
