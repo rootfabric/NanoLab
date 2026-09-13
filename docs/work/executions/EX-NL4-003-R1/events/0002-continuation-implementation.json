@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-implementation",
+  "timestamp_utc": "2026-09-13T22:38:00Z",
+  "execution_id": "EX-NL4-003-R1",
+  "work_order_id": "NL4-003",
+  "event_type": "CONTINUATION",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9e4d7207b8997d38c00a8abbf2db205868c415d1",
+  "summary": "Реализация WO-NL4-003 s.1 завершена. scripts/nl4/mvp.py: CLI --goal user-goal.json --out-dir <evidence>; парсинг goal (target_angle/max_simulations/steps/revalidation_runs, steps из frozen enum); стратегия mvp-informed-greedy-r1 — детерминированная, scripted, БЕЗ LLM: published pooled-медианы (EX-NL3-002-SUMMARY-R1, common window) зашиты как данные PUBLISHED_SERIES с ссылкой, варианты ранжируются по |median − target|, top-N + frozen E2 seed-тройка по порядку (для 90°: 32b/201004, 11b/202008, 0b/203012; 74b отсутствует в prior — NOT_MEASURED); реальные прогоны через RealExecutorAdapter параллельно с WO-RUN_IDs E3-MVP-C001..C003 в /home/yurig/nl4-003-mvp/runs/<RUN_ID>/ (module-level override WSL_RUNS_ROOT; frozen-файлы не менялись), затем canonical-replay через Controller (ReplayExecutor, неизменный allowlist nl4-allowlist-r1); best по score = |median − 90| под гейтами E2_PROTO_R1 §4; re-validation best свежим seed 206024 (вне frozen тройки — анти-bias NL4-002; исполняется через executor напрямую, НЕ через кандидатное пространство allowlist — seed 20604 [206024] не входит в enum); финальный score = по re-validation; отчёты mvp-report.md + canonical mvp-report.json: goal, runs+digests, распределение угла (frames + bootstrap CI95 median, 10000 ресемплов, seed 424242), gates, chosen+prior, revalidated score, confidence, provenance, limitations, reproduction, verdict FOUND/NOT_FOUND (замороженное правило в compute_verdict: FOUND iff best валиден AND revalidation проходит гейты AND revalidated score < published-best gap 11.908154484). tests/test_nl4_mvp.py: 18 тестов на mock (детерминизм стратегии/отчёта/markdown, verdict-ветки, goal-контракт, 74b-исключение, bootstrap-детерминизм). Полный suite: 310 тестов OK (1 skip). Коммиты 7d837eb (implementation) + 9e4d720 (fix: sys.path при запуске скриптом из clean clone — первый clean-room запуск упал с ModuleNotFoundError до любых ранов, артефактов не создано, повторный запуск из обновлённого clean clone после git pull). Clean-room: git clone --branch work/nl4-003-mvp-r1 в C:\\NanoLab\\mvp-cleanroom, HEAD 9e4d720, status clean, каталоги ранов пусты; goal C:\\NanoLab\\mvp-goal.json {target_angle:90, max_simulations:3, steps:50000, revalidation_runs:1}; digest-гейт источников PASS; E3-MVP-C001/C002/C003 запущены параллельно.",
+  "command_refs": [
+    "python -m unittest discover -s tests -> 310 tests OK (skipped=1)",
+    "git clone --branch work/nl4-003-mvp-r1 C:\\NanoLab\\main C:\\NanoLab\\mvp-cleanroom",
+    "python C:\\NanoLab\\mvp-cleanroom\\scripts\\nl4\\mvp.py --goal C:\\NanoLab\\mvp-goal.json --out-dir <clone evidence>"
+  ],
+  "evidence_refs": [
+    "scripts/nl4/mvp.py",
+    "tests/test_nl4_mvp.py",
+    "docs/work/executions/EX-NL4-003-R1/events/0002-continuation-implementation.json"
+  ],
+  "next_action": "Дождаться 3 кандидатов + revalidation E3-MVP-REV001 внутри turn → анализ/отчёт из реальных данных → валидации → END_EXECUTION/END_ANALYSIS/HANDOFF.",
+  "blocker": null
+}
