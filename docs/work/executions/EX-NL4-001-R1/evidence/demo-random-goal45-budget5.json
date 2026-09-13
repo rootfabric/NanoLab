@@ -1,0 +1,272 @@
+{
+  "actions_log": [
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 203012,
+        "steps": 100000,
+        "variant": "32b"
+      },
+      "candidate_id": "CAND-0001",
+      "reason": null,
+      "seq": 1
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0001",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0001",
+      "seq": 2
+    },
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 201004,
+        "steps": 150000,
+        "variant": "32b"
+      },
+      "candidate_id": "CAND-0002",
+      "reason": null,
+      "seq": 3
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0002",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0002",
+      "seq": 4
+    },
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "53b"
+      },
+      "candidate_id": "CAND-0003",
+      "reason": null,
+      "seq": 5
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0003",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0003",
+      "seq": 6
+    },
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 202008,
+        "steps": 100000,
+        "variant": "0b"
+      },
+      "candidate_id": "CAND-0004",
+      "reason": null,
+      "seq": 7
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0004",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0004",
+      "seq": 8
+    },
+    {
+      "accepted": true,
+      "action": "propose_candidate",
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "53b"
+      },
+      "candidate_id": "CAND-0005",
+      "reason": null,
+      "seq": 9
+    },
+    {
+      "accepted": true,
+      "action": "request_run",
+      "candidate_id": "CAND-0005",
+      "reason": null,
+      "run_id": "NL4-MOCK-R0005",
+      "seq": 10
+    }
+  ],
+  "agent": "baseline-random-r1",
+  "allowlist_revision": "nl4-allowlist-r1",
+  "budget": {
+    "max_simulations": 5,
+    "max_wall_minutes": 30.0,
+    "simulations_used": 5,
+    "wall_seconds_used": 3.639
+  },
+  "candidates": {
+    "CAND-0001": {
+      "seed": 203012,
+      "steps": 100000,
+      "variant": "32b"
+    },
+    "CAND-0002": {
+      "seed": 201004,
+      "steps": 150000,
+      "variant": "32b"
+    },
+    "CAND-0003": {
+      "seed": 202008,
+      "steps": 50000,
+      "variant": "53b"
+    },
+    "CAND-0004": {
+      "seed": 202008,
+      "steps": 100000,
+      "variant": "0b"
+    },
+    "CAND-0005": {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "53b"
+    }
+  },
+  "controller_id": "nl4-controller-r1",
+  "executor": {
+    "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+    "executor_id": "mock-executor-r1"
+  },
+  "goal": {
+    "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+    "max_simulations": 5,
+    "max_wall_minutes": 30.0,
+    "target_angle_deg": 45.0
+  },
+  "kind": "nl4_session_report",
+  "runs": [
+    {
+      "analysis": {
+        "displacement_max": 23.7,
+        "long_bond_fraction": 0.008,
+        "median_angle_deg": 61.31,
+        "pairs_fraction_v2": 0.72
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 203012,
+        "steps": 100000,
+        "variant": "32b"
+      },
+      "candidate_id": "CAND-0001",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "3bbd9325ac583d2e268d0521060d52ad218eb2fabfd415155205b29a41040521",
+      "run_id": "NL4-MOCK-R0001",
+      "wall_seconds": 0.813
+    },
+    {
+      "analysis": {
+        "displacement_max": 18.0,
+        "long_bond_fraction": 0.0328,
+        "median_angle_deg": 49.91,
+        "pairs_fraction_v2": 0.45
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 201004,
+        "steps": 150000,
+        "variant": "32b"
+      },
+      "candidate_id": "CAND-0002",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "2a7440e7faba1686d458d499b3f67ec7525fb8dae92884c81d3ba644780107a1",
+      "run_id": "NL4-MOCK-R0002",
+      "wall_seconds": 0.925
+    },
+    {
+      "analysis": {
+        "displacement_max": 10.8,
+        "long_bond_fraction": 0.098,
+        "median_angle_deg": 135.36,
+        "pairs_fraction_v2": 0.73
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "53b"
+      },
+      "candidate_id": "CAND-0003",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "e7ccc7722a8957cf260ceb0d40fa546a63b1ffa6b5ffe33e1c9e64391a5177b4",
+      "run_id": "NL4-MOCK-R0003",
+      "wall_seconds": 0.673
+    },
+    {
+      "analysis": {
+        "displacement_max": 23.7,
+        "long_bond_fraction": 0.0182,
+        "median_angle_deg": 49.66,
+        "pairs_fraction_v2": 0.47
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 202008,
+        "steps": 100000,
+        "variant": "0b"
+      },
+      "candidate_id": "CAND-0004",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "e8b76fd37d6f5d887b355c442c1a472823f6c8b464102f28f24423a3a8f8607e",
+      "run_id": "NL4-MOCK-R0004",
+      "wall_seconds": 0.62
+    },
+    {
+      "analysis": {
+        "displacement_max": 16.6,
+        "long_bond_fraction": 0.0706,
+        "median_angle_deg": 92.72,
+        "pairs_fraction_v2": 0.41
+      },
+      "backend": "MOCK (no physics; pseudo-observables from fixture parameters)",
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "53b"
+      },
+      "candidate_id": "CAND-0005",
+      "executor": "mock-executor-r1",
+      "input_digest_sha256": "d69c9e96aecaa70134620648a67e6920876ec17cece6d162cf509009727955a9",
+      "run_id": "NL4-MOCK-R0005",
+      "wall_seconds": 0.608
+    }
+  ],
+  "schema_version": 1,
+  "scoring": {
+    "best": {
+      "candidate_id": "CAND-0003",
+      "run_id": "NL4-MOCK-R0003",
+      "score": 90.36
+    },
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 30.0,
+      "simulations_used": 5,
+      "wall_seconds_used": 3.639
+    },
+    "counts": {
+      "proposals_rejected": 0,
+      "proposals_total": 5,
+      "runs_executed": 5,
+      "runs_scored": 1,
+      "runs_structurally_invalid": 4
+    },
+    "target_angle_deg": 45.0
+  },
+  "stop_reason": "BUDGET_EXHAUSTED_SIMULATIONS"
+}
+

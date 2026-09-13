@@ -1,0 +1,8 @@
+[
+  {"action": "tune_protocol", "temperature": 400},
+  {"action": "propose_candidate", "candidate": {"variant": "99b"}},
+  {"action": "propose_candidate", "candidate": {"variant": "0b", "engine": "bypass"}},
+  {"action": "propose_candidate", "candidate": {"variant": "0b"}},
+  {"action": "request_run", "candidate": {"variant": "0b"}},
+  {"action": "stop"}
+]
