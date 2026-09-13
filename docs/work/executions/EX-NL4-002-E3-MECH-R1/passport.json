@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "checkpoint": "NL4",
+  "base_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "branch": "work/nl4-002-e3-mech-r1",
+  "worktree": "C:\\NanoLab\\nl4-002-e3",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / E3 comparison measured, no physics-interpretation",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL4-002-E3-MECH-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "scripts/nl4/**",
+    "tests/**"
+  ],
+  "parent_work_order": "NL4-002",
+  "protocol": "docs/work/WO-NL4-002.md (E3 preregistration) + docs/research/E2_PROTO_R1.md (frozen gates/observables)",
+  "owner_decisions_applied": [
+    "target_angle = 90 deg; budget = 5 runs x 50000 steps per agent; three agents (random/grid here, llm in a separate fresh session)",
+    "E3 candidate space narrowing at runner level: {0b, 11b, 32b, 53b} (74b excluded by its BLOCKED status in EX-NL3-002-PARAM-74B-R1); allowlist.json untouched, filtering applied in the runner only",
+    "arm manifests 11b/32b/53b copied verbatim from origin/work/nl3-002-summary-r1 (parametric batch branches are not merged into this branch)"
+  ],
+  "arms": ["EX-NL4-002-E3-RANDOM-R1 (baseline-random-r1)", "EX-NL4-002-E3-GRID-R1 (baseline-grid-r1)"],
+  "llm_arm": "NOT THIS EXECUTION: EX-NL4-002-E3-LLM-R1 runs in a separate fresh session/branch after mech merge",
+  "runs": [],
+  "started_at_utc": "2026-09-13T03:32:39Z",
+  "status": "STARTED"
+}

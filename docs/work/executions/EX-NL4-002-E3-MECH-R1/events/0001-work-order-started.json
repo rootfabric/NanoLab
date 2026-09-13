@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T03:32:39Z",
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "592c4a190be484107671982f662888f737e09f7a",
+  "summary": "Старт EX-NL4-002-E3-MECH-R1 (фаза 1 E3, WO-NL4-002): (1) реализация RealExecutorAdapter в scripts/nl4/real_executor.py — тот же интерфейс ExecutorAdapter, что MockExecutor (estimate_wall_seconds/run), oxDNA через WSL (/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA, source 00dc7fb9), digest-gated download-on-run варианта top+conf (+pro_CPU.in один раз) по scripts/hinge_family/source_pins.json (обязательны size+blob_sha1; sha256 для 11b/32b/53b NOT_VERIFIED в реестре — вычисляется при первой загрузке и записывается в манифест рана), input builder по шаблону E2_PROTO (DNA2/salt 0.5/300K/CPU/double, steps=50000, print_conf_interval=4000, print_energy_every=100, seed кандидата, per-run выходы, отклонения от pro_CPU.in — в deviations), запуск в /home/yurig/nl4-002-e3/runs/<RUN_ID>/ (setsid/nohup-лаунчер, exit-код в файл), анализ observables v2 (mutual) + замороженный arm-манифест варианта; (2) smoke E3-SMOKE-R001 (0b/201004/50000) ДО arms; (3) arms: RANDOM (baseline_random, goal target 90, 5 ранов) и GRID (baseline_grid, первые 5 канонических кандидатов), по 5 ранов × 50000 шагов, параллельно. Сужение пространства кандидатов на уровне runner: {0b,11b,32b,53b} — 74b исключён BLOCKED-статусом EX-NL3-002-PARAM-74B-R1 (зафиксировано как отклонение-сужение; allowlist.json НЕ меняется). Манифесты arm-manifest-{11b,32b,53b}.json скопированы verbatim из origin/work/nl3-002-summary-r1. Гейты E2_PROTO_R1 §4: lbf>0.1078 / pf_v2<0.50 / disp>20 → STRUCTURALLY_INVALID; score = |median(valid frames) − 90|, конвенция [0,180]. Клим-класс C0_SOFTWARE_ONLY / E3 comparison measured, no physics-interpretation. LLM-arm НЕ в этом execution. Стопы: digest FAIL → BLOCKED; отказ WSL → BLOCKED; ≤1.2 ч wall/ран. state.json не меняется.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl4-002-e3 -b work/nl4-002-e3-mech-r1 592c4a1",
+    "wsl bash git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL4-002.md",
+    "docs/research/E2_PROTO_R1.md",
+    "scripts/nl4/allowlist.json",
+    "scripts/nl4/controller.py",
+    "scripts/nl4/scoring.py",
+    "scripts/e2/observables.py",
+    "scripts/hinge_family/source_pins.json",
+    "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json",
+    "docs/work/executions/EX-NL4-002-E3-MECH-R1/passport.json",
+    "docs/work/executions/EX-NL4-002-E3-MECH-R1/branch-passport.md"
+  ],
+  "next_action": "IMPLEMENTER: скопировать манифесты 11b/32b/53b из origin/work/nl3-002-summary-r1 → реализовать real_executor.py + runner → smoke E3-SMOKE-R001 → arms random/grid (5×50000, параллельно) → анализ v2 + гейты → END_EXECUTION/END_ANALYSIS/HANDOFF.",
+  "blocker": null
+}
