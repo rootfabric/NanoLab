@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-EXECUTION-PROGRAM-R1",
+  "work_order": "WO-POST-MVP-EXECUTION-PROGRAM-R1",
+  "risk": "LOW",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "base_branch": "control/post-mvp-route-r1",
+  "base_sha": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+  "implementation_subject_head": "0844f92c39a1b572d5c1e9d3ba9f5dbf6d70fc8e",
+  "changed_surfaces": [
+    "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md",
+    "docs/work/WO-POST-MVP-EXECUTION-PROGRAM-R1.md",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/passport.json",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/evidence-map.json",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/summary.md",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/events/0001-work-order-started.json",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/events/0002-handoff-completed.json"
+  ],
+  "validation": {
+    "branch_base_exact": true,
+    "stacked_on_pr37_head": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+    "canonical_files_touched": false,
+    "state_or_plan_changed": false,
+    "physics_runtime_changed": false,
+    "scientific_runs_started": false,
+    "new_deadlines_or_unproven_counters_introduced": false,
+    "program_subordinated_to": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
+    "merge_order_constraint": "PR #37 first, then this PR (retarget base to main after #37 merge)"
+  },
+  "known_limits": [
+    "program is a planning candidate until PR #37 is merged and this document passes owner review",
+    "owner decisions D1..D7 are listed, not taken",
+    "effort classes and sequence are used instead of calendar estimates by project policy"
+  ],
+  "review_status": "REVIEW_REQUIRED",
+  "verifier_status": "NOT_REQUIRED_LOW_RISK_DOCS_ONLY",
+  "human_gate": "MERGE_REQUIRED"
+}

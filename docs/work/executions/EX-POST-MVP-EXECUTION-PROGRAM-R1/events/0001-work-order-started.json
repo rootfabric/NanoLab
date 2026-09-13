@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T14:48:29Z",
+  "execution_id": "EX-POST-MVP-EXECUTION-PROGRAM-R1",
+  "work_order_id": "WO-POST-MVP-EXECUTION-PROGRAM-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5918a679f1f9d6bbeb071e62b54a5966dd163c8c",
+  "summary": "Старт EX-POST-MVP-EXECUTION-PROGRAM-R1: подготовка исполнительной программы post-MVP как operational layer над уже зафиксированной стратегией POST_MVP_DEVELOPMENT_ROUTE_R1 (ветка control/post-mvp-route-r1, PR #37, head e05793c). Scope: (1) Gate 0 — последовательность приёмки PR #37 (Fresh Reviewer substantive subject 59815fe → exact-head Verifier e05793c → Human Gate → post-merge regression); (2) декомпозиция NL5-001 на bounded WO A..D (release contract + rights gate, assembly с 74b timebox/KNOWN_GAP правилом, clean-room reproduction, review + rc); (3) NL5-002 external reproduction с каталожной границей NL5 и WAIT_EXTERNAL-правилом; (4) параллельная линия INFRA2→INFRA3 без научной истины; (5) вход в NL6-001/E5 (HIGH scientific WO, frozen E5_PROTO_R1) и NL6-002/E3-R2; (6) owner decision register D1..D7 + housekeeping H1..H3; (7) метрики/риски/стоп-условия. Forbidden: любые изменения canonical state/plan/roadmap/WORK_QUEUE/checkpoint-catalog (территория PR #37), physics/runtime code, новые раны, merge, push в route-ветку, принятие owner-решений.",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b control/post-mvp-execution-program-r1 /home/rdpuser/NanoLab/post-mvp-plan-r1 origin/control/post-mvp-route-r1",
+    "git -C /home/rdpuser/NanoLab/post-mvp-plan-r1 rev-parse HEAD -> e05793cc8ff03b3b1af2d81b38e39d82cd7527d6 (PR #37 head, expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
+    "docs/work/WO-POST-MVP-ROUTE-R1.md",
+    "docs/work/executions/EX-POST-MVP-ROUTE-R1/evidence-map.json",
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "docs/infra/ROADMAP.md"
+  ],
+  "next_action": "IMPLEMENTER: опубликовать POST_MVP_EXECUTION_PROGRAM_R1.md, канонические harness-записи, валидации (work_cli validate/close, check-consistency, unittest) → handoff.",
+  "blocker": null
+}

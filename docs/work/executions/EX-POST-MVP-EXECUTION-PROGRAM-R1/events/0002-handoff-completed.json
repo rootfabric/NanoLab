@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-handoff-completed",
+  "timestamp_utc": "2026-09-13T14:52:30Z",
+  "execution_id": "EX-POST-MVP-EXECUTION-PROGRAM-R1",
+  "work_order_id": "WO-POST-MVP-EXECUTION-PROGRAM-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0844f921c4e7e2b42c1b0e16116ea12b192f421e",
+  "summary": "Handoff EX-POST-MVP-EXECUTION-PROGRAM-R1. Deliverable: docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md (284 строки) — Gate 0 приёмки PR #37; NL5-001 A..D с DoD (schema v0.1, digest-linked карточки из существующих E2 evidence без re-measurement, 74b timebox→KNOWN_GAP, clean-room smoke, rc + publication gate); NL5-002 протокол/независимость/WAIT_EXTERNAL/граница приёмки NL5; INFRA2→INFRA3 sync-точка к E5; вход E5 (frozen E5_PROTO_R1, номенклатура externally driven DNA component) и E3-R2 (equal budget, anti-bias revalidation, NO_ADVANTAGE допустим); D1..D7 + H1..H3 (включая ai_campaigns semantics-then-audit); метрики; риски; стоп-условия route §5. Canonical файлы не тронуты (diff — только новые файлы). Валидации: work_cli validate/close ok; harness.cli check-consistency ok (frontier NL5, next NL5-001); unittest suite ok. Open risks: (1) программа — кандидат до merge PR #37 и owner review; (2) PR #37 OWN execution record EX-POST-MVP-ROUTE-R1 не проходит work_cli validate (missing passport.json) — находка для Fresh Reviewer Gate 0, не чинится в этой ветке, чтобы не менять subject под review; (3) push из Linux выполняется по SSH, API-токена нет — draft PR открывает owner. Одно next action: owner — Gate 0 по PR #37 (D1), затем review этой программы.",
+  "command_refs": [
+    "./CONTROL_WORK.sh validate docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1 -> ok",
+    "./CONTROL_WORK.sh close docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1 -> ok",
+    "./CONTROL_DEVELOPMENT.sh --check-consistency -> ok (frontier NL5, next NL5-001)",
+    "python3 -m unittest discover -s tests -t . -> full suite ok"
+  ],
+  "evidence_refs": [
+    "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md",
+    "docs/work/WO-POST-MVP-EXECUTION-PROGRAM-R1.md",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/evidence-map.json",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/summary.md"
+  ],
+  "next_action": "OWNER: Gate 0 для PR #37 (fresh review + exact-head verification + Human Gate merge, D1), затем owner review программы; merge этого PR — только после PR #37.",
+  "blocker": null
+}

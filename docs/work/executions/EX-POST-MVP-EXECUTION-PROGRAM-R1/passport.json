@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-EXECUTION-PROGRAM-R1",
+  "work_order_id": "WO-POST-MVP-EXECUTION-PROGRAM-R1",
+  "checkpoint": "control/planning (post NL4, перед NL5-001; подчинено WO-POST-MVP-ROUTE-R1)",
+  "base_sha": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+  "base_branch": "control/post-mvp-route-r1",
+  "branch": "control/post-mvp-execution-program-r1",
+  "worktree": "/home/rdpuser/NanoLab/post-mvp-plan-r1",
+  "risk_class": "LOW",
+  "claim_class": "C0_SOFTWARE_ONLY (planning document, no scientific claim)",
+  "allowed_paths": [
+    "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md",
+    "docs/work/WO-POST-MVP-EXECUTION-PROGRAM-R1.md",
+    "docs/work/executions/EX-POST-MVP-EXECUTION-PROGRAM-R1/**"
+  ],
+  "stacked_on": {
+    "pr": 37,
+    "branch": "control/post-mvp-route-r1",
+    "head": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+    "merge_order": "PR #37 merges first; this PR retargets to main afterwards"
+  },
+  "deliverables": [
+    "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md — Gate 0 for PR #37, tracks NL5-001 A..D, NL5-002, INFRA2->INFRA3, E5/E3-R2 entry, owner decision register D1..D7, housekeeping H1..H3, metrics, risks, stop conditions"
+  ],
+  "started_at_utc": "2026-09-13T14:48:29Z",
+  "status": "HANDOFF_READY"
+}
