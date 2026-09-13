@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0007-end-analysis",
+  "timestamp_utc": "2026-09-13T09:50:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "scientific_outcome": "MEASURED",
+  "summary": "END_ANALYSIS (measured-only, интерпретаций нет; сравнение arms — Director после всех рук). Таблица 5 ранов (все exit 0, все 12/12 кадров валидны, гейты §4 PASS): R001 32b/201004 median 78.32 score 11.68; R002 32b/202008 77.04 / 12.96; R003 32b/203012 80.17 / 9.83; R004 11b/201004 73.77 / 16.23; R005 11b/202008 73.28 / 16.72. BEST: E3-LLM-R003 (32b, seed 203012) score 9.832001928 (median 80.17°). 50k-медианы 32b согласуются с опубликованной 150k-медианой 78.09° (сдвиг < 2.1°, меж-seed IQR ~3.1°); 11b ~73.5° против 73.93°. Пост-фактум (полностью в llm-decisions.json final_summary): стратегия a-priori-оптимальна для данного дискретного пространства (32b доминирует при любом знаке сдвига); раны 4-5 имели низкое ожидание улучшения, но положительное (best-of монотонен по добавлению ранов).",
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-decisions.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-arm-session.json"
+  ],
+  "next_action": "HANDOFF (0008): summary.md, passport HANDOFF_READY, SESSION_LOG, валидации, коммит+push.",
+  "blocker": null
+}

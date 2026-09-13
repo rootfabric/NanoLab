@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "checkpoint": "NL4",
+  "base_sha": "64b91635325ca8decc11e6f7abd0da832a133a5e",
+  "branch": "work/nl4-002-e3-llm-r1",
+  "worktree": "C:\\NanoLab\\nl4-002-e3-llm",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / measured-only: LLM arm эксперимента E3 — 5 реальных прогонов oxDNA (WSL, pinned build, digest-gated входы) через bounded-интерфейс (BoundedAgent + frozen allowlist), без изменения кода scripts/**; адаптивная стратегия выбора кандидатов из суженного пространства {0b,11b,32b,53b} x seed {201004,202008,203012}, steps=50000; scientific claim ограничен WO-NL4-002 (сравнение стратегий при равном бюджете)",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/**",
+    "docs/work/SESSION_LOG.md (append)"
+  ],
+  "actor_role": "LLM_AGENT (DSH fresh session via bounded interface)",
+  "isolation_statement": "Fair-comparison изоляция соблюдена: nothing under docs/work/executions/EX-NL4-002-E3-MECH-R1/** не читалось и не ищется; известны только опубликованные E2-медианы (0b 65.87 / 11b 73.93 / 32b 78.09 / 53b 132.36 @150-200k), allowlist, код пакета и собственные наблюдения",
+  "protocol": "docs/work/WO-NL4-002.md (E3 пререгистрация); integrity-гейты frozen E2_PROTO_R1 §4 (lbf <= 0.1078, pf_v2 >= 0.50, disp <= 20.0) — зеркалированы в nl4.scoring/real_executor; канонический JSON e2.canonical; engine /home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA (commit 00dc7fb9) через WSL; run-каталоги вне Git, манифесты SHA-256+size обязательны",
+  "budget": {
+    "max_simulations": 5,
+    "steps": 50000,
+    "max_wall_minutes_per_run": 72.0
+  },
+  "runs": [
+    "E3-LLM-R001 (32b/201004, median 78.32, score 11.68, ANALYSED)",
+    "E3-LLM-R002 (32b/202008, median 77.04, score 12.96, ANALYSED)",
+    "E3-LLM-R003 (32b/203012, median 80.17, score 9.83, ANALYSED, BEST)",
+    "E3-LLM-R004 (11b/201004, median 73.77, score 16.23, ANALYSED)",
+    "E3-LLM-R005 (11b/202008, median 73.28, score 16.72, ANALYSED)"
+  ],
+  "physics_runs": 5,
+  "started_at_utc": "2026-09-13T06:04:21Z",
+  "completed_at_utc": "2026-09-13T10:00:00Z",
+  "status": "HANDOFF_READY"
+}

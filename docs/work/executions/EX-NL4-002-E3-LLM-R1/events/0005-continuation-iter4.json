@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-continuation-iter4",
+  "timestamp_utc": "2026-09-13T09:37:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "summary": "Итерация 4/5: 11b seed 201004. E3-LLM-R004: exit 0, wall 2540 s, 12/12 кадров валидны, гейты §4 PASS (lbf 0.0543; pf_v2 0.9867; disp 4.20), median 73.77°, score 16.23 (best не улучшен; ожидаемо — 11b ниже 32b).",
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/E3-LLM-R004/analysis.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-decisions.json"
+  ],
+  "next_action": "Итерация 5 (финальная): 11b seed 202008.",
+  "blocker": null
+}

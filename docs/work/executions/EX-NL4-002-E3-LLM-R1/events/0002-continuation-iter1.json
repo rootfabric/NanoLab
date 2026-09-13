@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-iter1",
+  "timestamp_utc": "2026-09-13T07:04:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "summary": "Итерация 1/5: 32b seed 201004 (proposal + rationale записаны ДО запуска в evidence/llm-decisions.json). E3-LLM-R001: exit 0, wall 2320 s, 12/12 кадров валидны, гейты §4 PASS (lbf 0.0562 <= 0.1078; pf_v2 0.9865 >= 0.50; disp 9.24 <= 20.0), median 78.32°, score |78.32-90| = 11.68. Наблюдение: 50k-медиана практически совпадает с опубликованной 150k-медианой 78.09° (сдвиг ~+0.2°) — стратегия подтверждена. Инцидент логистики (без траты бюджета): первый запуск итерации 1 был убит на границе turn'а ДО старта движка (run-каталог не создан, ledger пуст) — перезапущен тем же кандидатом.",
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/E3-LLM-R001/analysis.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-decisions.json"
+  ],
+  "next_action": "Итерация 2: 32b seed 202008.",
+  "blocker": null
+}

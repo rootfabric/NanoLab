@@ -1,0 +1,300 @@
+{
+  "agent": "llm-brain-r1 (DSH fresh session) via bounded-agent-r1",
+  "allowlist_narrowing": {
+    "note": "EX-NL4-002-E3-LLM-R1 runner-level narrowing (same as mech arm); allowlist.json NOT modified",
+    "reason": "74b excluded by BLOCKED status (EX-NL3-002-PARAM-74B-R1); steps fixed to 50000 by WO-NL4-002 budget",
+    "steps": [
+      50000
+    ],
+    "variants": [
+      "0b",
+      "11b",
+      "32b",
+      "53b"
+    ]
+  },
+  "arm": "llm",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "goal": {
+    "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+    "max_simulations": 5,
+    "max_wall_minutes": 540.0,
+    "target_angle_deg": 90.0
+  },
+  "kind": "nl4_e3_llm_arm_execution",
+  "schema_version": 1,
+  "scoring": {
+    "best": {
+      "candidate_id": "CAND-0003",
+      "run_id": "E3-LLM-R003",
+      "score": 9.832001928
+    },
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 540.0,
+      "simulations_used": 5,
+      "wall_seconds_used": 12760.38
+    },
+    "counts": {
+      "proposals_rejected": 0,
+      "proposals_total": 5,
+      "runs_executed": 5,
+      "runs_scored": 5,
+      "runs_structurally_invalid": 0
+    },
+    "target_angle_deg": 90.0
+  },
+  "sequential_adaptive": true,
+  "session_report": {
+    "actions_log": [
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0001",
+        "reason": null,
+        "seq": 1
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0001",
+        "reason": null,
+        "run_id": "E3-LLM-R001",
+        "seq": 2
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0002",
+        "reason": null,
+        "seq": 3
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0002",
+        "reason": null,
+        "run_id": "E3-LLM-R002",
+        "seq": 4
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0003",
+        "reason": null,
+        "seq": 5
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0003",
+        "reason": null,
+        "run_id": "E3-LLM-R003",
+        "seq": 6
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0004",
+        "reason": null,
+        "seq": 7
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0004",
+        "reason": null,
+        "run_id": "E3-LLM-R004",
+        "seq": 8
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0005",
+        "reason": null,
+        "seq": 9
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0005",
+        "reason": null,
+        "run_id": "E3-LLM-R005",
+        "seq": 10
+      }
+    ],
+    "agent": "bounded-agent-r1",
+    "allowlist_revision": "nl4-allowlist-r1",
+    "bounded_agent_rejected": [],
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 540.0,
+      "simulations_used": 5,
+      "wall_seconds_used": 12760.38
+    },
+    "candidates": {
+      "CAND-0001": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "CAND-0002": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "CAND-0003": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "CAND-0004": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "CAND-0005": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "11b"
+      }
+    },
+    "controller_id": "nl4-controller-r1",
+    "executor": {
+      "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+      "executor_id": "real-oxdna-wsl-r1"
+    },
+    "goal": {
+      "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+      "max_simulations": 5,
+      "max_wall_minutes": 540.0,
+      "target_angle_deg": 90.0
+    },
+    "kind": "nl4_session_report",
+    "runs": [
+      {
+        "analysis": {
+          "displacement_max": 9.242589828,
+          "long_bond_fraction": 0.05621162,
+          "median_angle_deg": 78.322644849,
+          "pairs_fraction_v2": 0.986482382
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0001",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "1ae2273f99e18b21c8fa3d524bc10d53bb6378ba36d193be5777f73557a0116c",
+        "run_id": "E3-LLM-R001",
+        "wall_seconds": 2320.06
+      },
+      {
+        "analysis": {
+          "displacement_max": 8.072581083,
+          "long_bond_fraction": 0.055680208,
+          "median_angle_deg": 77.044589742,
+          "pairs_fraction_v2": 0.98656401
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0002",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "06a972eabe82f10ff7f306c3de802656a765579c084ac12c52c16af591d1bd79",
+        "run_id": "E3-LLM-R002",
+        "wall_seconds": 2700.1
+      },
+      {
+        "analysis": {
+          "displacement_max": 8.401493691,
+          "long_bond_fraction": 0.056093529,
+          "median_angle_deg": 80.167998072,
+          "pairs_fraction_v2": 0.985361391
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0003",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "cf5e9af3bf70d233abf6ba01e985a67a96d5f2f34b1f68ed63f6a4f9a463d557",
+        "run_id": "E3-LLM-R003",
+        "wall_seconds": 2440.07
+      },
+      {
+        "analysis": {
+          "displacement_max": 4.204821504,
+          "long_bond_fraction": 0.054303524,
+          "median_angle_deg": 73.768492098,
+          "pairs_fraction_v2": 0.986709441
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0004",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "d09a31a8d6d4fe2c9d4b2c7075d4226907c3b025fd1c84f14b5f495d66bac80d",
+        "run_id": "E3-LLM-R004",
+        "wall_seconds": 2540.07
+      },
+      {
+        "analysis": {
+          "displacement_max": 4.756747179,
+          "long_bond_fraction": 0.0544234,
+          "median_angle_deg": 73.279585565,
+          "pairs_fraction_v2": 0.98684613
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 202008,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0005",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "83a7b4e40e42b57766548020c6137f3004af6baa085a41294e15f8f0c3a37e33",
+        "run_id": "E3-LLM-R005",
+        "wall_seconds": 2760.08
+      }
+    ],
+    "schema_version": 1,
+    "stop_reason": "BUDGET_EXHAUSTED_SIMULATIONS"
+  }
+}
+

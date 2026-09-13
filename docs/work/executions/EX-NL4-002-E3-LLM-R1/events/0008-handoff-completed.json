@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0008-handoff-completed",
+  "timestamp_utc": "2026-09-13T10:05:00Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "agent_identity": "LLM_AGENT (DSH fresh session via bounded interface)",
+  "subject_sha": "bf8528a78fc51185960eee5f3fbec5459974eded",
+  "summary": "Handoff EX-NL4-002-E3-LLM-R1 (LLM arm E3). Ветка work/nl4-002-e3-llm-r1 (base 64b9163; чекпоинт итераций 1-3 bf8528a; настоящий records-коммит добавляет итерации 4-5, события, summary, passport HANDOFF_READY). Бюджет: ровно 5 прогонов oxDNA 50000 шагов через bounded-интерфейс, все ANALYSED, 0 rejected, 0 STRUCTURALLY_INVALID (60/60 кадров валидны), суммарный wall 12760 s. Итог: best E3-LLM-R003 (32b, seed 203012) median 80.17°, score 9.832001928. Изоляция fair-comparison: каталог EX-NL4-002-E3-MECH-R1/** не читался и поиск его результатов не производился; ИНЦИДЕНТ (раскрыт, влияния нет): при аппенде в SESSION_LOG.md (allowed-файл) хвост файла показал содержавшуюся в base-коммите 64b9163 mech-сводку с агрегатами random/grid — ПОСЛЕ фиксации всех 5 решений (последнее 09:41Z, стратегия 06:04Z); подробности в summary.md. Валидации: unittest 291 OK (1 skip); work_cli validate ok=true; work_cli close ok=true; check-consistency ok=true. Артефакты ранов в WSL вне Git с манифестами SHA-256+size; временные исходники удалены (U4=NO); scripts/** не изменялись. Открытые риски: (1) score = single-median best-of, n=5 — без CI-оценки по WO (tie-break CI95 применяется Director'ом только при равенстве); (2) verification победителя свежими seeds 204016/205020 — отдельный пост-кампанейский шаг WO. NEXT (одно действие): Director: батч-ревью всех трёх рук E3 -> winner + re-validation -> acceptance (Human Gate merge).",
+  "command_refs": [
+    "python docs/work/executions/EX-NL4-002-E3-LLM-R1/tools/llm_arm_driver.py run --run-seq N --variant V --seed S (x5)",
+    "python docs/work/executions/EX-NL4-002-E3-LLM-R1/tools/llm_arm_driver.py replay",
+    "PYTHONPATH=scripts python -m pytest tests -q -> 291 passed, 1 skipped",
+    "PYTHONPATH=scripts python -m harness.work_cli validate docs/work/executions/EX-NL4-002-E3-LLM-R1 -> ok=true",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok=true"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/summary.md",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-decisions.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-arm-session.json",
+    "docs/work/executions/EX-NL4-002-E3-LLM-R1/evidence/llm-runs-ledger.json"
+  ],
+  "next_action": "Director: батч-ревью трёх рук E3 -> winner + re-validation -> acceptance (merge = Human Gate).",
+  "blocker": null
+}
