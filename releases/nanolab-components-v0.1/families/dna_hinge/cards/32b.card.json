@@ -1,0 +1,170 @@
+{
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "component_id": "dna_hinge/32b",
+  "design": {
+    "angle_frame0_deg": 77.477102136,
+    "arm_a_nucleotides": 4814,
+    "arm_b_nucleotides": 3190,
+    "arm_manifest_report": "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b-report.json",
+    "manifest_determinism": "byte-identical derivations: 2 runs",
+    "manifest_fraction_of_paired": 0.9995005,
+    "manifest_fraction_of_topology": 0.933955659,
+    "topology_nucleotides": 8570,
+    "upstream_role": "REGISTERED_NOT_VALIDATED"
+  },
+  "family": "dna_hinge",
+  "function": "Compliant DNA hinge: взаимный угол плеч; в v0.1 измерено равновесное распределение угла в общем сравнительном окне 150k параметрической серии. Управляемый привод — предмет E5, не этой карточки",
+  "integrity": {
+    "details": [
+      "valid_frame_fraction_in_window = 1.0 в каждой реплике (PARAM-32B-S001: 37/37, PARAM-32B-S002: 37/37, PARAM-32B-S003: 37/37)",
+      "кадры за пределами окна 150k исключены frozen-правилом сравнения, а не гейт-отказом"
+    ],
+    "frames_valid": "111/111 in-window",
+    "gates_passed": true,
+    "notes": "гейты §4 E2_PROTO_R1"
+  },
+  "interfaces": {
+    "arms": "два плеча (arm_a 4814 / arm_b 3190 нуклеотидов манифеста), топология 8570 нуклеотидов",
+    "measurement_interface": "[0,180] deg, PCA axes, erratum R1 §2.5; detector v2 mutual-nearest + PCA hinge angle, frozen arm manifest"
+  },
+  "kind": "nanolab_component_card",
+  "known_gaps": [],
+  "known_limitations": [
+    "измерение выполнено в общем сравнительном окне 150k параметрической серии (addendum §8); confirmatory 200k в v0.1 есть только у варианта 0b",
+    "вариант зарегистрирован из upstream; spring layers REPORTED (paper via NL0-001), машинно не проверялись в R1 (source_pins role REGISTERED_NOT_VALIDATED)",
+    "coarse-grained модель oxDNA DNA2: количественное соответствие эксперименту не claim'ится (ceiling C0_SOFTWARE_ONLY/measured-only)",
+    "конвенция угла [0,180] по PCA-осям не имеет прямого соответствия SI статьи (U-obs-1 закрыт first-principles решением E2_OBS1_SI_DECISION_R1, не подгонкой под SI)",
+    "v2-detector пар (mutual-nearest, window + antiparallel a1) — frozen-инструментальная конвенция, не авторский код"
+  ],
+  "measured_observables": {
+    "hinge_angle_common_window_150k": {
+      "convention": "[0,180] deg, PCA axes, erratum R1 §2.5; detector v2 mutual-nearest + PCA hinge angle, frozen arm manifest; общий кросс-вариантный интервал 150k (addendum §8 item 3)",
+      "digests": {},
+      "distribution": {
+        "bootstrap": {
+          "ci95": [
+            77.794798276,
+            78.66512915
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          77.044589742,
+          79.781487257
+        ],
+        "per_replica_median_deg": {
+          "PARAM-32B-S001": 79.877463339,
+          "PARAM-32B-S002": 77.4927314,
+          "PARAM-32B-S003": 77.794798276
+        },
+        "q05_q95_deg": [
+          75.753118173,
+          81.213081515
+        ]
+      },
+      "estimate": 78.091845516,
+      "n": 111,
+      "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
+      "uncertainty": [
+        77.794798276,
+        78.66512915
+      ],
+      "units": "deg"
+    }
+  },
+  "measurement_status": "MEASURED",
+  "operating_range": {
+    "model": "oxDNA DNA2 coarse-grained",
+    "notes": "применимость ограничена измеренным протоколом; экстраполяция не заявляется",
+    "salt_concentration_M": 0.5,
+    "temperature": "300 K"
+  },
+  "protocol_pins": {
+    "engine": "oxDNA (CPU build, double precision)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "model": "DNA2",
+    "notes": "прогоны полностью внутри общего окна 150k (cross-check: data fully inside window)",
+    "options": {
+      "print_conf_interval": 4000,
+      "print_energy_every": 100,
+      "salt_concentration": 0.5
+    },
+    "platform": "как в ENGINE_ENVIRONMENT_R1 (WSL2 Ubuntu 24.04)",
+    "protocol": "docs/research/E2_PROTO_R1.md (frozen; addendum §8 common window); observables: docs/research/E2_OBSERVABLES_R2.md",
+    "seeds": [
+      201004,
+      202008,
+      203012
+    ],
+    "steps": 150000,
+    "temperature": "300 K"
+  },
+  "provenance": {
+    "card_generated_from": [
+      "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
+      "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/source-download-verification.json",
+      "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b-report.json",
+      "scripts/hinge_family/source_pins.json",
+      "docs/research/ENGINE_ENVIRONMENT_R1.md"
+    ],
+    "evidence_execution_id": "EX-NL3-002-PARAM-32B-R1",
+    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+  },
+  "reproduction": {
+    "expected": {
+      "hinge_angle_common_window_150k": 78.091845516
+    },
+    "requires": [
+      "oxDNA @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (CPU build, double precision)",
+      "python3 >= 3.10 (stdlib only)",
+      "сетевой доступ для download-on-run по exact pinned commit (REFERENCE_ONLY)"
+    ],
+    "rights_constraints": "download-on-run по exact pinned commit; durable-cache запрещён; upstream-файлы не включены в пакет",
+    "steps": [
+      "1. download-on-run с digest-гейтом: size + blob_sha1 (registry pin) обязательны; sha256 сверяется со значением карточки с учётом sha256_status",
+      "2. сборка входов реплик: verbatim conf/top + pro_CPU.in; seeds как в protocol_pins",
+      "3. прогоны: CPU oxDNA, 3 реплики; анализ в общем окне 150000 steps (addendum §8)",
+      "4. frozen-анализ: v2 mutual-nearest + гейты §4 + статистика §6 (median/IQR/q05-q95 по валидным кадрам, bootstrap CI95 10000 resamples, seed 424242)",
+      "5. сравнение pooled median с expected в пределах CI95; расхождение вне CI — REPRODUCTION_MISMATCH"
+    ],
+    "tolerance_policy": "pooled median в пределах bootstrap CI95 карточки; гейты кадра §4 E2_PROTO_R1; не PASS при отсутствии проверки"
+  },
+  "rights": {
+    "derived_results_publishable": true,
+    "durable_cache": "FORBIDDEN",
+    "notes": "G1 decision B: download-on-run по exact pinned commit; пакет распространяет производные результаты NanoLab, не upstream-файлы",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "rights_mode": "REFERENCE_ONLY",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations"
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (параметрическая серия, общее сравнительное окно 150000 steps; кросс-вариантные тренды в карточке не интерпретируются)",
+  "source_provenance": {
+    "digest_gate_result": "digest_gate_all = PASS (size + blob_sha1 registry pin; sha256 computed at download, status COMPUTED_NOT_VERIFIED)",
+    "digest_gates": {
+      "MD_Hinges/32b.conf": {
+        "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+        "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 2345114
+      },
+      "MD_Hinges/32b.top": {
+        "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+        "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 123024
+      },
+      "MD_Hinges/pro_CPU.in": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "sha256_status": "CONTENT_VERIFIED",
+        "size_bytes": 933
+      }
+    },
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations"
+  },
+  "variant": "32b"
+}

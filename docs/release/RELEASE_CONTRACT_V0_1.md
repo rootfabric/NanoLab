@@ -6,6 +6,17 @@
 
 Изменение контракта после публикации данных = новая ревизия контракта + новая версия пакета, никогда не правка задним числом.
 
+## Revision history
+
+- **R1** (WO-NL5-001-A-R1): первоначальный контракт.
+- **R1.1** (WO-NL5-001-B-R1, обнаружено при сборке библиотеки): digest-объект карточки —
+  обязательны `size_bytes` + `blob_sha1` (registry-пин, Git blob SHA1); `sha256` опционален
+  и допускается только вместе с `sha256_status ∈ {CONTENT_VERIFIED, COMPUTED_NOT_VERIFIED,
+  UNKNOWN}` (семантика S5). Основание: у вариантов 11b/32b/53b/74b sha256 вычислен при
+  скачивании (`COMPUTED_NOT_VERIFIED`, «recorded for future re-use; no registry claim»),
+  content-verified — только входы 0b и `pro_CPU.in`. Добавлено необязательное поле
+  `design` (факты arm-manifest варианта).
+
 ## 1. Назначение и границы
 
 Контракт определяет формат публичного пакета **`nanolab-components-v0.1`**: проверенные

@@ -132,6 +132,16 @@ def validate_card(card: Any, schema: dict[str, Any], origin: str) -> list[str]:
     for gap in card["known_gaps"]:
         _check_rel_path(str(gap.get("gap_id", "")), f"{origin}: known_gap {gap.get('gap_id')!r}", errors)
 
+    # S5 (amendment R1.1): a sha256 claim without its verification level (or the
+    # reverse) is a half-claim; the registry pin remains blob_sha1.
+    for gate_path, digest in card.get("source_provenance", {}).get("digest_gates", {}).items():
+        has_sha256 = "sha256" in digest
+        has_status = "sha256_status" in digest
+        if has_sha256 != has_status:
+            errors.append(
+                f"{origin}: digest {gate_path!r}: sha256 and sha256_status must be provided together (S5)"
+            )
+
     return errors
 
 

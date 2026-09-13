@@ -54,6 +54,11 @@
         "notes": {"type": "string"}
       }
     },
+    "design": {
+      "type": "object",
+      "description": "Design/arm-manifest facts for the variant (nucleotide counts, frame-0 angle, manifest coverage and determinism). Free-form typed values; explicit UNKNOWN allowed.",
+      "additionalProperties": {"type": ["string", "number", "boolean", "array", "null"]}
+    },
     "claim_ceiling": {
       "description": "New ceiling values require a new schema revision, never silent extension.",
       "enum": ["C0_SOFTWARE_ONLY", "C1_COMPUTATIONAL_REPRODUCTION"]
@@ -92,12 +97,16 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
-            "required": ["size_bytes", "blob_sha1", "sha256"],
+            "required": ["size_bytes", "blob_sha1"],
             "additionalProperties": false,
             "properties": {
               "size_bytes": {"type": "integer", "minimum": 0},
               "blob_sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
-              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "sha256_status": {
+                "description": "Amendment R1.1: sha256 is claimed only together with its verification level. The registry pin is blob_sha1 (Git blob SHA1); sha256 may be content-verified or merely computed at download for future re-use.",
+                "enum": ["CONTENT_VERIFIED", "COMPUTED_NOT_VERIFIED", "UNKNOWN"]
+              }
             }
           }
         },
