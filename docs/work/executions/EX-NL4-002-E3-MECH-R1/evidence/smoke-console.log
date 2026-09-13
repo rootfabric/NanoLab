@@ -1,0 +1,23 @@
+{
+  "analysis": {
+    "displacement_max": 4.430401912,
+    "long_bond_fraction": 0.055045317,
+    "median_angle_deg": 65.926791285,
+    "pairs_fraction_v2": 0.986482382
+  },
+  "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+  "candidate": {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "0b"
+  },
+  "evidence": "evidence/E3-SMOKE-R001/analysis.json",
+  "executor": "real-oxdna-wsl-r1",
+  "exit_code": 0,
+  "input_digest_sha256": "730ffb8720f485f6bb889a98c7cb4415456840bb80f75bbc243d0d9c49971c37",
+  "run_id": "E3-SMOKE-R001",
+  "status": "ANALYSED",
+  "wall_seconds": 2360.06,
+  "wsl_dir": "/home/yurig/nl4-002-e3/runs/E3-SMOKE-R001"
+}
+
