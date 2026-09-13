@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_component_card",
+  "component_id": "dna_hinge/74b",
+  "family": "dna_hinge",
+  "variant": "74b",
+  "function": "Compliant DNA hinge, длинноплечий вариант 74b; измерений нет — карточка публикуется как честный известный гэп семейства",
+  "interfaces": {
+    "arms": "структура аналогична 0b, длинаплечная конфигурация 74b",
+    "measurement_interface": "UNKNOWN до закрытия arm-manifest-v2 (detector применить нельзя без валидного arm manifest)"
+  },
+  "operating_range": {
+    "notes": "UNKNOWN — измерений не проводилось; ничего не заявляется"
+  },
+  "rights": {
+    "rights_mode": "REFERENCE_ONLY",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "derived_results_publishable": true,
+    "durable_cache": "FORBIDDEN",
+    "notes": "права те же, что у семейства; измерений нет, поэтому публикуются только метаданные варианта"
+  },
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "measurement_status": "NOT_MEASURED",
+  "scientific_outcome": "NOT_MEASURED (детерминированный отказ arm-manifest-v1; confirmatory runs NOT_RUN — honest gap, сохранён как есть)",
+  "protocol_pins": {
+    "engine": "oxDNA (CPU build, double precision)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "model": "DNA2",
+    "temperature": null,
+    "steps": null,
+    "seeds": [],
+    "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1)",
+    "options": {},
+    "protocol": "docs/research/E2_PROTO_R1.md; параметрическая серия — общий интервал 150k (addendum §8)",
+    "notes": "runs NOT_RUN для 74b; протокол не применялся"
+  },
+  "source_provenance": {
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "digest_gates": {},
+    "digest_gate_result": "n/a — runs NOT_RUN; input pins варианта хранятся в scripts/hinge_family/source_pins.json репозитория",
+    "notes": "отсутствие digest-гейтов здесь отражает отсутствие прогонов, а не пропуск проверки"
+  },
+  "measured_observables": {},
+  "integrity": {
+    "gates_passed": false,
+    "frames_valid": "0/0 (NOT_RUN)",
+    "details": ["arm-manifest-v1: детерминированный отказ при построении manifest для 74b"],
+    "notes": "integrity-гейты не проходились; это не PASS и не отрицательный научный результат — это NOT_RUN"
+  },
+  "known_gaps": [
+    {
+      "gap_id": "G-74B-ARM-MANIFEST",
+      "description": "Детерминированный отказ arm-manifest-v1 на варианте 74b; confirmatory runs NOT_RUN. Ремонт — отдельный bounded WO arm-manifest-v2; release v0.1 сознательно не задерживается этим гэпом (route R1 Phase B).",
+      "status": "KNOWN_GAP",
+      "blocking_release": false
+    }
+  ],
+  "known_limitations": [
+    "по 74b нет ни одного измеренного значения в v0.1",
+    "после закрытия arm-manifest-v2 карточка пересобирается по measured evidence в новой версии пакета, а не редактируется задним числом"
+  ],
+  "reproduction": {
+    "requires": ["закрытый bounded WO arm-manifest-v2 (предусловие воспроизводимости)"],
+    "steps": [
+      "1. убедиться, что arm-manifest-v2 принят и опубликован в новой версии пакета",
+      "2. воспроизвести measured-карточку 74b по её reproduction-секции в этой новой версии"
+    ],
+    "expected": {},
+    "tolerance_policy": "n/a — воспроизводить нечего (NOT_MEASURED); попытка воспроизведения отсутствующих значений не предполагается",
+    "rights_constraints": "как у семейства: download-on-run по exact pinned commit, durable-cache запрещён"
+  },
+  "provenance": {
+    "evidence_execution_id": "EX-NL3-002-PARAM-74B-R1",
+    "card_generated_from": [
+      "docs/work/executions/EX-NL3-002-PARAM-74B-R1/summary.md",
+      "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json"
+    ],
+    "generation": "curated example for WO-NL5-001-A-R1; демонстрирует honest KNOWN_GAP-вариант; НЕ является release-артефактом",
+    "notes": "реальная сборка библиотеки — NL5-001-B"
+  }
+}
