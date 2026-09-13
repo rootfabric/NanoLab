@@ -434,3 +434,13 @@ Director decision (2026-09-12): NL3-002 = ACCEPTED. state.json (execution-facts 
 Merge: work/nl3-002-summary-r1 (интеграция 11b/32b/53b/74b + summary) и review/nl3-002-param-batch-r1 влиты в main (28e9571, bcf51e0).
 
 Следующее действие: решение владельца о закрытии стадии NL3 (frontier → NL4, next NL4-001 «bounded AI agent») с учётом honest gap 74b; при закрытии — docs sync (README/ROADMAP/AGENT_START на NL4).
+
+## 2026-09-12 — NL3 — Director: стадия NL3 ЗАКРЫТА (владелец), frontier → NL4, next NL4-001
+
+Owner decision (2026-09-12, интерактивно): «Закрыть NL3 → frontier NL4 (Recommended)» — стадия NL3 принята целиком с честным гэпом 74b (NOT_MEASURED, детерминированный отказ arm-manifest-v1 до прогонов; сохранён как ограничение, путь решения — arm-manifest-v2 ревизия отдельным WO). Boundary NL3 по ROADMAP выполнена: семейство зарегистрировано, воспроизводимая серия E2 исполнена по frozen протоколу, зависимость параметр→угол получена (0b 65.87° / 11b 73.93° / 32b 78.09° / 53b 132.36° в общем окне 150k, bootstrap CI95) без навязанного тренда.
+
+state.json: stage_status NL3 = ACCEPTED, NL4 = IN_PROGRESS; frontier = NL4; next_work_order = NL4-001 (READY); task_status NL4-001 = READY. E2 = RUN (конвенция execution-facts). docs sync: README (CURRENT FRONTIER = NL4), ROADMAP (вводная), AGENT_START (fallback на NL4-001), WORK_QUEUE (разрешён старт NL4-001; 74b gap зафиксирован).
+
+Итог измерительной фазы лаборатории (measured-only): confirmatory 0b 65.98° [65.67, 66.32] (150/150 валидных); серия 11b/32b/53b в общем окне 150k — 73.93/78.09/132.36; все execution'ы с батчевым REVIEWER PASS (98c1cad); карточка компонента 0b; cost 0.049-0.066 s/step. NL4-001 — bounded AI agent (allowlist, фиксированные протоколы, budgets); baselines random/grid обязательны до E3.
+
+Следующее действие: dispatch NL4-001 (IMPLEMENTER fresh-сессия) — контроллер + ограниченный агент + baselines-каркас по WO-критериям WORK_QUEUE.

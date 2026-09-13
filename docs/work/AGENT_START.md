@@ -14,7 +14,7 @@
 > 8. Перед завершением создай `summary.md` и `HANDOFF_COMPLETED` либо точный `WORK_ORDER_BLOCKED`; проверь `CONTROL_WORK close`. Не объявляй себя независимым Reviewer/Verifier.
 > 9. Публикуй PR с evidence, exact HEAD/TREE, выполненными/невыполненными проверками и одним следующим действием.
 >
-> Если frontier — `NL3`, следующая READY-задача — `NL3-002` «Провести E2» (первый шарнир `0b` по `E2-SETUP-R1`). До dispatch кампании обязательно: (а) зафиксировать права источника G1 — открытое owner-решение (данные `DNA-hinge-simulations` = `REFERENCE_ONLY`, права UNKNOWN); (б) закрыть pre-E2 технические гэпы NL3-001 (см. `WO-NL3-002A.md`: compatibility audit, design→topology mapping, spring/restraint semantics, observables); (в) freeze `E2-PROTO-*` после пилота и до confirmatory прогонов. Не запускать кампанию без frozen protocol и не строить большой orchestrator до её завершения.
+> Если frontier — `NL4`, следующая READY-задача — `NL4-001` «Реализовать ограниченного агента и контроллер»: allowlist действий/параметров, фиксированные протоколы, budgets, реальные run/evidence IDs; ИИ не меняет физику/критерии/протоколы; baselines (random/grid) обязательны до E3. Измерительная база готова: E2 серия измерена (0b 65.98° [65.67, 66.32]; 11b/32b/53b; 74b honest gap — arm-manifest-v2 ревизия отдельным WO). Не запускать кампании E3 до NL4-001 acceptance и baselines.
 >
 > Если frontier всё ещё NL0 и NL0-001 не выполнен, выполни `docs/work/WO-NL0-001.md`: выбрать доступный reference E1 и candidate hinge E2, проверить фактические входы, первичные источники и ограничения. Не запускать дорогие simulations и не строить большой orchestrator до выбора входных данных.
 >

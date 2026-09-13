@@ -7,12 +7,12 @@
 ## Текущее состояние
 
 ```text
-CURRENT FRONTIER = NL3
-NEXT = NL3-002 (провести E2)
-E0 = RUN · E1 = SUPPORTED · E2 = NOT_RUN
+CURRENT FRONTIER = NL4
+NEXT = NL4-001 (bounded AI agent)
+E0 = RUN · E1 = SUPPORTED · E2 = RUN (0b: 65.98° [65.67, 66.32]; параметрика 11b/32b/53b; 74b honest gap)
 ```
 
-**Научная стадия `NL3` в работе: `NL0`–`NL2` приняты целиком; `NL3-001` (регистрация семейства шарниров Shi–Castro–Arya + структурное воспроизведение первого экземпляра `0b` без динамики) принята после Fresh Reviewer + Fresh Verifier. Кампания `E2` не стартовала.** Канонические статусы: [project/state.json](project/state.json), сводка приёмок: [WORK_QUEUE](docs/work/WORK_QUEUE.md). Следующий приоритет: `NL3-002` — провести E2 (первый шарнир `0b` по `E2-SETUP-R1`); при dispatch обязателен `E2-PROTO-*` freeze и фиксация прав источника G1 (открытое owner-решение). Регистрация семейства: [HINGE_FAMILY_R1](docs/research/HINGE_FAMILY_R1.md), выбор reference: [REFERENCE_SELECTION](docs/research/REFERENCE_SELECTION.md), exact inputs/provenance: [INPUT_AVAILABILITY](docs/research/INPUT_AVAILABILITY.md), протокол E1: [PREREGISTRATION_E1_R1](docs/research/PREREGISTRATION_E1_R1.md), постановка E2: [E2_SETUP_R1](docs/research/E2_SETUP_R1.md).
+**Научная стадия `NL3` канонически закрыта (параметризованная лаборатория нанокомпонента работает): NL3-001 (регистрация семейства) и NL3-002 (кампания E2 — confirmatory 0b + параметрика 11b/32b/53b, honest gap 74b, карточка компонента) приняты после Fresh Reviewer/Verifier и батчевого Reviewer. Стадия `NL4` (AI NanoLab MVP) в работе.** Канонические статусы: [project/state.json](project/state.json), сводка приёмок: [WORK_QUEUE](docs/work/WORK_QUEUE.md). Следующий приоритет: `NL4-001` — ограниченный исследовательский агент (allowlist, фиксированные протоколы, budgets; baselines — до E3). Регистрация семейства: [HINGE_FAMILY_R1](docs/research/HINGE_FAMILY_R1.md), протокол E2: [E2_PROTO_R1](docs/research/E2_PROTO_R1.md), карточка компонента 0b: [EX-NL3-002-SUMMARY-R1](docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.md).
 
 С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
 
