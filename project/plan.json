@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "kind": "development_plan",
-  "revision": "foundation-r1",
+  "revision": "post-mvp-route-r1",
   "runtime_schema_implemented": false,
   "mission": "Reproducible AI-assisted design and testing of nanostructures, components and future nanomachines",
   "mvp_stage": "NL4",
