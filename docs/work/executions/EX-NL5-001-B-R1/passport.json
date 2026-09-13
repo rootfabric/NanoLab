@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "checkpoint": "NL5 / NL5-001-B",
+  "base_sha": "9cbde33b854eeeb00abde84346c17fe3080bbe50",
+  "base_branch": "work/nl5-001-a-release-contract-r1",
+  "branch": "work/nl5-001-b-library-assembly-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-001-b-library",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY (publication of measured results, no interpretation)",
+  "allowed_paths": [
+    "docs/work/WO-NL5-001-B-R1.md",
+    "docs/work/executions/EX-NL5-001-B-R1/**",
+    "releases/nanolab-components-v0.1/**",
+    "schemas/components/component-card.v1.json",
+    "scripts/release/card_lint.py",
+    "scripts/release/build_library.py",
+    "examples/release/**",
+    "docs/release/RELEASE_CONTRACT_V0_1.md",
+    "tests/test_release_contract.py",
+    "tests/test_release_library.py"
+  ],
+  "parent_work_order": "NL5-001",
+  "program_reference": "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md (§3 NL5-001-B; merge после A и Gate 0 PR #37)",
+  "protocol": "docs/release/RELEASE_CONTRACT_V0_1.md (amendment R1.1 в этом WO) + docs/research/E2_PROTO_R1.md (frozen) + evidence-файлы как единственный источник чисел",
+  "deliverables": [
+    "scripts/release/build_library.py — детерминированный builder evidence -> пакет (--check режим)",
+    "releases/nanolab-components-v0.1/** — пакет: 1 семейство dna_hinge, 5 карточек, provenance, reports, protocols, reproduction, RIGHTS/CITATION/VERSION, manifest",
+    "contract amendment R1.1: sha256 опционален + sha256_status (CONTENT_VERIFIED / COMPUTED_NOT_VERIFIED / UNKNOWN), линтер S5",
+    "examples/release/** refresh под R1.1",
+    "tests/test_release_library.py — builder determinism + verbatim-number checks"
+  ],
+  "started_at_utc": "2026-09-13T15:23:53Z",
+  "status": "HANDOFF_READY"
+}

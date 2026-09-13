@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T15:24:30Z",
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9cbde33b854eeeb00abde84346c17fe3080bbe50",
+  "summary": "Старт EX-NL5-001-B-R1: сборка release-пакета nanolab-components-v0.1 (одно семейство dna_hinge, варианты 0b/11b/32b/53b/74b) детерминированным builder'ом из опубликованного evidence, zero new physics. Источники чисел: parametric-summary.json (pooled medians 150k: 0b 65.870460546, 11b 73.928725839, 32b 78.091845516, 53b 132.35778773; seeds 201004/202008/203012; n=111 на вариант), confirmatory-summary.json (0b 200k: 65.976921401, CI95 [65.674963662, 66.318271836], n=150), component-card-0b.json (limitations/environment verbatim), arm_manifest_summary (geometry per variant), source_pins.json + source-download-verification.json (digest-уровни), arm-manifest-74b-failure.json (FAILED_TWO_DOMINANT_BLOCKS, 2 attempts, runs NOT_RUN). Обнаружено требование amendment R1.1: у 11b/32b/53b/74b sha256 = COMPUTED_NOT_VERIFIED (blob_sha1 — верифицированный пин), схема A требовала sha256 безусловно. План: (1) amendment схемы + S5 линтера + refresh примера A; (2) builder с режимом --check (байт-в-байт); (3) пакет + манифест линтером; (4) тесты verbatim-чисел; (5) валидации. 74b публикуется как KNOWN_GAP без задержки release (route Phase B); ремонт — отдельный bounded arm-manifest-v2 WO. Forbidden: физика, canonical, лицензия за владельца, публикация.",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-001-b-library-assembly-r1 /home/rdpuser/NanoLab/nl5-001-b-library 9cbde33b854eeeb00abde84346c17fe3080bbe50",
+    "git -C /home/rdpuser/NanoLab/nl5-001-b-library rev-parse HEAD -> 9cbde33b854eeeb00abde84346c17fe3080bbe50 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
+    "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json",
+    "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.json",
+    "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+    "scripts/hinge_family/source_pins.json",
+    "docs/release/RELEASE_CONTRACT_V0_1.md"
+  ],
+  "next_action": "IMPLEMENTER: amendment R1.1 + builder + пакет + тесты + валидации → handoff.",
+  "blocker": null
+}
