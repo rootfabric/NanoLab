@@ -3,7 +3,7 @@
   "kind": "project_state",
   "foundation": "DOCUMENTED",
   "frontier": "NL4",
-  "next_work_order": "NL4-002",
+  "next_work_order": "NL4-003",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
@@ -29,8 +29,8 @@
     "NL3-001": "ACCEPTED",
     "NL3-002": "ACCEPTED",
     "NL4-001": "ACCEPTED",
-    "NL4-002": "READY",
-    "NL4-003": "PLANNED",
+    "NL4-002": "ACCEPTED",
+    "NL4-003": "READY",
     "NL5-001": "PLANNED",
     "NL5-002": "PLANNED",
     "NL6-001": "PLANNED",
@@ -59,7 +59,7 @@
   },
   "execution": {
     "runtime_implemented": false,
-    "physics_runs": 13,
+    "physics_runs": 31,
     "ai_campaigns": 0,
     "external_reproductions": 0,
     "paid_compute_authorized": false
