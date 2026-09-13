@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-EXECUTION-PROGRAM-R1",
+  "work_order": "WO-POST-MVP-EXECUTION-PROGRAM-R1",
+  "event": "WORK_ORDER_STARTED",
+  "status": "IN_PROGRESS",
+  "base_branch": "control/post-mvp-route-r1",
+  "base_sha": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+  "branch": "control/post-mvp-execution-program-r1",
+  "risk": "LOW",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "scope": "post-MVP execution program: decomposition of route R1 into bounded tracks, gates, metrics and owner decisions",
+  "next_action": "publish POST_MVP_EXECUTION_PROGRAM_R1.md and complete handoff evidence"
+}
