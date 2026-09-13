@@ -154,6 +154,21 @@ class TestCardSemantics(ReleaseContractTestBase):
         errors = card_lint.validate_card(card, self.schema, origin="mutated")
         self.assertTrue(any("(S4)" in e for e in errors), errors)
 
+    def test_s5_sha256_requires_status_together(self) -> None:
+        card = load(CARD_0B)
+        del card["source_provenance"]["digest_gates"]["MD_Hinges/0b.conf"]["sha256_status"]
+        errors = card_lint.validate_card(card, self.schema, origin="mutated")
+        self.assertTrue(any("(S5)" in e for e in errors), errors)
+
+        card = load(CARD_74B)
+        card["source_provenance"]["digest_gates"]["MD_Hinges/74b.conf"] = {
+            "size_bytes": 2403188,
+            "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
+            "sha256_status": "COMPUTED_NOT_VERIFIED",
+        }
+        errors = card_lint.validate_card(card, self.schema, origin="mutated")
+        self.assertTrue(any("(S5)" in e for e in errors), errors)
+
 
 class TestRightsAndPackage(ReleaseContractTestBase):
     def test_rights_example_passes_with_draft_warning(self) -> None:

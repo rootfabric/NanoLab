@@ -21,8 +21,8 @@
     {
       "path": "families/dna_hinge/cards/0b.card.json",
       "role": "card",
-      "sha256": "a90d8088af5d6c440546e36d1a2bedde14367a240234808501bcc8cbafd87daa",
-      "size_bytes": 8350
+      "sha256": "fa6946fb41f24141cd4e715f1e8971999677f35661b708e11f3f129059a27fd0",
+      "size_bytes": 8642
     },
     {
       "path": "families/dna_hinge/cards/74b.card.json",
@@ -51,8 +51,8 @@
     {
       "path": "schema/components/component-card.v1.json",
       "role": "schema",
-      "sha256": "350380a938d43ed4fe761c0139bf6e633db8780e8845a9f6bfe42b7fde60399e",
-      "size_bytes": 7160
+      "sha256": "37f4f6e9a8425215f6d5550ab2647377ef75457473361165ab6b95ad089d460b",
+      "size_bytes": 7843
     },
     {
       "path": "schema/release/release-manifest.v1.json",
@@ -67,7 +67,7 @@
       "size_bytes": 2509
     }
   ],
-  "generated_at_utc": "2026-09-13T15:10:10Z",
+  "generated_at_utc": "2026-09-13T15:27:54Z",
   "generated_by": "release.card_lint manifest create",
   "kind": "nanolab_release_manifest",
   "package": "nanolab-components",

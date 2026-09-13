@@ -1,0 +1,116 @@
+{
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "component_id": "dna_hinge/74b",
+  "design": {
+    "arm_manifest_failure_report": "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+    "arm_manifest_status": "MANIFEST_DERIVATION_FAILED (FAILED_TWO_DOMINANT_BLOCKS)",
+    "derivation_attempts": 2,
+    "deterministic_identical_error": true,
+    "error_class": "FAILED_TWO_DOMINANT_BLOCKS",
+    "error_message_head": "no threshold in PARALLEL_GRID yields two dominant rigid blocks; size tables: {0.85: [1734, 960, 722, 628, 350, 310, 268, 196, 180, 168, 168, 84, 74, 62, 58, 44, 42, 40, 32, 30, 30, 30, 28, 28, 28, 28,"
+  },
+  "family": "dna_hinge",
+  "function": "Compliant DNA hinge, длинноплечий вариант 74b; измерений нет — карточка публикуется как честный известный гэп семейства",
+  "integrity": {
+    "details": [
+      "arm-manifest-v1: FAILED_TWO_DOMINANT_BLOCKS (детерминированно, 2 attempts)",
+      "no simulation runs started for 74b; runs NOT_RUN; BLOCKED per stop rules"
+    ],
+    "frames_valid": "0/0 (NOT_RUN)",
+    "gates_passed": false,
+    "notes": "integrity-гейты не проходились; это не PASS и не отрицательный научный результат — это NOT_RUN"
+  },
+  "interfaces": {
+    "arms": "структура аналогична другим вариантам семейства, длинноплечная конфигурация 74b",
+    "measurement_interface": "UNKNOWN до закрытия arm-manifest-v2 (detector не применим без валидного arm manifest)"
+  },
+  "kind": "nanolab_component_card",
+  "known_gaps": [
+    {
+      "blocking_release": false,
+      "description": "Детерминированный отказ arm-manifest-v1 на 74b (no threshold in PARALLEL_GRID yields two dominant rigid blocks); runs NOT_RUN. Ремонт — отдельный bounded WO arm-manifest-v2; release v0.1 сознательно не задерживается этим гэпом (route R1 Phase B).",
+      "gap_id": "G-74B-ARM-MANIFEST",
+      "status": "KNOWN_GAP"
+    }
+  ],
+  "known_limitations": [
+    "по 74b нет ни одного измеренного значения в v0.1",
+    "после закрытия arm-manifest-v2 карточка пересобирается по measured evidence в новой версии пакета, а не редактируется задним числом"
+  ],
+  "measured_observables": {},
+  "measurement_status": "NOT_MEASURED",
+  "operating_range": {
+    "notes": "UNKNOWN — измерений не проводилось; ничего не заявляется"
+  },
+  "protocol_pins": {
+    "engine": "oxDNA (CPU build, double precision)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "model": "DNA2",
+    "notes": "runs NOT_RUN для 74b: блокировка по stop-правилам WO-NL3-002-PARAM до манифеста",
+    "options": {},
+    "platform": "как в ENGINE_ENVIRONMENT_R1 (WSL2 Ubuntu 24.04)",
+    "protocol": "docs/research/E2_PROTO_R1.md; к варианту 74b не применялся",
+    "seeds": [],
+    "steps": null,
+    "temperature": null
+  },
+  "provenance": {
+    "card_generated_from": [
+      "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+      "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/source-download-verification.json",
+      "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
+      "scripts/hinge_family/source_pins.json"
+    ],
+    "evidence_execution_id": "EX-NL3-002-PARAM-74B-R1",
+    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+  },
+  "reproduction": {
+    "expected": {},
+    "requires": [
+      "закрытый bounded WO arm-manifest-v2 (предусловие воспроизводимости)"
+    ],
+    "rights_constraints": "как у семейства: download-on-run по exact pinned commit, durable-cache запрещён",
+    "steps": [
+      "1. убедиться, что arm-manifest-v2 принят и опубликован в новой версии пакета",
+      "2. воспроизвести measured-карточку 74b по её reproduction-секции в этой новой версии"
+    ],
+    "tolerance_policy": "n/a — воспроизводить нечего (NOT_MEASURED); попытка воспроизведения отсутствующих значений не предполагается"
+  },
+  "rights": {
+    "derived_results_publishable": true,
+    "durable_cache": "FORBIDDEN",
+    "notes": "права те же, что у семейства; измерений нет, публикуются только метаданные варианта",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "rights_mode": "REFERENCE_ONLY",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations"
+  },
+  "schema_version": 1,
+  "scientific_outcome": "NOT_MEASURED (детерминированный отказ arm-manifest-v1; runs NOT_RUN — honest gap, сохранён как есть)",
+  "source_provenance": {
+    "digest_gate_result": "digest_gate_all = PASS на этапе скачивания входов; симуляции не запускались",
+    "digest_gates": {
+      "MD_Hinges/74b.conf": {
+        "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
+        "sha256": "711bb36a3e1d3113ef3cd8875020af30d1fdece8fb88f9a9e5134a77b4478bcb",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 2403188
+      },
+      "MD_Hinges/74b.top": {
+        "blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5",
+        "sha256": "80477acacac3892590085cc6caee08f6b07ded64144ffc5732234569d36890b7",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 126116
+      },
+      "MD_Hinges/pro_CPU.in": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "sha256_status": "CONTENT_VERIFIED",
+        "size_bytes": 933
+      }
+    },
+    "notes": "наличие digest-гейтов отражает выполненное скачивание; отсутствие измерений — отдельный факт (NOT_RUN)",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "upstream_repo": "gauravarya77/DNA-hinge-simulations"
+  },
+  "variant": "74b"
+}
