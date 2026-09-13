@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-end-execution",
+  "timestamp_utc": "2026-09-13T23:40:00Z",
+  "execution_id": "EX-NL4-003-R1",
+  "work_order_id": "NL4-003",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9e4d7207b8997d38c00a8abbf2db205868c415d1",
+  "summary": "Clean-room execution завершена: 4/4 ранов, все exit 0, 0 крэшей, 0 digest-FAIL. Прогон выполнен ИЗ СВЕЖЕГО КЛОНА C:\\NanoLab\\mvp-cleanroom (git clone --branch work/nl4-003-mvp-r1, HEAD 9e4d720 = subject, status clean), цель C:\\NanoLab\\mvp-goal.json {target_angle 90, max_simulations 3, steps 50000, revalidation_runs 1}, никакие артефакты вручную не правились. Команда: python <clone>\\scripts\\nl4\\mvp.py --goal C:\\NanoLab\\mvp-goal.json --out-dir <clone evidence> (консольный лог evidence/mvp-console.log). Digest-гейт источников 3/3 PASS (32b.top/32b.conf/pro_CPU.in; source-download-verification.json, digest_gate_all=PASS). Informed-greedy план (до ранов, детерминированно из published-медиан): E3-MVP-C001 32b/201004, E3-MVP-C002 11b/202008, E3-MVP-C003 0b/203012 — запущены параллельно; после best-выбора (C001) — revalidation E3-MVP-REV001 32b/206024 (свежий seed). Раны: /home/yurig/nl4-003-mvp/runs/<RUN_ID>/ (WSL, вне Git); входы digest-gated и скопированы в каталоги ранов с sha256-верификацией копий; каждые deviations.json + input.in + analysis.json (манифест артефактов SHA-256+size+location) в evidence/<RUN_ID>/. Wall: C001 2981.95 с, C002 3143.63 с, C003 2900.08 с, REV001 2440.07 с — все < 4320 с (кап 1.2 ч/ран); траектории 25.4–28.1 МБ/ран, полные 50000 шагов (12 кадров, print_conf_interval 4000). Cumulative executor wall (canonical Controller-replay) 9025.66 с при бюджете 288 мин. Отклонение-сужение: 74b отсутствует в prior (NOT_MEASURED) и не предлагался; allowlist nl4-allowlist-r1 не менялся; run-root /home/yurig/nl4-003-mvp/runs — module-level override WSL_RUNS_ROOT (frozen-файлы не тронуты).",
+  "command_refs": [
+    "git clone --branch work/nl4-003-mvp-r1 C:\\NanoLab\\main C:\\NanoLab\\mvp-cleanroom",
+    "python C:\\NanoLab\\mvp-cleanroom\\scripts\\nl4\\mvp.py --goal C:\\NanoLab\\mvp-goal.json --out-dir C:\\NanoLab\\mvp-cleanroom\\docs\\work\\executions\\EX-NL4-003-R1\\evidence",
+    "wsl ls /home/yurig/nl4-003-mvp/runs/{E3-MVP-C001,E3-MVP-C002,E3-MVP-C003,E3-MVP-REV001}"
+  ],
+  "evidence_refs": [
+    "evidence/mvp-console.log",
+    "evidence/source-download-verification.json",
+    "evidence/E3-MVP-C001/{analysis.json,deviations.json,input.in}",
+    "evidence/E3-MVP-C002/{analysis.json,deviations.json,input.in}",
+    "evidence/E3-MVP-C003/{analysis.json,deviations.json,input.in}",
+    "evidence/E3-MVP-REV001/{analysis.json,deviations.json,input.in}",
+    "evidence/mvp-session-report.json"
+  ],
+  "next_action": "END_ANALYSIS: отчёт из реальных данных + verdict.",
+  "blocker": null
+}

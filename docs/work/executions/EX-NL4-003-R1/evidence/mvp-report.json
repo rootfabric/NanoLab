@@ -1,0 +1,248 @@
+{
+  "angle_distribution": {
+    "E3-MVP-C001": {
+      "bootstrap_ci95_median": [
+        77.717927149,
+        80.0557981
+      ],
+      "max_deg": 81.259939078,
+      "median_deg": 78.322644849,
+      "min_deg": 76.888159701,
+      "n_frames_total": 12,
+      "n_frames_valid": 12,
+      "valid_frame_fraction": 1.0
+    },
+    "E3-MVP-C002": {
+      "bootstrap_ci95_median": [
+        73.187723067,
+        73.841803675
+      ],
+      "max_deg": 74.308728866,
+      "median_deg": 73.279585565,
+      "min_deg": 72.896351802,
+      "n_frames_total": 12,
+      "n_frames_valid": 12,
+      "valid_frame_fraction": 1.0
+    },
+    "E3-MVP-C003": {
+      "bootstrap_ci95_median": [
+        66.636637829,
+        67.743302119
+      ],
+      "max_deg": 68.410832656,
+      "median_deg": 67.309388567,
+      "min_deg": 66.117137317,
+      "n_frames_total": 12,
+      "n_frames_valid": 12,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "chosen": {
+    "candidate": {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    "candidate_score": 11.677355151,
+    "published_prior_median_deg": 78.091845516,
+    "run_id": "E3-MVP-C001"
+  },
+  "confidence": {
+    "note": "frames-based bootstrap CI95 for the median of valid frames (10000 resamples, seed 424242, E2_PROTO_R1 s.6 method)",
+    "revalidation": {
+      "bootstrap_ci95_median": [
+        74.500363522,
+        76.73407418
+      ],
+      "max_deg": 77.499625786,
+      "median_deg": 75.598452579,
+      "min_deg": 73.850011846,
+      "n_frames_total": 12,
+      "n_frames_valid": 12,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "gates": {
+    "displacement_max_max": 20.0,
+    "long_bond_fraction_max": 0.1078,
+    "pairs_fraction_v2_min": 0.5,
+    "per_run_status": {
+      "E3-MVP-C001": "OK",
+      "E3-MVP-C002": "OK",
+      "E3-MVP-C003": "OK"
+    },
+    "source": "docs/research/E2_PROTO_R1.md s.4 (FROZEN)"
+  },
+  "goal": {
+    "max_simulations": 3,
+    "revalidation_runs": 1,
+    "steps": 50000,
+    "target_angle": 90.0
+  },
+  "kind": "nl4_mvp_report",
+  "limitations": [
+    "discrete candidate space: 4 published variants only (74b NOT_MEASURED — arm-manifest derivation BLOCKED)",
+    "coarse-grained oxDNA model (DNA2), no claim of physical manufacturability",
+    "angle convention R1: [0,180] deg PCA-axes unsigned; erratum E2_PROTO_R1 s.2.5 (no theta <-> 180-theta folding)",
+    "budget: 3 candidates x 50000 steps + 1 revalidation run(s); no finer parameter search",
+    "final claimed score is the re-validation score on ONE fresh seed (anti-bias rule NL4-002)"
+  ],
+  "provenance": {
+    "allowlist_revision": "nl4-allowlist-r1",
+    "arm_manifests": "frozen per-variant (EX-NL3-002 arm-manifest-v1)",
+    "engine": "/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA",
+    "engine_source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "goal_file": "C:\\NanoLab\\mvp-goal.json",
+    "input_digests": {
+      "E3-MVP-C001": "1ae2273f99e18b21c8fa3d524bc10d53bb6378ba36d193be5777f73557a0116c",
+      "E3-MVP-C002": "83a7b4e40e42b57766548020c6137f3004af6baa085a41294e15f8f0c3a37e33",
+      "E3-MVP-C003": "82cd348ea0b1446f8b94921f2d11c938401eb61abb5c34f72696b540c5d4dad5",
+      "E3-MVP-REV001": "fd1794969a13f376bcbf41189efa54eab63e531de53fa8010020da9df60323fa"
+    },
+    "observables": "scripts/e2/observables.py v2 mutual-nearest (frozen)",
+    "repo": "rootfabric/NanoLab",
+    "repo_commit": "9e4d7207b8997d38c00a8abbf2db205868c415d1",
+    "revalidation_seed": 206024,
+    "runs_root": "/home/yurig/nl4-003-mvp/runs"
+  },
+  "reproduction": {
+    "command": "python scripts/nl4/mvp.py --goal <user-goal.json> --out-dir <evidence-dir> (from a fresh clone of commit 9e4d7207b8997d38c00a8abbf2db205868c415d1; proxy env required for digest-gated source download)",
+    "goal_file": "C:\\NanoLab\\mvp-goal.json",
+    "goal_json": {
+      "max_simulations": 3,
+      "revalidation_runs": 1,
+      "steps": 50000,
+      "target_angle": 90.0
+    }
+  },
+  "revalidation": {
+    "candidate": {
+      "seed": 206024,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    "distribution": {
+      "bootstrap_ci95_median": [
+        74.500363522,
+        76.73407418
+      ],
+      "max_deg": 77.499625786,
+      "median_deg": 75.598452579,
+      "min_deg": 73.850011846,
+      "n_frames_total": 12,
+      "n_frames_valid": 12,
+      "valid_frame_fraction": 1.0
+    },
+    "input_digest_sha256": "fd1794969a13f376bcbf41189efa54eab63e531de53fa8010020da9df60323fa",
+    "integrity_status": "OK",
+    "median_angle_deg": 75.598452579,
+    "revalidated_score": 14.401547421,
+    "run_id": "E3-MVP-REV001",
+    "wall_seconds": 2440.07
+  },
+  "runs": [
+    {
+      "candidate": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "input_digest_sha256": "1ae2273f99e18b21c8fa3d524bc10d53bb6378ba36d193be5777f73557a0116c",
+      "integrity_status": "OK",
+      "median_angle_deg": 78.322644849,
+      "run_id": "E3-MVP-C001",
+      "score": 11.677355151,
+      "wall_seconds": 2981.95
+    },
+    {
+      "candidate": {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "input_digest_sha256": "83a7b4e40e42b57766548020c6137f3004af6baa085a41294e15f8f0c3a37e33",
+      "integrity_status": "OK",
+      "median_angle_deg": 73.279585565,
+      "run_id": "E3-MVP-C002",
+      "score": 16.720414435,
+      "wall_seconds": 3143.63
+    },
+    {
+      "candidate": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "input_digest_sha256": "82cd348ea0b1446f8b94921f2d11c938401eb61abb5c34f72696b540c5d4dad5",
+      "integrity_status": "OK",
+      "median_angle_deg": 67.309388567,
+      "run_id": "E3-MVP-C003",
+      "score": 22.690611433,
+      "wall_seconds": 2900.08
+    }
+  ],
+  "schema_version": 1,
+  "scoring": {
+    "best": {
+      "candidate_id": "CAND-0001",
+      "run_id": "E3-MVP-C001",
+      "score": 11.677355151
+    },
+    "budget": {
+      "max_simulations": 3,
+      "max_wall_minutes": 288.0,
+      "simulations_used": 3,
+      "wall_seconds_used": 9025.66
+    },
+    "counts": {
+      "proposals_rejected": 0,
+      "proposals_total": 3,
+      "runs_executed": 3,
+      "runs_scored": 3,
+      "runs_structurally_invalid": 0
+    },
+    "target_angle_deg": 90.0
+  },
+  "strategy": {
+    "name": "mvp-informed-greedy-r1",
+    "planned_candidates": [
+      {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      {
+        "seed": 202008,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "0b"
+      }
+    ],
+    "policy": "deterministic informed-greedy: published-nearest variant first, then next-ranked alternatives; seeds from the frozen E2 triple in order; no LLM, no adaptivity",
+    "published_series": {
+      "excluded": {
+        "74b": "NOT_MEASURED (arm-manifest derivation BLOCKED, EX-NL3-002-PARAM-74B-R1)"
+      },
+      "median_deg": {
+        "0b": 65.870460546,
+        "11b": 73.928725839,
+        "32b": 78.091845516,
+        "53b": 132.35778773
+      },
+      "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json (pooled common-window t <= 150000 medians, valid frames only)"
+    }
+  },
+  "verdict": {
+    "published_best_gap_deg": 11.908154484,
+    "reasons": [
+      "REVALIDATED_SCORE_NOT_BELOW_PUBLISHED_BEST"
+    ],
+    "rule": "FOUND iff best valid candidate exists AND revalidation passes frozen gates AND revalidated |median - target| < published-best gap",
+    "verdict": "NOT_FOUND"
+  }
+}
+
