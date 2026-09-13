@@ -13,7 +13,7 @@
     {"id": "NL3", "title": "Parameterized nanocomponent lab", "depends_on": ["NL2"]},
     {"id": "NL4", "title": "AI NanoLab MVP", "depends_on": ["NL3"]},
     {"id": "NL5", "title": "Validated library and external reproduction", "depends_on": ["NL4"]},
-    {"id": "NL6", "title": "One additional scientific capability", "depends_on": ["NL5"]},
+    {"id": "NL6", "title": "Driven DNA component and rich-space AI benchmark", "depends_on": ["NL5"]},
     {"id": "NL7", "title": "Composition and validated reduced models", "depends_on": ["NL6"]},
     {"id": "NL8", "title": "Specialized nanomachine research", "depends_on": ["NL7"]}
   ],
@@ -42,8 +42,9 @@
     {"id": "NL4-003", "stage": "NL4", "title": "Package user-facing MVP", "depends_on": ["NL4-002"], "doc": "docs/work/WORK_QUEUE.md"},
     {"id": "NL5-001", "stage": "NL5", "title": "Publish validated component library", "depends_on": ["NL4-003"], "doc": "docs/work/WORK_QUEUE.md"},
     {"id": "NL5-002", "stage": "NL5", "title": "Obtain external reproduction", "depends_on": ["NL5-001"], "doc": "docs/work/WORK_QUEUE.md"},
-    {"id": "NL6-001", "stage": "NL6", "title": "Select and validate one extension", "depends_on": ["NL5-002"], "doc": "docs/work/WORK_QUEUE.md"},
-    {"id": "NL7-001", "stage": "NL7", "title": "Validate composition and reduced models", "depends_on": ["NL6-001"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL6-001", "stage": "NL6", "title": "Validate E5 driven DNA component under explicit actuation and load", "depends_on": ["NL5-002"], "doc": "docs/work/WORK_QUEUE.md"},
+    {"id": "NL6-002", "stage": "NL6", "title": "Execute E3-R2 AI benchmark on enriched post-E5 design space", "depends_on": ["NL6-001"], "doc": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md"},
+    {"id": "NL7-001", "stage": "NL7", "title": "Validate composition and reduced models", "depends_on": ["NL6-002"], "doc": "docs/work/WORK_QUEUE.md"},
     {"id": "NL8-001", "stage": "NL8", "title": "Specify nanomachine energy and control study", "depends_on": ["NL7-001"], "doc": "docs/work/WORK_QUEUE.md"}
   ]
 }
