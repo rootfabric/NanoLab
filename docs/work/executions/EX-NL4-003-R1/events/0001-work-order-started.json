@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T22:05:00Z",
+  "execution_id": "EX-NL4-003-R1",
+  "work_order_id": "NL4-003",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "abd79ba236d714957f55e42af59dd41554f597b5",
+  "summary": "Старт EX-NL4-003-R1 (WO-NL4-003, финальный WO стадии NL4 — user-facing MVP + clean-room). План: (1) scripts/nl4/mvp.py — CLI --goal user-goal.json (target_angle/max_simulations/steps/revalidation_runs), стратегия informed-greedy (детерминированная, scripted, БЕЗ LLM): published pooled-медианы параметрической серии (EX-NL3-002-SUMMARY-R1 parametric-summary.json, common window) зашиты как данные с ссылкой; старт с published-ближайшего варианта к target, затем 2 следующих по рангу; цикл через Controller + RealExecutorAdapter (реальные oxDNA-прогоны через WSL, pinned 00dc7fb9, digest-gated входы, runs в /home/yurig/nl4-003-mvp/runs/<RUN_ID>/); best по score = |median − target| (гейты E2_PROTO_R1 §4); re-validation best свежим seed 206024 (вне замороженной E2-тройки — анти-bias правило NL4-002, ран идёт через executor напрямую, не через кандидатное пространство allowlist); финальный score = по re-validation; отчёт mvp-report.md + canonical JSON (goal/runs/digests/распределение/gates/chosen+revalidated/confidence/provenance/limitations/reproduction/verdict FOUND|NOT_FOUND). (2) Тесты на mock (детерминизм стратегии, verdict-логика, генерация отчёта). (3) Clean-room: свежий git clone в C:\\NanoLab\\mvp-cleanroom (НЕ worktree), пустые каталоги ранов, goal {"target_angle": 90, "max_simulations": 3, "steps": 50000, "revalidation_runs": 1}, 3 рана параллельно + 1 revalidation, всё внутри turn; траектории вне Git, манифесты SHA-256+size в evidence. (4) Verdict: FOUND iff revalidated |median − 90| < published-best |78.091845516 − 90| = 11.908154484 И гейты всех ранов зелёные; иначе NOT_FOUND (нормальный исход). Бюджет ≤ 4 ранов, ≤ 1.2 ч/ран. Claim: C0_SOFTWARE_ONLY / MVP clean-run measured. Стопы: digest FAIL / движок-крэш 2 из 4 / clean-room clone невозможен → BLOCKED. state.json не меняется.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\main fetch origin",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\nl4-003-mvp -b work/nl4-003-mvp-r1 abd79ba",
+    "wsl bash git -C /home/yurig/nl1-002/oxdna-src rev-parse HEAD -> 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL4-003.md",
+    "docs/research/E2_PROTO_R1.md",
+    "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
+    "scripts/nl4/controller.py",
+    "scripts/nl4/real_executor.py",
+    "scripts/nl4/scoring.py",
+    "docs/work/executions/EX-NL4-002-E3-MECH-R1/ (deviations/manifest format)"
+  ],
+  "next_action": "IMPLEMENTER: реализовать scripts/nl4/mvp.py + тесты → clean-room clone + прогон 3+1 ранов из clean-копии → анализ + отчёт из реальных данных → валидации → END_EXECUTION/END_ANALYSIS/HANDOFF.",
+  "blocker": null
+}

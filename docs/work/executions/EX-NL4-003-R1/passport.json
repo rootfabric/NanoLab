@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL4-003-R1",
+  "work_order_id": "NL4-003",
+  "checkpoint": "NL4",
+  "base_sha": "abd79ba236d714957f55e42af59dd41554f597b5",
+  "branch": "work/nl4-003-mvp-r1",
+  "worktree": "C:\\NanoLab\\nl4-003-mvp",
+  "cleanroom_dir": "C:\\NanoLab\\mvp-cleanroom",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY / MVP clean-run measured",
+  "allowed_paths": [
+    "docs/work/WO-NL4-003.md",
+    "docs/work/executions/EX-NL4-003-R1/**",
+    "docs/work/SESSION_LOG.md",
+    "scripts/nl4/**",
+    "tests/**"
+  ],
+  "parent_work_order": "NL4-003",
+  "protocol": "docs/work/WO-NL4-003.md + docs/research/E2_PROTO_R1.md (frozen gates/observables) + EX-NL3-002-SUMMARY-R1 parametric-summary.json (published medians as data)",
+  "deliverables": [
+    "scripts/nl4/mvp.py (user-facing MVP CLI, informed-greedy, no LLM)",
+    "tests/test_nl4_mvp.py (mock-based determinism/verdict/report tests)",
+    "clean-room run: 3 candidates x 50000 steps + 1 revalidation (seed 206024) from a fresh git clone",
+    "mvp-report.md + mvp-report.json (canonical) from real clean-room data, verdict FOUND/NOT_FOUND"
+  ],
+  "runs": [
+    {"run_id": "E3-MVP-C001", "variant": "32b", "seed": 201004, "kind": "CANDIDATE"},
+    {"run_id": "E3-MVP-C002", "variant": "11b", "seed": 202008, "kind": "CANDIDATE"},
+    {"run_id": "E3-MVP-C003", "variant": "0b", "seed": 203012, "kind": "CANDIDATE"},
+    {"run_id": "E3-MVP-REV001", "variant": "best-of-C001-C003", "seed": 206024, "kind": "REVALIDATION"}
+  ],
+  "started_at_utc": "2026-09-13T22:05:00Z",
+  "completed_at_utc": null,
+  "status": "IN_PROGRESS"
+}
