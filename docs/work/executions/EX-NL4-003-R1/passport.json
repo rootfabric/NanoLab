@@ -28,9 +28,9 @@
     {"run_id": "E3-MVP-C001", "variant": "32b", "seed": 201004, "kind": "CANDIDATE"},
     {"run_id": "E3-MVP-C002", "variant": "11b", "seed": 202008, "kind": "CANDIDATE"},
     {"run_id": "E3-MVP-C003", "variant": "0b", "seed": 203012, "kind": "CANDIDATE"},
-    {"run_id": "E3-MVP-REV001", "variant": "best-of-C001-C003", "seed": 206024, "kind": "REVALIDATION"}
+    {"run_id": "E3-MVP-REV001", "variant": "32b", "seed": 206024, "kind": "REVALIDATION"}
   ],
   "started_at_utc": "2026-09-13T22:05:00Z",
-  "completed_at_utc": null,
-  "status": "IN_PROGRESS"
+  "completed_at_utc": "2026-09-14T01:10:00Z",
+  "status": "HANDOFF_READY"
 }

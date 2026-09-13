@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-handoff-completed",
+  "timestamp_utc": "2026-09-14T01:10:00Z",
+  "execution_id": "EX-NL4-003-R1",
+  "work_order_id": "NL4-003",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9e4d7207b8997d38c00a8abbf2db205868c415d1",
+  "summary": "Handoff EX-NL4-003-R1. Deliverables: (1) scripts/nl4/mvp.py — user-facing MVP CLI (informed-greedy, детерминированная, без LLM; Controller + RealExecutorAdapter; best → re-validation свежим seed; mvp-report.md + canonical JSON со всеми пунктами WO §1 и verdict FOUND/NOT_FOUND); (2) tests/test_nl4_mvp.py — 18 mock-тестов (детерминизм стратегии/отчёта/markdown, verdict-ветки, goal-контракт, 74b-исключение, bootstrap-детерминизм), полный suite 310 OK (1 skip); (3) clean-room proof: свежий git clone C:\\NanoLab\\mvp-cleanroom @ 9e4d720, 3 кандидата + 1 revalidation реальным движком (все exit 0, все гейты зелёные, digest 3/3 PASS), отчёты сгенерированы инструментом из реальных данных и опубликованы as-is; (4) verdict NOT_FOUND, финальный заявляемый score 14.402 (revalidated, seed 206024). Валидации: unittest 310 OK (1 skip); work_cli validate/close ok; harness.cli check-consistency ok (state.json НЕ менялся). Временные исходники источника удалены (U4=NO); main не пушен. Раны в WSL /home/yurig/nl4-003-mvp/runs/ (вне Git), манифесты SHA-256+size в evidence. Open risks: NOT_FOUND — неуспех поиска на баре published-best при свежем seed (нормальный исход, разброс 32b@50k); MVP-конвейер подтверждён end-to-end. Одно next action: батчевый REVIEWER NL4 (NL4-001/002/003 + MVP clean-run) → Director: acceptance NL4 = MVP COMPLETE (merge — Human Gate).",
+  "command_refs": [
+    "python -m unittest discover -s tests -> 310 OK (skipped=1)",
+    "python scripts/harness/work_cli.py validate docs/work/executions/EX-NL4-003-R1 -> ok",
+    "python scripts/harness/work_cli.py close docs/work/executions/EX-NL4-003-R1 -> ok",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency --root . -> ok"
+  ],
+  "evidence_refs": [
+    "scripts/nl4/mvp.py",
+    "tests/test_nl4_mvp.py",
+    "docs/work/executions/EX-NL4-003-R1/summary.md",
+    "docs/work/executions/EX-NL4-003-R1/evidence/mvp-report.md"
+  ],
+  "next_action": "REVIEWER (batch NL4) -> Director acceptance NL4 = MVP COMPLETE.",
+  "blocker": null
+}

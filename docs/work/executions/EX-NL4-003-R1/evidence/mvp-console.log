@@ -1,0 +1,76 @@
+[mvp] goal: {
+  "max_simulations": 3,
+  "revalidation_runs": 1,
+  "steps": 50000,
+  "target_angle": 90.0
+}
+
+[mvp] informed-greedy plan: [
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "32b"
+  },
+  {
+    "seed": 202008,
+    "steps": 50000,
+    "variant": "11b"
+  },
+  {
+    "seed": 203012,
+    "steps": 50000,
+    "variant": "0b"
+  }
+]
+
+[mvp] prepared E3-MVP-C001 ({
+  "seed": 201004,
+  "steps": 50000,
+  "variant": "32b"
+}
+)
+[mvp] prepared E3-MVP-C002 ({
+  "seed": 202008,
+  "steps": 50000,
+  "variant": "11b"
+}
+)
+[mvp] prepared E3-MVP-C003 ({
+  "seed": 203012,
+  "steps": 50000,
+  "variant": "0b"
+}
+)
+[mvp] launched E3-MVP-C001
+[mvp] launched E3-MVP-C002
+[mvp] launched E3-MVP-C003
+[mvp] finished E3-MVP-C003 exit=0 wall=2900.08s
+[mvp] finished E3-MVP-C001 exit=0 wall=2981.95s
+[mvp] finished E3-MVP-C002 exit=0 wall=3143.63s
+[mvp] scoring: {
+  "best": {
+    "candidate_id": "CAND-0001",
+    "run_id": "E3-MVP-C001",
+    "score": 11.677355151
+  },
+  "budget": {
+    "max_simulations": 3,
+    "max_wall_minutes": 288.0,
+    "simulations_used": 3,
+    "wall_seconds_used": 9025.66
+  },
+  "counts": {
+    "proposals_rejected": 0,
+    "proposals_total": 3,
+    "runs_executed": 3,
+    "runs_scored": 3,
+    "runs_structurally_invalid": 0
+  },
+  "target_angle_deg": 90.0
+}
+
+[mvp] prepared E3-MVP-REV001 (fresh seed 206024)
+[mvp] launched E3-MVP-REV001
+[mvp] finished E3-MVP-REV001 exit=0 wall=2440.07s
+[mvp] verdict: NOT_FOUND
+[mvp] wrote C:\NanoLab\mvp-cleanroom\docs\work\executions\EX-NL4-003-R1\evidence\mvp-report.json and C:\NanoLab\mvp-cleanroom\docs\work\executions\EX-NL4-003-R1\evidence\mvp-report.md
