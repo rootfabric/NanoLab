@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "family_id": "dna_hinge",
+  "title": "DNA hinge family (Shi–Castro–Arya)",
+  "description": "Одно семейство compliant DNA-шарниров с измеренными вариантами. Варианты публикуются как члены семейства с общим протоколом, а НЕ как независимые компоненты.",
+  "upstream": {
+    "citation": "Shi, Castro, Arya — DNA hinge, DOI 10.1021/acsnano.7b00242",
+    "repo": "gauravarya77/DNA-hinge-simulations",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "rights_mode": "REFERENCE_ONLY"
+  },
+  "variants": ["0b", "74b"],
+  "variant_status": {
+    "0b": "MEASURED",
+    "74b": "NOT_MEASURED (KNOWN_GAP: arm-manifest-v2 pending)"
+  },
+  "presentation_rule": "family + variants; каждая карточка варианта ссылается на общий протокол семейства и свои digest-pins",
+  "notes": "МИНИАТЮРНЫЙ ПРИМЕР пакета для контракта WO-NL5-001-A-R1: включены две показательные карточки (measured 0b и honest-gap 74b). Полная v0.1 (NL5-001-B) декларирует 0b/11b/32b/53b/74b; каждый объявленный вариант обязан иметь карточку (measured или KNOWN_GAP) — см. RELEASE_CONTRACT_V0_1.md §7."
+}

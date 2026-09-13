@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_components_rights",
+  "package": "nanolab-components",
+  "package_version": "0.1.0-rc0",
+  "own_code_license": "UNDECIDED_PENDING_OWNER_DECISION",
+  "own_docs_data_license": "UNDECIDED_PENDING_OWNER_DECISION",
+  "policy": {
+    "durable_cache": "FORBIDDEN",
+    "download_on_run": true
+  },
+  "items": [
+    {
+      "path": "families/**",
+      "rights_mode": "MIXED",
+      "redistribution": "ALLOWED",
+      "derived_results_publishable": true,
+      "notes": "карточки, family.json и reproduction-материалы — производные результаты NanoLab (собственные материалы); upstream-файлы в пакет не включены; собственная лицензия — ожидание owner-решения D2"
+    },
+    {
+      "path": "provenance/**",
+      "rights_mode": "REFERENCE_ONLY",
+      "redistribution": "METADATA_ONLY",
+      "upstream_repo": "gauravarya77/DNA-hinge-simulations",
+      "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+      "derived_results_publishable": true,
+      "notes": "digest-метаданные upstream-файлов (размер/хэши); сами upstream-файлы не распространяются, доступ — download-on-run пользователем"
+    },
+    {
+      "path": "reports/**",
+      "rights_mode": "OWN",
+      "redistribution": "ALLOWED",
+      "derived_results_publishable": true,
+      "notes": "собственные отчёты NanoLab; лицензия — ожидание owner-решения D2"
+    }
+  ]
+}
