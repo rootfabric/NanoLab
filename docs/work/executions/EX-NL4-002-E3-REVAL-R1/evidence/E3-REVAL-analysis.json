@@ -1,0 +1,85 @@
+{
+  "comparison": {
+    "claimed_score": 9.832001928,
+    "delta_vs_claimed": 5.058745022,
+    "delta_vs_published_implied": 2.98074695,
+    "published_implied_score_150k": 11.91,
+    "revalidated_score": 14.89074695
+  },
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "final_claimable_score": 14.89074695,
+  "kind": "nl4_e3_reval_score",
+  "per_run": {
+    "E3-REVAL-R001": {
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "interrupted_budget": false,
+      "run_median_deg": 75.307615786,
+      "run_score": 14.692384214,
+      "seed": 204016,
+      "valid_angles_deg": [
+        77.439679633,
+        76.934518164,
+        75.902155861,
+        75.137046835,
+        74.858687485,
+        74.972316052,
+        75.081459265,
+        75.789377213,
+        75.478184736,
+        74.27779595,
+        74.76902589,
+        75.821940463
+      ],
+      "wall_seconds": 2860.11
+    },
+    "E3-REVAL-R002": {
+      "exit_code": 0,
+      "frames_total": 12,
+      "frames_valid": 12,
+      "interrupted_budget": false,
+      "run_median_deg": 74.586898437,
+      "run_score": 15.413101563,
+      "seed": 205020,
+      "valid_angles_deg": [
+        78.210879316,
+        78.292082775,
+        77.555198514,
+        76.171870255,
+        76.374911989,
+        74.66108241,
+        74.512714465,
+        74.255300288,
+        73.618414286,
+        74.283840689,
+        74.03163541,
+        74.078433186
+      ],
+      "wall_seconds": 2861.67
+    }
+  },
+  "pool": {
+    "pooled_max_deg": 78.292082775,
+    "pooled_median_deg": 75.10925305,
+    "pooled_min_deg": 73.618414286,
+    "pooled_valid_frames": 24,
+    "runs": [
+      "E3-REVAL-R001",
+      "E3-REVAL-R002"
+    ]
+  },
+  "purpose": "winner re-validation honest score recomputation (anti-selection-bias gate)",
+  "revalidated_score": 14.89074695,
+  "schema_version": 1,
+  "verdict": "ANNULED",
+  "verdict_rule": "WO-NL4-002 §Winner-критерий: если |median - 90| на свежих seeds выходит за пределы заявленного скора, заявленный скор аннулируется; финальный заявляемый = revalidated. Аннулирование — ожидаемое поведение anti-selection-bias гейта (регрессия к среднему), не провал кампании.",
+  "winner_candidate_claimed": {
+    "claimed_score": 9.832001928,
+    "observed_median_deg": 80.167998072,
+    "run_id": "E3-LLM-R003",
+    "seed": 203012,
+    "variant": "32b"
+  }
+}
+

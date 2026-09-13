@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "execution_id": "EX-NL4-002-E3-REVAL-R1",
-  "work_order_id": "NL4-002 (winner re-validation, verification step)",
+  "work_order_id": "NL4-002",
   "checkpoint": "NL4",
   "base_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
   "branch": "work/nl4-002-e3-reval-r1",
@@ -25,5 +25,6 @@
     {"run_id": "E3-REVAL-R002", "variant": "32b", "seed": 205020}
   ],
   "started_at_utc": "2026-09-13T10:10:32Z",
-  "status": "RUNNING"
+  "completed_at_utc": "2026-09-13T11:11:00Z",
+  "status": "HANDOFF_READY"
 }

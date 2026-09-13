@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-end-execution",
+  "timestamp_utc": "2026-09-13T11:08:12Z",
+  "execution_id": "EX-NL4-002-E3-REVAL-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
+  "summary": "END_EXECUTION: оба re-validation рана победителя выполнены. E3-REVAL-R001 (32b/seed 204016): exit 0, wall 2860.11 с, полные 50000 шагов, 12/12 кадров валидны, median 75.307615786°. E3-REVAL-R002 (32b/seed 205020): exit 0, wall 2861.67 с, полные 50000 шагов, 12/12 кадров валидны, median 74.586898437°. Раны параллельны (2 процесса WSL), wall-cap 4320 с не превышен (контеншн минимален). Digest-гейты входов PASS (32b.top/32b.conf/pro_CPU.in по source_pins; source-download-verification.json); копии в run-каталоги верифицированы sha256; манифесты артефактов (sha256+size+location) — в analysis.json каждого рана; траектории вне Git в WSL /home/yurig/nl4-002-e3-reval/runs/<RUN_ID>/. ОТКЛОНЕНИЯ (документированы): (1) WSL run-root переопределён на /home/yurig/nl4-002-e3-reval/runs (frozen default /home/yurig/nl4-002-e3/runs) — исключает смешение с рана́ми кампании E3; (2) свежие seeds 204016/205020 вне allowlist-тройки: RealExecutorAdapter использован напрямую без controller/agent-слоя (seed-фильтр механических arms жил не в адаптере); авторизация 'Director-authorized fresh seeds per WO winner re-validation' помечена в deviations.json каждого рана; (3) фиксированные observables v2 mutual + arm-manifest-32b + гейты E2_PROTO_R1 §4 — без изменений. Крэшей движка 0, digest FAIL 0, WSL-отказов 0, budget-interrupt 0.",
+  "command_refs": [
+    "python %TEMP%\\nl4-002-e3-reval-driver.py -> exit 0 (2/2 runs exit 0, ANALYSED)",
+    "evidence/reval-console.log, evidence/reval-runs.json"
+  ],
+  "evidence_refs": [
+    "evidence/E3-REVAL-R001/analysis.json",
+    "evidence/E3-REVAL-R002/analysis.json",
+    "evidence/E3-REVAL-R001/deviations.json",
+    "evidence/E3-REVAL-R002/deviations.json",
+    "evidence/source-download-verification.json",
+    "evidence/reval-runs.json"
+  ],
+  "next_action": "IMPLEMENTER: пересчёт revalidated score (пул 24 валидных кадров) → END_ANALYSIS → HANDOFF.",
+  "blocker": null
+}

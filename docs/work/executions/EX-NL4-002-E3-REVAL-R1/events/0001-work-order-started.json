@@ -3,7 +3,7 @@
   "event_id": "0001-work-order-started",
   "timestamp_utc": "2026-09-13T10:10:32Z",
   "execution_id": "EX-NL4-002-E3-REVAL-R1",
-  "work_order_id": "NL4-002 (winner re-validation)",
+  "work_order_id": "NL4-002",
   "event_type": "WORK_ORDER_STARTED",
   "actor_role": "IMPLEMENTER",
   "subject_sha": "e3f7e5c65dda1cbb47141cd274098988d7093034",
