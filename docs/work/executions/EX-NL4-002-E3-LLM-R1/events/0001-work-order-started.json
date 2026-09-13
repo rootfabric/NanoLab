@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T06:04:21Z",
+  "execution_id": "EX-NL4-002-E3-LLM-R1",
+  "work_order_id": "NL4-002",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "LLM_AGENT (DSH fresh session via bounded interface)",
+  "subject_sha": "64b91635325ca8decc11e6f7abd0da832a133a5e",
+  "summary": "Старт LLM arm E3 (EX-NL4-002-E3-LLM-R1): 5 последовательных прогонов oxDNA (50000 шагов, hard cap 1.2 ч/ран) через bounded-интерфейс (BoundedAgent, frozen allowlist nl4-allowlist-r1, runner-level narrowing: variants {0b,11b,32b,53b}, 74b исключён BLOCKED-статусом). Изоляция fair-comparison: EX-NL4-002-E3-MECH-R1/** не читается. Стратегия записана ДО первого рана в evidence/llm-decisions.json (iteration 1 proposal + rationale).",
+  "strategy_predeclared": {
+    "knowledge_base": "опубликованные E2-медианы @150-200k: 0b=65.87, 11b=73.93, 32b=78.09, 53b=132.36 (deg, [0,180], PCA/mutual v2)",
+    "plan_iterations_1_3": "32b x seeds {201004, 202008, 203012}: 32b — ближайший к target 90 вариант (Δ≈11.9 против Δ≈16.1 у 11b и Δ≈42.4 у 53b); три реплики дают распределение и шанс на благоприятный шум; между 32b и 53b нет промежуточных вариантов, поэтому 32b доминирует при любом знаке 50k-сдвига",
+    "plan_iterations_4_5": "адаптивно по итогам 1-3: базовый план 11b x 2 оставшихся seed (лучший ожидаемый скор среди непокрытых кандидатов); переключение на 53b/0b только если наблюдения 1-3 покажут систематический сдвиг, меняющий порядок вариантов",
+    "scoring_note": "score = |median - 90| по валидным кадрам; итог = лучший ран агента; поэтому дополнительные раны могут только улучшить best-of, приоритет — кандидатам с наименьшим ожидаемым Δ"
+  }
+}
