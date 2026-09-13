@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-13T15:00:30Z",
+  "execution_id": "EX-NL5-001-A-R1",
+  "work_order_id": "NL5-001-A",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+  "summary": "Старт EX-NL5-001-A-R1: release contract для component library v0.1. Scope: (1) нормативная component card schema v0.1 (draft-2020-12 документ + stdlib executor + lint CLI, fail-closed; внешние зависимости запрещены — hosted CI stdlib-only); (2) layout пакета nanolab-components-v0.1, VERSION/semver, неизменяемость карточек после релиза; (3) форматы RIGHTS.json / CITATION.cff / RELEASE_MANIFEST.json с перерасчётом sha256; (4) reproduction interface (verify-package/plan без физики в этом WO); (5) OWN_LICENSE_OPTIONS_MEMO_R1 — опции для owner-решения D2, БЕЗ выбора (LICENSE_POLICY.md: агент лицензию не назначает). Карточка-пример 0b собирается ТОЛЬКО из опубликованных чисел EX-NL3-002-SUMMARY-R1 (component-card-0b.json) с source-путями; 74b — пример честного KNOWN_GAP/NOT_MEASURED. Базовая ветка — head PR #37 (e05793c): программа §2 разрешает DOC/CODE-подготовку до Gate 0, конфликтов с PR #37 нет (только новые файлы). Forbidden: canonical state/plan/roadmap/WORK_QUEUE/catalog, физика, сборка реальной библиотеки (это B), CI workflow, merge.",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-001-a-release-contract-r1 /home/rdpuser/NanoLab/nl5-001-a-contract e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+    "git -C /home/rdpuser/NanoLab/nl5-001-a-contract rev-parse HEAD -> e05793cc8ff03b3b1af2d81b38e39d82cd7527d6 (expected: MATCH)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.json",
+    "docs/DATA_CONTRACTS.md",
+    "docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md",
+    "LICENSE_POLICY.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: схемы + lint + примеры + тесты + контракт-док + memo → валидации → handoff.",
+  "blocker": null
+}
