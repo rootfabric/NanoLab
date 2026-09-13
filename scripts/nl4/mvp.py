@@ -38,6 +38,7 @@ import random
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from nl4 import real_executor as re_mod  # noqa: E402
 from nl4.controller import Controller, ExecutorAdapter, load_allowlist  # noqa: E402
