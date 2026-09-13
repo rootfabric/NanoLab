@@ -651,11 +651,27 @@ class RealExecutorAdapter(ExecutorAdapter):
                         flush=True,
                     )
                     pending.discard(idx)
+                elif time.perf_counter() - started > self.run_wall_cap_s:
+                    # hard per-run wall cap (WO-NL4-002): interrupt and record
+                    run_id = prep["run_id"]
+                    subprocess.run(
+                        ["wsl", "-e", "bash", "-c", f"pkill -f 'runs/{run_id}' || true"],
+                        timeout=120,
+                    )
+                    proc.wait()
+                    engine_out = self._collect(run_id, proc, started, interrupted=True)
+                    results[idx] = self.analyse_run(candidate, prep, engine_out)
+                    print(
+                        f"[real_executor] BUDGET-INTERRUPTED {run_id} "
+                        f"wall={engine_out['wall_seconds']}s",
+                        flush=True,
+                    )
+                    pending.discard(idx)
             if pending:
                 time.sleep(20)
         return results
 
-    def _collect(self, run_id: str, proc, started: float) -> dict:
+    def _collect(self, run_id: str, proc, started: float, interrupted: bool = False) -> dict:
         wall = time.perf_counter() - started
         exit_code = None
         out = wsl(f"cat '{WSL_RUNS_ROOT}/{run_id}/exit_code.txt' 2>/dev/null || true")
@@ -664,7 +680,7 @@ class RealExecutorAdapter(ExecutorAdapter):
                 exit_code = int(line.split(":", 1)[1])
         return {
             "exit_code": exit_code,
-            "interrupted_budget": False,
+            "interrupted_budget": interrupted,
             "wall_seconds": round(wall, 2),
             "per_step_s": round(wall / float(STEPS_FIXED), 6),
         }

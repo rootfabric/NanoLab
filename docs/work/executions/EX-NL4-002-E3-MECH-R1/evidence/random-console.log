@@ -1,0 +1,61 @@
+[runner] baseline-random-r1 candidates: [
+  {
+    "seed": 203012,
+    "steps": 50000,
+    "variant": "11b"
+  },
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "11b"
+  },
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "0b"
+  },
+  {
+    "seed": 201004,
+    "steps": 50000,
+    "variant": "32b"
+  },
+  {
+    "seed": 203012,
+    "steps": 50000,
+    "variant": "53b"
+  }
+]
+
+[real_executor] launched E3-RANDOM-R001
+[real_executor] launched E3-RANDOM-R002
+[real_executor] launched E3-RANDOM-R003
+[real_executor] launched E3-RANDOM-R004
+[real_executor] launched E3-RANDOM-R005
+[real_executor] finished E3-RANDOM-R005 exit=0 wall=4280.11s
+[real_executor] finished E3-RANDOM-R003 exit=0 wall=4322.86s
+[real_executor] finished E3-RANDOM-R001 exit=0 wall=4365.0s
+[real_executor] finished E3-RANDOM-R002 exit=0 wall=4386.75s
+[real_executor] finished E3-RANDOM-R004 exit=0 wall=4428.32s
+[runner] wrote C:\NanoLab\nl4-002-e3\docs\work\executions\EX-NL4-002-E3-MECH-R1\evidence\E3-RANDOM-arm.json
+{
+  "best": {
+    "candidate_id": "CAND-0004",
+    "run_id": "E3-RANDOM-R004",
+    "score": 11.677355151
+  },
+  "budget": {
+    "max_simulations": 5,
+    "max_wall_minutes": 400.0,
+    "simulations_used": 5,
+    "wall_seconds_used": 21783.04
+  },
+  "counts": {
+    "proposals_rejected": 0,
+    "proposals_total": 5,
+    "runs_executed": 5,
+    "runs_scored": 5,
+    "runs_structurally_invalid": 0
+  },
+  "target_angle_deg": 90.0
+}
+

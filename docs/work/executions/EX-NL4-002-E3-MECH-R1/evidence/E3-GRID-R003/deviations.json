@@ -1,0 +1,69 @@
+{
+  "deviations": [
+    {
+      "author": "74b.conf",
+      "confirm": "0b.conf",
+      "key": "conf_file",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "hinge_energy.dat",
+      "confirm": "e3-grid-r003_energy.dat",
+      "key": "energy_file",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": null,
+      "confirm": "e3-grid-r003_last.dat",
+      "key": "lastconf_file",
+      "reason": "author input has no lastconf_file; protocol records final configuration"
+    },
+    {
+      "author": "log2.dat",
+      "confirm": "e3-grid-r003_log.dat",
+      "key": "log_file",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "4e3",
+      "confirm": "4000",
+      "key": "print_conf_interval",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "4e3",
+      "confirm": "100",
+      "key": "print_energy_every",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "7777",
+      "confirm": "203012",
+      "key": "seed",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "2e7",
+      "confirm": "50000",
+      "key": "steps",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "74b.top",
+      "confirm": "0b.top",
+      "key": "topology",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    },
+    {
+      "author": "pro.dat",
+      "confirm": "e3-grid-r003_traj.dat",
+      "key": "trajectory_file",
+      "reason": "WO-NL4-002 E3 frozen protocol / per-run naming"
+    }
+  ],
+  "kind": "nl4_e3_input_deviations",
+  "run_id": "E3-GRID-R003",
+  "schema_version": 1,
+  "source_input": "MD_Hinges/pro_CPU.in @ 23fd1ff (digest-gated, verbatim base)"
+}
+

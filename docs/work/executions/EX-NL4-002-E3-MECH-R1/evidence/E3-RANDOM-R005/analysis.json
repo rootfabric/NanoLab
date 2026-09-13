@@ -1,0 +1,251 @@
+{
+  "angle_convention": "[0,180] deg, PCA axes, erratum R1 §2.5",
+  "angle_stats_valid_frames": {
+    "max_deg": 135.734579592,
+    "median_deg": 133.769341047,
+    "min_deg": 132.903152729,
+    "n_frames": 12
+  },
+  "arm_manifest": "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/arm-manifest-53b.json (frozen)",
+  "artifacts": {
+    "53b.conf": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/53b.conf",
+      "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+      "size_bytes": 2379246
+    },
+    "53b.top": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/53b.top",
+      "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+      "size_bytes": 124872
+    },
+    "e3-random-r005_energy.dat": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/e3-random-r005_energy.dat",
+      "sha256": "8bd302662028ad4c0265137b0bfccbec3b5588063912c910b9d171279f160cad",
+      "size_bytes": 24549
+    },
+    "e3-random-r005_last.dat": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/e3-random-r005_last.dat",
+      "sha256": "725a8be48d44aae72a0b253df2364058b2333246279b2352701bc5140a702c1d",
+      "size_bytes": 2379970
+    },
+    "e3-random-r005_log.dat": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/e3-random-r005_log.dat",
+      "sha256": "25da117ccc3807ab7a86af679f727d0e436b66e6c73ab6521ff8c16a84921788",
+      "size_bytes": 51694
+    },
+    "e3-random-r005_traj.dat": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/e3-random-r005_traj.dat",
+      "sha256": "7d9f7d7a736c5d28125948fdcf4de4771a2b793850984b1399deef7e11451a02",
+      "size_bytes": 28556561
+    },
+    "engine_stderr.txt": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/engine_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "engine_stdout.txt": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/engine_stdout.txt",
+      "sha256": "0333d969f523b877d33f5e38619d06e4565e47ec945a53321aab2b9ffffa994e",
+      "size_bytes": 31062
+    },
+    "exit_code.txt": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/exit_code.txt",
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7
+    },
+    "input.in": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/input.in",
+      "sha256": "fb7f02ab00d042a6fe87538ea128ddecf9805eecb9421be2464c8e18eed82728",
+      "size_bytes": 1017
+    },
+    "pro_CPU.in": {
+      "location": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005/pro_CPU.in",
+      "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+      "size_bytes": 933
+    }
+  },
+  "candidate": {
+    "seed": 203012,
+    "steps": 50000,
+    "variant": "53b"
+  },
+  "detector": "v2 mutual-nearest (frozen, E2_OBSERVABLES_R2 + E2_PROTO_R1 §2)",
+  "energy": {
+    "columns": [
+      "time",
+      "potential",
+      "kinetic",
+      "total"
+    ],
+    "max_abs_drift_total": 0.006144,
+    "rows_total": 501,
+    "time_first": 0.0,
+    "time_last": 250.0,
+    "total_energy_first": -1.162355,
+    "total_energy_last": -1.166436,
+    "total_energy_max": -1.160455,
+    "total_energy_min": -1.168499
+  },
+  "engine": "/home/yurig/nl1-002/build-oxdna-cpu/bin/oxDNA",
+  "engine_source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "executor": "real-oxdna-wsl-r1",
+  "exit_code": 0,
+  "frames": [
+    {
+      "angle_deg": 133.164711105,
+      "angle_status": "OK",
+      "displacement_max": 0.0,
+      "frame": 0,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.056085641,
+      "pairs_fraction_v2": 1.0,
+      "time": "4000",
+      "valid": true
+    },
+    {
+      "angle_deg": 132.903152729,
+      "angle_status": "OK",
+      "displacement_max": 5.091111881,
+      "frame": 1,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.0556202,
+      "pairs_fraction_v2": 0.984029484,
+      "time": "8000",
+      "valid": true
+    },
+    {
+      "angle_deg": 133.245331962,
+      "angle_status": "OK",
+      "displacement_max": 6.962782556,
+      "frame": 2,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055969281,
+      "pairs_fraction_v2": 0.98955774,
+      "time": "12000",
+      "valid": true
+    },
+    {
+      "angle_deg": 133.625932066,
+      "angle_status": "OK",
+      "displacement_max": 8.157359014,
+      "frame": 3,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.056085641,
+      "pairs_fraction_v2": 0.987714988,
+      "time": "16000",
+      "valid": true
+    },
+    {
+      "angle_deg": 133.364790614,
+      "angle_status": "OK",
+      "displacement_max": 8.513418986,
+      "frame": 4,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055271119,
+      "pairs_fraction_v2": 0.985257985,
+      "time": "20000",
+      "valid": true
+    },
+    {
+      "angle_deg": 133.643687538,
+      "angle_status": "OK",
+      "displacement_max": 7.938868472,
+      "frame": 5,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05538748,
+      "pairs_fraction_v2": 0.986179361,
+      "time": "24000",
+      "valid": true
+    },
+    {
+      "angle_deg": 133.894994556,
+      "angle_status": "OK",
+      "displacement_max": 8.490602815,
+      "frame": 6,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.055271119,
+      "pairs_fraction_v2": 0.984029484,
+      "time": "28000",
+      "valid": true
+    },
+    {
+      "angle_deg": 134.264111958,
+      "angle_status": "OK",
+      "displacement_max": 7.956364712,
+      "frame": 7,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05573656,
+      "pairs_fraction_v2": 0.987407862,
+      "time": "32000",
+      "valid": true
+    },
+    {
+      "angle_deg": 134.652220355,
+      "angle_status": "OK",
+      "displacement_max": 7.758575573,
+      "frame": 8,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.056085641,
+      "pairs_fraction_v2": 0.983415233,
+      "time": "36000",
+      "valid": true
+    },
+    {
+      "angle_deg": 135.092293913,
+      "angle_status": "OK",
+      "displacement_max": 8.62269388,
+      "frame": 9,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.05550384,
+      "pairs_fraction_v2": 0.985257985,
+      "time": "40000",
+      "valid": true
+    },
+    {
+      "angle_deg": 135.432300606,
+      "angle_status": "OK",
+      "displacement_max": 7.819499145,
+      "frame": 10,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.057016523,
+      "pairs_fraction_v2": 0.986179361,
+      "time": "44000",
+      "valid": true
+    },
+    {
+      "angle_deg": 135.734579592,
+      "angle_status": "OK",
+      "displacement_max": 8.281606534,
+      "frame": 11,
+      "invalid_reasons": [],
+      "long_bond_fraction": 0.056434722,
+      "pairs_fraction_v2": 0.983722359,
+      "time": "48000",
+      "valid": true
+    }
+  ],
+  "frames_total": 12,
+  "frames_valid": 12,
+  "gates": {
+    "displacement_max_max": 20.0,
+    "long_bond_fraction_max": 0.1078,
+    "pairs_fraction_v2_min": 0.5
+  },
+  "interrupted_budget": false,
+  "kind": "nl4_e3_run_analysis",
+  "per_step_s": 0.085602,
+  "reference_pairs_v2_count": 3256,
+  "run_id": "E3-RANDOM-R005",
+  "schema_version": 1,
+  "status": "ANALYSED",
+  "summary_valid_frames": {
+    "displacement_max": 7.947616592,
+    "long_bond_fraction": 0.055852921,
+    "median_angle_deg": 133.769341047,
+    "pairs_fraction_v2": 0.985718673
+  },
+  "valid_frame_fraction": 1.0,
+  "wall_seconds": 4280.11,
+  "wsl_dir": "/home/yurig/nl4-002-e3/runs/E3-RANDOM-R005"
+}
+

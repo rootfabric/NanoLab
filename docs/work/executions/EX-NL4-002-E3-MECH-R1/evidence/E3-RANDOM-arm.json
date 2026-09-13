@@ -1,0 +1,326 @@
+{
+  "agent": "baseline-random-r1",
+  "allowlist_narrowing": {
+    "note": "runner-level narrowing for EX-NL4-002-E3-MECH-R1; frozen file scripts/nl4/allowlist.json is NOT modified",
+    "reason": "74b excluded by BLOCKED status (EX-NL3-002-PARAM-74B-R1); steps fixed to 50000 by WO-NL4-002 budget",
+    "steps": [
+      50000
+    ],
+    "variants": [
+      "0b",
+      "11b",
+      "32b",
+      "53b"
+    ]
+  },
+  "arm": "random",
+  "candidates": [
+    {
+      "seed": 203012,
+      "steps": 50000,
+      "variant": "11b"
+    },
+    {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "11b"
+    },
+    {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "0b"
+    },
+    {
+      "seed": 201004,
+      "steps": 50000,
+      "variant": "32b"
+    },
+    {
+      "seed": 203012,
+      "steps": 50000,
+      "variant": "53b"
+    }
+  ],
+  "execution_id": "EX-NL4-002-E3-MECH-R1",
+  "goal": {
+    "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+    "max_simulations": 5,
+    "max_wall_minutes": 400.0,
+    "target_angle_deg": 90.0
+  },
+  "kind": "nl4_e3_arm_execution",
+  "parallel_runs": true,
+  "schema_version": 1,
+  "scoring": {
+    "best": {
+      "candidate_id": "CAND-0004",
+      "run_id": "E3-RANDOM-R004",
+      "score": 11.677355151
+    },
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 400.0,
+      "simulations_used": 5,
+      "wall_seconds_used": 21783.04
+    },
+    "counts": {
+      "proposals_rejected": 0,
+      "proposals_total": 5,
+      "runs_executed": 5,
+      "runs_scored": 5,
+      "runs_structurally_invalid": 0
+    },
+    "target_angle_deg": 90.0
+  },
+  "session_report": {
+    "actions_log": [
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0001",
+        "reason": null,
+        "seq": 1
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0001",
+        "reason": null,
+        "run_id": "E3-RANDOM-R001",
+        "seq": 2
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0002",
+        "reason": null,
+        "seq": 3
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0002",
+        "reason": null,
+        "run_id": "E3-RANDOM-R002",
+        "seq": 4
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        "candidate_id": "CAND-0003",
+        "reason": null,
+        "seq": 5
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0003",
+        "reason": null,
+        "run_id": "E3-RANDOM-R003",
+        "seq": 6
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0004",
+        "reason": null,
+        "seq": 7
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0004",
+        "reason": null,
+        "run_id": "E3-RANDOM-R004",
+        "seq": 8
+      },
+      {
+        "accepted": true,
+        "action": "propose_candidate",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "53b"
+        },
+        "candidate_id": "CAND-0005",
+        "reason": null,
+        "seq": 9
+      },
+      {
+        "accepted": true,
+        "action": "request_run",
+        "candidate_id": "CAND-0005",
+        "reason": null,
+        "run_id": "E3-RANDOM-R005",
+        "seq": 10
+      }
+    ],
+    "agent": "baseline-random-r1",
+    "allowlist_revision": "nl4-allowlist-r1",
+    "budget": {
+      "max_simulations": 5,
+      "max_wall_minutes": 400.0,
+      "simulations_used": 5,
+      "wall_seconds_used": 21783.04
+    },
+    "candidates": {
+      "CAND-0001": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "CAND-0002": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "11b"
+      },
+      "CAND-0003": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "0b"
+      },
+      "CAND-0004": {
+        "seed": 201004,
+        "steps": 50000,
+        "variant": "32b"
+      },
+      "CAND-0005": {
+        "seed": 203012,
+        "steps": 50000,
+        "variant": "53b"
+      }
+    },
+    "controller_id": "nl4-controller-r1",
+    "executor": {
+      "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+      "executor_id": "real-oxdna-wsl-r1"
+    },
+    "goal": {
+      "integrity_gate": "E2_PROTO_R1_S4_FROZEN",
+      "max_simulations": 5,
+      "max_wall_minutes": 400.0,
+      "target_angle_deg": 90.0
+    },
+    "kind": "nl4_session_report",
+    "runs": [
+      {
+        "analysis": {
+          "displacement_max": 4.951276353,
+          "long_bond_fraction": 0.054543275,
+          "median_angle_deg": 73.995884595,
+          "pairs_fraction_v2": 0.984862527
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0001",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "8bb2f7efc12d5b9e123117ee70ae6c46b81f3046194cf74e30b0b1aacabc28bc",
+        "run_id": "E3-RANDOM-R001",
+        "wall_seconds": 4365.0
+      },
+      {
+        "analysis": {
+          "displacement_max": 4.204821504,
+          "long_bond_fraction": 0.054303524,
+          "median_angle_deg": 73.768492098,
+          "pairs_fraction_v2": 0.986709441
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "11b"
+        },
+        "candidate_id": "CAND-0002",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "d09a31a8d6d4fe2c9d4b2c7075d4226907c3b025fd1c84f14b5f495d66bac80d",
+        "run_id": "E3-RANDOM-R002",
+        "wall_seconds": 4386.75
+      },
+      {
+        "analysis": {
+          "displacement_max": 4.430401912,
+          "long_bond_fraction": 0.055045317,
+          "median_angle_deg": 65.926791285,
+          "pairs_fraction_v2": 0.986482382
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "0b"
+        },
+        "candidate_id": "CAND-0003",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "730ffb8720f485f6bb889a98c7cb4415456840bb80f75bbc243d0d9c49971c37",
+        "run_id": "E3-RANDOM-R003",
+        "wall_seconds": 4322.86
+      },
+      {
+        "analysis": {
+          "displacement_max": 9.242589828,
+          "long_bond_fraction": 0.05621162,
+          "median_angle_deg": 78.322644849,
+          "pairs_fraction_v2": 0.986482382
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 201004,
+          "steps": 50000,
+          "variant": "32b"
+        },
+        "candidate_id": "CAND-0004",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "1ae2273f99e18b21c8fa3d524bc10d53bb6378ba36d193be5777f73557a0116c",
+        "run_id": "E3-RANDOM-R004",
+        "wall_seconds": 4428.32
+      },
+      {
+        "analysis": {
+          "displacement_max": 7.947616592,
+          "long_bond_fraction": 0.055852921,
+          "median_angle_deg": 133.769341047,
+          "pairs_fraction_v2": 0.985718673
+        },
+        "backend": "oxDNA 00dc7fb CPU/double via WSL (pinned build, digest-gated inputs)",
+        "candidate": {
+          "seed": 203012,
+          "steps": 50000,
+          "variant": "53b"
+        },
+        "candidate_id": "CAND-0005",
+        "executor": "real-oxdna-wsl-r1",
+        "input_digest_sha256": "1b2394b45a5154fe76ba92949cc26b82362088880856cedc1255164ac960fd95",
+        "run_id": "E3-RANDOM-R005",
+        "wall_seconds": 4280.11
+      }
+    ],
+    "schema_version": 1,
+    "stop_reason": "BUDGET_EXHAUSTED_SIMULATIONS"
+  }
+}
+

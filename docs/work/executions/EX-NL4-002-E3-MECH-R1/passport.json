@@ -19,11 +19,24 @@
   "owner_decisions_applied": [
     "target_angle = 90 deg; budget = 5 runs x 50000 steps per agent; three agents (random/grid here, llm in a separate fresh session)",
     "E3 candidate space narrowing at runner level: {0b, 11b, 32b, 53b} (74b excluded by its BLOCKED status in EX-NL3-002-PARAM-74B-R1); allowlist.json untouched, filtering applied in the runner only",
-    "arm manifests 11b/32b/53b copied verbatim from origin/work/nl3-002-summary-r1 (parametric batch branches are not merged into this branch)"
+    "arm manifests 11b/32b/53b verified present at base SHA (merged via main from the parametric batch branches); no copying required"
   ],
   "arms": ["EX-NL4-002-E3-RANDOM-R1 (baseline-random-r1)", "EX-NL4-002-E3-GRID-R1 (baseline-grid-r1)"],
   "llm_arm": "NOT THIS EXECUTION: EX-NL4-002-E3-LLM-R1 runs in a separate fresh session/branch after mech merge",
-  "runs": [],
+  "runs": [
+    {"run_id": "E3-SMOKE-R001", "variant": "0b", "seed": 201004, "kind": "SMOKE"},
+    {"run_id": "E3-RANDOM-R001", "variant": "11b", "seed": 203012},
+    {"run_id": "E3-RANDOM-R002", "variant": "11b", "seed": 201004},
+    {"run_id": "E3-RANDOM-R003", "variant": "0b", "seed": 201004},
+    {"run_id": "E3-RANDOM-R004", "variant": "32b", "seed": 201004},
+    {"run_id": "E3-RANDOM-R005", "variant": "53b", "seed": 203012},
+    {"run_id": "E3-GRID-R001", "variant": "0b", "seed": 201004},
+    {"run_id": "E3-GRID-R002", "variant": "0b", "seed": 202008},
+    {"run_id": "E3-GRID-R003", "variant": "0b", "seed": 203012},
+    {"run_id": "E3-GRID-R004", "variant": "11b", "seed": 201004},
+    {"run_id": "E3-GRID-R005", "variant": "11b", "seed": 202008}
+  ],
   "started_at_utc": "2026-09-13T03:32:39Z",
-  "status": "STARTED"
+  "completed_at_utc": "2026-09-13T05:53:08Z",
+  "status": "HANDOFF_READY"
 }

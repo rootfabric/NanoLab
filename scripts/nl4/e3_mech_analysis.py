@@ -29,6 +29,7 @@ EX_DIR = os.path.join(REPO, "docs", "work", "executions", "EX-NL4-002-E3-MECH-R1
 EVIDENCE = os.path.join(EX_DIR, "evidence")
 TARGET = 90.0
 ARMS = ("random", "grid")
+RUN_WALL_CAP_S = 1.2 * 3600  # WO-NL4-002 hard per-run cap
 
 
 def load(path):
@@ -66,6 +67,12 @@ def run_row(analysis: dict) -> dict:
         "median_angle_deg_valid_frames": stats.get("median_deg"),
         "integrity_status": scored["status"],
         "score": scored["score"],
+        "wall_cap_s": RUN_WALL_CAP_S,
+        "wall_cap_breach": bool(
+            analysis.get("wall_seconds") is not None
+            and analysis["wall_seconds"] > RUN_WALL_CAP_S
+            and not analysis.get("interrupted_budget")
+        ),
     }
 
 
@@ -80,6 +87,7 @@ def arm_summary(arm: str, rows: list) -> dict:
             1 for r in rows if r["status"] != "FAILED" and r["integrity_status"] == "STRUCTURALLY_INVALID"
         ),
         "runs_scored": len(scored),
+        "runs_wall_cap_breach": sum(1 for r in rows if r["wall_cap_breach"]),
         "candidates": [r["candidate"] for r in rows],
         "scores": [
             {"run_id": r["run_id"], "candidate": r["candidate"], "score": r["score"],
@@ -101,7 +109,7 @@ def main() -> int:
         payload = load(os.path.join(EVIDENCE, f"E3-{arm.upper()}-arm.json"))
         rows = []
         for result in payload["session_report"]["runs"]:
-            analysis = load(os.path.join(EX_DIR, result["analysis_evidence_path"]))
+            analysis = load(os.path.join(EX_DIR, "evidence", result["run_id"], "analysis.json"))
             rows.append(run_row(analysis))
         per_arm[arm] = arm_summary(arm, rows)
         all_rows.extend(rows)
@@ -129,10 +137,11 @@ def main() -> int:
         "claim_class": "C0_SOFTWARE_ONLY / E3 comparison measured, no physics-interpretation",
         "arms": {
             arm: {
-                "agent": per_arm[arm]["runs_executed"] and None,
+                "agent": "baseline-random-r1" if arm == "random" else "baseline-grid-r1",
                 "runs_executed": per_arm[arm]["runs_executed"],
                 "runs_failed": per_arm[arm]["runs_failed"],
                 "runs_structurally_invalid": per_arm[arm]["runs_structurally_invalid"],
+                "runs_wall_cap_breach": per_arm[arm]["runs_wall_cap_breach"],
                 "best": per_arm[arm]["best"],
                 "scores": per_arm[arm]["scores"],
             }
@@ -158,6 +167,21 @@ def main() -> int:
                 "detail": "non-adaptive mechanical arms executed their 5 runs concurrently; "
                           "canonical budget accounting via Controller replay with identical "
                           "action order (ReplayExecutor)",
+            },
+            {
+                "key": "wall_cap_breach_parallel_contention",
+                "detail": "WO-NL4-002 hard cap is 1.2 h (4320 s) per run, calibrated for solo "
+                          "execution (measured ~0.8 h). Running all 10 arm runs concurrently "
+                          "slowed every run (memory-bandwidth contention) to 4280-4566 s; runs "
+                          "exceeding 4320 s completed the FULL preregistered 50000 steps with "
+                          "exit 0 (no truncation, no data loss) and are flagged wall_cap_breach "
+                          "in the per-run ledger. The parallel launcher did not enforce the "
+                          "interrupt path (implementation gap, fixed post-execution in "
+                          "real_executor.run_parallel); runs are kept as MEASURED with this "
+                          "deviation, both arms faced identical conditions. Interruption was "
+                          "NOT applied retroactively: killing completed full-length runs would "
+                          "discard valid measured data without changing their scientific "
+                          "content; final treatment is a Director/REVIEWER decision.",
             },
         ],
     }
