@@ -1,13 +1,11 @@
 {
   "schema_version": 1,
-  "event": "WORK_ORDER_STARTED",
-  "execution_id": "EX-NL5-001-B-REPAIR-R1",
-  "work_order": "WO-NL5-001-B-REPAIR-R1",
-  "base_branch": "work/nl5-001-b-library-assembly-r1",
-  "base_sha": "628526594784ded8bb2067976cefbe53c4ac0e48",
-  "branch": "repair/nl5-001-b-library-r1",
-  "risk": "MEDIUM",
-  "claim_ceiling": "C0_SOFTWARE_ONLY",
-  "physics_runs_authorized": false,
-  "next_action": "implement reviewer repair map R1-R6 and revalidate"
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "NL5-001-B-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-implementer-repair-r1",
+  "subject_sha": "628526594784ded8bb2067976cefbe53c4ac0e48",
+  "timestamp_utc": "2026-09-14T11:44:00Z",
+  "summary": "Started bounded repair from exact NL5-001-B reviewed head; no physics runs authorized. Scope: reproduction rule, evidence-derived pins, deterministic manifest, R1.1/R1.2 sync, stale refs, manifest hardening."
 }
