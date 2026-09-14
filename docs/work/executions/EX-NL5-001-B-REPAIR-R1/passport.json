@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-001-B-REPAIR-R1",
+  "work_order_id": "NL5-001-B-REPAIR-R1",
+  "checkpoint": "NL5 / NL5-001-B repair",
+  "base_sha": "628526594784ded8bb2067976cefbe53c4ac0e48",
+  "base_branch": "work/nl5-001-b-library-assembly-r1",
+  "branch": "repair/nl5-001-b-library-r1",
+  "worktree": "connector-managed / no physics executor",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-001-B-REPAIR-R1.md",
+    "docs/work/WO-NL5-001-A-R1.md",
+    "docs/work/WO-NL5-001-B-R1.md",
+    "docs/work/executions/EX-NL5-001-B-REPAIR-R1/**",
+    "docs/release/**",
+    "schemas/release/release-manifest.v1.json",
+    "scripts/release/**",
+    "examples/release/**",
+    "releases/nanolab-components-v0.1/**",
+    "tests/test_release_contract.py",
+    "tests/test_release_library.py",
+    "tests/test_release_repair_r12.py",
+    "tests/test_release_planning_refs.py"
+  ],
+  "parent_work_order": "NL5-001-B",
+  "program_reference": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md Phase B; reviewer repair map review/nl5-001-b-r1:docs/evidence/NL5-001-B/REPAIR_MAP_R1.md",
+  "protocol": "docs/release/RELEASE_CONTRACT_V0_1.md R1.2 + docs/release/REPRODUCTION_RULE_V0_1.md; no physics runs",
+  "deliverables": [
+    "frozen independent reproduction rule and classifier",
+    "evidence-derived R1.2 package builder",
+    "deterministic full-package manifest and hardening",
+    "R1.1/R1.2 contract synchronization and stale-link repair",
+    "repair regression tests"
+  ],
+  "started_at_utc": "2026-09-14T11:44:00Z",
+  "status": "IN_PROGRESS"
+}
