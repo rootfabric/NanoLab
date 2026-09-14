@@ -3,7 +3,7 @@
 ## Паспорт
 
 - Work Order: `WO-NL5-001-A-R1` (`NL5-001-A`, planning decomposition из `docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md`, Phase B / ближайшая очередь A..D).
-- Base: `control/post-mvp-route-r1 @ e05793cc8ff03b3b332e5221038c2e843e7cd5f77` was planning intent; actual reviewed stacked base/head lineage is recorded by Git (`e05793cc8ff03b3b1af2d81b38e39d82cd7527d6` for PR #37 head).
+- Base: `control/post-mvp-route-r1 @ e05793cc8ff03b3b1af2d81b38e39d82cd7527d6` (PR #37 head).
 - Historical implementation branch: `work/nl5-001-a-release-contract-r1`.
 - Risk: MEDIUM; claim ceiling C0_SOFTWARE_ONLY.
 
