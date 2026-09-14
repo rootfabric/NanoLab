@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-POST-MVP-ROUTE-R1",
+  "work_order_id": "WO-POST-MVP-ROUTE-R1",
+  "checkpoint": "control / post-NL4 route",
+  "base_branch": "main",
+  "base_sha": "50318c7b32576cf444f36a29ebd7c94a0cc38564",
+  "base_tree_sha": "110c787091286c2f1041a7d18a99006300375ea2",
+  "branch": "control/post-mvp-route-r1",
+  "worktree": "historical connector-managed control branch; passport reconstructed by bounded execution-record repair",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "HANDOFF_READY",
+  "allowed_paths": [
+    "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
+    "docs/ROADMAP.md",
+    "docs/work/WORK_QUEUE.md",
+    "project/state.json",
+    "project/plan.json",
+    "config/control/harness/checkpoint-catalog.v1.json",
+    "docs/work/WO-POST-MVP-ROUTE-R1.md",
+    "docs/work/executions/EX-POST-MVP-ROUTE-R1/**"
+  ],
+  "forbidden_paths": [
+    "physics/runtime/analysis code",
+    "new scientific runs",
+    "accepted NL0-NL4 evidence",
+    "direct push/merge to main"
+  ],
+  "dependencies": [
+    "main@50318c7b32576cf444f36a29ebd7c94a0cc38564"
+  ],
+  "resource_budget": "documentation/control only; zero scientific compute",
+  "deliverables": [
+    "post-MVP route R1",
+    "canonical roadmap/state/plan/work-queue reconciliation",
+    "execution evidence and handoff"
+  ]
+}
