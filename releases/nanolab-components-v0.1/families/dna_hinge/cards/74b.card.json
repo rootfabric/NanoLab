@@ -39,9 +39,7 @@
   ],
   "measured_observables": {},
   "measurement_status": "NOT_MEASURED",
-  "operating_range": {
-    "notes": "UNKNOWN — измерений не проводилось; ничего не заявляется"
-  },
+  "operating_range": {"notes": "UNKNOWN — измерений не проводилось; ничего не заявляется"},
   "protocol_pins": {
     "engine": "oxDNA (CPU build, double precision)",
     "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
@@ -62,13 +60,11 @@
       "scripts/hinge_family/source_pins.json"
     ],
     "evidence_execution_id": "EX-NL3-002-PARAM-74B-R1",
-    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+    "generation": "assembled by release.build_library_r12.py (WO-NL5-001-B-REPAIR-R1); scientific/protocol machine fields are evidence-derived; full package deterministic check includes manifest"
   },
   "reproduction": {
     "expected": {},
-    "requires": [
-      "закрытый bounded WO arm-manifest-v2 (предусловие воспроизводимости)"
-    ],
+    "requires": ["закрытый bounded WO arm-manifest-v2 (предусловие воспроизводимости)"],
     "rights_constraints": "как у семейства: download-on-run по exact pinned commit, durable-cache запрещён",
     "steps": [
       "1. убедиться, что arm-manifest-v2 принят и опубликован в новой версии пакета",
@@ -89,24 +85,9 @@
   "source_provenance": {
     "digest_gate_result": "digest_gate_all = PASS на этапе скачивания входов; симуляции не запускались",
     "digest_gates": {
-      "MD_Hinges/74b.conf": {
-        "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
-        "sha256": "711bb36a3e1d3113ef3cd8875020af30d1fdece8fb88f9a9e5134a77b4478bcb",
-        "sha256_status": "COMPUTED_NOT_VERIFIED",
-        "size_bytes": 2403188
-      },
-      "MD_Hinges/74b.top": {
-        "blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5",
-        "sha256": "80477acacac3892590085cc6caee08f6b07ded64144ffc5732234569d36890b7",
-        "sha256_status": "COMPUTED_NOT_VERIFIED",
-        "size_bytes": 126116
-      },
-      "MD_Hinges/pro_CPU.in": {
-        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
-        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
-        "sha256_status": "CONTENT_VERIFIED",
-        "size_bytes": 933
-      }
+      "MD_Hinges/74b.conf": {"blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02", "sha256": "711bb36a3e1d3113ef3cd8875020af30d1fdece8fb88f9a9e5134a77b4478bcb", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 2403188},
+      "MD_Hinges/74b.top": {"blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5", "sha256": "80477acacac3892590085cc6caee08f6b07ded64144ffc5732234569d36890b7", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 126116},
+      "MD_Hinges/pro_CPU.in": {"blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "sha256_status": "CONTENT_VERIFIED", "size_bytes": 933}
     },
     "notes": "наличие digest-гейтов отражает выполненное скачивание; отсутствие измерений — отдельный факт (NOT_RUN)",
     "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
