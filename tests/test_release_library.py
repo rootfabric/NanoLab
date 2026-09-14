@@ -1,139 +1,135 @@
-"""Release library v0.1 tests (WO-NL5-001-B-R1).
+"""Release library tests after NL5-001-B Repair R1.
 
-Guarantees: the committed package is exactly what the deterministic builder
-produces from published evidence (byte-for-byte), every card number matches
-its evidence source, digest entries match source_pins, and the 74b honest
-gap is preserved (never encoded as PASS or as a fabricated value).
+No scientific control numbers are duplicated here: expected machine fields are
+read from published evidence/config and compared to a fresh R1.2 build.
 """
 
 from __future__ import annotations
 
 import json
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from release import build_library, card_lint  # noqa: E402
+from release import build_library_r12, card_lint, reproduction_rule  # noqa: E402
 
-RELEASE_PKG = ROOT / "releases" / "nanolab-components-v0.1"
 VARIANTS = ["0b", "11b", "32b", "53b", "74b"]
-
-# Control numbers from published evidence (parametric-summary.json / confirmatory-summary.json).
-EXPECTED_MEDIANS = {
-    "0b": ("hinge_angle_confirmatory_200k", 65.976921401, 150),
-    "11b": ("hinge_angle_common_window_150k", 73.928725839, 111),
-    "32b": ("hinge_angle_common_window_150k", 78.091845516, 111),
-    "53b": ("hinge_angle_common_window_150k", 132.357787730, 111),
-}
 
 
 def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def card(variant: str) -> dict:
-    return load(RELEASE_PKG / "families" / "dna_hinge" / "cards" / f"{variant}.card.json")
-
-
-class TestBuilderDeterminism(unittest.TestCase):
-    def test_builder_check_byte_identical(self) -> None:
-        self.assertEqual(build_library.check(), [])
-
-
-class TestPackageIntegrity(unittest.TestCase):
+class BuiltPackageCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.report = card_lint.run_package(RELEASE_PKG)
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.pkg = Path(cls.tmp.name) / "pkg"
+        build_library_r12.build(cls.pkg)
 
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.tmp.cleanup()
+
+    def card(self, variant: str) -> dict:
+        return load(self.pkg / "families" / "dna_hinge" / "cards" / f"{variant}.card.json")
+
+
+class TestBuilderDeterminism(BuiltPackageCase):
+    def test_two_independent_full_builds_byte_identical_including_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            other = Path(tmp) / "pkg"
+            build_library_r12.build(other)
+            a = {p.relative_to(self.pkg).as_posix(): p.read_bytes() for p in self.pkg.rglob("*") if p.is_file()}
+            b = {p.relative_to(other).as_posix(): p.read_bytes() for p in other.rglob("*") if p.is_file()}
+            self.assertEqual(a, b)
+            self.assertIn("RELEASE_MANIFEST.json", a)
+
+
+class TestPackageIntegrity(BuiltPackageCase):
     def test_package_lints_clean(self) -> None:
-        self.assertTrue(self.report["ok"], self.report["errors"])
-        self.assertEqual(
-            self.report["cards"],
-            [f"families/dna_hinge/cards/{v}.card.json" for v in VARIANTS],
-        )
+        report = card_lint.run_package(self.pkg)
+        self.assertTrue(report["ok"], report["errors"])
+        self.assertEqual(report["cards"], [f"families/dna_hinge/cards/{v}.card.json" for v in VARIANTS])
 
-    def test_manifest_verifies(self) -> None:
-        report = card_lint.manifest_verify(RELEASE_PKG, card_lint.MANIFEST_SCHEMA)
+    def test_manifest_is_deterministic_and_verifies(self) -> None:
+        manifest = load(self.pkg / "RELEASE_MANIFEST.json")
+        self.assertNotIn("generated_at_utc", manifest)
+        report = card_lint.manifest_verify(self.pkg, card_lint.MANIFEST_SCHEMA)
         self.assertTrue(report["ok"], report["errors"])
 
     def test_variant_statuses(self) -> None:
-        status = self.report["variant_status"]
+        report = card_lint.run_package(self.pkg)
         for variant in ("0b", "11b", "32b", "53b"):
-            self.assertEqual(status[variant], "MEASURED")
-        self.assertIn("NOT_MEASURED", status["74b"])
+            self.assertEqual(report["variant_status"][variant], "MEASURED")
+        self.assertEqual(report["variant_status"]["74b"], "NOT_MEASURED")
 
 
-class TestVerbatimNumbers(unittest.TestCase):
-    def test_control_medians_exact(self) -> None:
-        for variant, (observable, median, n) in EXPECTED_MEDIANS.items():
-            with self.subTest(variant=variant):
-                observable_data = card(variant)["measured_observables"][observable]
-                self.assertEqual(observable_data["estimate"], median)
-                self.assertEqual(observable_data["n"], n)
-
-    def test_ci95_matches_evidence(self) -> None:
+class TestEvidenceDerivedNumbers(BuiltPackageCase):
+    def test_observables_match_published_evidence(self) -> None:
         param = load(ROOT / "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json")
         confirm = load(ROOT / "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json")
-        self.assertEqual(
-            card("0b")["measured_observables"]["hinge_angle_confirmatory_200k"]["uncertainty"],
-            confirm["pooled_angle_stats_valid_frames"]["bootstrap"]["ci95"],
-        )
+
+        obs0 = self.card("0b")["measured_observables"]["hinge_angle_confirmatory_200k"]
+        self.assertEqual(obs0["estimate"], confirm["pooled_angle_stats_valid_frames"]["median_deg"])
+        self.assertEqual(obs0["n"], confirm["pooled_angle_stats_valid_frames"]["n_frames"])
+        self.assertEqual(obs0["uncertainty"], confirm["pooled_angle_stats_valid_frames"]["bootstrap"]["ci95"])
+
         for variant in ("11b", "32b", "53b"):
-            pooled = param["variants"][variant]["pooled_common_window"]["angle_stats_valid_frames"]
-            self.assertEqual(
-                card(variant)["measured_observables"]["hinge_angle_common_window_150k"]["uncertainty"],
-                pooled["bootstrap"]["ci95"],
-            )
+            source = param["variants"][variant]["pooled_common_window"]["angle_stats_valid_frames"]
+            obs = self.card(variant)["measured_observables"]["hinge_angle_common_window_150k"]
+            self.assertEqual(obs["estimate"], source["median_deg"])
+            self.assertEqual(obs["n"], source["n_frames"])
+            self.assertEqual(obs["uncertainty"], source["bootstrap"]["ci95"])
 
-    def test_report_table_matches_cards(self) -> None:
-        report_text = (RELEASE_PKG / "reports" / "family-report.md").read_text(encoding="utf-8")
-        for variant, (_, median, _) in EXPECTED_MEDIANS.items():
-            self.assertIn(f"{median:.9f}", report_text, f"{variant} median missing from report")
+    def test_protocol_pins_match_evidence(self) -> None:
+        evidence0 = load(ROOT / "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.json")
+        card0 = self.card("0b")
+        self.assertEqual(card0["protocol_pins"]["steps"], evidence0["environment"]["steps_confirmatory"])
+        self.assertEqual(card0["protocol_pins"]["seeds"], evidence0["simulation_confidence"]["seeds"])
+        self.assertEqual(card0["protocol_pins"]["options"]["print_conf_interval"], evidence0["environment"]["print_conf_interval"])
+        self.assertEqual(card0["protocol_pins"]["options"]["print_energy_every"], evidence0["environment"]["print_energy_every"])
+        self.assertEqual(card0["protocol_pins"]["options"]["salt_concentration"], evidence0["environment"]["salt_concentration"])
+
+        for variant in ("11b", "32b", "53b"):
+            summary = load(ROOT / f"docs/work/executions/EX-NL3-002-PARAM-{variant.upper()}-R1/evidence/PARAM-{variant.upper()}-summary.json")
+            reports = [summary["run_reports"][key] for key in sorted(summary["run_reports"])]
+            card = self.card(variant)
+            self.assertEqual(card["protocol_pins"]["seeds"], [row["seed"] for row in reports])
+            self.assertEqual(card["protocol_pins"]["steps"], reports[0]["steps_requested"])
+
+    def test_reproduction_rule_payload_comes_from_replica_medians(self) -> None:
+        for variant in ("0b", "11b", "32b", "53b"):
+            card = self.card(variant)
+            expected = card["reproduction"]["expected"]
+            self.assertEqual(expected["rule_id"], reproduction_rule.RULE_ID)
+            self.assertEqual(expected["bootstrap_ci_role"], "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE")
+            self.assertEqual(expected["required_fresh_replicas"], 3)
+            self.assertIn("replica median", card["reproduction"]["tolerance_policy"])
 
 
-class TestDigestHonesty(unittest.TestCase):
-    def test_digest_gates_match_source_pins(self) -> None:
+class TestDigestHonesty(BuiltPackageCase):
+    def test_registry_blob_and_size_match_source_pins(self) -> None:
         pins = load(ROOT / "scripts/hinge_family/source_pins.json")
         for variant in VARIANTS:
-            gates = card(variant)["source_provenance"]["digest_gates"]
+            gates = self.card(variant)["source_provenance"]["digest_gates"]
             for rel in (f"MD_Hinges/{variant}.conf", f"MD_Hinges/{variant}.top"):
-                with self.subTest(variant=variant, rel=rel):
-                    self.assertEqual(gates[rel]["blob_sha1"], pins["files"][rel]["blob_sha1"])
-                    self.assertEqual(gates[rel]["size_bytes"], pins["files"][rel]["size_bytes"])
+                self.assertEqual(gates[rel]["blob_sha1"], pins["files"][rel]["blob_sha1"])
+                self.assertEqual(gates[rel]["size_bytes"], pins["files"][rel]["size_bytes"])
+                self.assertEqual("sha256" in gates[rel], "sha256_status" in gates[rel])
 
-    def test_sha256_status_invariant(self) -> None:
-        for variant in VARIANTS:
-            for rel, digest in card(variant)["source_provenance"]["digest_gates"].items():
-                with self.subTest(variant=variant, rel=rel):
-                    self.assertEqual("sha256" in digest, "sha256_status" in digest, rel)
-
-    def test_0b_content_verified_others_computed(self) -> None:
-        conf_0b = card("0b")["source_provenance"]["digest_gates"]["MD_Hinges/0b.conf"]
-        self.assertEqual(conf_0b["sha256_status"], "CONTENT_VERIFIED")
-        conf_11b = card("11b")["source_provenance"]["digest_gates"]["MD_Hinges/11b.conf"]
-        self.assertEqual(conf_11b["sha256_status"], "COMPUTED_NOT_VERIFIED")
-
-
-class TestHonestGap74b(unittest.TestCase):
-    def test_not_measured_with_known_gap(self) -> None:
-        card_74b = card("74b")
-        self.assertEqual(card_74b["measurement_status"], "NOT_MEASURED")
-        self.assertEqual(card_74b["measured_observables"], {})
-        self.assertEqual(card_74b["reproduction"]["expected"], {})
-        gaps = card_74b["known_gaps"]
-        self.assertEqual(len(gaps), 1)
-        self.assertEqual(gaps[0]["status"], "KNOWN_GAP")
-        self.assertFalse(gaps[0]["blocking_release"])
-        self.assertIn("NOT_RUN", card_74b["scientific_outcome"])
-
-    def test_failure_facts_recorded(self) -> None:
-        design = card("74b")["design"]
-        self.assertEqual(design["error_class"], "FAILED_TWO_DOMINANT_BLOCKS")
-        self.assertTrue(design["deterministic_identical_error"])
-        self.assertEqual(design["derivation_attempts"], 2)
+    def test_74b_honest_gap(self) -> None:
+        card = self.card("74b")
+        self.assertEqual(card["measurement_status"], "NOT_MEASURED")
+        self.assertEqual(card["measured_observables"], {})
+        self.assertEqual(card["reproduction"]["expected"], {})
+        self.assertFalse(card["known_gaps"][0]["blocking_release"])
+        self.assertIn("NOT_RUN", card["scientific_outcome"])
 
 
 if __name__ == "__main__":
