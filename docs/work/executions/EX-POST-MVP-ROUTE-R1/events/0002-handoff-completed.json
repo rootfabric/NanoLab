@@ -1,13 +1,22 @@
 {
   "schema_version": 1,
-  "execution_id": "EX-POST-MVP-ROUTE-R1",
-  "event": "HANDOFF_COMPLETED",
-  "status": "IMPLEMENTED",
-  "implementation_subject_head": "59815fedef0c033f902fedc136f8da1c408f707e",
-  "evidence_map": "docs/work/executions/EX-POST-MVP-ROUTE-R1/evidence-map.json",
-  "summary": "docs/work/executions/EX-POST-MVP-ROUTE-R1/summary.md",
-  "review_status": "REVIEW_REQUIRED",
-  "verifier_status": "VERIFY_REQUIRED",
-  "human_gate": "MERGE_REQUIRED",
-  "next_action": "fresh review of substantive subject, then exact final PR-head verification and Human Gate"
+  "event_id": "0002-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-POST-MVP-ROUTE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "execution-record-repair-r1",
+  "subject_sha": "59815fedef0c033f902fedc136f8da1c408f707e",
+  "timestamp_utc": "2026-09-14T12:10:01Z",
+  "summary": "Reconstructed the terminal handoff event into the current work-event contract. Original implementation facts are preserved: substantive subject 59815fedef0c033f902fedc136f8da1c408f707e, route/state/plan reconciliation completed, no physics runs. This repair changes record shape only.",
+  "command_refs": [
+    "control/documentation-only execution; no scientific compute"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-POST-MVP-ROUTE-R1.md",
+    "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
+    "docs/work/executions/EX-POST-MVP-ROUTE-R1/evidence-map.json",
+    "docs/work/executions/EX-POST-MVP-ROUTE-R1/summary.md"
+  ],
+  "next_action": "Fresh review/verification of this execution-record compatibility repair, then Human Gate for the underlying post-MVP route stack.",
+  "blocker": null
 }
