@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "execution_id": "EX-POST-MVP-ROUTE-R1",
   "event_id": "0002-handoff-completed",
   "event_type": "HANDOFF_COMPLETED",
   "work_order_id": "WO-POST-MVP-ROUTE-R1",
@@ -8,9 +9,7 @@
   "subject_sha": "59815fedef0c033f902fedc136f8da1c408f707e",
   "timestamp_utc": "2026-09-14T12:10:01Z",
   "summary": "Reconstructed the terminal handoff event into the current work-event contract. Original implementation facts are preserved: substantive subject 59815fedef0c033f902fedc136f8da1c408f707e, route/state/plan reconciliation completed, no physics runs. This repair changes record shape only.",
-  "command_refs": [
-    "control/documentation-only execution; no scientific compute"
-  ],
+  "command_refs": ["control/documentation-only execution; no scientific compute"],
   "evidence_refs": [
     "docs/work/WO-POST-MVP-ROUTE-R1.md",
     "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
