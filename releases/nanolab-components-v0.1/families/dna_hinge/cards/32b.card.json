@@ -42,35 +42,23 @@
       "digests": {},
       "distribution": {
         "bootstrap": {
-          "ci95": [
-            77.794798276,
-            78.66512915
-          ],
+          "ci95": [77.794798276, 78.66512915],
           "resamples": 10000,
           "seed": 424242,
           "statistic": "median"
         },
-        "iqr_deg": [
-          77.044589742,
-          79.781487257
-        ],
+        "iqr_deg": [77.044589742, 79.781487257],
         "per_replica_median_deg": {
           "PARAM-32B-S001": 79.877463339,
           "PARAM-32B-S002": 77.4927314,
           "PARAM-32B-S003": 77.794798276
         },
-        "q05_q95_deg": [
-          75.753118173,
-          81.213081515
-        ]
+        "q05_q95_deg": [75.753118173, 81.213081515]
       },
       "estimate": 78.091845516,
       "n": 111,
       "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
-      "uncertainty": [
-        77.794798276,
-        78.66512915
-      ],
+      "uncertainty": [77.794798276, 78.66512915],
       "units": "deg"
     }
   },
@@ -79,7 +67,7 @@
     "model": "oxDNA DNA2 coarse-grained",
     "notes": "применимость ограничена измеренным протоколом; экстраполяция не заявляется",
     "salt_concentration_M": 0.5,
-    "temperature": "300 K"
+    "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)"
   },
   "protocol_pins": {
     "engine": "oxDNA (CPU build, double precision)",
@@ -91,15 +79,11 @@
       "print_energy_every": 100,
       "salt_concentration": 0.5
     },
-    "platform": "как в ENGINE_ENVIRONMENT_R1 (WSL2 Ubuntu 24.04)",
+    "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1; gcc 13.3.0, cmake 3.31.6 user-local)",
     "protocol": "docs/research/E2_PROTO_R1.md (frozen; addendum §8 common window); observables: docs/research/E2_OBSERVABLES_R2.md",
-    "seeds": [
-      201004,
-      202008,
-      203012
-    ],
+    "seeds": [201004, 202008, 203012],
     "steps": 150000,
-    "temperature": "300 K"
+    "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)"
   },
   "provenance": {
     "card_generated_from": [
@@ -110,11 +94,18 @@
       "docs/research/ENGINE_ENVIRONMENT_R1.md"
     ],
     "evidence_execution_id": "EX-NL3-002-PARAM-32B-R1",
-    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+    "generation": "assembled by release.build_library_r12.py (WO-NL5-001-B-REPAIR-R1); scientific/protocol machine fields are evidence-derived; full package deterministic check includes manifest"
   },
   "reproduction": {
     "expected": {
-      "hinge_angle_common_window_150k": 78.091845516
+      "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+      "independent_unit": "replica_median_deg",
+      "reference_campaign_statistic_deg": 77.794798276,
+      "reference_observable_estimate_deg": 78.091845516,
+      "reference_replica_envelope_deg": [77.4927314, 79.877463339],
+      "reference_replica_medians_deg": [79.877463339, 77.4927314, 77.794798276],
+      "required_fresh_replicas": 3,
+      "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
     },
     "requires": [
       "oxDNA @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (CPU build, double precision)",
@@ -123,13 +114,13 @@
     ],
     "rights_constraints": "download-on-run по exact pinned commit; durable-cache запрещён; upstream-файлы не включены в пакет",
     "steps": [
-      "1. download-on-run с digest-гейтом: size + blob_sha1 (registry pin) обязательны; sha256 сверяется со значением карточки с учётом sha256_status",
-      "2. сборка входов реплик: verbatim conf/top + pro_CPU.in; seeds как в protocol_pins",
-      "3. прогоны: CPU oxDNA, 3 реплики; анализ в общем окне 150000 steps (addendum §8)",
-      "4. frozen-анализ: v2 mutual-nearest + гейты §4 + статистика §6 (median/IQR/q05-q95 по валидным кадрам, bootstrap CI95 10000 resamples, seed 424242)",
-      "5. сравнение pooled median с expected в пределах CI95; расхождение вне CI — REPRODUCTION_MISMATCH"
+      "1. download-on-run; verify mandatory size + blob_sha1; interpret sha256 only together with sha256_status",
+      "2. freeze three fresh seeds before execution; do not reuse reference seeds",
+      "3. run the pinned CPU/double oxDNA model and apply the frozen E2 frame-validity/angle convention",
+      "4. analyze the frozen comparison window t <= 150000; report per-replica medians and descriptive bootstrap (10000 resamples, seed 424242)",
+      "5. classify with NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE using independent replica medians; pooled bootstrap CI is descriptive only, never a prediction/tolerance interval"
     ],
-    "tolerance_policy": "pooled median в пределах bootstrap CI95 карточки; гейты кадра §4 E2_PROTO_R1; не PASS при отсутствии проверки"
+    "tolerance_policy": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE; independent unit=replica median; MATCH/MISMATCH/INCONCLUSIVE per docs/release/REPRODUCTION_RULE_V0_1.md; bootstrap CI is descriptive only"
   },
   "rights": {
     "derived_results_publishable": true,
@@ -144,24 +135,9 @@
   "source_provenance": {
     "digest_gate_result": "digest_gate_all = PASS (size + blob_sha1 registry pin; sha256 computed at download, status COMPUTED_NOT_VERIFIED)",
     "digest_gates": {
-      "MD_Hinges/32b.conf": {
-        "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
-        "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
-        "sha256_status": "COMPUTED_NOT_VERIFIED",
-        "size_bytes": 2345114
-      },
-      "MD_Hinges/32b.top": {
-        "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
-        "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
-        "sha256_status": "COMPUTED_NOT_VERIFIED",
-        "size_bytes": 123024
-      },
-      "MD_Hinges/pro_CPU.in": {
-        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
-        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
-        "sha256_status": "CONTENT_VERIFIED",
-        "size_bytes": 933
-      }
+      "MD_Hinges/32b.conf": {"blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae", "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 2345114},
+      "MD_Hinges/32b.top": {"blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b", "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 123024},
+      "MD_Hinges/pro_CPU.in": {"blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "sha256_status": "CONTENT_VERIFIED", "size_bytes": 933}
     },
     "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
     "upstream_repo": "gauravarya77/DNA-hinge-simulations"
