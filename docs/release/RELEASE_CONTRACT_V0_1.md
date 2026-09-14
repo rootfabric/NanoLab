@@ -1,160 +1,143 @@
 # NanoLab Component Release Contract v0.1
 
-Статус: **нормативный контракт** для `NL5-001` component library / release package.
-Ревизия: R1 (WO-NL5-001-A-R1). Подчинён: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B и [POST_MVP_EXECUTION_PROGRAM_R1](../control/POST_MVP_EXECUTION_PROGRAM_R1.md) §3 (NL5-001-A).
-Канонические совместимые источники: [DATA_CONTRACTS](../DATA_CONTRACTS.md), [E2_SOURCE_RIGHTS_G1_DECISION_R1](../control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md), [LICENSE_POLICY](../../LICENSE_POLICY.md), `docs/research/E2_PROTO_R1.md`.
+Статус: **нормативный контракт-кандидат** для `NL5-001` component library / release package.
 
-Изменение контракта после публикации данных = новая ревизия контракта + новая версия пакета, никогда не правка задним числом.
+Канонический маршрут: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), Phase B. Durable planning decomposition `NL5-001-A..D` хранится в этом route-документе; ссылки на несуществующий `POST_MVP_EXECUTION_PROGRAM_R1.md` не используются.
+
+Совместимые источники: [DATA_CONTRACTS](../DATA_CONTRACTS.md), [E2_SOURCE_RIGHTS_G1_DECISION_R1](../control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md), [LICENSE_POLICY](../../LICENSE_POLICY.md), `docs/research/E2_PROTO_R1.md`, [REPRODUCTION_RULE_V0_1](REPRODUCTION_RULE_V0_1.md).
+
+Изменение контракта после публикации данных = новая ревизия + новая версия пакета; старый release не переписывается задним числом.
 
 ## Revision history
 
-- **R1** (WO-NL5-001-A-R1): первоначальный контракт.
-- **R1.1** (WO-NL5-001-B-R1, обнаружено при сборке библиотеки): digest-объект карточки —
-  обязательны `size_bytes` + `blob_sha1` (registry-пин, Git blob SHA1); `sha256` опционален
-  и допускается только вместе с `sha256_status ∈ {CONTENT_VERIFIED, COMPUTED_NOT_VERIFIED,
-  UNKNOWN}` (семантика S5). Основание: у вариантов 11b/32b/53b/74b sha256 вычислен при
-  скачивании (`COMPUTED_NOT_VERIFIED`, «recorded for future re-use; no registry claim»),
-  content-verified — только входы 0b и `pro_CPU.in`. Добавлено необязательное поле
-  `design` (факты arm-manifest варианта).
+- **R1** — исходный контракт `WO-NL5-001-A-R1`.
+- **R1.1** — digest honesty: mandatory registry-level fields = `size_bytes + blob_sha1`; `sha256` optional и допустим только парой с `sha256_status`; добавлено optional `design`.
+- **R1.2 / B-Repair-R1** — frozen independent-reproduction rule; full-package deterministic manifest; fail-closed duplicate/unsafe manifest paths; scientific/protocol pins обязаны происходить из evidence/config, а не из duplicated literals; stale planning reference удалён.
 
-## 1. Назначение и границы
-
-Контракт определяет формат публичного пакета **`nanolab-components-v0.1`**: проверенные
-измеренные компоненты с машинно-читаемыми карточками, правами, provenance, manifest
-и интерфейсом воспроизведения.
-
-Не входит в контракт v0.1 (и не заявляется):
-
-- автоматическое исполнение движка из пакета (исполнение — ответственность
-  внешнего воспроизводителя по шагам карточки; автоматизация — NL5-001-C);
-- научные интерпретации: карточка публикует измерения и их источники, не «смысл»;
-- любые заявки сверх `claim_ceiling` карточки.
-
-## 2. Layout пакета
+## 1. Package layout
 
 ```text
 nanolab-components-v0.1/
-  schema/                          # снимок нормативных схем (component-card, rights, manifest)
+  schema/
   families/<family_id>/
-    family.json                    # декларация семейства и вариантов
-    cards/<variant>.card.json      # карточки вариантов
-  protocols/                       # pins протоколов, если не полностью в карточках
-  reports/                         # человеческие сводки измерений
-  provenance/                      # digest-метаданные входов (НЕ сами upstream-файлы)
+    family.json
+    cards/<variant>.card.json
+  protocols/
+  reports/
+  provenance/
   reproduction/
     README.md
-    reproduce.py                   # stdlib-only: verify / plan
+    reproduce.py
   RIGHTS.json
   CITATION.cff
   VERSION
   RELEASE_MANIFEST.json
 ```
 
-Семантика: пакет распространяет **производные результаты NanoLab**; upstream-файлы
-(REFERENCE_ONLY) в пакет не включаются — только их digest-метаданные и pins.
+Пакет распространяет производные результаты NanoLab; upstream `REFERENCE_ONLY` bytes в release не включаются.
 
-## 3. Нормативные схемы и исполнитель
+## 2. Component card
 
-| Артефакт | Схема |
+Нормативная схема: `schemas/components/component-card.v1.json`; fail-closed executor: `scripts/release/mini_schema.py`; semantic checks: `scripts/release/card_lint.py`.
+
+Обязательные принципы:
+
+- `family + variant`, один family с вариантами, не набор независимых «изобретений»;
+- `UNKNOWN` явный; отсутствие проверки никогда не PASS;
+- `measurement_status`: `NOT_MEASURED | MEASURED | MEASURED_STATISTICALLY_VALIDATED`;
+- `claim_ceiling`: максимум `C1_COMPUTATIONAL_REPRODUCTION` в этой schema line;
+- каждое measured observable содержит source path и единицы/convention;
+- protocol/scientific pins генерируются из frozen evidence/config sources;
+- `74b` остаётся `NOT_MEASURED / KNOWN_GAP` до отдельного arm-manifest-v2.
+
+### Digest semantics R1.1
+
+Для каждого upstream input:
+
+- `size_bytes` — **mandatory**;
+- `blob_sha1` — **mandatory registry pin** (Git blob SHA-1);
+- `sha256` — optional;
+- если присутствует `sha256`, обязательно присутствует `sha256_status`;
+- если присутствует `sha256_status`, обязательно присутствует `sha256`.
+
+`sha256_status`:
+
+- `CONTENT_VERIFIED` — SHA-256 проверен против отдельного registry/evidence claim;
+- `COMPUTED_NOT_VERIFIED` — SHA-256 вычислен при download, но отдельного registry claim нет;
+- `UNKNOWN` — доказанность SHA-256 не установлена.
+
+### Semantic rules
+
+| ID | Rule |
 |---|---|
-| Карточка компонента | `schemas/components/component-card.v1.json` |
-| `RIGHTS.json` | `schemas/release/rights.v1.json` |
-| `RELEASE_MANIFEST.json` | `schemas/release/release-manifest.v1.json` |
+| S1 | `MEASURED*` → observables/source и reproduction expected непусты |
+| S2 | `NOT_MEASURED` → known gap обязателен |
+| S3 | `REFERENCE_ONLY/DOWNLOAD_ON_RUN/MIXED` → upstream repo + pinned commit + durable cache FORBIDDEN |
+| S4 | `C1_COMPUTATIONAL_REPRODUCTION` → measured data |
+| S5 | `sha256` ↔ `sha256_status`: поля допускаются только вместе |
 
-Схемы написаны в подмножестве JSON Schema draft 2020-12 и исполняются
-`scripts/release/mini_schema.py` (stdlib-only, **fail-closed**): ключевое слово вне
-поддерживаемого подмножества — ошибка, а не молчаливое игнорирование. Hosted CI не
-устанавливает сторонних пакетов, поэтому release-инструментарий не имеет права на
-зависимости (тест-гвардеец `test_stdlib_only` следит за этим).
+Family invariants: I1 — каждый declared variant имеет card; I2 — каждая card объявлена family.
 
-Линтер: `PYTHONPATH=scripts python3 -m release.card_lint card|rights|manifest|package …`.
-Exit-коды: `0` ok, `3` validation failure, `2` usage.
+## 3. Reproduction rule
 
-## 4. Карточка компонента: политика полей
+Нормативный документ: `docs/release/REPRODUCTION_RULE_V0_1.md`; machine implementation: `scripts/release/reproduction_rule.py`; rule id: `NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE`.
 
-- `schema_version: 1`, `kind: "nanolab_component_card"` — идентификация формата.
-- Идентичность: `family` + `variant`; `component_id = "<family>/<variant>"`.
-- `function`, `interfaces`, `operating_range` — назначение/интерфейсы/измеренная
-  область; неизмеренное помечается явным `UNKNOWN`. Отсутствие проверки **никогда**
-  не кодируется как PASS (правило `DATA_CONTRACTS`).
-- `measurement_status`: `NOT_MEASURED | MEASURED | MEASURED_STATISTICALLY_VALIDATED`.
-- `claim_ceiling`: `C0_SOFTWARE_ONLY | C1_COMPUTATIONAL_REPRODUCTION`. Новое значение
-  потолка = новая ревизия схемы, не расширение на месте.
-- `measured_observables` — только числа из опубликованного evidence; каждое значение
-  несёт `source` (путь к evidence), `units`, `convention`, `uncertainty`, `n`.
-  Выхолопливание/пересчёт «для красоты» запрещён: расхождение карточки и evidence =
-  review-fail.
-- `protocol_pins` — engine/engine_commit/model обязательны; seeds/steps/platform/options.
-- `source_provenance.digest_gates` — для каждого upstream-входа: `size_bytes`,
-  `blob_sha1` (40 hex), `sha256` (64 hex).
-- `known_gaps` / `known_limitations` — честные гэпы и ограничения; NOT_RUN не
-  кодируется ни как PASS, ни как отрицательный научный результат.
-- `reproduction` — `requires`, `steps`, `expected`, `tolerance_policy`,
-  `rights_constraints`.
-- `provenance.card_generated_from` — пути evidence, из которых собрана карточка.
+**Запрещено** использовать исходный pooled bootstrap CI95 как prediction/tolerance interval независимой reproduction campaign.
 
-### Семантические правила (card_lint; вне выразимости подмножества схемы)
+Card/release публикует reference per-replica medians/envelope. Independent unit = replica median. При трёх fresh replicas:
 
-| ID | Правило |
-|---|---|
-| S1 | `MEASURED*` → `measured_observables` непусто, каждый observable с `source`, `reproduction.expected` непусто |
-| S2 | `NOT_MEASURED` → `known_gaps` непусто (гэп объявлен явно) |
-| S3 | `rights_mode ∈ {REFERENCE_ONLY, DOWNLOAD_ON_RUN, MIXED}` → `upstream_repo` + `pinned_commit` (40-hex), `durable_cache = FORBIDDEN` (G1) |
-| S4 | `claim_ceiling = C1_COMPUTATIONAL_REPRODUCTION` → есть измеренные данные |
+- `MATCH`: median fresh replica medians внутри pre-existing reference replica envelope;
+- `MISMATCH`: все fresh replica medians полностью и однонаправленно отделены от reference envelope;
+- `INCONCLUSIVE`: недостаточно валидных replicas, incomplete integrity/analysis либо промежуточный случай;
+- technical failures фиксируются отдельно.
 
-## 5. Семейство и варианты
+Это operational computational-reproduction classification, не физическая validation claim.
 
-Публикуется **одно семейство с вариантами**, не набор независимых компонентов.
-Инварианты (enforced `card_lint package`):
+## 4. RIGHTS / citation / version
 
-- **I1** каждый вариант, объявленный в `family.json`, имеет `cards/<variant>.card.json`
-  (измеренную или KNOWN_GAP);
-- **I2** каждая карточка объявлена в `family.json`;
-- `variant_status` покрывает ровно множество `variants`.
+`RIGHTS.json` допускает `UNDECIDED_PENDING_OWNER_DECISION` только для draft. Публичный release запрещён до owner D2. `REFERENCE_ONLY` не означает redistribution permission. `CITATION.cff` и `VERSION` финализируются в NL5-001-D.
 
-Правило `74b`: вариант без измерений выпускается карточкой `NOT_MEASURED` с
-`known_gaps` (`status: KNOWN_GAP`, `blocking_release: false`) — гэп не задерживает
-release, но и не прячется.
+## 5. RELEASE_MANIFEST determinism and hardening
 
-## 6. RIGHTS.json / CITATION.cff / VERSION
+Manifest содержит SHA-256 + size + role каждого package file, кроме самого manifest.
 
-- `RIGHTS.json`: `own_code_license` / `own_docs_data_license` — только owner-решение
-  (программа D2; `LICENSE_POLICY.md`: агент лицензию не назначает). Значение
-  `UNDECIDED_PENDING_OWNER_DECISION` легально для draft-пакета; линтер даёт warning,
-  а **публикация** пакета в этом состоянии запрещена. Item-правила: путь — POSIX
-  relative, без `..`; `REFERENCE_ONLY` → `upstream_repo` + `pinned_commit`;
-  `policy.durable_cache` по умолчанию `FORBIDDEN`, `download_on_run: true` для
-  REFERENCE_ONLY-источников. `UNKNOWN` прав не является разрешением.
-- `CITATION.cff`: title/version/message; `license`, `authors`, `date-released`
-  заполняются на момент публикации (NL5-001-D), не раньше.
-- `VERSION`: содержимое = semver (`MAJOR.MINOR.PATCH[-rcN]`).
+Для release candidate v0.1 manifest **детерминирован**: wall-clock timestamp не является обязательным содержимым и не должен менять bytes повторной сборки. `generated_by` и optional frozen subject описывают происхождение.
 
-## 7. Версионирование и неизменяемость
+Verifier обязан:
 
-- Пакет: semver. До 1.0.0 ломающие изменения схемы/формата = минорный бамп.
-- Карточка варианта **неизменяема после релиза**: исправление измерения/ошибки =
-  новая версия пакета + changelog + сохранение прежней карточки (правило
-  «отрицательные/промежуточные результаты не стираются»).
-- `RELEASE_MANIFEST.json`: `sha256` + `size_bytes` каждого файла (кроме самого
-  манифеста), роль файла; верификация — перерасчёт (`manifest verify`,
-  `reproduce.py verify`).
+- reject duplicate `path` entries до преобразования в mapping;
+- reject absolute paths, backslashes и `..`;
+- reject missing/unlisted files;
+- recompute SHA-256 и size;
+- compare package version with `VERSION`.
 
-## 8. Reproduction interface
+Full-package deterministic check включает `RELEASE_MANIFEST.json`.
 
-`reproduction/reproduce.py` (stdlib-only): `verify` — целостность пакета;
-`plan` — план по карточкам (engine pins, шаги, expected, права); `self-test`.
-Helper **не** скачивает входы и **не** запускает движок в v0.1: download-on-run,
-исполнение и сравнение с `expected` по `tolerance_policy` выполняет внешний
-воспроизводитель. Расхождение вне полосы — `REPRODUCTION_MISMATCH`, честный
-сохраняемый исход.
+## 6. Builder provenance
 
-## 9. Acceptance NL5-001-A → передача в NL5-001-B
+Нормативный builder обязан брать machine-readable scientific/protocol numeric fields из published evidence/config:
 
-A закрыт, когда: (1) все три схемы + линтер + тесты в `main` (после review);
-(2) пример-пакет проходит `card_lint package`; (3) memo D2 опубликовано и
-owner-решение получено ИЛИ явно отложено с блокировкой только публикации;
-(4) настоящий контракт принят review без открытых FIX_REQUIRED.
+- window/steps;
+- seeds;
+- engine/model/environment pins;
+- print intervals/salt where emitted;
+- bootstrap analysis pins where emitted;
+- source/digest pins.
 
-B начинает сборку реальной библиотеки (0b/11b/32b/53b/74b) на этом контракте;
-карточки B генерируются из evidence, все числа verbatim, каждая карточка
-проходит линтер.
+Release metadata (`VERSION`, schema identifiers, labels/prose) может быть code-owned. Human-authored prose не является источником научного numeric claim.
+
+Tests сравнивают generated machine fields непосредственно с evidence/config, а не только с дублированными constants в тестах.
+
+## 7. Acceptance A/B → C
+
+До NL5-001-C:
+
+1. R1.2 contract + reproduction rule должны пройти Fresh Re-review;
+2. package lint зелёный;
+3. full-package byte-identical rebuild зелёный;
+4. manifest duplicate/path negative controls зелёные;
+5. evidence-vs-generated protocol pin tests зелёные;
+6. `74b` остаётся честным NOT_MEASURED;
+7. D2 может оставаться unresolved только как publication blocker, не как причина выдумать license.
+
+A @ `9cbde33` является историческим pre-amendment subject и не принимается отдельно как финальный контракт; repaired integrated B supersedes его для NL5-001 release candidate.
