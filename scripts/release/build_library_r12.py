@@ -1,11 +1,11 @@
 """R1.2 deterministic repair builder for nanolab-components-v0.1.
 
-The historical R1 builder remains durable evidence. This module calls it only
-for non-authoritative assembly/template work, then rewrites every emitted
-machine-readable scientific/protocol comparison field from published evidence
-and creates a deterministic full-package manifest.
+The historical R1 builder remains durable evidence. This module reuses its
+non-authoritative assembly/templates, then rewrites emitted machine-readable
+scientific/protocol/reproduction fields from published evidence and creates a
+deterministic full-package manifest.
 
-Normative command after B-Repair R1:
+Normative commands after B-Repair R1:
     PYTHONPATH=scripts python3 -m release.build_library_r12 build
     PYTHONPATH=scripts python3 -m release.build_library_r12 check
 """
@@ -41,10 +41,6 @@ def _variant_summary_path(variant: str) -> Path:
     return legacy.PARAM_EXEC[variant] / "evidence" / f"PARAM-{variant.upper()}-summary.json"
 
 
-def _common_environment() -> dict[str, Any]:
-    return _read_json(CARD_0B_EVIDENCE)["environment"]
-
-
 def _reference_replica_medians(card: dict[str, Any]) -> list[float]:
     observables = card["measured_observables"]
     if "hinge_angle_confirmatory_200k" in observables:
@@ -59,8 +55,10 @@ def _reference_replica_medians(card: dict[str, Any]) -> list[float]:
 
 def _reproduction_expected(card: dict[str, Any], observable_name: str) -> dict[str, Any]:
     target = card["measured_observables"][observable_name]["estimate"]
-    payload = reproduction_rule.reference_rule_payload(_reference_replica_medians(card))
-    return {"reference_observable_estimate_deg": target, **payload}
+    return {
+        "reference_observable_estimate_deg": target,
+        **reproduction_rule.reference_rule_payload(_reference_replica_medians(card)),
+    }
 
 
 def _reproduction_steps(window_steps: int, bootstrap_resamples: int, bootstrap_seed: int) -> list[str]:
@@ -73,13 +71,13 @@ def _reproduction_steps(window_steps: int, bootstrap_resamples: int, bootstrap_s
     ]
 
 
-def _repair_0b(card: dict[str, Any], evidence: dict[str, Any], param: dict[str, Any]) -> None:
+def _repair_0b(card: dict[str, Any], evidence: dict[str, Any]) -> None:
     env = evidence["environment"]
-    conf = evidence["angle_distribution_confirmatory_200k"]["pooled"]["bootstrap"]
+    boot = evidence["angle_distribution_confirmatory_200k"]["pooled"]["bootstrap"]
     seeds = evidence["simulation_confidence"]["seeds"]
-    window_steps = int(param["variants"]["0b"]["common_window_steps"])
+    confirmatory_steps = int(env["steps_confirmatory"])
 
-    card["protocol_pins"]["steps"] = int(env["steps_confirmatory"])
+    card["protocol_pins"]["steps"] = confirmatory_steps
     card["protocol_pins"]["seeds"] = list(seeds)
     card["protocol_pins"]["temperature"] = env["temperature"]
     card["protocol_pins"]["platform"] = env["platform"]
@@ -93,7 +91,7 @@ def _repair_0b(card: dict[str, Any], evidence: dict[str, Any], param: dict[str, 
 
     observable = "hinge_angle_confirmatory_200k"
     card["reproduction"]["expected"] = _reproduction_expected(card, observable)
-    card["reproduction"]["steps"] = _reproduction_steps(window_steps, int(conf["resamples"]), int(conf["seed"]))
+    card["reproduction"]["steps"] = _reproduction_steps(confirmatory_steps, int(boot["resamples"]), int(boot["seed"]))
     card["reproduction"]["tolerance_policy"] = (
         f"{reproduction_rule.RULE_ID}; independent unit=replica median; MATCH/MISMATCH/INCONCLUSIVE per docs/release/REPRODUCTION_RULE_V0_1.md; bootstrap CI is descriptive only"
     )
@@ -136,13 +134,13 @@ def _postprocess(root: Path) -> None:
     evidence_0b = _read_json(CARD_0B_EVIDENCE)
     param = _read_json(PARAM_SUMMARY)
     env = evidence_0b["environment"]
-
     cards_dir = root / "families" / "dna_hinge" / "cards"
+
     for variant in legacy.VARIANTS:
         path = cards_dir / f"{variant}.card.json"
         card = _read_json(path)
         if variant == "0b":
-            _repair_0b(card, evidence_0b, param)
+            _repair_0b(card, evidence_0b)
         elif variant in ("11b", "32b", "53b"):
             _repair_parametric(card, variant, param, env)
         # 74b remains NOT_MEASURED; no reproduction threshold is invented.
@@ -154,37 +152,39 @@ def _postprocess(root: Path) -> None:
     rule_target = root / "reproduction" / "REPRODUCTION_RULE_V0_1.md"
     rule_target.write_bytes(RULE_DOC.read_bytes())
 
-    protocol_readme = root / "protocols" / "README.md"
-    text = protocol_readme.read_text(encoding="utf-8")
-    marker = "\nIndependent reproduction classification: `reproduction/REPRODUCTION_RULE_V0_1.md`"
-    if marker.strip() not in text:
-        protocol_readme.write_text(text.rstrip() + marker + "\n", encoding="utf-8")
-
     manifest = card_lint.manifest_create(root, generated_by="release.build_library_r12 deterministic-r1.2")
     _write_json(root / card_lint.MANIFEST_NAME, manifest)
 
 
 def build(root: Path = PKG_ROOT) -> list[Path]:
-    written = legacy.build(root)
+    legacy.build(root)
     _postprocess(root)
     return sorted(p for p in root.rglob("*") if p.is_file())
 
 
-def check(root: Path = PKG_ROOT) -> list[str]:
-    problems: list[str] = []
+def _snapshot(root: Path) -> dict[str, bytes]:
+    return {p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()}
+
+
+def check() -> list[str]:
+    """Prove two independent full builds are byte-identical, including manifest."""
     with tempfile.TemporaryDirectory() as tmp:
-        built_root = Path(tmp) / "pkg"
-        build(built_root)
-        built = {p.relative_to(built_root).as_posix(): p for p in built_root.rglob("*") if p.is_file()}
-        committed = {p.relative_to(root).as_posix(): p for p in root.rglob("*") if p.is_file()}
-        for rel in sorted(set(built) | set(committed)):
-            if rel not in committed:
-                problems.append(f"built file not committed: {rel}")
-            elif rel not in built:
-                problems.append(f"committed file not produced: {rel}")
-            elif built[rel].read_bytes() != committed[rel].read_bytes():
-                problems.append(f"byte mismatch: {rel}")
-    return problems
+        a = Path(tmp) / "a"
+        b = Path(tmp) / "b"
+        build(a)
+        build(b)
+        sa, sb = _snapshot(a), _snapshot(b)
+        problems: list[str] = []
+        for rel in sorted(set(sa) | set(sb)):
+            if rel not in sa:
+                problems.append(f"missing in build A: {rel}")
+            elif rel not in sb:
+                problems.append(f"missing in build B: {rel}")
+            elif sa[rel] != sb[rel]:
+                problems.append(f"byte mismatch between independent builds: {rel}")
+        if "RELEASE_MANIFEST.json" not in sa:
+            problems.append("RELEASE_MANIFEST.json missing from deterministic build")
+        return problems
 
 
 def main(argv: list[str] | None = None) -> int:
