@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "event": "WORK_ORDER_STARTED",
+  "execution_id": "EX-NL5-001-B-REPAIR-R1",
+  "work_order": "WO-NL5-001-B-REPAIR-R1",
+  "base_branch": "work/nl5-001-b-library-assembly-r1",
+  "base_sha": "628526594784ded8bb2067976cefbe53c4ac0e48",
+  "branch": "repair/nl5-001-b-library-r1",
+  "risk": "MEDIUM",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "physics_runs_authorized": false,
+  "next_action": "implement reviewer repair map R1-R6 and revalidate"
+}
