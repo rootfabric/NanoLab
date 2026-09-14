@@ -23,7 +23,6 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -38,6 +37,9 @@ RIGHTS_NAME = "RIGHTS.json"
 VERSION_NAME = "VERSION"
 CITATION_NAME = "CITATION.cff"
 SEMVER_PATTERN = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
+# Repair R1 (finding F-B2): a manifest timestamp is frozen release metadata,
+# never wall-clock. The caller must pass an explicit ISO-8601 UTC stamp.
+UTC_STAMP_PATTERN = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$")
 ROLE_PREFIXES = (
     ("schema/", "schema"),
     ("protocols/", "protocol"),
@@ -224,7 +226,17 @@ def _read_version(pkg_root: Path) -> str:
         raise LintFailure(f"{version_path}: cannot read VERSION ({exc})") from exc
 
 
-def manifest_create(pkg_root: Path, generated_by: str = "release.card_lint manifest create") -> dict[str, Any]:
+def manifest_create(
+    pkg_root: Path,
+    generated_at_utc: str,
+    generated_by: str = "release.card_lint manifest create",
+    subject: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Deterministic manifest: a pure function of (payload files, version,
+    frozen stamp, subject). There is intentionally NO default timestamp: a
+    wall-clock ``now()`` would make regeneration non-reproducible (F-B2)."""
+    if not isinstance(generated_at_utc, str) or not UTC_STAMP_PATTERN.match(generated_at_utc):
+        raise LintFailure(f"generated_at_utc {generated_at_utc!r} must be an ISO-8601 UTC stamp (YYYY-MM-DDTHH:MM:SSZ)")
     version = _read_version(pkg_root)
     files = []
     for path in _package_files(pkg_root):
@@ -242,10 +254,12 @@ def manifest_create(pkg_root: Path, generated_by: str = "release.card_lint manif
         "kind": "nanolab_release_manifest",
         "package": "nanolab-components",
         "package_version": version,
-        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at_utc": generated_at_utc,
         "generated_by": generated_by,
         "files": files,
     }
+    if subject is not None:
+        manifest["subject"] = {str(key): str(value) for key, value in subject.items()}
     return manifest
 
 
@@ -257,7 +271,32 @@ def manifest_verify(pkg_root: Path, schema_path: Path) -> dict[str, Any]:
     if errors:
         return {"command": "MANIFEST_VERIFY", "ok": False, "errors": errors}
 
-    listed = {entry["path"]: entry for entry in manifest["files"]}
+    # Repair R1 (finding F-B6), fail-closed BEFORE any dict conversion: path
+    # semantics and duplicate rejection on the raw entry list. A dict keyed by
+    # path would silently collapse duplicate entries, letting a conflicting
+    # duplicate hide behind the last record.
+    seen: dict[str, int] = {}
+    duplicates: list[str] = []
+    for index, entry in enumerate(manifest["files"]):
+        where = f"{manifest_path}.files[{index}]"
+        path_text = entry.get("path") if isinstance(entry, dict) else None
+        if not isinstance(path_text, str):
+            errors.append(f"{where}: path must be a string")
+            continue
+        _check_rel_path(path_text, where, errors)
+        if path_text in seen:
+            duplicates.append(path_text)
+            errors.append(
+                f"{where}: duplicate manifest path {path_text!r} (first seen at files[{seen[path_text]}])"
+            )
+        else:
+            seen[path_text] = index
+    if duplicates:
+        # Never evaluate a manifest whose file list is not bijective with the
+        # package: fail closed without partial verification results.
+        return {"command": "MANIFEST_VERIFY", "ok": False, "errors": errors, "files": len(manifest["files"])}
+
+    listed = seen
     actual = {p.relative_to(pkg_root).as_posix(): p for p in _package_files(pkg_root)}
 
     version = _read_version(pkg_root)
@@ -269,7 +308,7 @@ def manifest_verify(pkg_root: Path, schema_path: Path) -> dict[str, Any]:
     for rel in sorted(set(actual) - set(listed)):
         errors.append(f"{manifest_path}: file not in manifest: {rel!r}")
     for rel in sorted(set(listed) & set(actual)):
-        entry = listed[rel]
+        entry = manifest["files"][listed[rel]]
         path = actual[rel]
         digest = _sha256(path)
         if digest != entry["sha256"]:
@@ -402,6 +441,12 @@ def main(argv: list[str] | None = None) -> int:
     p_manifest.add_argument("pkg_root")
     p_manifest.add_argument("--schema", default=str(MANIFEST_SCHEMA))
     p_manifest.add_argument("--stdout", action="store_true", help="manifest create: print manifest instead of writing")
+    p_manifest.add_argument(
+        "--generated-at-utc",
+        dest="generated_at_utc",
+        default=None,
+        help="manifest create: frozen ISO-8601 UTC stamp (required; never wall-clock)",
+    )
     p_package = sub.add_parser("package", help="full package check")
     p_package.add_argument("pkg_root")
     args = parser.parse_args(argv)
@@ -414,7 +459,9 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "manifest":
             pkg_root = Path(args.pkg_root)
             if args.mode == "create":
-                manifest = manifest_create(pkg_root)
+                if not args.generated_at_utc:
+                    parser.error("manifest create requires --generated-at-utc (frozen stamp, never wall-clock)")
+                manifest = manifest_create(pkg_root, generated_at_utc=args.generated_at_utc)
                 if args.stdout:
                     report = {"command": "MANIFEST_CREATE", "ok": True, "manifest": manifest}
                 else:

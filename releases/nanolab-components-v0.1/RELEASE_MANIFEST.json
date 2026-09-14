@@ -21,44 +21,44 @@
     {
       "path": "families/dna_hinge/cards/0b.card.json",
       "role": "card",
-      "sha256": "d25773ca282e1d3a9e140f2549e93eea452abc9cb4a6a0ca8388e6e9ea6ec278",
-      "size_bytes": 10192
+      "sha256": "d19f4ceda7ad255495068318056c624f21dfc21205633477cc83e9213be4ea64",
+      "size_bytes": 11512
     },
     {
       "path": "families/dna_hinge/cards/11b.card.json",
       "role": "card",
-      "sha256": "224dbf355cf94742f64eaea7fdc4e77d7806044bcdf9e3246c24adca5ab880f9",
-      "size_bytes": 8984
+      "sha256": "7040dcb9dde9f7564f58b79b72507518e785227d97eba02b873c5a63332d0da0",
+      "size_bytes": 10241
     },
     {
       "path": "families/dna_hinge/cards/32b.card.json",
       "role": "card",
-      "sha256": "66cca4999261944a89806b28fa655fa5e94afd3b473f737edbfefe634f8feca5",
-      "size_bytes": 8975
+      "sha256": "207d13ccb82914d8401b512f475659701de6045639989dc563d00c78dbd214fb",
+      "size_bytes": 10232
     },
     {
       "path": "families/dna_hinge/cards/53b.card.json",
       "role": "card",
-      "sha256": "78eb5d7909049f84ac572bee71a6308e98ad54c1dad69737960016ef6a444b49",
-      "size_bytes": 8985
+      "sha256": "3a9a32fccdb0ee4ca4302616abb10e1c3fbf7b9221037b036520bc75025f5444",
+      "size_bytes": 10242
     },
     {
       "path": "families/dna_hinge/cards/74b.card.json",
       "role": "card",
-      "sha256": "86a38b800dee60d23f5c380a00d5cec790e59f490d0d9ad7b7917cda83791641",
-      "size_bytes": 6674
+      "sha256": "5d3c6657ca96fe98a1f8a2c8ad51953e8fdc66c29ecd0fda54dde04d2b987bd2",
+      "size_bytes": 6705
     },
     {
       "path": "families/dna_hinge/family.json",
       "role": "family",
-      "sha256": "73edf747b9259614f81be5a41994cc8c65075b6c9ae66047fbcacdda12a93e98",
-      "size_bytes": 1300
+      "sha256": "38d29ef95c55c98b72b4ff89f8fab8687956c013876dc3064c1cb6a5685f9844",
+      "size_bytes": 1306
     },
     {
       "path": "protocols/README.md",
       "role": "protocol",
-      "sha256": "ec2d1cf6839611e307573ffb7389fc6f110f4a9daac7b1b5d791a7e7b3273114",
-      "size_bytes": 838
+      "sha256": "14229f6b5ecd9bc1ed78d6865197159db777e2f8002616135817a573c041b191",
+      "size_bytes": 1074
     },
     {
       "path": "provenance/source-digests.json",
@@ -81,20 +81,26 @@
     {
       "path": "reports/family-report.md",
       "role": "report",
-      "sha256": "45358c9c51cec6a3813f2ae4c8cbdf8d36e86a2434bbbef02af8b44c454c92c9",
-      "size_bytes": 1212
+      "sha256": "ccc3bf287ec955237171ba95ef7278f50a693ecd528a0a9ee54c8901d77888d7",
+      "size_bytes": 1310
     },
     {
       "path": "reproduction/README.md",
       "role": "reproduction",
-      "sha256": "c60f6c1fdd30cd9d2b08dce1bdfc9c428c3d420aba711787e32ed10a2b5625a1",
-      "size_bytes": 1994
+      "sha256": "0ea72bd5baf5ad8c3f48bb970173efc7be171dc8b3240cc83ce0348670450954",
+      "size_bytes": 3197
+    },
+    {
+      "path": "reproduction/REPRODUCTION_RULE_R1.md",
+      "role": "reproduction",
+      "sha256": "d3563a5d526ea0d7fc3e552b2573181848cd1e3ab005c718a0622f288c7268ee",
+      "size_bytes": 9413
     },
     {
       "path": "reproduction/reproduce.py",
       "role": "reproduction",
-      "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb",
-      "size_bytes": 4407
+      "sha256": "6cb0fde7748dd475ecf27de0ba0162d3c3e567aaf3437c90f3f01e57fa45207c",
+      "size_bytes": 13224
     },
     {
       "path": "schema/components/component-card.v1.json",
@@ -116,9 +122,13 @@
     }
   ],
   "generated_at_utc": "2026-09-13T15:32:04Z",
-  "generated_by": "release.card_lint manifest create",
+  "generated_by": "release.build_library 0.1.0-rc0",
   "kind": "nanolab_release_manifest",
   "package": "nanolab-components",
   "package_version": "0.1.0-rc0",
-  "schema_version": 1
+  "schema_version": 1,
+  "subject": {
+    "commit": "be73c5408bee54bc66105f0dee3e3262905eb2ad",
+    "repository": "rootfabric/NanoLab"
+  }
 }

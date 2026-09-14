@@ -13,7 +13,7 @@
     "upstream_role": "FIRST_INSTANCE_CONTROL (E2-SETUP-R1 section 2: zero-insertion control variant, smallest in family)"
   },
   "family": "dna_hinge",
-  "function": "Compliant DNA hinge: взаимный угол плеч под внешним воздействием; в v0.1 измерено равновесное распределение угла (confirmatory 200k + общее окно 150k). Управляемый привод — предмет E5, не этой карточки",
+  "function": "Compliant DNA hinge: взаимный угол плеч под внешним воздействием; в v0.1 измерено равновесное распределение угла (confirmatory 200000 + общее окно 150000). Управляемый привод — предмет E5, не этой карточки",
   "integrity": {
     "details": [
       "long_bond_fraction <= 0.1078: max 0.055951662",
@@ -56,7 +56,7 @@
           64.978234103,
           66.578222971
         ],
-        "note": "secondary cross-variant window; primary confirmatory 200k result NOT revised",
+        "note": "secondary cross-variant window; primary confirmatory 200000 result NOT revised",
         "q05_q95_deg": [
           62.487721419,
           67.738097648
@@ -110,7 +110,7 @@
   },
   "measurement_status": "MEASURED",
   "operating_range": {
-    "model": "oxDNA DNA2 coarse-grained",
+    "model": "DNA2",
     "notes": "применимость ограничена измеренным протоколом; экстраполяция не заявляется",
     "salt_concentration_M": 0.5,
     "temperature": "300 K (author config verbatim; decision rule E2-SETUP-R1 §5)"
@@ -140,11 +140,14 @@
       "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json",
       "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
       "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.json",
+      "docs/work/executions/EX-NL3-002-R1/evidence/c001_input.in",
+      "docs/work/executions/EX-NL3-002-R1/evidence/run-reports.json",
       "scripts/hinge_family/source_pins.json",
-      "docs/research/ENGINE_ENVIRONMENT_R1.md"
+      "docs/research/ENGINE_ENVIRONMENT_R1.md",
+      "docs/research/REPRODUCTION_RULE_R1.md"
     ],
     "evidence_execution_id": "EX-NL3-002-SUMMARY-R1",
-    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+    "generation": "built by release.build_library.py (WO-NL5-001-B-R1 repair R1) from published evidence; protocol pins derived from run-config evidence and cross-checked; deterministic and byte-reproducible (--check, manifest included)"
   },
   "reproduction": {
     "expected": {
@@ -162,9 +165,10 @@
       "2. сборка входов реплик: python docs/work/executions/EX-NL3-002-R1/evidence/build_confirm_inputs.py (0b.top/0b.conf verbatim + pro_CPU.in; seeds 201004/202008/203012; copy-checks SHA-256)",
       "3. прогоны (CPU oxDNA @ 00dc7fb9, WSL): python docs/work/executions/EX-NL3-002-R1/evidence/run_confirm.py (3 параллельные реплики, 200000 steps, бюджет 3.5 ч/реплику)",
       "4. анализ (frozen протокол): python docs/work/executions/EX-NL3-002-R1/evidence/confirm_analysis.py (v2 mutual + гейты §4 + статистика §6, bootstrap 10000/seed 424242)",
-      "5. окно 150k: python docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/param_summary_build.py (ре-срез по времени кадра, тот же статистический метод)"
+      "5. окно 150k: python docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/param_summary_build.py (ре-срез по времени кадра, тот же статистический метод)",
+      "5. сравнение с карточкой по замороженному правилу REPRODUCTION_RULE_R1 (docs/research/REPRODUCTION_RULE_R1.md; копия в пакете reproduction/): медиана пер-репличных медиан >= 3 валидных реплик в пределах [min, max] пер-репличных медиан карточки; pooled bootstrap CI95 исходной оценки — не полоса допуска; вердикты REPRODUCTION_MATCH / REPRODUCTION_MISMATCH / INCONCLUSIVE / TECHNICAL_FAILURE (исполнитель: reproduction/reproduce.py evaluate); наблюдаемые: hinge_angle_confirmatory_200k, hinge_angle_common_window_150k"
     ],
-    "tolerance_policy": "pooled median в пределах bootstrap CI95 карточки; гейты кадра §4 E2_PROTO_R1; не PASS при отсутствии проверки"
+    "tolerance_policy": "REPRODUCTION_RULE_R1: M_new (медиана пер-репличных медиан, >=3 валидных реплик) в пределах [min, max] пер-репличных медиан карточки; pooled bootstrap CI95 — не полоса допуска; гейты кадра §4 E2_PROTO_R1; недостаточно валидных реплик — INCONCLUSIVE; техотказ/отказ digest-гейта — TECHNICAL_FAILURE; не PASS при отсутствии проверки"
   },
   "rights": {
     "derived_results_publishable": true,

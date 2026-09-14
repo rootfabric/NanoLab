@@ -21,8 +21,8 @@
     {
       "path": "families/dna_hinge/cards/0b.card.json",
       "role": "card",
-      "sha256": "fa6946fb41f24141cd4e715f1e8971999677f35661b708e11f3f129059a27fd0",
-      "size_bytes": 8642
+      "sha256": "892bc24be4fd8c338e7a92cbda27b4394026c58f8260d770c9cf3f12597ea513",
+      "size_bytes": 9439
     },
     {
       "path": "families/dna_hinge/cards/74b.card.json",
@@ -39,14 +39,20 @@
     {
       "path": "reproduction/README.md",
       "role": "reproduction",
-      "sha256": "c60f6c1fdd30cd9d2b08dce1bdfc9c428c3d420aba711787e32ed10a2b5625a1",
-      "size_bytes": 1994
+      "sha256": "0ea72bd5baf5ad8c3f48bb970173efc7be171dc8b3240cc83ce0348670450954",
+      "size_bytes": 3197
+    },
+    {
+      "path": "reproduction/REPRODUCTION_RULE_R1.md",
+      "role": "reproduction",
+      "sha256": "d3563a5d526ea0d7fc3e552b2573181848cd1e3ab005c718a0622f288c7268ee",
+      "size_bytes": 9413
     },
     {
       "path": "reproduction/reproduce.py",
       "role": "reproduction",
-      "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb",
-      "size_bytes": 4407
+      "sha256": "6cb0fde7748dd475ecf27de0ba0162d3c3e567aaf3437c90f3f01e57fa45207c",
+      "size_bytes": 13224
     },
     {
       "path": "schema/components/component-card.v1.json",

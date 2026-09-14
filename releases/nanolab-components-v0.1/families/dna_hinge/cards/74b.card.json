@@ -48,7 +48,7 @@
     "model": "DNA2",
     "notes": "runs NOT_RUN для 74b: блокировка по stop-правилам WO-NL3-002-PARAM до манифеста",
     "options": {},
-    "platform": "как в ENGINE_ENVIRONMENT_R1 (WSL2 Ubuntu 24.04)",
+    "platform": "как в ENGINE_ENVIRONMENT_R1 (WSL2 Ubuntu 24.04.2)",
     "protocol": "docs/research/E2_PROTO_R1.md; к варианту 74b не применялся",
     "seeds": [],
     "steps": null,
@@ -62,7 +62,7 @@
       "scripts/hinge_family/source_pins.json"
     ],
     "evidence_execution_id": "EX-NL3-002-PARAM-74B-R1",
-    "generation": "built by release.build_library.py (WO-NL5-001-B-R1) from published evidence; deterministic and byte-reproducible (--check)"
+    "generation": "built by release.build_library.py (WO-NL5-001-B-R1 repair R1) from published evidence; deterministic and byte-reproducible (--check, manifest included)"
   },
   "reproduction": {
     "expected": {},
