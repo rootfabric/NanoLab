@@ -2,7 +2,10 @@
 
 ## Паспорт
 
-- Work Order: `WO-NL5-001-B-R1` (canonical Work ID `NL5-001-B`; маршрут — [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B, программа §3)
+- Work Order: `WO-NL5-001-B-R1` (canonical Work ID `NL5-001-B`; маршрут и декомпозиция A..D — [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B).
+  **Коррекция (repair R1, F-B5):** упоминание несуществующей «программы §3»
+  (`POST_MVP_EXECUTION_PROGRAM_R1.md`) удалено; durable источник планирования —
+  POST_MVP_DEVELOPMENT_ROUTE_R1.
 - Checkpoint: `NL5 / NL5-001-B`
 - Base: `work/nl5-001-a-release-contract-r1 @ 9cbde33b854eeeb00abde84346c17fe3080bbe50` (stacked на контракте A; A стекируется на PR #37)
 - Branch: `work/nl5-001-b-library-assembly-r1`
@@ -70,3 +73,33 @@ Amendment: в digest-объекте `sha256` становится опциона
 Merge — после A (и транзитивно после Gate 0 PR #37), по стандартному Harness
 (Reviewer MEDIUM+; Verifier рекомендован). Публичный release — отдельный Human Gate
 (NL5-001-D) и требует owner-решения D2.
+
+## Repair R1 (FIX_REQUIRED Fresh Review R1)
+
+Статус-нот: исходный handoff B (exact head `6285265`) получил
+**FIX_REQUIRED** (Fresh Reviewer, `review/nl5-001-b-r1 @ ab55eb5`; review map:
+`docs/evidence/NL5-001-B/REPAIR_MAP_R1.md @ 0761e53`). Ремонт выполняется на
+этой же ветке как continuation (события 0004+), старые события не редактируются.
+
+Scope ремонта = canonical repair surfaces Repair Map (расширяет allowed_paths
+выше по явному полномочию map): `docs/research/REPRODUCTION_RULE_R1.md`,
+`scripts/release/reproduction.py`, `tests/test_reproduction_rule.py`,
+`docs/evidence/NL5-001-B/**`, `docs/work/WO-NL5-001-A-R1.md` (только битая
+ссылка), паспорта A/B (только program_reference), `examples/release/**`,
+`releases/nanolab-components-v0.1/**`, `scripts/release/*`,
+`docs/release/RELEASE_CONTRACT_V0_1.md`, `tests/test_release_*`.
+
+Ключевые изменения семантики относительно исходной формулировки DoD:
+
+1. Воспроизведение — по замороженному правилу `REPRODUCTION_RULE_R1`
+   (band из пер-репличных медиан; CI95 — не полоса допуска), а не «pooled
+   median в пределах bootstrap CI95».
+2. Builder: научные/протокольные значения выводятся из evidence
+   (run-config входы, сводки, run-reports) с cross-check-гейтами; «без ручных
+   чисел» теперь фактически истинно; код-own — только классифицированные
+   release-метаданные.
+3. Детерминизм: манифест генерируется builder-ом детерминированно
+   (замороженный штамп) и входит в byte-for-byte `--check`.
+4. A @ `9cbde33` фиксируется как SUPERSEDED интегрированным отремонтированным
+   кандидатом B (стратегия Repair Map); отдельный ре-accept A не проводится,
+   если harness не требует обратного.

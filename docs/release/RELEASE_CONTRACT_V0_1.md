@@ -1,8 +1,8 @@
 # NanoLab Component Release Contract v0.1
 
 Статус: **нормативный контракт** для `NL5-001` component library / release package.
-Ревизия: R1 (WO-NL5-001-A-R1). Подчинён: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B и [POST_MVP_EXECUTION_PROGRAM_R1](../control/POST_MVP_EXECUTION_PROGRAM_R1.md) §3 (NL5-001-A).
-Канонические совместимые источники: [DATA_CONTRACTS](../DATA_CONTRACTS.md), [E2_SOURCE_RIGHTS_G1_DECISION_R1](../control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md), [LICENSE_POLICY](../../LICENSE_POLICY.md), `docs/research/E2_PROTO_R1.md`.
+Ревизия: R1.2 (repair R1, WO-NL5-001-B-R1). Подчинён: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B (включая декомпозицию A..D).
+Канонические совместимые источники: [DATA_CONTRACTS](../DATA_CONTRACTS.md), [E2_SOURCE_RIGHTS_G1_DECISION_R1](../control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md), [LICENSE_POLICY](../../LICENSE_POLICY.md), `docs/research/E2_PROTO_R1.md`, [REPRODUCTION_RULE_R1](../research/REPRODUCTION_RULE_R1.md).
 
 Изменение контракта после публикации данных = новая ревизия контракта + новая версия пакета, никогда не правка задним числом.
 
@@ -16,6 +16,17 @@
   скачивании (`COMPUTED_NOT_VERIFIED`, «recorded for future re-use; no registry claim»),
   content-verified — только входы 0b и `pro_CPU.in`. Добавлено необязательное поле
   `design` (факты arm-manifest варианта).
+- **R1.2** (WO-NL5-001-B-R1 repair R1; Fresh Review R1 findings F-B1..F-B6, map
+  `docs/evidence/NL5-001-B/REPAIR_MAP_R1.md`): (1) независимое воспроизведение
+  сравнивается ТОЛЬКО по замороженному правилу [REPRODUCTION_RULE_R1](../research/REPRODUCTION_RULE_R1.md);
+  pooled bootstrap CI95 исходной оценки — не полоса допуска (F-B3); (2) манифест —
+  детерминированные release-метаданные: `generated_at_utc` — замороженный штамп сборки
+  (не wall-clock), манифест входит в byte-for-byte проверку (F-B2); (3) научные/протокольные
+  пины карточек выводятся builder-ом из evidence-артефактов с cross-check-гейтами;
+  ручная транскрипция чисел запрещена (F-B1); (4) нормативный текст приведён к R1.1/S5
+  (этот раздел, §4); (5) битая ссылка на `POST_MVP_EXECUTION_PROGRAM_R1.md` удалена —
+  durable источник планирования: POST_MVP_DEVELOPMENT_ROUTE_R1 (F-B5); (6) `manifest verify`
+  отвергает duplicate paths и нарушает path-семантику fail-closed до словарной свёртки (F-B6).
 
 ## 1. Назначение и границы
 
@@ -67,7 +78,8 @@ nanolab-components-v0.1/
 устанавливает сторонних пакетов, поэтому release-инструментарий не имеет права на
 зависимости (тест-гвардеец `test_stdlib_only` следит за этим).
 
-Линтер: `PYTHONPATH=scripts python3 -m release.card_lint card|rights|manifest|package …`.
+Линтер: `PYTHONPATH=scripts python3 -m release.card_lint card|rights|manifest|package …`
+(`manifest create` требует явный замороженный `--generated-at-utc`, F-B2).
 Exit-коды: `0` ok, `3` validation failure, `2` usage.
 
 ## 4. Карточка компонента: политика полей
@@ -85,8 +97,22 @@ Exit-коды: `0` ok, `3` validation failure, `2` usage.
   Выхолопливание/пересчёт «для красоты» запрещён: расхождение карточки и evidence =
   review-fail.
 - `protocol_pins` — engine/engine_commit/model обязательны; seeds/steps/platform/options.
-- `source_provenance.digest_gates` — для каждого upstream-входа: `size_bytes`,
-  `blob_sha1` (40 hex), `sha256` (64 hex).
+  Все научные/протокольные значения выводятся из frozen evidence-артефактов
+  (run-config входы, сводки кампаний, environment-записи) и кросс-проверяются;
+  ручная транскрипция чисел в builder запрещена (R1.2, F-B1). Код-own константы —
+  только release/contract metadata (version, замороженный штамп манифеста,
+  именование движка/конвенции/observable-идентификаторов), явно классифицированные
+  в docstring builder-а.
+- `source_provenance.digest_gates` — для каждого upstream-входа ОБЯЗАТЕЛЬНЫ
+  `size_bytes` + `blob_sha1` (registry-пин, 40 hex); `sha256` (64 hex) —
+  ОПЦИОНАЛЕН и допускается только вместе с `sha256_status` (amendment R1.1, S5).
+  Значения `sha256_status`:
+  - `CONTENT_VERIFIED` — sha256 сверен с registry/content-claim (например,
+    R1_TREE_LISTING для 0b и `pro_CPU.in`);
+  - `COMPUTED_NOT_VERIFIED` — sha256 вычислен при скачивании для будущего
+    переиспользования; registry-claim нет (словарь G1);
+  - `UNKNOWN` — уровень доказанности не установлен.
+  Отсутствие `sha256` не ослабляет digest-гейт: registry-пин — `blob_sha1`.
 - `known_gaps` / `known_limitations` — честные гэпы и ограничения; NOT_RUN не
   кодируется ни как PASS, ни как отрицательный научный результат.
 - `reproduction` — `requires`, `steps`, `expected`, `tolerance_policy`,
@@ -101,6 +127,7 @@ Exit-коды: `0` ok, `3` validation failure, `2` usage.
 | S2 | `NOT_MEASURED` → `known_gaps` непусто (гэп объявлен явно) |
 | S3 | `rights_mode ∈ {REFERENCE_ONLY, DOWNLOAD_ON_RUN, MIXED}` → `upstream_repo` + `pinned_commit` (40-hex), `durable_cache = FORBIDDEN` (G1) |
 | S4 | `claim_ceiling = C1_COMPUTATIONAL_REPRODUCTION` → есть измеренные данные |
+| S5 | `sha256` и `sha256_status` в digest-объекте разрешены только вместе (amendment R1.1; обязательный registry-пин — `blob_sha1`) |
 
 ## 5. Семейство и варианты
 
@@ -137,16 +164,39 @@ release, но и не прячется.
   «отрицательные/промежуточные результаты не стираются»).
 - `RELEASE_MANIFEST.json`: `sha256` + `size_bytes` каждого файла (кроме самого
   манифеста), роль файла; верификация — перерасчёт (`manifest verify`,
-  `reproduce.py verify`).
+  `reproduce.py verify`). Дубликаты `path` и нарушения path-семантики
+  (absolute/backslash/`..`) отвергаются fail-closed до любых свёрток (R1.2, F-B6).
+- Детерминизм (R1.2, F-B2): манифест генерируется builder-ом как чистая функция
+  payload + frozen release metadata. `generated_at_utc` — замороженный штамп
+  сборки пакета (классифицированные release-метаданные), НЕ wall-clock;
+  `card_lint manifest create` требует явный штамп. `build_library check`
+  сравнивает ВЕСЬ пакет byte-for-byte, включая манифест: регенерация манифеста
+  воспроизводима байт-в-байт.
 
 ## 8. Reproduction interface
 
 `reproduction/reproduce.py` (stdlib-only): `verify` — целостность пакета;
-`plan` — план по карточкам (engine pins, шаги, expected, права); `self-test`.
-Helper **не** скачивает входы и **не** запускает движок в v0.1: download-on-run,
-исполнение и сравнение с `expected` по `tolerance_policy` выполняет внешний
-воспроизводитель. Расхождение вне полосы — `REPRODUCTION_MISMATCH`, честный
-сохраняемый исход.
+`plan` — план по карточкам (engine pins, шаги, expected, права); `evaluate` —
+сравнение отчёта независимой кампании с карточкой по замороженному правилу;
+`self-test`. Helper **не** скачивает входы и **не** запускает движок в v0.1:
+download-on-run, исполнение и оценку выполняет внешний воспроизводитель.
+
+Сравнение независимой кампании с карточкой выполняется **исключительно** по
+замороженному правилу [REPRODUCTION_RULE_R1](../research/REPRODUCTION_RULE_R1.md)
+(копия в пакете: `reproduction/REPRODUCTION_RULE_R1.md`; нормативный исполнитель
+в авторском репозитории: `scripts/release/reproduction.py`; conformance между
+исполнителями закреплена тестами):
+
+- полоса допуска — `[min, max]` пер-репличных медиан исходной кампании из
+  карточки (k ≥ 2); статистика новой кампании — медиана пер-репличных медиан
+  ≥ 3 валидных реплик;
+- pooled bootstrap CI95 исходной оценки — характеристика точности исходной
+  оценки и **не** является полосой допуска / prediction interval (F-B3);
+- вердикты: `REPRODUCTION_MATCH`, `REPRODUCTION_MISMATCH` (честный сохраняемый
+  исход), `INCONCLUSIVE` (меньше трёх валидных реплик — явный не-PASS),
+  `TECHNICAL_FAILURE` (технический отказ, не научный mismatch);
+- пороги заморожены до наблюдения новых данных; изменение = новая ревизия
+  правила, никогда не правка задним числом.
 
 ## 9. Acceptance NL5-001-A → передача в NL5-001-B
 

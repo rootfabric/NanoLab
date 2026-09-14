@@ -2,7 +2,10 @@
 
 ## Паспорт
 
-- Work Order: `WO-NL5-001-A-R1` (canonical Work ID `NL5-001-A`, planning decomposition из [POST_MVP_EXECUTION_PROGRAM_R1](../../control/POST_MVP_EXECUTION_PROGRAM_R1.md) §3; маршрут — [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B)
+- Work Order: `WO-NL5-001-A-R1` (canonical Work ID `NL5-001-A`; маршрут и декомпозиция A..D — [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md) Phase B).
+  **Коррекция (repair R1, F-B5/F-A2):** исходная ссылка на несуществующий
+  `docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md` удалена; durable источник
+  планирования — POST_MVP_DEVELOPMENT_ROUTE_R1 (Phase B, декомпозиция A..D).
 - Checkpoint: `NL5 / NL5-001-A`
 - Base: `control/post-mvp-route-r1 @ e05793cc8ff03b3b1af2d81b38e39d82cd7527d6` (PR #37 head; DOC/CODE-подготовка до Gate 0 разрешена программой §2 — merge-конфликтов с PR #37 нет, только новые файлы)
 - Branch: `work/nl5-001-a-release-contract-r1`

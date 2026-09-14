@@ -22,7 +22,7 @@
     "tests/test_release_library.py"
   ],
   "parent_work_order": "NL5-001",
-  "program_reference": "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md (§3 NL5-001-B; merge после A и Gate 0 PR #37)",
+  "program_reference": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B)",
   "protocol": "docs/release/RELEASE_CONTRACT_V0_1.md (amendment R1.1 в этом WO) + docs/research/E2_PROTO_R1.md (frozen) + evidence-файлы как единственный источник чисел",
   "deliverables": [
     "scripts/release/build_library.py — детерминированный builder evidence -> пакет (--check режим)",
@@ -32,5 +32,14 @@
     "tests/test_release_library.py — builder determinism + verbatim-number checks"
   ],
   "started_at_utc": "2026-09-13T15:23:53Z",
-  "status": "HANDOFF_READY"
+  "status": "HANDOFF_READY",
+  "corrections": [
+    {
+      "field": "program_reference",
+      "original_value": "docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md (§3 NL5-001-B; merge после A и Gate 0 PR #37)",
+      "corrected_value": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B)",
+      "authority": "review/nl5-001-b-r1 @ 0761e53 docs/evidence/NL5-001-B/REPAIR_MAP_R1.md, R5 (F-B5/F-A2)",
+      "note": "repair R1 (F-B5/F-A2): исходный program_reference указывал на несуществующий docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md; заменён на durable planning source docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B, декомпозиция A..D). Оригинальное значение сохранено в corrections; исторические events не редактируются."
+    }
+  ]
 }
