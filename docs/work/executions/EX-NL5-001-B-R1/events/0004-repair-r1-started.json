@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-repair-r1-started",
+  "timestamp_utc": "2026-09-14T10:42:57Z",
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "628526594784ded8bb2067976cefbe53c4ac0e48",
+  "summary": "Repair R1 START on exact reviewed candidate work/nl5-001-b-library-assembly-r1 @ 6285265. Основание: Fresh Reviewer verdict FIX_REQUIRED (review/nl5-001-b-r1 @ ab55eb5, docs/evidence/NL5-001-B/FRESH_REVIEW_R1.md) и reviewer-authored Repair Map (review/nl5-001-b-r1 @ 0761e53, docs/evidence/NL5-001-B/REPAIR_MAP_R1.md; копии обоих сохранены в этом коммите как исторические evidence). Блокирующие находки: F-B1 provenance overclaim (ручные scientific/protocol литералы в build_library.py), F-B2 overclaimed whole-package determinism (manifest с wall-clock generated_at_utc исключён из byte-check), F-B3 НЕВАЛИДНЫЙ reproduction criterion (pooled bootstrap CI95 используется как prediction interval; НЕ запускать NL5-001-C до заморозки корректного правила), F-B4 R1.1 normative text inconsistency (контракт противоречит S5), F-B5 битая ссылка POST_MVP_EXECUTION_PROGRAM_R1.md, F-B6 manifest_verify молча схлопывает duplicate paths. Порядок работ по Repair Map: R1 (freeze reproduction criterion) -> R2 (evidence-derived pins) -> R3 (manifest determinism, Option A) -> R4 (contract sync) -> R5 (stale refs) -> R6 (manifest duplicate hardening) -> R7 (records) -> full revalidation gate. Стратегия map: integrated B repair, A @ 9cbde33 фиксируется как SUPERSEDED. Scope-поверхности расширяются против passport.allowed_paths строго по canonical repair surfaces Repair Map (дополнительно: docs/research/REPRODUCTION_RULE_R1.md, scripts/release/reproduction.py, tests/test_reproduction_rule.py, docs/evidence/NL5-001-B/**, паспорта/WO A и B для program_reference-коррекции). NL5-001-C не начинается; роли Reviewer/Verifier не исполняются.",
+  "command_refs": [
+    "git rev-parse --verify 628526594784ded8bb2067976cefbe53c4ac0e48 -> ok",
+    "git show ab55eb5:docs/evidence/NL5-001-B/FRESH_REVIEW_R1.md -> copied (sha256 fe022d16...)",
+    "git show 0761e53:docs/evidence/NL5-001-B/REPAIR_MAP_R1.md -> copied (sha256 bc7f2bc6...)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-001-B/FRESH_REVIEW_R1.md",
+    "docs/evidence/NL5-001-B/REPAIR_MAP_R1.md",
+    "origin/review/nl5-001-b-r1 @ ab55eb58f1ae7845628d3841808aaf83d5926051",
+    "origin/review/nl5-001-b-r1 @ 0761e53e250055bf864f3e61267e6f0b543128d3"
+  ],
+  "next_action": "IMPLEMENTER: R1 freeze docs/research/REPRODUCTION_RULE_R1.md + release.reproduction evaluator + tests; затем R2..R7 по Repair Map; exact-head Fresh Re-review request.",
+  "blocker": null
+}
