@@ -14,6 +14,8 @@
     "docs/work/WO-NL5-001-A-R1.md",
     "docs/work/WO-NL5-001-B-R1.md",
     "docs/work/executions/EX-NL5-001-B-REPAIR-R1/**",
+    "docs/work/executions/EX-NL5-001-A-R1/passport.json",
+    "docs/work/executions/EX-NL5-001-B-R1/passport.json",
     "docs/release/**",
     "schemas/release/release-manifest.v1.json",
     "scripts/release/**",

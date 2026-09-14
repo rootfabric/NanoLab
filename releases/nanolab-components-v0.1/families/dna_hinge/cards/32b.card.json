@@ -42,23 +42,35 @@
       "digests": {},
       "distribution": {
         "bootstrap": {
-          "ci95": [77.794798276, 78.66512915],
+          "ci95": [
+            77.794798276,
+            78.66512915
+          ],
           "resamples": 10000,
           "seed": 424242,
           "statistic": "median"
         },
-        "iqr_deg": [77.044589742, 79.781487257],
+        "iqr_deg": [
+          77.044589742,
+          79.781487257
+        ],
         "per_replica_median_deg": {
           "PARAM-32B-S001": 79.877463339,
           "PARAM-32B-S002": 77.4927314,
           "PARAM-32B-S003": 77.794798276
         },
-        "q05_q95_deg": [75.753118173, 81.213081515]
+        "q05_q95_deg": [
+          75.753118173,
+          81.213081515
+        ]
       },
       "estimate": 78.091845516,
       "n": 111,
       "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
-      "uncertainty": [77.794798276, 78.66512915],
+      "uncertainty": [
+        77.794798276,
+        78.66512915
+      ],
       "units": "deg"
     }
   },
@@ -81,7 +93,11 @@
     },
     "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1; gcc 13.3.0, cmake 3.31.6 user-local)",
     "protocol": "docs/research/E2_PROTO_R1.md (frozen; addendum §8 common window); observables: docs/research/E2_OBSERVABLES_R2.md",
-    "seeds": [201004, 202008, 203012],
+    "seeds": [
+      201004,
+      202008,
+      203012
+    ],
     "steps": 150000,
     "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)"
   },
@@ -102,8 +118,15 @@
       "independent_unit": "replica_median_deg",
       "reference_campaign_statistic_deg": 77.794798276,
       "reference_observable_estimate_deg": 78.091845516,
-      "reference_replica_envelope_deg": [77.4927314, 79.877463339],
-      "reference_replica_medians_deg": [79.877463339, 77.4927314, 77.794798276],
+      "reference_replica_envelope_deg": [
+        77.4927314,
+        79.877463339
+      ],
+      "reference_replica_medians_deg": [
+        79.877463339,
+        77.4927314,
+        77.794798276
+      ],
       "required_fresh_replicas": 3,
       "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
     },
@@ -135,9 +158,24 @@
   "source_provenance": {
     "digest_gate_result": "digest_gate_all = PASS (size + blob_sha1 registry pin; sha256 computed at download, status COMPUTED_NOT_VERIFIED)",
     "digest_gates": {
-      "MD_Hinges/32b.conf": {"blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae", "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 2345114},
-      "MD_Hinges/32b.top": {"blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b", "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 123024},
-      "MD_Hinges/pro_CPU.in": {"blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "sha256_status": "CONTENT_VERIFIED", "size_bytes": 933}
+      "MD_Hinges/32b.conf": {
+        "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+        "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 2345114
+      },
+      "MD_Hinges/32b.top": {
+        "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+        "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 123024
+      },
+      "MD_Hinges/pro_CPU.in": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "sha256_status": "CONTENT_VERIFIED",
+        "size_bytes": 933
+      }
     },
     "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
     "upstream_repo": "gauravarya77/DNA-hinge-simulations"

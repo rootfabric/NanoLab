@@ -42,23 +42,35 @@
       "digests": {},
       "distribution": {
         "bootstrap": {
-          "ci95": [73.709568565, 74.116753782],
+          "ci95": [
+            73.709568565,
+            74.116753782
+          ],
           "resamples": 10000,
           "seed": 424242,
           "statistic": "median"
         },
-        "iqr_deg": [73.055447548, 74.554783902],
+        "iqr_deg": [
+          73.055447548,
+          74.554783902
+        ],
         "per_replica_median_deg": {
           "PARAM-11B-S001": 74.218071238,
           "PARAM-11B-S002": 72.165683993,
           "PARAM-11B-S003": 74.533109426
         },
-        "q05_q95_deg": [71.09381729, 75.236945887]
+        "q05_q95_deg": [
+          71.09381729,
+          75.236945887
+        ]
       },
       "estimate": 73.928725839,
       "n": 111,
       "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
-      "uncertainty": [73.709568565, 74.116753782],
+      "uncertainty": [
+        73.709568565,
+        74.116753782
+      ],
       "units": "deg"
     }
   },
@@ -81,7 +93,11 @@
     },
     "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1; gcc 13.3.0, cmake 3.31.6 user-local)",
     "protocol": "docs/research/E2_PROTO_R1.md (frozen; addendum §8 common window); observables: docs/research/E2_OBSERVABLES_R2.md",
-    "seeds": [201004, 202008, 203012],
+    "seeds": [
+      201004,
+      202008,
+      203012
+    ],
     "steps": 200000,
     "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)"
   },
@@ -102,8 +118,15 @@
       "independent_unit": "replica_median_deg",
       "reference_campaign_statistic_deg": 74.218071238,
       "reference_observable_estimate_deg": 73.928725839,
-      "reference_replica_envelope_deg": [72.165683993, 74.533109426],
-      "reference_replica_medians_deg": [74.218071238, 72.165683993, 74.533109426],
+      "reference_replica_envelope_deg": [
+        72.165683993,
+        74.533109426
+      ],
+      "reference_replica_medians_deg": [
+        74.218071238,
+        72.165683993,
+        74.533109426
+      ],
       "required_fresh_replicas": 3,
       "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
     },
@@ -135,9 +158,24 @@
   "source_provenance": {
     "digest_gate_result": "digest_gate_all = PASS (size + blob_sha1 registry pin; sha256 computed at download, status COMPUTED_NOT_VERIFIED)",
     "digest_gates": {
-      "MD_Hinges/11b.conf": {"blob_sha1": "ce9402560649d9337487371944ce15cd1b74b50d", "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 2309610},
-      "MD_Hinges/11b.top": {"blob_sha1": "c8d34a47e584cd43b1de3107e9c8e57a992f8688", "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 121176},
-      "MD_Hinges/pro_CPU.in": {"blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "sha256_status": "CONTENT_VERIFIED", "size_bytes": 933}
+      "MD_Hinges/11b.conf": {
+        "blob_sha1": "ce9402560649d9337487371944ce15cd1b74b50d",
+        "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 2309610
+      },
+      "MD_Hinges/11b.top": {
+        "blob_sha1": "c8d34a47e584cd43b1de3107e9c8e57a992f8688",
+        "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 121176
+      },
+      "MD_Hinges/pro_CPU.in": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "sha256_status": "CONTENT_VERIFIED",
+        "size_bytes": 933
+      }
     },
     "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
     "upstream_repo": "gauravarya77/DNA-hinge-simulations"

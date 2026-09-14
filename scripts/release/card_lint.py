@@ -153,7 +153,10 @@ def validate_rights(rights: Any, schema: dict[str, Any], origin: str) -> tuple[l
         rights["own_code_license"] == "UNDECIDED_PENDING_OWNER_DECISION"
         or rights["own_docs_data_license"] == "UNDECIDED_PENDING_OWNER_DECISION"
     ):
-        warnings.append(f"{origin}: own license UNDECIDED_PENDING_OWNER_DECISION — package is draft-only")
+        warnings.append(
+            f"{origin}: own license UNDECIDED_PENDING_OWNER_DECISION (owner license decision D2)"
+            " — package is draft-only; public release blocked until D2"
+        )
     return errors, warnings
 
 
