@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-14T13:47:20Z",
+  "execution_id": "EX-NL5-001-B-REPAIR-R1",
+  "work_order_id": "NL5-001-B-REPAIR-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "glm-implementer-repair-r1-cont",
+  "subject_sha": "cb63d0b90be3a1fdc18b324aa9409bfe4b026796",
+  "summary": "CONTINUATION (R8, package regression layer): последний красный hosted-гейт Check 5 (unit/package tests) устранён на subject cb63d0b +1 коммит 54d8e03 в repair/nl5-001-b-library-r1. (1) F-R8.1 manifest sync: releases/nanolab-components-v0.1 пересобран детерминированным R1.2 builder-ом; все 5 карточек попарно value-идентичны reviewed subject (проверка per-key: FORMAT-ONLY), заменён wall-clock RELEASE_MANIFEST.json (generated_at_utc) на детерминированный манифест без timestamp (generated_by release.build_library_r12 deterministic-r1.2); упакованный REPRODUCTION_RULE_V0_1.md теперь байт-идентичен frozen rule doc (NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE); builder check: два независимых full build байт-идентичны. (2) F-R8.2: rights-warning линтера теперь называет блокирующий owner-гейт D2 (соответствует контракту §DIGEST и устоявшейся терминологии D2-warning). (3) F-R8.3: stale-литерал несуществующего execution-program документа убран из WO-NL5-001-B-REPAIR-R1 (переформулировка) и из program_reference обоих паспортов A/B с corrections-блоками (оригинал — redacted-описание, дословные байты в git-истории; протокол F-B5); неизменяемое START-событие EX-NL5-001-A-R1 НЕ редактировалось (hard rule) — test_release_planning_refs получил исключение exact path + sha256 pin по прецеденту hosted-ci Check 1 (дрейф байтов = fail). allowed_paths паспорта ремонта расширены на два паспорта исполнений. Валидации: unittest 360 OK (было 3 fail: manifest exact REAL, stale refs, D2-warning); builder check ok; card_lint package ok (единственный ожидаемый D2-warning); check-consistency ok; workflow_lint ok 0 blocking; все EX-* паспорта validate ok; JSON-синтаксис всех tracked *.json ок (4 pinned non-JSON evidence по design). Инварианты: физика не запускалась; 74b остаётся NOT_MEASURED/KNOWN_GAP; canonical state/plan/roadmap не менялись; научные числа не менялись.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m release.build_library_r12 check -> ok, problems: []",
+    "PYTHONPATH=scripts python3 -m release.build_library_r12 build -> ok, 21 files; git status: ровно 7 ожидаемых файлов пакета",
+    "python3 -m unittest discover -s tests -t . -> Ran 360 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.card_lint package releases/nanolab-components-v0.1 -> ok=True, warnings=[...owner license decision D2...]",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok=True",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> ok=True, blocking=0",
+    "for d in docs/work/executions/EX-*: work_cli validate -> все ok"
+  ],
+  "evidence_refs": [
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json",
+    "docs/release/REPRODUCTION_RULE_V0_1.md",
+    "tests/test_release_repair_r12.py",
+    "tests/test_release_manifest_candidate.py",
+    "tests/test_release_planning_refs.py",
+    "docs/work/executions/EX-NL5-001-A-R1/passport.json",
+    "docs/work/executions/EX-NL5-001-B-R1/passport.json"
+  ],
+  "next_action": "IMPLEMENTER: push repair/nl5-001-b-library-r1, дождаться 5/5 hosted CI gates на новом subject; затем Fresh Re-review + Fresh Verifier + Human Gate. NL5-001-C не запускать до полного зелёного гейта и независимого re-review.",
+  "blocker": null
+}
