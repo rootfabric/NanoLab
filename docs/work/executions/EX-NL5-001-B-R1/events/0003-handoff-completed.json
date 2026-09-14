@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-13T15:36:10Z",
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "be73c5408bee54bc66105f0dee3e3262905eb2ad",
+  "summary": "Handoff EX-NL5-001-B-R1. Deliverable: releases/nanolab-components-v0.1 — одно семейство dna_hinge с вариантами 0b/11b/32b/53b/74b. 0b: MEASURED (confirmatory 200k 65.976921401 CI95 [65.674963662, 66.318271836] n=150 + окно 150k), CONTENT_VERIFIED digest. 11b/32b/53b: MEASURED по общему окну 150k (73.928725839 / 78.091845516 / 132.357787730, n=111 каждый), sha256 COMPUTED_NOT_VERIFIED при верифицированном blob_sha1-пине (amendment R1.1 — честные уровни доказанности). 74b: NOT_MEASURED/KNOWN_GAP (FAILED_TWO_DOMINANT_BLOCKS, 2 attempts, runs NOT_RUN, blocking_release=false) — release не задержан, ремонт в будущем bounded arm-manifest-v2 WO. Валидации: 351 тест OK; builder --check байт-идентичен; card_lint package ok (1 ожидаемый D2-warning); consistency ok; canonical не менялся; физика не запускалась. Открытые риски: (1) A и B — кандидаты до review; merge-порядок PR #37 -> A -> B; (2) публикация пакета заблокирована до D2 (лицензия) и гейта NL5-001-D; (3) reproduce.py v0.1 не исполняет физику — исполнение NL5-001-C/NL5-002; (4) в карточках 11b/32b/53b steps=null при прогоне 11b длиннее окна — зафиксировано в notes. Одно next action: REVIEWER exact head be73c54; после merges — NL5-001-C clean-room воспроизведение пакета.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 351 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.build_library check -> ok:true",
+    "./CONTROL_WORK.sh validate docs/work/executions/EX-NL5-001-B-R1 -> ok",
+    "./CONTROL_WORK.sh close docs/work/executions/EX-NL5-001-B-R1 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-001-B-R1.md",
+    "docs/work/executions/EX-NL5-001-B-R1/evidence-map.json",
+    "docs/work/executions/EX-NL5-001-B-R1/summary.md",
+    "docs/release/RELEASE_CONTRACT_V0_1.md"
+  ],
+  "next_action": "REVIEWER: independent review exact head be73c54; merge-цепочка #37 -> A -> B; затем NL5-001-C clean-room reproduction из пакета.",
+  "blocker": null
+}

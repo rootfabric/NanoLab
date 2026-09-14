@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-ROUTE-R1",
+  "work_order": "WO-POST-MVP-ROUTE-R1",
+  "event": "WORK_ORDER_STARTED",
+  "status": "IN_PROGRESS",
+  "base_branch": "main",
+  "base_sha": "50318c7b32576cf444f36a29ebd7c94a0cc38564",
+  "branch": "control/post-mvp-route-r1",
+  "risk": "MEDIUM",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "scope": "canonical roadmap/state/plan reconciliation and post-MVP development route",
+  "next_action": "publish strategy document and synchronize canonical roadmap/state/plan"
+}

@@ -1,0 +1,20 @@
+{
+  "files": [
+    {"path": "CITATION.cff", "role": "citation", "sha256": "92c9438430646c1a89f2739dea54d48902a5b16eac62c38f5d5b65d61a713a97", "size_bytes": 577},
+    {"path": "RIGHTS.json", "role": "rights", "sha256": "d6dc4f2b456d4401d56bf678319cf073e7eb315f08ca01a2996aa1c008f085e1", "size_bytes": 1614},
+    {"path": "VERSION", "role": "metadata", "sha256": "9e189c5664357eb331218b9f67531411dfe9e6c2d9e8b99411a19446571ac170", "size_bytes": 10},
+    {"path": "families/dna_hinge/cards/0b.card.json", "role": "card", "sha256": "fa6946fb41f24141cd4e715f1e8971999677f35661b708e11f3f129059a27fd0", "size_bytes": 8642},
+    {"path": "families/dna_hinge/cards/74b.card.json", "role": "card", "sha256": "1919844e607111028a91a51756cd39bf71727aadab4ef3447cb440db14329437", "size_bytes": 5059},
+    {"path": "families/dna_hinge/family.json", "role": "family", "sha256": "516411d7c43118d356b2931352360fb40c0d2a89c0257969016bf46dec1e4f43", "size_bytes": 1427},
+    {"path": "reproduction/README.md", "role": "reproduction", "sha256": "c60f6c1fdd30cd9d2b08dce1bdfc9c428c3d420aba711787e32ed10a2b5625a1", "size_bytes": 1994},
+    {"path": "reproduction/reproduce.py", "role": "reproduction", "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb", "size_bytes": 4407},
+    {"path": "schema/components/component-card.v1.json", "role": "schema", "sha256": "37f4f6e9a8425215f6d5550ab2647377ef75457473361165ab6b95ad089d460b", "size_bytes": 7843},
+    {"path": "schema/release/release-manifest.v1.json", "role": "schema", "sha256": "69c2a3d89e501716282d1064ba9b9591113583825737552e2d4f5e2887e3cacb", "size_bytes": 1827},
+    {"path": "schema/release/rights.v1.json", "role": "schema", "sha256": "80d8e419bdd61ff30fc0571aee27cbe28b7eaf175afd58b8740996dc799be8a7", "size_bytes": 2509}
+  ],
+  "generated_by": "release.card_lint manifest create deterministic-r1.2",
+  "kind": "nanolab_release_manifest",
+  "package": "nanolab-components",
+  "package_version": "0.1.0-rc0",
+  "schema_version": 1
+}

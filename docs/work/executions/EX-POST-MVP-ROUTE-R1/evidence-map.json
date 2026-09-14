@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-ROUTE-R1",
+  "work_order": "WO-POST-MVP-ROUTE-R1",
+  "risk": "MEDIUM",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "base_sha": "50318c7b32576cf444f36a29ebd7c94a0cc38564",
+  "implementation_subject_head": "59815fedef0c033f902fedc136f8da1c408f707e",
+  "changed_surfaces": [
+    "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
+    "docs/ROADMAP.md",
+    "docs/work/WORK_QUEUE.md",
+    "project/state.json",
+    "project/plan.json",
+    "config/control/harness/checkpoint-catalog.v1.json",
+    "docs/work/WO-POST-MVP-ROUTE-R1.md",
+    "docs/work/executions/EX-POST-MVP-ROUTE-R1/manifest.json"
+  ],
+  "validation": {
+    "branch_base_exact": true,
+    "epoch_drift": "NONE_AT_COMPARE",
+    "state_frontier": "NL5",
+    "next_work_order": "NL5-001",
+    "nl5_001_status": "READY",
+    "duplicate_nl5_001_removed": true,
+    "nl4_tasks_preserved_accepted": true,
+    "physics_runs_reconciled": 35,
+    "e3_execution_status": "RUN",
+    "post_mvp_dependency_chain": "NL5-001 -> NL5-002 -> NL6-001(E5) -> NL6-002(E3-R2) -> NL7-001 -> NL8-001",
+    "physics_runtime_changed": false,
+    "scientific_runs_started": false
+  },
+  "known_limits": [
+    "execution.ai_campaigns remains 0 because its counting semantics were not independently established in this control Work Order",
+    "NanoLab own code/documentation/data license remains an owner decision",
+    "74b remains NOT_MEASURED until a separate bounded arm-manifest-v2 revision",
+    "main protection/stale PR cleanup are planned as separate housekeeping/control work"
+  ],
+  "review_status": "REVIEW_REQUIRED",
+  "verifier_status": "VERIFY_REQUIRED",
+  "human_gate": "MERGE_REQUIRED"
+}
