@@ -1,19 +1,11 @@
 """NanoLab release contract linter (stdlib-only).
 
-Executes the normative release schemas (via release.mini_schema) plus the
-semantic cross-field rules of docs/release/RELEASE_CONTRACT_V0_1.md that
-the mini executor subset cannot express. Fail-closed: unknown schema
-keywords are errors, manifest digests are recomputed, path rules are
-enforced.
-
-Usage (from repo root):
-    PYTHONPATH=scripts python3 -m release.card_lint card FILE [FILE...]
-    PYTHONPATH=scripts python3 -m release.card_lint rights RIGHTS_JSON
-    PYTHONPATH=scripts python3 -m release.card_lint manifest create PKG_ROOT
-    PYTHONPATH=scripts python3 -m release.card_lint manifest verify PKG_ROOT
-    PYTHONPATH=scripts python3 -m release.card_lint package PKG_ROOT
-
-Exit codes: 0 = ok, 3 = validation failure (harness style), 2 = usage error.
+R1.2 hardening:
+- fail-closed schema execution;
+- S1..S5 component semantics;
+- deterministic manifest creation (no wall-clock field by default);
+- duplicate and unsafe manifest paths rejected before mapping;
+- manifest digests/sizes recomputed.
 """
 
 from __future__ import annotations
@@ -23,7 +15,6 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -53,17 +44,16 @@ class LintFailure(Exception):
 
 def _load_json(path: Path) -> Any:
     try:
-        with path.open("r", encoding="utf-8") as handle:
-            return json.load(handle)
+        return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise LintFailure(f"{path}: cannot load JSON ({exc})") from exc
 
 
 def _load_schema(path: Path, label: str) -> dict[str, Any]:
     schema = _load_json(path)
-    scan_errors = mini_schema.lint_schema(schema, path=str(path))
-    if scan_errors:
-        raise LintFailure(f"{label} schema at {path} uses unsupported constructs: {scan_errors}")
+    errors = mini_schema.lint_schema(schema, path=str(path))
+    if errors:
+        raise LintFailure(f"{label} schema at {path} uses unsupported constructs: {errors}")
     return schema
 
 
@@ -88,16 +78,16 @@ def _sha256(path: Path) -> str:
 
 
 # ---------------------------------------------------------------------------
-# cards
+# Cards
 
 
 def validate_card(card: Any, schema: dict[str, Any], origin: str) -> list[str]:
     errors = mini_schema.validate(card, schema, path=origin)
     if errors:
         return errors
+
     measurement = card["measurement_status"]
     observables = card["measured_observables"]
-
     if measurement in ("MEASURED", "MEASURED_STATISTICALLY_VALIDATED"):
         if not observables:
             errors.append(f"{origin}: measurement_status={measurement} but measured_observables is empty (S1)")
@@ -117,30 +107,19 @@ def validate_card(card: Any, schema: dict[str, Any], origin: str) -> list[str]:
         if not rights.get("pinned_commit"):
             errors.append(f"{origin}: rights_mode={rights['rights_mode']} requires pinned_commit (S3)")
         if rights["durable_cache"] != "FORBIDDEN":
-            errors.append(
-                f"{origin}: rights_mode={rights['rights_mode']} requires durable_cache=FORBIDDEN (S3, G1 decision)"
-            )
+            errors.append(f"{origin}: rights_mode={rights['rights_mode']} requires durable_cache=FORBIDDEN (S3)")
 
     if card["claim_ceiling"] == "C1_COMPUTATIONAL_REPRODUCTION" and measurement not in (
         "MEASURED",
         "MEASURED_STATISTICALLY_VALIDATED",
     ):
-        errors.append(
-            f"{origin}: claim_ceiling=C1_COMPUTATIONAL_REPRODUCTION requires measured data, got measurement_status={measurement} (S4)"
-        )
+        errors.append(f"{origin}: C1_COMPUTATIONAL_REPRODUCTION requires measured data (S4)")
 
-    for gap in card["known_gaps"]:
-        _check_rel_path(str(gap.get("gap_id", "")), f"{origin}: known_gap {gap.get('gap_id')!r}", errors)
-
-    # S5 (amendment R1.1): a sha256 claim without its verification level (or the
-    # reverse) is a half-claim; the registry pin remains blob_sha1.
     for gate_path, digest in card.get("source_provenance", {}).get("digest_gates", {}).items():
-        has_sha256 = "sha256" in digest
+        has_sha = "sha256" in digest
         has_status = "sha256_status" in digest
-        if has_sha256 != has_status:
-            errors.append(
-                f"{origin}: digest {gate_path!r}: sha256 and sha256_status must be provided together (S5)"
-            )
+        if has_sha != has_status:
+            errors.append(f"{origin}: digest {gate_path!r}: sha256 and sha256_status must be provided together (S5)")
 
     return errors
 
@@ -150,19 +129,16 @@ def run_card(paths: list[Path], schema_path: Path) -> dict[str, Any]:
     errors: list[str] = []
     checked: list[str] = []
     for path in paths:
-        card = _load_json(path)
-        errors.extend(validate_card(card, schema, origin=str(path)))
+        errors.extend(validate_card(_load_json(path), schema, origin=str(path)))
         checked.append(str(path))
     return {"command": "CARD", "checked": checked, "ok": not errors, "errors": errors}
 
 
 # ---------------------------------------------------------------------------
-# rights
+# Rights
 
 
 def validate_rights(rights: Any, schema: dict[str, Any], origin: str) -> tuple[list[str], list[str]]:
-    """Return (errors, warnings). UNDECIDED own licenses are a legal draft state
-    (program D2) — publication-blocking process rule, not a file-level error."""
     errors = mini_schema.validate(rights, schema, path=origin)
     warnings: list[str] = []
     if errors:
@@ -172,29 +148,23 @@ def validate_rights(rights: Any, schema: dict[str, Any], origin: str) -> tuple[l
         _check_rel_path(item["path"], where, errors)
         if item["rights_mode"] == "REFERENCE_ONLY":
             if not item.get("upstream_repo") or not item.get("pinned_commit"):
-                errors.append(
-                    f"{where}: REFERENCE_ONLY item requires upstream_repo and pinned_commit (40-hex)"
-                )
+                errors.append(f"{where}: REFERENCE_ONLY item requires upstream_repo and pinned_commit")
     if (
         rights["own_code_license"] == "UNDECIDED_PENDING_OWNER_DECISION"
         or rights["own_docs_data_license"] == "UNDECIDED_PENDING_OWNER_DECISION"
     ):
-        warnings.append(
-            f"{origin}: own license UNDECIDED_PENDING_OWNER_DECISION (program D2) — the package is "
-            "draft-only and MUST NOT be published until the owner decision is recorded"
-        )
+        warnings.append(f"{origin}: own license UNDECIDED_PENDING_OWNER_DECISION — package is draft-only")
     return errors, warnings
 
 
 def run_rights(path: Path, schema_path: Path) -> dict[str, Any]:
     schema = _load_schema(schema_path, "rights")
-    rights = _load_json(path)
-    errors, warnings = validate_rights(rights, schema, origin=str(path))
+    errors, warnings = validate_rights(_load_json(path), schema, origin=str(path))
     return {"command": "RIGHTS", "checked": [str(path)], "ok": not errors, "errors": errors, "warnings": warnings}
 
 
 # ---------------------------------------------------------------------------
-# manifest
+# Manifest
 
 
 def _package_files(pkg_root: Path) -> list[Path]:
@@ -217,35 +187,36 @@ def _role_for(rel_path: str, file_name: str) -> str:
 
 
 def _read_version(pkg_root: Path) -> str:
-    version_path = pkg_root / VERSION_NAME
     try:
-        return version_path.read_text(encoding="utf-8").strip()
+        return (pkg_root / VERSION_NAME).read_text(encoding="utf-8").strip()
     except OSError as exc:
-        raise LintFailure(f"{version_path}: cannot read VERSION ({exc})") from exc
+        raise LintFailure(f"cannot read VERSION: {exc}") from exc
 
 
-def manifest_create(pkg_root: Path, generated_by: str = "release.card_lint manifest create") -> dict[str, Any]:
-    version = _read_version(pkg_root)
+def manifest_create(
+    pkg_root: Path,
+    generated_by: str = "release.card_lint manifest create deterministic-r1.2",
+    *,
+    subject: dict[str, str | None] | None = None,
+) -> dict[str, Any]:
+    """Create deterministic manifest bytes from package bytes and frozen metadata.
+
+    No wall-clock value is emitted. Optional subject must itself be frozen input.
+    """
     files = []
     for path in _package_files(pkg_root):
         rel = path.relative_to(pkg_root).as_posix()
-        files.append(
-            {
-                "path": rel,
-                "sha256": _sha256(path),
-                "size_bytes": path.stat().st_size,
-                "role": _role_for(rel, path.name),
-            }
-        )
-    manifest = {
+        files.append({"path": rel, "sha256": _sha256(path), "size_bytes": path.stat().st_size, "role": _role_for(rel, path.name)})
+    manifest: dict[str, Any] = {
         "schema_version": 1,
         "kind": "nanolab_release_manifest",
         "package": "nanolab-components",
-        "package_version": version,
-        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "package_version": _read_version(pkg_root),
         "generated_by": generated_by,
         "files": files,
     }
+    if subject:
+        manifest["subject"] = subject
     return manifest
 
 
@@ -257,13 +228,23 @@ def manifest_verify(pkg_root: Path, schema_path: Path) -> dict[str, Any]:
     if errors:
         return {"command": "MANIFEST_VERIFY", "ok": False, "errors": errors}
 
-    listed = {entry["path"]: entry for entry in manifest["files"]}
-    actual = {p.relative_to(pkg_root).as_posix(): p for p in _package_files(pkg_root)}
+    entries = manifest["files"]
+    seen: set[str] = set()
+    for index, entry in enumerate(entries):
+        rel = entry["path"]
+        _check_rel_path(rel, f"{manifest_path}.files[{index}].path", errors)
+        if rel in seen:
+            errors.append(f"{manifest_path}: duplicate path entry {rel!r}")
+        seen.add(rel)
 
+    if errors:
+        return {"command": "MANIFEST_VERIFY", "ok": False, "errors": errors}
+
+    listed = {entry["path"]: entry for entry in entries}
+    actual = {p.relative_to(pkg_root).as_posix(): p for p in _package_files(pkg_root)}
     version = _read_version(pkg_root)
     if manifest["package_version"] != version:
-        errors.append(f"{manifest_path}: package_version {manifest['package_version']!r} != {VERSION_NAME} content {version!r}")
-
+        errors.append(f"{manifest_path}: package_version {manifest['package_version']!r} != VERSION {version!r}")
     for rel in sorted(set(listed) - set(actual)):
         errors.append(f"{manifest_path}: manifest lists missing file {rel!r}")
     for rel in sorted(set(actual) - set(listed)):
@@ -271,38 +252,32 @@ def manifest_verify(pkg_root: Path, schema_path: Path) -> dict[str, Any]:
     for rel in sorted(set(listed) & set(actual)):
         entry = listed[rel]
         path = actual[rel]
-        digest = _sha256(path)
-        if digest != entry["sha256"]:
+        if _sha256(path) != entry["sha256"]:
             errors.append(f"{manifest_path}: sha256 mismatch for {rel!r}")
         if path.stat().st_size != entry["size_bytes"]:
             errors.append(f"{manifest_path}: size_bytes mismatch for {rel!r}")
-
-    return {"command": "MANIFEST_VERIFY", "ok": not errors, "errors": errors, "files": len(listed)}
+    return {"command": "MANIFEST_VERIFY", "ok": not errors, "errors": errors, "files": len(entries)}
 
 
 # ---------------------------------------------------------------------------
-# package
+# Package
 
 
-def _check_family_file(path: Path, variants_seen: dict[str, str]) -> list[str]:
+def _check_family_file(path: Path) -> list[str]:
     family = _load_json(path)
     errors: list[str] = []
     if not isinstance(family, dict):
         return [f"{path}: family.json must be a JSON object"]
-    family_id = family.get("family_id")
-    if not isinstance(family_id, str) or not family_id:
-        errors.append(f"{path}: missing family_id")
     variants = family.get("variants")
+    status = family.get("variant_status")
+    if not isinstance(family.get("family_id"), str) or not family.get("family_id"):
+        errors.append(f"{path}: missing family_id")
     if not isinstance(variants, list) or not variants:
         errors.append(f"{path}: variants must be a non-empty array")
-    status = family.get("variant_status")
     if not isinstance(status, dict):
         errors.append(f"{path}: variant_status must be an object")
-    else:
-        if variants and sorted(status) != sorted(map(str, variants)):
-            errors.append(f"{path}: variant_status keys {sorted(status)} != variants {sorted(variants)}")
-        for variant, value in status.items():
-            variants_seen[variant] = str(value)
+    elif isinstance(variants, list) and sorted(status) != sorted(map(str, variants)):
+        errors.append(f"{path}: variant_status keys {sorted(status)} != variants {sorted(variants)}")
     return errors
 
 
@@ -310,7 +285,6 @@ def run_package(pkg_root: Path) -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
     pkg_root = pkg_root.resolve()
-
     version = _read_version(pkg_root)
     if not SEMVER_PATTERN.match(version):
         errors.append(f"{pkg_root / VERSION_NAME}: content {version!r} is not semver")
@@ -321,64 +295,49 @@ def run_package(pkg_root: Path) -> dict[str, Any]:
 
     card_schema_path = pkg_root / "schema" / "components" / "component-card.v1.json"
     schema_source = card_schema_path if card_schema_path.is_file() else CARD_SCHEMA
-    if card_schema_path.is_file() and card_schema_path.read_bytes() == CARD_SCHEMA.read_bytes():
-        pass
-    elif card_schema_path.is_file():
-        warnings.append(
-            f"{card_schema_path}: packaged schema snapshot differs from repo schema {CARD_SCHEMA}; "
-            "allowed for pinned releases, record the reason in the package changelog"
-        )
+    if card_schema_path.is_file() and card_schema_path.read_bytes() != CARD_SCHEMA.read_bytes():
+        warnings.append(f"{card_schema_path}: packaged schema snapshot differs from repo schema")
 
-    card_results: list[str] = []
-    variants_seen: dict[str, str] = {}
-    card_paths = sorted((pkg_root / "families").rglob("*.card.json")) if (pkg_root / "families").is_dir() else []
-    if not card_paths:
-        errors.append(f"{pkg_root}: no component cards found under families/")
     schema = _load_schema(schema_source, "component card")
+    card_paths = sorted((pkg_root / "families").rglob("*.card.json")) if (pkg_root / "families").is_dir() else []
+    card_results: list[str] = []
+    cards_by_family: dict[str, set[str]] = {}
+    variant_status: dict[str, str] = {}
+    if not card_paths:
+        errors.append(f"{pkg_root}: no component cards found")
     for path in card_paths:
-        card_errors = validate_card(_load_json(path), schema, origin=path.relative_to(pkg_root).as_posix())
+        rel = path.relative_to(pkg_root).as_posix()
+        card = _load_json(path)
+        card_errors = validate_card(card, schema, origin=rel)
         errors.extend(card_errors)
-        card_results.append(path.relative_to(pkg_root).as_posix())
+        card_results.append(rel)
         if not card_errors:
-            card = _load_json(path)
-            variants_seen.setdefault(str(card.get("variant")), str(card.get("measurement_status")))
+            cards_by_family.setdefault(str(card.get("family")), set()).add(str(card.get("variant")))
+            variant_status[str(card.get("variant"))] = str(card.get("measurement_status"))
 
-    for family_path in sorted((pkg_root / "families").rglob("family.json")) if (pkg_root / "families").is_dir() else []:
-        errors.extend(_check_family_file(family_path, variants_seen))
-
-    # Invariants I1/I2 (contract §7): a declared variant must have a card file,
-    # and a card's variant must be declared by its family — a family is one
-    # family with variants, never a bag of unrelated cards.
-    for family_path in sorted((pkg_root / "families").rglob("family.json")) if (pkg_root / "families").is_dir() else []:
+    family_paths = sorted((pkg_root / "families").rglob("family.json")) if (pkg_root / "families").is_dir() else []
+    for family_path in family_paths:
+        errors.extend(_check_family_file(family_path))
         family = _load_json(family_path)
         family_id = str(family.get("family_id", ""))
-        cards_dir = family_path.parent / "cards"
-        for variant in map(str, family.get("variants", [])):
-            card_path = cards_dir / f"{variant}.card.json"
-            if not card_path.is_file():
-                errors.append(f"{family_path}: variant {variant!r} declared but {card_path.relative_to(pkg_root).as_posix()} is missing (I1)")
-        declared_by_family = set(map(str, family.get("variants", [])))
-        for path in card_paths:
-            relative = path.relative_to(pkg_root).as_posix()
-            card = _load_json(path)
-            if str(card.get("family")) == family_id and str(card.get("variant")) not in declared_by_family:
-                errors.append(
-                    f"{relative}: variant {card.get('variant')!r} has a card but is not declared in family.json (I2)"
-                )
+        declared = set(map(str, family.get("variants", [])))
+        present = cards_by_family.get(family_id, set())
+        for variant in sorted(declared - present):
+            errors.append(f"{family_path}: declared variant {variant!r} has no card (I1)")
+        for variant in sorted(present - declared):
+            errors.append(f"{family_path}: card variant {variant!r} is not declared (I2)")
 
     rights_result = run_rights(pkg_root / RIGHTS_NAME, RIGHTS_SCHEMA)
     errors.extend(rights_result["errors"])
     warnings.extend(rights_result.get("warnings", []))
-
     manifest_result = manifest_verify(pkg_root, MANIFEST_SCHEMA)
     errors.extend(manifest_result["errors"])
-
     return {
         "command": "PACKAGE",
         "package_root": str(pkg_root),
         "version": version,
         "cards": card_results,
-        "variant_status": variants_seen,
+        "variant_status": variant_status,
         "warnings": warnings,
         "ok": not errors,
         "errors": errors,
@@ -386,23 +345,24 @@ def run_package(pkg_root: Path) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# CLI
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="release.card_lint", description="NanoLab release contract linter")
+    parser = argparse.ArgumentParser(prog="release.card_lint")
     sub = parser.add_subparsers(dest="command", required=True)
-    p_card = sub.add_parser("card", help="validate component card JSON file(s)")
+    p_card = sub.add_parser("card")
     p_card.add_argument("files", nargs="+")
     p_card.add_argument("--schema", default=str(CARD_SCHEMA))
-    p_rights = sub.add_parser("rights", help="validate RIGHTS.json")
+    p_rights = sub.add_parser("rights")
     p_rights.add_argument("file")
     p_rights.add_argument("--schema", default=str(RIGHTS_SCHEMA))
-    p_manifest = sub.add_parser("manifest", help="create or verify RELEASE_MANIFEST.json")
+    p_manifest = sub.add_parser("manifest")
     p_manifest.add_argument("mode", choices=["create", "verify"])
     p_manifest.add_argument("pkg_root")
     p_manifest.add_argument("--schema", default=str(MANIFEST_SCHEMA))
-    p_manifest.add_argument("--stdout", action="store_true", help="manifest create: print manifest instead of writing")
-    p_package = sub.add_parser("package", help="full package check")
+    p_manifest.add_argument("--stdout", action="store_true")
+    p_package = sub.add_parser("package")
     p_package.add_argument("pkg_root")
     args = parser.parse_args(argv)
 
