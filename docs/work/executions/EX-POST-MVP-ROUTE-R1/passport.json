@@ -12,6 +12,7 @@
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
   "status": "HANDOFF_READY",
+  "started_at_utc": "2026-09-13T14:14:00Z",
   "allowed_paths": [
     "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md",
     "docs/ROADMAP.md",
