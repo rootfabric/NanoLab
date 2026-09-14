@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-repair-r1-completed",
+  "timestamp_utc": "2026-09-14T11:12:47Z",
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "861d5832ff5456262bab764871b86a943265ab10",
+  "summary": "Repair R1 COMPLETED. Все шесть blocking findings Fresh Review R1 (ab55eb5) устранены по Repair Map (0761e53): F-B3 — заморожено правило REPRODUCTION_RULE_R1 (docs/research/REPRODUCTION_RULE_R1.md; band = [min,max] пер-репличных медиан карточки k>=2, статистика кампании = медиана пер-репличных медиан >=3 валидных реплик; MATCH/MISMATCH/INCONCLUSIVE/TECHNICAL_FAILURE; pooled bootstrap CI95 — не полоса допуска; нормативный исполнитель release.reproduction + clean-room evaluate в reproduce.py, conformance-тест) — критерий заморожен ДО любых данных NL5-001-C; F-B1 — все научные/протокольные пины builder выводит из evidence (run-config c00*/s00*_input.in, сводки, run-reports engine_source_commit, ENGINE doc, source_pins) с fail-closed cross-check-гейтами и shared-config гейтом pro_CPU.in; код-own — только классифицированные release-метаданные; F-B2 — манифест детерминирован (generated_at_utc = замороженный штамп 2026-09-13T15:32:04Z, не wall-clock; manifest create требует явный штамп) и входит в byte-for-byte --check вместе с копией правила reproduction/REPRODUCTION_RULE_R1.md; F-B4 — контракт R1.2: digest-политика size_bytes+blob_sha1 обязательны / sha256+sha256_status опциональны, S1–S5 в таблице, revision history; F-B5 — битая ссылка POST_MVP_EXECUTION_PROGRAM_R1.md заменена на POST_MVP_DEVELOPMENT_ROUTE_R1 в контракте, WO-A, WO-B и паспортах A/B (corrections сохраняют оригинал; исторические events не редактировались); F-B6 — manifest verify fail-closed отвергает duplicate paths и плохую path-семантику до словарной свёртки, negative-тесты добавлены. A @ 9cbde33 зафиксирован SUPERSEDED интегрированным кандидатом B (стратегия map). Валидации: 385 тестов OK (+34 к 351), build_library check byte-identical (весь пакет, манифест включён), card_lint package release+example ok (по 1 ожидаемому D2-warning), consistency ok, canonical/state не менялись, физика не запускалась. Роли Reviewer/Verifier реализатором не исполнялись. Точный head кандидата — HEAD ветки work/nl5-001-b-library-assembly-r1 после этого коммита (см. next_action).",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 385 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.build_library check -> ok:true, problems:[]",
+    "PYTHONPATH=scripts python3 -m release.card_lint package releases/nanolab-components-v0.1 -> ok (1 expected D2 warning)",
+    "PYTHONPATH=scripts python3 -m release.card_lint package examples/release/nanolab-components-v0.1 -> ok (1 expected D2 warning)",
+    "./CONTROL_DEVELOPMENT.sh --check-consistency -> ok",
+    "./CONTROL_WORK.sh validate docs/work/executions/EX-NL5-001-B-R1 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-001-B/FRESH_REVIEW_R1.md",
+    "docs/evidence/NL5-001-B/REPAIR_MAP_R1.md",
+    "docs/research/REPRODUCTION_RULE_R1.md",
+    "docs/release/RELEASE_CONTRACT_V0_1.md (R1.2)",
+    "docs/work/executions/EX-NL5-001-B-R1/evidence-map.json (repair_r1)",
+    "docs/work/executions/EX-NL5-001-B-R1/summary.md (Repair R1)"
+  ],
+  "next_action": "FRESH REVIEWER: independent re-review exact HEAD of work/nl5-001-b-library-assembly-r1 против REPAIR_MAP_R1 (R1..R7 + revalidation gate); затем отдельный exact-head VERIFIER и Human merge; NL5-001-C — только clean-room по замороженному REPRODUCTION_RULE_R1.",
+  "blocker": null
+}

@@ -41,5 +41,12 @@
       "authority": "review/nl5-001-b-r1 @ 0761e53 docs/evidence/NL5-001-B/REPAIR_MAP_R1.md, R5 (F-B5/F-A2)",
       "note": "repair R1 (F-B5/F-A2): исходный program_reference указывал на несуществующий docs/control/POST_MVP_EXECUTION_PROGRAM_R1.md; заменён на durable planning source docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B, декомпозиция A..D). Оригинальное значение сохранено в corrections; исторические events не редактируются."
     }
-  ]
+  ],
+  "repair_r1": {
+    "verdict_addressed": "FIX_REQUIRED (review/nl5-001-b-r1 @ ab55eb5)",
+    "repair_map": "docs/evidence/NL5-001-B/REPAIR_MAP_R1.md (@ 0761e53)",
+    "status": "REPAIRED_AWAITING_FRESH_RE_REVIEW",
+    "supersedes": "work/nl5-001-a-release-contract-r1 @ 9cbde33 (integrated repair strategy)",
+    "note": "events 0004-0005 appended; historical events not edited; NL5-001-C not started (criterion frozen first)"
+  }
 }
