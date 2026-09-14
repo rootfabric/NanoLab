@@ -13,7 +13,7 @@
 2. Make scientific/protocol pins evidence-derived rather than code literals.
 3. Make the full release package deterministic, including `RELEASE_MANIFEST.json`.
 4. Finish R1.1 digest-contract synchronization.
-5. Remove stale references to nonexistent `POST_MVP_EXECUTION_PROGRAM_R1.md`.
+5. Remove stale references to the nonexistent execution-program planning document (superseded by `POST_MVP_DEVELOPMENT_ROUTE_R1.md`); immutable historical events are exempt and digest-pinned by `tests/test_release_planning_refs.py`.
 6. Reject duplicate/unsafe manifest paths fail-closed.
 7. Preserve 74b as `NOT_MEASURED`; no physics runs.
 

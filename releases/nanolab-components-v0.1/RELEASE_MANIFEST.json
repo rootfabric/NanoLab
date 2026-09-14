@@ -21,32 +21,32 @@
     {
       "path": "families/dna_hinge/cards/0b.card.json",
       "role": "card",
-      "sha256": "d25773ca282e1d3a9e140f2549e93eea452abc9cb4a6a0ca8388e6e9ea6ec278",
-      "size_bytes": 10192
+      "sha256": "06aa9eb85cb689f3c562f0ef982ca8e1fbd427cc608bd08b6f58b1a539870f00",
+      "size_bytes": 10396
     },
     {
       "path": "families/dna_hinge/cards/11b.card.json",
       "role": "card",
-      "sha256": "224dbf355cf94742f64eaea7fdc4e77d7806044bcdf9e3246c24adca5ab880f9",
-      "size_bytes": 8984
+      "sha256": "d17a6533d1a9d5b255eb0e25dc21542947d8262748b7a09aef3ba77562bffb25",
+      "size_bytes": 9644
     },
     {
       "path": "families/dna_hinge/cards/32b.card.json",
       "role": "card",
-      "sha256": "66cca4999261944a89806b28fa655fa5e94afd3b473f737edbfefe634f8feca5",
-      "size_bytes": 8975
+      "sha256": "66fc6ca91d9bf174449b6dc9c985d0cc476eb7cf52c7e3ec80f3be41ac6c07d3",
+      "size_bytes": 9629
     },
     {
       "path": "families/dna_hinge/cards/53b.card.json",
       "role": "card",
-      "sha256": "78eb5d7909049f84ac572bee71a6308e98ad54c1dad69737960016ef6a444b49",
-      "size_bytes": 8985
+      "sha256": "460a89e7606404c93c0d7c8e8ab38bbe4ae329fe26aacd7f2eb3f8567b336251",
+      "size_bytes": 9649
     },
     {
       "path": "families/dna_hinge/cards/74b.card.json",
       "role": "card",
-      "sha256": "86a38b800dee60d23f5c380a00d5cec790e59f490d0d9ad7b7917cda83791641",
-      "size_bytes": 6674
+      "sha256": "5894f420c0ec81621955e7351cb09174b2f7eb4b8358ee63f1bf50a96ce350bb",
+      "size_bytes": 6727
     },
     {
       "path": "families/dna_hinge/family.json",
@@ -91,6 +91,12 @@
       "size_bytes": 1994
     },
     {
+      "path": "reproduction/REPRODUCTION_RULE_V0_1.md",
+      "role": "reproduction",
+      "sha256": "6b70dfc26764c8a21d006824f00e485df9abec8b020e67de5a9709acea793e78",
+      "size_bytes": 4461
+    },
+    {
       "path": "reproduction/reproduce.py",
       "role": "reproduction",
       "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb",
@@ -105,8 +111,8 @@
     {
       "path": "schema/release/release-manifest.v1.json",
       "role": "schema",
-      "sha256": "ce9b9526e7b649eda1b24a42cbd58d7e753d506515e4ea06e374b73a3cb74f26",
-      "size_bytes": 2040
+      "sha256": "69c2a3d89e501716282d1064ba9b9591113583825737552e2d4f5e2887e3cacb",
+      "size_bytes": 1827
     },
     {
       "path": "schema/release/rights.v1.json",
@@ -115,8 +121,7 @@
       "size_bytes": 2509
     }
   ],
-  "generated_at_utc": "2026-09-13T15:32:04Z",
-  "generated_by": "release.card_lint manifest create",
+  "generated_by": "release.build_library_r12 deterministic-r1.2",
   "kind": "nanolab_release_manifest",
   "package": "nanolab-components",
   "package_version": "0.1.0-rc0",

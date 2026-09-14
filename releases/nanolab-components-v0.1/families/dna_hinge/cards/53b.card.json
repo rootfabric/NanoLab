@@ -42,23 +42,35 @@
       "digests": {},
       "distribution": {
         "bootstrap": {
-          "ci95": [131.776207377, 132.988423322],
+          "ci95": [
+            131.776207377,
+            132.988423322
+          ],
           "resamples": 10000,
           "seed": 424242,
           "statistic": "median"
         },
-        "iqr_deg": [131.306849164, 134.406738791],
+        "iqr_deg": [
+          131.306849164,
+          134.406738791
+        ],
         "per_replica_median_deg": {
           "PARAM-53B-S001": 132.343978104,
           "PARAM-53B-S002": 131.049227687,
           "PARAM-53B-S003": 135.285186059
         },
-        "q05_q95_deg": [130.488770052, 135.918211802]
+        "q05_q95_deg": [
+          130.488770052,
+          135.918211802
+        ]
       },
       "estimate": 132.35778773,
       "n": 111,
       "source": "docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/parametric-summary.json",
-      "uncertainty": [131.776207377, 132.988423322],
+      "uncertainty": [
+        131.776207377,
+        132.988423322
+      ],
       "units": "deg"
     }
   },
@@ -81,7 +93,11 @@
     },
     "platform": "WSL2 Ubuntu 24.04 (ENGINE_ENVIRONMENT_R1; gcc 13.3.0, cmake 3.31.6 user-local)",
     "protocol": "docs/research/E2_PROTO_R1.md (frozen; addendum §8 common window); observables: docs/research/E2_OBSERVABLES_R2.md",
-    "seeds": [201004, 202008, 203012],
+    "seeds": [
+      201004,
+      202008,
+      203012
+    ],
     "steps": 150000,
     "temperature": "300 K (авторская установка конфига; decision rule E2-SETUP-R1 §5 — reproduction arm verbatim)"
   },
@@ -102,8 +118,15 @@
       "independent_unit": "replica_median_deg",
       "reference_campaign_statistic_deg": 132.343978104,
       "reference_observable_estimate_deg": 132.35778773,
-      "reference_replica_envelope_deg": [131.049227687, 135.285186059],
-      "reference_replica_medians_deg": [132.343978104, 131.049227687, 135.285186059],
+      "reference_replica_envelope_deg": [
+        131.049227687,
+        135.285186059
+      ],
+      "reference_replica_medians_deg": [
+        132.343978104,
+        131.049227687,
+        135.285186059
+      ],
       "required_fresh_replicas": 3,
       "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
     },
@@ -135,9 +158,24 @@
   "source_provenance": {
     "digest_gate_result": "digest_gate_all = PASS (size + blob_sha1 registry pin; sha256 computed at download, status COMPUTED_NOT_VERIFIED)",
     "digest_gates": {
-      "MD_Hinges/53b.conf": {"blob_sha1": "74fb97380b4099a7df6e3b0ee316224ac82b7d6a", "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 2379246},
-      "MD_Hinges/53b.top": {"blob_sha1": "171fcb419b97dbb8099aff400bc5791ec47f4fc9", "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf", "sha256_status": "COMPUTED_NOT_VERIFIED", "size_bytes": 124872},
-      "MD_Hinges/pro_CPU.in": {"blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "sha256_status": "CONTENT_VERIFIED", "size_bytes": 933}
+      "MD_Hinges/53b.conf": {
+        "blob_sha1": "74fb97380b4099a7df6e3b0ee316224ac82b7d6a",
+        "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 2379246
+      },
+      "MD_Hinges/53b.top": {
+        "blob_sha1": "171fcb419b97dbb8099aff400bc5791ec47f4fc9",
+        "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+        "sha256_status": "COMPUTED_NOT_VERIFIED",
+        "size_bytes": 124872
+      },
+      "MD_Hinges/pro_CPU.in": {
+        "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+        "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+        "sha256_status": "CONTENT_VERIFIED",
+        "size_bytes": 933
+      }
     },
     "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
     "upstream_repo": "gauravarya77/DNA-hinge-simulations"
