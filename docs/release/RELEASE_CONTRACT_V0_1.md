@@ -2,7 +2,7 @@
 
 Статус: **нормативный контракт-кандидат** для `NL5-001` component library / release package.
 
-Канонический маршрут: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), Phase B. Durable planning decomposition `NL5-001-A..D` хранится в этом route-документе; ссылки на несуществующий `POST_MVP_EXECUTION_PROGRAM_R1.md` не используются.
+Канонический маршрут: [POST_MVP_DEVELOPMENT_ROUTE_R1](../control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), Phase B. Durable planning decomposition `NL5-001-A..D` хранится в этом route-документе; старые ссылки на отсутствовавший execution-program документ superseded этим маршрутом и не используются.
 
 Совместимые источники: [DATA_CONTRACTS](../DATA_CONTRACTS.md), [E2_SOURCE_RIGHTS_G1_DECISION_R1](../control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md), [LICENSE_POLICY](../../LICENSE_POLICY.md), `docs/research/E2_PROTO_R1.md`, [REPRODUCTION_RULE_V0_1](REPRODUCTION_RULE_V0_1.md).
 
