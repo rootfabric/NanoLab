@@ -20,29 +20,19 @@ name: hosted-ci
 on:
   pull_request:
     branches: [main]
-    # ready_for_review: draft-to-ready transitions must run validation
-    # (NOTE-3, DIRECTOR_ACCEPTANCE_R1 INFRA1-001; enforced by the NC lint).
     types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
 
-# Baseline §5.2: explicit minimal permissions; PR route gets contents:read and nothing else.
-# Write permissions (contents/pull-requests/releases/events) are forbidden on this route (NC-4).
 permissions:
   contents: read
 
-# Budget hygiene: superseded runs of the same ref are cancelled instead of queuing
-# (free-tier minutes are bounded; a re-run inherits the same RC0 budget — NC-6).
 concurrency:
   group: hosted-ci-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   rc0-hosted-validation:
-    # RC0_HOSTED_VALIDATION (baseline §6): GitHub-hosted ephemeral runner (class H0),
-    # wall-clock budget <= 15 minutes, debug artifacts only.
-    # runs-on carries ONLY standard hosted labels; reserved self-hosted labels
-    # (nanolab-cpu, nanolab-gpu, nanolab-hpc-*, self-hosted) are forbidden here.
     name: RC0 hosted validation (H0)
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -51,8 +41,6 @@ jobs:
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           persist-credentials: false
-          # Full history keeps review diffs and merge-base context available on
-          # the runner; the token is not persisted (baseline §5.4).
           fetch-depth: 0
 
       - name: Environment fingerprint (executor-contract context, no secrets emitted)
@@ -67,8 +55,6 @@ jobs:
             echo "git=$(git --version 2>&1)"
           } | tee ci-debug/environment.txt
 
-      # Existing cheap repository checks, safe subset for hosted untrusted Linux
-      # (selection rationale: docs/infra/HOSTED_CI_R1.md §5, docs/infra/VALIDATION_GATES_R1.md).
       - name: Check 1/5 — machine contracts JSON syntax (all tracked *.json)
         run: |
           set -euo pipefail
@@ -79,42 +65,39 @@ jobs:
           fi
           mkdir -p ci-debug
           : > ci-debug/check-json-syntax.txt
-          # Deliberately corrupt negative-control fixtures (E0 NEG family, NL2-001;
-          # see docs/evidence/NL2-001/DIRECTOR_ACCEPTANCE_R1.md) must remain
-          # unparseable: the validators under test are required to fail closed on
-          # them. The exception is pinned by exact path AND sha256 — any content
-          # drift fails this check and requires a reviewed evidence erratum.
-          # Every other tracked *.json must still parse (json.tool).
+          # A very small set of reviewed tracked paths intentionally contains bytes
+          # that are not JSON despite the historical .json suffix. They are durable
+          # negative/failed-run evidence and MUST NOT be rewritten merely to satisfy
+          # a filename-based syntax sweep. Each exception is fail-closed by exact
+          # path + exact sha256; any byte drift fails this check and requires review.
           declare -A neg_fixtures=(
             ["experiments/evidence/E0/E0-R1/fixtures/negative/n001_empty_passport/execution/passport.json"]="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
             ["experiments/evidence/E0/E0-R1/fixtures/negative/n002_truncated_json/execution/passport.json"]="1de18ae447d83f621e98f64ef928858e9c0b1456144f10b4870bfcea8a3c4a85"
+            ["docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-run1.stdout.json"]="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            ["docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-run2.stdout.json"]="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
           )
           neg_pinned=0
           for f in "${files[@]}"; do
             if [[ -n "${neg_fixtures[$f]+x}" ]]; then
               actual="$(sha256sum "$f" | cut -d' ' -f1)"
               if [ "$actual" != "${neg_fixtures[$f]}" ]; then
-                echo "FAIL  $f (negative-control fixture drifted from pinned sha256; reviewed erratum required)" | tee -a ci-debug/check-json-syntax.txt
+                echo "FAIL  $f (pinned non-JSON evidence drifted; reviewed erratum required)" | tee -a ci-debug/check-json-syntax.txt
                 exit 1
               fi
               neg_pinned=$((neg_pinned + 1))
-              echo "NEG-OK (pinned unparseable fixture, sha256 match)  $f" | tee -a ci-debug/check-json-syntax.txt
+              echo "NEG-OK (pinned non-JSON evidence, sha256 match)  $f" | tee -a ci-debug/check-json-syntax.txt
             else
               python3 -m json.tool "$f" > /dev/null
               echo "OK  $f" | tee -a ci-debug/check-json-syntax.txt
             fi
           done
-          echo "json syntax: ${#files[@]} files OK (${neg_pinned} pinned negative-control fixtures digest-checked)"
+          echo "json syntax: ${#files[@]} files OK (${neg_pinned} pinned non-JSON evidence paths digest-checked)"
 
       - name: Check 2/5 — harness control consistency (plan/state/goals/catalog/scheduler)
         run: |
           set -euo pipefail
           PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . | tee ci-debug/check-consistency.json
 
-      # Since INFRA1-002 the validator is corrections-aware (post-terminal
-      # CONTINUATION_CHECKPOINT/REVIEW_CORRECTIONS events after handoff are
-      # accepted when semantically valid), so the earlier diff-scope limitation
-      # is gone: every execution dir is validated on every run (fail closed).
       - name: Check 3/5 — execution passports and work events integrity (all EX-*)
         run: |
           set -euo pipefail
@@ -136,9 +119,6 @@ jobs:
           done
           exit "$status"
 
-      # Mechanical negative controls NC-1..NC-7 (blocking; INFRA1-002): NC-1 is the
-      # blocking acceptance criterion — an untrusted PR route cannot select a
-      # self-hosted label; reference values: config/infra/validation-gates.v1.json.
       - name: Check 4/5 — workflow negative-control lint (NC-1..NC-7, blocking)
         run: |
           set -euo pipefail
@@ -149,9 +129,6 @@ jobs:
           set -euo pipefail
           python3 -m unittest discover -s tests -t . -v 2>&1 | tee ci-debug/check-gate-tests.txt
 
-      # Baseline §7 artifact policy: hosted CI artifacts are ephemeral debug material,
-      # NOT scientific evidence; every published artifact carries provenance fields
-      # sha256 / size_bytes / producer_run_id / subject_sha / storage_location.
       - name: Build debug artifact manifest (failure only)
         if: failure()
         env:
