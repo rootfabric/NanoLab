@@ -14,7 +14,10 @@
     "NL2-002",
     "NL2-003",
     "NL3-001",
-    "NL3-002"
+    "NL3-002",
+    "NL4-001",
+    "NL4-002",
+    "NL4-003"
   ],
   "active_tasks": [],
   "task_status": {
@@ -32,9 +35,9 @@
     "NL4-002": "ACCEPTED",
     "NL4-003": "ACCEPTED",
     "NL5-001": "READY",
-    "NL5-001": "PLANNED",
     "NL5-002": "PLANNED",
     "NL6-001": "PLANNED",
+    "NL6-002": "PLANNED",
     "NL7-001": "PLANNED",
     "NL8-001": "PLANNED"
   },
@@ -53,14 +56,14 @@
     "E0": "RUN",
     "E1": "RUN",
     "E2": "RUN",
-    "E3": "NOT_RUN",
+    "E3": "RUN",
     "E4": "NOT_RUN",
     "E5": "NOT_RUN",
     "E6": "NOT_RUN"
   },
   "execution": {
     "runtime_implemented": false,
-    "physics_runs": 31,
+    "physics_runs": 35,
     "ai_campaigns": 0,
     "external_reproductions": 0,
     "paid_compute_authorized": false
