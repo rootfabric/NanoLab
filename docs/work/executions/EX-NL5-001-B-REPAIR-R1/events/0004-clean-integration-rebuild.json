@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-clean-integration-rebuild",
+  "timestamp_utc": "2026-09-16T08:11:46Z",
+  "execution_id": "EX-NL5-001-B-REPAIR-R1",
+  "work_order_id": "NL5-001-B-REPAIR-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "clean-integration-r1-director",
+  "subject_sha": "66e2270d07b2e7936257dfe2c028f65746e4048f",
+  "summary": "CONTINUATION (clean integration R1, stack de-liquefaction): repair subject dc3063b7cf9cc1584e9a1141252862e32128adf4 (branch repair/nl5-001-b-library-r1, PR #38) пересобран как чистый NL5-специфичный candidate поверх интегрированного control plane. Base = 9de094c8d423574568e62832854664b577e9f282 (main после merge PR #39 ci-empty-json-evidence и квант-merge PR #37 post-MVP route + PR #40 execution records repair; canonical hosted CI на 9de094c predecessor c8ce2f0 = success run 34973711065). Метод: 39 NL5-специфичных коммитов cherry-pick в исходном порядке (полная карта старый->новый SHA в clean-integration-sha-map.md); исключены как уже интегрированные: 14 нижних post-MVP route коммитов (вошли через PR #37), 6 carry-коммитов post-MVP execution records (дублируются PR #40), 2 CI carry-коммита (superseded PR #39). Эквивалентность дерева: git diff dc3063b7c..66e2270 по всем NL5-поверхностям пуст; единственное цельное дерево-различие vs старого stack-head — docs/work/executions/EX-POST-MVP-ROUTE-R1/events/0002-handoff-completed.json (косметическое JSON-форматирование массива; каноничен variant PR #40, прошедший Fresh Reviewer PASS (review/post-mvp-route-exec-r1) и Fresh Verifier PASS (verify/post-mvp-route-exec-r1)). Локальная валидация на 66e2270: json.tool sweep всех tracked *.json кроме 4 pinned (1030 файлов) ok; check-consistency ok; все EX-* work_cli validate ok; workflow_lint 0 blocking; unittest discover = Ran 360 tests OK; release.build_library_r12 check ok problems=[]; release.card_lint package ok=true (единственный ожидаемый D2 owner-gate warning). Паспорта/события A/B/REPAIR не редактировались (hard rule, неизменяемость исторических событий); веточные поля паспортов отражают исторические stack-ветки, интеграционным носителем является ветка work/nl5-001-clean-integration-r1. Инварианты: физика не запускалась; 74b остаётся NOT_MEASURED/KNOWN_GAP; canonical state/plan/roadmap не менялись; научные числа не менялись; лицензионное решение D2 остаётся за владельцем.",
+  "command_refs": [
+    "git cherry-pick <39 commits> на base 9de094c -> все ok, конфликтов нет",
+    "git diff dc3063b7c..66e2270 -- (NL5 surfaces) -> пусто; цельное дерево: только EX-POST-MVP-ROUTE-R1/events/0002-handoff-completed.json (косметика)",
+    "python3 -m json.tool sweep (1030 tracked *.json, 4 pinned non-JSON evidence) -> ok",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> exit 0",
+    "for d in docs/work/executions/EX-*: PYTHONPATH=scripts python3 -m harness.work_cli validate $d -> все ok",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> exit 0, blocking 0",
+    "python3 -m unittest discover -s tests -t . -> Ran 360 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.build_library_r12 check -> ok=true, problems=[]",
+    "PYTHONPATH=scripts python3 -m release.card_lint package releases/nanolab-components-v0.1 -> ok=true, warnings=[D2 owner license decision]"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-B-REPAIR-R1/clean-integration-sha-map.md",
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json",
+    "docs/release/REPRODUCTION_RULE_V0_1.md",
+    "tests/test_release_repair_r12.py",
+    "tests/test_release_planning_refs.py",
+    "docs/evidence/WO-POST-MVP-ROUTE-R1/EXEC_RECORDS_REPAIR_FRESH_VERIFY_R1.md"
+  ],
+  "next_action": "DIRECTOR: push work/nl5-001-clean-integration-r1, владелец открывает draft PR (pull_request маршрут) -> hosted CI 5/5 на замороженном head; затем Fresh Re-review repaired subject, Fresh exact-head Verifier, Human Gate merge; NL5-001-C clean-room reproduction после merge.",
+  "blocker": null
+}
