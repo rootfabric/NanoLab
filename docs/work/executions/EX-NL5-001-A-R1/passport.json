@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-001-A-R1",
+  "work_order_id": "NL5-001-A",
+  "checkpoint": "NL5 / NL5-001-A",
+  "base_sha": "e05793cc8ff03b3b1af2d81b38e39d82cd7527d6",
+  "base_branch": "control/post-mvp-route-r1",
+  "branch": "work/nl5-001-a-release-contract-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-001-a-contract",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-001-A-R1.md",
+    "docs/work/executions/EX-NL5-001-A-R1/**",
+    "docs/release/RELEASE_CONTRACT_V0_1.md",
+    "docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md",
+    "schemas/**",
+    "scripts/release/**",
+    "examples/release/**",
+    "tests/test_release_contract.py"
+  ],
+  "parent_work_order": "NL5-001",
+  "program_reference": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B; декомпозиция A..D)",
+  "protocol": "docs/release/RELEASE_CONTRACT_V0_1.md (создаётся этим WO) + docs/DATA_CONTRACTS.md + docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md + LICENSE_POLICY.md",
+  "deliverables": [
+    "schemas/components/component-card.v1.json — нормативная схема карточки",
+    "schemas/release/rights.v1.json + schemas/release/release-manifest.v1.json",
+    "scripts/release/mini_schema.py — stdlib executor ограниченного draft-2020-12 подмножества (fail-closed)",
+    "scripts/release/card_lint.py — CLI: card/rights/manifest create/verify/package",
+    "examples/release/nanolab-components-v0.1/** — миниатюрный пример пакета: 0b (MEASURED, числа verbatim из E2 evidence) + 74b (KNOWN_GAP/NOT_MEASURED)",
+    "tests/test_release_contract.py — позитивные/негативные фикстуры",
+    "docs/release/RELEASE_CONTRACT_V0_1.md — контракт пакета",
+    "docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md — memo для owner-решения D2 (без выбора)"
+  ],
+  "started_at_utc": "2026-09-13T14:59:51Z",
+  "status": "HANDOFF_READY",
+  "corrections": [
+    {
+      "field": "program_reference",
+      "original_value": "(REDACTED-STALE-REF) docs/control/<несуществующий execution-program planning document> (§3 NL5-001-A; merge после Gate 0 PR #37); дословные исходные байты поля — в истории git этой строки до коррекции repair R1",
+      "corrected_value": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B; декомпозиция A..D)",
+      "authority": "review/nl5-001-b-r1 docs/evidence/NL5-001-B/REPAIR_MAP_R1.md (F-B5/F-A2); EX-NL5-001-B-REPAIR-R1 (repair R1)",
+      "note": "Repair R1 (F-B5/F-A2): указанный в исходном значении planning-документ не существует; durable источник планирования — POST_MVP_DEVELOPMENT_ROUTE_R1.md (Phase B, декомпозиция A..D). Исторические events не редактируются: ссылка в START-событии сохранена как факт истории и закреплена digest-пином в tests/test_release_planning_refs.py (дрейф байтов = fail). A остаётся superseded integrated B-repair (WO-NL5-001-A-R1.md)."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-13T15:34:23Z",
+  "execution_id": "EX-NL5-001-B-R1",
+  "work_order_id": "NL5-001-B",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "be73c5408bee54bc66105f0dee3e3262905eb2ad",
+  "summary": "Реализация сборки библиотеки закоммичена (be73c54). Состав: (1) contract amendment R1.1 — digest-объект: обязательны size_bytes+blob_sha1 (registry-пин), sha256 опционален вместе с sha256_status {CONTENT_VERIFIED, COMPUTED_NOT_VERIFIED, UNKNOWN}; линтер S5; поле design; запись в RELEASE_CONTRACT_V0_1.md Revision history; пример-пакет A обновлён (снапшоты схем, sha256_status, манифест перегенерирован); (2) scripts/release/build_library.py — детерминированный builder evidence->пакет: читает parametric-summary, confirmatory-summary, component-card-0b, source_pins, source-download-verification (11B/32B/53B/74B), arm-manifest-74b-failure, ENGINE_ENVIRONMENT_R1 (regex pinned commit); режим --check сверяет байт-в-байт с закоммиченным пакетом; (3) releases/nanolab-components-v0.1 — 19 файлов + манифест: family.json (варианты 0b/11b/32b/53b/74b), 5 карточек, provenance/source-digests.json, reports (family-report.md + evidence-снапшоты), protocols/README.md, reproduction (шаблоны из примера), RIGHTS/CITATION/VERSION, RELEASE_MANIFEST.json; (4) тесты: test_release_library.py (builder determinism, verbatim-числа 65.976921401/73.928725839/78.091845516/132.357787730, digest-vs-source_pins, честный гэп 74b, манифест) + S5-тесты в test_release_contract.py. Числа в карточки не вписывались вручную — только из evidence builder'ом.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 351 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.build_library check -> ok:true, problems:[]",
+    "PYTHONPATH=scripts python3 -m release.card_lint package releases/nanolab-components-v0.1 -> ok:true (1 ожидаемый D2-warning UNDECIDED)",
+    "./CONTROL_DEVELOPMENT.sh --check-consistency -> ok:true"
+  ],
+  "evidence_refs": [
+    "releases/nanolab-components-v0.1/families/dna_hinge/cards/0b.card.json",
+    "releases/nanolab-components-v0.1/families/dna_hinge/cards/74b.card.json",
+    "releases/nanolab-components-v0.1/reports/family-report.md",
+    "scripts/release/build_library.py",
+    "tests/test_release_library.py"
+  ],
+  "next_action": "IMPLEMENTER: handoff-записи (0003, evidence-map, summary) + work_cli валидации → REVIEWER.",
+  "blocker": null
+}

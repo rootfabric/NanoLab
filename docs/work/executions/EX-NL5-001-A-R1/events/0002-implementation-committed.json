@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-13T15:14:20Z",
+  "execution_id": "EX-NL5-001-A-R1",
+  "work_order_id": "NL5-001-A",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "2efbed379fce9d448ec24052724576a974ba2e05",
+  "summary": "Реализация контракта release v0.1 закоммичена (2efbed3). Состав: (1) schemas/components/component-card.v1.json — нормативная схема карточки (draft-2020-12 подмножество: идентичность family/variant, rights, claim_ceiling enum, measurement_status, protocol_pins, source_provenance с digest-объектами 40/64-hex, measured_observables с source-путями, known_gaps, reproduction, provenance; additionalProperties false); (2) schemas/release/rights.v1.json + release-manifest.v1.json; (3) scripts/release/mini_schema.py — fail-closed stdlib executor (неизвестное ключевое слово схемы = ошибка; bool/int guard; lint_schema обходит всё дерево схемы); (4) scripts/release/card_lint.py — CLI card/rights/manifest create/verify/package с семантиками S1-S4 и семейными инвариантами I1/I2 (каждый объявленный вариант имеет карточку и наоборот), exit 3 при ошибке; (5) examples/release/nanolab-components-v0.1 — миниатюрный пример: 0b (MEASURED, все числа verbatim из EX-NL3-002-SUMMARY-R1 evidence) + 74b (NOT_MEASURED/KNOWN_GAP, blocking_release=false) + RIGHTS.json (UNDECIDED_PENDING_OWNER_DECISION, warning линтера) + CITATION.cff draft + reproduction/reproduce.py (verify/plan/self-test, без физики) + RELEASE_MANIFEST.json (создан линтером); (6) tests/test_release_contract.py — 28 тестов (позитив/негатив схем, S1-S4, I1/I2, тампер-детекция манифеста, fail-closed executor, stdlib-only guard); (7) docs/release/RELEASE_CONTRACT_V0_1.md — нормативный контракт (§1-9); (8) docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md — memo D2 без выбора лицензии. Canonical файлы не менялись.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 338 tests, OK (310 existing + 28 new)",
+    "PYTHONPATH=scripts python3 -m release.card_lint package examples/release/nanolab-components-v0.1 -> ok:true (1 warning D2 UNDECIDED — ожидаемо)",
+    "./CONTROL_DEVELOPMENT.sh --check-consistency -> ok:true, frontier NL5, next NL5-001"
+  ],
+  "evidence_refs": [
+    "docs/release/RELEASE_CONTRACT_V0_1.md",
+    "docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md",
+    "schemas/components/component-card.v1.json",
+    "scripts/release/card_lint.py",
+    "examples/release/nanolab-components-v0.1/families/dna_hinge/cards/0b.card.json",
+    "tests/test_release_contract.py"
+  ],
+  "next_action": "IMPLEMENTER: handoff-записи (event 0003, evidence-map, summary) + валидации work_cli → REVIEWER.",
+  "blocker": null
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-14T14:20:30Z",
+  "execution_id": "EX-NL5-001-B-REPAIR-R1",
+  "work_order_id": "NL5-001-B-REPAIR-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "glm-implementer-repair-r1-cont",
+  "subject_sha": "af894eee96ddce7c6d6645d2f774cdd69aaaa96d",
+  "summary": "Handoff EX-NL5-001-B-REPAIR-R1. Repair scope R1 полностью реализован и гейтится зелёным: hosted-ci run 34851421528 @ af894ee — Check 1..5/5 success (включая ранее падавший Check 5 unit/package). Финальный batch 54d8e03: (F-R8.1) releases/nanolab-components-v0.1 пересобран детерминированным R1.2 builder-ом — 5 карточек value-идентичны reviewed subject (FORMAT-ONLY), wall-clock манифест заменён детерминированным без timestamp, упакованный REPRODUCTION_RULE байт-идентичен frozen doc NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE; (F-R8.2) rights-warning называет owner-гейт D2; (F-R8.3) stale-литералы несуществующего execution-program документа убраны из repair WO и паспортов A/B (corrections по F-B5, оригинал в git-истории), неизменяемое START-событие A не редактировалось — digest-pin path+sha256 в tests/test_release_planning_refs.py, дрейф=fail closed. Валидации: unittest 360 OK; builder check байт-идентичен; card_lint package ok (1 ожидаемый D2-warning); consistency/lint ok; все EX-* passports ok. Инварианты: физика не запускалась; 74b NOT_MEASURED/KNOWN_GAP; canonical не менялся; A — superseded integrated B-repair. Открытые риски: публикация пакета заблокирована D2 (лицензия, owner) + NL5-001-D; arm-manifest-v2 — будущий bounded WO.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m release.build_library_r12 build/check -> ok",
+    "python3 -m unittest discover -s tests -t . -> Ran 360 tests, OK",
+    "PYTHONPATH=scripts python3 -m release.card_lint package releases/nanolab-components-v0.1 -> ok=True",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-001-B-REPAIR-R1 -> ok",
+    "hosted-ci run 34851421528 @ af894eee96ddce7c6d6645d2f774cdd69aaaa96d -> 5/5 checks success"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-B-REPAIR-R1/summary.md",
+    "docs/work/executions/EX-NL5-001-B-REPAIR-R1/events/0002-continuation-checkpoint.json",
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json",
+    "docs/release/REPRODUCTION_RULE_V0_1.md",
+    "tests/test_release_repair_r12.py",
+    "tests/test_release_planning_refs.py"
+  ],
+  "next_action": "REVIEWER (fresh, independent): review exact HEAD repair/nl5-001-b-library-r1 (итоговый HEAD после push этого handoff; PR #38) вместе с PR #40 execution compatibility; затем Fresh Verifier и Human Gate; NL5-001-C остаётся заблокированным до pass всех трёх.",
+  "blocker": null
+}

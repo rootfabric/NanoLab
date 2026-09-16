@@ -1,0 +1,129 @@
+{
+  "files": [
+    {
+      "path": "CITATION.cff",
+      "role": "citation",
+      "sha256": "68e89b006c749d6496dd2362f673940f0d6a414da47e5db7df9ca89f0109a5d5",
+      "size_bytes": 497
+    },
+    {
+      "path": "RIGHTS.json",
+      "role": "rights",
+      "sha256": "93f8908efca1c572033b7d62b95cc1713bc1caec86524ad2d1f8506af25bafc3",
+      "size_bytes": 1575
+    },
+    {
+      "path": "VERSION",
+      "role": "metadata",
+      "sha256": "9e189c5664357eb331218b9f67531411dfe9e6c2d9e8b99411a19446571ac170",
+      "size_bytes": 10
+    },
+    {
+      "path": "families/dna_hinge/cards/0b.card.json",
+      "role": "card",
+      "sha256": "06aa9eb85cb689f3c562f0ef982ca8e1fbd427cc608bd08b6f58b1a539870f00",
+      "size_bytes": 10396
+    },
+    {
+      "path": "families/dna_hinge/cards/11b.card.json",
+      "role": "card",
+      "sha256": "d17a6533d1a9d5b255eb0e25dc21542947d8262748b7a09aef3ba77562bffb25",
+      "size_bytes": 9644
+    },
+    {
+      "path": "families/dna_hinge/cards/32b.card.json",
+      "role": "card",
+      "sha256": "66fc6ca91d9bf174449b6dc9c985d0cc476eb7cf52c7e3ec80f3be41ac6c07d3",
+      "size_bytes": 9629
+    },
+    {
+      "path": "families/dna_hinge/cards/53b.card.json",
+      "role": "card",
+      "sha256": "460a89e7606404c93c0d7c8e8ab38bbe4ae329fe26aacd7f2eb3f8567b336251",
+      "size_bytes": 9649
+    },
+    {
+      "path": "families/dna_hinge/cards/74b.card.json",
+      "role": "card",
+      "sha256": "5894f420c0ec81621955e7351cb09174b2f7eb4b8358ee63f1bf50a96ce350bb",
+      "size_bytes": 6727
+    },
+    {
+      "path": "families/dna_hinge/family.json",
+      "role": "family",
+      "sha256": "73edf747b9259614f81be5a41994cc8c65075b6c9ae66047fbcacdda12a93e98",
+      "size_bytes": 1300
+    },
+    {
+      "path": "protocols/README.md",
+      "role": "protocol",
+      "sha256": "ec2d1cf6839611e307573ffb7389fc6f110f4a9daac7b1b5d791a7e7b3273114",
+      "size_bytes": 838
+    },
+    {
+      "path": "provenance/source-digests.json",
+      "role": "provenance",
+      "sha256": "38c837ff86f17063c0006908a993c9001ab52897e21b63c5e92ac41a220db6fa",
+      "size_bytes": 5461
+    },
+    {
+      "path": "reports/evidence/confirmatory-summary.json",
+      "role": "report",
+      "sha256": "dc551eedc27007cc373f7fb299fb65f26dff0f2a3d01b4396cb5fefa4888dfdf",
+      "size_bytes": 3771
+    },
+    {
+      "path": "reports/evidence/parametric-summary.json",
+      "role": "report",
+      "sha256": "58260815a684a290e663214f6d881725dee4d761e10e8b5b3839a676df4f7b1a",
+      "size_bytes": 29408
+    },
+    {
+      "path": "reports/family-report.md",
+      "role": "report",
+      "sha256": "45358c9c51cec6a3813f2ae4c8cbdf8d36e86a2434bbbef02af8b44c454c92c9",
+      "size_bytes": 1212
+    },
+    {
+      "path": "reproduction/README.md",
+      "role": "reproduction",
+      "sha256": "c60f6c1fdd30cd9d2b08dce1bdfc9c428c3d420aba711787e32ed10a2b5625a1",
+      "size_bytes": 1994
+    },
+    {
+      "path": "reproduction/REPRODUCTION_RULE_V0_1.md",
+      "role": "reproduction",
+      "sha256": "6b70dfc26764c8a21d006824f00e485df9abec8b020e67de5a9709acea793e78",
+      "size_bytes": 4461
+    },
+    {
+      "path": "reproduction/reproduce.py",
+      "role": "reproduction",
+      "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb",
+      "size_bytes": 4407
+    },
+    {
+      "path": "schema/components/component-card.v1.json",
+      "role": "schema",
+      "sha256": "37f4f6e9a8425215f6d5550ab2647377ef75457473361165ab6b95ad089d460b",
+      "size_bytes": 7843
+    },
+    {
+      "path": "schema/release/release-manifest.v1.json",
+      "role": "schema",
+      "sha256": "69c2a3d89e501716282d1064ba9b9591113583825737552e2d4f5e2887e3cacb",
+      "size_bytes": 1827
+    },
+    {
+      "path": "schema/release/rights.v1.json",
+      "role": "schema",
+      "sha256": "80d8e419bdd61ff30fc0571aee27cbe28b7eaf175afd58b8740996dc799be8a7",
+      "size_bytes": 2509
+    }
+  ],
+  "generated_by": "release.build_library_r12 deterministic-r1.2",
+  "kind": "nanolab_release_manifest",
+  "package": "nanolab-components",
+  "package_version": "0.1.0-rc0",
+  "schema_version": 1
+}
