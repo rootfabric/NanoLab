@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-POST-MVP-ROUTE-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-POST-MVP-ROUTE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "execution-record-repair-r1",
+  "subject_sha": "50318c7b32576cf444f36a29ebd7c94a0cc38564",
+  "timestamp_utc": "2026-09-14T12:10:00Z",
+  "summary": "Reconstructed durable START marker from the already-published control execution manifest. This repair changes only execution-record shape; the original base, scope and implementation subject are unchanged."
+}
