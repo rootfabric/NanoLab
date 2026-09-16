@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "timestamp_utc": "2026-09-16T13:00:42Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "5b2d440cd41d0b68ea18d3418546846923264712",
+  "summary": "CONTINUATION (batch 1: inputs + launch): (1) upstream inputs скачаны download-on-run по exact pinned commit 23fd1ff (12 файлов: <V>.conf/<V>.top/pro_CPU.in для 0b/11b/32b/53b); все size+blob_sha1 гейты против FROZEN пинов пакета provenance/source-digests.json = PASS (12/12; sha256 для CONTENT_VERIFIED пинов сверен, для COMPUTED_NOT_VERIFIED записан); durable cache отсутствует, disposable run dir /home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1; verification record input-download-verification.json. (2) 12 run-каталогов собраны build_run_inputs.py: input.in отклоняется от author pro_CPU.in ровно по frozen deviation list (steps/seed/output names/print_conf_interval=4000/print_energy_every=100/lastconf_file/subject files), seeds = frozen fresh из WO, каждый каталог содержит byte-verified копии источников + input-build.json. (3) Инцидент окружения ДО использования каких-либо данных: первичный запуск (22:27-22:33Z local) остановлен после замера скорости, движок пересобран clean (cmake -DCMAKE_BUILD_TYPE=Release, 176 TU) — бинарь байт-идентичен исходному (sha256 45da6a50...) т.к. oxDNA CMakeLists уже задавал -O3 -ffast-math -march=native; скорость ~4 steps/s — свойство хоста (загружен сторонними сервисами), не сборки; никакие партиальные траектории не использовались. (4) Финальный запуск всех 12 прогонов параллельно (supervisor run_all.py, PID-группа, per-replica kill 20h): старт 12:45Z, на 13:00Z все на шаге 6100-6600 (~4 steps/s); ETA 150k ~10h, 200k ~13.5h — в бюджете. (5) Опубликованы tools: fetch_inputs.py / build_run_inputs.py / run_all.py / analyze_all.py (анализатор смоук-тестирован на частичной траектории: кадр 4000 шагов, угол 73.965 deg, гейты PASS). Инварианты: 74b исключён; reference seeds не используются; threshold tuning запрещён; canonical не менялся.",
+  "command_refs": [
+    "python3 docs/work/executions/EX-NL5-001-C-R1/tools/fetch_inputs.py . <run_dir> -> exit 0, 12/12 gates PASS",
+    "python3 docs/work/executions/EX-NL5-001-C-R1/tools/build_run_inputs.py . <run_dir> -> exit 0, 12 inputs",
+    "cmake -DCMAKE_BUILD_TYPE=Release + make -j48 -> rebuild_exit=0; sha256 bin/oxDNA == 45da6a50... (identical)",
+    "python3 docs/work/executions/EX-NL5-001-C-R1/tools/run_all.py <run_dir> -> 12 started 12:45Z",
+    "smoke analyze on partial traj -> frame@4000 angle_deg=73.965 valid=True"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-C-R1/tools/fetch_inputs.py",
+    "docs/work/executions/EX-NL5-001-C-R1/tools/build_run_inputs.py",
+    "docs/work/executions/EX-NL5-001-C-R1/tools/run_all.py",
+    "docs/work/executions/EX-NL5-001-C-R1/tools/analyze_all.py",
+    "releases/nanolab-components-v0.1/provenance/source-digests.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: дождаться завершения 12 прогонов (run-reports.json), затем analyze_all.py -> per-replica analyses + per-variant classification -> CONTINUATION с результатами -> Fresh Reviewer + Fresh Verifier.",
+  "blocker": null
+}
