@@ -1,0 +1,61 @@
+{
+  "execution_id": "EX-NL5-001-C-R1",
+  "kind": "nl5_001_c_campaign_classification",
+  "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+  "variants": {
+    "0b": {
+      "campaign_statistic_deg": 66.159296437,
+      "fresh_replica_medians_deg": [
+        66.159296437,
+        67.279863514,
+        65.350402836
+      ],
+      "outcome": "MATCH",
+      "reference_envelope_deg": [
+        65.095434789,
+        67.236579608
+      ]
+    },
+    "11b": {
+      "campaign_statistic_deg": 75.514562357,
+      "fresh_replica_medians_deg": [
+        75.514562357,
+        72.834291464,
+        75.636625463
+      ],
+      "outcome": "INCONCLUSIVE",
+      "reference_envelope_deg": [
+        72.165683993,
+        74.533109426
+      ]
+    },
+    "32b": {
+      "campaign_statistic_deg": 78.096569929,
+      "fresh_replica_medians_deg": [
+        78.939838677,
+        78.096569929,
+        73.050085356
+      ],
+      "outcome": "MATCH",
+      "reference_envelope_deg": [
+        77.4927314,
+        79.877463339
+      ]
+    },
+    "53b": {
+      "campaign_statistic_deg": 132.575590442,
+      "fresh_replica_medians_deg": [
+        133.109255574,
+        130.592247501,
+        132.575590442
+      ],
+      "outcome": "MATCH",
+      "reference_envelope_deg": [
+        131.049227687,
+        135.285186059
+      ]
+    }
+  },
+  "window_steps": 150000
+}
+

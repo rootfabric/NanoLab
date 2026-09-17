@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-16T12:14:43Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "6577f8bb5fcf5f97ad40fadfdbbc34e9f0c970fc",
+  "summary": "START EX-NL5-001-C-R1: clean release reproduction nanolab-components-v0.1 на subject main @ 6577f8b (NL5-001-A/B/R1.2 integrated через PR #41; fresh re-review PASS review/nl5-001-b-repair-r1 @ 8e83486, exact-head verify PASS verify/nl5-001-b-repair-r1 @ b95f5ab, hosted CI 35090409941 5/5). Протокол заморожен ДО любых результатов: WO-NL5-001-C-R1 фиксирует 12 прогонов (0b/11b/32b/53b x 3 реплики), fresh seeds (0b:[170085,157480,561483], 11b:[373439,592596,456410], 32b:[399746,801667,659403], 53b:[511532,979551,175554]; reference seeds [201004,202008,203012] не переиспользуются), engine oxDNA @ 00dc7fb9 CPU double (локальная сборка, provenance ~/nl5-001-c-env/BUILD_PROVENANCE.md), upstream inputs @ 23fd1ff7 download-on-run с size+blob_sha1 гейтами без durable cache, анализ по frozen convention (E2_OBSERVABLES_R2 + erratum R1 §2.5, detector v2 + PCA, окно t<=150000, frame gates §4 E2_PROTO_R1), классификация NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (envelope = [min,max] reference replica medians из карточек). 74b = NOT_MEASURED исключён. Бюджет: 48h wall-clock, kill на реплику 20h => FAILED_TECHNICAL. Threshold tuning после старта запрещён (hard rule).",
+  "command_refs": [
+    "git worktree add -b work/nl5-001-c-clean-reproduction-r1 <path> 6577f8bb -> ok",
+    "python3 secrets.randbelow seed draw x12 -> seeds frozen in WO-NL5-001-C-R1.md до запуска"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-001-C-R1.md",
+    "releases/nanolab-components-v0.1/families/dna_hinge/cards/",
+    "docs/release/REPRODUCTION_RULE_V0_1.md",
+    "docs/evidence/NL5-001-B/FRESH_REVIEW_REPAIR_R1.md",
+    "docs/evidence/NL5-001-B/FRESH_VERIFY_REPAIR_R1.md"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: download-on-run inputs с digest-гейтами, запуск 12 прогонов по frozen seeds, затем анализ и классификация по rule.",
+  "blocker": null
+}

@@ -1,0 +1,68 @@
+{
+  "campaign_statistic_deg": 75.514562357,
+  "card_reference": {
+    "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+    "independent_unit": "replica_median_deg",
+    "reference_campaign_statistic_deg": 74.218071238,
+    "reference_observable_estimate_deg": 73.928725839,
+    "reference_replica_envelope_deg": [
+      72.165683993,
+      74.533109426
+    ],
+    "reference_replica_medians_deg": [
+      74.218071238,
+      72.165683993,
+      74.533109426
+    ],
+    "required_fresh_replicas": 3,
+    "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+  },
+  "classification": {
+    "outcome": "INCONCLUSIVE",
+    "reason": "campaign statistic is outside the reference envelope without complete directional separation",
+    "reference_campaign_statistic_deg": 74.218071238,
+    "reference_envelope_deg": [
+      72.165683993,
+      74.533109426
+    ],
+    "reproduction_campaign_statistic_deg": 75.514562357,
+    "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+    "valid_replicas": 3
+  },
+  "fresh_replica_medians_deg": [
+    75.514562357,
+    72.834291464,
+    75.636625463
+  ],
+  "replicas": {
+    "NL5-001-C-11B-S001": {
+      "budget_abort": false,
+      "engine_exit_code": 0,
+      "frames_in_window": 37,
+      "frames_total": 50,
+      "frames_valid_in_window": 37,
+      "replica_median_deg": 75.514562357,
+      "seed": 373439
+    },
+    "NL5-001-C-11B-S002": {
+      "budget_abort": false,
+      "engine_exit_code": 0,
+      "frames_in_window": 37,
+      "frames_total": 50,
+      "frames_valid_in_window": 37,
+      "replica_median_deg": 72.834291464,
+      "seed": 592596
+    },
+    "NL5-001-C-11B-S003": {
+      "budget_abort": false,
+      "engine_exit_code": 0,
+      "frames_in_window": 37,
+      "frames_total": 50,
+      "frames_valid_in_window": 37,
+      "replica_median_deg": 75.636625463,
+      "seed": 456410
+    }
+  },
+  "variant": "11b"
+}
+

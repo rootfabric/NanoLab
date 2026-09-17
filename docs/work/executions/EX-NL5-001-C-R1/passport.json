@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "checkpoint": "NL5 / NL5-001-C clean release reproduction",
+  "base_sha": "6577f8bb5fcf5f97ad40fadfdbbc34e9f0c970fc",
+  "base_branch": "main",
+  "branch": "work/nl5-001-c-clean-reproduction-r1",
+  "worktree": "connector-managed / local CPU host (no physics executor service)",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/WO-NL5-001-C-R1.md",
+    "docs/work/executions/EX-NL5-001-C-R1/**"
+  ],
+  "parent_work_order": "NL5-001",
+  "program_reference": "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md Phase B queue: NL5-001-C clean release reproduction",
+  "protocol": "docs/work/WO-NL5-001-C-R1.md frozen protocol; classification NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (docs/release/REPRODUCTION_RULE_V0_1.md); observables docs/research/E2_OBSERVABLES_R2.md + E2_PROTO_R1.md; no physics beyond the declared 12 oxDNA runs",
+  "deliverables": [
+    "12 fresh-seed oxDNA runs (0b/11b/32b/53b x 3 replicas) with digest-gated download-on-run inputs",
+    "per-replica evidence manifests (sha256/size) and in-window replica medians",
+    "per-card classification MATCH/MISMATCH/INCONCLUSIVE per frozen envelope rule",
+    "honest FAILED_TECHNICAL/INCONCLUSIVE records if they occur"
+  ],
+  "started_at_utc": "2026-09-16T12:14:43Z",
+  "status": "RUNNING"
+}

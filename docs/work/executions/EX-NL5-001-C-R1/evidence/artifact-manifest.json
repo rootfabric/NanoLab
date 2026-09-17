@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "kind": "nl5_001_c_artifact_manifest",
+  "execution_id": "EX-NL5-001-C-R1",
+  "artifact_policy": "raw artifacts outside Git; digest+size+location recorded (provenance rule)",
+  "durable_cache": "upstream inputs REFERENCE_ONLY: disposable run dir, not archived",
+  "artifacts": {
+    "NL5-001-C-0B-S001/s001_traj.dat": {
+      "sha256": "292b194820bd17346607e2a52348559f022531e0bdc00517990d6f236492f005",
+      "size_bytes": 114706021,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/s001_traj.dat"
+    },
+    "NL5-001-C-0B-S001/s001_energy.dat": {
+      "sha256": "76e70902983ab9e2cd18706499d289176f2bc8dd0874c8fdb7b60644b1ee0eef",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/s001_energy.dat"
+    },
+    "NL5-001-C-0B-S001/s001_log.dat": {
+      "sha256": "ff3c49ba683ca8f7b257bd63ca135974b2db1efaa206852ec7e9338bd9c02b01",
+      "size_bytes": 201503,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/s001_log.dat"
+    },
+    "NL5-001-C-0B-S001/s001_last.dat": {
+      "sha256": "e201eeb02082fe369f0c573d16dbe6951547ffdee0b8e8fa1b009876d9f17af5",
+      "size_bytes": 2294140,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/s001_last.dat"
+    },
+    "NL5-001-C-0B-S001/engine_stdout.txt": {
+      "sha256": "5d3895fe844b80be53747778b998e6796da35b8d1350de12f885681a76ede889",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/engine_stdout.txt"
+    },
+    "NL5-001-C-0B-S001/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/engine_stderr.txt"
+    },
+    "NL5-001-C-0B-S001/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/exit_code.txt"
+    },
+    "NL5-001-C-0B-S001/input.in": {
+      "sha256": "b0898786c1d5b701955964a5be38eeee51ece52a203e88d15784872efc4025bc",
+      "size_bytes": 976,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/input.in"
+    },
+    "NL5-001-C-0B-S001/input-build.json": {
+      "sha256": "e52f96ed84ed100345a166f139998c452e8df1657fa749e6a6b57b5712da2857",
+      "size_bytes": 3004,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S001/input-build.json"
+    },
+    "NL5-001-C-0B-S002/s002_traj.dat": {
+      "sha256": "ba9ccc7077009a730c63b38fb24ae23e24377b0d42065ab9e96e13fcd7db7608",
+      "size_bytes": 114706153,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/s002_traj.dat"
+    },
+    "NL5-001-C-0B-S002/s002_energy.dat": {
+      "sha256": "f655826e97b6bb7868f5e723cb7570c00c44dc28942ee7252b8a56d3d79ca96b",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/s002_energy.dat"
+    },
+    "NL5-001-C-0B-S002/s002_log.dat": {
+      "sha256": "f27cdbbfb15c656d6fd85f701cf85739ffa9abdc1ac67b50cd0c30f021901621",
+      "size_bytes": 201503,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/s002_log.dat"
+    },
+    "NL5-001-C-0B-S002/s002_last.dat": {
+      "sha256": "95ee6527b70d475d01b3073f30f119c92a406d17f2ec9f5d0b44500d045eb7c2",
+      "size_bytes": 2293810,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/s002_last.dat"
+    },
+    "NL5-001-C-0B-S002/engine_stdout.txt": {
+      "sha256": "b330623b5eb9a2b2ceab39f263991b2d2f07c9c080efa808e800a77c288c42ed",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/engine_stdout.txt"
+    },
+    "NL5-001-C-0B-S002/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/engine_stderr.txt"
+    },
+    "NL5-001-C-0B-S002/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/exit_code.txt"
+    },
+    "NL5-001-C-0B-S002/input.in": {
+      "sha256": "b6a253ce0cae10ef5da9e75b2b67e686ffff167528f6091feccf39f41246196a",
+      "size_bytes": 976,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/input.in"
+    },
+    "NL5-001-C-0B-S002/input-build.json": {
+      "sha256": "79ecc434902abd9f5ef9a1a03f1f8b3964083a49da5819bd8528d75e0b0c6752",
+      "size_bytes": 3004,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S002/input-build.json"
+    },
+    "NL5-001-C-0B-S003/s003_traj.dat": {
+      "sha256": "457f77de291a9aaa6a0a7b23286ed5d004f51547c36612f8cf7c284b72ccd2cf",
+      "size_bytes": 114698306,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/s003_traj.dat"
+    },
+    "NL5-001-C-0B-S003/s003_energy.dat": {
+      "sha256": "c266ea9d2dfaad47e3558416034defae4555d217c4f210be8261b80080297ca2",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/s003_energy.dat"
+    },
+    "NL5-001-C-0B-S003/s003_log.dat": {
+      "sha256": "a672baf95e92da98079ae5bb77f7b4d21f9d16568f7aeb8960f73b1729e49ed3",
+      "size_bytes": 201517,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/s003_log.dat"
+    },
+    "NL5-001-C-0B-S003/s003_last.dat": {
+      "sha256": "e6217fb9cc8592e0e6d9cb92e498351ae41f14e27a2eed20dd3d3f6fc4341531",
+      "size_bytes": 2294006,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/s003_last.dat"
+    },
+    "NL5-001-C-0B-S003/engine_stdout.txt": {
+      "sha256": "50e34e6fa4dfabf0a417e49cc4f31cda3d4a429ee749b5d98e4ed10eb5414f36",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/engine_stdout.txt"
+    },
+    "NL5-001-C-0B-S003/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/engine_stderr.txt"
+    },
+    "NL5-001-C-0B-S003/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/exit_code.txt"
+    },
+    "NL5-001-C-0B-S003/input.in": {
+      "sha256": "a1f6a558f1df5f113d6b3da9b8cf40b4c09751158b9e604cb586ac5efc59db49",
+      "size_bytes": 976,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/input.in"
+    },
+    "NL5-001-C-0B-S003/input-build.json": {
+      "sha256": "69c87b032c16c3dcd382b1e8ab85075aafa437d89069c734093612e94b8dba12",
+      "size_bytes": 3004,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-0B-S003/input-build.json"
+    },
+    "NL5-001-C-11B-S001/s001_traj.dat": {
+      "sha256": "564bbf1b5711225b75aa52835f420e19beb2ec4b52119b0c841fcbab8c873aa6",
+      "size_bytes": 115480182,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/s001_traj.dat"
+    },
+    "NL5-001-C-11B-S001/s001_energy.dat": {
+      "sha256": "2afadd2c456c5cc12f781165ebf0af5932dab93f5a48c9be1648c8231c257562",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/s001_energy.dat"
+    },
+    "NL5-001-C-11B-S001/s001_log.dat": {
+      "sha256": "cf84103c9f444de79d05762d63bac63936b4d2a2569ecd4bcfd7d6170f0ac441",
+      "size_bytes": 201478,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/s001_log.dat"
+    },
+    "NL5-001-C-11B-S001/s001_last.dat": {
+      "sha256": "c034746c74fb9f33c6348d4fee0e578aaf5b0faa08b413bed153dbd9cecb3adc",
+      "size_bytes": 2309628,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/s001_last.dat"
+    },
+    "NL5-001-C-11B-S001/engine_stdout.txt": {
+      "sha256": "f9701a8e11c1bb3b4761e9256830fef08797b55d23390846f9e9496fc1e61a76",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/engine_stdout.txt"
+    },
+    "NL5-001-C-11B-S001/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/engine_stderr.txt"
+    },
+    "NL5-001-C-11B-S001/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/exit_code.txt"
+    },
+    "NL5-001-C-11B-S001/input.in": {
+      "sha256": "8adc10f306c9862637fd20c261d7e14ef393a79c6e2f5defccc158705b124fbc",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/input.in"
+    },
+    "NL5-001-C-11B-S001/input-build.json": {
+      "sha256": "1dce2c339fb4ac235c40c245e5703cf933211e9bf66d7a01a432302f6e85b645",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S001/input-build.json"
+    },
+    "NL5-001-C-11B-S002/s002_traj.dat": {
+      "sha256": "7c38bba80f8ce94611d9db5dc8cc6d4ed83fe0ee734ad96168640c6b1aaa6172",
+      "size_bytes": 115494038,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/s002_traj.dat"
+    },
+    "NL5-001-C-11B-S002/s002_energy.dat": {
+      "sha256": "092a6e7c0aa285db1bdb1975a8dc82fd9f65cdf0fb3d53ec40b83c58db708174",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/s002_energy.dat"
+    },
+    "NL5-001-C-11B-S002/s002_log.dat": {
+      "sha256": "64565bcca738ed63f6722b80d0333860fb6ba05f1d2e6f43367ef491a8cfeed3",
+      "size_bytes": 201529,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/s002_log.dat"
+    },
+    "NL5-001-C-11B-S002/s002_last.dat": {
+      "sha256": "8967515e424415f86dafbff3d0f05e268d433ab6f24afc166e906a8169126ed2",
+      "size_bytes": 2310083,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/s002_last.dat"
+    },
+    "NL5-001-C-11B-S002/engine_stdout.txt": {
+      "sha256": "daeccf9845e6b3891769ebe38a2297281dc8512802f0f0b51ca62b5f107447fe",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/engine_stdout.txt"
+    },
+    "NL5-001-C-11B-S002/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/engine_stderr.txt"
+    },
+    "NL5-001-C-11B-S002/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/exit_code.txt"
+    },
+    "NL5-001-C-11B-S002/input.in": {
+      "sha256": "27817dbc33abfccb585aa94d5c68956983e5c06639b9acc95ac879b5d6b88ff8",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/input.in"
+    },
+    "NL5-001-C-11B-S002/input-build.json": {
+      "sha256": "cba06ace538e0a77ed9fb21c6cdfa3287bf915b767e301a82e5f6ee497727a7d",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S002/input-build.json"
+    },
+    "NL5-001-C-11B-S003/s003_traj.dat": {
+      "sha256": "60a2f7b37c2fda221eeeb0a4ed8d64e025d5f4dae8dd893b939bfb0c984ae7cb",
+      "size_bytes": 115484165,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/s003_traj.dat"
+    },
+    "NL5-001-C-11B-S003/s003_energy.dat": {
+      "sha256": "3d9d5a3a969d25dfc3054375e959ffee12814ac253dd6bf8056d27739a28cada",
+      "size_bytes": 98049,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/s003_energy.dat"
+    },
+    "NL5-001-C-11B-S003/s003_log.dat": {
+      "sha256": "c249c2c74a54d34fcac46072123c92be6ceab95cd469c08bae435201ceb2d5ba",
+      "size_bytes": 201503,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/s003_log.dat"
+    },
+    "NL5-001-C-11B-S003/s003_last.dat": {
+      "sha256": "8a504852da97ef1d8c4fdfeba0fd6b601bd671a45849d33cb3bbd90c203ea437",
+      "size_bytes": 2309500,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/s003_last.dat"
+    },
+    "NL5-001-C-11B-S003/engine_stdout.txt": {
+      "sha256": "239875217e19f85dcd58826fd65301cba8c72b4657aa2c7dcb70d52a8ed7b3b0",
+      "size_bytes": 124062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/engine_stdout.txt"
+    },
+    "NL5-001-C-11B-S003/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/engine_stderr.txt"
+    },
+    "NL5-001-C-11B-S003/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/exit_code.txt"
+    },
+    "NL5-001-C-11B-S003/input.in": {
+      "sha256": "87be88bd7802b0a7207df382d97ef4cb0b5a959f6fb175f0aca8bc5650f08ac3",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/input.in"
+    },
+    "NL5-001-C-11B-S003/input-build.json": {
+      "sha256": "c74540d35f12bf8baf737596c3ea3bb2a5da61d8ef3d8bd311671b555d10438d",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-11B-S003/input-build.json"
+    },
+    "NL5-001-C-32B-S001/s001_traj.dat": {
+      "sha256": "c4e15e22daa6ec673bfec92f7988eeb76a2f0e4ba19ea4965a335635e8b8980c",
+      "size_bytes": 86756099,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/s001_traj.dat"
+    },
+    "NL5-001-C-32B-S001/s001_energy.dat": {
+      "sha256": "f9c8a52b04436be359f362dcc72f108b1d088baea7b62a9a957ac0b061b40775",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/s001_energy.dat"
+    },
+    "NL5-001-C-32B-S001/s001_log.dat": {
+      "sha256": "a9f4b22e88304346cbcb035629cde558e52d0fe23f33892dbbb39c1625073aa5",
+      "size_bytes": 151652,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/s001_log.dat"
+    },
+    "NL5-001-C-32B-S001/s001_last.dat": {
+      "sha256": "9e6c882df85bbe81f53e865fb54a1c6e3d95adb61991a1c247f071384a05beaf",
+      "size_bytes": 2345084,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/s001_last.dat"
+    },
+    "NL5-001-C-32B-S001/engine_stdout.txt": {
+      "sha256": "57f53956ee1daac8e8c605b3add97e2ba5feff43bf14dc1d46364e005323b56f",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/engine_stdout.txt"
+    },
+    "NL5-001-C-32B-S001/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/engine_stderr.txt"
+    },
+    "NL5-001-C-32B-S001/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/exit_code.txt"
+    },
+    "NL5-001-C-32B-S001/input.in": {
+      "sha256": "c72dd94c3e59a0bf794b1ee6d2e4c88881b97fdd9d43eeec34b21f6b17c22bd3",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/input.in"
+    },
+    "NL5-001-C-32B-S001/input-build.json": {
+      "sha256": "66888f2831bc2c23eecdc5cbf753506c751ccbf98cc0c816236824ce9d758785",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S001/input-build.json"
+    },
+    "NL5-001-C-32B-S002/s002_traj.dat": {
+      "sha256": "8c04e333be9ba1c09faec1cb08d66ffbe12c122a0f304f6b2b2060c9c4690e57",
+      "size_bytes": 86764813,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/s002_traj.dat"
+    },
+    "NL5-001-C-32B-S002/s002_energy.dat": {
+      "sha256": "135e93e29fe9eb01d52231dbb4ab10ca1046414827dd419a7a19d16debb2c8ac",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/s002_energy.dat"
+    },
+    "NL5-001-C-32B-S002/s002_log.dat": {
+      "sha256": "df1662d69bc833e4ab1cea48ff87869834824db395086edb703189d60599b34a",
+      "size_bytes": 151641,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/s002_log.dat"
+    },
+    "NL5-001-C-32B-S002/s002_last.dat": {
+      "sha256": "40d669693ca1a4649b19f080d7e2a0f8c010d6944701f318ee8e85f0e93337bb",
+      "size_bytes": 2344837,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/s002_last.dat"
+    },
+    "NL5-001-C-32B-S002/engine_stdout.txt": {
+      "sha256": "18cbd0d93ecf74bdc106f39cc3dfd874507d68142c4502197595e5acb6bd8a32",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/engine_stdout.txt"
+    },
+    "NL5-001-C-32B-S002/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/engine_stderr.txt"
+    },
+    "NL5-001-C-32B-S002/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/exit_code.txt"
+    },
+    "NL5-001-C-32B-S002/input.in": {
+      "sha256": "87fe4973fafa0e80c152bb7e8268579b05ecd8bb538ae53ea5fb1c21c889d1ed",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/input.in"
+    },
+    "NL5-001-C-32B-S002/input-build.json": {
+      "sha256": "2c2ca1158653ac7467f2e19cac7347f7edae3972152bb8482546ec194b6f797e",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S002/input-build.json"
+    },
+    "NL5-001-C-32B-S003/s003_traj.dat": {
+      "sha256": "9914effba3d76b1bb871d09eb083c5b06259bc3fe98c0cbf0a41c74f39104279",
+      "size_bytes": 86774639,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/s003_traj.dat"
+    },
+    "NL5-001-C-32B-S003/s003_energy.dat": {
+      "sha256": "9feb527b35023dcee8426012d62cd9a5131db25703efc3346bba7ffcccf7ac58",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/s003_energy.dat"
+    },
+    "NL5-001-C-32B-S003/s003_log.dat": {
+      "sha256": "da770ee4e15bbaed6b5787121e56c89ee687f73f081404fa058040de0d11f31a",
+      "size_bytes": 151627,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/s003_log.dat"
+    },
+    "NL5-001-C-32B-S003/s003_last.dat": {
+      "sha256": "10139b93f7b01d3aea08f4ea61d3f8ac6e8252a76b20e090acebce1776d340db",
+      "size_bytes": 2345668,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/s003_last.dat"
+    },
+    "NL5-001-C-32B-S003/engine_stdout.txt": {
+      "sha256": "859abf4210834b7d448ab778de2ae403f677070bb14127796bbb25b9d396ec8d",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/engine_stdout.txt"
+    },
+    "NL5-001-C-32B-S003/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/engine_stderr.txt"
+    },
+    "NL5-001-C-32B-S003/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/exit_code.txt"
+    },
+    "NL5-001-C-32B-S003/input.in": {
+      "sha256": "d88af2057dd23752ae32a7e2014012eebcb92ce082412a0a97ca261b80fd3f25",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/input.in"
+    },
+    "NL5-001-C-32B-S003/input-build.json": {
+      "sha256": "f9f4c7fbd8de08c3a4988dd1790f669536fbcc719828301bc7a4504df6469402",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-32B-S003/input-build.json"
+    },
+    "NL5-001-C-53B-S001/s001_traj.dat": {
+      "sha256": "b8225222d16635693e76832cc8a4a75102445eaadd1333285bceb645c1109594",
+      "size_bytes": 88055786,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/s001_traj.dat"
+    },
+    "NL5-001-C-53B-S001/s001_energy.dat": {
+      "sha256": "86be16fb9133ca6010497b5b1a65fe86dbbd5a52890c6942e2490aa3e53a8222",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/s001_energy.dat"
+    },
+    "NL5-001-C-53B-S001/s001_log.dat": {
+      "sha256": "e389f5d48ef5d7b8b21e7ca552d8a9924b11aad6f547094f426f0a62a0c6f1f7",
+      "size_bytes": 151714,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/s001_log.dat"
+    },
+    "NL5-001-C-53B-S001/s001_last.dat": {
+      "sha256": "ac7145ab6c87356350dcfd0a08f43ff638fe971141f6cedfd8a907eedb2740fc",
+      "size_bytes": 2379671,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/s001_last.dat"
+    },
+    "NL5-001-C-53B-S001/engine_stdout.txt": {
+      "sha256": "676dea443727543c9a7c31f2645fd5f7e7f881776662e36beba7f7af9df0a0ec",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/engine_stdout.txt"
+    },
+    "NL5-001-C-53B-S001/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/engine_stderr.txt"
+    },
+    "NL5-001-C-53B-S001/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/exit_code.txt"
+    },
+    "NL5-001-C-53B-S001/input.in": {
+      "sha256": "c589149a66312b0d498369767d36ef447f20c6d2107c53c2d6c5d32d30c74c42",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/input.in"
+    },
+    "NL5-001-C-53B-S001/input-build.json": {
+      "sha256": "7de05962df4cfa36fc6b606b350c30134e14548bec6e1bf79fc9f0b2a5d12000",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S001/input-build.json"
+    },
+    "NL5-001-C-53B-S002/s002_traj.dat": {
+      "sha256": "fa019223fdf5afe63a11f1a73e09938f65470be670e216603c8cf2600c7e7acd",
+      "size_bytes": 88044370,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/s002_traj.dat"
+    },
+    "NL5-001-C-53B-S002/s002_energy.dat": {
+      "sha256": "a9d35f72684be6ee3937041af87b0316ca76769fed854c396b7dd627c43a739f",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/s002_energy.dat"
+    },
+    "NL5-001-C-53B-S002/s002_log.dat": {
+      "sha256": "f196ea197c0d72e29766a174b3052c660d00b862cd49ee975eaed41b8d84567d",
+      "size_bytes": 151729,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/s002_log.dat"
+    },
+    "NL5-001-C-53B-S002/s002_last.dat": {
+      "sha256": "415dc74bbc97f133fbe51b988cc388ffff47dbe8b566f59c301c858528336a0c",
+      "size_bytes": 2379602,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/s002_last.dat"
+    },
+    "NL5-001-C-53B-S002/engine_stdout.txt": {
+      "sha256": "eda65bc7a612ceb04b8a63dc7b4c5dc1a460deec042b1719b20aa4ea04a263f5",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/engine_stdout.txt"
+    },
+    "NL5-001-C-53B-S002/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/engine_stderr.txt"
+    },
+    "NL5-001-C-53B-S002/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/exit_code.txt"
+    },
+    "NL5-001-C-53B-S002/input.in": {
+      "sha256": "1a2e2844e26eae354e120b4cde13454b6e630e9f9247299bb622bb158f1eadec",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/input.in"
+    },
+    "NL5-001-C-53B-S002/input-build.json": {
+      "sha256": "6caa751f68cd75326d96eac8d68b687f0eb363085220e935188db4974ffaacdb",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S002/input-build.json"
+    },
+    "NL5-001-C-53B-S003/s003_traj.dat": {
+      "sha256": "808e052d2e5c972da243c265ed617336cc6b498553554190cabfde314abe871b",
+      "size_bytes": 88046664,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/s003_traj.dat"
+    },
+    "NL5-001-C-53B-S003/s003_energy.dat": {
+      "sha256": "c683f81d36c5735d2155d37acdd49e57fb6e91873ed251a46023de01f8eeaa00",
+      "size_bytes": 73549,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/s003_energy.dat"
+    },
+    "NL5-001-C-53B-S003/s003_log.dat": {
+      "sha256": "08ebe3766e89c3bef45fb6e12b2babee5f3fb9bc1078b3cf6975eb7fec40e348",
+      "size_bytes": 151649,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/s003_log.dat"
+    },
+    "NL5-001-C-53B-S003/s003_last.dat": {
+      "sha256": "32076e2d1165b67faecaf11299e4bada17c8f8331b5c9d4d0b70aef0b2156baa",
+      "size_bytes": 2380042,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/s003_last.dat"
+    },
+    "NL5-001-C-53B-S003/engine_stdout.txt": {
+      "sha256": "49a16a134f6ada8fc44b77621c27459450d70cbb8a2ee0703955c3d319e1b9ca",
+      "size_bytes": 93062,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/engine_stdout.txt"
+    },
+    "NL5-001-C-53B-S003/engine_stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/engine_stderr.txt"
+    },
+    "NL5-001-C-53B-S003/exit_code.txt": {
+      "sha256": "194ff5bca66278888f0f00be5c7ca523d15098ece958b14952533811089f6106",
+      "size_bytes": 7,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/exit_code.txt"
+    },
+    "NL5-001-C-53B-S003/input.in": {
+      "sha256": "561effcd579b53067d2e53324021f73c9b131ade952d2cb7b6438a9835f55f4a",
+      "size_bytes": 978,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/input.in"
+    },
+    "NL5-001-C-53B-S003/input-build.json": {
+      "sha256": "4211918a974144b0469873ae56c6c923c63ab45c9b9b2f7648494bedbb57f475",
+      "size_bytes": 3015,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/NL5-001-C-53B-S003/input-build.json"
+    },
+    "run-reports.json": {
+      "sha256": "37852fde007252a73c250f04b8cdae833c56867ee61435ff10e635d379fc1de3",
+      "size_bytes": 1200,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/run-reports.json"
+    },
+    "run-reports-live.json": {
+      "sha256": "37852fde007252a73c250f04b8cdae833c56867ee61435ff10e635d379fc1de3",
+      "size_bytes": 1200,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/run-reports-live.json"
+    },
+    "input-download-verification.json": {
+      "sha256": "1c988cbdcb8e9071fa60b2cd278d8c52f45502b412c3d5232e8173e172b0653d",
+      "size_bytes": 6610,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/input-download-verification.json"
+    },
+    "run-inputs-index.json": {
+      "sha256": "f8608fa165533b16f8852ff5f81ef36e3dfdeda2b1d5dfa4374658ab4d6c3c0a",
+      "size_bytes": 1523,
+      "storage_location": "local:/home/rdpuser/nl5-001-c-env/run-EX-NL5-001-C-R1/run-inputs-index.json"
+    }
+  }
+}

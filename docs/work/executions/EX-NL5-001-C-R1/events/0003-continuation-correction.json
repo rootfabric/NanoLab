@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-continuation-correction",
+  "timestamp_utc": "2026-09-16T13:02:21Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "5b2d4408e95273b8faca8faacc2570ae45d94caf",
+  "summary": "CORRECTION to event 0002 (fact fix, no semantic change): поле subject_sha события 0002 было записано с ошибкой — полный 40-hex хвост был вписан вручную от сокращённого префикса 5b2d440 вместо копирования из live git (5b2d440cd41d0b68ea18d3418546846923264712 — несуществующий объект). Корректный subject_sha события 0002 = 5b2d4408e95273b8faca8faacc2570ae45d94caf (commit 'control(nl5-001-c): start EX-NL5-001-C-R1 - frozen protocol, seeds, budget', родитель коммита ab3574b с событием 0002), что подтверждается git log живого репозитория. Все остальные факты события 0002 (гейты входов 12/12 PASS, frozen deviations, инцидент пересборки движка с байт-идентичным результатом, запуск 12 прогонов 12:45Z, скорость ~4 steps/s, ETA в бюджете) верны и не меняются. Урок: все SHA в durable-записях копировать только из вывода git-команд, никогда не reconstruct из памяти.",
+  "command_refs": [
+    "git log --format='%H %s' -3 -> 5b2d4408e95273b8faca8faacc2570ae45d94caf (START commit, подтверждён live)",
+    "git rev-parse 5b2d440cd41d0b68ea18d3418546846923264712 -> not a valid object name (подтверждение ошибки в 0002)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-C-R1/events/0002-continuation-checkpoint.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: продолжать наблюдение 12 прогонов; анализ по завершении (analyze_all.py).",
+  "blocker": null
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-handoff-completed",
+  "timestamp_utc": "2026-09-17T02:52:00Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "ebaedcfbf81c60ed54d7da3103f17c5b700f25be",
+  "summary": "HANDOFF EX-NL5-001-C-R1 (END_EXECUTION): clean release reproduction нанolab-components-v0.1 выполнена полностью по frozen протоколу — 12/12 прогонов engine exit=0 без budget abort; все входы digest-gated (12/12 PASS); анализ в окне t<=150000 (37/37 valid кадров на каждую реплику); классификация по NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE: 0b MATCH, 11b INCONCLUSIVE, 32b MATCH, 53b MATCH. Technical outcome: COMPLETED. Scientific outcome: результаты классификации зарегистрированы как facts; интерпретация INCONCLUSIVE 11b — открытый пункт для review (не PASS и не скрывается; консервативная промежуточная область правила с 3 reference репликами). Открытые риски: (1) 11b INCONCLUSIVE требует независимой интерпретации и решения о (не)запуске additional replicas только через новый protocol revision (change после просмотра данных без новой revision запрещён); (2) merge решений по ветке — Human Gate. Evidence: см. evidence_refs; raw-артефакты за manifest (sha256) в disposable run dir вне Git. Exact HEAD/TREE ветки work/nl5-001-c-clean-reproduction-r1 — см. push; PR не открывался (создание draft PR возможно через выданный токен при необходимости CI-гейта merge).",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-001-C-R1 -> ok",
+    "git push origin work/nl5-001-c-clean-reproduction-r1 -> ok (нелинейно: см. live ref)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-C-R1/summary.md",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/campaign-summary.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/artifact-manifest.json",
+    "docs/work/executions/EX-NL5-001-C-R1/events/0005-validation-recorded.json"
+  ],
+  "next_action": "REVIEWER (fresh, independent): review exact HEAD work/nl5-001-c-clean-reproduction-r1 (результаты NL5-001-C, классификации, evidence); затем Fresh Verifier; затем Human Gate merge. NL5-001-D (release candidate) и NL5-002 — после acceptance.",
+  "blocker": null
+}
