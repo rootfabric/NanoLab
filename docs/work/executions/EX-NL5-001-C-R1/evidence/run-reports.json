@@ -1,0 +1,62 @@
+{
+  "NL5-001-C-53B-S001": {
+    "exit_code": 0,
+    "wall_s": 35793.5,
+    "budget_abort": false
+  },
+  "NL5-001-C-53B-S002": {
+    "exit_code": 0,
+    "wall_s": 36063.8,
+    "budget_abort": false
+  },
+  "NL5-001-C-53B-S003": {
+    "exit_code": 0,
+    "wall_s": 36213.9,
+    "budget_abort": false
+  },
+  "NL5-001-C-32B-S002": {
+    "exit_code": 0,
+    "wall_s": 38015.6,
+    "budget_abort": false
+  },
+  "NL5-001-C-32B-S001": {
+    "exit_code": 0,
+    "wall_s": 38225.8,
+    "budget_abort": false
+  },
+  "NL5-001-C-32B-S003": {
+    "exit_code": 0,
+    "wall_s": 38526.1,
+    "budget_abort": false
+  },
+  "NL5-001-C-11B-S003": {
+    "exit_code": 0,
+    "wall_s": 49246.1,
+    "budget_abort": false
+  },
+  "NL5-001-C-0B-S002": {
+    "exit_code": 0,
+    "wall_s": 49906.8,
+    "budget_abort": false
+  },
+  "NL5-001-C-11B-S002": {
+    "exit_code": 0,
+    "wall_s": 50026.9,
+    "budget_abort": false
+  },
+  "NL5-001-C-11B-S001": {
+    "exit_code": 0,
+    "wall_s": 50147.0,
+    "budget_abort": false
+  },
+  "NL5-001-C-0B-S003": {
+    "exit_code": 0,
+    "wall_s": 50267.1,
+    "budget_abort": false
+  },
+  "NL5-001-C-0B-S001": {
+    "exit_code": 0,
+    "wall_s": 50657.5,
+    "budget_abort": false
+  }
+}

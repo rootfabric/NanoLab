@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-validation-recorded",
+  "timestamp_utc": "2026-09-17T02:47:28Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "ebaedcfbf81c60ed54d7da3103f17c5b700f25be",
+  "summary": "VALIDATION (analysis + classification по frozen rule, применяется после всех прогонов, без какого-либо threshold tuning): analyze_all.py обработал 12 реплик (окно t<=150000: по 37 кадров на реплику, все valid для всех 12 реплик; frame gates lbf<=0.1078 / pf_v2>=0.50 / disp<=20.0; detector v2 mutual-nearest + PCA, erratum R1 §2.5; bootstrap 10000/seed 424242 — descriptive only). Классификация NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (classify() из scripts/release/reproduction_rule.py, reference medians из карточек): 0b MATCH — campaign 66.159296437 deg внутри envelope [65.095434789, 67.236579608], реплики [66.159296437, 67.279863514, 65.350402836]; 11b INCONCLUSIVE — campaign 75.514562357 вне envelope [72.165683993, 74.533109426], но без полной directional separation (реплика S002 72.834291464 ниже ref_max; S001/S003 75.514562357/75.636625463 выше ref_min), промежуточная область INCONCLUSIVE — консервативный исход по frozen rule, сохраняется как есть; 32b MATCH — campaign 78.096569929 внутри [77.4927314, 79.877463339], реплики [78.939838677, 78.096569929, 73.050085356] (одна реплика 73.05 ниже envelope, campaign statistic внутри); 53b MATCH — campaign 132.575590442 внутри [131.049227687, 135.285186059], реплики [133.109255574, 130.592247501, 132.575590442]. Итог кампании: 3 MATCH + 1 INCONCLUSIVE; научная интерпретация и acceptance — не в этом событии; negative/inconclusive результат 11b сохраняется как durable fact. Инварианты: engine exit=0 все 12; 74b NOT_MEASURED не тронут; никаких изменений acceptance criteria.",
+  "command_refs": [
+    "python3 tools/analyze_all.py <run_dir> -> exit 0 (12 replica analyses + 4 classifications + campaign-summary.json)",
+    "classification-11b.json: outcome=INCONCLUSIVE, reason='campaign statistic is outside the reference envelope without complete directional separation'",
+    "classification-0b/32b/53b.json: outcome=MATCH"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/campaign-summary.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/classification-0b.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/classification-11b.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/classification-32b.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/classification-53b.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/NL5-001-C-0B-S001-analysis.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/NL5-001-C-11B-S001-analysis.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/NL5-001-C-32B-S001-analysis.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/NL5-001-C-53B-S001-analysis.json"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + handoff; затем Fresh Reviewer + Fresh Verifier результатов; Human Gate merge.",
+  "blocker": null
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-checkpoint",
+  "timestamp_utc": "2026-09-17T02:45:00Z",
+  "execution_id": "EX-NL5-001-C-R1",
+  "work_order_id": "NL5-001-C-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-001-c-director-operator",
+  "subject_sha": "ebaedcfbf81c60ed54d7da3103f17c5b700f25be",
+  "summary": "CONTINUATION (batch 2: execution complete): все 12 прогонов завершены engine exit=0, без budget abort (лимит 20h/реплику не достигнут). Wall-clock: 53B ~35.8-36.2ks (~9.9-10.1h), 32B ~38.0-38.5ks (~10.6-10.7h), 11B ~49.2-50.1ks (~13.7-13.9h), 0B ~49.9-50.7ks (~13.9-14.1h); supervisor run_all.py engine_ok=True. Raw-артефакты (traj/energy/log/lastconf, stdout/stderr, exit codes) находятся в disposable run dir вне Git и зафиксированы artifact-manifest.json (112 записей sha256+size+location, missing=0). input-download-verification.json и run-reports.json скопированы в evidence. Инварианты: 74b не запускался; reference seeds не использовались; threshold tuning отсутствовал.",
+  "command_refs": [
+    "run_all.py supervisor -> all done; engine_ok = True (12/12 exit=0, budget_abort=false)",
+    "artifact_manifest.py -> 112 entries, missing: none"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/artifact-manifest.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/run-reports.json",
+    "docs/work/executions/EX-NL5-001-C-R1/evidence/input-download-verification.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: анализ + классификация (analyze_all.py), затем VALIDATION_RECORDED и handoff.",
+  "blocker": null
+}
