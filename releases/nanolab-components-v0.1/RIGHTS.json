@@ -2,7 +2,7 @@
   "items": [
     {
       "derived_results_publishable": true,
-      "notes": "карточки, family.json и reproduction-материалы — производные результаты NanoLab; upstream-файлы в пакет не включены; собственная лицензия — ожидание owner-решения D2",
+      "notes": "карточки и family.json — собственные производные результаты NanoLab под CC-BY-4.0; reproduction-код NanoLab — Apache-2.0; upstream-файлы в пакет не включены и не перелицензируются",
       "path": "families/**",
       "redistribution": "ALLOWED",
       "rights_mode": "MIXED"
@@ -18,17 +18,17 @@
     },
     {
       "derived_results_publishable": true,
-      "notes": "собственные отчёты и evidence-снапшоты NanoLab; лицензия — ожидание owner-решения D2",
+      "notes": "собственные отчёты и evidence-снапшоты NanoLab публикуются под CC-BY-4.0",
       "path": "reports/**",
       "redistribution": "ALLOWED",
       "rights_mode": "OWN"
     }
   ],
   "kind": "nanolab_components_rights",
-  "own_code_license": "UNDECIDED_PENDING_OWNER_DECISION",
-  "own_docs_data_license": "UNDECIDED_PENDING_OWNER_DECISION",
+  "own_code_license": "Apache-2.0",
+  "own_docs_data_license": "CC-BY-4.0",
   "package": "nanolab-components",
-  "package_version": "0.1.0-rc0",
+  "package_version": "0.1.0",
   "policy": {
     "download_on_run": true,
     "durable_cache": "FORBIDDEN"
