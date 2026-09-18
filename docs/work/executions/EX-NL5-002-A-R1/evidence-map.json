@@ -5,7 +5,7 @@
   "work_order_id": "NL5-002-A",
   "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
   "branch": "work/nl5-002-a-protocol-freeze-r1",
-  "head_sha": "TO_BE_FILLED_AT_FINAL_COMMIT",
+  "head_sha": "2108ea795588c1a5f3492d3a6f4788e695a32834 (deliverables commit; bookkeeping-записи точных значений — отдельным commit поверх, deliverables не меняет)",
   "claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION",
   "scientific_outcome": "NOT_EVALUATED",
   "execution_outcome": "COMPLETED",

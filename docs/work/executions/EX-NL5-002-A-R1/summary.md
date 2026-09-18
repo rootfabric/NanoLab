@@ -26,7 +26,10 @@
 
 ## Exact HEAD/TREE
 
-Фиксируются в evidence-map.json после финального commit этого WO.
+- Deliverables commit: `2108ea795588c1a5f3492d3a6f4788e695a32834`
+- Deliverables tree: `a83a6d5aa04b9f43fcd48bf56cadf9a584fc390b`
+- Bookkeeping-записи (эта правка, evidence-map head_sha) идут отдельным commit
+  поверх и содержимого deliverables не меняют.
 
 ## Open risks (предсказаны до данных; executor'у не передаются)
 
