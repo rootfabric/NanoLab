@@ -189,7 +189,9 @@ def _postprocess(root: Path) -> None:
     rule_target = root / "reproduction" / "REPRODUCTION_RULE_V0_1.md"
     rule_target.write_bytes(RULE_DOC.read_bytes())
 
-    _finalize_release_metadata(root)\n\n    manifest = card_lint.manifest_create(root, generated_by="release.build_library_r12 deterministic-r1.2")
+    _finalize_release_metadata(root)
+
+    manifest = card_lint.manifest_create(root, generated_by="release.build_library_r12 deterministic-r1.2")
     _write_json(root / card_lint.MANIFEST_NAME, manifest)
 
 
