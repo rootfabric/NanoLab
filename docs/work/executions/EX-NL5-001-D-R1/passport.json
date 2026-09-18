@@ -13,6 +13,7 @@
     "LICENSE_POLICY.md",
     "docs/control/NL5_001_D_LICENSE_DECISION_R1.md",
     "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "scripts/release/build_library_r12.py",
     "releases/nanolab-components-v0.1/RIGHTS.json",
     "releases/nanolab-components-v0.1/CITATION.cff",
     "releases/nanolab-components-v0.1/VERSION",
