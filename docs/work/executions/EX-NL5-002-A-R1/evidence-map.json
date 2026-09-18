@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "execution_id": "EX-NL5-002-A-R1",
+  "work_order_id": "NL5-002-A",
+  "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "branch": "work/nl5-002-a-protocol-freeze-r1",
+  "head_sha": "TO_BE_FILLED_AT_FINAL_COMMIT",
+  "claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION",
+  "scientific_outcome": "NOT_EVALUATED",
+  "execution_outcome": "COMPLETED",
+  "items": [
+    {
+      "path": "docs/work/WO-NL5-002-A-R1.md",
+      "role": "FROZEN_PROTOCOL",
+      "notes": "Полный протокол external reproduction + Appendix A (executor-facing, self-contained) + classification mapping + risks R1-R3 frozen-before-data"
+    },
+    {
+      "path": "docs/work/templates/EXTERNAL_REPRO_REPORT_TEMPLATE_R1.md",
+      "role": "FROZEN_REPORT_TEMPLATE",
+      "notes": "Обязательный формат external execution report (Appendix B)"
+    },
+    {
+      "path": "docs/work/executions/EX-NL5-002-A-R1/events/0001-work-order-started.json",
+      "role": "START_RECORD"
+    },
+    {
+      "path": "docs/work/executions/EX-NL5-002-A-R1/events/0002-implementation-committed.json",
+      "role": "IMPLEMENTATION_RECORD"
+    },
+    {
+      "path": "docs/work/executions/EX-NL5-002-A-R1/events/0003-handoff-completed.json",
+      "role": "HANDOFF_RECORD"
+    },
+    {
+      "path": "docs/work/executions/EX-NL5-002-A-R1/summary.md",
+      "role": "SUMMARY"
+    }
+  ],
+  "validation": [
+    "appendixA_self_contained_grep_clean",
+    "package_pins_from_main_48c55b3",
+    "no_protocol_change_after_dispatch (policy)"
+  ],
+  "next_role": "ORCHESTRATOR/DIRECTOR: dispatch EX-NL5-002-B (fresh external executor)"
+}
