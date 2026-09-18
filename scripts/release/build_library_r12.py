@@ -26,6 +26,22 @@ PKG_ROOT = legacy.PKG_ROOT
 RULE_DOC = REPO_ROOT / "docs" / "release" / "REPRODUCTION_RULE_V0_1.md"
 CARD_0B_EVIDENCE = legacy.CARD_0B_EVIDENCE
 PARAM_SUMMARY = legacy.PARAM_SUMMARY
+FINAL_VERSION = "0.1.0"
+FINAL_CODE_LICENSE = "Apache-2.0"
+FINAL_DOCS_DATA_LICENSE = "CC-BY-4.0"
+FINAL_CITATION_CFF = """cff-version: 1.2.0
+message: "If you use this component library, please cite it and the upstream scientific sources referenced in RIGHTS.json."
+title: "NanoLab Component Library (nanolab-components)"
+version: "0.1.0"
+date-released: 2026-09-18
+license: Apache-2.0
+authors:
+  - name: "NanoLab project"
+keywords:
+  - DNA nanomechanics
+  - component library
+  - reproducibility
+"""
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -130,6 +146,27 @@ def _repair_parametric(card: dict[str, Any], variant: str, param: dict[str, Any]
     )
 
 
+def _finalize_release_metadata(root: Path) -> None:
+    """Apply owner decision D2 without touching scientific/card content."""
+    rights_path = root / "RIGHTS.json"
+    rights = _read_json(rights_path)
+    rights["package_version"] = FINAL_VERSION
+    rights["own_code_license"] = FINAL_CODE_LICENSE
+    rights["own_docs_data_license"] = FINAL_DOCS_DATA_LICENSE
+    for item in rights["items"]:
+        if item["path"] == "families/**":
+            item["notes"] = (
+                "карточки и family.json — собственные производные результаты NanoLab под CC-BY-4.0; "
+                "reproduction-код NanoLab — Apache-2.0; upstream-файлы в пакет не включены и не перелицензируются"
+            )
+        elif item["path"] == "reports/**":
+            item["notes"] = "собственные отчёты и evidence-снапшоты NanoLab публикуются под CC-BY-4.0"
+    _write_json(rights_path, rights)
+
+    (root / "VERSION").write_text(FINAL_VERSION + "\n", encoding="utf-8")
+    (root / "CITATION.cff").write_text(FINAL_CITATION_CFF, encoding="utf-8")
+
+
 def _postprocess(root: Path) -> None:
     evidence_0b = _read_json(CARD_0B_EVIDENCE)
     param = _read_json(PARAM_SUMMARY)
@@ -151,6 +188,8 @@ def _postprocess(root: Path) -> None:
 
     rule_target = root / "reproduction" / "REPRODUCTION_RULE_V0_1.md"
     rule_target.write_bytes(RULE_DOC.read_bytes())
+
+    _finalize_release_metadata(root)
 
     manifest = card_lint.manifest_create(root, generated_by="release.build_library_r12 deterministic-r1.2")
     _write_json(root / card_lint.MANIFEST_NAME, manifest)

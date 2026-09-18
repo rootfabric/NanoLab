@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-001-D-R1",
+  "work_order_id": "NL5-001-D-R1",
+  "checkpoint": "NL5",
+  "base_sha": "bc9ad8c5a10e482ea380a03b6fe30aed2cac451e",
+  "branch": "control/nl5-001-d-license-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "LICENSE",
+    "LICENSE-DOCS-DATA.md",
+    "LICENSE_POLICY.md",
+    "docs/control/NL5_001_D_LICENSE_DECISION_R1.md",
+    "docs/research/DEPENDENCY_LICENSE_MATRIX.md",
+    "scripts/release/build_library_r12.py",
+    "releases/nanolab-components-v0.1/RIGHTS.json",
+    "releases/nanolab-components-v0.1/CITATION.cff",
+    "releases/nanolab-components-v0.1/VERSION",
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json",
+    "docs/work/WO-NL5-001-D-R1.md",
+    "docs/work/executions/EX-NL5-001-D-R1/**"
+  ],
+  "started_at_utc": "2026-09-18T10:31:00Z",
+  "status": "HANDOFF_READY"
+}

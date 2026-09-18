@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this component library, please cite it and the upstream scientific sources referenced in RIGHTS.json."
 title: "NanoLab Component Library (nanolab-components)"
-version: "0.1.0-rc0"
-# DRAFT package: license/authors/date-released are filled at publication (NL5-001-D)
-# after the owner license decision (program D2). Not a publication artifact yet.
+version: "0.1.0"
+date-released: 2026-09-18
+license: Apache-2.0
 authors:
   - name: "NanoLab project"
 keywords:

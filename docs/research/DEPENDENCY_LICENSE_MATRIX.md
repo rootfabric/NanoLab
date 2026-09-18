@@ -68,7 +68,7 @@ NO_VENDORING_YET    — GPL-код не вендорится в дерево Nan
 - Ax/BoTorch — planned только; в E1 не входит (подтверждает формулировку NL0-001).
 - `VENDOR_NOT_RECOMMENDED` для GPL-кода в дереве NanoLab — консервативная проектная политика до решения владельца/legal review, а не утверждение о юридической невозможности; режим доступа — pip/build/dependency.
 
-## 3. Варианты лицензии NanoLab (решение за владельцем, агент не назначает)
+## 3. Варианты лицензии NanoLab (исторические варианты; D2 принят)
 
 | Option | Код | Ключевые последствия |
 |---|---|---|
@@ -80,7 +80,7 @@ NO_VENDORING_YET    — GPL-код не вендорится в дерево Nan
 
 Принципиально: **лицензия NanoLab ≠ лицензии сторонних научных входов**. Собственная лицензия не легализует ни E2-файлы (UNKNOWN), ни S08-материалы (ACS copyright), ни NANOBASE-записи. Выбор permissive Option A/B не запрещает вендоринг GPLv3-fixtures автоматически и не разрешает его автоматически: вендоринг — архитектурное решение (`REQUIRES_OWNER_DECISION`, при нестандартной структуре — `REQUIRES_LEGAL_REVIEW`); текущая безопасная политика — `NO_VENDORING_YET`.
 
-Рекомендация (не решение): Apache-2.0 (A) для кода + CC BY 4.0 для документации — лучший баланс patent-grant/permissiveness для заявленной миссии; окончательный выбор — владелец.
+**OWNER_DECISION D2 (2026-09-18):** код NanoLab = `Apache-2.0`; документация и NanoLab-owned derived data/results = `CC-BY-4.0`. Решение зафиксировано в `docs/control/NL5_001_D_LICENSE_DECISION_R1.md`. Оно не меняет лицензии и rights mode сторонних/upstream материалов.
 
 ## 4. Citation policy (научная атрибуция; отдельно от license obligations)
 
