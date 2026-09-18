@@ -3,20 +3,20 @@
     {
       "path": "CITATION.cff",
       "role": "citation",
-      "sha256": "68e89b006c749d6496dd2362f673940f0d6a414da47e5db7df9ca89f0109a5d5",
-      "size_bytes": 497
+      "sha256": "27046a10719d37f80cf7ceac39f5579b813158ebe496d08567c843d0cfa62433",
+      "size_bytes": 373
     },
     {
       "path": "RIGHTS.json",
       "role": "rights",
-      "sha256": "93f8908efca1c572033b7d62b95cc1713bc1caec86524ad2d1f8506af25bafc3",
-      "size_bytes": 1575
+      "sha256": "5292781ac4448112b3f3ecdaa47aede3f6539f8a68c357808e28dc896fa9bebf",
+      "size_bytes": 1511
     },
     {
       "path": "VERSION",
       "role": "metadata",
-      "sha256": "9e189c5664357eb331218b9f67531411dfe9e6c2d9e8b99411a19446571ac170",
-      "size_bytes": 10
+      "sha256": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67",
+      "size_bytes": 6
     },
     {
       "path": "families/dna_hinge/cards/0b.card.json",
@@ -124,6 +124,6 @@
   "generated_by": "release.build_library_r12 deterministic-r1.2",
   "kind": "nanolab_release_manifest",
   "package": "nanolab-components",
-  "package_version": "0.1.0-rc0",
+  "package_version": "0.1.0",
   "schema_version": 1
 }
