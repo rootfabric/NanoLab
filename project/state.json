@@ -3,7 +3,7 @@
   "kind": "project_state",
   "foundation": "DOCUMENTED",
   "frontier": "NL5",
-  "next_work_order": "NL5-001",
+  "next_work_order": "NL5-002",
   "completed_tasks": [
     "NL0-001",
     "NL0-002",
@@ -17,7 +17,8 @@
     "NL3-002",
     "NL4-001",
     "NL4-002",
-    "NL4-003"
+    "NL4-003",
+    "NL5-001"
   ],
   "active_tasks": [],
   "task_status": {
@@ -34,8 +35,8 @@
     "NL4-001": "ACCEPTED",
     "NL4-002": "ACCEPTED",
     "NL4-003": "ACCEPTED",
-    "NL5-001": "READY",
-    "NL5-002": "PLANNED",
+    "NL5-001": "ACCEPTED",
+    "NL5-002": "READY",
     "NL6-001": "PLANNED",
     "NL6-002": "PLANNED",
     "NL7-001": "PLANNED",
@@ -68,9 +69,7 @@
     "external_reproductions": 0,
     "paid_compute_authorized": false
   },
-  "open_decisions": [
-    "NanoLab code/documentation/data license choice (owner decision)"
-  ],
+  "open_decisions": [],
   "github_tracking": {
     "roadmap_issue": 1,
     "task_issues": {

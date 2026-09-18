@@ -1,6 +1,6 @@
 # Дорожная карта NanoLab
 
-**Текущий frontier: `NL5` — библиотека компонентов и release-пакет; следующая работа `NL5-001`. `NL0–NL4` приняты целиком (NL4 = AI NanoLab MVP COMPLETE); статусы экспериментов: `E0 = RUN`, `E1 = SUPPORTED`, `E2 = RUN`, `E3 = RUN` (первый benchmark завершён честным negative-on-AI-advantage результатом; 74b остаётся honest gap до arm-manifest-v2).** Актуальные статусы хранятся в [state.json](../project/state.json), зависимости работ — в [plan.json](../project/plan.json), post-MVP решение — в [POST_MVP_DEVELOPMENT_ROUTE_R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), сводка приёмок — в [WORK_QUEUE](work/WORK_QUEUE.md). Сроки и стоимость устанавливаются по измерениям, а не по обещанию ускорения от ИИ.
+**Текущий frontier: `NL5` — внешнее воспроизведение release-пакета; следующая работа `NL5-002`. `NL0–NL4` приняты целиком (NL4 = AI NanoLab MVP COMPLETE); `NL5-001` принят (2026-09-18): опубликован пакет `nanolab-components 0.1.0` с финализированными лицензиями (код Apache-2.0; docs/data CC-BY-4.0; сторонние права не перелицензованы) и clean reproduction классификацией 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b honest gap до arm-manifest-v2; статусы экспериментов: `E0 = RUN`, `E1 = SUPPORTED`, `E2 = RUN`, `E3 = RUN` (честный negative-on-AI-advantage).** Актуальные статусы хранятся в [state.json](../project/state.json), зависимости работ — в [plan.json](../project/plan.json), post-MVP решение — в [POST_MVP_DEVELOPMENT_ROUTE_R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), сводка приёмок — в [WORK_QUEUE](work/WORK_QUEUE.md). Сроки и стоимость устанавливаются по измерениям, а не по обещанию ускорения от ИИ.
 
 ```text
 NL0  Научная постановка и доступные эталоны
@@ -62,23 +62,20 @@ NL8      specialized nanomachine study
 
 ## Ближайший план действий
 
-### 1. Завершить control/release hygiene
+### 1. Control/release hygiene (текущее состояние)
 
-- синхронизировать `project/state.json` после NL4;
-- сохранить `NL5-001 = READY` без duplicate key;
-- до публичного release получить owner decision по лицензии NanoLab;
+- `project/state.json` синхронизирован: `NL5-001 = ACCEPTED`, `next = NL5-002`, лицензионное open decision закрыто (D2);
+- owner decision по лицензии получен 2026-09-18 (D2): код Apache-2.0; документация + derived data CC-BY-4.0; сторонние права не перелицензованы;
 - stale PR/старые control surfaces закрывать или supersede отдельным housekeeping решением;
 - protection/required checks для `main` усилить отдельным bounded control/infra WO.
 
-### 2. NL5-001 — component library v0.1
+### 2. NL5-001 — component library v0.1 (ВЫПОЛНЕНО и ПРИНЯТО, 2026-09-18)
 
-Release должен включать machine-readable schema, family/variant cards, protocols, reports, provenance, reproduction, rights, citation/version и release manifest. Первое DNA hinge family публикуется как **одно семейство с измеренными вариантами**, а не как несколько независимых компонентов.
+Release `nanolab-components 0.1.0` включает machine-readable schema, family/variant cards, protocols, reports, provenance, reproduction, rights, citation/version и детерминированный release manifest. Первое DNA hinge family опубликовано как **одно семейство с измеренными вариантами**; clean reproduction: 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b `KNOWN_GAP / NOT_MEASURED` — честное состояние v0.1 (arm-manifest-v2 — отдельный будущий WO).
 
-`74b` не должен бесконечно блокировать release: малый bounded `arm-manifest-v2` repair можно включить; иначе `KNOWN_GAP / NOT_MEASURED` остаётся честным состоянием v0.1.
+### 3. NL5-002 — external reproduction (СЛЕДУЮЩАЯ)
 
-### 3. NL5-002 — external reproduction
-
-Повторить release package из fresh environment без внутренних авторских допущений; сохранить команды, версии, digests, numerical/statistical deviations, failures и независимость executor/reviewer. Приёмка NL5 требует хотя бы одного такого воспроизведения.
+Независимый внешний executor повторяет release package `nanolab-components 0.1.0` из fresh environment, стартуя только с опубликованного пакета (без внутренних авторских допущений); сохранить команды, версии, digests, numerical/statistical deviations, failures и независимость executor/reviewer. Приёмка NL5 требует хотя бы одного такого воспроизведения.
 
 ### 4. Параллельно INFRA2 → INFRA3
 
