@@ -25,6 +25,7 @@ Remove the D2 publication blocker and finalize the v0.1 release metadata without
 - `LICENSE_POLICY.md`
 - `docs/control/NL5_001_D_LICENSE_DECISION_R1.md`
 - `docs/research/DEPENDENCY_LICENSE_MATRIX.md`
+- `scripts/release/build_library_r12.py`
 - `releases/nanolab-components-v0.1/RIGHTS.json`
 - `releases/nanolab-components-v0.1/CITATION.cff`
 - `releases/nanolab-components-v0.1/VERSION`
@@ -38,9 +39,10 @@ Remove the D2 publication blocker and finalize the v0.1 release metadata without
 2. Apache-2.0 license for NanoLab code.
 3. CC BY 4.0 notice for NanoLab docs/own derived data.
 4. RIGHTS/CITATION/VERSION synchronized with the decision.
-5. Deterministic release manifest refreshed after metadata changes.
-6. Validation evidence and handoff for Fresh Reviewer + Verifier.
-7. No change to 0b/11b/32b/53b/74b scientific facts or NL5-001-C evidence.
+5. Normative R1.2 builder emits the finalized metadata deterministically.
+6. Deterministic release manifest refreshed after metadata changes.
+7. Validation evidence and handoff for Fresh Reviewer + Verifier.
+8. No change to 0b/11b/32b/53b/74b scientific facts or NL5-001-C evidence.
 
 ## Validation
 
