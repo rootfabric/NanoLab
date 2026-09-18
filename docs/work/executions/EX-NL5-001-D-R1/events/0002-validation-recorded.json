@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "timestamp_utc": "2026-09-18T10:46:00Z",
+  "execution_id": "EX-NL5-001-D-R1",
+  "work_order_id": "NL5-001-D-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "50aee77760e73e8399a703566fd3bb0082dc9fbd",
+  "summary": "Owner D2 implementation validated on exact substantive subject. Hosted CI run 35336208105 passed all 5 gates; unit suite 360/360 OK. Deterministic full-package rebuild including RELEASE_MANIFEST passed, package lint passed, committed manifest exact test passed, 74b known gap and all prior scientific/reproduction tests remained green.",
+  "command_refs": [
+    "hosted-ci run 35336208105 -> SUCCESS",
+    "Check 1/5 JSON syntax -> PASS",
+    "Check 2/5 control consistency -> PASS",
+    "Check 3/5 execution passports/events -> PASS",
+    "Check 4/5 workflow negative-control lint -> PASS",
+    "Check 5/5 unittest -> Ran 360 tests, OK"
+  ],
+  "evidence_refs": [
+    "docs/control/NL5_001_D_LICENSE_DECISION_R1.md",
+    "LICENSE",
+    "LICENSE-DOCS-DATA.md",
+    "releases/nanolab-components-v0.1/RIGHTS.json",
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json"
+  ],
+  "next_action": "IMPLEMENTER: publish terminal handoff for fresh independent Reviewer and exact-head Verifier; no merge.",
+  "blocker": null
+}
