@@ -1,0 +1,8 @@
+NanoLab Source Code License
+
+Except where otherwise noted and excluding third-party/upstream materials, NanoLab source code is licensed under the Apache License, Version 2.0.
+
+SPDX-License-Identifier: Apache-2.0
+License terms: https://www.apache.org/licenses/LICENSE-2.0
+
+Third-party dependencies, scientific inputs, fixtures, articles, designs, data, and other upstream materials are not relicensed by this file. Their own licenses and rights declarations continue to apply; see LICENSE_POLICY.md and the release RIGHTS.json files.
