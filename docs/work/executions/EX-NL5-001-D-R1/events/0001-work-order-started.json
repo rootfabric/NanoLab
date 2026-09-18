@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-18T10:31:00Z",
+  "execution_id": "EX-NL5-001-D-R1",
+  "work_order_id": "NL5-001-D-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bc9ad8c5a10e482ea380a03b6fe30aed2cac451e",
+  "summary": "Started bounded NL5-001-D release-license finalization from exact canonical main. Owner decision D2 is explicit: NanoLab code Apache-2.0; NanoLab documentation and own derived data/results CC-BY-4.0. Third-party/upstream rights remain unchanged; E2 inputs stay REFERENCE_ONLY/download-on-run and are not relicensed. Scope is release/legal metadata only; no scientific outputs, thresholds, classifications, raw evidence, or canonical project state are changed in this execution.",
+  "command_refs": [
+    "GitHub branch control/nl5-001-d-license-r1 created from main bc9ad8c5a10e482ea380a03b6fe30aed2cac451e"
+  ],
+  "evidence_refs": [
+    "docs/control/OWN_LICENSE_OPTIONS_MEMO_R1.md",
+    "LICENSE_POLICY.md",
+    "releases/nanolab-components-v0.1/RIGHTS.json",
+    "docs/release/RELEASE_CONTRACT_V0_1.md"
+  ],
+  "next_action": "IMPLEMENTER: apply owner D2 to license files and release metadata, refresh deterministic manifest, validate, then hand off for fresh review/verifier.",
+  "blocker": null
+}
