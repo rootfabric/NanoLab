@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-A-R1",
+  "work_order_id": "NL5-002-A",
+  "checkpoint": "NL5 / NL5-002-A",
+  "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "base_branch": "main",
+  "branch": "work/nl5-002-a-protocol-freeze-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-002-a-protocol",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/WO-NL5-002-A-R1.md",
+    "docs/work/templates/EXTERNAL_REPRO_REPORT_TEMPLATE_R1.md",
+    "docs/work/executions/EX-NL5-002-A-R1/**"
+  ],
+  "parent_work_order": "NL5-002",
+  "program_reference": "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md (§2 NL5-002 A..D; §11 немедленные действия, пункт 2)",
+  "protocol": "docs/work/WO-NL5-002-A-R1.md (создаётся этим WO; frozen-before-any-external-run) + releases/nanolab-components-v0.1/reproduction/REPRODUCTION_RULE_V0_1.md + docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md",
+  "deliverables": [
+    "docs/work/WO-NL5-002-A-R1.md — замороженный протокол external reproduction: subject pins, executor constraints, seed policy, budget/stop conditions, classification taxonomy + mapping на NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE, Appendix A (executor-facing protocol, self-contained) ",
+    "docs/work/templates/EXTERNAL_REPRO_REPORT_TEMPLATE_R1.md — обязательный формат external execution report (Appendix B)",
+    "docs/work/executions/EX-NL5-002-A-R1/** — execution records этого WO"
+  ],
+  "started_at_utc": "2026-09-18T13:47:59Z",
+  "status": "STARTED",
+  "notes": "Планирование разрешено статусом NL5-002 = READY (project/state.json, scheduler priority по WORK_QUEUE). Owner directive (2026-09-18): реализовывать план NL5_NL8_EXECUTION_PLAN_R1 по пунктам с commit+push после каждого пункта. До любого внешнего запуска никакие результаты не существуют и протокол не подлежит tuning."
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-18T13:51:52Z",
+  "execution_id": "EX-NL5-002-A-R1",
+  "work_order_id": "NL5-002-A",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Handoff NL5-002-A: протокол external reproduction заморожен до любого запуска; WO-level готовность к dispatch фазы B. Exact HEAD/TREE фиксируются в summary.md и evidence-map.json. Открытые риски R1-R3 без изменений по сути (предсказаны до данных, executor'у не передаются). Next action (один): staging /home/rdpuser/nl5-002-external/ (package copy + EXECUTOR_PROTOCOL.md + REPORT_TEMPLATE.md, sha256-сверка пинов) -> fresh external executor subagent -> отчёт в workspace, ingest как evidence фазы B на ветке work/nl5-002-b-external-run-r1.",
+  "command_refs": [
+    "git -C /home/rdpuser/NanoLab/nl5-002-a-protocol rev-parse HEAD",
+    "git -C /home/rdpuser/NanoLab/nl5-002-a-protocol rev-parse HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-A-R1.md",
+    "docs/work/executions/EX-NL5-002-A-R1/summary.md",
+    "docs/work/executions/EX-NL5-002-A-R1/evidence-map.json"
+  ],
+  "next_action": "DIRECTOR/ORCHESTRATOR: dispatch фазы B на замороженном протоколе; результаты внешнего прогона принимает фаза C (compare/bounded repair).",
+  "blocker": null
+}

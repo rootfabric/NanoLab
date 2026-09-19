@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-18T13:47:59Z",
+  "execution_id": "EX-NL5-002-A-R1",
+  "work_order_id": "NL5-002-A",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Старт EX-NL5-002-A-R1: заморозка протокола external reproduction пакета nanolab-components 0.1.0 до любого внешнего запуска (NL5-002 = READY, external_reproductions = 0). Scope: (1) WO с frozen subject pins (package = releases/nanolab-components-v0.1 @ main 48c55b3, RELEASE_MANIFEST.json sha256 f87134de..., все файлы по манифесту 20/20); (2) executor constraints — fresh/external agent session, вход ТОЛЬКО публичный пакет + self-contained executor-facing protocol, доступ к NanoLab repo/worktrees/внутренним evidence и командам NL5-001-C запрещён, OS/runtime записывается но не подгоняется; (3) seed policy — 3 fresh seeds/вариант выбираются executor'ом до запусков, != reference seeds 201004/202008/203012; (4) classification — per-card MATCH/MISMATCH/INCONCLUSIVE по NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (как опубликовано в карточках), WO-level вердикт REPRODUCED/REPRODUCED_WITH_DEVIATION/INCONCLUSIVE/FAILED_TECHNICAL/MISMATCH с явным mapping; 74b = NOT_MEASURED/KNOWN_GAP, значения запрещены; (5) budget — 12 runs single-threaded, per-replica kill 20h, campaign wall 48h, без paid compute/GPU; (6) external execution report template. Планирующий источник: docs/control/NL5_NL8_EXECUTION_PLAN_R1.md §2/§11 (пункт 2). Ownership chain: NL5-002-A (freeze) -> B (fresh external executor) -> C (compare/bounded repair) -> D (Fresh Reviewer + Fresh Verifier + Director).",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-002-a-protocol-freeze-r1 /home/rdpuser/NanoLab/nl5-002-a-protocol 48c55b3c4acdd2264527083e3072757be8bd9ada",
+    "git -C /home/rdpuser/NanoLab/nl5-002-a-protocol rev-parse HEAD -> 48c55b3c4acdd2264527083e3072757be8bd9ada (expected: MATCH)",
+    "sha256sum releases/nanolab-components-v0.1/RELEASE_MANIFEST.json -> f87134dedf11c279fcdddb47bac2a3cc32ea98f260232ac5457bba1c64a6b7fd",
+    "python3 -c \"import json; m=json.load(open('RELEASE_MANIFEST.json')); print(len(m.get('files',[])))\" -> 20"
+  ],
+  "evidence_refs": [
+    "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md",
+    "project/state.json",
+    "docs/work/WORK_QUEUE.md",
+    "releases/nanolab-components-v0.1/RELEASE_MANIFEST.json",
+    "releases/nanolab-components-v0.1/reproduction/REPRODUCTION_RULE_V0_1.md",
+    "docs/control/E2_SOURCE_RIGHTS_G1_DECISION_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: WO-NL5-002-A-R1 + EXTERNAL_REPRO_REPORT_TEMPLATE_R1 -> валидация self-containedness Appendix A -> handoff к dispatch B.",
+  "blocker": null
+}
