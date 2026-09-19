@@ -50,4 +50,16 @@
 
 ## 5. Exact HEAD/TREE
 
-- См. event 0003 (HANDOFF_COMPLETED). Reviewer/Verifier binds к этому subject.
+- Deliverables commit: `4cbf913adeeab270076181436233c84132613928`, tree `0661ec51cff159471560ae9a21754726ea824c2b`; handoff event — commit `9161c9581b99859acbc2936edeb70d1c02f79e4c`. Reviewer/Verifier binds к этому subject.
+
+## 6. Errata (timestamp), 2026-09-19T17:12:00Z
+
+События 0001–0003 этой execution содержат преждевременные (future) `timestamp_utc`, проставленные orchestration по оценке, а не по часам. События не редактируются (append-only); оригинальные байты — в git-истории. Авторитетные времена — авторские даты коммитов (UTC):
+
+| event | заявленный timestamp | фактическое время записи (commit author date) |
+|---|---|---|
+| 0001 WORK_ORDER_STARTED | 14:45:00Z | **14:17:05Z** (90e1d80) |
+| 0002 VALIDATION_RECORDED | 17:55:00Z | **16:55:44Z** (4cbf913) |
+| 0003 HANDOFF_COMPLETED | 18:05:00Z | **16:56:13Z** (9161c95) |
+
+Freeze-критическое свойство подтверждается фактическими временами: процедура C2 заморожена **14:17:05Z** — ДО появления per-card данных B-R2 (packaged analysis завершён 16:22:33Z; terminal ingest 16:52:09Z). Первоначально опубликованное corrections-событие с этой errata было удалено последующим коммитом (остатся в git-истории): оно нарушало правило валидатора «corrections timestamp ≥ terminal timestamp» из-за future-даты терминала; содержимое errata сохранено здесь. Причина ошибки — процессуальная (оценка времени вместо чтения часов); исправлено: дальнейшие события получают timestamp из `date -u` в момент записи (см. зеркальную errata на work/nl5-002-b-r2-external-run-r1, event 0005).
