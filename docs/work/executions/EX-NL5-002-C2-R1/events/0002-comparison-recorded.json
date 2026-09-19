@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-comparison-recorded",
+  "timestamp_utc": "2026-09-19T17:55:00Z",
+  "execution_id": "EX-NL5-002-C2-R1",
+  "work_order_id": "NL5-002-C2",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "9556d0f6ac527db6f32518b51b6de5825a171548",
+  "summary": "Механическое сравнение B-R2 vs frozen contract выполнено строго по замороженной процедуре WO-NL5-002-C2-R1 и ТОЛЬКО из ingested evidence (subject work/nl5-002-b-r2-external-run-r1 @ 9556d0f). Integrity gates: PASS (verify 42/42 старт; upstream 9/9; frame0 4/4 EXACT; 12/12 наблюдаемых exit=0; completeness 50/37 кадров; engine pristine; budget 13.8h<48h). Per-card (frozen rule NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE, независимый recalc median-of-3 + directional separation): 0b=MISMATCH (67.586/68.390/69.600 все строго выше [65.095, 67.237]), 11b=MATCH (73.561 в [72.166, 74.533]), 32b=MISMATCH (74.713/75.180/76.101 все строго ниже [77.493, 79.877]), 53b=MATCH (132.412 в [131.049, 135.285]), 74b=NOT_MEASURED. Recalc == executor 4/4; run->campaign chain консистентна. WO-level verdict по frozen mapping WO-NL5-002-A-R1: MISMATCH. Отклонения D1-D3 задокументированы; N1 (per-card окна против универсального 150k из A-R1 - применено карточное окно как published contract) и F-orch1 (.pyc pinned в RELEASE_MANIFEST v0.1.1, packaging-дефект вне науки) помечены для Fresh Reviewer. Пороги/envelope НЕ менялись; R3 автоматически не запускается; критерий NL5 (воспроизведение вне авторской среды) данной кампанией НЕ выполнен - disposition по Human Gate (owner mission §12).",
+  "command_refs": [
+    "python3 /tmp/c2_compare.py (blobs via git show origin/work/nl5-002-b-r2-external-run-r1) -> comparison.json",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-002-C2-R1 -> ok"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-C2-R1/comparison.json",
+    "docs/work/executions/EX-NL5-002-C2-R1/summary.md",
+    "docs/work/executions/EX-NL5-002-C2-R1/evidence-map.json"
+  ],
+  "next_action": "DIRECTOR: event 0003 HANDOFF_COMPLETED; затем Fresh Reviewer + Fresh Verifier на exact subject.",
+  "blocker": null
+}
