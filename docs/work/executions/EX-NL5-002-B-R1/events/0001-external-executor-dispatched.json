@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-external-executor-dispatched",
+  "timestamp_utc": "2026-09-18T13:55:15Z",
+  "execution_id": "EX-NL5-002-B-R1",
+  "work_order_id": "NL5-002-B",
+  "event_type": "EXTERNAL_EXECUTOR_DISPATCHED",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Dispatch fresh external executor на замороженный протокол WO-NL5-002-A-R1 (Appendix A дословно, без авторских дополнений). Staging вне репозитория: package copy nanolab-components 0.1.0 (пины сверены: RELEASE_MANIFEST f87134de…, VERSION e9dd8507…, RIGHTS 5292781a…, RULE 6b70dfc2…, карточки 06aa9eb8/d17a6533/66fc6ca9/460a89e7/5894f420), EXECUTOR_PROTOCOL.md, REPORT_TEMPLATE.md, чистый workspace. Executor: fresh agent session без контекста авторской сессии и без доступа к NanoLab материалам; действует как обычный пользователь пакета: verify -> plan -> чистая среда -> сборка oxDNA по карточечным пинам (CPU, double) -> download-on-run upstream c size+blob_sha1 gates -> 3 fresh seeds/вариант до запусков (не равны 201004/202008/203012) -> 12 прогонов (0b/11b 200k, 32b/53b 150k, upstream verbatim кроме seed) -> анализ окна t<=150000 (missing convention elements = PORTABILITY_FINDING, выдумывать значения запрещено; best-effort только с пометкой BEST_EFFORT_NOT_CONTRACT) -> per-card классификация по NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE -> отчёт по шаблону (13 секций) + artifact manifest. Budget: kill 20h/replica, wall 48h, no paid/GPU. Ожидаемый wall кампании ~15h (12 параллельных single-thread прогонов, калибровка NL5-001-C). Никаких предсказаний (R1-R3) executor'у не передаётся.",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-002-b-external-run-r1 /home/rdpuser/NanoLab/nl5-002-b-external 48c55b3c4acdd2264527083e3072757be8bd9ada",
+    "sha256sum /home/rdpuser/nl5-002-external/package/RELEASE_MANIFEST.json -> f87134dedf11c279fcdddb47bac2a3cc32ea98f260232ac5457bba1c64a6b7fd (MATCH WO pin)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-A-R1/passport.json",
+    "docs/work/WO-NL5-002-A-R1.md"
+  ],
+  "next_action": "ORCHESTRATOR: ожидать завершения внешней сессии; затем ingest отчёта в эту ветку (event 0002-external-run-completed + artifact digests) и передача фазы C.",
+  "blocker": null
+}

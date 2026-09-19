@@ -1,0 +1,10 @@
+--- /tmp/orig_parse_input.h	2026-09-19 02:31:18.913815203 +1000
++++ oxdna-src/src/Utilities/parse_input/parse_input.h	2026-09-19 00:30:08.775498625 +1000
+@@ -8,6 +8,7 @@
+ #include <vector>
+ #include <map>
+ #include <set>
++#include <string>
+ 
+ #ifdef JSON_ENABLED
+ #include <nlohmann/json_fwd.hpp>

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-continuation-runs-terminated-report-correction",
+  "timestamp_utc": "2026-09-19T00:45:00Z",
+  "execution_id": "EX-NL5-002-B-R1",
+  "work_order_id": "NL5-002-B",
+  "event_type": "CONTINUATION",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Наблюдение (00:31Z): внешняя сессия ушла в idle ~16:35Z после преждевременной записи отчёта (секции 7-13 PENDING, таблица прогонов с непроверенными exit=0); 12 основных прогонов были убиты средой в ~00:18-00:27Z на 128k-136.6k шагов из 200k/150k (траектории не растут, процессов нет). Классификация усечённых прогонов: FAILED_TECHNICAL (средовое завершение), не научный исход; run IDs сохранены, переиспользование запрещено. Фактически полученное внешней стороной ДО обрывов: (1) reproduce.py verify 20/20 ok; (2) downstream digest gates 12/12 PASS; (3) seeds frozen до запусков; (4) движок собран по пину (tarball exact commit вместо clone - network deviation; однострочный #include <string> патч для GCC 11 - build-only); (5) determinism D1/D2 IDENTICAL; (6) ГЛАВНОЕ: portability finding подтверждён с высокой строгостью - 12 документированных попыток реконструкции frozen convention (detector v2 + arm manifest) против опубликованных оракулов (angle_frame0_deg, пары, coverage) НЕ воспроизвели (counts, angle); вывод исполнителя: convention не реализуема из пакета, contract classification per card = INCONCLUSIVE, BEST_EFFORT серии под явной пометкой. Это подтверждает риск R1 из WO-NL5-002-A-R1 (предсказан до данных). Действия: (a) executor'у отправлено административное сообщение - завершить отчёт честно из своих записей (исправить §7 фактическими состояниями усечения, заполнить 8-13), БЕЗ новых прогонов и БЕЗ научных подсказок; вердикт не зависит от усечённых прогонов; (b) после инжеста отчёта - фаза C по плану §2.3: root cause = package under-specification (R1 подтверждён + нет корневого README + не указан URL репозитория движка + print_energy_every расхождение карточка/upstream), bounded repair = package revision 0.1.1 (опубликовать arm manifests + detector v2 reference implementation + README + engine acquisition + convention docs), затем СВЕЖИЙ внешний повтор на 0.1.1; научные tolerance/envelope не меняются.",
+  "command_refs": [
+    "grep -c '^t = ' workspace/runs/EXTERNAL-0b-R1/trajectory.dat -> 32 (last t=128000)",
+    "stat/size delta trajectory EXTERNAL-53b-R2 за 20s -> 0 (не растёт)",
+    "cat workspace/analysis/convention_reconstruction_log.md (12 методов, оракулы, вывод INCONCLUSIVE)"
+  ],
+  "evidence_refs": [
+    "/home/rdpuser/nl5-002-external/workspace/EXTERNAL_REPRODUCTION_REPORT.md (черновик v0, корректируется исполнителем)",
+    "/home/rdpuser/nl5-002-external/workspace/analysis/convention_reconstruction_log.md",
+    "/home/rdpuser/nl5-002-external/workspace/analysis/frozen_seeds.json",
+    "docs/work/executions/EX-NL5-002-B-R1/events/0002-continuation-external-campaign-in-progress.json"
+  ],
+  "next_action": "ORCHESTRATOR: дождаться финального отчёта executor'а -> event 0004-external-run-completed + ingest (отчёт/manifest/дайджесты в repo) -> фаза C: docs/work/WO-NL5-002-C-R1 (root cause + repair map) и package 0.1.1 -> свежий внешний повтор.",
+  "blocker": null
+}
