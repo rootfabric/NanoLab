@@ -36,6 +36,21 @@
     "gpu": false
   },
   "started_at_utc": "2026-09-18T13:55:15Z",
-  "status": "DISPATCHED",
+  "status": "COMPLETED_INCONCLUSIVE",
+  "outcome": {
+    "execution_outcome": "COMPLETED",
+    "scientific_outcome": "INCONCLUSIVE",
+    "external_verdict": "INCONCLUSIVE",
+    "per_card": {
+      "0b": "INCONCLUSIVE",
+      "11b": "INCONCLUSIVE",
+      "32b": "INCONCLUSIVE",
+      "53b": "INCONCLUSIVE",
+      "74b": "N/A (NOT_MEASURED/KNOWN_GAP)"
+    },
+    "report_sha256": "5b6d1f06e75876a1ebf7393a2f04f3e0db098f9f84b6d46f23e0ac6c231bef32",
+    "campaign_wall": "11.04h (2026-09-18T13:57:34Z -> 2026-09-19T00:55:17Z)",
+    "portability_finding": "frozen observable convention (arm manifests, convention docs, detector reference) отсутствует в пакете; 12 семейств реконструкции не сошлись с оракулами"
+  },
   "notes": "Протокол заморожен EX-NL5-002-A-R1 (deliverables 2108ea7, tree a83a6d5) ДО dispatch; staging пины сверены байт-в-байт с WO. Результаты внешнего прогона в canonical repo не существуют до ingest; никаких предсказаний executor'у не передаётся (риски R1-R3 остаются на авторской стороне)."
 }

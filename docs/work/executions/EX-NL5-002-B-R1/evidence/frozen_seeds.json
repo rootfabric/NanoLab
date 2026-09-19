@@ -1,0 +1,44 @@
+{
+  "frozen_at_utc": "2026-09-18T14:01:32Z",
+  "policy": "3 fresh seeds frozen BEFORE first engine run; shared across variants mirroring reference campaign design (reference used same 3 seeds for all variants)",
+  "reference_seeds_forbidden": [
+    201004,
+    202008,
+    203012
+  ],
+  "variants": {
+    "0b": {
+      "seeds": [
+        510101,
+        520202,
+        530303
+      ]
+    },
+    "11b": {
+      "seeds": [
+        510101,
+        520202,
+        530303
+      ]
+    },
+    "32b": {
+      "seeds": [
+        510101,
+        520202,
+        530303
+      ]
+    },
+    "53b": {
+      "seeds": [
+        510101,
+        520202,
+        530303
+      ]
+    }
+  },
+  "checks": {
+    "all_distinct": true,
+    "none_equal_reference": true,
+    "int32_valid_for_engine": true
+  }
+}

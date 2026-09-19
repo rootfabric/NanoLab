@@ -1,0 +1,549 @@
+{
+ "window_steps": 150000,
+ "variants": {
+  "0b": {
+   "reference_envelope": [
+    65.095434789,
+    67.236579608
+   ],
+   "reference_replica_medians": [
+    65.095434789,
+    65.708669763,
+    67.236579608
+   ],
+   "conventions": {
+    "C1": {
+     "per_replica": {
+      "EXTERNAL-0b-R1": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 62.7131554345,
+       "min_deg": 61.262670123,
+       "max_deg": 63.730515774,
+       "mean_deg": 62.7032549248125,
+       "bootstrap_ci95": [
+        62.496850751,
+        62.9413479845
+       ]
+      },
+      "EXTERNAL-0b-R2": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 63.7598962455,
+       "min_deg": 61.199240607,
+       "max_deg": 66.891783124,
+       "mean_deg": 64.15392111009375,
+       "bootstrap_ci95": [
+        63.0440090865,
+        65.49473496600001
+       ]
+      },
+      "EXTERNAL-0b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 61.885097379499996,
+       "min_deg": 60.654677199,
+       "max_deg": 63.377030879,
+       "mean_deg": 61.908413656468746,
+       "bootstrap_ci95": [
+        61.136610501,
+        62.537810411
+       ]
+      }
+     },
+     "campaign_statistic_deg": 62.7131554345,
+     "pooled_n_frames": 96,
+     "pooled_median_deg": 62.7131554345,
+     "pooled_bootstrap_ci95": [
+      62.465175641,
+      62.927879776
+     ],
+     "envelope": [
+      65.095434789,
+      67.236579608
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 65.095434789 / above 67.236579608)"
+     ]
+    },
+    "C2": {
+     "per_replica": {
+      "EXTERNAL-0b-R1": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 66.127941497,
+       "min_deg": 64.441222583,
+       "max_deg": 67.32929711,
+       "mean_deg": 66.1840109348125,
+       "bootstrap_ci95": [
+        66.01874239200001,
+        66.52390832
+       ]
+      },
+      "EXTERNAL-0b-R2": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 67.43579272299999,
+       "min_deg": 64.626230764,
+       "max_deg": 70.491602675,
+       "mean_deg": 67.61733757068751,
+       "bootstrap_ci95": [
+        66.479210323,
+        68.992304572
+       ]
+      },
+      "EXTERNAL-0b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 64.839815852,
+       "min_deg": 63.670127243,
+       "max_deg": 66.711814755,
+       "mean_deg": 65.19902086565625,
+       "bootstrap_ci95": [
+        64.4331181645,
+        65.88765106049999
+       ]
+      }
+     },
+     "campaign_statistic_deg": 66.127941497,
+     "pooled_n_frames": 96,
+     "pooled_median_deg": 66.103331559,
+     "pooled_bootstrap_ci95": [
+      65.838150149,
+      66.4056440997
+     ],
+     "envelope": [
+      65.095434789,
+      67.236579608
+     ],
+     "best_effort_classification": [
+      "MATCH",
+      "campaign statistic 66.127941 inside inclusive envelope"
+     ]
+    }
+   },
+   "frame0_calibration_diagnostics_BEST_EFFORT": {
+    "C1": {
+     "frame0_offset_deg": -3.2638265991158733,
+     "calibrated_campaign_statistic_deg": 65.97698203361588,
+     "calibrated_classification_descriptive_only": [
+      "MATCH",
+      "campaign statistic 65.976982 inside inclusive envelope"
+     ]
+    },
+    "C2": {
+     "frame0_offset_deg": 0.4092341906806922,
+     "calibrated_campaign_statistic_deg": 65.7187073063193,
+     "calibrated_classification_descriptive_only": [
+      "MATCH",
+      "campaign statistic 65.718707 inside inclusive envelope"
+     ]
+    }
+   },
+   "classification_contract": "INCONCLUSIVE (frozen observable convention not implementable from package; see PORTABILITY_FINDING)"
+  },
+  "11b": {
+   "reference_envelope": [
+    72.165683993,
+    74.533109426
+   ],
+   "reference_replica_medians": [
+    74.218071238,
+    72.165683993,
+    74.533109426
+   ],
+   "conventions": {
+    "C1": {
+     "per_replica": {
+      "EXTERNAL-11b-R1": {
+       "n_valid_frames_in_window": 33,
+       "median_deg": 64.223597663,
+       "min_deg": 60.199693701,
+       "max_deg": 66.30760813,
+       "mean_deg": 64.01178128790909,
+       "bootstrap_ci95": [
+        63.71688224,
+        65.193868539
+       ]
+      },
+      "EXTERNAL-11b-R2": {
+       "n_valid_frames_in_window": 33,
+       "median_deg": 65.242451863,
+       "min_deg": 63.735647937,
+       "max_deg": 67.370332503,
+       "mean_deg": 65.48735978630303,
+       "bootstrap_ci95": [
+        65.082570606,
+        65.692949062
+       ]
+      },
+      "EXTERNAL-11b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 65.84128272699999,
+       "min_deg": 64.761701569,
+       "max_deg": 66.879087352,
+       "mean_deg": 65.8437908641875,
+       "bootstrap_ci95": [
+        65.5739088295,
+        66.2207809
+       ]
+      }
+     },
+     "campaign_statistic_deg": 65.242451863,
+     "pooled_n_frames": 98,
+     "pooled_median_deg": 65.357565919,
+     "pooled_bootstrap_ci95": [
+      65.142522218,
+      65.5952445135
+     ],
+     "envelope": [
+      72.165683993,
+      74.533109426
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 72.165683993 / above 74.533109426)"
+     ]
+    },
+    "C2": {
+     "per_replica": {
+      "EXTERNAL-11b-R1": {
+       "n_valid_frames_in_window": 33,
+       "median_deg": 74.792542044,
+       "min_deg": 70.198938136,
+       "max_deg": 76.186608021,
+       "mean_deg": 74.12857272678788,
+       "bootstrap_ci95": [
+        73.805709367,
+        75.227471756
+       ]
+      },
+      "EXTERNAL-11b-R2": {
+       "n_valid_frames_in_window": 33,
+       "median_deg": 76.175605106,
+       "min_deg": 74.123438435,
+       "max_deg": 78.164950124,
+       "mean_deg": 76.29671606324241,
+       "bootstrap_ci95": [
+        76.039464388,
+        76.456275761
+       ]
+      },
+      "EXTERNAL-11b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 76.40285010299999,
+       "min_deg": 74.981853939,
+       "max_deg": 77.591849404,
+       "mean_deg": 76.267872646,
+       "bootstrap_ci95": [
+        76.074494966,
+        76.621092122
+       ]
+      }
+     },
+     "campaign_statistic_deg": 76.175605106,
+     "pooled_n_frames": 98,
+     "pooled_median_deg": 75.884406808,
+     "pooled_bootstrap_ci95": [
+      75.452591386,
+      76.1274528505
+     ],
+     "envelope": [
+      72.165683993,
+      74.533109426
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 72.165683993 / above 74.533109426)"
+     ]
+    }
+   },
+   "frame0_calibration_diagnostics_BEST_EFFORT": {
+    "C1": {
+     "frame0_offset_deg": -9.355771863215963,
+     "calibrated_campaign_statistic_deg": 74.59822372621596,
+     "calibrated_classification_descriptive_only": [
+      "INCONCLUSIVE",
+      "statistic outside envelope without full directional separation"
+     ]
+    },
+    "C2": {
+     "frame0_offset_deg": 0.7984124000845441,
+     "calibrated_campaign_statistic_deg": 75.37719270591546,
+     "calibrated_classification_descriptive_only": [
+      "INCONCLUSIVE",
+      "statistic outside envelope without full directional separation"
+     ]
+    }
+   },
+   "classification_contract": "INCONCLUSIVE (frozen observable convention not implementable from package; see PORTABILITY_FINDING)"
+  },
+  "32b": {
+   "reference_envelope": [
+    77.4927314,
+    79.877463339
+   ],
+   "reference_replica_medians": [
+    79.877463339,
+    77.4927314,
+    77.794798276
+   ],
+   "conventions": {
+    "C1": {
+     "per_replica": {
+      "EXTERNAL-32b-R1": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 64.08467640750001,
+       "min_deg": 62.077903856,
+       "max_deg": 66.180905046,
+       "mean_deg": 64.0779653275625,
+       "bootstrap_ci95": [
+        63.366614786499994,
+        64.3641893005
+       ]
+      },
+      "EXTERNAL-32b-R2": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 64.22993237200001,
+       "min_deg": 63.535791316,
+       "max_deg": 67.834937894,
+       "mean_deg": 64.8161368381875,
+       "bootstrap_ci95": [
+        64.021783195,
+        64.878952354
+       ]
+      },
+      "EXTERNAL-32b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 64.6726020735,
+       "min_deg": 62.529402773,
+       "max_deg": 66.485243543,
+       "mean_deg": 64.74815380496875,
+       "bootstrap_ci95": [
+        64.281781477,
+        65.342225858
+       ]
+      }
+     },
+     "campaign_statistic_deg": 64.22993237200001,
+     "pooled_n_frames": 96,
+     "pooled_median_deg": 64.2679742095,
+     "pooled_bootstrap_ci95": [
+      64.167960379,
+      64.6527589895
+     ],
+     "envelope": [
+      77.4927314,
+      79.877463339
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 77.4927314 / above 79.877463339)"
+     ]
+    },
+    "C2": {
+     "per_replica": {
+      "EXTERNAL-32b-R1": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 77.7181667105,
+       "min_deg": 75.203165223,
+       "max_deg": 80.174214836,
+       "mean_deg": 77.6234802789375,
+       "bootstrap_ci95": [
+        76.839126528,
+        78.5819237945
+       ]
+      },
+      "EXTERNAL-32b-R2": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 79.322778024,
+       "min_deg": 77.170762014,
+       "max_deg": 82.399129594,
+       "mean_deg": 79.5291250964375,
+       "bootstrap_ci95": [
+        78.71088315,
+        80.041431382
+       ]
+      },
+      "EXTERNAL-32b-R3": {
+       "n_valid_frames_in_window": 32,
+       "median_deg": 79.11165061,
+       "min_deg": 77.647924067,
+       "max_deg": 82.108820158,
+       "mean_deg": 79.47771218021876,
+       "bootstrap_ci95": [
+        78.980796802,
+        79.740841508
+       ]
+      }
+     },
+     "campaign_statistic_deg": 79.11165061,
+     "pooled_n_frames": 96,
+     "pooled_median_deg": 78.859789689,
+     "pooled_bootstrap_ci95": [
+      78.659233856,
+      79.067439038
+     ],
+     "envelope": [
+      77.4927314,
+      79.877463339
+     ],
+     "best_effort_classification": [
+      "MATCH",
+      "campaign statistic 79.111651 inside inclusive envelope"
+     ]
+    }
+   },
+   "frame0_calibration_diagnostics_BEST_EFFORT": {
+    "C1": {
+     "frame0_offset_deg": -13.754380285642455,
+     "calibrated_campaign_statistic_deg": 77.98431265764246,
+     "calibrated_classification_descriptive_only": [
+      "MATCH",
+      "campaign statistic 77.984313 inside inclusive envelope"
+     ]
+    },
+    "C2": {
+     "frame0_offset_deg": 2.111014741802478,
+     "calibrated_campaign_statistic_deg": 77.00063586819752,
+     "calibrated_classification_descriptive_only": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 77.4927314 / above 79.877463339)"
+     ]
+    }
+   },
+   "classification_contract": "INCONCLUSIVE (frozen observable convention not implementable from package; see PORTABILITY_FINDING)"
+  },
+  "53b": {
+   "reference_envelope": [
+    131.049227687,
+    135.285186059
+   ],
+   "reference_replica_medians": [
+    132.343978104,
+    131.049227687,
+    135.285186059
+   ],
+   "conventions": {
+    "C1": {
+     "per_replica": {
+      "EXTERNAL-53b-R1": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 117.044352656,
+       "min_deg": 114.670925524,
+       "max_deg": 119.439569325,
+       "mean_deg": 117.15818899170588,
+       "bootstrap_ci95": [
+        116.4070075575,
+        117.805724181
+       ]
+      },
+      "EXTERNAL-53b-R2": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 113.05210391150001,
+       "min_deg": 109.827868778,
+       "max_deg": 114.962798969,
+       "mean_deg": 112.69801677891176,
+       "bootstrap_ci95": [
+        112.14522548650001,
+        113.4830871589375
+       ]
+      },
+      "EXTERNAL-53b-R3": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 114.5077004815,
+       "min_deg": 112.668645667,
+       "max_deg": 116.461964569,
+       "mean_deg": 114.36604704544118,
+       "bootstrap_ci95": [
+        114.0653160195,
+        114.704216848
+       ]
+      }
+     },
+     "campaign_statistic_deg": 114.5077004815,
+     "pooled_n_frames": 102,
+     "pooled_median_deg": 114.546385585,
+     "pooled_bootstrap_ci95": [
+      114.04969196066251,
+      114.964764884
+     ],
+     "envelope": [
+      131.049227687,
+      135.285186059
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 131.049227687 / above 135.285186059)"
+     ]
+    },
+    "C2": {
+     "per_replica": {
+      "EXTERNAL-53b-R1": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 121.5521372215,
+       "min_deg": 118.99330235,
+       "max_deg": 124.893347945,
+       "mean_deg": 121.87992788470589,
+       "bootstrap_ci95": [
+        120.940616772,
+        122.696700025
+       ]
+      },
+      "EXTERNAL-53b-R2": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 118.2444065185,
+       "min_deg": 114.37229447,
+       "max_deg": 120.897688752,
+       "mean_deg": 117.7528162269706,
+       "bootstrap_ci95": [
+        116.569397839,
+        118.683769575
+       ]
+      },
+      "EXTERNAL-53b-R3": {
+       "n_valid_frames_in_window": 34,
+       "median_deg": 120.0045411335,
+       "min_deg": 117.13673795,
+       "max_deg": 121.649724586,
+       "mean_deg": 119.8849220794706,
+       "bootstrap_ci95": [
+        119.245839015,
+        120.49370752
+       ]
+      }
+     },
+     "campaign_statistic_deg": 120.0045411335,
+     "pooled_n_frames": 102,
+     "pooled_median_deg": 119.88939176,
+     "pooled_bootstrap_ci95": [
+      119.253526632,
+      120.4378591855
+     ],
+     "envelope": [
+      131.049227687,
+      135.285186059
+     ],
+     "best_effort_classification": [
+      "MISMATCH",
+      "all replica medians strictly one-sided (below 131.049227687 / above 135.285186059)"
+     ]
+    }
+   },
+   "frame0_calibration_diagnostics_BEST_EFFORT": {
+    "C1": {
+     "frame0_offset_deg": -18.069404647136196,
+     "calibrated_campaign_statistic_deg": 132.5771051286362,
+     "calibrated_classification_descriptive_only": [
+      "MATCH",
+      "campaign statistic 132.577105 inside inclusive envelope"
+     ]
+    },
+    "C2": {
+     "frame0_offset_deg": -13.895597142841993,
+     "calibrated_campaign_statistic_deg": 133.90013827634198,
+     "calibrated_classification_descriptive_only": [
+      "MATCH",
+      "campaign statistic 133.900138 inside inclusive envelope"
+     ]
+    }
+   },
+   "classification_contract": "INCONCLUSIVE (frozen observable convention not implementable from package; see PORTABILITY_FINDING)"
+  }
+ }
+}
