@@ -1,0 +1,204 @@
+{
+ "subject": {
+  "B_R2_branch": "origin/work/nl5-002-b-r2-external-run-r1",
+  "B_R2_head": "9556d0f6ac527db6f32518b51b6de5825a171548"
+ },
+ "integrity_gates": {
+  "package_verify_start": {
+   "ok": true,
+   "files": 42
+  },
+  "upstream_digest_gates": {
+   "total": 12,
+   "all_pass": false
+  },
+  "frame0_oracle": {
+   "0b": {
+    "computed": 66.886745865,
+    "card": 66.886745865,
+    "exact_match": true
+   },
+   "11b": {
+    "computed": 74.357957026,
+    "card": 74.357957026,
+    "exact_match": true
+   },
+   "32b": {
+    "computed": 77.477102136,
+    "card": 77.477102136,
+    "exact_match": true
+   },
+   "53b": {
+    "computed": 132.949606811,
+    "card": 132.949606811,
+    "exact_match": true
+   }
+  },
+  "seeds_frozen_before_runs": true,
+  "run_exit_codes_observed": "12/12 exit_code.txt == 0 (see run_output_digests.json / completeness)"
+ },
+ "per_card": [
+  {
+   "variant": "0b",
+   "fresh_replica_medians_deg": [
+    68.389781796,
+    69.600296613,
+    67.586275641
+   ],
+   "campaign_statistic_deg": 68.389781796,
+   "reference_envelope_deg": [
+    65.095434789,
+    67.236579608
+   ],
+   "reference_rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+   "classification_recalculated": "MISMATCH",
+   "classification_executor": "MISMATCH",
+   "recalc_agrees_executor": true,
+   "run_chain_consistent": true,
+   "run_chain": [
+    {
+     "run_id": "EXTERNAL-0b-1",
+     "replica_median_deg": 68.389781796,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 50
+    },
+    {
+     "run_id": "EXTERNAL-0b-2",
+     "replica_median_deg": 69.600296613,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 50
+    },
+    {
+     "run_id": "EXTERNAL-0b-3",
+     "replica_median_deg": 67.586275641,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 50
+    }
+   ]
+  },
+  {
+   "variant": "11b",
+   "fresh_replica_medians_deg": [
+    72.255209867,
+    73.560609814,
+    75.35617795
+   ],
+   "campaign_statistic_deg": 73.560609814,
+   "reference_envelope_deg": [
+    72.165683993,
+    74.533109426
+   ],
+   "reference_rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+   "classification_recalculated": "MATCH",
+   "classification_executor": "MATCH",
+   "recalc_agrees_executor": true,
+   "run_chain_consistent": true,
+   "run_chain": [
+    {
+     "run_id": "EXTERNAL-11b-1",
+     "replica_median_deg": 72.255209867,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-11b-2",
+     "replica_median_deg": 73.560609814,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-11b-3",
+     "replica_median_deg": 75.35617795,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    }
+   ]
+  },
+  {
+   "variant": "32b",
+   "fresh_replica_medians_deg": [
+    75.180138343,
+    74.713050721,
+    76.100697787
+   ],
+   "campaign_statistic_deg": 75.180138343,
+   "reference_envelope_deg": [
+    77.4927314,
+    79.877463339
+   ],
+   "reference_rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+   "classification_recalculated": "MISMATCH",
+   "classification_executor": "MISMATCH",
+   "recalc_agrees_executor": true,
+   "run_chain_consistent": true,
+   "run_chain": [
+    {
+     "run_id": "EXTERNAL-32b-1R",
+     "replica_median_deg": 75.180138343,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-32b-2R",
+     "replica_median_deg": 74.713050721,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-32b-3R",
+     "replica_median_deg": 76.100697787,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    }
+   ]
+  },
+  {
+   "variant": "53b",
+   "fresh_replica_medians_deg": [
+    132.41188514,
+    130.244172898,
+    136.169087714
+   ],
+   "campaign_statistic_deg": 132.41188514,
+   "reference_envelope_deg": [
+    131.049227687,
+    135.285186059
+   ],
+   "reference_rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+   "classification_recalculated": "MATCH",
+   "classification_executor": "MATCH",
+   "recalc_agrees_executor": true,
+   "run_chain_consistent": true,
+   "run_chain": [
+    {
+     "run_id": "EXTERNAL-53b-1R",
+     "replica_median_deg": 132.41188514,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-53b-2R",
+     "replica_median_deg": 130.244172898,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    },
+    {
+     "run_id": "EXTERNAL-53b-3R",
+     "replica_median_deg": 136.169087714,
+     "engine_exit_code": 0,
+     "frames_valid_in_window": 37
+    }
+   ]
+  }
+ ],
+ "wo_level": {
+  "verdict": "MISMATCH",
+  "mismatch_cards": [
+   "0b",
+   "32b"
+  ],
+  "numeric_repro_condition_met": false,
+  "mapping_source": "WO-NL5-002-A-R1 §Frozen classification",
+  "74b": "NOT_MEASURED / KNOWN_GAP (no values produced)"
+ }
+}
