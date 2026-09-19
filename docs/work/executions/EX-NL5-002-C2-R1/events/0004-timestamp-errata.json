@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-timestamp-errata",
+  "timestamp_utc": "2026-09-19T17:08:43Z",
+  "execution_id": "EX-NL5-002-C2-R1",
+  "work_order_id": "NL5-002-C2",
+  "event_type": "REVIEW_CORRECTIONS",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "9556d0f6ac527db6f32518b51b6de5825a171548",
+  "summary": "Errata (append-only; исходные события не редактируются). События этой execution содержали преждевременные (future) timestamps: event 0001-work-order-started заявил 2026-09-19T14:45:00Z при фактической записи 14:17:05Z (commit 90e1d80); event 0002-comparison-recorded заявил 17:55:00Z при фактических 16:55:44Z (commit 4cbf913); event 0003-handoff-completed заявил 18:05:00Z при фактических 16:56:13Z (commit 9161c95). Содержание не меняется. Критическое freeze-свойство подтверждается фактическими временами: процедура C2 заморожена 14:17:05Z (commit 90e1d80) - ДО появления per-card данных B-R2 (packaged analysis завершён 16:22:33Z, terminal ingest 16:52:09Z). Причина: ошибка процесса orchestration (оценка времени вместо чтения часов); дальнейшие события получают timestamp из `date -u` в момент записи.",
+  "command_refs": [
+    "git log --format='%h %aI' origin/work/nl5-002-c2-compare-r2-r1 -3",
+    "date -u +%FT%TZ -> 2026-09-19T17:08:43Z"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-C2-R1/events/0001-work-order-started.json",
+    "docs/work/executions/EX-NL5-002-C2-R1/events/0002-comparison-recorded.json",
+    "docs/work/executions/EX-NL5-002-C2-R1/events/0003-handoff-completed.json"
+  ],
+  "next_action": "ORCHESTRATOR: Fresh Reviewer на актуальных HEAD цепочки NL5-002.",
+  "blocker": null
+}
