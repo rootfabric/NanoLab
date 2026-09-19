@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-19T18:05:00Z",
+  "execution_id": "EX-NL5-002-C2-R1",
+  "work_order_id": "NL5-002-C2",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "9556d0f6ac527db6f32518b51b6de5825a171548",
+  "summary": "NL5-002-C2 завершена (HANDOFF_READY). Deliverables commit: 4cbf913adeeab270076181436233c84132613928; tree: 0661ec51cff159471560ae9a21754726ea824c2b (этот handoff-event идёт отдельным bookkeeping-коммитом поверх и содержимое deliverables не меняет). Сравниваемый subject: work/nl5-002-b-r2-external-run-r1 @ 9556d0f6ac527db6f32518b51b6de5825a171548. Итог: integrity gates PASS; binding per-card 0b=MISMATCH / 11b=MATCH / 32b=MISMATCH / 53b=MATCH / 74b=NOT_MEASURED; WO-level MISMATCH по frozen mapping; recalc == executor 4/4; chain консистентна; отклонения D1-D3 + N1 + F-orch1 + F1-F4 задокументированы; пороги/envelope не менялись. NL5 acceptance данной кампанией НЕ выполнен; disposition - Human Gate. Open risks: платформенная чувствительность MD-статистик при узких 3-репличных envelope (кандидат в отдельный исследовательский WO, не вердикт данной единицы).",
+  "command_refs": [
+    "git rev-parse HEAD -> 4cbf913adeeab270076181436233c84132613928",
+    "git rev-parse HEAD^{tree} -> 0661ec51cff159471560ae9a21754726ea824c2b"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-C2-R1/summary.md",
+    "docs/work/executions/EX-NL5-002-C2-R1/comparison.json",
+    "docs/work/executions/EX-NL5-002-C2-R1/evidence-map.json"
+  ],
+  "next_action": "ORCHESTRATOR: Fresh Reviewer (review/nl5-002-r1) на exact subject цепочки NL5-002 (A + B-R1 + C + B-R2 + C2); затем Fresh exact-head Verifier; затем integration candidate + Human Gate.",
+  "blocker": null
+}

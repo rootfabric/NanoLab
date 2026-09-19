@@ -31,6 +31,6 @@
     "paid_compute": false
   },
   "started_at_utc": "2026-09-19T14:45:00Z",
-  "status": "IN_PROGRESS",
+  "status": "HANDOFF_READY",
   "notes": "Сравнение механическое: per-card MATCH/MISMATCH/INCONCLUSIVE из frozen rule; WO-level REPRODUCED / REPRODUCED_WITH_DEVIATION / INCONCLUSIVE / FAILED_TECHNICAL / MISMATCH по frozen mapping. Запрещено: менять пороги/envelope; производить значения 74b; переписывать B-R1/C repair; интерпретировать физику за пределами frozen classification. 74b остаётся NOT_MEASURED/KNOWN_GAP."
 }
