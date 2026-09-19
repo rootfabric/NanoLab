@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-timestamp-errata",
+  "timestamp_utc": "2026-09-19T17:08:43Z",
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "event_type": "CONTINUATION",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Errata (append-only; исходные события не редактируются, оригинальные байты сохранены в git-истории). События этой execution содержали преждевременные (future) timestamps, проставленные orchestration по оценкам, а не по фактическому времени: event 0003-continuation-r2-administrative-recovery.json заявил timestamp 2026-09-19T14:20:00Z при фактическом времени записи ~14:12:58Z (авторская дата commit 70f08c7); event 0004-external-run-completed.json заявил 2026-09-19T17:20:00Z при фактическом ~16:52:09Z (commit 9556d0f). Содержание событий НЕ меняется; фактические значения всех зафиксированных в них фактов верны. Авторитетные времена фиксации - авторские даты соответствующих коммитов (UTC: 70f08c7 = 14:12:58Z; 9556d0f = 16:52:09Z). Причина: ошибка процесса у orchestration (оценка времени вместо чтения часов); исправлено процессуально - дальнейшие события получают timestamp из `date -u` в момент записи.",
+  "command_refs": [
+    "git log --format='%h %aI' origin/work/nl5-002-b-r2-external-run-r1 -3",
+    "date -u +%FT%TZ -> 2026-09-19T17:08:43Z"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R2/events/0003-continuation-r2-administrative-recovery.json",
+    "docs/work/executions/EX-NL5-002-B-R2/events/0004-external-run-completed.json"
+  ],
+  "next_action": "ORCHESTRATOR: продолжение фазы D (Fresh Reviewer) на актуальных HEAD цепочки.",
+  "blocker": null
+}

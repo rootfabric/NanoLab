@@ -1,0 +1,6 @@
+launched EXTERNAL-32b-1R variant=32b seed=174329 steps=150000 wrapper_pid=279695
+launched EXTERNAL-32b-2R variant=32b seed=285637 steps=150000 wrapper_pid=279714
+launched EXTERNAL-32b-3R variant=32b seed=396421 steps=150000 wrapper_pid=279740
+launched EXTERNAL-53b-1R variant=53b seed=507283 steps=150000 wrapper_pid=279753
+launched EXTERNAL-53b-2R variant=53b seed=618457 steps=150000 wrapper_pid=279782
+launched EXTERNAL-53b-3R variant=53b seed=729613 steps=150000 wrapper_pid=279798

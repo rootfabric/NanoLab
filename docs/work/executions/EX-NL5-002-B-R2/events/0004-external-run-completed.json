@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-external-run-completed",
+  "timestamp_utc": "2026-09-19T17:20:00Z",
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "event_type": "EXTERNAL_RUN_COMPLETED",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Внешняя кампания NL5-002-B-R2 (nanolab-components 0.1.1) ЗАВЕРШЕНА. (1) execution_outcome = COMPLETED: 12/12 валидных реплик (0b/11b 200k шагов по 50 кадров; 32b/53b 150k по 37 кадров в окне), все exit codes НАБЛЮДАЕМЫЕ = 0 (exit_code.txt записаны wrapper'ами), все packaged-анализы и campaign-классификации exit=0; wall кампании 02:30:08Z -> 16:18:44Z = 13.8h (бюджет 48h, per-replica 20h kill не достигнут); watcher исполнителя завершил packaged-анализ 16:22:33Z. (2) Техническая цепочка полная: package verify 42/42 ok на старте; движок собран из pristine-исходников пина 00dc7fb9 (CPU/double, tarball по карточке, sha256 записан, правок исходников НЕТ); upstream digest gates 9/9 PASS (size+blob_sha1, sha256 == published); frame0 oracle 4/4 EXACT; 12 fresh seeds заморожены до запусков (seeds_frozen.json); durable-cache отсутствовал. (3) Отклонения (из отчёта, §10): D1 - wave-1 EXTERNAL-32b-1..3/53b-1..3 остановлены исполнителем 02:44Z при смене launch-стратегии (12-way параллелизм снижал rate; ETA 26h > 20h kill), перезапущены под НОВЫМИ ID (-R) с теми же frozen seeds по protocol §9; D2 - потеря executor-сессии ~05:48Z, detached runs не пострадали, watcher административно перезапущен orchestration 14:03:46Z без изменения скрипта; D3 - warnings/stderr прогонов и анализа отсутствуют. (4) Научный исход по packaged-конвенции (executor, non-binding self-assessment §12): WO-level MISMATCH; per-card (rule_id NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE, valid_replicas=3): 0b = MISMATCH (статистика 68.389781796 вне envelope [65.095434789, 67.236579608], все 3 fresh median строго выше), 11b = MATCH (73.560609814 в [72.165683993, 74.533109426]), 32b = MISMATCH (75.180138343 вне [77.4927314, 79.877463339], все 3 строго ниже), 53b = MATCH (132.41188514 в [131.049227687, 135.285186059]), 74b = N/A NOT_MEASURED (значения не производились). Независимый механический пересчёт orchestration (median-of-3, directional separation) подтвердил 4/4 классификации и цепочку run->campaign medians. (5) Binding-сравнение с frozen contract - отдельной единицей NL5-002-C2 (work/nl5-002-c2-compare-r2-r1, процедура заморожена до данных, WO-NL5-002-C2-R1) по frozen mapping WO-NL5-002-A-R1; пороги/envelope НЕ меняются; MISMATCH не repairится порогами (owner mission §12). (6) Orchestrator finding (из identity-проверки C2, вне научных поверхностей): RELEASE_MANIFEST.json v0.1.1 пинует 7 файлов convention/nlbl_convention/__pycache__/*.pyc, отсутствующих в git-дереве release; свежий verify по git-checkout падает на missing files, verify в рабочей копии ломается после реимпорта (перегенерация .pyc). Packaging-детерминизм, науку не затрагивает (все научные поверхности verify OK: analyze_hinge.py, arm-manifests, карточки - sha256 == manifest). (7) Ingest: отчёт и evidence скопированы в evidence/ (72 файла, ~652KB); raw trajectories остаются в staging с манифестами (run_output_digests.json 84 записи 12 прогонов x 7 файлов; artifact_manifest.json 427 записей). sha256 финального отчёта 5aee793479292eafa6095f91533aca949bfbad596949d19fd7ee8daca910f421.",
+  "command_refs": [
+    "sha256sum staging workspace/EXTERNAL_REPRODUCTION_REPORT.md -> 5aee793479292eafa6095f91533aca949bfbad596949d19fd7ee8daca910f421",
+    "for r in 12 runs: cat runs/$r/exit_code.txt -> exit_code: 0 (12/12)",
+    "tail logs/wait_and_analyze_progress.txt -> 16:18:44Z all runs done; 16:22:33Z analysis done",
+    "python3 - <<recalc: median-of-3 + directional separation по campaign_<v>.json -> 4/4 agree",
+    "bash /tmp/ingest_b_r2.sh docs/work/executions/EX-NL5-002-B-R2/evidence (72 files)",
+    "python3 reproduction/reproduce.py verify (staging, повторно после кампании) -> pyc-находка F-orch1"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/EXTERNAL_REPRODUCTION_REPORT.md",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/analysis/campaign_0b.json",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/analysis/campaign_11b.json",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/analysis/campaign_32b.json",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/analysis/campaign_53b.json",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/run_output_digests.json",
+    "docs/work/executions/EX-NL5-002-B-R2/evidence/artifact_manifest.json",
+    "docs/work/WO-NL5-002-C2-R1.md (на work/nl5-002-c2-compare-r2-r1)"
+  ],
+  "next_action": "ORCHESTRATOR: NL5-002-C2 - механическое сравнение B-R2 с frozen contract (binding вердикт) на work/nl5-002-c2-compare-r2-r1; затем Fresh Reviewer + Fresh Verifier; disposition MISMATCH - по owner mission §12 (без threshold tuning, без автоматического R3).",
+  "blocker": null
+}

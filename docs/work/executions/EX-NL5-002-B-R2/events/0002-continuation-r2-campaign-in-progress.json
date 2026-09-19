@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-r2-campaign-in-progress",
+  "timestamp_utc": "2026-09-19T05:10:00Z",
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "event_type": "CONTINUATION",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Кампания R2 в процессе (статус исполнителя, ~05:00Z): все 12 реплик запущены стабильно, отвязанно от сессии исполнителя (setsid/nohup по протоколу R2), ~4.2 steps/s каждая, stderr чист; ~22-25% пути на момент статуса. Волны завершения по наблюдателям исполнителя: 32b/53b (150k) ~13:00Z, 0b/11b (200k) ~16:30Z; после завершения всех 12 исполнитель по своему watcher-плану запускает анализ по упакованной конвенции (frame0 oracle -> run -> campaign) и финализирует отчёт. Урок B-R1 учтён: прогоны не зависят от жизни сессии; критично только, чтобы исполнитель вернулся к анализу - при отсутствии финального отчёта после ~17:30Z orchestration nudge через send_message (административный, без научных подсказок). Цепочка приёмки после R2: ingest отчёта -> сравнение по frozen rule -> при REPRODUCED/REPRODUCED_WITH_DEVIATION фаза D (Fresh Reviewer + Fresh Verifier + Director record + state transition NL5=ACCEPTED, external_reproductions=1).",
+  "command_refs": [
+    "list_agents -> 09fdf6c4-33af-47ed-8d9e-a020ab723681 (executor R2, between turns, watchers armed)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R2/passport.json",
+    "docs/work/executions/EX-NL5-002-B-R2/events/0001-external-executor-r2-dispatched.json"
+  ],
+  "next_action": "ORCHESTRATOR: по финальному отчёту R2 - event 0003-external-run-completed + ingest + сравнение; далее фаза D.",
+  "blocker": null
+}

@@ -1,0 +1,149 @@
+{
+  "mode": "plan",
+  "ok": true,
+  "plans": [
+    {
+      "card": "families/dna_hinge/cards/0b.card.json",
+      "component_id": "dna_hinge/0b",
+      "measurement_status": "MEASURED",
+      "claim_ceiling": "C0_SOFTWARE_ONLY",
+      "rights_mode": "REFERENCE_ONLY",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "steps": [
+        "1. download-on-run; verify mandatory size + blob_sha1; interpret sha256 only together with sha256_status",
+        "2. freeze three fresh seeds before execution; do not reuse reference seeds",
+        "3. run the pinned CPU/double oxDNA model and apply the packaged frozen convention: convention/OBSERVABLE_CONVENTION_V0_1.md, reference implementation convention/analyze_hinge.py + convention/nlbl_convention/, frozen arm manifest convention/arm-manifest-0b.json",
+        "4. analyze the frozen comparison window t <= 200000 (analyze_hinge.py run --window 200000; envelope basis: confirmatory 200k basis, 50 frames/replica); report per-replica medians and descriptive bootstrap (10000 resamples, seed 424242)",
+        "5. classify with NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (reproduction/REPRODUCTION_RULE_V0_1.md packaged; machine implementation convention/nlbl_convention/reproduction_rule.py) using independent replica medians; pooled bootstrap CI is descriptive only, never a prediction/tolerance interval"
+      ],
+      "expected": {
+        "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+        "independent_unit": "replica_median_deg",
+        "reference_campaign_statistic_deg": 65.708669763,
+        "reference_observable_estimate_deg": 65.976921401,
+        "reference_replica_envelope_deg": [
+          65.095434789,
+          67.236579608
+        ],
+        "reference_replica_medians_deg": [
+          65.095434789,
+          65.708669763,
+          67.236579608
+        ],
+        "required_fresh_replicas": 3,
+        "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+      }
+    },
+    {
+      "card": "families/dna_hinge/cards/11b.card.json",
+      "component_id": "dna_hinge/11b",
+      "measurement_status": "MEASURED",
+      "claim_ceiling": "C0_SOFTWARE_ONLY",
+      "rights_mode": "REFERENCE_ONLY",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "steps": [
+        "1. download-on-run; verify mandatory size + blob_sha1; interpret sha256 only together with sha256_status",
+        "2. freeze three fresh seeds before execution; do not reuse reference seeds",
+        "3. run the pinned CPU/double oxDNA model and apply the packaged frozen convention: convention/OBSERVABLE_CONVENTION_V0_1.md, reference implementation convention/analyze_hinge.py + convention/nlbl_convention/, frozen arm manifest convention/arm-manifest-11b.json",
+        "4. analyze the frozen comparison window t <= 150000 (analyze_hinge.py run --window 150000; envelope basis: parametric common window, 37 frames/replica); report per-replica medians and descriptive bootstrap (10000 resamples, seed 424242)",
+        "5. classify with NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (reproduction/REPRODUCTION_RULE_V0_1.md packaged; machine implementation convention/nlbl_convention/reproduction_rule.py) using independent replica medians; pooled bootstrap CI is descriptive only, never a prediction/tolerance interval"
+      ],
+      "expected": {
+        "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+        "independent_unit": "replica_median_deg",
+        "reference_campaign_statistic_deg": 74.218071238,
+        "reference_observable_estimate_deg": 73.928725839,
+        "reference_replica_envelope_deg": [
+          72.165683993,
+          74.533109426
+        ],
+        "reference_replica_medians_deg": [
+          74.218071238,
+          72.165683993,
+          74.533109426
+        ],
+        "required_fresh_replicas": 3,
+        "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+      }
+    },
+    {
+      "card": "families/dna_hinge/cards/32b.card.json",
+      "component_id": "dna_hinge/32b",
+      "measurement_status": "MEASURED",
+      "claim_ceiling": "C0_SOFTWARE_ONLY",
+      "rights_mode": "REFERENCE_ONLY",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "steps": [
+        "1. download-on-run; verify mandatory size + blob_sha1; interpret sha256 only together with sha256_status",
+        "2. freeze three fresh seeds before execution; do not reuse reference seeds",
+        "3. run the pinned CPU/double oxDNA model and apply the packaged frozen convention: convention/OBSERVABLE_CONVENTION_V0_1.md, reference implementation convention/analyze_hinge.py + convention/nlbl_convention/, frozen arm manifest convention/arm-manifest-32b.json",
+        "4. analyze the frozen comparison window t <= 150000 (analyze_hinge.py run --window 150000; envelope basis: parametric common window, 37 frames/replica); report per-replica medians and descriptive bootstrap (10000 resamples, seed 424242)",
+        "5. classify with NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (reproduction/REPRODUCTION_RULE_V0_1.md packaged; machine implementation convention/nlbl_convention/reproduction_rule.py) using independent replica medians; pooled bootstrap CI is descriptive only, never a prediction/tolerance interval"
+      ],
+      "expected": {
+        "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+        "independent_unit": "replica_median_deg",
+        "reference_campaign_statistic_deg": 77.794798276,
+        "reference_observable_estimate_deg": 78.091845516,
+        "reference_replica_envelope_deg": [
+          77.4927314,
+          79.877463339
+        ],
+        "reference_replica_medians_deg": [
+          79.877463339,
+          77.4927314,
+          77.794798276
+        ],
+        "required_fresh_replicas": 3,
+        "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+      }
+    },
+    {
+      "card": "families/dna_hinge/cards/53b.card.json",
+      "component_id": "dna_hinge/53b",
+      "measurement_status": "MEASURED",
+      "claim_ceiling": "C0_SOFTWARE_ONLY",
+      "rights_mode": "REFERENCE_ONLY",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "steps": [
+        "1. download-on-run; verify mandatory size + blob_sha1; interpret sha256 only together with sha256_status",
+        "2. freeze three fresh seeds before execution; do not reuse reference seeds",
+        "3. run the pinned CPU/double oxDNA model and apply the packaged frozen convention: convention/OBSERVABLE_CONVENTION_V0_1.md, reference implementation convention/analyze_hinge.py + convention/nlbl_convention/, frozen arm manifest convention/arm-manifest-53b.json",
+        "4. analyze the frozen comparison window t <= 150000 (analyze_hinge.py run --window 150000; envelope basis: parametric common window, 37 frames/replica); report per-replica medians and descriptive bootstrap (10000 resamples, seed 424242)",
+        "5. classify with NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (reproduction/REPRODUCTION_RULE_V0_1.md packaged; machine implementation convention/nlbl_convention/reproduction_rule.py) using independent replica medians; pooled bootstrap CI is descriptive only, never a prediction/tolerance interval"
+      ],
+      "expected": {
+        "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+        "independent_unit": "replica_median_deg",
+        "reference_campaign_statistic_deg": 132.343978104,
+        "reference_observable_estimate_deg": 132.35778773,
+        "reference_replica_envelope_deg": [
+          131.049227687,
+          135.285186059
+        ],
+        "reference_replica_medians_deg": [
+          132.343978104,
+          131.049227687,
+          135.285186059
+        ],
+        "required_fresh_replicas": 3,
+        "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+      }
+    },
+    {
+      "card": "families/dna_hinge/cards/74b.card.json",
+      "component_id": "dna_hinge/74b",
+      "measurement_status": "NOT_MEASURED",
+      "claim_ceiling": "C0_SOFTWARE_ONLY",
+      "rights_mode": "REFERENCE_ONLY",
+      "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+      "steps": [
+        "1. убедиться, что arm-manifest-v2 принят и опубликован в новой версии пакета",
+        "2. воспроизвести measured-карточку 74b по её reproduction-секции в этой новой версии"
+      ],
+      "expected": {},
+      "note": "NO MEASUREMENT TO REPRODUCE (KNOWN_GAP); do not fabricate values"
+    }
+  ],
+  "errors": []
+}

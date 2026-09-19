@@ -1,0 +1,12 @@
+launched EXTERNAL-0b-1 variant=0b seed=410273 steps=200000 wrapper_pid=116138
+launched EXTERNAL-0b-2 variant=0b seed=520931 steps=200000 wrapper_pid=116186
+launched EXTERNAL-0b-3 variant=0b seed=638257 steps=200000 wrapper_pid=116214
+launched EXTERNAL-11b-1 variant=11b seed=741953 steps=200000 wrapper_pid=116226
+launched EXTERNAL-11b-2 variant=11b seed=852607 steps=200000 wrapper_pid=116241
+launched EXTERNAL-11b-3 variant=11b seed=963541 steps=200000 wrapper_pid=116265
+launched EXTERNAL-32b-1 variant=32b seed=174329 steps=150000 wrapper_pid=116318
+launched EXTERNAL-32b-2 variant=32b seed=285637 steps=150000 wrapper_pid=116331
+launched EXTERNAL-32b-3 variant=32b seed=396421 steps=150000 wrapper_pid=116344
+launched EXTERNAL-53b-1 variant=53b seed=507283 steps=150000 wrapper_pid=116355
+launched EXTERNAL-53b-2 variant=53b seed=618457 steps=150000 wrapper_pid=116368
+launched EXTERNAL-53b-3 variant=53b seed=729613 steps=150000 wrapper_pid=116379
