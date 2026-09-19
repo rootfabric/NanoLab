@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-19T01:20:00Z",
+  "execution_id": "EX-NL5-002-C-R1",
+  "work_order_id": "NL5-002-C",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Собрана и провалидирована repair-ревизия releases/nanolab-components-v0.1.1 (v0.1.0 не тронут, контракт R1.2). Дельта v0.1.0 -> v0.1.1: (1) NEW convention/ - OBSERVABLE_CONVENTION_V0_1.md (самодостаточная спецификация frozen конвенции: угол [0,180] PCA-оси наружу, erratum R1 s.2.5; detector v2 mutual-nearest; frame gates; окно/статистика; bootstrap descriptive), frozen arm-manifest-{0b,11b,32b,53b}.json (точные копии EX-NL3-002-PROTO/PARAM evidence; 74b манифест не публикуется - NOT_MEASURED), run_arm_manifest.py (прозрачность генерации), nlbl_convention/ (stdlib-only референс-реализация: observables, oxdna_conf/topology, canonical, reproduction_rule - из scripts/ с относительными импортами), analyze_hinge.py (CLI: frame0/run/campaign); (2) карточки 0b/11b/32b/53b: reproduction.steps ссылаются на packaged convention + --window с basis (0b 200000 confirmatory basis 50 frames; 11b/32b/53b 150000 parametric common window 37 frames), requires дополнен URL движка https://github.com/lorenzo-rovigatti/oxDNA и tarball-путём codeload, protocol_pins.notes поясняет overlay print_energy_every=100 (upstream 4e3); expected/integrity/design - БИТ-В-БИТ идентичны v0.1.0 (проверено программно); (3) reproduction/README.md v0.1.1 (шаг конвенции + обязательная frame0 самопроверка), NEW корневой README.md с историей ревизий, VERSION/CITATION 0.1.1; (4) RELEASE_MANIFEST.json перегенерирован release.card_lint manifest create: 42 файла, package_version 0.1.1. Валидации (все PASS): reproduce.py verify ok 42/42; reproduce.py plan ok; card_lint package ok 0 warnings; frame0-оракул на upstream входах: EXACT MATCH x4 (66.886745865 / 74.357957026 / 77.477102136 / 132.949606811); полный конвейерный тест - analyze_hinge.py run на оригинальной траектории NL5-001-C-0B-S001 воспроизвёл записанную медиану 66.159296437 (frames 50/37/37) и campaign MATCH по карточному envelope. Научные tolerance/envelope не менялись; 74b без значений.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 scripts/release/card_lint.py manifest create releases/nanolab-components-v0.1.1 -> 42 files",
+    "python3 reproduction/reproduce.py verify (cwd v0.1.1) -> ok true, files 42",
+    "convention/analyze_hinge.py frame0 x4 -> EXACT MATCH design.angle_frame0_deg",
+    "convention/analyze_hinge.py run (NL5-001-C-0B-S001) -> replica_median_deg 66.159296437 == recorded"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-C-R1.md",
+    "releases/nanolab-components-v0.1.1/convention/OBSERVABLE_CONVENTION_V0_1.md",
+    "releases/nanolab-components-v0.1.1/README.md"
+  ],
+  "next_action": "IMPLEMENTER: events 0003 handoff + summary + evidence-map -> push -> staging v0.1.1 + dispatch B-R2.",
+  "blocker": null
+}
