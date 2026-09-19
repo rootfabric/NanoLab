@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this component library, please cite it and the upstream scientific sources referenced in RIGHTS.json."
+title: "NanoLab Component Library (nanolab-components)"
+version: "0.1.1"
+date-released: 2026-09-19
+license: Apache-2.0
+authors:
+  - name: "NanoLab project"
+keywords:
+  - DNA nanomechanics
+  - component library
+  - reproducibility

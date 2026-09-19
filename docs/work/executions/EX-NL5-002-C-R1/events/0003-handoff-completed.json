@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-09-19T01:20:00Z",
+  "execution_id": "EX-NL5-002-C-R1",
+  "work_order_id": "NL5-002-C",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Handoff NL5-002-C: repair-ревизия v0.1.1 собрана, все валидации PASS (verify 42/42, plan ok, lint ok, frame0 oracle EXACT x4, полный конвейер на референсной траектории воспроизводит опубликованные числа бит-в-бит). Открытые риски: (a) окна анализа 0b 200k vs внутренняя практика NL5-001-C 150k задокументированы в карточке/конвенции как basis-различие, числа не менялись; (b) детерминизм 53b между разными сборками движка не гарантирован вне протокола (пины соблюдены). Next action (один): staging /home/rdpuser/nl5-002-external-r2 (package v0.1.1 + EXECUTOR_PROTOCOL_R2 = Appendix A с путями R2 + требование robust detached execution + записи exit codes) -> fresh external executor session B-R2 -> отчёт; затем фаза D (Fresh Reviewer + Fresh Verifier + Director).",
+  "command_refs": [
+    "git -C /home/rdpuser/NanoLab/nl5-002-c-repair rev-parse HEAD",
+    "git -C /home/rdpuser/NanoLab/nl5-002-c-repair rev-parse HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-C-R1/summary.md",
+    "docs/work/executions/EX-NL5-002-C-R1/evidence-map.json"
+  ],
+  "next_action": "ORCHESTRATOR: dispatch NL5-002-B-R2 на v0.1.1; после отчёта - сравнение по frozen rule и при REPRODUCED/REPRODUCED_WITH_DEVIATION - фаза D acceptance chain.",
+  "blocker": null
+}
