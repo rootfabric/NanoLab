@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "checkpoint": "NL5 / NL5-002-B (fresh external repeat after bounded repair)",
+  "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "base_branch": "main",
+  "branch": "work/nl5-002-b-r2-external-run-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-002-b2-external",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL5-002-B-R2/**"
+  ],
+  "parent_work_order": "NL5-002",
+  "program_reference": "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md (§2.3: свежий внешний повтор после repair; §11 п.4)",
+  "protocol": "EXECUTOR_PROTOCOL_R2.md (frozen; адаптация Appendix A WO-NL5-002-A-R1 на staging R2 + robust process management + обязательная frame0 самопроверка) + releases/nanolab-components-v0.1.1 (branch work/nl5-002-c-compare-repair-r1 @ a1ba517)",
+  "executor": {
+    "kind": "fresh_external_agent_session",
+    "isolation": "вход ТОЛЬКО: /home/rdpuser/nl5-002-external-r2/{package,EXECUTOR_PROTOCOL_R2.md,REPORT_TEMPLATE.md}; доступ к NanoLab repo/worktrees/внутренним evidence и отчёту B-R1 запрещён",
+    "staging_pins_verified": true
+  },
+  "staging": {
+    "root": "/home/rdpuser/nl5-002-external-r2",
+    "package_copy": "/home/rdpuser/nl5-002-external-r2/package",
+    "executor_protocol": "/home/rdpuser/nl5-002-external-r2/EXECUTOR_PROTOCOL_R2.md",
+    "report_template": "/home/rdpuser/nl5-002-external-r2/REPORT_TEMPLATE.md",
+    "workspace": "/home/rdpuser/nl5-002-external-r2/workspace",
+    "expected_report": "/home/rdpuser/nl5-002-external-r2/workspace/EXTERNAL_REPRODUCTION_REPORT.md",
+    "package_version": "0.1.1",
+    "release_manifest_sha256": "88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef"
+  },
+  "budget": {
+    "runs": "12 (4 варианта x 3 fresh seeds), single-threaded, параллельно; перезапуск усечённых реплик под новыми ID до 3 полных",
+    "per_replica_hard_kill": "20h -> FAILED_TECHNICAL",
+    "campaign_wall": "48h",
+    "paid_compute": false,
+    "gpu": false
+  },
+  "started_at_utc": "2026-09-19T01:20:40Z",
+  "status": "DISPATCHED",
+  "notes": "Свежий внешний повтор после bounded repair C (v0.1.1 публикует frozen convention, engine URL, README, overlay-пояснение; научные значения бит-в-бит v0.1.0). Executor не получает отчёт B-R1 и repair map - только пакет 0.1.1 + EXECUTOR_PROTOCOL_R2 + шаблон отчёта. Валидации repair до dispatch: frame0 oracle EXACT x4, полный конвейер на эталонной траектории воспроизводит опубликованные числа бит-в-бит.",
+  "started_after_repair": {
+    "repair_branch": "work/nl5-002-c-compare-repair-r1",
+    "repair_head": "a1ba517"
+  }
+}
