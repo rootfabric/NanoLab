@@ -1,6 +1,6 @@
 # Дорожная карта NanoLab
 
-**Текущий frontier: `NL5` — внешнее воспроизведение release-пакета; следующая работа `NL5-002`. `NL0–NL4` приняты целиком (NL4 = AI NanoLab MVP COMPLETE); `NL5-001` принят (2026-09-18): опубликован пакет `nanolab-components 0.1.0` с финализированными лицензиями (код Apache-2.0; docs/data CC-BY-4.0; сторонние права не перелицензованы) и clean reproduction классификацией 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b honest gap до arm-manifest-v2; статусы экспериментов: `E0 = RUN`, `E1 = SUPPORTED`, `E2 = RUN`, `E3 = RUN` (честный negative-on-AI-advantage).** Актуальные статусы хранятся в [state.json](../project/state.json), зависимости работ — в [plan.json](../project/plan.json), post-MVP решение — в [POST_MVP_DEVELOPMENT_ROUTE_R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), сводка приёмок — в [WORK_QUEUE](work/WORK_QUEUE.md). Сроки и стоимость устанавливаются по измерениям, а не по обещанию ускорения от ИИ.
+**Текущий frontier: `NL5` — внешнее воспроизведение release-пакета; `NL5-002` исполнен с terminal `MISMATCH` (verified, 2026-09-19) и находится в `WAITING_HUMAN` (disposition — Human Gate). `NL0–NL4` приняты целиком (NL4 = AI NanoLab MVP COMPLETE); `NL5-001` принят (2026-09-18): опубликован пакет `nanolab-components 0.1.0` с финализированными лицензиями (код Apache-2.0; docs/data CC-BY-4.0; сторонние права не перелицензованы) и clean reproduction классификацией 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b honest gap до arm-manifest-v2; NL5-002 external reproduction (пакет v0.1.1 после bounded repair): 11b/53b MATCH, 0b/32b MISMATCH по frozen rule (пороги не менялись; Fresh Reviewer PASS be945f1 + Verifier PASS 4116468) — NL5 acceptance НЕ объявлен; статусы экспериментов: `E0 = RUN`, `E1 = SUPPORTED`, `E2 = RUN`, `E3 = RUN` (честный negative-on-AI-advantage).** Актуальные статусы хранятся в [state.json](../project/state.json), зависимости работ — в [plan.json](../project/plan.json), post-MVP решение — в [POST_MVP_DEVELOPMENT_ROUTE_R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), сводка приёмок — в [WORK_QUEUE](work/WORK_QUEUE.md). Сроки и стоимость устанавливаются по измерениям, а не по обещанию ускорения от ИИ.
 
 ```text
 NL0  Научная постановка и доступные эталоны
@@ -73,9 +73,9 @@ NL8      specialized nanomachine study
 
 Release `nanolab-components 0.1.0` включает machine-readable schema, family/variant cards, protocols, reports, provenance, reproduction, rights, citation/version и детерминированный release manifest. Первое DNA hinge family опубликовано как **одно семейство с измеренными вариантами**; clean reproduction: 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b `KNOWN_GAP / NOT_MEASURED` — честное состояние v0.1 (arm-manifest-v2 — отдельный будущий WO).
 
-### 3. NL5-002 — external reproduction (СЛЕДУЮЩАЯ)
+### 3. NL5-002 — external reproduction (ИСПОЛНЕН: terminal MISMATCH, WAITING_HUMAN)
 
-Независимый внешний executor повторяет release package `nanolab-components 0.1.0` из fresh environment, стартуя только с опубликованного пакета (без внутренних авторских допущений); сохранить команды, версии, digests, numerical/statistical deviations, failures и независимость executor/reviewer. Приёмка NL5 требует хотя бы одного такого воспроизведения.
+Цепочка 2026-09-19: A frozen protocol → B-R1 INCONCLUSIVE+PORTABILITY_FINDING (сохранён) → C bounded repair v0.1.1 (science byte-identical) → B-R2 12/12 валидных реплик exit=0 → C2 binding MISMATCH (0b/32b вне frozen envelopes, 11b/53b MATCH; 74b NOT_MEASURED; threshold tuning отсутствует). Fresh Reviewer PASS `be945f1`, Fresh Verifier PASS `4116468`; integration candidate `integration/nl5-002-r1 @ 33935ae`. Приёмка NL5 требует успешного воспроизведения — НЕ выполнено; disposition (platform-sensitivity research WO / optional packaging v0.1.2 / acceptance policy) — Human Gate: `docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md`.
 
 ### 4. Параллельно INFRA2 → INFRA3
 
