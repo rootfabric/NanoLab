@@ -38,7 +38,7 @@
     "gpu": false
   },
   "started_at_utc": "2026-09-19T01:20:40Z",
-  "status": "DISPATCHED",
+  "status": "COMPLETED_MISMATCH",
   "notes": "Свежий внешний повтор после bounded repair C (v0.1.1 публикует frozen convention, engine URL, README, overlay-пояснение; научные значения бит-в-бит v0.1.0). Executor не получает отчёт B-R1 и repair map - только пакет 0.1.1 + EXECUTOR_PROTOCOL_R2 + шаблон отчёта. Валидации repair до dispatch: frame0 oracle EXACT x4, полный конвейер на эталонной траектории воспроизводит опубликованные числа бит-в-бит.",
   "started_after_repair": {
     "repair_branch": "work/nl5-002-c-compare-repair-r1",

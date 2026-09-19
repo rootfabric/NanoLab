@@ -1,0 +1,26 @@
+=== cmake configure 2026-09-19T02:11:17Z ===
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test COMPILER_SUPPORTS_MARCH_NATIVE
+-- Performing Test COMPILER_SUPPORTS_MARCH_NATIVE - Success
+-- Zstd support disabled
+-- Found Git: /usr/bin/git (found version "2.34.1") 
+-- Could NOT find Doxygen (missing: DOXYGEN_EXECUTABLE) 
+-- Adding the targets found in the /home/rdpuser/nl5-002-external-r2/workspace/engine/oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591/contrib/randisi folder
+-- Adding the targets found in the /home/rdpuser/nl5-002-external-r2/workspace/engine/oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591/contrib/romano folder
+-- Adding the targets found in the /home/rdpuser/nl5-002-external-r2/workspace/engine/oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591/contrib/rovigatti folder
+-- Adding the targets found in the /home/rdpuser/nl5-002-external-r2/workspace/engine/oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591/contrib/tostiguerra folder
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/rdpuser/nl5-002-external-r2/workspace/engine/build
+cmake_exit: 0

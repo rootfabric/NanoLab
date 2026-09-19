@@ -1,0 +1,43 @@
+{
+  "campaign_statistic_deg": 132.41188514,
+  "card_reference": {
+    "bootstrap_ci_role": "DESCRIPTIVE_ONLY_NOT_A_REPRODUCTION_TOLERANCE",
+    "independent_unit": "replica_median_deg",
+    "reference_campaign_statistic_deg": 132.343978104,
+    "reference_observable_estimate_deg": 132.35778773,
+    "reference_replica_envelope_deg": [
+      131.049227687,
+      135.285186059
+    ],
+    "reference_replica_medians_deg": [
+      132.343978104,
+      131.049227687,
+      135.285186059
+    ],
+    "required_fresh_replicas": 3,
+    "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE"
+  },
+  "classification": {
+    "outcome": "MATCH",
+    "reason": "fresh campaign replica-median statistic lies inside the preregistered empirical reference-replica envelope",
+    "reference_campaign_statistic_deg": 132.343978104,
+    "reference_envelope_deg": [
+      131.049227687,
+      135.285186059
+    ],
+    "reproduction_campaign_statistic_deg": 132.41188514,
+    "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+    "valid_replicas": 3
+  },
+  "fresh_replica_medians_deg": [
+    132.41188514,
+    130.244172898,
+    136.169087714
+  ],
+  "kind": "nanolab_convention_campaign_classification",
+  "note": "bootstrap CI is descriptive only and never a tolerance",
+  "rule_id": "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE",
+  "schema_version": 1,
+  "variant": "53b"
+}
+

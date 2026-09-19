@@ -1,0 +1,28 @@
+EXTERNAL-0b-1 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-0b-1 exit=0
+EXTERNAL-0b-2 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-0b-2 exit=0
+EXTERNAL-0b-3 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-0b-3 exit=0
+campaign 0b exit=0
+EXTERNAL-11b-1 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-11b-1 exit=0
+EXTERNAL-11b-2 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-11b-2 exit=0
+EXTERNAL-11b-3 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze EXTERNAL-11b-3 exit=0
+campaign 11b exit=0
+EXTERNAL-32b-1R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-32b-1R exit=0
+EXTERNAL-32b-2R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-32b-2R exit=0
+EXTERNAL-32b-3R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-32b-3R exit=0
+campaign 32b exit=0
+EXTERNAL-53b-1R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-53b-1R exit=0
+EXTERNAL-53b-2R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-53b-2R exit=0
+EXTERNAL-53b-3R frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze EXTERNAL-53b-3R exit=0
+campaign 53b exit=0

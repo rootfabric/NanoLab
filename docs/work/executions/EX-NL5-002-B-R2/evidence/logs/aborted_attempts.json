@@ -1,0 +1,44 @@
+[
+  {
+    "run_id": "EXTERNAL-32b-1",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556426+00:00",
+    "last_energy_step": null
+  },
+  {
+    "run_id": "EXTERNAL-32b-2",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556617+00:00",
+    "last_energy_step": null
+  },
+  {
+    "run_id": "EXTERNAL-32b-3",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556716+00:00",
+    "last_energy_step": null
+  },
+  {
+    "run_id": "EXTERNAL-53b-1",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556803+00:00",
+    "last_energy_step": null
+  },
+  {
+    "run_id": "EXTERNAL-53b-2",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556885+00:00",
+    "last_energy_step": null
+  },
+  {
+    "run_id": "EXTERNAL-53b-3",
+    "status": "ABORTED_BY_EXECUTOR_AT_LAUNCH_STRATEGY_CHANGE",
+    "reason": "12-way parallel concurrency halved per-process rate (~2.1 steps/s -> 200k ETA 26h > 20h kill limit); restructured into two waves",
+    "killed_at_utc": "2026-09-19T02:44:22.556971+00:00",
+    "last_energy_step": null
+  }
+]
