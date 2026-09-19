@@ -20,6 +20,13 @@
     "docs/work/executions/EX-NL5-002-B-R1/evidence/upstream_digest_gates.json",
     "/home/rdpuser/nl5-002-external/workspace/artifacts/artifact_manifest.json (staging; digest в summary.md)"
   ],
-  "next_action": "ORCHESTRATOR: фаза C на ветке work/nl5-002-c-compare-repair-r1 - сравнение/	root cause/repair map (WO-NL5-002-C-R1), package 0.1.1, затем свежий внешний повтор NL5-002-B-R2.",
-  "blocker": null
+  "next_action": "ORCHESTRATOR: фаза C на ветке work/nl5-002-c-compare-repair-r1 - сравнение / root cause/repair map (WO-NL5-002-C-R1), package 0.1.1, затем свежий внешний повтор NL5-002-B-R2.",
+  "blocker": null,
+  "corrections": [
+    {
+      "field": "next_action (syntax)",
+      "issue": "raw TAB control character inside JSON string made the event unparsable (committed as 82ad7bd)",
+      "fix": "TAB replaced by space; semantic content unchanged; original bytes preserved in git history at commit 82ad7bd"
+    }
+  ]
 }
