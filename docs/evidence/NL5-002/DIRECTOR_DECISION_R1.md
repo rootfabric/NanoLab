@@ -151,9 +151,9 @@ tooling Reviewer (fresh session) = PASS  review/nl5-002-integration-r1 @ 61edc42
                                    (REVIEWED_INTEGRATION_HEAD = 4c67e211…, REVIEWED_TREE = 641c9cc7…,
                                     8/8 инвариантов, 21/21 negative controls, 369 tests OK;
                                     evidence: docs/evidence/NL5-002/FRESH_INTEGRATION_REVIEW_R1.md)
-PR #43                           = MERGED, merge commit 7504b38110aa0694495b037d11f079afee467de
+PR #43                           = MERGED, merge commit 7504b38110aa0694495b037d11f07f9afee467de
                                    (parents 48c55b3 + 4c67e21; merge содержит exact integration head)
-post-merge main                  = 7504b38110aa0694495b037d11f079afee467de
+post-merge main                  = 7504b38110aa0694495b037d11f07f9afee467de
 ancestry                         = git merge-base --is-ancestor 4c67e211… origin/main → PASS
 post-merge verification          = 369 tests OK; check-consistency ok=true;
                                    workflow_lint blocking=0; 43/43 EX-* valid
