@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-20T14:11:30Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "d07e75e68c20599e4b942aefb20b4b3922985219",
+  "summary": "START platform sensitivity R1, P1 leg (author Windows/WSL2 environment). Preregistration gates all PASS and frozen: review 1f8c063 + verify bd25baf at WO head 4d6542f (tree 7651569a); dispatch was BLOCKED_ON_P1_AVAILABILITY, now resumed because the owner P1 host is available and fingerprint-verified. P1 identity gate executed per mission before any physics: CURRENT_HOST_IS_P1=true (13th Gen Intel i9-13900H, 20 logical, Windows + WSL2 default v2), P1_ACCESSIBLE=true (pre-existing author distro 'Ubuntu', user yurig, ~/nl1-001 original campaign artifacts present), P1_ENVIRONMENT_MATCH=true vs docs/research/ENGINE_ENVIRONMENT_R1.md section 2 and PREREGISTRATION_FREEZE_R1 (Ubuntu 24.04.2 LTS exact; kernel 6.18.33.2-microsoft-standard-WSL2 exact; gcc/g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 exact; cmake 3.31.6 user-local; GNU Make 4.3; Python 3.12.3; 15 GiB WSL RAM; WSLInterop present). Clean execution worktree work/nl5-002-e-platform-sensitivity-r1 created from canonical origin/main d07e75e68c20599e4b942aefb20b4b3922985219 (fresh fetch --all --prune; local main was behind, branch created from origin/main per mission section 3; administrative branch docs/nl5-002-e-status-sync-r1 not blocking, no scientific cherry-pick). Passport pins ALL remaining pre-data implementation choices per the binding Verifier condition of FRESH_PREREGISTRATION_VERIFY_R1 Check 7: N_PRIMARY=10; P3=NOT_INCLUDED; primary variants 0b/32b with steps 200000/150000; controls 11b/53b NOT_RUN_IN_PRIMARY_CAMPAIGN; 74b FORBIDDEN; frozen seeds S001-S010 verbatim from WO (paired with future P2); raw MAD convention without 1.4826; within_v = median(MAD P1, MAD P2); within_v=0 degenerate rules (0 if shift 0, +INF otherwise); bootstrap = Python random.Random(902107), 10000 resamples, paired, percentile CI with h=(B-1)*p linear interpolation; P1_MAX_CONCURRENCY=8; package nanolab-components 0.1.1 (RELEASE_MANIFEST sha256 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef); engine oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 CPU/double, fresh P1-convention rebuild planned (no GCC11 B-R2 patch, no source edits; STOP if any gcc13 source modification turns out to be required); upstream inputs gauravarya77/DNA-hinge-simulations @ 23fd1ff7731e9017bd776f49206dc42d70d9fe91 via Windows transport with size+blob_sha1 gates and transient-copy cleanup, durable_cache FORBIDDEN; replica input = upstream verbatim + overlay(seed, steps, paths, print_energy_every=100); run IDs PLATSENS-P1-{0B,32B}-S001..S010, technical reruns under new -R1 IDs with same seed; runs detached inside WSL on Linux filesystem (~/nanolab-platform-sensitivity-r1/P1), raw trajectories never in Git nor on /mnt/c; monitoring limited to process/step/exit status - no angle/MATCH/shift/verdict decisions until the frozen P1 set completes; P1-only boundary forbids shift/CI/ratio/verdict computation until P2 data exist. Next: commit+push this START, then workspace/package/engine/upstream preparation, then 20 detached runs.",
+  "command_refs": [
+    "git fetch --all --prune; git rev-parse origin/main -> d07e75e68c20599e4b942aefb20b4b3922985219 (MATCH canonical)",
+    "git rev-parse '4d6542fda81084dced2578f3e008c8c8e0705a5a^{tree}' -> 7651569ac8d0e93c0cc7614cb692945ad5bd0c98 (MATCH WO TREE pin)",
+    "git merge-base --is-ancestor 4d6542fda81084dced2578f3e008c8c8e0705a5a origin/main -> YES",
+    "git worktree add C:/NanoLab/nl5-002-e-platform-r1 -b work/nl5-002-e-platform-sensitivity-r1 origin/main (clean)",
+    "wsl -d Ubuntu fingerprint: os-release 24.04.2; uname -r 6.18.33.2-microsoft-standard-WSL2; gcc/g++ 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1); make 4.3; python3 3.12.3; lscpu i9-13900H; free 15Gi; WSLInterop_PRESENT; user-local cmake 3.31.6 present"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-E-R1.md",
+    "docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md",
+    "docs/evidence/NL5-002-E/FRESH_PREREGISTRATION_REVIEW_R1.md",
+    "docs/evidence/NL5-002-E/FRESH_PREREGISTRATION_VERIFY_R1.md",
+    "docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md",
+    "docs/work/executions/EX-NL5-002-E-R1/passport.json"
+  ],
+  "next_action": "EXECUTOR: push START, prepare WSL P1 workspace, transfer package 0.1.1 byte-for-byte with digest verification, fresh oxDNA build (P1 convention), upstream input acquisition with digest gates, then launch 20 detached runs at concurrency <= 8.",
+  "blocker": null
+}

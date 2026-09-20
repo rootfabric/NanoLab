@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "checkpoint": "NL5 / NL5-002-E platform sensitivity (P1 leg of paired P1/P2 campaign)",
+  "base_sha": "d07e75e68c20599e4b942aefb20b4b3922985219",
+  "base_branch": "main",
+  "branch": "work/nl5-002-e-platform-sensitivity-r1",
+  "worktree": "C:/NanoLab/nl5-002-e-platform-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL5-002-E-R1/**",
+    "docs/evidence/NL5-002-E/**"
+  ],
+  "parent_work_order": "NL5-002",
+  "program_reference": "docs/work/WO-NL5-002-E-R1.md (frozen @ 4d6542f); docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md; docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md (Дополнение 3)",
+  "preregistration": {
+    "wo_document": "docs/work/WO-NL5-002-E-R1.md",
+    "wo_head": "4d6542fda81084dced2578f3e008c8c8e0705a5a",
+    "wo_tree": "7651569ac8d0e93c0cc7614cb692945ad5bd0c98",
+    "freeze_record": "docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md",
+    "review_pass": "docs/evidence/NL5-002-E/FRESH_PREREGISTRATION_REVIEW_R1.md (review/nl5-002-e-preregistration-r1 @ 1f8c063e6c620ec6f8caa804954bf861eb76f13d, PASS)",
+    "verify_pass": "docs/evidence/NL5-002-E/FRESH_PREREGISTRATION_VERIFY_R1.md (verify/nl5-002-e-preregistration-r1 @ bd25baf325987656eddd8a5b2ab36065f0170d5c, PASS 9/9)",
+    "canonical_main_at_start": "d07e75e68c20599e4b942aefb20b4b3922985219",
+    "status_branch_not_blocking": "docs/nl5-002-e-status-sync-r1 @ 9f160dd is administrative status-sync only; P1 executes from canonical origin/main d07e75e; no scientific content is cherry-picked from it"
+  },
+  "pins": {
+    "package": "nanolab-components 0.1.1",
+    "package_source": "releases/nanolab-components-v0.1.1 (copied byte-for-byte from canonical worktree into WSL P1 workspace)",
+    "release_manifest_sha256": "88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef",
+    "convention": "convention/analyze_hinge.py + convention/nlbl_convention/ (packaged; same as R1; no substitute analyzer)",
+    "engine": "oxDNA (lorenzo-rovigatti/oxDNA)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "engine_build": "CPU, DOUBLE precision; P1 build convention of docs/research/ENGINE_ENVIRONMENT_R1 section 3 (fresh rebuild in this campaign; no GCC11-specific B-R2 build patch applied on P1; NO source modifications)",
+    "upstream_inputs": "gauravarya77/DNA-hinge-simulations @ 23fd1ff7731e9017bd776f49206dc42d70d9fe91, files MD_Hinges/<variant>.conf, MD_Hinges/<variant>.top, MD_Hinges/pro_CPU.in; download-on-run via Windows transport with mandatory size + blob_sha1 gate and sha256 cross-check against card source_provenance.digest_gates; durable_cache FORBIDDEN; transient upstream copies deleted after evidence/digests",
+    "replica_input_rule": "upstream files verbatim (digest-gated copies); ONLY overlay = seed, steps, input/output paths, print_energy_every=100 (card protocol_pins.options pin; upstream file has 4e3); print_conf_interval=4000 verbatim; run command: <workspace>/engine/build/bin/oxDNA input executed in the run directory",
+    "upstream_rights": "REFERENCE_ONLY, download-on-run, durable_cache FORBIDDEN (RIGHTS.json / card rights)"
+  },
+  "design": {
+    "N_PRIMARY": 10,
+    "P3": "NOT_INCLUDED",
+    "primary_variants": ["0b", "32b"],
+    "controls_11b_53b": "NOT_RUN_IN_PRIMARY_CAMPAIGN (may only be opened by a separate preregistered continuation if genuinely needed later)",
+    "variant_74b": "FORBIDDEN (WO hard prohibition; NOT_MEASURED/KNOWN_GAP)",
+    "steps": {
+      "0b": 200000,
+      "32b": 150000
+    },
+    "seeds_frozen": {
+      "S001": 1259289227,
+      "S002": 1358106528,
+      "S003": 1524307444,
+      "S004": 601855227,
+      "S005": 274288237,
+      "S006": 972234272,
+      "S007": 1934775205,
+      "S008": 1747973984,
+      "S009": 880427736,
+      "S010": 744386736
+    },
+    "seed_rule": "identical seed list on P1 and P2 (paired design); seeds frozen in WO before any data; failed run IDs are never reused - a technical rerun takes a new ID with suffix -R1 (e.g. PLATSENS-P1-0B-S004-R1) and the SAME frozen seed; exit 0 is never treated as a scientific pass",
+    "run_id_convention_p1": "PLATSENS-P1-0B-S001..S010, PLATSENS-P1-32B-S001..S010 (20 primary P1 runs)",
+    "runs_expected_p1": 20
+  },
+  "statistics_frozen_pre_data": {
+    "mad_convention_verbatim": "median_x = median(x); MAD(x) = median( abs(x_i - median_x) )  -- RAW MAD, NO 1.4826 factor",
+    "within_variant_verbatim": "within_v = median( MAD(P1 variant v), MAD(P2 variant v) )  where MAD is taken over per-seed replica medians within each platform",
+    "ratio_rule_verbatim": "if within_v > 0: ratio_v = abs(shift_v) / within_v; if within_v == 0 and abs(shift_v) == 0: ratio_v = 0; if within_v == 0 and abs(shift_v) > 0: ratio_v = +INF",
+    "shift_definition": "shift_v = median_i( d_i ), d_i = median(P2, seed_i) - median(P1, seed_i); computed ONLY when both platforms have data for the same seed",
+    "bootstrap_implementation": {
+      "rng": "Python random.Random(902107) (stdlib, deterministic)",
+      "resamples": 10000,
+      "paired_resampling": true,
+      "procedure": "on each bootstrap iteration: draw N indices with replacement from [0..N-1]; take the corresponding paired differences d_i; statistic = median(resampled differences)",
+      "percentile_ci_verbatim": "sort bootstrap statistics; q(p): h = (B - 1) * p; lo = floor(h); hi = ceil(h); linear interpolation; CI95 = q(0.025), q(0.975)"
+    },
+    "verdict_rule": "PLATFORM_SENSITIVE: CI excludes 0 AND ratio_v >= 1; PLATFORM_INSENSITIVE: CI contains 0 OR ratio_v < 0.5; otherwise INCONCLUSIVE (per variant); WO-level: both variants SENSITIVE -> PLATFORM_SENSITIVE, both INSENSITIVE -> PLATFORM_INSENSITIVE, else INCONCLUSIVE",
+    "p1_only_boundary": "after the P1 leg ONLY per-seed results and descriptive distribution of P1 are produced; shift_v, paired bootstrap CI, ratio_v and any platform verdict are FORBIDDEN until P2 data for the same seeds exist"
+  },
+  "platforms": {
+    "P1_actual_fingerprint": {
+      "role": "author/reference environment (frozen P1)",
+      "host_os": "Windows (author machine; Get-CimInstance Win32_ComputerSystem: Manufacturer=INTEL, Model='Raptor Lake PCH B760M-ATX ERYING')",
+      "cpu": "13th Gen Intel(R) Core(TM) i9-13900H, 14 cores / 20 logical processors",
+      "wsl": "version 2 (default), distro 'Ubuntu' (pre-existing author distro; no new distro, no upgrades)",
+      "distro": "Ubuntu 24.04.2 LTS (Noble Numbat)",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "gcc": "gcc/g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "make": "GNU Make 4.3",
+      "cmake": "3.31.6 user-local tarball (no global install, no sudo), same convention as ENGINE_ENVIRONMENT_R1",
+      "python": "3.12.3",
+      "wsl_ram": "15 GiB",
+      "wslinterop": "WSLInterop_PRESENT",
+      "wsl_user": "yurig (same author WSL environment as prior P1 campaigns; ~/nl1-001 original build present)",
+      "compared_against": "docs/research/ENGINE_ENVIRONMENT_R1.md section 2 + docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md; exact match on distro version, kernel, compiler string, CPU, WSL2, make, python, RAM"
+    },
+    "P2_frozen_fingerprint": {
+      "role": "external environment (platform of B-R2)",
+      "distro": "Ubuntu 22.04.5",
+      "gcc": "11.4.0",
+      "cpu": "Intel(R) Xeon(R) CPU E5-2698 v3",
+      "host": "outenemy",
+      "note": "P2 fingerprint as frozen in PREREGISTRATION_FREEZE_R1; verified against B-R2 evidence env/environment_fingerprint.txt by the freeze gates"
+    }
+  },
+  "execution_environment": {
+    "scientific_runs": "executed INSIDE WSL2 Ubuntu (P1), never by a native Windows binary",
+    "raw_trajectories": "kept on the WSL2 Linux filesystem under ~/nanolab-platform-sensitivity-r1/P1/runs (NOT in Git, NOT on /mnt/c)",
+    "p1_max_concurrency": 8,
+    "concurrency_rule": "max 8 single-threaded oxDNA processes simultaneously; never launch all 20 at once; concurrency is NOT changed based on scientific angle output; if 8 proves unacceptable for thermal/performance budget, stop before scientific analysis, record an administrative throughput finding, and choose a new value only before mass continuation",
+    "detached_processes": "each run is launched detached (nohup/setsid inside WSL) so it survives agent session closure; per run recorded: command, PID, start UTC, stdout, stderr, exit_code file, wall time; no parent-lifetime dependency on the agent session",
+    "monitoring_boundary": "during the campaign only process/CPU/memory/step-progress/stderr/disk/ETA/exit-code are monitored; NO decisions on angle, MATCH/MISMATCH, shift, or platform verdict until the frozen set is complete",
+    "windows_transport": "WSL has no direct internet route (historical P1 convention): engine sources and upstream inputs are fetched on the Windows side with exact pin/digest validation, transiently copied into WSL, and transient upstream copies are deleted after evidence/digests"
+  },
+  "budget": {
+    "runs_p1": "20 primary (10 seeds x 2 variants), single-threaded engine processes, concurrency <= 8",
+    "steps": "0b: 200000 x 10; 32b: 150000 x 10",
+    "campaign_wall_p1": "<= 72h per platform (frozen WO budget)",
+    "per_replica_hard_kill": "24h -> FAILED_TECHNICAL",
+    "paid_compute": false,
+    "gpu": false
+  },
+  "started_at_utc": "2026-09-20T14:10:56Z",
+  "status": "STARTED",
+  "notes": "P1 leg only. This passport pins every pre-data implementation detail required by PREREGISTRATION_FREEZE_R1 (MAD convention, within_v=0 degenerate cases, bootstrap RNG implementation, N, seeds, variants, windows, concurrency) BEFORE the first physics run, per the binding Verifier condition. R1 MISMATCH and NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE are not touched; NL5 acceptance, NL6-001 and E5 remain locked. Raw trajectories stay outside Git; Git receives compact evidence only."
+}
