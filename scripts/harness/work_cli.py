@@ -15,6 +15,19 @@ TERMINAL = {"HANDOFF_COMPLETED", "WORK_ORDER_BLOCKED", "WORK_ORDER_CANCELLED"}
 CORRECTIONS_EVENTS = {"CONTINUATION_CHECKPOINT", "REVIEW_CORRECTIONS"}
 ALLOWED_EVENTS = {"WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", "REVIEW_CORRECTIONS", *TERMINAL}
 ALLOWED_ROLES = {"IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"}
+# External executor campaigns (NL5-002 lineage): ORCHESTRATOR-dispatched external
+# agent sessions report with a dedicated event vocabulary. A directory belongs to
+# the external profile iff its first (lexically) event is EXTERNAL_EXECUTOR_DISPATCHED.
+# Structural discipline: exactly one dispatch opener, exactly one EXTERNAL_RUN_COMPLETED
+# terminal; CONTINUATION records progress/errata append-only (also allowed after the
+# terminal, e.g. documented timestamp errata). Per-event integrity (required fields,
+# event_id/filename match, subject_sha, parseable timestamps) is enforced identically
+# to standard work-order directories; standard directories keep the existing rules
+# unchanged and must not use the external vocabulary.
+EXTERNAL_ALLOWED_EVENTS = {"EXTERNAL_EXECUTOR_DISPATCHED", "CONTINUATION", "EXTERNAL_RUN_COMPLETED"}
+EXTERNAL_ALLOWED_ROLES = {"ORCHESTRATOR"}
+EXTERNAL_OPENER = "EXTERNAL_EXECUTOR_DISPATCHED"
+EXTERNAL_TERMINAL = "EXTERNAL_RUN_COMPLETED"
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
 SUBJECT_SHA_ABBREV = re.compile(r"^[0-9a-f]{7,39}$")
 # MINOR-2 repair (INFRA1-002 review R1): an abbreviated subject_sha is accepted
@@ -142,10 +155,6 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
             errors.append(f"{path.name}: execution_id differs from passport")
         if event.get("work_order_id") != passport.get("work_order_id"):
             errors.append(f"{path.name}: work_order_id differs from passport")
-        if event.get("event_type") not in ALLOWED_EVENTS:
-            errors.append(f"{path.name}: unsupported event_type")
-        if event.get("actor_role") not in ALLOWED_ROLES:
-            errors.append(f"{path.name}: unsupported actor_role")
         sha_value = str(event.get("subject_sha", ""))
         legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
         if not SHA40.fullmatch(sha_value) and not (SUBJECT_SHA_ABBREV.fullmatch(sha_value) and legacy_key in LEGACY_ABBREVIATED_SHA_EVENTS):
@@ -166,9 +175,13 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         errors.append("events are not lexically ordered")
     if len(ids) != len(set(ids)):
         errors.append("duplicate event_id")
+
     # NL2-003 ("repeats"): one constant timestamp copied across >= 3 events is a
     # batch/copy artifact. Published immutable events are grandfathered by exact
     # (execution_id, event_id) and do not count toward the tally.
+    # Shared by BOTH profiles (review F-1, repair/nl5-002-ci-external-vocab-r1):
+    # the check runs before the external/standard branch so external executor
+    # campaigns cannot bypass it.
     stamps: dict[str, list[str]] = {}
     for path, event in zip(event_files, events):
         value = event.get("timestamp_utc")
@@ -184,6 +197,39 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
                 + ": record a per-event machine stamp (legacy batch events are whitelisted; "
                 + LEGACY_BATCH_TIMESTAMP_PROVENANCE + ")"
             )
+
+    # Profile selection: an external executor campaign opens with
+    # EXTERNAL_EXECUTOR_DISPATCHED and uses its own vocabulary/roles.
+    is_external_profile = bool(event_types) and event_types[0] == EXTERNAL_OPENER
+    allowed_events = EXTERNAL_ALLOWED_EVENTS if is_external_profile else ALLOWED_EVENTS
+    allowed_roles = EXTERNAL_ALLOWED_ROLES if is_external_profile else ALLOWED_ROLES
+    for path, event_type in zip(event_files, event_types):
+        if event_type not in allowed_events:
+            errors.append(f"{path.name}: unsupported event_type")
+    for path, event in zip(event_files, events):
+        if event.get("actor_role") not in allowed_roles:
+            errors.append(f"{path.name}: unsupported actor_role")
+
+    if is_external_profile:
+        if event_types.count(EXTERNAL_OPENER) != 1:
+            errors.append("external execution profile requires exactly one EXTERNAL_EXECUTOR_DISPATCHED opener")
+        if event_types.count(EXTERNAL_TERMINAL) != 1:
+            errors.append("external execution profile requires exactly one EXTERNAL_RUN_COMPLETED terminal event")
+        terminal_idx = event_types.index(EXTERNAL_TERMINAL) if EXTERNAL_TERMINAL in event_types else -1
+        return {
+            "ok": not errors,
+            "errors": errors,
+            "execution_id": passport.get("execution_id"),
+            "work_order_id": passport.get("work_order_id"),
+            "status": passport.get("status"),
+            "profile": "external_execution",
+            "passport_sha256": digest_file(passport_path),
+            "event_types": event_types,
+            "has_terminal_handoff": terminal_idx >= 0,
+            "has_post_terminal_corrections": terminal_idx >= 0 and any(item == "CONTINUATION" for item in event_types[terminal_idx + 1:]),
+            "has_summary": summary_path.is_file(),
+        }
+
     if event_types and event_types[0] != "WORK_ORDER_STARTED":
         errors.append("WORK_ORDER_STARTED must be the first event")
     if event_types.count("WORK_ORDER_STARTED") != 1:
@@ -236,6 +282,7 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         "execution_id": passport.get("execution_id"),
         "work_order_id": passport.get("work_order_id"),
         "status": passport.get("status"),
+        "profile": "standard_work_order",
         "passport_sha256": digest_file(passport_path),
         "event_types": event_types,
         "has_terminal_handoff": bool(terminal_positions),
