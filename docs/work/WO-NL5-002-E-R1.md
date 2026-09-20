@@ -2,7 +2,8 @@
 
 ## Статус
 
-**FREEZE-IN-PROGRESS — preregistration content frozen as of this commit; review/verify pending.**
+**FROZEN — preregistration frozen @ `4d6542f` (tree `7651569a`); fresh Scientific Reviewer PASS (`review/nl5-002-e-preregistration-r1` @ `1f8c063`) + fresh Verifier PASS (`verify/nl5-002-e-preregistration-r1` @ `bd25baf`); freeze record: `docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md`. Dispatch = BLOCKED_ON_P1_AVAILABILITY (P1 author environment недоступна из исполнительной среды; resume — доступ владельца к P1 либо явная новая revision WO; подмена P1 и P2-only paired run запрещены).**
+*(Статусная строка синхронизирована 2026-09-20 с freeze record; научные разделы не менялись.)*
 Owner-разрешение получено (2026-09-20): `HUMAN_GATE_PLATFORM_SENSITIVITY_PREPARATION = APPROVED`
 (подготовить и после корректного preregistration freeze запустить bounded experiment).
 До (1) fresh Scientific Reviewer PASS preregistration, (2) fresh Verifier PASS
