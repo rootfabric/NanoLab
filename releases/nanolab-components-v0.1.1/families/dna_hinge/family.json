@@ -1,0 +1,28 @@
+{
+  "description": "Одно семейство compliant DNA-шарниров с измеренными вариантами. Варианты — члены одного семейства с общим протоколом, а НЕ независимые компоненты.",
+  "family_id": "dna_hinge",
+  "measurement_basis": "0b: confirmatory 200k (frozen E2_PROTO_R1) + common window 150k; 11b/32b/53b: параметрическая серия, общее окно 150k (addendum §8); 74b: runs NOT_RUN (honest gap)",
+  "presentation_rule": "family + variants; каждая карточка варианта ссылается на общий протокол семейства и свои digest-pins",
+  "schema_version": 1,
+  "title": "DNA hinge family (Shi–Castro–Arya)",
+  "upstream": {
+    "citation": "Shi, Castro, Arya — DNA hinge, DOI 10.1021/acsnano.7b00242",
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "repo": "gauravarya77/DNA-hinge-simulations",
+    "rights_mode": "REFERENCE_ONLY"
+  },
+  "variant_status": {
+    "0b": "MEASURED",
+    "11b": "MEASURED",
+    "32b": "MEASURED",
+    "53b": "MEASURED",
+    "74b": "NOT_MEASURED (KNOWN_GAP: arm-manifest-v2 pending)"
+  },
+  "variants": [
+    "0b",
+    "11b",
+    "32b",
+    "53b",
+    "74b"
+  ]
+}

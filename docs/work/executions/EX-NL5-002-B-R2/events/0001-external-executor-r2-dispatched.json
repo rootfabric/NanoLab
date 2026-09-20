@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-external-executor-r2-dispatched",
+  "timestamp_utc": "2026-09-19T01:20:40Z",
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "event_type": "EXTERNAL_EXECUTOR_DISPATCHED",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Dispatch fresh external executor R2 на отремонтированную ревизию nanolab-components 0.1.1 (после честного INCONCLUSIVE B-R1 и bounded repair по плану §2.3). Staging /home/rdpuser/nl5-002-external-r2: package v0.1.1 (RELEASE_MANIFEST sha256 88c1f580..., сверено с repair head a1ba517 байт-в-байт), EXECUTOR_PROTOCOL_R2.md (frozen; = Appendix A + staging R2 + robust detached process management с обязательными exit_code.txt и перезапуском усечённых реплик под новыми ID + обязательная frame0 самопроверка до прогонов + окна по карточкам 0b 200000/11b-32b-53b 150000), REPORT_TEMPLATE.md, чистый workspace. Executor: fresh agent session; вход = staging only; NanoLab repo, отчёт B-R1, repair map - запрещены. Научные tolerance/envelope неизменны; 74b без значений; durable-cache запрещён; без paid/GPU. Ожидаемая длительность ~15-20h wall с учётом возможных перезапусков (бюджет 48h).",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-002-b-r2-external-run-r1 /home/rdpuser/NanoLab/nl5-002-b2-external 48c55b3c4acdd2264527083e3072757be8bd9ada",
+    "sha256sum /home/rdpuser/nl5-002-external-r2/package/RELEASE_MANIFEST.json -> 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef (MATCH a1ba517)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-C-R1/passport.json",
+    "docs/work/WO-NL5-002-C-R1.md"
+  ],
+  "next_action": "ORCHESTRATOR: ожидать отчёт B-R2; затем event 0002-external-run-completed + ingest; сравнение по frozen rule; при REPRODUCED/REPRODUCED_WITH_DEVIATION - фаза D.",
+  "blocker": null
+}

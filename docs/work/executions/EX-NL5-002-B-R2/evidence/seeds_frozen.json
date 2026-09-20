@@ -1,0 +1,32 @@
+{
+  "kind": "external_frozen_seeds_v1",
+  "frozen_at_utc": "2026-09-19T02:08:21.782668+00:00",
+  "rule": "fresh integers, engine-valid (positive int64), != reference seeds 201004/202008/203012; frozen before ANY engine run",
+  "reference_seeds": [
+    201004,
+    202008,
+    203012
+  ],
+  "per_variant": {
+    "0b": [
+      410273,
+      520931,
+      638257
+    ],
+    "11b": [
+      741953,
+      852607,
+      963541
+    ],
+    "32b": [
+      174329,
+      285637,
+      396421
+    ],
+    "53b": [
+      507283,
+      618457,
+      729613
+    ]
+  }
+}

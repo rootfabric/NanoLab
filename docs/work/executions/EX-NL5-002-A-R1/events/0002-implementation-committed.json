@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "timestamp_utc": "2026-09-18T13:51:52Z",
+  "execution_id": "EX-NL5-002-A-R1",
+  "work_order_id": "NL5-002-A",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Опубликованы frozen deliverables WO-NL5-002-A-R1: (1) docs/work/WO-NL5-002-A-R1.md — полный замороженный протокол external reproduction: subject pins пакета nanolab-components 0.1.0 (RELEASE_MANIFEST.json sha256 f87134de…, 20/20 файлов, 5 карточек + rule doc + RIGHTS), executor constraints (fresh external session, вход = пакет + Appendix A только; NanoLab repo/worktrees/evidence/команды NL5-001-C запрещены; OS/runtime записывается, не подгоняется), seed policy (3 fresh seeds/вариант до запусков, != 201004/202008/203012), execution design (12 runs, 0b/11b 200k + 32b/53b 150k, окно t<=150000, median-of-3), budget/stop (kill 20h/replica, wall 48h, без paid/GPU), classification (per-card NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE + WO-level REPRODUCED/REPRODUCED_WITH_DEVIATION/INCONCLUSIVE/FAILED_TECHNICAL/MISMATCH mapping; INCONCLUSIVE из-за неполноты пакета = portability finding -> Phase C bounded repair; tolerance не меняется никогда), dispatch mechanics (staging /home/rdpuser/nl5-002-external/ вне репозитория), risks R1 (анализ-конвенция ссылается на internal docs, которых в пакете нет — НЕ чинится до фазы B), R2 (нет корневого README), R3 (wall ~10-14h/replica, кампания ~15h); (2) docs/work/templates/EXTERNAL_REPRO_REPORT_TEMPLATE_R1.md — обязательный формат отчёта (13 секций, включая independence statement и artifact manifest); (3) Appendix A EXECUTOR_PROTOCOL — self-contained, валидация grep: 0 внутренних ссылок (docs/*, nl5-001, NanoLab, scripts/ отсутствуют). Freeze полный: после dispatch никакие элементы протокола не меняются; portability repairs только через Phase C + package revision + свежий внешний повтор.",
+  "command_refs": [
+    "awk '/^# Appendix A/,0' docs/work/WO-NL5-002-A-R1.md | grep -nE 'docs/work|docs/research|docs/release|nl5-001|NanoLab|scripts/|WO-NL5|EXECUTION_PLAN' -> (пусто, exit 1)",
+    "sha256sum releases/nanolab-components-v0.1/{RELEASE_MANIFEST.json,VERSION,RIGHTS.json} (из main @ 48c55b3) -> пины в WO §Frozen subject"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-A-R1.md",
+    "docs/work/templates/EXTERNAL_REPRO_REPORT_TEMPLATE_R1.md",
+    "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md",
+    "docs/work/WO-NL5-001-C-R1.md"
+  ],
+  "next_action": "IMPLEMENTER: event 0003 handoff -> dispatch фазы B (fresh external executor subagent, staging без внутренних материалов).",
+  "blocker": null
+}

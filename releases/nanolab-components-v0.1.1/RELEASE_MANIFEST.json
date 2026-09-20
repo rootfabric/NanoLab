@@ -1,0 +1,261 @@
+{
+  "files": [
+    {
+      "path": "CITATION.cff",
+      "role": "citation",
+      "sha256": "c838f507781e1840ce9d50e6c9a8c34ed5f858f39797085786b8166e1fe13868",
+      "size_bytes": 373
+    },
+    {
+      "path": "README.md",
+      "role": "other",
+      "sha256": "8d5b97a6745120d6387fcb33ff851f0432705566f900ce649b06a73e589371b1",
+      "size_bytes": 2690
+    },
+    {
+      "path": "RIGHTS.json",
+      "role": "rights",
+      "sha256": "5292781ac4448112b3f3ecdaa47aede3f6539f8a68c357808e28dc896fa9bebf",
+      "size_bytes": 1511
+    },
+    {
+      "path": "VERSION",
+      "role": "metadata",
+      "sha256": "80447316529fc62014fbaa047fb67c51ac30e32830cda370405349d8d66d196c",
+      "size_bytes": 6
+    },
+    {
+      "path": "convention/OBSERVABLE_CONVENTION_V0_1.md",
+      "role": "other",
+      "sha256": "a7ad4392a4fcb751a14b3b124ff360f42bb3d25d1e8a67ae6025a32810d5b0af",
+      "size_bytes": 5643
+    },
+    {
+      "path": "convention/analyze_hinge.py",
+      "role": "other",
+      "sha256": "300ecd58703c50aa9e24976ab92e9aac61f9d60e49f18e68a58b131861f3ae60",
+      "size_bytes": 11209
+    },
+    {
+      "path": "convention/arm-manifest-0b.json",
+      "role": "other",
+      "sha256": "d509e4d421e64bbea72f46bd9c2243493a8873dcf250256326c34dca78656c75",
+      "size_bytes": 113834
+    },
+    {
+      "path": "convention/arm-manifest-11b.json",
+      "role": "other",
+      "sha256": "4078f285609a49532382a174539b0bd705f3744412779ffa4eea235fd10f84cd",
+      "size_bytes": 113719
+    },
+    {
+      "path": "convention/arm-manifest-32b.json",
+      "role": "other",
+      "sha256": "2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f",
+      "size_bytes": 114643
+    },
+    {
+      "path": "convention/arm-manifest-53b.json",
+      "role": "other",
+      "sha256": "8e58eb8901a97dc7f0598a826b1e08d3ffe9cd879746860aa33d6cbba6bbb324",
+      "size_bytes": 113964
+    },
+    {
+      "path": "convention/nlbl_convention/__init__.py",
+      "role": "other",
+      "sha256": "13da3b0eee7ba9685877489af2ad07b6da790f137cabb04f1f5d2d6f76aa96a8",
+      "size_bytes": 278
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/__init__.cpython-310.pyc",
+      "role": "other",
+      "sha256": "29a79346aa1df44bb844af14d787d36dc7299f1a9518468b66d4eb5428b24876",
+      "size_bytes": 491
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/canonical.cpython-310.pyc",
+      "role": "other",
+      "sha256": "29357830e0590769738866628e5a08c78435c04ddb1188597f75a77d0c6781d5",
+      "size_bytes": 553
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/hf_canonical.cpython-310.pyc",
+      "role": "other",
+      "sha256": "0b4fd3b095507b0cb9fa766b7f9450c64ebc166dd6a66088baf1d0b917d1a524",
+      "size_bytes": 1492
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/observables.cpython-310.pyc",
+      "role": "other",
+      "sha256": "1c94d7d6caf2b05401c2da779b421dad9e591dedae4962b90ab9f3ed08732b52",
+      "size_bytes": 22012
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/oxdna_conf.cpython-310.pyc",
+      "role": "other",
+      "sha256": "9f07eaaaa5d3cdb4a278545eec99179af0070c0cc1cc31bde7a16fbdb81668e2",
+      "size_bytes": 7294
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/oxdna_topology.cpython-310.pyc",
+      "role": "other",
+      "sha256": "60ec685fae7064fded45c134cc11fe44692f51aaa3d9032049b6719874184403",
+      "size_bytes": 6705
+    },
+    {
+      "path": "convention/nlbl_convention/__pycache__/reproduction_rule.cpython-310.pyc",
+      "role": "other",
+      "sha256": "25a49ccaed1a22475a5db4edb5c6964cf69f682cb6b68a5397db75752e04853f",
+      "size_bytes": 4435
+    },
+    {
+      "path": "convention/nlbl_convention/canonical.py",
+      "role": "other",
+      "sha256": "f744e2bc3c5f56de97143bd21aa6f634a809499957c5894f0350878fc590f59a",
+      "size_bytes": 337
+    },
+    {
+      "path": "convention/nlbl_convention/hf_canonical.py",
+      "role": "other",
+      "sha256": "29bb7684c1f4ba8df8d1158ffcf44e14b9f08656efbb20b1c35572cf901b6434",
+      "size_bytes": 933
+    },
+    {
+      "path": "convention/nlbl_convention/observables.py",
+      "role": "other",
+      "sha256": "c4760606e2f3f7b24aca4b412a8422e9622a10a0ab63cc9fb1a31ac408c2caeb",
+      "size_bytes": 23442
+    },
+    {
+      "path": "convention/nlbl_convention/oxdna_conf.py",
+      "role": "other",
+      "sha256": "8e844640e3da877c10b195fe7e4b9f2ba50b97ae206e7d8711ca29f7c7e4d457",
+      "size_bytes": 6221
+    },
+    {
+      "path": "convention/nlbl_convention/oxdna_topology.py",
+      "role": "other",
+      "sha256": "7bac582a4109e5af61926b4a2c5a595cfd8cc379e4b0c08e225ab377cdf4246a",
+      "size_bytes": 7210
+    },
+    {
+      "path": "convention/nlbl_convention/reproduction_rule.py",
+      "role": "other",
+      "sha256": "b7b312c054bfbd58e6020b00459f2e568040dac7d2aa4c984d5423bb6665973f",
+      "size_bytes": 4944
+    },
+    {
+      "path": "convention/run_arm_manifest.py",
+      "role": "other",
+      "sha256": "1538962b376348ecd5747a54de1aeaa51549be077e18c4f36ce69500e483a473",
+      "size_bytes": 4641
+    },
+    {
+      "path": "families/dna_hinge/cards/0b.card.json",
+      "role": "card",
+      "sha256": "8d4515a792f024435115bab7870643f597be092965bc569f28c4f18513593d81",
+      "size_bytes": 11262
+    },
+    {
+      "path": "families/dna_hinge/cards/11b.card.json",
+      "role": "card",
+      "sha256": "976f02b1ca592cd97a617aea4fea6f8da9768747e3660aa70d6c83c95cbf0814",
+      "size_bytes": 10523
+    },
+    {
+      "path": "families/dna_hinge/cards/32b.card.json",
+      "role": "card",
+      "sha256": "6a4f55fd16809e7391eb92e7b0401545233b1f19fb54dcb6c975034c109f3663",
+      "size_bytes": 10508
+    },
+    {
+      "path": "families/dna_hinge/cards/53b.card.json",
+      "role": "card",
+      "sha256": "6b22a9f4c88914d895d812481cda6488e90c21aa9839632aa6f1937a1731347c",
+      "size_bytes": 10528
+    },
+    {
+      "path": "families/dna_hinge/cards/74b.card.json",
+      "role": "card",
+      "sha256": "5894f420c0ec81621955e7351cb09174b2f7eb4b8358ee63f1bf50a96ce350bb",
+      "size_bytes": 6727
+    },
+    {
+      "path": "families/dna_hinge/family.json",
+      "role": "family",
+      "sha256": "73edf747b9259614f81be5a41994cc8c65075b6c9ae66047fbcacdda12a93e98",
+      "size_bytes": 1300
+    },
+    {
+      "path": "protocols/README.md",
+      "role": "protocol",
+      "sha256": "ec2d1cf6839611e307573ffb7389fc6f110f4a9daac7b1b5d791a7e7b3273114",
+      "size_bytes": 838
+    },
+    {
+      "path": "provenance/source-digests.json",
+      "role": "provenance",
+      "sha256": "38c837ff86f17063c0006908a993c9001ab52897e21b63c5e92ac41a220db6fa",
+      "size_bytes": 5461
+    },
+    {
+      "path": "reports/evidence/confirmatory-summary.json",
+      "role": "report",
+      "sha256": "dc551eedc27007cc373f7fb299fb65f26dff0f2a3d01b4396cb5fefa4888dfdf",
+      "size_bytes": 3771
+    },
+    {
+      "path": "reports/evidence/parametric-summary.json",
+      "role": "report",
+      "sha256": "58260815a684a290e663214f6d881725dee4d761e10e8b5b3839a676df4f7b1a",
+      "size_bytes": 29408
+    },
+    {
+      "path": "reports/family-report.md",
+      "role": "report",
+      "sha256": "45358c9c51cec6a3813f2ae4c8cbdf8d36e86a2434bbbef02af8b44c454c92c9",
+      "size_bytes": 1212
+    },
+    {
+      "path": "reproduction/README.md",
+      "role": "reproduction",
+      "sha256": "47a78b434fbe35b0fba1b1fc714d4716dc94609edee37bc812cadbf9b93cc530",
+      "size_bytes": 2901
+    },
+    {
+      "path": "reproduction/REPRODUCTION_RULE_V0_1.md",
+      "role": "reproduction",
+      "sha256": "6b70dfc26764c8a21d006824f00e485df9abec8b020e67de5a9709acea793e78",
+      "size_bytes": 4461
+    },
+    {
+      "path": "reproduction/reproduce.py",
+      "role": "reproduction",
+      "sha256": "3a69c6526e1e87e1b36d724d38344ab89af8a42521fa4572679833e5979e35eb",
+      "size_bytes": 4407
+    },
+    {
+      "path": "schema/components/component-card.v1.json",
+      "role": "schema",
+      "sha256": "37f4f6e9a8425215f6d5550ab2647377ef75457473361165ab6b95ad089d460b",
+      "size_bytes": 7843
+    },
+    {
+      "path": "schema/release/release-manifest.v1.json",
+      "role": "schema",
+      "sha256": "69c2a3d89e501716282d1064ba9b9591113583825737552e2d4f5e2887e3cacb",
+      "size_bytes": 1827
+    },
+    {
+      "path": "schema/release/rights.v1.json",
+      "role": "schema",
+      "sha256": "80d8e419bdd61ff30fc0571aee27cbe28b7eaf175afd58b8740996dc799be8a7",
+      "size_bytes": 2509
+    }
+  ],
+  "generated_by": "release.card_lint manifest create deterministic-r1.2",
+  "kind": "nanolab_release_manifest",
+  "package": "nanolab-components",
+  "package_version": "0.1.1",
+  "schema_version": 1
+}

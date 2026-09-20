@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-B-R1",
+  "work_order_id": "NL5-002-B",
+  "checkpoint": "NL5 / NL5-002-B",
+  "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "base_branch": "main",
+  "branch": "work/nl5-002-b-external-run-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-002-b-external",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL5-002-B-R1/**"
+  ],
+  "parent_work_order": "NL5-002",
+  "program_reference": "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md (§2.2; §11 п.3)",
+  "protocol": "docs/work/WO-NL5-002-A-R1.md @ work/nl5-002-a-protocol-freeze-r1 @ 2108ea795588c1a5f3492d3a6f4788e695a32834 (frozen before any external run; dispatch contract = Appendix A дословно)",
+  "executor": {
+    "kind": "fresh_external_agent_session",
+    "isolation": "вход ТОЛЬКО: /home/rdpuser/nl5-002-external/{package,EXECUTOR_PROTOCOL.md,REPORT_TEMPLATE.md}; доступ к NanoLab repo/worktrees/внутренним evidence запрещён; подсказки по ходу запрещены",
+    "staging_pins_verified": true
+  },
+  "staging": {
+    "root": "/home/rdpuser/nl5-002-external",
+    "package_copy": "/home/rdpuser/nl5-002-external/package",
+    "executor_protocol": "/home/rdpuser/nl5-002-external/EXECUTOR_PROTOCOL.md",
+    "report_template": "/home/rdpuser/nl5-002-external/REPORT_TEMPLATE.md",
+    "workspace": "/home/rdpuser/nl5-002-external/workspace",
+    "expected_report": "/home/rdpuser/nl5-002-external/workspace/EXTERNAL_REPRODUCTION_REPORT.md"
+  },
+  "budget": {
+    "runs": "12 (4 варианта x 3 fresh seeds), single-threaded, параллельно",
+    "per_replica_hard_kill": "20h -> FAILED_TECHNICAL",
+    "campaign_wall": "48h",
+    "paid_compute": false,
+    "gpu": false
+  },
+  "started_at_utc": "2026-09-18T13:55:15Z",
+  "status": "COMPLETED_INCONCLUSIVE",
+  "outcome": {
+    "execution_outcome": "COMPLETED",
+    "scientific_outcome": "INCONCLUSIVE",
+    "external_verdict": "INCONCLUSIVE",
+    "per_card": {
+      "0b": "INCONCLUSIVE",
+      "11b": "INCONCLUSIVE",
+      "32b": "INCONCLUSIVE",
+      "53b": "INCONCLUSIVE",
+      "74b": "N/A (NOT_MEASURED/KNOWN_GAP)"
+    },
+    "report_sha256": "5b6d1f06e75876a1ebf7393a2f04f3e0db098f9f84b6d46f23e0ac6c231bef32",
+    "campaign_wall": "11.04h (2026-09-18T13:57:34Z -> 2026-09-19T00:55:17Z)",
+    "portability_finding": "frozen observable convention (arm manifests, convention docs, detector reference) отсутствует в пакете; 12 семейств реконструкции не сошлись с оракулами"
+  },
+  "notes": "Протокол заморожен EX-NL5-002-A-R1 (deliverables 2108ea7, tree a83a6d5) ДО dispatch; staging пины сверены байт-в-байт с WO. Результаты внешнего прогона в canonical repo не существуют до ingest; никаких предсказаний executor'у не передаётся (риски R1-R3 остаются на авторской стороне)."
+}

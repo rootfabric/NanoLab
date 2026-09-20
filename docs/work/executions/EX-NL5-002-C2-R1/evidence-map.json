@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "execution_id": "EX-NL5-002-C2-R1",
+  "work_order_id": "NL5-002-C2",
+  "intent": "Механическое сравнение terminal external repeat B-R2 (nanolab-components 0.1.1) с frozen reproduction contract; binding per-card и WO-level вердикты по замороженным правилам.",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION (external statement only; claims карточек не поднимаются)",
+  "subject": {
+    "compared_branch": "work/nl5-002-b-r2-external-run-r1",
+    "compared_head": "9556d0f6ac527db6f32518b51b6de5825a171548",
+    "this_branch": "work/nl5-002-c2-compare-r2-r1",
+    "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada"
+  },
+  "frozen_rules_applied": [
+    "NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE (releases/nanolab-components-v0.1.1/reproduction/REPRODUCTION_RULE_V0_1.md + convention/analyze_hinge.py)",
+    "WO-level mapping WO-NL5-002-A-R1 §Frozen classification (frozen 2026-09-18 до B-R1/B-R2 данных)",
+    "Процедура C2: WO-NL5-002-C2-R1 (frozen до публикации per-card данных B-R2)"
+  ],
+  "inputs_digests": {
+    "executor_report_sha256": "5aee793479292eafa6095f91533aca949bfbad596949d19fd7ee8daca910f421",
+    "evidence_dir": "docs/work/executions/EX-NL5-002-B-R2/evidence (72 files; EVIDENCE_SHA256SUMS.txt)",
+    "package_release_manifest_sha256": "88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef"
+  },
+  "results": {
+    "integrity_gates": "PASS (verify 42/42 старт; upstream gates 9/9; frame0 4/4 EXACT; 12/12 exit=0; completeness ok; engine pristine; budget ok)",
+    "per_card": {
+      "0b": "MISMATCH (все 3 fresh medians строго выше envelope; statistic 68.389781796 vs [65.095434789, 67.236579608])",
+      "11b": "MATCH (73.560609814 в [72.165683993, 74.533109426])",
+      "32b": "MISMATCH (все 3 строго ниже; 75.180138343 vs [77.4927314, 79.877463339])",
+      "53b": "MATCH (132.41188514 в [131.049227687, 135.285186059])",
+      "74b": "NOT_MEASURED / KNOWN_GAP (без значений)"
+    },
+    "recalc_vs_executor": "4/4 agree; run->campaign chain консистентна (comparison.json)",
+    "wo_level_verdict": "MISMATCH",
+    "scientific_conclusion": "External reproduction по frozen rule не подтверждена для 0b/32b; 11b/53b воспроизведены. Техническая/portability цепочка (v0.1.1) подтверждена полностью."
+  },
+  "deviations": ["D1 launch-strategy aborts + -R restarts (protocol §9)", "D2 session loss + administrative watcher restart 14:03:46Z (script unchanged)", "D3 zero warnings", "N1 per-card окна (карточное = published contract; A-R1 универсальное 150k) - на Reviewer", "F-orch1 .pyc pinned в RELEASE_MANIFEST (packaging, вне науки)", "F1..F4 executor findings"],
+  "negative_controls": "n/a (сравнение данных; negative controls инженерных проверок - в Verifier)",
+  "failed_or_inconclusive_preserved": ["B-R1 INCONCLUSIVE + PORTABILITY_FINDING (не переписан)", "B-R2 wave-1 aborts (aborted_attempts.json)", "B-R2 MISMATCH 0b/32b (настоящий результат)"],
+  "threshold_changes": "НЕТ (envelope/пороги/окна frozen; любые изменения = новая protocol revision через Human Gate)",
+  "validation": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-002-C2-R1 -> ok",
+  "remaining_risks": "Платформенная чувствительность MD-статистик при узких 3-репличных envelope - вопрос для отдельного исследовательского WO (решение Human Gate)",
+  "review_status": "PENDING (Fresh Reviewer)",
+  "next_action": "Fresh Reviewer + Fresh Verifier; затем integration candidate + Human Gate (disposition MISMATCH)"
+}

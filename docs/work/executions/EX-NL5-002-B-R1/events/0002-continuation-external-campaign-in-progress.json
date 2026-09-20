@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-external-campaign-in-progress",
+  "timestamp_utc": "2026-09-18T14:03:30Z",
+  "execution_id": "EX-NL5-002-B-R1",
+  "work_order_id": "NL5-002-B",
+  "event_type": "CONTINUATION",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Внешняя кампания NL5-002-B в процессе (fresh external executor session, staging /home/rdpuser/nl5-002-external, изоляция соблюдена). Прогресс: reproduce.py verify ok (20/20), plan ok, environment fingerprint записан (Ubuntu 22.04.5, Xeon E5-2698 v3 x64, 125GiB - отличается от авторской среды, честно), 3 fresh seeds заморожены ДО запусков в analysis/frozen_seeds.json (510101/520202/530303 общие на варианты, зеркально reference-дизайну; проверки: distinct, != reference 201004/202008/203012, int32), клон oxDNA + checkout пина 00dc7fb9... в процессе. Прогонов ещё нет. Ожидание: сборка -> download-on-run c digest gates -> 12 прогонов (0b/11b 200k, 32b/53b 150k; ~10-14h/replica, кампания ~15h wall при 12 параллельных) -> анализ (portability findings возможны по R1) -> отчёт workspace/EXTERNAL_REPRODUCTION_REPORT.md. Авторская подготовка фазы C завершена: регрессия reproduction_rule.py на NL5-001-C классификациях PASS 4/4 (0b MATCH, 11b INCONCLUSIVE, 32b MATCH, 53b MATCH воспроизводятся из карточечных reference medians).",
+  "command_refs": [
+    "ps aux | grep oxdna -> clone/cmake/make активность executor'а",
+    "cat /home/rdpuser/nl5-002-external/workspace/analysis/frozen_seeds.json"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R1/passport.json",
+    "docs/work/executions/EX-NL5-002-B-R1/events/0001-external-executor-dispatched.json"
+  ],
+  "next_action": "ORCHESTRATOR: по уведомлении о завершении внешней сессии - event 0003-external-run-completed + ingest отчёта/manifest в эту ветку, затем фаза C (сравнение по frozen rule, ветка work/nl5-002-c-compare-repair-r1).",
+  "blocker": null
+}

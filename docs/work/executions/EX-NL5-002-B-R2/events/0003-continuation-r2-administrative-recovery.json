@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-continuation-r2-administrative-recovery",
+  "timestamp_utc": "2026-09-19T14:20:00Z",
+  "execution_id": "EX-NL5-002-B-R2",
+  "work_order_id": "NL5-002-B-R2",
+  "event_type": "CONTINUATION",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Административное recovery кампании R2 (fresh Director session; только административные проверки, научные подсказки/интерпретации отсутствуют). Факты на 2026-09-19T14:00Z: (1) executor-сессия предыдущей orchestration недоступна для send_message (subagent 09fdf6c4-33af-47ed-8d9e-a020ab723681 из реестра предыдущей сессии; текущий реестр пуст) - detached runs при этом живы, кампания НЕ потеряна. (2) Физика: 6/12 реплик завершены - EXTERNAL-32b-1R/2R/3R (end 13:12-13:16Z) и EXTERNAL-53b-1R/2R/3R (end 12:36-12:40Z), все exit_code 0 (exit_code.txt записаны wrapper'ами исполнителя); 6/12 в процессе - EXTERNAL-0b-1/2/3, EXTERNAL-11b-1/2/3 (200k шагов), oxDNA-процессы живы с 02:30Z, ~85% пути (~169.9k шагов), rate ~4.05 steps/s, stderr чистый (стандартный DEBUG-вывод движка), все 6 wrapper.sh живы и запишут exit codes. (3) Перезапуски в рамках protocol R2 §9: wave-1 EXTERNAL-32b-1..3 и EXTERNAL-53b-1..3 прерваны самим executor'ом 02:44Z при смене launch-стратегии (12-way parallelism снижал rate до ~2.1 steps/s, ETA 26h > 20h kill limit; причина записана executor'ом в staging logs/aborted_attempts.json), перезапущены под НОВЫМИ ID с суффиксом R и теми же frozen seeds (174329/285637/396421, 507283/618457/729613) - переиспользования ID нет. (4) Watcher исполнителя wait_and_analyze.sh перестал логировать 05:48Z (умер вместе с сессией executor'а); административно перезапущен detached 14:03:46Z без изменений скрипта (исходный скрипт исполнителя; ждёт 12 exit_code.txt, затем запускает его же analyze_all.sh - упакованная конвенция v0.1.1, frame0->run->campaign); лог прогресса возобновился (pending=6). (5) Ресурсы: disk /home 47G свободно; бюджет соблюдён (campaign wall 48h от 02:30:08Z, per-replica 20h kill не угрожает при текущем rate; ETA реплик ~16:10-16:30Z). (6) Черновик отчёта исполнителя EXTERNAL_REPRODUCTION_REPORT.md существует, секции 1-2 заполнены, отчёт НЕ финализирован. Научные пороги/envelope/seeds не затронуты; интерпретация данных не выполнялась и не выполняется.",
+  "command_refs": [
+    "ps aux | grep oxDNA -> 6 процессов EXTERNAL-{0b,11b}-*, ~99.8% CPU",
+    "for r in 32b-*R 53b-*R: cat runs/$r/exit_code.txt -> exit_code: 0 (6/6)",
+    "tail -1 runs/EXTERNAL-0b-1/energy.dat -> 849.5 (t=849.5, dt=0.005 => ~169900 steps)",
+    "setsid nohup bash wait_and_analyze.sh >> logs/watcher_recovery_nohup.log 2>&1 (PID 1821592, 14:03:46Z)",
+    "tail -2 logs/wait_and_analyze_progress.txt -> pending=6 (14:03:44Z, 14:08:44Z)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R2/passport.json",
+    "staging: /home/rdpuser/nl5-002-external-r2/workspace/logs/aborted_attempts.json",
+    "staging: /home/rdpuser/nl5-002-external-r2/workspace/logs/wait_and_analyze_progress.txt"
+  ],
+  "next_action": "ORCHESTRATOR: дождаться завершения 6 оставшихся реплик и упакованного анализа (watcher исполнителя); при полном завершении physics runs и нефинализированном отчёте - administrative nudge fresh executor'у на финализацию отчёта по REPORT_TEMPLATE.md из уже существующих artifacts (без научных подсказок); затем event 0004-external-run-completed + ingest + сравнение по frozen rule.",
+  "blocker": null
+}

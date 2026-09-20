@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-19T14:45:00Z",
+  "execution_id": "EX-NL5-002-C2-R1",
+  "work_order_id": "NL5-002-C2",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Старт NL5-002-C2: bounded WO механического сравнения внешнего повтора B-R2 (nanolab-components 0.1.1) с frozen contract. Ветка work/nl5-002-c2-compare-r2-r1 от fresh main 48c55b3 (drift отсутствует - base совпадает с base всей цепочки NL5-002). Процедура сравнения заморожена в WO-NL5-002-C2-R1 ДО появления per-card классификаций B-R2 (freeze-before-data): per-card из packaged rule NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE по трем fresh per-replica medians из packaged-convention analysis artifacts; integrity gates; WO-level mapping по frozen WO-NL5-002-A-R1. Входы: terminal report + analysis artifacts B-R2 (будут_ingested в EX-NL5-002-B-R2), staging artifacts по digest. Запрещено: менять пороги/envelope, производить 74b, переписывать B-R1/C, добавлять tolerance. Симуляций нет - только сравнение уже произведенных evidence.",
+  "command_refs": [
+    "git worktree add -b work/nl5-002-c2-compare-r2-r1 /home/rdpuser/NanoLab/nl5-002-c2-compare 48c55b3c4acdd2264527083e3072757be8bd9ada"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-C2-R1.md",
+    "docs/work/executions/EX-NL5-002-B-R2/passport.json"
+  ],
+  "next_action": "DIRECTOR: после terminal ingest B-R2 выполнить механическое сравнение по frozen процедуре; результат - evidence-map + summary этой execution.",
+  "blocker": null
+}

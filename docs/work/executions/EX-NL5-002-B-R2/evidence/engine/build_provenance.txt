@@ -1,0 +1,14 @@
+=== engine build provenance ===
+commit pin: 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+source: https://github.com/lorenzo-rovigatti/oxDNA tarball https://codeload.github.com/lorenzo-rovigatti/oxDNA/tar.gz/00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+tarball sha256: 40a6dd36b93a1e126111fb9d9bbf2d4ac8fb392bb9e145d873cdd004ac9baa04
+source edits: NONE (no patches applied; build succeeded on pristine sources)
+cmake command: cmake -DCUDA=OFF -DMPI=OFF -DDOUBLE=ON ../oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+build command: make -j 16
+compiler: g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+cmake: cmake version 3.22.1
+warnings in build: 4
+errors in build: 0
+binary: -rwxr-xr-x 1 rdpuser rdpuser 3380728 Sep 19 12:11 build/bin/oxDNA
+binary sha256: 11cba0abb13bec05a2057f12f22d0ea0714ceafcad41fb05d315888363c023b2  build/bin/oxDNA
+build wall time: see timestamps in build_cmake.log/build_make.log

@@ -1,0 +1,45 @@
+=== date start ===
+2026-09-19T01:25:59Z
+=== uname ===
+Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+=== os-release ===
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+=== cpu ===
+64
+Model name:                              Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz
+Thread(s) per core:                      2
+Core(s) per socket:                      16
+Socket(s):                               2
+CPU max MHz:                             3600.0000
+=== mem ===
+               total        used        free      shared  buff/cache   available
+Mem:           125Gi        69Gi       8.4Gi       796Mi        47Gi        54Gi
+Swap:          8.0Gi       1.1Gi       6.9Gi
+=== disk ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p2  458G  386G   49G  89% /home
+=== gcc ===
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+=== g++ ===
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+=== make ===
+GNU Make 4.3
+=== cmake ===
+cmake version 3.22.1
+=== python ===
+Python 3.10.12
+=== git ===
+git version 2.34.1
+=== proxy env ===
+no_proxy=localhost,127.0.0.1,::1,192.168.0.15
+https_proxy=http://192.168.0.27:8888
+NO_PROXY=localhost,127.0.0.1,::1,192.168.0.15
+HTTPS_PROXY=http://192.168.0.27:8888
+HTTP_PROXY=http://192.168.0.27:8888
+http_proxy=http://192.168.0.27:8888
+ALL_PROXY=http://192.168.0.27:8888
+all_proxy=http://192.168.0.27:8888

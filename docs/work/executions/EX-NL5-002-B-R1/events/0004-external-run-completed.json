@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-external-run-completed",
+  "timestamp_utc": "2026-09-19T01:00:00Z",
+  "execution_id": "EX-NL5-002-B-R1",
+  "work_order_id": "NL5-002-B",
+  "event_type": "EXTERNAL_RUN_COMPLETED",
+  "actor_role": "ORCHESTRATOR",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Внешняя кампания NL5-002-B-R1 завершена (11.04 h wall, 13:57:34Z -> 00:55:17Z, в бюджете 48h). Финальный отчёт executor'а: 13/13 секций, 0 PENDING; sha256 5b6d1f06e75876a1ebf7393a2f04f3e0db098f9f84b6d46f23e0ac6c231bef32. Итоги: (1) execution_outcome кампании = COMPLETED (отчёт доставлен); исполнение 12 реплик = FAILED_TECHNICAL (терминированы средой ~00:15-00:30Z на 128k-138.8k шагов; 20h kill не наступил; stop-правила не срабатывали; exit codes ненаблюдаемы); (2) scientific_outcome внешнего воспроизведения = INCONCLUSIVE по замороженной таксономии WO-NL5-002-A-R1; per-card: 0b/11b/32b/53b = INCONCLUSIVE (две независимые достаточные причины: frozen observable convention нереализуема из пакета - 12 семейств реконструкции против опубликованных оракулов angle_frame0_deg/размеров плеч не сошлись, ошибки превышают ширину envelopes; окно анализа усечено до 128k-136k); 74b = N/A NOT_MEASURED (значения не производились, входы не скачивались); (3) полностью воспроизведённая техническая цепочка: package verify 20/20 PASS; oxDNA собран из точного пина 00dc7fb9 (CPU/double; документированный однострочный include-патч GCC 11, build-only); 12/12 upstream digest gates PASS (size+blob_sha1; sha256 тоже совпали); seeds 510101/520202/530303 заморожены до запусков; детерминизм движка byte-identical PASS; реконструированные frame gates 392/392 валидны и близки к published baseline; (4) все surrogate-числа помечены BEST_EFFORT_NOT_CONTRACT; пакет/пороги/envelopes не менялись; 74b значения не производились; durable-cache запрещение соблюдено. WO-level вердикт по frozen mapping = INCONCLUSIVE + PORTABILITY_FINDING (root cause: package under-specification - arm manifests, convention docs, detector reference implementation, engine URL, root README отсутствуют в пакете) -> Phase C bounded repair по плану §2.3: package revision 0.1.1 -> свежий внешний повтор. Научные tolerance/envelope не меняются. Ingest: отчёт и ключевые evidence скопированы в evidence/ с digest'ами; полный artifact manifest executor'а (3778 записей, 1.13GB workspace) остаётся в staging /home/rdpuser/nl5-002-external/workspace/artifacts/artifact_manifest.json, digest фиксируется в summary.md.",
+  "command_refs": [
+    "sha256sum workspace/EXTERNAL_REPRODUCTION_REPORT.md -> 5b6d1f06e75876a1ebf7393a2f04f3e0db098f9f84b6d46f23e0ac6c231bef32",
+    "cp отчёт + convention_reconstruction_log + frozen_seeds + campaign_summary + upstream_digest_gates + run_output_digests + engine_patch.diff -> docs/work/executions/EX-NL5-002-B-R1/evidence/",
+    "sha256sum workspace/artifacts/artifact_manifest.json (staging, не копируется в Git)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-B-R1/evidence/EXTERNAL_REPRODUCTION_REPORT.md",
+    "docs/work/executions/EX-NL5-002-B-R1/evidence/convention_reconstruction_log.md",
+    "docs/work/executions/EX-NL5-002-B-R1/evidence/frozen_seeds.json",
+    "docs/work/executions/EX-NL5-002-B-R1/evidence/upstream_digest_gates.json",
+    "/home/rdpuser/nl5-002-external/workspace/artifacts/artifact_manifest.json (staging; digest в summary.md)"
+  ],
+  "next_action": "ORCHESTRATOR: фаза C на ветке work/nl5-002-c-compare-repair-r1 - сравнение / root cause/repair map (WO-NL5-002-C-R1), package 0.1.1, затем свежий внешний повтор NL5-002-B-R2.",
+  "blocker": null,
+  "corrections": [
+    {
+      "field": "next_action (syntax)",
+      "issue": "raw TAB control character inside JSON string made the event unparsable (committed as 82ad7bd)",
+      "fix": "TAB replaced by space; semantic content unchanged; original bytes preserved in git history at commit 82ad7bd"
+    }
+  ]
+}

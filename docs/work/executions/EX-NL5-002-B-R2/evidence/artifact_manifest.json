@@ -1,0 +1,2564 @@
+[
+  {
+    "path": "EXTERNAL_REPRODUCTION_REPORT.md",
+    "sha256": "5aee793479292eafa6095f91533aca949bfbad596949d19fd7ee8daca910f421",
+    "size": 38328,
+    "producer": "executor (report)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-1_analysis.json",
+    "sha256": "c02739ffa9db8201a40205b652cdc49343d7d72f5961daefa834c495dd659b7f",
+    "size": 15348,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-1_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-1_analysis_stdout.json",
+    "sha256": "c02739ffa9db8201a40205b652cdc49343d7d72f5961daefa834c495dd659b7f",
+    "size": 15348,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-2_analysis.json",
+    "sha256": "daed5ea6274dffd3baa70a8e6e4b657dbda89a88a82b40d5bf16c0d37e1819e0",
+    "size": 15338,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-2_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-2_analysis_stdout.json",
+    "sha256": "daed5ea6274dffd3baa70a8e6e4b657dbda89a88a82b40d5bf16c0d37e1819e0",
+    "size": 15338,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-3_analysis.json",
+    "sha256": "e1ef1d150d4827d92b1f25c2e1b056ab4436b7d90a529a7b5efdf277ceda2fd3",
+    "size": 15334,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-3_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-0b-3_analysis_stdout.json",
+    "sha256": "e1ef1d150d4827d92b1f25c2e1b056ab4436b7d90a529a7b5efdf277ceda2fd3",
+    "size": 15334,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-1_analysis.json",
+    "sha256": "3133d01d52c21583c45da671fc941070b11c475e2f0e756af0c23d8d4574b2b8",
+    "size": 15326,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-1_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-1_analysis_stdout.json",
+    "sha256": "3133d01d52c21583c45da671fc941070b11c475e2f0e756af0c23d8d4574b2b8",
+    "size": 15326,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-2_analysis.json",
+    "sha256": "541ab339a037c673155d1bcaaba48cb51dea33fd3a9bfa9b15dbd45f2d729d48",
+    "size": 15329,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-2_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-2_analysis_stdout.json",
+    "sha256": "541ab339a037c673155d1bcaaba48cb51dea33fd3a9bfa9b15dbd45f2d729d48",
+    "size": 15329,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-3_analysis.json",
+    "sha256": "e16ed98cc297fe1be7d50f505ce92f249475b29a3ee97aebee71395b31e2c6cc",
+    "size": 15312,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-3_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-11b-3_analysis_stdout.json",
+    "sha256": "e16ed98cc297fe1be7d50f505ce92f249475b29a3ee97aebee71395b31e2c6cc",
+    "size": 15312,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-1R_analysis.json",
+    "sha256": "633e1d99f352b8867430dc6119111e1de9288f6ed87a74fbdaf8a3a7169424ce",
+    "size": 11644,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-1R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-1R_analysis_stdout.json",
+    "sha256": "633e1d99f352b8867430dc6119111e1de9288f6ed87a74fbdaf8a3a7169424ce",
+    "size": 11644,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-2R_analysis.json",
+    "sha256": "088cdf660eedc41b0b97b86b3ba9b63cbf0d610abd5a4cf10b479fffef76080c",
+    "size": 11653,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-2R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-2R_analysis_stdout.json",
+    "sha256": "088cdf660eedc41b0b97b86b3ba9b63cbf0d610abd5a4cf10b479fffef76080c",
+    "size": 11653,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-3R_analysis.json",
+    "sha256": "351010714951259978d6996da7ebd62786e6aeceb641848b812d41c09a31ae95",
+    "size": 11649,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-3R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-32b-3R_analysis_stdout.json",
+    "sha256": "351010714951259978d6996da7ebd62786e6aeceb641848b812d41c09a31ae95",
+    "size": 11649,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-1R_analysis.json",
+    "sha256": "60e9e7db59b2ad4118ca7fa92d5e8eb93878bebc00ed1fc0d54bbba891c1eeab",
+    "size": 11678,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-1R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-1R_analysis_stdout.json",
+    "sha256": "60e9e7db59b2ad4118ca7fa92d5e8eb93878bebc00ed1fc0d54bbba891c1eeab",
+    "size": 11678,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-2R_analysis.json",
+    "sha256": "735e9a977bb47ab1a0295fa7e0afca99178166e0715221ced522c7289f075ec5",
+    "size": 11692,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-2R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-2R_analysis_stdout.json",
+    "sha256": "735e9a977bb47ab1a0295fa7e0afca99178166e0715221ced522c7289f075ec5",
+    "size": 11692,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-3R_analysis.json",
+    "sha256": "316537c7f382d5bc711f76325801a40fbca5f2971218fb84bd8c3658ddcc1cc8",
+    "size": 11684,
+    "producer": "package convention/analyze_hinge.py run"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-3R_analysis_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py run (stderr)"
+  },
+  {
+    "path": "analysis/EXTERNAL-53b-3R_analysis_stdout.json",
+    "sha256": "316537c7f382d5bc711f76325801a40fbca5f2971218fb84bd8c3658ddcc1cc8",
+    "size": 11684,
+    "producer": "package convention/analyze_hinge.py run (stdout copy)"
+  },
+  {
+    "path": "analysis/campaign_0b.json",
+    "sha256": "bd8259e3da59ce5bbc33462b11834b0904620fa99747dfbab0a9793bb14ec2fa",
+    "size": 1309,
+    "producer": "package convention/analyze_hinge.py campaign"
+  },
+  {
+    "path": "analysis/campaign_0b_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py campaign (stderr)"
+  },
+  {
+    "path": "analysis/campaign_11b.json",
+    "sha256": "e846284ced452567279b802f19a5e0f5ee1893188aa35cc6f3cb7dad61be63da",
+    "size": 1331,
+    "producer": "package convention/analyze_hinge.py campaign"
+  },
+  {
+    "path": "analysis/campaign_11b_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py campaign (stderr)"
+  },
+  {
+    "path": "analysis/campaign_32b.json",
+    "sha256": "eef66bf8939990c56de10faaa98e65c58a159eda76f2f82149587e0875d56d9f",
+    "size": 1304,
+    "producer": "package convention/analyze_hinge.py campaign"
+  },
+  {
+    "path": "analysis/campaign_32b_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py campaign (stderr)"
+  },
+  {
+    "path": "analysis/campaign_53b.json",
+    "sha256": "f853a46439dbc18f552193e701f0f02184ffc93322cb1f86210f6f1eea1da941",
+    "size": 1343,
+    "producer": "package convention/analyze_hinge.py campaign"
+  },
+  {
+    "path": "analysis/campaign_53b_stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "package convention/analyze_hinge.py campaign (stderr)"
+  },
+  {
+    "path": "analysis/completeness.txt",
+    "sha256": "7a78e0c082f780a902ef5fb3529332dfa9eda9b83002da3aad25c93d3abd5baf",
+    "size": 1387,
+    "producer": "analyze_all.sh"
+  },
+  {
+    "path": "analyze_all.sh",
+    "sha256": "26385fbfcb559adceed5a0ea22fb969ab315a1ea42dfe0459f222e67e99a1a3f",
+    "size": 2081,
+    "producer": "executor (analysis driver)"
+  },
+  {
+    "path": "build_manifest.py",
+    "sha256": "c2f1c16e0f0a9c6d03b761ed45e903db76eb96f9843f87fc806d6da35a7a1ccc",
+    "size": 6179,
+    "producer": "executor (this generator)"
+  },
+  {
+    "path": "engine/build/bin/oxDNA",
+    "sha256": "11cba0abb13bec05a2057f12f22d0ea0714ceafcad41fb05d315888363c023b2",
+    "size": 3380728,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/build_cmake.log",
+    "sha256": "a0d124ab29e7c2c43359bb48328ffac71948d98825f2ac031caf0344a92e8600",
+    "size": 1571,
+    "producer": "executor (cmake)"
+  },
+  {
+    "path": "engine/build_make.log",
+    "sha256": "2681eba5cffb552e8a8c4cff6f52ee92aec4a02b4905b15f6a6fe1f67a4d324e",
+    "size": 19014,
+    "producer": "executor (make)"
+  },
+  {
+    "path": "engine/build_provenance.txt",
+    "sha256": "5365302de96e24b94cbb71e39f0745d8be2d061ee1afbb543a6ddae13468bd7a",
+    "size": 891,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/download.log",
+    "sha256": "6c010d5a5baf7a9b262eca9b5e77d8b8405f788687f9b49afe2df6ef75dbc12c",
+    "size": 48,
+    "producer": "executor (curl attempts)"
+  },
+  {
+    "path": "engine/download_engine.sh",
+    "sha256": "b1937f8080515dcc2d075c4de30f3f916f2562a1b6c4930bdbf212f25e5a0987",
+    "size": 623,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/download_engine_http11.sh",
+    "sha256": "b1e273ca4a2550f1e732a4fad7dd6593bb43eb900d6a43b52348c9a40ec03ad7",
+    "size": 681,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/download_http11.log",
+    "sha256": "6083b79c59e2994622751de9db3a9ce2a959f589018857c04f55594c8444822c",
+    "size": 188,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/download_http11_status.txt",
+    "sha256": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
+    "size": 3,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/git_fetch.log",
+    "sha256": "74de812eda0f2a98fc4c9e9ab52b01c97b1c0d776c90c3da2e1c360a5e69dfb1",
+    "size": 345,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/git_fetch_engine.sh",
+    "sha256": "d726d4aff4b12c3a137617c3f1e0ec06385c3382c27bf2886f3e1158ad97ddb5",
+    "size": 753,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591.tar.gz",
+    "sha256": "40a6dd36b93a1e126111fb9d9bbf2d4ac8fb392bb9e145d873cdd004ac9baa04",
+    "size": 32974279,
+    "producer": "executor"
+  },
+  {
+    "path": "engine/tarball_sha256.txt",
+    "sha256": "9422571afdc7dd263eba5777180b1ade36e70409cb3b5d8d1b41ba054714140a",
+    "size": 120,
+    "producer": "executor"
+  },
+  {
+    "path": "env/environment_fingerprint.txt",
+    "sha256": "c9dc995abcdbd6b19d0dda813243a57e4f4ab96f331b49f606090fa4c2ef3ce0",
+    "size": 1475,
+    "producer": "executor (system commands)"
+  },
+  {
+    "path": "launch_run.sh",
+    "sha256": "38407ffd8e34e72bd03142191f535b9d58302b5bcf9304e20f6eb72c933bdc87",
+    "size": 2707,
+    "producer": "executor (run launcher)"
+  },
+  {
+    "path": "logs/aborted_attempts.json",
+    "sha256": "2c7c11a8f3e7d5caa27b27da005ff6a3f08d28db27e4083e9014780f68cbc390",
+    "size": 2018,
+    "producer": "executor"
+  },
+  {
+    "path": "logs/analyze_all.log",
+    "sha256": "3611000552bf069754a8d6dbe7d15777102d3ae5f0658ca8994d6419114bc5cb",
+    "size": 1392,
+    "producer": "analyze_all.sh"
+  },
+  {
+    "path": "logs/campaign_start_utc.txt",
+    "sha256": "68ef169abfd9f819fff12387997a47b7f3a877b78601fc828dcd4ecd6357466c",
+    "size": 21,
+    "producer": "executor"
+  },
+  {
+    "path": "logs/frame0_0b.json",
+    "sha256": "5c5463790e9ed0363b1f052e922eda12c910284fd58aa429d77979797e799d6f",
+    "size": 404,
+    "producer": "package convention/analyze_hinge.py frame0"
+  },
+  {
+    "path": "logs/frame0_0b.time",
+    "sha256": "5b4a8abedf66c0881c52aef48353a7387a448b79e063aecfb705593822312fa0",
+    "size": 1107,
+    "producer": "executor (/usr/bin/time)"
+  },
+  {
+    "path": "logs/frame0_11b.json",
+    "sha256": "455601482ecbd99f18178dee4aef17506656cf984e6f9468bc335c1df82efe32",
+    "size": 406,
+    "producer": "package convention/analyze_hinge.py frame0"
+  },
+  {
+    "path": "logs/frame0_11b.time",
+    "sha256": "f9b79f5a1fb55a51f2734242370c204ed530dd81351d9f7319d38a0896acbc26",
+    "size": 1108,
+    "producer": "executor (/usr/bin/time)"
+  },
+  {
+    "path": "logs/frame0_32b.json",
+    "sha256": "2a5197a7c1753c262fcda72baf876f4b0289e74b0bdeed3387a2db209c2db10f",
+    "size": 406,
+    "producer": "package convention/analyze_hinge.py frame0"
+  },
+  {
+    "path": "logs/frame0_32b.time",
+    "sha256": "d704c6276757986ffa23b19c13651d2052fa5dbb8629d20be665c37424a710d6",
+    "size": 1108,
+    "producer": "executor (/usr/bin/time)"
+  },
+  {
+    "path": "logs/frame0_53b.json",
+    "sha256": "363bc60ca9419d479ed6f10ba51ff2b7bf208157baa3bdb0ec6d86ea80963862",
+    "size": 407,
+    "producer": "package convention/analyze_hinge.py frame0"
+  },
+  {
+    "path": "logs/frame0_53b.time",
+    "sha256": "2508a64a81cbbfee0ff30a80aac62a55e560d70580cb6233f0bef17c1acaf80a",
+    "size": 1108,
+    "producer": "executor (/usr/bin/time)"
+  },
+  {
+    "path": "logs/frame0_oracle_summary.json",
+    "sha256": "f0a3435bcb90cf3ca221cea42acdbfb30f9f6dad36944cf7ae99c90389f73b5d",
+    "size": 387,
+    "producer": "executor (frame0 oracle summary)"
+  },
+  {
+    "path": "logs/launch_12_runs.txt",
+    "sha256": "0ff5f4310f9e5295244b718b99ced27e5b2a4ddd26da55387fdc165b3c5d8a9f",
+    "size": 954,
+    "producer": "executor (launcher output)"
+  },
+  {
+    "path": "logs/launch_wave2_runs.txt",
+    "sha256": "90c2d52223893f3228ab338b7821b64b8f1193934d7a3133881d57b3d8d06694",
+    "size": 486,
+    "producer": "executor (launcher output)"
+  },
+  {
+    "path": "logs/oxdna_download.err",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "executor"
+  },
+  {
+    "path": "logs/plan.json",
+    "sha256": "da320065b4f5f264e60949886f2e2e3327e967d79fe53b88c60e640b11f52169",
+    "size": 8534,
+    "producer": "package reproduce.py plan"
+  },
+  {
+    "path": "logs/upstream_digest_gate.json",
+    "sha256": "bf3e49bf7015d195977985a354caba0c806655570e4340068469ba14699544b0",
+    "size": 8241,
+    "producer": "executor (digest gate script)"
+  },
+  {
+    "path": "logs/verify.json",
+    "sha256": "c82e4f91e40a950fb4a6dd6a474e496d630b961ce147a90ff071eb7ed809abf4",
+    "size": 68,
+    "producer": "package reproduce.py verify"
+  },
+  {
+    "path": "logs/wait_and_analyze_progress.txt",
+    "sha256": "faecc6e17bc0affde215eb556c8c05b4260cbd3aa9eccf2c28fd87309ae02174",
+    "size": 2045,
+    "producer": "wait_and_analyze.sh (watcher)"
+  },
+  {
+    "path": "logs/watcher_recovery_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "orchestrator (administrative watcher restart, script unchanged)"
+  },
+  {
+    "path": "run_output_digests.json",
+    "sha256": "ffe65d3199cc499009cbef380b71495f67099281f38decec06227e34ce0d9f83",
+    "size": 22386,
+    "producer": "executor (run output digests)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/0b.conf",
+    "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+    "size": 2294162,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/0b.top",
+    "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+    "size": 120204,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/end_time.txt",
+    "sha256": "ba0fe2089753fee0b0100ac82aeaefa66677fd25bfc43dbfff3162cc4285214d",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/energy.dat",
+    "sha256": "991cd1e1f7279976269f1b1fce70deb2b04a76b52dd91064eeae365cb326f005",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/input",
+    "sha256": "1c4b795f8b043c2b586ea6138eb3ad2f9dde6e69bfdc3ce7370b71d1b1790dcc",
+    "size": 930,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/last_conf.dat",
+    "sha256": "71ec7ad6b316431e68bf482703d5969f2c9b1c26c0fe679b0d828c2d0c83429b",
+    "size": 2294534,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/log.dat",
+    "sha256": "96c3e962a84988bc453152c0ad64c821473439342069741703ce0380a232e5b8",
+    "size": 201502,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/run_meta.json",
+    "sha256": "71ef4b3ab3bb77c2035e33e7181203c1584697cf8720fbd3cfdc58597903c494",
+    "size": 490,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/stdout.log",
+    "sha256": "29886d9d025bf2d36934dc2f13d2a5716718c868bffdacdfa66ff4f20bcd3a1b",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/traj.dat",
+    "sha256": "53dd853a486a9b44b2f9296b4b158cf2cdd44df4ca40388327f3ca5345c81e75",
+    "size": 114717228,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/wrapper.pid",
+    "sha256": "b62ff5d1aa50ac9b9dbbbcdfef7514a02c9ab607ebfb4c2a7cc38f8fafb94d4c",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/wrapper.sh",
+    "sha256": "9f759ef5f2bc80a69f741f7f9bf58adc00720dc492328e26d95e1911f7aa9ce9",
+    "size": 412,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-1/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/0b.conf",
+    "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+    "size": 2294162,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/0b.top",
+    "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+    "size": 120204,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/end_time.txt",
+    "sha256": "904a69837fa9fe2e5b2b85910e48346117bdcbdd83a432d2ce461aba16e4fa44",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/energy.dat",
+    "sha256": "1190c4b0bfc2d569ba34ac709e87d71026af6d1a5abd9afb6d5adf20031dca9e",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/input",
+    "sha256": "54e7836d91e04c48f0c1270f3a98ac9c6d9128680cef4f85f851adfeb2fb06ee",
+    "size": 930,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/last_conf.dat",
+    "sha256": "daf6de04206b58b3d1e8658f4989b0a06c76cd0f29661bf197743faf2af36903",
+    "size": 2294207,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/log.dat",
+    "sha256": "32b83e343c5e8ccfe7c3c932d9388c480dbeb6ebd47447ba3ce134a046d881a8",
+    "size": 201495,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/run_meta.json",
+    "sha256": "18565a39ccb61ea20b5c617dbe0cf2c444a2de952609c0ff3b788117ddd7c361",
+    "size": 490,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/stdout.log",
+    "sha256": "017666c83680d28d86a21031c64d806b61181e758f61a2fd2a276da69fe6bc5c",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/traj.dat",
+    "sha256": "d3d265cc262ebe903f950dbdb494a04ac5f5b27f75a5635e96840a3bb30e187c",
+    "size": 114708295,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/wrapper.pid",
+    "sha256": "3d9460c885e42b2c1ef7c3aa7b5f3cb1b71269d4cd445a143be41a22a3088d09",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/wrapper.sh",
+    "sha256": "1131655c29c5742011a5d4abbf818c618296384c0265bfc927219fc69df5a535",
+    "size": 412,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-2/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/0b.conf",
+    "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+    "size": 2294162,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/0b.top",
+    "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+    "size": 120204,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/end_time.txt",
+    "sha256": "fe5c185bd07d9bd15f0a3442a9c8d1534a94df0bd7bebf98b51772b9a4213e6c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/energy.dat",
+    "sha256": "3a0633987767047f210d7bcc75aca34c97ada376103597f6b49c194a0a710e57",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/input",
+    "sha256": "f3353cd50b8077450652a56fc75a3755d94398191b10476ca01044bc8a4988d0",
+    "size": 930,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/last_conf.dat",
+    "sha256": "0bff8c23e627477475f0d8f602f0592129b472485cb912e4b82f17d8f4fb8750",
+    "size": 2293768,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/log.dat",
+    "sha256": "727a3dcbf9028006298436c0c659d19ee55883228b3f70e9bee85b278bff49e8",
+    "size": 201501,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/run_meta.json",
+    "sha256": "0149f074fdede79b211f819a84ecd2ff54cc770750bb1e70d08c19e6f2234b71",
+    "size": 490,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/stdout.log",
+    "sha256": "e66bc708c9d35a62803ed3be439f9d7e403535b239843ebf415ef66957ad3c5a",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/traj.dat",
+    "sha256": "7b2399177266c4d1eccc5b6b98b84b9c9345213028d425cb9563b102bac3f015",
+    "size": 114710272,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/wrapper.pid",
+    "sha256": "95bcb9766d24c023b1d196ed1e13381041e004b5cc55c538ac1ef60e6b9cb070",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/wrapper.sh",
+    "sha256": "7be9d73dd52abe276dbbc7e2283d4795d7c1dadcd79a8c8e98910eba8c958a92",
+    "size": 412,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-0b-3/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/11b.conf",
+    "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+    "size": 2309610,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/11b.top",
+    "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+    "size": 121176,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/end_time.txt",
+    "sha256": "8200a33f519772ff0dd181716c13f578bc1ba53b846cf89eb9c042fd2853670f",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/energy.dat",
+    "sha256": "c8d4a8894a97b52f6dc8143c33b0ac06b3bdbedc6d3ee52fea9dc796f5662c39",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/input",
+    "sha256": "55ac337157855bd15902c82dc07afdd33f091b649bc8386dd45ca51e1f65cd54",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/last_conf.dat",
+    "sha256": "ad745a128b63644a9dc09b88acad6640732f3bf8957033338087d499aa277cc2",
+    "size": 2309308,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/log.dat",
+    "sha256": "1d527d447ce4bf13eb5e524fca79bd831d546aa285ef190e09e8a16f74c6f0bb",
+    "size": 201486,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/run_meta.json",
+    "sha256": "b6cba4fc6b7a71760e2e6dfd87497bbd99019790558dea9276d2e23e67cec5df",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/stdout.log",
+    "sha256": "0a9bfb2bc37334f83453f803ca1dade040b87e9424bfe6a615f7cc42f36cc049",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/traj.dat",
+    "sha256": "f2b84aca380d60e882c0f7618d3889ce4d3ccdedb6313dc4a01efebd741f5c8d",
+    "size": 115484703,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/wrapper.pid",
+    "sha256": "4a428796faa375a658b87909c10db5ecea410ea836cc3ae30f882789d94cf45e",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/wrapper.sh",
+    "sha256": "032de0a7ae066ca0b7cfe42fc1171d196b7a293ed4650ef657bc3fefad8c35e6",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-1/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/11b.conf",
+    "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+    "size": 2309610,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/11b.top",
+    "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+    "size": 121176,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/end_time.txt",
+    "sha256": "1b5e45de7e6f2e62a0e73620c04450ae7c7ce09d43b115e62350336e6c01e62c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/energy.dat",
+    "sha256": "fd6e544f25aa44262672dca6327b9705d9db9d08bd1ca0e283b635ff66d7ea55",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/input",
+    "sha256": "a83aff44e8098ef5c1f79fd917a71701467f3dc3c4ec9db4ff9816090a9b69f9",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/last_conf.dat",
+    "sha256": "3e39cf4b2378147099d85aae7a6100797161ca642708b72afeb66031c4e3eda0",
+    "size": 2310308,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/log.dat",
+    "sha256": "9ec41415013cfac320fe1c60649494c5d4ff810a94360c77ffd9b25b94f6a074",
+    "size": 201555,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/run_meta.json",
+    "sha256": "330fdb6484f06e3f68de0390fd97ade2bbad80b2bc564c8b89849a3543f75f0c",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/stdout.log",
+    "sha256": "b30b8c5456fa84dc2a90ec55e92753f40e74ac4276bdecd404c4932066e20272",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/traj.dat",
+    "sha256": "0c6e4929a6e555b95a98110e786da42bea77e4d7d4a33d554fdd8bd8fae3c0db",
+    "size": 115490280,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/wrapper.pid",
+    "sha256": "081ea739eef8a9201a519a5b1bd33f301f4bfd087cacd102e040c8b56b5b51e4",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/wrapper.sh",
+    "sha256": "940e87b1e0bc85ca1ec1e98c9a57d504de19056619f74eef0509211575397d68",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-2/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/11b.conf",
+    "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+    "size": 2309610,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/11b.top",
+    "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+    "size": 121176,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/end_time.txt",
+    "sha256": "965845ddb35c3d143ed3da83c5a0a2c333fd0e8689784f7a74fd07b4687a925c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/energy.dat",
+    "sha256": "32bc530188610173f334b1e8fd31d313aa785ec2db446a262cb00567e12d26c9",
+    "size": 98049,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/input",
+    "sha256": "315b8597fbcf92d027623759d28d08945fa38b4342d70dcd986e5e415a53244a",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/last_conf.dat",
+    "sha256": "a602caed306c2507ec0484e2ec2604082a55c8c44758b54d46000e88f6532cc5",
+    "size": 2310173,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/log.dat",
+    "sha256": "60aca76e8ab6c1733ba16ea5d281d4f0a9027001f3c90ae251695d80e86c0d60",
+    "size": 201547,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/run_meta.json",
+    "sha256": "f53dbb891ba3e2bd74202496f13d903abe1dcd77935f0943a05518d8f88ea219",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/stdout.log",
+    "sha256": "7d474c63b6a86b07353a680e5ad34bf8368637f6f81f40b006f2ee0b7dc9fe33",
+    "size": 124062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/traj.dat",
+    "sha256": "b6cc82d48b3a52e6d5e4c36e5498c16efefac493f85bb2e2d720e091364c1b2b",
+    "size": 115484762,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/wrapper.pid",
+    "sha256": "24e852bd9cb577aa47c7511d00e10ac00930ddd431bb9c82a06ecb28f93d344c",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/wrapper.sh",
+    "sha256": "c6c4c026b3d8fda3551de5fe56cbcf2c9de7bb02e9282e20c6f9ddc9c038f503",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-11b-3/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/end_time.txt",
+    "sha256": "7b766beaf01f4491be4fcb4f9db3b6fd854f5eeb40e21b712b5a36701032bb8d",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/energy.dat",
+    "sha256": "63f1e3c81a6f925531067592099bbc29662305d16b9cf700d08c290fb6306a63",
+    "size": 1813,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/input",
+    "sha256": "c5c55ec32e8d9c24d9bc6d6ecfadf6cc588755cd6f74a65080d4aebb90a98895",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/last_conf.dat",
+    "sha256": "98ca6492cab05bf45bf3f2f6160a5efe99e9420975d22f116ebed9aefea65dca",
+    "size": 2344883,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/log.dat",
+    "sha256": "ae1db8ce98b4b683c65e3655a2b310d3d1b6e415f1e8cb16e11ce32e6d305d3b",
+    "size": 6575,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/run_meta.json",
+    "sha256": "675383edbb167fa6066c4bc633925699ac08dea9f2fb8bd5a5eca3caa475cb1b",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/stdout.log",
+    "sha256": "2e12078a0d38c93fbc947e777d03cea41e6d6454b9d567a7818efdc75b7b2562",
+    "size": 2294,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/wrapper.pid",
+    "sha256": "01f9c097a61c70646de0f176da8a1e5c874ec0e38e096355318b11571adff7eb",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/wrapper.sh",
+    "sha256": "e51d09bc2c647055b3d6d5869af71b4c2131733b694258bcdf79fa2e4c6ad976",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/end_time.txt",
+    "sha256": "f0d351983843acb10b3b1414ea2b42ecec91d0cdce036c62e2f02c4f8b19b9ea",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/energy.dat",
+    "sha256": "7bf153fda7f17e1f1a16b4a269f0baa2d31fa91e7fe8df910ac8d81ac4c56f9b",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/input",
+    "sha256": "c5c55ec32e8d9c24d9bc6d6ecfadf6cc588755cd6f74a65080d4aebb90a98895",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/last_conf.dat",
+    "sha256": "95225b3222f8ae4f1f49ef6b77bdd5250adc4a87870ea49c79238032a10bf628",
+    "size": 2345313,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/log.dat",
+    "sha256": "2b782bc783542fc43f9abc44f686b08a8a788d92f9e8bc241886f0c155881b14",
+    "size": 151617,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/run_meta.json",
+    "sha256": "f145fccc4f949212d3acfb3729f52f8a9a131cd5162dcb8d2c99f52cd8c75823",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/start_time.txt",
+    "sha256": "0170205bb77229f69faf4975f5310e2fa5dd5f8465ecd90ced2d9737f7e0879f",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/stdout.log",
+    "sha256": "9bf90d1776a2c1ca22d0ac077c1b9d17398d30f96f58d3365f71069e3037852b",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/traj.dat",
+    "sha256": "d2a2f564ae0cdbe33e5cb21b6f4320e2cc108a936e8baa4fd20e7769a81179db",
+    "size": 86769719,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/wrapper.pid",
+    "sha256": "3bd712b1ac76b860030536807f5ef10772f65781bf019a22e53d200f7cac3156",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/wrapper.sh",
+    "sha256": "2be7ded442a44cec634188a26ed469d102e8be82d8e9692ccecefff06d9b9a88",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-1R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/end_time.txt",
+    "sha256": "4f18e6bfe32af1cdc9986bc99817598044d23c667be7250dc9ab6d350102c5b0",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/energy.dat",
+    "sha256": "f1e96cedf9d15a2f30a37bb64883d761ceed7c2a19ed9a72f17bda0694ad83cb",
+    "size": 1764,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/input",
+    "sha256": "756023bb76dc7a376649ff0fa16903e192c8754ed11d8b8a877de3daa69e4d86",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/last_conf.dat",
+    "sha256": "0b13b35717bb0997fa883c200f1e46f3be9216d09d11738629f0142b48fc3b4e",
+    "size": 2344888,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/log.dat",
+    "sha256": "80dc49dc5ff82429b258cea89f74fb962c712c31f3066311e5725220dee7b467",
+    "size": 6481,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/run_meta.json",
+    "sha256": "14c755ef010a45a7cc5af6bb5c006dee409d467dc9ef77e2eca93cbb2fca6f9b",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/start_time.txt",
+    "sha256": "b60bcf8c78d878fba29359e17f29c8189a00880247c520d8516f2c6e32907747",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/stdout.log",
+    "sha256": "71088a1fd023a0fd124ecf7ca4fee24e5d0636beab606b91ab420c42a9ef1a51",
+    "size": 2232,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/wrapper.pid",
+    "sha256": "797fbca943da6a8b2b99c95843aafc97fc6cb5c34bf2f1223721c520e05d2b6d",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/wrapper.sh",
+    "sha256": "070531a0e4825056aecfab30ec666d933f1f8ebc73e0cfb272e903d749548514",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/end_time.txt",
+    "sha256": "63cb51ec813774b596224b6332e0a275f58f5d10180795d5e723b3f1ff9a55bf",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/energy.dat",
+    "sha256": "dd127089c828eba3607f23d56a986a10c0bee4760499951e4a963f57889e1d89",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/input",
+    "sha256": "756023bb76dc7a376649ff0fa16903e192c8754ed11d8b8a877de3daa69e4d86",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/last_conf.dat",
+    "sha256": "4f080b9213b7ebd97f2d78da8c75dfdf9bc0fed1a13c0c06b9cd1252e6404d17",
+    "size": 2345320,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/log.dat",
+    "sha256": "03aef7e84ce189bf5d095adb0644c4fffa6bb5f04e95606b703d70889f3f3b71",
+    "size": 151586,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/run_meta.json",
+    "sha256": "4a8b9e74639657a6c34ad2630fd9eb4c06742c85dfced2e22f983c803254c5dc",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/start_time.txt",
+    "sha256": "0170205bb77229f69faf4975f5310e2fa5dd5f8465ecd90ced2d9737f7e0879f",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/stdout.log",
+    "sha256": "a7c7b8e37eba532dae906820884ae2aafee4c597bddf71c14c5dd7b21b96641c",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/traj.dat",
+    "sha256": "a301daba3b08484ee9610f4e331c3b3b2dc3c6c32a45c32bc61a53ad862cadd7",
+    "size": 86770034,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/wrapper.pid",
+    "sha256": "d0a721019da11aae9a09ed6240e1cac7060e3a784122c10735c38c580024b24b",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/wrapper.sh",
+    "sha256": "9f4e4dffcfc09e7f8ba7eff784d8626275a928bd91f829d720415ee79374041b",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-2R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/end_time.txt",
+    "sha256": "7b766beaf01f4491be4fcb4f9db3b6fd854f5eeb40e21b712b5a36701032bb8d",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/energy.dat",
+    "sha256": "defb0404fc80703c0dccc020bcfcffd2e2430bfc7c05f5618588284b18aa5d14",
+    "size": 1764,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/input",
+    "sha256": "11977fa801f81449eb2c16fd3843a64402fcf61f0706406e671efbc6fa1d10dc",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/last_conf.dat",
+    "sha256": "b0dc0379d9a553465f3621796903b683b6d2d482ae6847801ca6070a8ca816e7",
+    "size": 2344958,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/log.dat",
+    "sha256": "653a4672c1f02d91f95fbcbad05e6c353bc8ddabd4c4d0e52a37c75ef37b84e0",
+    "size": 6477,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/run_meta.json",
+    "sha256": "6a5dcbb976c0a7ae933497eec36ebfc873930afbeacec8ae30f7a7d81c2d011a",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/start_time.txt",
+    "sha256": "68ef169abfd9f819fff12387997a47b7f3a877b78601fc828dcd4ecd6357466c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/stdout.log",
+    "sha256": "15de6ee4d4e0e8c62da7373bd4d1ab5c150f56ed1a3df856150d2e8791c9a658",
+    "size": 2232,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/wrapper.pid",
+    "sha256": "a31f9a9d29c4028bdb2fcc0cf63f02bf4cb2fad27533ddf0b215ab10644b4d25",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/wrapper.sh",
+    "sha256": "6b6917bc4b7df3d28f3d94363cd287a9c170d41319c0350a57c18c4bc8d86771",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/32b.conf",
+    "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+    "size": 2345114,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/32b.top",
+    "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+    "size": 123024,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/end_time.txt",
+    "sha256": "4902a0360da5fd9ce9c077d81ddf769a1c52f6349a94ef9fda229e246aee46c3",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/energy.dat",
+    "sha256": "19cb6cc318f082a887ccd948b9a4af657ba1b85d6b30ad53eadf4fe78f1c65bc",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/input",
+    "sha256": "11977fa801f81449eb2c16fd3843a64402fcf61f0706406e671efbc6fa1d10dc",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/last_conf.dat",
+    "sha256": "b99b55479013e5019b37f00380ef892109d1556e0b80d059de068dbd683123af",
+    "size": 2345764,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/log.dat",
+    "sha256": "4acc36a20dd5c68d91eb91eee7c56b5bd2f45b3f7aabee99ec7b8c83d15bdb77",
+    "size": 151585,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/run_meta.json",
+    "sha256": "5f9db3579ba8690e551b19c81d44cddb09ec59f96be597afaa319d38278dd5b9",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/start_time.txt",
+    "sha256": "c1298b0721723ba8d79b14425fa1e71dea21e8e05272c09b37d14ce22934d3ed",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/stdout.log",
+    "sha256": "b935336a024036196282af9b6974841323f44d9f0af71787d22919e1fecb0c74",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/traj.dat",
+    "sha256": "f69112a831654db62134a0b146e348e0fc8a54882db77651b2489559fd8f69b4",
+    "size": 86775774,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/wrapper.pid",
+    "sha256": "3deaea391e1c1301e84457197fbab9474b08bcd63ae3b835763c2d974e46737d",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/wrapper.sh",
+    "sha256": "cd710f2630a9175c0a09ced4a9cfaf83bcfea5f5f24ab3116c7e0b5f2e67f36c",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-32b-3R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/end_time.txt",
+    "sha256": "4f18e6bfe32af1cdc9986bc99817598044d23c667be7250dc9ab6d350102c5b0",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/energy.dat",
+    "sha256": "eea7fd2e6513ddf119811a3e3b8fef7f62351925993c6a9553182b6b4a063ab0",
+    "size": 1911,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/input",
+    "sha256": "61c363df458c6aa592a43f02500071098419f2df43a2bb855e0e40a33bb1137e",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/last_conf.dat",
+    "sha256": "535817e4a69077a3df97efcdc3f19ad4d8e2f783be9f4dabfd5a2d5ac8c9b738",
+    "size": 2379619,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/log.dat",
+    "sha256": "09844a63465b0de80cbb068321d1f90ed8440b7bd6172e5232204c18a351ae3b",
+    "size": 6758,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/run_meta.json",
+    "sha256": "cfbda85f3ec9262205e7786bbf84becc05457bf72d80259d0f69cc42c3a43f26",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/start_time.txt",
+    "sha256": "68ef169abfd9f819fff12387997a47b7f3a877b78601fc828dcd4ecd6357466c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/stdout.log",
+    "sha256": "7707756b1f994354921553f87d5586b5bbf3a216caaef9806a36da3ce166fd25",
+    "size": 2418,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/wrapper.pid",
+    "sha256": "ca40d857c74140cbd2d4d646839d17fe112ddf25b4b82154d39880de146e0a93",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/wrapper.sh",
+    "sha256": "541727fde4fc0daa5b2d72a8a9829afb036836d7a88f8857fcc2aa874e936271",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/end_time.txt",
+    "sha256": "ce54498c21bcb79ebe6e998c5f4ad1e16afdd920b5e277a06435d2c8a5ee1e1f",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/energy.dat",
+    "sha256": "63fb71ebe5ee4110e3e900267683844cfee37414eb5ba9b15f6ef6e93f39d560",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/input",
+    "sha256": "61c363df458c6aa592a43f02500071098419f2df43a2bb855e0e40a33bb1137e",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/last_conf.dat",
+    "sha256": "69818665d039ce7f1d73cfb667a6b785b2ba7c7a272770812d803e4127755fe4",
+    "size": 2379483,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/log.dat",
+    "sha256": "265c6418ec420117299fa22fe7de96954fda24e47bf7d110995a962a21169e54",
+    "size": 151700,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/run_meta.json",
+    "sha256": "078c2c60cfeb720942a577ae8a0f6659293a417c2c3c716d0162ab5191eebe22",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/start_time.txt",
+    "sha256": "c1298b0721723ba8d79b14425fa1e71dea21e8e05272c09b37d14ce22934d3ed",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/stdout.log",
+    "sha256": "db8c88696674619035f2fa5431a54c0d8e7a1c4957380d04ae864fae4e892c7b",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/traj.dat",
+    "sha256": "647a90d710decd509b09bf0c55bb055e16823c4a55850a3df3246d30121e3c3a",
+    "size": 88051014,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/wrapper.pid",
+    "sha256": "78ed6a9886d93d68a181e4775e960ef87bd5719dd46df0c12bd21eb6bfad4acf",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/wrapper.sh",
+    "sha256": "e6668fb96e4b61cf9038f2b07b93a66564df678aa6889226347f3cd28a1acfd8",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-1R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/end_time.txt",
+    "sha256": "7b766beaf01f4491be4fcb4f9db3b6fd854f5eeb40e21b712b5a36701032bb8d",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/energy.dat",
+    "sha256": "7a269217c84d7e0b09ab7abca3d8a2130ee18ed49cc5faa95de73feced6faf7d",
+    "size": 1911,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/input",
+    "sha256": "32c26125a51e9487e41ad21e459762dc6e3f0572009a2cad2dcdff48fb00e146",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/last_conf.dat",
+    "sha256": "6094f2adb61ca9ff3cc8431f1811cc2111ecc09f1fc125e2b915f8f9e81e50d9",
+    "size": 2379379,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/log.dat",
+    "sha256": "c2454304e572d76d638641bec86eed98d5b088e10fd039dd76d41991db13a16e",
+    "size": 6768,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/run_meta.json",
+    "sha256": "4fd243115b8592d349fd93dae1804bca5a9c1f240d62d59e15d5a71f15f88456",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/start_time.txt",
+    "sha256": "68ef169abfd9f819fff12387997a47b7f3a877b78601fc828dcd4ecd6357466c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/stdout.log",
+    "sha256": "79d279af58faf22b45d3d4d52bccd6cdf7169fd60cace9b17a7b461f44920940",
+    "size": 2418,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/wrapper.pid",
+    "sha256": "7fb7468f20c09ad7ee3117e4cabb19c5ac06bbb2d2e0c4125140c6709aae6d74",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/wrapper.sh",
+    "sha256": "67e26c72de10087f146b46ad7d28b6bebb0068d07a7f8553ada8b09ff5f86c32",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/end_time.txt",
+    "sha256": "eaf49ecf2ba8e38e30c69f98d695f7986960cab3bb5d7d432a3f3af2e6107d5d",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/energy.dat",
+    "sha256": "146165c1011a6c6d8517546aa413f570efb6e680aa24b5ef5c0ffb69db8a7a4e",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/input",
+    "sha256": "32c26125a51e9487e41ad21e459762dc6e3f0572009a2cad2dcdff48fb00e146",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/last_conf.dat",
+    "sha256": "4cd99c27f34f3ef8422bddb701a40b784ad39130f75a7d0a1e25baa3531dec9a",
+    "size": 2379442,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/log.dat",
+    "sha256": "49280cde1d843ab431ea9c5aaf6147523bbba2acfcc2995ff30fd277c744a0c0",
+    "size": 151688,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/run_meta.json",
+    "sha256": "34f2dadfa5d5e38f0e2130bc1ca857f3848e8bb36ca22111f228ed437c82110e",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/start_time.txt",
+    "sha256": "c1298b0721723ba8d79b14425fa1e71dea21e8e05272c09b37d14ce22934d3ed",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/stdout.log",
+    "sha256": "139ef8d5d505fc4415d2829ae278de7f6a7fa22c82b69fa63b69f189c9f88c94",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/traj.dat",
+    "sha256": "b9a7002b1cc1b4eba24516cc5d4be0b60ddd9f3013871f7c088df9897517386d",
+    "size": 88042713,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/wrapper.pid",
+    "sha256": "7117fc4128df340b544f2d7127a2fda222450514d2ae7a7a1b92e6e516b74bbd",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/wrapper.sh",
+    "sha256": "c446669533110b9652a4f65999a2d50ba7dc17a00bb60b55cb55c9f8ff556d86",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-2R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/end_time.txt",
+    "sha256": "4f18e6bfe32af1cdc9986bc99817598044d23c667be7250dc9ab6d350102c5b0",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/energy.dat",
+    "sha256": "84f7ffa5c99eb8ae8aad9cfe5d51510ca1b6b03a6b9d6ae2e55a9864bf00c72f",
+    "size": 1911,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/input",
+    "sha256": "c5be61b8ac3b55f867aac00f6cadc0035ce143614c05b4faa18a0fadd93810dc",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/last_conf.dat",
+    "sha256": "04bda130099ab9c1484d76c40327af47d655a6490a6e2a3a5df9c24c69cb2d42",
+    "size": 2379474,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/log.dat",
+    "sha256": "3bd96e9e2283141aa162108414add183adb7b1b4828446422cd6a34c20c61f67",
+    "size": 6766,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/run_meta.json",
+    "sha256": "e7983e473a105d74a13139e390254fae01679510b26ab9fcc7c13565385f81d5",
+    "size": 492,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/start_time.txt",
+    "sha256": "68ef169abfd9f819fff12387997a47b7f3a877b78601fc828dcd4ecd6357466c",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/stdout.log",
+    "sha256": "124dcef245b8d486e55c0f0110a32ef31141f1d9994f8e06cd56d354bcbf10d9",
+    "size": 2418,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/wrapper.pid",
+    "sha256": "603940bb4368eb46ad99b03f9964f08820a76c381ab9dc50b0354fa3c83101b4",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/wrapper.sh",
+    "sha256": "1e584adab75047f1b6c8375db0076725659594a73b969e91fbdffadb32f32418",
+    "size": 413,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/53b.conf",
+    "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+    "size": 2379246,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/53b.top",
+    "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+    "size": 124872,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/end_time.txt",
+    "sha256": "4835603550d8ed74ed7787661e18a28157e430ddbc9a449d53c10e3d0d4cbbd7",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/energy.dat",
+    "sha256": "95a0cd4499b2f0b689bd59c230211b3740af39bb74d379b0e8c4011d97b75e64",
+    "size": 73549,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/input",
+    "sha256": "c5be61b8ac3b55f867aac00f6cadc0035ce143614c05b4faa18a0fadd93810dc",
+    "size": 932,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/last_conf.dat",
+    "sha256": "fcd9c4954f7ffaaaa33dc5748ac4ff97ea8241bb9d66f728d342b274b1686e82",
+    "size": 2380572,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/log.dat",
+    "sha256": "0f6a3534b5b91772c1e8fc47cb5fd0faeaf91bbbf1ae0bf5cda2b02459b9345f",
+    "size": 151663,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/run_meta.json",
+    "sha256": "ea4182c41668324aabf685ff986deff9e167cfe68664b62b950794f26eec2d74",
+    "size": 493,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/start_time.txt",
+    "sha256": "c1298b0721723ba8d79b14425fa1e71dea21e8e05272c09b37d14ce22934d3ed",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/stdout.log",
+    "sha256": "9f29a58f9576fa5a79535909f6f16d0b80c1ade4ee866a102fa188fdf1dc55a2",
+    "size": 93062,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/traj.dat",
+    "sha256": "7b2fc416b33c196238278579c6265d2cc94f5e2f9583f1199b1ece8561b779c1",
+    "size": 88064571,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/wrapper.pid",
+    "sha256": "6499f102d10a58a1ef34e113f08ce3722ceddf551a77ebd8c7591c0975c435ff",
+    "size": 7,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/wrapper.sh",
+    "sha256": "f98e946aa168bef5b19bdf6de353c33f76c3eaa56e1261ac783cf9ef46c8053e",
+    "size": 414,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-53b-3R/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/0b.conf",
+    "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+    "size": 2294162,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/0b.top",
+    "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+    "size": 120204,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/end_time.txt",
+    "sha256": "26459b3679d51fcb8c944148b27fd687977770e6edb217bcc1170d546ca18a88",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/energy.dat",
+    "sha256": "f0c49972673dd0cfd2db48c2300dce12fed05ec921986e78a11f1b5505a106af",
+    "size": 245,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/input",
+    "sha256": "0ff29ac1f8a2c531e27e01bbdd444c861328160bab9c7847b1d631a6dbf46637",
+    "size": 927,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/last_conf.dat",
+    "sha256": "d76be315c6a6fb85ed6083c015c2c617c72b4ee3c471bf2085669c0f747a62b2",
+    "size": 2294201,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/log.dat",
+    "sha256": "ed4758be28024bb0ef0016cece59be108c52be781342c0c2c2e96a4f04ade631",
+    "size": 3463,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/run_meta.json",
+    "sha256": "77bee294531721c17cbb5cf47f99bada9f7c51f65b4bbabdf687ea01aec0cd93",
+    "size": 494,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/start_time.txt",
+    "sha256": "a490629a9454ff9462b5eed5702a9fec16175e3214a5507caba78f459514db4f",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/stdout.log",
+    "sha256": "78d71155e9f0bbedb73dcd8612e0a41f07b2b8062e83adeedfc221a8b1fce094",
+    "size": 310,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/traj.dat",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/wrapper.pid",
+    "sha256": "055cafb1623ad8b8893c969cda537f03879b4e7af6f94b532027127b6c6db5a6",
+    "size": 8,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/wrapper.sh",
+    "sha256": "d594a577555706ecbeac8157a8a2f53e89f7fc8a111b10ff2dbdd1c4c3554525",
+    "size": 419,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-01/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/0b.conf",
+    "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+    "size": 2294162,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/0b.top",
+    "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+    "size": 120204,
+    "producer": "upstream verbatim copy (gated)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/end_time.txt",
+    "sha256": "04238aca3fafd4e990034d7156f8072e146393c6c4fd4f4abda8b61649825814",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/energy.dat",
+    "sha256": "8c47a2b41c781258cbd2025f4c89f67e409f21b28a8519893385b460e35c6cda",
+    "size": 2009,
+    "producer": "oxDNA (pinned 00dc7fb9) replica energy file"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/exit_code.txt",
+    "sha256": "849b5308ba7bcccd173022e0041ad23d29f0c18d9443404c8beff30520eed937",
+    "size": 13,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/exit_code_raw.txt",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "size": 2,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/input",
+    "sha256": "491ad3218a0fda7f1a6f19815c109e496343813c765c98122b52e230b07b862e",
+    "size": 928,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/last_conf.dat",
+    "sha256": "5d214b98aa4e38aa9604de76aab839a44c3c93b143c8f63acec012c35d991d95",
+    "size": 2294447,
+    "producer": "oxDNA (pinned 00dc7fb9) replica final configuration"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/log.dat",
+    "sha256": "62e0ec44d0fc9559f2b081ddb114767e2a61e7d52b7ca5870fe55a43f13a389f",
+    "size": 6917,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/run_meta.json",
+    "sha256": "8bbe0a626b80aa70326acf68df24a79ff57373065d3db05eb3bfce9a642d7b8e",
+    "size": 495,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/start_time.txt",
+    "sha256": "0d5fae8fd108457d51197ab23589db3121098c667fe9fa8e152d17f8b314a627",
+    "size": 21,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/stdout.log",
+    "sha256": "59859e324aae096c8fa546d4d1591b9d74ebf6743d04b2e60422119f7aa32304",
+    "size": 2542,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/traj.dat",
+    "sha256": "5d214b98aa4e38aa9604de76aab839a44c3c93b143c8f63acec012c35d991d95",
+    "size": 2294447,
+    "producer": "oxDNA (pinned 00dc7fb9) replica trajectory"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/wrapper.pid",
+    "sha256": "9b582448ed8a8796f6b49762c4de39b030d47690708bd2344521f63458d59e78",
+    "size": 8,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/wrapper.sh",
+    "sha256": "7dad3f371a585abdb05664f2a473dcc7e8f27dc46483fae872e982d7beb9a47e",
+    "size": 419,
+    "producer": "executor (run infrastructure)"
+  },
+  {
+    "path": "runs/EXTERNAL-SMOKE-0B-02/wrapper_nohup.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0,
+    "producer": "oxDNA replica run log"
+  },
+  {
+    "path": "seeds_frozen.json",
+    "sha256": "396b01e1705cdf0ac128401e13b6152bf2437d0db82df0c0c97f20808bc8b9f1",
+    "size": 554,
+    "producer": "executor (frozen before runs)"
+  },
+  {
+    "path": "wait_and_analyze.sh",
+    "sha256": "113899a2ddcacf09f7727871e8bb0950d646012027e2059ca257a6d86322c411",
+    "size": 809,
+    "producer": "executor (watcher)"
+  },
+  {
+    "path": "wait_wave2.sh",
+    "sha256": "9772e1bd541716cf8903533d474df97528a31d36c27bd0e325b89ec222719449",
+    "size": 366,
+    "producer": "executor (wave-2 watcher)"
+  }
+]

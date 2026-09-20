@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-19T01:01:36Z",
+  "execution_id": "EX-NL5-002-C-R1",
+  "work_order_id": "NL5-002-C",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "summary": "Старт EX-NL5-002-C-R1: bounded repair после внешнего вердикта B-R1 (INCONCLUSIVE + PORTABILITY_FINDING, отчёт sha256 5b6d1f06...). Сравнение по frozen rule механическое: per-card INCONCLUSIVE x4, 74b N/A. Root cause: пакет не публикует frozen observable convention (F1 blocking: arm manifests/конвенция осей/detector v2/гейты), не указан URL движка (F2), нет корневого README (F3), не объяснён overlay print_energy_every=100 (F4), не описан tarball-путь получения точного коммита (F5). Усечение реплик средой - orchestration issue исполнителя, в протокол повтора B-R2. Repair: новая ревизия releases/nanolab-components-v0.1.1 (v0.1.0 не переписывается, контракт R1.2): convention/ (arm manifests точные копии + stdlib reference implementation из scripts/ с относительными импортами + CLI analyze_hinge.py с frame0-оракулом + самодостаточная спецификация), карточки MEASURED - только reproduction.steps/requires/protocol_pins.notes (expected/envelopes byte-identical), reproduction/README, корневой README, VERSION/CITATION 0.1.1, RELEASE_MANIFEST перегенерация штатным тулингом. Валидация: reproduce.py verify, frame-0 оракул x4 (совпадение с design.angle_frame0_deg), v2 pair counts, schema lint. Научные tolerance/envelope не меняются; 74b без значений.",
+  "command_refs": [
+    "git --git-dir=/home/rdpuser/NanoLab/.git-store/repo.git worktree add -b work/nl5-002-c-compare-repair-r1 /home/rdpuser/NanoLab/nl5-002-c-repair 48c55b3c4acdd2264527083e3072757be8bd9ada",
+    "PYTHONPATH=scripts python3 scripts/release/card_lint.py --help -> ok (tooling available)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-002-C-R1.md",
+    "docs/work/executions/EX-NL5-002-B-R1/evidence/EXTERNAL_REPRODUCTION_REPORT.md"
+  ],
+  "next_action": "IMPLEMENTER: собрать releases/nanolab-components-v0.1.1, валидации, events 0002/0003, push, dispatch B-R2.",
+  "blocker": null
+}

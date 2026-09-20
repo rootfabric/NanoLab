@@ -1,0 +1,22 @@
+{
+  "0b": {
+    "computed": 66.886745865,
+    "card": 66.886745865,
+    "exact_match": true
+  },
+  "11b": {
+    "computed": 74.357957026,
+    "card": 74.357957026,
+    "exact_match": true
+  },
+  "32b": {
+    "computed": 77.477102136,
+    "card": 77.477102136,
+    "exact_match": true
+  },
+  "53b": {
+    "computed": 132.949606811,
+    "card": 132.949606811,
+    "exact_match": true
+  }
+}

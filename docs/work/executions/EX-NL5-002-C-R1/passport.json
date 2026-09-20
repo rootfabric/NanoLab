@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-C-R1",
+  "work_order_id": "NL5-002-C",
+  "checkpoint": "NL5 / NL5-002-C",
+  "base_sha": "48c55b3c4acdd2264527083e3072757be8bd9ada",
+  "base_branch": "main",
+  "branch": "work/nl5-002-c-compare-repair-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-002-c-repair",
+  "risk_class": "MEDIUM",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/WO-NL5-002-C-R1.md",
+    "docs/work/executions/EX-NL5-002-C-R1/**",
+    "releases/nanolab-components-v0.1.1/**"
+  ],
+  "parent_work_order": "NL5-002",
+  "program_reference": "docs/control/NL5_NL8_EXECUTION_PLAN_R1.md (§2.3 bounded repair; §11 п.4)",
+  "protocol": "docs/work/WO-NL5-002-C-R1.md + docs/release/RELEASE_CONTRACT_V0_1.md R1.2 (старый release не переписывается) + docs/work/WO-NL5-002-A-R1.md (frozen classification mapping)",
+  "input_evidence": {
+    "external_report": "docs/work/executions/EX-NL5-002-B-R1/evidence/EXTERNAL_REPRODUCTION_REPORT.md (branch work/nl5-002-b-external-run-r1 @ 10b4deb)",
+    "external_report_sha256": "5b6d1f06e75876a1ebf7393a2f04f3e0db098f9f84b6d46f23e0ac6c231bef32",
+    "external_verdict": "INCONCLUSIVE + PORTABILITY_FINDING"
+  },
+  "started_at_utc": "2026-09-19T01:01:36Z",
+  "status": "STARTED",
+  "notes": "Bounded repair: научные числа карточек (expected/envelopes/пороги) не меняются; v0.1.0 не переписывается; новая ревизия v0.1.1 добавляет опубликованную frozen convention (arm manifests + reference implementation + спецификация), engine URL, корневой README. Валидация frame-0 оракулом до dispatch B-R2."
+}
