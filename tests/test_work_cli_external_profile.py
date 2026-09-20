@@ -147,6 +147,19 @@ class ExternalExecutionProfile(unittest.TestCase):
         self.assertFalse(res["ok"])
         self.assertTrue(any("unsupported actor_role" in e for e in res["errors"]))
 
+    def test_batch_timestamp_repeats_check_reaches_external_profile(self):
+        # Review F-1: the NL2-003 batch-timestamp check must apply to the external
+        # profile too (3+ events sharing one constant copy timestamp -> reject).
+        same = "2026-09-19T05:00:00Z"
+        res = result([
+            event("0001-external-executor-dispatched", "EXTERNAL_EXECUTOR_DISPATCHED", timestamp=same),
+            event("0002-continuation", "CONTINUATION", timestamp=same),
+            event("0003-continuation", "CONTINUATION", timestamp=same),
+            event("0004-external-run-completed", "EXTERNAL_RUN_COMPLETED", timestamp=same),
+        ])
+        self.assertFalse(res["ok"])
+        self.assertTrue(any("constant copy timestamp across 4 events" in e for e in res["errors"]))
+
 
 if __name__ == "__main__":
     unittest.main()

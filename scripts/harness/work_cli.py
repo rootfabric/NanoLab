@@ -176,6 +176,28 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
     if len(ids) != len(set(ids)):
         errors.append("duplicate event_id")
 
+    # NL2-003 ("repeats"): one constant timestamp copied across >= 3 events is a
+    # batch/copy artifact. Published immutable events are grandfathered by exact
+    # (execution_id, event_id) and do not count toward the tally.
+    # Shared by BOTH profiles (review F-1, repair/nl5-002-ci-external-vocab-r1):
+    # the check runs before the external/standard branch so external executor
+    # campaigns cannot bypass it.
+    stamps: dict[str, list[str]] = {}
+    for path, event in zip(event_files, events):
+        value = event.get("timestamp_utc")
+        if isinstance(value, str) and value.strip():
+            legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
+            if legacy_key not in LEGACY_BATCH_TIMESTAMP_EVENTS:
+                stamps.setdefault(value.strip(), []).append(path.name)
+    for value, names in sorted(stamps.items()):
+        if len(names) >= 3:
+            errors.append(
+                "constant copy timestamp across " + str(len(names)) + " events ("
+                + ", ".join(names) + "): " + value
+                + ": record a per-event machine stamp (legacy batch events are whitelisted; "
+                + LEGACY_BATCH_TIMESTAMP_PROVENANCE + ")"
+            )
+
     # Profile selection: an external executor campaign opens with
     # EXTERNAL_EXECUTOR_DISPATCHED and uses its own vocabulary/roles.
     is_external_profile = bool(event_types) and event_types[0] == EXTERNAL_OPENER
@@ -208,24 +230,6 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
             "has_summary": summary_path.is_file(),
         }
 
-    # NL2-003 ("repeats"): one constant timestamp copied across >= 3 events is a
-    # batch/copy artifact. Published immutable events are grandfathered by exact
-    # (execution_id, event_id) and do not count toward the tally.
-    stamps: dict[str, list[str]] = {}
-    for path, event in zip(event_files, events):
-        value = event.get("timestamp_utc")
-        if isinstance(value, str) and value.strip():
-            legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
-            if legacy_key not in LEGACY_BATCH_TIMESTAMP_EVENTS:
-                stamps.setdefault(value.strip(), []).append(path.name)
-    for value, names in sorted(stamps.items()):
-        if len(names) >= 3:
-            errors.append(
-                "constant copy timestamp across " + str(len(names)) + " events ("
-                + ", ".join(names) + "): " + value
-                + ": record a per-event machine stamp (legacy batch events are whitelisted; "
-                + LEGACY_BATCH_TIMESTAMP_PROVENANCE + ")"
-            )
     if event_types and event_types[0] != "WORK_ORDER_STARTED":
         errors.append("WORK_ORDER_STARTED must be the first event")
     if event_types.count("WORK_ORDER_STARTED") != 1:
