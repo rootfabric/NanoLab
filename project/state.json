@@ -36,7 +36,7 @@
     "NL4-002": "ACCEPTED",
     "NL4-003": "ACCEPTED",
     "NL5-001": "ACCEPTED",
-    "NL5-002": "READY",
+    "NL5-002": "WAITING_HUMAN",
     "NL6-001": "PLANNED",
     "NL6-002": "PLANNED",
     "NL7-001": "PLANNED",
@@ -69,7 +69,16 @@
     "external_reproductions": 0,
     "paid_compute_authorized": false
   },
-  "open_decisions": [],
+  "open_decisions": [
+    {
+      "id": "NL5-ACCEPTANCE-POLICY",
+      "opened_utc": "2026-09-20T00:00:00Z",
+      "kind": "OWNER_DECISION",
+      "subject": "NL5 acceptance policy after WO-NL5-002-E-R1 platform-sensitivity study",
+      "question": "NL5-002 is closed as terminal verified MISMATCH / NOT accepted (disposition decided by owner 2026-09-20; PR #43 merged 7504b38). Open: whether NL5 acceptance after the platform study requires (a) a new preregistered reproduction rule (e.g. v0.2 distribution-based envelope) with a successful external reproduction under it, or (b) another owner-defined criterion. Optional sub-items: timing of bounded packaging repair v0.1.2 (pyc/RIGHTS findings FR-3/FR-4, non-scientific) and availability of optional platform P3.",
+      "record": "docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md"
+    }
+  ],
   "github_tracking": {
     "roadmap_issue": 1,
     "task_issues": {
