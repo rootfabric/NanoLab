@@ -2,10 +2,14 @@
 
 ## Статус
 
-**PLANNED — preregistration DRAFT.** Настоящий документ публикуется как bounded
-HIGH scientific Work Order-кандидат. Freeze и dispatch возможны только по явному
-решению владельца (Human Gate / owner mission). ДО dispatch ни один прогон этого
-WO не выполняется. Документ создан ДО любых данных кампании (freeze-before-data).
+**FREEZE-IN-PROGRESS — preregistration content frozen as of this commit; review/verify pending.**
+Owner-разрешение получено (2026-09-20): `HUMAN_GATE_PLATFORM_SENSITIVITY_PREPARATION = APPROVED`
+(подготовить и после корректного preregistration freeze запустить bounded experiment).
+До (1) fresh Scientific Reviewer PASS preregistration, (2) fresh Verifier PASS
+preregistration и (3) Director freeze record `docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md`
+ни один прогон этого WO не выполняется. Научное содержимое (вопрос, гипотезы, seeds,
+статистический план, decision rule, budgets, stop conditions) после этого коммита
+не меняется (freeze-before-data; любые правки = новая revision WO).
 
 - Parent: `NL5-002` (frontier `NL5`; `NL5-002` = terminal MISMATCH, WAITING_HUMAN)
 - Риск: **HIGH** (protocol/observable/analysis/claim) → требуется Reviewer + Verifier + Director

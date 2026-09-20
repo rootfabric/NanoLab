@@ -71,11 +71,11 @@
   },
   "open_decisions": [
     {
-      "id": "NL5-002-DISPOSITION",
-      "opened_utc": "2026-09-19T18:25:00Z",
-      "kind": "HUMAN_GATE",
-      "subject": "NL5-002 terminal MISMATCH (verified: Fresh Reviewer PASS be945f1, Fresh Verifier PASS 4116468, fresh tooling/integration Verifier PASS 776bb82)",
-      "question": "Disposition after verified external reproduction MISMATCH (0b/32b outside frozen envelopes, 11b/53b MATCH; no threshold tuning): merge integration evidence (integration/nl5-002-r1 @ 4c67e21, PR #43 READY_FOR_HUMAN_GATE), choose next step (platform-sensitivity WO WO-NL5-002-E-R1 / optional packaging repair v0.1.2 / other), and NL5 acceptance policy. NL6-001/E5 stays blocked until NL5 acceptance.",
+      "id": "NL5-ACCEPTANCE-POLICY",
+      "opened_utc": "2026-09-20T00:00:00Z",
+      "kind": "OWNER_DECISION",
+      "subject": "NL5 acceptance policy after WO-NL5-002-E-R1 platform-sensitivity study",
+      "question": "NL5-002 is closed as terminal verified MISMATCH / NOT accepted (disposition decided by owner 2026-09-20; PR #43 merged 7504b38). Open: whether NL5 acceptance after the platform study requires (a) a new preregistered reproduction rule (e.g. v0.2 distribution-based envelope) with a successful external reproduction under it, or (b) another owner-defined criterion. Optional sub-items: timing of bounded packaging repair v0.1.2 (pyc/RIGHTS findings FR-3/FR-4, non-scientific) and availability of optional platform P3.",
       "record": "docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md"
     }
   ],

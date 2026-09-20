@@ -1,7 +1,8 @@
-# DIRECTOR_DECISION_R1 — NL5-002 terminal: MISMATCH (proposal to Human Gate)
+# DIRECTOR_DECISION_R1 — NL5-002 terminal: MISMATCH (CANONICAL, применено 2026-09-20)
 
 Дата: 2026-09-19 (authoritative `date -u` при записи). Роль: DIRECTOR.
-Статус: **PROPOSAL — не применён к canonical state; решение за владельцем (Human Gate).**
+Статус: **CANONICAL — применён к canonical state 2026-09-20 по явному owner-разрешению
+(см. Дополнение 3); до этого момента документ существовал как PROPOSAL to Human Gate.**
 
 ## Установленный факт (verified цепочкой A→B-R1→C→B-R2→C2 + Fresh Reviewer PASS + Fresh Verifier PASS)
 
@@ -130,3 +131,67 @@ P1/P2[/P3], variants 0b/32b + controls 11b/53b, n=8–10 frozen seeds, paired
 bootstrap-план, hypotheses H0/H1, outcomes PLATFORM_INSENSITIVE/PLATFORM_SENSITIVE/
 INCONCLUSIVE). Freeze и dispatch — только по решению владельца; v0.1 envelope и
 R1 MISMATCH не пересматриваются.
+
+## Дополнение 3 — 2026-09-20: Human Gate получен, решение ПРИМЕНЕНО канонически (this record = canonical, не proposal)
+
+Owner-миссия 2026-09-20 дала явные разрешения (Human Gate):
+
+```text
+HUMAN_GATE_PR43_EVIDENCE_MERGE              = APPROVED
+HUMAN_GATE_NL5_002_TERMINAL_DISPOSITION     = APPROVED
+HUMAN_GATE_PLATFORM_SENSITIVITY_PREPARATION = APPROVED
+```
+
+Авторизация НЕ трактуется как `NL5-002 = ACCEPTED` или `NL5 = ACCEPTED`.
+
+### 1. Закрытие tooling Reviewer gap и merge PR #43
+
+```text
+tooling Reviewer (fresh session) = PASS  review/nl5-002-integration-r1 @ 61edc42a33cead5b1c084525df7c4dcd66177487
+                                   (REVIEWED_INTEGRATION_HEAD = 4c67e211…, REVIEWED_TREE = 641c9cc7…,
+                                    8/8 инвариантов, 21/21 negative controls, 369 tests OK;
+                                    evidence: docs/evidence/NL5-002/FRESH_INTEGRATION_REVIEW_R1.md)
+PR #43                           = MERGED, merge commit 7504b38110aa0694495b037d11f079afee467de
+                                   (parents 48c55b3 + 4c67e21; merge содержит exact integration head)
+post-merge main                  = 7504b38110aa0694495b037d11f079afee467de
+ancestry                         = git merge-base --is-ancestor 4c67e211… origin/main → PASS
+post-merge verification          = 369 tests OK; check-consistency ok=true;
+                                   workflow_lint blocking=0; 43/43 EX-* valid
+                                   (EX-NL5-002-A-R1/B-R1/C-R1/B-R2/C2-R1 включительно;
+                                    B-R1/B-R2 = external_execution profile)
+post-merge hosted CI             = run 35506654447 (main @ 7504b38) = SUCCESS
+```
+
+Научные/state-поверхности в evidence merge не добавлялись (tree main после merge =
+641c9cc7… — байт-в-байт tree integration head).
+
+### 2. Каноническая terminal disposition NL5-002 (ПРИМЕНЕНА)
+
+```text
+NL5-002 = WAITING_HUMAN (schema-supported статус HARNESS_CONTROL.md)
+        = terminal scientific MISMATCH / NOT ACCEPTED — canonical, не proposal
+0b = MISMATCH · 11b = MATCH · 32b = MISMATCH · 53b = MATCH · 74b = NOT_MEASURED/KNOWN_GAP
+WO-level = MISMATCH — immutable; threshold tuning / envelope widening / auto-R3
+           запрещены и не выполнялись
+NL5                    = IN_PROGRESS (acceptance НЕ объявлен)
+external_reproductions = 0 (не увеличивался: MISMATCH не является успешным воспроизведением)
+frontier               = NL5
+NL6-001 / E5           = PLANNED, LOCKED до отдельного NL5 acceptance
+```
+
+### 3. Следующий научный шаг — выбрано владельцем: PLATFORM-SENSITIVITY
+
+Пункт 3 таблицы «Что решает владелец» решён: вариант (a) — исследовательский
+WO `WO-NL5-002-E-R1` (PLATFORM-SENSITIVITY-R1). Дальнейшая последовательность:
+fresh Scientific Reviewer preregistration → fresh Verifier preregistration →
+Director freeze record `docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md` →
+только затем возможные прогоны (P1/P2, n≥8; 74b запрещён). v0.1 envelope и R1
+MISMATCH не пересматриваются этим WO.
+
+### 4. Открытые вопросы, оставленные владельцу (не «что делать дальше»)
+
+```text
+1. NL5 acceptance policy после platform study (см. open_decisions NL5-ACCEPTANCE-POLICY)
+2. optional packaging 0.1.2 (pyc/RIGHTS findings FR-3/FR-4) — timing
+3. optional platform P3 — availability
+```
