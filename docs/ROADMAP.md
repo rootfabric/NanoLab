@@ -75,7 +75,7 @@ Release `nanolab-components 0.1.0` включает machine-readable schema, fam
 
 ### 3. NL5-002 — external reproduction (ИСПОЛНЕН: terminal MISMATCH, WAITING_HUMAN)
 
-Цепочка 2026-09-19: A frozen protocol → B-R1 INCONCLUSIVE+PORTABILITY_FINDING (сохранён) → C bounded repair v0.1.1 (science byte-identical) → B-R2 12/12 валидных реплик exit=0 → C2 binding MISMATCH (0b/32b вне frozen envelopes, 11b/53b MATCH; 74b NOT_MEASURED; threshold tuning отсутствует). Fresh Reviewer PASS `be945f1`, Fresh Verifier PASS `4116468`; integration candidate `integration/nl5-002-r1 @ 33935ae`. Приёмка NL5 требует успешного воспроизведения — НЕ выполнено; disposition (platform-sensitivity research WO / optional packaging v0.1.2 / acceptance policy) — Human Gate: `docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md`.
+Цепочка 2026-09-19: A frozen protocol → B-R1 INCONCLUSIVE+PORTABILITY_FINDING (сохранён) → C bounded repair v0.1.1 (science byte-identical) → B-R2 12/12 валидных реплик exit=0 → C2 binding MISMATCH (0b/32b вне frozen envelopes, 11b/53b MATCH; 74b NOT_MEASURED; threshold tuning отсутствует). Fresh Reviewer PASS `be945f1`, Fresh Verifier PASS `4116468`; после bounded tooling repair (external execution profile, `616ecea`+`932481e`) integration candidate `integration/nl5-002-r1 @ 4c67e21` — PR #43 **READY_FOR_HUMAN_GATE**: hosted CI `35480129676` SUCCESS, fresh tooling/integration Verifier PASS `verify/nl5-002-integration-r1 @ 776bb82` (369 tests OK; 42/42 EX-* valid; NC-EXT/NC-STD pass). Приёмка NL5 требует успешного воспроизведения — НЕ выполнено; disposition (platform-sensitivity WO `WO-NL5-002-E-R1` / optional packaging v0.1.2 / acceptance policy) — Human Gate: `docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md`.
 
 ### 4. Параллельно INFRA2 → INFRA3
 
