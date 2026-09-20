@@ -74,8 +74,8 @@
       "id": "NL5-002-DISPOSITION",
       "opened_utc": "2026-09-19T18:25:00Z",
       "kind": "HUMAN_GATE",
-      "subject": "NL5-002 terminal MISMATCH (verified: Fresh Reviewer PASS be945f1, Fresh Verifier PASS 4116468)",
-      "question": "Disposition after verified external reproduction MISMATCH (0b/32b outside frozen envelopes, 11b/53b MATCH; no threshold tuning): merge integration evidence (integration/nl5-002-r1 @ 33935ae), choose next step (platform-sensitivity research WO / optional packaging repair v0.1.2 / other), and NL5 acceptance policy. NL6-001/E5 stays blocked until NL5 acceptance.",
+      "subject": "NL5-002 terminal MISMATCH (verified: Fresh Reviewer PASS be945f1, Fresh Verifier PASS 4116468, fresh tooling/integration Verifier PASS 776bb82)",
+      "question": "Disposition after verified external reproduction MISMATCH (0b/32b outside frozen envelopes, 11b/53b MATCH; no threshold tuning): merge integration evidence (integration/nl5-002-r1 @ 4c67e21, PR #43 READY_FOR_HUMAN_GATE), choose next step (platform-sensitivity WO WO-NL5-002-E-R1 / optional packaging repair v0.1.2 / other), and NL5 acceptance policy. NL6-001/E5 stays blocked until NL5 acceptance.",
       "record": "docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md"
     }
   ],
