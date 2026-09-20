@@ -58,8 +58,19 @@ WORK_QUEUE / ROADMAP / README / AGENT_START / SESSION_LOG — синхрониз
 ## Exact subjects
 
 ```text
-integration/nl5-002-r1 @ 33935ae813ca476b758192b3252aa6316a2cd5ca (эта ветка от него)
+integration/nl5-002-r1 @ 4c67e211f0db78c90366d32f643de92089ed190c   (PR #43 head; hosted CI run 35480129676 = success)
 review/nl5-002-r1 @ be945f1dbdf97202bc50a91bd0e75744ba9c4fa6   (PASS)
 verify/nl5-002-r1 @ 4116468ad570d59c35ff9349020495d4b455c00b   (PASS)
 B-R2 terminal evidence: work/nl5-002-b-r2-external-run-r1 @ a8dfe8ce…, отчёт sha256 5aee7934…f421
 ```
+
+## Дополнение 2026-09-19 (после Human Gate-подготовки)
+
+- hosted CI на PR #43: run 35478738272 (head 33935ae) = **failure** — Check 3 валидатора
+  отвергал external-execution словарь EX-NL5-002-B-R1/B-R2 (finding FR-2 из FRESH_REVIEW_R1).
+- Bounded machine-contract revision (schema + work_cli external execution profile,
+  9 тестов, fresh review PASS) — commits 616ecea + 932481e, merge 4c67e21 в
+  integration-ветку; повторный hosted CI run **35480129676 (head 4c67e21) = success**.
+- Дельта — tooling-only; пять scientific веток и их вердикты не затронуты
+  (subject-binding review/verify сохраняется). Disclose-комментарий в PR #43
+  (issuecomment-5746556599). Merge остаётся Human Gate.
