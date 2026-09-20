@@ -1,0 +1,33 @@
+Package integrity verification - nanolab-components 0.1.1, P1 leg (EX-NL5-002-E-R1)
+
+Transfer method: byte-exact extraction of blobs from canonical git object store
+(commit d07e75e68c20599e4b942aefb20b4b3922985219, path releases/nanolab-components-v0.1.1/)
+performed with Linux git inside WSL (git archive of the exact commit), because a
+Windows-side `git archive` applies core.autocrlf text conversion and corrupts byte
+identity (documented negative artifact class: ENGINE_ENVIRONMENT_R1 section 5).
+
+Results (WSL, python3 reproduction/reproduce.py verify):
+  RELEASE_MANIFEST.json sha256 = 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef
+    -> EXACT MATCH with frozen pin (PREREGISTRATION_FREEZE_R1, passport).
+  VERSION = 0.1.1
+  verify: 42 manifest entries; 35 real files: ALL sha256+size PASS;
+          7 errors, ALL of them "missing file: convention/nlbl_convention/__pycache__/*.cpython-310.pyc"
+
+Classification of the 7 errors (known packaging finding FR-3, documented in
+DIRECTOR_DECISION_R1 as the optional non-scientific packaging repair v0.1.2, NOT
+accepted by the owner): the v0.1.1 RELEASE_MANIFEST accidentally lists 7 compiled
+__pycache__/*.cpython-310.pyc entries that were generated locally on the P2 machine
+and are NOT part of the git tree; they cannot be materialized byte-exactly and are
+NOT fabricated. They are non-scientific bytecode of the convention package. All 35
+real package files (cards, manifests, convention sources, schemas, RIGHTS) verify
+byte-exact. Scientific content of the package is intact; the package was NOT modified.
+
+Convention sources in use (sha256, WSL-side):
+  convention/analyze_hinge.py            (verified by RELEASE_MANIFEST, PASS)
+  convention/arm-manifest-0b.json        (verified by RELEASE_MANIFEST, PASS)
+  convention/arm-manifest-32b.json       (verified by RELEASE_MANIFEST, PASS)
+  convention/nlbl_convention/*.py        (verified by RELEASE_MANIFEST, PASS)
+
+frame0 oracle self-check (mandatory before runs, packaged analyze_hinge.py):
+  0b : angle_deg = 66.886745865  status=OK  == card design.angle_frame0_deg  (EXACT)
+  32b: angle_deg = 77.477102136  status=OK  == card design.angle_frame0_deg  (EXACT)

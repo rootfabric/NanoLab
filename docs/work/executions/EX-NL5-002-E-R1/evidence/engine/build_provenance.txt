@@ -1,0 +1,15 @@
+campaign: EX-NL5-002-E-R1 platform sensitivity P1
+commit pin: 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+source: https://github.com/lorenzo-rovigatti/oxDNA tarball https://codeload.github.com/lorenzo-rovigatti/oxDNA/tar.gz/00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+tarball sha256: 40a6dd36b93a1e126111fb9d9bbf2d4ac8fb392bb9e145d873cdd004ac9baa04 (MATCH published B-R2 provenance pin)
+source edits: NONE (no patches applied; pristine sources)
+cmake command: /home/yurig/verify-nl2-002/tools/bin/cmake ../oxdna-src -DCMAKE_BUILD_TYPE=Release -DCUDA=OFF -DMPI=OFF
+cmake version: 3.31.6 (user-local tarball, ENGINE_ENVIRONMENT_R1 convention)
+build command: make -j20
+compiler: gcc/g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+effective cmake options: CMAKE_BUILD_TYPE=Release, DOUBLE=ON, CUDA=OFF, MPI=OFF, NATIVE_COMPILATION=ON, JSON_ENABLED=ON
+binary build/bin/oxDNA sha256: 363356b9789fab8e0dab314bd66f92dc0e3a7e2cb3810e24b031614cebb45058 (3375976 B)
+binary build/bin/DNAnalysis sha256: 300102469f3a0b18a2bc3f515e5d6cee8a03a6a2f72bad631bcf6f0b0686d639 (2957400 B)
+binary build/bin/confGenerator sha256: 48e8d976e9076f770189a6de1db44f814687bd876833983e36c4d459c7878292 (2201664 B)
+build wall time: 16 s (make -j20; logs build_cmake.log / build_make.log)
+note: binary sizes byte-identical to ENGINE_ENVIRONMENT_R1 section 4 sizes (3375976/2957400/2201664 B); sha256 differ from the 2026-09-09 recording because this is a fresh rebuild in the campaign workspace (build path/timestamps embedded), as anticipated by ENGINE_ENVIRONMENT_R1 section 9.4

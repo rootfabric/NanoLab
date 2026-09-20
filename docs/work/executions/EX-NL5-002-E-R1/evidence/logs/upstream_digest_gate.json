@@ -1,0 +1,44 @@
+{
+  "kind": "platform_sensitivity_upstream_digest_gate_v1",
+  "execution_id": "EX-NL5-002-E-R1",
+  "leg": "P1",
+  "upstream_repo": "gauravarya77/DNA-hinge-simulations",
+  "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+  "rights": "REFERENCE_ONLY / download-on-run / durable_cache FORBIDDEN; transient Windows transport copies deleted after this evidence commit",
+  "acquisition": "Windows transport layer (curl 8.x, raw.githubusercontent.com at pinned commit), digest-gated, then byte-copied into WSL P1 workspace; WSL-side re-verification of sha256 + git hash-object blob_sha1 PASS 5/5",
+  "gate_rule": "size + blob_sha1 mandatory; sha256 cross-checked against published value together with sha256_status (card source_provenance.digest_gates)",
+  "checks": [
+    {
+      "variant": "0b", "file": "MD_Hinges/0b.conf",
+      "expected_size": 2294162, "computed_size": 2294162, "size_gate": "PASS",
+      "expected_blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da", "computed_blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da", "blob_sha1_gate": "PASS",
+      "published_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263", "computed_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263", "published_sha256_status": "CONTENT_VERIFIED", "sha256_match": true
+    },
+    {
+      "variant": "0b", "file": "MD_Hinges/0b.top",
+      "expected_size": 120204, "computed_size": 120204, "size_gate": "PASS",
+      "expected_blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b", "computed_blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b", "blob_sha1_gate": "PASS",
+      "published_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f", "computed_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f", "published_sha256_status": "CONTENT_VERIFIED", "sha256_match": true
+    },
+    {
+      "variant": "32b", "file": "MD_Hinges/32b.conf",
+      "expected_size": 2345114, "computed_size": 2345114, "size_gate": "PASS",
+      "expected_blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae", "computed_blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae", "blob_sha1_gate": "PASS",
+      "published_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a", "computed_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a", "published_sha256_status": "COMPUTED_NOT_VERIFIED", "sha256_match": true
+    },
+    {
+      "variant": "32b", "file": "MD_Hinges/32b.top",
+      "expected_size": 123024, "computed_size": 123024, "size_gate": "PASS",
+      "expected_blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b", "computed_blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b", "blob_sha1_gate": "PASS",
+      "published_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f", "computed_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f", "published_sha256_status": "COMPUTED_NOT_VERIFIED", "sha256_match": true
+    },
+    {
+      "variant": "shared", "file": "MD_Hinges/pro_CPU.in",
+      "expected_size": 933, "computed_size": 933, "size_gate": "PASS",
+      "expected_blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "computed_blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735", "blob_sha1_gate": "PASS",
+      "published_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "computed_sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673", "published_sha256_status": "CONTENT_VERIFIED", "sha256_match": true
+    }
+  ],
+  "result": "5/5 PASS",
+  "verified_at": "2026-09-20T14:16-14:22Z"
+}

@@ -1,0 +1,10 @@
+{
+  "angle_deg": 66.886745865,
+  "angle_status": "OK",
+  "conf": "/home/yurig/nanolab-platform-sensitivity-r1/P1/upstream/MD_Hinges/0b.conf",
+  "kind": "nanolab_convention_frame0_check",
+  "manifest": "convention/arm-manifest-0b.json",
+  "oracle": "MUST equal card field design.angle_frame0_deg",
+  "reference_pairs_v2_count": 3300
+}
+
