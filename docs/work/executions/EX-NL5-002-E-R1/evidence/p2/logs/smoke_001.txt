@@ -1,0 +1,8 @@
+# PLATSENS-P2-SMOKE-001 (technical smoke, 400 steps, NOT a protocol run; seed 424242 is a throwaway, NOT from the frozen list)
+launched: 2026-09-21T12:28:59Z  ended: 2026-09-21T12:30:32Z
+exit_code_raw=0  exit_code_file='EXIT_CODE: 0'
+stderr_bytes=0  stdout_bytes=310
+energy_bytes=245 (4-column rows, print_energy_every=100; packaged parse_energy rows:0 fact = same as accepted B-R2 analyses)
+traj_bytes=0 (0 frames: first trajectory frame at t=4000 per print_conf_interval=4e3 verbatim; expected at 400 steps)
+input overlay verified: seed/steps/topology/conf_file/trajectory_file/log_file/energy_file/print_energy_every=100 applied; print_conf_interval=4e3 verbatim
+raw run dir deleted after this evidence (smoke is not a campaign run; ID not reused)

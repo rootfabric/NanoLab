@@ -1,0 +1,27 @@
+{
+  "kind": "platform_sensitivity_frozen_seeds_p2_v1",
+  "execution_id": "EX-NL5-002-E-R1",
+  "leg": "P2",
+  "source": "frozen in WO-NL5-002-E-R1 + docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md before ANY campaign data; identical list on P1 and P2 (paired design)",
+  "seeds": {
+    "S001": 1259289227,
+    "S002": 1358106528,
+    "S003": 1524307444,
+    "S004": 601855227,
+    "S005": 274288237,
+    "S006": 972234272,
+    "S007": 1934775205,
+    "S008": 1747973984,
+    "S009": 880427736,
+    "S010": 744386736
+  },
+  "steps": {
+    "0b": 200000,
+    "32b": 150000
+  },
+  "run_ids": {
+    "0b": ["PLATSENS-P2-0B-S001", "PLATSENS-P2-0B-S002", "PLATSENS-P2-0B-S003", "PLATSENS-P2-0B-S004", "PLATSENS-P2-0B-S005", "PLATSENS-P2-0B-S006", "PLATSENS-P2-0B-S007", "PLATSENS-P2-0B-S008", "PLATSENS-P2-0B-S009", "PLATSENS-P2-0B-S010"],
+    "32b": ["PLATSENS-P2-32B-S001", "PLATSENS-P2-32B-S002", "PLATSENS-P2-32B-S003", "PLATSENS-P2-32B-S004", "PLATSENS-P2-32B-S005", "PLATSENS-P2-32B-S006", "PLATSENS-P2-32B-S007", "PLATSENS-P2-32B-S008", "PLATSENS-P2-32B-S009", "PLATSENS-P2-32B-S010"]
+  },
+  "technical_retry_rule": "failed run IDs are never reused; a technical rerun takes a NEW ID with suffix -R1 (e.g. PLATSENS-P2-32B-S004-R1) and the SAME frozen seed; exit 0 is never treated as a scientific pass"
+}

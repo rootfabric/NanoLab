@@ -1,0 +1,24 @@
+=== EX-NL5-002-E-R1 P2 engine build provenance ===
+
+commit pin: 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+source: https://github.com/lorenzo-rovigatti/oxDNA tarball https://codeload.github.com/lorenzo-rovigatti/oxDNA/tar.gz/00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+tarball sha256: 40a6dd36b93a1e126111fb9d9bbf2d4ac8fb392bb9e145d873cdd004ac9baa04
+  gate: ENGINE_TARBALL_GATE=PASS (EXACT MATCH to published provenance pin, same digest as P1 acquisition)
+source edits: NONE (no patches applied; build from pristine sources; same convention as B-R2 on this platform)
+cmake command: cmake -DCUDA=OFF -DMPI=OFF -DDOUBLE=ON ../oxDNA-00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591
+  cmake: cmake version 3.22.1
+  effective cache (CMakeCache.txt): DOUBLE=ON, NATIVE_COMPILATION=ON (default), JSON_ENABLED=ON (default), CMAKE_BUILD_TYPE=(empty)  -- same effective flags as B-R2 build on this platform
+build command: make -j 16
+compiler: g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+build result: MAKE_EXIT=0, errors in build log: 0 (build_cmake.log / build_make.log)
+binary: build/bin/oxDNA, size 3380728 B
+binary sha256 (this fresh build): f590cc872c2989a0aee991517231b2a92db14f851757183c653b47e501f0b9b4
+B-R2 binary (same platform/toolchain/pins): sha256 11cba0abb13bec05a2057f12f22d0ea0714ceafcad41fb05d315888363c023b2, size 3380728 B
+build wall: cmake+make 2026-09-21T12:18Z..12:21:59Z (~4 min)
+
+NOTE on sha256 difference vs B-R2 binary at identical size: fresh builds of this
+engine are not byte-reproducible (embedded build paths/timestamps); the same
+size and the identical pin/flags/compiler convention are the recorded gates.
+This mirrors the P1 convention where fresh-build sha256 difference was
+anticipated by docs/research/ENGINE_ENVIRONMENT_R1 section 9.4 and size was
+byte-identical.

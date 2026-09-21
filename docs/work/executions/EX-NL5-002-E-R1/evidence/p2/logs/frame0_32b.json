@@ -1,0 +1,10 @@
+{
+  "angle_deg": 77.477102136,
+  "angle_status": "OK",
+  "conf": "/home/rdpuser/nl5-002-e-p2/workspace/upstream_disposable/DNA-hinge-simulations-23fd1ff7731e9017bd776f49206dc42d70d9fe91/MD_Hinges/32b.conf",
+  "kind": "nanolab_convention_frame0_check",
+  "manifest": "package/convention/arm-manifest-32b.json",
+  "oracle": "MUST equal card field design.angle_frame0_deg",
+  "reference_pairs_v2_count": 3292
+}
+
