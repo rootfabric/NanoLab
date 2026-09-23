@@ -1,0 +1,40 @@
+PLATSENS-P2-0B-S001 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S001 exit=0
+PLATSENS-P2-0B-S002 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S002 exit=0
+PLATSENS-P2-0B-S003 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S003 exit=0
+PLATSENS-P2-0B-S004 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S004 exit=0
+PLATSENS-P2-0B-S005 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S005 exit=0
+PLATSENS-P2-0B-S006 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S006 exit=0
+PLATSENS-P2-0B-S007 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S007 exit=0
+PLATSENS-P2-0B-S008 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S008 exit=0
+PLATSENS-P2-0B-S009 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S009 exit=0
+PLATSENS-P2-0B-S010 frames=50 last_step=40000000 last_energy_step_printed=1000.0000
+analyze PLATSENS-P2-0B-S010 exit=0
+PLATSENS-P2-32B-S001 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S001 exit=0
+PLATSENS-P2-32B-S002 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S002 exit=0
+PLATSENS-P2-32B-S003 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S003 exit=0
+PLATSENS-P2-32B-S004 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S004 exit=0
+PLATSENS-P2-32B-S005 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S005 exit=0
+PLATSENS-P2-32B-S006 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S006 exit=0
+PLATSENS-P2-32B-S007 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S007 exit=0
+PLATSENS-P2-32B-S008 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S008 exit=0
+PLATSENS-P2-32B-S009 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S009 exit=0
+PLATSENS-P2-32B-S010 frames=37 last_step=29600000 last_energy_step_printed=750.0000
+analyze PLATSENS-P2-32B-S010 exit=0

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-continuation-p2-complete",
+  "timestamp_utc": "2026-09-23T10:35:00Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "cabdb564ed736629fb3f5a5a6214730c97b1f8e7",
+  "summary": "CONTINUATION (execution-complete record; NO scientific values, verdicts or paired statistics recorded - P1-only/paired boundary still binding): P2 leg COMPLETE 20/20 primary runs - PLATSENS-P2-0B-S001..S010 (10/10) and PLATSENS-P2-32B-S001..S010 (10/10), all exit=0, all stderr 0 B, zero technical failures, zero retries (no -R1 IDs; no run ID reused). Campaign wall: dispatched 2026-09-21T21:27:22Z, last replica finished 2026-09-23T07:15:29Z (~33.8h, inside the 72h platform budget). Artifacts per run: traj.dat (0b ~114.70 MB x10, 32b ~86.77 MB x10), energy.dat, last_conf.dat, stdout/stderr (0 B), input overlay, run_meta.json - all bound by sha256+size+producer in workspace run_output_digests_p2.json (20 final run IDs, 0 missing, 0 duplicates, superseded_attempts empty); raw trajectories remain on outenemy local FS outside Git. Packaged convention analysis (nanolab-components 0.1.1, convention/analyze_hinge.py): 20/20 reports, every report engine_exit_code=0, frames_valid_in_window == frames_in_window (0b: 50/50, 32b: 37/37 per print_conf_interval=4e3 verbatim), replica_median_deg present in all; structural verification: NONE issues; per-run analysis stderr empty. P1 leg remains INCOMPLETE on the execution record (no evidence push from the author machine; origin watcher active). PAIRED differences, shift_v, bootstrap CI, ratio_v and any platform verdict remain FORBIDDEN until P1 evidence for the same seeds exists; the fresh Reviewer will independently recompute all statistics per the frozen plan.",
+  "command_refs": [
+    "bash /home/rdpuser/nl5-002-e-p2/workspace/status.sh (technical monitoring)",
+    "python3 /home/rdpuser/nl5-002-e-p2/workspace/build_run_output_digests.py",
+    "cat /home/rdpuser/nl5-002-e-p2/workspace/analysis/completeness.txt"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/analysis/ (20 packaged analysis reports + completeness.txt)",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/run_output_digests_p2.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: P2 leg execution-complete and evidence-committed. Remaining campaign dependency: P1 evidence collection on the author machine (DESKTOP-QNAGSTI) - without it the paired completeness gate (10 complete pairs per variant) cannot open; after P1 evidence lands, the frozen statistics plan, then fresh Reviewer + fresh Verifier + Director acceptance apply.",
+  "blocker": null
+}
