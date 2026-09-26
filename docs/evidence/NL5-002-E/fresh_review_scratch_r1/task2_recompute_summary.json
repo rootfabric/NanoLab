@@ -1,0 +1,142 @@
+{
+ "PLATSENS-P2-0B-S001": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 67.783408083,
+  "replica_median_deg_committed": 67.783408083,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S002": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 66.113225748,
+  "replica_median_deg_committed": 66.113225748,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S003": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 64.242555719,
+  "replica_median_deg_committed": 64.242555719,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S004": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 64.626148665,
+  "replica_median_deg_committed": 64.626148665,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S005": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 66.279476703,
+  "replica_median_deg_committed": 66.279476703,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S006": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 68.00185984,
+  "replica_median_deg_committed": 68.00185984,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S007": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 67.442547308,
+  "replica_median_deg_committed": 67.442547308,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S008": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 68.28556184,
+  "replica_median_deg_committed": 68.28556184,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S009": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 65.156150603,
+  "replica_median_deg_committed": 65.156150603,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-0B-S010": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 65.485299387,
+  "replica_median_deg_committed": 65.485299387,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S001": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 77.459863261,
+  "replica_median_deg_committed": 77.459863261,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S002": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 77.858367343,
+  "replica_median_deg_committed": 77.858367343,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S003": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 77.134925768,
+  "replica_median_deg_committed": 77.134925768,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S004": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 72.343701014,
+  "replica_median_deg_committed": 72.343701014,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S005": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 77.404065803,
+  "replica_median_deg_committed": 77.404065803,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S006": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 76.340166355,
+  "replica_median_deg_committed": 76.340166355,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S007": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 76.547889142,
+  "replica_median_deg_committed": 76.547889142,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S008": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 72.264179719,
+  "replica_median_deg_committed": 72.264179719,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S009": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 76.958755327,
+  "replica_median_deg_committed": 76.958755327,
+  "exact_equal": true,
+  "diffs": []
+ },
+ "PLATSENS-P2-32B-S010": {
+  "analyzer_rc": 0,
+  "replica_median_deg_mine": 76.372532234,
+  "replica_median_deg_committed": 76.372532234,
+  "exact_equal": true,
+  "diffs": []
+ }
+}
