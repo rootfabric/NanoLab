@@ -1,0 +1,241 @@
+PREPARED PLATSENS-P1-0B-S009-R1 (retry of failed attempt PLATSENS-P1-0B-S009, same frozen seed)
+PREPARED PLATSENS-P1-0B-S010-R1 (retry of failed attempt PLATSENS-P1-0B-S010, same frozen seed)
+PREPARED PLATSENS-P1-32B-S001-R1 (retry of failed attempt PLATSENS-P1-32B-S001, same frozen seed)
+PREPARED PLATSENS-P1-32B-S002-R1 (retry of failed attempt PLATSENS-P1-32B-S002, same frozen seed)
+PREPARED PLATSENS-P1-32B-S003-R1 (retry of failed attempt PLATSENS-P1-32B-S003, same frozen seed)
+PREPARED PLATSENS-P1-32B-S004-R1 (retry of failed attempt PLATSENS-P1-32B-S004, same frozen seed)
+PREPARED PLATSENS-P1-32B-S005-R1 (retry of failed attempt PLATSENS-P1-32B-S005, same frozen seed)
+PREPARED PLATSENS-P1-32B-S006-R1 (retry of failed attempt PLATSENS-P1-32B-S006, same frozen seed)
+2026-09-25T11:06:00+0000 recovery queue: PLATSENS-P1-0B-S009-R1 PLATSENS-P1-0B-S010-R1 PLATSENS-P1-32B-S001-R1 PLATSENS-P1-32B-S002-R1 PLATSENS-P1-32B-S003-R1 PLATSENS-P1-32B-S004-R1 PLATSENS-P1-32B-S005-R1 PLATSENS-P1-32B-S006-R1 PLATSENS-P1-32B-S007 PLATSENS-P1-32B-S008 PLATSENS-P1-32B-S009 PLATSENS-P1-32B-S010
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-0B-S009-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:00+0000 launched PLATSENS-P1-0B-S009-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-0B-S010-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:02+0000 launched PLATSENS-P1-0B-S010-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S001-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:04+0000 launched PLATSENS-P1-32B-S001-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S002-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:06+0000 launched PLATSENS-P1-32B-S002-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S003-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:08+0000 launched PLATSENS-P1-32B-S003-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S004-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:10+0000 launched PLATSENS-P1-32B-S004-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S005-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:12+0000 launched PLATSENS-P1-32B-S005-R1 pid=
+cat: /home/yurig/nanolab-platform-sensitivity-r1/P1/runs/PLATSENS-P1-32B-S006-R1/wrapper.pid: No such file or directory
+2026-09-25T11:06:14+0000 launched PLATSENS-P1-32B-S006-R1 pid=
+2026-09-25T13:04:03+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R2 (supersedes PLATSENS-P1-0B-S009-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:03+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R2 pid=
+2026-09-25T13:04:05+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R2 (supersedes PLATSENS-P1-0B-S010-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:05+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R2 pid=
+2026-09-25T13:04:07+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R2 (supersedes PLATSENS-P1-32B-S001-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:07+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R2 pid=
+2026-09-25T13:04:09+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R2 (supersedes PLATSENS-P1-32B-S002-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:09+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R2 pid=
+2026-09-25T13:04:11+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R2 (supersedes PLATSENS-P1-32B-S003-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:11+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R2 pid=
+2026-09-25T13:04:13+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R2 (supersedes PLATSENS-P1-32B-S004-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:13+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R2 pid=
+2026-09-25T13:04:16+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R2 (supersedes PLATSENS-P1-32B-S005-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:16+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R2 pid=
+2026-09-25T13:04:18+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R2 (supersedes PLATSENS-P1-32B-S006-R1; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:04:18+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R2 pid=
+2026-09-25T13:25:56+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R3 (supersedes PLATSENS-P1-0B-S009-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:25:56+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R3 pid=
+2026-09-25T13:25:58+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R3 (supersedes PLATSENS-P1-0B-S010-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:25:58+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R3 pid=
+2026-09-25T13:26:00+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R3 (supersedes PLATSENS-P1-32B-S001-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:00+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R3 pid=
+2026-09-25T13:26:02+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R3 (supersedes PLATSENS-P1-32B-S002-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:02+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R3 pid=
+2026-09-25T13:26:05+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R3 (supersedes PLATSENS-P1-32B-S003-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:05+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R3 pid=
+2026-09-25T13:26:07+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R3 (supersedes PLATSENS-P1-32B-S004-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:07+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R3 pid=
+2026-09-25T13:26:09+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R3 (supersedes PLATSENS-P1-32B-S005-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:09+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R3 pid=
+2026-09-25T13:26:11+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R3 (supersedes PLATSENS-P1-32B-S006-R2; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:26:11+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R3 pid=
+2026-09-25T13:31:30+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R4 (supersedes PLATSENS-P1-0B-S009-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:30+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R4 pid=
+2026-09-25T13:31:32+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R4 (supersedes PLATSENS-P1-0B-S010-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:32+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R4 pid=
+2026-09-25T13:31:34+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R4 (supersedes PLATSENS-P1-32B-S001-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:34+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R4 pid=
+2026-09-25T13:31:37+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R4 (supersedes PLATSENS-P1-32B-S002-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:37+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R4 pid=
+2026-09-25T13:31:39+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R4 (supersedes PLATSENS-P1-32B-S003-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:39+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R4 pid=
+2026-09-25T13:31:41+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R4 (supersedes PLATSENS-P1-32B-S004-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:41+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R4 pid=
+2026-09-25T13:31:43+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R4 (supersedes PLATSENS-P1-32B-S005-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:43+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R4 pid=
+2026-09-25T13:31:45+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R4 (supersedes PLATSENS-P1-32B-S006-R3; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:31:45+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R4 pid=
+2026-09-25T13:52:25+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R5 (supersedes PLATSENS-P1-0B-S009-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:52:25+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R5 pid=
+2026-09-25T13:53:55+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R6 (supersedes PLATSENS-P1-0B-S009-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:53:55+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R6 pid=
+2026-09-25T13:57:33+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R7 (supersedes PLATSENS-P1-0B-S009-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:57:33+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R7 pid=
+2026-09-25T13:57:35+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R5 (supersedes PLATSENS-P1-0B-S010-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:57:35+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R5 pid=
+2026-09-25T13:57:37+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R5 (supersedes PLATSENS-P1-32B-S001-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:57:37+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R5 pid=
+2026-09-25T13:58:12+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R8 (supersedes PLATSENS-P1-0B-S009-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T13:58:12+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R8 pid=
+2026-09-25T14:01:27+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R9 (supersedes PLATSENS-P1-0B-S009-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:27+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R9 pid=
+2026-09-25T14:01:29+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R6 (supersedes PLATSENS-P1-0B-S010-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:29+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R6 pid=
+2026-09-25T14:01:31+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R6 (supersedes PLATSENS-P1-32B-S001-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:31+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R6 pid=
+2026-09-25T14:01:33+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R5 (supersedes PLATSENS-P1-32B-S002-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:33+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R5 pid=
+2026-09-25T14:01:35+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R5 (supersedes PLATSENS-P1-32B-S003-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:35+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R5 pid=
+2026-09-25T14:01:37+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R5 (supersedes PLATSENS-P1-32B-S004-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:37+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R5 pid=
+2026-09-25T14:01:40+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R5 (supersedes PLATSENS-P1-32B-S005-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:40+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R5 pid=
+2026-09-25T14:01:42+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R5 (supersedes PLATSENS-P1-32B-S006-R4; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T14:01:42+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R5 pid=
+2026-09-25T15:14:40+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R10 (supersedes PLATSENS-P1-0B-S009-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:14:40+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R10 pid=
+2026-09-25T15:19:48+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R11 (supersedes PLATSENS-P1-0B-S009-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:19:48+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R11 pid=
+2026-09-25T15:24:55+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R12 (supersedes PLATSENS-P1-0B-S009-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:24:55+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R12 pid=
+2026-09-25T15:30:01+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R13 (supersedes PLATSENS-P1-0B-S009-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:30:01+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R13 pid=
+2026-09-25T15:35:02+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R14 (supersedes PLATSENS-P1-0B-S009-R13; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:02+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R14 pid=
+2026-09-25T15:35:04+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R7 (supersedes PLATSENS-P1-0B-S010-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:04+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R7 pid=
+2026-09-25T15:35:07+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R7 (supersedes PLATSENS-P1-32B-S001-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:07+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R7 pid=
+2026-09-25T15:35:09+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R6 (supersedes PLATSENS-P1-32B-S002-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:09+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R6 pid=
+2026-09-25T15:35:11+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R6 (supersedes PLATSENS-P1-32B-S003-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:11+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R6 pid=
+2026-09-25T15:35:13+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R6 (supersedes PLATSENS-P1-32B-S004-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:13+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R6 pid=
+2026-09-25T15:35:15+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R6 (supersedes PLATSENS-P1-32B-S005-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:15+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R6 pid=
+2026-09-25T15:35:15+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R6 (supersedes PLATSENS-P1-32B-S006-R5; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:35:15+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R6 pid=
+2026-09-25T15:45:40+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R15 (supersedes PLATSENS-P1-0B-S009-R14; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:40+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R15 pid=
+2026-09-25T15:45:42+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R8 (supersedes PLATSENS-P1-0B-S010-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:42+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R8 pid=
+2026-09-25T15:45:44+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R8 (supersedes PLATSENS-P1-32B-S001-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:44+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R8 pid=
+2026-09-25T15:45:47+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R7 (supersedes PLATSENS-P1-32B-S002-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:47+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R7 pid=
+2026-09-25T15:45:49+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R7 (supersedes PLATSENS-P1-32B-S003-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:49+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R7 pid=
+2026-09-25T15:45:51+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R7 (supersedes PLATSENS-P1-32B-S004-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:51+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R7 pid=
+2026-09-25T15:45:53+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R7 (supersedes PLATSENS-P1-32B-S005-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:53+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R7 pid=
+2026-09-25T15:45:55+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R7 (supersedes PLATSENS-P1-32B-S006-R6; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:45:55+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R7 pid=
+2026-09-25T15:47:54+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R16 (supersedes PLATSENS-P1-0B-S009-R15; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:47:54+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R16 pid=
+2026-09-25T15:47:56+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R9 (supersedes PLATSENS-P1-0B-S010-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:47:56+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R9 pid=
+2026-09-25T15:47:58+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R9 (supersedes PLATSENS-P1-32B-S001-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:47:58+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R9 pid=
+2026-09-25T15:48:00+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R8 (supersedes PLATSENS-P1-32B-S002-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:48:00+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R8 pid=
+2026-09-25T15:48:03+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R8 (supersedes PLATSENS-P1-32B-S003-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:48:03+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R8 pid=
+2026-09-25T15:48:05+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R8 (supersedes PLATSENS-P1-32B-S004-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:48:05+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R8 pid=
+2026-09-25T15:48:07+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R8 (supersedes PLATSENS-P1-32B-S005-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:48:07+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R8 pid=
+2026-09-25T15:48:09+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R8 (supersedes PLATSENS-P1-32B-S006-R7; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:48:09+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R8 pid=
+2026-09-25T15:51:11+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R17 (supersedes PLATSENS-P1-0B-S009-R16; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:11+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R17 pid=
+2026-09-25T15:51:13+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R10 (supersedes PLATSENS-P1-0B-S010-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:13+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R10 pid=
+2026-09-25T15:51:16+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R10 (supersedes PLATSENS-P1-32B-S001-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:16+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R10 pid=
+2026-09-25T15:51:18+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R9 (supersedes PLATSENS-P1-32B-S002-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:18+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R9 pid=
+2026-09-25T15:51:20+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R9 (supersedes PLATSENS-P1-32B-S003-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:20+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R9 pid=
+2026-09-25T15:51:22+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R9 (supersedes PLATSENS-P1-32B-S004-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:22+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R9 pid=
+2026-09-25T15:51:24+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R9 (supersedes PLATSENS-P1-32B-S005-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:24+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R9 pid=
+2026-09-25T15:51:26+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R9 (supersedes PLATSENS-P1-32B-S006-R8; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:51:26+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R9 pid=
+2026-09-25T15:56:38+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R18 (supersedes PLATSENS-P1-0B-S009-R17; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:38+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R18 pid=
+2026-09-25T15:56:40+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R11 (supersedes PLATSENS-P1-0B-S010-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:40+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R11 pid=
+2026-09-25T15:56:42+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R11 (supersedes PLATSENS-P1-32B-S001-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:42+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R11 pid=
+2026-09-25T15:56:44+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R10 (supersedes PLATSENS-P1-32B-S002-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:44+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R10 pid=
+2026-09-25T15:56:46+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R10 (supersedes PLATSENS-P1-32B-S003-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:46+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R10 pid=
+2026-09-25T15:56:49+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R10 (supersedes PLATSENS-P1-32B-S004-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:49+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R10 pid=
+2026-09-25T15:56:51+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R10 (supersedes PLATSENS-P1-32B-S005-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:51+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R10 pid=
+2026-09-25T15:56:53+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R10 (supersedes PLATSENS-P1-32B-S006-R9; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T15:56:53+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R10 pid=
+2026-09-25T16:02:09+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R19 (supersedes PLATSENS-P1-0B-S009-R18; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:09+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R19 pid=
+2026-09-25T16:02:12+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R12 (supersedes PLATSENS-P1-0B-S010-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:12+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R12 pid=
+2026-09-25T16:02:14+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R12 (supersedes PLATSENS-P1-32B-S001-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:14+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R12 pid=
+2026-09-25T16:02:16+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R11 (supersedes PLATSENS-P1-32B-S002-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:16+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R11 pid=
+2026-09-25T16:02:18+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R11 (supersedes PLATSENS-P1-32B-S003-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:18+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R11 pid=
+2026-09-25T16:02:20+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R11 (supersedes PLATSENS-P1-32B-S004-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:20+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R11 pid=
+2026-09-25T16:02:22+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R11 (supersedes PLATSENS-P1-32B-S005-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:22+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R11 pid=
+2026-09-25T16:02:24+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R11 (supersedes PLATSENS-P1-32B-S006-R10; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T16:02:24+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R11 pid=
+2026-09-25T17:30:00+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R20 (supersedes PLATSENS-P1-0B-S009-R19; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:00+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R20 pid=
+2026-09-25T17:30:02+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R13 (supersedes PLATSENS-P1-0B-S010-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:02+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R13 pid=
+2026-09-25T17:30:04+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R13 (supersedes PLATSENS-P1-32B-S001-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:04+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R13 pid=
+2026-09-25T17:30:06+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R12 (supersedes PLATSENS-P1-32B-S002-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:06+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R12 pid=
+2026-09-25T17:30:08+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R12 (supersedes PLATSENS-P1-32B-S003-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:08+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R12 pid=
+2026-09-25T17:30:10+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R12 (supersedes PLATSENS-P1-32B-S004-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:10+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R12 pid=
+2026-09-25T17:30:12+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R12 (supersedes PLATSENS-P1-32B-S005-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:12+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R12 pid=
+2026-09-25T17:30:15+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R12 (supersedes PLATSENS-P1-32B-S006-R11; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:30:15+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R12 pid=
+2026-09-25T17:45:47+0000 supervisor: PREPARED PLATSENS-P1-0B-S009-R21 (supersedes PLATSENS-P1-0B-S009-R20; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:47+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S009-R21 pid=
+2026-09-25T17:45:49+0000 supervisor: PREPARED PLATSENS-P1-0B-S010-R14 (supersedes PLATSENS-P1-0B-S010-R13; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:49+0000 supervisor: LAUNCHED PLATSENS-P1-0B-S010-R14 pid=
+2026-09-25T17:45:51+0000 supervisor: PREPARED PLATSENS-P1-32B-S001-R14 (supersedes PLATSENS-P1-32B-S001-R13; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:51+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S001-R14 pid=
+2026-09-25T17:45:53+0000 supervisor: PREPARED PLATSENS-P1-32B-S002-R13 (supersedes PLATSENS-P1-32B-S002-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:53+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S002-R13 pid=
+2026-09-25T17:45:55+0000 supervisor: PREPARED PLATSENS-P1-32B-S003-R13 (supersedes PLATSENS-P1-32B-S003-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:55+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S003-R13 pid=
+2026-09-25T17:45:58+0000 supervisor: PREPARED PLATSENS-P1-32B-S004-R13 (supersedes PLATSENS-P1-32B-S004-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:45:58+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S004-R13 pid=
+2026-09-25T17:46:00+0000 supervisor: PREPARED PLATSENS-P1-32B-S005-R13 (supersedes PLATSENS-P1-32B-S005-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:46:00+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S005-R13 pid=
+2026-09-25T17:46:02+0000 supervisor: PREPARED PLATSENS-P1-32B-S006-R13 (supersedes PLATSENS-P1-32B-S006-R12; technical: process killed mid-run (host/WSL restart), no exit code, truncated trajectory)
+2026-09-25T17:46:02+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S006-R13 pid=
+2026-09-25T21:47:48+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S007 pid=
+2026-09-25T21:47:50+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S008 pid=
+2026-09-25T21:47:52+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S009 pid=
+2026-09-25T21:52:57+0000 supervisor: LAUNCHED PLATSENS-P1-32B-S010 pid=

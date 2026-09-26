@@ -1,0 +1,1487 @@
+{
+  "duplicate_check": true,
+  "engine_binary_sha256": "363356b9789fab8e0dab314bd66f92dc0e3a7e2cb3810e24b031614cebb45058",
+  "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "execution_id": "EX-NL5-002-E-R1",
+  "expected_final_runs": 20,
+  "final_runs_recorded": 20,
+  "interrupted_or_failed_attempts_kept": [
+    {
+      "slot": "PLATSENS-P1-0B-S009",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-0B-S009",
+        "PLATSENS-P1-0B-S009-R1",
+        "PLATSENS-P1-0B-S009-R2",
+        "PLATSENS-P1-0B-S009-R3",
+        "PLATSENS-P1-0B-S009-R4",
+        "PLATSENS-P1-0B-S009-R5",
+        "PLATSENS-P1-0B-S009-R6",
+        "PLATSENS-P1-0B-S009-R7",
+        "PLATSENS-P1-0B-S009-R8",
+        "PLATSENS-P1-0B-S009-R9",
+        "PLATSENS-P1-0B-S009-R10",
+        "PLATSENS-P1-0B-S009-R11",
+        "PLATSENS-P1-0B-S009-R12",
+        "PLATSENS-P1-0B-S009-R13",
+        "PLATSENS-P1-0B-S009-R14",
+        "PLATSENS-P1-0B-S009-R15",
+        "PLATSENS-P1-0B-S009-R16",
+        "PLATSENS-P1-0B-S009-R17",
+        "PLATSENS-P1-0B-S009-R18",
+        "PLATSENS-P1-0B-S009-R19",
+        "PLATSENS-P1-0B-S009-R20"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-0B-S010",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-0B-S010",
+        "PLATSENS-P1-0B-S010-R1",
+        "PLATSENS-P1-0B-S010-R2",
+        "PLATSENS-P1-0B-S010-R3",
+        "PLATSENS-P1-0B-S010-R4",
+        "PLATSENS-P1-0B-S010-R5",
+        "PLATSENS-P1-0B-S010-R6",
+        "PLATSENS-P1-0B-S010-R7",
+        "PLATSENS-P1-0B-S010-R8",
+        "PLATSENS-P1-0B-S010-R9",
+        "PLATSENS-P1-0B-S010-R10",
+        "PLATSENS-P1-0B-S010-R11",
+        "PLATSENS-P1-0B-S010-R12",
+        "PLATSENS-P1-0B-S010-R13"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S001",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S001",
+        "PLATSENS-P1-32B-S001-R1",
+        "PLATSENS-P1-32B-S001-R2",
+        "PLATSENS-P1-32B-S001-R3",
+        "PLATSENS-P1-32B-S001-R4",
+        "PLATSENS-P1-32B-S001-R5",
+        "PLATSENS-P1-32B-S001-R6",
+        "PLATSENS-P1-32B-S001-R7",
+        "PLATSENS-P1-32B-S001-R8",
+        "PLATSENS-P1-32B-S001-R9",
+        "PLATSENS-P1-32B-S001-R10",
+        "PLATSENS-P1-32B-S001-R11",
+        "PLATSENS-P1-32B-S001-R12",
+        "PLATSENS-P1-32B-S001-R13"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S002",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S002",
+        "PLATSENS-P1-32B-S002-R1",
+        "PLATSENS-P1-32B-S002-R2",
+        "PLATSENS-P1-32B-S002-R3",
+        "PLATSENS-P1-32B-S002-R4",
+        "PLATSENS-P1-32B-S002-R5",
+        "PLATSENS-P1-32B-S002-R6",
+        "PLATSENS-P1-32B-S002-R7",
+        "PLATSENS-P1-32B-S002-R8",
+        "PLATSENS-P1-32B-S002-R9",
+        "PLATSENS-P1-32B-S002-R10",
+        "PLATSENS-P1-32B-S002-R11",
+        "PLATSENS-P1-32B-S002-R12"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S003",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S003",
+        "PLATSENS-P1-32B-S003-R1",
+        "PLATSENS-P1-32B-S003-R2",
+        "PLATSENS-P1-32B-S003-R3",
+        "PLATSENS-P1-32B-S003-R4",
+        "PLATSENS-P1-32B-S003-R5",
+        "PLATSENS-P1-32B-S003-R6",
+        "PLATSENS-P1-32B-S003-R7",
+        "PLATSENS-P1-32B-S003-R8",
+        "PLATSENS-P1-32B-S003-R9",
+        "PLATSENS-P1-32B-S003-R10",
+        "PLATSENS-P1-32B-S003-R11",
+        "PLATSENS-P1-32B-S003-R12"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S004",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S004",
+        "PLATSENS-P1-32B-S004-R1",
+        "PLATSENS-P1-32B-S004-R2",
+        "PLATSENS-P1-32B-S004-R3",
+        "PLATSENS-P1-32B-S004-R4",
+        "PLATSENS-P1-32B-S004-R5",
+        "PLATSENS-P1-32B-S004-R6",
+        "PLATSENS-P1-32B-S004-R7",
+        "PLATSENS-P1-32B-S004-R8",
+        "PLATSENS-P1-32B-S004-R9",
+        "PLATSENS-P1-32B-S004-R10",
+        "PLATSENS-P1-32B-S004-R11",
+        "PLATSENS-P1-32B-S004-R12"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S005",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S005",
+        "PLATSENS-P1-32B-S005-R1",
+        "PLATSENS-P1-32B-S005-R2",
+        "PLATSENS-P1-32B-S005-R3",
+        "PLATSENS-P1-32B-S005-R4",
+        "PLATSENS-P1-32B-S005-R5",
+        "PLATSENS-P1-32B-S005-R6",
+        "PLATSENS-P1-32B-S005-R7",
+        "PLATSENS-P1-32B-S005-R8",
+        "PLATSENS-P1-32B-S005-R9",
+        "PLATSENS-P1-32B-S005-R10",
+        "PLATSENS-P1-32B-S005-R11",
+        "PLATSENS-P1-32B-S005-R12"
+      ]
+    },
+    {
+      "slot": "PLATSENS-P1-32B-S006",
+      "superseded_attempts_history": [
+        "PLATSENS-P1-32B-S006",
+        "PLATSENS-P1-32B-S006-R1",
+        "PLATSENS-P1-32B-S006-R2",
+        "PLATSENS-P1-32B-S006-R3",
+        "PLATSENS-P1-32B-S006-R4",
+        "PLATSENS-P1-32B-S006-R5",
+        "PLATSENS-P1-32B-S006-R6",
+        "PLATSENS-P1-32B-S006-R7",
+        "PLATSENS-P1-32B-S006-R8",
+        "PLATSENS-P1-32B-S006-R9",
+        "PLATSENS-P1-32B-S006-R10",
+        "PLATSENS-P1-32B-S006-R11",
+        "PLATSENS-P1-32B-S006-R12"
+      ]
+    }
+  ],
+  "kind": "platform_sensitivity_p1_run_output_digests_v1",
+  "leg": "P1",
+  "missing_runs": [],
+  "raw_data_location": "WSL2 Linux FS ~/nanolab-platform-sensitivity-r1/P1/runs (outside Git)",
+  "retry_policy": "append-only: failed IDs kept in history; -R1 retry keeps frozen seed/variant/steps/engine/package",
+  "runs": [
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "d5a719abfe655606dd8c6748a124ed0de29a482f51994558aa03f42831af1ab0",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "a285c6ffa85d96c5961413b23b5f613bf445d1c7c87dbbbcafcea937e5005078",
+          "size_bytes": 947
+        },
+        "last_conf.dat": {
+          "sha256": "78a1cd7d99c609e7b68ec5aeec149f51f3a749b685a93989ba5b1fb8827a602c",
+          "size_bytes": 2293667
+        },
+        "log2.dat": {
+          "sha256": "3f1c499a0e5154e927760db53e990b936b6e2917dd92e838250ebb21b5b882da",
+          "size_bytes": 199366
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "56cc7b9148f435b561a36c42144e45a61ed11ba98d4d3d35751481f6cfb4887b",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "07b2a08c322142b1768363baa567e382e8fb3e65a27d74e580e64e796ac93852",
+          "size_bytes": 114715377
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:57:00Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.00036408567386800496,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.485373
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S001",
+      "input_sha256": "a285c6ffa85d96c5961413b23b5f613bf445d1c7c87dbbbcafcea937e5005078",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S001",
+      "seed": 1259289227,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15876.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "d497f66e5608f9c71cf11ba483ec65276f6fe2feebb6a7477f38bac5920868cc",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "17138bd4f1667be6afeb68448544c00e960bfa2700346cabb5c9dffd6581da1b",
+          "size_bytes": 947
+        },
+        "last_conf.dat": {
+          "sha256": "85be7afa967416d04202730b9c067b4a10aa5b927d49587ff444373c6d9eb6b6",
+          "size_bytes": 2294632
+        },
+        "log2.dat": {
+          "sha256": "cbe4e9c9caac7bd7392f0dfd00c5f2715c318452bfd023885147c27b6b13806d",
+          "size_bytes": 199385
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "cf2314ca8f65ec35aed9632f50984dce06fc3ae97b648ef56f3a07c3c004c2a2",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "e0665e9d526fc9e1cdc520803fd431f7e5a3acdad095608fbddcd0b9306f8042",
+          "size_bytes": 114713124
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:57:18Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0024913958681322553,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.482212
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S002",
+      "input_sha256": "17138bd4f1667be6afeb68448544c00e960bfa2700346cabb5c9dffd6581da1b",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S002",
+      "seed": 1358106528,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15894.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "4e327476c99a1420891fbc62163d97751d43a5fcbf0d62a489ad887168b78e8d",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "89bb44e6d4d41bb197f14984ea2ded0baa39ffc8baa28d61db2ad1a8e46b515c",
+          "size_bytes": 947
+        },
+        "last_conf.dat": {
+          "sha256": "486bd3c03fb18ba47731623a0bac5f3671a4988d5ef25cc5e508b25a64770f37",
+          "size_bytes": 2294034
+        },
+        "log2.dat": {
+          "sha256": "31d45a75a2b412596e05eaf04506138078d4c0f831d7616b97a4eb1ddb231dfa",
+          "size_bytes": 199463
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "f77462b9e40789e8057ca301d9916b31c7de62abd941231f56faa4d1e54d2b30",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "1064c2931cb31fdee835e1d7696720558a7d387ba5c2766bbe994156661685ba",
+          "size_bytes": 114689001
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:58:10Z",
+      "energy_drift_bookkeeping": {
+        "drift": -0.002702713615996632,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.48993
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S003",
+      "input_sha256": "89bb44e6d4d41bb197f14984ea2ded0baa39ffc8baa28d61db2ad1a8e46b515c",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S003",
+      "seed": 1524307444,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15946.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "0706e1bf0006bec5aeeb744580b038acc801007023e62e036ce74defe549f220",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "c3c1510a5fc01048a37f75840b51d3a3d0ac67cb27b05f87c07cc8da8febfb2e",
+          "size_bytes": 946
+        },
+        "last_conf.dat": {
+          "sha256": "5ea92c6e81619540c7ae85d5f947ecb68ea82e1ca2d7a50e33dc0da25a495094",
+          "size_bytes": 2293536
+        },
+        "log2.dat": {
+          "sha256": "7b16833be39a9f15f73077e4fd1aef5f9564b4956b889c8a7847125f83fb9169",
+          "size_bytes": 199360
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "412ddf6e6d2a1091b2d884f5ed5c54cbc859162a2a9550b04cb0fa02c183a4ca",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "ccc6e0a58b435f43563f63e40a66c2919edfc98b95c64d4eeee320bc9ba5bb0f",
+          "size_bytes": 114694252
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:54:05Z",
+      "energy_drift_bookkeeping": {
+        "drift": -0.002027035211997474,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.488926
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S004",
+      "input_sha256": "c3c1510a5fc01048a37f75840b51d3a3d0ac67cb27b05f87c07cc8da8febfb2e",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S004",
+      "seed": 601855227,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15701.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "b9a4b98827206e4cec12b8f1262aa1f35614ee2cc459bf857e5e69f59addceb5",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "332960f0f28f50ee5b70de52bf0bf2204fe8c250d9d65a8a35a58102278925d6",
+          "size_bytes": 946
+        },
+        "last_conf.dat": {
+          "sha256": "ac34c1e51dd10db1488b67f9110fe7b4beb95c6546451bffbdea6bc67c68607a",
+          "size_bytes": 2293811
+        },
+        "log2.dat": {
+          "sha256": "5d164f4ccf92590317dedac5b724d056cd5329c56bc01631218b68094a5334f8",
+          "size_bytes": 199351
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "c2a52b255987e55e3cb197fd4f734fd0b7e6a7a2efaf1d17fc066bd805f17798",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "54cae6f81f6ce81dfcf92d57d4e5bdceb2082f2e3a57e7d69ac8dc1e42d10d26",
+          "size_bytes": 114673948
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:59:00Z",
+      "energy_drift_bookkeeping": {
+        "drift": -0.0015949779058545672,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.488284
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S005",
+      "input_sha256": "332960f0f28f50ee5b70de52bf0bf2204fe8c250d9d65a8a35a58102278925d6",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S005",
+      "seed": 274288237,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15996.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "006c187b714b7f92cef3fd8dfa93de6a9cd601ae59a927e8699b0ddfbc92eaa1",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "5758f17b73987f71bd6a3cc98a97d1e82a0942d5eab14a596a798c3c9f9edc49",
+          "size_bytes": 946
+        },
+        "last_conf.dat": {
+          "sha256": "6414f2a411b5bdc34f4be430f0bf29a0fd09b68a83f182c925f8d81f24bcef46",
+          "size_bytes": 2293157
+        },
+        "log2.dat": {
+          "sha256": "03b071337fcbfc0ea0a94388c830bc7d82f92e46bdc2355a24df3ab880a76bfb",
+          "size_bytes": 199392
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "ac76bfa213816a74cf308723c637a81f35773b863b615505077de3653274bc34",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "510891af944cea32a93dce8e8fae19e2eeae5564d05cae1029e0df64af3d564a",
+          "size_bytes": 114698416
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:57:06Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0004576307915532217,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.485234
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S006",
+      "input_sha256": "5758f17b73987f71bd6a3cc98a97d1e82a0942d5eab14a596a798c3c9f9edc49",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S006",
+      "seed": 972234272,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15882.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "bb598c45a0701ac372909d9ae473e09c0934793ddd638f239205af39b89e430a",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "0febddaeb45b7153a6742b5b52201204984e1818d8653f13be89f3acf59076b3",
+          "size_bytes": 947
+        },
+        "last_conf.dat": {
+          "sha256": "b88ac50775a3020c62e4a7b9b3dd65203573f1f1365ecc41e74c03d26689476f",
+          "size_bytes": 2293944
+        },
+        "log2.dat": {
+          "sha256": "01b8c3bd0f322540e2f2cfcfe93fcbd2b10b65d2b766445d9b8af4c9f4d790a0",
+          "size_bytes": 199325
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "636e186c4da933395c95a596f992be9e6868a1c1c19f507c8c3237807329647a",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "9b30dfc958fed62268e4cb063b4651efc2f06f2680a6361fffa4155cda886369",
+          "size_bytes": 114708519
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:56:06Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.00039975395615088317,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.48532
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S007",
+      "input_sha256": "0febddaeb45b7153a6742b5b52201204984e1818d8653f13be89f3acf59076b3",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S007",
+      "seed": 1934775205,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15822.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "6c7fb368fe083a4d25521d16bddc41664ab23444bfec248539c0fd2fd2e95435",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "0b127ef0591815fcba4a30dc5cec6ca5a7ee3e3fbbbcefc88354e7969af78443",
+          "size_bytes": 947
+        },
+        "last_conf.dat": {
+          "sha256": "ca8df360f11eff5f308df6a5f4666a866c010d645210c324692d0554134a00be",
+          "size_bytes": 2293898
+        },
+        "log2.dat": {
+          "sha256": "812830fef922b7145a2ea532fae0de13fe9e25bf22663b2598da2bf6abdeaa7c",
+          "size_bytes": 199376
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "a180a7a9b21cad5790889eea5aab74d70429f4e84411ee0f40be0cc5df617e05",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "68ece6bdf9961c7c9e38d0a4f9c3b99aafb63260d2fdf3f82e0c736befd2ec61",
+          "size_bytes": 114689227
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-20T18:56:51Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0026784861035025398,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.481934
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S008",
+      "input_sha256": "0b127ef0591815fcba4a30dc5cec6ca5a7ee3e3fbbbcefc88354e7969af78443",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-0B-S008",
+      "seed": 1747973984,
+      "started_utc": "2026-09-20T14:32:24Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "variant": "0b",
+      "wall_seconds": 15867.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "3917721f8e5a4171d9b8234431a5d1dbad346efcb34a9a091a2781bc54683450",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "91ece2ef8118aa04c93b2fca436bc66465b2077efd5612e9e361536a8d55c203",
+          "size_bytes": 946
+        },
+        "last_conf.dat": {
+          "sha256": "984393cd927ace5571ba7bb15335a3f02fb49d99c31c8546337e4734e553d29f",
+          "size_bytes": 2293474
+        },
+        "log2.dat": {
+          "sha256": "591cd12b86e762ce1ecc08f9e9025810df4e5f2f1e38b7fdac0f4e19108ced78",
+          "size_bytes": 199552
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "6c34638eb0e5e6676b73b3f80ad2ae9e1f972c7a80d92b6d88348224a4b463e1",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "b6bc8b7d4c90b2b98006bf91dde36f606bc036b830928832f1bf95314d46deaf",
+          "size_bytes": 114687930
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 21,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T22:40:08Z",
+      "energy_drift_bookkeeping": {
+        "drift": -0.0013527027809146878,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.487924
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S009-R21",
+      "input_sha256": "91ece2ef8118aa04c93b2fca436bc66465b2077efd5612e9e361536a8d55c203",
+      "retries": 21,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-0B-S009",
+      "seed": 880427736,
+      "started_utc": "2026-09-25T17:45:47Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "superseded_failed_attempt": "PLATSENS-P1-0B-S009-R20",
+      "variant": "0b",
+      "wall_seconds": 17661.0
+    },
+    {
+      "artifacts": {
+        "0b.conf": {
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size_bytes": 2294162
+        },
+        "0b.top": {
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size_bytes": 120204
+        },
+        "hinge_energy.dat": {
+          "sha256": "70b1a30d026ccaf8f335014120a47abe09a5ed2d34355a4d0d982f2350cea315",
+          "size_bytes": 98049
+        },
+        "input": {
+          "sha256": "dbb552b7e9d24197f6cd4826977ca2504eb855cd98779f78087a75789dd979da",
+          "size_bytes": 946
+        },
+        "last_conf.dat": {
+          "sha256": "efac139e7532563ee256a8314efa4389b81c71723ec9f32e653c8b3cf67bce41",
+          "size_bytes": 2293334
+        },
+        "log2.dat": {
+          "sha256": "572f2bd4f82727760e52c558e53be1c02ff5b47fd40b101320a339edd6fdc2c9",
+          "size_bytes": 199611
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "20b2ba21328d6fb37503050338364514d5e8b7ba1a17f53f2c04998ad8be8e01",
+          "size_bytes": 124062
+        },
+        "trajectory.dat": {
+          "sha256": "ca8ac0f9c15920d9af4deac0311eb7e474402ddb8076e99eeadc1b3af3a93535",
+          "size_bytes": 114691501
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 14,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T22:41:37Z",
+      "energy_drift_bookkeeping": {
+        "drift": -0.0026360879566381017,
+        "rows": 2001,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.485914,
+        "u_over_n_last": -1.489831
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-0B-S010-R14",
+      "input_sha256": "dbb552b7e9d24197f6cd4826977ca2504eb855cd98779f78087a75789dd979da",
+      "retries": 14,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-0B-S010",
+      "seed": 744386736,
+      "started_utc": "2026-09-25T17:45:49Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 200000,
+      "superseded_failed_attempt": "PLATSENS-P1-0B-S010-R13",
+      "variant": "0b",
+      "wall_seconds": 17748.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "83356ace1d93090e1d462a08d141589574719e6a23f698ff2ea07459b02e45e4",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "2d4102f39d6d844a27cd94d68ebc83f76444a7dba3bb53441865d82ed4c50500",
+          "size_bytes": 949
+        },
+        "last_conf.dat": {
+          "sha256": "7876e2d62370a08c9cca574ee5b6740fa44a89415153fe8b594410ed13649439",
+          "size_bytes": 2345871
+        },
+        "log2.dat": {
+          "sha256": "59fff0bb478cd98425adf33eace864bbcd28d484e62c1c2211a1dcd032cd961d",
+          "size_bytes": 150182
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "c64ecc051bbce127b3cf51331814fc67b3897c559437cf56c31d8af1e7f9ca2e",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "03f27e852666283f8d73a404229172365b0d230ef564036e9366877fb8e362aa",
+          "size_bytes": 86775703
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 14,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:47:41Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0051572448767601186,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.470106
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S001-R14",
+      "input_sha256": "2d4102f39d6d844a27cd94d68ebc83f76444a7dba3bb53441865d82ed4c50500",
+      "retries": 14,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S001",
+      "seed": 1259289227,
+      "started_utc": "2026-09-25T17:45:51Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S001-R13",
+      "variant": "32b",
+      "wall_seconds": 14510.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "bbe7d17500bf17461f9d9d30d3776b8c465615c36dd7ca0b09e1227224303ff5",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "0d6c7ce6f7122e07118f1771ba154a897570dbaef3a590e059bc4c80660ef87b",
+          "size_bytes": 949
+        },
+        "last_conf.dat": {
+          "sha256": "b2d1bfd0d1114ed702198b2d49f4f17a5a11ac51c606dd7be33283af92656b84",
+          "size_bytes": 2345023
+        },
+        "log2.dat": {
+          "sha256": "03e84547a7174396c9f04b82f9b545f553f72d4645346990356a28b313f359e2",
+          "size_bytes": 150195
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "8764d0335c94672851598ed1633621ee6e1eece0962deee186fa1d72919f85f2",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "6cbe20dcdf9fb2e2d4a686b73ee14492da98f19885e5179137ee422ba3cd02d9",
+          "size_bytes": 86774364
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 13,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:44:57Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.005909075221607213,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.468995
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S002-R13",
+      "input_sha256": "0d6c7ce6f7122e07118f1771ba154a897570dbaef3a590e059bc4c80660ef87b",
+      "retries": 13,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S002",
+      "seed": 1358106528,
+      "started_utc": "2026-09-25T17:45:53Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S002-R12",
+      "variant": "32b",
+      "wall_seconds": 14344.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "5e394916fc37a7b7a76b9a4f47228c8cbd5c63c53e54f583a1ef12efb2706254",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "5060de3cb95d9ae1c88a8e6892b3fba2d4005fd38daf7eba36832029f744df0b",
+          "size_bytes": 949
+        },
+        "last_conf.dat": {
+          "sha256": "620f6c75a4036b6c46f2b96a61e0970eb31076b853e4cbca8e200e9ad20e0ab2",
+          "size_bytes": 2345064
+        },
+        "log2.dat": {
+          "sha256": "dd22503336ad1d6ba21bd4afdec48828f52f89b195ac52aadfe6700344a9e746",
+          "size_bytes": 150178
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "71bbe085218fdedd050611898897d5b2e82772c2db9e6507a7a81e0220d3acd0",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "ae6ad10a2951b494617d6d700c6714ad227d519ca0555043c2d190c018c98734",
+          "size_bytes": 86767598
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 13,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:44:18Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0038884042857713426,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.471981
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S003-R13",
+      "input_sha256": "5060de3cb95d9ae1c88a8e6892b3fba2d4005fd38daf7eba36832029f744df0b",
+      "retries": 13,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S003",
+      "seed": 1524307444,
+      "started_utc": "2026-09-25T17:45:55Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S003-R12",
+      "variant": "32b",
+      "wall_seconds": 14303.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "ad9942f9281588690d47cf8a31030d0e6c7ad7cb27a75e65878390d66cbdde2b",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "246c8681bbefe982e2269a6d7c2a2252a724aa30c678cbd320c2f1b3479495e8",
+          "size_bytes": 948
+        },
+        "last_conf.dat": {
+          "sha256": "19fdfe44283e72c5d98d776da9c475eef049f75cec44c66faa4b893c63fbebaf",
+          "size_bytes": 2345159
+        },
+        "log2.dat": {
+          "sha256": "7d6d64ddb2d8f1f62f45c0598e31291c7ed7b9cfbb7b79393ae9c7dc5cad69aa",
+          "size_bytes": 150196
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "ef0865fbd395efffa803c855e106d2d79aa90eef9a227e8f9b2e39ab569fa294",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "3c194ad9a25e085d7ce85d0ef96488a1495dc41bef313d30b47ab4fccd13c13a",
+          "size_bytes": 86770713
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 13,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:50:36Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.005211382075308875,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.470026
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S004-R13",
+      "input_sha256": "246c8681bbefe982e2269a6d7c2a2252a724aa30c678cbd320c2f1b3479495e8",
+      "retries": 13,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S004",
+      "seed": 601855227,
+      "started_utc": "2026-09-25T17:45:58Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S004-R12",
+      "variant": "32b",
+      "wall_seconds": 14678.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "73d6e959a2d66bf7c961a13bff5483b2ff1af46387dba4f7e686c25f2b7f27b9",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "5c53115944d90c4dead38a9fc07268584e89a367761729193ae321c76ef1568f",
+          "size_bytes": 948
+        },
+        "last_conf.dat": {
+          "sha256": "bb37d7dafb1d594ea54dffb66acaa963a61e03a644f50da7b5786015eb0852cc",
+          "size_bytes": 2344748
+        },
+        "log2.dat": {
+          "sha256": "e3abc717eea6e5c83457c1d83d47e61561217e9b077b1c21b6a48eb74c624c20",
+          "size_bytes": 150219
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "e21feec29a1f394c89b0c8169e1b0d008932d8f1d7e50258b357a768969b8f6f",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "abbf68b689b6577fd575b07471161e6c8aca36982c987d1616161b1086a6260d",
+          "size_bytes": 86776887
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 13,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:48:23Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.005861028457895152,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.469066
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S005-R13",
+      "input_sha256": "5c53115944d90c4dead38a9fc07268584e89a367761729193ae321c76ef1568f",
+      "retries": 13,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S005",
+      "seed": 274288237,
+      "started_utc": "2026-09-25T17:46:00Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S005-R12",
+      "variant": "32b",
+      "wall_seconds": 14543.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "01aae493f7c0232ac1161eeb3019433e810494d497cc2112f365cd13edea61fb",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "d0588364e934997c240d9e1a48ccfe6e8bc8f716bbc864f95dcc247b4c064e1f",
+          "size_bytes": 948
+        },
+        "last_conf.dat": {
+          "sha256": "b42bcb389268a79d2e537b9382aae3159f6986f929a3b7be930d3bafbc78aaac",
+          "size_bytes": 2344817
+        },
+        "log2.dat": {
+          "sha256": "dd9f843afc7e8ca5fb378e9d219f871f93103ad53dddd0e484f780a39b41468e",
+          "size_bytes": 150212
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "38bb061ad003b2b860fa83e3bf9342e65f1ede5b07a73f35aa7fd495701acf49",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "6bce6a0004cd5b7d15f2ee364d8509c7729a2478ca48dc943fc256aed640f2df",
+          "size_bytes": 86776226
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 13,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-25T21:49:04Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.003138604085869663,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.473089
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S006-R13",
+      "input_sha256": "d0588364e934997c240d9e1a48ccfe6e8bc8f716bbc864f95dcc247b4c064e1f",
+      "retries": 13,
+      "retry_reason": "technical: superseded attempt(s) interrupted or failed; see run_meta.json of final attempt",
+      "run_id": "PLATSENS-P1-32B-S006",
+      "seed": 972234272,
+      "started_utc": "2026-09-25T17:46:02Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "superseded_failed_attempt": "PLATSENS-P1-32B-S006-R12",
+      "variant": "32b",
+      "wall_seconds": 14582.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "e5fdec4d4c729e1841f027dbe0809d10bba84f4822bbe1a78612a61612c347e8",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "27c4ee76b19f6171bce06de033abf38f5e5a925c66c72f9f08986aecd669872a",
+          "size_bytes": 949
+        },
+        "last_conf.dat": {
+          "sha256": "c60405807b18ae20d03cf5d20818f71a9afbfec0501623a14251fe4f67b4ef5e",
+          "size_bytes": 2345289
+        },
+        "log2.dat": {
+          "sha256": "6e38c77434473a6f707e0d966ab0c5a2ae9baa9dad2eda4e25ce1884c1e25811",
+          "size_bytes": 150008
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "641294e46ab21bac1f716b28b411c5dedda6f6486a4fefc92e9c3eea49cfd94d",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "dd03339871d1c7e2da12e76e71fa64f341c34dabec9dbf778121705c2373aa65",
+          "size_bytes": 86769781
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-26T00:21:09Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.005606583624715592,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.469442
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S007",
+      "input_sha256": "27c4ee76b19f6171bce06de033abf38f5e5a925c66c72f9f08986aecd669872a",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-32B-S007",
+      "seed": 1934775205,
+      "started_utc": "2026-09-25T21:47:48Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "variant": "32b",
+      "wall_seconds": 9201.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "fc6afeb1958e0a28f53b9df8d932f3c8e5eaede9a401e59e790fbfa1f06502c1",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "6e59091914a9bb92ebbe5c2e94c291b2ada38187b7f166dd95ecc8e510c5ba6f",
+          "size_bytes": 949
+        },
+        "last_conf.dat": {
+          "sha256": "1ed7aaee47af1c1c50284217dcc75ffc2ebafdb990f0e6ce9301657a616d2f74",
+          "size_bytes": 2345551
+        },
+        "log2.dat": {
+          "sha256": "a41dad9cce879523e5dc91a2cf7352a899252047b61c3a77fdcd7d0d1ba8a5b0",
+          "size_bytes": 149984
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "e8758cd4865d10fa39afb5004a8dd51d019ea2a181ba7caa416612183664beba",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "2fad14f04a6ce7beaa751350adc25b936eae8dc98c65e6c05b70dc75973c16ee",
+          "size_bytes": 86776209
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-26T00:21:05Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0020721012744574067,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.474665
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S008",
+      "input_sha256": "6e59091914a9bb92ebbe5c2e94c291b2ada38187b7f166dd95ecc8e510c5ba6f",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-32B-S008",
+      "seed": 1747973984,
+      "started_utc": "2026-09-25T21:47:50Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "variant": "32b",
+      "wall_seconds": 9195.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "652a642a446df629407bb16e278be258c0cd16f226ed35b31be92eee2c3c3b0c",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "0cdf4744d1478df872f6af77ecc3e904ae2331980d022ab064acc71d2235688e",
+          "size_bytes": 948
+        },
+        "last_conf.dat": {
+          "sha256": "d63d1dd95bdf42e211d011e6ebe36568ca4f95faf0c800ab659283decfc971f0",
+          "size_bytes": 2344924
+        },
+        "log2.dat": {
+          "sha256": "a2f5b87bc39de85687626dcb919ad3668585671500202e4ab586b8e452d585ed",
+          "size_bytes": 149963
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "b8ee956442424ccf91091dc84e6830ce5886739f4a7d477cf32181f59df6bfb6",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "01b9af36d18bc2eb5d369b9ef350cc5c2a829b54fb69431c474b311fa276e0fc",
+          "size_bytes": 86773334
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-26T00:16:48Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.003184620704636309,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.473021
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S009",
+      "input_sha256": "0cdf4744d1478df872f6af77ecc3e904ae2331980d022ab064acc71d2235688e",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-32B-S009",
+      "seed": 880427736,
+      "started_utc": "2026-09-25T21:47:52Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "variant": "32b",
+      "wall_seconds": 8936.0
+    },
+    {
+      "artifacts": {
+        "32b.conf": {
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size_bytes": 2345114
+        },
+        "32b.top": {
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size_bytes": 123024
+        },
+        "hinge_energy.dat": {
+          "sha256": "1326d1052041346860d2d6b6514755c432cbcd0de09dd090a0eb2b3a36d6febe",
+          "size_bytes": 73549
+        },
+        "input": {
+          "sha256": "e86d12c04b0fa7b1de889c79ff09b403e8525a674e2b43d73d2d0039be7acd4b",
+          "size_bytes": 948
+        },
+        "last_conf.dat": {
+          "sha256": "3311354c338ac8e5aac591264dc51430ca5efb08bcc975d674e17a08852d2c22",
+          "size_bytes": 2344833
+        },
+        "log2.dat": {
+          "sha256": "2372e3a59daae6b22b7a30dac3283091371d2e983fa2af2d59494c4c65b774da",
+          "size_bytes": 149886
+        },
+        "stderr.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout.txt": {
+          "sha256": "58d79b0ca9688dd747d820e1a671e6ac764916c7af1e40781118658bb7b5073d",
+          "size_bytes": 93062
+        },
+        "trajectory.dat": {
+          "sha256": "c41d491700b4b17042e13e0eb11c4438ce0948c7dd547d9445205c07976c69dc",
+          "size_bytes": 86763958
+        },
+        "wrapper.sh": {
+          "sha256": "0433d450aa446bc4e503e4bcb52893fd29cca7938981a902018b06628761fb2b",
+          "size_bytes": 270
+        }
+      },
+      "attempt": 0,
+      "command": "/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/build-oxdna-cpu/bin/oxDNA input",
+      "ended_utc": "2026-09-26T00:23:41Z",
+      "energy_drift_bookkeeping": {
+        "drift": 0.0015909569223543942,
+        "rows": 1501,
+        "source": "hinge_energy.dat (4 columns, upstream verbatim format)",
+        "u_over_n_first": -1.477727,
+        "u_over_n_last": -1.475376
+      },
+      "engine_exit_code": 0,
+      "final_attempt_id": "PLATSENS-P1-32B-S010",
+      "input_sha256": "e86d12c04b0fa7b1de889c79ff09b403e8525a674e2b43d73d2d0039be7acd4b",
+      "retries": 0,
+      "run_id": "PLATSENS-P1-32B-S010",
+      "seed": 744386736,
+      "started_utc": "2026-09-25T21:52:57Z",
+      "status": "COMPLETE_EXIT_0",
+      "steps": 150000,
+      "variant": "32b",
+      "wall_seconds": 9044.0
+    }
+  ]
+}
