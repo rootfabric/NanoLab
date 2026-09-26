@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0007-continuation-paired-analysis-and-handoff",
+  "timestamp_utc": "2026-09-26T01:50:00Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "END_ANALYSIS",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "eb8ccf09789bd2d3feb3e44821968ed6cc6d887f",
+  "summary": "END_ANALYSIS (frozen paired statistics computed AFTER P1 evidence landed on the live branch; NO Director acceptance declared): paired completeness gate PASS - 10 complete P1xP2 pairs for 0b and 10 for 32b; mechanical identity verified per pair (frozen seeds S001-S010 via committed runmaps, variants, steps 200000/150000, package nanolab-components 0.1.1 RELEASE_MANIFEST sha256 exact match both legs, engine commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 both legs, single frozen analyzer convention/analyze_hinge.py). Frozen statistics plan applied VERBATIM (passport.statistics_frozen_pre_data: raw MAD no 1.4826; within_v = median(MAD_P1, MAD_P2); ratio degenerate rules; bootstrap random.Random(902107), 10000 paired-index resamples, percentile CI95 linear interpolation). Results: 0b shift_v = +0.684695 deg, CI95 [-0.550264, +1.199044] (contains 0), within_v = 1.254651 deg, ratio_v = 0.5457 -> PLATFORM_INSENSITIVE; 32b shift_v = -1.207386 deg, CI95 [-2.090433, +2.149149] (contains 0), within_v = 0.915862 deg, ratio_v = 1.3183 -> PLATFORM_INSENSITIVE (CI-contains-0 branch; ratio >= 1 alone is insufficient by the frozen rule). WO-level verdict: PLATFORM_INSENSITIVE. Cross-validated: two independently written implementations of the frozen spec produced identical numbers on the same Git evidence; committed paired_tooling self-test PASS (synthetic only; its report loader predates the -R13/-R14/-R21 final-attempt IDs and the null-seed report field - loader-only limitation documented in evidence/paired/PAIRED_PROVENANCE.md, statistical core untouched). Execution orchestration deviations remain disclosed and unchanged (EXECUTION_ORCHESTRATION_DEVIATION = YES: early P2 dispatch by Director override + P1 recovery retry chains after repeated external host terminations; SCIENTIFIC_PROTOCOL_MUTATION = NO: all scientific pins held). Status boundaries preserved: NL5 = IN_PROGRESS, external_reproductions = 0, NL6-001 = LOCKED, pending a separate NL5-ACCEPTANCE-POLICY decision; frozen WO not modified. HANDOFF: next actions are FRESH Scientific Reviewer session (must explicitly answer: P2 early dispatch + P1 retry chains - do they invalidate paired scientific inference? YES/NO with justification; reviewer must recompute statistics independently per frozen plan), then FRESH Verifier (exact-head evidence binding), then Director acceptance decision. This Implementer session does not self-accept.",
+  "command_refs": [
+    "python docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_analysis.py (frozen-plan operator implementation; writes paired_platform_sensitivity.json)",
+    "python C:\\NanoLab\\paired_analysis.py <p1_analysis> <p2_analysis> <out> (independent cross-check implementation, identical outputs)",
+    "python docs/work/executions/EX-NL5-002-E-R1/paired_tooling/paired_stats_platsens.py --self-test (PASS, synthetic only)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_platform_sensitivity.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_analysis.py",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/paired/PAIRED_PROVENANCE.md",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p1/ (P1-complete evidence, commit eb8ccf0)",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/ (P2-complete evidence, commit 5ef6c1c)"
+  ],
+  "next_action": "FRESH_REVIEWER session: independent recomputation per frozen plan + explicit YES/NO on whether the recorded execution orchestration deviations invalidate paired scientific inference; then FRESH Verifier; then Director acceptance (WO-NL5-002-E-R1 disposition and any NL5-ACCEPTANCE-POLICY are Director/Human-Gate decisions).",
+  "blocker": null
+}
