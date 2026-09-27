@@ -61,7 +61,28 @@ risk/claim   = MEDIUM / C0_SOFTWARE_ONLY (control/infrastructure; НЕ науч�
   любые новые scientific WO блокируются на «выделить U1» (честный HARD_BLOCKED).
 - Policy-обновления поверхностей вступают в силу только после merge (Human Gate).
 
-## 5. Next action (одно)
+## 5. Errata / repair после review R1 (MINOR-1..MINOR-5, verdict PASS 7f25e8d)
+
+- **MINOR-1**: поле `notes` удалено из `passport.json` (schema
+  `additionalProperties: false`); содержимое перенесено в branch-passport §2.
+- **MINOR-2**: устаревшая запись об отклонении checkpoint-паттерна исправлена:
+  паттерн уже `^(NL[0-8]|INFRA[0-7])$` (расширен `EX-CTRL-LINTSCHEMA-R1`),
+  отклонения не существует (branch-passport §2, авторитетная коррекция; event 0001
+  не редактируется — append-only).
+- **MINOR-3**: подтверждено, что `timestamp_utc` событий 0002–0004 — декларативные
+  метки записи, смещённые относительно фактических commit-времён; события
+  неизменяемы, факт фиксируется этой строкой (прецедент errata-via-summary).
+- **MINOR-4**: уточнение записи event 0003: на машине reviewer'а test-suite даёт
+  **6** base-идентичных FAIL (класс Windows-CRLF чекаута; включая
+  test_release_manifest_candidate ×2, test_release_planning_refs ×1), а не 3;
+  все воспроизводятся на чистом base `d07e75e` — вклад ветки 0.
+- **MINOR-5**: `passport.status` переключён `IN_PROGRESS` → `HANDOFF_READY`.
+- **NOTE-1/2/3** (символы U1/U2 машины vs gates; события 0002/0003 биндят START
+  commit; пустой depends_on INFRA3-003) — приняты к сведению, исправления не
+  требуют; символика машин уточнена: машина автора = U1 AUTHOR_UBUNTU, внешняя
+  машина = U2 (outenemy), gates именуются U1–U5 по документу R2.
+
+## 6. Next action (одно)
 
 Выделить U1 (native Ubuntu, не WSL/VM), затем: freeze fingerprint
 (`ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md` §9) → gates U1–U5 → NC-U1..U5 →

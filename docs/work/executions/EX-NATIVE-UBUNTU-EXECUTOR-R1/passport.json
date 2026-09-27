@@ -22,6 +22,5 @@
     "project/infra-plan.json"
   ],
   "started_at_utc": "2026-09-27T11:40:00Z",
-  "status": "IN_PROGRESS",
-  "notes": "Control/infrastructure WO (not a scientific experiment). Known schema deviation: checkpoint 'INFRA3' does not match ^NL[0-8]$ in execution-passport.schema.v1.json - same documented deviation class as EX-INFRA0-001-R1/EX-INFRA1-001-R1/EX-INFRA1-002-R1 (NOTE-1)."
+  "status": "HANDOFF_READY"
 }

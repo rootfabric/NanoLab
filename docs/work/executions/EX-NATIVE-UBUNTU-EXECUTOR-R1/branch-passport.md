@@ -17,11 +17,16 @@ environment R2 (`U1 = AUTHOR_UBUNTU`) и вывести Windows/WSL2 из mandat
 path. Windows/WSL2 (DESKTOP-QNAGSTI, ENGINE_ENVIRONMENT_R1) остаётся историческим
 фактом provenance; outenemy сохраняет роль внешней независимой репродукции/верификации.
 
-## 2. Отклонения от схемы
+## 2. Схемные замечания (исправлено по review/native-ubuntu-executor-r1, MINOR-1/MINOR-2)
 
-- `checkpoint: "INFRA3"` не матчит `^NL[0-8]$` в `execution-passport.schema.v1.json`
-  — тот же задокументированный класс, что EX-INFRA0-001-R1 / EX-INFRA1-001-R1 /
-  EX-INFRA1-002-R1 (NOTE-1).
+Первоначальный текст этой секции (и удалённое затем поле `notes` паспорта)
+документировали отклонение `checkpoint: "INFRA3"` против паттерна `^NL[0-8]$` как
+NOTE-1 класс. Fresh Reviewer (MINOR-2) установил: паттерн в
+`execution-passport.schema.v1.json` уже расширен control WO `EX-CTRL-LINTSCHEMA-R1`
+до `^(NL[0-8]|INFRA[0-7])$` — `INFRA3` легитимен, отклонение НЕ существует; запись
+об отклонении была устаревшей. Поле `notes` удалено из паспорта (MINOR-1:
+`additionalProperties: false`). Событие `0001` остаётся неизменным (append-only);
+настоящая секция — авторитетная коррекция.
 
 ## 3. Честные границы этой R1 (на момент старта)
 
