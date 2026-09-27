@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NATIVE-UBUNTU-EXECUTOR-R1",
+  "work_order_id": "WO-NATIVE-UBUNTU-EXECUTOR-R1",
+  "checkpoint": "INFRA3",
+  "base_sha": "d07e75e68c20599e4b942aefb20b4b3922985219",
+  "branch": "control/native-ubuntu-executor-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md",
+    "docs/work/executions/EX-NATIVE-UBUNTU-EXECUTOR-R1/**",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
+    "AGENTS.md",
+    "docs/work/AGENT_START.md",
+    "docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md",
+    "config/control/harness/scheduler-policy.v1.json",
+    "docs/ROADMAP.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/infra/ROADMAP.md",
+    "project/infra-plan.json"
+  ],
+  "started_at_utc": "2026-09-27T11:40:00Z",
+  "status": "IN_PROGRESS",
+  "notes": "Control/infrastructure WO (not a scientific experiment). Known schema deviation: checkpoint 'INFRA3' does not match ^NL[0-8]$ in execution-passport.schema.v1.json - same documented deviation class as EX-INFRA0-001-R1/EX-INFRA1-001-R1/EX-INFRA1-002-R1 (NOTE-1)."
+}
