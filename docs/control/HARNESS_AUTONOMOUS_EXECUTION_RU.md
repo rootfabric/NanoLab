@@ -18,6 +18,21 @@
 
 Отсутствие предпочтительной VM не является `HARD_BLOCKED`, если задача доступна другим разрешённым способом.
 
+### Executor environment policy (2026-09-27, WO-NATIVE-UBUNTU-EXECUTOR-R1)
+
+Для **scientific execution** fallback-список выше не применяется: новые scientific
+runs на Windows/WSL2 запрещены (`WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY`,
+`WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO`; owner decree 2026-09-27). Канонический
+author/executor — native Ubuntu R2 (`U1 = AUTHOR_UBUNTU`), статус PROPOSED до
+прохождения validation gates (frozen fingerprint, U1–U5, NC-U1..U5 —
+`docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`); до активации научные
+execution-запросы ожидают выделения U1 (честный `HARD_BLOCKED` с resume condition,
+тихий fallback на Windows запрещён). Hardware/engineering C0-работа (harness, docs,
+Git) продолжает выполняться на доступном разрешённом хосте. Scientific executor и
+CI runner не владеют жизненным циклом друг друга; scientific jobs — вне agent
+session (`systemd-run --scope`/transient unit). См.
+`docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`.
+
 ## Scientific compute
 
 Автономность ограничена preregistered protocol и budget. Дополнительные replicas разрешены только в границах protocol. Нельзя бесконечно повторять научно отрицательный опыт до получения желаемого результата.

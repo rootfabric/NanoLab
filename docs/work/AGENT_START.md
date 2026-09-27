@@ -19,6 +19,8 @@
 > Если frontier всё ещё NL0 и NL0-001 не выполнен, выполни `docs/work/WO-NL0-001.md`: выбрать доступный reference E1 и candidate hinge E2, проверить фактические входы, первичные источники и ограничения. Не запускать дорогие simulations и не строить большой orchestrator до выбора входных данных.
 >
 > Если NL0-001 уже принят, не повторяй его: используй `project/state.json` и dependencies для следующего READY Work ID.
+>
+> **Executor environment (2026-09-27):** новые scientific runs на Windows/WSL2 ЗАПРЕЩЕНЫ (`WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY`, owner decree); канонический author/executor — native Ubuntu R2 (`U1 = AUTHOR_UBUNTU`), статус PROPOSED до validation gates. Ищи Ubuntu host первым (`ssh <u1>`, `cd ~/src/NanoLab`, `git fetch --all --prune`); outenemy = внешняя репродукция (U2), не author host. До активации R2 научные execution-запросы — честный `HARD_BLOCKED` с resume condition «выделить U1» (см. `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`, `docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`). Scientific jobs — вне agent session; CI не владеет их жизненным циклом.
 
 ## Локальный старт
 
