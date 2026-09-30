@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-contract-and-surfaces",
+  "timestamp_utc": "2026-09-27T12:30:00Z",
+  "execution_id": "EX-NATIVE-UBUNTU-EXECUTOR-R1",
+  "work_order_id": "WO-NATIVE-UBUNTU-EXECUTOR-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d0f994a8b089e7d5d6b2f2370893f3e19045ef4b",
+  "summary": "CONTINUATION (документация/контракт опубликованы; машина U1 не выделена — все валидационные gates остаются WAITING_HOST, PASS-статусы по ним НЕ декларируются): (1) docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md — целевая архитектура GitHub -> U1 native Ubuntu AUTHOR/DEV/PRIMARY EXECUTOR + U2 external REPRO/VERIFY (outenemy сохраняет независимую внешнюю роль, author host'ом не становится), Windows = optional UI/historical evidence only; требования native (kernel/ext4-класс/systemd, запрет WSL/Docker Desktop VM/VirtualBox//mnt/c); canonical paths ~/src/NanoLab + ~/nanolab/{workspaces,raw,cache,tools}; software policy (autocrlf false/safecrlf true, pinned .venv, фиксация gcc/cmake/make по факту без auto apt upgrade); fresh oxDNA build от 00dc7fb9 CPU/DOUBLE=ON/CUDA=OFF/MPI=OFF с фиксацией source SHA/compiler/cmake/CMakeCache pins/binary size/sha256/build log; migration gate = same source commit + intended flags + clean build + smoke + frame0 + fixtures, НЕ binary-sha equality с WSL; validation gates U1-U5 и negative controls NC-U1..U5 определены со статусом WAITING_HOST; raw evidence policy (manifest sha256/size/producer/retention, Git = compact evidence, backup после завершения run); научная история неприкосновенна: ENGINE_ENVIRONMENT_R1.md не изменяется, PLATFORM_INSENSITIVE остаётся фактом frozen R1, старые числа не переносятся как oracle R2, NL5/NL6 границы не тронуты. (2) docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md — контракт среды R2 в статусе WAITING_HOST + процедура заморозки fingerprint по факту (fingerprint команды, build pins, gates, NC, статус FROZEN только после исполнения). (3) docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md — WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY и WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO effective 2026-09-27 (owner decree, исключение — explicit bounded environment comparison WO); DEFAULT_AUTHOR_EXECUTOR = NATIVE_UBUNTU_R2 PROPOSED, условия активации = frozen fingerprint + U1-U5 + NC-U1..U5 + fresh review/verify + Human Gate; до активации научные execution-запросы = честный HARD_BLOCKED с resume condition 'выделить U1', тихий fallback на Windows запрещён; разделение процессов nanolab-executor.service / github-actions-runner.service (CI запрещены reboot/shutdown/kill executor cgroup); scientific jobs вне agent session (systemd-run --scope), переживают SSH disconnect/agent crash/CI restart; NC-U5: deliberate kill -> FAILED_TECHNICAL, run ID не переиспользуется. (4) Поверхности: AGENTS.md (новый раздел Executor environment policy), docs/work/AGENT_START.md (Ubuntu-first правило + honest HARD_BLOCKED до R2), docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md (Executor environment policy subsection: scientific execution вне fallback-списка Windows), config/control/harness/scheduler-policy.v1.json (revision NL-N5-2026-09-27-R2 + блок executor_environment_policy; current_checkpoint/next_work_order НЕ изменялись — канонические NL5/NL5-002), docs/ROADMAP.md (§4 Параллельно INFRA2->INFRA3 + WO), docs/work/WORK_QUEUE.md (строка INFRA3-003 IN_PROGRESS), docs/infra/ROADMAP.md (раздел INFRA3 = native Ubuntu reproducible scientific executor), project/infra-plan.json (задача INFRA3-003, depends_on [], doc link, note: без регистрации runner — INFRA2-001 не затронут). Root cause кампании NL5-002-E P1 (CI -> wsl --shutdown -> killed physics -> retry storm) конструктивно исключается: scientific executor и CI runner не владеют жизненным циклом друг друга.",
+  "command_refs": [
+    "git -C C:\\NanoLab\\control-native-ubuntu add/commit поверх START d0f994a8b089e7d5d6b2f2370893f3e19045ef4b",
+    "правки: AGENTS.md, docs/work/AGENT_START.md, docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md, config/control/harness/scheduler-policy.v1.json, docs/ROADMAP.md, docs/work/WORK_QUEUE.md, docs/infra/ROADMAP.md, project/infra-plan.json",
+    "новые: docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md, docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md, docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R1.md (историческая R1, НЕ изменялась)",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p1/RECOVERY_INCIDENTS.md"
+  ],
+  "next_action": "IMPLEMENTER: локальные harness-проверки (check-consistency, workflow lint, unittest с фиксацией pre-existing CRLF-артефакта), events 0003-0004 + summary + handoff, push, handoff в fresh Reviewer/Verifier.",
+  "blocker": null
+}

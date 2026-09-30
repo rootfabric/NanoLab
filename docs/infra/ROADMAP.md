@@ -59,6 +59,20 @@ Harness Experiment/Work evidence
 
 Сам факт успешного job не является научным PASS; scientific acceptance остаётся в Experiment Harness.
 
+## INFRA3 = native Ubuntu reproducible scientific executor (2026-09-27)
+
+Решение `WO-NATIVE-UBUNTU-EXECUTOR-R1` (в границах существующего направления
+INFRA2 → INFRA3, без второго параллельного дизайна): целевой substrate checkpoint
+INFRA3 — **native Ubuntu** author/development/primary-executor environment R2
+(`U1 = AUTHOR_UBUNTU`); Windows/WSL2 выведен из mandatory execution path
+(`WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY`, effective 2026-09-27). Контракт среды и
+validation gates (U1–U5) и negative controls (NC-U1..U5: process survival вне agent
+session, CI не владеет жизненным циклом scientific executor, raw evidence manifest)
+— `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`,
+`docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`. Задача: `INFRA3-003` в
+`project/infra-plan.json`. Runner-регистрация по-прежнему отдельный `INFRA2-001`;
+эта линия не создаёт self-hosted runner и не меняет security baseline.
+
 ## Связь с научной дорожной картой
 
 - `NL0`: INFRA не требуется.

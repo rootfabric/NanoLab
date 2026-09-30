@@ -120,6 +120,27 @@ REVIEW
 
 Старые experiment events не редактировать; corrections/superseding — новым event.
 
+## Executor environment policy
+
+```text
+WINDOWS_WSL_EXECUTOR            = HISTORICAL_ONLY   (effective 2026-09-27)
+WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO                (exception: explicit bounded
+                                                     environment comparison WO)
+DEFAULT_AUTHOR_EXECUTOR         = NATIVE_UBUNTU_R2  (PROPOSED -> ACTIVE после
+                                                     validation gates R2)
+```
+
+Новые scientific runs на Windows/WSL2 запрещены (owner decree 2026-09-27);
+Windows/WSL2 = historical evidence + UI only. Новые local agents ищут native
+Ubuntu host (U1 = AUTHOR_UBUNTU) первым: `ssh <u1>`, `cd ~/src/NanoLab`,
+`git fetch --all --prune`. outenemy = внешняя независимая репродукция/верификация
+(U2), НЕ author/dev host. До фактической активации R2 (frozen fingerprint +
+gates U1-U5 + NC-U1..U5 + review/verify + Human Gate — см.
+`docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`,
+`docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`) научные execution-запросы
+ожидают выделения U1; тихий fallback на Windows запрещён. Детали:
+`docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`.
+
 ## Resources and safety
 
 Не запускать платные GPU/CI/внешние сервисы сверх budget. Не запускать физический wet-lab/hardware experiment по правилам вычислительного harness: такие работы `CRITICAL` и требуют отдельного human/domain gate. Не скрывать секреты и не изменять систему владельца глобальными установками без scope.
