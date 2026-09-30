@@ -150,3 +150,34 @@ class CandidateDocConsistencyTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FeasibilityGateTest(unittest.TestCase):
+    """Pinned §12 gate mechanics (review refresh R-1/R-2)."""
+
+    def test_quantile_linear(self):
+        from nl5.repro_v02_feasibility_gate import quantile_linear
+        self.assertEqual(quantile_linear([1.0], 0.05), 1.0)
+        self.assertEqual(quantile_linear([0.0, 10.0], 0.5), 5.0)
+        self.assertAlmostEqual(quantile_linear(sorted([1.0, 2.0, 3.0, 4.0]), 0.25), 1.75)
+
+    def test_pooled_sd_known_values(self):
+        from nl5.repro_v02_feasibility_gate import pooled_sd
+        # v1 = 1.0, v2 = 4.0 -> pooled = sqrt((2*1 + 2*4) / 4) = sqrt(2.5)
+        self.assertAlmostEqual(pooled_sd([1.0, 2.0, 3.0], [2.0, 4.0, 6.0]), 2.5 ** 0.5)
+
+    def test_half_width_shrinks_with_n(self):
+        from nl5.repro_v02_feasibility_gate import paired_bootstrap_half_width
+        diffs = [0.5, -0.3, 1.2, 0.0, -0.8, 0.4, 2.1, -1.0, 0.7, 0.2]
+        w10 = paired_bootstrap_half_width(diffs, 42, 10, blocks=2000)
+        w40 = paired_bootstrap_half_width(diffs, 42, 40, blocks=2000)
+        self.assertLess(w40, w10)
+
+    def test_evaluate_variant_gate_fields(self):
+        from nl5.repro_v02_feasibility_gate import evaluate_variant
+        res = evaluate_variant([1.0, 2.0, 3.0, 4.0] * 2 + [1.5, 2.5, 3.5, 4.5] + [2.0, 1.0],
+                               [1.2, 2.2, 3.2, 4.2] * 2 + [1.7, 2.7, 3.7, 4.7] + [2.2, 1.2],
+                               bootstrap_seed=7)
+        for key in ("s", "s_eff", "margin", "ratio_subsample", "ratio_sqrt_extrapolated", "gate_pass"):
+            self.assertIn(key, res)
+        self.assertEqual(res["gate_pass"], res["ratio_subsample"] <= 1.0)

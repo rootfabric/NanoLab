@@ -187,6 +187,9 @@ frozen statistical plan platform study), сделан a priori, не по дан
 
 ```text
 1. если n_valid < N_min            → INCONCLUSIVE(v)
+   (controls: n_valid < 8 → control-статистика помечается
+   INCONCLUSIVE-CONTROLS и ИСКЛЮЧАЕТСЯ из downgrade-логики §9.3;
+   verdict определяется primaries; направление ошибки консервативное)
 2. если CI90(Δ̂) ⊂ (−margin, +margin)          → EQUIVALENT(v)
 3. elif CI90(Δ̂) целиком выше +margin ИЛИ
         целиком ниже −margin                       → NOT_EQUIVALENT(v)
@@ -255,15 +258,27 @@ compute           = CPU-only, paid compute FORBIDDEN без отдельной o
 wall budget       = ≤ 360 ч на платформу (15 суток; калибровка: platform
                     study — 20 runs/platform в ≤ 72 ч при intra-node
                     параллелизме); превышение → STOP / BUDGET_EXCEEDED
-MANDATORY FEASIBILITY GATE (до dispatch, механически):
+MANDATORY FEASIBILITY GATE (до dispatch, механически; реализация pinned:
+  scripts/nl5/repro_v02_feasibility_gate.py, two-estimate схема по review R-2):
   из committed paired данных R1 platform study
   (paired_platform_sensitivity.json) берутся per-seed medians primaries;
-  ŝ — pooled SD; ожидаемая CI90 half-width при n=40 оценивается тем же
-  pinned paired bootstrap (B=10 000, RNG bootstrap seed, subsample n=40);
-  gate PASS ⇔ ratio = half-width / (δ·s_eff) ≤ 1.0 для ОБОИХ primaries.
-  Evidence gate записывается в Git ДО dispatch. FAIL => кампания НЕ
-  стартует: протокол честно фиксирует INFEASIBLE при текущем бюджете и
-  возвращается к owner (новая revision), никакой «подгонки» δ/N под запуск.
+  ŝ — pooled SD; оценка-1 (DECISION): CI90 half-width при n=40 pinned paired
+  bootstrap'ом (B=10 000, RNG random.Random(bootstrap_seed_v), 40 вытягиваний
+  с возвращением из n=10-поддержки); оценка-2 (ADVISORY): √n-экстраполяция из
+  полного n=10-bootstrap (granularity-диагностика поддержки);
+  ratio_k = half-width_k / (δ·s_eff).
+  gate PASS ⇔ ratio_1 ≤ 1.0 для ОБОИХ primaries; ratio_2 публикуется рядом
+  (не меняет решение, показывает неопределённость экстраполяции с 10 точек).
+  Известные вычисленные значения (committed R1 данные, 2026-09-30, evidence
+  repro-v0-2-feasibility-gate-R2.json): 0b ratio_1 = 0.124 PASS;
+  32b ratio_1 = 1.298 FAIL при ratio_2 = 0.907 — т.е. 32b
+  FEASIBILITY-UNCERTAIN: параметрика независимого review для реальных n=40
+  даёт 0.76–0.81 (feasible), subsample-оценка — 1.298 (fail). Это честно
+  выносится владельцу ДО HG-B (варианты: принять риск INFEASIBLE для 32b /
+  сузить primary set до 0b ревизией R3 / расширить budget ревизией R3 —
+  решение owner, не имплементатора). Evidence gate записывается в Git ДО
+  dispatch; FAIL ⇒ кампания НЕ стартует: протокол фиксирует INFEASIBLE при
+  текущем бюджете и возвращается к owner, никакой «подгонки» δ/N под запуск.
 stop conditions   = environment недоступна → BLOCKED_ENVIRONMENT; ≥ 3 подряд
                     FAILED_TECHNICAL в ячейке → ячейка остановлена; любое
                     требование изменить protocol после data → STOP + новый WO;

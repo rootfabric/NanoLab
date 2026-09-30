@@ -66,6 +66,22 @@ DOES NOT:
 - **C. Отложить NL5 acceptance** — решение остаётся открытым; научная вертикаль
   стоит на NL5 (NL6-001 LOCKED), infra-линия может продолжаться независимо.
 
+## 4.1. Известный риск, видимый владельцу ДО HG-B (review refresh R-1/R-2)
+
+Mandatory feasibility gate (§12 candidate R2), вычисленный на committed R1
+данных (`evidence/repro-v0-2-feasibility-gate-R2.json`):
+
+```text
+0b : ratio 0.124 (subsample) / 0.207 (advisory √n) → FEASIBLE
+32b: ratio 1.298 (subsample) / 0.907 (advisory √n) → FEASIBILITY-UNCERTAIN
+     (независимый review, параметрика для реальных n=40: 0.76–0.81)
+```
+
+По букве протокола freeze-цепочка для 32b упрётся в честный INFEASIBLE→owner.
+Варианты для владельца (решение owner, не имплементатора): (i) принять риск;
+(ii) ревизия R3 — сузить primary set до 0b; (iii) ревизия R3 — расширить
+budget. Пороги/статистика при этом не трогаются.
+
 ## 5. Почему это соответствует прежним owner-решениям
 
 - Миссия 2026-09-20 (record DIRECTOR_DECISION_R1) прямо предлагала v0.2-class
