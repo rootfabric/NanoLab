@@ -1,0 +1,1474 @@
+{
+  "kind": "platform_sensitivity_run_output_digests_v1",
+  "execution_id": "EX-NL5-002-E-R1",
+  "leg": "P2",
+  "generated_at_utc": "2026-09-23T10:31:32.687201+00:00",
+  "expected_final_runs": 20,
+  "final_runs_recorded": 20,
+  "missing_runs": [],
+  "duplicate_check": true,
+  "runs": [
+    {
+      "run_id": "PLATSENS-P2-0B-S001",
+      "variant": "0b",
+      "seed": 1259289227,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S001/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S001)",
+      "wrapper_pid": "829631",
+      "start_utc": "2026-09-21T21:27:22Z",
+      "end_utc": "2026-09-22T10:54:43Z",
+      "wall_time_s": 48441,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "fcf1213acaea742d5c0e17eb73288304e7c6a2adbbdd4d7886796e5a2eadd00c",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S001/traj.dat",
+          "sha256": "d0ffe690ec839f177aa746ce2295940a8f8a195e214aba32899d3f8cee918ec9",
+          "size": 114705541,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S001/energy.dat",
+          "sha256": "f8621d488b3dfff4833e46538a3cd4a73c76da1384a14a80768f76581f7c67be",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S001/last_conf.dat",
+          "sha256": "52eb8ccca42b8dde7fce2358b8b447831d2be31549a2dcd449b3b0b4c8c31b94",
+          "size": 2294345,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S001/stdout.log",
+          "sha256": "b0d971d0df9c9b6b6fd97bd120275e5e3aad79563a29b9a7c03ca2e6efa16a39",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S001/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S001/input",
+          "sha256": "fcf1213acaea742d5c0e17eb73288304e7c6a2adbbdd4d7886796e5a2eadd00c",
+          "size": 934,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S001/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S001/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S001/run_meta.json",
+          "sha256": "05df9147e5eeaa1ec4582984429efd23b759fb387776d17625181121cc126c08",
+          "size": 491,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S002",
+      "variant": "0b",
+      "seed": 1358106528,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S002/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S002)",
+      "wrapper_pid": "829785",
+      "start_utc": "2026-09-21T21:27:25Z",
+      "end_utc": "2026-09-22T10:45:39Z",
+      "wall_time_s": 47894,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "1fd8dd1deefdab3a5085d6c4f789ba5d5957c9ed3d47337353ccebdd8193bef6",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S002/traj.dat",
+          "sha256": "b951a2cfd17c17580238b4ed618d12fc5eea644f6f519683623c2544e7808274",
+          "size": 114696904,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S002/energy.dat",
+          "sha256": "e22cdf043da39ef8c015f40c8ce2651f75efa6a9ba714ae43646a7058ebb99e7",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S002/last_conf.dat",
+          "sha256": "874ccf9fc3daaa3f23b417f7d8d2335abc425f18283309aea6d0fd9014e5f9dc",
+          "size": 2294242,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S002/stdout.log",
+          "sha256": "073a167bb77d65c485aa1bca56c42a917603ac77790eaf46fc6ec5a69a548b26",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S002/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S002/input",
+          "sha256": "1fd8dd1deefdab3a5085d6c4f789ba5d5957c9ed3d47337353ccebdd8193bef6",
+          "size": 934,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S002/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S002/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S002/run_meta.json",
+          "sha256": "8f0bdfa1b661a4843478edf2f00bf06c3768d5e4f055a25af348a0277f0b4f07",
+          "size": 491,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S003",
+      "variant": "0b",
+      "seed": 1524307444,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S003/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S003)",
+      "wrapper_pid": "830343",
+      "start_utc": "2026-09-21T21:27:27Z",
+      "end_utc": "2026-09-22T11:03:02Z",
+      "wall_time_s": 48935,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "06d5166e337242c16ec9160471748fd7a1004480d065e7b1201bbf813a3f570e",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S003/traj.dat",
+          "sha256": "6eaa229bd0e009578445efd8d82049ea289b211522c1a8cc2c71fb231b168ce8",
+          "size": 114693106,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S003/energy.dat",
+          "sha256": "29b54c98fc4586e881636668bc471072e54ec09cbbd92c96d48e6a0b9e6e05ec",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S003/last_conf.dat",
+          "sha256": "198bf6f314f322bced9177f4104f1b16715e0d5532b097de9b8d7030cb72b1ec",
+          "size": 2293635,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S003/stdout.log",
+          "sha256": "bf38d8731bbb97ccc2e9b5baa4051cc4b2747340e64b6fe88dd4f957853e78c3",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S003/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S003/input",
+          "sha256": "06d5166e337242c16ec9160471748fd7a1004480d065e7b1201bbf813a3f570e",
+          "size": 934,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S003/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S003/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S003/run_meta.json",
+          "sha256": "501b1fcf3a01840393986bbaab619f24f043cd3c42714f78c6b0847a61eda5a0",
+          "size": 491,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S004",
+      "variant": "0b",
+      "seed": 601855227,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S004/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S004)",
+      "wrapper_pid": "830515",
+      "start_utc": "2026-09-21T21:27:29Z",
+      "end_utc": "2026-09-22T10:56:59Z",
+      "wall_time_s": 48570,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "6d405aca097b35834920c7afa26e41ef7b2552113c41a6554daf72b04e6ffa0e",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S004/traj.dat",
+          "sha256": "1de4f5a73d7ff38f3e19b562c4fa4039905db954b1008005c542a9f84772f3a0",
+          "size": 114690975,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S004/energy.dat",
+          "sha256": "cb4cfde2b49a717f624d8efcb9762a7f266f51d13b554b14a5acec37c1be6439",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S004/last_conf.dat",
+          "sha256": "743e8663045d7523abdcc6913444e90162d41ea51ae5841f6fdd9841e365bf54",
+          "size": 2293667,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S004/stdout.log",
+          "sha256": "deedcb6e01813125e179363147b06a6a390545507d2ec2b9eb8cfef3a4577817",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S004/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S004/input",
+          "sha256": "6d405aca097b35834920c7afa26e41ef7b2552113c41a6554daf72b04e6ffa0e",
+          "size": 933,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S004/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S004/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S004/run_meta.json",
+          "sha256": "7ef102640449f39d8755c4bfb7ddf23c6f7a89f48bbd8fae2708bccd1cc9a614",
+          "size": 490,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S005",
+      "variant": "0b",
+      "seed": 274288237,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S005/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S005)",
+      "wrapper_pid": "830850",
+      "start_utc": "2026-09-21T21:27:32Z",
+      "end_utc": "2026-09-22T10:58:07Z",
+      "wall_time_s": 48635,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "1be53e5dafcaf873d00641ae16a44625067320885a893f500ee16b7a940a0907",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S005/traj.dat",
+          "sha256": "0fe3533000c52bb4d35d415dcd3bcfe621025e0d07cb1c6b2e464f8793e32289",
+          "size": 114706714,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S005/energy.dat",
+          "sha256": "239966752280f34c220fb9d4fd598dc057fb2a29528a75299f48b471bf716d10",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S005/last_conf.dat",
+          "sha256": "cc00d03239b4b6cd66b8ad9485fac484b91715be2c5d775f9c173fef0cbe32da",
+          "size": 2294422,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S005/stdout.log",
+          "sha256": "3271ce3c55ecf8bc007e967653ad440e67a61d211cd451f66a315725af030403",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S005/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S005/input",
+          "sha256": "1be53e5dafcaf873d00641ae16a44625067320885a893f500ee16b7a940a0907",
+          "size": 933,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S005/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S005/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S005/run_meta.json",
+          "sha256": "ce909f21da98f1dedc2845bdc14b0b32e8167e69a2f3267d4f8970aa3cb08d48",
+          "size": 490,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S006",
+      "variant": "0b",
+      "seed": 972234272,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S006/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S006)",
+      "wrapper_pid": "831056",
+      "start_utc": "2026-09-21T21:27:35Z",
+      "end_utc": "2026-09-22T10:49:24Z",
+      "wall_time_s": 48109,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "314572e3bc15e17cc5f0d1e98ca5e34642d70ab54d6a115bf46d1c52ddf3dd84",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S006/traj.dat",
+          "sha256": "0749b291c06bef02f8d6be3200b3ff6ee4c5b7501e9b1f942f8a907793a3d8bc",
+          "size": 114703912,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S006/energy.dat",
+          "sha256": "b2fd626ea87d8a9c6f46e060e05be27e4e9617623d3df04a827b70b274217984",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S006/last_conf.dat",
+          "sha256": "c0c26bb8096e488d3edb3f53b6e668dd55bf09e6af5a8714a4b00004834ebe01",
+          "size": 2293845,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S006/stdout.log",
+          "sha256": "a01046901a378215679dc5b739c2d1d89312dde6dc0651d97b0b91655d3ca00e",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S006/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S006/input",
+          "sha256": "314572e3bc15e17cc5f0d1e98ca5e34642d70ab54d6a115bf46d1c52ddf3dd84",
+          "size": 933,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S006/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S006/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S006/run_meta.json",
+          "sha256": "3a59ac8c71500bb030d0408b389338d92b5dd58d1e7e7dbe7cf3d68120aa0d1c",
+          "size": 490,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S007",
+      "variant": "0b",
+      "seed": 1934775205,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S007/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S007)",
+      "wrapper_pid": "831455",
+      "start_utc": "2026-09-21T21:27:38Z",
+      "end_utc": "2026-09-22T10:51:10Z",
+      "wall_time_s": 48212,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "2df9f2fd82900187407eefe77784ce03fb030002e70495b8e895cd4fb0d5541b",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S007/traj.dat",
+          "sha256": "4d2ba28fc21d5af6eef25ec29d4c5210ed9035c06b65831dfccda1443bb2cb0f",
+          "size": 114711619,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S007/energy.dat",
+          "sha256": "0b7912fad020d1c83573113b07de5058af0840e1b24f3271fd75aa71be508629",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S007/last_conf.dat",
+          "sha256": "cd2a81ebaedfe15f59e3fa5b99c2c35e69b650835d9fffaaa938a22a78261c8d",
+          "size": 2294381,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S007/stdout.log",
+          "sha256": "3591d7c0f723474fc83a4c618688c6ff19fada5ecab3ff17e0fc54740f795765",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S007/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S007/input",
+          "sha256": "2df9f2fd82900187407eefe77784ce03fb030002e70495b8e895cd4fb0d5541b",
+          "size": 934,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S007/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S007/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S007/run_meta.json",
+          "sha256": "25173591585ff1ff3b1b693e022ed248d715194ee9a318706ff58505dbba6592",
+          "size": 491,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S008",
+      "variant": "0b",
+      "seed": 1747973984,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S008/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S008)",
+      "wrapper_pid": "831863",
+      "start_utc": "2026-09-21T21:27:41Z",
+      "end_utc": "2026-09-22T10:46:51Z",
+      "wall_time_s": 47950,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "5592b0ee2df4cf596d2aab271c6f0f532e4a995dfcd326026446096585dce059",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S008/traj.dat",
+          "sha256": "6cf40809e07d864a109ff40593e07c0fd7aec90fabe337906e57b70bf0278dcb",
+          "size": 114694923,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S008/energy.dat",
+          "sha256": "3ce42490225b80ff4d2ce4a6942cbc9957b21d2edaef76ffa74ab969a087d4b1",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S008/last_conf.dat",
+          "sha256": "5ccd58726f438f53e7a723dcee5393ad413f050f2f4e9e8299827d63b0000ef4",
+          "size": 2293677,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S008/stdout.log",
+          "sha256": "9903f095c10e1a13f486c856e620656c7d8875e5cb9166a7b8ca78e8cef84e86",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S008/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S008/input",
+          "sha256": "5592b0ee2df4cf596d2aab271c6f0f532e4a995dfcd326026446096585dce059",
+          "size": 934,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S008/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S008/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S008/run_meta.json",
+          "sha256": "33415158c82f5c19d3e636a3f13ccdd640fb24ba0bb314624cdd2c6f5d147ac2",
+          "size": 491,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S009",
+      "variant": "0b",
+      "seed": 880427736,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S009/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S009)",
+      "wrapper_pid": "3307143",
+      "start_utc": "2026-09-22T10:45:50Z",
+      "end_utc": "2026-09-23T00:22:43Z",
+      "wall_time_s": 49013,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "c41da37351caad22afa3180e5edffef98901cb2f6033956cec2a23e279bb8dd2",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S009/traj.dat",
+          "sha256": "0f2d4bcbf51e370b99929bbf75be7ae0e5a2181488180e9cd446e72741c22548",
+          "size": 114688236,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S009/energy.dat",
+          "sha256": "562d410a330949771146ef94fc9f3dd8fe657985ed9583472bafc5f35a7f56e8",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S009/last_conf.dat",
+          "sha256": "c0d99b3dc7c87118b75c6438f5f4d59bc2d8959fbbb5a12eb1f3b316cf4b8553",
+          "size": 2293699,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S009/stdout.log",
+          "sha256": "019805b78784f9b61e1cf47d9bc8cabf0e0296041bfc9101001eb077f453ee6b",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S009/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S009/input",
+          "sha256": "c41da37351caad22afa3180e5edffef98901cb2f6033956cec2a23e279bb8dd2",
+          "size": 933,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S009/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S009/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S009/run_meta.json",
+          "sha256": "fbaec61e62542278fd6c6b953e289ebb8f6d78ec3482f7043bed7c58285c9cfe",
+          "size": 490,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-0B-S010",
+      "variant": "0b",
+      "seed": 744386736,
+      "steps": 200000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-0B-S010/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-0B-S010)",
+      "wrapper_pid": "3317525",
+      "start_utc": "2026-09-22T10:46:56Z",
+      "end_utc": "2026-09-23T00:21:01Z",
+      "wall_time_s": 48845,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "1c1282e9f3dc87ede4260f2821f80ff948850f263e8eafa4ca4e331350d790fb",
+      "conf_sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+      "top_sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-0B-S010/traj.dat",
+          "sha256": "2bd86e71f737eba3f9773451c6c991ed331a11a9b416f84bed6d969dfce711c3",
+          "size": 114700915,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-0B-S010/energy.dat",
+          "sha256": "05d3efa7e6ff831e20e086905659ff34ed125794c8452f3adc1150cd3decf764",
+          "size": 98049,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-0B-S010/last_conf.dat",
+          "sha256": "25db52ab3a1cf8a551738f65b6f09973e106cb63e18a4ccdfe1e2f35ae88e222",
+          "size": 2294030,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-0B-S010/stdout.log",
+          "sha256": "6362bd506053b6fedb062ae1f0192523c9788d6952c334911088a073bfebb643",
+          "size": 124062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-0B-S010/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-0B-S010/input",
+          "sha256": "1c1282e9f3dc87ede4260f2821f80ff948850f263e8eafa4ca4e331350d790fb",
+          "size": 933,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-0B-S010/0b.conf",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "size": 2294162,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-0B-S010/0b.top",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "size": 120204,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-0B-S010/run_meta.json",
+          "sha256": "75a412cc5739957c9a0e43285c3b04ce48b93c9bdc7024f414c4bd211b570dda",
+          "size": 490,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S001",
+      "variant": "32b",
+      "seed": 1259289227,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S001/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S001)",
+      "wrapper_pid": "3343851",
+      "start_utc": "2026-09-22T10:49:35Z",
+      "end_utc": "2026-09-22T20:54:19Z",
+      "wall_time_s": 36284,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "ab10a4b3b765093acf0d87ba09f0383c1c479c322e64b258259a2fe8869eeab6",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S001/traj.dat",
+          "sha256": "8f6a8f1600013fa92f4b01dd21f13f5a5fa9f21ff2144e63d3107e58ea230ca2",
+          "size": 86773459,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S001/energy.dat",
+          "sha256": "074fbc60590c675a5fbf69997d22753f32adceae44567e984c8fd4e8c99f69b2",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S001/last_conf.dat",
+          "sha256": "5749a96aaabc37babf0ddadaf1d003ab7fb53ef104ae4257e19e25cf35c1f34f",
+          "size": 2345301,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S001/stdout.log",
+          "sha256": "82a7d3db0f93908fd80d13bd26cfb48a32d5024b3eca2f41779ad7460f621fac",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S001/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S001/input",
+          "sha256": "ab10a4b3b765093acf0d87ba09f0383c1c479c322e64b258259a2fe8869eeab6",
+          "size": 936,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S001/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S001/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S001/run_meta.json",
+          "sha256": "003b23f2ff0e3fb48170f265894a6d86397b4ac3e3228bcf82eb5660c19ba892",
+          "size": 493,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S002",
+      "variant": "32b",
+      "seed": 1358106528,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S002/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S002)",
+      "wrapper_pid": "3358228",
+      "start_utc": "2026-09-22T10:51:13Z",
+      "end_utc": "2026-09-22T21:02:43Z",
+      "wall_time_s": 36690,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "176e4b99ee8fee3c0242043b3347102b5898637098efcdbdbef3268e34af5c58",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S002/traj.dat",
+          "sha256": "8ae645509be24a6c4c0b5ca778311eed97a21cbafeddf36cadca27a9a8a82ad1",
+          "size": 86758115,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S002/energy.dat",
+          "sha256": "cc8355fd39efec8d8da0cde759acd21748c79b542f7ccee2c509034367c435e5",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S002/last_conf.dat",
+          "sha256": "21e7891ceb6d0e0fb8d57019db9128d12345917743c42ff77dcf66fd5f140517",
+          "size": 2344790,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S002/stdout.log",
+          "sha256": "bb954cd8e61083dec44e83875cc4afcc7d40956a4e0ae85b2c82ee5e0e612150",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S002/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S002/input",
+          "sha256": "176e4b99ee8fee3c0242043b3347102b5898637098efcdbdbef3268e34af5c58",
+          "size": 936,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S002/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S002/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S002/run_meta.json",
+          "sha256": "0fd8f313c10bc00cfb2c4750172427016f19809faed917221b015348917473ba",
+          "size": 493,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S003",
+      "variant": "32b",
+      "seed": 1524307444,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S003/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S003)",
+      "wrapper_pid": "3389822",
+      "start_utc": "2026-09-22T10:54:57Z",
+      "end_utc": "2026-09-22T21:08:23Z",
+      "wall_time_s": 36806,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "67147935b3ea96721fe1de2ca78a9f00c5739cc48f1f3891c3d5ccee72bca6c3",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S003/traj.dat",
+          "sha256": "66ba6d79bbd0ad8b84f26eefee4ddf71173baa388d18e9cd97b1ca95327af0c3",
+          "size": 86776361,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S003/energy.dat",
+          "sha256": "049d9418301f7665031188572a30e84b4eef81941694d794efba1ff0953b7062",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S003/last_conf.dat",
+          "sha256": "56dec5703e9a2bac5c12ed5eaa16a813bdcf56773cb768983866f988558edf86",
+          "size": 2345405,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S003/stdout.log",
+          "sha256": "2380267696b5b68ceab6db0d3f1c0f502e1cfb256bd83295920028b0ff843994",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S003/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S003/input",
+          "sha256": "67147935b3ea96721fe1de2ca78a9f00c5739cc48f1f3891c3d5ccee72bca6c3",
+          "size": 936,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S003/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S003/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S003/run_meta.json",
+          "sha256": "2637e436e78529c41fe8ec240376ea4dbd19184bfbfa182e266ec4f12b098222",
+          "size": 493,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S004",
+      "variant": "32b",
+      "seed": 601855227,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S004/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S004)",
+      "wrapper_pid": "3407898",
+      "start_utc": "2026-09-22T10:57:07Z",
+      "end_utc": "2026-09-22T21:13:22Z",
+      "wall_time_s": 36975,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "e0f4230ef48113fa793c3f6dfa319da378c6fa89e359193cce49e20271f3e0be",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S004/traj.dat",
+          "sha256": "d7803986c3df979d0e9cabee6dadae3a7acdbcb8908a27acf4463d6d4ff8253f",
+          "size": 86768307,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S004/energy.dat",
+          "sha256": "c0d8937f75aed2b20e7878e4de8ef14f8f7e2835acea07dac119345c3dfff996",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S004/last_conf.dat",
+          "sha256": "f19762a6fb64643daea2146bd60ecda79cbe71e0882d98a89ac6ebe93acf3666",
+          "size": 2345038,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S004/stdout.log",
+          "sha256": "30de9c4c51f3c20d10f170bc7ff5b2136c460df30da5f5b1277e00614a7b5c8f",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S004/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S004/input",
+          "sha256": "e0f4230ef48113fa793c3f6dfa319da378c6fa89e359193cce49e20271f3e0be",
+          "size": 935,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S004/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S004/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S004/run_meta.json",
+          "sha256": "562e1b837689b56dea9ed9c3a2344b9ae446fad17d82406d54d8b6c36205ded9",
+          "size": 492,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S005",
+      "variant": "32b",
+      "seed": 274288237,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S005/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S005)",
+      "wrapper_pid": "3416490",
+      "start_utc": "2026-09-22T10:58:15Z",
+      "end_utc": "2026-09-22T21:06:59Z",
+      "wall_time_s": 36524,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "050c9dcacfbe5bea709ffc9f0c705445b751bf04337d7694734bc9123921c108",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S005/traj.dat",
+          "sha256": "bd7a3f979b01bb0f36f9ac9e87774788b5fec26010d6988438f96caa622406dc",
+          "size": 86773675,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S005/energy.dat",
+          "sha256": "842ffcd431f0ab737daa2b176e3c9067a83f07b6f14b65e754cd90735fb6c1bb",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S005/last_conf.dat",
+          "sha256": "69d3bc23365d41a75f38e947f1e544f968a228e7bd55a820eca8b9f8692e0ac5",
+          "size": 2345392,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S005/stdout.log",
+          "sha256": "d1db8d8b61cb9a6948e299b85e5067c64ad490bf7545c5c3006e000c5d7c3a5d",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S005/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S005/input",
+          "sha256": "050c9dcacfbe5bea709ffc9f0c705445b751bf04337d7694734bc9123921c108",
+          "size": 935,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S005/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S005/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S005/run_meta.json",
+          "sha256": "b57813733967a061431fcc363d9242cb7f323f031c6208516c54ac207e0d8084",
+          "size": 492,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S006",
+      "variant": "32b",
+      "seed": 972234272,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S006/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S006)",
+      "wrapper_pid": "3457706",
+      "start_utc": "2026-09-22T11:03:06Z",
+      "end_utc": "2026-09-22T21:19:40Z",
+      "wall_time_s": 36994,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "0f73b8b252eb8f1a071da054c1eec7f3d583826dc21aa5f52aae9487d1237a68",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S006/traj.dat",
+          "sha256": "2676f643b4467b39a4830352d44f3c2135d3a4561f305355d707c8b0d0c86e61",
+          "size": 86762542,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S006/energy.dat",
+          "sha256": "2a5af0d17dca074abf302abf445e7f0e8ecc95cc8c8fb5fe617364999032fb19",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S006/last_conf.dat",
+          "sha256": "5d071d61ff3b3dd3cf6b7f3a469253413d6198d76d42810b3cf7c5741dec90a8",
+          "size": 2345023,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S006/stdout.log",
+          "sha256": "01a90b837194c69c5a42f5210ed6497dba7ea4fc0e7dcd91ca30529e23cc0b29",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S006/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S006/input",
+          "sha256": "0f73b8b252eb8f1a071da054c1eec7f3d583826dc21aa5f52aae9487d1237a68",
+          "size": 935,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S006/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S006/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S006/run_meta.json",
+          "sha256": "946ba349e542f13d60037badcee6b1c926b93701e7ce14fbb6fa463123af8ed3",
+          "size": 492,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S007",
+      "variant": "32b",
+      "seed": 1934775205,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S007/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S007)",
+      "wrapper_pid": "259451",
+      "start_utc": "2026-09-22T20:54:39Z",
+      "end_utc": "2026-09-23T07:05:19Z",
+      "wall_time_s": 36640,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "65cc5cf829a7a8b977e9852a6650381f5c098ae4cd53cf62af0bf23adb546788",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S007/traj.dat",
+          "sha256": "4fb5180b6511d00243edc4be08f0a63d7576d020ecc8bce8c1559457e6fe295d",
+          "size": 86770394,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S007/energy.dat",
+          "sha256": "ad5ca7266363060479cb3942e31cc984f1b165b585813e6fd93c952f1a62c716",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S007/last_conf.dat",
+          "sha256": "143c104cbcc7470a05a09dccc4871df4d615a6006406dd533df7a026ada7ed27",
+          "size": 2345430,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S007/stdout.log",
+          "sha256": "b773b7b7f7b3351511bc34db814b89ca195bb9b18bbc9899cddbe3d7c55bc7e4",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S007/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S007/input",
+          "sha256": "65cc5cf829a7a8b977e9852a6650381f5c098ae4cd53cf62af0bf23adb546788",
+          "size": 936,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S007/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S007/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S007/run_meta.json",
+          "sha256": "08e02932563fd76bc7fba2ccbf1ca1332fd29e8c5a4f33c1740606427894e8bb",
+          "size": 493,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S008",
+      "variant": "32b",
+      "seed": 1747973984,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S008/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S008)",
+      "wrapper_pid": "317717",
+      "start_utc": "2026-09-22T21:02:45Z",
+      "end_utc": "2026-09-23T07:09:48Z",
+      "wall_time_s": 36423,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "2bbca4cf51411b99b282c649feac99416c4ff956fe95d0a31114c94e7eb129d9",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S008/traj.dat",
+          "sha256": "48f624fae0ab993e2e162bd7a2edc0bf6f7f2be57694c330dcdec76ea12c4dab",
+          "size": 86773841,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S008/energy.dat",
+          "sha256": "06b255ea0fac702f65ebf42eb10088b3014cb820e8ddbee36b55f2aeee784d00",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S008/last_conf.dat",
+          "sha256": "0fbb9a15162bfa0880d495a6c4a80fb9581423601bd314ebdf64ba0e174b8055",
+          "size": 2345358,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S008/stdout.log",
+          "sha256": "f0c164923f7dc76ee169be546ec512f4742d013748c4620db46ff265d6a8864d",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S008/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S008/input",
+          "sha256": "2bbca4cf51411b99b282c649feac99416c4ff956fe95d0a31114c94e7eb129d9",
+          "size": 936,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S008/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S008/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S008/run_meta.json",
+          "sha256": "3e1b15e9cd50e42513b22b5c5d854fa5b0829030c862377de26d5d994a17b2d5",
+          "size": 493,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S009",
+      "variant": "32b",
+      "seed": 880427736,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S009/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S009)",
+      "wrapper_pid": "349089",
+      "start_utc": "2026-09-22T21:07:08Z",
+      "end_utc": "2026-09-23T07:12:45Z",
+      "wall_time_s": 36337,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "a5c982e6f982fafe6d4cced0b91109c97d399ccb2bfd075688bf55c71b2d8ab5",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S009/traj.dat",
+          "sha256": "bda1228feb3cf3b5bc5761294018d8e7e25afab52b93ba6f30d4299492563c9b",
+          "size": 86771567,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S009/energy.dat",
+          "sha256": "f521e92252f61d5aaa4c96bbd17d96e7c01dcc35166d2797fec2b99b443e8e2d",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S009/last_conf.dat",
+          "sha256": "143e34c2b7fa0f650babf2675bd9a19454fb36dfde9dd91337251f5f45eecb53",
+          "size": 2344909,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S009/stdout.log",
+          "sha256": "aea32cfa77585f350a3d940679f7d37c129db66bdd09ab733f5c91a2b71c787a",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S009/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S009/input",
+          "sha256": "a5c982e6f982fafe6d4cced0b91109c97d399ccb2bfd075688bf55c71b2d8ab5",
+          "size": 935,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S009/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S009/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S009/run_meta.json",
+          "sha256": "7624981b539555721d38a4e60ddf3c898955ee4c3dbf853482a5984bc081ec99",
+          "size": 492,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    },
+    {
+      "run_id": "PLATSENS-P2-32B-S010",
+      "variant": "32b",
+      "seed": 744386736,
+      "steps": 150000,
+      "attempt": 1,
+      "command": "bash /home/rdpuser/nl5-002-e-p2/workspace/runs/PLATSENS-P2-32B-S010/wrapper.sh  # wrapper executes: /home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA input (cwd = runs/PLATSENS-P2-32B-S010)",
+      "wrapper_pid": "361407",
+      "start_utc": "2026-09-22T21:08:49Z",
+      "end_utc": "2026-09-23T07:15:25Z",
+      "wall_time_s": 36396,
+      "exit_code": 0,
+      "engine_binary": "/home/rdpuser/nl5-002-e-p2/workspace/engine/build/bin/oxDNA",
+      "input_sha256": "7a65054c19e71e439c4940135d7f5213a5e6ae7f184392cdb093f45fdcb7a1f3",
+      "conf_sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+      "top_sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+      "artifacts": {
+        "traj_dat": {
+          "path": "runs/PLATSENS-P2-32B-S010/traj.dat",
+          "sha256": "dea892576b9032df44c8832a966ccf7106cd21dc0e06dc8a765a8866c48afe50",
+          "size": 86763901,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica trajectory"
+        },
+        "energy": {
+          "path": "runs/PLATSENS-P2-32B-S010/energy.dat",
+          "sha256": "52aba1d32fbd042e4fa46fb752dc1e66b8d6e43f82b0d3e7296dc5cb5095a55d",
+          "size": 73549,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica energy file"
+        },
+        "last_conf": {
+          "path": "runs/PLATSENS-P2-32B-S010/last_conf.dat",
+          "sha256": "f67e4d9b98bc3f4b1eee7ac4120a79c51dd9399e7e950c75eb002edd46fce365",
+          "size": 2344883,
+          "producer": "oxDNA (pinned 00dc7fb9, P2 build) replica final configuration"
+        },
+        "stdout": {
+          "path": "runs/PLATSENS-P2-32B-S010/stdout.log",
+          "sha256": "9d8dd96f56c06e934dec141d04213653bc74dd769f64bf28467ae90504c9ebd8",
+          "size": 93062,
+          "producer": "oxDNA replica run stdout"
+        },
+        "stderr": {
+          "path": "runs/PLATSENS-P2-32B-S010/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0,
+          "producer": "oxDNA replica run stderr"
+        },
+        "input": {
+          "path": "runs/PLATSENS-P2-32B-S010/input",
+          "sha256": "7a65054c19e71e439c4940135d7f5213a5e6ae7f184392cdb093f45fdcb7a1f3",
+          "size": 935,
+          "producer": "executor (overlay input; upstream pro_CPU.in verbatim + pinned overlay fields)"
+        },
+        "conf": {
+          "path": "runs/PLATSENS-P2-32B-S010/32b.conf",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "size": 2345114,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "top": {
+          "path": "runs/PLATSENS-P2-32B-S010/32b.top",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "size": 123024,
+          "producer": "upstream verbatim copy (digest-gated)"
+        },
+        "run_meta": {
+          "path": "runs/PLATSENS-P2-32B-S010/run_meta.json",
+          "sha256": "19fca3a5d0b41840f598a0ca28f5d051309e5a02e06bfd81ce830e05a3b06fb0",
+          "size": 492,
+          "producer": "executor (run infrastructure)"
+        }
+      }
+    }
+  ],
+  "superseded_attempts": [],
+  "raw_trajectories_note": "raw trajectories remain on outenemy local FS outside Git"
+}

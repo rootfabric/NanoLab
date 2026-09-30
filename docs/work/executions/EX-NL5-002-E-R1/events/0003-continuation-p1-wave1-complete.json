@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-continuation-p1-wave1-complete",
+  "timestamp_utc": "2026-09-20T19:14:30Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "1376575f44653702c777feb62f1caa488831b4c2",
+  "summary": "CONTINUATION (technical; no scientific values read, P1-only boundary maintained): primary wave 1 COMPLETE - PLATSENS-P1-0B-S001..S008 all 8/8 exit=0, single-thread oxDNA, launched 2026-09-20T14:32:24Z by detached scheduler (concurrency 8), ended 18:54:05Z..18:59:00Z, wall 15701-16000 s per replica (tight cluster, uniform host behaviour), trajectories ~114.7 MB each (50 frames, first frame t=4000 - same convention as B-R2 0b runs), stderr/stdout captured per run. Wave 2 in progress since 18:54:18Z (scheduler auto-launch): PLATSENS-P1-0B-S009, PLATSENS-P1-0B-S010, PLATSENS-P1-32B-S001..S006 running; queue remaining PLATSENS-P1-32B-S007..S010; projected full-set completion ~01:30 UTC. Pipeline self-test on completed run S004 verified the packaged analyzer end-to-end (exit 0, 50/50 frames in window valid, JSON keys complete) WITHOUT reading scientific values; two bookkeeping facts recorded: (1) packaged parse_energy leaves energy={rows:0} for this protocol's 4-column hinge_energy.dat - identical to accepted B-R2 committed analysis JSONs (EXTERNAL-0b-1_analysis.json), so per-replica energy drift is recorded as mechanical bookkeeping in the run manifest, not as an analyzer change; (2) analyzer expects exit-code file format 'EXIT_CODE: <n>' (B-R2 precedent); raw artifacts keep bare integers and a formatted copy is passed to the analyzer at analysis time. No protocol pins changed. Raw trajectories remain in WSL Linux FS outside Git.",
+  "command_refs": [
+    "bash ~/nanolab-platform-sensitivity-r1/P1/logs/status.sh (technical monitoring)",
+    "python3 package/convention/analyze_hinge.py run ... --run-id PIPELINE-SELFTEST-S004 (structural self-test only; output deleted, values not read)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-E-R1/passport.json",
+    "docs/work/executions/EX-NL5-002-E-R1/events/0002-continuation-p1-campaign-launched.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: on ALL_PROTOCOL_RUNS_FINISHED collect run metadata + artifact digests, run packaged per-replica analysis, commit P1-complete evidence; handle any technical failure under a new -R1 ID with the same frozen seed.",
+  "blocker": null
+}

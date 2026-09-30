@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-002-E-R1",
+  "leg": "P2",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "checkpoint": "NL5 / NL5-002-E platform sensitivity (P2 leg of paired P1/P2 campaign)",
+  "design_source": "SAME frozen execution passport design as P1 (docs/work/executions/EX-NL5-002-E-R1/passport.json @ db40c0b041a39297f9bd55723936d6eb25fa0ede); no new scientific protocol; only leg-specific environment/paths differ",
+  "base_branch": "work/nl5-002-e-platform-sensitivity-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C1_COMPUTATIONAL_REPRODUCTION",
+  "allowed_paths": [
+    "docs/work/executions/EX-NL5-002-E-R1/**",
+    "docs/evidence/NL5-002-E/**"
+  ],
+  "p2_workspace": {
+    "root": "/home/rdpuser/nl5-002-e-p2/workspace",
+    "host": "outenemy",
+    "kind": "separate P2 executor workspace (same passport design); precedent layout: EX-NL5-002-B-R2 staging",
+    "raw_trajectories": "kept on outenemy local FS under runs/ (NOT in Git)",
+    "dispatch_gate": "P2 physics may only start AFTER the durable P1 evidence commit (P1 20/20 + packaged analysis + digest manifest) exists on origin branch work/nl5-002-e-platform-sensitivity-r1"
+  },
+  "pins": {
+    "package": "nanolab-components 0.1.1",
+    "package_source": "extracted from canonical git objects origin/main:releases/nanolab-components-v0.1.1 (Linux-side extraction, no autocrlf); RELEASE_MANIFEST.json sha256 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef EXACT MATCH; 36 real files; verify signature identical to P1 (7 documented FR-3 __pycache__ pyc entries, all real files PASS)",
+    "convention": "convention/analyze_hinge.py + convention/nlbl_convention/ (packaged; same as P1; no substitute analyzer)",
+    "engine": "oxDNA (lorenzo-rovigatti/oxDNA)",
+    "engine_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "engine_build": "FRESH build on outenemy from pristine tarball (sha256 40a6dd36...baa04 GATE PASS); cmake -DCUDA=OFF -DMPI=OFF -DDOUBLE=ON; effective NATIVE_COMPILATION=ON/JSON_ENABLED=ON (defaults, same as B-R2 on this platform); MAKE_EXIT=0, 0 errors; NO source edits; binary size 3380728 B byte-identical to B-R2 build size (fresh-build sha256 difference anticipated, same convention as P1)",
+    "upstream_inputs": "gauravarya77/DNA-hinge-simulations @ 23fd1ff7731e9017bd776f49206dc42d70d9fe91; direct codeload tarball (sha256 9b96c22e... GATE PASS, same value as B-R2); per-file size+blob_sha1+sha256 gates 5/5 PASS (logs/upstream_digest_gate_p2.json, expected values = P1-recorded card digest gates); durable_cache FORBIDDEN; working copies deleted after campaign evidence/digests",
+    "replica_input_rule": "upstream files verbatim (digest-gated copies); ONLY overlay = seed, steps, input/output paths, print_energy_every=100; print_conf_interval=4e3 verbatim; run command: <workspace>/engine/build/bin/oxDNA input executed in the run directory; launcher byte-adapted from accepted B-R2 launch_run.sh",
+    "upstream_rights": "REFERENCE_ONLY, download-on-run, durable_cache FORBIDDEN"
+  },
+  "design": {
+    "N_PRIMARY": 10,
+    "P3": "NOT_INCLUDED",
+    "primary_variants": [
+      "0b",
+      "32b"
+    ],
+    "controls_11b_53b": "NOT_RUN_IN_PRIMARY_CAMPAIGN",
+    "variant_74b": "FORBIDDEN",
+    "steps": {
+      "0b": 200000,
+      "32b": 150000
+    },
+    "seeds_frozen": {
+      "S001": 1259289227,
+      "S002": 1358106528,
+      "S003": 1524307444,
+      "S004": 601855227,
+      "S005": 274288237,
+      "S006": 972234272,
+      "S007": 1934775205,
+      "S008": 1747973984,
+      "S009": 880427736,
+      "S010": 744386736
+    },
+    "seed_rule": "identical frozen seed list on P1 and P2 (paired design); technical rerun takes a NEW ID with suffix -R1 (e.g. PLATSENS-P2-32B-S004-R1) and the SAME frozen seed; IDs never reused",
+    "run_id_convention_p2": "PLATSENS-P2-0B-S001..S010, PLATSENS-P2-32B-S001..S010 (20 primary P2 runs)",
+    "runs_expected_p2": 20
+  },
+  "statistics_frozen_pre_data": "identical to P1 passport statistics_frozen_pre_data block verbatim (raw MAD no 1.4826; shift_v = median_i(d_i) with d_i = median(P2,seed_i) - median(P1,seed_i); bootstrap random.Random(902107), 10000 resamples, paired indices with replacement, percentile CI95 with linear interpolation; within_v = median(MAD(P1),MAD(P2)); ratio degenerate rule for within_v=0; verdict rule SENSITIVE/INSENSITIVE/INCONCLUSIVE; WO-level aggregation). PAIRED STATISTICS ARE FORBIDDEN UNTIL BOTH P1 AND P2 DATA FOR THE SAME SEEDS EXIST (paired completeness gate: 10 complete pairs per variant).",
+  "platforms": {
+    "P2_environment_gate": {
+      "evidence": "workspace env/environment_fingerprint_p2.txt (fresh, pre-physics)",
+      "distro": "Ubuntu 22.04.5 LTS",
+      "gcc": "11.4.0",
+      "cpu": "Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz (2 sockets, 64 logical)",
+      "host": "outenemy",
+      "kernel": "5.15.0-190-generic",
+      "python": "3.10.12",
+      "cmake": "3.22.1",
+      "make": "GNU Make 4.3",
+      "gate_result": "PASS (material match: Ubuntu 22.04.x, gcc 11.4.x, Xeon E5-2698 v3, host=outenemy; same physical platform as accepted B-R2)"
+    },
+    "P1_reference_platform": "author WSL2 machine (frozen in P1 passport platforms.P1_actual_fingerprint)"
+  },
+  "execution_environment": {
+    "p2_max_concurrency": 8,
+    "concurrency_rule": "max 8 single-threaded oxDNA processes simultaneously; never 20 at once; concurrency is NOT changed based on scientific data",
+    "detached_processes": "setsid+nohup detached wrappers (B-R2 convention); per run: command, wrapper PID, start/end UTC, stdout/stderr, exit_code files, wall time; scheduler survives agent session closure",
+    "monitoring_boundary": "process/CPU/memory/step-progress/stderr/exit-code/wall/queue state only; NO angle/shift/verdict decisions until the frozen 20-run set completes; per-replica medians are recorded by the packaged analyzer only at analysis time",
+    "per_replica_hard_kill": "24h -> FAILED_TECHNICAL (new -R1 ID, same seed)",
+    "budget": "20 primary runs; campaign wall <= 72h (frozen WO platform budget); no paid compute; no GPU"
+  },
+  "prepared_at_utc": "2026-09-21T12:35:00Z",
+  "status": "DISPATCHED",
+  "notes": "P2 leg prepared on outenemy (the frozen P2 platform) while the P1 leg runs detached on the author machine. Technical smoke PLATSENS-P2-SMOKE-001 (400 steps, throwaway seed, not a protocol run) exit 0, stderr empty, overlay verified, raw dir deleted. frame0 oracle EXACT x2 (66.886745865 / 77.477102136, status OK) matching P1 oracle values. P1-only scientific boundary and paired completeness gate remain binding; per-seed P2 medians are recorded only by the packaged analyzer after dispatch, and no paired/shift/verdict computation happens until P1 evidence (20/20) exists on origin.",
+  "dispatched_at_utc": "2026-09-21T19:26:00Z",
+  "dispatch_gate_resolution": "Director authorized early P2 dispatch at 2026-09-21T19:25Z after the P1 hard-kill deadline (18:54Z) passed without an evidence push; paired statistics remain gated on P1 evidence existence."
+}

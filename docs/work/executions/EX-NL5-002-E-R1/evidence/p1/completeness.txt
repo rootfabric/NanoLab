@@ -1,0 +1,23 @@
+P1 packaged analysis completeness (nanolab-components 0.1.1, convention/analyze_hinge.py)
+final successful runs analyzed: 20/20
+
+PLATSENS-P1-0B-S001 engine_exit_code=0 median=67.070882863 frames_valid=50/50
+PLATSENS-P1-0B-S002 engine_exit_code=0 median=65.413594877 frames_valid=50/50
+PLATSENS-P1-0B-S003 engine_exit_code=0 median=68.744738874 frames_valid=50/50
+PLATSENS-P1-0B-S004 engine_exit_code=0 median=66.24673885 frames_valid=50/50
+PLATSENS-P1-0B-S005 engine_exit_code=0 median=63.825786126 frames_valid=50/50
+PLATSENS-P1-0B-S006 engine_exit_code=0 median=67.141783719 frames_valid=50/50
+PLATSENS-P1-0B-S007 engine_exit_code=0 median=66.922485192 frames_valid=50/50
+PLATSENS-P1-0B-S008 engine_exit_code=0 median=67.61580222 frames_valid=50/50
+PLATSENS-P1-0B-S009-R21 engine_exit_code=0 median=64.939909073 frames_valid=50/50
+PLATSENS-P1-0B-S010-R14 engine_exit_code=0 median=63.799736969 frames_valid=50/50
+PLATSENS-P1-32B-S001-R14 engine_exit_code=0 median=74.892180555 frames_valid=37/37
+PLATSENS-P1-32B-S002-R13 engine_exit_code=0 median=75.624640833 frames_valid=37/37
+PLATSENS-P1-32B-S003-R13 engine_exit_code=0 median=78.504573777 frames_valid=37/37
+PLATSENS-P1-32B-S004-R13 engine_exit_code=0 median=74.818110405 frames_valid=37/37
+PLATSENS-P1-32B-S005-R13 engine_exit_code=0 median=79.110521774 frames_valid=37/37
+PLATSENS-P1-32B-S006-R13 engine_exit_code=0 median=78.263485501 frames_valid=37/37
+PLATSENS-P1-32B-S007 engine_exit_code=0 median=74.398740326 frames_valid=37/37
+PLATSENS-P1-32B-S008 engine_exit_code=0 median=75.859814341 frames_valid=37/37
+PLATSENS-P1-32B-S009 engine_exit_code=0 median=76.227108343 frames_valid=37/37
+PLATSENS-P1-32B-S010 engine_exit_code=0 median=77.417657026 frames_valid=37/37

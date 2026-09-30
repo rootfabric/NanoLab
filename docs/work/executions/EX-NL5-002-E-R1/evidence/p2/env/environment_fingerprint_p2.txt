@@ -1,0 +1,54 @@
+# EX-NL5-002-E-R1 P2 environment gate (fresh fingerprint, taken BEFORE any P2 physics run)
+
+Recorded: 2026-09-21T12:16:06Z by SCIENTIFIC_OPERATOR (P2 leg, host outenemy).
+Frozen P2 (PREREGISTRATION_FREEZE_R1 + passport platforms.P2_frozen_fingerprint): Ubuntu 22.04.5, gcc 11.4.0, Intel Xeon E5-2698 v3, host = outenemy.
+Gate rule: material match on distro major, gcc major.minor, CPU model, host.
+
+## Live fingerprint
+
+```
+=== date ===
+2026-09-21T12:16:24Z
+=== hostname ===
+outenemy
+=== uname -a ===
+Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+=== os-release ===
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+VERSION_ID="22.04"
+=== cpu model ===
+Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz
+64
+=== mem ===
+Mem:           125Gi        72Gi       4.4Gi       746Mi        48Gi        51Gi
+=== disk /home ===
+/dev/nvme0n1p2  458G  391G   44G  90% /home
+=== gcc ===
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+=== g++ ===
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+=== make ===
+GNU Make 4.3
+=== cmake ===
+cmake version 3.22.1
+=== python3 ===
+Python 3.10.12
+=== git ===
+git version 2.34.1
+```
+
+## Gate evaluation
+
+```
+distro   : Ubuntu 22.04.5 LTS (VERSION_ID=22.04)   -> frozen Ubuntu 22.04.x  : MATCH
+gcc      : 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04.3) -> frozen gcc 11.4.x      : MATCH
+cpu      : Intel(R) Xeon(R) CPU E5-2698 v3         -> frozen Xeon E5-2698 v3 : MATCH
+host     : outenemy                                -> frozen host outenemy   : MATCH
+```
+
+P2_ENVIRONMENT_GATE = PASS (material match on all four frozen components; same
+physical platform as B-R2, see docs/work/executions/EX-NL5-002-B-R2 evidence
+env/environment_fingerprint.txt).
+
+Note: exact values for mem/disk recorded at gate time; they are host-load facts,
+not frozen pins. Engine build and upstream gates are separate evidence files.

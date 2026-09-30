@@ -1,0 +1,7 @@
+# PLATSENS-P2-ANALYZE-SMOKE (technical analyzer validation, 4000 steps, throwaway seed 424243, NOT a protocol run; ID not reused)
+launched: 2026-09-21T12:41:40Z  ended: 2026-09-21T12:56:38Z  exit=0
+stderr_bytes=0  traj frames=1 (t=4000, print_conf_interval=4e3 verbatim convention)
+analyzer validation: exit 0, stderr empty, report keys complete and STRUCTURALLY IDENTICAL to accepted B-R2 committed analyses (seed:null and energy.rows:0 same as EXTERNAL-0b-1_analysis.json on origin/main)
+frames_total=1 frames_in_window=1 frames_valid_in_window=1 engine_exit_code=0 replica_median_deg present(float)
+no scientific value from this throwaway run was recorded or used for any decision
+raw run dir + analysis smoke files deleted after this evidence

@@ -1,0 +1,68 @@
+# EX-NL5-002-E-R1 P1 environment fingerprint (recorded BEFORE first physics run)
+
+Recorded: 2026-09-20T14:05-14:32Z by SCIENTIFIC_OPERATOR (Windows side: Get-CimInstance / wsl --status / wsl -l -v; WSL side: direct commands below).
+Compared against: docs/research/ENGINE_ENVIRONMENT_R1.md (section 2) + docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md (platform definitions). RESULT: MATCH (all frozen components).
+
+## Windows host
+
+```
+Manufacturer           : INTEL
+Model                  : Raptor Lake PCH B760M-ATX ERYING
+TotalPhysicalMemory    : 34111528960 (~31.8 GiB)
+CPU                    : 13th Gen Intel(R) Core(TM) i9-13900H
+NumberOfCores          : 14
+NumberOfLogicalProcessors: 20
+WSL default version    : 2
+WSL distros            : Ubuntu (version 2), docker-desktop (version 2)
+P1 distro used         : Ubuntu (pre-existing author distro; no new distro, no upgrades)
+```
+
+## WSL 'Ubuntu' fingerprint (live commands)
+
+```
+$ hostname
+DESKTOP-QNAGSTI
+$ uname -a / uname -r
+Linux DESKTOP-QNAGSTI 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 GNU/Linux
+6.18.33.2-microsoft-standard-WSL2
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
+VERSION_ID="24.04"
+VERSION="24.04.2 LTS (Noble Numbat)"
+$ gcc --version ; g++ --version
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+$ make --version
+GNU Make 4.3
+$ cmake --version (user-local, PATH of the campaign)
+cmake version 3.31.6   (/home/yurig/verify-nl2-002/tools/bin/cmake; user-local tarball, no sudo - ENGINE_ENVIRONMENT_R1 convention)
+$ python3 --version
+Python 3.12.3
+$ lscpu (excerpt)
+Model name: 13th Gen Intel(R) Core(TM) i9-13900H
+CPU(s): 20 ; Thread(s) per core: 2 ; Core(s) per socket: 10
+$ free -h
+Mem: 15Gi total (WSL allocation)
+$ grep -i microsoft /proc/version
+Linux version 6.18.33.2-microsoft-standard-WSL2 ... (gcc (GCC) 13.2.0, GNU ld 2.41)
+$ test -e /proc/sys/fs/binfmt_misc/WSLInterop
+WSLInterop_PRESENT
+$ whoami
+yurig (same author WSL user/environment as prior P1 campaigns; ~/nl1-001 original campaign artifacts present)
+```
+
+## Comparison table
+
+| Component | Frozen pin (ENGINE_ENVIRONMENT_R1 / FREEZE_R1) | Actual (this record) | Verdict |
+|---|---|---|---|
+| Distro | WSL2 Ubuntu 24.04.2 LTS | Ubuntu 24.04.2 LTS | MATCH (exact) |
+| Kernel | microsoft-standard-WSL2 (6.18.33.2) | 6.18.33.2-microsoft-standard-WSL2 | MATCH (exact) |
+| CPU | i9-13900H, 20 logical | i9-13900H, 20 logical | MATCH |
+| gcc/g++ | 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1) | identical package string | MATCH |
+| cmake | 3.31.6 user-local, no sudo | 3.31.6 user-local | MATCH |
+| make | GNU Make 4.3 | GNU Make 4.3 | MATCH |
+| python | 3.12.3 | 3.12.3 | MATCH |
+| WSL RAM | 15 GiB | 15Gi | MATCH |
+| WSL2 / interop | WSL2 | WSL2, WSLInterop_PRESENT | MATCH |
+
+Gate: CURRENT_HOST_IS_P1 = true; P1_ACCESSIBLE = true; P1_ENVIRONMENT_MATCH = true.

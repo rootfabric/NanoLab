@@ -1,0 +1,40 @@
+{
+  "kind": "platform_sensitivity_seeds_runmap_v1",
+  "execution_id": "EX-NL5-002-E-R1",
+  "leg": "P1",
+  "rule": "seeds frozen in WO-NL5-002-E-R1 before any data; identical list to be used by P2; run IDs unique; technical rerun takes NEW ID with -R1 suffix and the SAME frozen seed; failed IDs never reused",
+  "frozen_at_utc": "2026-09-20 (WO freeze 4d6542fda81084dced2578f3e008c8c8e0705a5a)",
+  "steps": { "0b": 200000, "32b": 150000 },
+  "run_map": {
+    "0b": {
+      "PLATSENS-P1-0B-S001": 1259289227,
+      "PLATSENS-P1-0B-S002": 1358106528,
+      "PLATSENS-P1-0B-S003": 1524307444,
+      "PLATSENS-P1-0B-S004": 601855227,
+      "PLATSENS-P1-0B-S005": 274288237,
+      "PLATSENS-P1-0B-S006": 972234272,
+      "PLATSENS-P1-0B-S007": 1934775205,
+      "PLATSENS-P1-0B-S008": 1747973984,
+      "PLATSENS-P1-0B-S009": 880427736,
+      "PLATSENS-P1-0B-S010": 744386736
+    },
+    "32b": {
+      "PLATSENS-P1-32B-S001": 1259289227,
+      "PLATSENS-P1-32B-S002": 1358106528,
+      "PLATSENS-P1-32B-S003": 1524307444,
+      "PLATSENS-P1-32B-S004": 601855227,
+      "PLATSENS-P1-32B-S005": 274288237,
+      "PLATSENS-P1-32B-S006": 972234272,
+      "PLATSENS-P1-32B-S007": 1934775205,
+      "PLATSENS-P1-32B-S008": 1747973984,
+      "PLATSENS-P1-32B-S009": 880427736,
+      "PLATSENS-P1-32B-S010": 744386736
+    }
+  },
+  "technical_smoke": {
+    "run_id": "PLATSENS-P1-SMOKE-001",
+    "note": "400-step technical go/no-go on 0b inputs, seed 7777 (upstream default), NOT a protocol run, never used as data; exit 0, print_energy_every=100 verified, stderr empty"
+  },
+  "controls_11b_53b": "NOT_RUN_IN_PRIMARY_CAMPAIGN",
+  "variant_74b": "FORBIDDEN"
+}

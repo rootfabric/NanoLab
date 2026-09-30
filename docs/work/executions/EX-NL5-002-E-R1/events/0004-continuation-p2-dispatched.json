@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-p2-dispatched",
+  "timestamp_utc": "2026-09-21T21:30:00Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "db40c0b041a39297f9bd55723936d6eb25fa0ede",
+  "summary": "CONTINUATION (technical dispatch record; no scientific values read): P2 leg DISPATCHED on outenemy (the frozen P2 platform) by explicit director decision at 2026-09-21T21:25Z, opening the dispatch gate EARLY after the P1 24h per-replica hard-kill deadline (18:54Z) passed with no P1 evidence push (origin tip unchanged db40c0b since 2026-09-20T19:14:30Z; P1 operator session on the author machine DESKTOP-QNAGSTI unresponsive ~24h; P1 recovery remains a human-side dependency and the origin watcher continues). Pre-data preparation completed and validated before dispatch: environment gate PASS (Ubuntu 22.04.5, gcc 11.4.0, Xeon E5-2698 v3, host outenemy - material match to frozen P2); package nanolab-components 0.1.1 extracted from canonical git objects, RELEASE_MANIFEST.json sha256 88c1f580... EXACT MATCH, verify signature identical to P1 (7 documented FR-3 pyc entries only); engine oxDNA 00dc7fb9 fresh pristine build (tarball sha256 gate PASS, MAKE_EXIT=0, binary size 3380728 B = B-R2 build size); upstream digest gates 5/5 PASS (size+blob_sha1+sha256 vs P1-recorded card gates); frame0 oracle EXACT x2 (66.886745865 / 77.477102136, status OK); technical smoke PLATSENS-P2-SMOKE-001 (400 steps, throwaway seed) exit 0 stderr empty; analyzer pipeline validated on a real 4000-step trajectory (report structurally identical to accepted B-R2 committed analyses incl. seed:null and energy.rows:0 precedents); scheduler concurrency logic functionally tested. Dispatch at 21:27:22Z: detached setsid scheduler (PID 829615), P2_MAX_CONCURRENCY=8, queue 20 primary runs PLATSENS-P2-0B-S001..S010 (200000 steps) + PLATSENS-P2-32B-S001..S010 (150000 steps), frozen seeds S001-S010 identical to P1 (paired design); wave 1 = 0B S001..S008 all RUNNING (8 single-thread oxDNA processes); detached wait_and_analyze watcher (PID 840415) will trigger packaged analysis on 20/20 exit codes. PAIRED STATISTICS REMAIN FORBIDDEN until P1 evidence exists; per-replica medians are recorded by the packaged analyzer only as execution outputs. Raw trajectories remain on outenemy local FS outside Git.",
+  "command_refs": [
+    "setsid nohup bash /home/rdpuser/nl5-002-e-p2/workspace/scheduler.sh (conc 8, detached)",
+    "setsid nohup bash /home/rdpuser/nl5-002-e-p2/workspace/wait_and_analyze.sh (detached)",
+    "bash /home/rdpuser/nl5-002-e-p2/workspace/status.sh (technical monitoring only)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/passport_p2.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/DISPATCH_GATE.md",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/env/environment_fingerprint_p2.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/upstream_digest_gate_p2.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/frame0_0b.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/frame0_32b.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/package_verification.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/smoke_001.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/analyze_smoke_001.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/logs/build_provenance.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/seeds_runmap_p2.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: monitor P2 technically (status.sh) until 20/20 exit codes; wait_and_analyze runs packaged analysis; then build run_output_digests_p2.json and commit P2-complete evidence. P1 recovery on DESKTOP-QNAGSTI remains REQUIRED for paired statistics - no shift/CI/ratio/verdict until P1 evidence exists.",
+  "blocker": null
+}

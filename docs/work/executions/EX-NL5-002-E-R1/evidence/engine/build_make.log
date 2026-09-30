@@ -1,0 +1,222 @@
+[  0%] Building C object src/CMakeFiles/tinyexpr.dir/extern/tinyexpr/tinyexpr.c.o
+[  0%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/RNANucleotide.cpp.o
+[  1%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/TEPParticle.cpp.o
+[  1%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/BaseParticle.cpp.o
+[  3%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/DNANucleotide.cpp.o
+[  3%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/PatchyParticle.cpp.o
+[  3%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/SpheroCylinder.cpp.o
+[  3%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/ANMParticle.cpp.o
+[  5%] Building CXX object src/CMakeFiles/oxdna_common.dir/Particles/Molecule.cpp.o
+[  5%] Building CXX object src/CMakeFiles/oxdna_common.dir/Managers/SimManager.cpp.o
+[  5%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/OrderParameters.cpp.o
+[  7%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/Weights.cpp.o
+[  7%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/LR_vector.cpp.o
+[  7%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/Histogram.cpp.o
+[  7%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/Utils.cpp.o
+[  8%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/LR_matrix.cpp.o
+[  8%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/oxDNAException.cpp.o
+[  8%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/parse_input/parse_input.cpp.o
+[ 10%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/Logger.cpp.o
+[ 10%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/time_scales/time_scales.cpp.o
+[ 12%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/SignalManager.cpp.o
+[ 12%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/ConfigInfo.cpp.o
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c: In function ‘base’:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:328:16: warning: array subscript ‘te_expr[0]’ is partly outside array bounds of ‘unsigned char[16]’ [-Warray-bounds=]
+  328 |             ret->bound = s->bound;
+      |                ^~
+In function ‘new_expr’,
+    inlined from ‘base’ at /home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:325:19:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:91:20: note: object of size 16 allocated by ‘malloc’
+   91 |     te_expr *ret = malloc(size);
+      |                    ^~~~~~~~~~~~
+In function ‘new_expr’,
+    inlined from ‘base’ at /home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:317:19:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:98:15: warning: array subscript ‘te_expr[0]’ is partly outside array bounds of ‘unsigned char[16]’ [-Warray-bounds=]
+   98 |     ret->type = type;
+      |     ~~~~~~~~~~^~~~~~
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:91:20: note: object of size 16 allocated by ‘malloc’
+   91 |     te_expr *ret = malloc(size);
+      |                    ^~~~~~~~~~~~
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c: In function ‘base’:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:320:16: warning: array subscript ‘te_expr[0]’ is partly outside array bounds of ‘unsigned char[16]’ [-Warray-bounds=]
+  320 |             ret->value = s->value;
+      |                ^~
+In function ‘new_expr’,
+    inlined from ‘base’ at /home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:317:19:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:91:20: note: object of size 16 allocated by ‘malloc’
+   91 |     te_expr *ret = malloc(size);
+      |                    ^~~~~~~~~~~~
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c: In function ‘base’:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:414:16: warning: array subscript ‘te_expr[0]’ is partly outside array bounds of ‘unsigned char[16]’ [-Warray-bounds=]
+  414 |             ret->value = NAN;
+      |                ^~
+In function ‘new_expr’,
+    inlined from ‘base’ at /home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:410:19:
+/home/yurig/nanolab-platform-sensitivity-r1/P1/engine/oxdna-src/src/extern/tinyexpr/tinyexpr.c:91:20: note: object of size 16 allocated by ‘malloc’
+   91 |     te_expr *ret = malloc(size);
+      |                    ^~~~~~~~~~~~
+[ 14%] Linking C static library libtinyexpr.a
+[ 14%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/FlattenedConfigInfo.cpp.o
+[ 14%] Built target tinyexpr
+[ 15%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/TopologyParser.cpp.o
+[ 15%] Building CXX object src/CMakeFiles/oxdna_common.dir/PluginManagement/PluginManager.cpp.o
+[ 15%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/ForceFactory.cpp.o
+[ 15%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/BaseForce.cpp.o
+[ 17%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/COMForce.cpp.o
+[ 17%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/ConstantRateForce.cpp.o
+[ 17%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/SawtoothForce.cpp.o
+[ 19%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/ConstantRateTorque.cpp.o
+[ 19%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/ConstantTrap.cpp.o
+[ 19%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/MovingTrap.cpp.o
+[ 21%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/LowdimMovingTrap.cpp.o
+[ 21%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/MutualTrap.cpp.o
+[ 21%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsiveEllipsoid.cpp.o
+[ 22%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsionPlane.cpp.o
+[ 22%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsionPlaneMoving.cpp.o
+[ 22%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsiveSphere.cpp.o
+[ 24%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsiveSphereSmooth.cpp.o
+[ 24%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/LJWall.cpp.o
+[ 24%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/HardWall.cpp.o
+[ 24%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/AlignmentField.cpp.o
+[ 26%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/GenericCentralForce.cpp.o
+[ 26%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/LJCone.cpp.o
+[ 26%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/YukawaSphere.cpp.o
+[ 28%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/LTCoordination.cpp.o
+[ 28%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/LTCOMTrap.cpp.o
+[ 28%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/LTCOMAngleTrap.cpp.o
+[ 29%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/LT2DCOMTrap.cpp.o
+[ 29%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/LTAtanCOMTrap.cpp.o
+[ 29%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/Metadynamics/meta_utils.cpp.o
+[ 31%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/AttractionPlane.cpp.o
+[ 31%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsiveKeplerPoinsot.cpp.o
+[ 31%] Building CXX object src/CMakeFiles/oxdna_common.dir/Forces/RepulsiveSphereMoving.cpp.o
+[ 33%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/BaseObservable.cpp.o
+[ 33%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ObservableFactory.cpp.o
+[ 33%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ObservableOutput.cpp.o
+[ 35%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Step.cpp.o
+[ 35%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/PotentialEnergy.cpp.o
+[ 35%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/StackingPropensity.cpp.o
+[ 35%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/CrossStackingPropensity.cpp.o
+[ 36%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/KineticEnergy.cpp.o
+[ 36%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/TotalEnergy.cpp.o
+[ 36%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/BackendInfo.cpp.o
+[ 38%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/HBEnergy.cpp.o
+[ 38%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/OrderParameterValues.cpp.o
+[ 38%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/HBList.cpp.o
+[ 40%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/StrandwiseBonds.cpp.o
+[ 40%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/PairEnergy.cpp.o
+[ 40%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/PairForce.cpp.o
+[ 42%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ForceEnergy.cpp.o
+[ 42%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Pressure.cpp.o
+[ 42%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/StressAutocorrelation.cpp.o
+[ 43%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Density.cpp.o
+[ 43%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Rdf.cpp.o
+[ 43%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Distance.cpp.o
+[ 43%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/DensityProfile.cpp.o
+[ 45%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ParticlePosition.cpp.o
+[ 45%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/CoaxVariables.cpp.o
+[ 45%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Pitch.cpp.o
+[ 47%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ExternalTorque.cpp.o
+[ 47%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/MeanVectorCosine.cpp.o
+[ 47%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/VectorAngle.cpp.o
+[ 49%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Checkpoint.cpp.o
+[ 49%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Contacts.cpp.o
+[ 49%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Writhe.cpp.o
+[ 50%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/UnstackedList.cpp.o
+[ 50%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/PlectonemePosition.cpp.o
+[ 50%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/StretchedBonds.cpp.o
+[ 52%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/StructureFactor.cpp.o
+[ 52%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/FormFactor.cpp.o
+[ 52%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/TEPPlectonemePosition.cpp.o
+[ 52%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/AverageEnergy.cpp.o
+[ 54%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ContactMap.cpp.o
+[ 54%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/AllVectors.cpp.o
+[ 54%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ExternalForce.cpp.o
+[ 56%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ParticleForceAndTorque.cpp.o
+[ 56%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/ParticleStress.cpp.o
+[ 56%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Coordination.cpp.o
+[ 57%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Configurations/Configuration.cpp.o
+[ 57%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Configurations/BinaryConfiguration.cpp.o
+[ 57%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Configurations/TEPtclOutput.cpp.o
+[ 59%] Building CXX object src/CMakeFiles/oxdna_common.dir/Observables/Configurations/TEPxyzOutput.cpp.o
+[ 59%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/BaseList.cpp.o
+[ 59%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/NoList.cpp.o
+[ 61%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/Cells.cpp.o
+[ 61%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/RodCells.cpp.o
+[ 61%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/VerletList.cpp.o
+[ 61%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/BinVerletList.cpp.o
+[ 63%] Building CXX object src/CMakeFiles/oxdna_common.dir/Lists/ListFactory.cpp.o
+[ 63%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/BackendFactory.cpp.o
+[ 63%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/SimBackend.cpp.o
+[ 64%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/AnalysisBackend.cpp.o
+[ 64%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MDBackend.cpp.o
+[ 64%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCBackend.cpp.o
+[ 66%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MD_CPUBackend.cpp.o
+[ 66%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MC_CPUBackend.cpp.o
+[ 66%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MC_CPUBackend2.cpp.o
+[ 68%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/VMMC_CPUBackend.cpp.o
+[ 68%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MinBackend.cpp.o
+[ 68%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/FIREBackend.cpp.o
+[ 70%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/FFS_MD_CPUBackend.cpp.o
+[ 70%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/SRDThermostat.cpp.o
+[ 70%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/DPDThermostat.cpp.o
+[ 71%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/ThermostatFactory.cpp.o
+[ 71%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/BaseThermostat.cpp.o
+[ 71%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/NoThermostat.cpp.o
+[ 71%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/BrownianThermostat.cpp.o
+[ 73%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/RefreshThermostat.cpp.o
+[ 73%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/BussiThermostat.cpp.o
+[ 73%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/Thermostats/LangevinThermostat.cpp.o
+[ 75%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/InteractionFactory.cpp.o
+[ 75%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/InteractionUtils.cpp.o
+[ 75%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/Mesh.cpp.o
+[ 77%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/BaseInteraction.cpp.o
+[ 77%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/LJInteraction.cpp.o
+[ 77%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNAInteraction.cpp.o
+[ 78%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNA2Interaction.cpp.o
+[ 78%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNA2SDInteraction.cpp.o
+[ 78%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNA3Interaction.cpp.o
+[ 80%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNAInteraction_relax.cpp.o
+[ 80%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/RNAInteraction.cpp.o
+[ 80%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/RNAInteraction2.cpp.o
+[ 80%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/RNAInteraction_relax.cpp.o
+[ 82%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/TEPInteraction.cpp.o
+[ 82%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/HSInteraction.cpp.o
+[ 82%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/HardCylinderInteraction.cpp.o
+[ 84%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/HardSpheroCylinderInteraction.cpp.o
+[ 84%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/BoxInteraction.cpp.o
+[ 84%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/PatchyInteraction.cpp.o
+[ 85%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/KFInteraction.cpp.o
+[ 85%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DRHInteraction.cpp.o
+[ 85%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DRHInteraction_relax.cpp.o
+[ 87%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/ANMInteraction.cpp.o
+[ 87%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/DNANMInteraction.cpp.o
+[ 87%] Building CXX object src/CMakeFiles/oxdna_common.dir/Interactions/RNANMInteraction.cpp.o
+[ 89%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/BaseMove.cpp.o
+[ 89%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/MoveFactory.cpp.o
+[ 89%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/MCTras.cpp.o
+[ 89%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/MCRot.cpp.o
+[ 91%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/Pivot.cpp.o
+[ 91%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/VMMC.cpp.o
+[ 91%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/VolumeMove.cpp.o
+[ 92%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/MoleculeVolumeMove.cpp.o
+[ 92%] Building CXX object src/CMakeFiles/oxdna_common.dir/Backends/MCMoves/ShapeMove.cpp.o
+[ 92%] Building CXX object src/CMakeFiles/oxdna_common.dir/Boxes/BaseBox.cpp.o
+[ 94%] Building CXX object src/CMakeFiles/oxdna_common.dir/Boxes/CubicBox.cpp.o
+[ 94%] Building CXX object src/CMakeFiles/oxdna_common.dir/Boxes/OrthogonalBox.cpp.o
+[ 94%] Building CXX object src/CMakeFiles/oxdna_common.dir/Boxes/LeesEdwardsCubicBox.cpp.o
+[ 96%] Building CXX object src/CMakeFiles/oxdna_common.dir/Boxes/BoxFactory.cpp.o
+[ 96%] Building CXX object src/CMakeFiles/oxdna_common.dir/Utilities/Timings.cpp.o
+[ 96%] Linking CXX static library liboxdna_common.a
+[ 96%] Built target oxdna_common
+[ 96%] Building CXX object src/CMakeFiles/DNAnalysis.dir/DNAnalysis.cpp.o
+[ 96%] Building CXX object src/CMakeFiles/oxDNA.dir/oxDNA.cpp.o
+[ 96%] Building CXX object src/CMakeFiles/confGenerator.dir/confGenerator.cpp.o
+[ 96%] Building CXX object src/CMakeFiles/DNAnalysis.dir/Managers/AnalysisManager.cpp.o
+[ 98%] Building CXX object src/CMakeFiles/confGenerator.dir/Managers/GeneratorManager.cpp.o
+[ 98%] Linking CXX executable ../bin/oxDNA
+[100%] Linking CXX executable ../bin/DNAnalysis
+[100%] Built target oxDNA
+[100%] Built target DNAnalysis
+[100%] Linking CXX executable ../bin/confGenerator
+[100%] Built target confGenerator
