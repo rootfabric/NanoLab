@@ -83,19 +83,27 @@ DOES NOT:
 
 ```text
 candidate protocol      = docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md
+                          (revision R2: paired-анализ, N=40 primaries, mechanical
+                          decision rule, feasibility gate, 34-seed exclusion list;
+                          НЕ FROZEN)
 seed generation tool    = scripts/nl5/repro_v02_seeds.py (+ тесты; deterministic,
-                          exclusion list исторических seeds)
+                          exclusion 34 документированных R1 seeds)
 HG-B proposal           = docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md (этот файл)
 WO                      = docs/work/WO-NL5-ACCEPTANCE-POLICY-R2.md
 execution               = docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/
 branch                  = control/nl5-acceptance-policy-r2 (review/verify отдельно)
+review cycle            = fresh scientific review R1: FAIL f07fe39 (M-1/M-2/M-3) —
+                          repair R1: candidate R2 (этот package); refresh review —
+                          следующий шаг. FAIL-цикл ДО freeze — свидетельство работы
+                          процесса pre-data integrity, а не дефект плана.
 ```
 
 ## 7. Точная механика после HG-B
 
 ```text
 owner: HG-B APPROVED (принцип; опционально поправки)
-  → агент: Director FREEZE record (protocol + seed record + analyzer pin)
+  → агент: Director FREEZE record (protocol + seed record + analyzer pin +
+    feasibility-gate evidence §12)
   → агент: fresh scientific Reviewer + fresh Verifier на FROZEN protocol
   → параллельно: R2 activation path (HG-A: выделить U1 → gates → activate)
   → после R2 ACTIVE + FROZEN: author leg (U1) → external leg (U2)

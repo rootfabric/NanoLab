@@ -18,9 +18,11 @@ from typing import Any
 RULE_ID = "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL"
 DEFAULT_ANCHOR = "NANOLAB-REPRO-V0.2-R1"
 
-# Frozen exclusion list: every known R1 confirmatory seed (candidate protocol
-# §7). Sources: E1 (T1 + verify), E2 reference, E3-reval, platform study
-# S001-S010 (PREREGISTRATION_FREEZE_R1), frozen bootstrap seed.
+# Frozen exclusion list: every documented R1 confirmatory seed (candidate
+# protocol §7, revision R2 — review f07fe39 M-1). Sources: E1 (T1 + verify),
+# E2 reference, E3-reval, B-R1 frozen_seeds.json (3), B-R2 seeds_frozen.json
+# (12, per-variant), platform study S001-S010 (PREREGISTRATION_FREEZE_R1),
+# frozen bootstrap seed.
 HISTORICAL_SEEDS_V1: frozenset[int] = frozenset(
     {
         -200619630,  # E1-R1-S001 (T1 verbatim)
@@ -32,6 +34,21 @@ HISTORICAL_SEEDS_V1: frozenset[int] = frozenset(
         205020,  # E3 revalidation
         206024,  # E3 revalidation / NL4-003
         902107,  # platform-study frozen bootstrap seed
+        510101,  # B-R1 (frozen_seeds.json)
+        520202,  # B-R1
+        530303,  # B-R1
+        410273,  # B-R2 0b (seeds_frozen.json)
+        520931,  # B-R2 0b
+        638257,  # B-R2 0b
+        741953,  # B-R2 11b
+        852607,  # B-R2 11b
+        963541,  # B-R2 11b
+        174329,  # B-R2 32b
+        285637,  # B-R2 32b
+        396421,  # B-R2 32b
+        507283,  # B-R2 53b
+        618457,  # B-R2 53b
+        729613,  # B-R2 53b
         1259289227,  # S001
         1358106528,  # S002
         1524307444,  # S003

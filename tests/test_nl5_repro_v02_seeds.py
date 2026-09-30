@@ -64,9 +64,18 @@ class ExclusionTest(unittest.TestCase):
         documented = {
             -200619630, 319832093, 201004, 202008, 203012,
             204016, 205020, 206024, 902107,
+            # B-R1 (EX-NL5-002-B-R1 evidence/frozen_seeds.json)
+            510101, 520202, 530303,
+            # B-R2 (EX-NL5-002-B-R2 evidence/seeds_frozen.json, per variant)
+            410273, 520931, 638257,
+            741953, 852607, 963541,
+            174329, 285637, 396421,
+            507283, 618457, 729613,
+            # platform study S001-S010 (PREREGISTRATION_FREEZE_R1)
             1259289227, 1358106528, 1524307444, 601855227, 274288237,
             972234272, 1934775205, 1747973984, 880427736, 744386736,
         }
+        self.assertEqual(len(documented), 34)
         self.assertEqual(seeds.HISTORICAL_SEEDS_V1, frozenset(documented))
 
     def test_generator_refuses_excluded_value(self):
@@ -118,13 +127,19 @@ class CandidateDocConsistencyTest(unittest.TestCase):
     def test_document_declares_same_anchor_and_n(self):
         text = CANDIDATE_DOC.read_text(encoding="utf-8")
         self.assertIn('anchor   = "NANOLAB-REPRO-V0.2-R1"', text)
-        self.assertIn("N = 10 fresh replicas", text)
+        self.assertIn("N = 40 fresh replicas", text)
         self.assertIn("NANOLAB_REPRO_V0_2_DISTRIBUTIONAL", text)
         for seed in sorted(seeds.HISTORICAL_SEEDS_V1):
-            if seed < 0:
-                self.assertIn(str(seed), text)
-            else:
-                self.assertIn(str(seed), text)
+            self.assertIn(str(seed), text)
+
+    def test_document_pins_paired_bootstrap_and_feasibility_gate(self):
+        text = CANDIDATE_DOC.read_text(encoding="utf-8")
+        self.assertIn("PAIRED scheme", text)
+        self.assertIn("random.Random(bootstrap_seed_v)", text)
+        self.assertIn("B = 10 000", text)
+        self.assertIn("MANDATORY FEASIBILITY GATE", text)
+        self.assertIn("candidate revision  = R2", text)
+        self.assertIn("NOT FROZEN", text)
 
     def test_document_declares_frozen_vocabulary(self):
         text = CANDIDATE_DOC.read_text(encoding="utf-8")

@@ -60,3 +60,24 @@ status       = HANDOFF_READY (fresh Reviewer + fresh Verifier -> Human Gate merg
 Fresh Reviewer + fresh Verifier на exact HEAD → Human Gate merge этой ветки →
 владельцу: **HG-B** (формат ответа — proposal §7). Параллельно HG-A: выделение
 U1 → механическая активация R2 tooling'ом EX-INFRA3-NATIVE-UBUNTU-R2-R1.
+
+## 5. Errata / repair R1 (post review FAIL f07fe39)
+
+Fresh scientific review вернул **FAIL** (3 MAJOR + 4 MINOR) — candidate-протокол
+не был готов к freeze. Candidate переведён в **revision R2** (текст переписан,
+R1 сохранён в git history @ 3171564; по-прежнему PRE-DATA / NOT FROZEN):
+
+1. M-1: exclusion list 19 → **34** (B-R1 + B-R2 seeds добавлены, верифицированы
+   по evidence); seed-потоки не изменились (digest прежний).
+2. M-2: primary statistic — **paired per-seed differences**; bootstrap pinned
+   (PAIRED, B=10 000, RNG mechanical); N primaries **40**/cell (MC review на
+   реальных R1 данных: n=10 при δ=0.5 давало гарантированный INCONCLUSIVE);
+   budget 200+40=240 runs; **mandatory feasibility gate** до dispatch.
+3. M-3: decision rule полностью механический (§9.2/§9.3, приоритеты; controls
+   противоречие устранено; s_floor 0.01°; замкнутый список deviation classes).
+4. m-1..m-4: окна разведены, регенерация вписана в протокол, R2-gate обеих ног
+   явный, тесты doc-consistency обновлены.
+
+Тесты: 14 seed-tool / 388 full, зелёные. Reviewer refresh + fresh Verifier —
+следующие шаги; событие 0005 (CONTINUATION_CHECKPOINT, post-terminal
+corrections class).
