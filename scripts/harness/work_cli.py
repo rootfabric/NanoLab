@@ -14,6 +14,22 @@ TERMINAL = {"HANDOFF_COMPLETED", "WORK_ORDER_BLOCKED", "WORK_ORDER_CANCELLED"}
 # doubles as the legacy spelling used by already-published canonical executions.
 CORRECTIONS_EVENTS = {"CONTINUATION_CHECKPOINT", "REVIEW_CORRECTIONS"}
 ALLOWED_EVENTS = {"WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "IMPLEMENTATION_COMMITTED", "VALIDATION_RECORDED", "BLOCKER_RECORDED", "REPAIR_STARTED", "REPAIR_COMPLETED", "REVIEW_RECORDED", "REVIEW_CORRECTIONS", *TERMINAL}
+# Legacy tolerance (science integration 2026-09-30, precedent MINOR-2/MINOR-3):
+# the immutable, fresh-verified science closure event EX-NL5-002-E-R1
+# 0007-continuation-paired-analysis-and-handoff (verified at
+# work/nl5-002-e-platform-sensitivity-r1 @ 2f9f81c by verify a2f1f57 +
+# verify/nl5-002-e-p1-raw-replay-r1 @ 9e6200a; Director DIRECTOR_ACCEPTANCE_R2)
+# was published with event_type "END_ANALYSIS", which is outside the enum above.
+# Published immutable events are never edited (AGENTS.md: corrections are new
+# events), so the validator admits EXACTLY this (execution_id, event_id) pair —
+# the same grandfather pattern as LEGACY_ABBREVIATED_SHA_EVENTS. Any other
+# event (new or reusing the id/type elsewhere) still fails; this vocabulary is
+# NOT opened for future events. Schema keeps the strict enum (schema = ceiling;
+# divergence documented in config/control/harness/README.md and
+# docs/infra/VALIDATION_GATES_R1.md section 2).
+LEGACY_END_ANALYSIS_EVENTS = frozenset({
+    ("EX-NL5-002-E-R1", "0007-continuation-paired-analysis-and-handoff"),
+})
 ALLOWED_ROLES = {"IMPLEMENTER", "SCIENTIFIC_OPERATOR", "REVIEWER", "VERIFIER", "DIRECTOR"}
 # External executor campaigns (NL5-002 lineage): ORCHESTRATOR-dispatched external
 # agent sessions report with a dedicated event vocabulary. A directory belongs to
@@ -203,8 +219,9 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
     is_external_profile = bool(event_types) and event_types[0] == EXTERNAL_OPENER
     allowed_events = EXTERNAL_ALLOWED_EVENTS if is_external_profile else ALLOWED_EVENTS
     allowed_roles = EXTERNAL_ALLOWED_ROLES if is_external_profile else ALLOWED_ROLES
-    for path, event_type in zip(event_files, event_types):
-        if event_type not in allowed_events:
+    for path, event_type, event in zip(event_files, event_types, events):
+        legacy_key = (str(event.get("execution_id")), str(event.get("event_id")))
+        if event_type not in allowed_events and legacy_key not in LEGACY_END_ANALYSIS_EVENTS:
             errors.append(f"{path.name}: unsupported event_type")
     for path, event in zip(event_files, events):
         if event.get("actor_role") not in allowed_roles:
