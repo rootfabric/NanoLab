@@ -398,3 +398,66 @@ NOT accepted, v0.1 envelope, PLATFORM-SENSITIVITY-R1, external_reproductions = 0
 NL6-001 LOCKED.
 
 — Fresh independent Scientific Reviewer (CONTROL), refresh R1, 2026-09-30
+
+---
+
+## Review refresh R2 @ a9d7d07
+
+```text
+REFRESH_ID        = NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT (refresh R2)
+REFRESH_VERDICT   = PASS
+REFRESH_DATE      = 2026-09-30 (executed 2026-09-30T16:29Z UTC)
+REFRESHED_HEAD    = a9d7d07fa264e9907b67ca244b00ba2da3430b0f
+                    (один repair-коммит поверх 6e5287b — линейная история; subject
+                     sha event 0006 = c25bcd6, т.е. мой refresh R1 — корректный lineage)
+SCOPE OF CHANGE   = 7 файлов: gate-скрипт (pinned), gate evidence JSON, протокол
+                    §12 two-estimate + §9.2 control-оговорка, HG-B §4.1,
+                    WORK_QUEUE sync, тесты +4, event 0006
+```
+
+### R-1..R-5 → фикс → измерение → статус
+
+| Risk | Фикс @ a9d7d07 | Независимое измерение этой сессии | Статус |
+|---|---|---|---|
+| **R-1** gate на committed данных: 32b FAIL → INFEASIBLE→owner, число не видно владельцу до HG-B | §4.1 HG-B proposal: числа 0b 0.124/0.207, 32b 1.298/0.907 опубликованы; 32b = FEASIBILITY-UNCERTAIN как owner-решение ДО HG-B с тремя опциями (принять риск / R3 сузить primary до 0b / R3 расширить budget); пороги не трогаются | §4.1 присутствует, числа совпадают с моим MC и committed evidence; опции сформулированы как owner-решение, не имплементатора | **CLOSED** (INFEASIBLE-путь для 32b — теперь задокументированный owner-пункт, не дефект имплементации) |
+| **R-2** gate-оценка granularity-смещена, реализация не запинена | `scripts/nl5/repro_v02_feasibility_gate.py` (pinned, 162 строки): DECISION = subsample n=40 (protocol letter), ADVISORY = √n-экстраполяция из полного n=10-bootstrap; §12 дополнен two-estimate схемой и вычисленными числами; evidence committed с `source_sha256` | source digest `2b0df07d…` совпадает с sha256 committed paired JSON; повторный прогон `evaluate_variant` **bit-exact** воспроизводит committed evidence JSON (все float-поля ≤1e-12, gate_pass-флаги совпадают); числа = мои независимые MC: 0b 0.124 PASS / 32b 1.298 FAIL / advisory √n 32b 0.907 | **CLOSED** |
+| **R-3** P(успеха\|Δ=0) ≈ 5–19% — INCONCLUSIVE частый исход | Не «фиксится» кодом — осознанный tradeoff: теперь виден владельцу через §4.1 (числа + опции R3) и управляется failsafe-gate | Подтверждён моим MC (без изменений); protocol letter не искажён | **CLOSED** (как задокументированный tradeoff с владельческим путём; наука не подгонялась) |
+| **R-4** control n_valid < 8 не отображён в §9.3 | §9.2: control n_valid < 8 → INCONCLUSIVE-CONTROLS, исключается из downgrade-логики §9.3; verdict определяется primaries | Текст в §9.2 в нужном приоритет-блоке; §9.3 когерентен (downgrade применяется только к оцениваемым controls) | **CLOSED** |
+| **R-5 / NEW-1** WORK_QUEUE staleness (N=10/ячейка) | WORK_QUEUE строка NL5-002 → «N=40 primaries/10 controls» | Diff точечный: заменён только фрагмент параметров, весь остальной текст строки байт-в-байт сохранён (terminal MISMATCH/NOT ACCEPTED и вся цепочка гейтов нетронуты) | **CLOSED** |
+
+### Регрессия и machine-проверки @ a9d7d07 (все зелёные)
+
+```text
+pytest tests/test_nl5_repro_v02_seeds.py -q → 18 passed (14 + 4 gate-теста:
+  quantile_linear, pooled_sd known values, half-width shrinks with n,
+  evaluate_variant gate fields — осмысленные unit-проверки машинерии)
+pytest tests/ -q                            → 392 passed
+check-consistency → ok:true; workflow_lint → blocking=0;
+work_cli validate EX-…-R2 → ok:true, HANDOFF_READY
+event 0006 = CONTINUATION_CHECKPOINT 16:25:00Z, subject_sha = c25bcd6 (мой refresh R1)
+scope 6e5287b..a9d7d07 → 7/7 в allowed_paths; секрет-скан 0; conventional commit
+```
+
+### Оценка блокирующих дефектов
+
+Блокирующих для freeze-цепочки дефектов НЕ осталось. Неопределённость 32b
+(subsample 1.298 vs advisory 0.907 vs параметрика 0.76–0.81) теперь: (а) честно
+зафиксирована в evidence и протоколе two-estimate схемой; (б) вынесена владельцу
+до HG-B с тремя опциями без касания порогов/статистики; (в) покрыта failsafe
+поведением gate (FAIL ⇒ INFEASIBLE ⇒ owner, без подгонки). Это правильная
+конструкция pre-data честности: неопределённость превращена в механическую
+процедуру + владельческое решение, а не в post-hoc свободу.
+
+### Refresh-verdict
+
+```text
+REFRESH_VERDICT = PASS
+```
+
+Candidate R2 + pinned feasibility gate готов к вынесению на HG-B с моих позиций.
+Этот refresh не создаёт научных утверждений, не freeze'ит протокол и не меняет
+NL5-002 terminal MISMATCH / NOT accepted, v0.1 envelope, PLATFORM-SENSITIVITY-R1,
+external_reproductions = 0, NL6-001 LOCKED; claim ceiling пакета — по-прежнему
+C0_SOFTWARE_ONLY.
+
+— Fresh independent Scientific Reviewer (CONTROL), refresh R2, 2026-09-30
