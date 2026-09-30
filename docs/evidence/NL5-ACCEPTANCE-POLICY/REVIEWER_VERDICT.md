@@ -310,3 +310,91 @@ candidate-протокола к freeze, а не к честности испол
 software/process-факты пакета подтверждены (§2, §4).
 
 — Fresh independent Scientific Reviewer (CONTROL), 2026-09-30
+
+---
+
+## Review refresh R1 (candidate R2) @ 6e5287b
+
+```text
+REFRESH_ID        = NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT (refresh R1)
+REFRESH_VERDICT   = PASS
+REFRESH_DATE      = 2026-09-30 (executed 2026-09-30T16:16Z UTC)
+REFRESHED_HEAD    = 6e5287bb3b831396908d0e431e06200f0e42006c
+                    (repair commit поверх 51ca09a; один коммит; conventional;
+                     f07fe39 — отдельная review-ветка, предком не является и не должен быть)
+SCOPE OF CHANGE   = 7 файлов: candidate doc переписан в R2, tool (+15 seeds),
+                    tests (+1 тест = 14), HG-B proposal (review cycle + gate в
+                    freeze-механике), evidence repro-v0-2-seed-record-PRE_DATA_R2.json,
+                    summary errata §5, event 0005 (CONTINUATION_CHECKPOINT,
+                    post-terminal corrections class — work_cli принимает, ok:true)
+PASS MEANING      = candidate R2 готов к вынесению на HG-B / freeze-цепочку с
+                    позиций этого review; НЕ freeze и не научное утверждение;
+                    claim ceiling по-прежнему C0_SOFTWARE_ONLY у пакета
+```
+
+### Таблица finding → fix → измерение → статус
+
+| Finding | Fix в R2 | Независимое измерение этой сессии | Статус |
+|---|---|---|---|
+| **M-1** exclusion 19, ложный claim «все известные» | +15 B-R1/B-R2 seeds → 34; тест хардкодит 34 с per-source комментариями + `len==34` | Независимая экстракция seed'ов из evidence-файлов (B-R1 frozen_seeds.json: 3; B-R2 seeds_frozen.json: 12; PREREGISTRATION_FREEZE_R1 S001–S010: 10; reference 3; E3-reval 3; E1 2; bootstrap 1) → **34, EQUAL с tool-множеством, missing/extra = ∅**; seed-потоки НЕ изменились: регенерация byte-identical R2-записи, `record_sha256 5c956644…` == R1 == R2 (digest не покрывает exclusion — корректно); fresh∩historical = ∅ | **CLOSED** |
+| **M-2** TOST недостижим при n=10; пилот optional; budget 96 | primary statistic = paired per-seed differences; bootstrap pinned (PAIRED, B=10 000, `random.Random(bootstrap_seed_v)`, quantile linear); N=40 primaries / N_min=32; budget 200+40=240; **MANDATORY FEASIBILITY GATE §12** (ratio ≤ 1.0 по обеим primaries до dispatch, FAIL → INFEASIBLE → owner, без подгонки) | (а) Структурно: MC pinned-статистики, n=10 → P(EQUIVALENT\|Δ=0) ≈ 3%/вариант; **n=40 → 22–44%/вариант (ρ=0–0.32), WO-level ≈ 5–19%** — недостижимость устранена, но успех не гарантирован. (б) Gate воспроизведён ПОСВОВНО (pinned RNG `random.Random(bootstrap_seed_v)`, B=10 000, subsample n=40) на committed R1 данных: **0b ratio 0.124 (PASS), 32b ratio 1.298 (FAIL > 1.0)**; numpy-репликация другим RNG даёт те же ratios (робастно). (в) Параметрическая оценка для реальных n=40 свежих пар: 0b ≈ 0.81, 32b ≈ 0.76 (borderline-feasible) — gate-оценка на 10-точечной эмпирической поддержке granularity-смещена в ОБЕ стороны (0b 0.124 — нереалистично оптимистична; 32b 1.298 — пессимистична) | **PARTIAL** — структурная невозможность устранена; gate добавлен, механичен и failsafe; НО по букве протокола на committed данных gate сейчас FAIL для 32b → ожидаемый исход freeze-цепочки: INFEASIBLE → owner (честный, но владелец должен видеть это ДО HG-B); см. риски R-1..R-3 |
+| **M-3** rule не механичен (controls-противоречие; двусмысленность; незапиненный bootstrap; s=0; deviation-классы) | §9.2 приоритетная классификация (n<N_min → INCONCLUSIVE; CI⊂полоса → EQUIVALENT; elif CI целиком вне → NOT_EQUIVALENT; else INCONCLUSIVE); §9.3 WO-level с приоритетами, controls gross failure (≥1.0·s_eff(control)) → downgrade до REPRODUCED_WITH_DEVIATION, не MISMATCH; s_eff = max(s, 0.01°); §9.4 замкнутый список DEV-* , вне списка → STOP + новая revision | Перечитано целиком: приоритеты взаимоисключающие и полные (6 веток покрывают всё пространство); NOT_EQUIVALENT сформулирован точно; противоречие R1 устранено явно (текст §9.3 называет и снимает его); bootstrap-план запинен полностью и воспроизводимо (мой gate — прямая реализация текста); FAILED_TECHNICAL ≠ MISMATCH сохранён во всех поверхностях | **CLOSED** (остаток: NOTE R-4 — control-ячейка с n_valid < 8 не отображена в §9.3) |
+| **m-1** окна смешивали run-length и window | §6: run lengths запинены как исполненная конвенция (0b=200k; 11b/32b/53b=150k), analysis window/gates — frozen convention без изменений | Сверено с B-R2 `window_steps` и E-study `--window` — соответствует исполненному; считаем закрывающим | **CLOSED** |
+| **m-2** регенерация только в summary | §7 «Обязательство регенерации (часть протокола…)»: регенерация + сверка 34 exclusions + whole-tree literal search; несовпадение digest = freeze невозможен | Текст присутствует в протоколе; механика проверена регенерацией | **CLOSED** |
+| **m-3** external leg не загейчен на R2 ACTIVE | §5 «ОБЕ ноги гейтятся на R2 ACTIVE до dispatch»; §12 stop conditions «ОБЕ ноги … HARD_BLOCKED» | Текст в двух местах; согласован с summary | **CLOSED** |
+| **m-4** само-референциальный тест полноты | Тест хардкодит полные 34 значения с указанием источников + count-pin | Хардкод сверен с evidence-файлами независимо (EQUAL, см. M-1); runtime-чтение evidence было бы сильнее, но зафиксированный полный набор корректен на этом дереве | **CLOSED** |
+| **NEW-1** (этот refresh) WORK_QUEUE staleness | — (в repair-коммите WORK_QUEUE.md НЕ менялся, хотя repair-брифф ожидал sync N=40/10) | Строка NL5-002 в WORK_QUEUE всё ещё описывает пакет как «N=10/ячейка» (текст R1-эпохи) — расходится с R2 (N=40 primaries / 10 controls, budget 240) | **NOT_CLOSED** (minor, канонический факт не искажает; исправить синком при следующем touch поверхности) |
+
+### Регрессия и machine-проверки @ 6e5287b (все зелёные)
+
+```text
+pytest tests/ -q                 → 388 passed (387 + 1 новый doc-pin тест; seed-tool 14)
+check-consistency                → ok:true, errors=[]
+workflow_lint                    → blocking=0
+work_cli validate EX-…-R2        → ok:true, HANDOFF_READY,
+                                   has_post_terminal_corrections=true (event 0005 —
+                                   валидный post-terminal corrections класс)
+scope diff 51ca09a..6e5287b      → 7/7 файлов в allowed_paths паспорта
+секрет-скан / conventional commit / timestamps → чисто; 0005 (15:52:42Z) > 0004
+```
+
+### Оставшиеся риски (не блокируют HG-B, должны быть видимы владельцу)
+
+- **R-1 (главный).** По буквальному воспроизведению §12 gate на committed R1 данных
+  **32b FAIL (ratio 1.298)** → freeze-цепочка по этому протоколу, скорее всего,
+  завершится INFEASIBLE → owner, а не dispatch. Параметрическая оценка говорит, что
+  реальные n=40 погранично проходимы (ratios ≈ 0.76–0.81) — т.е. это артефакт выбора
+  gate-оценки, а не смерть дизайна. РЕКОМЕНДАЦИЯ: вычислить и опубликовать §12 gate
+  evidence УЖЕ сейчас (все входы committed, вычисление pre-data) и приложить к HG-B,
+  чтобы владелец одобрял принцип, зная текущий исход gate'а; при желании — owner-решение
+  по параметрам (n, gate-оценка) до freeze.
+- **R-2.** Gate-оценка на 10-точечной эмпирической поддержке granularity-смещена
+  двунаправленно (0b: 0.124 против параметрических ~0.81; 32b: 1.298 против ~0.76).
+  Запинить в freeze-записи точную реализацию и интерпретацию (или заменить на
+  параметрическую + empirical-две оценки с обоими числами в evidence).
+- **R-3.** Даже при идеальной эквивалентности платформ P(WO-level REPRODUCED) при
+  n=40 ≈ 5–19% (ρ-зависимо; margin остаётся в шкале within-platform SD, а SD парных
+  разностей ≈ 1.25–1.41·s при ρ≈0–0.3). Дизайн честный, но INCONCLUSIVE остаётся
+  частым исходом; это осознанный tradeoff, теперь управляемый gate'ом.
+- **R-4 (NOTE).** §9.3 не определяет исход при control-ячейке с n_valid < 8
+  (gross-failure порог тогда считается на неустойчивой выборке). Направление ошибки
+  консервативно (downgrade, не завышение); рекомендуется пре-пинуть (например:
+  control n<N_min → трактовать как deviation-class note / REPRODUCED_WITH_DEVIATION).
+- **R-5 (NEW-1).** WORK_QUEUE NL5-002 строка устарела (N=10/ячейка) — синхронизировать.
+
+### Refresh-verdict
+
+```text
+REFRESH_VERDICT = PASS
+```
+
+Обоснование в одну строку: все три MAJOR и все четыре MINOR R1-ревизии закрыты
+(измеримо; M-2 — структурно, с обязательным failsafe-гейтом) либо сведены к
+задокументированным рискам с владельческим путём решения; новых дефектов
+целостности не найдено; пакет честно остаётся PRE-DATA / NOT FROZEN и готов к
+вынесению на HG-B с раскрытием R-1..R-5. Этот refresh не создаёт научных
+утверждений, не freeze'ит протокол и не меняет NL5-002 terminal MISMATCH /
+NOT accepted, v0.1 envelope, PLATFORM-SENSITIVITY-R1, external_reproductions = 0,
+NL6-001 LOCKED.
+
+— Fresh independent Scientific Reviewer (CONTROL), refresh R1, 2026-09-30
