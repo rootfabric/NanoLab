@@ -23,7 +23,7 @@ from pathlib import Path
 from typing import Any
 
 from . import TOOLING_VERSION
-from .contract import utc_now_iso
+from .contract import sha256_file, utc_now_iso
 from .fingerprint import validate_native_u1
 
 GATES: tuple[tuple[str, str], ...] = (
@@ -95,6 +95,10 @@ class GateReport:
                 raise GateError(f"{gate_id}: PASS evidence file does not exist: {evidence_ref}")
             if evidence.stat().st_size == 0:
                 raise GateError(f"{gate_id}: PASS evidence file is empty: {evidence_ref}")
+            # Repair R1 (review MINOR-2): a PASS record pins the exact evidence
+            # content it was granted for, not merely a path.
+            entry["evidence_sha256"] = sha256_file(evidence)
+            entry["evidence_size"] = evidence.stat().st_size
         entry["status"] = status
         entry["evidence_ref"] = evidence_ref
         entry["recorded_utc"] = utc_now_iso()

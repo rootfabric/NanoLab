@@ -105,10 +105,20 @@ def provenance_record(
     cache_values: dict[str, str],
     tools: dict[str, str],
     build_log_path: Path,
+    source_commit: str | None = None,
 ) -> dict[str, Any]:
+    """Provenance for one R2 engine build.
+
+    ``source_commit``: pass the value verified by ``verify_pinned_source`` so
+    the artifact carries the actual 40-hex commit (repair R1, review NOTE-4);
+    the placeholder only appears when the caller could not verify it.
+    """
     return {
         "engine_source": ENGINE_SOURCE,
-        "source_commit": source_commit_probe(src_dir),
+        "source_commit": source_commit or "resolved-at-execution",
+        "source_commit_verified": bool(
+            source_commit and source_commit == ENGINE_PINNED_COMMIT
+        ),
         "source_tree_sha256": tree_digest(src_dir),
         "cmake_argv": configure_argv(src_dir, build_dir),
         "build_argv": build_argv(build_dir),

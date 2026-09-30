@@ -117,3 +117,14 @@ fingerprint/build/gates/NC evidence → activation decision с Human Gate».
 Никакая часть фактической активации этим WO не выполняется и не может быть
 выполнена без машины U1 и отдельного Human Gate. `NEW_SCIENCE` без R2 остаётся
 `HARD_BLOCKED`.
+
+## 8. Errata (repair R1, 2026-09-30 — после fresh review PASS @ 89fdbb0)
+
+Уточнение §2 (инвариант 1): host-guard покрывает исполняющие subcommands
+`build-engine`, `run`, `gate`, `nc-verify` (exit 2 `BLOCKED_HOST` вне
+native-eligible U1); `fingerprint`, `check-host`, `nc-plan` — безопасны
+на любом хосте; `report`, `activation-check` — read-only/аналитика (решение
+об активации всё равно требует fingerprint + review + verify + Human Gate).
+Gate PASS привязывает sha256/size evidence-файла; hostname deny-list
+сравнивает full- и short-name; build provenance содержит верифицированный
+commit. Детали — event 0005 и errata в execution summary.

@@ -189,6 +189,12 @@ class FingerprintTest(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(any("outenemy" in reason for reason in reasons))
 
+    def test_outenemy_fqdn_form_also_rejected(self):
+        # Repair R1 (review NOTE-3): deny-list must survive suffix forms.
+        ok, reasons = validate_native_u1(ok_fingerprint(hostname="outenemy.lab.local"))
+        self.assertFalse(ok)
+        self.assertTrue(any("forbidden as author host" in reason for reason in reasons))
+
     def test_wsl_host_rejected(self):
         fp = ok_fingerprint()
         fp["parsed"]["wsl_marker"] = True
@@ -386,6 +392,9 @@ class GateReportTest(unittest.TestCase):
             evidence.write_text("build log", encoding="utf-8")
             entry = report.set_status("U1", "PASS", str(evidence))
             self.assertEqual(entry["status"], "PASS")
+            # Repair R1 (review MINOR-2): PASS pins the evidence content.
+            self.assertEqual(entry["evidence_sha256"], sha256_file(evidence))
+            self.assertEqual(entry["evidence_size"], evidence.stat().st_size)
             with self.assertRaises(GateError):
                 report.set_status("U9", "PASS", str(evidence))
             with self.assertRaises(GateError):
@@ -517,8 +526,20 @@ class EngineBuildTest(unittest.TestCase):
             )
             self.assertFalse(record["binary_sha_equality_with_r1_required"])
             self.assertEqual(record["source_commit"], "resolved-at-execution")
+            self.assertFalse(record["source_commit_verified"])
             self.assertEqual(record["binary"]["size"], len(b"\x7fELF-fake-binary"))
             self.assertEqual(record["cmake_cache_pins"]["DOUBLE"], "ON")
+            # Repair R1 (review NOTE-4): a verified commit is embedded as fact.
+            verified = engine_build.provenance_record(
+                src,
+                build_dir,
+                engine_build.parse_cmake_cache((build_dir / "CMakeCache.txt").read_text(encoding="utf-8")),
+                {"gcc": "gcc 13.2.0"},
+                build_dir / "build-r2.log",
+                source_commit=engine_build.ENGINE_PINNED_COMMIT,
+            )
+            self.assertEqual(verified["source_commit"], engine_build.ENGINE_PINNED_COMMIT)
+            self.assertTrue(verified["source_commit_verified"])
 
 
 class CliNegativeControlTest(unittest.TestCase):
@@ -597,25 +618,37 @@ class CliNegativeControlTest(unittest.TestCase):
         self.assertEqual(payload["control"], "NC-U5")
         self.assertIn("FAILED_TECHNICAL", payload["procedure"])
 
-    def test_nc_verify_requires_true_facts(self):
+    def test_gate_pass_blocked_or_rejected(self):
+        # Repair R1 (review MINOR-1): on a non-eligible host the gate command
+        # is host-guarded (BLOCKED_HOST); on an eligible host a PASS without
+        # evidence is still REJECTED.
+        host = json.loads(self._run_cli("check-host").stdout)
+        completed = self._run_cli("gate", "--report", "/tmp/r2-repair-probe-gates.json", "--gate", "U1", "--status", "PASS", "--evidence", "")
+        payload = json.loads(completed.stdout)
+        if host["eligible"]:
+            self.assertEqual(completed.returncode, 3)
+            self.assertEqual(payload["status"], "REJECTED")
+        else:
+            self.assertEqual(completed.returncode, 2)
+            self.assertEqual(payload["status"], "BLOCKED_HOST")
+
+    def test_nc_verify_blocked_on_ineligible_host(self):
+        host = json.loads(self._run_cli("check-host").stdout)
         with tempfile.TemporaryDirectory() as tmp:
             evidence = Path(tmp) / "ncu1.json"
             evidence.write_text(json.dumps({"owner_session_gone": True, "job_still_running": False}), encoding="utf-8")
             completed = self._run_cli("nc-verify", "--nc", "NC-U1", "--evidence", str(evidence))
-            self.assertEqual(completed.returncode, 2)
-            verdict = json.loads(completed.stdout)
-            self.assertFalse(verdict["pass"])
-            evidence.write_text(json.dumps({"owner_session_gone": True, "job_still_running": True}), encoding="utf-8")
-            passed = self._run_cli("nc-verify", "--nc", "NC-U1", "--evidence", str(evidence))
-            self.assertEqual(passed.returncode, 0)
-            self.assertTrue(json.loads(passed.stdout)["pass"])
-
-    def test_gate_command_rejects_pass_without_evidence(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            report_path = Path(tmp) / "gates.json"
-            completed = self._run_cli("gate", "--report", str(report_path), "--gate", "U1", "--status", "PASS", "--evidence", "")
-            self.assertEqual(completed.returncode, 3)
-            self.assertEqual(json.loads(completed.stdout)["status"], "REJECTED")
+            payload = json.loads(completed.stdout)
+            if host["eligible"]:
+                self.assertEqual(completed.returncode, 2)
+                self.assertFalse(payload["pass"])
+                evidence.write_text(json.dumps({"owner_session_gone": True, "job_still_running": True}), encoding="utf-8")
+                passed = self._run_cli("nc-verify", "--nc", "NC-U1", "--evidence", str(evidence))
+                self.assertEqual(passed.returncode, 0)
+                self.assertTrue(json.loads(passed.stdout)["pass"])
+            else:
+                self.assertEqual(completed.returncode, 2)
+                self.assertEqual(payload["status"], "BLOCKED_HOST")
 
 
 class ConfigContractTest(unittest.TestCase):

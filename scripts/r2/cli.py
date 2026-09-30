@@ -118,7 +118,10 @@ def cmd_build_engine(args: argparse.Namespace) -> int:
     cache_values = engine_build.parse_cmake_cache((build_dir / "CMakeCache.txt").read_text(encoding="utf-8", errors="replace"))
     pins_ok, deviations = engine_build.verify_cache_pins(cache_values)
     fingerprint = collect_fingerprint(real_runner)
-    provenance = engine_build.provenance_record(src, build_dir, cache_values, fingerprint["parsed"]["tools"], log_path)
+    provenance = engine_build.provenance_record(
+        src, build_dir, cache_values, fingerprint["parsed"]["tools"], log_path,
+        source_commit=actual_commit,
+    )
     provenance["cache_pins_verified"] = pins_ok
     provenance["cache_pin_deviations"] = deviations
     (build_dir / "build-r2-provenance.json").write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -166,13 +169,17 @@ class SystemdLauncherChoice:
 
 
 def cmd_gate(args: argparse.Namespace) -> int:
+    # Repair R1 (review MINOR-1): R2 gate reports are U1 facts; recording them
+    # from a non-eligible host would contradict the host guard.
+    if require_u1_or_exit(args) is None:
+        return 2
     report = GateReport(Path(args.report))
     try:
         entry = report.set_status(args.gate, args.status, args.evidence or "")
     except GateError as error:
         emit({"status": "REJECTED", "reason": str(error)})
         return 3
-    emit({"status": "RECORDED", "entry": entry})
+    emit({"status": "RECORDED", "entry": entry, "invocation": " ".join(sys.argv)})
     return 0
 
 
@@ -199,6 +206,7 @@ def cmd_activation_check(args: argparse.Namespace) -> int:
         verify_verdict=args.verify_verdict,
         human_gate_approved=args.human_gate_approved,
     )
+    decision["invocation"] = " ".join(sys.argv)
     emit(decision)
     return 0 if decision["r2_activated"] else 2
 
@@ -242,6 +250,10 @@ def cmd_nc_plan(args: argparse.Namespace) -> int:
 
 
 def cmd_nc_verify(args: argparse.Namespace) -> int:
+    # Repair R1 (review MINOR-1): NC evidence is produced on U1; verifying it
+    # elsewhere would decouple the verdict from the execution host.
+    if require_u1_or_exit(args) is None:
+        return 2
     evidence = load_json(Path(args.evidence))
     evaluators = {
         "NC-U1": lambda data: nc_u1_evaluate(data["owner_session_gone"], data["job_still_running"]),
@@ -258,6 +270,7 @@ def cmd_nc_verify(args: argparse.Namespace) -> int:
         return 3
     verdict = evaluator(evidence)
     verdict["verified_utc"] = utc_now_iso()
+    verdict["invocation"] = " ".join(sys.argv)
     if args.out:
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)

@@ -171,7 +171,9 @@ def validate_native_u1(
         reasons.append("systemd (systemctl) is not available")
     hostname = str(parsed.get("hostname", ""))
     forbidden = tuple(forbidden_hostnames)
-    if hostname in forbidden:
+    short_name = hostname.split(".")[0].lower()
+    forbidden_short = {str(item).split(".")[0].lower() for item in forbidden}
+    if hostname.lower() in {str(item).lower() for item in forbidden} or short_name in forbidden_short:
         reasons.append(
             f"hostname {hostname!r} is forbidden as author host "
             f"(external reproduction platform only: {', '.join(forbidden)})"

@@ -87,3 +87,29 @@ Fresh Reviewer + fresh Verifier на exact HEAD этой ветки → Human Ga
 build-engine → gates U1–U5 → NC-U1..U5 → activation-check → review/verify →
 Human Gate активации R2 (порядок и условия —
 `ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md` §9, policy §1).
+
+## 6. Errata (repair R1, после fresh review PASS @ 89fdbb0)
+
+Fresh review (`docs/infra/evidence/INFRA3-R2-ACTIVATION-R1/REVIEWER_VERDICT.md`,
+PASS, 2 MINOR + 4 NOTE) вскрыл неточности и пробелы; repair (event 0005):
+
+1. §1(7) этого summary и WO §2(инвариант 1) заявляли host-guard шире
+   фактического. Точное покрытие ПОСЛЕ repair: `build-engine`, `run`,
+   `gate`, `nc-verify` — U1-only (BLOCKED_HOST exit 2 вне eligible-хоста);
+   `fingerprint`, `check-host`, `nc-plan`, `report`, `activation-check` —
+   read-only/аналитика, безопасны на любом хосте.
+2. Gate PASS теперь привязывает содержимое evidence (`evidence_sha256`,
+   `evidence_size`), а не только путь; требование расположения evidence
+   внутри raw-дерева — future hardening (NOTE).
+3. Hostname deny-list сравнивает full-name и short-name (FQDN-форма
+   `outenemy.*` также отклоняется).
+4. Build provenance содержит верифицированный source commit
+   (`source_commit` + `source_commit_verified`), а не плейсхолдер.
+5. CLI outputs (`gate`, `nc-verify`, `activation-check`) несут `invocation`
+   (полная command line) — evidence самодостаточнее; ранее опубликованные
+   evidence-файлы остаются историческими фактами ревизии 9a6fb62 и не
+   перезаписываются.
+6. Ledger tamper-evidence (hash-chain/внешний reconcile) — задокументировано
+   как future hardening, не входит в repair R1.
+
+Тесты после repair: 53 tooling / 427 full, все зелёные.
