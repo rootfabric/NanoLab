@@ -11,6 +11,19 @@ WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO                [EFFECTIVE 2026-09-27]
 DEFAULT_AUTHOR_EXECUTOR         = NATIVE_UBUNTU_R2  [PROPOSED → ACTIVE после gates]
 ```
 
+Канонический статус на момент integration rebuild (2026-09-30, ветка
+`integration/native-ubuntu-executor-r1` от science-integrated main `3e220f6`;
+append-only уточнение, не переписывает решение 2026-09-27):
+
+```text
+NATIVE_UBUNTU_POLICY            = MERGED            [этот integration branch; канонично на main после Human Gate миграции]
+AUTHOR_U1                       = NOT_ASSIGNED
+R2_STATUS                       = WAITING_HOST / NOT_ACTIVE
+R2_ACTIVATED                    = NO
+NEW_SCIENCE                     = HARD_BLOCKED (без R2; silent fallback на Windows = FORBIDDEN)
+OUTENEMY_ROLE                   = EXTERNAL_U2_ONLY  [не author/dev host]
+```
+
 - `WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY` и `WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO`
   — **effective немедленно** по owner decree (mission 2026-09-27): после закрытия
   `P1_RAW_REPLAY` новые scientific physics на Windows/WSL2 не запускаются.
