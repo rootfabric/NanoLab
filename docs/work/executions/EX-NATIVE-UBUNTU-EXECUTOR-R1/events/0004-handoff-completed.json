@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-27T13:00:00Z",
+  "execution_id": "EX-NATIVE-UBUNTU-EXECUTOR-R1",
+  "work_order_id": "WO-NATIVE-UBUNTU-EXECUTOR-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4dac9dc3f7c71e72de9622fe56cbbefcf402739d",
+  "summary": "HANDOFF_COMPLETED (control/infrastructure WO; реализация в границах R1-скоупа завершена, машина U1 не выделена): substantive HEAD 4dac9dc3f7c71e72de9622fe56cbbefcf402739d, tree 013b55754a79124d66c2728e73d0b521031cd81f (base d07e75e68c20599e4b942aefb20b4b3922985219). Deliverables: (1) docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md — WO с целевой архитектурой U1 native Ubuntu AUTHOR/DEV/PRIMARY EXECUTOR + U2 outenemy external REPRO/VERIFY + Windows UI/historical only; (2) docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md — контракт среды R2 WAITING_HOST + процедура freeze fingerprint по факту; (3) docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md — WINDOWS_WSL_EXECUTOR=HISTORICAL_ONLY + WINDOWS_ALLOWED_FOR_NEW_SCIENCE=NO effective 2026-09-27 (owner decree), DEFAULT_AUTHOR_EXECUTOR=NATIVE_UBUNTU_R2 PROPOSED с условиями активации (frozen fingerprint + U1-U5 + NC-U1..U5 + fresh review/verify + Human Gate); (4) surfaces: AGENTS.md, AGENT_START, HARNESS_AUTONOMOUS_EXECUTION_RU.md, scheduler-policy.v1.json (rev NL-N5-2026-09-27-R2, executor_environment_policy), docs/ROADMAP.md, docs/work/WORK_QUEUE.md (INFRA3-003), docs/infra/ROADMAP.md (INFRA3 = native Ubuntu reproducible scientific executor), project/infra-plan.json (INFRA3-003, без runner-регистрации). Validation: check-consistency ok=true; workflow lint blocking=0; unittest 3 FAIL = pre-existing Windows-CRLF артефакт base d07e75e (воспроизведён на чистом base-worktree, вне diff, на hosted CI зелёный) — зафиксировано честно в event 0003; work_cli validate — без нарушений (NOTE-1 checkpoint deviation class задокументирован в passport/branch-passport). Научная история не тронута: ENGINE_ENVIRONMENT_R1.md неизменён, NL5-002-E результат и границы NL5/NL6/external_reproductions=0 не менялись, scientific runs не выполнялись, secrets/paid compute/runner registration отсутствуют. Diff scope: только allowed_paths паспорта (AGENTS.md, AGENT_START, HARNESS_AUTONOMOUS, scheduler-policy, ROADMAP, WORK_QUEUE, infra ROADMAP, infra-plan, WO/R2-doc/policy-doc, EX-каталог). Открытые: gates U1-U5 и NC-U1..U5 = WAITING_HOST до выделения машины; до активации R2 новые scientific WO = честный HARD_BLOCKED (resume condition: owner выделяет U1). Branch: control/native-ubuntu-executor-r1 (pushed, non-force).",
+  "command_refs": [
+    "git -C C:\\NanoLab\\control-native-ubuntu rev-parse HEAD -> 4dac9dc3f7c71e72de9622fe56cbbefcf402739d",
+    "git -C C:\\NanoLab\\control-native-ubuntu rev-parse HEAD^{tree} -> 013b55754a79124d66c2728e73d0b521031cd81f",
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> ok:true",
+    "PYTHONPATH=scripts python -m harness.workflow_lint -> blocking=0",
+    "git -C C:\\NanoLab\\control-native-ubuntu push origin control/native-ubuntu-executor-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NATIVE-UBUNTU-EXECUTOR-R1/summary.md",
+    "docs/work/executions/EX-NATIVE-UBUNTU-EXECUTOR-R1/branch-passport.md",
+    "docs/work/executions/EX-NATIVE-UBUNTU-EXECUTOR-R1/events/0002-continuation-contract-and-surfaces.json",
+    "docs/work/executions/EX-NATIVE-UBUNTU-EXECUTOR-R1/events/0003-validation-recorded.json",
+    "docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md"
+  ],
+  "next_action": "FRESH REVIEWER (review/native-ubuntu-executor-r1): architecture/scope/pins audit на exact 4dac9dc; затем FRESH VERIFIER (verify/native-ubuntu-executor-r1) — independent contract/policy check; затем Human Gate (merge). Параллельно owner: выделить U1 (native Ubuntu, не WSL/VM) — после этого freeze fingerprint, gates U1-U5, NC-U1..U5, review/verify миграции, активация DEFAULT_AUTHOR_EXECUTOR=NATIVE_UBUNTU_R2.",
+  "blocker": null
+}

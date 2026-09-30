@@ -4,6 +4,7 @@
 
 | Work ID | Результат | Приёмка |
 |---|---|---|
+| INFRA3-003 (parallel capability, вне NL-вертикали) | **WO-NATIVE-UBUNTU-EXECUTOR-R1** — native Ubuntu R2 author/executor environment (`U1 = AUTHOR_UBUNTU`); `WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY` (effective 2026-09-27, owner decree); `DEFAULT_AUTHOR_EXECUTOR = NATIVE_UBUNTU_R2` PROPOSED до validation gates U1–U5 + NC-U1..U5; outenemy остаётся внешней репродукцией (U2). **IN_PROGRESS** — ветка `control/native-ubuntu-executor-r1`; NEXT_ACTION: выделить U1, freeze fingerprint, gates, review/verify, Human Gate. Доки: `docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`, `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`, `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md` | Acceptance WO = документы + honest статусы + review/verify; acceptance МИГРАЦИИ = все gates PASS (отдельная точка после выделения U1) |
 | NL0-001 | Проверить до трёх небольших эталонов E1 и кандидата шарнира E2 | **ACCEPTED** — выбран DSDNA8/MD для E1 и Shi–Castro–Arya hinge family для E2; exact sources/evidence сохранены |
 | NL0-002 | Аудит зависимостей, входных данных и прав | **ACCEPTED** — E1 CLEAR (GPL-3.0, DOWNLOAD_ON_SETUP), E2 UNKNOWN (REFERENCE_ONLY); матрица лицензий и owner-варианты опубликованы |
 | NL0-003 | Пререгистрировать E1 и подготовить постановку E2 | **ACCEPTED** — `E1-PROTO-R1` пререгистрирован (условия verbatim, критерий из upstream `quick_compare`), `E2-SETUP-R1` подготовлен (первый шарнир `0b`, требования угла/целостности, decision rule 298 K vs 300 K); недостающие значения не выдуманы |

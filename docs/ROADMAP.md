@@ -81,6 +81,8 @@ Release `nanolab-components 0.1.0` включает machine-readable schema, fam
 
 Подготовить protected self-hosted CPU route и reproducible scientific executor. Это capability work, а не scientific acceptance.
 
+Активная задача линии (2026-09-27): `WO-NATIVE-UBUNTU-EXECUTOR-R1` — native Ubuntu R2 author/executor environment (`U1 = AUTHOR_UBUNTU`) и вывод Windows/WSL2 из mandatory execution path (`WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY` effective; `DEFAULT_AUTHOR_EXECUTOR = NATIVE_UBUNTU_R2` PROPOSED до validation gates U1–U5 + NC-U1..U5). INFRA3 определяется как native Ubuntu reproducible scientific executor. Контракт: `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`, policy: `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`. Это не scientific acceptance и не меняет NL5/NL6 границы.
+
 ### 5. NL6-001 — E5 driven DNA component
 
 Отдельный HIGH scientific Work Order и preregistration: явное внешнее воздействие, нагрузка, state/angle distributions, success/failure rule, return/reversibility, repeated cycles, structural integrity, uncertainty и ограничения модели. Результат называется externally driven component, не автономным мотором/нанороботом.

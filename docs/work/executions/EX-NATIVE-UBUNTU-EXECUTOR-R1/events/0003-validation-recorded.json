@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-27T12:45:00Z",
+  "execution_id": "EX-NATIVE-UBUNTU-EXECUTOR-R1",
+  "work_order_id": "WO-NATIVE-UBUNTU-EXECUTOR-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d0f994a8b089e7d5d6b2f2370893f3e19045ef4b",
+  "summary": "CONTINUATION (локальные механические проверки этой control-ветки; scientific execution не выполнялась): (1) python -m harness.cli check-consistency -> ok:true (scheduler current_checkpoint/next_work_order согласованы с project/state.json; новые поля executor_environment_policy валидации не нарушают; project/plan.json и project/state.json НЕ изменялись). (2) python -m harness.workflow_lint -> blocking=0. (3) python -m unittest discover tests -> 3 FAIL в tests.test_release_contract.TestExamplePackage (test_example_manifest_self_consistent, test_example_package_passes, test_reproduce_self_test): sha256/size_bytes mismatch рабочего дерева против examples/release/nanolab-components-v0.1/RELEASE_MANIFEST.json. УСТАНОВЛЕНО PRE-EXISTING: те же 3 падения воспроизведены на чистом base d07e75e68c20599e4b942aefb20b4b3922985219 во временном worktree (git worktree add -> unittest -> те же FAIL -> worktree удалён) — это Windows-специфичный CRLF-артефакт чекаута (core.autocrlf=true конвертирует LF->CRLF в working copy, manifest построен на LF); на hosted CI (ubuntu-latest, HISTORY: exact-head run 35509262809 success на этой линии) тесты зелёные. К change-набору этой ветки отношения не имеет (diff не затрагивает examples/release/**); исправление CRLF-политики Windows-чекаутов — вне scope и де-факто закрывается настоящей миграцией на native Ubuntu (autocrlf false по контракту R2). Остальные тесты (включая task bus, work_cli, workflow lint негативы) — PASS.",
+  "command_refs": [
+    "PYTHONPATH=scripts python -m harness.cli check-consistency -> {\"ok\": true}",
+    "PYTHONPATH=scripts python -m harness.workflow_lint -> blocking=0",
+    "PYTHONPATH=scripts python -m unittest discover -s tests -> 3 FAIL (pre-existing, base-identical)",
+    "git -C C:\\NanoLab\\main worktree add C:\\NanoLab\\scratch\\basecheck d07e75e...; unittest tests.test_release_contract -> same 3 FAIL; worktree remove --force"
+  ],
+  "evidence_refs": [
+    "scripts/harness/contracts.py (check_consistency: scheduler<->state cross-check)",
+    "examples/release/nanolab-components-v0.1/RELEASE_MANIFEST.json (LF-canonical manifest)",
+    "docs/work/executions/EX-INFRA1-001-R1/ (precedent: hosted CI ubuntu-latest = green на той же поверхности)"
+  ],
+  "next_action": "IMPLEMENTER: event 0004 HANDOFF_COMPLETED + summary.md + push; передать fresh Reviewer и fresh Verifier на exact HEAD.",
+  "blocker": null
+}
