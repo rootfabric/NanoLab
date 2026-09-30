@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INFRA3-NATIVE-UBUNTU-R2-R1",
+  "work_order_id": "WO-INFRA3-R2-ACTIVATION-R1",
+  "checkpoint": "INFRA3",
+  "base_sha": "8205781def7179d6bdfa6eb7ab2a84d46776649c",
+  "branch": "infra/infra3-native-ubuntu-r2-activation-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-INFRA3-R2-ACTIVATION-R1.md",
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/**",
+    "scripts/r2/**",
+    "tests/test_r2_activation_tooling.py",
+    "config/infra/r2-activation.v1.json",
+    "docs/work/WORK_QUEUE.md",
+    "project/infra-plan.json",
+    "docs/infra/ROADMAP.md"
+  ],
+  "started_at_utc": "2026-09-30T14:34:36Z",
+  "status": "STARTED"
+}
