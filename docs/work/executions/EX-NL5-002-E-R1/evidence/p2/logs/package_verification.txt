@@ -1,0 +1,17 @@
+# P2 package verification (nanolab-components 0.1.1, extracted from canonical git objects origin/main:releases/nanolab-components-v0.1.1)
+# RELEASE_MANIFEST.json sha256 = 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef (EXACT MATCH to frozen pin)
+# 36 real files extracted; verify reports 42 entries - 7 errors are exclusively the documented FR-3 __pycache__ cpython-310 manifest entries (identical signature to P1 verification evidence); all 35 real files PASS
+{
+  "mode": "verify",
+  "ok": false,
+  "files": 42,
+  "errors": [
+    "missing file: convention/nlbl_convention/__pycache__/__init__.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/canonical.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/hf_canonical.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/observables.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/oxdna_conf.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/oxdna_topology.cpython-310.pyc",
+    "missing file: convention/nlbl_convention/__pycache__/reproduction_rule.cpython-310.pyc"
+  ]
+}

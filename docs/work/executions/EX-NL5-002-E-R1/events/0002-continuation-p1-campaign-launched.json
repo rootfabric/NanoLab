@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-p1-campaign-launched",
+  "timestamp_utc": "2026-09-20T14:36:53Z",
+  "execution_id": "EX-NL5-002-E-R1",
+  "work_order_id": "WO-NL5-002-E-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "SCIENTIFIC_OPERATOR",
+  "subject_sha": "8e6a1b254afe51dc223f1d46794cebecfcd54c93",
+  "summary": "CONTINUATION: P1 leg launched (technical phase record; NO scientific data observed or produced yet). Sequence after START commit 8e6a1b2: (1) P1 identity gate PASS before any physics - CURRENT_HOST_IS_P1/P1_ACCESSIBLE/P1_ENVIRONMENT_MATCH all true, fingerprint exact match vs ENGINE_ENVIRONMENT_R1 incl. kernel 6.18.33.2-microsoft-standard-WSL2 (evidence/env/environment_fingerprint_p1.txt). (2) WSL P1 workspace created on Linux filesystem ~/nanolab-platform-sensitivity-r1/P1 (runs never on /mnt/c, never in Git). (3) Package nanolab-components 0.1.1 transferred byte-exact from canonical git objects (Linux-side extraction to avoid Windows autocrlf corruption); RELEASE_MANIFEST.json sha256 = 88c1f58061f15fde44225900f0577acbf2634d3f4a75fb96a2cedca24fd1bfef EXACT MATCH to frozen pin; all 35 real files PASS digests; 7 verify errors are exclusively the documented FR-3 __pycache__ pyc manifest entries (non-committed cpython-310 bytecode of the P2 machine, not fabricable, non-scientific; owner never accepted the optional v0.1.2 repair) (evidence/logs/package_verification.txt). (4) Engine oxDNA 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 acquired as tarball with sha256 40a6dd36...baa04 EXACT MATCH to published provenance pin; FRESH P1-convention build: cmake 3.31.6 user-local, cmake ../oxdna-src -DCMAKE_BUILD_TYPE=Release -DCUDA=OFF -DMPI=OFF, effective DOUBLE=ON/NATIVE_COMPILATION=ON/JSON_ENABLED=ON (CMakeCache), make -j20, CONFIGURE_EXIT=0 BUILD_EXIT=0 wall 16 s, NO source edits, NO GCC11 B-R2 patch (not needed on gcc13 - no STOP condition triggered); binary oxDNA sha256 363356b9789fab8e0dab314bd66f92dc0e3a7e2cb3810e24b031614cebb45058, size 3375976 B byte-identical to ENGINE_ENVIRONMENT_R1 section 4 size (fresh-build sha256 difference anticipated by section 9.4) (evidence/engine/). (5) Upstream inputs gauravarya77/DNA-hinge-simulations @ 23fd1ff7 acquired via Windows transport with size+blob_sha1+sha256 gates 5/5 PASS, WSL-side re-verification PASS (evidence/logs/upstream_digest_gate.json). (6) frame0 oracle self-check with packaged analyze_hinge.py: 0b 66.886745865 EXACT, 32b 77.477102136 EXACT, both status OK (evidence/logs/frame0_0b.json, frame0_32b.json). (7) Technical smoke PLATSENS-P1-SMOKE-001 (400 steps, NOT a protocol run): exit 0, stderr empty, print_energy_every=100 overlay verified. (8) 20 protocol runs generated (evidence/seeds_runmap_p1.json: frozen seeds verbatim, replica input = upstream verbatim + overlay ONLY seed/steps/paths/print_energy_every=100, print_conf_interval=4e3 verbatim) and launched via detached setsid scheduler PID 349 at 2026-09-20T14:32:24Z, P1_MAX_CONCURRENCY=8 (first wave PLATSENS-P1-0B-S001..S008 running, 8 single-thread oxDNA processes, load avg 6.41, RAM 775 MB); processes survive agent session closure (verified across wsl sessions); per-run command/PID/start-UTC/stdout/stderr/exit_code/wall recorded in run dirs. Monitoring restricted to process/CPU/memory/energy-row/exit-code; no angle/shift/verdict examination until the frozen set completes. ETA first wave ~4-5 h, full campaign ~8-10 h, within 72 h platform budget.",
+  "command_refs": [
+    "wsl -d Ubuntu: cmake ../oxdna-src -DCMAKE_BUILD_TYPE=Release -DCUDA=OFF -DMPI=OFF; make -j20 (ENGINE_ENVIRONMENT_R1 section 3 convention)",
+    "python3 reproduction/reproduce.py verify -> manifest sha256 88c1f580...bfef MATCH",
+    "python3 convention/analyze_hinge.py frame0 --conf 0b.conf --topology 0b.top --manifest arm-manifest-0b.json -> 66.886745865 OK",
+    "setsid nohup bash scheduler.sh (queue 20 runs, max 8 concurrent) -> logs/launch_log.txt"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/env/environment_fingerprint_p1.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/engine/build_provenance.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/engine/build_cmake.log",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/engine/build_make.log",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/logs/upstream_digest_gate.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/logs/package_verification.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/logs/frame0_0b.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/logs/frame0_32b.json",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/logs/launch_log.txt",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/seeds_runmap_p1.json"
+  ],
+  "next_action": "SCIENTIFIC_OPERATOR: monitor technical status only; on 20/20 completion collect per-run metadata + artifact digests, run packaged per-replica analysis, commit P1-complete evidence; P2 remains REQUIRED for paired statistics (no shift/CI/ratio/verdict computation from P1 alone).",
+  "blocker": null
+}
