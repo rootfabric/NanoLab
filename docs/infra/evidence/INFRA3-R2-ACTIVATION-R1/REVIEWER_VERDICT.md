@@ -145,3 +145,41 @@ mutations A/B/C в copies + git checkout --                                     
 **PASS** — при условиях: findings MINOR-1/MINOR-2 учесть repair-ревизией (или явной doc-ревизией формулировок) до либо при фактической активации на U1; NOTE-1..NOTE-4 — в бэклог. Merge остаётся Human Gate. R2 остаётся `WAITING_HOST / NOT_ACTIVE`, `AUTHOR_U1 = NOT_ASSIGNED`, gates/NC `WAITING_HOST`, claim `C0_SOFTWARE_ONLY` не превышен.
 
 — FRESH REVIEWER (CONTROL), 2026-09-30, worktree `review-infra3-r2-activation` @ df6c2122cbdf60cebc9e6aa8348aea12685f9d00
+
+---
+
+## Review refresh R1 (post-repair) @ c12b88b
+
+- Дата: 2026-09-30 (UTC)
+- Refresh-объект: repair R1 ветки `infra/infra3-native-ubuntu-r2-activation-r1` — substantive `7a357b1` + reclassification `c12b88b8b290592c5357755aa1844af007a0121e` (post-repair HEAD), поверх df6c212; review-база моего первичного вердикта — 89fdbb0.
+- Метод: `git fetch --all --prune`; ff-only merge в review-ветку невозможен (review-ветка дивержировала моим вердикт-коммитом 89fdbb0 — by design), поэтому c12b88b верифицирован в detached worktree на exact HEAD; вердикт-файл дополняется на моей review-ветке.
+
+### Scope repair-дельты (измерено)
+
+`git diff --name-status df6c212..c12b88b` (по коммитам 7a357b1 + c12b88b): ровно `scripts/r2/{cli,engine_build,fingerprint,gates}.py`, `tests/test_r2_activation_tooling.py`, `summary.md` (errata §6, append), `WO-INFRA3-R2-ACTIVATION-R1.md` (errata §8, append), `events/0005-repair-r1-completed.json` (A в 7a357b1, M в c12b88b — reclassification), `evidence/repair-r1-gate-pass-BLOCKED_HOST.json` (A). Посторонних файлов нет; WORK_QUEUE/infra-plan/config/passport/state-файлы не тронуты. (В diff `89fdbb0..c12b88b` дополнительно виден только `D` моего вердикт-файла — артефакт сравнения дивергированных веток, не действие repair.)
+
+### Finding → fix → подтверждение (все измерено на exact c12b88b, dev-хост outenemy)
+
+| Finding | Fix в repair R1 | Подтверждён |
+|---|---|---|
+| MINOR-1 (guard покрытие) | `require_u1_or_exit` добавлен в `gate` и `nc-verify`; точное покрытие задокументировано в WO errata §8 + summary errata §6(1): build-engine/run/gate/nc-verify = U1-only; fingerprint/check-host/nc-plan/report/activation-check = read-only/аналитика | ДА: мой собственный repro — `gate --report /tmp/x.json --gate U1 --status PASS --evidence <непустой файл>` на outenemy → **BLOCKED_HOST exit 2**, файл отчёта НЕ создан; `nc-verify` → BLOCKED_HOST exit 2; build-engine → exit 2; committed `evidence/repair-r1-gate-pass-BLOCKED_HOST.json` байт-совпадает с текущим поведением |
+| MINOR-2 (evidence provenance) | `GateReport.set_status('PASS')` записывает `evidence_sha256` (sha256 файла) + `evidence_size` — PASS пинует конкретный контент | ДА: код (`gates.py`), тест (`test_pass_requires_existing_nonempty_evidence` — assert на sha256/size), независимый API-repro в tmp (digest совпал с `hashlib.sha256`). Расположение внутри raw-дерева — честно отложено как future hardening |
+| NOTE-1 (evidence не самодостаточен) | `invocation` (полная command line) добавлена в outputs `gate` (RECORDED), `nc-verify`, `activation-check`; ранее опубликованные evidence не перезаписываются (errata §6(5)) | ДА: код cli.py (3 точки emit); BLOCKED_HOST-evidence без invocation соответствует фактическому выводу guard-пути |
+| NOTE-2 (ledger tamper-evidence) | Не фиксится; явно задокументировано как future hardening (summary errata §6(6)) | ДА (честный defer, а не молчаливый пропуск) |
+| NOTE-3 (hostname deny-list) | Сравнение full-name И short-name, case-insensitive (`fingerprint.py`) | ДА: `outenemy.lab.local` → ineligible с named-причиной; `OUTENEMY` → ineligible; тест `test_outenemy_fqdn_form_also_rejected` |
+| NOTE-4 (provenance commit) | `provenance_record(source_commit=verified)` из CLI (`actual_commit` после `verify_pinned_source`) + флаг `source_commit_verified` | ДА: код + тест (verified → 40-hex pin + `source_commit_verified=True`; без верификации → плейсхолдер + `False`) |
+
+### Machine-проверки на exact c12b88b (независимый прогон)
+
+- `PYTHONPATH=scripts python3 -m pytest tests/test_r2_activation_tooling.py -q` → **53 passed** (+1 к моим 52: FQDN-тест; gate/nc-verify CLI-тесты переписаны host-условными без ослабления: на eligible-хосте по-прежнему требуют REJECTED/pass-логику)
+- `python3 -m pytest tests/ -q` → **427 passed** (374 канонических + 53)
+- `check-consistency` → ok:true; `workflow_lint` → blocking=0
+- `work_cli validate docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1` → ok:true, `has_terminal_handoff: true`, **`has_post_terminal_corrections: true`** — честно отражает post-terminal event 0005
+- jsonschema Draft202012: все 5 событий (0001–0005) VALID; timestamps монотонны (…14:51:50Z < 0005 15:16:11Z); event 0005 = CONTINUATION_CHECKPOINT (reclassification c REPAIR_COMPLETED после терминала — сам инцидент и фикс честно в истории коммитов; валидатор это принимает и помечает)
+- Scope/passport: passport_sha256 не изменился (73caa3cf…), статус HANDOFF_READY; статусы границ не тронуты
+
+### Refresh-вердикт
+
+**PASS** — repair R1 закрывает MINOR-1 и MINOR-2 фактически (не редактурой), смягчает NOTE-1, закрывает NOTE-3/NOTE-4, NOTE-2 честно defer'нут. Все 6 machine-инвариантов подтверждены заново на c12b88b; новых findings не обнаружено. Оставшиеся открытые пункты (в бэклог, не блокируют): raw-tree binding для gate evidence, ledger tamper-evidence (hash-chain/reconcile), `SystemdTransientLauncher.run` остаётся stub'ом (вне repair-scope; задокументированное ограничение — CLI default `--launcher systemd` на U1 потребует либо stub-removal, либо `--launcher direct`; рекомендация зафиксирована в первичном вердикте). Merge остаётся Human Gate; R2 остаётся `WAITING_HOST / NOT_ACTIVE`.
+
+— FRESH REVIEWER (CONTROL), refresh R1, 2026-09-30, верификация на detached worktree @ c12b88b8b290592c5357755aa1844af007a0121e
