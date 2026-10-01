@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-30T14:56:00Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8205781def7179d6bdfa6eb7ab2a84d46776649c",
+  "summary": "Начат control Work Order WO-NL5-ACCEPTANCE-POLICY-R2 «Candidate reproduction rule v0.2 + HG-B package» (central-agent mission 2026-09-30 §19-§28; open owner decision NL5-ACCEPTANCE-POLICY от 2026-09-20, record docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md). Контекст: canonical main = 8205781def7179d6bdfa6eb7ab2a84d46776649c; scientific facts НЕ меняются: NL5-001 = ACCEPTED, NL5-002 = WAITING_HUMAN terminal verified MISMATCH / NOT accepted, NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE immutable, PLATFORM-SENSITIVITY-R1 = PLATFORM_INSENSITIVE (frozen R1 study, FULLY VERIFIED), NL5 = IN_PROGRESS, external_reproductions = 0, NL6-001 = LOCKED. Цель — pre-data candidate-пакет для Human Gate B (полный proposal, не вопрос): (1) docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md — предложение владельцу утвердить принцип «NL5 acceptance requires successful fresh external reproduction under preregistered v0.2 distribution-based rule» + границы действия approval; (2) docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md — candidate protocol v0.2 (status CANDIDATE / PRE-DATA / NOT FROZEN): scientific question (distributional equivalence hinge-angle observables между author U1 и external U2), hypotheses, platform definitions (P-A = AUTHOR_U1 native Ubuntu R2, P-B = U2 outenemy external; Windows исключён), variants (primary 0b/32b, controls 11b/53b; 74b NOT_MEASURED исключён до arm-manifest-v2), fresh seeds (deterministic sha256-цепочка от protocol anchor, positive int32, frozen exclusion list всех известных R1 confirmatory seeds), N (по 10 реплик на variant на платформу — power/budget planning из операционных данных R1: platform study n=10 x 2 x 2 исполним на CPU), observables (per-replica median_deg упакованной конвенцией analyze_hinge.py — convention НЕ заменяется), distribution metrics (median shift, pooled within-platform SD(n-1)/MAD, standardized effect d, percentile bootstrap CI, overlap coefficient), decision rule (TOST-подобная equivalence: 90% CI(shift) внутри +-0.5 pooled SD; margin 0.5 фиксирован a priori по стандартной конвенции medium-effect границы, НЕ подобран под observed R1 shifts) с frozen vocabulary REPRODUCED | REPRODUCED_WITH_DEVIATION | INCONCLUSIVE | FAILED_TECHNICAL | MISMATCH, technical failure policy (retry новыми attempt id, replacement allowance 20%, N_min=15), budget (80 confirmatory + 16 replacement runs; wall <= 168ч/платформа; STOP/BUDGET_EXCEEDED), stop conditions, явное разделение technical/numerical/distributional reproducibility/scientific consistency, historical R1 data ТОЛЬКО в appendix power/budget planning; (3) scripts/nl5/repro_v02_seeds.py — deterministic seed generation + record JSON c digest + exclusions; (4) tests/test_nl5_repro_v02_seeds.py. Freeze chain В ЭТОМ WO НЕ ИСПОЛНЯЕТСЯ: candidate -> HG-B owner approval -> Director freeze record (отдельный WO) -> fresh scientific review/verify FROZEN protocol -> только потом scientific execution (и то только после R2 ACTIVE). Запрещено: freeze протокола, любые simulations, пересмотр v0.1 envelope/thresholds, переклассификация MISMATCH, изменения project/state.json, объявление NL5 ACCEPTED, открытие NL6-001. Risk HIGH (acceptance-policy surface), claim C0_SOFTWARE_ONLY.",
+  "command_refs": [
+    "git -C /home/rdpuser/NanoLab/main fetch --all --prune -> origin/main = 8205781def7179d6bdfa6eb7ab2a84d46776649c",
+    "git -C /home/rdpuser/NanoLab/main worktree add /home/rdpuser/NanoLab/nl5-acceptance-policy -b control/nl5-acceptance-policy-r2 8205781def7179d6bdfa6eb7ab2a84d46776649c",
+    "git -C /home/rdpuser/NanoLab/nl5-acceptance-policy rev-parse HEAD -> 8205781def7179d6bdfa6eb7ab2a84d46776649c"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md (open decision NL5-ACCEPTANCE-POLICY)",
+    "docs/release/REPRODUCTION_RULE_V0_1.md (immutable v0.1 rule)",
+    "docs/evidence/NL5-002-E/PREREGISTRATION_FREEZE_R1.md (frozen seeds S001-S010, exclusion source)",
+    "docs/work/WO-NL5-002-E-R1.md (platform study design; budget/wall calibration)",
+    "docs/work/WO-NL5-002-C2-R1.md (v0.1 mechanical comparison structure)"
+  ],
+  "next_action": "IMPLEMENTER: HG-B proposal + candidate protocol v0.2 + seed tool + тесты + sync; validation; summary + handoff; затем fresh Reviewer + fresh Verifier на exact HEAD; merge = Human Gate; HG-B = отдельное owner-решение.",
+  "blocker": null
+}

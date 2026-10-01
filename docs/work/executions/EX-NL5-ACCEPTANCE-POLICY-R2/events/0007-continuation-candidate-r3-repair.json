@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0007-continuation-candidate-r3-repair",
+  "timestamp_utc": "2026-10-01T01:21:10Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "bc83af2ff3b5951544491dd1760907662ff0e39a",
+  "summary": "CONTINUATION (post-terminal correction, repair R3 по central closure mission): candidate переведён в revision R3 (ветка control/nl5-acceptance-policy-r3 от exact a9d7d07; R1/R2 тексты в git history). Repair Map: (а) N-CONTRACT — устранён дефект R1/R2 (генератор выдавал 10 seeds/вариант при протокольных 40 primaries): generator API теперь выдаёт ровно протокольные cardinalities; после declared N-grid search SELECTED_N = 64 → seed streams 0b 64 / 32b 64 / 11b 10 / 53b 10 = 148 fresh identities (mission §18: record обязан содержать именно выбранный N), PRIMARY_REPLICAS=64 / CONTROL_REPLICAS=10 machine constants; (б) DECLARED N-GRID SEARCH зафиксирован ДО вычислений (grid {40,48,64,80,96,128}, headroom ratio ≤ 0.80 по ОБОИМ primaries — safety headroom, не граница 1.0; δ/статистика/decision rule БЕЗ ИЗМЕНЕНИЙ), mechanical run_n_grid на committed R1 paired planning-данных: полный grid сохранён (evidence repro-v0-2-n-grid-R3.json, неудобные строки не выбрасывались): N=40 0b0.124/32b1.298 FAIL; N=48 FAIL; N=64 0b0.071/32b0.736 PASS ← SELECTED; N=80/96/128 PASS; (в) MANDATORY GATE FAIL ⇒ BLOCKED — «owner accepts risk → execute despite failed gate» явно ЗАПРЕЩЁН (§12.3); разрешение только новой preregistered revision, сама проходящей gate; (г) whole-tree seed collision scan (literal git grep -F) с deterministic continuation rule, зафиксированным до вычислений: identity в index-порядке, tree-collision identity SKIP + запись в record (генерация R3: 0b 10 / 32b 11 / 11b 10 / 53b 10 skips на a9d7d07-tree); freeze-time scan исключает seed-record/protocol paths; (д) PROTOCOL↔RECORD CONSISTENCY GATE — новый machine модуль scripts/nl5/repro_v02_freeze_gate.py: protocol §7/§8 N == seed-record variant_counts == budget derivation (296 confirmatory + 60 replacement = MAX 356 runs; wall ≤ 560ч/платформа) == N_min-базис (51/8) == execution plan; любое расхождение = FREEZE_GATE_FAIL (тест PASS + FAIL-направления); (е) HG-B proposal обновлён: единый canonical N-текст (primaries 0b/32b = 64 paired replicas/platform; controls 11b/53b = 10), §4.1 переписан — риск 32b UNCERTAIN устранён grid-выбором N=64 (0.736 ≤ 0.80), accept-risk опция удалена; (ж) WORK_QUEUE NL5-002 → N=64/10. Seed record R3: repro-v0-2-seed-record-PRE_DATA_R3.json, record_sha256 eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b (R1/R2 records не переписывались). Tests: 25 seed-tool / 399 full — зелёные (включая seed count contract 64/64/10/10=148, global uniqueness 148, 34 exclusions, tree-collision continuation mock + real-scan literal hit, protocol-vs-record mismatch FREEZE_GATE_FAIL, N-grid deterministic, selected-N deterministic, headroom 0.80, budget derivation 356, replacement 20%, N_min consistency). Границы: PRE-DATA, NOT FROZEN, 0 simulations, факты/границы не тронуты. Точный счёт тестов полного набора: 399 passed (в commit-сообщении bc83af2 ошибочно 402 — cosmetic, фактические прогоны в command_refs).",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m pytest tests/test_nl5_repro_v02_seeds.py -q -> 25 passed",
+    "python3 -m pytest tests/ -q -> 399 passed",
+    "PYTHONPATH=scripts run_n_grid on committed R1 paired data -> SELECTED_N=64 (0b 0.071 / 32b 0.736, headroom 0.80)",
+    "PYTHONPATH=scripts seed_record regeneration with literal_tree_collision_scan -> record_sha256 eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b; fresh_total 148; skips 10/11/10/10",
+    "git rev-parse HEAD -> bc83af2ff3b5951544491dd1760907662ff0e39a; tree 64a861c3a6c4d7009162d957c51863e0d98b7ed6"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md (candidate R3)",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R3.json",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-n-grid-R3.json",
+    "scripts/nl5/repro_v02_freeze_gate.py",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md"
+  ],
+  "next_action": "FRESH SCIENTIFIC REVIEWER R3 (review/nl5-acceptance-policy-r3): инвариант-согласованность protocol/record/budget/N_min/gate-N + явный ответ на non-post-hoc вопрос (δ/N/seeds/variants/thresholds не выбраны по future data); затем FRESH VERIFIER R3; затем integration branch + hosted CI; HG-B.",
+  "blocker": null
+}

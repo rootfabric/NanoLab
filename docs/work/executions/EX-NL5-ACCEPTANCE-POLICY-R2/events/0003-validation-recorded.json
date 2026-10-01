@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-30T15:04:54Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ee40984a9a6a08c4d3c6182b5ba400a365bf59e5",
+  "summary": "VALIDATION_RECORDED (software-валидация candidate-пакета, НЕ scientific validation): python3 -m pytest tests/ -q => 387 passed (374 canonical + 13 новых seed-tool тестов; 0 fail); PYTHONPATH=scripts python3 -m harness.cli check-consistency => ok:true; PYTHONPATH=scripts python3 -m harness.workflow_lint => blocking=0; work_cli validate docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2 => ok:true (mid-flight); seed-record determinism: повторная генерация даёт идентичный record_sha256 5c95664485e00069379e962f44b3ba247f00030e02a7375a27d3b4ab441f5a9c; doc-consistency тесты подтверждают синхронность tools ↔ protocol text (anchor, N=10, rule id, δ=0.5, frozen vocabulary). Ограничения (честно): это валидация ДОКУМЕНТА И TOOLING, не протокола как научного объекта — protocol review (научная адекватность margin/статистики/power) — задача fresh scientific Reviewer; актуальный scientific freeze произойдёт ТОЛЬКО после HG-B отдельной Director-записью с повторной генерацией seed record и whole-tree literal search exclusions (прецедент platform-study verifier).",
+  "command_refs": [
+    "python3 -m pytest tests/ -q -> 387 passed",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency -> ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint -> blocking=0",
+    "PYTHONPATH=scripts python3 scripts/harness/work_cli.py validate docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2 -> ok:true"
+  ],
+  "evidence_refs": [
+    "tests/test_nl5_repro_v02_seeds.py",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + passport HANDOFF_READY + event 0004 handoff; затем fresh Reviewer + fresh Verifier; merge = Human Gate; HG-B — owner.",
+  "blocker": null
+}
