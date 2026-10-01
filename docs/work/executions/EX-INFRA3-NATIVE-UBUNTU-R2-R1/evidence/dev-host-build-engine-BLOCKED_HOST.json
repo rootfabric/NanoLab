@@ -1,0 +1,9 @@
+{
+  "command": "build-engine",
+  "status": "BLOCKED_HOST",
+  "eligible": false,
+  "reasons": [
+    "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)"
+  ],
+  "r2_status": "WAITING_HOST / NOT_ACTIVE"
+}

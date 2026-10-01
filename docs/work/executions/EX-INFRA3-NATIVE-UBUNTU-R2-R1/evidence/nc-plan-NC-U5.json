@@ -1,0 +1,5 @@
+{
+  "control": "NC-U5",
+  "procedure": "1) запустить disposable scientific-process через run (ledger); 2) deliberately kill процесс; 3) machine-check: ledger содержит FAILED_TECHNICAL с сохранённой попыткой; retry получает новый attempt id.",
+  "note": "execution only on eligible U1 host"
+}

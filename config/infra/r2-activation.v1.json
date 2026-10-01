@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "r2_activation_contract",
+  "revision": "r2-activation-r1",
+  "canonical_sources": [
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
+    "docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md",
+    "docs/work/WO-INFRA3-R2-ACTIVATION-R1.md"
+  ],
+  "engine": {
+    "source": "lorenzo-rovigatti/oxDNA",
+    "pinned_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "rights": "GPL-3.0 (NL0-002); DOWNLOAD_ON_SETUP",
+    "intended_flags": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "DOUBLE": "ON",
+      "CUDA": "OFF",
+      "MPI": "OFF"
+    },
+    "binary_sha_equality_with_r1_required": false,
+    "note": "engine version change requires a separate future WO; provenance (source commit, tree digest, compiler, cmake argv, CMakeCache pins, binary sha256+size, build log) is captured by scripts/r2/engine_build.py"
+  },
+  "canonical_paths": {
+    "git_checkout": "~/src/NanoLab",
+    "workspaces": "~/nanolab/workspaces/<execution-id>/",
+    "raw": "~/nanolab/raw/<execution-id>/<attempt-id>/",
+    "cache": "~/nanolab/cache/",
+    "tools": "~/nanolab/tools/"
+  },
+  "git_policy": {
+    "core.autocrlf": false,
+    "core.safecrlf": true,
+    "note": "physics/raw data never stored inside the Git checkout"
+  },
+  "python_environment": {
+    "kind": "pinned-venv",
+    "path": "~/nanolab/venvs/r2",
+    "required_record": ["python exact version", "pip/uv exact versions", "dependency versions", "lock/hash information"],
+    "global_pip_install": "forbidden"
+  },
+  "host_eligibility": {
+    "required": ["native Linux kernel", "virtualization none (not WSL, not VM)", "native filesystem ext4/xfs/btrfs", "native systemd", "hostname not in forbidden list"],
+    "forbidden_as_r2": ["WSL", "Docker Desktop VM", "VirtualBox VM", "Windows bind mount /mnt/c"],
+    "forbidden_hostnames": ["outenemy"],
+    "outenemy_role": "EXTERNAL_U2_ONLY"
+  },
+  "policy": {
+    "windows_wsl_executor": "HISTORICAL_ONLY",
+    "windows_allowed_for_new_science": false,
+    "default_author_executor": "NATIVE_UBUNTU_R2",
+    "default_author_executor_status": "PROPOSED",
+    "author_u1": "NOT_ASSIGNED",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "r2_activated": false,
+    "new_science_without_r2": "HARD_BLOCKED",
+    "activation_preconditions": [
+      "all gates U1-U5 PASS with existing evidence",
+      "all negative controls NC-U1..U5 PASS",
+      "frozen native-eligible fingerprint",
+      "fresh review verdict PASS",
+      "fresh verify verdict VERIFIED",
+      "human gate approved"
+    ]
+  },
+  "process_isolation": {
+    "scientific_jobs": "systemd-run transient service/scope (outside agent session)",
+    "ci_service": "github-actions-runner.service (separate unit)",
+    "ci_forbidden": ["systemctl reboot", "systemctl shutdown", "kill executor cgroup"],
+    "failure_semantics": "deliberate kill or crash => FAILED_TECHNICAL, attempt preserved in append-only ledger, retry gets new attempt id (-R1, -R2, ...)"
+  },
+  "raw_evidence": {
+    "manifest_fields": ["path", "sha256", "size", "producer", "retention"],
+    "manifest_digest": "sha256 of canonical json of the manifest",
+    "git_stores": "compact evidence only; raw trajectories never in Git",
+    "retention_default": "raw-local-persistent"
+  }
+}

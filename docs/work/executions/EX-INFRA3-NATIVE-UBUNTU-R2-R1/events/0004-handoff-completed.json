@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "timestamp_utc": "2026-09-30T14:51:50Z",
+  "execution_id": "EX-INFRA3-NATIVE-UBUNTU-R2-R1",
+  "work_order_id": "WO-INFRA3-R2-ACTIVATION-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9a6fb6248d697350c2e218d8bbadb34e2177bc8b",
+  "summary": "HANDOFF_COMPLETED (infrastructure WO; реализация в границах WO-INFRA3-R2-ACTIVATION-R1 завершена): substantive HEAD 9a6fb6248d697350c2e218d8bbadb34e2177bc8b, tree 0c73f85be4eb932ee071517914aa21dc2347273e (base 8205781def7179d6bdfa6eb7ab2a84d46776649c; START f01310e -> implementation 26f3d08 -> continuation 9a6fb62 -> handoff). Deliverables: scripts/r2/{__init__,contract,fingerprint,executor,supervisor,gates,engine_build,cli}.py + config/infra/r2-activation.v1.json + tests/test_r2_activation_tooling.py (52 теста, полный набор 426 passed) + dev-host negative controls (5 evidence-файлов) + surface sync (WORK_QUEUE INFRA3-003 append, infra-plan note append; статусы границ не менялись). Machine-инварианты в коде: attempt id никогда не переиспользуется; FAILED_TECHNICAL сохраняет попытку, retry получает новый id; gate PASS только с существующим evidence; R2_ACTIVATED=YES только при all gates+NC PASS ∧ frozen native fingerprint (outenemy исключён hostname-правилом) ∧ fresh review PASS ∧ fresh verify VERIFIED ∧ human gate approved; исполняющие subcommands отказывают (BLOCKED_HOST exit 2) вне native U1 без silent fallback. Честные границы: gates U1-U5 и NC-U1..U5 = WAITING_HOST (фактическое исполнение только после выделения U1); fingerprint R2 не снимался; oxDNA не собирался; scientific runs не выполнялись; project/state.json и project/infra-state.json не тронуты; научная история и ENGINE_ENVIRONMENT_R1.md не изменялись; runner не регистрировался; secrets/платный compute отсутствуют. Passport status синхронно переведён в HANDOFF_READY этим handoff-коммитом (урок MINOR-5 prior review); timestamps событий машинные (урок MINOR-3); passport без поля notes (урок MINOR-1); фактических схемных отклонений нет (checkpoint INFRA3 валиден паттерном ^(NL[0-8]|INFRA[0-7])$).",
+  "command_refs": [
+    "git rev-parse HEAD -> 9a6fb6248d697350c2e218d8bbadb34e2177bc8b",
+    "git rev-parse 9a6fb62^{tree} -> 0c73f85be4eb932ee071517914aa21dc2347273e",
+    "python3 -m pytest tests/ -q -> 426 passed",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency -> ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint -> blocking=0",
+    "git push origin infra/infra3-native-ubuntu-r2-activation-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/summary.md",
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/branch-passport.md",
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/events/0002-continuation-implementation-and-negative-controls.json",
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/events/0003-validation-recorded.json",
+    "docs/work/WO-INFRA3-R2-ACTIVATION-R1.md",
+    "config/infra/r2-activation.v1.json"
+  ],
+  "next_action": "FRESH REVIEWER (review/infra3-native-ubuntu-r2-activation-r1): scope/pins/invariant audit на exact substantive HEAD; затем FRESH VERIFIER (verify/infra3-native-ubuntu-r2-activation-r1) — independent rerun тестов + negative controls; затем Human Gate (merge). Параллельно owner: выделить U1 — после этого механическая активация по WO §7 (fingerprint -> build-engine -> gates -> NC -> activation-check -> review/verify -> Human Gate).",
+  "blocker": null
+}

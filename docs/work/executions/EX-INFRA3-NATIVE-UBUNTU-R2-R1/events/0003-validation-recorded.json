@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-09-30T14:50:48Z",
+  "execution_id": "EX-INFRA3-NATIVE-UBUNTU-R2-R1",
+  "work_order_id": "WO-INFRA3-R2-ACTIVATION-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "9a6fb6248d697350c2e218d8bbadb34e2177bc8b",
+  "summary": "VALIDATION_RECORDED (dev-host validation факта tooling, НЕ валидация R2): python3 -m pytest tests/ -q => 426 passed (374 canonical + 52 новых r2-теста; full suite, 0 fail, 0 skip кроме platform-conditional CLI-тестов, которые на outenemy выполняют NOT_ELIGIBLE-ветку); PYTHONPATH=scripts python3 -m harness.cli check-consistency => ok:true, errors=[], warnings=[]; PYTHONPATH=scripts python3 -m harness.workflow_lint => blocking=0; PYTHONPATH=scripts python3 scripts/harness/work_cli.py validate docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1 => ok:true (mid-flight, после event 0002; terminal добавляется handoff-коммитом); конфиг-сверка code-vs-config (ConfigContractTest): pins/policy в config/infra/r2-activation.v1.json байт-согласованы с кодом (engine commit, флаги, binary_sha_equality_with_r1_required=false, author_u1 NOT_ASSIGNED, r2_status WAITING_HOST / NOT_ACTIVE, new_science_without_r2 HARD_BLOCKED, forbidden_hostnames [outenemy]). Ограничения валидации (честно): validation выполнялась на dev-хосте outenemy как C0-среда; systemd-исполнение launcher'а не валидировалось (доступно только на eligible U1 —-by-design, argv-builder покрыт unit-тестами); сборка oxDNA не выполнялась; gates U1–U5 и NC-U1..U5 остаются WAITING_HOST.",
+  "command_refs": [
+    "python3 -m pytest tests/ -q -> 426 passed in 19.20s",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency -> ok:true, errors=[], warnings=[]",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint -> blocking=0",
+    "PYTHONPATH=scripts python3 scripts/harness/work_cli.py validate docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1 -> ok:true"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/events/0002-continuation-implementation-and-negative-controls.json",
+    "tests/test_r2_activation_tooling.py",
+    "config/infra/r2-activation.v1.json"
+  ],
+  "next_action": "IMPLEMENTER: summary.md + passport status HANDOFF_READY + event 0004 handoff; затем fresh Reviewer + fresh Verifier на exact HEAD; merge = Human Gate.",
+  "blocker": null
+}
