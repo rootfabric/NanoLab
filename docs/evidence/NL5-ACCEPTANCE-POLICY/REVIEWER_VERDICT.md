@@ -737,3 +737,69 @@ PLATFORM-SENSITIVITY-R1 FULLY VERIFIED, external_reproductions = 0,
 NL6-001 LOCKED; claim ceiling — C0_SOFTWARE_ONLY.
 
 — Fresh independent Scientific Reviewer (CONTROL), review R3, 2026-10-01
+
+## Review refresh R3.1 @ 290cba6
+
+```text
+REFRESH_ID        = NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT (review refresh R3.1)
+REFRESH_VERDICT   = PASS
+REFRESH_DATE      = 2026-10-01
+REFRESHED_HEAD    = 290cba6e4be40d3afa91e670ab50e58f7bbd7d35
+                    (tree 0d0e171b917441dba9791bf050ab88a914c7f46b — сверен
+                     git rev-parse; origin control/nl5-acceptance-policy-r3 =
+                     290cba6, мой review-хвост 846a5a2 не тронут)
+ANCESTRY (поправка к брифу) — 290cba6 НЕ потомок 846a5a2: родитель 290cba6 =
+                    2c3171e, т.е. repair-коммит — СИБЛИНГ моего review-коммита
+                    (оба дети candidate head 2c3171e). Это структурно нормально
+                    (review-ветки вне candidate-цепочки), сам repair корректно
+                    ссылается на мой вердикт (commit subject + summary §7
+                    «post review R3 PASS 846a5a2»). Диапазон из брифа
+                    «846a5a2..290cba6: только protocol/tests/summary» неточен:
+                    он включает ещё удаление моего verdict-файла (741 строка) —
+                    артефакт сиблингства, не дефект. Корректный scope ремонта:
+                    git diff 2c3171e..290cba6.
+SCOPE OF CHANGE   = 3 файла (2c3171e..290cba6): protocol doc — ровно 2 литерала;
+                    tests +45 строк (в брифе «+23» — фактически +45);
+                    summary §7 +11 строк. Protected paths 0-diff; evidence
+                    (включая seed record R3, record_sha256 eb4ab3f8…) —
+                    не тронуты; cardinality-строка §7 не менялась.
+```
+
+### Проверка закрытия findings
+
+| Finding | Фикс @ 290cba6 | Независимое измерение этой сессии | Статус |
+|---|---|---|---|
+| **MINOR-1** застарелые «100 fresh» (§7:157, Appendix B:398) | «100 fresh globally unique» → «148 fresh globally unique»; «(100 fresh seeds)» → «(148 fresh seeds)»; других изменений протокола нет (diff = 2 строки) | grep по новому дереву: «100 fresh» отсутствует, оба «148 fresh» присутствуют; freeze-consistency gate PASS на обновлённом пакете; cardinality-контракт и record_sha256 eb4ab3f8… неизменны | **CLOSED** |
+| **MINOR-3** event 0007 заявлял несуществующие grid-тесты | Новый класс `NGridDeterminismTest` (4 теста): (1) N_GRID == (40,48,64,80,96,128) и HEADROOM_RATIO == 0.80 как constants; (2) двойной прогон run_n_grid — grid и selected_n детерминированы; (3) selected_n == 64 + «SELECTED_N = 64» в документе + все ratio N=64 строки ≤ 0.80; (4) boundary semantics ≤ 0.80 включительно + passes_headroom_all_variants сверяется с рекомпутом по всем строкам | Поимённая сверка: 29 тестов собираются (25 + 4 новых); мои прогоны в temp-worktree @ 290cba6: **29/29 seed-tool, 403/403 full — зелёные**. Тесты осмысленные (не self-referential): реальные константы, реальный computation, boundary-семантика | **CLOSED** |
+| **MINOR-2** bootstrap seeds R1/R2-эры | Принят как задокументированный: summary §7 «буква контракта цела; влияние pre-data нулевое» — соответствует моей собственной оценке в review R3 (влияние нулевое, рекомендация на будущую ревизию) | Задокументировано в summary §7; в протоколе поведение не менялось (и не требовалось) | **CLOSED (accepted/documented)** |
+| **NOTE** P(EQUIV\|Δ=0) WO-level ≈ 6% на N=64 | Внесён в summary §7 для владельца (INCONCLUSIVE — вероятный исход; headroom-дизайн; ревизии headroom/N — через owner до freeze) | Текст присутствует, число соответствует моему MC | **SURFACED** |
+
+### Machine-проверки @ 290cba6 (temp-worktree, все зелёные)
+
+```text
+pytest tests/ -q                                                     → 403 passed
+PYTHONPATH=scripts pytest tests/test_nl5_repro_v02_seeds.py -q       → 29 passed
+freeze_consistency_gate(protocol_R3.1, committed_record)             → PASS (296+60=356)
+work_cli validate EX-NL5-ACCEPTANCE-POLICY-R2                        → ok:true, HANDOFF_READY (7 events)
+check-consistency                                                    → ok:true, errors=[]
+workflow_lint                                                        → blocking=0
+protected paths (state.json, docs/evidence, EX-NL5-002-*, raw evidence) → 0-diff
+```
+
+NOTE (не блокирует): отдельный event-record для R3.1 не создавался (последний —
+0007); документирование через summary §7 errata + commit subject со ссылкой на
+review 846a5a2; machine-слой (work_cli) это принимает, append-only discipline
+соблюдена. Владельцу видно в одном месте (summary).
+
+### Refresh-verdict
+
+```text
+REFRESH_VERDICT = PASS
+```
+
+MINOR-1 и MINOR-3 закрыты проверяемо; MINOR-2 задокументирован как принятый;
+владельческий NOTE surfaced. Candidate R3 (head 290cba6) остаётся PRE-DATA /
+NOT FROZEN и готов к вынесению на HG-B с моих позиций; freeze/acceptance этим
+refresh не производятся; все прежние ceiling-ограничения действуют.
+
+— Fresh independent Scientific Reviewer (CONTROL), review refresh R3.1, 2026-10-01
