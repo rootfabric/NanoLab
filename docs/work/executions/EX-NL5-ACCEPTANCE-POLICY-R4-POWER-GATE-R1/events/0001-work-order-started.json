@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-01T08:58:00Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R4-POWER-GATE-R1",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R4-POWER-GATE-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "290cba6e4be40d3afa91e670ab50e58f7bbd7d35",
+  "summary": "Opened a pre-data R4 repair because candidate R3's CI-width feasibility gate does not by itself guarantee decision usefulness: fresh scientific review surfaced approximately 6% WO-level P(REPRODUCED | ideal equivalence) at N=64. R4 adds a deterministic decision-power gate before HG-B/freeze. No v0.2 simulations are run, no scientific thresholds are changed, and canonical NL5/NL6 facts remain unchanged.",
+  "command_refs": [
+    "PR #47 merged to main as 87298b36431045474d3784adf5cee8c9a64d0fc9",
+    "PR #48 converted to draft pending R4 power-gate repair",
+    "repair/nl5-acceptance-policy-r4-power-gate-r1 created from candidate R3.1 290cba6e4be40d3afa91e670ab50e58f7bbd7d35"
+  ],
+  "evidence_refs": [
+    "review/nl5-acceptance-policy-r3 @ 846a5a25aaa8b926206a1de4fe2468da0b7c9e62",
+    "verify/nl5-acceptance-policy-r3 @ 0c708e24fa393328ed794972074f8ef33e97ad24",
+    "docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_platform_sensitivity.json"
+  ],
+  "next_action": "IMPLEMENTER: pin and implement deterministic R4 power model/grid, publish complete power evidence, update candidate/proposal/seed/budget contracts if the selected N changes, then fresh Scientific Reviewer and fresh Verifier.",
+  "blocker": null
+}
