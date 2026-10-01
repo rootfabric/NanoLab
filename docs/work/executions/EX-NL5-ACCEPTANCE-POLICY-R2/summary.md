@@ -81,3 +81,25 @@ R1 сохранён в git history @ 3171564; по-прежнему PRE-DATA / N
 Тесты: 14 seed-tool / 388 full, зелёные. Reviewer refresh + fresh Verifier —
 следующие шаги; событие 0005 (CONTINUATION_CHECKPOINT, post-terminal
 corrections class).
+
+## 6. Errata / repair R3 (central closure mission)
+
+Candidate переведён в **revision R3** (control/nl5-acceptance-policy-r3,
+substantive head bc83af2):
+
+1. **N-contract**: generator выдаёт ровно протокольные cardinalities —
+   после declared N-grid search SELECTED_N = 64: streams 0b 64 / 32b 64 /
+   11b 10 / 53b 10 = **148 fresh identities** (R1/R2 дефект «10 при
+   требуемых 40/64» устранён machine-контрактом PRIMARY_REPLICAS/
+   CONTROL_REPLICAS/VARIANT_REPLICAS + consistency gate).
+2. **Declared N-grid**: {40,48,64,80,96,128}, headroom 0.80, правило
+   зафиксировано ДО вычислений; SELECTED_N = 64 (полный grid — evidence).
+3. **Mandatory gate FAIL ⇒ BLOCKED**; «accept risk» обход запрещён.
+4. **Whole-tree collision scan**: deterministic continuation rule,
+   skips recorded; freeze-time scan excludes seed-record/protocol paths.
+5. **Consistency gate**: protocol N == record N == budget N == N_min
+   (scripts/nl5/repro_v02_freeze_gate.py + тесты PASS/FAIL).
+6. Budget: 296 + 60 = max 356 runs; wall ≤ 560 ч/платформа.
+
+Тесты: 25 seed-tool / 399 full. Seed record R3: digest
+eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b.
