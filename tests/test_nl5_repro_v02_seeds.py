@@ -261,3 +261,48 @@ class FreezeConsistencyGateTest(unittest.TestCase):
         result = freeze_consistency_gate("0b = 40, 32b = 40, 11b = 10, 53b = 10", record)
         # protocol literal 40 (grid minimum) vs contract 64 -> FAIL
         self.assertEqual(result["gate"], "FREEZE_GATE_FAIL")
+
+
+class NGridDeterminismTest(unittest.TestCase):
+    """Mission §21: N-grid deterministic, selected-N deterministic, headroom 0.80."""
+
+    @classmethod
+    def setUpClass(cls):
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+        from nl5.repro_v02_feasibility_gate import run_n_grid
+        from nl5.repro_v02_seeds import seed_record
+        cls.run_n_grid = staticmethod(run_n_grid)
+        rec = seed_record()
+        cls.bootstrap_seeds = {v: rec["bootstrap_seeds"][v] for v in ("0b", "32b")}
+        cls.src = (Path(__file__).resolve().parents[1] / "docs" / "work" /
+                   "executions" / "EX-NL5-002-E-R1" / "evidence" / "paired" /
+                   "paired_platform_sensitivity.json").resolve()
+
+    def test_n_grid_constant_matches_protocol(self):
+        from nl5.repro_v02_feasibility_gate import N_GRID, HEADROOM_RATIO
+        self.assertEqual(N_GRID, (40, 48, 64, 80, 96, 128))
+        self.assertEqual(HEADROOM_RATIO, 0.80)
+
+    def test_n_grid_deterministic(self):
+        first = self.run_n_grid(self.src, self.bootstrap_seeds, ["0b", "32b"])
+        second = self.run_n_grid(self.src, self.bootstrap_seeds, ["0b", "32b"])
+        self.assertEqual(first["grid"], second["grid"])
+        self.assertEqual(first["selected_n"], second["selected_n"])
+
+    def test_selected_n_deterministic_and_documented(self):
+        result = self.run_n_grid(self.src, self.bootstrap_seeds, ["0b", "32b"])
+        self.assertEqual(result["selected_n"], 64)
+        self.assertIn("SELECTED_N = 64", CANDIDATE_DOC.read_text(encoding="utf-8"))
+        ratios = result["grid"][2]["variants"]  # N=64 row
+        for item in ratios.values():
+            self.assertLessEqual(item["ratio_decision"], 0.80)
+
+    def test_gate_boundary_080_inclusive(self):
+        from nl5.repro_v02_feasibility_gate import HEADROOM_RATIO
+        self.assertTrue(0.80 <= HEADROOM_RATIO)  # boundary semantics: <= passes
+        self.assertFalse(0.800001 <= HEADROOM_RATIO)
+        grid = self.run_n_grid(self.src, self.bootstrap_seeds, ["0b", "32b"])["grid"]
+        for row in grid:
+            expected = all(v["ratio_decision"] <= 0.80 for v in row["variants"].values())
+            self.assertEqual(row["passes_headroom_all_variants"], expected)

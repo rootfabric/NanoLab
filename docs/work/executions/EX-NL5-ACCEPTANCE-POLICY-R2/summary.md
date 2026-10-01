@@ -103,3 +103,14 @@ substantive head bc83af2):
 
 Тесты: 25 seed-tool / 399 full. Seed record R3: digest
 eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b.
+
+## 7. Errata / repair R3.1 (post review R3 PASS 846a5a2)
+
+MINOR-1: литералы «100 fresh» → «148 fresh» (§7 cardinality, Appendix B).
+MINOR-3: добавлены mission-обязательные тесты (N-grid constant + deterministic,
+selected-N deterministic 64, headroom 0.80 boundary semantics) — 29 seed-tool /
+403 full зелёные. MINOR-2 (bootstrap literals R1/R2-эры) — принят как
+задокументированный (буква контракта цела; влияние pre-data нулевое). NOTE
+для владельца: reviewer MC на N=64 — P(REPRODUCED | идеальная эквивалентность)
+≈ 6% WO-level (INCONCLUSIVE — вероятный исход; осознанный tradeoff headroom-
+дизайна; ревизии headroom/N — через owner до freeze).

@@ -154,7 +154,7 @@ Cardinality contract (revision R3, machine-enforced):
 0b = 64, 32b = 64, 11b = 10, 53b = 10  → fresh_seed_total = 148
 (generation-time scan на a9d7d07-tree: 0b 10 skips, 32b 11, 11b 10, 53b 10)
 bootstrap seeds = 4 (по одному на variant)
-100 fresh globally unique; bootstrap unique;
+148 fresh globally unique; bootstrap unique;
 bootstrap ∩ fresh = ∅; fresh ∩ historical = ∅; bootstrap ∩ historical = ∅
 protocol N == seed-record N == budget N == N_min-базис (consistency gate;
     любое расхождение = FREEZE_GATE_FAIL)
@@ -395,6 +395,6 @@ candidate R2 (6e5287b): paired pinned анализ, N=40 primaries, budget 240,
                         exclusion 34, deviation classes §9.4 — refresh PASS
                         c25bcd6 с M-2 PARTIAL + R-1..R-5
 candidate R3 (этот)   : SELECTED_N=64 declared grid, N-contract generator
-                        (100 fresh seeds), tree-collision continuation rule,
+                        (148 fresh seeds), tree-collision continuation rule,
                         consistency gate, accept-risk обход запрещён
 ```
