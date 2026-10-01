@@ -1,0 +1,20 @@
+{
+  "r2_activated": false,
+  "r2_status": "WAITING_HOST / NOT_ACTIVE",
+  "author_u1": "NOT_ASSIGNED",
+  "unmet": [
+    "gate U1=WAITING_HOST",
+    "gate U2=WAITING_HOST",
+    "gate U3=WAITING_HOST",
+    "gate U4=WAITING_HOST",
+    "gate U5=WAITING_HOST",
+    "gate NC-U1=WAITING_HOST",
+    "gate NC-U2=WAITING_HOST",
+    "gate NC-U3=WAITING_HOST",
+    "gate NC-U4=WAITING_HOST",
+    "gate NC-U5=WAITING_HOST",
+    "fingerprint frozen (no fingerprint provided)"
+  ],
+  "decided_utc": "2026-09-30T14:48:47Z",
+  "tooling_version": "r2-activation-r1"
+}

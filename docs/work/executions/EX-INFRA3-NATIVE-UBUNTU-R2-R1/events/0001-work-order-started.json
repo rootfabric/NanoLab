@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-09-30T14:34:36Z",
+  "execution_id": "EX-INFRA3-NATIVE-UBUNTU-R2-R1",
+  "work_order_id": "WO-INFRA3-R2-ACTIVATION-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8205781def7179d6bdfa6eb7ab2a84d46776649c",
+  "summary": "Начат infrastructure Work Order WO-INFRA3-R2-ACTIVATION-R1 «R2 activation tooling» (child WO родителя WO-NATIVE-UBUNTU-EXECUTOR-R1 / INFRA-задачи INFRA3-003; central-agent mission 2026-09-30 §3–§5/§11–§15). Контекст: canonical main = 8205781def7179d6bdfa6eb7ab2a84d46776649c (tree 0a2a449e9359a7326dfddd929d469585d19bbdf1); AUTHOR_U1 = NOT_ASSIGNED, R2_STATUS = WAITING_HOST / NOT_ACTIVE, NEW_SCIENCE без R2 = HARD_BLOCKED (host текущей сессии = outenemy = EXTERNAL_U2_ONLY, author-хостом не становится). Цель: исполняемый bounded tooling R2-активации, чтобы после выделения U1 активация была механической: (1) scripts/r2 — fingerprint + native-eligibility валидатор (native kernel, не-WSL, не-VM, native ФС ext4/xfs/btrfs, systemd, hostname не из запрещённых: outenemy никогда не проходит), run contract (execution_id/run_base/attempt; attempt id <run_base>|<run_base>-R<n>; append-only ledger c запретом переиспользования attempt id; technical outcome отделён от scientific; FAILED_TECHNICAL с сохранением попытки), executor (direct + systemd-run launcher; stdout/stderr/exit/start/end UTC; raw ~/nanolab/raw/<execution-id>/<attempt-id>/; artifact manifest path+sha256+size+producer+retention; Git — только compact evidence), supervisor (transient unit argv-строители, survival checks, NC-U1..NC-U5 сценарии), gates U1–U5 (WAITING_HOST→PASS|FAIL; PASS только с существующим evidence-ref), activation decision machine (R2_ACTIVATED=YES только при all gates PASS ∧ all NC PASS ∧ frozen native fingerprint ∧ fresh review PASS ∧ fresh verify VERIFIED ∧ human_gate_approved=true — policy-инвариант зашит кодом); (2) config/infra/r2-activation.v1.json — machine-readable pins (engine 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591, CPU/DOUBLE=ON/CUDA=OFF/MPI=OFF, binary-sha-equality с WSL НЕ требуется) и honest policy-статусы; (3) tests/test_r2_activation_tooling.py — unit-тесты всей логики на fake runners/tmp dirs (без systemd, без сети, без сборки oxDNA, без научных прогонов). ВНЕ scope: scientific runs, фактическое исполнение gates/NC (статусы остаются WAITING_HOST), регистрация runner, secrets, paid compute, изменения project/state.json, project/infra-state.json, scientific history, ENGINE_ENVIRONMENT_R1.md, существующих execution-каталогов. Валидация WO на dev-хосте: pytest, check-consistency, workflow lint, work_cli validate; негативная демонстрация BLOCKED_HOST на outenemy. Risk MEDIUM, claim C0_SOFTWARE_ONLY; merge = Human Gate.",
+  "command_refs": [
+    "git -C /home/rdpuser/NanoLab/main fetch --all --prune -> origin/main = 8205781def7179d6bdfa6eb7ab2a84d46776649c",
+    "git -C /home/rdpuser/NanoLab/main worktree add /home/rdpuser/NanoLab/infra3-r2-activation -b infra/infra3-native-ubuntu-r2-activation-r1 8205781def7179d6bdfa6eb7ab2a84d46776649c",
+    "git -C /home/rdpuser/NanoLab/infra3-r2-activation rev-parse HEAD -> 8205781def7179d6bdfa6eb7ab2a84d46776649c"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md (родительский WO, gates U1-U5 / NC-U1..U5)",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md (контракт R2, WAITING_HOST)",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md (policy: AUTHOR_U1 = NOT_ASSIGNED, R2 NOT_ACTIVE, outenemy = EXTERNAL_U2_ONLY)",
+    "config/control/harness/scheduler-policy.v1.json (executor_environment_policy)"
+  ],
+  "next_action": "IMPLEMENTER: реализовать scripts/r2 (contract/fingerprint/executor/supervisor/gates/cli), config/infra/r2-activation.v1.json, tests; validation-прогон; surface sync WORK_QUEUE/infra-plan; summary + handoff; затем fresh Reviewer + fresh Verifier на exact HEAD; merge = Human Gate.",
+  "blocker": null
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-repair-r1-completed",
+  "timestamp_utc": "2026-09-30T15:16:11Z",
+  "execution_id": "EX-INFRA3-NATIVE-UBUNTU-R2-R1",
+  "work_order_id": "WO-INFRA3-R2-ACTIVATION-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "89fdbb0a549e13320796ecdc01b2e87945d41b1e",
+  "summary": "CONTINUATION (post-terminal correction, REPAIR_COMPLETED class): fresh review PASS 89fdbb0a549e13320796ecdc01b2e87945d41b1e (docs/infra/evidence/INFRA3-R2-ACTIVATION-R1/REVIEWER_VERDICT.md: 2 MINOR, 4 NOTE, 0 MAJOR; все 6 machine-инвариантов подтверждены; mutation-проверки A/B/C). Repair Map: (MINOR-1) host-guard покрытие уже документированного — ФИКС: require_u1_or_exit добавлен в subcommands gate и nc-verify (R2 gate-отчёты и NC-verdicts = факты U1; на не-eligible хосте exit 2 BLOCKED_HOST; воспроизведение reviewer'а 'gate PASS --evidence <непустой файл>' на outenemy теперь BLOCKED_HOST exit 2 — evidence repair-r1-gate-pass-BLOCKED_HOST.json); формулировки summary.md §6-errata и WO §8-errata приведены к точному покрытию (guard: build-engine/run/gate/nc-verify; safe/read-only: fingerprint/check-host/nc-plan/report/activation-check); (MINOR-2) PASS не привязан к происхождению evidence — ФИКС: set_status при PASS вычисляет и сохраняет evidence_sha256 + evidence_size (PASS pins content, не только путь); требование пути внутри raw-дерева — зафиксировано как future hardening (NOTE-класс); (NOTE-3) hostname deny-list точного совпадения — ФИКС: сравнение full-name (case-insensitive) и short-name (hostname.split('.')[0]); тест test_outenemy_fqdn_form_also_rejected; (NOTE-4) provenance без верифицированного commit — ФИКС: provenance_record принимает source_commit, CLI передаёт верифицированный actual_commit, поле source_commit_verified; тест расширен; (NOTE-1) evidence activation-check не самодостаточен — ФИКС: CLI outputs gate/nc-verify/activation-check содержат invocation (полная command line); committed evidence-файлы остаются историческими фактами предыдущей ревизии, не перезаписываются; (NOTE-2 ledger tamper-evidence — defer: внешний reconcile/хеш-цепочка в будущей ревизии, задокументировано в errata). Tests: 53 tooling (было 52; +FQDN) / полный набор 427 passed; pytest, consistency ok, lint blocking=0 — прогон после repair. Научных прогонов нет; статусы границ не менялись; REVIEWER REFRESH на exact post-repair HEAD — следующий шаг, затем FRESH VERIFIER.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m pytest tests/test_r2_activation_tooling.py -q -> 53 passed",
+    "python3 -m pytest tests/ -q -> 427 passed",
+    "PYTHONPATH=scripts python3 -m r2.cli gate --report /tmp/g-probe.json --gate U1 --status PASS --evidence /tmp/nonempty-evidence.txt -> BLOCKED_HOST exit 2 (reviewer MINOR-1 repro closed)",
+    "git rev-parse HEAD -> 89fdbb0a549e13320796ecdc01b2e87945d41b1e (review head; repair commit follows this event)"
+  ],
+  "evidence_refs": [
+    "docs/infra/evidence/INFRA3-R2-ACTIVATION-R1/REVIEWER_VERDICT.md (на ветке review/infra3-native-ubuntu-r2-activation-r1 @ 89fdbb0)",
+    "docs/work/executions/EX-INFRA3-NATIVE-UBUNTU-R2-R1/evidence/repair-r1-gate-pass-BLOCKED_HOST.json"
+  ],
+  "next_action": "REVIEWER REFRESH (та же независимая сессия review/infra3-native-ubuntu-r2-activation-r1) на exact post-repair HEAD; затем FRESH VERIFIER; затем Human Gate merge.",
+  "blocker": null
+}
