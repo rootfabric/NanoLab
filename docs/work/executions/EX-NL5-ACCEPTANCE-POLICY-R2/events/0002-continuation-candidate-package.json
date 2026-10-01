@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-candidate-package",
+  "timestamp_utc": "2026-09-30T15:04:17Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ee40984a9a6a08c4d3c6182b5ba400a365bf59e5",
+  "summary": "CONTINUATION_CHECKPOINT: candidate-пакет HG-B реализован полностью; substantive HEAD ee40984a9a6a08c4d3c6182b5ba400a365bf59e5 (START 793459d -> candidate 3171564 -> continuation ee40984; base 8205781def7179d6bdfa6eb7ab2a84d46776649c). Deliverables: (1) docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md — candidate protocol NANOLAB_REPRO_V0_2_DISTRIBUTIONAL, статус CANDIDATE / PRE-DATA / NOT FROZEN: разделение technical/numerical/distributional reproducibility/scientific consistency (mission §22); scientific question (distributional equivalence per-replica median hinge angle между P-A = AUTHOR_U1 native Ubuntu R2 и P-B = U2 outenemy, Windows исключён); variants 0b/32b primary + 11b/53b controls (74b NOT_MEASURED исключён до arm-manifest-v2); fresh paired seeds (sha256-цепочка anchor|variant|replica-i & 0x7FFFFFFF -> positive int32; anchor NANOLAB-REPRO-V0.2-R1 фиксируется freeze record'ом; bootstrap seeds отдельной веткой); N = 10/ячейка (N_min 8; replacement 20% только FAILED_TECHNICAL); observables без изменений — per-replica median_deg упакованной конвенцией analyze_hinge.py, те же windows (0b 200k, остальные 150k) и frame-validity gates; metrics: Δ = median_B − median_A, pooled within-platform SD(n−1), d = Δ/s, percentile bootstrap CI90 (10k resamples, frozen bootstrap seed), overlap coefficient (descriptive); decision rule TOST-эквивалентность margin ±δ·s, δ = 0.5 фиксирован a priori по стандартной конвенции medium-effect границы (НЕ подобран под observed R1 shifts — проверяется Reviewer особо), frozen vocabulary REPRODUCED | REPRODUCED_WITH_DEVIATION | INCONCLUSIVE | FAILED_TECHNICAL | MISMATCH; controls репортятся, не гейтят (gross failure |d|>=1.0 -> investigation-note, пре-объявлено); technical failure policy + budget (80 confirmatory + 16 replacement; CPU-only, paid forbidden; wall <= 168ч/платформа; STOP/BUDGET_EXCEEDED) + stop conditions; historical R1 data ТОЛЬКО в appendix power/budget planning; freeze chain §13 (HG-B -> Director freeze -> fresh review/verify FROZEN -> R2 ACTIVE prerequisite -> author leg EX-NL5-REPRO-V0-2-U1-R1 -> external leg EX-NL5-REPRO-V0-2-U2-R1 -> independent analysis -> NL5 decision); (2) docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md — полный proposal владельцу: принцип «NL5 acceptance requires successful fresh external reproduction under preregistered v0.2 distribution-based rule», что approval разрешает/НЕ разрешает, альтернативы A-C, точная механика после HG-B (однострочный ответ владельца достаточен); (3) scripts/nl5/repro_v02_seeds.py — deterministic generation (positive int32 через & 0x7FFFFFFF), frozen exclusion list 19 исторических R1 confirmatory seeds (E1/E2-reference/E3-reval/platform-study S001-S010/bootstrap-902107), refusal при коллизии, record JSON c record_sha256 (5c95664485e00069379e962f44b3ba247f00030e02a7375a27d3b4ab441f5a9c) по каноническому payload; (4) tests/test_nl5_repro_v02_seeds.py — 13 тестов (детерминизм, positive int32, anchor-чувствительность, exclusion refusal, глобальная уникальность, digest stability, doc-consistency: anchor/N/rule/vocabulary/δ=0.5 синхронны тексту протокола); (5) WORK_QUEUE NL5-002 surface sync (open decision остаётся открытым — его закрывает владелец). Границы: НИКАКОГО freeze (candidate), никаких simulations, никакой physics, NL5-002 terminal MISMATCH / v0.1 envelope / PLATFORM_INSENSITIVE не тронуты, project/state.json не изменён, NL6-001 LOCKED, external_reproductions = 0.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m pytest tests/test_nl5_repro_v02_seeds.py -q -> 13 passed",
+    "python3 -m pytest tests/ -q -> 387 passed",
+    "PYTHONPATH=scripts python3 scripts/nl5 seed record generation -> record_sha256 = 5c95664485e00069379e962f44b3ba247f00030e02a7375a27d3b4ab441f5a9c",
+    "git rev-parse HEAD -> ee40984a9a6a08c4d3c6182b5ba400a365bf59e5"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+    "docs/work/WO-NL5-ACCEPTANCE-POLICY-R2.md"
+  ],
+  "next_action": "IMPLEMENTER: validation event + summary + handoff; затем fresh Reviewer + fresh Verifier на exact HEAD; merge = Human Gate; HG-B = отдельное owner-решение (готов однострочный формат ответа).",
+  "blocker": null
+}

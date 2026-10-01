@@ -1,0 +1,45 @@
+{
+  "kind": "r2_feasibility_gate_evidence",
+  "protocol": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL candidate R2 §12",
+  "delta": 0.5,
+  "s_floor": 0.01,
+  "bootstrap": {
+    "scheme": "paired-subsample",
+    "B": 10000,
+    "n": 40,
+    "quantile": "linear"
+  },
+  "source": "/home/rdpuser/NanoLab/main/docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_platform_sensitivity.json",
+  "source_sha256": "2b0df07deb62add319d8d12f29cde276d0288a38474760b36978f92adb953096",
+  "platforms": [
+    "P1",
+    "P2"
+  ],
+  "variants": {
+    "0b": {
+      "n_source_pairs": 10,
+      "s": 1.5566358620943725,
+      "s_eff": 1.5566358620943725,
+      "margin": 0.7783179310471863,
+      "half_width_n40_subsample": 0.096231551999999,
+      "ratio_subsample": 0.12364041500434719,
+      "half_width_n10_full": 0.32191729549999337,
+      "half_width_n40_sqrt_extrapolated": 0.16095864774999669,
+      "ratio_sqrt_extrapolated": 0.2068032115531955,
+      "gate_pass": true
+    },
+    "32b": {
+      "n_source_pairs": 10,
+      "s": 1.8776395290783043,
+      "s_eff": 1.8776395290783043,
+      "margin": 0.9388197645391522,
+      "half_width_n40_subsample": 1.2190514775000096,
+      "ratio_subsample": 1.298493623106047,
+      "half_width_n10_full": 1.703002946500007,
+      "half_width_n40_sqrt_extrapolated": 0.8515014732500035,
+      "ratio_sqrt_extrapolated": 0.9069914220095148,
+      "gate_pass": false
+    }
+  },
+  "gate_pass_all": false
+}
