@@ -4,10 +4,17 @@
 
 ```text
 rule_id (candidate) = NANOLAB_REPRO_V0_2_DISTRIBUTIONAL
-candidate revision  = R2 (2026-09-30, repair R1 по fresh scientific review FAIL
-                      f07fe39859bcf910f4ae8c95404e7d2f76dbbd02: M-1/M-2/M-3 + m-1..m-4;
-                      полный текст R1 сохранён в git history @ 3171564; изменения ДО
-                      freeze бесплатны для protocol integrity — данных ещё нет)
+candidate revision  = R3 (2026-09-30, repair R2 по fresh review refresh R2 PASS
+                      61d8c67 R-1..R-5 + central closure mission: (а) N-contract —
+                      генератор выдаёт ровно протокольные cardinalities (было
+                      10/вариант при протокольных 40 primaries; R3 grid-search →
+                      SELECTED 64); (б) declared N-grid search зафиксирован ДО
+                      вычислений; (в) mandatory feasibility gate FAIL ⇒ BLOCKED —
+                      «accept risk» обход запрещён; (г) whole-tree seed collision
+                      scan с deterministic continuation rule; (д) protocol↔record
+                      consistency gate. Полные тексты R1/R2 — git history
+                      (3171564 / 6e5287b); изменения ДО freeze бесплатны —
+                      confirmatory data нет)
 подготовлен          = WO-NL5-ACCEPTANCE-POLICY-R2 (EX-NL5-ACCEPTANCE-POLICY-R2)
 базовый main         = 8205781def7179d6bdfa6eb7ab2a84d46776649c
 date                 = 2026-09-30
@@ -132,21 +139,42 @@ platform study: 1259289227, 1358106528, 1524307444, 601855227,
 Обязательство регенерации (часть протокола, не только summary): при Director
 freeze seed record регенерируется из frozen anchor, сверяется с exclusion
 list (34), и выполняется whole-tree literal search — каждый fresh seed не
-должен встречаться нигде в evidence-дереве (прецедент: verifier platform
-study). Несовпадение digest'ов или любая коллизия = freeze невозможен.
+должен встречаться нигде в evidence-дереве КРОМЕ seed record и этого
+документа (scan excludes seed-record/protocol paths; прецедент: verifier
+platform study). Детерминистическое tree-collision правило генерации
+зафиксировано ДО любых вычислений: identity потребляются в index-порядке;
+identity, чья литеральная форма уже встречается в дереве (SEED_COLLISION),
+ПРОПУСКАЕТСЯ, потребляется следующий index, skip записывается в record
+(генерация R3, scan на a9d7d07-tree: skips учтены в record). Несовпадение digest'ов
+или collision вне разрешённых мест = freeze невозможен.
+
+Cardinality contract (revision R3, machine-enforced):
+
+```text
+0b = 64, 32b = 64, 11b = 10, 53b = 10  → fresh_seed_total = 148
+(generation-time scan на a9d7d07-tree: 0b 10 skips, 32b 11, 11b 10, 53b 10)
+bootstrap seeds = 4 (по одному на variant)
+100 fresh globally unique; bootstrap unique;
+bootstrap ∩ fresh = ∅; fresh ∩ historical = ∅; bootstrap ∩ historical = ∅
+protocol N == seed-record N == budget N == N_min-базис (consistency gate;
+    любое расхождение = FREEZE_GATE_FAIL)
+```
 
 ## 8. N и replicas
 
 ```text
-primaries (0b, 32b) : N = 40 fresh replicas на (variant, platform)
+primaries (0b, 32b) : N = 64 fresh paired replicas на (variant, platform)
 controls (11b, 53b) : N = 10 (non-gating, статистика та же)
-обоснование N       = power/budget planning по историческим R1 данным
-                      (review f07fe39 M-2 MC: при n=10 и δ=0.5·s независимая
-                      CI90-ширина ≈ 1.85×margin => гарантированный
-                      INCONCLUSIVE; paired-схема при n=40 достигает
-                      half-width ≤ margin; значения R1 используются ТОЛЬКО
-                      как planning-оценка, не как thresholds)
-N_min               = 32 валидных пары на primary ячейку; 8 на control
+обоснование N       = declared N-grid search (§12), зафиксированный ДО
+                      вычислений: grid {40, 48, 64, 80, 96, 128}, правило
+                      «минимальный N с ratio_decision ≤ 0.80 по ОБОИМ
+                      primaries» (safety headroom, не граница 1.0);
+                      механическое исполнение на committed R1 paired данных
+                      дало SELECTED_N = 64 (0b 0.071 / 32b 0.736; полный grid
+                      — evidence repro-v0-2-n-grid-R3.json); R1 значения —
+                      ТОЛЬКО planning-оценка, не thresholds
+N_min               = 51 валидных пары на primary ячейку (80% от N=64);
+                      8 на control
 replacement         = ≤ 20% на ячейку, ТОЛЬКО для FAILED_TECHNICAL
                       (новые attempt id; пара выбрасывается, если любая
                       сторона failed; замена идёт тем же generator-потоком
@@ -248,42 +276,81 @@ Replica FAILED_TECHNICAL: engine exit ≠ 0, неполная траектори
 (`-R1`, `-R2`, …), append-only ledger; replacement в пределах 20% allowance.
 Ячейка с ≥ 3 подряд FAILED_TECHNICAL останавливается → честная классификация.
 
-## 12. Budget, feasibility gate, stop conditions (pre-declared)
+## 12. Budget, declared N-grid, feasibility gate, stop conditions (pre-declared)
+
+### 12.1 Declared N-grid search (зафиксировано ДО вычислений)
 
 ```text
-confirmatory runs = primaries 2 × 40 × 2 = 160 + controls 2 × 10 × 2 = 40
-                    = 200; replacements ≤ 40 (20%); MAX 240 runs
+grid            = {40, 48, 64, 80, 96, 128}   (candidate R3 constant)
+headroom        = ratio_decision <= 0.80 по ОБОИМ primaries
+                  (safety headroom: проектировать НЕ на границе 1.0)
+selection rule  = минимальный grid N, проходящий headroom по обеим primaries
+δ / статистика  = БЕЗ ИЗМЕНЕНИЙ (0.5, paired) — grid меняет ТОЛЬКО N
+planning data   = committed R1 paired platform-study medians (power/budget
+                  planning; mission §26; НЕ thresholds)
+```
+
+Механическое исполнение (реализация pinned `run_n_grid`,
+scripts/nl5/repro_v02_feasibility_gate.py; полный grid сохранён,
+evidence `repro-v0-2-n-grid-R3.json`; неудобные строки не выбрасывались):
+
+```text
+N= 40: 0b 0.124 / 32b 1.298  → FAIL
+N= 48: 0b 0.124 / 32b 1.298  → FAIL
+N= 64: 0b 0.071 / 32b 0.736  → PASS  ← SELECTED_N = 64
+N= 80: 0b 0.019 / 32b 0.173  → PASS
+N= 96: 0b 0.019 / 32b 0.173  → PASS
+N=128: 0b 0.019 / 32b 0.173  → PASS
+```
+
+### 12.2 Budget (derivation от SELECTED_N = 64, machine-consistent)
+
+```text
+confirmatory runs = primaries 2 × 64 × 2 = 256 + controls 2 × 10 × 2 = 40
+                    = 296; replacements ≤ 59 → округлено 60 (20%); MAX 356 runs
 compute           = CPU-only, paid compute FORBIDDEN без отдельной owner-
                     авторизации
-wall budget       = ≤ 360 ч на платформу (15 суток; калибровка: platform
+wall budget       = ≤ 560 ч на платформу (~23 суток; калибровка: platform
                     study — 20 runs/platform в ≤ 72 ч при intra-node
-                    параллелизме); превышение → STOP / BUDGET_EXCEEDED
-MANDATORY FEASIBILITY GATE (до dispatch, механически; реализация pinned:
-  scripts/nl5/repro_v02_feasibility_gate.py, two-estimate схема по review R-2):
-  из committed paired данных R1 platform study
-  (paired_platform_sensitivity.json) берутся per-seed medians primaries;
-  ŝ — pooled SD; оценка-1 (DECISION): CI90 half-width при n=40 pinned paired
-  bootstrap'ом (B=10 000, RNG random.Random(bootstrap_seed_v), 40 вытягиваний
-  с возвращением из n=10-поддержки); оценка-2 (ADVISORY): √n-экстраполяция из
-  полного n=10-bootstrap (granularity-диагностика поддержки);
-  ratio_k = half-width_k / (δ·s_eff).
-  gate PASS ⇔ ratio_1 ≤ 1.0 для ОБОИХ primaries; ratio_2 публикуется рядом
-  (не меняет решение, показывает неопределённость экстраполяции с 10 точек).
-  Известные вычисленные значения (committed R1 данные, 2026-09-30, evidence
-  repro-v0-2-feasibility-gate-R2.json): 0b ratio_1 = 0.124 PASS;
-  32b ratio_1 = 1.298 FAIL при ratio_2 = 0.907 — т.е. 32b
-  FEASIBILITY-UNCERTAIN: параметрика независимого review для реальных n=40
-  даёт 0.76–0.81 (feasible), subsample-оценка — 1.298 (fail). Это честно
-  выносится владельцу ДО HG-B (варианты: принять риск INFEASIBLE для 32b /
-  сузить primary set до 0b ревизией R3 / расширить budget ревизией R3 —
-  решение owner, не имплементатора). Evidence gate записывается в Git ДО
-  dispatch; FAIL ⇒ кампания НЕ стартует: протокол фиксирует INFEASIBLE при
-  текущем бюджете и возвращается к owner, никакой «подгонки» δ/N под запуск.
+                    параллелизме; 148 runs/platform ≈ 7.4×); превышение →
+                    STOP / BUDGET_EXCEEDED, не расширять автоматически
+```
+
+### 12.3 Mandatory feasibility gate (dispatch-инвариант)
+
+```text
+gate FAIL ⇒ execution = BLOCKED. Путь «owner accepts risk → execute despite
+failed mandatory gate» ЗАПРЕЩЁН. Execution становится разрешён ТОЛЬКО новой
+preregistered revision, которая САМА проходит gate.
+```
+
+Gate confirmation на dispatch: SELECTED_N = 64 и committed grid-строка N=64
+(0b 0.071 / 32b 0.736 ≤ 0.80) — кампания проектируется в гарантированно
+feasible области; если к моменту dispatch planning-данные изменились (новые
+committed paired evidence), grid пересчитывается той же pinned реализацией до
+dispatch, и любое ухудшение соотношения за пределы headroom = BLOCKED (новая
+revision). История R2-эры (0b 0.124 / 32b 1.298 при n=40) сохранена в
+evidence `repro-v0-2-feasibility-gate-R2.json` как planning-факт.
+
+### 12.4 Consistency gate (freeze/dispatch machine-check)
+
+```text
+protocol §8 N (64/10) == seed-record variant_counts == budget derivation N
+== N_min-базис (51/8) == execution plan N. Любое расхождение =
+FREEZE_GATE_FAIL — машино-проверяемо (tests + freeze checklist), невозможно
+пропустить Reviewer/Verifier.
+```
+
+### 12.5 Stop conditions
+
+```text
 stop conditions   = environment недоступна → BLOCKED_ENVIRONMENT; ≥ 3 подряд
                     FAILED_TECHNICAL в ячейке → ячейка остановлена; любое
                     требование изменить protocol после data → STOP + новый WO;
                     ОБЕ ноги (author U1 и external U2) требуют R2 ACTIVE /
-                    разрешённый executor до dispatch (HARD_BLOCKED иначе)
+                    разрешённый executor до dispatch (HARD_BLOCKED иначе);
+                    feasibility gate FAIL → BLOCKED (§12.3, без accept-risk
+                    обхода)
 ```
 
 ## 13. Freeze chain (после HG-B, отдельными записями)
@@ -314,7 +381,7 @@ committed данных механически.
 
 | аспект | v0.1 (immutable) | v0.2 candidate |
 |---|---|---|
-| единица | 3 replica medians, envelope [min,max] | paired seeds, N=40 primaries |
+| единица | 3 replica medians, envelope [min,max] | paired seeds, N=64 primaries |
 | статистика | point-in-envelope | paired TOST: CI90(Δ) vs ±δ·s_eff |
 | margin | эмпирический envelope | δ = 0.5 pooled SD, a priori |
 | исходы | MATCH/MISMATCH/INCONCLUSIVE | + REPRODUCED / REPRODUCED_WITH_DEVIATION / FAILED_TECHNICAL |
@@ -323,7 +390,11 @@ committed данных механически.
 ```text
 candidate R1 (3171564): initial draft — review FAIL f07fe39 (M-1 exclusion 19→34,
                         M-2 n=10/δ=0.5 недостижим, M-3 rule не механичен)
-candidate R2 (этот)   : paired pinned анализ, N=40 primaries, budget 240,
+candidate R2 (6e5287b): paired pinned анализ, N=40 primaries, budget 240,
                         mechanical rule §9.2/9.3, feasibility gate §12,
-                        exclusion 34, deviation classes §9.4
+                        exclusion 34, deviation classes §9.4 — refresh PASS
+                        c25bcd6 с M-2 PARTIAL + R-1..R-5
+candidate R3 (этот)   : SELECTED_N=64 declared grid, N-contract generator
+                        (100 fresh seeds), tree-collision continuation rule,
+                        consistency gate, accept-risk обход запрещён
 ```

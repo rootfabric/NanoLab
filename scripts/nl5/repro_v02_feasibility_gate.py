@@ -160,3 +160,63 @@ def evaluate(
         "variants": results,
         "gate_pass_all": all(item["gate_pass"] for item in results.values()),
     }
+
+
+# --- Candidate R3: declared N-grid search (protocol §12, fixed pre-data) ----
+N_GRID = (40, 48, 64, 80, 96, 128)
+HEADROOM_RATIO = 0.80  # design margin: ratio_decision <= 0.80 required (not 1.0)
+
+
+def run_n_grid(
+    paired_json: Path,
+    bootstrap_seeds: dict[str, int],
+    variants: list[str],
+    n_grid: tuple[int, ...] = N_GRID,
+    headroom: float = HEADROOM_RATIO,
+    blocks: int = 2000,
+) -> dict[str, Any]:
+    """Mechanically evaluate every declared N; select minimal passing N.
+
+    Selection rule (fixed in candidate R3 BEFORE this function was ever run):
+    the minimal grid N for which BOTH primary variants have ratio_decision
+    (pinned paired bootstrap half-width / (delta * s_eff)) <= headroom (0.80).
+    Full grid output is preserved — inconvenient rows are never discarded.
+    """
+    data = load_paired_medians(paired_json)
+    platforms = sorted(next(iter(data.values())).keys())
+    grid_rows: list[dict[str, Any]] = []
+    for n in n_grid:
+        row: dict[str, Any] = {"n": n, "variants": {}}
+        passing = True
+        for variant in variants:
+            medians_a = data[variant][platforms[0]]
+            medians_b = data[variant][platforms[1]]
+            diffs = [b - a for a, b in zip(medians_a, medians_b)]
+            s = pooled_sd(medians_a, medians_b)
+            s_eff = max(s, S_FLOOR)
+            margin = DELTA * s_eff
+            half = paired_bootstrap_half_width(
+                diffs, bootstrap_seeds[variant], n, blocks=blocks
+            )
+            ratio = half / margin
+            row["variants"][variant] = {
+                "half_width": half,
+                "margin": margin,
+                "ratio_decision": ratio,
+                "passes_headroom": ratio <= headroom,
+            }
+            passing = passing and ratio <= headroom
+        row["passes_headroom_all_variants"] = passing
+        grid_rows.append(row)
+    selected = next((row["n"] for row in grid_rows if row["passes_headroom_all_variants"]), None)
+    return {
+        "kind": "r3_feasibility_n_grid",
+        "n_grid": list(n_grid),
+        "headroom_ratio": headroom,
+        "selection_rule": "minimal grid N with ratio_decision <= 0.80 for BOTH primaries",
+        "source": str(paired_json),
+        "source_sha256": hashlib.sha256(paired_json.read_bytes()).hexdigest(),
+        "grid": grid_rows,
+        "selected_n": selected,
+        "design_infeasible_at_grid": selected is None,
+    }

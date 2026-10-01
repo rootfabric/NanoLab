@@ -23,7 +23,10 @@ under preregistered v0.2 distribution-based rule
 Операционально:
 
 1. Candidate protocol `NANOLAB_REPRO_V0_2_CANDIDATE_R1.md` (distribution-based
-   equivalence, TOST margin δ=0.5 pooled SD, fresh paired seeds, N=10/ячейка,
+   equivalence, TOST margin δ=0.5 pooled SD, fresh paired seeds (R3:
+   primaries 0b/32b = 64 paired replicas/platform, controls 11b/53b = 10
+   paired replicas/platform; выбрано declared N-grid search'ом с headroom
+   0.80 на committed R1 planning-данных ДО каких-либо confirmatory data),
    4 варианта, frozen vocabulary `REPRODUCED | REPRODUCED_WITH_DEVIATION |
    INCONCLUSIVE | FAILED_TECHNICAL | MISMATCH`) freeze'ится Director-записью
    после HG-B и проходит fresh scientific review + fresh verify ДО любых данных.
@@ -66,21 +69,19 @@ DOES NOT:
 - **C. Отложить NL5 acceptance** — решение остаётся открытым; научная вертикаль
   стоит на NL5 (NL6-001 LOCKED), infra-линия может продолжаться независимо.
 
-## 4.1. Известный риск, видимый владельцу ДО HG-B (review refresh R-1/R-2)
+## 4.1. Feasibility: resolved by declared N-grid search (candidate R3)
 
-Mandatory feasibility gate (§12 candidate R2), вычисленный на committed R1
-данных (`evidence/repro-v0-2-feasibility-gate-R2.json`):
-
-```text
-0b : ratio 0.124 (subsample) / 0.207 (advisory √n) → FEASIBLE
-32b: ratio 1.298 (subsample) / 0.907 (advisory √n) → FEASIBILITY-UNCERTAIN
-     (независимый review, параметрика для реальных n=40: 0.76–0.81)
-```
-
-По букве протокола freeze-цепочка для 32b упрётся в честный INFEASIBLE→owner.
-Варианты для владельца (решение owner, не имплементатора): (i) принять риск;
-(ii) ревизия R3 — сузить primary set до 0b; (iii) ревизия R3 — расширить
-budget. Пороги/статистика при этом не трогаются.
+Предыдущий пункт риска (candidate R2: 32b ratio 1.298 при N=40 →
+FEASIBILITY-UNCERTAIN) устранён конструкторски, без изменения δ/статистики:
+candidate R3 зафиксировал declared N-grid search ДО вычислений (grid
+{40, 48, 64, 80, 96, 128}, headroom ratio ≤ 0.80 по обеим primaries) и
+механически выбрал **SELECTED_N = 64** (0b 0.071 / 32b 0.736; полный grid
+в evidence `repro-v0-2-n-grid-R3.json`). Mandatory feasibility gate теперь
+PASS по построению; путь «owner accepts risk → execute despite failed gate»
+в R3 явно ЗАПРЕЩЁН (gate FAIL ⇒ BLOCKED; разрешение — только новая
+preregistered revision, сама проходящая gate). Budget обновлён
+machine-consistently: 296 confirmatory + 60 replacement = max 356 runs,
+wall ≤ 560 ч/платформа.
 
 ## 5. Почему это соответствует прежним owner-решениям
 
@@ -99,7 +100,8 @@ budget. Пороги/статистика при этом не трогаютс�
 
 ```text
 candidate protocol      = docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md
-                          (revision R2: paired-анализ, N=40 primaries, mechanical
+                          (revision R3: paired-анализ, N=64 primaries/10 controls
+                          по declared grid, mechanical decision rule + consistency gate,
                           decision rule, feasibility gate, 34-seed exclusion list;
                           НЕ FROZEN)
 seed generation tool    = scripts/nl5/repro_v02_seeds.py (+ тесты; deterministic,

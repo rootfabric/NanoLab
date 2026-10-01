@@ -29,14 +29,58 @@ class DerivationTest(unittest.TestCase):
 
     def test_positive_int32(self):
         for variant in seeds.DEFAULT_VARIANTS:
-            for seed in seeds.generate_variant_seeds(seeds.DEFAULT_ANCHOR, variant):
+            outcome = seeds.generate_variant_seeds(seeds.DEFAULT_ANCHOR, variant, seeds.VARIANT_REPLICAS[variant])
+            for seed in outcome["seeds"]:
                 self.assertTrue(0 <= seed < 2**31)
+
+    def test_seed_count_contract(self):
+        record = seeds.seed_record()
+        self.assertEqual(len(record["seeds"]["0b"]), 64)
+        self.assertEqual(len(record["seeds"]["32b"]), 64)
+        self.assertEqual(len(record["seeds"]["11b"]), 10)
+        self.assertEqual(len(record["seeds"]["53b"]), 10)
+        total = sum(len(v) for v in record["seeds"].values())
+        self.assertEqual(total, 148)
+        all_seeds = [s for v in record["seeds"].values() for s in v]
+        self.assertEqual(len(set(all_seeds)), 148)
+        self.assertEqual(record["fresh_seed_total"], 148)
+        self.assertEqual(record["bootstrap_seed_total"], 4)
+
+    def test_bootstrap_isolation(self):
+        record = seeds.seed_record()
+        fresh = {s for v in record["seeds"].values() for s in v}
+        bootstraps = set(record["bootstrap_seeds"].values())
+        self.assertEqual(len(bootstraps), 4)
+        self.assertEqual(bootstraps & fresh, set())
+        self.assertEqual(bootstraps & seeds.HISTORICAL_SEEDS_V1, set())
+
+    def test_tree_collision_continuation_rule(self):
+        # Deterministic continuation: a colliding identity is skipped, the next
+        # index consumed, the skip recorded (protocol §7, fixed pre-data).
+        anchor = "tree-collision-probe"
+        first = seeds.derive_seed(anchor, seeds.replica_label("probe", 1))
+        second = seeds.derive_seed(anchor, seeds.replica_label("probe", 2))
+        outcome = seeds.generate_variant_seeds(
+            anchor, "probe", count=1, excluded=frozenset(),
+            tree_collision_scan=lambda seed: seed == first,
+        )
+        self.assertEqual(outcome["seeds"], [second])
+        self.assertEqual(outcome["skipped"], [{"index": 1, "seed": first, "reason": "SEED_COLLISION_TREE"}])
+
+    def test_literal_tree_scan_hits_needle(self):
+        from nl5.repro_v02_seeds import literal_tree_collision_scan
+        root = Path(__file__).resolve().parents[1]
+        marker = 20260930  # this literal exists in this test file
+        result = literal_tree_collision_scan(root, [marker])
+        self.assertEqual(result["collision_count"], 1)
+        self.assertTrue(any("test_nl5_repro_v02_seeds.py" in f for f in result["collisions"][str(marker)]))
 
     def test_deterministic_across_calls(self):
         first = seeds.seed_record()
         second = seeds.seed_record()
         self.assertEqual(first, second)
         self.assertEqual(first["record_sha256"], second["record_sha256"])
+        self.assertEqual(first["variant_counts"], {"0b": 64, "32b": 64, "11b": 10, "53b": 10})
 
     def test_anchor_changes_stream(self):
         record_default = seeds.seed_record()
@@ -56,7 +100,7 @@ class ExclusionTest(unittest.TestCase):
         self.assertEqual(emitted, set(seeds.HISTORICAL_SEEDS_V1))
         for variant, stream in record["seeds"].items():
             self.assertEqual(set(stream) & seeds.HISTORICAL_SEEDS_V1, set(), variant)
-            self.assertEqual(len(stream), seeds.REPLICAS_PER_CELL)
+            self.assertEqual(len(stream), seeds.VARIANT_REPLICAS[variant])
         for variant, seed in record["bootstrap_seeds"].items():
             self.assertNotIn(seed, seeds.HISTORICAL_SEEDS_V1, variant)
 
@@ -83,10 +127,11 @@ class ExclusionTest(unittest.TestCase):
         # Inject the value the stream will actually produce: the refusal path
         # must trigger whenever any generated seed is excluded.
         first_seed = seeds.derive_seed(anchor, seeds.replica_label("probe", 1))
-        with self.assertRaises(ValueError):
+        with self.assertRaises(seeds.SeedCollisionError):
             seeds.generate_variant_seeds(anchor, "probe", count=1, excluded=frozenset({first_seed}))
         # Without the injected exclusion the same stream is fine.
-        self.assertEqual(seeds.generate_variant_seeds(anchor, "probe", count=1, excluded=frozenset()), [first_seed])
+        clean = seeds.generate_variant_seeds(anchor, "probe", count=1, excluded=frozenset())
+        self.assertEqual(clean["seeds"], [first_seed])
 
     def test_cross_variant_uniqueness_enforced(self):
         # 10 replicas x 4 variants from one anchor must be globally unique.
@@ -105,6 +150,7 @@ class RecordTest(unittest.TestCase):
                 "seeds": record["seeds"],
                 "bootstrap_seeds": record["bootstrap_seeds"],
                 "anchor": record["anchor"],
+                "variant_counts": record["variant_counts"],
             },
             ensure_ascii=False,
             sort_keys=True,
@@ -127,8 +173,9 @@ class CandidateDocConsistencyTest(unittest.TestCase):
     def test_document_declares_same_anchor_and_n(self):
         text = CANDIDATE_DOC.read_text(encoding="utf-8")
         self.assertIn('anchor   = "NANOLAB-REPRO-V0.2-R1"', text)
-        self.assertIn("N = 40 fresh replicas", text)
+        self.assertIn("N = 64 fresh paired replicas", text)
         self.assertIn("NANOLAB_REPRO_V0_2_DISTRIBUTIONAL", text)
+        self.assertIn("candidate revision  = R3", text)
         for seed in sorted(seeds.HISTORICAL_SEEDS_V1):
             self.assertIn(str(seed), text)
 
@@ -137,8 +184,10 @@ class CandidateDocConsistencyTest(unittest.TestCase):
         self.assertIn("PAIRED scheme", text)
         self.assertIn("random.Random(bootstrap_seed_v)", text)
         self.assertIn("B = 10 000", text)
-        self.assertIn("MANDATORY FEASIBILITY GATE", text)
-        self.assertIn("candidate revision  = R2", text)
+        self.assertIn("### 12.3 Mandatory feasibility gate", text)
+        self.assertIn("### 12.4 Consistency gate", text)
+        self.assertIn("SELECTED_N = 64", text)
+        self.assertIn("candidate revision  = R3", text)
         self.assertIn("NOT FROZEN", text)
 
     def test_document_declares_frozen_vocabulary(self):
@@ -181,3 +230,34 @@ class FeasibilityGateTest(unittest.TestCase):
         for key in ("s", "s_eff", "margin", "ratio_subsample", "ratio_sqrt_extrapolated", "gate_pass"):
             self.assertIn(key, res)
         self.assertEqual(res["gate_pass"], res["ratio_subsample"] <= 1.0)
+
+
+class FreezeConsistencyGateTest(unittest.TestCase):
+    """Protocol N == record N == budget N == N_min (mission §11)."""
+
+    def test_pass_on_consistent_package(self):
+        from nl5.repro_v02_freeze_gate import freeze_consistency_gate
+        record = seeds.seed_record()
+        text = CANDIDATE_DOC.read_text(encoding="utf-8")
+        result = freeze_consistency_gate(text, record)
+        self.assertEqual(result["gate"], "PASS", result["failures"])
+        self.assertEqual(result["failures"], [])
+        self.assertEqual(result["budget"]["confirmatory_runs"], 296)
+        self.assertEqual(result["budget"]["max_runs"], 356)
+
+    def test_fail_on_record_mismatch(self):
+        from nl5.repro_v02_freeze_gate import freeze_consistency_gate
+        record = seeds.seed_record()
+        record["variant_counts"]["0b"] = 10  # the R1/R2-era defect class
+        record["seeds"]["0b"] = record["seeds"]["0b"][:10]
+        text = CANDIDATE_DOC.read_text(encoding="utf-8")
+        result = freeze_consistency_gate(text, record)
+        self.assertEqual(result["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("0b" in item for item in result["failures"]))
+
+    def test_fail_on_protocol_mismatch(self):
+        from nl5.repro_v02_freeze_gate import freeze_consistency_gate
+        record = seeds.seed_record()
+        result = freeze_consistency_gate("0b = 40, 32b = 40, 11b = 10, 53b = 10", record)
+        # protocol literal 40 (grid minimum) vs contract 64 -> FAIL
+        self.assertEqual(result["gate"], "FREEZE_GATE_FAIL")
