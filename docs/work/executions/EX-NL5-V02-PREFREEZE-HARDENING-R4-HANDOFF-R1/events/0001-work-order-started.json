@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-03T06:03:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "summary": "Открыт bounded control/handoff Work Order для публикации pre-freeze hardening R4: зафиксировать новый focused audit exact subject PR #48, Repair Map F1-F4, готовую mission-инструкцию и отдельный prompt для Ubuntu-агента. Это PRE-DATA / C0_SOFTWARE_ONLY: никаких новых scientific simulations, freeze, HG-B approval, R2 activation или NL5 acceptance этим execution не объявляется. Canonical main на старте = 87298b36431045474d3784adf5cee8c9a64d0fc9; PR #48 остаётся OPEN/DRAFT и diverged после merge PR #47. Исторические R3 review/verify verdicts не переписываются; новые findings публикуются append-only и требуют нового implementation/review/verify цикла перед freeze.",
+  "command_refs": [
+    "GitHub branch read: main -> 87298b36431045474d3784adf5cee8c9a64d0fc9",
+    "GitHub PR read: #48 -> ce13f0e9cb9536aaffddfff0a05c9a73f0870a21, OPEN/DRAFT",
+    "GitHub branch create: control/nl5-v02-prefreeze-hardening-r4-handoff-r1 from exact main"
+  ],
+  "evidence_refs": [
+    "PR #48 integration/nl5-acceptance-policy-r3 @ ce13f0e9cb9536aaffddfff0a05c9a73f0870a21",
+    "PR #47 merged R2 activation tooling @ main 87298b36431045474d3784adf5cee8c9a64d0fc9",
+    "focused audit 2026-10-03: freeze gate, tree collision scan, replacement cursor, integer rounding"
+  ],
+  "next_action": "DIRECTOR: publish WO/mission, append-only audit evidence and Ubuntu continuation prompt; then validate exact branch diff and hand off to a real Ubuntu IMPLEMENTER.",
+  "blocker": null
+}

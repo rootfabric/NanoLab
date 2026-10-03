@@ -1,0 +1,103 @@
+{
+  "subject_head": "ce13f0e9cb9536aaffddfff0a05c9a73f0870a21",
+  "scope": "focused module-level audit; not full project tests, not scientific execution",
+  "source_blob_sha1_verified": {
+    "repro_v02_freeze_gate.py": "3875167709de7db89ebb0ad4c33d5722a85621aa",
+    "repro_v02_seeds.py": "81c1401c5d151202d6853cc46cdd81be0baff66a"
+  },
+  "reconstructed_seed_record_blob_sha1": "0a8cd6ad5a6c0ccf1c70bceb4223c43339529a37",
+  "defects_reproduced": true,
+  "observations": [
+    {
+      "test": "valid_committed_cardinalities_positive_control",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "empty_both_control_seed_lists",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "duplicate_primary_seed_with_stale_digest",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "incorrect_record_digest",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "missing_bootstrap_seeds",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "historical_seed_in_primary",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "contradictory_protocol_nmin_wall_and_budget",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "contradictory_duplicate_cardinality_line",
+      "observed": "PASS",
+      "failures": []
+    },
+    {
+      "test": "tree_scan_outside_git_repository",
+      "git_exit_code": 128,
+      "observed": {
+        "scanned": 1,
+        "collisions": {},
+        "collision_count": 0
+      }
+    },
+    {
+      "test": "scan_observes_worktree_not_pinned_commit",
+      "observed": {
+        "scanned": 1,
+        "collisions": {},
+        "collision_count": 0
+      }
+    },
+    {
+      "test": "documented_N_plus_1_replacement_reuses_confirmatory_identity",
+      "observed": {
+        "0b": {
+          "documented_replacement_index_N_plus_1": 65,
+          "seed": 1960729465,
+          "already_in_confirmatory_seed_set": true,
+          "consumed_candidate_indices": 74
+        },
+        "32b": {
+          "documented_replacement_index_N_plus_1": 65,
+          "seed": 411873937,
+          "already_in_confirmatory_seed_set": true,
+          "consumed_candidate_indices": 75
+        },
+        "11b": {
+          "documented_replacement_index_N_plus_1": 11,
+          "seed": 1351266957,
+          "already_in_confirmatory_seed_set": true,
+          "consumed_candidate_indices": 20
+        },
+        "53b": {
+          "documented_replacement_index_N_plus_1": 11,
+          "seed": 1321440826,
+          "already_in_confirmatory_seed_set": true,
+          "consumed_candidate_indices": 20
+        }
+      }
+    },
+    {
+      "test": "integer_rounding_contract",
+      "n_min_fraction": 0.796875,
+      "replacement_budget_fraction": 0.20270270270270271
+    }
+  ]
+}
