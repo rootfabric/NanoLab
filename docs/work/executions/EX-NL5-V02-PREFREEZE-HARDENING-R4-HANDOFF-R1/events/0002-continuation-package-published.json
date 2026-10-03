@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-package-published",
+  "timestamp_utc": "2026-10-03T06:16:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "36ce836d8858381bc0d27c741ccd11508d262575",
+  "summary": "R4 handoff product package published. Exact product tree = 8bfd676b891aef57837ed6ea25d267901f2ef1f4. Package contains the complete mission/WO, machine-readable audit observations, exact audited source copies from PR #48, exact R3 seed record, pre-repair reproducer, integrity manifest and Ubuntu continuation prompt. Compare to base main: ahead 11 / behind 0 at product subject; historical R3 evidence remains untouched. Focused reproducer was re-executed in a local equivalent source/ layout and exited 0, confirming the intended pre-repair findings. This is not R4 repair acceptance and not scientific execution.",
+  "command_refs": [
+    "GitHub compare base 87298b36431045474d3784adf5cee8c9a64d0fc9...product 36ce836d8858381bc0d27c741ccd11508d262575",
+    "python3 reproduce_findings.py -> exit 0 (pre-repair defect reproduction only)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-V02-PREFREEZE-HARDENING-R4.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/PACKAGE_MANIFEST_R1.json",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/audit/README_AUDIT_R4.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/audit_results_2026-10-03.json",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md"
+  ],
+  "next_action": "UBUNTU IMPLEMENTER: fetch this handoff branch, create/continue the real R4 implementation execution from fresh main, then proceed with Track A and eligible U1 host validation as separate durable workstreams.",
+  "blocker": null
+}
