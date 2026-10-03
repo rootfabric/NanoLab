@@ -4,7 +4,21 @@
 
 ```text
 rule_id (candidate) = NANOLAB_REPRO_V0_2_DISTRIBUTIONAL
-candidate revision  = R3 (2026-09-30, repair R2 по fresh review refresh R2 PASS
+candidate revision  = R4 (2026-10-03, pre-freeze hardening R4 по WO-NL5-V02-
+                      PREFREEZE-HARDENING-R4 / focused audit 2026-10-03 F1–F4:
+                      (F1) authoritative machine-readable freeze/dispatch
+                      contract, fail-closed; consistency gate = contract gate;
+                      (F2) literal tree scan ТОЛЬКО по pinned immutable tree
+                      a9d7d07 с fail-closed семантикой exit-кодов git grep;
+                      (F3) replacement pool/cursor после последнего
+                      потреблённого candidate index (никогда raw N+1);
+                      (F4) одна явно названная целочисленная policy
+                      ceil-nmin-floor-replacement-pairs-v1: N_min =
+                      ceil(0.80·N) = 52/8, per-cell replacement quota =
+                      floor(0.20·N) пар = 12/12/2/2, replacement cap =
+                      56 runs, max_runs = 352. Confirmatory identities НЕ
+                      изменялись — logical digest наследован от R3)
+candidate revision R3 (2026-09-30, repair R2 по fresh review refresh R2 PASS
                       61d8c67 R-1..R-5 + central closure mission: (а) N-contract —
                       генератор выдаёт ровно протокольные cardinalities (было
                       10/вариант при протокольных 40 primaries; R3 grid-search →
@@ -15,14 +29,31 @@ candidate revision  = R3 (2026-09-30, repair R2 по fresh review refresh R2 PAS
                       consistency gate. Полные тексты R1/R2 — git history
                       (3171564 / 6e5287b); изменения ДО freeze бесплатны —
                       confirmatory data нет)
-подготовлен          = WO-NL5-ACCEPTANCE-POLICY-R2 (EX-NL5-ACCEPTANCE-POLICY-R2)
-базовый main         = 8205781def7179d6bdfa6eb7ab2a84d46776649c
-date                 = 2026-09-30
+подготовлен          = WO-NL5-ACCEPTANCE-POLICY-R2 (EX-NL5-ACCEPTANCE-POLICY-R2);
+                       R4 hardening = WO-NL5-V02-PREFREEZE-HARDENING-R4
+                       (EX-NL5-V02-PREFREEZE-HARDENING-R4)
+базовый main         = 87298b36431045474d3784adf5cee8c9a64d0fc9 (R4 branch base);
+                       R3 базовый main = 8205781def7179d6bdfa6eb7ab2a84d46776649c
+date                 = 2026-10-03 (R4); 2026-09-30 (R3)
 freeze status        = NOT FROZEN — freeze отдельной Director-записью ТОЛЬКО после
                        HG-B (owner approval принципа) и fresh review/verify ЭТОЙ
                        ревизии, до любых confirmatory data
 claim ceiling        = C1_COMPUTATIONAL_REPRODUCTION (у будущей кампании)
 ```
+
+Изменения R3 → R4 (pre-data candidate revision; полная Repair Map —
+`docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/`; owner decision
+delta — addendum в HG-B proposal; это НЕ тихая смена science criteria:
+
+| аспект | R3 | R4 | причина (audit 2026-10-03) |
+|---|---|---|---|
+| freeze authority | regex-строка протокола + частичный gate (fail-open классы) | machine-readable contract, fail-closed; dispatch без gate невозможен | F1 |
+| collision scan | mutable worktree; git grep exit 128 неотличим от «чисто» | pinned immutable tree a9d7d07; exit 0=hits/1=clean/иное=SCAN_ERROR→BLOCKED | F2 |
+| replacement cursor | текстовое «N+1, N+2, …» (повторно выбирает уже потреблённые identity при skips) | frozen replacement pool от `next_candidate_index` (после всех skips) | F3 |
+| N_min | 51 = floor(0.80·64); 51/64 = 79.6875% < 80% | **52** = ceil(0.80·64) (literal ≥80%); control **8** = ceil(0.80·10) | F4 |
+| replacement budget | ≤59 → округлено 60 = ceil(0.20·296); 60/296 = 20.27% > 20% | **56 runs** = Σ 2·floor(0.20·N) по ячейкам (12/12/2/2 пар; ≤20% literal по каждой ячейке и по сумме) | F4 |
+| max_runs | 356 | **352** | F4 |
+| wording | «гарантированно feasible» | «feasible на committed planning-данных» + явные ограничения вывода | F4 |
 
 Этот документ — **candidate**. Он не изменяет canonical state, не freeze'ится
 этим фактом и не отменяет `NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE` (тот остаётся
@@ -62,8 +93,15 @@ scientific consistency         — согласие с ранее приняты
 > Воспроизводится ли распределение per-replica median hinge angle вариантов
 > dna_hinge (0b, 32b primary; 11b, 53b controls) на независимой
 > external-платформе (U2) относительно author-платформы (U1) эквивалентно —
-> то есть так, что межплатформенный сдвиг мал относительно собственной
+> то есть так, что межплатформенный сдвиг МЕДИАН мал относительно собственной
 > внутриплатформенной вариативности свежих реплик?
+
+Scope-ограничение (explicit, R4): правило проверяет эквивалентность
+**медианного парного сдвига** относительно внутриплатформенной вариативности
+(TOST-логика на CI90 медианы d_i). Оно НЕ проверяет равенство всех прочих
+свойств распределений (дисперсии, хвосты, форму, высшие моменты) и не
+утверждает «платформы одинаковы во всём». PASS означает только
+неотличимость медианного сдвига от нуля в выбранной шкале δ·s_eff.
 
 ## 4. Hypotheses (для каждого primary варианта v ∈ {0b, 32b})
 
@@ -138,26 +176,43 @@ platform study: 1259289227, 1358106528, 1524307444, 601855227,
 
 Обязательство регенерации (часть протокола, не только summary): при Director
 freeze seed record регенерируется из frozen anchor, сверяется с exclusion
-list (34), и выполняется whole-tree literal search — каждый fresh seed не
-должен встречаться нигде в evidence-дереве КРОМЕ seed record и этого
-документа (scan excludes seed-record/protocol paths; прецедент: verifier
-platform study). Детерминистическое tree-collision правило генерации
-зафиксировано ДО любых вычислений: identity потребляются в index-порядке;
-identity, чья литеральная форма уже встречается в дереве (SEED_COLLISION),
-ПРОПУСКАЕТСЯ, потребляется следующий index, skip записывается в record
-(генерация R3, scan на a9d7d07-tree: skips учтены в record). Несовпадение digest'ов
-или collision вне разрешённых мест = freeze невозможен.
+list (34), и выполняется literal search по **pinned immutable tree** — каждый
+fresh replica identity (confirmatory + replacement pool; НЕ bootstrap:
+bootstrap-значения детерминистичны по anchor и легитимно повторяются в
+seed-records предыдущих ревизий R1/R2 — их provenance фиксируется отдельно)
+не должен встречаться нигде в зафиксированном дереве КРОМЕ seed
+record и этого документа (EXACT path allowlist = {seed record path, candidate
+doc path}; prefix-исключения запрещены, F2; прецедент: verifier platform
+study). Scan исполняется `git grep` по зафиксированному tree/commit, а не по
+изменяемому worktree; семантика exit-кодов fail-closed: 0 = найдено, 1 = чисто,
+любой иной код / недоступный object / не-git = SCAN_ERROR → BLOCKED
+(«0 коллизий» при неполной проверке запрещено, F2). Детерминистическое
+tree-collision правило генерации зафиксировано ДО любых вычислений: identity
+потребляются в index-порядке; identity, чья литеральная форма уже встречается
+в pinned дереве (SEED_COLLISION), ПРОПУСКАЕТСЯ, потребляется следующий index,
+skip записывается в record (генерация R3, scan на pinned tree
+a9d7d07fa264e9907b67ca244b00ba2da3430b0f: skips учтены в record). Изменение
+exclusion tree = новая явно зафиксированная generation revision, не скрытый
+дрейф. Несовпадение digest'ов или collision вне разрешённых мест = freeze
+невозможен. R4 regression-контроль: replay записанных skips обязан
+воспроизводить опубликованные identities бит-в-бит (машинно проверяется
+contract gate).
 
-Cardinality contract (revision R3, machine-enforced):
+Cardinality contract (revision R4, machine-enforced через authoritative
+freeze contract):
 
 ```text
 0b = 64, 32b = 64, 11b = 10, 53b = 10  → fresh_seed_total = 148
-(generation-time scan на a9d7d07-tree: 0b 10 skips, 32b 11, 11b 10, 53b 10)
-bootstrap seeds = 4 (по одному на variant)
+(generation-time scan на pinned tree a9d7d07: 0b 10 skips, 32b 11, 11b 10, 53b 10;
+ indices_consumed = 74/75/20/20, next_candidate_index = 75/76/21/21)
+bootstrap seeds = 4 (по одному на variant; индексы записаны в record)
 148 fresh globally unique; bootstrap unique;
 bootstrap ∩ fresh = ∅; fresh ∩ historical = ∅; bootstrap ∩ historical = ∅
-protocol N == seed-record N == budget N == N_min-базис (consistency gate;
-    любое расхождение = FREEZE_GATE_FAIL)
+protocol N == seed-record N == budget N == N_min-базис == contract
+    (authoritative machine contract; любое расхождение = FREEZE_GATE_FAIL,
+    dispatch без PASS gate невозможен — F1)
+replacement pool = заранее сгенерирован и frozen ДО данных от
+    next_candidate_index (F3; см. §8)
 ```
 
 ## 8. N и replicas
@@ -173,12 +228,31 @@ controls (11b, 53b) : N = 10 (non-gating, статистика та же)
                       дало SELECTED_N = 64 (0b 0.071 / 32b 0.736; полный grid
                       — evidence repro-v0-2-n-grid-R3.json); R1 значения —
                       ТОЛЬКО planning-оценка, не thresholds
-N_min               = 51 валидных пары на primary ячейку (80% от N=64);
-                      8 на control
-replacement         = ≤ 20% на ячейку, ТОЛЬКО для FAILED_TECHNICAL
-                      (новые attempt id; пара выбрасывается, если любая
-                      сторона failed; замена идёт тем же generator-потоком
-                      с индексами N+1, N+2, ...)
+integer policy (F4) = ceil-nmin-floor-replacement-pairs-v1 (единая для всех
+                      поверхностей):
+  N_min             = ceil(0.80·N) валидных пар на ячейку:
+                      primary ceil(0.80·64) = 52 (51/64 = 79.6875% НЕ
+                      удовлетворяет literal «не менее 80%»; 52/64 = 81.25% ≥);
+                      control ceil(0.80·10) = 8
+  replacement quota = floor(0.20·N) ПАР на variant-ячейку, ТОЛЬКО для
+                      FAILED_TECHNICAL: primary 12 пар, control 2 пары
+                      (12/64 = 18.75% ≤ 20%; 2/10 = 20% ≤ 20% literal)
+  replacement runs  = 2 runs на пару (paired legs) → cap =
+                      2·(12+12+2+2) = 56 runs ≤ 20% от 296 (= 59.2) literal
+  max_runs          = 296 + 56 = 352 (было 356; ужесточение, не расширение)
+replacement mechanics = заранее сгенерированный frozen replacement pool на
+                      variant, продолжающий deterministic поток С ИНДЕКСА
+                      next_candidate_index (после последнего потреблённого
+                      candidate index, включая skips; raw «N+1» ЗАПРЕЩЕН —
+                      при R3 skips индекс N+1 уже принадлежит confirmatory
+                      identities, audit F3). Курсор (indices_consumed,
+                      next_candidate_index) хранится per variant в record.
+                      Новые attempt id (`<run_base>` / `<run_base>-R<n>`,
+                      reuse запрещён, append-only ledger); пара
+                      выбрасывается, если любая сторона failed; замена
+                      потребляет СЛЕДУЮЩУЮ identity пула (outcome-driven
+                      выбор seeds запрещён). Исчерпание квоты = честная
+                      классификация ячейки, без расширения
 ```
 
 ## 9. Observables, metrics, decision rule (полностью механические)
@@ -273,8 +347,12 @@ model / observable / seeds / статистику» (такие изменени
 
 Replica FAILED_TECHNICAL: engine exit ≠ 0, неполная траектория, невалидные
 кадры сверх frozen gates, digest mismatch входов. Retry — новый attempt id
-(`-R1`, `-R2`, …), append-only ledger; replacement в пределах 20% allowance.
-Ячейка с ≥ 3 подряд FAILED_TECHNICAL останавливается → честная классификация.
+(`-R1`, `-R2`, …), append-only ledger; replacement — только из frozen
+per-cell replacement pool (§8, F4 integer policy: 12/12/2/2 пар = 56 runs),
+только для FAILED_TECHNICAL; replacement identity потребляется из пула по
+курсору, outcome-driven выбор запрещён. Ячейка с ≥ 3 подряд
+FAILED_TECHNICAL или исчерпанной квотой останавливается → честная
+классификация.
 
 ## 12. Budget, declared N-grid, feasibility gate, stop conditions (pre-declared)
 
@@ -303,11 +381,17 @@ N= 96: 0b 0.019 / 32b 0.173  → PASS
 N=128: 0b 0.019 / 32b 0.173  → PASS
 ```
 
-### 12.2 Budget (derivation от SELECTED_N = 64, machine-consistent)
+### 12.2 Budget (derivation от SELECTED_N = 64, machine-consistent, F4 policy)
 
 ```text
 confirmatory runs = primaries 2 × 64 × 2 = 256 + controls 2 × 10 × 2 = 40
-                    = 296; replacements ≤ 59 → округлено 60 (20%); MAX 356 runs
+                    = 296
+replacement cap   = Σ по ячейкам 2 × floor(0.20·N) = 2·(12+12+2+2) = 56 runs
+                    (per-cell literal ≤ 20%: 12/64 = 18.75%, 2/10 = 20%;
+                    сумма 56/296 = 18.92% ≤ 20%; R3-значение «≤59 → 60»
+                    удалено как противоречащее literal «не более 20%»,
+                    60/296 = 20.27%)
+MAX runs          = 296 + 56 = 352
 compute           = CPU-only, paid compute FORBIDDEN без отдельной owner-
                     авторизации
 wall budget       = ≤ 560 ч на платформу (~23 суток; калибровка: platform
@@ -325,20 +409,62 @@ preregistered revision, которая САМА проходит gate.
 ```
 
 Gate confirmation на dispatch: SELECTED_N = 64 и committed grid-строка N=64
-(0b 0.071 / 32b 0.736 ≤ 0.80) — кампания проектируется в гарантированно
-feasible области; если к моменту dispatch planning-данные изменились (новые
-committed paired evidence), grid пересчитывается той же pinned реализацией до
-dispatch, и любое ухудшение соотношения за пределы headroom = BLOCKED (новая
-revision). История R2-эры (0b 0.124 / 32b 1.298 при n=40) сохранена в
-evidence `repro-v0-2-feasibility-gate-R2.json` как planning-факт.
+(0b 0.071 / 32b 0.736 ≤ 0.80) — кампания проектируется в области, которая
+**была feasible на committed planning-данных R1** (planning-оценка, НЕ
+гарантия исхода будущих данных/среды: прохождение planning bootstrap на
+исторических парах не предопределяет результат новых данных, а R1-медианы не
+являются thresholds). Если к моменту dispatch planning-данные изменились
+(новые committed paired evidence), grid пересчитывается той же pinned
+реализацией до dispatch, и любое ухудшение соотношения за пределы headroom =
+BLOCKED (новая revision). История R2-эры (0b 0.124 / 32b 1.298 при n=40)
+сохранена в evidence `repro-v0-2-feasibility-gate-R2.json` как planning-факт.
 
-### 12.4 Consistency gate (freeze/dispatch machine-check)
+### 12.4 Consistency gate = authoritative freeze contract gate (F1)
 
 ```text
+authoritative source = machine-readable freeze contract JSON (versioned,
+  revision r4): единственный authoritative declaration для freeze/dispatch;
+  дублирующие/противоречащие декларации в протоколе = FREEZE_GATE_FAIL
+dispatch       = entrypoint обязан вызвать полный contract gate; PLAN не
+  строится без PASS (обход невозможен по построению; negative tests
+  фиксируют отказ)
+проверки       = malformed/missing/extra/unknown revision/read error →
+  fail-closed; фактические массивы: длины, int32-range, без bool,
+  глобальная уникальность, disjoint fresh/bootstrap/replacement/historical
+  множества, digest, bit-exact регенерация replay, per-cell quotas,
+  total cap, wall cap, cardinalities
 protocol §8 N (64/10) == seed-record variant_counts == budget derivation N
-== N_min-базис (51/8) == execution plan N. Любое расхождение =
-FREEZE_GATE_FAIL — машино-проверяемо (tests + freeze checklist), невозможно
-пропустить Reviewer/Verifier.
+  == N_min-базис (52/8) == machine block == execution plan N. Любое
+  расхождение = FREEZE_GATE_FAIL — машино-проверяемо, невозможно пропустить
+  Reviewer/Verifier
+```
+
+Машинный биндинг документ ↔ contract (authoritative block, проверяется
+gate'ом; единственный экземпляр в документе):
+
+```text
+# machine-contract-v1 (authoritative; verified against repro-v0-2-freeze-contract-PRE_DATA_R4.json)
+rule_id = NANOLAB_REPRO_V0_2_DISTRIBUTIONAL
+candidate_revision = R4
+anchor = NANOLAB-REPRO-V0.2-R1
+n_0b = 64
+n_32b = 64
+n_11b = 10
+n_53b = 10
+n_min_primary = 52
+n_min_control = 8
+replacement_quota_pairs_primary = 12
+replacement_quota_pairs_control = 2
+confirmatory_runs = 296
+replacement_runs_cap = 56
+max_runs = 352
+wall_hours_per_platform = 560
+selected_n = 64
+headroom_ratio = 0.8
+bootstrap_resamples = 10000
+exclusion_list_size = 34
+exclusion_tree_pin = a9d7d07fa264e9907b67ca244b00ba2da3430b0f
+integer_policy_name = ceil-nmin-floor-replacement-pairs-v1
 ```
 
 ### 12.5 Stop conditions
@@ -394,7 +520,19 @@ candidate R2 (6e5287b): paired pinned анализ, N=40 primaries, budget 240,
                         mechanical rule §9.2/9.3, feasibility gate §12,
                         exclusion 34, deviation classes §9.4 — refresh PASS
                         c25bcd6 с M-2 PARTIAL + R-1..R-5
-candidate R3 (этот)   : SELECTED_N=64 declared grid, N-contract generator
+candidate R3 (ce13f0e): SELECTED_N=64 declared grid, N-contract generator
                         (148 fresh seeds), tree-collision continuation rule,
-                        consistency gate, accept-risk обход запрещён
+                        consistency gate, accept-risk обход запрещён;
+                        review R3 PASS 846a5a2 + refresh R3.1 PASS fa30772 +
+                        verify VERIFIED 0c708e2 (исторические вердикты R3
+                        сохранены; focused audit 2026-10-03 нашёл F1–F4 =>
+                        readiness FIX_REQUIRED, не отменяя R3-верdicts)
+candidate R4 (этот)   : pre-freeze hardening по audit F1–F4: authoritative
+                        machine contract (fail-closed freeze/dispatch, F1);
+                        pinned-tree literal scan с exit-семантикой (F2);
+                        frozen replacement pool/cursor после последнего
+                        потреблённого index (F3); integer policy
+                        ceil-nmin-floor-replacement-pairs-v1 — N_min 52/8,
+                        per-cell quota 12/12/2/2 пар, replacement cap 56,
+                        max_runs 352 (F4); wording softening (§3/§12.3)
 ```

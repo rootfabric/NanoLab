@@ -67,13 +67,53 @@ class DerivationTest(unittest.TestCase):
         self.assertEqual(outcome["seeds"], [second])
         self.assertEqual(outcome["skipped"], [{"index": 1, "seed": first, "reason": "SEED_COLLISION_TREE"}])
 
-    def test_literal_tree_scan_hits_needle(self):
+    def test_literal_tree_scan_hits_needle_pinned(self):
+        """F2: the authoritative scan runs on a pinned immutable tree."""
+        import subprocess
         from nl5.repro_v02_seeds import literal_tree_collision_scan
         root = Path(__file__).resolve().parents[1]
-        marker = 20260930  # this literal exists in this test file
-        result = literal_tree_collision_scan(root, [marker])
+        marker = 20260930  # this literal exists in this test file (tracked)
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=root, check=True
+        ).stdout.strip()
+        result = literal_tree_collision_scan(root, [marker], pinned_commit=head)
         self.assertEqual(result["collision_count"], 1)
         self.assertTrue(any("test_nl5_repro_v02_seeds.py" in f for f in result["collisions"][str(marker)]))
+
+    def test_pinned_scan_ignores_dirty_worktree(self):
+        """F2: an uncommitted worktree edit cannot hide a pinned-tree hit."""
+        import subprocess
+        from nl5.repro_v02_seeds import literal_tree_collision_scan
+        root = Path(__file__).resolve().parents[1]
+        marker = 20260930
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=root, check=True
+        ).stdout.strip()
+        target = root / "tests" / "test_nl5_repro_v02_seeds.py"
+        original = target.read_text(encoding="utf-8")
+        try:
+            target.write_text(original.replace(str(marker), "99999999"), encoding="utf-8")
+            dirty_worktree_scan = literal_tree_collision_scan(root, [marker])
+            self.assertEqual(dirty_worktree_scan["collision_count"], 0)  # worktree mode is blind
+            pinned_scan = literal_tree_collision_scan(root, [marker], pinned_commit=head)
+            self.assertEqual(pinned_scan["collision_count"], 1)  # pinned mode still sees it
+        finally:
+            target.write_text(original, encoding="utf-8")
+
+    def test_exact_path_exclusions_do_not_use_prefixes(self):
+        """F2: an exclusion is exact; neighbouring paths are never swallowed."""
+        import subprocess
+        from nl5.repro_v02_seeds import literal_tree_collision_scan
+        root = Path(__file__).resolve().parents[1]
+        marker = 20260930
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=root, check=True
+        ).stdout.strip()
+        near_miss = "tests/test_nl5_repro_v02_seeds.py-NEIGHBOUR"
+        result = literal_tree_collision_scan(
+            root, [marker], exclude_paths=(near_miss,), pinned_commit=head
+        )
+        self.assertEqual(result["collision_count"], 1)
 
     def test_deterministic_across_calls(self):
         first = seeds.seed_record()
@@ -175,7 +215,7 @@ class CandidateDocConsistencyTest(unittest.TestCase):
         self.assertIn('anchor   = "NANOLAB-REPRO-V0.2-R1"', text)
         self.assertIn("N = 64 fresh paired replicas", text)
         self.assertIn("NANOLAB_REPRO_V0_2_DISTRIBUTIONAL", text)
-        self.assertIn("candidate revision  = R3", text)
+        self.assertIn("candidate revision  = R4", text)
         for seed in sorted(seeds.HISTORICAL_SEEDS_V1):
             self.assertIn(str(seed), text)
 
@@ -187,7 +227,7 @@ class CandidateDocConsistencyTest(unittest.TestCase):
         self.assertIn("### 12.3 Mandatory feasibility gate", text)
         self.assertIn("### 12.4 Consistency gate", text)
         self.assertIn("SELECTED_N = 64", text)
-        self.assertIn("candidate revision  = R3", text)
+        self.assertIn("candidate revision  = R4", text)
         self.assertIn("NOT FROZEN", text)
 
     def test_document_declares_frozen_vocabulary(self):
@@ -243,7 +283,9 @@ class FreezeConsistencyGateTest(unittest.TestCase):
         self.assertEqual(result["gate"], "PASS", result["failures"])
         self.assertEqual(result["failures"], [])
         self.assertEqual(result["budget"]["confirmatory_runs"], 296)
-        self.assertEqual(result["budget"]["max_runs"], 356)
+        # R4 integer policy: replacement cap 56 = 2*(12+12+2+2); max_runs 352
+        self.assertEqual(result["budget"]["replacement_runs_cap"], 56)
+        self.assertEqual(result["budget"]["max_runs"], 352)
 
     def test_fail_on_record_mismatch(self):
         from nl5.repro_v02_freeze_gate import freeze_consistency_gate

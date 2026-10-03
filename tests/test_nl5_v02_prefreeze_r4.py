@@ -1,0 +1,596 @@
+"""R4 pre-freeze hardening regression tests (WO-NL5-V02-PREFREEZE-HARDENING-R4).
+
+Repairs audit findings F1-F4 (focused audit 2026-10-03). Unlike the R3-era
+tests, the negative controls here REQUIRE REJECTION: a corrupted contract,
+record, protocol declaration or incomplete scan must fail closed (gate FAIL /
+exception / non-zero exit), never PASS.
+
+No simulations, no network, no scientific claims. Fixtures are synthetic or
+the committed PRE-DATA R4 evidence package.
+"""
+from __future__ import annotations
+
+import copy
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+from nl5 import repro_v02_seeds as seeds
+from nl5.repro_v02_freeze_contract import (
+    INTEGER_ROUNDING_POLICY,
+    ContractError,
+    ReplacementBudgetExhausted,
+    ReplacementLedger,
+    build_execution_plan,
+    derive_budget,
+    freeze_gate,
+    load_contract,
+    load_seed_record,
+    n_min_cell,
+    parse_protocol_cardinalities,
+    parse_protocol_machine_block,
+    replacement_quota_pairs,
+    validate_freeze_contract,
+)
+
+EVIDENCE = REPO_ROOT / "docs" / "work" / "executions" / "EX-NL5-V02-PREFREEZE-HARDENING-R4" / "evidence"
+CONTRACT_PATH = EVIDENCE / "repro-v0-2-freeze-contract-PRE_DATA_R4.json"
+RECORD_PATH = EVIDENCE / "repro-v0-2-seed-record-PRE_DATA_R4.json"
+DOC_PATH = REPO_ROOT / "docs" / "research" / "NANOLAB_REPRO_V0_2_CANDIDATE_R1.md"
+
+
+def load_package():
+    return load_contract(CONTRACT_PATH), DOC_PATH.read_text(encoding="utf-8"), load_seed_record(RECORD_PATH)
+
+
+def write_tmp(directory: Path, name: str, payload) -> Path:
+    path = directory / name
+    if isinstance(payload, (dict, list)):
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    else:
+        path.write_text(payload, encoding="utf-8")
+    return path
+
+
+def cli(args: list[str]) -> subprocess.CompletedProcess:
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(REPO_ROOT / "scripts") + os.pathsep + env.get("PYTHONPATH", "")
+    return subprocess.run(
+        [sys.executable, "-m", "nl5.repro_v02_freeze_contract", *args],
+        capture_output=True, text=True, cwd=REPO_ROOT, env=env, timeout=120,
+    )
+
+
+# ---------------------------------------------------------------------------
+# F4 — one explicitly named integer policy
+# ---------------------------------------------------------------------------
+
+
+class IntegerPolicyTest(unittest.TestCase):
+    def test_named_policy_values(self):
+        self.assertEqual(INTEGER_ROUNDING_POLICY["name"], "ceil-nmin-floor-replacement-pairs-v1")
+        self.assertEqual(n_min_cell(64), 52)
+        self.assertEqual(n_min_cell(10), 8)
+        self.assertEqual(replacement_quota_pairs(64), 12)
+        self.assertEqual(replacement_quota_pairs(10), 2)
+
+    def test_literal_bounds_hold(self):
+        # 51/64 = 79.6875% violates ">= 80%"; 52/64 satisfies it.
+        self.assertLess(51 * 100, 80 * 64)
+        self.assertGreaterEqual(52 * 100, 80 * 64)
+        # 60/296 = 20.27% violates "<= 20%"; the policy cap satisfies it.
+        self.assertGreater(60 * 100, 20 * 296)
+        budget = derive_budget()
+        self.assertEqual(budget["confirmatory_runs"], 296)
+        self.assertEqual(budget["replacement_runs_cap"], 56)
+        self.assertEqual(budget["max_runs"], 352)
+        self.assertLessEqual(budget["replacement_runs_cap"] * 100, 20 * budget["confirmatory_runs"])
+
+    def test_budget_is_single_source(self):
+        counts = {"0b": 64, "32b": 64, "11b": 10, "53b": 10}
+        self.assertEqual(derive_budget(counts), derive_budget())
+        with self.assertRaises(ValueError):
+            n_min_cell(True)  # bool is not an integer under the policy
+        with self.assertRaises(ValueError):
+            replacement_quota_pairs(-3)
+
+
+# ---------------------------------------------------------------------------
+# F1 — contract structure: malformed / missing / extra / unknown fail closed
+# ---------------------------------------------------------------------------
+
+
+class ContractMalformedTest(unittest.TestCase):
+    def test_truncated_json_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "contract.json"
+            path.write_text('{"schema_version": 1, "kind": ', encoding="utf-8")
+            with self.assertRaises(ContractError):
+                load_contract(path)
+
+    def test_missing_contract_file_fails_closed(self):
+        with self.assertRaises(ContractError):
+            load_contract(Path("/nonexistent/nanolab-contract.json"))
+
+    def test_unknown_revision_fails(self):
+        contract, text, record = load_package()
+        contract["contract_revision"] = "r99"
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("unknown contract_revision" in f for f in report["failures"]))
+
+    def test_missing_required_section_fails(self):
+        contract, text, record = load_package()
+        del contract["run_budget"]
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_extra_top_level_key_fails(self):
+        contract, text, record = load_package()
+        contract["sneaky_extra"] = {"bypass": True}
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("extra" in f for f in report["failures"]))
+
+    def test_missing_variant_fails(self):
+        contract, text, record = load_package()
+        del contract["variants"]["53b"]
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_extra_variant_fails(self):
+        contract, text, record = load_package()
+        contract["variants"]["74b"] = {"role": "control", "n": 10, "n_min": 8}
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_record_missing_entirely_fails_for_freeze(self):
+        contract, text, _ = load_package()
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=None)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("seed record not provided" in f for f in report["failures"]))
+
+
+# ---------------------------------------------------------------------------
+# F1 — seed-level integrity classes from the audit
+# ---------------------------------------------------------------------------
+
+
+class SeedIntegrityNegativeTest(unittest.TestCase):
+    def _mutated(self, mutate):
+        contract, text, record = load_package()
+        mutate(contract, record)
+        return contract, text, record
+
+    def test_empty_control_arrays_fail(self):
+        def mutate(contract, record):
+            record["seeds"]["11b"] = []
+            record["seeds"]["53b"] = []
+            contract["confirmatory_seeds"]["11b"] = []
+            contract["confirmatory_seeds"]["53b"] = []
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("11b" in f for f in report["failures"]))
+
+    def test_duplicate_primary_seed_fails(self):
+        def mutate(contract, record):
+            contract["confirmatory_seeds"]["0b"][7] = contract["confirmatory_seeds"]["0b"][0]
+            record["seeds"]["0b"][7] = record["seeds"]["0b"][0]
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("duplicate" in f for f in report["failures"]))
+
+    def test_historical_seed_in_primary_fails(self):
+        def mutate(contract, record):
+            contract["confirmatory_seeds"]["32b"][0] = 201004
+            record["seeds"]["32b"][0] = 201004
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("historical" in f for f in report["failures"]))
+
+    def test_stale_record_digest_fails(self):
+        def mutate(contract, record):
+            record["seeds"]["0b"][1] = record["seeds"]["0b"][0]
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("digest" in f for f in report["failures"]))
+
+    def test_contract_logical_digest_mismatch_fails(self):
+        def mutate(contract, record):
+            contract["scientific_subject"]["seed_record_logical_sha256"] = "0" * 64
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_missing_bootstrap_fails(self):
+        def mutate(contract, record):
+            contract["bootstrap"]["seeds"] = {}
+            contract["bootstrap"]["indices"] = {}
+            record["bootstrap_seeds"] = {}
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("bootstrap" in f for f in report["failures"]))
+
+    def test_bool_seed_fails(self):
+        def mutate(contract, record):
+            contract["confirmatory_seeds"]["11b"][0] = True
+            record["seeds"]["11b"][0] = True
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("not an integer" in f for f in report["failures"]))
+
+    def test_out_of_range_seed_fails(self):
+        for bad in (2**31, -5):
+            def mutate(contract, record, bad=bad):
+                contract["confirmatory_seeds"]["11b"][0] = bad
+                record["seeds"]["11b"][0] = bad
+            report = validate_freeze_contract(*self._mutated(mutate))
+            self.assertEqual(report["gate"], "FREEZE_GATE_FAIL", bad)
+
+    def test_n_mismatch_between_record_and_contract_fails(self):
+        def mutate(contract, record):
+            record["variant_counts"]["0b"] = 10
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_wrong_nmin_value_fails(self):
+        def mutate(contract, record):
+            contract["variants"]["0b"]["n_min"] = 51  # floor(0.8*64) — the F4 defect
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("n_min" in f for f in report["failures"]))
+
+    def test_wrong_replacement_cap_fails(self):
+        def mutate(contract, record):
+            contract["run_budget"]["replacement_runs_cap"] = 60  # the F4 defect (20.27%)
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("replacement_runs_cap" in f for f in report["failures"]))
+
+    def test_wrong_wall_cap_fails(self):
+        def mutate(contract, record):
+            contract["run_budget"]["wall_hours_per_platform"] = 1
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_replacement_pool_shorter_than_quota_fails(self):
+        def mutate(contract, record):
+            contract["replacement"]["pools"]["0b"]["seeds"] = contract["replacement"]["pools"]["0b"]["seeds"][:5]
+            record["replacement_pools"]["0b"]["seeds"] = record["replacement_pools"]["0b"]["seeds"][:5]
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_replacement_pool_starting_at_raw_n_plus_1_fails(self):
+        def mutate(contract, record):
+            # Simulate the F3 defect: pool begins at N+1 = 65 instead of cursor 75.
+            contract["replacement"]["pools"]["0b"]["start_index"] = 65
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("start_index" in f for f in report["failures"]))
+
+    def test_cursor_not_after_last_consumed_index_fails(self):
+        def mutate(contract, record):
+            contract["seed_generation"]["next_candidate_index"]["0b"] = 65  # raw N+1, F3 defect
+            contract["replacement"]["pools"]["0b"]["start_index"] = 65
+            contract["replacement"]["pools"]["0b"]["next_candidate_index"] = 77
+        report = validate_freeze_contract(*self._mutated(mutate))
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("next_candidate_index" in f for f in report["failures"]))
+
+
+# ---------------------------------------------------------------------------
+# F1 — protocol declarations: contradictions and duplicates fail closed
+# ---------------------------------------------------------------------------
+
+
+class ProtocolDeclarationNegativeTest(unittest.TestCase):
+    def test_duplicate_cardinality_line_fails(self):
+        _, text, _ = load_package()
+        with self.assertRaises(ContractError):
+            parse_protocol_cardinalities(text + "\n0b = 1, 32b = 1, 11b = 1, 53b = 1\n")
+
+    def test_missing_cardinality_line_fails(self):
+        with self.assertRaises(ContractError):
+            parse_protocol_cardinalities("no cardinalities here")
+
+    def test_second_machine_block_fails(self):
+        import re
+        _, text, _ = load_package()
+        match = None
+        for fence in re.finditer(r"```[^\n]*\n(.*?)```", text, re.DOTALL):
+            if "machine-contract-v1" in fence.group(1):
+                match = fence
+                break
+        self.assertIsNotNone(match)
+        mutated_block = "```text\n# machine-contract-v1 (authoritative; duplicate is fail-closed)\n" \
+            "rule_id = NANOLAB_REPRO_V0_2_DISTRIBUTIONAL\ncandidate_revision = R4\n" \
+            "anchor = NANOLAB-REPRO-V0.2-R1\nn_0b = 64\nn_32b = 64\nn_11b = 10\nn_53b = 10\n" \
+            "n_min_primary = 51\nn_min_control = 8\nreplacement_quota_pairs_primary = 12\n" \
+            "replacement_quota_pairs_control = 2\nconfirmatory_runs = 296\nreplacement_runs_cap = 56\n" \
+            "max_runs = 352\nwall_hours_per_platform = 560\nselected_n = 64\nheadroom_ratio = 0.8\n" \
+            "bootstrap_resamples = 10000\nexclusion_list_size = 34\n" \
+            "exclusion_tree_pin = a9d7d07fa264e9907b67ca244b00ba2da3430b0f\n" \
+            "integer_policy_name = ceil-nmin-floor-replacement-pairs-v1\n```"
+        with self.assertRaises(ContractError) as ctx:
+            parse_protocol_machine_block(text + "\n" + mutated_block)
+        self.assertIn("machine-contract-v1 blocks", str(ctx.exception))
+
+    def test_machine_block_contradiction_fails_gate(self):
+        contract, text, record = load_package()
+        mutated = text.replace("n_min_primary = 52", "n_min_primary = 51").replace(
+            "max_runs = 352", "max_runs = 356"
+        )
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("n_min_primary" in f for f in report["failures"]))
+        self.assertTrue(any("max_runs" in f for f in report["failures"]))
+
+    def test_freeze_status_contradiction_fails_gate(self):
+        contract, text, record = load_package()
+        contract["scientific_subject"]["freeze_status"] = "FROZEN"
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_unsafe_allowlist_paths_fail(self):
+        contract, text, record = load_package()
+        contract["seed_generation"]["scan_allowlist_paths_exact"] = ["/etc/passwd"]
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_unknown_exclusion_tree_pin_format_fails(self):
+        contract, text, record = load_package()
+        contract["seed_generation"]["exclusion_tree_pin"] = "a9d7d07"  # abbreviated
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_engine_pin_drift_fails(self):
+        contract, text, record = load_package()
+        contract["environment_pins"]["cuda"] = "ON"
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+    def test_feasibility_grid_drift_fails(self):
+        contract, text, record = load_package()
+        contract["feasibility_planning"]["selected_n"] = 40
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+
+# ---------------------------------------------------------------------------
+# F2 — collision scan error semantics (fail-closed)
+# ---------------------------------------------------------------------------
+
+
+class CollisionScanNegativeTest(unittest.TestCase):
+    PIN = "a9d7d07fa264e9907b67ca244b00ba2da3430b0f"
+
+    def test_scan_outside_repository_is_scan_error_not_zero(self):
+        from nl5.repro_v02_seeds import TreeScanError, literal_tree_collision_scan
+        with tempfile.TemporaryDirectory(prefix="nanolab-nonrepo-") as tmp:
+            with self.assertRaises(TreeScanError) as ctx:
+                literal_tree_collision_scan(Path(tmp), [201004], pinned_commit=self.PIN)
+            self.assertIsNotNone(ctx.exception.returncode)
+            self.assertNotEqual(ctx.exception.returncode, 1)
+
+    def test_scan_missing_pinned_object_is_scan_error(self):
+        from nl5.repro_v02_seeds import TreeScanError, literal_tree_collision_scan
+        with self.assertRaises(TreeScanError):
+            literal_tree_collision_scan(REPO_ROOT, [201004], pinned_commit="0" * 40)
+
+    def test_scan_timeout_is_scan_error(self):
+        from unittest.mock import patch
+        from nl5.repro_v02_seeds import TreeScanError, literal_tree_collision_scan
+
+        def fake_timeout(*args, **kwargs):
+            raise subprocess.TimeoutExpired(cmd="git grep", timeout=0.001)
+
+        with patch("nl5.repro_v02_seeds.subprocess.run", side_effect=fake_timeout):
+            with self.assertRaises(TreeScanError):
+                literal_tree_collision_scan(REPO_ROOT, [201004], pinned_commit=self.PIN)
+
+    def test_true_no_match_is_clean_zero(self):
+        from nl5.repro_v02_seeds import literal_tree_collision_scan
+        result = literal_tree_collision_scan(
+            REPO_ROOT, [2147480000], pinned_commit=self.PIN
+        )
+        self.assertEqual(result["status"], "CLEAN")
+        self.assertEqual(result["collision_count"], 0)
+        self.assertEqual(result["mode"], "pinned_tree")
+
+
+# ---------------------------------------------------------------------------
+# F3 — replacement pool/cursor and attempt ledger semantics
+# ---------------------------------------------------------------------------
+
+
+class ReplacementStreamTest(unittest.TestCase):
+    def test_documented_n_plus_1_identity_is_not_the_replacement_start(self):
+        """The exact audit F3 observation must stay rejected for the R4 record."""
+        record = load_seed_record(RECORD_PATH)
+        contract = load_contract(CONTRACT_PATH)
+        for variant in seeds.DEFAULT_VARIANTS:
+            n = seeds.VARIANT_REPLICAS[variant]
+            n_plus_one_seed = seeds.derive_seed(
+                record["anchor"], seeds.replica_label(variant, n + 1)
+            )
+            self.assertIn(n_plus_one_seed, record["seeds"][variant])  # it is confirmatory
+            pool = contract["replacement"]["pools"][variant]
+            self.assertNotEqual(pool["start_index"], n + 1)
+            self.assertEqual(
+                pool["start_index"], contract["seed_generation"]["next_candidate_index"][variant]
+            )
+            self.assertGreater(pool["start_index"], record["indices_consumed"][variant])
+
+    def test_pool_continues_stream_after_cursor_synthetic(self):
+        anchor = "replacement-probe"
+        first = seeds.derive_seed(anchor, seeds.replica_label("probe", 1))
+        second = seeds.derive_seed(anchor, seeds.replica_label("probe", 2))
+        third = seeds.derive_seed(anchor, seeds.replica_label("probe", 3))
+        scan = lambda seed: seed == first  # noqa: E731 — skip index 1 (tree collision)
+        confirmatory = seeds.generate_variant_seeds(
+            anchor, "probe", count=1, excluded=frozenset(), tree_collision_scan=scan
+        )
+        self.assertEqual(confirmatory["seeds"], [second])
+        self.assertEqual(confirmatory["indices_consumed"], 2)  # skipped index 1, consumed index 2
+        self.assertEqual(confirmatory["next_candidate_index"], 3)  # cursor AFTER last consumed
+        pool = seeds.generate_replacement_pool(
+            anchor, "probe", start_index=confirmatory["next_candidate_index"],
+            count=1, excluded=frozenset(), tree_collision_scan=scan,
+        )
+        self.assertEqual(pool["seeds"], [third])  # stream continues after the cursor
+        self.assertEqual(pool["start_index"], 3)
+        self.assertEqual(pool["next_candidate_index"], 4)
+        # The F3 defect class: starting at raw N+1 (= 2 here) would reuse `second`.
+        with self.assertRaises(seeds.SeedCollisionError):
+            seeds.generate_replacement_pool(
+                anchor, "probe", start_index=2, count=1,
+                excluded=frozenset(), taken=frozenset({second}),
+            )
+
+    def test_pool_rejects_taken_identity(self):
+        anchor = "pool-taken-probe"
+        s1 = seeds.derive_seed(anchor, seeds.replica_label("probe", 1))
+        with self.assertRaises(seeds.SeedCollisionError):
+            seeds.generate_replacement_pool(
+                anchor, "probe", start_index=1, count=2,
+                excluded=frozenset(), taken=frozenset({s1}),
+            )
+
+    def test_bit_exact_regeneration_from_recorded_cursor(self):
+        record = load_seed_record(RECORD_PATH)
+        contract = load_contract(CONTRACT_PATH)
+        for variant in seeds.DEFAULT_VARIANTS:
+            skips = {entry["index"] for entry in record["skipped_identities"][variant]}
+            replayed = seeds.replay_variant_stream(
+                record["anchor"], variant, record["indices_consumed"][variant], skips
+            )
+            self.assertEqual(replayed, contract["confirmatory_seeds"][variant], variant)
+
+    def test_committed_r3_identities_are_preserved_in_r4(self):
+        r3 = json.loads(
+            (REPO_ROOT / "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/"
+             "repro-v0-2-seed-record-PRE_DATA_R3.json").read_text(encoding="utf-8")
+        )
+        record = load_seed_record(RECORD_PATH)
+        self.assertEqual(record["seeds"], r3["seeds"])
+        self.assertEqual(record["record_sha256"], r3["record_sha256"])
+        self.assertEqual(
+            record["record_sha256"],
+            "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+        )
+
+
+class ReplacementLedgerTest(unittest.TestCase):
+    def setUp(self):
+        self.pools = {"0b": [111, 222, 333], "32b": [444]}
+        self.ledger = ReplacementLedger({"0b": 2, "32b": 1}, self.pools)
+
+    def test_attempt_id_reuse_rejected(self):
+        self.ledger.register_attempt("run-0001", "0b", "author", "FAILED_TECHNICAL")
+        with self.assertRaises(ValueError):
+            self.ledger.register_attempt("run-0001", "0b", "external", "COMPLETED")
+
+    def test_replacement_only_for_failed_technical(self):
+        self.ledger.register_attempt("run-0002", "0b", "author", "COMPLETED")
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", "run-0002")
+
+    def test_replacement_consumes_pool_in_order(self):
+        self.ledger.register_attempt("run-0003", "0b", "author", "FAILED_TECHNICAL")
+        self.assertEqual(self.ledger.request_replacement("0b", "run-0003"), 111)
+        self.ledger.register_attempt("run-0003-R1", "0b", "author", "FAILED_TECHNICAL")
+        self.assertEqual(self.ledger.request_replacement("0b", "run-0003-R1"), 222)
+        self.assertEqual(self.ledger.used_pairs("0b"), 2)
+
+    def test_quota_exhaustion_raises_without_expansion(self):
+        self.ledger.register_attempt("a-0b-1", "0b", "author", "FAILED_TECHNICAL")
+        self.ledger.request_replacement("0b", "a-0b-1")
+        self.ledger.register_attempt("a-0b-2", "0b", "author", "FAILED_TECHNICAL")
+        self.ledger.request_replacement("0b", "a-0b-2")
+        self.ledger.register_attempt("a-0b-3", "0b", "author", "FAILED_TECHNICAL")
+        with self.assertRaises(ReplacementBudgetExhausted):
+            self.ledger.request_replacement("0b", "a-0b-3")
+
+    def test_unknown_attempt_and_variant_mismatch_rejected(self):
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", "ghost-attempt")
+        self.ledger.register_attempt("x-32b", "32b", "author", "FAILED_TECHNICAL")
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", "x-32b")
+
+    def test_invalid_attempt_id_format_rejected(self):
+        with self.assertRaises(ValueError):
+            self.ledger.register_attempt("bad id with spaces", "0b", "author", "FAILED_TECHNICAL")
+
+
+# ---------------------------------------------------------------------------
+# Positive controls — the clean package must PASS and dispatch
+# ---------------------------------------------------------------------------
+
+
+class CleanPackagePositiveTest(unittest.TestCase):
+    def test_freeze_gate_passes_on_clean_package(self):
+        report = freeze_gate(CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT)
+        self.assertEqual(report["gate"], "PASS", report["failures"])
+        self.assertEqual(report["failures"], [])
+
+    def test_dispatch_plan_built_only_from_valid_package(self):
+        plan = build_execution_plan(CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT)
+        self.assertEqual(plan["kind"], "nanolab_v02_dispatch_execution_plan")
+        self.assertEqual(
+            {v: cell["n_min_valid_pairs"] for v, cell in plan["cells"].items()},
+            {"0b": 52, "32b": 52, "11b": 8, "53b": 8},
+        )
+        self.assertEqual(plan["budget"]["max_runs"], 352)
+        self.assertEqual(plan["scientific_outcome"], "NOT_EVALUATED")
+
+    def test_cli_gate_exit_zero_and_plan_exit_zero(self):
+        gate = cli([
+            "gate",
+            "--contract", str(CONTRACT_PATH),
+            "--protocol", str(DOC_PATH),
+            "--record", str(RECORD_PATH),
+            "--repo-root", str(REPO_ROOT),
+        ])
+        self.assertEqual(gate.returncode, 0, gate.stdout + gate.stderr)
+        self.assertIn('"gate": "PASS"', gate.stdout)
+        plan = cli([
+            "plan",
+            "--contract", str(CONTRACT_PATH),
+            "--protocol", str(DOC_PATH),
+            "--record", str(RECORD_PATH),
+            "--repo-root", str(REPO_ROOT),
+        ])
+        self.assertEqual(plan.returncode, 0, plan.stdout + plan.stderr)
+        self.assertIn("nanolab_v02_dispatch_execution_plan", plan.stdout)
+
+    def test_dispatch_refuses_corrupted_contract(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            contract, _, _ = load_package()
+            contract["confirmatory_seeds"]["11b"] = []  # the F1 audit class
+            bad_contract = write_tmp(Path(tmp), "bad-contract.json", contract)
+            plan = cli([
+                "plan",
+                "--contract", str(bad_contract),
+                "--protocol", str(DOC_PATH),
+                "--record", str(RECORD_PATH),
+                "--repo-root", str(REPO_ROOT),
+            ])
+            self.assertNotEqual(plan.returncode, 0)
+            self.assertIn("FREEZE_GATE_FAIL", plan.stdout)
+
+    def test_dispatch_refuses_missing_record(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            missing = Path(tmp) / "missing.json"
+            with self.assertRaises(ContractError):
+                build_execution_plan(CONTRACT_PATH, DOC_PATH, missing, repo_root=REPO_ROOT)
+
+
+if __name__ == "__main__":
+    unittest.main()
