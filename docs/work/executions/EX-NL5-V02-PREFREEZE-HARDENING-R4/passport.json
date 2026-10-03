@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "checkpoint": "NL5",
+  "base_sha": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "branch": "work/nl5-v02-prefreeze-hardening-r4",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V02-PREFREEZE-HARDENING-R4.md",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/**",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/**",
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md",
+    "scripts/nl5/**",
+    "tests/test_nl5_repro_v02_seeds.py",
+    "tests/test_nl5_v02_prefreeze_r4.py",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-03T09:29:05Z",
+  "status": "IN_PROGRESS"
+}
