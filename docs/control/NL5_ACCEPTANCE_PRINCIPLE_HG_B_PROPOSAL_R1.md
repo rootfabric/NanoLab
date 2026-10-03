@@ -130,3 +130,36 @@ owner: HG-B APPROVED (принцип; опционально поправки)
 
 Ответ владельца достаточно выразить одной строкой:
 `HG-B: APPROVED` / `HG-B: APPROVED WITH CHANGES: <список>` / `HG-B: <alternative>`.
+
+## 8. Addendum R4 — owner decision delta (pre-freeze hardening, 2026-10-03)
+
+Append-only addendum к этому proposal (текст §1–§7 выше не изменяется).
+Focused audit R4 (2026-10-03, `docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/`)
+воспроизвёл F1–F4 на exact R3 subject; hardening R4 реализован в
+`EX-NL5-V02-PREFREEZE-HARDENING-R4` (ветка `work/nl5-v02-prefreeze-hardening-r4`).
+Ниже — ЕДИНСТВЕННЫЕ численные delta кандидата (pre-data; confirmatory data
+нет; это НЕ тихая смена science criteria — явная часть owner decision package
+вместе с принципом §2):
+
+```text
+параметр                | R3          | R4 (предлагается)     | основание
+N_min (primary ячейка)  | 51          | 52 = ceil(0.80·64)    | 51/64 = 79.6875% НЕ удовлетворяет literal «не менее 80%»
+N_min (control)         | 8           | 8 = ceil(0.80·10)     | без изменения (8/10 = 80% ≥ 80%)
+replacement budget      | ≤59 → 60    | 56 = Σ 2·floor(0.20·N)| 60/296 = 20.27% НАРУШАЕТ literal «не более 20%»; per-cell 12/12/2/2 пар: 18.75%/18.75%/20%/20%
+max_runs                | 356         | 352                   | 296 + 56; ужесточение, не расширение
+wall hours/platform     | 560         | 560                   | без изменения
+N, δ=0.5, варианты, grid, paired scheme | — | без изменений    | не трогались
+```
+
+Целочисленная политика зафиксирована одной именованной схемой
+`ceil-nmin-floor-replacement-pairs-v1` (machine-enforced в
+`scripts/nl5/repro_v02_freeze_contract.py`; machine block в candidate doc).
+Словесные смягчения R4 (не численные): feasibility-прохождение = planning-факт
+на committed данных, не гарантия исхода; CI медианного парного сдвига
+проверяет эквивалентность медианного сдвига, НЕ все свойства распределений;
+старый terminal MISMATCH NL5-002 не «объясняется» формой v0.2.
+
+Для владельца: HG-B approval по §2 теперь неявно покрывает таблицу выше;
+`HG-B: APPROVED WITH CHANGES: <список>` остаётся доступным для отклонения
+любой строки. До HG-B кандидат остаётся **PRE-DATA / NOT FROZEN**;
+`freeze`/`dispatch` машинно запрещены без PASS полного contract gate.

@@ -1,0 +1,153 @@
+{
+  "kind": "nanolab_r4_track_b_host_check",
+  "track": "B (native Ubuntu R2) — kept separate from R4 protocol repair",
+  "hostname": "outenemy",
+  "conclusion": {
+    "HOST_ELIGIBLE_U1": "NO",
+    "AUTHOR_U1": "NOT_ASSIGNED",
+    "R2_STATUS": "WAITING_HOST / NOT_ACTIVE",
+    "R2_ACTIVATED": "NO",
+    "U1_engine_build": "WAITING_HOST",
+    "U2_package_verify": "WAITING_HOST",
+    "U3_frame0_oracle": "WAITING_HOST",
+    "U4_short_technical_smoke": "WAITING_HOST",
+    "U5_harness": "WAITING_HOST",
+    "NC-U1": "WAITING_HOST",
+    "NC-U2": "WAITING_HOST",
+    "NC-U3": "WAITING_HOST",
+    "NC-U4": "WAITING_HOST",
+    "NC-U5": "WAITING_HOST",
+    "ceiling_even_if_pass": "READY_FOR_FRESH_REVIEW_VERIFY, never ACTIVE without fresh review + fresh verify + Human Gate",
+    "guard_bypass": "none — executing subcommands refused by host guard (exit 2)"
+  },
+  "blocker_exact": "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy) — config/infra/r2-activation.v1.json host_eligibility.forbidden_hostnames; outenemy = EXTERNAL_U2_ONLY",
+  "check_host_command": "PYTHONPATH=scripts python3 -m r2.cli check-host",
+  "check_host_exit_code": 2,
+  "check_host_stdout": "{\n  \"status\": \"NOT_ELIGIBLE\",\n  \"hostname\": \"outenemy\",\n  \"eligible\": false,\n  \"reasons\": [\n    \"hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)\"\n  ]\n}",
+  "fingerprint_sha256": "43c88737ee26aa9ab7fe52f14651b6d6f2a0b70e884b429179c6f8fb64945c9a",
+  "fingerprint": {
+    "tooling_version": "r2-activation-r1",
+    "fingerprint": {
+      "commands": {
+        "hostname": {
+          "returncode": 0,
+          "stdout": "outenemy\n",
+          "stderr": ""
+        },
+        "uname": {
+          "returncode": 0,
+          "stdout": "Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+          "stderr": ""
+        },
+        "os_release": {
+          "returncode": 0,
+          "stdout": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n",
+          "stderr": ""
+        },
+        "virtualization": {
+          "returncode": 1,
+          "stdout": "none\n",
+          "stderr": ""
+        },
+        "proc_version": {
+          "returncode": 0,
+          "stdout": "Linux version 5.15.0-190-generic (buildd@lcy02-amd64-101) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026\n",
+          "stderr": ""
+        },
+        "cpu": {
+          "returncode": 0,
+          "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  64\nOn-line CPU(s) list:                     0-63\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz\nCPU family:                              6\nModel:                                   63\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               2\nStepping:                                2\nCPU max MHz:                             3600.0000\nCPU min MHz:                             1200.0000\nBogoMIPS:                                4588.84\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault epb invpcid_single pti intel_ppin ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm xsaveopt cqm_llc cqm_occup_llc dtherm ida arat pln pts md_clear flush_l1d ibpb_exit_to_user\nVirtualization:                          VT-x\nL1d cache:                               1 MiB (32 instances)\nL1i cache:                               1 MiB (32 instances)\nL2 cache:                                8 MiB (32 instances)\nL3 cache:                                80 MiB (2 instances)\nNUMA node(s):                            2\nNUMA node0 CPU(s):                       0-15,32-47\nNUMA node1 CPU(s):                       16-31,48-63\nVulnerability Gather data sampling:      Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             KVM: Mitigation: Split huge pages\nVulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl and seccomp\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n",
+          "stderr": ""
+        },
+        "memory": {
+          "returncode": 0,
+          "stdout": "               total        used        free      shared  buff/cache   available\nMem:           125Gi        88Gi       1.6Gi       570Mi        35Gi        35Gi\nSwap:          8.0Gi       6.3Gi       1.7Gi\n",
+          "stderr": ""
+        },
+        "root_filesystem": {
+          "returncode": 0,
+          "stdout": "Filesystem     Type 1K-blocks      Used Available Use% Mounted on\n/dev/nvme0n1p2 ext4 479594152 417688812  37469784  92% /\n",
+          "stderr": ""
+        },
+        "gcc": {
+          "returncode": 0,
+          "stdout": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "stderr": ""
+        },
+        "gxx": {
+          "returncode": 0,
+          "stdout": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+          "stderr": ""
+        },
+        "cmake": {
+          "returncode": 0,
+          "stdout": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+          "stderr": ""
+        },
+        "make": {
+          "returncode": 0,
+          "stdout": "GNU Make 4.3\nBuilt for x86_64-pc-linux-gnu\nCopyright (C) 1988-2020 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n",
+          "stderr": ""
+        },
+        "python3": {
+          "returncode": 0,
+          "stdout": "Python 3.10.12\n",
+          "stderr": ""
+        },
+        "git": {
+          "returncode": 0,
+          "stdout": "git version 2.34.1\n",
+          "stderr": ""
+        },
+        "systemctl": {
+          "returncode": 0,
+          "stdout": "systemd 249 (249.11-0ubuntu3.22)\n+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY -P11KIT -QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified\n",
+          "stderr": ""
+        }
+      },
+      "parsed": {
+        "hostname": "outenemy",
+        "uname": "Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+        "os_pretty_name": "Ubuntu 22.04.5 LTS",
+        "os_id": "ubuntu",
+        "os_version_id": "22.04",
+        "virtualization": "none",
+        "wsl_marker": false,
+        "root_filesystem": "ext4",
+        "systemd_available": true,
+        "tools": {
+          "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+          "gxx": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+          "cmake": "cmake version 3.22.1",
+          "make": "GNU Make 4.3",
+          "python3": "Python 3.10.12",
+          "git": "git version 2.34.1"
+        }
+      }
+    },
+    "eligible": false,
+    "reasons": [
+      "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)"
+    ]
+  },
+  "host_facts": {
+    "os_release": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy",
+    "uname": "Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "findmnt_checkout": "TARGET SOURCE         FSTYPE OPTIONS\n/      /dev/nvme0n1p2 ext4   rw,relatime",
+    "systemctl_is_system_running": "degraded",
+    "note": "otherwise native-class host (Linux 5.15 bare-metal kernel signature, virt=none, ext4, systemd present-degraded) — ineligibility is ONLY the hostname role rule"
+  },
+  "environment_quirk": {
+    "observation": "python3 -m scripts.r2.cli fails on this host: a global regular package /usr/local/lib/python3.10/dist-packages/scripts (with __init__.py) shadows the repository namespace package scripts/ (regular package beats namespace portion regardless of sys.path order)",
+    "exact_error": "ModuleNotFoundError: No module named 'scripts.r2'",
+    "working_invocation": "PYTHONPATH=scripts python3 -m r2.cli ... (same route as WO-INFRA3 validation plan)",
+    "action": "recorded as host observation; no global system change performed (global pip/apt forbidden)"
+  },
+  "scientific_runs": 0,
+  "canonical_refs": [
+    "config/infra/r2-activation.v1.json",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/work/WO-INFRA3-R2-ACTIVATION-R1.md (prior dev-host evidence: same host, same NOT_ELIGIBLE reason)"
+  ]
+}
