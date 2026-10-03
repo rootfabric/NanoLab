@@ -149,5 +149,6 @@
     "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
     "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
     "docs/work/WO-INFRA3-R2-ACTIVATION-R1.md (prior dev-host evidence: same host, same NOT_ELIGIBLE reason)"
-  ]
+  ],
+  "fingerprint_file": "track-b-r2-host/fingerprint-outenemy-R1.json (byte-identical copy of the captured artifact)"
 }
