@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-03T11:05:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "62f65612f7b2652917396e3acfc5d6d3a605032e",
+  "summary": "HANDOFF реализации R4 pre-freeze hardening независимым ролям. PRODUCT SUBJECT (exact review/verify target): HEAD 62f65612f7b2652917396e3acfc5d6d3a605032e, TREE a45f8295067ff7bf0b9f0c401f09e0771df7d909, ветка work/nl5-v02-prefreeze-hardening-r4, base main 87298b36431045474d3784adf5cee8c9a64d0fc9 (tree db19f9dd265873f99c995aa279ae5e0c5b21c330). Коммиты этого subject: c205f14 (START, до substantive edits) → 1077bdf (merge handoff package, --no-ff) → 9826f27 (merge exact R3 subject PR #48 ce13f0e, --no-ff, история сохранена) → 962cc24 (F1–F4 implementation) → 834b57c (CONTINUATION) → 62f6561 (Track B evidence + Repair Map + HG-B addendum §8 + WORK_QUEUE sync + summary). Коммиты после этого события (если появятся) — evidence-only; review/verify прикрепляются к pinned HEAD/TREE выше; новый substantive commit = новый review subject. Факты handoff: F1 FIXED (authoritative machine contract revision r4, fail-closed; CLI gate exit 0/3/4; dispatch валидирует внутренне — обход невозможен); F2 FIXED (pinned-tree scan, 0/1/иное семантика, exact allowlist; 176 fresh identities CLEAN на a9d7d07fa264e9907b67ca244b00ba2da3430b0f); F3 FIXED (frozen replacement pools 12/12/2/2 от cursor 75/76/21/21; ledger: attempt id reuse/FAILED_TECHNICAL-only/quota exhaustion); F4 FIXED (ceil-nmin-floor-replacement-pairs-v1: N_min 52/8, cap 56, max_runs 352; HG-B addendum §8; wording смягчён). Confirmatory identities R3 сохранены бит-в-бит (record_sha256 eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b наследован; authoritative contract: repro-v0-2-freeze-contract-PRE_DATA_R4.json, seed record file sha256 4fe35dab07a6ac5311c4737b673af2171183776cc5335657d8b8d62e1add6271). Валидация на реализованной поверхности: unittest discover = 513 OK (55 новых R4 regression, негативные требуют rejection); check-consistency ok; workflow_lint blocking=0; work_cli все EX-* ok. Hosted CI run для этого HEAD = NOT_RUN (gh не аутентифицирован; draft PR — следующий актор, TR-PR маршрут). Track B: host outenemy NOT eligible U1 (EXTERNAL_U2_ONLY) ⇒ AUTHOR_U1 = NOT_ASSIGNED, R2_STATUS = WAITING_HOST / NOT_ACTIVE, U1–U5/NC-U1..U5 = WAITING_HOST, guard не обходился; evidence track-b-r2-host/. Связанная dormant ветка repair/nl5-acceptance-policy-r4-power-gate-r1 (другой R4: decision-power gate) — Director-секвенирование при integration, не дубль. Границы соблюдены: CANDIDATE = PRE-DATA / NOT FROZEN; NEW SCIENTIFIC RUNS = 0; NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED; WINDOWS/WSL = HISTORICAL_ONLY; outenemy = EXTERNAL_U2_ONLY; исторические evidence/verdicts не переписаны; merged PR #47 сохранён. REAL_HOST_GATES = NOT_RUN (нет eligible U1).",
+  "command_refs": [
+    "git rev-parse HEAD -> 62f65612f7b2652917396e3acfc5d6d3a605032e; git rev-parse HEAD^{tree} -> a45f8295067ff7bf0b9f0c401f09e0771df7d909",
+    "python3 -m unittest discover -s tests -t . -> Ran 513 tests OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4 -> ok true"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/REPAIR_MAP_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/summary.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/ (baseline repro, contract, seed record R4, gate PASS, dispatch plan, collision scan)",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/track-b-r2-host/ (NOT_ELIGIBLE + fingerprint)",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md (§8 addendum R4)",
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md (candidate revision R4)"
+  ],
+  "next_action": "REVIEWER: fresh independent SCIENTIFIC/PROTOCOL review exact HEAD 62f6561 (F1–F4 + claim scope + R3→R4 delta + HG-B addendum), затем VERIFIER: fresh exact-head verification (включая dispatch-bypass negative controls и hosted collection), затем Director readiness record + draft PR; merge = Human Gate. R2: ожидание owner-provided native Ubuntu U1 (outenemy = EXTERNAL_U2_ONLY навсегда).",
+  "blocker": null
+}
