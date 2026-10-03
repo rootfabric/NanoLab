@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-03T06:20:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "062d0818175f85c08accd5200eb1c9b41972362e",
+  "summary": "Durable R4/Ubuntu handoff completed. Handoff package subject before this terminal event: HEAD 062d0818175f85c08accd5200eb1c9b41972362e / TREE 5b9ff5fc63f2e5b4bdb4b2506004255e3b8fff24. The package is documentation/evidence only: no F1-F4 product repair, no scientific run, no protocol freeze, no R2 activation. Next executor must resolve fresh main and active work before starting implementation.",
+  "command_refs": [
+    "GitHub branch control/nl5-v02-prefreeze-hardening-r4-handoff-r1",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1/summary.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/PACKAGE_MANIFEST_R1.json"
+  ],
+  "next_action": "UBUNTU IMPLEMENTER: follow docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md from a fresh Git read; create/continue actual R4 implementation and, independently, real U1 host-validation if eligible.",
+  "blocker": null
+}
