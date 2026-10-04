@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_reviewer_verdict",
+  "review_id": "NL5-V02-PREFREEZE-HARDENING-R4.3/REVIEWER_VERDICT_R4",
+  "reviewed_head": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+  "reviewed_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1",
+  "base_main": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "verdict": "PASS",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "candidate_status": "PRE-DATA / NOT FROZEN",
+  "hosted_ci": "NOT_RUN",
+  "independent_full_test_rerun": "NOT_RUN_REVIEW_ENV_DNS_BLOCKED",
+  "passed_findings": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "R4.1-M2",
+    "R4.1-M3",
+    "R4.1-m1",
+    "R4.2-M6",
+    "R4.2-m2",
+    "R4.2-GitBinding",
+    "R4.2-TrustCeiling",
+    "R4.3-M7",
+    "R4.3-m3"
+  ],
+  "blocking_findings": [],
+  "next_actor": "VERIFIER",
+  "next_action": "Fresh exact-head verification of R4.3 subject; then draft PR/hosted CI only if VERIFIED"
+}
