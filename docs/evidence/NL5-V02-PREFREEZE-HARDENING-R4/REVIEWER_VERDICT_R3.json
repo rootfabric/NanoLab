@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_reviewer_verdict",
+  "review_id": "NL5-V02-PREFREEZE-HARDENING-R4.2/REVIEWER_VERDICT_R3",
+  "reviewed_head": "e58ac8225562995963c414e66b9b6ce6ea9ad55e",
+  "reviewed_tree": "7f9f063e266d74cc7d6c6646a3022184a06bc976",
+  "base_main": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "verdict": "FIX_REQUIRED",
+  "passed_findings": [
+    "R2-M6",
+    "R2-m2",
+    "R2-M5-GitBinding",
+    "R2-M5-TrustCeiling"
+  ],
+  "blocking_findings": [
+    {
+      "id": "M-7",
+      "title": "review/verify records pin pre-freeze subject rather than immutable frozen package"
+    }
+  ],
+  "minor_findings": [
+    {
+      "id": "m-3",
+      "title": "CLI/docstring still says authorized plan despite Human/Protected-Writer ceiling"
+    }
+  ],
+  "hosted_ci": "NOT_RUN",
+  "independent_test_rerun": "NOT_RUN_REVIEW_ENV_NO_NETWORK_CLONE",
+  "scientific_runs": 0,
+  "next_actor": "IMPLEMENTER",
+  "next_action": "R4.3 narrow repair frozen package review/verify sequencing; publish new exact subject; then fresh review"
+}
