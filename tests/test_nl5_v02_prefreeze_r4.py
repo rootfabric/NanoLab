@@ -1,17 +1,32 @@
 """R4 pre-freeze hardening regression tests (WO-NL5-V02-PREFREEZE-HARDENING-R4).
 
 Repairs audit findings F1-F4 (focused audit 2026-10-03) and the fresh
-independent Reviewer R1 corrections M-1..M-4 + m-1 (REVIEWER_VERDICT_R1,
-repair R4.1). Unlike the R3-era tests, the negative controls here REQUIRE
-REJECTION: a corrupted contract, record, protocol declaration, incomplete
-scan, fabricated collision skip or missing dispatch authority must fail
-closed (gate FAIL / exception / non-zero exit), never PASS.
+independent Reviewer corrections R4.1 M-1..M-4 + m-1 (REVIEWER_VERDICT_R1)
+and R4.2 M-5 + M-6 + m-2 (REVIEWER_VERDICT_R2). Unlike the R3-era tests,
+the negative controls here REQUIRE REJECTION: a corrupted contract, record,
+protocol declaration, incomplete scan, fabricated collision skip, missing
+dispatch authority, fake Git binding, worktree-only authority record or a
+non-atomic replacement rejection must fail closed (gate FAIL / exception /
+non-zero exit / structurally unchanged ledger), never PASS.
 
 M-1 invariants pinned here: the committed PRE-DATA / NOT FROZEN package
 yields PREFREEZE_VALIDATION_PASS and DISPATCH_BLOCKED; a
 ``nanolab_v02_dispatch_execution_plan`` is produced ONLY for a validated
 synthetic dispatch authority fixture (explicitly marked
 ``SYNTHETIC TEST FIXTURE ONLY``; never for the real package).
+
+R4.2 invariants pinned here (DispatchAuthorityGitBindingTest): the frozen
+subject must exist as a real Git commit with a matching tree; authority
+records and frozen artifacts must be exact immutable Git objects of the
+freeze-evidence commit (bytes read from the Git object database, never the
+mutable worktree); the machine conclusion ceiling is
+DISPATCH_PRECONDITIONS_RECORDED with machine_launch_authorized=False — the
+launch gate stays Human/Protected-Writer.
+
+R4.2 invariants pinned here (PairReplacementAtomicityTest): request_replacement
+is a two-phase transaction — every rejection leaves pairs, attempts,
+seed ownership, quota, cursor and ledger events structurally unchanged;
+open_pair/ledger/pair return independent snapshots (m-2).
 
 No simulations, no network, no scientific claims. Fixtures are synthetic or
 the committed PRE-DATA R4 evidence package.
@@ -27,6 +42,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
@@ -1121,96 +1137,185 @@ def _write_json(path: Path, payload) -> Path:
     return path
 
 
-def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FROZEN",
-                       subject_head: str = "f" * 40, subject_tree: str = "a" * 40):
-    """Build a self-consistent SYNTHETIC TEST FIXTURE ONLY authority package.
+def _git_run(root: Path, *args: str) -> str:
+    """Run git in the synthetic fixture repo (real commits/trees/blobs)."""
+    completed = subprocess.run(
+        ["git", "-C", str(root), *args], capture_output=True, text=True
+    )
+    if completed.returncode != 0:
+        raise AssertionError(f"git {' '.join(args)} failed: {completed.stderr.strip()}")
+    return completed.stdout.strip()
 
-    Returns the authority path inside ``tmp`` (a fake repository root with
-    the contract/protocol/record/manifest/authority files laid out). Every
-    record is marked synthetic; the fixture NEVER represents a real
-    authorization.
+
+def _git_blob(root: Path, commit: str, relpath: str) -> str:
+    return _git_run(root, "rev-parse", f"{commit}:{relpath}")
+
+
+def _git_hash_object(root: Path, raw: bytes) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(root), "hash-object", "--stdin"],
+        input=raw, capture_output=True,
+    )
+    if completed.returncode != 0:
+        raise AssertionError(f"git hash-object failed: {completed.stderr!r}")
+    return completed.stdout.decode("utf-8").strip()
+
+
+def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FROZEN",
+                       subject_head: str | None = None, subject_tree: str | None = None):
+    """Build a self-consistent SYNTHETIC TEST FIXTURE ONLY authority package
+    backed by a REAL temporary Git repository (real commits, trees, blobs).
+
+    Mirrors a real Director freeze flow (R4.2, M-5):
+
+      commit 1 = reviewed subject ``R`` — pre-freeze contract copy, protocol,
+                 seed record, collision manifest;
+      commit 2 = freeze-evidence commit ``E`` — FROZEN contract pinning ``R``,
+                 the five authority records pinning ``R``; every object the
+                 authority binds immutably lives here;
+      the authority JSON itself is written after commit 2 (it is the live
+      gate input, not part of the frozen evidence).
+
+    ``subject_head``/``subject_tree`` overrides exist ONLY for negative
+    tests (self-consistent fake pins that cannot exist in Git).
     """
     (Path(tmp) / "authority").mkdir(parents=True, exist_ok=True)
-    contract = copy.deepcopy(base_contract)
-    contract["scientific_subject"]["freeze_status"] = freeze_status
-    if freeze_status == "FROZEN":
-        contract["scientific_subject"]["frozen_subject_head"] = subject_head
-        contract["scientific_subject"]["frozen_subject_tree"] = subject_tree
-    else:
-        contract["scientific_subject"]["frozen_subject_head"] = None
-        contract["scientific_subject"]["frozen_subject_tree"] = None
+    # ---- commit 1: the reviewed subject R (pre-freeze content)
     record_bytes = RECORD_PATH.read_bytes()
     manifest_bytes = MANIFEST_PATH.read_bytes()
     doc_text = DOC_PATH.read_text(encoding="utf-8")
-    if freeze_status == "FROZEN":
-        doc_text = doc_text.replace("NOT FROZEN", "FROZEN")
-    contract_bytes = (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    record_path = Path(tmp) / contract["scientific_subject"]["seed_record_path"]
+    pre_contract = copy.deepcopy(base_contract)
+    pre_contract["scientific_subject"]["freeze_status"] = "NOT_FROZEN"
+    pre_contract["scientific_subject"]["frozen_subject_head"] = None
+    pre_contract["scientific_subject"]["frozen_subject_tree"] = None
+    record_rel = pre_contract["scientific_subject"]["seed_record_path"]
+    manifest_rel = pre_contract["collision_scan_manifest"]["path"]
+    record_path = Path(tmp) / record_rel
     record_path.parent.mkdir(parents=True, exist_ok=True)
     record_path.write_bytes(record_bytes)
-    manifest_path = Path(tmp) / contract["collision_scan_manifest"]["path"]
+    manifest_path = Path(tmp) / manifest_rel
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_bytes(manifest_bytes)
     protocol_path = Path(tmp) / "candidate.md"
     protocol_path.write_text(doc_text, encoding="utf-8")
-    contract_path = Path(tmp) / "authority" / "contract.json"
-    contract_path.write_bytes(contract_bytes)
+    (Path(tmp) / "authority" / "contract.json").write_bytes(
+        (json.dumps(pre_contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    )
+    _git_run(tmp, "init", "-q")
+    _git_run(tmp, "config", "user.name", "synthetic-fixture")
+    _git_run(tmp, "config", "user.email", "synthetic-fixture@example.invalid")
+    _git_run(tmp, "add", "-A")
+    _git_run(tmp, "commit", "-q", "-m", "synthetic reviewed subject")
+    real_head = _git_run(tmp, "rev-parse", "HEAD")
+    real_tree = _git_run(tmp, "rev-parse", "HEAD^{tree}")
+    head = subject_head or real_head
+    tree = subject_tree or real_tree
+    # ---- commit 2: freeze-evidence commit E (FROZEN contract + records)
+    frozen_doc = doc_text.replace("NOT FROZEN", "FROZEN") if freeze_status == "FROZEN" else doc_text
+    contract = copy.deepcopy(base_contract)
+    contract["scientific_subject"]["freeze_status"] = freeze_status
+    if freeze_status == "FROZEN":
+        contract["scientific_subject"]["frozen_subject_head"] = head
+        contract["scientific_subject"]["frozen_subject_tree"] = tree
+    else:
+        contract["scientific_subject"]["frozen_subject_head"] = None
+        contract["scientific_subject"]["frozen_subject_tree"] = None
+    protocol_path.write_text(frozen_doc, encoding="utf-8")
+    contract_bytes = (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    (Path(tmp) / "authority" / "contract.json").write_bytes(contract_bytes)
     record_sha = _sha256_bytes(record_bytes)
     payloads = {
         "freeze": {
+            "record_kind": "DIRECTOR_FREEZE_RECORD",
+            "issuer_class": "DIRECTOR",
             "director": "DIRECTOR-SYNTHETIC-FIXTURE",
             "decision": "FREEZE",
-            "subject_head": subject_head,
-            "subject_tree": subject_tree,
+            "subject_head": head,
+            "subject_tree": tree,
             "contract_sha256": _sha256_bytes(contract_bytes),
             "seed_record_sha256": record_sha,
         },
         "hg_b": {
+            "record_kind": "HG_B_OWNER_APPROVAL",
+            "issuer_class": "HUMAN_GATE_OWNER",
             "decision": "APPROVED",
             "candidate_revision": str(contract["scientific_subject"]["candidate_revision"]),
             "rule_id": contract["rule_id"],
         },
         "review": {
+            "record_kind": "REVIEWER_VERDICT",
+            "issuer_class": "INDEPENDENT_REVIEWER",
             "verdict": "PASS",
-            "reviewed_head": subject_head,
-            "reviewed_tree": subject_tree,
+            "reviewed_head": head,
+            "reviewed_tree": tree,
         },
         "verify": {
+            "record_kind": "VERIFIER_VERDICT",
+            "issuer_class": "INDEPENDENT_VERIFIER",
             "verdict": "VERIFIED",
-            "verified_head": subject_head,
-            "verified_tree": subject_tree,
+            "verified_head": head,
+            "verified_tree": tree,
         },
         "r2": {
+            "record_kind": "R2_ACTIVATION_RECORD",
+            "issuer_class": "R2_HOST",
             "r2_status": "ACTIVE",
             "author_executor": "AUTHOR_U1",
             "external_executor": "EXTERNAL_U2",
         },
     }
-    embedded = {}
     for name, payload in payloads.items():
-        raw = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-        (Path(tmp) / "authority" / f"{name}.json").write_bytes(raw)
-        embedded[name] = {
-            "path": f"authority/{name}.json",
-            "sha256": _sha256_bytes(raw),
-            **payload,
+        _write_json(Path(tmp) / "authority" / f"{name}.json", payload)
+    _git_run(tmp, "add", "-A")
+    _git_run(tmp, "commit", "-q", "-m", "synthetic freeze evidence")
+    evidence_commit = _git_run(tmp, "rev-parse", "HEAD")
+
+    def embedded(name: str) -> dict:
+        rel = f"authority/{name}.json"
+        return {
+            "path": rel,
+            "source_commit": evidence_commit,
+            "git_blob_sha1": _git_blob(tmp, evidence_commit, rel),
+            "canonical_sha256": _sha256_bytes((Path(tmp) / rel).read_bytes()),
+            **payloads[name],
         }
+
     authority = {
-        "schema_version": 1,
+        "schema_version": 2,
         "kind": "nanolab_v02_dispatch_authority",
-        "authority_revision": "synthetic-fixture-r4-1",
+        "authority_revision": "synthetic-fixture-r4-2",
         "fixture": True,
         "fixture_note": SYNTHETIC_FIXTURE_MARKER + " - not a real authorization",
         "frozen": freeze_status == "FROZEN",
-        "subject_head": subject_head,
-        "subject_tree": subject_tree,
+        "subject_head": head,
+        "subject_tree": tree,
         "contract_sha256": _sha256_bytes(contract_bytes),
         "seed_record_sha256": record_sha,
-        "freeze_record": embedded["freeze"],
-        "hg_b_record": embedded["hg_b"],
-        "review_verdict": embedded["review"],
-        "verify_verdict": embedded["verify"],
-        "r2_record": embedded["r2"],
+        "frozen_subject_binding": {
+            "contract": {
+                "source_commit": evidence_commit,
+                "path": "authority/contract.json",
+                "git_blob_sha1": _git_blob(tmp, evidence_commit, "authority/contract.json"),
+                "canonical_sha256": _sha256_bytes(contract_bytes),
+            },
+            "protocol": {
+                "source_commit": evidence_commit,
+                "path": "candidate.md",
+                "git_blob_sha1": _git_blob(tmp, evidence_commit, "candidate.md"),
+                "canonical_sha256": _sha256_bytes(frozen_doc.encode("utf-8")),
+            },
+            "seed_record": {
+                "source_commit": evidence_commit,
+                "path": record_rel,
+                "git_blob_sha1": _git_blob(tmp, evidence_commit, record_rel),
+                "canonical_sha256": record_sha,
+            },
+        },
+        "freeze_record": embedded("freeze"),
+        "hg_b_record": embedded("hg_b"),
+        "review_verdict": embedded("review"),
+        "verify_verdict": embedded("verify"),
+        "r2_record": embedded("r2"),
         "author_executor": "AUTHOR_U1",
         "external_executor": "EXTERNAL_U2",
         "executor_policy": {"author_leg_allowed": True, "external_leg_allowed": True},
@@ -1250,7 +1355,17 @@ class DispatchAuthorityTest(unittest.TestCase):
         )
         self.assertEqual(plan["kind"], "nanolab_v02_dispatch_execution_plan")
         self.assertTrue(plan["synthetic_test_fixture_only"])
-        self.assertEqual(plan["dispatch_authority"]["status"], "DISPATCH_AUTHORIZED")
+        # R4.2 (M-5): the machine NEVER claims DISPATCH_AUTHORIZED — Git-bound
+        # records prove preconditions RECORDED, not issuer identity. The real
+        # launch gate stays external (Human / Protected-Writer).
+        self.assertEqual(
+            plan["dispatch_authority"]["status"], "DISPATCH_PRECONDITIONS_RECORDED"
+        )
+        self.assertIs(plan["dispatch_authority"]["machine_launch_authorized"], False)
+        self.assertEqual(plan["dispatch_authority"]["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertIs(plan["machine_launch_authorized"], False)
+        self.assertEqual(plan["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertNotIn("DISPATCH_AUTHORIZED", json.dumps(plan))
         self.assertEqual(
             {v: cell["n_min_valid_pairs"] for v, cell in plan["cells"].items()},
             {"0b": 52, "32b": 52, "11b": 8, "53b": 8},
@@ -1345,12 +1460,12 @@ class DispatchAuthorityTest(unittest.TestCase):
         self._assert_rejected("contract digest", authority=self._mutated(mutate))
 
     def test_tampered_referenced_record_rejected(self):
-        authority = self._authority()
-        record_path = self.tmp / "authority" / "hg_b.json"
-        payload = json.loads(record_path.read_text(encoding="utf-8"))
-        payload["note"] = "tampered after binding"
-        record_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-        self._assert_rejected("tampered record", authority=authority)
+        # R4.2 (M-5): the authority's embedded copy of a record is bound to
+        # the exact Git object — an embedded field that the published,
+        # committed record does not carry breaks the binding.
+        def mutate(authority):
+            authority["hg_b_record"]["owner_note"] = "tampered after binding"
+        self._assert_rejected("tampered record", authority=self._mutated(mutate))
 
     def test_authority_structural_missing_key_rejected(self):
         authority_path = self._authority()
@@ -1363,6 +1478,376 @@ class DispatchAuthorityTest(unittest.TestCase):
         def mutate(authority):
             authority["freeze_record"]["decision"] = "DRAFT"
         self._assert_rejected("freeze decision", authority=self._mutated(mutate))
+
+
+class DispatchAuthorityGitBindingTest(unittest.TestCase):
+    """R4.2 M-5: the frozen subject must EXIST in Git with immutable bindings.
+
+    The positive fixture uses a REAL temporary Git repository (real commits,
+    trees, blobs). The negatives prove the production path rejects strings
+    that merely look like Git objects, worktree-only records and
+    source/path/blob mismatches — and that even a fully Git-bound local
+    package is never machine-authorized (DISPATCH_PRECONDITIONS_RECORDED
+    ceiling; the launch gate stays Human/Protected-Writer).
+    """
+
+    def setUp(self):
+        self.contract, self.text, self.record = load_package()
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.tmp = Path(self._tmp.name)
+        self.record_rel = self.contract["scientific_subject"]["seed_record_path"]
+
+    def _fixture(self, **kwargs) -> Path:
+        return _authority_fixture(self.tmp, self.contract, **kwargs)
+
+    def _validate(self, authority_path: Path):
+        return validate_dispatch_authority(
+            load_dispatch_authority(authority_path),
+            load_contract(self.tmp / "authority" / "contract.json"),
+            (self.tmp / "candidate.md").read_text(encoding="utf-8"),
+            load_seed_record(self.tmp / self.record_rel),
+            repo_root=self.tmp,
+            contract_path=self.tmp / "authority" / "contract.json",
+            protocol_path=self.tmp / "candidate.md",
+            rerun_scan=False,
+            allow_fixture=True,
+        )
+
+    def _mutated(self, mutate) -> Path:
+        authority_path = self._fixture()
+        authority = load_dispatch_authority(authority_path)
+        mutate(authority)
+        _write_json(authority_path, authority)
+        return authority_path
+
+    def _assert_rejected(self, label: str, authority_path: Path, substring: str):
+        with self.assertRaises(ContractError) as ctx:
+            self._validate(authority_path)
+        message = str(ctx.exception)
+        self.assertNotIn("DISPATCH_AUTHORIZED", message, label)
+        self.assertIn(substring, message, f"{label}: {message[:400]}")
+
+    def test_positive_fixture_is_backed_by_real_git_objects(self):
+        authority_path = self._fixture()
+        # the fixture pins a REAL commit: git can resolve head and tree
+        authority = load_dispatch_authority(authority_path)
+        self.assertEqual(
+            _git_run(self.tmp, "rev-parse", f"{authority['subject_head']}^{{tree}}"),
+            authority["subject_tree"],
+        )
+        report = self._validate(authority_path)
+        self.assertEqual(report["status"], "DISPATCH_PRECONDITIONS_RECORDED")
+        self.assertIs(report["machine_launch_authorized"], False)
+        self.assertEqual(report["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertIn(
+            report["identity_proof_ceiling"],
+            report["identity_proof_ceiling"],  # honesty ceiling recorded
+        )
+
+    def test_nonexistent_well_formed_subject_head_rejected(self):
+        authority_path = self._fixture(subject_head="e" * 40)
+        self._assert_rejected(
+            "nonexistent head", authority_path, "does not exist as a Git commit"
+        )
+
+    def test_existing_head_with_wrong_tree_rejected(self):
+        authority_path = self._fixture(subject_tree="b" * 40)
+        self._assert_rejected(
+            "wrong tree", authority_path, "subject_tree mismatch"
+        )
+
+    def test_record_only_in_dirty_worktree_rejected(self):
+        authority_path = self._fixture()
+        # rewrite the published hg_b record in the WORKTREE only (not
+        # committed) and rebind the authority to the new bytes: the Git
+        # object at the pinned commit still holds the old bytes.
+        candidate_revision = load_dispatch_authority(authority_path)["hg_b_record"][
+            "candidate_revision"
+        ]
+        new_payload = {
+            "record_kind": "HG_B_OWNER_APPROVAL",
+            "issuer_class": "HUMAN_GATE_OWNER",
+            "decision": "APPROVED",
+            "candidate_revision": candidate_revision,
+            "rule_id": self.contract["rule_id"],
+            "note": "worktree-only rewrite — never committed",
+        }
+        raw = (json.dumps(new_payload, indent=2) + "\n").encode("utf-8")
+        (self.tmp / "authority" / "hg_b.json").write_bytes(raw)
+
+        def mutate(authority):
+            authority["hg_b_record"]["canonical_sha256"] = _sha256_bytes(raw)
+            authority["hg_b_record"]["git_blob_sha1"] = _git_hash_object(self.tmp, raw)
+
+        self._assert_rejected(
+            "dirty worktree record", self._mutated(mutate), "immutable source binding mismatch"
+        )
+
+    def test_record_source_commit_mismatch_rejected(self):
+        authority_path = self._fixture()
+        evidence = load_dispatch_authority(authority_path)["freeze_record"]["source_commit"]
+        # a DIFFERENT real commit (the reviewed subject R itself)
+        subject = _git_run(self.tmp, "rev-parse", "HEAD~1")
+
+        def mutate(authority):
+            authority["hg_b_record"]["source_commit"] = subject
+
+        self.assertNotEqual(subject, evidence)
+        self._assert_rejected(
+            "record source commit mismatch",
+            self._mutated(mutate),
+            "freeze-evidence commit",
+        )
+
+    def test_record_path_blob_mismatch_rejected(self):
+        def mutate(authority):
+            # bind the hg_b record path to the FREEZE record's blob
+            authority["hg_b_record"]["git_blob_sha1"] = authority["freeze_record"][
+                "git_blob_sha1"
+            ]
+
+        self._assert_rejected(
+            "record blob mismatch", self._mutated(mutate), "immutable source binding mismatch"
+        )
+
+    def test_fake_non_fixture_local_authority_never_machine_authorized(self):
+        # A fully self-consistent, REAL-Git-bound authority package produced
+        # locally with fixture=False: every Git binding verifies, but the
+        # machine still must not claim DISPATCH_AUTHORIZED.
+        authority_path = self._fixture()
+
+        def mutate(authority):
+            authority["fixture"] = False
+            authority["fixture_note"] = None
+            authority["authority_revision"] = "fake-local-non-fixture"
+
+        fake_path = self._mutated(mutate)
+        report = self._validate(fake_path)
+        self.assertEqual(report["status"], "DISPATCH_PRECONDITIONS_RECORDED")
+        self.assertIs(report["machine_launch_authorized"], False)
+        self.assertEqual(report["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertIs(report["synthetic_test_fixture_only"], False)
+        self.assertNotIn("DISPATCH_AUTHORIZED", json.dumps(report))
+
+    def test_contract_artifact_not_in_evidence_commit_rejected(self):
+        def mutate(authority):
+            authority["frozen_subject_binding"]["contract"]["path"] = (
+                "authority/absent-from-frozen-subject.json"
+            )
+
+        self._assert_rejected(
+            "artifact blob not in frozen subject",
+            self._mutated(mutate),
+            "immutable artifact binding failed",
+        )
+
+    def test_artifact_source_commit_mismatch_rejected(self):
+        def mutate(authority):
+            authority["frozen_subject_binding"]["protocol"]["source_commit"] = _git_run(
+                self.tmp, "rev-parse", "HEAD~1"
+            )
+
+        self._assert_rejected(
+            "artifact source commit mismatch",
+            self._mutated(mutate),
+            "freeze-evidence commit",
+        )
+
+    def test_worktree_contract_bytes_not_the_frozen_blob_rejected(self):
+        authority_path = self._fixture()
+        # tamper the contract file in the worktree AFTER the fixture exists
+        # (the fixture builder would overwrite it) and update every digest
+        # the authority carries EXCEPT the immutable Git blob — the frozen
+        # bytes live in the pinned commit and cannot be rewritten. The
+        # tampering must stay digest-consistent (no pre-Git check may fire
+        # first), so the reported failure is the artifact binding itself.
+        tampered = json.loads((self.tmp / "authority" / "contract.json").read_text())
+        tampered["worktree_note"] = "tampered after freeze"
+        raw = (json.dumps(tampered, indent=2) + "\n").encode("utf-8")
+        (self.tmp / "authority" / "contract.json").write_bytes(raw)
+        authority = load_dispatch_authority(authority_path)
+        authority["contract_sha256"] = _sha256_bytes(raw)
+        authority["freeze_record"]["contract_sha256"] = _sha256_bytes(raw)
+        authority["frozen_subject_binding"]["contract"]["canonical_sha256"] = _sha256_bytes(raw)
+        authority["frozen_subject_binding"]["contract"]["git_blob_sha1"] = _git_hash_object(
+            self.tmp, raw
+        )
+        _write_json(authority_path, authority)
+        self._assert_rejected(
+            "contract blob not of frozen subject",
+            authority_path,
+            "frozen artifact bytes mismatch",
+        )
+
+    def test_schema_1_authority_rejected(self):
+        def mutate(authority):
+            authority["schema_version"] = 1
+
+        self._assert_rejected("schema downgrade", self._mutated(mutate), "schema_version")
+
+
+class PairReplacementAtomicityTest(unittest.TestCase):
+    """R4.2 M-6: replacement is a two-phase transaction; m-2: snapshot safety.
+
+    Every rejection — before or during commit — must leave the ledger
+    structurally identical: no cursor movement, no quota consumption, no
+    source-pair change, no new pair, no new attempt, no new ledger event.
+    """
+
+    def setUp(self):
+        self.pools = {"0b": [111, 222, 333], "32b": [444]}
+        self.ledger = ReplacementLedger({"0b": 2, "32b": 1}, self.pools)
+
+    def _open_failed_pair(self, pair_id="pair-1", variant="0b", seed=700,
+                          author="run-0001", external="run-0002"):
+        self.ledger.open_pair(pair_id, variant, seed)
+        self.ledger.record_attempt(author, pair_id, "author", "FAILED_TECHNICAL")
+        self.ledger.record_attempt(external, pair_id, "external", "COMPLETED")
+        return pair_id
+
+    def _snapshot(self):
+        return self.ledger.state_snapshot()
+
+    def _assert_rejection_is_inert(self, baseline, call):
+        with self.assertRaises((ValueError, ReplacementBudgetExhausted)):
+            call()
+        self.assertEqual(self._snapshot(), baseline)
+
+    def test_state_snapshot_helper_covers_required_surfaces(self):
+        failed = self._open_failed_pair()
+        snapshot = self._snapshot()
+        self.assertEqual(
+            sorted(snapshot),
+            ["attempts", "ledger", "pairs", "pool_cursor", "quota_pairs", "seed_owner", "used_pairs"],
+        )
+        self.assertIn(failed, snapshot["pairs"])
+        self.assertEqual(len(snapshot["ledger"]), 3)  # opened + two legs
+        self.assertEqual(snapshot["used_pairs"], {"0b": 0, "32b": 0})
+        # the snapshot is independent of live state
+        snapshot["pairs"][failed]["legs"]["author"] = "tampered"
+        self.assertNotEqual(snapshot["pairs"][failed], self.ledger.pair(failed))
+
+    def test_duplicate_replacement_pair_id_rejected_without_state_change(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, failed, "rp-a", "rp-e"
+            ),
+        )
+        self.assertEqual(self.ledger.pair_state(failed), "PAIR_FAILED_TECHNICAL")
+
+    def test_duplicate_author_attempt_id_rejected_without_state_change(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, "pair-1-RP1", "run-0001", "rp-e"
+            ),
+        )
+
+    def test_duplicate_external_attempt_id_rejected_without_state_change(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, "pair-1-RP1", "rp-a", "run-0002"
+            ),
+        )
+
+    def test_invalid_author_attempt_id_format_rejected_without_state_change(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, "pair-1-RP1", "bad id with spaces", "rp-e"
+            ),
+        )
+
+    def test_invalid_external_attempt_id_format_rejected_without_state_change(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, "pair-1-RP1", "rp-a", "bad id with spaces"
+            ),
+        )
+
+    def test_replacement_seed_already_owned_rejected_without_state_change(self):
+        # pool identity 700 is already owned by an existing pair: the next
+        # replacement candidate would collide with an owned seed
+        self.ledger.open_pair("pair-owned", "0b", 111)
+        failed = self._open_failed_pair(seed=700)
+        baseline = self._snapshot()
+        self._assert_rejection_is_inert(
+            baseline,
+            lambda: self.ledger.request_replacement(
+                "0b", failed, "pair-1-RP1", "rp-a", "rp-e"
+            ),
+        )
+        self.assertEqual(self.ledger.pool_cursor("0b"), 0)
+
+    def test_second_leg_failure_rolls_back_entire_transaction(self):
+        failed = self._open_failed_pair()
+        baseline = self._snapshot()
+        original = ReplacementLedger._bind_attempt
+
+        def failing_bind(self, attempt_id, pair_id, leg, outcome, allow_scheduled):
+            if leg == "external":
+                raise ValueError("simulated second-leg binding failure")
+            return original(self, attempt_id, pair_id, leg, outcome, allow_scheduled)
+
+        with mock.patch.object(ReplacementLedger, "_bind_attempt", failing_bind):
+            with self.assertRaises(ValueError):
+                self.ledger.request_replacement("0b", failed, "pair-1-RP1", "rp-a", "rp-e")
+        # the rollback guard restored every touched structure
+        self.assertEqual(self._snapshot(), baseline)
+        self.assertEqual(self.ledger.pair_state(failed), "PAIR_FAILED_TECHNICAL")
+        with self.assertRaises(ValueError):
+            self.ledger.pair("pair-1-RP1")  # no partial replacement pair
+
+    def test_successful_replacement_still_atomic_and_complete(self):
+        failed = self._open_failed_pair()
+        identity = self.ledger.request_replacement(
+            "0b", failed, "pair-1-RP1", "rp-a", "rp-e"
+        )
+        self.assertEqual(identity, 111)
+        self.assertEqual(self.ledger.pool_cursor("0b"), 1)
+        self.assertEqual(self.ledger.used_pairs("0b"), 1)
+        self.assertEqual(self.ledger.pair_state(failed), "PAIR_REPLACED")
+        self.assertEqual(
+            self.ledger.pair("pair-1-RP1")["legs"], {"author": "rp-a", "external": "rp-e"}
+        )
+        self.assertEqual(len(self.ledger.ledger), 7)  # 3 source + pair opened + 2 legs + assignment
+
+    def test_open_pair_returns_independent_snapshot(self):
+        # R4.2, m-2: mutating the returned dict must not reach the ledger
+        returned = self.ledger.open_pair("pair-a", "0b", 10)
+        returned["legs"]["author"] = "hijacked"
+        returned["state"] = "PAIR_COMPLETED"
+        self.assertEqual(self.ledger.pair("pair-a")["legs"], {})
+        self.assertEqual(self.ledger.pair_state("pair-a"), "PAIR_RUNNING")
+
+    def test_ledger_property_returns_independent_event_snapshots(self):
+        self.ledger.open_pair("pair-a", "0b", 10)
+        events = self.ledger.ledger
+        events[0]["event"] = "FORGED"
+        events.append({"event": "FORGED"})
+        self.assertEqual(self.ledger.ledger[0]["event"], "PAIR_OPENED")
+        self.assertEqual(len(self.ledger.ledger), 1)
+
+    def test_pair_property_deep_copies_legs(self):
+        self.ledger.open_pair("pair-a", "0b", 10)
+        self.ledger.record_attempt("a-1", "pair-a", "author", "COMPLETED")
+        view = self.ledger.pair("pair-a")
+        view["legs"]["author"] = "hijacked"
+        self.assertEqual(self.ledger.pair("pair-a")["legs"]["author"], "a-1")
 
 
 if __name__ == "__main__":

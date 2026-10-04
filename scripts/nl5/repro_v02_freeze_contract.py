@@ -34,6 +34,22 @@ M-1..M-4) hardens the authority model:
   record and manifest were edited self-consistently. Scan errors, missing
   pinned objects and timeouts are BLOCKED, never treated as clean.
 
+- **Dispatch authority is Git-provenance bound (R4.2, M-5).** The authority
+  must mechanically prove that the frozen subject EXISTS in Git: the
+  ``subject_head`` resolves to a real commit, ``git rev-parse
+  <subject_head>^{tree}`` equals the pinned ``subject_tree``, and the frozen
+  contract/protocol/seed-record are the exact Git blobs of that subject tree.
+  Every authority record (Director FREEZE, HG-B, review, verify, R2) carries
+  an immutable source binding (``source_commit`` + ``path`` +
+  ``git_blob_sha1`` + ``canonical_sha256`` + ``record_kind``/
+  ``issuer_class``) and its bytes are read from the Git object — never from a
+  mutable worktree path. Because the infrastructure has no cryptographically
+  proven trusted writer, the machine conclusion ceiling is
+  ``DISPATCH_PRECONDITIONS_RECORDED`` (never ``DISPATCH_AUTHORIZED``): the
+  real launch gate remains an external Human/Protected-Writer gate. The
+  synthetic fixture path stays test-only and is backed by a REAL temporary
+  Git repository (real commits/trees/blobs).
+
 EVERYTHING is validated fail-closed: malformed JSON, missing or extra
 fields, wrong types (including ``bool`` where an integer is required),
 out-of-range or duplicate seeds, stale digests, missing/extra variants,
@@ -65,6 +81,7 @@ import hashlib
 import json
 import math
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -377,10 +394,21 @@ _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 _MANIFEST_KEYS = ("path", "sha256")
 
 _DISPATCH_AUTHORITY_KIND = "nanolab_v02_dispatch_authority"
-_DISPATCH_AUTHORITY_SCHEMA_VERSION = 1
+# R4.2 (M-5): schema 2 adds immutable Git source bindings to every authority
+# record and the frozen-subject artifact binding. Schema 1 authorities are
+# rejected (fail-closed evolution: an old self-consistent package must not
+# silently pass a stronger gate).
+_DISPATCH_AUTHORITY_SCHEMA_VERSION = 2
 _AUTHORIZED_AUTHOR_EXECUTOR = "AUTHOR_U1"
 _AUTHORIZED_EXTERNAL_EXECUTOR = "EXTERNAL_U2"
 SYNTHETIC_FIXTURE_MARKER = "SYNTHETIC TEST FIXTURE ONLY"
+
+# R4.2 (M-5): the machine can never authorize a launch on its own — local
+# Git-bound records still do not prove owner/independent identity. The
+# honest ceiling is "preconditions recorded"; the real launch gate stays
+# external (Human / Protected-Writer).
+_DISPATCH_PRECONDITIONS_STATUS = "DISPATCH_PRECONDITIONS_RECORDED"
+_LAUNCH_GATE_HUMAN = "HUMAN_PROTECTED_WRITER"
 
 _DISPATCH_AUTHORITY_TOP_KEYS = (
     "schema_version",
@@ -393,6 +421,7 @@ _DISPATCH_AUTHORITY_TOP_KEYS = (
     "subject_tree",
     "contract_sha256",
     "seed_record_sha256",
+    "frozen_subject_binding",
     "freeze_record",
     "hg_b_record",
     "review_verdict",
@@ -402,9 +431,16 @@ _DISPATCH_AUTHORITY_TOP_KEYS = (
     "external_executor",
     "executor_policy",
 )
-_AUTHORITY_FREEZE_RECORD_KEYS = (
+# R4.2 (M-5): every authority record carries an immutable source binding.
+_AUTHORITY_RECORD_BINDING_KEYS = (
     "path",
-    "sha256",
+    "canonical_sha256",
+    "git_blob_sha1",
+    "record_kind",
+    "issuer_class",
+    "source_commit",
+)
+_AUTHORITY_FREEZE_RECORD_KEYS = _AUTHORITY_RECORD_BINDING_KEYS + (
     "director",
     "decision",
     "subject_head",
@@ -412,11 +448,48 @@ _AUTHORITY_FREEZE_RECORD_KEYS = (
     "contract_sha256",
     "seed_record_sha256",
 )
-_AUTHORITY_HG_B_KEYS = ("path", "sha256", "decision", "candidate_revision", "rule_id")
-_AUTHORITY_REVIEW_KEYS = ("path", "sha256", "verdict", "reviewed_head", "reviewed_tree")
-_AUTHORITY_VERIFY_KEYS = ("path", "sha256", "verdict", "verified_head", "verified_tree")
-_AUTHORITY_R2_KEYS = ("path", "sha256", "r2_status", "author_executor", "external_executor")
+_AUTHORITY_HG_B_KEYS = _AUTHORITY_RECORD_BINDING_KEYS + (
+    "decision",
+    "candidate_revision",
+    "rule_id",
+)
+_AUTHORITY_REVIEW_KEYS = _AUTHORITY_RECORD_BINDING_KEYS + (
+    "verdict",
+    "reviewed_head",
+    "reviewed_tree",
+)
+_AUTHORITY_VERIFY_KEYS = _AUTHORITY_RECORD_BINDING_KEYS + (
+    "verdict",
+    "verified_head",
+    "verified_tree",
+)
+_AUTHORITY_R2_KEYS = _AUTHORITY_RECORD_BINDING_KEYS + (
+    "r2_status",
+    "author_executor",
+    "external_executor",
+)
 _AUTHORITY_POLICY_KEYS = ("author_leg_allowed", "external_leg_allowed")
+
+# R4.2 (M-5): explicit provenance/issuer class per authority record. The
+# class names the ROLE that issued the record; infrastructure cannot prove
+# the identity behind the role (no protected writer yet), hence the
+# DISPATCH_PRECONDITIONS_RECORDED ceiling above.
+_AUTHORITY_RECORD_CLASSES = {
+    "freeze_record": ("DIRECTOR_FREEZE_RECORD", "DIRECTOR"),
+    "hg_b_record": ("HG_B_OWNER_APPROVAL", "HUMAN_GATE_OWNER"),
+    "review_verdict": ("REVIEWER_VERDICT", "INDEPENDENT_REVIEWER"),
+    "verify_verdict": ("VERIFIER_VERDICT", "INDEPENDENT_VERIFIER"),
+    "r2_record": ("R2_ACTIVATION_RECORD", "R2_HOST"),
+}
+
+# R4.2 (M-5): the frozen subject must be a real Git commit whose tree equals
+# the pinned subject_tree, and the contract/protocol/seed-record must be
+# bound to exact immutable Git blobs of the authority's freeze-evidence
+# commit (a subject commit cannot contain its own hash inside its contract,
+# so the freeze fill-in lives in the evidence commit, exactly like a real
+# Director freeze flow: subject = reviewed commit, evidence = freeze commit).
+_FROZEN_SUBJECT_BINDING_KEYS = ("contract", "protocol", "seed_record")
+_FROZEN_ARTIFACT_BINDING_KEYS = ("source_commit", "path", "git_blob_sha1", "canonical_sha256")
 
 
 def load_contract(path: Path | str) -> dict[str, Any]:
@@ -1368,53 +1441,343 @@ def load_dispatch_authority(path: Path | str) -> dict[str, Any]:
     return authority
 
 
-def _authority_path_digest(
-    repo_root: Path,
+def _git_capture(root: Path, *args: str, timeout: float = 120.0) -> tuple[int, bytes, str]:
+    """Run ``git -C <root> <args>`` and capture raw output (never raises for
+    non-zero exit; converts timeout/OS errors into ``(None, …)`` so callers
+    fail closed with a reason)."""
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), *args],
+            capture_output=True, timeout=timeout, check=False,
+        )
+    except subprocess.TimeoutExpired:
+        return None, b"", f"git {' '.join(args)} timed out after {timeout}s"
+    except OSError as exc:
+        return None, b"", f"git could not be executed: {exc}"
+    return (
+        completed.returncode,
+        completed.stdout,
+        completed.stderr.decode("utf-8", errors="replace").strip(),
+    )
+
+
+def _git_object_kind(root: Path, obj: str) -> tuple[str | None, str]:
+    """Return the Git object type of ``obj`` (or ``None`` with a reason)."""
+    code, out, err = _git_capture(root, "cat-file", "-t", obj)
+    if code != 0:
+        return None, err or f"git cat-file -t {obj} failed (exit {code})"
+    return out.decode("utf-8", errors="replace").strip(), ""
+
+
+def _git_commit_tree(root: Path, commit: str) -> tuple[str | None, str]:
+    """Resolve ``<commit>^{tree}`` (or ``None`` with a reason)."""
+    code, out, err = _git_capture(root, "rev-parse", f"{commit}^{{tree}}")
+    if code != 0:
+        return None, err or f"git rev-parse {commit}^{{tree}} failed (exit {code})"
+    return out.decode("utf-8", errors="replace").strip().lower(), ""
+
+
+def _git_blob_sha1_at(root: Path, commit: str, path: str) -> tuple[str | None, str]:
+    """Return the blob SHA-1 of ``path`` inside ``commit``'s tree."""
+    code, out, err = _git_capture(root, "rev-parse", f"{commit}:{path}")
+    if code != 0:
+        return None, err or f"git rev-parse {commit}:{path} failed (exit {code})"
+    return out.decode("utf-8", errors="replace").strip().lower(), ""
+
+
+def _git_blob_bytes(root: Path, commit: str, path: str) -> tuple[bytes | None, str]:
+    """Return the exact blob bytes of ``path`` inside ``commit`` (from the
+    Git object database — never the mutable worktree)."""
+    code, out, err = _git_capture(root, "cat-file", "blob", f"{commit}:{path}")
+    if code != 0:
+        return None, err or f"git cat-file blob {commit}:{path} failed (exit {code})"
+    return out, ""
+
+
+def _safe_relative_to(root: Path, path: Path) -> str | None:
+    """Repo-relative form of ``path`` (or ``None`` if outside the root)."""
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return None
+
+
+def _authority_git_record_binding(
+    root: Path,
+    authority: dict[str, Any],
     record: dict[str, Any],
-    embedded: dict[str, Any],
     where: str,
+    evidence_commit: str,
     failures: list[str],
 ) -> None:
-    """Verify an authority-referenced record file (fail-closed).
+    """Verify an authority record's immutable Git source binding (R4.2, M-5).
 
-    The file at ``record['path']`` must exist, hash to the bound ``sha256``,
-    parse as JSON, and carry exactly the fields the authority embeds for it
-    (minus the ``path``/``sha256`` binding keys themselves) — the embedded
-    decision fields are therefore inseparable from the published record.
+    The record must be pinned to the authority's freeze-evidence commit and
+    live at ``path`` inside that commit's tree with the exact bound blob
+    SHA-1 and canonical SHA-256. The record bytes are read from the Git
+    OBJECT (not the mutable worktree) and must parse to exactly the fields
+    the authority embeds for the record — the embedded decision fields are
+    therefore inseparable from the published, immutable record bytes.
     """
     path = record.get("path")
-    digest = record.get("sha256")
+    digest = record.get("canonical_sha256")
+    blob_sha1 = record.get("git_blob_sha1")
+    source_commit = record.get("source_commit")
     if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
         failures.append(f"{where}.path: must be a repository-relative path")
         return
     if not isinstance(digest, str) or not _SHA256_RE.match(digest or ""):
-        failures.append(f"{where}.sha256: must be 64-hex sha256")
+        failures.append(f"{where}.canonical_sha256: must be 64-hex sha256")
         return
-    target = repo_root / path
-    if not target.is_file():
-        failures.append(f"{where}: referenced record missing on disk: {target}")
+    if not isinstance(blob_sha1, str) or not _HEX40_RE.match(blob_sha1 or ""):
+        failures.append(f"{where}.git_blob_sha1: must be a full 40-hex Git blob SHA-1")
         return
-    raw = target.read_bytes()
+    if not isinstance(source_commit, str) or not _HEX40_RE.match(source_commit or ""):
+        failures.append(f"{where}.source_commit: must be a full 40-hex Git commit SHA")
+        return
+    if source_commit != evidence_commit:
+        failures.append(
+            f"{where}.source_commit {source_commit} != the authority freeze-evidence commit "
+            f"{evidence_commit} — every authority record must be pinned to one immutable "
+            "freeze-evidence commit"
+        )
+        return
+    expected_kind = _AUTHORITY_RECORD_CLASSES[where][0]
+    expected_issuer = _AUTHORITY_RECORD_CLASSES[where][1]
+    if record.get("record_kind") != expected_kind or record.get("issuer_class") != expected_issuer:
+        failures.append(
+            f"{where}: record_kind/issuer_class must be "
+            f"{expected_kind!r}/{expected_issuer!r} "
+            f"(got {record.get('record_kind')!r}/{record.get('issuer_class')!r})"
+        )
+    actual_blob, blob_err = _git_blob_sha1_at(root, source_commit, path)
+    if actual_blob is None:
+        failures.append(
+            f"{where}: immutable source binding failed — {path!r} is not present as a Git "
+            f"blob in commit {source_commit} ({blob_err}); a record that exists only in a "
+            "mutable/dirty worktree is not an immutable authority record"
+        )
+        return
+    if actual_blob != blob_sha1:
+        failures.append(
+            f"{where}: immutable source binding mismatch — Git blob of "
+            f"{source_commit}:{path} is {actual_blob}, bound {blob_sha1}"
+        )
+    raw, raw_err = _git_blob_bytes(root, source_commit, path)
+    if raw is None:
+        failures.append(f"{where}: cannot read Git object {source_commit}:{path} ({raw_err})")
+        return
     actual = hashlib.sha256(raw).hexdigest()
     if actual != digest:
         failures.append(
-            f"{where}: referenced record digest mismatch: file {actual} != bound {digest}"
+            f"{where}: immutable source binding mismatch — sha256 of Git object "
+            f"{source_commit}:{path} is {actual}, bound {digest}"
         )
     try:
-        on_disk = json.loads(raw.decode("utf-8"))
+        from_git = json.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-        failures.append(f"{where}: referenced record is not valid JSON: {exc}")
+        failures.append(f"{where}: Git record {source_commit}:{path} is not valid JSON: {exc}")
         return
-    if not isinstance(on_disk, dict):
-        failures.append(f"{where}: referenced record must be a JSON object")
+    if not isinstance(from_git, dict):
+        failures.append(f"{where}: Git record {source_commit}:{path} must be a JSON object")
         return
-    expected = {k: v for k, v in embedded.items() if k not in ("path", "sha256")}
-    actual_fields = {k: v for k, v in on_disk.items() if k not in ("path", "sha256")}
-    if actual_fields != expected:
+    binding_keys = set(_AUTHORITY_RECORD_BINDING_KEYS) | {"sha256"}
+    expected_fields = {k: v for k, v in record.items() if k not in binding_keys}
+    actual_fields = {k: v for k, v in from_git.items() if k not in binding_keys}
+    if actual_fields != expected_fields:
         failures.append(
-            f"{where}: referenced record content does not match the authority-embedded copy "
-            "(the binding must cover the published record bytes)"
+            f"{where}: Git record content does not match the authority-embedded copy "
+            f"of {source_commit}:{path} (the binding must cover the published record bytes)"
         )
+    if from_git.get("record_kind") != expected_kind or from_git.get("issuer_class") != expected_issuer:
+        failures.append(
+            f"{where}: Git record must declare record_kind/issuer_class "
+            f"{expected_kind!r}/{expected_issuer!r} (provenance class is inseparable "
+            "from the published record bytes)"
+        )
+
+
+def _validate_frozen_subject_git_binding(
+    root: Path,
+    authority: dict[str, Any],
+    contract: dict[str, Any],
+    protocol_text: str,
+    contract_path: Path | str,
+    protocol_path: Path | str | None,
+    evidence_commit: str,
+    failures: list[str],
+) -> None:
+    """Prove the frozen subject exists in Git and binds its artifacts (M-5).
+
+    1. ``subject_head`` exists as a Git commit;
+    2. ``git rev-parse <subject_head>^{tree}`` equals the pinned subject_tree;
+    3. contract/protocol/seed-record are the EXACT Git blobs pinned by the
+       authority's freeze-evidence commit and byte-identical to the
+       validation inputs.
+    """
+    subject_head = authority.get("subject_head")
+    subject_tree = authority.get("subject_tree")
+    kind, kind_err = _git_object_kind(root, subject_head)
+    if kind is None:
+        failures.append(
+            f"dispatch_authority.subject_head {subject_head} does not exist as a Git commit "
+            f"in the repository ({kind_err}) — a frozen subject must be a real, immutable "
+            "Git commit"
+        )
+    elif kind != "commit":
+        failures.append(
+            f"dispatch_authority.subject_head {subject_head} is a Git {kind}, not a commit"
+        )
+    actual_tree, tree_err = _git_commit_tree(root, subject_head)
+    if actual_tree is None:
+        failures.append(
+            f"dispatch_authority.subject_head {subject_head} has no resolvable Git tree "
+            f"({tree_err})"
+        )
+    elif actual_tree != subject_tree:
+        failures.append(
+            f"dispatch_authority: subject_tree mismatch — git rev-parse "
+            f"{subject_head}^{{tree}} is {actual_tree}, pinned {subject_tree}"
+        )
+    binding = authority.get("frozen_subject_binding")
+    if not isinstance(binding, dict) or not binding:
+        failures.append(
+            "dispatch_authority.frozen_subject_binding: must bind contract, protocol and "
+            "seed record as immutable Git artifact refs"
+        )
+        return
+    for name, entry in binding.items():
+        if name not in _FROZEN_SUBJECT_BINDING_KEYS:
+            failures.append(
+                f"frozen_subject_binding.{name}: unknown artifact binding "
+                f"(allowed: {_FROZEN_SUBJECT_BINDING_KEYS})"
+            )
+            continue
+        if not isinstance(entry, dict):
+            failures.append(f"frozen_subject_binding.{name}: must be a JSON object")
+            continue
+        _require_keys(entry, _FROZEN_ARTIFACT_BINDING_KEYS, f"frozen_subject_binding.{name}", failures)
+        if any(f.startswith(f"frozen_subject_binding.{name}") for f in failures):
+            continue
+        art_path = entry.get("path")
+        art_blob = entry.get("git_blob_sha1")
+        art_digest = entry.get("canonical_sha256")
+        art_commit = entry.get("source_commit")
+        if not isinstance(art_path, str) or not art_path or art_path.startswith("/") or ".." in Path(art_path).parts:
+            failures.append(f"frozen_subject_binding.{name}.path: must be a repository-relative path")
+            continue
+        if not isinstance(art_blob, str) or not _HEX40_RE.match(art_blob or ""):
+            failures.append(
+                f"frozen_subject_binding.{name}.git_blob_sha1: must be a full 40-hex Git blob SHA-1"
+            )
+            continue
+        if not isinstance(art_digest, str) or not _SHA256_RE.match(art_digest or ""):
+            failures.append(
+                f"frozen_subject_binding.{name}.canonical_sha256: must be 64-hex sha256"
+            )
+            continue
+        if not isinstance(art_commit, str) or not _HEX40_RE.match(art_commit or ""):
+            failures.append(
+                f"frozen_subject_binding.{name}.source_commit: must be a full 40-hex Git commit SHA"
+            )
+            continue
+        if art_commit != evidence_commit:
+            failures.append(
+                f"frozen_subject_binding.{name}.source_commit {art_commit} != the authority "
+                f"freeze-evidence commit {evidence_commit}"
+            )
+            continue
+        blob_sha1, blob_err = _git_blob_sha1_at(root, art_commit, art_path)
+        if blob_sha1 is None:
+            failures.append(
+                f"frozen_subject_binding.{name}: immutable artifact binding failed — "
+                f"{art_path!r} is not a Git blob of commit {art_commit} ({blob_err}); a "
+                "frozen artifact must be an exact immutable Git blob, not a worktree copy"
+            )
+            continue
+        if blob_sha1 != art_blob:
+            failures.append(
+                f"frozen_subject_binding.{name}: blob mismatch — Git blob of "
+                f"{art_commit}:{art_path} is {blob_sha1}, bound {art_blob}"
+            )
+        raw, raw_err = _git_blob_bytes(root, art_commit, art_path)
+        if raw is None:
+            failures.append(
+                f"frozen_subject_binding.{name}: cannot read Git object "
+                f"{art_commit}:{art_path} ({raw_err})"
+            )
+            continue
+        if hashlib.sha256(raw).hexdigest() != art_digest:
+            failures.append(
+                f"frozen_subject_binding.{name}: frozen artifact bytes mismatch — sha256 of "
+                f"Git object {art_commit}:{art_path} is "
+                f"{hashlib.sha256(raw).hexdigest()}, bound {art_digest}"
+            )
+        if name == "contract":
+            if art_digest != authority.get("contract_sha256"):
+                failures.append(
+                    "frozen_subject_binding.contract.canonical_sha256 != authority "
+                    "contract_sha256"
+                )
+            contract_rel = _safe_relative_to(root, Path(contract_path))
+            if contract_rel is None:
+                failures.append(
+                    f"dispatch contract {contract_path} is not inside the repository root — "
+                    "the validated contract file must be the frozen contract blob"
+                )
+            elif entry.get("path") != contract_rel:
+                failures.append(
+                    f"frozen_subject_binding.contract.path {entry.get('path')!r} != the "
+                    f"validated contract file location {contract_rel!r}"
+                )
+            try:
+                on_disk = _sha256_file(Path(contract_path))
+            except OSError as exc:
+                failures.append(f"contract file read error {contract_path}: {exc}")
+                on_disk = None
+            if on_disk is not None and on_disk != art_digest:
+                failures.append(
+                    f"frozen_subject_binding.contract: the validated contract file is not the "
+                    f"frozen subject's bytes (file {on_disk} != subject blob {art_digest})"
+                )
+        elif name == "protocol":
+            protocol_digest = hashlib.sha256(protocol_text.encode("utf-8")).hexdigest()
+            if protocol_digest != art_digest:
+                failures.append(
+                    f"frozen_subject_binding.protocol: the validated protocol text is not the "
+                    f"frozen subject's bytes (text {protocol_digest} != subject blob {art_digest})"
+                )
+            if protocol_path is not None:
+                protocol_rel = _safe_relative_to(root, Path(protocol_path))
+                if protocol_rel is not None and entry.get("path") != protocol_rel:
+                    failures.append(
+                        f"frozen_subject_binding.protocol.path {entry.get('path')!r} != the "
+                        f"validated protocol file location {protocol_rel!r}"
+                    )
+        elif name == "seed_record":
+            if art_digest != authority.get("seed_record_sha256"):
+                failures.append(
+                    "frozen_subject_binding.seed_record.canonical_sha256 != authority "
+                    "seed_record_sha256"
+                )
+            record_rel = contract.get("scientific_subject", {}).get("seed_record_path")
+            if entry.get("path") != record_rel:
+                failures.append(
+                    f"frozen_subject_binding.seed_record.path {entry.get('path')!r} != contract "
+                    f"seed_record_path {record_rel!r}"
+                )
+            if isinstance(record_rel, str):
+                try:
+                    on_disk = _sha256_file(root / record_rel)
+                except OSError as exc:
+                    failures.append(f"seed record read error {record_rel}: {exc}")
+                    on_disk = None
+                if on_disk is not None and on_disk != art_digest:
+                    failures.append(
+                        f"frozen_subject_binding.seed_record: the validated seed record file is "
+                        f"not the frozen subject's bytes (file {on_disk} != subject blob "
+                        f"{art_digest})"
+                    )
 
 
 def validate_dispatch_authority(
@@ -1424,10 +1787,11 @@ def validate_dispatch_authority(
     seed_record: dict[str, Any],
     repo_root: Path | str,
     contract_path: Path | str,
+    protocol_path: Path | str | None = None,
     rerun_scan: bool = True,
     allow_fixture: bool = False,
 ) -> dict[str, Any]:
-    """Validate the machine-readable dispatch authority (R4.1, M-1).
+    """Validate the machine-readable dispatch authority (R4.1 M-1, R4.2 M-5).
 
     The authority must machine-bind, for THIS exact contract:
 
@@ -1441,10 +1805,25 @@ def validate_dispatch_authority(
       authorized and allowed by the executor policy;
     - the SHA-256 of the exact contract file and seed record file.
 
-    Every referenced record must exist under ``repo_root`` with the bound
-    digest. A ``fixture`` authority is second-class: it is rejected unless
-    ``allow_fixture=True`` and the produced plan is marked
-    ``synthetic_test_fixture_only``. Any problem raises :class:`ContractError`.
+    R4.2 (M-5) additionally proves the frozen subject EXISTS in Git: the
+    ``subject_head`` must resolve to a real commit, ``git rev-parse
+    <subject_head>^{tree}`` must equal the pinned ``subject_tree``, and the
+    contract/protocol/seed-record plus every authority record (Director
+    FREEZE, HG-B, review, verify, R2) must be exact immutable Git objects of
+    the authority's freeze-evidence commit — each carrying an immutable
+    source binding (``source_commit`` + ``path`` + ``git_blob_sha1`` +
+    ``canonical_sha256`` + ``record_kind``/``issuer_class``) whose bytes are
+    read from the Git OBJECT DATABASE, never from a mutable worktree path.
+
+    TRUST CEILING (R4.2, M-5 item 6): Git-bound records still do not prove
+    the identity behind the issuer class (no cryptographically protected
+    writer exists in this infrastructure), so the machine conclusion is
+    CAPPED at ``DISPATCH_PRECONDITIONS_RECORDED`` — never
+    ``DISPATCH_AUTHORIZED``. The real launch gate remains an external
+    Human/Protected-Writer gate. A ``fixture`` authority is second-class: it
+    is rejected unless ``allow_fixture=True`` and the produced plan is marked
+    ``synthetic_test_fixture_only``. Any problem raises
+    :class:`ContractError`.
     """
     root = Path(repo_root)
     failures: list[str] = []
@@ -1526,6 +1905,10 @@ def validate_dispatch_authority(
     _require_keys(verify, _AUTHORITY_VERIFY_KEYS, "verify_verdict", failures)
     r2 = authority["r2_record"]
     _require_keys(r2, _AUTHORITY_R2_KEYS, "r2_record", failures)
+    frozen_binding = authority["frozen_subject_binding"]
+    _require_keys(
+        frozen_binding, _FROZEN_SUBJECT_BINDING_KEYS, "frozen_subject_binding", failures
+    )
     if failures:
         raise ContractError("dispatch authority rejected: " + "; ".join(failures))
 
@@ -1617,14 +2000,47 @@ def validate_dispatch_authority(
     if failures:
         raise ContractError("dispatch authority rejected: " + "; ".join(failures))
 
-    for where, embedded in (
-        ("freeze_record", freeze_record),
-        ("hg_b_record", hg_b),
-        ("review_verdict", review),
-        ("verify_verdict", verify),
-        ("r2_record", r2),
-    ):
-        _authority_path_digest(root, embedded, embedded, where, failures)
+    # R4.2 (M-5): mechanically prove the frozen subject exists in Git and
+    # that every authority record and frozen artifact is an exact immutable
+    # Git object of the authority's freeze-evidence commit. These checks
+    # read the Git OBJECT DATABASE — a dirty worktree or a local file that
+    # was never committed into the pinned commits cannot satisfy them.
+    # (The subject commit cannot contain its own hash inside its contract,
+    # so the freeze fill-in — FROZEN contract + authority records — lives in
+    # the freeze-evidence commit, exactly like a real Director freeze flow:
+    # subject = reviewed commit, evidence = freeze commit.)
+    evidence_commit = freeze_record.get("source_commit")
+    if not isinstance(evidence_commit, str) or not _HEX40_RE.match(evidence_commit or ""):
+        raise ContractError(
+            "dispatch authority rejected: freeze_record.source_commit must be a full 40-hex "
+            "Git commit SHA (immutable freeze-evidence commit, M-5)"
+        )
+    evidence_kind, evidence_err = _git_object_kind(root, evidence_commit)
+    if evidence_kind != "commit":
+        failures.append(
+            f"freeze_record.source_commit {evidence_commit} does not exist as a Git commit "
+            f"in the repository ({evidence_err}) — the freeze-evidence commit must be real "
+            "and immutable"
+        )
+    else:
+        _validate_frozen_subject_git_binding(
+            root,
+            authority,
+            contract,
+            protocol_text,
+            contract_path,
+            protocol_path,
+            evidence_commit,
+            failures,
+        )
+        for where, record in (
+            ("freeze_record", freeze_record),
+            ("hg_b_record", hg_b),
+            ("review_verdict", review),
+            ("verify_verdict", verify),
+            ("r2_record", r2),
+        ):
+            _authority_git_record_binding(root, authority, record, where, evidence_commit, failures)
     if failures:
         raise ContractError("dispatch authority rejected: " + "; ".join(failures))
 
@@ -1640,8 +2056,16 @@ def validate_dispatch_authority(
         raise ContractError(
             "dispatch refused: freeze gate FAIL — " + "; ".join(gate_report["failures"][:8])
         )
+    # R4.2 (M-5 item 6): Git-bound records prove that the preconditions are
+    # RECORDED immutably, not that the issuer identities are authentic — no
+    # cryptographically protected writer exists in this infrastructure. The
+    # machine conclusion therefore never claims DISPATCH_AUTHORIZED; the
+    # real launch remains behind the external Human/Protected-Writer gate.
     return {
-        "status": "DISPATCH_AUTHORIZED",
+        "status": _DISPATCH_PRECONDITIONS_STATUS,
+        "machine_launch_authorized": False,
+        "launch_gate": _LAUNCH_GATE_HUMAN,
+        "identity_proof_ceiling": "GIT_IMMUTABLE_RECORDS_ONLY (issuer identities not proven)",
         "fixture": fixture,
         "synthetic_test_fixture_only": bool(fixture),
         "subject_head": authority["subject_head"],
@@ -1665,16 +2089,21 @@ def build_execution_plan(
     allow_fixture: bool = False,
     rerun_scan: bool = True,
 ) -> dict[str, Any]:
-    """THE dispatch entrypoint (R4.1, M-1): DISPATCH_READY requires authority.
+    """THE dispatch entrypoint (R4.1 M-1, R4.2 M-5): launch requires authority.
 
     A plan is produced ONLY when (a) the full freeze gate passes
     (``PREFREEZE_VALIDATION_PASS``) AND (b) a machine-readable
     ``nanolab_v02_dispatch_authority`` validates for this exact contract:
-    FROZEN subject + Director FREEZE record + HG-B APPROVED + review PASS +
-    verify VERIFIED + R2 ACTIVE with both legs authorized. The committed
-    PRE-DATA / NOT FROZEN package is therefore DISPATCH_BLOCKED here — any
-    validation or authority failure raises :class:`ContractError` (non-zero
-    exit at the CLI); a dispatch cannot bypass the gate by construction.
+    FROZEN subject proven to EXIST in Git (real commit + matching tree +
+    contract/protocol/record as its exact blobs, R4.2 M-5) + Director FREEZE
+    record + HG-B APPROVED + review PASS + verify VERIFIED + R2 ACTIVE with
+    both legs authorized, every record Git-bound immutably. The machine
+    conclusion is capped at ``DISPATCH_PRECONDITIONS_RECORDED`` with
+    ``machine_launch_authorized = False``: the real launch gate is the
+    external Human/Protected-Writer gate. The committed PRE-DATA / NOT FROZEN
+    package is therefore DISPATCH_BLOCKED here — any validation or authority
+    failure raises :class:`ContractError` (non-zero exit at the CLI); a
+    dispatch cannot bypass the gate by construction.
     """
     if repo_root is None:
         raise ContractError(
@@ -1700,6 +2129,7 @@ def build_execution_plan(
         record,
         repo_root=repo_root,
         contract_path=contract_path,
+        protocol_path=protocol_path,
         rerun_scan=rerun_scan,
         allow_fixture=allow_fixture,
     )
@@ -1715,6 +2145,8 @@ def build_execution_plan(
             "integer_rounding_policy": INTEGER_ROUNDING_POLICY["name"],
         },
         "dispatch_authority": authority_report,
+        "machine_launch_authorized": False,
+        "launch_gate": _LAUNCH_GATE_HUMAN,
         "synthetic_test_fixture_only": bool(authority_report["fixture"]),
         "cells": {},
         "budget": contract["run_budget"],
@@ -1796,7 +2228,12 @@ class ReplacementLedger:
     # -- pair lifecycle ----------------------------------------------------
 
     def open_pair(self, pair_id: str, variant: str, seed_identity: int) -> dict[str, Any]:
-        """Open a PAIR_RUNNING pair owning one frozen seed identity."""
+        """Open a PAIR_RUNNING pair owning one frozen seed identity.
+
+        R4.2 (m-2): the returned snapshot is independent — the nested
+        ``legs`` mapping is copied, so mutating the returned value can never
+        reach the internal ledger state.
+        """
         if not isinstance(pair_id, str) or not pair_id:
             raise ValueError("pair_id must be a non-empty string")
         if pair_id in self._pairs:
@@ -1833,7 +2270,18 @@ class ReplacementLedger:
                 "state": "PAIR_RUNNING",
             }
         )
-        return dict(pair)
+        # R4.2 (m-2): independent snapshot — nested ``legs`` must be copied.
+        return {
+            "pair_id": pair["pair_id"],
+            "variant": pair["variant"],
+            "seed_identity": pair["seed_identity"],
+            "state": pair["state"],
+            "legs": dict(pair["legs"]),
+            "replacement_assigned": pair["replacement_assigned"],
+            "replacement_identity": pair["replacement_identity"],
+            "replacement_pair_id": pair["replacement_pair_id"],
+            "source_pair_id": pair["source_pair_id"],
+        }
 
     def record_attempt(self, attempt_id: str, pair_id: str, leg: str, outcome: str) -> None:
         """Bind a real (non-SCHEDULED) attempt outcome to one pair leg."""
@@ -1875,14 +2323,22 @@ class ReplacementLedger:
         author_attempt_id: str,
         external_attempt_id: str,
     ) -> int:
-        """One-shot replacement of a terminal FAILED_TECHNICAL pair (M-4).
+        """One-shot ATOMIC replacement of a terminal FAILED_TECHNICAL pair (R4.1 M-4, R4.2 M-6).
 
-        Validates the pair state BEFORE consuming anything: both legs must be
-        bound (a missing counterpart is not a failed pair), the pair must be
-        terminal ``PAIR_FAILED_TECHNICAL``, and it must not already carry a
-        replacement assignment. On success the next frozen pool identity is
-        consumed in pool order, a NEW pair is created for it, and BOTH legs
-        of the new pair are scheduled with fresh globally-unique attempt ids.
+        The mutation is a two-phase transaction. PHASE 1 validates every
+        future write WITHOUT mutating anything: pair state (terminal
+        ``PAIR_FAILED_TECHNICAL``, both legs bound, at most one replacement),
+        variant, quota, pool cursor, ``replacement_pair_id`` availability,
+        replacement-seed ownership, attempt-id format and global uniqueness
+        for BOTH legs, and leg distinctness. PHASE 2 commits all writes
+        (cursor/quota advance, source pair marked ``PAIR_REPLACED``, new
+        replacement pair, both scheduled legs, ledger events) under a
+        rollback guard: if any commit step raised, the ledger state is
+        restored bit-for-bit and the exception propagates. Every rejection —
+        before or during commit — therefore leaves the ledger structurally
+        identical to the state before the call: no cursor movement, no quota
+        consumption, no source-pair change, no new pair, no new attempt, no
+        new ledger event.
         """
         pair = self._pairs.get(failed_pair_id)
         if pair is None:
@@ -1929,33 +2385,68 @@ class ReplacementLedger:
                 "replacement refused: author and external legs require two distinct "
                 "globally-unique attempt ids (one-leg-only replacement is forbidden)"
             )
+        # ---- PHASE 1: validate every future write; NOTHING is mutated above
+        # or below until the commit section. (R4.2, M-6)
+        if not isinstance(replacement_pair_id, str) or not replacement_pair_id:
+            raise ValueError("replacement_pair_id must be a non-empty string")
+        if replacement_pair_id in self._pairs:
+            raise ValueError(
+                f"replacement refused: replacement pair id {replacement_pair_id!r} already "
+                "exists — pair ids are unique forever"
+            )
+        for leg_label, attempt_id in (("author", author_attempt_id), ("external", external_attempt_id)):
+            if not isinstance(attempt_id, str) or not ATTEMPT_ID_RE.match(attempt_id):
+                raise ValueError(
+                    f"replacement refused: {leg_label} attempt id {attempt_id!r} violates "
+                    "the attempt id rule"
+                )
+            if attempt_id in self._attempts:
+                other = self._attempts[attempt_id]
+                raise ValueError(
+                    f"replacement refused: {leg_label} attempt id {attempt_id!r} is already "
+                    f"bound to pair {other['pair_id']!r} ({other['leg']} leg) — attempt ids "
+                    "are globally unique"
+                )
         identity = self._pools[variant][cursor]
-        # All validation has passed — consume quota/cursor, then mutate state.
-        self._pool_cursor[variant] = cursor + 1
-        self._used_pairs[variant] += 1
-        pair["state"] = "PAIR_REPLACED"
-        pair["replacement_assigned"] = True
-        pair["replacement_identity"] = identity
-        pair["replacement_pair_id"] = replacement_pair_id
-        self.open_pair(replacement_pair_id, variant, identity)
-        self._pairs[replacement_pair_id]["source_pair_id"] = failed_pair_id
-        for leg, attempt_id in (("author", author_attempt_id), ("external", external_attempt_id)):
-            self._bind_attempt(attempt_id, replacement_pair_id, leg, "SCHEDULED", allow_scheduled=True)
-        self._ledger.append(
-            {
-                "event": "REPLACEMENT_PAIR_ASSIGNED",
-                "variant": variant,
-                "failed_pair_id": failed_pair_id,
-                "replacement_pair_id": replacement_pair_id,
-                "replacement_identity": identity,
-                "author_attempt_id": author_attempt_id,
-                "external_attempt_id": external_attempt_id,
-                "both_legs_scheduled": True,
-                "pool_cursor_after": self._pool_cursor[variant],
-                "used_pairs": self._used_pairs[variant],
-                "quota_pairs": self._quota[variant],
-            }
-        )
+        seed_owner = self._seed_owner.get((variant, identity))
+        if seed_owner is not None:
+            raise ValueError(
+                f"replacement refused: replacement seed identity {identity} already belongs "
+                f"to pair {seed_owner!r} — one seed identity belongs to exactly one pair"
+            )
+        # ---- PHASE 2: COMMIT (all validations passed). A rollback guard
+        # restores the exact prior state if any commit step raises, so the
+        # transaction stays atomic even against future internal edits.
+        snapshot = self._snapshot_state()
+        try:
+            self._pool_cursor[variant] = cursor + 1
+            self._used_pairs[variant] += 1
+            pair["state"] = "PAIR_REPLACED"
+            pair["replacement_assigned"] = True
+            pair["replacement_identity"] = identity
+            pair["replacement_pair_id"] = replacement_pair_id
+            self.open_pair(replacement_pair_id, variant, identity)
+            self._pairs[replacement_pair_id]["source_pair_id"] = failed_pair_id
+            for leg, attempt_id in (("author", author_attempt_id), ("external", external_attempt_id)):
+                self._bind_attempt(attempt_id, replacement_pair_id, leg, "SCHEDULED", allow_scheduled=True)
+            self._ledger.append(
+                {
+                    "event": "REPLACEMENT_PAIR_ASSIGNED",
+                    "variant": variant,
+                    "failed_pair_id": failed_pair_id,
+                    "replacement_pair_id": replacement_pair_id,
+                    "replacement_identity": identity,
+                    "author_attempt_id": author_attempt_id,
+                    "external_attempt_id": external_attempt_id,
+                    "both_legs_scheduled": True,
+                    "pool_cursor_after": self._pool_cursor[variant],
+                    "used_pairs": self._used_pairs[variant],
+                    "quota_pairs": self._quota[variant],
+                }
+            )
+        except Exception:
+            self._restore_state(snapshot)
+            raise
         return identity
 
     # -- internals ----------------------------------------------------------
@@ -2023,11 +2514,67 @@ class ReplacementLedger:
         else:
             pair["state"] = "PAIR_COMPLETED"
 
+    # -- transactional state snapshots (R4.2, M-6) --------------------------
+
+    def _snapshot_state(self) -> dict[str, Any]:
+        """Full deep-enough copy of every mutable ledger structure."""
+        return {
+            "quota": dict(self._quota),
+            "pools": {v: list(pool) for v, pool in self._pools.items()},
+            "used_pairs": dict(self._used_pairs),
+            "pool_cursor": dict(self._pool_cursor),
+            "pairs": {
+                pid: {**p, "legs": dict(p["legs"])} for pid, p in self._pairs.items()
+            },
+            "seed_owner": dict(self._seed_owner),
+            "attempts": {aid: dict(a) for aid, a in self._attempts.items()},
+            "ledger": list(self._ledger),
+        }
+
+    def _restore_state(self, snapshot: dict[str, Any]) -> None:
+        """Restore the exact prior state (rollback guard of PHASE 2)."""
+        self._quota = dict(snapshot["quota"])
+        self._pools = {v: list(pool) for v, pool in snapshot["pools"].items()}
+        self._used_pairs = dict(snapshot["used_pairs"])
+        self._pool_cursor = dict(snapshot["pool_cursor"])
+        self._pairs = {
+            pid: {**p, "legs": dict(p["legs"])} for pid, p in snapshot["pairs"].items()
+        }
+        self._seed_owner = dict(snapshot["seed_owner"])
+        self._attempts = {aid: dict(a) for aid, a in snapshot["attempts"].items()}
+        self._ledger = list(snapshot["ledger"])
+
+    def state_snapshot(self) -> dict[str, Any]:
+        """Independent structural snapshot for atomicity assertions (M-6).
+
+        Covers every mutable surface — pairs (with both legs), attempts,
+        seed ownership, used quota, pool cursors and the full event list —
+        as deep-enough copies. Mutating the snapshot never reaches the
+        ledger; comparing snapshots before/after a rejected call must show
+        structural identity (no cursor movement, no quota consumption, no
+        new pair/attempt/event).
+        """
+        return {
+            "pairs": {pid: self.pair(pid) for pid in sorted(self._pairs)},
+            "attempts": {
+                aid: dict(a) for aid, a in sorted(self._attempts.items())
+            },
+            "seed_owner": {
+                key: owner for key, owner in sorted(self._seed_owner.items())
+            },
+            "used_pairs": dict(self._used_pairs),
+            "pool_cursor": dict(self._pool_cursor),
+            "quota_pairs": dict(self._quota),
+            "ledger": [dict(event) for event in self._ledger],
+        }
+
     # -- read surface ---------------------------------------------------------
 
     @property
     def ledger(self) -> list[dict[str, Any]]:
-        return list(self._ledger)
+        """Independent event-list snapshot (R4.2, m-2): mutating a returned
+        event dict must never reach the internal ledger state."""
+        return [dict(event) for event in self._ledger]
 
     def used_pairs(self, variant: str) -> int:
         return self._used_pairs[variant]
