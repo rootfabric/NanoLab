@@ -50,6 +50,36 @@ M-1..M-4) hardens the authority model:
   synthetic fixture path stays test-only and is backed by a REAL temporary
   Git repository (real commits/trees/blobs).
 
+- **The frozen package is reviewed, not the pre-freeze candidate
+  (R4.3, M-7).** The R4.2 two-commit scheme (reviewed pre-freeze subject R +
+  one freeze-evidence commit E holding both the FROZEN bytes and review/
+  verify records pointing back at R) proved review of R, never review of the
+  frozen bytes. The required lifecycle is now strictly sequenced:
+
+  .. code-block:: text
+
+      S = PRE-FREEZE candidate subject   PRE-DATA / NOT FROZEN; HG-B APPROVED
+      F = FROZEN PACKAGE COMMIT          exact frozen protocol/contract/seed
+                                         record; NO self-reference to its own
+                                         commit SHA
+      R = REVIEW RECORD COMMIT           review PASS pins F HEAD/TREE
+      V = VERIFIER RECORD COMMIT         verify VERIFIED pins F HEAD/TREE
+      A = AUTHORITY / READINESS EVIDENCE binds F + the exact R/V/HG-B/R2
+                                         record blobs
+
+  ``reviewed_head``/``verified_head`` must equal F — never S. Records no
+  longer share one evidence commit: each carries its own immutable source
+  binding, and the review/verify/freeze record source commits must DESCEND
+  from F (a record that predates F, lives on unrelated history, or sits
+  inside F itself cannot prove an independent post-freeze review/verify).
+  The contract's ``frozen_subject_head``/``frozen_subject_tree`` fields are
+  non-authoritative compatibility fields (a real frozen package commit
+  cannot embed its own SHA); the exact frozen HEAD/TREE pins live in the
+  external Director freeze / authority record, and
+  ``frozen_subject_binding`` binds contract/protocol/seed-record to F —
+  never to an authority/evidence commit. No self-consistent two-commit
+  shortcut satisfies this chain.
+
 EVERYTHING is validated fail-closed: malformed JSON, missing or extra
 fields, wrong types (including ``bool`` where an integer is required),
 out-of-range or duplicate seeds, stale digests, missing/extra variants,
@@ -68,9 +98,11 @@ the repository namespace use ``PYTHONPATH=scripts``)::
         --contract <contract.json> --protocol <candidate.md> --record <record.json> \
         --authority <dispatch-authority.json>
 
-Exit codes: 0 = PASS / authorized plan produced (``prefreeze`` exits 0 for
-internal-consistency PASS even while dispatch stays blocked); 3 =
-FREEZE_GATE_FAIL or DISPATCH_BLOCKED (reasons printed); 4 = contract/read
+Exit codes: 0 = validation/preconditions recorded (``prefreeze`` exits 0 for
+internal-consistency PASS and ``plan`` exits 0 for a prepared execution plan
+while machine launch remains false — a prepared plan is NOT a launch
+authorization: the real launch gate stays HUMAN_PROTECTED_WRITER);
+3 = FREEZE_GATE_FAIL or DISPATCH_BLOCKED (reasons printed); 4 = contract/read
 error (fail-closed).
 """
 
@@ -395,10 +427,16 @@ _MANIFEST_KEYS = ("path", "sha256")
 
 _DISPATCH_AUTHORITY_KIND = "nanolab_v02_dispatch_authority"
 # R4.2 (M-5): schema 2 adds immutable Git source bindings to every authority
-# record and the frozen-subject artifact binding. Schema 1 authorities are
-# rejected (fail-closed evolution: an old self-consistent package must not
-# silently pass a stronger gate).
-_DISPATCH_AUTHORITY_SCHEMA_VERSION = 2
+# record and the frozen-subject artifact binding.
+# R4.3 (M-7): schema 3 re-sequences the lifecycle — ``subject_head``/``subject_tree``
+# pin the FROZEN PACKAGE COMMIT F (not a pre-freeze candidate), review/verify
+# verdicts must pin F from later record commits that descend from F, each
+# record carries its own independent immutable source binding (no shared
+# freeze-evidence commit), and ``frozen_subject_binding`` binds the frozen
+# artifacts to F. Schema 1 AND schema 2 authorities are rejected (fail-closed
+# evolution: an old self-consistent package must not silently pass a stronger
+# gate — the v2 two-commit shortcut must no longer validate).
+_DISPATCH_AUTHORITY_SCHEMA_VERSION = 3
 _AUTHORIZED_AUTHOR_EXECUTOR = "AUTHOR_U1"
 _AUTHORIZED_EXTERNAL_EXECUTOR = "EXTERNAL_U2"
 SYNTHETIC_FIXTURE_MARKER = "SYNTHETIC TEST FIXTURE ONLY"
@@ -482,12 +520,12 @@ _AUTHORITY_RECORD_CLASSES = {
     "r2_record": ("R2_ACTIVATION_RECORD", "R2_HOST"),
 }
 
-# R4.2 (M-5): the frozen subject must be a real Git commit whose tree equals
-# the pinned subject_tree, and the contract/protocol/seed-record must be
-# bound to exact immutable Git blobs of the authority's freeze-evidence
-# commit (a subject commit cannot contain its own hash inside its contract,
-# so the freeze fill-in lives in the evidence commit, exactly like a real
-# Director freeze flow: subject = reviewed commit, evidence = freeze commit).
+# R4.3 (M-7): the frozen subject IS the frozen package commit F. The frozen
+# contract/protocol/seed-record must be exact Git blobs OF F (a subject
+# commit cannot contain its own hash, so the FROZEN contract carries no
+# self-SHA — the exact frozen HEAD/TREE pins live in the external Director
+# freeze / authority record, and every review/verify record must pin F from
+# a LATER immutable commit of its own).
 _FROZEN_SUBJECT_BINDING_KEYS = ("contract", "protocol", "seed_record")
 _FROZEN_ARTIFACT_BINDING_KEYS = ("source_commit", "path", "git_blob_sha1", "canonical_sha256")
 
@@ -681,30 +719,35 @@ def _validate_subject(subject: Any, failures: list[str]) -> None:
         failures.append("scientific_subject.seed_record_logical_sha256: must be 64-hex sha256")
     if subject["freeze_status"] not in ("NOT_FROZEN", "FROZEN"):
         failures.append("scientific_subject.freeze_status must be NOT_FROZEN or FROZEN")
-    # R4.1 (M-1): frozen subject pins. A NOT_FROZEN candidate must carry NO
-    # frozen subject binding (null); a FROZEN contract must pin the exact
-    # subject HEAD/TREE that the dispatch authority will be validated against.
+    # R4.3 (M-7): ``frozen_subject_head``/``frozen_subject_tree`` are
+    # NON-AUTHORITATIVE compatibility fields. A real frozen package commit F
+    # cannot embed its own SHA, so the canonical frozen contract carries
+    # null here; the exact frozen HEAD/TREE pins live in the external
+    # Director freeze / authority record and are never compared against
+    # these fields. A NOT_FROZEN candidate must still carry NO frozen pins.
     frozen = subject.get("freeze_status") == "FROZEN"
     for key in ("frozen_subject_head", "frozen_subject_tree"):
         value = subject.get(key)
-        if frozen:
-            if not isinstance(value, str) or not _HEX40_RE.match(value or ""):
-                failures.append(
-                    f"scientific_subject.{key}: must be a full 40-hex pin while freeze_status "
-                    "is FROZEN"
-                )
-        elif value is not None:
+        if value is None:
+            continue
+        if not isinstance(value, str) or not _HEX40_RE.match(value or ""):
+            failures.append(
+                f"scientific_subject.{key}: must be null or a full 40-hex compatibility "
+                "value (non-authoritative field, R4.3 M-7)"
+            )
+        elif not frozen:
             failures.append(
                 f"scientific_subject.{key}: must be null while freeze_status is NOT_FROZEN "
                 "(a pre-freeze candidate must not claim frozen subject pins)"
             )
-    if frozen and isinstance(subject.get("frozen_subject_head"), str) and isinstance(
-        subject.get("frozen_subject_tree"), str
+    if (
+        isinstance(subject.get("frozen_subject_head"), str)
+        and isinstance(subject.get("frozen_subject_tree"), str)
+        and subject["frozen_subject_head"] == subject["frozen_subject_tree"]
     ):
-        if subject["frozen_subject_head"] == subject["frozen_subject_tree"]:
-            failures.append(
-                "scientific_subject: frozen_subject_head and frozen_subject_tree must differ"
-            )
+        failures.append(
+            "scientific_subject: frozen_subject_head and frozen_subject_tree must differ"
+        )
 
 
 def _validate_variants(variants: Any, failures: list[str]) -> None:
@@ -1494,6 +1537,20 @@ def _git_blob_bytes(root: Path, commit: str, path: str) -> tuple[bytes | None, s
     return out, ""
 
 
+def _git_is_ancestor(root: Path, ancestor: str, descendant: str) -> tuple[bool | None, str]:
+    """Return whether ``ancestor`` is an ancestor of (or equal to)
+    ``descendant`` — ``None`` with a reason when Git cannot decide
+    (callers fail closed)."""
+    code, _out, err = _git_capture(root, "merge-base", "--is-ancestor", ancestor, descendant)
+    if code == 0:
+        return True, ""
+    if code == 1:
+        return False, ""
+    return None, err or (
+        f"git merge-base --is-ancestor {ancestor} {descendant} failed (exit {code})"
+    )
+
+
 def _safe_relative_to(root: Path, path: Path) -> str | None:
     """Repo-relative form of ``path`` (or ``None`` if outside the root)."""
     try:
@@ -1504,20 +1561,23 @@ def _safe_relative_to(root: Path, path: Path) -> str | None:
 
 def _authority_git_record_binding(
     root: Path,
-    authority: dict[str, Any],
     record: dict[str, Any],
     where: str,
-    evidence_commit: str,
     failures: list[str],
-) -> None:
-    """Verify an authority record's immutable Git source binding (R4.2, M-5).
+) -> bool:
+    """Verify an authority record's immutable Git source binding (R4.2, M-5;
+    R4.3, M-7 independence).
 
-    The record must be pinned to the authority's freeze-evidence commit and
-    live at ``path`` inside that commit's tree with the exact bound blob
-    SHA-1 and canonical SHA-256. The record bytes are read from the Git
-    OBJECT (not the mutable worktree) and must parse to exactly the fields
-    the authority embeds for the record — the embedded decision fields are
+    The record is pinned to ITS OWN ``source_commit`` — records no longer
+    have to share one freeze-evidence commit (R4.3, M-7) — and must live at
+    ``path`` inside that commit's tree with the exact bound blob SHA-1 and
+    canonical SHA-256. The record bytes are read from the Git OBJECT (not
+    the mutable worktree) and must parse to exactly the fields the
+    authority embeds for the record — the embedded decision fields are
     therefore inseparable from the published, immutable record bytes.
+
+    Returns ``True`` when the binding fully verifies (the sequencing gate
+    may then run ancestry checks against the frozen package commit).
     """
     path = record.get("path")
     digest = record.get("canonical_sha256")
@@ -1525,23 +1585,16 @@ def _authority_git_record_binding(
     source_commit = record.get("source_commit")
     if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
         failures.append(f"{where}.path: must be a repository-relative path")
-        return
+        return False
     if not isinstance(digest, str) or not _SHA256_RE.match(digest or ""):
         failures.append(f"{where}.canonical_sha256: must be 64-hex sha256")
-        return
+        return False
     if not isinstance(blob_sha1, str) or not _HEX40_RE.match(blob_sha1 or ""):
         failures.append(f"{where}.git_blob_sha1: must be a full 40-hex Git blob SHA-1")
-        return
+        return False
     if not isinstance(source_commit, str) or not _HEX40_RE.match(source_commit or ""):
         failures.append(f"{where}.source_commit: must be a full 40-hex Git commit SHA")
-        return
-    if source_commit != evidence_commit:
-        failures.append(
-            f"{where}.source_commit {source_commit} != the authority freeze-evidence commit "
-            f"{evidence_commit} — every authority record must be pinned to one immutable "
-            "freeze-evidence commit"
-        )
-        return
+        return False
     expected_kind = _AUTHORITY_RECORD_CLASSES[where][0]
     expected_issuer = _AUTHORITY_RECORD_CLASSES[where][1]
     if record.get("record_kind") != expected_kind or record.get("issuer_class") != expected_issuer:
@@ -1557,7 +1610,7 @@ def _authority_git_record_binding(
             f"blob in commit {source_commit} ({blob_err}); a record that exists only in a "
             "mutable/dirty worktree is not an immutable authority record"
         )
-        return
+        return False
     if actual_blob != blob_sha1:
         failures.append(
             f"{where}: immutable source binding mismatch — Git blob of "
@@ -1566,7 +1619,7 @@ def _authority_git_record_binding(
     raw, raw_err = _git_blob_bytes(root, source_commit, path)
     if raw is None:
         failures.append(f"{where}: cannot read Git object {source_commit}:{path} ({raw_err})")
-        return
+        return False
     actual = hashlib.sha256(raw).hexdigest()
     if actual != digest:
         failures.append(
@@ -1577,10 +1630,10 @@ def _authority_git_record_binding(
         from_git = json.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         failures.append(f"{where}: Git record {source_commit}:{path} is not valid JSON: {exc}")
-        return
+        return False
     if not isinstance(from_git, dict):
         failures.append(f"{where}: Git record {source_commit}:{path} must be a JSON object")
-        return
+        return False
     binding_keys = set(_AUTHORITY_RECORD_BINDING_KEYS) | {"sha256"}
     expected_fields = {k: v for k, v in record.items() if k not in binding_keys}
     actual_fields = {k: v for k, v in from_git.items() if k not in binding_keys}
@@ -1595,6 +1648,7 @@ def _authority_git_record_binding(
             f"{expected_kind!r}/{expected_issuer!r} (provenance class is inseparable "
             "from the published record bytes)"
         )
+    return not failures
 
 
 def _validate_frozen_subject_git_binding(
@@ -1604,16 +1658,17 @@ def _validate_frozen_subject_git_binding(
     protocol_text: str,
     contract_path: Path | str,
     protocol_path: Path | str | None,
-    evidence_commit: str,
+    frozen_head: str,
     failures: list[str],
 ) -> None:
-    """Prove the frozen subject exists in Git and binds its artifacts (M-5).
+    """Prove the FROZEN PACKAGE COMMIT exists in Git and binds its artifacts
+    (R4.2 M-5; R4.3 M-7).
 
-    1. ``subject_head`` exists as a Git commit;
+    1. ``subject_head`` (= F, the frozen package commit) exists as a Git commit;
     2. ``git rev-parse <subject_head>^{tree}`` equals the pinned subject_tree;
-    3. contract/protocol/seed-record are the EXACT Git blobs pinned by the
-       authority's freeze-evidence commit and byte-identical to the
-       validation inputs.
+    3. contract/protocol/seed-record are the EXACT Git blobs OF F — bound to
+       the frozen package commit itself, never to an authority/evidence
+       commit — and byte-identical to the validation inputs.
     """
     subject_head = authority.get("subject_head")
     subject_tree = authority.get("subject_tree")
@@ -1681,10 +1736,12 @@ def _validate_frozen_subject_git_binding(
                 f"frozen_subject_binding.{name}.source_commit: must be a full 40-hex Git commit SHA"
             )
             continue
-        if art_commit != evidence_commit:
+        if art_commit != frozen_head:
             failures.append(
-                f"frozen_subject_binding.{name}.source_commit {art_commit} != the authority "
-                f"freeze-evidence commit {evidence_commit}"
+                f"frozen_subject_binding.{name}.source_commit {art_commit} != the frozen "
+                f"package commit {frozen_head} — frozen artifacts must be exact blobs of the "
+                "frozen package commit F, not of another (e.g. pre-freeze subject or "
+                "authority/evidence) commit (R4.3 M-7)"
             )
             continue
         blob_sha1, blob_err = _git_blob_sha1_at(root, art_commit, art_path)
@@ -1780,6 +1837,50 @@ def _validate_frozen_subject_git_binding(
                     )
 
 
+def _validate_record_sequencing(
+    root: Path,
+    frozen_head: str,
+    record: dict[str, Any],
+    where: str,
+    failures: list[str],
+) -> None:
+    """Require a pinned record's source commit to be a STRICT descendant of
+    the frozen package commit F (R4.3, M-7).
+
+    A record that pins F in its fields must have been recorded AFTER F
+    existed: a source commit that predates F (or sits on unrelated history)
+    cannot prove an independent post-freeze review/verify/freeze decision,
+    and a record contained in F itself would be a self-reference cycle
+    (F cannot contain a verdict about F). Binding validity is a
+    precondition: call only after :func:`_authority_git_record_binding`
+    verified the record's own immutable binding.
+    """
+    source_commit = record.get("source_commit")
+    if not isinstance(source_commit, str) or not _HEX40_RE.match(source_commit or ""):
+        return  # format already reported by the binding check
+    is_ancestor, err = _git_is_ancestor(root, frozen_head, source_commit)
+    if is_ancestor is None:
+        failures.append(
+            f"{where}.source_commit: Git ancestry could not be proven ({err}) — "
+            "failing closed: a record about the frozen package must provably postdate it"
+        )
+        return
+    if not is_ancestor:
+        failures.append(
+            f"{where}.source_commit {source_commit} does not descend from the frozen "
+            f"package commit {frozen_head} — a {where} about the frozen package must be "
+            "recorded AFTER it exists (records that predate F or live on unrelated "
+            "history cannot prove review/verify of the frozen bytes; R4.3 M-7)"
+        )
+        return
+    if source_commit == frozen_head:
+        failures.append(
+            f"{where}.source_commit == the frozen package commit {frozen_head} — a record "
+            "contained in the frozen package itself cannot prove an independent "
+            "post-freeze decision (self-reference cycle; R4.3 M-7)"
+        )
+
+
 def validate_dispatch_authority(
     authority: dict[str, Any],
     contract: dict[str, Any],
@@ -1791,29 +1892,48 @@ def validate_dispatch_authority(
     rerun_scan: bool = True,
     allow_fixture: bool = False,
 ) -> dict[str, Any]:
-    """Validate the machine-readable dispatch authority (R4.1 M-1, R4.2 M-5).
+    """Validate the machine-readable dispatch authority (R4.1 M-1, R4.2 M-5,
+    R4.3 M-7).
 
     The authority must machine-bind, for THIS exact contract:
 
-    - ``freeze_status == FROZEN`` with frozen subject HEAD/TREE pins equal to
-      the authority pins and to the Director FREEZE record pins;
+    - ``freeze_status == FROZEN`` with the frozen subject pinned to the
+      FROZEN PACKAGE COMMIT F (``subject_head``/``subject_tree``), equal to
+      the Director FREEZE record pins;
     - a Director FREEZE record binding the exact contract + seed-record digests;
     - HG-B owner approval (``decision == APPROVED``) for this rule/revision;
-    - a fresh review verdict PASS and a fresh verify verdict VERIFIED for the
-      frozen subject HEAD/TREE;
+    - a fresh review verdict PASS and a fresh verify verdict VERIFIED whose
+      ``reviewed_head``/``verified_head`` pin the FROZEN PACKAGE COMMIT F —
+      never a pre-freeze candidate S;
     - R2 ACTIVE with BOTH executor legs (``AUTHOR_U1`` / ``EXTERNAL_U2``)
       authorized and allowed by the executor policy;
     - the SHA-256 of the exact contract file and seed record file.
 
-    R4.2 (M-5) additionally proves the frozen subject EXISTS in Git: the
-    ``subject_head`` must resolve to a real commit, ``git rev-parse
-    <subject_head>^{tree}`` must equal the pinned ``subject_tree``, and the
-    contract/protocol/seed-record plus every authority record (Director
-    FREEZE, HG-B, review, verify, R2) must be exact immutable Git objects of
-    the authority's freeze-evidence commit — each carrying an immutable
-    source binding (``source_commit`` + ``path`` + ``git_blob_sha1`` +
-    ``canonical_sha256`` + ``record_kind``/``issuer_class``) whose bytes are
-    read from the Git OBJECT DATABASE, never from a mutable worktree path.
+    R4.2 (M-5) proves the frozen subject EXISTS in Git: the ``subject_head``
+    must resolve to a real commit, ``git rev-parse <subject_head>^{tree}``
+    must equal the pinned ``subject_tree``, and the contract/protocol/
+    seed-record plus every authority record (Director FREEZE, HG-B, review,
+    verify, R2) must be exact immutable Git objects — each record carrying
+    an immutable source binding (``source_commit`` + ``path`` +
+    ``git_blob_sha1`` + ``canonical_sha256`` + ``record_kind``/
+    ``issuer_class``) whose bytes are read from the Git OBJECT DATABASE,
+    never from a mutable worktree path.
+
+    R4.3 (M-7) breaks the freeze/review self-reference cycle by sequencing
+    the lifecycle ``S -> F -> R/V -> A``:
+
+    - ``frozen_subject_binding`` binds contract/protocol/seed-record to F
+      itself (never to an authority/evidence commit), and the validated
+      input bytes must equal the F blob bytes;
+    - every authority record carries its OWN ``source_commit`` — records no
+      longer share one freeze-evidence commit;
+    - the review/verify/freeze record source commits must be strict
+      DESCENDANTS of F: a review/verify record that predates F, lives on
+      unrelated history, or sits inside F cannot prove an independent
+      post-freeze decision about the frozen bytes;
+    - ``reviewed_head == verified_head == F`` — no self-consistent
+      two-commit shortcut (pre-freeze subject + evidence commit) satisfies
+      the chain.
 
     TRUST CEILING (R4.2, M-5 item 6): Git-bound records still do not prove
     the identity behind the issuer class (no cryptographically protected
@@ -1977,12 +2097,11 @@ def validate_dispatch_authority(
             f"contract freeze_status is {subject.get('freeze_status')!r}, not FROZEN: a "
             "PRE-DATA / NOT FROZEN package cannot be dispatched"
         )
-    if subject.get("frozen_subject_head") != authority.get("subject_head") or subject.get(
-        "frozen_subject_tree"
-    ) != authority.get("subject_tree"):
-        failures.append(
-            "frozen subject mismatch: contract frozen_subject pins != authority subject pins"
-        )
+    # R4.3 (M-7): the contract's ``frozen_subject_head``/``frozen_subject_tree``
+    # fields are NON-AUTHORITATIVE compatibility fields and are deliberately
+    # NOT compared against the authority pins — a real frozen package commit
+    # cannot embed its own SHA, so the exact frozen HEAD/TREE pins live only
+    # in this external Director freeze / authority record.
     if authority.get("seed_record_sha256") != subject.get("seed_record_file_sha256"):
         failures.append(
             "seed record mismatch: authority seed_record_sha256 != contract "
@@ -2000,27 +2119,23 @@ def validate_dispatch_authority(
     if failures:
         raise ContractError("dispatch authority rejected: " + "; ".join(failures))
 
-    # R4.2 (M-5): mechanically prove the frozen subject exists in Git and
-    # that every authority record and frozen artifact is an exact immutable
-    # Git object of the authority's freeze-evidence commit. These checks
-    # read the Git OBJECT DATABASE — a dirty worktree or a local file that
-    # was never committed into the pinned commits cannot satisfy them.
-    # (The subject commit cannot contain its own hash inside its contract,
-    # so the freeze fill-in — FROZEN contract + authority records — lives in
-    # the freeze-evidence commit, exactly like a real Director freeze flow:
-    # subject = reviewed commit, evidence = freeze commit.)
-    evidence_commit = freeze_record.get("source_commit")
-    if not isinstance(evidence_commit, str) or not _HEX40_RE.match(evidence_commit or ""):
-        raise ContractError(
-            "dispatch authority rejected: freeze_record.source_commit must be a full 40-hex "
-            "Git commit SHA (immutable freeze-evidence commit, M-5)"
-        )
-    evidence_kind, evidence_err = _git_object_kind(root, evidence_commit)
-    if evidence_kind != "commit":
+    # R4.2 (M-5) + R4.3 (M-7): mechanically prove the FROZEN PACKAGE COMMIT F
+    # exists in Git, that the frozen artifacts are exact immutable blobs OF F,
+    # and that every authority record is an exact immutable Git object of its
+    # OWN source commit with review/verify/freeze recorded strictly AFTER F.
+    # These checks read the Git OBJECT DATABASE — a dirty worktree or a local
+    # file that was never committed into the pinned commits cannot satisfy
+    # them. (The frozen contract carries no self-SHA: the exact F HEAD/TREE
+    # pins live in this external authority record, and review/verify verdicts
+    # pin F from later immutable record commits — never the pre-freeze
+    # candidate S.)
+    frozen_head = authority.get("subject_head")
+    frozen_kind, frozen_err = _git_object_kind(root, frozen_head)
+    if frozen_kind != "commit":
         failures.append(
-            f"freeze_record.source_commit {evidence_commit} does not exist as a Git commit "
-            f"in the repository ({evidence_err}) — the freeze-evidence commit must be real "
-            "and immutable"
+            f"dispatch_authority.subject_head {frozen_head} does not exist as a Git commit "
+            f"in the repository ({frozen_err}) — the frozen package commit F must be a real, "
+            "immutable Git commit"
         )
     else:
         _validate_frozen_subject_git_binding(
@@ -2030,9 +2145,10 @@ def validate_dispatch_authority(
             protocol_text,
             contract_path,
             protocol_path,
-            evidence_commit,
+            frozen_head,
             failures,
         )
+        bound = True
         for where, record in (
             ("freeze_record", freeze_record),
             ("hg_b_record", hg_b),
@@ -2040,7 +2156,22 @@ def validate_dispatch_authority(
             ("verify_verdict", verify),
             ("r2_record", r2),
         ):
-            _authority_git_record_binding(root, authority, record, where, evidence_commit, failures)
+            # R4.3 (M-7): each record pins its OWN immutable source commit —
+            # independent review/verify commits/refs are allowed as long as
+            # both pin the exact frozen package F.
+            bound = _authority_git_record_binding(root, record, where, failures) and bound
+        if bound:
+            # R4.3 (M-7): the review/verify/freeze decisions about the frozen
+            # package must be recorded strictly AFTER F exists. HG-B owner
+            # approval and the R2 activation record intentionally PRECEDE the
+            # freeze in the lifecycle (S is approved before F) — they get
+            # binding checks only.
+            for where, record in (
+                ("freeze_record", freeze_record),
+                ("review_verdict", review),
+                ("verify_verdict", verify),
+            ):
+                _validate_record_sequencing(root, frozen_head, record, where, failures)
     if failures:
         raise ContractError("dispatch authority rejected: " + "; ".join(failures))
 
@@ -2089,18 +2220,22 @@ def build_execution_plan(
     allow_fixture: bool = False,
     rerun_scan: bool = True,
 ) -> dict[str, Any]:
-    """THE dispatch entrypoint (R4.1 M-1, R4.2 M-5): launch requires authority.
+    """THE dispatch entrypoint (R4.1 M-1, R4.2 M-5, R4.3 M-7): launch
+    requires authority.
 
     A plan is produced ONLY when (a) the full freeze gate passes
     (``PREFREEZE_VALIDATION_PASS``) AND (b) a machine-readable
     ``nanolab_v02_dispatch_authority`` validates for this exact contract:
-    FROZEN subject proven to EXIST in Git (real commit + matching tree +
-    contract/protocol/record as its exact blobs, R4.2 M-5) + Director FREEZE
-    record + HG-B APPROVED + review PASS + verify VERIFIED + R2 ACTIVE with
-    both legs authorized, every record Git-bound immutably. The machine
+    the FROZEN PACKAGE COMMIT F proven to EXIST in Git (real commit +
+    matching tree + contract/protocol/record as its exact blobs, R4.2 M-5)
+    with Director FREEZE record + HG-B APPROVED + fresh review PASS + fresh
+    verify VERIFIED all pinning F from record commits that strictly
+    postdate F, R2 ACTIVE with both legs authorized, every record carrying
+    its own immutable Git source binding (R4.3 M-7). The machine
     conclusion is capped at ``DISPATCH_PRECONDITIONS_RECORDED`` with
-    ``machine_launch_authorized = False``: the real launch gate is the
-    external Human/Protected-Writer gate. The committed PRE-DATA / NOT FROZEN
+    ``machine_launch_authorized = False``: a prepared plan is NOT a launch
+    authorization, and the real launch gate is the external
+    Human/Protected-Writer gate. The committed PRE-DATA / NOT FROZEN
     package is therefore DISPATCH_BLOCKED here — any validation or authority
     failure raises :class:`ContractError` (non-zero exit at the CLI); a
     dispatch cannot bypass the gate by construction.

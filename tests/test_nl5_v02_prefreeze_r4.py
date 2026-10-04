@@ -1,27 +1,41 @@
 """R4 pre-freeze hardening regression tests (WO-NL5-V02-PREFREEZE-HARDENING-R4).
 
 Repairs audit findings F1-F4 (focused audit 2026-10-03) and the fresh
-independent Reviewer corrections R4.1 M-1..M-4 + m-1 (REVIEWER_VERDICT_R1)
-and R4.2 M-5 + M-6 + m-2 (REVIEWER_VERDICT_R2). Unlike the R3-era tests,
-the negative controls here REQUIRE REJECTION: a corrupted contract, record,
-protocol declaration, incomplete scan, fabricated collision skip, missing
-dispatch authority, fake Git binding, worktree-only authority record or a
-non-atomic replacement rejection must fail closed (gate FAIL / exception /
-non-zero exit / structurally unchanged ledger), never PASS.
+independent Reviewer corrections R4.1 M-1..M-4 + m-1 (REVIEWER_VERDICT_R1),
+R4.2 M-5 + M-6 + m-2 (REVIEWER_VERDICT_R2) and R4.3 M-7 + m-3
+(REVIEWER_VERDICT_R3). Unlike the R3-era tests, the negative controls here
+REQUIRE REJECTION: a corrupted contract, record, protocol declaration,
+incomplete scan, fabricated collision skip, missing dispatch authority,
+fake Git binding, worktree-only authority record, pre-freeze review/verify
+binding or a non-atomic replacement rejection must fail closed (gate FAIL /
+exception / non-zero exit / structurally unchanged ledger), never PASS.
 
 M-1 invariants pinned here: the committed PRE-DATA / NOT FROZEN package
 yields PREFREEZE_VALIDATION_PASS and DISPATCH_BLOCKED; a
 ``nanolab_v02_dispatch_execution_plan`` is produced ONLY for a validated
 synthetic dispatch authority fixture (explicitly marked
-``SYNTHETIC TEST FIXTURE ONLY``; never for the real package).
+``SYNTHETIC TEST FIXTURE ONLY``; never for the real package). Exit code 0
+means validation/preconditions recorded — never a launch authorization (m-3).
 
 R4.2 invariants pinned here (DispatchAuthorityGitBindingTest): the frozen
 subject must exist as a real Git commit with a matching tree; authority
-records and frozen artifacts must be exact immutable Git objects of the
-freeze-evidence commit (bytes read from the Git object database, never the
-mutable worktree); the machine conclusion ceiling is
-DISPATCH_PRECONDITIONS_RECORDED with machine_launch_authorized=False — the
-launch gate stays Human/Protected-Writer.
+records and frozen artifacts must be exact immutable Git objects (bytes
+read from the Git object database, never the mutable worktree); the machine
+conclusion ceiling is DISPATCH_PRECONDITIONS_RECORDED with
+machine_launch_authorized=False — the launch gate stays
+Human/Protected-Writer.
+
+R4.3 invariants pinned here (FrozenPackageSequencingTest, M-7): the
+authority lifecycle is strictly sequenced S -> F -> R/V -> A —
+``subject_head``/``subject_tree`` pin the FROZEN PACKAGE COMMIT F; the
+fresh review PASS / verify VERIFIED records pin F (never the pre-freeze
+candidate S) from their own later immutable record commits, which must
+strictly descend from F; each authority record carries its own immutable
+source binding (no shared freeze-evidence commit); the frozen contract
+carries no self-SHA (``frozen_subject_head``/``frozen_subject_tree`` are
+non-authoritative compatibility fields and the exact frozen pins live in
+the external freeze/authority record); no self-consistent two-commit
+shortcut satisfies the chain.
 
 R4.2 invariants pinned here (PairReplacementAtomicityTest): request_replacement
 is a two-phase transaction — every rejection leaves pairs, attempts,
@@ -1162,25 +1176,38 @@ def _git_hash_object(root: Path, raw: bytes) -> str:
 
 
 def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FROZEN",
-                       subject_head: str | None = None, subject_tree: str | None = None):
+                       subject_head: str | None = None, subject_tree: str | None = None,
+                       legacy_two_commit: bool = False):
     """Build a self-consistent SYNTHETIC TEST FIXTURE ONLY authority package
     backed by a REAL temporary Git repository (real commits, trees, blobs).
 
-    Mirrors a real Director freeze flow (R4.2, M-5):
+    Mirrors the required R4.3 (M-7) freeze lifecycle ``S -> F -> R/V -> A``:
 
-      commit 1 = reviewed subject ``R`` — pre-freeze contract copy, protocol,
-                 seed record, collision manifest;
-      commit 2 = freeze-evidence commit ``E`` — FROZEN contract pinning ``R``,
-                 the five authority records pinning ``R``; every object the
-                 authority binds immutably lives here;
-      the authority JSON itself is written after commit 2 (it is the live
-      gate input, not part of the frozen evidence).
+      commit S = PRE-FREEZE candidate subject — NOT FROZEN contract copy,
+                 protocol, seed record, collision manifest;
+      commit H = HG-B owner approval + R2 activation records (pre-freeze;
+                 they intentionally reference no frozen commit);
+      commit F = FROZEN PACKAGE COMMIT — FROZEN contract (NO self-SHA: the
+                 ``frozen_subject_*`` compatibility fields stay null), FROZEN
+                 protocol, seed record, manifest;
+      commit R = fresh review record pinning F (reviewed_head/tree = F);
+      commit V = fresh verify record pinning F (verified_head/tree = F);
+      commit A = Director FREEZE record pinning F;
+      the authority JSON itself is written after commit A — it is the live
+      gate input binding F + the exact R/V/HG-B/R2 record blobs, not part
+      of them.
 
     ``subject_head``/``subject_tree`` overrides exist ONLY for negative
-    tests (self-consistent fake pins that cannot exist in Git).
+    tests (self-consistent fake pins that cannot exist in Git); the frozen
+    artifact bindings always stay pinned to the REAL frozen package commit.
+
+    ``legacy_two_commit=True`` reproduces the REJECTED R4.2 two-commit
+    shortcut instead (pre-freeze reviewed subject + one evidence commit
+    holding the FROZEN bytes and review/verify records pointing back at the
+    subject) to prove the new validator can no longer be satisfied by it.
     """
     (Path(tmp) / "authority").mkdir(parents=True, exist_ok=True)
-    # ---- commit 1: the reviewed subject R (pre-freeze content)
+    # ---- commit S: the pre-freeze candidate subject (PRE-DATA / NOT FROZEN)
     record_bytes = RECORD_PATH.read_bytes()
     manifest_bytes = MANIFEST_PATH.read_bytes()
     doc_text = DOC_PATH.read_text(encoding="utf-8")
@@ -1205,33 +1232,30 @@ def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FRO
     _git_run(tmp, "config", "user.name", "synthetic-fixture")
     _git_run(tmp, "config", "user.email", "synthetic-fixture@example.invalid")
     _git_run(tmp, "add", "-A")
-    _git_run(tmp, "commit", "-q", "-m", "synthetic reviewed subject")
-    real_head = _git_run(tmp, "rev-parse", "HEAD")
-    real_tree = _git_run(tmp, "rev-parse", "HEAD^{tree}")
-    head = subject_head or real_head
-    tree = subject_tree or real_tree
-    # ---- commit 2: freeze-evidence commit E (FROZEN contract + records)
+    _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic pre-freeze candidate subject")
+    subject_commit = _git_run(tmp, "rev-parse", "HEAD")
+    subject_tree_real = _git_run(tmp, "rev-parse", "HEAD^{tree}")
+
+    # ---- frozen contract bytes (used by both modes)
     frozen_doc = doc_text.replace("NOT FROZEN", "FROZEN") if freeze_status == "FROZEN" else doc_text
     contract = copy.deepcopy(base_contract)
     contract["scientific_subject"]["freeze_status"] = freeze_status
-    if freeze_status == "FROZEN":
-        contract["scientific_subject"]["frozen_subject_head"] = head
-        contract["scientific_subject"]["frozen_subject_tree"] = tree
-    else:
-        contract["scientific_subject"]["frozen_subject_head"] = None
-        contract["scientific_subject"]["frozen_subject_tree"] = None
-    protocol_path.write_text(frozen_doc, encoding="utf-8")
+    # R4.3 (M-7): a real frozen package commit F cannot embed its own SHA —
+    # the frozen contract carries NO self-reference pins (non-authoritative
+    # compatibility fields stay null; the exact pins live in the authority).
+    contract["scientific_subject"]["frozen_subject_head"] = None
+    contract["scientific_subject"]["frozen_subject_tree"] = None
     contract_bytes = (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    (Path(tmp) / "authority" / "contract.json").write_bytes(contract_bytes)
     record_sha = _sha256_bytes(record_bytes)
+
     payloads = {
         "freeze": {
             "record_kind": "DIRECTOR_FREEZE_RECORD",
             "issuer_class": "DIRECTOR",
             "director": "DIRECTOR-SYNTHETIC-FIXTURE",
             "decision": "FREEZE",
-            "subject_head": head,
-            "subject_tree": tree,
+            "subject_head": None,  # filled per mode below
+            "subject_tree": None,
             "contract_sha256": _sha256_bytes(contract_bytes),
             "seed_record_sha256": record_sha,
         },
@@ -1246,15 +1270,15 @@ def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FRO
             "record_kind": "REVIEWER_VERDICT",
             "issuer_class": "INDEPENDENT_REVIEWER",
             "verdict": "PASS",
-            "reviewed_head": head,
-            "reviewed_tree": tree,
+            "reviewed_head": None,
+            "reviewed_tree": None,
         },
         "verify": {
             "record_kind": "VERIFIER_VERDICT",
             "issuer_class": "INDEPENDENT_VERIFIER",
             "verdict": "VERIFIED",
-            "verified_head": head,
-            "verified_tree": tree,
+            "verified_head": None,
+            "verified_tree": None,
         },
         "r2": {
             "record_kind": "R2_ACTIVATION_RECORD",
@@ -1264,50 +1288,112 @@ def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FRO
             "external_executor": "EXTERNAL_U2",
         },
     }
-    for name, payload in payloads.items():
-        _write_json(Path(tmp) / "authority" / f"{name}.json", payload)
-    _git_run(tmp, "add", "-A")
-    _git_run(tmp, "commit", "-q", "-m", "synthetic freeze evidence")
-    evidence_commit = _git_run(tmp, "rev-parse", "HEAD")
+    record_source_commits: dict[str, str] = {}
+
+    if legacy_two_commit:
+        # ---- REJECTED R4.2 shortcut: commit E holds the FROZEN bytes AND
+        # review/verify records pinning the pre-freeze subject S.
+        head, tree = subject_head or subject_commit, subject_tree or subject_tree_real
+        for key in ("freeze", "review"):
+            payloads[key]["subject_head" if key == "freeze" else "reviewed_head"] = head
+            payloads[key]["subject_tree" if key == "freeze" else "reviewed_tree"] = tree
+        payloads["verify"]["verified_head"] = head
+        payloads["verify"]["verified_tree"] = tree
+        protocol_path.write_text(frozen_doc, encoding="utf-8")
+        (Path(tmp) / "authority" / "contract.json").write_bytes(contract_bytes)
+        for name in ("freeze", "hg_b", "review", "verify", "r2"):
+            _write_json(Path(tmp) / "authority" / f"{name}.json", payloads[name])
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic freeze evidence (legacy two-commit)")
+        evidence_commit = _git_run(tmp, "rev-parse", "HEAD")
+        for name in payloads:
+            record_source_commits[name] = evidence_commit
+        frozen_head, frozen_tree = evidence_commit, _git_run(tmp, "rev-parse", "HEAD^{tree}")
+        authority_head, authority_tree = head, tree
+    else:
+        # ---- commit H: HG-B owner approval + R2 activation (pre-freeze)
+        for name in ("hg_b", "r2"):
+            _write_json(Path(tmp) / "authority" / f"{name}.json", payloads[name])
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic HG-B approval + R2 activation records")
+        record_source_commits["hg_b"] = _git_run(tmp, "rev-parse", "HEAD")
+        record_source_commits["r2"] = record_source_commits["hg_b"]
+        # ---- commit F: the FROZEN PACKAGE COMMIT (frozen contract + protocol)
+        protocol_path.write_text(frozen_doc, encoding="utf-8")
+        (Path(tmp) / "authority" / "contract.json").write_bytes(contract_bytes)
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic frozen package commit")
+        frozen_head = _git_run(tmp, "rev-parse", "HEAD")
+        frozen_tree = _git_run(tmp, "rev-parse", "HEAD^{tree}")
+        head = subject_head or frozen_head
+        tree = subject_tree or frozen_tree
+        payloads["freeze"]["subject_head"] = head
+        payloads["freeze"]["subject_tree"] = tree
+        payloads["review"]["reviewed_head"] = head
+        payloads["review"]["reviewed_tree"] = tree
+        payloads["verify"]["verified_head"] = head
+        payloads["verify"]["verified_tree"] = tree
+        # ---- commit R: fresh review record pinning F
+        _write_json(Path(tmp) / "authority" / "review.json", payloads["review"])
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic review record pinning the frozen package")
+        record_source_commits["review"] = _git_run(tmp, "rev-parse", "HEAD")
+        # ---- commit V: fresh verify record pinning F
+        _write_json(Path(tmp) / "authority" / "verify.json", payloads["verify"])
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic verify record pinning the frozen package")
+        record_source_commits["verify"] = _git_run(tmp, "rev-parse", "HEAD")
+        # ---- commit A: Director freeze record pinning F
+        _write_json(Path(tmp) / "authority" / "freeze.json", payloads["freeze"])
+        _git_run(tmp, "add", "-A")
+        _git_run(tmp, "commit", "-q", "--allow-empty", "-m", "synthetic director freeze record pinning the package")
+        record_source_commits["freeze"] = _git_run(tmp, "rev-parse", "HEAD")
+        authority_head, authority_tree = head, tree
 
     def embedded(name: str) -> dict:
         rel = f"authority/{name}.json"
+        source = record_source_commits[name]
         return {
             "path": rel,
-            "source_commit": evidence_commit,
-            "git_blob_sha1": _git_blob(tmp, evidence_commit, rel),
+            "source_commit": source,
+            "git_blob_sha1": _git_blob(tmp, source, rel),
             "canonical_sha256": _sha256_bytes((Path(tmp) / rel).read_bytes()),
             **payloads[name],
         }
 
+    # R4.3 (M-7): frozen artifacts are ALWAYS bound to the FROZEN PACKAGE
+    # COMMIT itself (in legacy_two_commit mode that binding — evidence
+    # commit E while the authority pins S — is exactly what the validator
+    # must reject).
+    artifact_commit = frozen_head
     authority = {
-        "schema_version": 2,
+        "schema_version": 3,
         "kind": "nanolab_v02_dispatch_authority",
-        "authority_revision": "synthetic-fixture-r4-2",
+        "authority_revision": "synthetic-fixture-r4-3",
         "fixture": True,
         "fixture_note": SYNTHETIC_FIXTURE_MARKER + " - not a real authorization",
         "frozen": freeze_status == "FROZEN",
-        "subject_head": head,
-        "subject_tree": tree,
+        "subject_head": authority_head,
+        "subject_tree": authority_tree,
         "contract_sha256": _sha256_bytes(contract_bytes),
         "seed_record_sha256": record_sha,
         "frozen_subject_binding": {
             "contract": {
-                "source_commit": evidence_commit,
+                "source_commit": artifact_commit,
                 "path": "authority/contract.json",
-                "git_blob_sha1": _git_blob(tmp, evidence_commit, "authority/contract.json"),
+                "git_blob_sha1": _git_blob(tmp, artifact_commit, "authority/contract.json"),
                 "canonical_sha256": _sha256_bytes(contract_bytes),
             },
             "protocol": {
-                "source_commit": evidence_commit,
+                "source_commit": artifact_commit,
                 "path": "candidate.md",
-                "git_blob_sha1": _git_blob(tmp, evidence_commit, "candidate.md"),
+                "git_blob_sha1": _git_blob(tmp, artifact_commit, "candidate.md"),
                 "canonical_sha256": _sha256_bytes(frozen_doc.encode("utf-8")),
             },
             "seed_record": {
-                "source_commit": evidence_commit,
+                "source_commit": artifact_commit,
                 "path": record_rel,
-                "git_blob_sha1": _git_blob(tmp, evidence_commit, record_rel),
+                "git_blob_sha1": _git_blob(tmp, artifact_commit, record_rel),
                 "canonical_sha256": record_sha,
             },
         },
@@ -1481,14 +1567,16 @@ class DispatchAuthorityTest(unittest.TestCase):
 
 
 class DispatchAuthorityGitBindingTest(unittest.TestCase):
-    """R4.2 M-5: the frozen subject must EXIST in Git with immutable bindings.
+    """R4.2 M-5 / R4.3 M-7: the frozen package must EXIST in Git with
+    immutable bindings.
 
     The positive fixture uses a REAL temporary Git repository (real commits,
-    trees, blobs). The negatives prove the production path rejects strings
-    that merely look like Git objects, worktree-only records and
-    source/path/blob mismatches — and that even a fully Git-bound local
-    package is never machine-authorized (DISPATCH_PRECONDITIONS_RECORDED
-    ceiling; the launch gate stays Human/Protected-Writer).
+    trees, blobs) sequenced S -> F -> R/V -> A. The negatives prove the
+    production path rejects strings that merely look like Git objects,
+    worktree-only records and source/path/blob mismatches — and that even a
+    fully Git-bound local package is never machine-authorized
+    (DISPATCH_PRECONDITIONS_RECORDED ceiling; the launch gate stays
+    Human/Protected-Writer).
     """
 
     def setUp(self):
@@ -1575,29 +1663,28 @@ class DispatchAuthorityGitBindingTest(unittest.TestCase):
         }
         raw = (json.dumps(new_payload, indent=2) + "\n").encode("utf-8")
         (self.tmp / "authority" / "hg_b.json").write_bytes(raw)
-
-        def mutate(authority):
-            authority["hg_b_record"]["canonical_sha256"] = _sha256_bytes(raw)
-            authority["hg_b_record"]["git_blob_sha1"] = _git_hash_object(self.tmp, raw)
-
+        authority = load_dispatch_authority(authority_path)
+        authority["hg_b_record"]["canonical_sha256"] = _sha256_bytes(raw)
+        authority["hg_b_record"]["git_blob_sha1"] = _git_hash_object(self.tmp, raw)
+        _write_json(authority_path, authority)
         self._assert_rejected(
-            "dirty worktree record", self._mutated(mutate), "immutable source binding mismatch"
+            "dirty worktree record", authority_path, "immutable source binding mismatch"
         )
 
     def test_record_source_commit_mismatch_rejected(self):
         authority_path = self._fixture()
-        evidence = load_dispatch_authority(authority_path)["freeze_record"]["source_commit"]
-        # a DIFFERENT real commit (the reviewed subject R itself)
-        subject = _git_run(self.tmp, "rev-parse", "HEAD~1")
-
-        def mutate(authority):
-            authority["hg_b_record"]["source_commit"] = subject
-
-        self.assertNotEqual(subject, evidence)
+        authority = load_dispatch_authority(authority_path)
+        frozen = authority["subject_head"]
+        # a real commit where the review record does NOT exist yet (the
+        # pre-freeze candidate S precedes the review record commit R)
+        before_review = _git_run(self.tmp, "rev-list", "--max-parents=0", "HEAD")
+        self.assertNotEqual(before_review, frozen)
+        authority["review_verdict"]["source_commit"] = before_review
+        _write_json(authority_path, authority)
         self._assert_rejected(
             "record source commit mismatch",
-            self._mutated(mutate),
-            "freeze-evidence commit",
+            authority_path,
+            "immutable source binding failed",
         )
 
     def test_record_path_blob_mismatch_rejected(self):
@@ -1616,42 +1703,43 @@ class DispatchAuthorityGitBindingTest(unittest.TestCase):
         # locally with fixture=False: every Git binding verifies, but the
         # machine still must not claim DISPATCH_AUTHORIZED.
         authority_path = self._fixture()
-
-        def mutate(authority):
-            authority["fixture"] = False
-            authority["fixture_note"] = None
-            authority["authority_revision"] = "fake-local-non-fixture"
-
-        fake_path = self._mutated(mutate)
-        report = self._validate(fake_path)
+        authority = load_dispatch_authority(authority_path)
+        authority["fixture"] = False
+        authority["fixture_note"] = None
+        authority["authority_revision"] = "fake-local-non-fixture"
+        _write_json(authority_path, authority)
+        report = self._validate(authority_path)
         self.assertEqual(report["status"], "DISPATCH_PRECONDITIONS_RECORDED")
         self.assertIs(report["machine_launch_authorized"], False)
         self.assertEqual(report["launch_gate"], "HUMAN_PROTECTED_WRITER")
         self.assertIs(report["synthetic_test_fixture_only"], False)
         self.assertNotIn("DISPATCH_AUTHORIZED", json.dumps(report))
 
-    def test_contract_artifact_not_in_evidence_commit_rejected(self):
+    def test_contract_artifact_not_in_frozen_package_commit_rejected(self):
         def mutate(authority):
             authority["frozen_subject_binding"]["contract"]["path"] = (
-                "authority/absent-from-frozen-subject.json"
+                "authority/absent-from-frozen-package.json"
             )
 
         self._assert_rejected(
-            "artifact blob not in frozen subject",
+            "artifact blob not in frozen package",
             self._mutated(mutate),
             "immutable artifact binding failed",
         )
 
     def test_artifact_source_commit_mismatch_rejected(self):
+        # R4.3 (M-7) required test 3: review/verify pin F but the artifact
+        # binding points at a DIFFERENT (even content-identical!) commit —
+        # the frozen artifacts must be bound to F itself.
         def mutate(authority):
             authority["frozen_subject_binding"]["protocol"]["source_commit"] = _git_run(
-                self.tmp, "rev-parse", "HEAD~1"
+                self.tmp, "rev-parse", "HEAD"  # the authority/freeze-record commit A
             )
 
         self._assert_rejected(
             "artifact source commit mismatch",
             self._mutated(mutate),
-            "freeze-evidence commit",
+            "frozen package commit",
         )
 
     def test_worktree_contract_bytes_not_the_frozen_blob_rejected(self):
@@ -1680,11 +1768,319 @@ class DispatchAuthorityGitBindingTest(unittest.TestCase):
             "frozen artifact bytes mismatch",
         )
 
-    def test_schema_1_authority_rejected(self):
-        def mutate(authority):
-            authority["schema_version"] = 1
+    def test_schema_1_and_2_authorities_rejected(self):
+        # R4.3 (M-7): fail-closed evolution — BOTH previous schema versions
+        # are rejected; the v2 two-commit shortcut must not silently pass
+        # the stronger gate.
+        authority_path = self._fixture()
+        for version in (1, 2):
+            authority = load_dispatch_authority(authority_path)
+            authority["schema_version"] = version
+            _write_json(authority_path, authority)
+            self._assert_rejected(
+                f"schema {version} downgrade", authority_path, "schema_version"
+            )
 
-        self._assert_rejected("schema downgrade", self._mutated(mutate), "schema_version")
+
+class FrozenPackageSequencingTest(unittest.TestCase):
+    """R4.3 M-7: review/verify must bind the FROZEN PACKAGE COMMIT F.
+
+    Required repair tests (REVIEWER_VERDICT_R3, M-7): review/verify pointing
+    at the pre-freeze candidate are rejected; review and verify must pin F
+    from their own LATER immutable record commits; the authority must bind
+    the exact record blob refs; the frozen contract carries no self-SHA and
+    the exact frozen pins live only in the external freeze/authority record;
+    no self-consistent two-commit shortcut satisfies the chain. The
+    positive fixture uses real temporary Git commits in the order
+    ``S -> F -> Review/Verify evidence -> authority``. No fake real-world
+    authorization is produced.
+    """
+
+    def setUp(self):
+        self.contract, self.text, self.record = load_package()
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.tmp = Path(self._tmp.name)
+        self.record_rel = self.contract["scientific_subject"]["seed_record_path"]
+
+    def _fixture(self, **kwargs) -> Path:
+        return _authority_fixture(self.tmp, self.contract, **kwargs)
+
+    def _authority(self, authority_path: Path) -> dict:
+        return load_dispatch_authority(authority_path)
+
+    def _validate(self, authority_path: Path):
+        return validate_dispatch_authority(
+            load_dispatch_authority(authority_path),
+            load_contract(self.tmp / "authority" / "contract.json"),
+            (self.tmp / "candidate.md").read_text(encoding="utf-8"),
+            load_seed_record(self.tmp / self.record_rel),
+            repo_root=self.tmp,
+            contract_path=self.tmp / "authority" / "contract.json",
+            protocol_path=self.tmp / "candidate.md",
+            rerun_scan=False,
+            allow_fixture=True,
+        )
+
+    def _plan(self, authority_path: Path) -> dict:
+        return build_execution_plan(
+            self.tmp / "authority" / "contract.json",
+            self.tmp / "candidate.md",
+            self.tmp / self.record_rel,
+            repo_root=self.tmp,
+            authority_path=authority_path,
+            allow_fixture=True,
+            rerun_scan=False,
+        )
+
+    def _mutated(self, mutate) -> Path:
+        authority_path = self._fixture()
+        authority = load_dispatch_authority(authority_path)
+        mutate(authority)
+        _write_json(authority_path, authority)
+        return authority_path
+
+    def _assert_rejected(self, label: str, authority_path: Path, substring: str):
+        with self.assertRaises(ContractError) as ctx:
+            self._validate(authority_path)
+        message = str(ctx.exception)
+        self.assertNotIn("DISPATCH_AUTHORIZED", message, label)
+        self.assertIn(substring, message, f"{label}: {message[:400]}")
+
+    # -- lifecycle facts of the positive fixture ---------------------------
+
+    def test_lifecycle_commits_are_sequenced_s_f_review_verify_authority(self):
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        # the root commit is the pre-freeze candidate S; the frozen package
+        # commit F strictly descends from it; the review/verify/freeze
+        # record commits strictly descend from F (S -> F -> R/V -> A)
+        subject = _git_run(self.tmp, "rev-list", "--max-parents=0", "HEAD")
+        frozen = authority["subject_head"]
+        review_src = authority["review_verdict"]["source_commit"]
+        verify_src = authority["verify_verdict"]["source_commit"]
+        freeze_src = authority["freeze_record"]["source_commit"]
+        self.assertEqual(_git_run(self.tmp, "rev-parse", f"{frozen}^{{tree}}"),
+                         authority["subject_tree"])
+        for name, source in (("review", review_src), ("verify", verify_src),
+                             ("freeze", freeze_src)):
+            self.assertNotEqual(subject, source, name)
+            self.assertNotEqual(frozen, source, name)
+        # S is an ancestor of F; F is a strict ancestor of every record commit
+        _git_run(self.tmp, "merge-base", "--is-ancestor", subject, frozen)
+        for name, source in (("review", review_src), ("verify", verify_src),
+                             ("freeze", freeze_src)):
+            _git_run(self.tmp, "merge-base", "--is-ancestor", frozen, source)
+            self.assertNotEqual(frozen, source, f"{name} must postdate F")
+
+    def test_frozen_contract_carries_no_self_sha(self):
+        # M-7: the FROZEN contract inside F must NOT embed its own commit
+        # SHA; the compatibility fields stay null and the exact frozen pins
+        # live only in the external authority record.
+        authority = self._authority(self._fixture())
+        frozen = authority["subject_head"]
+        contract_from_git = json.loads(
+            _git_run(self.tmp, "cat-file", "blob", f"{frozen}:authority/contract.json")
+        )
+        self.assertEqual(contract_from_git["scientific_subject"]["freeze_status"], "FROZEN")
+        self.assertIsNone(contract_from_git["scientific_subject"]["frozen_subject_head"])
+        self.assertIsNone(contract_from_git["scientific_subject"]["frozen_subject_tree"])
+        self.assertNotIn(frozen, json.dumps(contract_from_git))
+        self.assertEqual(authority["subject_head"], frozen)
+        self.assertEqual(
+            _git_run(self.tmp, "rev-parse", f"{frozen}^{{tree}}"), authority["subject_tree"]
+        )
+
+    def test_review_verify_pin_exact_frozen_package_commit(self):
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        frozen, tree = authority["subject_head"], authority["subject_tree"]
+        self.assertEqual(authority["review_verdict"]["reviewed_head"], frozen)
+        self.assertEqual(authority["review_verdict"]["reviewed_tree"], tree)
+        self.assertEqual(authority["verify_verdict"]["verified_head"], frozen)
+        self.assertEqual(authority["verify_verdict"]["verified_tree"], tree)
+        report = self._validate(authority_path)
+        self.assertEqual(report["status"], "DISPATCH_PRECONDITIONS_RECORDED")
+        self.assertIs(report["machine_launch_authorized"], False)
+        self.assertEqual(report["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        # the recorded plan keeps the honest ceiling (m-3: exit 0 is NOT a
+        # launch authorization)
+        plan = self._plan(authority_path)
+        self.assertEqual(plan["dispatch_authority"]["status"], "DISPATCH_PRECONDITIONS_RECORDED")
+        self.assertIs(plan["machine_launch_authorized"], False)
+        self.assertNotIn("DISPATCH_AUTHORIZED", json.dumps(plan))
+
+    # -- required test 1/2: review/verify pointing at the pre-freeze subject
+
+    def test_review_and_verify_pointing_at_prefreeze_subject_rejected(self):
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        subject = _git_run(self.tmp, "rev-list", "--max-parents=0", "HEAD")
+        subject_tree = _git_run(self.tmp, "rev-parse", f"{subject}^{{tree}}")
+        authority["review_verdict"]["reviewed_head"] = subject
+        authority["review_verdict"]["reviewed_tree"] = subject_tree
+        authority["verify_verdict"]["verified_head"] = subject
+        authority["verify_verdict"]["verified_tree"] = subject_tree
+        _write_json(authority_path, authority)
+        self._assert_rejected(
+            "review/verify -> S with frozen blobs -> F",
+            authority_path,
+            "review subject mismatch",
+        )
+
+    def test_review_points_frozen_verify_points_prefreeze_rejected(self):
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        subject = _git_run(self.tmp, "rev-list", "--max-parents=0", "HEAD")
+        subject_tree = _git_run(self.tmp, "rev-parse", f"{subject}^{{tree}}")
+        authority["verify_verdict"]["verified_head"] = subject
+        authority["verify_verdict"]["verified_tree"] = subject_tree
+        _write_json(authority_path, authority)
+        self._assert_rejected(
+            "review -> F, verify -> S",
+            authority_path,
+            "verify subject mismatch",
+        )
+
+    # -- required tests 4/5: record source predates F ----------------------
+
+    def _orphan_record_commit(self, name: str, payload: dict) -> tuple[str, bytes]:
+        """Commit ``payload`` as ``authority/<name>.json`` on an ORPHAN
+        branch: created after F in wall-clock time but on UNRELATED history
+        — mechanically indistinguishable from a record that predates F (F
+        is not its ancestor), so the sequencing gate must reject it even
+        though the record's own blob binding is fully valid. Returns the
+        orphan commit SHA and the exact committed bytes."""
+        anchor = _git_run(self.tmp, "rev-parse", "HEAD")
+        _git_run(self.tmp, "checkout", "-q", "--orphan", f"orphan-{name}")
+        _git_run(self.tmp, "rm", "-rfq", "--ignore-unmatch", ".")
+        raw = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        (self.tmp / "authority" / f"{name}.json").write_bytes(raw)
+        _git_run(self.tmp, "add", f"authority/{name}.json")
+        _git_run(self.tmp, "commit", "-q", "-m", f"synthetic orphan {name} record")
+        orphan = _git_run(self.tmp, "rev-parse", "HEAD")
+        _git_run(self.tmp, "checkout", "-q", "--detach", anchor)
+        return orphan, raw
+
+    def _orphan_rejection_case(self, name: str, where: str, label: str):
+        authority_path = self._fixture()
+        authority = load_dispatch_authority(authority_path)
+        frozen = authority["subject_head"]
+        payload = {k: v for k, v in authority[where].items()
+                   if k not in ("path", "source_commit", "git_blob_sha1", "canonical_sha256")}
+        orphan, raw = self._orphan_record_commit(name, payload)
+        record = authority[where]
+        record["source_commit"] = orphan
+        record["git_blob_sha1"] = _git_blob(self.tmp, orphan, f"authority/{name}.json")
+        record["canonical_sha256"] = _sha256_bytes(raw)
+        _write_json(authority_path, authority)
+        # the orphan record commit is real and its blob binding is exact —
+        # only its relation to F is wrong
+        self.assertEqual(_git_run(self.tmp, "cat-file", "-t", orphan), "commit")
+        self.assertEqual(
+            _git_run(self.tmp, "rev-parse", f"{orphan}:authority/{name}.json"),
+            record["git_blob_sha1"],
+        )
+        self._assert_rejected(label, authority_path, "does not descend from the frozen package commit")
+        self.assertNotEqual(orphan, frozen)
+
+    def test_review_source_predating_frozen_package_rejected(self):
+        self._orphan_rejection_case(
+            "review", "review_verdict", "review source predates F / unrelated history"
+        )
+
+    def test_verify_source_predating_frozen_package_rejected(self):
+        self._orphan_rejection_case(
+            "verify", "verify_verdict", "verify source predates F / unrelated history"
+        )
+
+    def test_freeze_record_source_predating_frozen_package_rejected(self):
+        self._orphan_rejection_case(
+            "freeze", "freeze_record", "freeze record source predates F"
+        )
+
+    # -- required test 7: authority binds exact record blob refs -----------
+
+    def test_authority_binds_exact_review_verify_record_blob_refs(self):
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        for where, name in (
+            ("review_verdict", "review"),
+            ("verify_verdict", "verify"),
+            ("freeze_record", "freeze"),
+            ("hg_b_record", "hg_b"),
+            ("r2_record", "r2"),
+        ):
+            record = authority[where]
+            rel = record["path"]
+            self.assertEqual(
+                record["git_blob_sha1"],
+                _git_run(self.tmp, "rev-parse", f"{record['source_commit']}:{rel}"),
+                where,
+            )
+            # the worktree copy is byte-identical to the committed blob
+            # (the fixture never touches record files after their commit)
+            self.assertEqual(
+                record["canonical_sha256"],
+                _sha256_bytes((self.tmp / rel).read_bytes()),
+                where,
+            )
+
+    # -- required test 8: tampered verdict source --------------------------
+
+    def test_tampered_verdict_source_digest_rejected(self):
+        def mutate(authority):
+            authority["review_verdict"]["canonical_sha256"] = "0" * 64
+
+        self._assert_rejected(
+            "tampered verdict digest",
+            self._mutated(mutate),
+            "immutable source binding mismatch",
+        )
+
+    def test_tampered_verdict_source_path_rejected(self):
+        def mutate(authority):
+            authority["verify_verdict"]["path"] = "authority/never-committed.json"
+
+        self._assert_rejected(
+            "tampered verdict path",
+            self._mutated(mutate),
+            "immutable source binding failed",
+        )
+
+    # -- M-7: no self-consistent two-commit shortcut -----------------------
+
+    def test_legacy_two_commit_shortcut_rejected(self):
+        # The exact R4.2 scheme the reviewer rejected: one pre-freeze
+        # reviewed subject S + one evidence commit E holding the FROZEN
+        # bytes and review/verify records pointing back at S. Under the
+        # R4.3 validator this self-consistent chain can no longer validate.
+        authority_path = self._fixture(legacy_two_commit=True)
+        authority = self._authority(authority_path)
+        subject = _git_run(self.tmp, "rev-list", "--max-parents=0", "HEAD")
+        self.assertEqual(authority["subject_head"], subject)
+        self.assertEqual(authority["review_verdict"]["reviewed_head"], subject)
+        self.assertEqual(authority["verify_verdict"]["verified_head"], subject)
+        self._assert_rejected(
+            "two-commit shortcut",
+            authority_path,
+            "frozen artifacts must be exact blobs of the frozen package commit",
+        )
+
+    def test_hg_b_and_r2_records_may_precede_frozen_package(self):
+        # HG-B approval + R2 activation intentionally PRECEDE the freeze in
+        # the lifecycle (S is approved before F): their own immutable
+        # bindings must be sufficient — no ancestry requirement.
+        authority_path = self._fixture()
+        authority = self._authority(authority_path)
+        frozen = authority["subject_head"]
+        hg_b_source = authority["hg_b_record"]["source_commit"]
+        self.assertEqual(authority["r2_record"]["source_commit"], hg_b_source)
+        # commit H (hg_b + r2 records) really is an ancestor of F: a legal
+        # pre-freeze record placement
+        _git_run(self.tmp, "merge-base", "--is-ancestor", hg_b_source, frozen)
+        report = self._validate(authority_path)
+        self.assertEqual(report["status"], "DISPATCH_PRECONDITIONS_RECORDED")
 
 
 class PairReplacementAtomicityTest(unittest.TestCase):
