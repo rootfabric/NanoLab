@@ -165,13 +165,70 @@ replacement cap = 56; max_runs = 352; δ = 0.5; paired design; R3 confirmatory i
 HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE;
 NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED.
 
+## R4.3 — fresh Reviewer R3 FIX_REQUIRED → narrow repair (2026-10-04, append-only)
+
+Fresh independent Reviewer R3 (`REVIEWER_VERDICT_R3`, branch
+`review/nl5-v02-prefreeze-hardening-r4-2-r3` head `cfdd4ca`) подтвердила закрытие
+R2 M-6/m-2 и Git binding/ceiling (= PASS) и вынесла FIX_REQUIRED: **M-7** —
+blocking (review/verify verdicts привязаны к pre-freeze subject, а не к frozen
+bytes; один общий freeze-evidence commit делает «review exact frozen package»
+невозможным) и **m-3** — minor (wording «authorized plan produced»). Narrow
+repair R4.3 выполнен на ветке `repair/nl5-v02-prefreeze-hardening-r4-r3`
+(от tip R4.2 `e58ac82` = reviewed subject; reviewer branch интегрирована
+`--no-ff`, merge `76e192a`); детали — `REPAIR_MAP_R3.md`, START marker — event
+`0008`. Итог:
+
+```text
+M-7 frozen-package        = FIXED — schema_version 3: lifecycle строго
+  sequencing                секвенирован S -> F -> R/V -> A. subject_head/tree
+                            пинуют FROZEN PACKAGE COMMIT F (real commit, tree
+                            сверен); frozen_subject_binding связывает contract/
+                            protocol/seed-record как exact blobs САМОГО F (не
+                            authority/evidence commit), байт-в-байт с входами;
+                            каждый authority record — собственный immutable
+                            source binding (общий evidence commit не требуется);
+                            source commits freeze/review/verify обязаны быть
+                            строгими потомками F (merge-base --is-ancestor;
+                            предшествующие/несвязанные/внутри-F records — REJECT);
+                            reviewed_head/verified_head == F, никогда S;
+                            frozen_subject_head/tree в контракте — non-authoritative
+                            compatibility fields (null; F не может встроить свой
+                            SHA), exact pins — во внешнем freeze/authority record;
+                            schema 1/2 отклоняются; legacy two-commit shortcut
+                            не проходит; trust ceiling не изменён
+m-3 wording               = FIXED — «0 = PASS / authorized plan produced» заменено
+                            на «0 = validation/preconditions recorded; machine
+                            launch remains false; HUMAN_PROTECTED_WRITER required»
+                            (prepared execution plan != launch authorization)
+Валидация                 = 593 tests OK (было 580; +13 net: FrozenPackageSequencingTest
+                            13 на реальном временном Git repo S -> H -> F -> R -> V ->
+                            A); check-consistency ok; workflow_lint blocking 0;
+                            work_cli все 49 EX-* ok; prefreeze committed package =
+                            PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED (evidence
+                            r4-3-prefreeze-validation-PASS-R4_3.json, package
+                            digests unchanged); hosted CI = NOT_RUN
+```
+
+Принятые поверхности R4/R4.1/R4.2 не переделывались: M-2 replacement replay, M-3
+collision proof, M-6 atomic pair ledger, m-2 snapshot safety, TOST/equivalence
+wording, Git object existence/byte binding, trust ceiling = PASS у Reviewer R3;
+committed package (contract/record/manifest) байт-в-байт тот же. Параметры дизайна
+без изменений: N = 64/64/10/10; N_min = 52/52/8/8; replacement quotas = 12/12/2/2;
+replacement cap = 56; max_runs = 352; δ = 0.5; paired design; R3 confirmatory
+identities.
+
+Статусы НЕ меняются: CANDIDATE = PRE-DATA / NOT FROZEN; SCIENTIFIC RUNS = 0;
+HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE;
+NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED.
+
 ## Next action
 
 ```text
 NEXT_ACTOR = fresh independent SCIENTIFIC/PROTOCOL REVIEWER
-NEXT_ACTION = review exact R4.2 HEAD/TREE (см. event 0007 / REPAIR_MAP_R2.md) на
-              предмет M-5 + M-6 + m-2 и сохранения границ R4/R4.1; затем — только
-              при PASS — fresh exact-head Verifier, draft PR (TR-PR hosted CI),
-              Director readiness record; merge = Human Gate. R2: ждать реального
-              owner-provided U1 (не outenemy). Verifier до Reviewer PASS не запускать.
+NEXT_ACTION = review exact R4.3 HEAD/TREE (см. event 0009 / REPAIR_MAP_R3.md) на
+              предмет M-7 + m-3 и сохранения границ R4/R4.1/R4.2; затем — только
+              при PASS — fresh exact-head Verifier по FROZEN package sequencing,
+              draft PR (TR-PR hosted CI), Director readiness record; merge = Human
+              Gate. R2: ждать реального owner-provided U1 (не outenemy). Verifier
+              до Reviewer PASS не запускать.
 ```
