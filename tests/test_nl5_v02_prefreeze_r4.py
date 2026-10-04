@@ -1,9 +1,17 @@
 """R4 pre-freeze hardening regression tests (WO-NL5-V02-PREFREEZE-HARDENING-R4).
 
-Repairs audit findings F1-F4 (focused audit 2026-10-03). Unlike the R3-era
-tests, the negative controls here REQUIRE REJECTION: a corrupted contract,
-record, protocol declaration or incomplete scan must fail closed (gate FAIL /
-exception / non-zero exit), never PASS.
+Repairs audit findings F1-F4 (focused audit 2026-10-03) and the fresh
+independent Reviewer R1 corrections M-1..M-4 + m-1 (REVIEWER_VERDICT_R1,
+repair R4.1). Unlike the R3-era tests, the negative controls here REQUIRE
+REJECTION: a corrupted contract, record, protocol declaration, incomplete
+scan, fabricated collision skip or missing dispatch authority must fail
+closed (gate FAIL / exception / non-zero exit), never PASS.
+
+M-1 invariants pinned here: the committed PRE-DATA / NOT FROZEN package
+yields PREFREEZE_VALIDATION_PASS and DISPATCH_BLOCKED; a
+``nanolab_v02_dispatch_execution_plan`` is produced ONLY for a validated
+synthetic dispatch authority fixture (explicitly marked
+``SYNTHETIC TEST FIXTURE ONLY``; never for the real package).
 
 No simulations, no network, no scientific claims. Fixtures are synthetic or
 the committed PRE-DATA R4 evidence package.
@@ -11,6 +19,7 @@ the committed PRE-DATA R4 evidence package.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 import subprocess
@@ -25,6 +34,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from nl5 import repro_v02_seeds as seeds
 from nl5.repro_v02_freeze_contract import (
     INTEGER_ROUNDING_POLICY,
+    PAIR_STATES,
     ContractError,
     ReplacementBudgetExhausted,
     ReplacementLedger,
@@ -32,18 +42,30 @@ from nl5.repro_v02_freeze_contract import (
     derive_budget,
     freeze_gate,
     load_contract,
+    load_dispatch_authority,
     load_seed_record,
     n_min_cell,
     parse_protocol_cardinalities,
     parse_protocol_machine_block,
+    prefreeze_validation,
     replacement_quota_pairs,
+    validate_dispatch_authority,
     validate_freeze_contract,
+    SYNTHETIC_FIXTURE_MARKER,
+)
+from nl5.repro_v02_seeds import (
+    collision_manifest_digest,
+    r4_record_digest,
+    replacement_pool_digest,
+    replay_replacement_stream,
 )
 
 EVIDENCE = REPO_ROOT / "docs" / "work" / "executions" / "EX-NL5-V02-PREFREEZE-HARDENING-R4" / "evidence"
 CONTRACT_PATH = EVIDENCE / "repro-v0-2-freeze-contract-PRE_DATA_R4.json"
 RECORD_PATH = EVIDENCE / "repro-v0-2-seed-record-PRE_DATA_R4.json"
+MANIFEST_PATH = EVIDENCE / "r4-1-collision-scan-manifest-R4.json"
 DOC_PATH = REPO_ROOT / "docs" / "research" / "NANOLAB_REPRO_V0_2_CANDIDATE_R1.md"
+HG_B_PROPOSAL_PATH = REPO_ROOT / "docs" / "control" / "NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md"
 
 
 def load_package():
@@ -486,51 +508,491 @@ class ReplacementStreamTest(unittest.TestCase):
         )
 
 
-class ReplacementLedgerTest(unittest.TestCase):
+class PairLedgerTest(unittest.TestCase):
+    """M-4: pair-level, one-shot replacement semantics."""
+
     def setUp(self):
         self.pools = {"0b": [111, 222, 333], "32b": [444]}
         self.ledger = ReplacementLedger({"0b": 2, "32b": 1}, self.pools)
 
-    def test_attempt_id_reuse_rejected(self):
-        self.ledger.register_attempt("run-0001", "0b", "author", "FAILED_TECHNICAL")
-        with self.assertRaises(ValueError):
-            self.ledger.register_attempt("run-0001", "0b", "external", "COMPLETED")
+    def _open_failed_pair(self, pair_id="pair-1", variant="0b", seed=700,
+                          author="run-0001", external="run-0002"):
+        self.ledger.open_pair(pair_id, variant, seed)
+        self.ledger.record_attempt(author, pair_id, "author", "FAILED_TECHNICAL")
+        self.ledger.record_attempt(external, pair_id, "external", "COMPLETED")
+        return pair_id
 
-    def test_replacement_only_for_failed_technical(self):
-        self.ledger.register_attempt("run-0002", "0b", "author", "COMPLETED")
+    def test_pair_states_and_attempt_uniqueness(self):
+        self.assertEqual(PAIR_STATES, (
+            "PAIR_RUNNING", "PAIR_COMPLETED", "PAIR_FAILED_TECHNICAL",
+            "PAIR_REPLACED", "PAIR_ABORTED",
+        ))
+        self.ledger.open_pair("pair-a", "0b", 10)
+        self.assertEqual(self.ledger.pair_state("pair-a"), "PAIR_RUNNING")
+        self.ledger.record_attempt("run-a", "pair-a", "author", "COMPLETED")
+        self.assertEqual(self.ledger.pair_state("pair-a"), "PAIR_RUNNING")
         with self.assertRaises(ValueError):
-            self.ledger.request_replacement("0b", "run-0002")
+            self.ledger.record_attempt("run-a", "pair-a", "external", "COMPLETED")  # id reuse
+        with self.assertRaises(ValueError):
+            self.ledger.record_attempt("run-b", "pair-a", "author", "COMPLETED")  # leg reuse
+        self.ledger.record_attempt("run-b", "pair-a", "external", "COMPLETED")
+        self.assertEqual(self.ledger.pair_state("pair-a"), "PAIR_COMPLETED")
+        with self.assertRaises(ValueError):  # terminal pair accepts no new legs
+            self.ledger.record_attempt("run-c", "pair-a", "author", "COMPLETED")
+        with self.assertRaises(ValueError):
+            self.ledger.open_pair("pair-a", "0b", 11)  # pair id unique forever
 
-    def test_replacement_consumes_pool_in_order(self):
-        self.ledger.register_attempt("run-0003", "0b", "author", "FAILED_TECHNICAL")
-        self.assertEqual(self.ledger.request_replacement("0b", "run-0003"), 111)
-        self.ledger.register_attempt("run-0003-R1", "0b", "author", "FAILED_TECHNICAL")
-        self.assertEqual(self.ledger.request_replacement("0b", "run-0003-R1"), 222)
-        self.assertEqual(self.ledger.used_pairs("0b"), 2)
+    def test_seed_identity_belongs_to_exactly_one_pair(self):
+        self.ledger.open_pair("pair-a", "0b", 10)
+        with self.assertRaises(ValueError):
+            self.ledger.open_pair("pair-b", "0b", 10)  # seed/pair mismatch
+
+    def test_replacement_only_for_failed_technical_pair(self):
+        self.ledger.open_pair("pair-ok", "0b", 10)
+        self.ledger.record_attempt("r-ok-1", "pair-ok", "author", "COMPLETED")
+        self.ledger.record_attempt("r-ok-2", "pair-ok", "external", "COMPLETED")
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", "pair-ok", "pair-rp", "a-x", "e-x")
+
+    def test_missing_counterpart_is_rejected(self):
+        self.ledger.open_pair("pair-half", "0b", 10)
+        self.ledger.record_attempt("r-half-1", "pair-half", "author", "FAILED_TECHNICAL")
+        self.assertEqual(self.ledger.pair_state("pair-half"), "PAIR_RUNNING")
+        cursor_before = self.ledger.pool_cursor("0b")
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", "pair-half", "pair-rp", "a-x", "e-x")
+        self.assertEqual(self.ledger.pool_cursor("0b"), cursor_before)
+
+    def test_double_replacement_request_rejected_cursor_and_quota_unchanged(self):
+        failed = self._open_failed_pair()
+        identity = self.ledger.request_replacement(
+            "0b", failed, "pair-1-RP1", "run-0001-RP1a", "run-0001-RP1e"
+        )
+        self.assertEqual(identity, 111)
+        self.assertEqual(self.ledger.pair_state(failed), "PAIR_REPLACED")
+        used_after = self.ledger.used_pairs("0b")
+        cursor_after = self.ledger.pool_cursor("0b")
+        with self.assertRaises(ValueError):  # second request for the same failed pair
+            self.ledger.request_replacement("0b", failed, "pair-1-RP2", "run-x", "run-y")
+        self.assertEqual(self.ledger.used_pairs("0b"), used_after)
+        self.assertEqual(self.ledger.pool_cursor("0b"), cursor_after)
+
+    def test_replacement_schedules_both_legs_of_new_pair(self):
+        failed = self._open_failed_pair()
+        self.ledger.request_replacement(
+            "0b", failed, "pair-1-RP1", "run-0001-RP1a", "run-0001-RP1e"
+        )
+        pair = self.ledger.pair("pair-1-RP1")
+        self.assertEqual(pair["seed_identity"], 111)
+        self.assertEqual(pair["source_pair_id"], failed)
+        self.assertEqual(
+            pair["legs"], {"author": "run-0001-RP1a", "external": "run-0001-RP1e"}
+        )
+        self.assertEqual(self.ledger.pair_state("pair-1-RP1"), "PAIR_RUNNING")
+        # scheduled legs are resolved by outcome, not re-registered
+        with self.assertRaises(ValueError):
+            self.ledger.record_attempt("run-0001-RP1a", "pair-1-RP1", "author", "COMPLETED")
+        self.ledger.record_outcome("run-0001-RP1a", "COMPLETED")
+        self.ledger.record_outcome("run-0001-RP1e", "COMPLETED")
+        self.assertEqual(self.ledger.pair_state("pair-1-RP1"), "PAIR_COMPLETED")
+
+    def test_external_failed_mirror_yields_same_behavior(self):
+        self.ledger.open_pair("pair-m", "0b", 700)
+        self.ledger.record_attempt("m-a", "pair-m", "author", "COMPLETED")
+        self.ledger.record_attempt("m-e", "pair-m", "external", "FAILED_TECHNICAL")
+        self.assertEqual(self.ledger.pair_state("pair-m"), "PAIR_FAILED_TECHNICAL")
+        identity = self.ledger.request_replacement("0b", "pair-m", "pair-m-RP1", "m-a2", "m-e2")
+        self.assertEqual(identity, 111)
+        self.assertEqual(len(self.ledger.pair("pair-m-RP1")["legs"]), 2)
+
+    def test_variant_mismatch_rejected(self):
+        failed = self._open_failed_pair(variant="0b")
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("32b", failed, "rp", "a", "e")
+        self.assertEqual(self.ledger.pool_cursor("32b"), 0)
+
+    def test_second_failure_must_reference_the_replacement_pair(self):
+        failed = self._open_failed_pair()
+        self.ledger.request_replacement("0b", failed, "pair-1-RP1", "rp-a", "rp-e")
+        # the replacement pair fails as well
+        self.ledger.record_outcome("rp-a", "FAILED_TECHNICAL")
+        self.ledger.record_outcome("rp-e", "FAILED_TECHNICAL")
+        self.assertEqual(self.ledger.pair_state("pair-1-RP1"), "PAIR_FAILED_TECHNICAL")
+        # referencing the ORIGINAL failed pair is forbidden (already replaced)
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", failed, "pair-1-RP2", "x-a", "x-e")
+        identity = self.ledger.request_replacement("0b", "pair-1-RP1", "pair-1-RP2", "x-a", "x-e")
+        self.assertEqual(identity, 222)
+
+    def test_one_leg_only_replacement_rejected(self):
+        failed = self._open_failed_pair()
+        with self.assertRaises(ValueError):
+            self.ledger.request_replacement("0b", failed, "rp", "only-author", "only-author")
+        self.assertEqual(self.ledger.pool_cursor("0b"), 0)
 
     def test_quota_exhaustion_raises_without_expansion(self):
-        self.ledger.register_attempt("a-0b-1", "0b", "author", "FAILED_TECHNICAL")
-        self.ledger.request_replacement("0b", "a-0b-1")
-        self.ledger.register_attempt("a-0b-2", "0b", "author", "FAILED_TECHNICAL")
-        self.ledger.request_replacement("0b", "a-0b-2")
-        self.ledger.register_attempt("a-0b-3", "0b", "author", "FAILED_TECHNICAL")
+        ledger = ReplacementLedger({"0b": 1}, {"0b": [111, 222]})
+        for n, (pid, seed) in enumerate((("p1", 10), ("p2", 20), ("p3", 30)), start=1):
+            ledger.open_pair(pid, "0b", seed)
+            ledger.record_attempt(f"a-{pid}", pid, "author", "FAILED_TECHNICAL")
+            ledger.record_attempt(f"e-{pid}", pid, "external", "COMPLETED")
+        ledger.request_replacement("0b", "p1", "p1-RP", "a-p1-RP", "e-p1-RP")
         with self.assertRaises(ReplacementBudgetExhausted):
-            self.ledger.request_replacement("0b", "a-0b-3")
-
-    def test_unknown_attempt_and_variant_mismatch_rejected(self):
-        with self.assertRaises(ValueError):
-            self.ledger.request_replacement("0b", "ghost-attempt")
-        self.ledger.register_attempt("x-32b", "32b", "author", "FAILED_TECHNICAL")
-        with self.assertRaises(ValueError):
-            self.ledger.request_replacement("0b", "x-32b")
+            ledger.request_replacement("0b", "p2", "p2-RP", "a-p2-RP", "e-p2-RP")
+        self.assertEqual(ledger.used_pairs("0b"), 1)
+        self.assertEqual(ledger.pool_cursor("0b"), 1)
 
     def test_invalid_attempt_id_format_rejected(self):
+        self.ledger.open_pair("pair-a", "0b", 10)
         with self.assertRaises(ValueError):
-            self.ledger.register_attempt("bad id with spaces", "0b", "author", "FAILED_TECHNICAL")
+            self.ledger.record_attempt("bad id with spaces", "pair-a", "author", "COMPLETED")
 
 
 # ---------------------------------------------------------------------------
-# Positive controls — the clean package must PASS and dispatch
+# M-2 — bit-exact replacement-pool replay + R4.1 integrity digests
+# ---------------------------------------------------------------------------
+
+
+class ReplacementReplayTest(unittest.TestCase):
+    def _mutated_package(self, mutate):
+        contract, text, record = load_package()
+        mutate(contract, record)
+        return contract, text, record
+
+    def test_bit_exact_clean_replay_passes(self):
+        contract, _, record = load_package()
+        for variant, pool in contract["replacement"]["pools"].items():
+            replayed = replay_replacement_stream(
+                contract["seed_generation"]["anchor"], variant,
+                pool["start_index"], len(pool["seeds"]), pool.get("skipped") or [],
+            )
+            self.assertEqual(replayed, pool["seeds"], variant)
+            self.assertEqual(
+                pool["next_candidate_index"],
+                pool["start_index"] + len(pool["seeds"]) + len(pool["skipped"]),
+            )
+        self.assertEqual(
+            replacement_pool_digest(contract["replacement"]["pools"]),
+            contract["replacement_pool_sha256"],
+        )
+        self.assertEqual(r4_record_digest(record), record["record_r4_sha256"])
+        self.assertEqual(
+            record["record_r4_sha256"], contract["seed_record_r4_sha256"]
+        )
+        # R3 logical digest is preserved as provenance, unchanged
+        self.assertEqual(
+            record["record_sha256"],
+            "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+        )
+
+    def test_mutated_pool_seed_rejected_even_when_contract_and_record_agree(self):
+        """The reviewer M-2 attack: edit contract + record together."""
+        def mutate(contract, record):
+            contract["replacement"]["pools"]["0b"]["seeds"][0] = 999999999
+            record["replacement_pools"]["0b"]["seeds"][0] = 999999999
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("bit-exact" in f or "deterministic stream" in f for f in report["failures"]))
+
+    def test_wrong_skipped_seed_rejected(self):
+        def mutate(contract, record):
+            pool = contract["replacement"]["pools"]["0b"]
+            start = pool["start_index"]
+            seed = seeds.derive_seed(
+                contract["seed_generation"]["anchor"],
+                seeds.replica_label("0b", start),
+            )
+            pool["skipped"] = [
+                {"index": start, "seed": seed + 1, "reason": "SEED_COLLISION_TREE"}
+            ]
+            record["replacement_pools"]["0b"]["skipped"] = pool["skipped"]
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("does not re-derive" in f for f in report["failures"]))
+
+    def test_wrong_skipped_reason_rejected(self):
+        def mutate(contract, record):
+            pool = contract["replacement"]["pools"]["32b"]
+            start = pool["start_index"]
+            seed = seeds.derive_seed(
+                contract["seed_generation"]["anchor"],
+                seeds.replica_label("32b", start),
+            )
+            pool["skipped"] = [{"index": start, "seed": seed, "reason": "INCONVENIENT"}]
+            record["replacement_pools"]["32b"]["skipped"] = pool["skipped"]
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("SEED_COLLISION_TREE" in f for f in report["failures"]))
+
+    def test_fake_skip_structure_with_extra_key_rejected(self):
+        def mutate(contract, record):
+            pool = contract["replacement"]["pools"]["11b"]
+            start = pool["start_index"]
+            seed = seeds.derive_seed(
+                contract["seed_generation"]["anchor"],
+                seeds.replica_label("11b", start),
+            )
+            pool["skipped"] = [
+                {"index": start, "seed": seed, "reason": "SEED_COLLISION_TREE", "note": "x"}
+            ]
+            record["replacement_pools"]["11b"]["skipped"] = pool["skipped"]
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("extra keys" in f for f in report["failures"]))
+
+    def test_fake_skip_with_true_continuation_rejected_by_manifest_coverage(self):
+        """A structurally valid skip that hands the stream forward is still refused."""
+        contract, text, record = load_package()
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        pool = contract["replacement"]["pools"]["0b"]
+        fake_index = pool["start_index"]
+        fake_seed = pool["seeds"][0]
+        pool["skipped"] = [
+            {"index": fake_index, "seed": fake_seed, "reason": "SEED_COLLISION_TREE"}
+        ]
+        pool["seeds"] = replay_replacement_stream(
+            record["anchor"], "0b", pool["start_index"], len(pool["seeds"]), pool["skipped"]
+        )
+        pool["next_candidate_index"] = (
+            pool["start_index"] + len(pool["seeds"]) + len(pool["skipped"])
+        )
+        record["replacement_pools"]["0b"] = dict(
+            pool, indices_consumed=[pool["start_index"], pool["next_candidate_index"] - 1]
+        )
+        report = validate_freeze_contract(
+            contract, protocol_text=text, seed_record=record,
+            repo_root=REPO_ROOT, collision_manifest=manifest, rerun_scan=False,
+        )
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("skip coverage mismatch" in f for f in report["failures"]))
+        self.assertTrue(any("replacement_pool_sha256" in f for f in report["failures"]))
+
+    def test_wrong_pool_cursor_rejected(self):
+        def mutate(contract, record):
+            contract["replacement"]["pools"]["53b"]["next_candidate_index"] = 99
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("next_candidate_index" in f for f in report["failures"]))
+
+    def test_stale_replacement_pool_digest_rejected(self):
+        def mutate(contract, record):
+            contract["replacement_pool_sha256"] = "1" * 64
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("replacement_pool_sha256" in f for f in report["failures"]))
+
+    def test_record_pool_drift_from_contract_rejected(self):
+        def mutate(contract, record):
+            record["replacement_pools"]["32b"]["seeds"][0] = (
+                record["replacement_pools"]["32b"]["seeds"][0] + 1
+            )
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("replacement pool seeds != contract" in f for f in report["failures"]))
+
+    def test_stale_full_record_digest_rejected(self):
+        def mutate(contract, record):
+            record["skipped_identities"]["11b"][0]["seed"] += 1
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("record_r4_sha256" in f for f in report["failures"]))
+
+    def test_confirmatory_skip_entry_must_rederive(self):
+        def mutate(contract, record):
+            record["skipped_identities"]["11b"][0]["seed"] += 1
+            contract["seed_record_r4_sha256"] = record["record_r4_sha256"] = r4_record_digest(record)
+        contract, text, record = self._mutated_package(mutate)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("does not re-derive" in f for f in report["failures"]))
+
+
+# ---------------------------------------------------------------------------
+# M-3 — collision-skip legitimacy bound into the authoritative gate
+# ---------------------------------------------------------------------------
+
+
+class CollisionSkipProofTest(unittest.TestCase):
+    def setUp(self):
+        self.contract, self.text, self.record = load_package()
+        self.manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+    def _validate(self, contract=None, record=None, manifest=None, **kwargs):
+        return validate_freeze_contract(
+            contract or self.contract,
+            protocol_text=self.text,
+            seed_record=record or self.record,
+            repo_root=kwargs.pop("repo_root", REPO_ROOT),
+            collision_manifest=manifest if manifest is not None else self.manifest,
+            **kwargs,
+        )
+
+    def test_committed_manifest_proves_all_41_skips(self):
+        self.assertEqual(self.manifest["scan_status"], "VERIFIED")
+        proven = 0
+        for variant, streams in self.manifest["recorded_skips"].items():
+            for stream_name, facts in streams.items():
+                for fact in facts:
+                    self.assertGreaterEqual(fact["non_allowlisted_hit_count"], 1)
+                    self.assertTrue(fact["hit_paths"])
+                    proven += 1
+        self.assertEqual(proven, 41)
+        report = self._validate(rerun_scan=True)
+        self.assertEqual(report["gate"], "PASS", report["failures"])
+
+    def test_fabricated_skip_for_clean_candidate_fails(self):
+        """CRITICAL M-3 control: a fully self-consistent hand-edit still fails."""
+        contract = copy.deepcopy(self.contract)
+        record = copy.deepcopy(self.record)
+        manifest = copy.deepcopy(self.manifest)
+        pool = contract["replacement"]["pools"]["0b"]
+        fake_index = pool["start_index"]  # 75: an ACCEPTED clean candidate
+        fake_seed = pool["seeds"][0]
+        pool["skipped"] = [
+            {"index": fake_index, "seed": fake_seed, "reason": "SEED_COLLISION_TREE"}
+        ]
+        pool["seeds"] = replay_replacement_stream(
+            record["anchor"], "0b", pool["start_index"], len(pool["seeds"]), pool["skipped"]
+        )
+        pool["next_candidate_index"] = (
+            pool["start_index"] + len(pool["seeds"]) + len(pool["skipped"])
+        )
+        record["replacement_pools"]["0b"] = dict(
+            pool, indices_consumed=[pool["start_index"], pool["next_candidate_index"] - 1]
+        )
+        digest = replacement_pool_digest(contract["replacement"]["pools"])
+        contract["replacement_pool_sha256"] = record["replacement_pool_sha256"] = digest
+        record["record_r4_sha256"] = r4_record_digest(record)
+        contract["seed_record_r4_sha256"] = record["record_r4_sha256"]
+        manifest["accepted_replacement"]["0b"]["seeds"] = pool["seeds"]
+        manifest["recorded_skips"]["0b"]["replacement"].append({
+            "index": fake_index,
+            "seed": fake_seed,
+            "reason": "SEED_COLLISION_TREE",
+            "hit_paths": ["README.md"],  # fabricated
+            "non_allowlisted_hit_count": 1,
+        })
+        manifest["manifest_sha256"] = collision_manifest_digest(manifest)
+        report = self._validate(contract=contract, record=record, manifest=manifest, rerun_scan=True)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(
+            any("found NO collision" in f for f in report["failures"]),
+            report["failures"],
+        )
+
+    def test_manifest_digest_mismatch_rejected(self):
+        manifest = copy.deepcopy(self.manifest)
+        manifest["scan_status"] = "VERIFIED-TAMPERED"  # digest no longer matches content
+        report = self._validate(manifest=manifest, rerun_scan=False)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("manifest_sha256 stale" in f for f in report["failures"]))
+
+    def test_incomplete_skip_coverage_rejected(self):
+        manifest = copy.deepcopy(self.manifest)
+        manifest["recorded_skips"]["0b"]["confirmatory"] = \
+            manifest["recorded_skips"]["0b"]["confirmatory"][:-1]
+        manifest["manifest_sha256"] = collision_manifest_digest(manifest)
+        report = self._validate(manifest=manifest, rerun_scan=False)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("skip coverage mismatch" in f for f in report["failures"]))
+
+    def test_missing_pinned_object_blocks(self):
+        """A scan that cannot run is BLOCKED (never treated as clean)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            # non-git repository root: the pinned scan cannot be executed
+            report = self._validate(rerun_scan=True, repo_root=Path(tmp))
+            self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+            self.assertTrue(
+                any("collision-skip proof BLOCKED" in f for f in report["failures"]),
+                report["failures"],
+            )
+
+    def test_manifest_pin_mismatch_rejected(self):
+        manifest = copy.deepcopy(self.manifest)
+        manifest["exclusion_tree_pin"] = "1" * 40
+        report = self._validate(manifest=manifest, rerun_scan=False)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("exclusion_tree_pin != contract pin" in f for f in report["failures"]))
+
+    def test_missing_manifest_binding_fails_closed(self):
+        contract = copy.deepcopy(self.contract)
+        del contract["collision_scan_manifest"]
+        report = self._validate(contract=contract, manifest=None, rerun_scan=False, repo_root=None)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("collision_scan_manifest" in f for f in report["failures"]))
+
+    def test_tampered_manifest_file_rejected_by_gate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            contract = copy.deepcopy(self.contract)
+            record = self.record
+            record_path = root / contract["scientific_subject"]["seed_record_path"]
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            manifest_path = root / contract["collision_scan_manifest"]["path"]
+            manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            manifest_path.write_text(json.dumps(self.manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            # tamper AFTER binding
+            tampered = copy.deepcopy(self.manifest)
+            tampered["scan_status"] = "CLEAN-EVERYWHERE"
+            manifest_path.write_text(json.dumps(tampered, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = validate_freeze_contract(
+                contract, protocol_text=self.text, seed_record=record,
+                repo_root=root, rerun_scan=False,
+            )
+            self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+            self.assertTrue(
+                any("digest mismatch" in f or "manifest_sha256 stale" in f for f in report["failures"]),
+                report["failures"],
+            )
+
+
+# ---------------------------------------------------------------------------
+# m-1 — equivalence wording (TOST semantics, not "indistinguishable from zero")
+# ---------------------------------------------------------------------------
+
+
+class EquivalenceWordingTest(unittest.TestCase):
+    def test_candidate_doc_states_equivalence_interval_not_indistinguishability(self):
+        text = DOC_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("неотличимость медианного сдвига от нуля", text)
+        self.assertIn("equivalence interval", text)
+        self.assertIn("statistical non-significance", text)
+        self.assertIn("standard TOST", text)
+        self.assertIn("H0(v): не-эквивалентность", text)
+        self.assertIn("H1(v): эквивалентность", text)
+        # the mechanical decision rule remains authoritative
+        self.assertIn("→ EQUIVALENT(v)", text)
+        self.assertIn("→ NOT_EQUIVALENT(v)", text)
+
+    def test_hg_b_proposal_records_r4_1_addendum(self):
+        text = HG_B_PROPOSAL_PATH.read_text(encoding="utf-8")
+        self.assertIn("Addendum R4.1", text)
+        self.assertIn("nanolab_v02_dispatch_authority", text)
+        self.assertIn("WAITING_OWNER", text)
+
+    def test_candidate_doc_pins_r4_1_repair_and_preserved_identities(self):
+        text = DOC_PATH.read_text(encoding="utf-8")
+        self.assertIn("candidate revision  = R4", text)
+        self.assertIn("candidate repair R4.1", text)
+        self.assertIn("NOT FROZEN", text)
+        self.assertIn("DISPATCH_BLOCKED", text)
+        self.assertIn("replacement_pool_sha256", text)
+        self.assertIn("record_r4_sha256", text)
+        self.assertIn("0b = 64, 32b = 64, 11b = 10, 53b = 10", text)
+        self.assertIn("next_candidate_index = 75/76/21/21", text)
+
+
+# ---------------------------------------------------------------------------
+# Positive + M-1 controls — pre-freeze validation vs gated dispatch
 # ---------------------------------------------------------------------------
 
 
@@ -539,18 +1001,54 @@ class CleanPackagePositiveTest(unittest.TestCase):
         report = freeze_gate(CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT)
         self.assertEqual(report["gate"], "PASS", report["failures"])
         self.assertEqual(report["failures"], [])
+        # M-1: a consistency PASS is a PRE-FREEZE validation, never dispatch.
+        self.assertEqual(report["validation_stage"], "PREFREEZE_VALIDATION_PASS")
+        self.assertFalse(report["dispatch_ready"])
+        self.assertEqual(report["dispatch"], "DISPATCH_BLOCKED")
+        self.assertTrue(report["dispatch_blockers"])
 
-    def test_dispatch_plan_built_only_from_valid_package(self):
-        plan = build_execution_plan(CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT)
-        self.assertEqual(plan["kind"], "nanolab_v02_dispatch_execution_plan")
-        self.assertEqual(
-            {v: cell["n_min_valid_pairs"] for v, cell in plan["cells"].items()},
-            {"0b": 52, "32b": 52, "11b": 8, "53b": 8},
-        )
-        self.assertEqual(plan["budget"]["max_runs"], 352)
-        self.assertEqual(plan["scientific_outcome"], "NOT_EVALUATED")
+    def test_prefreeze_validation_passes_while_dispatch_stays_blocked(self):
+        report = prefreeze_validation(CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT)
+        self.assertEqual(report["gate"], "PASS")
+        self.assertEqual(report["validation_stage"], "PREFREEZE_VALIDATION_PASS")
+        self.assertEqual(report["dispatch"], "DISPATCH_BLOCKED")
+        self.assertIn("NOT_FROZEN", report["dispatch_blockers"][0])
 
-    def test_cli_gate_exit_zero_and_plan_exit_zero(self):
+    def test_prefreeze_package_cannot_produce_dispatch_plan(self):
+        """M-1 core regression: NOT_FROZEN + clean contract => dispatch REJECTED."""
+        contract, text, record = load_package()
+        self.assertEqual(contract["scientific_subject"]["freeze_status"], "NOT_FROZEN")
+        for kwargs in (
+            {"authority_path": None},
+            {"authority_path": EVIDENCE / "repro-v0-2-freeze-contract-PRE_DATA_R4.json"},
+        ):
+            with self.assertRaises(ContractError) as ctx:
+                build_execution_plan(
+                    CONTRACT_PATH, DOC_PATH, RECORD_PATH, repo_root=REPO_ROOT, **kwargs
+                )
+            message = str(ctx.exception)
+            self.assertTrue(
+                "DISPATCH_BLOCKED" in message or "dispatch authority" in message, message
+            )
+        # even a well-formed FROZEN authority cannot authorize a NOT_FROZEN contract
+        with tempfile.TemporaryDirectory() as tmp:
+            authority = _authority_fixture(Path(tmp), contract, freeze_status="NOT_FROZEN")
+            with self.assertRaises(ContractError) as ctx:
+                build_execution_plan(
+                    Path(tmp) / "authority" / "contract.json",
+                    Path(tmp) / "candidate.md",
+                    Path(tmp) / contract["scientific_subject"]["seed_record_path"],
+                    repo_root=tmp,
+                    authority_path=authority,
+                    allow_fixture=True,
+                    rerun_scan=False,
+                )
+            message = str(ctx.exception)
+            self.assertTrue(
+                "not FROZEN" in message or "frozen must be literally true" in message, message
+            )
+
+    def test_cli_gate_exit_zero_and_plan_refused_for_predata(self):
         gate = cli([
             "gate",
             "--contract", str(CONTRACT_PATH),
@@ -560,15 +1058,27 @@ class CleanPackagePositiveTest(unittest.TestCase):
         ])
         self.assertEqual(gate.returncode, 0, gate.stdout + gate.stderr)
         self.assertIn('"gate": "PASS"', gate.stdout)
+        self.assertIn('"validation_stage": "PREFREEZE_VALIDATION_PASS"', gate.stdout)
+        self.assertIn('"dispatch": "DISPATCH_BLOCKED"', gate.stdout)
+        prefreeze = cli([
+            "prefreeze",
+            "--contract", str(CONTRACT_PATH),
+            "--protocol", str(DOC_PATH),
+            "--record", str(RECORD_PATH),
+            "--repo-root", str(REPO_ROOT),
+        ])
+        self.assertEqual(prefreeze.returncode, 0, prefreeze.stdout + prefreeze.stderr)
+        # plan without a dispatch authority: refused (M-1)
         plan = cli([
             "plan",
             "--contract", str(CONTRACT_PATH),
             "--protocol", str(DOC_PATH),
             "--record", str(RECORD_PATH),
             "--repo-root", str(REPO_ROOT),
+            "--authority", str(EVIDENCE / "r4-1-collision-scan-manifest-R4.json"),
         ])
-        self.assertEqual(plan.returncode, 0, plan.stdout + plan.stderr)
-        self.assertIn("nanolab_v02_dispatch_execution_plan", plan.stdout)
+        self.assertNotEqual(plan.returncode, 0)
+        self.assertNotIn("nanolab_v02_dispatch_execution_plan", plan.stdout)
 
     def test_dispatch_refuses_corrupted_contract(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -581,6 +1091,7 @@ class CleanPackagePositiveTest(unittest.TestCase):
                 "--protocol", str(DOC_PATH),
                 "--record", str(RECORD_PATH),
                 "--repo-root", str(REPO_ROOT),
+                "--authority", str(MANIFEST_PATH),
             ])
             self.assertNotEqual(plan.returncode, 0)
             self.assertIn("FREEZE_GATE_FAIL", plan.stdout)
@@ -588,8 +1099,270 @@ class CleanPackagePositiveTest(unittest.TestCase):
     def test_dispatch_refuses_missing_record(self):
         with tempfile.TemporaryDirectory() as tmp:
             missing = Path(tmp) / "missing.json"
+            dummy_authority = write_tmp(Path(tmp), "authority.json", {"placeholder": True})
             with self.assertRaises(ContractError):
-                build_execution_plan(CONTRACT_PATH, DOC_PATH, missing, repo_root=REPO_ROOT)
+                build_execution_plan(
+                    CONTRACT_PATH, DOC_PATH, missing,
+                    repo_root=REPO_ROOT, authority_path=dummy_authority,
+                )
+
+
+# ---------------------------------------------------------------------------
+# M-1 — dispatch authority matrix (synthetic fixture is test-only)
+# ---------------------------------------------------------------------------
+
+
+def _sha256_bytes(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _write_json(path: Path, payload) -> Path:
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FROZEN",
+                       subject_head: str = "f" * 40, subject_tree: str = "a" * 40):
+    """Build a self-consistent SYNTHETIC TEST FIXTURE ONLY authority package.
+
+    Returns the authority path inside ``tmp`` (a fake repository root with
+    the contract/protocol/record/manifest/authority files laid out). Every
+    record is marked synthetic; the fixture NEVER represents a real
+    authorization.
+    """
+    (Path(tmp) / "authority").mkdir(parents=True, exist_ok=True)
+    contract = copy.deepcopy(base_contract)
+    contract["scientific_subject"]["freeze_status"] = freeze_status
+    if freeze_status == "FROZEN":
+        contract["scientific_subject"]["frozen_subject_head"] = subject_head
+        contract["scientific_subject"]["frozen_subject_tree"] = subject_tree
+    else:
+        contract["scientific_subject"]["frozen_subject_head"] = None
+        contract["scientific_subject"]["frozen_subject_tree"] = None
+    record_bytes = RECORD_PATH.read_bytes()
+    manifest_bytes = MANIFEST_PATH.read_bytes()
+    doc_text = DOC_PATH.read_text(encoding="utf-8")
+    if freeze_status == "FROZEN":
+        doc_text = doc_text.replace("NOT FROZEN", "FROZEN")
+    contract_bytes = (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    record_path = Path(tmp) / contract["scientific_subject"]["seed_record_path"]
+    record_path.parent.mkdir(parents=True, exist_ok=True)
+    record_path.write_bytes(record_bytes)
+    manifest_path = Path(tmp) / contract["collision_scan_manifest"]["path"]
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_bytes(manifest_bytes)
+    protocol_path = Path(tmp) / "candidate.md"
+    protocol_path.write_text(doc_text, encoding="utf-8")
+    contract_path = Path(tmp) / "authority" / "contract.json"
+    contract_path.write_bytes(contract_bytes)
+    record_sha = _sha256_bytes(record_bytes)
+    payloads = {
+        "freeze": {
+            "director": "DIRECTOR-SYNTHETIC-FIXTURE",
+            "decision": "FREEZE",
+            "subject_head": subject_head,
+            "subject_tree": subject_tree,
+            "contract_sha256": _sha256_bytes(contract_bytes),
+            "seed_record_sha256": record_sha,
+        },
+        "hg_b": {
+            "decision": "APPROVED",
+            "candidate_revision": str(contract["scientific_subject"]["candidate_revision"]),
+            "rule_id": contract["rule_id"],
+        },
+        "review": {
+            "verdict": "PASS",
+            "reviewed_head": subject_head,
+            "reviewed_tree": subject_tree,
+        },
+        "verify": {
+            "verdict": "VERIFIED",
+            "verified_head": subject_head,
+            "verified_tree": subject_tree,
+        },
+        "r2": {
+            "r2_status": "ACTIVE",
+            "author_executor": "AUTHOR_U1",
+            "external_executor": "EXTERNAL_U2",
+        },
+    }
+    embedded = {}
+    for name, payload in payloads.items():
+        raw = (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        (Path(tmp) / "authority" / f"{name}.json").write_bytes(raw)
+        embedded[name] = {
+            "path": f"authority/{name}.json",
+            "sha256": _sha256_bytes(raw),
+            **payload,
+        }
+    authority = {
+        "schema_version": 1,
+        "kind": "nanolab_v02_dispatch_authority",
+        "authority_revision": "synthetic-fixture-r4-1",
+        "fixture": True,
+        "fixture_note": SYNTHETIC_FIXTURE_MARKER + " - not a real authorization",
+        "frozen": freeze_status == "FROZEN",
+        "subject_head": subject_head,
+        "subject_tree": subject_tree,
+        "contract_sha256": _sha256_bytes(contract_bytes),
+        "seed_record_sha256": record_sha,
+        "freeze_record": embedded["freeze"],
+        "hg_b_record": embedded["hg_b"],
+        "review_verdict": embedded["review"],
+        "verify_verdict": embedded["verify"],
+        "r2_record": embedded["r2"],
+        "author_executor": "AUTHOR_U1",
+        "external_executor": "EXTERNAL_U2",
+        "executor_policy": {"author_leg_allowed": True, "external_leg_allowed": True},
+    }
+    return _write_json(Path(tmp) / "authority" / "dispatch-authority.json", authority)
+
+
+class DispatchAuthorityTest(unittest.TestCase):
+    """M-1: DISPATCH_READY requires the full machine-bound authority."""
+
+    def setUp(self):
+        self.contract, self.text, self.record = load_package()
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.tmp = Path(self._tmp.name)
+
+    def _authority(self, **kwargs):
+        return _authority_fixture(self.tmp, self.contract, **kwargs)
+
+    def _plan_kwargs(self, authority, **overrides):
+        kwargs = dict(
+            repo_root=self.tmp,
+            authority_path=authority,
+            allow_fixture=True,
+            rerun_scan=False,
+        )
+        kwargs.update(overrides)
+        return kwargs
+
+    def test_synthetic_fully_authorized_fixture_generates_plan(self):
+        authority = self._authority()
+        plan = build_execution_plan(
+            self.tmp / "authority" / "contract.json",
+            self.tmp / "candidate.md",
+            self.tmp / self.contract["scientific_subject"]["seed_record_path"],
+            **self._plan_kwargs(authority),
+        )
+        self.assertEqual(plan["kind"], "nanolab_v02_dispatch_execution_plan")
+        self.assertTrue(plan["synthetic_test_fixture_only"])
+        self.assertEqual(plan["dispatch_authority"]["status"], "DISPATCH_AUTHORIZED")
+        self.assertEqual(
+            {v: cell["n_min_valid_pairs"] for v, cell in plan["cells"].items()},
+            {"0b": 52, "32b": 52, "11b": 8, "53b": 8},
+        )
+        self.assertEqual(plan["budget"]["max_runs"], 352)
+        self.assertEqual(plan["scientific_outcome"], "NOT_EVALUATED")
+
+    def test_fixture_authority_rejected_for_real_dispatch(self):
+        authority = self._authority()
+        with self.assertRaises(ContractError) as ctx:
+            build_execution_plan(
+                self.tmp / "authority" / "contract.json",
+                self.tmp / "candidate.md",
+                self.tmp / self.contract["scientific_subject"]["seed_record_path"],
+                repo_root=self.tmp,
+                authority_path=authority,
+                allow_fixture=False,
+                rerun_scan=False,
+            )
+        self.assertIn("fixture", str(ctx.exception))
+
+    def test_missing_authority_rejected(self):
+        with self.assertRaises(ContractError) as ctx:
+            build_execution_plan(
+                CONTRACT_PATH, DOC_PATH, RECORD_PATH,
+                repo_root=REPO_ROOT, authority_path=None,
+            )
+        self.assertIn("DISPATCH_BLOCKED", str(ctx.exception))
+
+    def _mutated(self, mutate):
+        authority_path = self._authority()
+        authority = load_dispatch_authority(authority_path)
+        mutate(authority)
+        _write_json(authority_path, authority)
+        return authority_path
+
+    def _assert_rejected(self, label, **overrides):
+        authority = overrides.pop("authority", None) or self._authority()
+        with self.assertRaises(ContractError) as ctx:
+            build_execution_plan(
+                self.tmp / "authority" / "contract.json",
+                self.tmp / "candidate.md",
+                self.tmp / self.contract["scientific_subject"]["seed_record_path"],
+                **self._plan_kwargs(authority, **overrides),
+            )
+        self.assertNotIn("DISPATCH_AUTHORIZED", str(ctx.exception), label)
+
+    def test_not_frozen_package_rejected_even_with_frozen_authority(self):
+        self._assert_rejected(
+            "not frozen",
+            authority=self._authority(freeze_status="NOT_FROZEN"),
+        )
+
+    def test_hg_b_not_approved_rejected(self):
+        def mutate(authority):
+            authority["hg_b_record"]["decision"] = "WAITING_OWNER"
+        self._assert_rejected("hg-b", authority=self._mutated(mutate))
+
+    def test_frozen_subject_mismatch_rejected(self):
+        def mutate(authority):
+            authority["subject_head"] = "b" * 40
+        self._assert_rejected("subject mismatch", authority=self._mutated(mutate))
+
+    def test_review_not_pass_rejected(self):
+        def mutate(authority):
+            authority["review_verdict"]["verdict"] = "FIX_REQUIRED"
+        self._assert_rejected("review", authority=self._mutated(mutate))
+
+    def test_verify_not_verified_rejected(self):
+        def mutate(authority):
+            authority["verify_verdict"]["verdict"] = "NOT_VERIFIED"
+        self._assert_rejected("verify", authority=self._mutated(mutate))
+
+    def test_r2_not_active_rejected(self):
+        def mutate(authority):
+            authority["r2_record"]["r2_status"] = "WAITING_HOST"
+        self._assert_rejected("r2", authority=self._mutated(mutate))
+
+    def test_executor_mismatch_rejected(self):
+        def mutate(authority):
+            authority["author_executor"] = "OUTENEMY_AS_AUTHOR"
+        self._assert_rejected("executor", authority=self._mutated(mutate))
+
+    def test_executor_policy_leg_forbidden_rejected(self):
+        def mutate(authority):
+            authority["executor_policy"]["external_leg_allowed"] = False
+        self._assert_rejected("policy", authority=self._mutated(mutate))
+
+    def test_contract_digest_mismatch_rejected(self):
+        def mutate(authority):
+            authority["contract_sha256"] = "0" * 64
+        self._assert_rejected("contract digest", authority=self._mutated(mutate))
+
+    def test_tampered_referenced_record_rejected(self):
+        authority = self._authority()
+        record_path = self.tmp / "authority" / "hg_b.json"
+        payload = json.loads(record_path.read_text(encoding="utf-8"))
+        payload["note"] = "tampered after binding"
+        record_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        self._assert_rejected("tampered record", authority=authority)
+
+    def test_authority_structural_missing_key_rejected(self):
+        authority_path = self._authority()
+        authority = load_dispatch_authority(authority_path)
+        del authority["r2_record"]
+        _write_json(authority_path, authority)
+        self._assert_rejected("missing key", authority=authority_path)
+
+    def test_freeze_record_decision_must_be_freeze(self):
+        def mutate(authority):
+            authority["freeze_record"]["decision"] = "DRAFT"
+        self._assert_rejected("freeze decision", authority=self._mutated(mutate))
 
 
 if __name__ == "__main__":

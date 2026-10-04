@@ -533,5 +533,7 @@
       "next_candidate_index": 23
     }
   },
-  "record_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b"
+  "record_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+  "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821",
+  "record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91"
 }

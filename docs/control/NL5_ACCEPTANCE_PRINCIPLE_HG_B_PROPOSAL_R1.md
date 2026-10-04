@@ -163,3 +163,23 @@ N, δ=0.5, варианты, grid, paired scheme | — | без изменени
 `HG-B: APPROVED WITH CHANGES: <список>` остаётся доступным для отклонения
 любой строки. До HG-B кандидат остаётся **PRE-DATA / NOT FROZEN**;
 `freeze`/`dispatch` машинно запрещены без PASS полного contract gate.
+
+## 9. Addendum R4.1 — dispatch authority (reviewer corrections M-1..M-4, append-only)
+
+Append-only дополнение к §8 (числа выше не меняются). Fresh independent
+Reviewer R1 (REVIEWER_VERDICT_R1, FIX_REQUIRED) подтвердила hardening R4 и
+нашла 4 blocking-дефекта + 1 wording-дефект; repair R4.1 реализован в
+`EX-NL5-V02-PREFREEZE-HARDENING-R4` (ветка
+`repair/nl5-v02-prefreeze-hardening-r4-r1`). Для owner decision package
+важно: actual scientific dispatch теперь машинно требует — помимо полного
+contract gate — versioned объект `nanolab_v02_dispatch_authority` с
+`freeze_status == FROZEN` + exact frozen subject HEAD/TREE, Director FREEZE
+record, **HG-B = APPROVED** (этот gate), fresh review PASS + fresh verify
+VERIFIED frozen subject, R2 ACTIVE с authorization обоих плеч
+(`AUTHOR_U1` / `EXTERNAL_U2`). Текущий committed package остаётся
+PRE-DATA / NOT FROZEN ⇒ `PREFREEZE_VALIDATION_PASS` / `DISPATCH_BLOCKED`;
+никакой синтетический positive-fixture не является реальной authorization
+записью (помечен `SYNTHETIC TEST FIXTURE ONLY`). Wording-коррекция (m-1):
+PASS правила = эквивалентность (CI90 медианного парного сдвига целиком внутри
+pre-declared полосы ±δ·s_eff), что НЕ тождественно «неотличимости от нуля»;
+H0/H1 приведены к standard TOST. HG-B остаётся **WAITING_OWNER**.

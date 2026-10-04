@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_v02_r4_1_dispatch_block_evidence",
+  "note": "R4.1 (reviewer correction M-1) proof: the committed PRE-DATA / NOT FROZEN package passes PREFREEZE_VALIDATION and is mechanically DISPATCH_BLOCKED. No real dispatch authority exists (HG-B = WAITING_OWNER, R2 = WAITING_HOST/NOT_ACTIVE, no Director FREEZE record); the synthetic positive dispatch fixture exists ONLY inside tests (SYNTHETIC TEST FIXTURE ONLY).",
+  "prefreeze_validation": {
+    "gate": "PASS",
+    "validation_stage": "PREFREEZE_VALIDATION_PASS",
+    "dispatch": "DISPATCH_BLOCKED",
+    "dispatch_ready": false,
+    "dispatch_blockers": [
+      "freeze_status is NOT_FROZEN: scientific dispatch requires a Director FREEZE record on this exact subject"
+    ],
+    "failures": [],
+    "cli_exit": 0
+  },
+  "dispatch_attempts": [
+    {
+      "attempt": "plan without a validated nanolab_v02_dispatch_authority (input file is the scan manifest, not an authority object)",
+      "cli_exit": 3,
+      "stdout": {
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority rejected: dispatch_authority: missing keys ['authority_revision', 'fixture', 'fixture_note', 'frozen', 'subject_head', 'subject_tree', 'contract_sha256', 'seed_record_sha256', 'freeze_record', 'hg_b_record', 'review_verdict', 'verify_verdict', 'r2_record', 'author_executor', 'external_executor', 'executor_policy']; dispatch_authority: unknown extra keys ['accepted_confirmatory', 'accepted_replacement', 'allowlist_paths_exact', 'exclusion_tree_pin', 'manifest_sha256', 'recorded_skips', 'scan_mode', 'scan_status']"
+      }
+    }
+  ],
+  "package_bindings": {
+    "contract": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json",
+    "contract_sha256": "46e3c9595e0dd89ce3f02d5326c11e920bbbc035b683cfac40e43b302a77906d",
+    "seed_record": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json",
+    "seed_record_file_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+    "collision_scan_manifest": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-collision-scan-manifest-R4.json",
+    "collision_scan_manifest_sha256": "77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c",
+    "freeze_status": "NOT_FROZEN"
+  },
+  "status_ceiling": {
+    "CANDIDATE": "PRE-DATA / NOT FROZEN",
+    "HG-B": "WAITING_OWNER",
+    "R2": "WAITING_HOST / NOT_ACTIVE",
+    "AUTHOR_U1": "NOT_ASSIGNED",
+    "SCIENTIFIC_RUNS": 0
+  }
+}

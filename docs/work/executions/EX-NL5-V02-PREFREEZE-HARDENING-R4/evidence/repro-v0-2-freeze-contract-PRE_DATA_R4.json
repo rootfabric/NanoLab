@@ -7,9 +7,11 @@
     "candidate_doc_path": "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
     "candidate_revision": "R4",
     "seed_record_path": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json",
-    "seed_record_file_sha256": "4fe35dab07a6ac5311c4737b673af2171183776cc5335657d8b8d62e1add6271",
+    "seed_record_file_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
     "seed_record_logical_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
-    "freeze_status": "NOT_FROZEN"
+    "freeze_status": "NOT_FROZEN",
+    "frozen_subject_head": null,
+    "frozen_subject_tree": null
   },
   "variants": {
     "0b": {
@@ -303,8 +305,8 @@
         "next_candidate_index": 23
       }
     },
-    "attempt_id_rule": "<run_base> | <run_base>-R<n>; append-only ledger; attempt id reuse forbidden",
-    "paired_semantics": "pair invalidated if EITHER leg fails; replacement consumes the next frozen pool identity and re-executes BOTH legs with a new attempt id; outcome-driven seed selection forbidden"
+    "attempt_id_rule": "<run_base> for the original pair legs; <run_base>-R<n> for retry/replacement attempts; attempt ids globally unique forever (reuse rejected); both legs of a replacement pair are scheduled by request_replacement and resolved via record_outcome",
+    "paired_semantics": "pair-level one-shot ledger (R4.1 M-4): pair_id unique; one frozen seed_identity per pair; attempt ids globally unique; author+external legs belong to the same pair; replacement ONLY for a terminal PAIR_FAILED_TECHNICAL pair; at most ONE replacement assignment per failed pair (repeat request rejected, quota/cursor untouched); the replacement consumes the next frozen pool identity in order, creates a NEW pair and schedules BOTH legs"
   },
   "historical_exclusions": {
     "list_size": 34,
@@ -380,5 +382,11 @@
     "cuda": "OFF",
     "mpi": "OFF",
     "platforms": "P-A = U1 native Ubuntu R2 (fingerprint frozen before campaign); P-B = U2 external (outenemy role EXTERNAL_U2_ONLY); Windows/WSL excluded (HISTORICAL_ONLY)"
+  },
+  "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821",
+  "seed_record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+  "collision_scan_manifest": {
+    "path": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-collision-scan-manifest-R4.json",
+    "sha256": "77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c"
   }
 }

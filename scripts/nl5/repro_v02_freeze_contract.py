@@ -2,18 +2,37 @@
 
 Pre-freeze hardening R4 (WO-NL5-V02-PREFREEZE-HARDENING-R4), repairs audit
 finding F1 (fail-open freeze consistency gate) and F4 (integer rounding /
-scientific wording drift).
+scientific wording drift). R4.1 (fresh independent Reviewer R1 corrections
+M-1..M-4) hardens the authority model:
 
-The machine-readable contract JSON is the SINGLE authoritative source for
-freeze/dispatch. It mechanically binds: rule/revision + scientific subject
-pins; variant set with primary/control classification; per-variant N, N_min
-and the exact integer rounding policy; confirmatory + frozen replacement
-pools; seed anchor/algorithm with consumed indices and the replacement
-cursor; bootstrap seeds/configuration; historical exclusions with the
-immutable exclusion-tree pin and the exact path allowlist; per-cell paired
-attempt/replacement quotas with the total run cap and wall cap; analyzer /
-convention / environment pins; feasibility planning evidence; and execution
-plan cardinalities.
+- **Two stages are mechanically separated (M-1).** ``validate_freeze_contract``
+  / :func:`freeze_gate` prove INTERNAL CONSISTENCY ONLY
+  (``PREFREEZE_VALIDATION_PASS``); they never authorize execution. A
+  scientific ``nanolab_v02_dispatch_execution_plan`` is produced exclusively
+  by :func:`build_execution_plan`, which additionally requires a validated
+  machine-readable ``nanolab_v02_dispatch_authority`` object binding:
+  ``freeze_status == FROZEN`` with frozen subject HEAD/TREE pins, a Director
+  FREEZE record, HG-B owner approval, fresh review PASS + verify VERIFIED for
+  the frozen subject, R2 ACTIVE with both executor legs authorized, and the
+  exact contract/seed-record digests. The committed PRE-DATA / NOT FROZEN
+  package is therefore ``DISPATCH_BLOCKED`` by construction.
+
+- **Replacement pools are replayed bit-exactly (M-2).** Every pool must
+  regenerate from ``(anchor, variant, start_index, quota, recorded skips)``
+  via :func:`nl5.repro_v02_seeds.replay_replacement_stream`; each skip entry
+  must be the strict object ``{"index", "seed", "reason": "SEED_COLLISION_TREE"}``
+  re-deriving from the stream. A dedicated ``replacement_pool_sha256`` and a
+  full ``seed_record_r4_sha256`` integrity digest are bound into the
+  contract (the historical R3 logical digest is kept as provenance only).
+
+- **Collision-skip legitimacy is bound into the gate (M-3).** The contract
+  binds a ``collision_scan_manifest`` by path + SHA-256; the manifest must
+  prove every accepted identity CLEAN outside the exact allowlist and every
+  recorded skip backed by a real non-allowlisted pinned-tree hit.
+  Authoritative entrypoints re-run the pinned scan for every recorded skip:
+  a fabricated skip for a clean candidate fails the gate even when contract,
+  record and manifest were edited self-consistently. Scan errors, missing
+  pinned objects and timeouts are BLOCKED, never treated as clean.
 
 EVERYTHING is validated fail-closed: malformed JSON, missing or extra
 fields, wrong types (including ``bool`` where an integer is required),
@@ -22,20 +41,21 @@ N/N_min/quota/wall mismatches, contradictory or duplicated protocol
 declarations, unknown revisions and read errors all produce
 ``FREEZE_GATE_FAIL`` / :class:`ContractError` — never a silent PASS.
 
-The dispatch entrypoint (:func:`build_execution_plan`) re-runs the full
-gate before producing a plan; there is no code path that returns an
-execution plan from an unvalidated contract.
-
 CLI (repository root; on hosts where a global ``scripts`` package shadows
 the repository namespace use ``PYTHONPATH=scripts``)::
 
-    python3 -m scripts.nl5.repro_v02_freeze_contract gate \
-        --contract <contract.json> --protocol <candidate.md> [--record <record.json>]
-    python3 -m scripts.nl5.repro_v02_freeze_contract plan \
+    python3 -m scripts.nl5.repro_v02_freeze_contract prefreeze \
         --contract <contract.json> --protocol <candidate.md> --record <record.json>
+    python3 -m scripts.nl5.repro_v02_freeze_contract gate \
+        --contract <contract.json> --protocol <candidate.md> --record <record.json>
+    python3 -m scripts.nl5.repro_v02_freeze_contract plan \
+        --contract <contract.json> --protocol <candidate.md> --record <record.json> \
+        --authority <dispatch-authority.json>
 
-Exit codes: 0 = PASS / plan produced; 3 = FREEZE_GATE_FAIL (failures list
-printed); 4 = contract/read error (fail-closed).
+Exit codes: 0 = PASS / authorized plan produced (``prefreeze`` exits 0 for
+internal-consistency PASS even while dispatch stays blocked); 3 =
+FREEZE_GATE_FAIL or DISPATCH_BLOCKED (reasons printed); 4 = contract/read
+error (fail-closed).
 """
 
 from __future__ import annotations
@@ -56,9 +76,17 @@ from nl5.repro_v02_seeds import (
     HISTORICAL_SEEDS_V1,
     PRIMARY_VARIANTS,
     RULE_ID,
+    SCAN_MANIFEST_KIND,
     bootstrap_label,
+    check_skip_entry,
+    collision_manifest_digest,
     derive_seed,
+    normalized_replacement_pools,
+    r4_record_digest,
+    replacement_pool_digest,
+    replay_replacement_stream,
     replay_variant_stream,
+    verify_collision_manifest,
 )
 
 CONTRACT_SCHEMA_VERSION = 1
@@ -291,6 +319,9 @@ _TOP_KEYS = (
     "analyzer_pins",
     "feasibility_planning",
     "environment_pins",
+    "replacement_pool_sha256",
+    "seed_record_r4_sha256",
+    "collision_scan_manifest",
 )
 
 _SUBJECT_KEYS = (
@@ -300,6 +331,8 @@ _SUBJECT_KEYS = (
     "seed_record_file_sha256",
     "seed_record_logical_sha256",
     "freeze_status",
+    "frozen_subject_head",
+    "frozen_subject_tree",
 )
 _GENERATION_KEYS = (
     "anchor",
@@ -341,6 +374,50 @@ _POLICY_KEYS = (
 _HEX40_RE = re.compile(r"^[0-9a-f]{40}$")
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
+_MANIFEST_KEYS = ("path", "sha256")
+
+_DISPATCH_AUTHORITY_KIND = "nanolab_v02_dispatch_authority"
+_DISPATCH_AUTHORITY_SCHEMA_VERSION = 1
+_AUTHORIZED_AUTHOR_EXECUTOR = "AUTHOR_U1"
+_AUTHORIZED_EXTERNAL_EXECUTOR = "EXTERNAL_U2"
+SYNTHETIC_FIXTURE_MARKER = "SYNTHETIC TEST FIXTURE ONLY"
+
+_DISPATCH_AUTHORITY_TOP_KEYS = (
+    "schema_version",
+    "kind",
+    "authority_revision",
+    "fixture",
+    "fixture_note",
+    "frozen",
+    "subject_head",
+    "subject_tree",
+    "contract_sha256",
+    "seed_record_sha256",
+    "freeze_record",
+    "hg_b_record",
+    "review_verdict",
+    "verify_verdict",
+    "r2_record",
+    "author_executor",
+    "external_executor",
+    "executor_policy",
+)
+_AUTHORITY_FREEZE_RECORD_KEYS = (
+    "path",
+    "sha256",
+    "director",
+    "decision",
+    "subject_head",
+    "subject_tree",
+    "contract_sha256",
+    "seed_record_sha256",
+)
+_AUTHORITY_HG_B_KEYS = ("path", "sha256", "decision", "candidate_revision", "rule_id")
+_AUTHORITY_REVIEW_KEYS = ("path", "sha256", "verdict", "reviewed_head", "reviewed_tree")
+_AUTHORITY_VERIFY_KEYS = ("path", "sha256", "verdict", "verified_head", "verified_tree")
+_AUTHORITY_R2_KEYS = ("path", "sha256", "r2_status", "author_executor", "external_executor")
+_AUTHORITY_POLICY_KEYS = ("author_leg_allowed", "external_leg_allowed")
+
 
 def load_contract(path: Path | str) -> dict[str, Any]:
     """Load the contract JSON; any read/parse problem fails closed."""
@@ -379,10 +456,18 @@ def validate_freeze_contract(
     seed_record: dict[str, Any] | None = None,
     repo_root: Path | str | None = None,
     require_record: bool = True,
+    collision_manifest: dict[str, Any] | None = None,
+    manifest_file_sha256: str | None = None,
+    rerun_scan: bool = False,
 ) -> dict[str, Any]:
     """Full fail-closed validation. Returns a report; ``gate`` is PASS only
     when ``failures`` is empty. Any malformed/missing/extra/mismatch/unknown
-    input lands in ``failures`` — the caller must treat FAIL as terminal."""
+    input lands in ``failures`` — the caller must treat FAIL as terminal.
+
+    IMPORTANT (R4.1, M-1): a PASS here is a ``PREFREEZE_VALIDATION_PASS``
+    (internal consistency only). It is NOT dispatch authorization — see
+    :func:`validate_dispatch_authority` / :func:`build_execution_plan`.
+    """
     failures: list[str] = []
 
     _require_keys(contract, _TOP_KEYS, "contract", failures)
@@ -433,21 +518,70 @@ def validate_freeze_contract(
                     f"{contract['scientific_subject']['seed_record_file_sha256']}"
                 )
 
+    # R4.1 (M-3): the bound collision-scan manifest. When a pre-loaded
+    # manifest is supplied it is verified directly; with a repository root
+    # the manifest file is loaded from its contract-bound path. Structural
+    # verification is cheap and always runs when the manifest is available;
+    # ``rerun_scan`` additionally re-runs the pinned-tree scan for every
+    # recorded skip (authoritative freeze/dispatch paths).
+    if failures or collision_manifest is not None or repo_root is not None:
+        _validate_manifest_binding(
+            contract,
+            failures,
+            manifest=collision_manifest,
+            manifest_file_sha256=manifest_file_sha256,
+            record=seed_record,
+            repo_root=repo_root,
+            rerun_root=repo_root if rerun_scan else None,
+        )
+
     return _report(failures, contract)
 
 
+def dispatch_blockers(contract: dict[str, Any]) -> list[str]:
+    """R4.1 (M-1): why this contract is not dispatch-ready right now."""
+    subject = contract.get("scientific_subject") or {}
+    blockers: list[str] = []
+    if subject.get("freeze_status") != "FROZEN":
+        blockers.append(
+            "freeze_status is NOT_FROZEN: scientific dispatch requires a Director FREEZE "
+            "record on this exact subject"
+        )
+    else:
+        blockers.append(
+            "no validated nanolab_v02_dispatch_authority object was supplied "
+            "(Director FREEZE record + HG-B APPROVED + review PASS + verify VERIFIED + "
+            "R2 ACTIVE with both executor legs authorized)"
+        )
+    return blockers
+
+
 def _report(failures: list[str], contract: dict[str, Any]) -> dict[str, Any]:
+    gate_pass = not failures
+    frozen = isinstance(contract.get("scientific_subject"), dict) and (
+        contract["scientific_subject"].get("freeze_status") == "FROZEN"
+    )
     return {
         "kind": "r4_freeze_contract_gate",
         "contract_revision": contract.get("contract_revision"),
-        "gate": "PASS" if not failures else "FREEZE_GATE_FAIL",
+        "gate": "PASS" if gate_pass else "FREEZE_GATE_FAIL",
         "failures": failures,
+        # R4.1 (M-1): a consistency PASS is a PRE-FREEZE VALIDATION result.
+        # It never authorizes scientific dispatch on its own.
+        "validation_stage": "PREFREEZE_VALIDATION_PASS" if gate_pass else "FREEZE_GATE_FAIL",
+        "freeze_status": contract.get("scientific_subject", {}).get("freeze_status")
+        if isinstance(contract.get("scientific_subject"), dict)
+        else None,
+        "dispatch_ready": False,
+        "dispatch": "DISPATCH_BLOCKED",
+        "dispatch_blockers": dispatch_blockers(contract) if gate_pass else [],
         "integer_rounding_policy": INTEGER_ROUNDING_POLICY["name"],
         "budget": derive_budget(
             {v: spec.get("n") for v, spec in contract["variants"].items()}
         ) if isinstance(contract.get("variants"), dict) and contract["variants"] and all(
             isinstance(spec, dict) and _is_int(spec.get("n")) for spec in contract["variants"].values()
         ) else None,
+        "frozen_declared": frozen,
     }
 
 
@@ -474,6 +608,30 @@ def _validate_subject(subject: Any, failures: list[str]) -> None:
         failures.append("scientific_subject.seed_record_logical_sha256: must be 64-hex sha256")
     if subject["freeze_status"] not in ("NOT_FROZEN", "FROZEN"):
         failures.append("scientific_subject.freeze_status must be NOT_FROZEN or FROZEN")
+    # R4.1 (M-1): frozen subject pins. A NOT_FROZEN candidate must carry NO
+    # frozen subject binding (null); a FROZEN contract must pin the exact
+    # subject HEAD/TREE that the dispatch authority will be validated against.
+    frozen = subject.get("freeze_status") == "FROZEN"
+    for key in ("frozen_subject_head", "frozen_subject_tree"):
+        value = subject.get(key)
+        if frozen:
+            if not isinstance(value, str) or not _HEX40_RE.match(value or ""):
+                failures.append(
+                    f"scientific_subject.{key}: must be a full 40-hex pin while freeze_status "
+                    "is FROZEN"
+                )
+        elif value is not None:
+            failures.append(
+                f"scientific_subject.{key}: must be null while freeze_status is NOT_FROZEN "
+                "(a pre-freeze candidate must not claim frozen subject pins)"
+            )
+    if frozen and isinstance(subject.get("frozen_subject_head"), str) and isinstance(
+        subject.get("frozen_subject_tree"), str
+    ):
+        if subject["frozen_subject_head"] == subject["frozen_subject_tree"]:
+            failures.append(
+                "scientific_subject: frozen_subject_head and frozen_subject_tree must differ"
+            )
 
 
 def _validate_variants(variants: Any, failures: list[str]) -> None:
@@ -726,6 +884,29 @@ def _validate_replacement(contract: dict[str, Any], confirmatory: dict[str, list
                     f"replacement.pools.{variant}: next_candidate_index {nxt} != "
                     f"start {start} + quota {quota} + skips {len(pool.get('skipped') or [])}"
                 )
+        # R4.1 (M-2): bit-exact replay of the pool from the deterministic
+        # stream. A published pool that is not exactly the stream implied by
+        # (anchor, variant, start_index, quota, recorded skips) is a
+        # hand-adjusted list, not a deterministic allocation.
+        skipped = pool.get("skipped")
+        if _is_int(start) and isinstance(skipped, list):
+            try:
+                replayed_pool = replay_replacement_stream(
+                    contract["seed_generation"].get("anchor", DEFAULT_ANCHOR),
+                    variant,
+                    start,
+                    len(pool_seeds),
+                    skipped,
+                )
+            except ValueError as exc:
+                failures.append(f"replacement.pools.{variant}: replay error: {exc}")
+                continue
+            if replayed_pool != pool_seeds:
+                failures.append(
+                    f"replacement.pools.{variant}: pool identities are NOT the bit-exact "
+                    "deterministic stream from start_index with the recorded skips "
+                    "(hand-picked seed stream is forbidden, M-2)"
+                )
 
 
 def _validate_exclusions(exclusions: Any, failures: list[str]) -> None:
@@ -931,9 +1112,32 @@ def _validate_record_binding(contract: dict[str, Any], record: dict[str, Any], f
             failures.append(f"seed record replacement pool start_index != contract for {variant}")
         if record_pool.get("next_candidate_index") != contract_pools[variant]["next_candidate_index"]:
             failures.append(f"seed record replacement pool cursor != contract for {variant}")
+        if record_pool.get("skipped") != contract_pools[variant].get("skipped"):
+            failures.append(f"seed record replacement pool skipped entries != contract for {variant}")
+        consumed = record_pool.get("indices_consumed")
+        if _is_int(record_pool.get("start_index")) and _is_int(record_pool.get("next_candidate_index")):
+            expected_consumed = [
+                record_pool["start_index"],
+                record_pool["next_candidate_index"] - 1,
+            ]
+            if consumed != expected_consumed:
+                failures.append(
+                    f"seed record replacement pool indices_consumed {consumed!r} != "
+                    f"{expected_consumed!r} for {variant}"
+                )
     # Bit-exact regeneration from the recorded cursor + skip state (F2/F3 proof).
     for variant in variants:
         skipped = (record.get("skipped_identities") or {}).get(variant) or []
+        # R4.1 (M-2/M-3): confirmatory skip entries must be strict collision
+        # objects that re-derive from the deterministic stream — a recorded
+        # skip is evidence, not an accepted-on-trust cursor adjustment.
+        for position, entry in enumerate(skipped):
+            failures.extend(
+                check_skip_entry(
+                    entry, contract["seed_generation"]["anchor"], variant,
+                    f"seed record skipped_identities.{variant}[{position}]",
+                )
+            )
         skip_indices = {entry["index"] for entry in skipped if isinstance(entry, dict)}
         consumed = contract["seed_generation"]["indices_consumed"][variant]
         try:
@@ -958,6 +1162,10 @@ def _validate_record_binding(contract: dict[str, Any], record: dict[str, Any], f
         failures.append("seed record logical digest stale (record_sha256 mismatch)")
     if digest != subject["seed_record_logical_sha256"]:
         failures.append("seed record logical digest != contract seed_record_logical_sha256")
+    # R4.1 (M-2): full R4 integrity digests. The R3 logical recipe above is
+    # provenance only; these digests cover the replacement pools, skips and
+    # cursor state as well.
+    _validate_integrity(contract, record, failures)
     exclusions = record.get("exclusions_applied")
     if exclusions != sorted(HISTORICAL_SEEDS_V1):
         failures.append("seed record exclusions_applied != frozen historical exclusion list")
@@ -966,8 +1174,120 @@ def _validate_record_binding(contract: dict[str, Any], record: dict[str, Any], f
         failures.append("historical seed present in published confirmatory arrays")
 
 
+def _validate_integrity(contract: dict[str, Any], record: dict[str, Any], failures: list[str]) -> None:
+    """R4.1 (M-2): replacement-pool + full-record digests, mutually bound."""
+    where = "integrity"
+    pools_digest = replacement_pool_digest((contract.get("replacement") or {}).get("pools"))
+    bound = contract.get("replacement_pool_sha256")
+    if not isinstance(bound, str) or not _SHA256_RE.match(bound or ""):
+        failures.append(f"{where}: contract replacement_pool_sha256 must be 64-hex sha256")
+    elif bound != pools_digest:
+        failures.append(
+            f"{where}: contract replacement_pool_sha256 {bound} != recomputed {pools_digest} "
+            "(stale or hand-edited replacement pools, M-2)"
+        )
+    record_pools_digest = replacement_pool_digest(record.get("replacement_pools"))
+    record_bound = record.get("replacement_pool_sha256")
+    if not isinstance(record_bound, str) or not _SHA256_RE.match(record_bound or ""):
+        failures.append(f"{where}: seed record replacement_pool_sha256 must be 64-hex sha256")
+    elif record_bound != pools_digest:
+        failures.append(
+            f"{where}: seed record replacement_pool_sha256 {record_bound} != contract pools "
+            f"digest {pools_digest} (record/contract pool drift, M-2)"
+        )
+    if record_bound != bound and isinstance(record_bound, str) and isinstance(bound, str):
+        failures.append(f"{where}: replacement_pool_sha256 differs between contract and record")
+    full = r4_record_digest(record)
+    record_full = record.get("record_r4_sha256")
+    if not isinstance(record_full, str) or not _SHA256_RE.match(record_full or ""):
+        failures.append(f"{where}: seed record record_r4_sha256 must be 64-hex sha256")
+    elif record_full != full:
+        failures.append(
+            f"{where}: seed record record_r4_sha256 {record_full} != recomputed {full} "
+            "(stale full-record digest, M-2)"
+        )
+    contract_full = contract.get("seed_record_r4_sha256")
+    if not isinstance(contract_full, str) or not _SHA256_RE.match(contract_full or ""):
+        failures.append(f"{where}: contract seed_record_r4_sha256 must be 64-hex sha256")
+    elif contract_full != full:
+        failures.append(
+            f"{where}: contract seed_record_r4_sha256 {contract_full} != record {full} "
+            "(full-record digest drift, M-2)"
+        )
+
+
+def _validate_manifest_binding(
+    contract: dict[str, Any],
+    failures: list[str],
+    manifest: dict[str, Any] | None = None,
+    manifest_file_sha256: str | None = None,
+    record: dict[str, Any] | None = None,
+    repo_root: Path | str | None = None,
+    rerun_root: Path | str | None = None,
+) -> None:
+    """R4.1 (M-3): bind the collision-scan manifest into the gate decision."""
+    binding = contract.get("collision_scan_manifest")
+    pre = len(failures)
+    _require_keys(binding, _MANIFEST_KEYS, "collision_scan_manifest", failures)
+    if not isinstance(binding, dict):
+        return
+    path = binding.get("path")
+    if not isinstance(path, str) or not path:
+        failures.append("collision_scan_manifest.path: must be a repository-relative path")
+    elif path.startswith("/") or ".." in Path(path).parts:
+        failures.append("collision_scan_manifest.path: must be a repository-relative path")
+    digest = binding.get("sha256")
+    if not isinstance(digest, str) or not _SHA256_RE.match(digest or ""):
+        failures.append("collision_scan_manifest.sha256: must be 64-hex sha256")
+    if len(failures) > pre:
+        return
+    if manifest is None:
+        if repo_root is None:
+            # Binding-only check: the manifest file itself is verified by the
+            # authoritative entrypoints (freeze_gate / dispatch), which always
+            # pass a repository root.
+            return
+        manifest, manifest_file_sha256, load_failures = _load_manifest_file(
+            Path(repo_root) / path
+        )
+        failures.extend(load_failures)
+        if manifest is None:
+            return
+    if manifest_file_sha256 is not None and digest != manifest_file_sha256:
+        failures.append(
+            f"collision_scan_manifest: bound sha256 {digest} != manifest file digest "
+            f"{manifest_file_sha256} (edited scan facts, M-3)"
+        )
+    verify_collision_manifest(
+        contract,
+        manifest,
+        failures,
+        record=record,
+        rerun_root=Path(rerun_root) if rerun_root is not None else None,
+    )
+
+
+def _load_manifest_file(path: Path) -> tuple[dict[str, Any] | None, str | None, list[str]]:
+    failures: list[str] = []
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        failures.append(f"collision_scan_manifest read error {path}: {exc}")
+        return None, None, failures
+    file_digest = hashlib.sha256(raw).hexdigest()
+    try:
+        manifest = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        failures.append(f"collision_scan_manifest is not valid JSON ({path}): {exc}")
+        return None, file_digest, failures
+    if not isinstance(manifest, dict):
+        failures.append(f"collision_scan_manifest must be a JSON object ({path})")
+        return None, file_digest, failures
+    return manifest, file_digest, failures
+
+
 # ---------------------------------------------------------------------------
-# Dispatch entrypoint (mandatory gate; bypass is impossible by construction).
+# Two-stage authority (R4.1, M-1): PREFREEZE_VALIDATION vs DISPATCH_READY.
 # ---------------------------------------------------------------------------
 
 
@@ -976,8 +1296,22 @@ def freeze_gate(
     protocol_path: Path | str,
     record_path: Path | str | None = None,
     repo_root: Path | str | None = None,
+    rerun_scan: bool = True,
 ) -> dict[str, Any]:
-    """Load + validate the full freeze/dispatch package (fail-closed)."""
+    """Authoritative pre-freeze validation of the full package (fail-closed).
+
+    R4.1 (M-1): this proves INTERNAL CONSISTENCY ONLY — the report's
+    ``validation_stage`` is ``PREFREEZE_VALIDATION_PASS`` and ``dispatch`` is
+    ``DISPATCH_BLOCKED`` even on PASS. It never authorizes execution. The
+    bound collision-scan manifest is verified from the repository and, by
+    default, every recorded skip is re-proven against the pinned tree
+    (``rerun_scan``; a scan error is BLOCKED, never clean).
+    """
+    if repo_root is None:
+        raise ContractError(
+            "freeze_gate requires a repository root: the contract-bound collision scan "
+            "manifest must be loaded and verified (fail-closed, M-3)"
+        )
     contract = load_contract(contract_path)
     try:
         protocol_text = Path(protocol_path).read_text(encoding="utf-8")
@@ -990,8 +1324,336 @@ def freeze_gate(
         raise ContractError("frozen contract requires an explicit seed record binding")
     return validate_freeze_contract(
         contract, protocol_text=protocol_text, seed_record=record,
-        repo_root=repo_root, require_record=True,
+        repo_root=repo_root, require_record=True, rerun_scan=rerun_scan,
     )
+
+
+def prefreeze_validation(
+    contract_path: Path | str,
+    protocol_path: Path | str,
+    record_path: Path | str | None = None,
+    repo_root: Path | str | None = None,
+    rerun_scan: bool = True,
+) -> dict[str, Any]:
+    """The ONLY gate a PRE-DATA / NOT FROZEN package can pass (R4.1, M-1).
+
+    Returns the consistency report with ``validation_stage =
+    PREFREEZE_VALIDATION_PASS`` and ``dispatch = DISPATCH_BLOCKED`` when the
+    internal-consistency gate passes. No dispatch plan is produced here.
+    """
+    report = freeze_gate(
+        contract_path, protocol_path, record_path, repo_root=repo_root, rerun_scan=rerun_scan
+    )
+    if report["gate"] == "PASS":
+        report["conclusion"] = (
+            "internal consistency holds; the package remains PRE-DATA / NOT FROZEN and "
+            "scientific dispatch stays blocked until FROZEN + dispatch authority"
+        )
+    return report
+
+
+def load_dispatch_authority(path: Path | str) -> dict[str, Any]:
+    """Load a ``nanolab_v02_dispatch_authority`` JSON (fail-closed)."""
+    path = Path(path)
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ContractError(f"dispatch authority read error {path}: {exc}") from exc
+    try:
+        authority = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ContractError(f"dispatch authority is not valid JSON ({path}): {exc}") from exc
+    if not isinstance(authority, dict):
+        raise ContractError("dispatch authority must be a JSON object")
+    return authority
+
+
+def _authority_path_digest(
+    repo_root: Path,
+    record: dict[str, Any],
+    embedded: dict[str, Any],
+    where: str,
+    failures: list[str],
+) -> None:
+    """Verify an authority-referenced record file (fail-closed).
+
+    The file at ``record['path']`` must exist, hash to the bound ``sha256``,
+    parse as JSON, and carry exactly the fields the authority embeds for it
+    (minus the ``path``/``sha256`` binding keys themselves) — the embedded
+    decision fields are therefore inseparable from the published record.
+    """
+    path = record.get("path")
+    digest = record.get("sha256")
+    if not isinstance(path, str) or not path or path.startswith("/") or ".." in Path(path).parts:
+        failures.append(f"{where}.path: must be a repository-relative path")
+        return
+    if not isinstance(digest, str) or not _SHA256_RE.match(digest or ""):
+        failures.append(f"{where}.sha256: must be 64-hex sha256")
+        return
+    target = repo_root / path
+    if not target.is_file():
+        failures.append(f"{where}: referenced record missing on disk: {target}")
+        return
+    raw = target.read_bytes()
+    actual = hashlib.sha256(raw).hexdigest()
+    if actual != digest:
+        failures.append(
+            f"{where}: referenced record digest mismatch: file {actual} != bound {digest}"
+        )
+    try:
+        on_disk = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        failures.append(f"{where}: referenced record is not valid JSON: {exc}")
+        return
+    if not isinstance(on_disk, dict):
+        failures.append(f"{where}: referenced record must be a JSON object")
+        return
+    expected = {k: v for k, v in embedded.items() if k not in ("path", "sha256")}
+    actual_fields = {k: v for k, v in on_disk.items() if k not in ("path", "sha256")}
+    if actual_fields != expected:
+        failures.append(
+            f"{where}: referenced record content does not match the authority-embedded copy "
+            "(the binding must cover the published record bytes)"
+        )
+
+
+def validate_dispatch_authority(
+    authority: dict[str, Any],
+    contract: dict[str, Any],
+    protocol_text: str,
+    seed_record: dict[str, Any],
+    repo_root: Path | str,
+    contract_path: Path | str,
+    rerun_scan: bool = True,
+    allow_fixture: bool = False,
+) -> dict[str, Any]:
+    """Validate the machine-readable dispatch authority (R4.1, M-1).
+
+    The authority must machine-bind, for THIS exact contract:
+
+    - ``freeze_status == FROZEN`` with frozen subject HEAD/TREE pins equal to
+      the authority pins and to the Director FREEZE record pins;
+    - a Director FREEZE record binding the exact contract + seed-record digests;
+    - HG-B owner approval (``decision == APPROVED``) for this rule/revision;
+    - a fresh review verdict PASS and a fresh verify verdict VERIFIED for the
+      frozen subject HEAD/TREE;
+    - R2 ACTIVE with BOTH executor legs (``AUTHOR_U1`` / ``EXTERNAL_U2``)
+      authorized and allowed by the executor policy;
+    - the SHA-256 of the exact contract file and seed record file.
+
+    Every referenced record must exist under ``repo_root`` with the bound
+    digest. A ``fixture`` authority is second-class: it is rejected unless
+    ``allow_fixture=True`` and the produced plan is marked
+    ``synthetic_test_fixture_only``. Any problem raises :class:`ContractError`.
+    """
+    root = Path(repo_root)
+    failures: list[str] = []
+    _require_keys(authority, _DISPATCH_AUTHORITY_TOP_KEYS, "dispatch_authority", failures)
+    if failures:
+        raise ContractError("dispatch authority rejected: " + "; ".join(failures))
+    if authority["schema_version"] != _DISPATCH_AUTHORITY_SCHEMA_VERSION:
+        failures.append(
+            f"dispatch_authority.schema_version {authority['schema_version']!r} != "
+            f"{_DISPATCH_AUTHORITY_SCHEMA_VERSION}"
+        )
+    if authority["kind"] != _DISPATCH_AUTHORITY_KIND:
+        failures.append(
+            f"dispatch_authority.kind {authority['kind']!r} != {_DISPATCH_AUTHORITY_KIND!r}"
+        )
+    if not isinstance(authority["authority_revision"], str) or not authority["authority_revision"]:
+        failures.append("dispatch_authority.authority_revision: must be a non-empty string")
+    fixture = authority["fixture"]
+    if not isinstance(fixture, bool):
+        failures.append("dispatch_authority.fixture: must be a boolean")
+    if fixture is True:
+        note = authority.get("fixture_note")
+        if not isinstance(note, str) or SYNTHETIC_FIXTURE_MARKER not in note:
+            failures.append(
+                f"dispatch_authority.fixture_note: a fixture authority must carry the marker "
+                f"{SYNTHETIC_FIXTURE_MARKER!r}"
+            )
+        if not allow_fixture:
+            failures.append(
+                "dispatch_authority: fixture authorities are not valid for real dispatch "
+                "(allow_fixture=True is required even for synthetic use)"
+            )
+    elif authority.get("fixture_note") not in (None, ""):
+        failures.append("dispatch_authority.fixture_note: must be empty for a non-fixture authority")
+    if authority["frozen"] is not True:
+        failures.append(
+            f"dispatch_authority.frozen must be literally true (got {authority['frozen']!r})"
+        )
+    for key in ("subject_head", "subject_tree"):
+        if not isinstance(authority[key], str) or not _HEX40_RE.match(authority[key] or ""):
+            failures.append(f"dispatch_authority.{key}: must be a full 40-hex SHA")
+    if authority.get("subject_head") == authority.get("subject_tree"):
+        failures.append("dispatch_authority: subject_head and subject_tree must differ")
+    if not isinstance(authority["contract_sha256"], str) or not _SHA256_RE.match(
+        authority["contract_sha256"] or ""
+    ):
+        failures.append("dispatch_authority.contract_sha256: must be 64-hex sha256")
+    if not isinstance(authority["seed_record_sha256"], str) or not _SHA256_RE.match(
+        authority["seed_record_sha256"] or ""
+    ):
+        failures.append("dispatch_authority.seed_record_sha256: must be 64-hex sha256")
+    if authority["author_executor"] != _AUTHORIZED_AUTHOR_EXECUTOR:
+        failures.append(
+            f"dispatch_authority.author_executor must be {_AUTHORIZED_AUTHOR_EXECUTOR!r} "
+            f"(got {authority['author_executor']!r})"
+        )
+    if authority["external_executor"] != _AUTHORIZED_EXTERNAL_EXECUTOR:
+        failures.append(
+            f"dispatch_authority.external_executor must be {_AUTHORIZED_EXTERNAL_EXECUTOR!r} "
+            f"(got {authority['external_executor']!r})"
+        )
+    policy = authority["executor_policy"]
+    _require_keys(policy, _AUTHORITY_POLICY_KEYS, "dispatch_authority.executor_policy", failures)
+    if isinstance(policy, dict):
+        for key in _AUTHORITY_POLICY_KEYS:
+            if policy.get(key) is not True:
+                failures.append(
+                    f"dispatch_authority.executor_policy.{key} must be literally true "
+                    "(both legs must be allowed by executor policy)"
+                )
+
+    freeze_record = authority["freeze_record"]
+    _require_keys(freeze_record, _AUTHORITY_FREEZE_RECORD_KEYS, "freeze_record", failures)
+    hg_b = authority["hg_b_record"]
+    _require_keys(hg_b, _AUTHORITY_HG_B_KEYS, "hg_b_record", failures)
+    review = authority["review_verdict"]
+    _require_keys(review, _AUTHORITY_REVIEW_KEYS, "review_verdict", failures)
+    verify = authority["verify_verdict"]
+    _require_keys(verify, _AUTHORITY_VERIFY_KEYS, "verify_verdict", failures)
+    r2 = authority["r2_record"]
+    _require_keys(r2, _AUTHORITY_R2_KEYS, "r2_record", failures)
+    if failures:
+        raise ContractError("dispatch authority rejected: " + "; ".join(failures))
+
+    if freeze_record.get("decision") != "FREEZE":
+        failures.append(
+            f"freeze_record.decision must be 'FREEZE' (got {freeze_record.get('decision')!r})"
+        )
+    if not isinstance(freeze_record.get("director"), str) or not freeze_record.get("director"):
+        failures.append("freeze_record.director: must be a non-empty string")
+    if freeze_record.get("subject_head") != authority.get("subject_head") or freeze_record.get(
+        "subject_tree"
+    ) != authority.get("subject_tree"):
+        failures.append(
+            "freeze subject mismatch: freeze_record subject pins != authority subject pins"
+        )
+    if freeze_record.get("contract_sha256") != authority.get("contract_sha256"):
+        failures.append("freeze_record.contract_sha256 != authority contract_sha256")
+    if freeze_record.get("seed_record_sha256") != authority.get("seed_record_sha256"):
+        failures.append("freeze_record.seed_record_sha256 != authority seed_record_sha256")
+    if hg_b.get("decision") != "APPROVED":
+        failures.append(
+            f"hg_b_record.decision must be 'APPROVED' (got {hg_b.get('decision')!r}); "
+            "HG-B owner approval is a dispatch prerequisite"
+        )
+    if hg_b.get("candidate_revision") != str(
+        contract.get("scientific_subject", {}).get("candidate_revision")
+    ):
+        failures.append(
+            "hg_b_record.candidate_revision != contract candidate_revision (the owner "
+            "approval must bind the R4 delta of THIS revision)"
+        )
+    if hg_b.get("rule_id") != contract.get("rule_id"):
+        failures.append("hg_b_record.rule_id != contract rule_id")
+    if review.get("verdict") != "PASS":
+        failures.append(
+            f"review_verdict.verdict must be 'PASS' for the frozen subject (got "
+            f"{review.get('verdict')!r})"
+        )
+    if review.get("reviewed_head") != authority.get("subject_head") or review.get(
+        "reviewed_tree"
+    ) != authority.get("subject_tree"):
+        failures.append("review subject mismatch: review_verdict != authority subject pins")
+    if verify.get("verdict") != "VERIFIED":
+        failures.append(
+            f"verify_verdict.verdict must be 'VERIFIED' for the frozen subject (got "
+            f"{verify.get('verdict')!r})"
+        )
+    if verify.get("verified_head") != authority.get("subject_head") or verify.get(
+        "verified_tree"
+    ) != authority.get("subject_tree"):
+        failures.append("verify subject mismatch: verify_verdict != authority subject pins")
+    if r2.get("r2_status") != "ACTIVE":
+        failures.append(
+            f"r2_record.r2_status must be 'ACTIVE' (got {r2.get('r2_status')!r}); both legs "
+            "are HARD_BLOCKED while R2 is WAITING_HOST / NOT_ACTIVE"
+        )
+    if r2.get("author_executor") != authority.get("author_executor") or r2.get(
+        "external_executor"
+    ) != authority.get("external_executor"):
+        failures.append(
+            "executor mismatch: r2_record executors != authority executors"
+        )
+    subject = contract.get("scientific_subject", {})
+    if subject.get("freeze_status") != "FROZEN":
+        failures.append(
+            f"contract freeze_status is {subject.get('freeze_status')!r}, not FROZEN: a "
+            "PRE-DATA / NOT FROZEN package cannot be dispatched"
+        )
+    if subject.get("frozen_subject_head") != authority.get("subject_head") or subject.get(
+        "frozen_subject_tree"
+    ) != authority.get("subject_tree"):
+        failures.append(
+            "frozen subject mismatch: contract frozen_subject pins != authority subject pins"
+        )
+    if authority.get("seed_record_sha256") != subject.get("seed_record_file_sha256"):
+        failures.append(
+            "seed record mismatch: authority seed_record_sha256 != contract "
+            "seed_record_file_sha256"
+        )
+    try:
+        actual_contract_digest = _sha256_file(Path(contract_path))
+    except OSError as exc:
+        raise ContractError(f"contract file read error {contract_path}: {exc}") from exc
+    if authority.get("contract_sha256") != actual_contract_digest:
+        failures.append(
+            f"contract digest mismatch: authority contract_sha256 "
+            f"{authority.get('contract_sha256')} != actual file {actual_contract_digest}"
+        )
+    if failures:
+        raise ContractError("dispatch authority rejected: " + "; ".join(failures))
+
+    for where, embedded in (
+        ("freeze_record", freeze_record),
+        ("hg_b_record", hg_b),
+        ("review_verdict", review),
+        ("verify_verdict", verify),
+        ("r2_record", r2),
+    ):
+        _authority_path_digest(root, embedded, embedded, where, failures)
+    if failures:
+        raise ContractError("dispatch authority rejected: " + "; ".join(failures))
+
+    gate_report = validate_freeze_contract(
+        contract,
+        protocol_text=protocol_text,
+        seed_record=seed_record,
+        repo_root=root,
+        require_record=True,
+        rerun_scan=rerun_scan,
+    )
+    if gate_report["gate"] != "PASS":
+        raise ContractError(
+            "dispatch refused: freeze gate FAIL — " + "; ".join(gate_report["failures"][:8])
+        )
+    return {
+        "status": "DISPATCH_AUTHORIZED",
+        "fixture": fixture,
+        "synthetic_test_fixture_only": bool(fixture),
+        "subject_head": authority["subject_head"],
+        "subject_tree": authority["subject_tree"],
+        "hg_b": "APPROVED",
+        "review": "PASS",
+        "verify": "VERIFIED",
+        "r2_status": "ACTIVE",
+        "author_executor": authority["author_executor"],
+        "external_executor": authority["external_executor"],
+        "authority_revision": authority["authority_revision"],
+    }
 
 
 def build_execution_plan(
@@ -999,23 +1661,48 @@ def build_execution_plan(
     protocol_path: Path | str,
     record_path: Path | str,
     repo_root: Path | str | None = None,
+    authority_path: Path | str | None = None,
+    allow_fixture: bool = False,
+    rerun_scan: bool = True,
 ) -> dict[str, Any]:
-    """THE dispatch entrypoint: only a fully PASSing freeze package yields a plan.
+    """THE dispatch entrypoint (R4.1, M-1): DISPATCH_READY requires authority.
 
-    Any validation failure raises :class:`ContractError` (non-zero exit at the
-    CLI) — a corrupted contract cannot be dispatched around the gate.
+    A plan is produced ONLY when (a) the full freeze gate passes
+    (``PREFREEZE_VALIDATION_PASS``) AND (b) a machine-readable
+    ``nanolab_v02_dispatch_authority`` validates for this exact contract:
+    FROZEN subject + Director FREEZE record + HG-B APPROVED + review PASS +
+    verify VERIFIED + R2 ACTIVE with both legs authorized. The committed
+    PRE-DATA / NOT FROZEN package is therefore DISPATCH_BLOCKED here — any
+    validation or authority failure raises :class:`ContractError` (non-zero
+    exit at the CLI); a dispatch cannot bypass the gate by construction.
     """
+    if repo_root is None:
+        raise ContractError(
+            "dispatch requires a repository root (collision-scan manifest verification)"
+        )
+    if authority_path is None:
+        raise ContractError(
+            "dispatch refused: DISPATCH_BLOCKED — missing nanolab_v02_dispatch_authority "
+            "object (freeze/dispatch requires FROZEN status, Director FREEZE record, HG-B "
+            "APPROVED, review PASS, verify VERIFIED and R2 ACTIVE)"
+        )
     contract = load_contract(contract_path)
     record = load_seed_record(record_path)
+    authority = load_dispatch_authority(authority_path)
     try:
         protocol_text = Path(protocol_path).read_text(encoding="utf-8")
     except OSError as exc:
         raise ContractError(f"protocol read error {protocol_path}: {exc}") from exc
-    report = validate_freeze_contract(
-        contract, protocol_text=protocol_text, seed_record=record, repo_root=repo_root
+    authority_report = validate_dispatch_authority(
+        authority,
+        contract,
+        protocol_text,
+        record,
+        repo_root=repo_root,
+        contract_path=contract_path,
+        rerun_scan=rerun_scan,
+        allow_fixture=allow_fixture,
     )
-    if report["gate"] != "PASS":
-        raise ContractError("dispatch refused: freeze gate FAIL — " + "; ".join(report["failures"][:8]))
     variants = contract["variants"]
     plan: dict[str, Any] = {
         "kind": "nanolab_v02_dispatch_execution_plan",
@@ -1024,18 +1711,24 @@ def build_execution_plan(
         "candidate": contract["scientific_subject"],
         "gate_report": {
             "gate": "PASS",
+            "validation_stage": "PREFREEZE_VALIDATION_PASS",
             "integer_rounding_policy": INTEGER_ROUNDING_POLICY["name"],
         },
+        "dispatch_authority": authority_report,
+        "synthetic_test_fixture_only": bool(authority_report["fixture"]),
         "cells": {},
         "budget": contract["run_budget"],
         "replacement_policy": {
             "allowed_only_for": contract["replacement"]["allowed_only_for"],
             "attempt_id_rule": contract["replacement"]["attempt_id_rule"],
             "paired_semantics": contract["replacement"]["paired_semantics"],
+            "pair_state_machine": PAIR_STATES,
         },
         "scientific_claim_ceiling": "C1_COMPUTATIONAL_REPRODUCTION (campaign-level; none claimed here)",
         "scientific_outcome": "NOT_EVALUATED",
     }
+    if authority_report["fixture"]:
+        plan["note"] = SYNTHETIC_FIXTURE_MARKER + " — not a real authorization"
     for variant, spec in variants.items():
         plan["cells"][variant] = {
             "role": spec["role"],
@@ -1054,10 +1747,21 @@ def build_execution_plan(
 
 
 # ---------------------------------------------------------------------------
-# Replacement ledger (F3 semantics: attempt ids + FAILED_TECHNICAL-only).
+# Pair-level replacement ledger (F3 + R4.1 M-4).
 # ---------------------------------------------------------------------------
 
 ATTEMPT_ID_RE = re.compile(r"^[A-Za-z0-9._-]+(-R[0-9]+)?$")
+
+PAIR_STATES = (
+    "PAIR_RUNNING",
+    "PAIR_COMPLETED",
+    "PAIR_FAILED_TECHNICAL",
+    "PAIR_REPLACED",
+    "PAIR_ABORTED",
+)
+LEGS = ("author", "external")
+ATTEMPT_OUTCOMES = ("SCHEDULED", "COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT")
+TERMINAL_OUTCOMES = ("COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT")
 
 
 class ReplacementBudgetExhausted(RuntimeError):
@@ -1065,14 +1769,18 @@ class ReplacementBudgetExhausted(RuntimeError):
 
 
 class ReplacementLedger:
-    """Append-only paired attempt/replacement ledger for one campaign.
+    """Append-only PAIR-LEVEL paired attempt/replacement ledger (R4.1, M-4).
 
-    - attempt IDs are unique forever (reuse raises);
-    - replacements are allowed ONLY for frozen ``FAILED_TECHNICAL`` outcomes
-      (any other outcome raises — outcome-driven seed selection is forbidden);
-    - replacement identities are consumed from the frozen pool in pool order
-      (deterministic; never chosen from outcomes);
-    - per-cell quota is frozen; exhausting it raises instead of expanding.
+    A pair (``pair_id``) owns one frozen ``seed_identity`` and exactly two
+    legs (author + external); attempts are globally unique and always bound
+    to one pair. A failed pair may receive AT MOST ONE replacement
+    assignment; the replacement consumes the next frozen pool identity,
+    creates a NEW pair and schedules BOTH of its legs. Repeated requests for
+    the same failed pair are rejected without consuming quota or moving the
+    pool cursor; incomplete pairs (missing counterpart), variant mismatches,
+    seed/pair mismatches and non-technical outcomes are rejected as well.
+    Outcome-driven seed selection is impossible by construction: identities
+    are consumed from the frozen pool in pool order.
     """
 
     def __init__(self, quota_pairs_per_variant: dict[str, int], pools: dict[str, list[int]]):
@@ -1080,37 +1788,132 @@ class ReplacementLedger:
         self._pools = {v: list(pools[v]) for v in self._quota}
         self._used_pairs = {v: 0 for v in self._quota}
         self._pool_cursor = {v: 0 for v in self._quota}
+        self._pairs: dict[str, dict[str, Any]] = {}
+        self._seed_owner: dict[tuple[str, int], str] = {}
         self._attempts: dict[str, dict[str, Any]] = {}
         self._ledger: list[dict[str, Any]] = []
 
-    def register_attempt(self, attempt_id: str, variant: str, leg: str, outcome: str) -> None:
-        if not ATTEMPT_ID_RE.match(attempt_id):
-            raise ValueError(f"attempt id {attempt_id!r} violates the attempt id rule")
-        if attempt_id in self._attempts:
+    # -- pair lifecycle ----------------------------------------------------
+
+    def open_pair(self, pair_id: str, variant: str, seed_identity: int) -> dict[str, Any]:
+        """Open a PAIR_RUNNING pair owning one frozen seed identity."""
+        if not isinstance(pair_id, str) or not pair_id:
+            raise ValueError("pair_id must be a non-empty string")
+        if pair_id in self._pairs:
+            raise ValueError(f"pair id {pair_id!r} already exists — pair ids are unique forever")
+        if variant not in self._quota:
+            raise ValueError(f"unknown variant {variant!r}")
+        if not _is_int(seed_identity) or not 0 <= seed_identity < SEED_MAX:
+            raise ValueError(f"seed identity {seed_identity!r} is not an int32-positive integer")
+        owner = self._seed_owner.get((variant, seed_identity))
+        if owner is not None:
             raise ValueError(
-                f"attempt id {attempt_id!r} already used for "
-                f"{self._attempts[attempt_id]['variant']}/{self._attempts[attempt_id]['leg']} — "
-                "attempt id reuse is forbidden"
+                f"seed/pair mismatch: seed identity {seed_identity} already belongs to "
+                f"pair {owner!r} — one seed identity belongs to exactly one pair"
             )
-        if outcome not in ("COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT"):
-            raise ValueError(f"unknown technical outcome {outcome!r}")
-        self._attempts[attempt_id] = {"variant": variant, "leg": leg, "outcome": outcome}
+        pair = {
+            "pair_id": pair_id,
+            "variant": variant,
+            "seed_identity": seed_identity,
+            "state": "PAIR_RUNNING",
+            "legs": {},
+            "replacement_assigned": False,
+            "replacement_identity": None,
+            "replacement_pair_id": None,
+            "source_pair_id": None,
+        }
+        self._pairs[pair_id] = pair
+        self._seed_owner[(variant, seed_identity)] = pair_id
         self._ledger.append(
-            {"attempt_id": attempt_id, "variant": variant, "leg": leg, "outcome": outcome}
+            {
+                "event": "PAIR_OPENED",
+                "pair_id": pair_id,
+                "variant": variant,
+                "seed_identity": seed_identity,
+                "state": "PAIR_RUNNING",
+            }
+        )
+        return dict(pair)
+
+    def record_attempt(self, attempt_id: str, pair_id: str, leg: str, outcome: str) -> None:
+        """Bind a real (non-SCHEDULED) attempt outcome to one pair leg."""
+        self._bind_attempt(attempt_id, pair_id, leg, outcome, allow_scheduled=False)
+
+    def record_outcome(self, attempt_id: str, outcome: str) -> None:
+        """Resolve a SCHEDULED leg (from a replacement pair) to its outcome."""
+        attempt = self._attempts.get(attempt_id)
+        if attempt is None:
+            raise ValueError(f"unknown attempt id {attempt_id!r}")
+        if attempt["outcome"] != "SCHEDULED":
+            raise ValueError(
+                f"attempt {attempt_id!r} already carries outcome {attempt['outcome']!r}; "
+                "record_outcome resolves SCHEDULED legs only"
+            )
+        if outcome not in TERMINAL_OUTCOMES:
+            raise ValueError(f"unknown technical outcome {outcome!r}")
+        pair = self._pairs[attempt["pair_id"]]
+        if pair["state"] != "PAIR_RUNNING":
+            raise ValueError(f"pair {pair['pair_id']!r} is {pair['state']}; cannot record outcomes")
+        attempt["outcome"] = outcome
+        self._apply_pair_state(pair)
+        self._ledger.append(
+            {
+                "event": "ATTEMPT_OUTCOME_RECORDED",
+                "attempt_id": attempt_id,
+                "pair_id": pair["pair_id"],
+                "leg": attempt["leg"],
+                "outcome": outcome,
+                "pair_state_after": pair["state"],
+            }
         )
 
-    def request_replacement(self, variant: str, failed_attempt_id: str) -> int:
-        """Consume the next frozen pool identity for a FAILED_TECHNICAL pair."""
-        attempt = self._attempts.get(failed_attempt_id)
-        if attempt is None:
-            raise ValueError(f"unknown attempt id {failed_attempt_id!r}")
-        if attempt["variant"] != variant:
-            raise ValueError(f"attempt {failed_attempt_id!r} belongs to {attempt['variant']}, not {variant}")
-        if attempt["outcome"] != "FAILED_TECHNICAL":
+    def request_replacement(
+        self,
+        variant: str,
+        failed_pair_id: str,
+        replacement_pair_id: str,
+        author_attempt_id: str,
+        external_attempt_id: str,
+    ) -> int:
+        """One-shot replacement of a terminal FAILED_TECHNICAL pair (M-4).
+
+        Validates the pair state BEFORE consuming anything: both legs must be
+        bound (a missing counterpart is not a failed pair), the pair must be
+        terminal ``PAIR_FAILED_TECHNICAL``, and it must not already carry a
+        replacement assignment. On success the next frozen pool identity is
+        consumed in pool order, a NEW pair is created for it, and BOTH legs
+        of the new pair are scheduled with fresh globally-unique attempt ids.
+        """
+        pair = self._pairs.get(failed_pair_id)
+        if pair is None:
+            raise ValueError(f"unknown pair id {failed_pair_id!r}")
+        if pair["variant"] != variant:
             raise ValueError(
-                f"replacement refused: attempt {failed_attempt_id!r} outcome is "
-                f"{attempt['outcome']!r}; replacements are allowed ONLY for FAILED_TECHNICAL"
+                f"variant mismatch: pair {failed_pair_id!r} belongs to {pair['variant']!r}, "
+                f"not {variant!r}"
             )
+        if pair["state"] == "PAIR_RUNNING":
+            bound = sorted(pair["legs"])
+            missing = [leg for leg in LEGS if leg not in pair["legs"]]
+            raise ValueError(
+                f"replacement refused: pair {failed_pair_id!r} is not terminal "
+                f"(state {pair['state']}; bound legs {bound}; missing counterpart: {missing}) — "
+                "an incomplete pair has no frozen FAILED_TECHNICAL condition"
+            )
+        if pair["state"] == "PAIR_REPLACED" or pair["replacement_assigned"]:
+            raise ValueError(
+                f"replacement refused: pair {failed_pair_id!r} already received its single "
+                f"replacement assignment (identity {pair['replacement_identity']}, new pair "
+                f"{pair['replacement_pair_id']!r}) — repeated replacement for one failed "
+                "pair is forbidden"
+            )
+        if pair["state"] != "PAIR_FAILED_TECHNICAL":
+            raise ValueError(
+                f"replacement refused: pair {failed_pair_id!r} terminal state is "
+                f"{pair['state']!r}; replacements are allowed ONLY for PAIR_FAILED_TECHNICAL"
+            )
+        if variant not in self._quota:
+            raise ValueError(f"unknown variant {variant!r}")
         if self._used_pairs[variant] >= self._quota[variant]:
             raise ReplacementBudgetExhausted(
                 f"{variant}: frozen replacement quota {self._quota[variant]} pairs exhausted "
@@ -1121,15 +1924,33 @@ class ReplacementLedger:
             raise ReplacementBudgetExhausted(
                 f"{variant}: frozen replacement pool exhausted at cursor {cursor}"
             )
+        if author_attempt_id == external_attempt_id:
+            raise ValueError(
+                "replacement refused: author and external legs require two distinct "
+                "globally-unique attempt ids (one-leg-only replacement is forbidden)"
+            )
         identity = self._pools[variant][cursor]
+        # All validation has passed — consume quota/cursor, then mutate state.
         self._pool_cursor[variant] = cursor + 1
         self._used_pairs[variant] += 1
+        pair["state"] = "PAIR_REPLACED"
+        pair["replacement_assigned"] = True
+        pair["replacement_identity"] = identity
+        pair["replacement_pair_id"] = replacement_pair_id
+        self.open_pair(replacement_pair_id, variant, identity)
+        self._pairs[replacement_pair_id]["source_pair_id"] = failed_pair_id
+        for leg, attempt_id in (("author", author_attempt_id), ("external", external_attempt_id)):
+            self._bind_attempt(attempt_id, replacement_pair_id, leg, "SCHEDULED", allow_scheduled=True)
         self._ledger.append(
             {
                 "event": "REPLACEMENT_PAIR_ASSIGNED",
                 "variant": variant,
-                "failed_attempt_id": failed_attempt_id,
+                "failed_pair_id": failed_pair_id,
+                "replacement_pair_id": replacement_pair_id,
                 "replacement_identity": identity,
+                "author_attempt_id": author_attempt_id,
+                "external_attempt_id": external_attempt_id,
+                "both_legs_scheduled": True,
                 "pool_cursor_after": self._pool_cursor[variant],
                 "used_pairs": self._used_pairs[variant],
                 "quota_pairs": self._quota[variant],
@@ -1137,12 +1958,101 @@ class ReplacementLedger:
         )
         return identity
 
+    # -- internals ----------------------------------------------------------
+
+    def _bind_attempt(
+        self, attempt_id: str, pair_id: str, leg: str, outcome: str, allow_scheduled: bool
+    ) -> None:
+        if not ATTEMPT_ID_RE.match(attempt_id or ""):
+            raise ValueError(f"attempt id {attempt_id!r} violates the attempt id rule")
+        if attempt_id in self._attempts:
+            other = self._attempts[attempt_id]
+            raise ValueError(
+                f"attempt id {attempt_id!r} already bound to pair {other['pair_id']!r} "
+                f"({other['leg']} leg) — attempt ids are globally unique"
+            )
+        pair = self._pairs.get(pair_id)
+        if pair is None:
+            raise ValueError(f"unknown pair id {pair_id!r}")
+        if pair["state"] != "PAIR_RUNNING":
+            raise ValueError(
+                f"pair {pair_id!r} is terminal ({pair['state']}); legs cannot be bound"
+            )
+        if leg not in LEGS:
+            raise ValueError(f"unknown leg {leg!r}; must be one of {LEGS}")
+        if leg in pair["legs"]:
+            raise ValueError(
+                f"pair {pair_id!r} already binds its {leg} leg (attempt "
+                f"{pair['legs'][leg]!r}) — author and external legs belong to the pair "
+                "exactly once"
+            )
+        if outcome not in ATTEMPT_OUTCOMES:
+            raise ValueError(f"unknown technical outcome {outcome!r}")
+        if outcome == "SCHEDULED" and not allow_scheduled:
+            raise ValueError(
+                "record_attempt requires a real technical outcome; SCHEDULED legs are "
+                "created only by request_replacement"
+            )
+        self._attempts[attempt_id] = {"pair_id": pair_id, "leg": leg, "outcome": outcome}
+        pair["legs"][leg] = attempt_id
+        self._apply_pair_state(pair)
+        self._ledger.append(
+            {
+                "event": "ATTEMPT_BOUND",
+                "attempt_id": attempt_id,
+                "pair_id": pair_id,
+                "leg": leg,
+                "outcome": outcome,
+                "pair_state_after": pair["state"],
+            }
+        )
+
+    def _apply_pair_state(self, pair: dict[str, Any]) -> None:
+        if len(pair["legs"]) < len(LEGS):
+            pair["state"] = "PAIR_RUNNING"
+            return
+        outcomes = [self._attempts[attempt_id]["outcome"] for attempt_id in pair["legs"].values()]
+        if any(o == "SCHEDULED" for o in outcomes):
+            # a replacement pair with unresolved scheduled legs is still RUNNING
+            pair["state"] = "PAIR_RUNNING"
+            return
+        if any(o == "FAILED_TECHNICAL" for o in outcomes):
+            pair["state"] = "PAIR_FAILED_TECHNICAL"
+        elif any(o in ("ABORTED", "BLOCKED_ENVIRONMENT") for o in outcomes):
+            pair["state"] = "PAIR_ABORTED"
+        else:
+            pair["state"] = "PAIR_COMPLETED"
+
+    # -- read surface ---------------------------------------------------------
+
     @property
     def ledger(self) -> list[dict[str, Any]]:
         return list(self._ledger)
 
     def used_pairs(self, variant: str) -> int:
         return self._used_pairs[variant]
+
+    def pool_cursor(self, variant: str) -> int:
+        return self._pool_cursor[variant]
+
+    def pair(self, pair_id: str) -> dict[str, Any]:
+        pair = self._pairs.get(pair_id)
+        if pair is None:
+            raise ValueError(f"unknown pair id {pair_id!r}")
+        return {
+            "pair_id": pair["pair_id"],
+            "variant": pair["variant"],
+            "seed_identity": pair["seed_identity"],
+            "state": pair["state"],
+            "legs": dict(pair["legs"]),
+            "replacement_assigned": pair["replacement_assigned"],
+            "replacement_identity": pair["replacement_identity"],
+            "replacement_pair_id": pair["replacement_pair_id"],
+            "source_pair_id": pair["source_pair_id"],
+        }
+
+    def pair_state(self, pair_id: str) -> str:
+        return self.pair(pair_id)["state"]
 
 
 # ---------------------------------------------------------------------------
@@ -1153,31 +2063,46 @@ class ReplacementLedger:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="python3 -m scripts.nl5.repro_v02_freeze_contract",
-        description="R4 fail-closed freeze/dispatch contract gate (F1/F4).",
+        description="R4/R4.1 fail-closed freeze contract gate + gated dispatch (F1/F4, M-1..M-4).",
     )
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("gate", "plan"):
+    for name in ("gate", "prefreeze"):
         child = sub.add_parser(name)
         child.add_argument("--contract", required=True)
         child.add_argument("--protocol", required=True)
         child.add_argument("--record")
         child.add_argument("--repo-root", default=".")
+        child.add_argument(
+            "--no-scan-rerun",
+            action="store_true",
+            help="skip the pinned-scan re-run for recorded skips (binding checks still run)",
+        )
+    plan = sub.add_parser("plan")
+    plan.add_argument("--contract", required=True)
+    plan.add_argument("--protocol", required=True)
+    plan.add_argument("--record", required=True)
+    plan.add_argument("--repo-root", default=".")
+    plan.add_argument("--authority", required=True, help="nanolab_v02_dispatch_authority JSON")
+    plan.add_argument("--no-scan-rerun", action="store_true")
     args = parser.parse_args(argv)
+    rerun = not getattr(args, "no_scan_rerun", False)
     try:
-        if args.command == "gate":
-            record_path = args.record
-            report = freeze_gate(
-                args.contract, args.protocol, record_path, repo_root=args.repo_root
+        if args.command in ("gate", "prefreeze"):
+            entry = prefreeze_validation if args.command == "prefreeze" else freeze_gate
+            report = entry(
+                args.contract, args.protocol, args.record, repo_root=args.repo_root, rerun_scan=rerun
             )
             print(json.dumps(report, ensure_ascii=False, indent=2))
             return 0 if report["gate"] == "PASS" else 3
-        plan = build_execution_plan(
+        result = build_execution_plan(
             args.contract,
             args.protocol,
-            args.record,  # type: ignore[arg-type]
+            args.record,
             repo_root=args.repo_root,
+            authority_path=args.authority,
+            rerun_scan=rerun,
         )
-        print(json.dumps(plan, ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except ContractError as exc:
         print(json.dumps({"gate": "FREEZE_GATE_FAIL", "error": str(exc)}, ensure_ascii=False))

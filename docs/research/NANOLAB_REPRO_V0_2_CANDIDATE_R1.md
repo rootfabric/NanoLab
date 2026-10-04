@@ -18,6 +18,27 @@ candidate revision  = R4 (2026-10-03, pre-freeze hardening R4 по WO-NL5-V02-
                       floor(0.20·N) пар = 12/12/2/2, replacement cap =
                       56 runs, max_runs = 352. Confirmatory identities НЕ
                       изменялись — logical digest наследован от R3)
+candidate repair R4.1 (2026-10-04, fresh independent Reviewer R1 FIX_
+                      REQUIRED corrections M-1..M-4 + m-1, append-only;
+                      branch repair/nl5-v02-prefreeze-hardening-r4-r1:
+                      (M-1) dispatch разделён с pre-freeze validation —
+                      PLAN только при FROZEN + machine-readable
+                      nanolab_v02_dispatch_authority (Director FREEZE record,
+                      HG-B APPROVED, review PASS, verify VERIFIED, R2 ACTIVE,
+                      оба executor-плеча); PRE-DATA package =
+                      PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED;
+                      (M-2) bit-exact replay replacement pools + новые
+                      integrity digests replacement_pool_sha256 /
+                      record_r4_sha256 (R3 logical digest = provenance);
+                      (M-3) machine-bound collision-scan manifest (SHA-256 в
+                      contract) + re-run pinned scan для каждого recorded
+                      skip: fabricated skip на чистом candidate = gate FAIL;
+                      (M-4) pair-level ReplacementLedger (one-shot
+                      replacement per failed pair, both legs scheduled);
+                      (m-1) equivalence wording: PASS = CI90 медианного
+                      парного сдвига целиком внутри pre-declared
+                      equivalence interval, НЕ «неотличимость от нуля»;
+                      H0/H1 → standard TOST. Научные параметры НЕ менялись)
 candidate revision R3 (2026-09-30, repair R2 по fresh review refresh R2 PASS
                       61d8c67 R-1..R-5 + central closure mission: (а) N-contract —
                       генератор выдаёт ровно протокольные cardinalities (было
@@ -100,18 +121,33 @@ Scope-ограничение (explicit, R4): правило проверяет �
 **медианного парного сдвига** относительно внутриплатформенной вариативности
 (TOST-логика на CI90 медианы d_i). Оно НЕ проверяет равенство всех прочих
 свойств распределений (дисперсии, хвосты, форму, высшие моменты) и не
-утверждает «платформы одинаковы во всём». PASS означает только
-неотличимость медианного сдвига от нуля в выбранной шкале δ·s_eff.
+утверждает «платформы одинаковы во всём». PASS (EQUIVALENT) означает только,
+что CI90 медианного парного сдвига целиком лежит внутри заранее
+определённого equivalence interval (−δ·s_eff, +δ·s_eff) (R4.1 wording,
+reviewer correction m-1). Equivalence в этом смысле — НЕ то же самое, что
+statistical non-significance относительно нуля: сдвиг может быть статистически
+отличим от нуля и при этом практически эквивалентен, если весь его CI лежит
+внутри pre-declared полосы; и наоборот, незамкнутый/широкий CI даёт
+INCONCLUSIVE даже при точечном сдвиге, неотличимом от нуля.
 
 ## 4. Hypotheses (для каждого primary варианта v ∈ {0b, 32b})
 
+Standard TOST semantics (R4.1, reviewer correction m-1: null =
+non-equivalence, alternative = equivalence; механическое decision rule §9.2
+остаётся authoritative и ему одного достаточно для вердикта):
+
 ```text
-H0(v): CI90(Δ_v) ⊂ (−δ·s_v, +δ·s_v)          (equivalence, TOST-логика, §9)
-H1(v): CI90(Δ_v) лежит целиком вне полосы     (не-эквивалентность, §9)
+H0(v): не-эквивалентность — CI90(Δ_v) НЕ лежит целиком внутри полосы
+       (−δ·s_v, +δ·s_v)                                (non-equivalence)
+H1(v): эквивалентность — CI90(Δ_v) целиком внутри (−δ·s_v, +δ·s_v)
+                                                      (equivalence, §9.2)
 иначе  : INCONCLUSIVE для v
 где Δ_v = median(d_v), d_i = median_B,i − median_A,i (paired по seed i),
-    s_v = pooled within-platform SD(n−1) тех же парных образцов,
+    s_v = pooled within-platform SD(n−1) тех же парных образцов
+          (s_eff = max(s_v, 0.01°), §9.1),
     δ  = 0.5 (fixed a priori; конвенция «medium effect»; НЕ выводится из R1 data)
+Отвержение H0 (CI целиком внутри полосы) = EQUIVALENT(v) — mechanical rule
+§9.2; H0/H1 labels выше — standard TOST convention, а не отдельный тест.
 ```
 
 ## 5. Platform definitions
@@ -535,4 +571,20 @@ candidate R4 (этот)   : pre-freeze hardening по audit F1–F4: authoritati
                         ceil-nmin-floor-replacement-pairs-v1 — N_min 52/8,
                         per-cell quota 12/12/2/2 пар, replacement cap 56,
                         max_runs 352 (F4); wording softening (§3/§12.3)
+candidate R4.1        : repair по fresh independent Reviewer R1 FIX_REQUIRED
+                        (M-1..M-4 + m-1): механическое разделение
+                        PREFREEZE_VALIDATION_PASS и DISPATCH_READY через
+                        versioned dispatch_authority (PLAN невозможен без
+                        FROZEN + Director FREEZE record + HG-B APPROVED +
+                        review PASS + verify VERIFIED + R2 ACTIVE с обоими
+                        executor-плечами); bit-exact replay replacement pools
+                        + integrity digests replacement_pool_sha256 /
+                        record_r4_sha256 (R3 digest eb4ab3f8… = provenance);
+                        machine-bound collision-scan manifest (path+SHA-256 в
+                        contract) с re-run pinned scan каждого recorded skip;
+                        pair-level ReplacementLedger (один replacement на
+                        failed pair, обе ноги планируются); equivalence
+                        wording §3/§4 (standard TOST; «equivalence ≠
+                        non-significance vs zero»). Научные параметры
+                        (N, δ, grid, paired, budget) НЕ менялись
 ```
