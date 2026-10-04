@@ -115,13 +115,63 @@ m-1 equivalence wording  = FIXED — equivalence interval (±δ·s_eff), standar
 HG-B = WAITING_OWNER; R2 = WAITING_HOST / NOT_ACTIVE; AUTHOR_U1 = NOT_ASSIGNED;
 NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED.
 
+## R4.2 — fresh Reviewer R2 FIX_REQUIRED → narrow repair (2026-10-04, append-only)
+
+Fresh independent Reviewer R2 (`REVIEWER_VERDICT_R2`, branch
+`review/nl5-v02-prefreeze-hardening-r4-1-r2` head `2be5c8f`) подтвердила закрытие
+R1 M-2/M-3/m-1 (= PASS) и вынесла FIX_REQUIRED по двум blocking + одному minor
+дефекту новой machinery: M-5 (Git/provenance binding dispatch authority),
+M-6 (атомарность pair replacement), m-2 (snapshot safety `open_pair`). Narrow
+repair R4.2 выполнен на ветке `repair/nl5-v02-prefreeze-hardening-r4-r2`
+(от tip R4.1 `7406b5a` = reviewed subject; reviewer branch интегрирована
+`--no-ff`, merge `5ea37a4`); детали — `REPAIR_MAP_R2.md`, START marker — event
+`0006`. Итог:
+
+```text
+M-5 Git/provenance       = FIXED — schema_version 2: subject_head обязан быть реальным
+                           Git commit, rev-parse <head>^{tree} == subject_tree; каждый
+                           authority record несёт source_commit/path/git_blob_sha1/
+                           canonical_sha256/record_kind/issuer_class и привязан к одному
+                           freeze-evidence commit; байты читаются из Git object database,
+                           НЕ из mutable worktree; frozen_subject_binding связывает
+                           contract/protocol/seed-record как exact Git blobs, байт-в-байт
+                           с валидируемыми входами; trust ceiling: DISPATCH_PRECONDITIONS_
+                           RECORDED + machine_launch_authorized=false + launch_gate=
+                           HUMAN_PROTECTED_WRITER (DISPATCH_AUTHORIZED не существует);
+                           fixture — test-only на реальном временном synthetic Git repo
+M-6 atomic replacement   = FIXED — двухфазная транзакция: PHASE 1 валидирует все будущие
+                           записи без мутаций (pair state, quota/cursor, replacement pair
+                           id свободен, seed не owned, формат+глобальная уникальность
+                           обоих attempt id, различие ног), PHASE 2 коммитит под rollback
+                           guard (snapshot/restore всех структур); после любого rejection
+                           state структурно идентичен (новый state_snapshot() helper)
+m-2 snapshot safety      = FIXED — open_pair возвращает независимый snapshot (legs
+                           копируется); ledger/pair getters тоже независимы
+Валидация                = 580 tests OK (было 557; +23 net: DispatchAuthorityGitBindingTest
+                           11, PairReplacementAtomicityTest 13, минус переработанные);
+                           check-consistency ok; workflow_lint blocking 0; work_cli все
+                           49 EX-* ok; prefreeze committed package = PREFREEZE_VALIDATION_
+                           PASS / DISPATCH_BLOCKED (evidence r4-2-prefreeze-validation-
+                           PASS-R4_2.json, package digests unchanged); hosted CI = NOT_RUN
+```
+
+Принятые поверхности R4/R4.1 не переделывались: M-2 replacement replay, M-3 collision
+proof, equivalence/TOST wording = PASS у Reviewer R2; код этих поверхностей не менялся;
+committed package (contract/record/manifest) байт-в-байт тот же. Параметры дизайна без
+изменений: N = 64/64/10/10; N_min = 52/52/8/8; replacement quotas = 12/12/2/2;
+replacement cap = 56; max_runs = 352; δ = 0.5; paired design; R3 confirmatory identities.
+
+Статусы НЕ меняются: CANDIDATE = PRE-DATA / NOT FROZEN; SCIENTIFIC RUNS = 0;
+HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE;
+NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED.
+
 ## Next action
 
 ```text
 NEXT_ACTOR = fresh independent SCIENTIFIC/PROTOCOL REVIEWER
-NEXT_ACTION = review exact R4.1 HEAD/TREE (см. event 0005 / REPAIR_MAP_R1_1.md) на
-              предмет M-1..M-4 + m-1 и сохранения границ R4; затем — только при
-              PASS — fresh exact-head Verifier, draft PR (TR-PR hosted CI),
+NEXT_ACTION = review exact R4.2 HEAD/TREE (см. event 0007 / REPAIR_MAP_R2.md) на
+              предмет M-5 + M-6 + m-2 и сохранения границ R4/R4.1; затем — только
+              при PASS — fresh exact-head Verifier, draft PR (TR-PR hosted CI),
               Director readiness record; merge = Human Gate. R2: ждать реального
-              owner-provided U1 (не outenemy).
+              owner-provided U1 (не outenemy). Verifier до Reviewer PASS не запускать.
 ```
