@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-continuation-r4-2-repair-started",
+  "timestamp_utc": "2026-10-04T06:01:07Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "5ea37a41671d82ab4576f4affbc5eda453d64436",
+  "summary": "R4.2 repair START (post-terminal review-correction continuation, append-only). Fresh independent Reviewer R2 вынесла FAIL / FIX_REQUIRED на exact R4.1 subject 7406b5a1755b7c025f6e10010be48a7fd231c9be / tree 8c6a9ba988fa3c539a2cecbba816a92d905e0495 (verdict: docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R2.md; branch review/nl5-v02-prefreeze-hardening-r4-1-r2 head 2be5c8f35d88af069a5ac40eac73979df34e81cf). Подтверждено закрытыми: R1 M-2 replacement replay = PASS, R1 M-3 collision proof = PASS, R1 m-1 equivalence/TOST wording = PASS. Blocking findings R4.2 (NARROW scope): M-5 — validate_dispatch_authority принимает 40-hex строки без механического доказательства существования frozen subject в Git (subject_head как commit, rev-parse subject_head^{tree} == subject_tree, protocol/contract/seed-record привязаны к exact Git blobs, immutable source binding (source_commit/path/git_blob_sha1/canonical_sha256/kind) на каждом authority record, байты из Git object а не mutable worktree, issuer/provenance class для HG-B/review/verify/R2, machine conclusion максимум DISPATCH_PRECONDITIONS_RECORDED — реальный launch за Human/Protected-Writer gate, fixture path не превращается в production флипом fixture=false); M-6 — request_replacement мутирует quota/cursor/source pair ДО завершения open_pair/_bind_attempt (нужна двухфазная транзакция PHASE 1 VALIDATE без мутаций + PHASE 2 COMMIT, state structurally unchanged после каждого rejection); m-2 — open_pair возвращает shallow copy с общим legs (нужен независимый snapshot). Ремонтная подготовка на этой ветке: создан repair/nl5-v02-prefreeze-hardening-r4-r2 от tip repair/nl5-v02-prefreeze-hardening-r4-r1 7406b5a1755b7c025f6e10010be48a7fd231c9be, reviewer branch интегрирован --no-ff (merge 5ea37a41671d82ab4576f4affbc5eda453d64436, tree ffd8392d5f805e5dcaebda1d5a38879718e943cf, без squash/force, reviewer evidence не изменялись). Факты до substantive edits: SHA сверены fresh fetch (origin/main = 87298b36431045474d3784adf5cee8c9a64d0fc9; repair r4-r1 tip = 7406b5a = reviewed HEAD; review r2 head = 2be5c8f; reviewed tree 8c6a9ba == rev-parse 7406b5a^{tree}); дублей repair-работы не обнаружено (branch repair/nl5-v02-prefreeze-hardening-r4-r2 отсутствовал на origin; dormant repair/nl5-acceptance-policy-r4-power-gate-r1 НЕ смешивается — Director sequencing). Сохраняются без изменений (accepted surfaces): M-2 replacement replay, M-3 collision proof, equivalence/TOST wording; N = 64/64/10/10; N_min = 52/52/8/8; replacement quotas = 12/12/2/2; replacement cap = 56; max_runs = 352; delta = 0.5; paired design; R3 confirmatory identities; PRE-DATA / NOT FROZEN package (evidence digests не трогаются). Границы: SCIENTIFIC RUNS = 0; CANDIDATE = PRE-DATA / NOT FROZEN; HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED; hosted CI = NOT_RUN. Старые terminal HANDOFF (event 0003) и validation event 0005 не редактируются; этот event — append-only correction marker. Следующее действие: реализация M-5 + M-6 + m-2 с negative tests, полный harness validation, REPAIR_MAP_R2.md, новый exact R4_2_HEAD/TREE для fresh independent Reviewer (Verifier — только после Reviewer PASS).",
+  "command_refs": [
+    "git fetch --all --prune -> origin/main 87298b36431045474d3784adf5cee8c9a64d0fc9; repair r4-r1 tip 7406b5a1755b7c025f6e10010be48a7fd231c9be; review r2 head 2be5c8f35d88af069a5ac40eac73979df34e81cf",
+    "git rev-parse 7406b5a1755b7c025f6e10010be48a7fd231c9be^{tree} -> 8c6a9ba988fa3c539a2cecbba816a92d905e0495 (== binding TREE from REVIEWER_VERDICT_R2)",
+    "git checkout -b repair/nl5-v02-prefreeze-hardening-r4-r2",
+    "git merge --no-ff origin/review/nl5-v02-prefreeze-hardening-r4-1-r2 -> merge 5ea37a41671d82ab4576f4affbc5eda453d64436 (tree ffd8392d5f805e5dcaebda1d5a38879718e943cf)",
+    "git ls-remote origin | grep r4-r2 -> 0 (дубликата repair branch нет)"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R2.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R2.json",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_2_REPAIR_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: выполнить R4.2 narrow repair (M-5 Git/provenance binding + M-6 atomic pair replacement + m-2 open_pair snapshot) на ветке repair/nl5-v02-prefreeze-hardening-r4-r2, опубликовать REPAIR_MAP_R2.md + новый exact R4_2_HEAD/TREE для fresh independent Reviewer (Verifier — только после Reviewer PASS).",
+  "blocker": null
+}
