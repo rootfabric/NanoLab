@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_director_readiness",
+  "readiness_id": "NL5-V02-PREFREEZE-HARDENING-R4.3/DIRECTOR_READINESS_R1",
+  "verdict": "READY_FOR_HUMAN_GATE",
+  "product_branch": "repair/nl5-v02-prefreeze-hardening-r4-r3",
+  "product_head": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+  "product_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1",
+  "base_main": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "review": {
+    "verdict": "PASS",
+    "evidence_tip": "f564aa7ab4654043a3bbd0711a893427f5a0f2f2"
+  },
+  "verifier": {
+    "verdict": "VERIFIED",
+    "evidence_commit": "4d14b34f8b91312a6c8d393840cb107974d0de10"
+  },
+  "integration_pr": 50,
+  "hosted_ci": {
+    "run_id": 37242371055,
+    "job_id": 111553472329,
+    "conclusion": "success",
+    "head_sha": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0"
+  },
+  "status_ceiling": {
+    "scientific_runs": 0,
+    "candidate": "PRE-DATA / NOT FROZEN",
+    "hg_b": "WAITING_OWNER",
+    "author_u1": "NOT_ASSIGNED",
+    "r2": "WAITING_HOST / NOT_ACTIVE",
+    "external_reproductions": 0,
+    "nl5": "IN_PROGRESS",
+    "nl6_001": "LOCKED",
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER"
+  },
+  "next_actor": "HUMAN_OWNER",
+  "next_action": "Explicit Human Gate decision on PR #50; no merge performed by this record"
+}
