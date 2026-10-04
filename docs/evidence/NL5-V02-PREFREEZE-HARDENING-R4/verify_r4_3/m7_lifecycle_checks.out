@@ -1,0 +1,49 @@
+PASS M-7 lifecycle: S -> H -> F -> R -> V -> A real commits exist
+PASS M-7 F strictly descends from S (not equal)
+PASS M-7 tree(F) == F_tree pinned by git
+PASS M-7 authority.subject_head == F
+PASS M-7 authority.subject_tree == tree(F)
+PASS M-7 reviewed_head == F and reviewed_tree == tree(F)
+PASS M-7 verified_head == F and verified_tree == tree(F)
+PASS M-7 frozen artifact contract is an exact immutable blob of F
+PASS M-7 frozen artifact protocol is an exact immutable blob of F
+PASS M-7 frozen artifact seed_record is an exact immutable blob of F
+PASS M-7 review record source commit 6cb40e4b STRICTLY descends from F
+PASS M-7 verify record source commit 3139b5ef STRICTLY descends from F
+PASS M-7 freeze record source commit 7f0a4bc7 STRICTLY descends from F
+PASS M-7 hg_b/r2 records precede F (pre-freeze approvals, binding-checked only)
+PASS M-7 POSITIVE validates  | {'status': 'DISPATCH_PRECONDITIONS_RECORDED', 'machine_launch_authorized': False, 'launch_gate': 'HUMAN_PROTECTED_WRITER', 'identity_proof_ceiling': 'GIT_IMMUTABLE_RECORDS_ONLY (issuer identities not proven)', 'fixture': True, 'sy
+PASS M-7 status == DISPATCH_PRECONDITIONS_RECORDED
+PASS M-7 machine_launch_authorized == false
+PASS M-7 launch_gate == HUMAN_PROTECTED_WRITER
+PASS M-7 review PASS / verify VERIFIED / r2 ACTIVE / hg_b APPROVED
+PASS M-7 fixture plan is second-class (synthetic_test_fixture_only)
+PASS M-7 identity_proof_ceiling documented
+PASS M-7 plan carries machine_launch_authorized=false
+PASS M-7 plan carries launch_gate HUMAN_PROTECTED_WRITER
+PASS M-7 plan is synthetic-fixture-only (never a real authorization)
+PASS M-7 plan scientific_outcome NOT_EVALUATED
+PASS M-7 NEG schema v1 authority rejected  | dispatch authority rejected: dispatch_authority.schema_version 1 != 3
+PASS M-7 NEG schema v2 authority rejected  | dispatch authority rejected: dispatch_authority.schema_version 2 != 3
+PASS M-7 NEG review->S (artifacts->F) rejected  | dispatch authority rejected: review subject mismatch: review_verdict != authority subject pins
+PASS M-7 NEG verify->S (artifacts->F) rejected  | dispatch authority rejected: verify subject mismatch: verify_verdict != authority subject pins
+PASS M-7 NEG review->F but verify->S rejected  | dispatch authority rejected: verify subject mismatch: verify_verdict != authority subject pins
+PASS M-7 NEG artifact binding -> non-F commit rejected  | dispatch authority rejected: frozen_subject_binding.contract.source_commit 0b584c71dab1e8a31e9a597d4cb2cf33c53284df != the frozen package commit 0e1cf1477516f979f71cff5d87bf645b9e2aae46 — frozen artif
+PASS M-7 NEG review source on unrelated/sibling history (valid binding) rejected  | dispatch authority rejected: review_verdict.source_commit 60b3d6b0beecf62b65570c87e431a12813c1174d does not descend from the frozen package commit 789e173a0d90fc3fdf620abc389833885fd445c7 — a review_v
+PASS M-7 NEG review source commit predating/nonexistent rejected (fail-closed)  | dispatch authority rejected: review_verdict: immutable source binding failed — 'authority/review.json' is not present as a Git blob in commit 0000000000000000000000000000000000000000 (fatal: path 'aut
+PASS M-7 NEG verify source on unrelated history rejected  | dispatch authority rejected: verify_verdict.source_commit a885bcbb94f827a04054a523192a1781e97279dc does not descend from the frozen package commit 789e173a0d90fc3fdf620abc389833885fd445c7 — a verify_v
+PASS M-7 NEG freeze_record.source_commit == F rejected (fail-closed)  | dispatch authority rejected: freeze_record: immutable source binding failed — 'authority/freeze.json' is not present as a Git blob in commit 789e173a0d90fc3fdf620abc389833885fd445c7 (fatal: path 'auth
+PASS M-7 NEG freeze_record.source_commit predating F rejected (fail-closed)  | dispatch authority rejected: freeze_record: immutable source binding failed — 'authority/freeze.json' is not present as a Git blob in commit 0000000000000000000000000000000000000000 (fatal: path 'auth
+PASS M-7 NEG tampered review path rejected  | dispatch authority rejected: review_verdict: immutable source binding failed — 'authority/nope.json' is not present as a Git blob in commit 2e98d5bf8caf555d043d25a6b7818a46453d12b9 (fatal: path 'autho
+PASS M-7 NEG tampered review blob sha1 rejected  | dispatch authority rejected: review_verdict: immutable source binding mismatch — Git blob of 2e98d5bf8caf555d043d25a6b7818a46453d12b9:authority/review.json is 9b933fd6c8216e1b6f67cae2b86dc22b219cb140,
+PASS M-7 NEG tampered review canonical digest rejected  | dispatch authority rejected: review_verdict: immutable source binding mismatch — sha256 of Git object 2e98d5bf8caf555d043d25a6b7818a46453d12b9:authority/review.json is 52dd68819e3af58a35ab9797b27d04a4
+PASS M-7 NEG tampered verify canonical digest rejected  | dispatch authority rejected: verify_verdict: immutable source binding mismatch — sha256 of Git object a5e392ca5e4ac1c054dc034987486272b1714814:authority/verify.json is 48915c36d76ab9047c664979cf2a0f00
+PASS M-7 NEG embedded review fields diverging from immutable record bytes rejected  | dispatch authority rejected: review_verdict.verdict must be 'PASS' for the frozen subject (got 'FAIL')
+PASS M-7 NEG nonexistent F rejected  | dispatch authority rejected: dispatch_authority.subject_head eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee1 does not exist as a Git commit in the repository (fatal: git cat-file: could not get object info) 
+PASS M-7 NEG self-consistent wrong subject_tree rejected  | dispatch authority rejected: dispatch_authority: subject_tree mismatch — git rev-parse acc14cd06b17db21d60fb4b4c795d0de8b6fab8a^{tree} is e9297ddd20a2d5c79b952c1d31c1ed28e0d1dcc5, pinned aaaaaaaaaaaaa
+PASS M-7 NEG worktree-only frozen protocol bytes rejected  | dispatch authority rejected: frozen_subject_binding.protocol: the validated protocol text is not the frozen subject's bytes (text a81dac68f24ff39a8abea59ce4d805a2baa0b3df04f319502a
+PASS M-7 NEG legacy R4.2 two-commit shortcut REJECTED  | dispatch authority rejected: frozen_subject_binding.contract.source_commit e6dc0fbbfb0a42d357437adfc2f8d4153041eb0a != the frozen package commit 53d9a77bc24cb6cc1e307f8712f5fb6a98260a01 — frozen artif
+PASS M-7 NEG subject_head pointing at a non-commit rejected  | dispatch authority rejected: dispatch_authority.subject_head 93610321cd2c8bd8a0248e5d35169c83f37442d8 does not exist as a Git commit in the repository () — the frozen package commit F must be a real, 
+PASS M-7 NEG fixture authority refused for real dispatch (allow_fixture=False)  | dispatch authority rejected: dispatch_authority: fixture authorities are not valid for real dispatch (allow_fixture=True is required even for synthetic use)
+
+== R4.3 M-7 verifier: 47/47 checks passed ==

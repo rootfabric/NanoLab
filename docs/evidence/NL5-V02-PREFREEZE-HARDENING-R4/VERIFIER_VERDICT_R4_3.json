@@ -1,0 +1,99 @@
+{
+  "schema": "nanolab.control_work_output.v1",
+  "kind": "r4_3_fresh_verifier_verdict",
+  "recorded_at_utc": "2026-10-04T13:30:00Z",
+  "verifier": "fresh independent VERIFIER (verify/nl5-v02-prefreeze-hardening-r4-3-r1)",
+  "verdict": "VERIFIED",
+  "verified_head": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+  "verified_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1",
+  "review_branch": "review/nl5-v02-prefreeze-hardening-r4-3-r4",
+  "review_verdict_recorded": "PASS",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -t . -v",
+    "ran": 593,
+    "result": "OK",
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "harness": {
+    "check_consistency": "ok (0 errors, 0 warnings)",
+    "workflow_lint": "ok (0 violations)",
+    "json_sweep": "1303 files OK (4 pinned non-JSON digest-checked)",
+    "work_cli_ex_dirs": "49/49 OK"
+  },
+  "independent_reproduction": {
+    "F1_F4": "79/79 PASS",
+    "R4_1_integrity": "PASS",
+    "R4_2_M6_transactional": "46/46 PASS",
+    "R4_3_M7_lifecycle": "47/47 PASS (real temp Git repo S->H->F->R->V->A)",
+    "scripts": [
+      "verify_r4_3/f1_f4_checks.py",
+      "verify_r4_3/r41_r42_checks.py",
+      "verify_r4_3/m7_lifecycle_checks.py"
+    ]
+  },
+  "m7_positive": {
+    "subject_head": "F (frozen package commit)",
+    "subject_tree": "tree(F)",
+    "reviewed_head": "F",
+    "verified_head": "F",
+    "frozen_artifacts": "exact immutable Git blobs of F",
+    "record_sequencing": "review/verify/freeze source commits strictly descend from F",
+    "status": "DISPATCH_PRECONDITIONS_RECORDED",
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER"
+  },
+  "m7_negative_rejects": [
+    "schema v1",
+    "schema v2",
+    "review->S",
+    "verify->S",
+    "review->F+verify->S",
+    "artifact binding->non-F",
+    "review/verify source unrelated history",
+    "record source nonexistent/predating F",
+    "freeze source ==F",
+    "tampered review path/blob/digest",
+    "tampered verify digest",
+    "embedded fields drift",
+    "nonexistent F",
+    "wrong tree(F)",
+    "worktree-only frozen bytes",
+    "legacy R4.2 two-commit shortcut",
+    "subject_head non-commit",
+    "fixture authority for real dispatch"
+  ],
+  "trust_ceiling": {
+    "DISPATCH_AUTHORIZED": "not produced by any executable path (docstrings only)",
+    "machine_launch_authorized_true": "no production path",
+    "statuses_produced": [
+      "DISPATCH_PRECONDITIONS_RECORDED",
+      "DISPATCH_BLOCKED"
+    ]
+  },
+  "status_boundaries": {
+    "SCIENTIFIC_RUNS": 0,
+    "candidate": "PRE-DATA / NOT FROZEN",
+    "hg_b": "WAITING_OWNER",
+    "author_u1": "NOT_ASSIGNED",
+    "r2": "WAITING_HOST / NOT_ACTIVE",
+    "external_reproductions": 0,
+    "nl5": "IN_PROGRESS",
+    "nl6_001": "LOCKED",
+    "windows_wsl_new_science": "NO",
+    "outenemy": "EXTERNAL_U2_ONLY"
+  },
+  "hosted_ci": "NOT_RUN (no TR-PR for 39cc9809; draft PR = next integration gate per repo process)",
+  "boundaries_respected": [
+    "main not merged",
+    "protocol not frozen",
+    "no scientific campaign",
+    "NL5/R2 statuses not raised",
+    "product branch not modified"
+  ],
+  "next": {
+    "NEXT_ACTOR": "DIRECTOR / integration preparation",
+    "NEXT_ACTION": "draft PR on exact reviewed+verified product subject -> TR-PR hosted CI -> Director readiness -> Human Gate"
+  }
+}

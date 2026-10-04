@@ -1,0 +1,53 @@
+PASS R4.1 PRE-DATA gate PASS
+PASS R4.1 PRE-DATA stage == PREFREEZE_VALIDATION_PASS
+PASS R4.1 PRE-DATA dispatch == DISPATCH_BLOCKED
+PASS R4.1 PRE-DATA freeze_status NOT_FROZEN
+PASS R4.1 PRE-DATA plan refused (missing authority)  | ContractError: dispatch refused: DISPATCH_BLOCKED — missing nanolab_v02_dispatch_authority object (freeze/dispatch requires FROZEN status, Director FREEZE record, HG-B APPROVED, review 
+PASS R4.1 garbage authority rejected  | ContractError: dispatch authority rejected: dispatch_authority: missing keys ['authority_revision', 'fixture', 'fixture_note', 'frozen', 'subject_head', 'subject_tree', 'contract_sha256
+PASS R4.1 CLI plan on PRE-DATA exits 3 (blocked, not authorized)  | {"gate": "FREEZE_GATE_FAIL", "error": "dispatch authority rejected: dispatch_authority: missing keys ['schema_version', 'authority_revision', 'fixture', 'fixtur
+PASS R4.1 CLI plan refusal carries no launch flag  | {'gate': 'FREEZE_GATE_FAIL', 'error': "dispatch authority rejected: dispatch_authority: missing keys ['schema_version', 'authority_revision', 'fixture', 'fixture_note', 'frozen', 'subject_head', 'subject_tree', 'contract
+PASS R4.1 CLI prefreeze on tampered contract exits 3  | {
+  "kind": "r4_freeze_contract_gate",
+  "contract_revision": "r4",
+  "gate": "FREEZE_GATE_FAIL",
+  "failures": [
+    "c
+PASS R4.1 tampered manifest digest in contract rejected  | ['collision_scan_manifest: bound sha256 0000000000000000000000000000000000000000000000000000000000000000 != manifest file digest 77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c (edited scan facts, M-3)']
+PASS R4.1 tampered manifest path rejected (points at non-manifest file)  | ['collision_scan_manifest is not valid JSON (/tmp/nl5-verify-431/docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md): Expecting value: line 1 column 1 (char 0)']
+PASS R4.1 untampered manifest verifies (control, structural+digest)
+PASS R4.1 tampered manifest allowlist rejected  | ['collision_scan_manifest: allowlist_paths_exact != contract allowlist', 'collision_scan_manifest: manifest_sha256 stale (digest mismatch)']
+PASS R4.1 fake collision skip rejected by manifest build (scans CLEAN -> error)  | TreeScanError: recorded skip entry failed re-derivation: 0b skip: recorded skip seed 2147483000 != derived stream seed 312966825 for 0b index 424242 (the skip does not re-derive)
+PASS M-6 duplicate pair id rejected  | ValueError: pair id 'p1' already exists — pair ids are unique forever
+PASS M-6 unknown variant rejected  | ValueError: unknown variant '99b'
+PASS M-6 replacement on unknown pair rejected  | ValueError: unknown pair id 'nope'
+PASS M-6 state unchanged after early rejects
+PASS M-6 author attempt with SCHEDULED outcome rejected  | ValueError: record_attempt requires a real technical outcome; SCHEDULED legs are created only by request_replacement
+PASS M-6 invalid attempt id format  | ValueError: attempt id 'bad id!' violates the attempt id rule
+PASS M-6 state unchanged after attempt rejects
+PASS M-6 duplicate author leg binding  | ValueError: pair 'p1' already binds its author leg (attempt 'p1-a') — author and external legs belong to the pair exactly once
+PASS M-6 state unchanged after duplicate-leg reject
+PASS M-6 replacement refused while pair incomplete  | ValueError: replacement refused: pair 'p1' is not terminal (state PAIR_RUNNING; bound legs ['author']; missing counterpart: ['external']) — an incomplete pair has no frozen FAILED_TE
+PASS M-6 state unchanged after incomplete-pair reject
+PASS M-6 both legs failed -> PAIR_FAILED_TECHNICAL
+PASS M-6 replacement consumed next pool identity in order
+PASS M-6 replacement pair has both SCHEDULED legs
+PASS M-6 second replacement for same failed pair rejected  | ValueError: replacement refused: pair 'p1' already received its single replacement assignment (identity 111, new pair 'p2') — repeated replacement for one failed pair is forbidden
+PASS M-6 state unchanged after one-shot violation
+PASS M-6 duplicate author attempt id across pairs  | ValueError: replacement refused: author attempt id 'p2-a' is already bound to pair 'p2' (author leg) — attempt ids are globally unique
+PASS M-6 duplicate external attempt id across pairs  | ValueError: replacement refused: external attempt id 'p2-e' is already bound to pair 'p2' (external leg) — attempt ids are globally unique
+PASS M-6 invalid external attempt id  | ValueError: replacement refused: external attempt id 'bad e!' violates the attempt id rule
+PASS M-6 author/external attempt id collision  | ValueError: replacement refused: author and external legs require two distinct globally-unique attempt ids (one-leg-only replacement is forbidden)
+PASS M-6 duplicate replacement pair id via request_replacement  | ValueError: replacement refused: replacement pair id 'p2' already exists — pair ids are unique forever
+PASS M-6 replacement seed already owned (open_pair)  | ValueError: seed/pair mismatch: seed identity 111 already belongs to pair 'p2' — one seed identity belongs to exactly one pair
+PASS M-6 state unchanged after all attempt-id/pair-id/seed rejects
+PASS M-6 forced second-leg failure raised
+PASS M-6 rollback restores state bit-for-bit after mid-commit failure
+PASS M-6 cursor/quota untouched after rollback
+PASS M-6 retry after rollback succeeds atomically
+PASS M-6/F3 quota exhausted -> ReplacementBudgetExhausted  | ReplacementBudgetExhausted: 0b: frozen replacement quota 1 pairs exhausted — cell stops with an honest classification, no silent expansion
+PASS M-6 public state_snapshot is isolated (mutations never reach ledger)
+PASS M-6 public ledger property is isolated
+PASS M-6 public pair() view is isolated (m-2)
+PASS M-6 pool consumed strictly in order (no outcome-driven selection)
+
+== R4.1/R4.2 verifier: 46/46 checks passed ==

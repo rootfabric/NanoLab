@@ -1,0 +1,81 @@
+PASS F4 n_min(64)==52
+PASS F4 n_min(10)==8
+PASS F4 n_min boundary: 51/64 <80% -> not acceptable (52 required)
+PASS F4 quota(64)==12
+PASS F4 quota(10)==2
+PASS F4 budget confirmatory==296  | {'confirmatory_runs': 296, 'replacement_runs_cap': 56, 'max_runs': 352, 'wall_hours_per_platform': 560}
+PASS F4 cap==56 (2*(12+12+2+2))
+PASS F4 max_runs==352
+PASS F4 policy name
+PASS F4 51/64 is NOT >=80%
+PASS F4 60/296 is NOT <=20% (per-cell floor caps)
+PASS F4 contract n_min values match policy
+PASS F4 contract quota values match policy
+PASS F4 contract run_budget matches derive_budget()
+PASS F1 baseline contract validates (control)
+PASS F1 reject: missing top-level key kind  | ["contract: missing keys ['kind']"]
+PASS F1 reject: missing required subkey variants.0b.n  | TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'
+PASS F1 reject: wrong contract schema_version 2  | ['contract schema_version 2 != 1']
+PASS F1 reject: wrong kind  | ["contract kind 'other' != 'nanolab_v02_freeze_contract'"]
+PASS F1 reject: unknown contract_revision  | ["unknown contract_revision 'r99'; known: ('r4',)"]
+PASS F1 reject: non-integer seed in confirmatory (string)  | ['confirmatory_seeds.0b[0]: seed is not an integer (got str)']
+PASS F1 reject: boolean seed (bool is not int)  | ['confirmatory_seeds.0b[1]: seed is not an integer (got bool)']
+PASS F1 reject: negative seed  | ['confirmatory_seeds.0b[2]: seed -5 outside int32-positive range [0, 2^31)']
+PASS F1 reject: seed above SEED_MAX  | ['confirmatory_seeds.0b[3]: seed 2147483649 outside int32-positive range [0, 2^31)']
+PASS F1 reject: wrong confirmatory count 63 (below n_min)  | ['confirmatory_seeds.0b: length 63 != N 64']
+PASS F1 reject: wrong n_min embedded  | ['variants.0b.n_min must be ceil(0.80*64) = 52 (integer policy; 51 is not the policy derivation)']
+PASS F1 reject: tampered anchor  | ["seed_generation.anchor 'OTHER' != 'NANOLAB-REPRO-V0.2-R1'"]
+PASS F1 reject: tampered budget max_runs  | ['run_budget.max_runs 999 != policy derivation 352']
+PASS F1 reject: frozen_status FROZEN without pins  | ['contract freeze_status FROZEN but protocol text still declares NOT FROZEN']
+PASS F1 reject protocol: cardinality line not found  | ['protocol cardinalities: protocol cardinality contract line not found']
+PASS F1 reject protocol: duplicate cardinality lines  | ['protocol cardinalities: protocol declares 2 cardinality lines; exactly one is allowed']
+PASS F1 reject protocol: cardinality contradiction with machine block  | ['protocol N for 0b = 63 != contract 64']
+PASS F1 reject protocol: machine block duplicated  | ['protocol machine block: protocol contains 2 machine-contract-v1 blocks; exactly one is allowed']
+PASS F1 truncated JSON does not parse
+PASS F2 real accepted seed: pinned scan CLEAN, 0 collisions  | {'scanned': 1, 'collisions': {}, 'collision_count': 0, 'excluded_hits': {}, 'pinned_commit': 'a9d7d07fa264e9907b67ca244b00ba2da3430b0f', 'mode': 'pinned_tree', 'exclude_paths_exact': ['docs/research/N
+PASS F2 seed absent from pinned tree scans CLEAN  | (111111117, 'CLEAN')
+PASS F2 missing pinned object -> TreeScanError  | pinned object 0000000000000000000000000000000000000000 is not available in /tmp/nl5-verify-431
+PASS F2 committed seed IS a collision outside allowlist  | {'scanned': 1, 'collisions': {'123456789': ['data.txt']}, 'collision_count': 1, 'excluded_hits': {}, 'pinned_commit': 'cde9b71fc8a0dbbf33fe2bcb61b9105f6a7c4122', 'mode': 'pinned_tree', 'exclude_paths_
+PASS F2 exact allowlist exclusion works (excluded_hits reported, CLEAN)  | {'scanned': 1, 'collisions': {}, 'collision_count': 0, 'excluded_hits': {'123456789': ['data.txt']}, 'pinned_commit': 'cde9b71fc8a0dbbf33fe2bcb61b9105f6a7c4122', 'mode': 'pinned_tree', 'exclude_paths_
+PASS F2 pinned tree beats dirty worktree (deleted-in-worktree file still found)  | {'scanned': 1, 'collisions': {'123456789': ['data.txt']}, 'collision_count': 1, 'excluded_hits': {}, 'pinned_commit': 'cde9b71fc8a0dbbf33fe2bcb61b9105f6a7c4122', 'mode': 'pinned_tree', 'exclude_paths_
+PASS F2 worktree mode (non-authoritative) loses the deleted file (why pinning is mandatory)  | {'scanned': 1, 'collisions': {}, 'collision_count': 0, 'excluded_hits': {}, 'pinned_commit': None, 'mode': 'worktree_non_authoritative', 'exclude_paths_exact': [], 'status': 'CLEAN'}
+PASS F3 0b: pool start_index 75 > last consumed confirmatory index 74
+PASS F3 0b: start_index == next_candidate_index
+PASS F3 0b: bit-exact replay of frozen pool
+PASS F3 0b: no confirmatory reuse (disjoint sets)
+PASS F3 0b: pool has no duplicates
+PASS F3 0b: pool length == quota
+PASS F3 0b: confirmatory stream bit-exact replay (skips dropped)
+PASS F3 0b: confirmatory skips all carry SEED_COLLISION_TREE reason
+PASS F3 0b: skips all lie inside [start_index, next_candidate_index)
+PASS F3 32b: pool start_index 76 > last consumed confirmatory index 75
+PASS F3 32b: start_index == next_candidate_index
+PASS F3 32b: bit-exact replay of frozen pool
+PASS F3 32b: no confirmatory reuse (disjoint sets)
+PASS F3 32b: pool has no duplicates
+PASS F3 32b: pool length == quota
+PASS F3 32b: confirmatory stream bit-exact replay (skips dropped)
+PASS F3 32b: confirmatory skips all carry SEED_COLLISION_TREE reason
+PASS F3 32b: skips all lie inside [start_index, next_candidate_index)
+PASS F3 11b: pool start_index 21 > last consumed confirmatory index 20
+PASS F3 11b: start_index == next_candidate_index
+PASS F3 11b: bit-exact replay of frozen pool
+PASS F3 11b: no confirmatory reuse (disjoint sets)
+PASS F3 11b: pool has no duplicates
+PASS F3 11b: pool length == quota
+PASS F3 11b: confirmatory stream bit-exact replay (skips dropped)
+PASS F3 11b: confirmatory skips all carry SEED_COLLISION_TREE reason
+PASS F3 11b: skips all lie inside [start_index, next_candidate_index)
+PASS F3 53b: pool start_index 21 > last consumed confirmatory index 20
+PASS F3 53b: start_index == next_candidate_index
+PASS F3 53b: bit-exact replay of frozen pool
+PASS F3 53b: no confirmatory reuse (disjoint sets)
+PASS F3 53b: pool has no duplicates
+PASS F3 53b: pool length == quota
+PASS F3 53b: confirmatory stream bit-exact replay (skips dropped)
+PASS F3 53b: confirmatory skips all carry SEED_COLLISION_TREE reason
+PASS F3 53b: skips all lie inside [start_index, next_candidate_index)
+PASS F3 fake skip seed (wrong value) rejected  | 0b replacement skip entry 0: recorded skip seed 1 != derived stream seed 1425427579 for 0b index 75 (the skip does not r
+PASS F3 pool digest matches contract embedding  | ('369a63c05592c400', '369a63c05592c400', '369a63c05592c400')
+
+== F1-F4 verifier: 79/79 checks passed ==

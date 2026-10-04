@@ -1,0 +1,7 @@
+  "candidate": null,
+  "reason": "CANDIDATE_PARAM_NOT_IN_ALLOWLIST",
+  "valid": false
+}
+
+EXIT=0
+Ran 593 tests in 43.736s / OK (0 failures, 0 errors, 0 skipped); full verbose log kept out-of-band
