@@ -86,12 +86,42 @@ decision-power gate repair по WO-NL5-ACCEPTANCE-POLICY-R4-POWER-GATE-R1
 меняют `scripts/nl5/**` и candidate doc — при integration потребуется
 явный merge/rebase с Repair Map. Эта задача его не дублирует и не отменяет.
 
+## R4.1 — fresh Reviewer R1 FIX_REQUIRED → repair (2026-10-04, append-only)
+
+Fresh independent Reviewer R1 (`REVIEWER_VERDICT_R1`, branch
+`review/nl5-v02-prefreeze-hardening-r4-r1` head `2729b9c`) подтвердила факты R4 и
+вынесла FIX_REQUIRED: M-1..M-4 blocking + m-1 minor. Repair R4.1 выполнен на ветке
+`repair/nl5-v02-prefreeze-hardening-r4-r1` (от tip `1964bb5`, reviewer branch
+интегрирована `--no-ff`, merge `61aa6eb`); детали — `REPAIR_MAP_R1_1.md`, START
+marker — event `0004`. Итог:
+
+```text
+M-1 dispatch authority   = FIXED — PREFREEZE_VALIDATION_PASS отделён от DISPATCH_READY;
+                           committed PRE-DATA package = DISPATCH_BLOCKED (evidence
+                           r4-1-dispatch-blocked-PRE_DATA_R4_1.json); positive fixture
+                           только SYNTHETIC TEST FIXTURE ONLY
+M-2 replacement replay   = FIXED — bit-exact replay + replacement_pool_sha256 /
+                           record_r4_sha256; R3 digest eb4ab3f8… = provenance
+M-3 collision skip proof = FIXED — machine-bound scan manifest (41/41 skips proven,
+                           148+28 accepted CLEAN) + rerun pinned scan: fabricated
+                           skip => FREEZE_GATE_FAIL
+M-4 pair ledger          = FIXED — pair-level one-shot replacement, both legs scheduled
+m-1 equivalence wording  = FIXED — equivalence interval (±δ·s_eff), standard TOST H0/H1
+Валидация                = 557 tests OK (было 513); check-consistency ok; workflow_lint
+                           blocking 0; work_cli все EX-* ok; hosted CI = NOT_RUN
+```
+
+Статусы НЕ меняются: CANDIDATE = PRE-DATA / NOT FROZEN; SCIENTIFIC RUNS = 0;
+HG-B = WAITING_OWNER; R2 = WAITING_HOST / NOT_ACTIVE; AUTHOR_U1 = NOT_ASSIGNED;
+NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED.
+
 ## Next action
 
 ```text
 NEXT_ACTOR = fresh independent SCIENTIFIC/PROTOCOL REVIEWER
-NEXT_ACTION = review exact HEAD (см. HANDOFF event) на предмет F1–F4 + scope
-              scientific claims; затем fresh exact-head Verifier; затем draft
-              PR (TR-PR hosted CI) и Director readiness record; merge =
-              Human Gate. R2: ждать реального owner-provided U1 (не outenemy).
+NEXT_ACTION = review exact R4.1 HEAD/TREE (см. event 0005 / REPAIR_MAP_R1_1.md) на
+              предмет M-1..M-4 + m-1 и сохранения границ R4; затем — только при
+              PASS — fresh exact-head Verifier, draft PR (TR-PR hosted CI),
+              Director readiness record; merge = Human Gate. R2: ждать реального
+              owner-provided U1 (не outenemy).
 ```

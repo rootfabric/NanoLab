@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-continuation-r4-1-repair-validation",
+  "timestamp_utc": "2026-10-04T02:05:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f0bbefe6abccb64a8b81e2c51dd7b2888b121589",
+  "summary": "R4.1 repair IMPLEMENTATION + VALIDATION RECORDED (post-terminal continuation, append-only). Fresh Reviewer R1 FIX_REQUIRED (M-1..M-4 + m-1, REVIEWER_VERDICT_R1) закрыт на ветке repair/nl5-v02-prefreeze-hardening-r4-r1; implementation commit f0bbefe6abccb64a8b81e2c51dd7b2888b121589 (tree c297f5e0b1b9397a41b71acc4c53e39b7b72176e). M-1 FIXED: PREFREEZE_VALIDATION_PASS механически отделён от DISPATCH_READY — versioned nanolab_v02_dispatch_authority (FROZEN + frozen subject HEAD/TREE pins, Director FREEZE record, HG-B APPROVED, review PASS, verify VERIFIED, R2 ACTIVE с AUTHOR_U1/EXTERNAL_U2 и executor policy оба плеча, exact contract/record digests, disk-verified records); build_execution_plan требует authority; committed PRE-DATA package = PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED (evidence r4-1-dispatch-blocked-PRE_DATA_R4_1.json); positive fixture только SYNTHETIC TEST FIXTURE ONLY внутри тестов. M-2 FIXED: bit-exact replay_replacement_stream + strict skip entries + replacement_pool_sha256 = 369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821 и record_r4_sha256 = 51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91, seed_record_file_sha256 = 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28; R3 logical digest eb4ab3f8… сохранён как provenance. M-3 FIXED: machine-bound collision_scan_manifest (evidence r4-1-collision-scan-manifest-R4.json, file sha256 77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c связан в contract binding): 148 confirmatory + 28 replacement accepted CLEAN вне exact allowlist на pinned a9d7d07fa264e9907b67ca244b00ba2da3430b0f, 41/41 recorded skips с реальными non-allowlisted hits; authoritative пути re-run pinned scan каждого skip — fabricated skip на чистом candidate = FREEZE_GATE_FAIL; scan errors = BLOCKED. M-4 FIXED: pair-level ReplacementLedger (PAIR_RUNNING/COMPLETED/FAILED_TECHNICAL/REPLACED/ABORTED; one-shot replacement на failed pair; обе ноги планируются; quota/cursor при reject не расходуются). m-1 FIXED: equivalence interval wording + standard TOST H0/H1 в candidate doc; HG-B proposal addendum §9 (append-only, числа §8 не менялись). Валидация: python3 -m unittest discover = 557 OK (было 513; +44 R4.1 regression: DispatchAuthorityTest 13, ReplacementReplayTest 10, CollisionSkipProofTest 8, PairLedgerTest 11, EquivalenceWordingTest 3, минус снятые leg-level); check-consistency ok:true; workflow_lint blocking=0; work_cli validate всех 49 EX-* = OK. REPAIR_MAP_R1_1.md опубликован. Границы: SCIENTIFIC RUNS = 0; CANDIDATE = PRE-DATA / NOT FROZEN; HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED; dormant repair/nl5-acceptance-policy-r4-power-gate-r1 не смешивалась; R4 positive design (N 64/64/10/10, N_min 52/8, quota 12/12/2/2, cap 56, max_runs 352, δ=0.5, paired, next_candidate_index 75/76/21/21, R3 identities bit-exact) сохранён. Hosted CI = NOT_RUN (TR-PR после fresh Reviewer PASS).",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 557 tests OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate (49 EX-*) -> все OK",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_r41_package -> package rebind OK (13.2s pinned scans)",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract prefreeze ... -> PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED (exit 0)",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract plan ... (без authority) -> exit 3 FREEZE_GATE_FAIL/DISPATCH_BLOCKED"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/REPAIR_MAP_R1_1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-prefreeze-validation-PASS-R4_1.json",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-dispatch-blocked-PRE_DATA_R4_1.json",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-collision-scan-manifest-R4.json",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R1.md"
+  ],
+  "next_action": "REVIEWER: fresh independent review exact R4.1 HEAD/TREE (implementation commit f0bbefe + REPAIR_MAP_R1_1 + этот event) на предмет M-1..M-4 + m-1 и сохранения границ R4; только при PASS — fresh exact-head VERIFIER, затем draft PR (TR-PR hosted CI), Director readiness, Human Gate. Verifier до Reviewer PASS не запускать.",
+  "blocker": null
+}
