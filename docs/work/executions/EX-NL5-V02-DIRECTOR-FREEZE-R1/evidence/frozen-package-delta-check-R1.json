@@ -1,0 +1,23 @@
+{
+  "kind": "frozen_package_delta_check",
+  "source_contract": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json",
+  "frozen_contract": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-freeze-contract-FROZEN_R1.json",
+  "result": "PASS",
+  "changed_leaf_paths": {
+    "scientific_subject.candidate_doc_path": {
+      "source": "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+      "frozen": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md"
+    },
+    "scientific_subject.freeze_status": {
+      "source": "NOT_FROZEN",
+      "frozen": "FROZEN"
+    },
+    "scientific_subject.seed_record_path": {
+      "source": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json",
+      "frozen": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json"
+    }
+  },
+  "unchanged_leaf_count": 307,
+  "frozen_seed_record_file_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "seed_record_byte_identical_to_r4": true
+}
