@@ -1,0 +1,13 @@
+{
+  "kind": "seed_record_identity_proof",
+  "r2_path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+  "r4_path": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json",
+  "f1_path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json",
+  "cmp_r4_vs_r2": "identical (exit 0)",
+  "cmp_f1_vs_r2": "identical (exit 0)",
+  "sha256_r2": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "sha256_r4": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "sha256_f1": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "contract_binding": "all three equal contract scientific_subject.seed_record_file_sha256 = 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "scientific_identities_changed": "NONE"
+}

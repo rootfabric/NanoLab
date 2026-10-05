@@ -1,0 +1,539 @@
+{
+  "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+  "anchor": "NANOLAB-REPRO-V0.2-R1",
+  "algorithm": "seed(v,i) = int(big-endian sha256('{anchor}|{v}|replica-{i:04d}')[:4]) & 0x7FFFFFFF; bootstrap = sha256('{anchor}|bootstrap-{v}')[:4] & 0x7FFFFFFF (bootstrap index retry -01, -02, ... while colliding)",
+  "variant_counts": {
+    "0b": 64,
+    "32b": 64,
+    "11b": 10,
+    "53b": 10
+  },
+  "primary_replicas": 64,
+  "control_replicas": 10,
+  "fresh_seed_total": 148,
+  "bootstrap_seed_total": 4,
+  "seeds": {
+    "0b": [
+      173237241,
+      632342429,
+      670625784,
+      1888400262,
+      1663021208,
+      836909046,
+      154461684,
+      627282485,
+      1515875928,
+      1928429163,
+      609090909,
+      1958933659,
+      2142366820,
+      1169171693,
+      598319659,
+      1575009589,
+      1220453627,
+      1995566219,
+      1605461643,
+      912938062,
+      1075019518,
+      711444371,
+      486327777,
+      750728549,
+      884517751,
+      720780208,
+      2033195985,
+      424620369,
+      1330699938,
+      1701218398,
+      230468705,
+      2105380575,
+      892196255,
+      1878727187,
+      686741480,
+      1119264512,
+      1914200740,
+      1911874288,
+      307734812,
+      1157404202,
+      1857602259,
+      48246887,
+      296787108,
+      2144244010,
+      1107629067,
+      928031292,
+      1867296800,
+      721034311,
+      945321416,
+      308945258,
+      932210901,
+      966150889,
+      1566976038,
+      1667598836,
+      1960729465,
+      2085207011,
+      355058809,
+      84171585,
+      1283752693,
+      1518524920,
+      1961692491,
+      598577476,
+      1506038909,
+      1967334984
+    ],
+    "32b": [
+      652172925,
+      1061471855,
+      1488835411,
+      1345998445,
+      1563793150,
+      1456830998,
+      1911641766,
+      693993459,
+      1359391029,
+      357278055,
+      1635567276,
+      1045174182,
+      1131685710,
+      1825363555,
+      1979539893,
+      1135639664,
+      1924360375,
+      9810985,
+      1748521268,
+      2015638113,
+      2146584302,
+      153125809,
+      1166804961,
+      1216454539,
+      1355378121,
+      562650201,
+      366666989,
+      1387291254,
+      1044595082,
+      254198190,
+      485760025,
+      894383516,
+      1032942703,
+      76385451,
+      937029001,
+      711520318,
+      1426311218,
+      2073795254,
+      564037477,
+      92051512,
+      1731513304,
+      115470100,
+      2010947828,
+      1866910457,
+      960707110,
+      1627448172,
+      916858262,
+      1803349411,
+      22293836,
+      2079912659,
+      602636467,
+      1323164179,
+      450823586,
+      411873937,
+      1736922300,
+      146745838,
+      783489202,
+      1142987814,
+      1951785749,
+      2139335986,
+      1474790665,
+      1741339957,
+      1170418983,
+      2062865742
+    ],
+    "11b": [
+      1351266957,
+      79022951,
+      1611712994,
+      1911934076,
+      681241267,
+      1220850728,
+      1181127065,
+      877856094,
+      1297500179,
+      1445093266
+    ],
+    "53b": [
+      1321440826,
+      633157947,
+      1726363519,
+      215036525,
+      1058550005,
+      706513118,
+      1951654445,
+      203822914,
+      676256951,
+      1154761419
+    ]
+  },
+  "skipped_identities": {
+    "0b": [
+      {
+        "index": 1,
+        "seed": 1374145662,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 2,
+        "seed": 15405922,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 3,
+        "seed": 815842812,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 4,
+        "seed": 2075217784,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 5,
+        "seed": 121869968,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 6,
+        "seed": 2116475598,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 7,
+        "seed": 71530274,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 8,
+        "seed": 445956048,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 9,
+        "seed": 371085869,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 10,
+        "seed": 179639723,
+        "reason": "SEED_COLLISION_TREE"
+      }
+    ],
+    "32b": [
+      {
+        "index": 1,
+        "seed": 784835965,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 2,
+        "seed": 1147991324,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 3,
+        "seed": 68816818,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 4,
+        "seed": 1279157045,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 5,
+        "seed": 1405927920,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 6,
+        "seed": 1465278086,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 7,
+        "seed": 166080254,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 8,
+        "seed": 73871844,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 9,
+        "seed": 355831697,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 10,
+        "seed": 2042247191,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 25,
+        "seed": 84676,
+        "reason": "SEED_COLLISION_TREE"
+      }
+    ],
+    "11b": [
+      {
+        "index": 1,
+        "seed": 1627797145,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 2,
+        "seed": 705723178,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 3,
+        "seed": 1217708110,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 4,
+        "seed": 2147184124,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 5,
+        "seed": 676026465,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 6,
+        "seed": 713579922,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 7,
+        "seed": 1771426530,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 8,
+        "seed": 1660731199,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 9,
+        "seed": 1230989540,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 10,
+        "seed": 179087359,
+        "reason": "SEED_COLLISION_TREE"
+      }
+    ],
+    "53b": [
+      {
+        "index": 1,
+        "seed": 121736161,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 2,
+        "seed": 863920084,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 3,
+        "seed": 1892664804,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 4,
+        "seed": 1426881248,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 5,
+        "seed": 1074119778,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 6,
+        "seed": 1730050286,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 7,
+        "seed": 873098383,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 8,
+        "seed": 1442571149,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 9,
+        "seed": 571895349,
+        "reason": "SEED_COLLISION_TREE"
+      },
+      {
+        "index": 10,
+        "seed": 2056885758,
+        "reason": "SEED_COLLISION_TREE"
+      }
+    ]
+  },
+  "bootstrap_seeds": {
+    "0b": 323707441,
+    "32b": 1702258603,
+    "11b": 404063983,
+    "53b": 627625019
+  },
+  "bootstrap_indices": {
+    "0b": 0,
+    "32b": 0,
+    "11b": 0,
+    "53b": 0
+  },
+  "indices_consumed": {
+    "0b": 74,
+    "32b": 75,
+    "11b": 20,
+    "53b": 20
+  },
+  "next_candidate_index": {
+    "0b": 75,
+    "32b": 76,
+    "11b": 21,
+    "53b": 21
+  },
+  "exclusion_list_size": 34,
+  "exclusions_applied": [
+    -200619630,
+    174329,
+    201004,
+    202008,
+    203012,
+    204016,
+    205020,
+    206024,
+    285637,
+    396421,
+    410273,
+    507283,
+    510101,
+    520202,
+    520931,
+    530303,
+    618457,
+    638257,
+    729613,
+    741953,
+    852607,
+    902107,
+    963541,
+    274288237,
+    319832093,
+    601855227,
+    744386736,
+    880427736,
+    972234272,
+    1259289227,
+    1358106528,
+    1524307444,
+    1747973984,
+    1934775205
+  ],
+  "tree_collision_rule": "consume index order; skip identities whose literal form occurs in the pinned exclusion tree; record skips; scan errors are fatal (fail-closed, F2)",
+  "exclusion_tree_pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+  "generation_revision": "r4-pools-on-a9d7d07 (confirmatory identities = R3, bit-exact replay)",
+  "scan_context_paths_exact": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "replacement_quota_pairs": {
+    "0b": 12,
+    "32b": 12,
+    "11b": 2,
+    "53b": 2
+  },
+  "replacement_pools": {
+    "0b": {
+      "seeds": [
+        1425427579,
+        2092545511,
+        1942088095,
+        1906341020,
+        1994969353,
+        111655649,
+        37299244,
+        1556046734,
+        2109066640,
+        1559187055,
+        1277984395,
+        1786478227
+      ],
+      "skipped": [],
+      "start_index": 75,
+      "indices_consumed": [
+        75,
+        86
+      ],
+      "next_candidate_index": 87
+    },
+    "32b": {
+      "seeds": [
+        792783434,
+        1912956295,
+        669227601,
+        182937638,
+        2014141120,
+        1330504711,
+        1177418791,
+        1678548875,
+        1257014694,
+        5783587,
+        532082925,
+        1313066371
+      ],
+      "skipped": [],
+      "start_index": 76,
+      "indices_consumed": [
+        76,
+        87
+      ],
+      "next_candidate_index": 88
+    },
+    "11b": {
+      "seeds": [
+        838716997,
+        1768488080
+      ],
+      "skipped": [],
+      "start_index": 21,
+      "indices_consumed": [
+        21,
+        22
+      ],
+      "next_candidate_index": 23
+    },
+    "53b": {
+      "seeds": [
+        1327790049,
+        424343851
+      ],
+      "skipped": [],
+      "start_index": 21,
+      "indices_consumed": [
+        21,
+        22
+      ],
+      "next_candidate_index": 23
+    }
+  },
+  "record_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+  "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821",
+  "record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91"
+}
