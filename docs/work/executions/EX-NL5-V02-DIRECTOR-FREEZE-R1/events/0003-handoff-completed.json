@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-05T09:00:53Z",
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R1",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "4236e0c7cfb19de2687a8f0d3be3641cc1b000d4",
+  "summary": "HANDOFF: Director FREEZE для v0.2 записан; FROZEN PACKAGE COMMIT F создан, опубликован и неизменяем. FROZEN SUBJECT (exact review/verify target): F_HEAD = cb91ade761f6802fc40c500761d3e35022408822, F_TREE = ad21ce39b42681f581da996b2805a5b2fb49111f (git rev-parse F^{tree} == F_TREE proven; опубликован non-force push 9eec5d5..cb91ade; amend/rewrite запрещены). Exact Git blobs of F: frozen protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md — blob 197cc717bae0b0906ac7816d11f28f93676558c2, canonical_sha256 7fafbf9ace099594a16182523432ca38fe5c31f30d2d8969d7281b8852f45962; frozen contract docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-freeze-contract-FROZEN_R1.json — blob 5f788c45842db695abbd3fc8706828bc74173d5e, canonical_sha256 c556b3f24a112f460cf34070e6a5ce99eb826e05663c589583af4dbe02f6ee4f; frozen seed record docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json — blob 0164e0e3f5dda6dbf63174df3730b1bd921d2c76, canonical_sha256 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28 (байт-в-байт копия принятой R4 PRE-DATA seed record; cmp чистый; все научные идентичности/seeds/cursors/pools/skips/digests без изменений). Frozen contract = PRE_DATA_R4 + только allowlisted subject binding (candidate_doc_path -> FROZEN_R1.md; seed_record_path -> FROZEN_R1.json; freeze_status -> FROZEN; frozen_subject_head/tree = null, non-authoritative, R4.3 M-7); 307/310 листьев неизменны; машинная проверка дельты frozen-package-delta-check-R1.json = PASS. Коммиты этой execution: 9eec5d5 (подготовка, ожидаемый prep HEAD) -> cb91ade (F) -> 4236e0c (Director FREEZE record + event 0002) -> этот bookkeeping commit. DIRECTOR FREEZE RECORD: commit 4236e0c7cfb19de2687a8f0d3be3641cc1b000d4 — СТРОГИЙ ПОТОМОК F (git merge-base --is-ancestor proven); docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R1.json — git_blob_sha1 423fdab372cc98fb902544df4b43da27a2231790, canonical_sha256 87ae3a9e23db2f90331889dd0cc83414b6eecf525a10987a8d2f26aa04afcdb8; docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R1.md — git_blob_sha1 0edf04db89d61f98665c9d59c59b117296256291, canonical_sha256 709e2e4ac2d4279c8410fb37396cc34d31e30646c22fd4088043fa8858d5a929; record_kind = DIRECTOR_FREEZE_RECORD, issuer_class = DIRECTOR, decision = FREEZE; pins subject_head/subject_tree = F, protocol/contract/seed_record exact digests, HG-B binding (source_commit 549b687a9171ea3636dbb00078d7018f619cebd3, path docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json, git_blob_sha1 61d1491233aeb2537f9800d6183def5b8fb0c8e0, canonical_sha256 b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9, record_kind HG_B_OWNER_APPROVAL, issuer_class HUMAN_GATE_OWNER, decision APPROVED, candidate_revision R4). Собственные SHA record-коммита внутри его байтов отсутствуют by design (self-reference невозможен) и фиксируются этим event. ЗАМОРОЗКА ДО ДАННЫХ: zero confirmatory data at freeze; SCIENTIFIC_RUNS = 0; frozen gate на frozen байтах = PASS / PREFREEZE_VALIDATION_PASS / freeze_status FROZEN / DISPATCH_BLOCKED / dispatch_ready false (frozen-gate-PASS-R1.json; PREFREEZE_VALIDATION_PASS — имя internal-consistency стадии, а не статус незамороженности; authoritative факт freeze = F + Director record). ВАЛИДАЦИЯ на 4236e0c: python3 -m unittest discover -s tests -t . = Ran 593 tests, OK; check-consistency ok (errors [], warnings []); workflow_lint workflows 1, violations 0, blocking 0; work_cli validate 50/50 EX-* ok. ГРАНИЦЫ НЕ ИЗМЕНЕНЫ: HG-B = APPROVED; NL5 = IN_PROGRESS; NL6-001 = LOCKED; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; external_reproductions = 0; machine_launch_authorized = false; launch_gate = HUMAN_PROTECTED_WRITER; project/state.json не изменялся (вне allowed_paths паспорта). DISPATCH = BLOCKED навсегда до: fresh Reviewer(F) PASS + fresh Verifier(F) VERIFIED + R2 ACTIVE + AUTHOR_U1 assigned + authority record A (schema v3, lifecycle S -> F -> D/R/V -> A). Событие append-only; события 0001/0002 и commit F не редактируются. СЛЕДУЮЩИЕ АКТОРЫ: fresh SCIENTIFIC REVIEWER(F), затем fresh independent VERIFIER(F) — оба обязаны пиновать exact F (F_HEAD/F_TREE выше), а не Director-record/bookkeeping коммиты; substantive-коммиты после F в научный subject не входят.",
+  "command_refs": [
+    "git rev-parse cb91ade761f6802fc40c500761d3e35022408822^{tree} -> ad21ce39b42681f581da996b2805a5b2fb49111f",
+    "git merge-base --is-ancestor cb91ade761f6802fc40c500761d3e35022408822 4236e0c7cfb19de2687a8f0d3be3641cc1b000d4 -> exit 0",
+    "git cat-file blob <commit>:<path> | sha256sum -> exact Git-object SHA-256 для всех трёх frozen артефактов и обеих частей Director record",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <FROZEN contract> --protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md --record <FROZEN seed record> --repo-root . -> exit 0, gate PASS, freeze_status FROZEN, dispatch DISPATCH_BLOCKED, dispatch_ready false",
+    "python3 -m unittest discover -s tests -t . -> Ran 593 tests, OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok:true, errors [], warnings []",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> workflows 1, violations 0, blocking 0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate <EX-*> -> 50/50 ok",
+    "git push origin control/nl5-v02-director-freeze-r1 (non-force) -> 9eec5d5..cb91ade..4236e0c published"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-freeze-contract-FROZEN_R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/frozen-package-delta-check-R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/frozen-gate-PASS-R1.json",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R1.json",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_V02_DIRECTOR_FREEZE_R1.md"
+  ],
+  "next_action": "fresh SCIENTIFIC REVIEWER(F) на exact F_HEAD cb91ade761f6802fc40c500761d3e35022408822 / F_TREE ad21ce39b42681f581da996b2805a5b2fb49111f; только при PASS — fresh independent VERIFIER(F) на тот же exact subject; затем отдельный authority-builder WO (A). Science / R2 activation / AUTHOR_U1 assignment / NL6 unlock не начинать.",
+  "blocker": null
+}
