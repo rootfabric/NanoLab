@@ -15,7 +15,8 @@
     "scripts/nl5/**",
     "tests/test_nl5_repro_v02_seeds.py",
     "docs/work/WORK_QUEUE.md",
-    "docs/evidence/NL5-ACCEPTANCE-POLICY/**"
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/**",
+    "project/state.json"
   ],
   "started_at_utc": "2026-09-30T14:56:00Z",
   "status": "HANDOFF_READY"
