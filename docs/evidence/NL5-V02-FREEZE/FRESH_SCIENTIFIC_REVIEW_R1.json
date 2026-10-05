@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_scientific_reviewer_verdict",
+  "review_id": "NL5-V02-FROZEN-R1/SCIENTIFIC_REVIEW_R1",
+  "verdict": "FIX_REQUIRED",
+  "reviewed_head": "cb91ade761f6802fc40c500761d3e35022408822",
+  "reviewed_tree": "ad21ce39b42681f581da996b2805a5b2fb49111f",
+  "artifact_blobs": {
+    "protocol": "197cc717bae0b0906ac7816d11f28f93676558c2",
+    "contract": "5f788c45842db695abbd3fc8706828bc74173d5e",
+    "seed_record": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+  },
+  "passed": [
+    "immutable F sequencing",
+    "scientific numeric parameters",
+    "seed identity preservation",
+    "paired TOST decision rule",
+    "zero-science/status ceiling"
+  ],
+  "blocking_findings": [
+    {
+      "id": "M-1",
+      "title": "FROZEN_R1 protocol collision-scan exact allowlist contradicts authoritative contract/approved R4 allowlist"
+    }
+  ],
+  "scientific_runs": 0,
+  "next_actor": "IMPLEMENTER_DIRECTOR_FREEZE_R2",
+  "next_action": "create new immutable FROZEN_R2; preserve FROZEN_R1; correct allowlist semantics and add fail-closed protocol/contract allowlist regression"
+}
