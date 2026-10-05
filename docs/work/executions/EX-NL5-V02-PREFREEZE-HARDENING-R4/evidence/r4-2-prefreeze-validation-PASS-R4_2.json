@@ -1,0 +1,30 @@
+{
+  "schema": "nanolab.control_work_output.v1",
+  "kind": "r4_2_prefreeze_validation_evidence",
+  "recorded_at_utc": "2026-10-04T06:45:00Z",
+  "repair": "R4.2 (M-5 + M-6 + m-2)",
+  "command": "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract prefreeze --contract ... --protocol docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md --record ... --repo-root .",
+  "exit_code": 0,
+  "gate": "PASS",
+  "validation_stage": "PREFREEZE_VALIDATION_PASS",
+  "dispatch": "DISPATCH_BLOCKED",
+  "dispatch_ready": false,
+  "dispatch_blockers": [
+    "freeze_status is NOT_FROZEN: scientific dispatch requires a Director FREEZE record on this exact subject"
+  ],
+  "freeze_status": "NOT_FROZEN",
+  "failures": [],
+  "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+  "budget": {
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560
+  },
+  "package_digests": {
+    "repro-v0-2-freeze-contract-PRE_DATA_R4.json": "46e3c9595e0dd89ce3f02d5326c11e920bbbc035b683cfac40e43b302a77906d",
+    "repro-v0-2-seed-record-PRE_DATA_R4.json": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+    "r4-1-collision-scan-manifest-R4.json": "77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c"
+  },
+  "note": "Committed PRE-DATA package unchanged by R4.2 (M-2/M-3 surfaces preserved); PREFREEZE_VALIDATION_PASS with DISPATCH_BLOCKED, machine_launch_authorized impossible without a Git-proven dispatch authority (R4.2 M-5)."
+}

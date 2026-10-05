@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "checkpoint": "NL5",
+  "base_sha": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "branch": "control/nl5-v02-prefreeze-hardening-r4-handoff-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V02-PREFREEZE-HARDENING-R4.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4-HANDOFF-R1/**",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/**",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md"
+  ],
+  "started_at_utc": "2026-10-03T06:03:00Z",
+  "status": "HANDOFF_READY"
+}

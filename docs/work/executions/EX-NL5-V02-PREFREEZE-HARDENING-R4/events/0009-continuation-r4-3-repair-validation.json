@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0009-continuation-r4-3-repair-validation",
+  "timestamp_utc": "2026-10-04T11:05:00Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "2f94d186266f4b79f377ea463771c8ccb35ccd86",
+  "summary": "R4.3 narrow repair IMPLEMENTATION + VALIDATION RECORDED (post-terminal continuation, append-only). Fresh Reviewer R3 FIX_REQUIRED (M-7 + m-3, REVIEWER_VERDICT_R3) закрыт на ветке repair/nl5-v02-prefreeze-hardening-r4-r3. M-7 = FIXED: dispatch authority schema_version 3, lifecycle строго секвенирован S -> F -> R/V -> A; subject_head/subject_tree пинуют FROZEN PACKAGE COMMIT F (real commit, rev-parse F^{tree} == subject_tree); frozen_subject_binding связывает contract/protocol/seed-record как exact immutable Git blobs самого F (не authority/evidence commit), байт-в-байт с валидируемыми входами; каждый authority record (Director FREEZE, HG-B, review, verify, R2) несёт СОБСТВЕННЫЙ immutable source binding (source_commit/path/git_blob_sha1/canonical_sha256/record_kind/issuer_class) — общий freeze-evidence commit больше не требуется, независимые review/verify commits/refs допускаются при exact-subject = F; source commits freeze/review/verify records обязаны быть строгими потомками F (git merge-base --is-ancestor; record, предшествующий F / на несвязанной истории / внутри самого F — REJECT); HG-B/R2 сознательно могут предшествовать F (binding-only); frozen_subject_head/tree в контракте — non-authoritative compatibility fields (FROZEN-контракт канонически null, self-SHA невозможен), exact frozen pins — во внешнем Director freeze / authority record; schema 1 и 2 отклоняются (fail-closed), self-consistent legacy two-commit shortcut R4.2 не проходит. m-3 = FIXED: «0 = PASS / authorized plan produced» заменено на «0 = validation/preconditions recorded; machine launch remains false; HUMAN_PROTECTED_WRITER required» (prepared execution plan != launch authorization). Trust ceiling не изменён: status = DISPATCH_PRECONDITIONS_RECORDED, machine_launch_authorized = false, launch_gate = HUMAN_PROTECTED_WRITER, DISPATCH_AUTHORIZED не существует. Принятые поверхности не переделывались (M-2, M-3, M-6, m-2, TOST/equivalence wording, Git object existence/byte binding). Валидация: 593 tests OK (было 580; +13 FrozenPackageSequencingTest на реальном временном Git repo в порядке S -> H -> F -> R -> V -> A; 10/10 required M-7 tests покрыты); check-consistency ok (0 errors / 0 warnings); workflow_lint blocking 0; work_cli validate 49/49 EX-* ok; prefreeze committed package = PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED exit 0, budget 296/56/352/560, package digests байт-в-байт равны R4.2 evidence (r4-3-prefreeze-validation-PASS-R4_3.json). Научные/тулинг параметры неизменны: N = 64/64/10/10; N_min = 52/52/8/8; replacement quotas = 12/12/2/2; replacement cap = 56; max_runs = 352; delta = 0.5; paired design; R3 confirmatory identities. Границы: SCIENTIFIC RUNS = 0; CANDIDATE = PRE-DATA / NOT FROZEN; HG-B = WAITING_OWNER; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; NL5 = IN_PROGRESS; NL6-001 = LOCKED; hosted CI = NOT_RUN; external_reproductions = 0. События 0003/0005/0007/0008 не редактируются; этот event — append-only validation marker. Следующее действие: fresh independent REVIEWER на exact R4_3_HEAD/TREE; Verifier — только после Reviewer PASS.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -> Ran 593 tests OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok:true, errors [], warnings []",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> violations 0, blocking 0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate <EX-*> -> 49/49 ok",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract prefreeze --contract <committed PRE-DATA contract> --protocol docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md --record <committed seed record> --repo-root . -> exit 0, PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED, freeze_status NOT_FROZEN",
+    "git diff --stat e58ac8225562995963c414e66b9b6ce6ea9ad55e..HEAD -- docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-collision-scan-manifest-R4.json -> пусто (package digests unchanged)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/REPAIR_MAP_R3.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-3-prefreeze-validation-PASS-R4_3.json",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R3.md",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_3_REPAIR_R1.md"
+  ],
+  "next_action": "REVIEWER: fresh independent review exact R4_3 HEAD/TREE (implementation commit + control commit с этим event + REPAIR_MAP_R3.md) на предмет M-7 + m-3 и сохранения границ R4/R4.1/R4.2. Только при PASS — fresh exact-head VERIFIER. Verifier до Reviewer PASS не запускать.",
+  "blocker": null
+}

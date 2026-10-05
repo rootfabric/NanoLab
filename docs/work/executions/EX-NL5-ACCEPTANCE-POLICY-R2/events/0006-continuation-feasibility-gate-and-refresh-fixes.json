@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-continuation-feasibility-gate-and-refresh-fixes",
+  "timestamp_utc": "2026-09-30T16:25:00Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "c25bcd6ff0fbd6a95dfa47a658ab3e04d81d4734",
+  "summary": "CONTINUATION (post-terminal correction, repair R2 по review refresh R1 @ c25bcd6f — refresh-VERDICT PASS с M-2 PARTIAL, R-1..R-5): (1) NEW-1/R-5 закрыт — WORK_QUEUE строка NL5-002 теперь N=40 primaries/10 controls (предыдущий sed не совпал из-за формы слова 'ячейка' vs 'ячейку'; в 6e5287b файл не вошёл); (2) R-1/R-2 — feasibility gate реализован mechanical: scripts/nl5/repro_v02_feasibility_gate.py (pinned §12: paired percentile bootstrap B=10 000, RNG random.Random(bootstrap_seed_v), quantile 'linear', 40 вытягиваний из n=10-поддержки; two-estimate схема: DECISION subsample-ratio + ADVISORY √n-экстраполяция), прогон на committed R1 данных ПОЛНОСТЬЮ ВОСПРОИЗВЁЛ независимые числа review: 0b ratio 0.124 PASS / 32b ratio 1.298 FAIL (advisory 32b 0.907) — evidence docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-feasibility-gate-R2.json; по букве протокола 32b = FEASIBILITY-UNCERTAIN (параметрика review для реальных n=40: 0.76–0.81 feasible) — честно вынесено в HG-B proposal §4.1 как owner-решение ДО HG-B (принять риск INFEASIBLE / ревизия R3 сузить primary до 0b / ревизия R3 расширить budget); пороги/статистика не трогаются; (3) R-4 — §9.2: control n_valid < 8 → INCONCLUSIVE-CONTROLS, исключение из downgrade-логики, verdict по primaries (консервативное направление); (4) тесты gate: quantile_linear/pooled_sd/сжатие half-width с ростом n/evaluate_variant поля — 18 seed-tool / 392 full зелёные. Реализация gate до фикса содержала bug take=min(40,n) — найден при расхождении с числами review, исправлен на 40 вытягиваний, после чего полный байт-уровень совпадения ratio с независимым review (0.124/1.298) — независимая взаимная валидация реализаций. Границы: nothing frozen; факты не тронуты; HG-B/INFEASIBLE-решение — owner.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m pytest tests/test_nl5_repro_v02_seeds.py -q -> 18 passed",
+    "python3 -m pytest tests/ -q -> 392 passed",
+    "PYTHONPATH=scripts python3 feasibility gate on committed R1 data -> 0b ratio 0.124 PASS; 32b ratio 1.298 FAIL; advisory 32b 0.907 (= review numbers)",
+    "git show c25bcd6ff0fbd6a95dfa47a658ab3e04d81d4734:docs/evidence/NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT.md (refresh-секция прочитана)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-feasibility-gate-R2.json",
+    "scripts/nl5/repro_v02_feasibility_gate.py",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md §4.1",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT.md @ c25bcd6 (refresh PASS, R-1..R-5)"
+  ],
+  "next_action": "REVIEWER REFRESH R2 (короткий: WORK_QUEUE sync + gate реализация/evidence + §9.2/§12 пины) на exact post-repair HEAD; затем FRESH VERIFIER; затем Human Gate merge; HG-B — владельцу (с §4.1 риском 32b).",
+  "blocker": null
+}

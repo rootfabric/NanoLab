@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-03T09:29:05Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "summary": "Начат bounded Work Order WO-NL5-V02-PREFREEZE-HARDENING-R4 «NL5 v0.2 pre-freeze hardening R4» (execution EX-NL5-V02-PREFREEZE-HARDENING-R4; handoff branch control/nl5-v02-prefreeze-hardening-r4-handoff-r1; prompt UBUNTU_AGENT_NL5_R4_R1). Контекст: canonical main = 87298b36431045474d3784adf5cee8c9a64d0fc9 (tree db19f9dd265873f99c995aa279ae5e0c5b21c330; PR #47 R2 activation tooling уже в main); PR #48 (integration/nl5-acceptance-policy-r3 @ ce13f0e9cb9536aaffddfff0a05c9a73f0870a21) = OPEN/DRAFT, PRE-DATA NOT FROZEN; focused audit R4 (2026-10-03) воспроизвёл F1–F4 => готовность к freeze FIX_REQUIRED; активный дубликат R4 implementation НЕ обнаружен (fresh fetch). Цель трека A: fail-closed repair F1–F4 на exact R3 subject с сохранением истории (интеграция handoff package + PR #48 через --no-ff, без rewrite): F1 — versioned machine-readable freeze/dispatch contract, fail-closed на malformed/missing/extra/mismatch inputs, реально вызываемый freeze/dispatch entrypoint (обход невозможен — negative test); F2 — immutable pinned-tree collision scan с корректной семантикой exit-кодов git grep (0=hits, 1=clean, иное=SCAN_ERROR/BLOCKED) вместо mutable worktree; F3 — deterministic replacement pool/cursor после последнего потреблённого candidate index (indices_consumed/next_candidate_index, attempt ledger, только FAILED_TECHNICAL, запрет reuse attempt id); F4 — одна явно названная целочисленная policy (N_min = ceil(0.80*N), per-cell replacement quota = floor(0.20*N), total cap = сумма per-cell caps) + смягчение scientific wording — как новая PRE-DATA candidate revision R4 с Repair Map и owner decision delta, без молчаливой смены science criteria. Regression tests уже требуют REJECTION неправильных inputs (сначала baseline-воспроизведение старых defects на exact audited subject). Ограничения: NEW SCIENTIFIC CONFIRMATORY RUNS = 0; CANDIDATE = PRE-DATA / NOT FROZEN; NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED; исторические R1/R2/R3 evidence/verdicts не переписываются; merged PR #47 (scripts/r2/**, config/infra/r2-activation.v1.json) сохраняется. Трек B (отдельно, не смешивать с R4): текущая машина = hostname outenemy = EXTERNAL_U2_ONLY (forbidden как author host по config/infra/r2-activation.v1.json) => AUTHOR_U1 = NOT_ASSIGNED, R2_STATUS = WAITING_HOST / NOT_ACTIVE; U1–U5/NC-U1..U5 = WAITING_HOST, guard не обходится; максимальный статус R2 даже при PASS = READY_FOR_FRESH_REVIEW_VERIFY, не ACTIVE. Risk HIGH (protocol integrity), claim C0_SOFTWARE_ONLY; merge = Human Gate.",
+  "command_refs": [
+    "git fetch --all --prune -> origin/main = 87298b36431045474d3784adf5cee8c9a64d0fc9",
+    "git checkout -b work/nl5-v02-prefreeze-hardening-r4 origin/main -> HEAD 87298b36431045474d3784adf5cee8c9a64d0fc9, tree db19f9dd265873f99c995aa279ae5e0c5b21c330",
+    "git branch -a | grep -iE 'prefreeze|hardening' -> только control/nl5-v02-prefreeze-hardening-r4-handoff-r1 (handoff, не implementation; дублей нет)",
+    "PYTHONPATH=scripts python3 -m r2.cli check-host -> NOT_ELIGIBLE (hostname 'outenemy' forbidden as author host), exit 2"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-V02-PREFREEZE-HARDENING-R4.md (R4 mission, F1-F4)",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/audit/README_AUDIT_R4.md (focused audit)",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/audit_results_2026-10-03.json (machine observations)",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_R1.md (Ubuntu continuation prompt)",
+    "config/infra/r2-activation.v1.json (host eligibility, forbidden_hostnames)"
+  ],
+  "next_action": "IMPLEMENTER: интегрировать handoff package (--no-ff от control/nl5-v02-prefreeze-hardening-r4-handoff-r1) и exact R3 subject (--no-ff от integration/nl5-acceptance-policy-r3) с сохранением истории; baseline-воспроизведение F1–F3; затем repair F1–F4 + regression tests; каждый substantive этап — commit + non-force push.",
+  "blocker": null
+}

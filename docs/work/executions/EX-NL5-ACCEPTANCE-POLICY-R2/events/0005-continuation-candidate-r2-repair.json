@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-continuation-candidate-r2-repair",
+  "timestamp_utc": "2026-09-30T15:52:42Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "f07fe39859bcf910f4ae8c95404e7d2f76dbbd02",
+  "summary": "CONTINUATION (post-terminal correction, repair R1): fresh scientific review вернул FAIL f07fe39859bcf910f4ae8c95404e7d2f76dbbd02 (review/nl5-acceptance-policy-r1... точнее ветка review/nl5-acceptance-policy-r2; вердикт docs/evidence/NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT.md: 3 MAJOR + 4 MINOR; процесс/машина/факты пакета признаны чистыми). Candidate переведён в revision R2 (docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md переписан; R1-текст сохранён в git history @ 3171564; по-прежнему CANDIDATE / PRE-DATA / NOT FROZEN — правки до freeze бесплатны). Repair Map: (M-1) exclusion list 19 → 34: добавлены 15 документированных confirmatory seeds B-R1 {510101,520202,530303} (evidence/frozen_seeds.json) и B-R2 {410273,520931,638257,741953,852607,963541,174329,285637,396421,507283,618457,729613} (evidence/seeds_frozen.json) — значения верифицированы имплементёром в evidence независимо от review; тест полноты переписан на 34 документированных значения (не self-referential); seed-потоки НЕ изменились (record_sha256 5c956644... прежний — коллизий нет), R2-record evidence добавлен рядом с историческим R1; (M-2) недостижимая TOST-ветвь: primary statistic PINNED на paired per-seed differences (d_i = median_B,i − median_A,i; дизайн парный по frozen seeds, прецедент frozen statistical plan platform study; выбор a priori, не по данным), bootstrap pinned полностью (PAIRED scheme, B=10 000, RNG python random.Random(bootstrap_seed_v), quantile 'linear'), N primaries 10 → 40 (обоснование: MC review на реальных R1 данных — power/budget planning, разрешено миссией §26; controls остаются 10, non-gating), N_min 32/8, budget 200 confirmatory + 40 replacement = max 240 runs, wall ≤ 360ч/платформа, + MANDATORY FEASIBILITY GATE §12: механическая проверка ratio = ожидаемая CI90 half-width (n=40, pinned bootstrap на committed R1 paired данных) / (δ·s_eff) ≤ 1.0 по обеим primaries ДО dispatch, evidence в Git до старта; FAIL => INFEASIBLE при текущем бюджете, возврат к owner без подгонки; (M-3) decision rule механический: §9.2 классификация варианта (приоритет 1-4: N_min → EQUIVALENT (CI90 внутри) → NOT_EQUIVALENT (CI90 целиком вне полосы, формулировка точная) → INCONCLUSIVE), §9.3 WO-level (приоритет 1-6; противоречие controls устранено: gross control failure |d̂| ≥ 1.0·s_eff не создаёт MISMATCH, но понижает REPRODUCED → REPRODUCED_WITH_DEVIATION + investigation), s_eff = max(s, 0.01°) (s_floor pre-declared), классы отклонений §9.4 замкнутый список {DEV-BUILD, DEV-ENV, DEV-TOOLING, DEV-OPS}; (m-1) run lengths vs analysis window разведены явно §6; (m-2) регенерация seed record + whole-tree literal search вписаны В протокол §7; (m-3) обе ноги явно гейтятся на R2 ACTIVE §12; (m-4) doc-consistency тест обновлён на 34 exclusions + pinned-механику. Tests: 14 seed-tool (было 13) / 388 full — зелёные. Границы: nothing frozen, никаких simulations, факты/границы не тронуты. REVIEWER REFRESH на exact post-repair HEAD — следующий шаг, затем FRESH VERIFIER.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m pytest tests/test_nl5_repro_v02_seeds.py -q -> 14 passed",
+    "python3 -m pytest tests/ -q -> 388 passed",
+    "PYTHONPATH=scripts python3 seed record regeneration -> record_sha256 5c95664485e00069379e962f44b3ba247f00030e02a7375a27d3b4ab441f5a9c (unchanged; exclusion_list_size 34)",
+    "git show f07fe39859bcf910f4ae8c95404e7d2f76dbbd02:docs/evidence/NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT.md (прочитан полный вердикт)",
+    "seed verification: docs/work/executions/EX-NL5-002-B-R1/evidence/frozen_seeds.json + EX-NL5-002-B-R2/evidence/seeds_frozen.json (15 значений подтверждены независимо)"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md (candidate R2)",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/REVIEWER_VERDICT.md @ f07fe39 (FAIL, 3 MAJOR)",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md"
+  ],
+  "next_action": "REVIEWER REFRESH (review/nl5-acceptance-policy-r2, та же научная сессия) на exact post-repair HEAD; затем FRESH VERIFIER; затем Human Gate merge; HG-B — владельцу.",
+  "blocker": null
+}

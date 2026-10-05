@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-r4-1-repair-started",
+  "timestamp_utc": "2026-10-04T01:28:45Z",
+  "execution_id": "EX-NL5-V02-PREFREEZE-HARDENING-R4",
+  "work_order_id": "WO-NL5-V02-PREFREEZE-HARDENING-R4",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "61aa6eb24c27f5773d6c91be9bfd22e3e2cd4f3b",
+  "summary": "R4.1 repair START (post-terminal review-correction continuation). Fresh independent Reviewer R1 вынесла FAIL / FIX_REQUIRED на exact R4 subject 62f65612f7b2652917396e3acfc5d6d3a605032e / tree a45f8295067ff7bf0b9f0c401f09e0771df7d909 (verdict: docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R1.md; branch review/nl5-v02-prefreeze-hardening-r4-r1 head 2729b9c4744339a188c222e8b0fae74fc7c50c62). Blocking findings: M-1 dispatch entrypoint принимает NOT_FROZEN package (build_execution_plan строит nanolab_v02_dispatch_execution_plan без freeze authority); M-2 replacement pools не доказываются bit-exact replay'ем и не имеют собственного R4 integrity digest; M-3 легитимность recorded SEED_COLLISION_TREE skips не привязана mechanically к freeze gate; M-4 ReplacementLedger leg-level и допускает повторное потребление replacement на один failed attempt. Minor: m-1 equivalence wording («неотличимость медианного сдвига от нуля» — неверно для TOST). Ремонтная подготовка на этой ветке: создан repair/nl5-v02-prefreeze-hardening-r4-r1 от tip work/nl5-v02-prefreeze-hardening-r4 1964bb51915fb0850f7f34b99d6774c48af5bf60, reviewer branch интегрирован --no-ff (merge 61aa6eb2, без squash/force, reviewer evidence не изменялись). Факты до substantive edits: baseline SHA сверены fresh fetch (origin/main = 87298b36431045474d3784adf5cee8c9a64d0fc9, product subject = 62f6561/tree a45f829, tip = 1964bb5, review head = 2729b9c — совпадают с REVIEWER_VERDICT_R1); дублей repair-работы не обнаружено (branch repair/nl5-v02-prefreeze-hardening-r4-r1 отсутствовал на origin; dormant repair/nl5-acceptance-policy-r4-power-gate-r1 НЕ смешивается — Director sequencing). Границы: SCIENTIFIC RUNS = 0; CANDIDATE = PRE-DATA / NOT FROZEN; HG-B = WAITING_OWNER; R2 = WAITING_HOST / NOT_ACTIVE; AUTHOR_U1 = NOT_ASSIGNED; NL5 = IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED. Старый terminal HANDOFF (event 0003) не редактируется; этот event — append-only correction marker. Следующее действие: реализация M-1..M-4 + m-1, новые regression tests, полный harness validation, REPAIR_MAP_R1_1.md, новый exact subject для fresh Reviewer.",
+  "command_refs": [
+    "git fetch --all --prune -> origin/main 87298b36431045474d3784adf5cee8c9a64d0fc9; work tip 1964bb51915fb0850f7f34b99d6774c48af5bf60; review head 2729b9c4744339a188c222e8b0fae74fc7c50c62",
+    "git checkout -b repair/nl5-v02-prefreeze-hardening-r4-r1 origin/work/nl5-v02-prefreeze-hardening-r4",
+    "git merge --no-ff origin/review/nl5-v02-prefreeze-hardening-r4-r1 -> merge 61aa6eb24c27f5773d6c91be9bfd22e3e2cd4f3b (tree 55d205a3fb5fcef4fff78d1a77788efa7baa8f4e)",
+    "git ls-remote origin | grep repair -> дубликатов repair/nl5-v02-prefreeze-hardening-r4-r1 нет"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R1.md",
+    "docs/evidence/NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R1.json",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_R4_1_REPAIR_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/REPAIR_MAP_R1.md"
+  ],
+  "next_action": "IMPLEMENTER: выполнить R4.1 repair M-1..M-4 + m-1 на новой ветке repair/nl5-v02-prefreeze-hardening-r4-r1, опубликовать REPAIR_MAP_R1_1.md + новый exact HEAD/TREE для fresh independent Reviewer (Verifier — только после Reviewer PASS).",
+  "blocker": null
+}

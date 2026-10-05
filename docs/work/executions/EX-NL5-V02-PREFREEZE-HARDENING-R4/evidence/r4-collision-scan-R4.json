@@ -1,0 +1,63 @@
+{
+  "kind": "nanolab_r4_pinned_tree_collision_scan",
+  "finding": "F2 (immutable pinned-tree collision scan)",
+  "pinned_commit": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+  "pinned_tree": "b3b35d566d1a26f970225845a7b4ecf5ce63cb70",
+  "mode": "pinned_tree",
+  "scan_semantics": "git grep exit 0 = hits; 1 = clean; other/timeout/missing object = SCAN_ERROR/BLOCKED (fail-closed); non-repo never yields collision_count=0",
+  "scan_scope": "fresh replica identities only (confirmatory 148 + replacement pools 28 = 176); bootstrap seeds reported separately below",
+  "exclude_paths_exact": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "identities_scanned": 176,
+  "collisions_outside_allowlist": {},
+  "collision_count": 0,
+  "excluded_hits": {},
+  "status": "CLEAN",
+  "elapsed_seconds": 10.5,
+  "bootstrap_provenance": {
+    "0b": {
+      "seed": 323707441,
+      "bootstrap_index": 0,
+      "regenerates_from_anchor": true,
+      "literal_hits_at_pinned_tree_outside_allowlist": [
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+      ],
+      "interpretation": "expected recurrence: bootstrap values are identical across candidate revisions (same anchor) and are published in the historical R1/R2 seed records; they are NOT fresh replica identities and are not subject to the fresh-identity skip rule"
+    },
+    "32b": {
+      "seed": 1702258603,
+      "bootstrap_index": 0,
+      "regenerates_from_anchor": true,
+      "literal_hits_at_pinned_tree_outside_allowlist": [
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+      ],
+      "interpretation": "expected recurrence: bootstrap values are identical across candidate revisions (same anchor) and are published in the historical R1/R2 seed records; they are NOT fresh replica identities and are not subject to the fresh-identity skip rule"
+    },
+    "11b": {
+      "seed": 404063983,
+      "bootstrap_index": 0,
+      "regenerates_from_anchor": true,
+      "literal_hits_at_pinned_tree_outside_allowlist": [
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+      ],
+      "interpretation": "expected recurrence: bootstrap values are identical across candidate revisions (same anchor) and are published in the historical R1/R2 seed records; they are NOT fresh replica identities and are not subject to the fresh-identity skip rule"
+    },
+    "53b": {
+      "seed": 627625019,
+      "bootstrap_index": 0,
+      "regenerates_from_anchor": true,
+      "literal_hits_at_pinned_tree_outside_allowlist": [
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+        "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+      ],
+      "interpretation": "expected recurrence: bootstrap values are identical across candidate revisions (same anchor) and are published in the historical R1/R2 seed records; they are NOT fresh replica identities and are not subject to the fresh-identity skip rule"
+    }
+  },
+  "record_file_sha256": "4fe35dab07a6ac5311c4737b673af2171183776cc5335657d8b8d62e1add6271",
+  "note": "generation-time and freeze-verification scans pin the same immutable exclusion tree a9d7d07 (protocol §7); changing the pin requires a new declared generation revision"
+}

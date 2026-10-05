@@ -1,0 +1,13 @@
+{
+  "kind": "r4_freeze_contract_gate",
+  "contract_revision": "r4",
+  "gate": "PASS",
+  "failures": [],
+  "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+  "budget": {
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560
+  }
+}

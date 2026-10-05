@@ -1,0 +1,684 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_v02_collision_scan_manifest",
+  "exclusion_tree_pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+  "scan_mode": "pinned_tree",
+  "allowlist_paths_exact": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "accepted_confirmatory": {
+    "0b": {
+      "seeds": [
+        173237241,
+        632342429,
+        670625784,
+        1888400262,
+        1663021208,
+        836909046,
+        154461684,
+        627282485,
+        1515875928,
+        1928429163,
+        609090909,
+        1958933659,
+        2142366820,
+        1169171693,
+        598319659,
+        1575009589,
+        1220453627,
+        1995566219,
+        1605461643,
+        912938062,
+        1075019518,
+        711444371,
+        486327777,
+        750728549,
+        884517751,
+        720780208,
+        2033195985,
+        424620369,
+        1330699938,
+        1701218398,
+        230468705,
+        2105380575,
+        892196255,
+        1878727187,
+        686741480,
+        1119264512,
+        1914200740,
+        1911874288,
+        307734812,
+        1157404202,
+        1857602259,
+        48246887,
+        296787108,
+        2144244010,
+        1107629067,
+        928031292,
+        1867296800,
+        721034311,
+        945321416,
+        308945258,
+        932210901,
+        966150889,
+        1566976038,
+        1667598836,
+        1960729465,
+        2085207011,
+        355058809,
+        84171585,
+        1283752693,
+        1518524920,
+        1961692491,
+        598577476,
+        1506038909,
+        1967334984
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "32b": {
+      "seeds": [
+        652172925,
+        1061471855,
+        1488835411,
+        1345998445,
+        1563793150,
+        1456830998,
+        1911641766,
+        693993459,
+        1359391029,
+        357278055,
+        1635567276,
+        1045174182,
+        1131685710,
+        1825363555,
+        1979539893,
+        1135639664,
+        1924360375,
+        9810985,
+        1748521268,
+        2015638113,
+        2146584302,
+        153125809,
+        1166804961,
+        1216454539,
+        1355378121,
+        562650201,
+        366666989,
+        1387291254,
+        1044595082,
+        254198190,
+        485760025,
+        894383516,
+        1032942703,
+        76385451,
+        937029001,
+        711520318,
+        1426311218,
+        2073795254,
+        564037477,
+        92051512,
+        1731513304,
+        115470100,
+        2010947828,
+        1866910457,
+        960707110,
+        1627448172,
+        916858262,
+        1803349411,
+        22293836,
+        2079912659,
+        602636467,
+        1323164179,
+        450823586,
+        411873937,
+        1736922300,
+        146745838,
+        783489202,
+        1142987814,
+        1951785749,
+        2139335986,
+        1474790665,
+        1741339957,
+        1170418983,
+        2062865742
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "11b": {
+      "seeds": [
+        1351266957,
+        79022951,
+        1611712994,
+        1911934076,
+        681241267,
+        1220850728,
+        1181127065,
+        877856094,
+        1297500179,
+        1445093266
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "53b": {
+      "seeds": [
+        1321440826,
+        633157947,
+        1726363519,
+        215036525,
+        1058550005,
+        706513118,
+        1951654445,
+        203822914,
+        676256951,
+        1154761419
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    }
+  },
+  "accepted_replacement": {
+    "0b": {
+      "seeds": [
+        1425427579,
+        2092545511,
+        1942088095,
+        1906341020,
+        1994969353,
+        111655649,
+        37299244,
+        1556046734,
+        2109066640,
+        1559187055,
+        1277984395,
+        1786478227
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "32b": {
+      "seeds": [
+        792783434,
+        1912956295,
+        669227601,
+        182937638,
+        2014141120,
+        1330504711,
+        1177418791,
+        1678548875,
+        1257014694,
+        5783587,
+        532082925,
+        1313066371
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "11b": {
+      "seeds": [
+        838716997,
+        1768488080
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    },
+    "53b": {
+      "seeds": [
+        1327790049,
+        424343851
+      ],
+      "status": "CLEAN",
+      "collisions_outside_allowlist": 0,
+      "excluded_hits": {}
+    }
+  },
+  "recorded_skips": {
+    "0b": {
+      "confirmatory": [
+        {
+          "index": 1,
+          "seed": 1374145662,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 2,
+          "seed": 15405922,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 3,
+          "seed": 815842812,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 4,
+          "seed": 2075217784,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 5,
+          "seed": 121869968,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 6,
+          "seed": 2116475598,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 7,
+          "seed": 71530274,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 8,
+          "seed": 445956048,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 9,
+          "seed": 371085869,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 10,
+          "seed": 179639723,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        }
+      ],
+      "replacement": []
+    },
+    "32b": {
+      "confirmatory": [
+        {
+          "index": 1,
+          "seed": 784835965,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 2,
+          "seed": 1147991324,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 3,
+          "seed": 68816818,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 4,
+          "seed": 1279157045,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 5,
+          "seed": 1405927920,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 6,
+          "seed": 1465278086,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 7,
+          "seed": 166080254,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 8,
+          "seed": 73871844,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 9,
+          "seed": 355831697,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 10,
+          "seed": 2042247191,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 25,
+          "seed": 84676,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-002-B-R1/evidence/campaign_summary.json",
+            "experiments/evidence/E1/E1-R1/runs/E1-R1-P001/artifacts/trajectory.dat",
+            "experiments/evidence/E1/E1-R1/runs/E1-R1-P002/artifacts/last_conf.dat",
+            "experiments/evidence/E1/E1-R1/runs/E1-R1-P002/artifacts/trajectory.dat",
+            "experiments/evidence/E1/E1-R1/runs/E1-R1-S001/artifacts/trajectory.dat",
+            "experiments/evidence/E1/E1-R2/runs/E1-R2-C002/artifacts/trajectory.dat"
+          ],
+          "non_allowlisted_hit_count": 1
+        }
+      ],
+      "replacement": []
+    },
+    "11b": {
+      "confirmatory": [
+        {
+          "index": 1,
+          "seed": 1627797145,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 2,
+          "seed": 705723178,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 3,
+          "seed": 1217708110,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 4,
+          "seed": 2147184124,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 5,
+          "seed": 676026465,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 6,
+          "seed": 713579922,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 7,
+          "seed": 1771426530,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 8,
+          "seed": 1660731199,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 9,
+          "seed": 1230989540,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 10,
+          "seed": 179087359,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        }
+      ],
+      "replacement": []
+    },
+    "53b": {
+      "confirmatory": [
+        {
+          "index": 1,
+          "seed": 121736161,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 2,
+          "seed": 863920084,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 3,
+          "seed": 1892664804,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 4,
+          "seed": 1426881248,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 5,
+          "seed": 1074119778,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 6,
+          "seed": 1730050286,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 7,
+          "seed": 873098383,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 8,
+          "seed": 1442571149,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 9,
+          "seed": 571895349,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        },
+        {
+          "index": 10,
+          "seed": 2056885758,
+          "reason": "SEED_COLLISION_TREE",
+          "hit_paths": [
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json",
+            "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json"
+          ],
+          "non_allowlisted_hit_count": 1
+        }
+      ],
+      "replacement": []
+    }
+  },
+  "scan_status": "VERIFIED",
+  "manifest_sha256": "6966b216309fd62e29dc93e31f26f00c2dc4735a6a68dd7ae047628a0c581857"
+}

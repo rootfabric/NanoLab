@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_reviewer_verdict",
+  "review_id": "NL5-V02-PREFREEZE-HARDENING-R4/REVIEWER_VERDICT_R1",
+  "reviewed_head": "62f65612f7b2652917396e3acfc5d6d3a605032e",
+  "reviewed_tree": "a45f8295067ff7bf0b9f0c401f09e0771df7d909",
+  "base_main": "87298b36431045474d3784adf5cee8c9a64d0fc9",
+  "verdict": "FIX_REQUIRED",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "blocking_findings": [
+    {
+      "id": "M-1",
+      "title": "dispatch entrypoint accepts NOT_FROZEN package"
+    },
+    {
+      "id": "M-2",
+      "title": "replacement pools are not deterministically replay-validated"
+    },
+    {
+      "id": "M-3",
+      "title": "collision skip legitimacy is not bound into freeze gate"
+    },
+    {
+      "id": "M-4",
+      "title": "replacement ledger lacks pair-level one-shot semantics"
+    }
+  ],
+  "minor_findings": [
+    {
+      "id": "m-1",
+      "title": "equivalence wording incorrectly says indistinguishable from zero"
+    }
+  ],
+  "hosted_ci": "NOT_RUN",
+  "next_actor": "IMPLEMENTER",
+  "next_action": "R4.1 repair M-1..M-4 + m-1, publish new exact HEAD/TREE, then fresh review"
+}

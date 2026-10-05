@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "checkpoint": "NL5",
+  "base_sha": "8205781def7179d6bdfa6eb7ab2a84d46776649c",
+  "branch": "control/nl5-acceptance-policy-r2",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-ACCEPTANCE-POLICY-R2.md",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/**",
+    "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md",
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "scripts/nl5/**",
+    "tests/test_nl5_repro_v02_seeds.py",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-09-30T14:56:00Z",
+  "status": "HANDOFF_READY"
+}
