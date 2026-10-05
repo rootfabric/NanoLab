@@ -1,6 +1,6 @@
 # WO-NL5-V02-DIRECTOR-FREEZE-R2 — Correct frozen collision-allowlist binding
 
-Status: **PLANNED / REPAIR REQUIRED AFTER FROZEN_R1 REVIEW FAIL**
+Status: **READY_FOR_REVIEW — F2 created + Director FREEZE R2 recorded (2026-10-05; awaiting fresh Scientific Reviewer(F2))**
 Risk: **HIGH** — frozen scientific protocol integrity.
 Claim ceiling: **C0_SOFTWARE_ONLY**.
 Scientific runs: **0**.
