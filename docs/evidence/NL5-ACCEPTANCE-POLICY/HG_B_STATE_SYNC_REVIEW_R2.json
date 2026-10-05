@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_control_reviewer_verdict",
+  "review_id": "NL5-HG-B-STATE-SYNC/REVIEWER_R2",
+  "verdict": "PASS",
+  "reviewed_head": "3d8a15c32e903256cd4015fe1109f18b445247b7",
+  "reviewed_tree": "5bfb2411d6283420e9067850807c6650725d838b",
+  "base_hg_b_head": "99a8af949db73da2c841625d89ff3b92f8184822",
+  "base_main": "3b0dd01e17e374c011007c6b0cdbbb5703bf2360",
+  "fixes": {
+    "M-1": "PASS — NL5-ACCEPTANCE-POLICY removed from project/state.json.open_decisions"
+  },
+  "boundaries": {
+    "scientific_runs": 0,
+    "candidate": "PRE-DATA / NOT FROZEN",
+    "r2": "WAITING_HOST / NOT_ACTIVE",
+    "author_u1": "NOT_ASSIGNED",
+    "nl5": "IN_PROGRESS",
+    "external_reproductions": 0,
+    "nl6_001": "LOCKED by dependency"
+  },
+  "next_actor": "DIRECTOR_INTEGRATION",
+  "next_action": "update PR #51 head to exact repaired subject; hosted CI; Human Gate merge"
+}
