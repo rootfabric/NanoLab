@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "record_kind": "DIRECTOR_FREEZE_RECORD",
+  "issuer_class": "DIRECTOR",
+  "director": "DIRECTOR",
+  "decision": "FREEZE",
+  "decision_id": "NL5-V02-FREEZE/DIRECTOR/R2",
+  "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+  "candidate_revision": "R4",
+  "frozen_revision": "FROZEN_R2",
+  "supersedes": {
+    "frozen_revision": "FROZEN_R1",
+    "subject_head": "cb91ade761f6802fc40c500761d3e35022408822",
+    "subject_tree": "ad21ce39b42681f581da996b2805a5b2fb49111f",
+    "director_record_commit": "4236e0c7cfb19de2687a8f0d3be3641cc1b000d4",
+    "disposition": "historical immutable attempt; fresh Scientific Review R1 = FAIL / FIX_REQUIRED (M-1: frozen protocol section 6 collision-scan exact allowlist contradicted the authoritative contract allowlist); FROZEN_R1 and Director FREEZE R1 are preserved unamended and are superseded for dispatch by FROZEN_R2 after successful review",
+    "review_evidence": "docs/evidence/NL5-V02-FREEZE/FRESH_SCIENTIFIC_REVIEW_R1.{md,json}"
+  },
+  "subject_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "subject_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+  "protocol_path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+  "protocol_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+  "protocol_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+  "contract_path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+  "contract_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+  "contract_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+  "seed_record_path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+  "seed_record_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+  "seed_record_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+  "frozen_subject_binding": {
+    "protocol": {
+      "source_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+      "git_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+      "canonical_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d"
+    },
+    "contract": {
+      "source_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+      "git_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+      "canonical_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a"
+    },
+    "seed_record": {
+      "source_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+      "git_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+      "canonical_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+    }
+  },
+  "hg_b_record": {
+    "source_commit": "549b687a9171ea3636dbb00078d7018f619cebd3",
+    "path": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+    "git_blob_sha1": "61d1491233aeb2537f9800d6183def5b8fb0c8e0",
+    "canonical_sha256": "b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9",
+    "record_kind": "HG_B_OWNER_APPROVAL",
+    "issuer_class": "HUMAN_GATE_OWNER",
+    "decision": "APPROVED",
+    "candidate_revision": "R4",
+    "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL"
+  },
+  "hg_b": "APPROVED",
+  "scientific_runs_at_freeze": 0,
+  "external_reproductions_at_freeze": 0,
+  "candidate_status_at_freeze": "PRE-DATA",
+  "zero_confirmatory_data_at_freeze": true,
+  "seed_record_byte_identical_to_r4": true,
+  "seed_record_byte_identical_to_frozen_r1": true,
+  "m1_repair": {
+    "finding": "M-1 of FRESH_SCIENTIFIC_REVIEW_R1: FROZEN_R1 protocol section 6 declared the collision-scan exact allowlist as the frozen-package paths of that package, contradicting the authoritative contract allowlist",
+    "correction": "FROZEN_R2 protocol declares the approved R4 pinned-tree allowlist in exactly one scan-allowlist-v1 machine block, ordered-exact equal to contract seed_generation.scan_allowlist_paths_exact; scan tree a9d7d07fa264e9907b67ca244b00ba2da3430b0f; FROZEN_R2 package paths are NOT allowlist entries for that historical scan",
+    "validator_regression": "fail-closed FROZEN-only scan-allowlist-v1 binding in scripts/nl5/repro_v02_freeze_contract.py + ScanAllowlistBindingTest (12 tests); frozen-package allowlist paths and the raw FROZEN_R1 protocol now produce FREEZE_GATE_FAIL / exit 3",
+    "allowlist_regression": "PASS",
+    "repair_map": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/REPAIR_MAP_M1.md"
+  },
+  "scan_allowlist_paths_exact": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "collision_scan_tree": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+  "frozen_gate": {
+    "gate": "PASS",
+    "validation_stage": "PREFREEZE_VALIDATION_PASS",
+    "freeze_status": "FROZEN",
+    "dispatch": "DISPATCH_BLOCKED",
+    "dispatch_ready": false,
+    "evidence": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-gate-PASS-R2.json"
+  },
+  "contract_delta_check": {
+    "evidence": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-package-delta-check-R2.json",
+    "result": "PASS",
+    "changed_leaf_paths": [
+      "scientific_subject.candidate_doc_path",
+      "scientific_subject.freeze_status",
+      "scientific_subject.seed_record_path"
+    ],
+    "unchanged_leaf_count": 307
+  },
+  "state_ceiling_at_freeze": {
+    "SCIENTIFIC_RUNS": 0,
+    "NL5": "IN_PROGRESS",
+    "NL6_001": "LOCKED",
+    "AUTHOR_U1": "NOT_ASSIGNED",
+    "R2": "WAITING_HOST / NOT_ACTIVE",
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER"
+  },
+  "dispatch": "BLOCKED",
+  "dispatch_blockers": [
+    "fresh Reviewer(F2) = missing",
+    "fresh Verifier(F2) = missing",
+    "R2 ACTIVE = false",
+    "AUTHOR_U1 = NOT_ASSIGNED"
+  ],
+  "lifecycle": "S -> F -> D/R/V -> A; this record (D2) pins F2 from a strict descendant commit; review/verify must pin F2 exactly",
+  "post_freeze_edit_policy": "post-freeze scientific edits require a new revision (v0.3+) via a new Work Order; frozen text edits forbidden; F2 is never amended after publication",
+  "record_source_note": "this record's own commit SHA / blob identity are intentionally absent here (impossible self-reference); they are recorded in the later append-only event 0003 of EX-NL5-V02-DIRECTOR-FREEZE-R2",
+  "recorded_at_utc": "2026-10-05T16:02:14Z"
+}
