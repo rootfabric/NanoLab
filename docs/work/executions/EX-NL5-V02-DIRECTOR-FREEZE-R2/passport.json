@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R2",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R2",
+  "checkpoint": "NL5",
+  "base_sha": "49bda9bad9110c4598d10aa20a28cf5b062acf13",
+  "branch": "repair/nl5-v02-director-freeze-r2",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V02-DIRECTOR-FREEZE-R2.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/**",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "scripts/nl5/repro_v02_freeze_contract.py",
+    "tests/test_nl5_v02_prefreeze_r4.py",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-05T15:52:10Z",
+  "status": "IN_PROGRESS"
+}
