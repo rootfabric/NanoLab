@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-05T05:39:00Z",
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R1",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "549b687a9171ea3636dbb00078d7018f619cebd3",
+  "summary": "Started bounded Director Freeze preparation for NL5 v0.2 after HG-B APPROVED. Goal: create a real immutable FROZEN PACKAGE COMMIT F containing exact frozen protocol/contract/seed-record blobs, then a later Director FREEZE record pinning F. No scientific runs, no R2 activation, no AUTHOR_U1 assignment, no NL5 acceptance, no NL6 unlock. Base main 549b687a9171ea3636dbb00078d7018f619cebd3 / tree 5bfb2411d6283420e9067850807c6650725d838b; PR #51 merged; post-merge hosted CI 37269130976 SUCCESS. Lifecycle required by schema v3: S -> F -> D/R/V -> A; F cannot contain its own SHA and review/verify must later pin F.",
+  "command_refs": [
+    "fresh GitHub main binding -> 549b687a9171ea3636dbb00078d7018f619cebd3",
+    "HG_B_OWNER_DECISION_R1.json -> APPROVED",
+    "repro-v0-2-freeze-contract-PRE_DATA_R4.json -> accepted R4 basis"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json",
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md"
+  ],
+  "next_action": "Ubuntu IMPLEMENTER creates F exactly as WO specifies, validates, pushes F, then records Director FREEZE in a later commit. Stop before scientific runs.",
+  "blocker": null
+}
