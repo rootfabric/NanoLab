@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0009-continuation-hg-b-approved-state-sync",
+  "timestamp_utc": "2026-10-05T03:53:12Z",
+  "execution_id": "EX-NL5-ACCEPTANCE-POLICY-R2",
+  "work_order_id": "WO-NL5-ACCEPTANCE-POLICY-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "e8c306ca89e1aa7cba9eac576173b057f5399ec9",
+  "summary": "CONTINUATION_CHECKPOINT (post-terminal corrections class, append-only; event 0008 не изменялся): canonical-state sync по fresh CONTROL/REVIEWER вердикту HG_B_CLOSURE_REVIEW_R1 (VERDICT = FIX_REQUIRED, blocker M-1 — единственный). decision_gate = HG-B. owner_decision = APPROVED. canonical_state_sync = NL5-ACCEPTANCE-POLICY removed from open_decisions. resolution = RESOLVED_BY_HG_B_R1. Исполнение: project/state.json.open_decisions очищен от resolved decision NL5-ACCEPTANCE-POLICY (DECISION_ID = NL5-ACCEPTANCE-POLICY/HG-B/R1, APPROVED) — вопрос «(a) new preregistered reproduction rule или (b) другой criterion» отвечён владельцем в пользу (a); open_decisions = []; новый state schema не создавался; новых open decisions для packaging/P3 не создавалось. Инварианты НЕ менялись: stage_status.NL5 = IN_PROGRESS; task_status.NL5-002 = WAITING_HUMAN; execution.external_reproductions = 0; NL6-001 = PLANNED (locked by dependency); scientific runs = 0; CANDIDATE = PRE-DATA / NOT FROZEN; R2 = WAITING_HOST / NOT_ACTIVE; AUTHOR_U1 = NOT_ASSIGNED. Passport EX-NL5-ACCEPTANCE-POLICY-R2 (append-only правка самого паспорта, разрешённая его же allowed_paths docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/**): exact path project/state.json добавлен в allowed_paths, т.к. предыдущий список покрывал только docs/**-пути и запрещал project/state.json; история сохранена. Subject e8c306ca89e1aa7cba9eac576173b057f5399ec9 — repair-коммит с самим state sync + passport update (ветка repair/nl5-hg-b-approved-state-sync-r1, base 99a8af949db73da2c841625d89ff3b92f8184822 = control/nl5-hg-b-approved-r1, интеграция review/nl5-hg-b-approved-r1-r1 через merge --no-ff cc18415). Валидация на subject: unittest 593 OK; check-consistency ok; workflow_lint violations 0; work_cli validate все EX-* 49/49 ok; prefreeze negative control PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED / freeze_status NOT_FROZEN. Границы: PR #51 не merge'ится из этой ветки; protocol НЕ freeze'ится; научные прогоны не запускались и не разрешаются этим event'ом.",
+  "command_refs": [
+    "git fetch origin; git ls-remote origin 'refs/heads/repair/nl5-hg-b-approved-state-sync-r1' -> пусто (fresh repair, существующего repair нет)",
+    "git merge --no-ff origin/review/nl5-hg-b-approved-r1-r1 -> merge cc18415 (3 файла: HG_B_CLOSURE_REVIEW_R1.{md,json}, prompt)",
+    "git commit e8c306ca89e1aa7cba9eac576173b057f5399ec9 (project/state.json open_decisions []; passport allowed_paths + project/state.json)",
+    "python3 -m unittest discover -s tests -t . -v -> Ran 593 tests OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok:true, errors [], warnings []",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> workflows 1, violations 0, blocking 0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate (все EX-*, find docs/work/executions -name 'EX-*') -> 49/49 ok",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract prefreeze --contract docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json --protocol docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md --record docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json --repo-root . -> exit 0, gate PASS, PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED, freeze_status NOT_FROZEN"
+  ],
+  "evidence_refs": [
+    "project/state.json (open_decisions = [])",
+    "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/passport.json (allowed_paths + project/state.json)",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.md",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_CLOSURE_REVIEW_R1.md",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_CLOSURE_REVIEW_R1.json"
+  ],
+  "next_action": "Fresh CONTROL/REVIEWER: верифицировать M-1 fix на repair/nl5-hg-b-approved-state-sync-r1 — canonical state sync (open_decisions без NL5-ACCEPTANCE-POLICY), append-only bookkeeping (event 0008 byte-identical, passport allowed_paths), все гейты. Затем handoff/PR. Не merge PR #51; не freeze protocol; научные прогоны не начинать (science открывается только при FROZEN package accepted + R2 ACTIVE + AUTHOR_U1 assigned).",
+  "blocker": null
+}
