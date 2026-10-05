@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "record_kind": "HG_B_OWNER_APPROVAL",
+  "issuer_class": "HUMAN_GATE_OWNER",
+  "decision_id": "NL5-ACCEPTANCE-POLICY/HG-B/R1",
+  "decision": "APPROVED",
+  "decision_class": "HUMAN_GATE_B",
+  "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+  "candidate_revision": "R4",
+  "candidate_basis": "R4 / post-R4.3 hardened pre-freeze basis",
+  "accepted_principle": "NL5 acceptance requires successful fresh external reproduction under preregistered v0.2 distribution-based rule.",
+  "scientific_runs_at_decision": 0,
+  "candidate_status_at_decision": "PRE-DATA / NOT FROZEN",
+  "r2_status_at_decision": "WAITING_HOST / NOT_ACTIVE",
+  "nl5_status_at_decision": "IN_PROGRESS",
+  "external_reproductions_at_decision": 0,
+  "nl6_001_status_at_decision": "LOCKED",
+  "author_u1_at_decision": "NOT_ASSIGNED",
+  "recorded_at_utc": "2026-10-05T02:15:00Z",
+  "decision_basis": {
+    "canonical_main_head": "3b0dd01e17e374c011007c6b0cdbbb5703bf2360",
+    "canonical_main_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1",
+    "r4_3_product_subject": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+    "r4_3_product_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1",
+    "integration_pr": 50,
+    "fresh_reviewer": {
+      "verdict": "PASS",
+      "record": "REVIEWER_VERDICT_R4",
+      "verdict_ref_branch": "review/nl5-v02-prefreeze-hardening-r4-3-r4",
+      "evidence_tip": "f564aa7ab4654043a3bbd0711a893427f5a0f2f2",
+      "reviewed_head": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+      "reviewed_tree": "10ba8bbffcae06ae7fad7135b2493494b0d4f9b1"
+    },
+    "fresh_verifier": {
+      "verdict": "VERIFIED",
+      "verdict_ref_branch": "verify/nl5-v02-prefreeze-hardening-r4-3-r1",
+      "evidence_commit": "4d14b34f8b91312a6c8d393840cb107974d0de10"
+    },
+    "director_readiness": {
+      "verdict": "READY_FOR_HUMAN_GATE",
+      "record": "DIRECTOR_READINESS_R1",
+      "verdict_ref_branch": "control/nl5-v02-prefreeze-hardening-r4-3-director-readiness-r1"
+    },
+    "hosted_ci": {
+      "tr_pr_run_id": 37242371055,
+      "tr_pr_attempt": 2,
+      "tr_pr_conclusion": "SUCCESS",
+      "tr_pr_head": "39cc9809ad4b9ad61b2effd6dbcb8c9067848da0",
+      "post_merge_run_id": 37252078697,
+      "post_merge_conclusion": "SUCCESS",
+      "post_merge_head": "3b0dd01e17e374c011007c6b0cdbbb5703bf2360"
+    },
+    "proposal": "docs/control/NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md",
+    "proposal_addenda": [
+      "8 (R4 decision delta)",
+      "9 (R4.1 dispatch authority)"
+    ]
+  },
+  "approved_parameters": {
+    "delta": 0.5,
+    "design": "paired",
+    "semantics": "standard TOST equivalence",
+    "equivalence_rule": "CI90 of paired median shift entirely inside pre-declared equivalence interval +-delta*s_eff",
+    "n_per_variant": {
+      "0b": 64,
+      "32b": 64,
+      "11b": 10,
+      "53b": 10
+    },
+    "n_min_per_variant": {
+      "0b": 52,
+      "32b": 52,
+      "11b": 8,
+      "53b": 8
+    },
+    "replacement_quota_pairs": {
+      "0b": 12,
+      "32b": 12,
+      "11b": 2,
+      "53b": 2
+    },
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560,
+    "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+    "exclusion_list_size": 34,
+    "exclusion_tree_pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+    "primary_variants": [
+      "0b",
+      "32b"
+    ],
+    "control_variants": [
+      "11b",
+      "53b"
+    ]
+  },
+  "approved_protective_properties": {
+    "paired_tost": true,
+    "fresh_deterministic_identities": true,
+    "replacement_only_failed_technical": true,
+    "frozen_replacement_streams": true,
+    "replacement_cursor_policy": "frozen pools from pinned next_candidate_index 75/76/21/21; never raw N+1",
+    "collision_skip_proof_required": true,
+    "mandatory_feasibility_gate": "FAIL => BLOCKED; accept-risk bypass forbidden",
+    "excluded_variants_from_v0_2_rule": [
+      {
+        "variant": "74b",
+        "status": "NOT_MEASURED / KNOWN_GAP",
+        "reason": "excluded from v0.2 reproduction rule"
+      }
+    ],
+    "machine_precondition": "HG-B APPROVED is a required machine-readable precondition of nanolab_v02_dispatch_authority (schema_version 3, lifecycle S -> F -> R/V -> A)"
+  },
+  "decision_boundaries": {
+    "freezes_protocol": false,
+    "activates_r2": false,
+    "assigns_author_u1": false,
+    "authorizes_scientific_runs": false,
+    "accepts_nl5": false,
+    "changes_nl5_002_v01_terminal_mismatch": false,
+    "changes_platform_insensitive_finding": false,
+    "unlocks_nl6": false,
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER"
+  },
+  "binding_intent": {
+    "note": "source_commit / git_blob_sha1 / canonical_sha256 for THIS record, and FROZEN_PACKAGE_HEAD / reviewed_head / verified_head, are intentionally absent: they cannot be honestly self-declared before the record is committed and a freeze lifecycle exists. At Director freeze time, schema v3 authority records bind this record as an exact immutable Git blob (source_commit/path/git_blob_sha1/canonical_sha256/record_kind/issuer_class). An HG-B record legally precedes the FROZEN PACKAGE COMMIT F (binding-only in the S -> F -> R/V -> A lifecycle).",
+    "expected_record_kind_at_freeze": "HG_B_OWNER_APPROVAL",
+    "binding_executor": "DIRECTOR freeze record (separate future work order)"
+  },
+  "dormant_branch_review": {
+    "branch": "repair/nl5-acceptance-policy-r4-power-gate-r1",
+    "tip": "01d191402029bd628ed3cb27c5f4fa02b129af38",
+    "action": "INSPECTED / NOT_MERGED",
+    "classification": "SUPERSEDED for HG-B",
+    "rationale": "admin-only records (WO + passport + START), no implementation; decision-power concern (P(REPRODUCED | ideal equivalence) ~6% WO-level at N=64) already durably documented in canonical main and was the owner-known headroom tradeoff; adopting a power gate now would change owner-approved pre-data parameters and requires a NEW owner decision package; not a missing mandatory integrity protection (INCONCLUSIVE is an honest mechanically-handled outcome of the frozen rule)."
+  },
+  "human_readable_record": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.md",
+  "execution_event": "docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/events/0008-continuation-hg-b-owner-decision.json"
+}

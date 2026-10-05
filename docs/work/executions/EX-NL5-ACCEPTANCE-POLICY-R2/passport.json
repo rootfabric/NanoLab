@@ -14,7 +14,8 @@
     "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
     "scripts/nl5/**",
     "tests/test_nl5_repro_v02_seeds.py",
-    "docs/work/WORK_QUEUE.md"
+    "docs/work/WORK_QUEUE.md",
+    "docs/evidence/NL5-ACCEPTANCE-POLICY/**"
   ],
   "started_at_utc": "2026-09-30T14:56:00Z",
   "status": "HANDOFF_READY"

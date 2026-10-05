@@ -94,3 +94,30 @@ Passport + events (START → CONTINUATION → VALIDATION → HANDOFF) + summary;
 валидации: pytest (полный набор), check-consistency, workflow lint, work_cli
 validate; fresh Reviewer + fresh Verifier на exact HEAD; merge = Human Gate
 (сам HG-B — отдельное owner-решение вне Git-мержа).
+
+## 7. Owner decision closure — HG-B R1 (append-only, 2026-10-05)
+
+Append-only дополнение: §1–§6 выше не изменяются. Цель этого WO — candidate
+acceptance-policy preparation + HG-B owner decision — **исполнена и закрыта**:
+
+```text
+HG-B CLOSED = APPROVED
+next work is a NEW freeze execution
+
+DECISION_ID     = NL5-ACCEPTANCE-POLICY/HG-B/R1
+decision record = docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.{md,json}
+decision basis  = canonical main после PR #50 (3b0dd01e; R4.3 product subject
+                  39cc9809ad4b9ad61b2effd6dbcb8c9067848da0)
+execution event = EX-NL5-ACCEPTANCE-POLICY-R2 event
+                  0008-continuation-hg-b-owner-decision
+```
+
+Статусная механика: существующая harness schema не содержит отдельного
+terminal-статуса «COMPLETED / ACCEPTED_CONTROL_DECISION», новый status enum не
+изобретался — execution остаётся в допустимом состоянии HANDOFF_READY с
+append-only post-terminal correction event 0008 (CONTINUATION_CHECKPOINT), а
+эта секция + decision record + WORK_QUEUE являются canonical truth о закрытии.
+Reproduction НЕ исполнялся этим WO: freeze chain (Director freeze → fresh
+review/verify FROZEN → R2 ACTIVE → author/external legs) — отдельные новые
+work orders. Границы неизменны: NL5 = IN_PROGRESS, external_reproductions = 0,
+NL6-001 = LOCKED, научных прогонов 0.

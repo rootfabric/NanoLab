@@ -114,3 +114,43 @@ selected-N deterministic 64, headroom 0.80 boundary semantics) — 29 seed-tool 
 для владельца: reviewer MC на N=64 — P(REPRODUCED | идеальная эквивалентность)
 ≈ 6% WO-level (INCONCLUSIVE — вероятный исход; осознанный tradeoff headroom-
 дизайна; ревизии headroom/N — через owner до freeze).
+
+## 8. HG-B owner decision closure (2026-10-05, append-only post-terminal)
+
+Владелец вынес решение **HG-B = APPROVED** (Human Gate B, event 0008). Это —
+закрытие owner-decision цели этого execution (candidate acceptance-policy
+preparation + HG-B owner decision); подготовка freeze — НОВЫЙ execution/WO.
+
+```text
+HG-B CLOSED = APPROVED
+next work is a NEW freeze execution
+
+DECISION_ID        = NL5-ACCEPTANCE-POLICY/HG-B/R1
+decision record    = docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.{md,json}
+decision basis     = canonical main после PR #50 (merge 3b0dd01e, tree 10ba8bbf;
+                     R4.3 product subject 39cc9809ad4b9ad61b2effd6dbcb8c9067848da0)
+approved principle = NL5 acceptance requires successful fresh external
+                     reproduction under preregistered v0.2 distribution-based rule
+approved rule      = NANOLAB_REPRO_V0_2_DISTRIBUTIONAL (R4 / post-R4.3 basis)
+approved params    = δ=0.5; N 64/64/10/10; N_min 52/52/8/8; replacement quota
+                     pairs 12/12/2/2; confirmatory 296; replacement cap 56;
+                     max_runs 352; paired TOST; integer policy
+                     ceil-nmin-floor-replacement-pairs-v1; wall 560 ч/платформа
+```
+
+Границы (не завышены): freeze НЕ выполнялся; SCIENTIFIC_RUNS = 0; candidate =
+PRE-DATA / NOT FROZEN; committed package по-прежнему
+PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED (negative control перепроверен
+2026-10-05, evidence `r4-3-prefreeze-validation-PASS-R4_3.json` digests
+неизменны); AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; NL5 =
+IN_PROGRESS; external_reproductions = 0; NL6-001 = LOCKED. Passport
+allowed_paths расширен на `docs/evidence/NL5-ACCEPTANCE-POLICY/**` (placement
+owner decision record по owner mission; статус паспорта не менялся —
+HANDOFF_READY остаётся валидным terminal-handoff состоянием; новый status enum
+не изобретался). Dormant-ветка `repair/nl5-acceptance-policy-r4-power-gate-r1`
+= INSPECTED / NOT_MERGED / SUPERSEDED для HG-B (обоснование — §8 decision
+record: admin-only, concern уже задокументирован в §7 выше, изменение
+утверждённых параметров требует нового owner package). NEXT: Director Freeze
+preparation (отдельный WO) → FROZEN PACKAGE COMMIT F → fresh review/verify F;
+параллельно R2 activation (HG-A). Не путать: HG-B approval НЕ означает NL5
+ACCEPTED.
