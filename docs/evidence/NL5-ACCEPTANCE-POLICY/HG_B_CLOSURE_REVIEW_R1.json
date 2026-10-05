@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "nanolab_control_reviewer_verdict",
+  "review_id": "NL5-HG-B-CLOSURE/REVIEWER_R1",
+  "verdict": "FIX_REQUIRED",
+  "reviewed_head": "99a8af949db73da2c841625d89ff3b92f8184822",
+  "reviewed_tree": "c6be3bac7e346fbab6ea55b5e034b6d03224c29b",
+  "base_main": "3b0dd01e17e374c011007c6b0cdbbb5703bf2360",
+  "pr": 51,
+  "hosted_ci": {
+    "run_id": 37254999220,
+    "conclusion": "success"
+  },
+  "blocking_findings": [
+    {
+      "id": "M-1",
+      "title": "project/state.json still lists NL5-ACCEPTANCE-POLICY as an open owner decision after HG-B APPROVED"
+    }
+  ],
+  "next_actor": "IMPLEMENTER_CONTROL",
+  "next_action": "remove resolved NL5-ACCEPTANCE-POLICY from open_decisions with append-only state-sync bookkeeping; re-run gates; fresh review"
+}

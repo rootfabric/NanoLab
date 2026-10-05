@@ -183,3 +183,58 @@ PRE-DATA / NOT FROZEN ⇒ `PREFREEZE_VALIDATION_PASS` / `DISPATCH_BLOCKED`;
 PASS правила = эквивалентность (CI90 медианного парного сдвига целиком внутри
 pre-declared полосы ±δ·s_eff), что НЕ тождественно «неотличимости от нуля»;
 H0/H1 приведены к standard TOST. HG-B остаётся **WAITING_OWNER**.
+
+## 10. Owner Decision — HG-B R1 (append-only closure, 2026-10-05)
+
+Append-only финальный раздел: предыдущие §1–§9 (включая исторический статус
+`PROPOSAL / WAITING_OWNER` и addenda R4/R4.1) сохранены без изменений. Владелец
+вынес решение в HG-B closure mission; durable record:
+
+```text
+HG-B = APPROVED
+
+decision record =
+  docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.md
+  docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json
+
+decision basis =
+  canonical main после PR #50 (merge `3b0dd01e17e374c011007c6b0cdbbb5703bf2360`,
+  tree `10ba8bbffcae06ae7fad7135b2493494b0d4f9b1`);
+  R4.3 product subject `39cc9809ad4b9ad61b2effd6dbcb8c9067848da0`;
+  fresh Reviewer PASS (REVIEWER_VERDICT_R4, verdict ref
+  review/nl5-v02-prefreeze-hardening-r4-3-r4, evidence tip `f564aa7`);
+  fresh Verifier VERIFIED (`verify/nl5-v02-prefreeze-hardening-r4-3-r1` @
+  `4d14b34`); TR-PR hosted CI `37242371055` attempt 2 SUCCESS; post-merge
+  main CI `37252078697` SUCCESS.
+
+scientific runs at decision =
+  0
+
+candidate =
+  PRE-DATA / NOT FROZEN
+```
+
+Утверждено: принцип §2 + protocol basis `NANOLAB_REPRO_V0_2_DISTRIBUTIONAL`
+(revision R4 / post-R4.3 hardened pre-freeze basis) с exact параметрами §8
+(delta 0.5; N 64/64/10/10; N_min 52/52/8/8; replacement quota pairs 12/12/2/2;
+confirmatory 296; replacement cap 56; max_runs 352; paired design; standard
+TOST equivalence semantics; integer policy
+`ceil-nmin-floor-replacement-pairs-v1`; wall ≤ 560 ч/платформа) и защитными
+свойствами §3 decision record (fresh deterministic identities; replacement
+только FAILED_TECHNICAL по frozen streams; collision-skip proof required;
+74b исключён из v0.2 reproduction rule; mandatory feasibility gate FAIL ⇒
+BLOCKED).
+
+Границы решения (семантика границ из §3 без изменений): HG-B НЕ freeze'ит
+protocol, НЕ
+активирует R2, НЕ назначает AUTHOR_U1, НЕ авторизует scientific runs, НЕ
+принимает NL5, НЕ меняет NL5-002 terminal MISMATCH / v0.1 envelope /
+PLATFORM_INSENSITIVE, НЕ открывает NL6-001. Полный machine-readable список
+границ — decision record JSON (`decision_boundaries`).
+
+Следующий шаг: **Director Freeze preparation** (отдельный bounded WO) →
+immutable FROZEN PACKAGE COMMIT F → fresh review/verify F. Параллельно —
+native Ubuntu R2 activation path (HG-A). Science открывается только при
+одновременности: HG-B APPROVED (есть) + FROZEN package accepted + R2 ACTIVE +
+AUTHOR_U1 assigned. Статус proposal-документа в целом: **owner decision
+recorded; HG-B CLOSED = APPROVED**.
