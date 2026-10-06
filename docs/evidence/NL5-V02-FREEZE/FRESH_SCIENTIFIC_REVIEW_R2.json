@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "record_kind": "REVIEWER_VERDICT",
+  "issuer_class": "INDEPENDENT_REVIEWER",
+  "review_id": "NL5-V02-FROZEN-R2/SCIENTIFIC_REVIEW_R1",
+  "verdict": "PASS",
+  "reviewed_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "reviewed_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+  "artifact_blobs": {
+    "protocol": "4835719622bae49a8e8b480536a482b4b222d408",
+    "contract": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+    "seed_record": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+  },
+  "previous_frozen_revision": {
+    "head": "cb91ade761f6802fc40c500761d3e35022408822",
+    "disposition": "historical immutable attempt; Scientific Review R1 FIX_REQUIRED"
+  },
+  "findings": {
+    "M-1": "PASS — FROZEN protocol scan-allowlist-v1 ordered-exact equals contract scan_allowlist_paths_exact; defect class fail-closed"
+  },
+  "scientific_runs": 0,
+  "state_ceiling": {
+    "r2": "WAITING_HOST / NOT_ACTIVE",
+    "author_u1": "NOT_ASSIGNED",
+    "nl5": "IN_PROGRESS",
+    "external_reproductions": 0,
+    "nl6_001": "LOCKED",
+    "machine_launch_authorized": false
+  },
+  "next_actor": "VERIFIER",
+  "next_action": "fresh independent verification of exact F2 HEAD/TREE; no science"
+}
