@@ -1,0 +1,31 @@
+{
+  "f2_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "f2_commit_type": "commit",
+  "f2_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+  "expected_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+  "artifacts": {
+    "protocol": {
+      "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+      "git_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+      "sha256_blob_bytes": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+      "worktree_bytes_identical": true
+    },
+    "contract": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+      "git_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+      "sha256_blob_bytes": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+      "worktree_bytes_identical": true
+    },
+    "seed_record": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+      "git_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+      "sha256_blob_bytes": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+      "worktree_bytes_identical": true
+    }
+  },
+  "scan_tree": {
+    "pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+    "type": "commit",
+    "tree": "b3b35d566d1a26f970225845a7b4ecf5ce63cb70"
+  }
+}

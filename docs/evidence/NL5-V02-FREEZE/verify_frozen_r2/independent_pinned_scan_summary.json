@@ -1,0 +1,13 @@
+{
+  "method": "verifier-independent re-implementation of the pinned-tree scan (git grep -I -F -l -e <seed> a9d7d07fa264e9907b67ca244b00ba2da3430b0f --)",
+  "allowlist_paths_exact": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "accepted_identities_scanned": 176,
+  "accepted_collisions_outside_allowlist": 0,
+  "recorded_skips_scanned": 41,
+  "skips_without_non_allowlisted_hit": 0,
+  "allowlisted_paths_containing_hits_in_pinned_tree": [],
+  "transparency_note": "The PRE_DATA_R4 seed-record allowlist path postdates the pinned tree a9d7d07 and therefore does not exist in it; it is an inert defensive entry (exact-path matching, no hits can be masked by it). All scan invariants hold: every accepted identity is clean outside the allowlist and every recorded skip has >=1 non-allowlisted literal hit."
+}

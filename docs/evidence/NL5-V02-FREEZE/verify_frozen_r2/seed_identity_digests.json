@@ -1,0 +1,53 @@
+{
+  "byte_identity": {
+    "f2_vs_r4_cmp": "identical",
+    "f2_vs_frozen_r1_cmp": "identical",
+    "shared_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+    "sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+    "sources": [
+      "F2 tree",
+      "F2 tree @ PRE_DATA_R4 path",
+      "FROZEN_R1 commit cb91ade761f6802fc40c500761d3e35022408822"
+    ]
+  },
+  "recomputed": {
+    "record_sha256_logical_r3": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+    "record_r4_sha256_full": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+    "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821"
+  },
+  "record_fields": {
+    "record_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+    "record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+    "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821"
+  },
+  "contract_bindings": {
+    "seed_record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+    "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821",
+    "seed_record_file_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+  },
+  "all_match": true,
+  "exclusions_applied_count": 34,
+  "skipped_identities_total": 41,
+  "pools_cursors": {
+    "0b": {
+      "start_index": 75,
+      "next_candidate_index": 87,
+      "quota": 12
+    },
+    "32b": {
+      "start_index": 76,
+      "next_candidate_index": 88,
+      "quota": 12
+    },
+    "11b": {
+      "start_index": 21,
+      "next_candidate_index": 23,
+      "quota": 2
+    },
+    "53b": {
+      "start_index": 21,
+      "next_candidate_index": 23,
+      "quota": 2
+    }
+  }
+}

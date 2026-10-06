@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "record_kind": "VERIFIER_VERDICT",
+  "issuer_class": "INDEPENDENT_VERIFIER",
+  "verdict": "VERIFIED",
+  "verified_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "verified_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+  "frozen_revision": "FROZEN_R2",
+  "candidate_revision": "R4",
+  "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+  "director_freeze_r2_commit": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d",
+  "verifier_branch": "verify/nl5-v02-frozen-r2-r1",
+  "verifier_base_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "method": {
+    "fresh_fetch": "rootfabric/NanoLab fetched immediately before verification; F2 object re-fetched and re-checked (cat-file -t = commit; rev-parse F2^{tree} == F2_TREE)",
+    "trust": "no implementer or reviewer conclusion reused as proof; every check reproduced independently in a clean F2-based worktree",
+    "environment": {
+      "python": "Python 3.10.12",
+      "git": "git version 2.34.1"
+    }
+  },
+  "sections": {
+    "1_git_identity": {
+      "result": "PASS",
+      "commit_type": "commit",
+      "tree_match": true,
+      "protocol": {
+        "blob": "4835719622bae49a8e8b480536a482b4b222d408",
+        "sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d"
+      },
+      "contract": {
+        "blob": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a"
+      },
+      "seed_record": {
+        "blob": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+      },
+      "all_expected_blobs_and_digests_match": true
+    },
+    "2_director_sequencing": {
+      "result": "PASS",
+      "f2_is_ancestor_of_director_r2": true,
+      "director_r2_strict_descendant_of_f2": true,
+      "director_pins_match_independent_computation": true,
+      "hg_b_binding_verified": {
+        "blob": "61d1491233aeb2537f9800d6183def5b8fb0c8e0",
+        "sha256": "b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9",
+        "decision": "APPROVED"
+      },
+      "frozen_r1_history_preserved": {
+        "f1_head": "cb91ade761f6802fc40c500761d3e35022408822",
+        "director_r1_commit": "4236e0c7cfb19de2687a8f0d3be3641cc1b000d4",
+        "f1_in_f2_history": true
+      }
+    },
+    "3_scientific_delta": {
+      "result": "PASS",
+      "leaves_total": 310,
+      "changed_leaf_paths": [
+        "scientific_subject.candidate_doc_path",
+        "scientific_subject.freeze_status",
+        "scientific_subject.seed_record_path"
+      ],
+      "unchanged_leaf_count": 307,
+      "unexpected_delta": "NONE",
+      "approved_values_exact": true
+    },
+    "4_seed_identity": {
+      "result": "PASS",
+      "byte_identical_to_r4": true,
+      "byte_identical_to_frozen_r1": true,
+      "cmp": "clean both comparisons",
+      "record_digests_recomputed": {
+        "record_sha256": "eb4ab3f891e17dd2b456a3870ed73b19e39d67bf51109b6cb47ca64524ce476b",
+        "record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+        "replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821"
+      },
+      "seeds_pools_skips_cursors_exclusions_bootstrap": "all MATCH contract"
+    },
+    "5_m1_allowlist_binding": {
+      "result": "PASS",
+      "scan_allowlist_v1_blocks_in_protocol": 1,
+      "ordered_paths_equal_contract": true,
+      "allowlist": [
+        "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+        "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+      ],
+      "pinned_scan_tree": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+      "negative_controls": {
+        "total": 10,
+        "all_freeze_gate_fail": true,
+        "cli_wrong_allowlist_exit": 3
+      },
+      "positive_controls": {
+        "total": 2,
+        "all_pass": true
+      },
+      "independent_scan": {
+        "accepted_identities": 176,
+        "collisions_outside_allowlist": 0,
+        "recorded_skips": 41,
+        "skips_without_hit": 0
+      },
+      "transparency_note": "the PRE_DATA_R4 seed-record allowlist path postdates the pinned tree and is absent from it (inert defensive exact-path entry; no hit masking possible); all scan invariants hold"
+    },
+    "6_frozen_gate": {
+      "result": "PASS",
+      "gate": "PASS",
+      "validation_stage": "PREFREEZE_VALIDATION_PASS",
+      "freeze_status": "FROZEN",
+      "dispatch": "DISPATCH_BLOCKED",
+      "dispatch_ready": false,
+      "exit_code": 0,
+      "scan_rerun": "pinned-tree rerun executed (no --no-scan-rerun)",
+      "authority_note": "PREFREEZE_VALIDATION_PASS is internal consistency only; the authoritative freeze fact is F2 + Director FREEZE R2"
+    },
+    "7_full_repo_validation": {
+      "result": "PASS",
+      "unittest": {
+        "ran": 605,
+        "ok": 605,
+        "failed": 0,
+        "errors": 0,
+        "exit": 0
+      },
+      "check_consistency": {
+        "ok": true,
+        "errors": 0,
+        "warnings": 0
+      },
+      "workflow_lint": {
+        "ok": true,
+        "violations": 0,
+        "blocking": 0
+      },
+      "ex_work_cli": {
+        "total": 51,
+        "ok": 51,
+        "failed": 0
+      },
+      "json_syntax_sweep": {
+        "tracked": 1325,
+        "invalid": 0,
+        "pinned_non_json_evidence": 4
+      },
+      "counts_are_actual_as_of_this_run": true
+    },
+    "8_authority_ceiling": {
+      "result": "PASS",
+      "fresh_verifier_f2_recorded_before_this_verdict": false,
+      "r2_active": false,
+      "r2_status": "WAITING_HOST / NOT_ACTIVE",
+      "author_u1": "NOT_ASSIGNED",
+      "scientific_runs_v02_campaign": 0,
+      "external_reproductions": 0,
+      "nl5": "IN_PROGRESS",
+      "nl6_001": "LOCKED (PLANNED, dependency-locked)",
+      "machine_launch_authorized": false,
+      "launch_gate": "HUMAN_PROTECTED_WRITER"
+    }
+  },
+  "boundaries": {
+    "science_started": false,
+    "r2_activated": false,
+    "nl5_accepted": false,
+    "nl6_unlocked": false
+  },
+  "next": {
+    "next_actor": "DIRECTOR / integration preparation",
+    "next_action": "integrate F2 tooling + FROZEN_R2 + D2 evidence through PR/hosted CI, preserving exact F2 review/verify bindings; in parallel continue R2 native Ubuntu activation"
+  },
+  "evidence_dir": "docs/evidence/NL5-V02-FREEZE/verify_frozen_r2",
+  "self_source_note": "this record's own commit SHA / blob identity are intentionally absent (impossible self-reference); later authority evidence binds this record to its source commit/path/blob/digest",
+  "recorded_at_utc": "2026-10-06T12:46:14Z"
+}

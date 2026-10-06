@@ -1,0 +1,47 @@
+{
+  "leaves_f2": 310,
+  "leaves_r4": 310,
+  "common": 310,
+  "changed_leaf_paths": [
+    "scientific_subject.candidate_doc_path",
+    "scientific_subject.freeze_status",
+    "scientific_subject.seed_record_path"
+  ],
+  "expected_changed": [
+    "scientific_subject.candidate_doc_path",
+    "scientific_subject.freeze_status",
+    "scientific_subject.seed_record_path"
+  ],
+  "unchanged_leaf_count": 307,
+  "result": "PASS",
+  "approved_values": {
+    "N": [
+      64,
+      64,
+      10,
+      10
+    ],
+    "N_min": [
+      52,
+      52,
+      8,
+      8
+    ],
+    "replacement_quota_pairs": [
+      12,
+      12,
+      2,
+      2
+    ],
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560,
+    "delta": "0.5",
+    "bootstrap_resamples": 10000,
+    "bootstrap_scheme": "PAIRED",
+    "replacement_allowed_only_for": "FAILED_TECHNICAL",
+    "protocol_74b": "excluded (protocol §6 '74b = NOT_MEASURED / KNOWN_GAP ... значения 74b запрещены'; §9 'Не производить 74b')",
+    "protocol_test": "paired TOST equivalence (protocol §7/§8.2, standard TOST semantics; contract bootstrap.scheme = PAIRED)"
+  }
+}

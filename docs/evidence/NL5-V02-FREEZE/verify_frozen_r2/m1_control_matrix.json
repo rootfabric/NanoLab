@@ -1,0 +1,94 @@
+{
+  "matrix": "M-1 scan-allowlist-v1 binding negative/positive controls",
+  "runner": "real gate CLI: PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --repo-root <F2 worktree>",
+  "results": [
+    {
+      "id": "N1",
+      "control": "FROZEN_R1-style frozen package paths in allowlist block",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'scan-allowlist-v1 declaration != contract'",
+      "ok": true
+    },
+    {
+      "id": "N2",
+      "control": "raw FROZEN_R1 protocol vs F2 contract",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3 (incl. 'protocol scan-allowlist-v1 block not found: a FROZEN protocol must declare ... exactly once')",
+      "ok": true
+    },
+    {
+      "id": "N3",
+      "control": "missing scan-allowlist-v1 block",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'scan-allowlist-v1 block not found'",
+      "ok": true
+    },
+    {
+      "id": "N4",
+      "control": "duplicate scan-allowlist-v1 block",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'exactly one is allowed'",
+      "ok": true
+    },
+    {
+      "id": "N5",
+      "control": "extra exact path_3 added",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'declaration != contract'",
+      "ok": true
+    },
+    {
+      "id": "N6",
+      "control": "order drift (path_1/path_2 swapped)",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'ordered exact comparison'",
+      "ok": true
+    },
+    {
+      "id": "N7",
+      "control": "malformed content line ('path_1:' instead of 'path_1 =')",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'malformed content line'",
+      "ok": true
+    },
+    {
+      "id": "N8",
+      "control": "non-consecutive path indices (1,3)",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'consecutive 1..K'",
+      "ok": true
+    },
+    {
+      "id": "N9",
+      "control": "frozen-only scan-allowlist-v1 block in PRE-DATA R4 package",
+      "expected": "FREEZE_GATE_FAIL",
+      "observed": "FREEZE_GATE_FAIL, exit 3, 'declaration is FROZEN-only'",
+      "ok": true
+    },
+    {
+      "id": "N10",
+      "control": "CLI wrong frozen allowlist",
+      "expected": "exit 3",
+      "observed": "exit 3",
+      "ok": true
+    },
+    {
+      "id": "P1",
+      "control": "F2 exact block == contract",
+      "expected": "PASS possible",
+      "observed": "gate=PASS, exit 0, PREFREEZE_VALIDATION_PASS / FROZEN / DISPATCH_BLOCKED / dispatch_ready=false",
+      "ok": true
+    },
+    {
+      "id": "P2",
+      "control": "historical PRE_DATA R4 without frozen-only block",
+      "expected": "PASS",
+      "observed": "gate=PASS, exit 0, freeze_status=NOT_FROZEN, DISPATCH_BLOCKED",
+      "ok": true
+    }
+  ],
+  "summary": {
+    "total": 12,
+    "as_expected": 12
+  }
+}

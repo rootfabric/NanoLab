@@ -1,0 +1,13 @@
+PASS | N1 frozen-package paths -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N2 raw FROZEN_R1 protocol -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N3 missing block -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N4 duplicate block -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N5 extra exact path -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N6 order drift -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N7 malformed line -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N8 non-consecutive path_N -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N9 PRE-DATA + frozen-only block -> FAIL | exit=3 gate=FREEZE_GATE_FAIL
+PASS | N10 CLI wrong frozen allowlist -> exit 3 | exit=3
+PASS | P1 F2 exact block -> PASS | exit=0 gate=PASS
+PASS | P2 historical PRE_DATA R4 (no block) -> PASS | exit=0 gate=PASS freeze_status=NOT_FROZEN
+MATRIX RESULT: 12/12 controls behaved as expected
