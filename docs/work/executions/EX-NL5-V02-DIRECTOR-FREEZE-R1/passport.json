@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R1",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R1",
+  "checkpoint": "NL5",
+  "base_sha": "549b687a9171ea3636dbb00078d7018f619cebd3",
+  "branch": "control/nl5-v02-director-freeze-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V02-DIRECTOR-FREEZE-R1.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/**",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/**",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_V02_DIRECTOR_FREEZE_R1.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-05T05:39:00Z",
+  "status": "HANDOFF_READY"
+}

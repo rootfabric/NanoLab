@@ -65,6 +65,7 @@ from nl5 import repro_v02_seeds as seeds
 from nl5.repro_v02_freeze_contract import (
     INTEGER_ROUNDING_POLICY,
     PAIR_STATES,
+    SCAN_ALLOWLIST_MARKER,
     ContractError,
     ReplacementBudgetExhausted,
     ReplacementLedger,
@@ -77,6 +78,7 @@ from nl5.repro_v02_freeze_contract import (
     n_min_cell,
     parse_protocol_cardinalities,
     parse_protocol_machine_block,
+    parse_protocol_scan_allowlist,
     prefreeze_validation,
     replacement_quota_pairs,
     validate_dispatch_authority,
@@ -97,9 +99,44 @@ MANIFEST_PATH = EVIDENCE / "r4-1-collision-scan-manifest-R4.json"
 DOC_PATH = REPO_ROOT / "docs" / "research" / "NANOLAB_REPRO_V0_2_CANDIDATE_R1.md"
 HG_B_PROPOSAL_PATH = REPO_ROOT / "docs" / "control" / "NL5_ACCEPTANCE_PRINCIPLE_HG_B_PROPOSAL_R1.md"
 
+# Historical FROZEN_R1 package (immutable F1 = cb91ade..., review
+# FIX_REQUIRED / M-1): used as the FROZEN-side fixture of the repaired gate.
+F1_EVIDENCE = REPO_ROOT / "docs" / "work" / "executions" / "EX-NL5-V02-DIRECTOR-FREEZE-R1" / "evidence"
+F1_CONTRACT_PATH = F1_EVIDENCE / "repro-v0-2-freeze-contract-FROZEN_R1.json"
+F1_RECORD_PATH = F1_EVIDENCE / "repro-v0-2-seed-record-FROZEN_R1.json"
+F1_DOC_PATH = REPO_ROOT / "docs" / "research" / "NANOLAB_REPRO_V0_2_FROZEN_R1.md"
+
 
 def load_package():
     return load_contract(CONTRACT_PATH), DOC_PATH.read_text(encoding="utf-8"), load_seed_record(RECORD_PATH)
+
+
+def load_frozen_package():
+    """The committed historical FROZEN_R1 package (contract/protocol/record)."""
+    return (
+        load_contract(F1_CONTRACT_PATH),
+        F1_DOC_PATH.read_text(encoding="utf-8"),
+        load_seed_record(F1_RECORD_PATH),
+    )
+
+
+def scan_allowlist_block(contract: dict) -> str:
+    """The canonical FROZEN-only ``scan-allowlist-v1`` declaration block.
+
+    The ordered ``path_N`` entries are taken verbatim from the contract's
+    ``seed_generation.scan_allowlist_paths_exact`` — this is the exact
+    machine-bound form the repaired gate requires from a FROZEN protocol.
+    """
+    paths = contract["seed_generation"]["scan_allowlist_paths_exact"]
+    pin = contract["seed_generation"]["exclusion_tree_pin"]
+    entries = "".join(f"path_{index} = {path}\n" for index, path in enumerate(paths, 1))
+    return (
+        "```text\n"
+        f"# {SCAN_ALLOWLIST_MARKER} (authoritative collision-scan exact allowlist; "
+        f"pinned scan tree {pin}; frozen-package paths are NOT allowlist entries)\n"
+        f"{entries}"
+        "```\n"
+    )
 
 
 def write_tmp(directory: Path, name: str, payload) -> Path:
@@ -412,6 +449,174 @@ class ProtocolDeclarationNegativeTest(unittest.TestCase):
         contract["feasibility_planning"]["selected_n"] = 40
         report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
         self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+
+
+# ---------------------------------------------------------------------------
+# FROZEN_R2 repair — M-1 of the FROZEN_R1 scientific review: the frozen
+# protocol's collision-scan exact allowlist is machine-bound to
+# contract.seed_generation.scan_allowlist_paths_exact (fail-closed).
+# ---------------------------------------------------------------------------
+
+
+class ScanAllowlistBindingTest(unittest.TestCase):
+    """The M-1 defect class must be mechanically unpassable.
+
+    FROZEN_R1 escaped the gate because its protocol §6 declared the
+    collision-scan exact allowlist as the later frozen-package paths while
+    the authoritative contract preserved the approved R4 pinned-tree
+    allowlist (scan tree ``a9d7d07...``). The repaired gate requires exactly
+    one ``scan-allowlist-v1`` block in a FROZEN protocol whose ordered exact
+    paths equal the contract allowlist; historical PRE-DATA R4 packages stay
+    block-free and green.
+    """
+
+    FROZEN_PACKAGE_PATHS = [
+        "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md",
+        "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json",
+    ]
+
+    def _block(self, paths: list[str]) -> str:
+        entries = "".join(f"path_{index} = {path}\n" for index, path in enumerate(paths, 1))
+        return "```text\n# scan-allowlist-v1 (test declaration)\n" + entries + "```\n"
+
+    def test_correct_frozen_allowlist_gate_can_pass(self):
+        contract, text, record = load_frozen_package()
+        self.assertNotIn(SCAN_ALLOWLIST_MARKER, text)
+        repaired_text = text + "\n" + scan_allowlist_block(contract)
+        report = validate_freeze_contract(
+            contract, protocol_text=repaired_text, seed_record=record
+        )
+        self.assertEqual(report["gate"], "PASS", report["failures"])
+        self.assertEqual(report["freeze_status"], "FROZEN")
+        self.assertEqual(report["dispatch"], "DISPATCH_BLOCKED")
+        # Full authoritative gate (with collision-scan re-run) on the same
+        # corrected FROZEN bytes:
+        tmp_protocol = self._tmpdir() / "protocol.md"
+        tmp_protocol.write_text(repaired_text, encoding="utf-8")
+        full_report = freeze_gate(
+            F1_CONTRACT_PATH, tmp_protocol, F1_RECORD_PATH, repo_root=REPO_ROOT
+        )
+        self.assertEqual(full_report["gate"], "PASS", full_report["failures"])
+        self.assertEqual(full_report["validation_stage"], "PREFREEZE_VALIDATION_PASS")
+        self.assertFalse(full_report["dispatch_ready"])
+
+    def _tmpdir(self) -> Path:
+        if not hasattr(self, "_tmp"):
+            self._tmp = tempfile.TemporaryDirectory()
+            self.addCleanup(self._tmp.cleanup)
+        return Path(self._tmp.name)
+
+    def test_m1_frozen_package_paths_fail_the_gate(self):
+        """THE M-1 regression: FROZEN_R1-style frozen-package allowlist."""
+        contract, text, record = load_frozen_package()
+        mutated = text + "\n" + self._block(self.FROZEN_PACKAGE_PATHS)
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(
+            any("scan-allowlist-v1" in f and "scan_allowlist_paths_exact" in f for f in report["failures"]),
+            report["failures"],
+        )
+
+    def test_missing_block_fails_for_frozen(self):
+        """The raw historical FROZEN_R1 protocol (no block) cannot pass."""
+        contract, text, record = load_frozen_package()
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("scan-allowlist-v1 block not found" in f for f in report["failures"]))
+
+    def test_duplicate_block_fails(self):
+        contract, text, record = load_frozen_package()
+        block = scan_allowlist_block(contract)
+        mutated = text + "\n" + block + "\n" + block
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("exactly one is allowed" in f for f in report["failures"]))
+
+    def test_extra_exact_path_fails(self):
+        contract, text, record = load_frozen_package()
+        drifted = list(contract["seed_generation"]["scan_allowlist_paths_exact"]) + [
+            "docs/work/WO-NL5-V02-DIRECTOR-FREEZE-R2.md"
+        ]
+        mutated = text + "\n" + self._block(drifted)
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("scan-allowlist-v1 declaration !=" in f for f in report["failures"]))
+
+    def test_order_drift_fails(self):
+        contract, text, record = load_frozen_package()
+        drifted = list(reversed(contract["seed_generation"]["scan_allowlist_paths_exact"]))
+        mutated = text + "\n" + self._block(drifted)
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("scan-allowlist-v1 declaration !=" in f for f in report["failures"]))
+
+    def test_malformed_block_fails(self):
+        contract, text, record = load_frozen_package()
+        good = scan_allowlist_block(contract)
+        mutated = text + "\n" + good.replace(
+            "path_1 = ", "allowlist_paths = ", 1
+        )
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("malformed content line" in f for f in report["failures"]))
+
+    def test_non_consecutive_indices_fail(self):
+        contract, text, record = load_frozen_package()
+        paths = contract["seed_generation"]["scan_allowlist_paths_exact"]
+        mutated_block = (
+            "```text\n# scan-allowlist-v1\n"
+            f"path_1 = {paths[0]}\npath_3 = {paths[1]}\n```\n"
+        )
+        report = validate_freeze_contract(
+            contract, protocol_text=text + "\n" + mutated_block, seed_record=record
+        )
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("consecutive 1..K" in f for f in report["failures"]))
+
+    def test_predata_r4_package_still_passes_without_block(self):
+        """Historical PRE-DATA R4 documents are NOT rewritten and stay green."""
+        contract, text, record = load_package()
+        self.assertNotIn(SCAN_ALLOWLIST_MARKER, text)
+        report = validate_freeze_contract(contract, protocol_text=text, seed_record=record)
+        self.assertEqual(report["gate"], "PASS", report["failures"])
+
+    def test_block_is_frozen_only_in_predata(self):
+        contract, text, record = load_package()
+        mutated = text + "\n" + scan_allowlist_block(contract)
+        report = validate_freeze_contract(contract, protocol_text=mutated, seed_record=record)
+        self.assertEqual(report["gate"], "FREEZE_GATE_FAIL")
+        self.assertTrue(any("FROZEN-only" in f for f in report["failures"]))
+
+    def test_parser_unit_semantics(self):
+        contract, _text, _record = load_frozen_package()
+        allowlist = contract["seed_generation"]["scan_allowlist_paths_exact"]
+        parsed = parse_protocol_scan_allowlist(scan_allowlist_block(contract))
+        self.assertEqual(parsed, allowlist)
+        with self.assertRaises(ContractError):
+            parse_protocol_scan_allowlist("no block at all")
+        block = scan_allowlist_block(contract)
+        with self.assertRaises(ContractError):
+            parse_protocol_scan_allowlist(block + "\n" + block)
+        with self.assertRaises(ContractError):
+            parse_protocol_scan_allowlist("```text\n# scan-allowlist-v1\nnot-a-path-line\n```\n")
+
+    def test_cli_wrong_frozen_allowlist_exits_3(self):
+        contract, text, record = load_frozen_package()
+        tmp = self._tmpdir()
+        mutated = text + "\n" + self._block(self.FROZEN_PACKAGE_PATHS)
+        contract_path = write_tmp(tmp, "contract.json", contract)
+        protocol_path = write_tmp(tmp, "protocol.md", mutated)
+        record_path = write_tmp(tmp, "record.json", record)
+        result = cli([
+            "gate",
+            "--contract", str(contract_path),
+            "--protocol", str(protocol_path),
+            "--record", str(record_path),
+            "--repo-root", str(REPO_ROOT),
+        ])
+        self.assertEqual(result.returncode, 3, result.stdout + result.stderr)
+        self.assertIn("FREEZE_GATE_FAIL", result.stdout)
+        self.assertIn("scan-allowlist-v1", result.stdout)
 
 
 # ---------------------------------------------------------------------------
@@ -1245,6 +1450,11 @@ def _authority_fixture(tmp: Path, base_contract: dict, freeze_status: str = "FRO
     # compatibility fields stay null; the exact pins live in the authority).
     contract["scientific_subject"]["frozen_subject_head"] = None
     contract["scientific_subject"]["frozen_subject_tree"] = None
+    # FROZEN_R2 repair (M-1 of the FROZEN_R1 review): a FROZEN protocol must
+    # carry exactly one scan-allowlist-v1 block machine-bound to the contract
+    # allowlist; the PRE-DATA subject keeps its historical block-free form.
+    if freeze_status == "FROZEN":
+        frozen_doc = frozen_doc + "\n" + scan_allowlist_block(contract)
     contract_bytes = (json.dumps(contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     record_sha = _sha256_bytes(record_bytes)
 

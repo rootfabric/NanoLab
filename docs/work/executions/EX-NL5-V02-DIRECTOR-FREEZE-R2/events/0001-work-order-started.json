@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-05T15:52:10Z",
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R2",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R2",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "8ec75bc0d7ab076ec72a3f0fdb370d7ee66f3674",
+  "summary": "Started bounded Director Freeze R2 repair for NL5 v0.2 after fresh Scientific Reviewer R1 verdict FIX_REQUIRED on exact FROZEN_R1 subject F1 = cb91ade761f6802fc40c500761d3e35022408822 / tree ad21ce39b42681f581da996b2805a5b2fb49111f (review branch review/nl5-v02-frozen-r1-scientific-review-r1, evidence FRESH_SCIENTIFIC_REVIEW_R1.{md,json}). Blocking finding M-1: FROZEN_R1 protocol section 6 declares the collision-scan exact allowlist as the later frozen-package paths (frozen protocol path + frozen seed-record path of the package), while the authoritative contract correctly preserves the approved R4 pinned-tree allowlist (candidate doc docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md + EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json) for collision scan tree a9d7d07fa264e9907b67ca244b00ba2da3430b0f. Scope: (Phase A) fail-closed FROZEN-only validator repair binding the frozen protocol scan-allowlist declaration to contract seed_generation.scan_allowlist_paths_exact + regression tests; (Phase B) new immutable FROZEN_R2 package (protocol/contract/seed record; seed record byte-identical to R4/F1; contract delta limited to the 3 allowlisted scientific_subject leaves); (Phase C) full frozen gate + M-1 negative control; (Phase D) immutable F2 commit; (Phase E) Director FREEZE R2 record in a strictly later descending commit. FROZEN_R1 (cb91ade) and Director Freeze R1 (4236e0c/49bda9b) remain byte-identical immutable history - verified before START (rev-parse F1^{tree} = ad21ce39...; frozen artifacts show zero diff vs F1/D1 published bytes). Git setup: fresh fetch of rootfabric/NanoLab (remote HEAD 549b687 confirmed); repair branch repair/nl5-v02-director-freeze-r2 based from control/nl5-v02-director-freeze-r1 tip 49bda9bad9110c4598d10aa20a28cf5b062acf13, reviewer branch merged --no-ff (merge commit 8ec75bc2c2956628284780432686233aa7a3c1e5); no existing R2 repair branch found on remote (no duplication). Boundaries: SCIENTIFIC_RUNS = 0; no scientific parameters change; HG-B = APPROVED unchanged; NL5 = IN_PROGRESS; NL6-001 = LOCKED; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; external_reproductions = 0; machine_launch_authorized = false. No merge to main.",
+  "command_refs": [
+    "git fetch origin '+refs/heads/*:refs/remotes/origin/*' (fresh; remote main HEAD 549b687a9171ea3636dbb00078d7018f619cebd3 confirmed)",
+    "git checkout -b repair/nl5-v02-director-freeze-r2 origin/control/nl5-v02-director-freeze-r1 (base 49bda9bad9110c4598d10aa20a28cf5b062acf13)",
+    "git merge --no-ff origin/review/nl5-v02-frozen-r1-scientific-review-r1 -> merge 8ec75bc2c2956628284780432686233aa7a3c1e5",
+    "git merge-base --is-ancestor cb91ade761f6802fc40c500761d3e35022408822 HEAD -> exit 0 (F1 immutable ancestor)",
+    "git rev-parse cb91ade761f6802fc40c500761d3e35022408822^{tree} -> ad21ce39b42681f581da996b2805a5b2fb49111f (= FROZEN_R1_TREE binding)",
+    "git diff cb91ade HEAD -- frozen protocol/contract/seed-record paths -> empty (byte-identical)",
+    "sha256sum R4 + FROZEN_R1 seed records -> both 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-V02-FREEZE/FRESH_SCIENTIFIC_REVIEW_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/FRESH_SCIENTIFIC_REVIEW_R1.json",
+    "docs/work/WO-NL5-V02-DIRECTOR-FREEZE-R2.md",
+    "docs/work/prompts/UBUNTU_AGENT_NL5_V02_DIRECTOR_FREEZE_R2.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-freeze-contract-PRE_DATA_R4.json",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "next_action": "Phase A: implement fail-closed FROZEN-only scan-allowlist-v1 protocol/contract binding in scripts/nl5/repro_v02_freeze_contract.py + regression tests (correct allowlist PASS; frozen-package paths / missing / duplicate / malformed / order-drift -> FREEZE_GATE_FAIL; PRE-DATA R4 still PASS); commit and push before F2.",
+  "blocker": null
+}

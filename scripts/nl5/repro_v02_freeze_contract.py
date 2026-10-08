@@ -80,6 +80,21 @@ M-1..M-4) hardens the authority model:
   never to an authority/evidence commit. No self-consistent two-commit
   shortcut satisfies this chain.
 
+- **The frozen collision-scan allowlist is machine-bound (FROZEN_R2
+  repair, M-1 of the FROZEN_R1 scientific review).** A FROZEN protocol must
+  declare the exact collision-scan allowlist in exactly ONE
+  ``scan-allowlist-v1`` marked block whose ordered ``path_N`` entries equal
+  ``contract["seed_generation"]["scan_allowlist_paths_exact"]`` (ordered
+  exact comparison). The scan allowlist belongs to the PINNED historical
+  collision tree (``exclusion_tree_pin``) — frozen-package artifact paths of
+  a later package are NOT allowlist substitutes for that historical scan
+  (this exact contradiction made FROZEN_R1 ``FREEZE_GATE_FAIL``-worthy but
+  escaped the gate before this binding existed). The declaration is
+  FROZEN-only and fail-closed: a PRE-DATA / NOT FROZEN protocol must not
+  carry it, a missing/duplicate/malformed/order-drifted block fails the
+  gate, and historical PRE-DATA R4 documents are NOT rewritten to adopt the
+  new syntax.
+
 EVERYTHING is validated fail-closed: malformed JSON, missing or extra
 fields, wrong types (including ``bool`` where an integer is required),
 out-of-range or duplicate seeds, stale digests, missing/extra variants,
@@ -217,6 +232,12 @@ CARDINALITY_RE = re.compile(
 )
 MACHINE_BLOCK_MARKER = "machine-contract-v1"
 
+# FROZEN_R2 repair (M-1 of the FROZEN_R1 review): the FROZEN-only marked
+# block that machine-binds the frozen protocol's collision-scan exact
+# allowlist to ``contract["seed_generation"]["scan_allowlist_paths_exact"]``.
+SCAN_ALLOWLIST_MARKER = "scan-allowlist-v1"
+_SCAN_ALLOWLIST_LINE_RE = re.compile(r"^path_(\d+)\s*=\s*(\S.*)$")
+
 MACHINE_BLOCK_KEYS = (
     "rule_id",
     "candidate_revision",
@@ -291,6 +312,77 @@ def parse_protocol_machine_block(protocol_text: str) -> dict[str, str]:
     if extra:
         raise ContractError(f"protocol machine block has unknown keys: {extra}")
     return block
+
+
+def _scan_allowlist_blocks(protocol_text: str) -> list[list[str]]:
+    """Structurally parse every fenced ``scan-allowlist-v1`` block (fail-closed).
+
+    A block qualifies when its fenced body contains the
+    ``SCAN_ALLOWLIST_MARKER``. Inside such a block only ``path_N = <path>``
+    content lines are allowed (comment lines starting with ``#`` and blank
+    lines are inert), the indices must form the consecutive sequence
+    ``1..K`` without repeats, and every path must be a non-empty
+    repository-relative exact path (no leading ``/``, no ``..`` traversal).
+    Any other content line, index drift or unsafe path raises
+    :class:`ContractError`. The ORDER of the returned paths is significant:
+    the frozen gate compares it as an ordered exact list against the
+    authoritative contract allowlist (FROZEN_R2 repair).
+    """
+    declarations: list[list[str]] = []
+    for fence in re.finditer(r"```[^\n]*\n(.*?)```", protocol_text, re.DOTALL):
+        body = fence.group(1)
+        if SCAN_ALLOWLIST_MARKER not in body:
+            continue
+        paths: dict[int, str] = {}
+        for line in body.splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            match = _SCAN_ALLOWLIST_LINE_RE.match(stripped)
+            if match is None:
+                raise ContractError(
+                    f"scan-allowlist-v1 block has a malformed content line {stripped!r}: "
+                    "only 'path_N = <exact path>' entries are allowed"
+                )
+            index = int(match.group(1))
+            value = match.group(2).strip()
+            if index in paths:
+                raise ContractError(f"scan-allowlist-v1 block repeats path_{index}")
+            if not value or value.startswith("/") or ".." in Path(value).parts:
+                raise ContractError(
+                    f"scan-allowlist-v1 path_{index}: must be a repository-relative exact path"
+                )
+            paths[index] = value
+        if not paths:
+            raise ContractError("scan-allowlist-v1 block declares no path entries")
+        indices = sorted(paths)
+        if indices != list(range(1, len(indices) + 1)):
+            raise ContractError(
+                f"scan-allowlist-v1 path indices must form the consecutive 1..K sequence "
+                f"(got {indices})"
+            )
+        declarations.append([paths[i] for i in range(1, len(indices) + 1)])
+    return declarations
+
+
+def parse_protocol_scan_allowlist(protocol_text: str) -> list[str]:
+    """Return THE single authoritative ``scan-allowlist-v1`` declaration.
+
+    Zero or multiple such blocks are a :class:`ContractError` (a frozen
+    protocol must declare the collision-scan exact allowlist exactly once;
+    contradicting or ambiguous declarations are forbidden, FROZEN_R2
+    repair). The returned list is ORDER-SENSITIVE: callers compare it as an
+    ordered exact list against
+    ``contract["seed_generation"]["scan_allowlist_paths_exact"]``.
+    """
+    blocks = _scan_allowlist_blocks(protocol_text)
+    if not blocks:
+        raise ContractError("protocol scan-allowlist-v1 block not found")
+    if len(blocks) > 1:
+        raise ContractError(
+            f"protocol contains {len(blocks)} scan-allowlist-v1 blocks; exactly one is allowed"
+        )
+    return blocks[0]
 
 
 # ---------------------------------------------------------------------------
@@ -1184,6 +1276,47 @@ def _validate_protocol(contract: dict[str, Any], protocol_text: str, failures: l
         failures.append("contract freeze_status NOT_FROZEN but protocol text does not declare NOT FROZEN")
     if not doc_says_frozen_candidate and frozen_phrase in protocol_text:
         failures.append("contract freeze_status FROZEN but protocol text still declares NOT FROZEN")
+    # FROZEN_R2 repair (M-1 of the FROZEN_R1 scientific review): the frozen
+    # protocol must declare the collision-scan exact allowlist in exactly one
+    # scan-allowlist-v1 block, and that declaration is machine-bound to the
+    # authoritative contract allowlist (ordered exact comparison). The
+    # declaration is FROZEN-only: historical PRE-DATA R4 documents are not
+    # rewritten and must not carry it.
+    try:
+        allowlist_blocks = _scan_allowlist_blocks(protocol_text)
+    except ContractError as exc:
+        failures.append(f"protocol scan allowlist: {exc}")
+        return
+    if not doc_says_frozen_candidate:
+        if not allowlist_blocks:
+            failures.append(
+                "protocol scan-allowlist-v1 block not found: a FROZEN protocol must declare the "
+                "collision-scan exact allowlist exactly once, machine-bound to "
+                "seed_generation.scan_allowlist_paths_exact (fail-closed, FROZEN_R2 M-1)"
+            )
+            return
+        if len(allowlist_blocks) > 1:
+            failures.append(
+                f"protocol contains {len(allowlist_blocks)} scan-allowlist-v1 blocks; exactly one "
+                "is allowed (duplicated authoritative declarations are fail-closed, FROZEN_R2 M-1)"
+            )
+            return
+        declared_allowlist = allowlist_blocks[0]
+        contract_allowlist = contract["seed_generation"]["scan_allowlist_paths_exact"]
+        if declared_allowlist != contract_allowlist:
+            failures.append(
+                "protocol scan-allowlist-v1 declaration != contract "
+                "seed_generation.scan_allowlist_paths_exact (ordered exact comparison): "
+                f"protocol {declared_allowlist} != contract {contract_allowlist} "
+                "(the collision-scan allowlist belongs to the pinned historical tree "
+                f"{contract['seed_generation'].get('exclusion_tree_pin')}; frozen-package "
+                "artifact paths are not allowlist substitutes — FROZEN_R1 M-1 defect class)"
+            )
+    elif allowlist_blocks:
+        failures.append(
+            "protocol scan-allowlist-v1 declaration is FROZEN-only: a PRE-DATA protocol must "
+            "not carry it (historical PRE-DATA R4 documents stay in their original form)"
+        )
 
 
 def _validate_record_binding(contract: dict[str, Any], record: dict[str, Any], failures: list[str]) -> None:

@@ -1,0 +1,45 @@
+{
+  "kind": "m1_negative_control",
+  "wo": "WO-NL5-V02-DIRECTOR-FREEZE-R2",
+  "description": "M-1 regression negative control: the FROZEN_R2 protocol copied to a temporary location with the scan-allowlist-v1 block changed back to FROZEN_R1-style frozen-package artifact paths must fail the repaired freeze gate",
+  "temporary_copy": "/tmp/m1-negative/protocol.md (not committed; generated from docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md by replacing only the scan-allowlist-v1 path entries)",
+  "mutated_allowlist": [
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json"
+  ],
+  "contract_allowlist_unchanged": [
+    "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+    "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+  ],
+  "command": "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <FROZEN_R2 contract> --protocol /tmp/m1-negative/protocol.md --record <FROZEN_R2 seed record> --repo-root .",
+  "result": "FREEZE_GATE_FAIL",
+  "exit_code": 3,
+  "gate_report": {
+    "kind": "r4_freeze_contract_gate",
+    "contract_revision": "r4",
+    "gate": "FREEZE_GATE_FAIL",
+    "failures": [
+      "protocol scan-allowlist-v1 declaration != contract seed_generation.scan_allowlist_paths_exact (ordered exact comparison): protocol ['docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md', 'docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json'] != contract ['docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md', 'docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json'] (the collision-scan allowlist belongs to the pinned historical tree a9d7d07fa264e9907b67ca244b00ba2da3430b0f; frozen-package artifact paths are not allowlist substitutes — FROZEN_R1 M-1 defect class)"
+    ],
+    "validation_stage": "FREEZE_GATE_FAIL",
+    "freeze_status": "FROZEN",
+    "dispatch_ready": false,
+    "dispatch": "DISPATCH_BLOCKED",
+    "dispatch_blockers": [],
+    "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+    "budget": {
+      "confirmatory_runs": 296,
+      "replacement_runs_cap": 56,
+      "max_runs": 352,
+      "wall_hours_per_platform": 560
+    },
+    "frozen_declared": true
+  },
+  "historical_f1_rejection_proof": {
+    "description": "the exact immutable FROZEN_R1 bytes (review FAIL subject) also fail the repaired gate",
+    "command": "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <FROZEN_R1 contract> --protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md --record <FROZEN_R1 seed record> --repo-root .",
+    "result": "FREEZE_GATE_FAIL",
+    "exit_code": 3,
+    "first_failure": "protocol scan-allowlist-v1 block not found: a FROZEN protocol must declare the collision-scan exact allowlist exactly once, machine-bound to seed_generation.scan_allowlist_paths_exact (fail-closed, FROZEN_R2 M-1)"
+  }
+}

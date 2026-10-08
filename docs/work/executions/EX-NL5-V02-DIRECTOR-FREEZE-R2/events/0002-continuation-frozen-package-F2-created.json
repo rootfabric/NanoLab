@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-frozen-package-F2-created",
+  "timestamp_utc": "2026-10-05T16:05:41Z",
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R2",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "60da9a846511265a8ac7564da088c3d74cb073f0",
+  "summary": "CORRECTED FROZEN PACKAGE COMMIT F2 CREATED AND PUBLISHED (immutable; append-only checkpoint; repair of FROZEN_R1 review FIX_REQUIRED / M-1). F_HEAD = 60da9a846511265a8ac7564da088c3d74cb073f0; F_TREE = e565c8a6cee9e829fac14008ebc9c2ea1609931d; rev-parse F2^{tree} == F_TREE proven; published non-force db8227a..60da9a8 on repair/nl5-v02-director-freeze-r2; amend/rewrite forbidden. Exact Git blobs of F2: frozen protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md (blob 4835719622bae49a8e8b480536a482b4b222d408, canonical_sha256 2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d), frozen contract repro-v0-2-freeze-contract-FROZEN_R2.json (blob d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b, canonical_sha256 7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a), frozen seed record repro-v0-2-seed-record-FROZEN_R2.json (blob 0164e0e3f5dda6dbf63174df3730b1bd921d2c76, canonical_sha256 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28 - SAME Git blob as FROZEN_R1 seed record: byte-identical to accepted R4 PRE-DATA seed record, cmp clean). M-1 = FIXED: FROZEN_R2 protocol declares the approved R4 pinned-tree allowlist (scan tree a9d7d07fa264e9907b67ca244b00ba2da3430b0f: candidate doc + PRE_DATA_R4 seed-record paths) in exactly one scan-allowlist-v1 machine block, ordered-exact equal to contract seed_generation.scan_allowlist_paths_exact; FROZEN_R2 package paths are NOT allowlist entries for that historical scan; stale FROZEN_R1 phrase removed. Contract delta vs PRE_DATA_R4 = only allowlisted scientific_subject leaves (candidate_doc_path / seed_record_path / freeze_status; 307/310 leaves unchanged; frozen-package-delta-check-R2.json PASS); unexpected scientific delta = NONE. Fail-closed regression in the gate (Phase A commit db8227a): scan-allowlist-v1 FROZEN-only binding + ScanAllowlistBindingTest 12 tests; negative controls PROVEN: frozen-package allowlist paths -> FREEZE_GATE_FAIL exit 3, raw FROZEN_R1 protocol -> FREEZE_GATE_FAIL exit 3 (m1-negative-control-R2.json), duplicate/malformed/order-drift -> FAIL, PRE-DATA R4 package stays PASS. Gate on frozen bytes: PASS / PREFREEZE_VALIDATION_PASS / freeze_status FROZEN / DISPATCH_BLOCKED / dispatch_ready false with full pinned-scan re-run (frozen-gate-PASS-R2.json). Pre-F2 validation: 605 tests OK (was 593); check-consistency ok (0/0); workflow_lint blocking 0; work_cli 51/51 EX-* ok. Director FREEZE R2 record follows in a strictly later commit pinning F2. Boundaries unchanged: SCIENTIFIC_RUNS = 0; NL5 = IN_PROGRESS; NL6-001 = LOCKED; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; external_reproductions = 0; machine_launch_authorized = false; launch_gate = HUMAN_PROTECTED_WRITER.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <FROZEN_R2 contract> --protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md --record <FROZEN_R2 seed record> --repo-root . -> exit 0, gate PASS, DISPATCH_BLOCKED",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate (same, temp protocol with frozen-package allowlist paths) -> exit 3 FREEZE_GATE_FAIL",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate (FROZEN_R1 contract/protocol/record) -> exit 3 FREEZE_GATE_FAIL",
+    "git rev-parse 60da9a846511265a8ac7564da088c3d74cb073f0^{tree} -> e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "git cat-file blob F2:<path> | sha256sum -> exact Git-object SHA-256 of all three frozen artifacts",
+    "cmp R4 seed record FROZEN_R2 seed record -> identical; same Git blob 0164e0e3f5dda6dbf63174df3730b1bd921d2c76 as FROZEN_R1",
+    "git push origin repair/nl5-v02-director-freeze-r2 (non-force) -> F2 published at 60da9a846511265a8ac7564da088c3d74cb073f0"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-package-delta-check-R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-gate-PASS-R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/m1-negative-control-R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/seed-record-identity-R2.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/REPAIR_MAP_M1.md"
+  ],
+  "next_action": "Director FREEZE R2 record commit (strict descendant of F2) pinning F2_HEAD/F2_TREE + exact Git-object digests; then full validation on the final commit; next actor: fresh SCIENTIFIC REVIEWER(F2). DO NOT START SCIENCE.",
+  "blocker": null
+}

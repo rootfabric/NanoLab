@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-frozen-package-F-created",
+  "timestamp_utc": "2026-10-05T18:55:51+10:00",
+  "execution_id": "EX-NL5-V02-DIRECTOR-FREEZE-R1",
+  "work_order_id": "WO-NL5-V02-DIRECTOR-FREEZE-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "cb91ade761f6802fc40c500761d3e35022408822",
+  "summary": "FROZEN PACKAGE COMMIT F CREATED AND PUBLISHED (immutable; append-only checkpoint). F_HEAD = cb91ade761f6802fc40c500761d3e35022408822; F_TREE = ad21ce39b42681f581da996b2805a5b2fb49111f; rev-parse F^{tree} == F_TREE proven; exact Git blobs of F: frozen protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md (blob 197cc717bae0b0906ac7816d11f28f93676558c2, canonical_sha256 7fafbf9ace099594a16182523432ca38fe5c31f30d2d8969d7281b8852f45962), frozen contract repro-v0-2-freeze-contract-FROZEN_R1.json (blob 5f788c45842db695abbd3fc8706828bc74173d5e, canonical_sha256 c556b3f24a112f460cf34070e6a5ce99eb826e05663c589583af4dbe02f6ee4f), frozen seed record repro-v0-2-seed-record-FROZEN_R1.json (blob 0164e0e3f5dda6dbf63174df3730b1bd921d2c76, canonical_sha256 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28). Seed record = byte-for-byte copy of accepted R4 PRE-DATA seed record (cmp clean; sha256 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28 = contract seed_record_file_sha256). Frozen contract derived from PRE_DATA_R4 by allowlisted subject binding only (candidate_doc_path -> FROZEN_R1.md, seed_record_path -> FROZEN_R1.json, freeze_status -> FROZEN; frozen_subject_head/tree = null per R4.3 M-7; 307/310 leaves unchanged; machine delta check evidence frozen-package-delta-check-R1.json). Gate on frozen bytes: PASS / PREFREEZE_VALIDATION_PASS / freeze_status FROZEN / DISPATCH_BLOCKED / dispatch_ready false (evidence frozen-gate-PASS-R1.json). Pre-commit validation: unittest OK (exit 0), check-consistency ok (0 errors / 0 warnings), workflow_lint blocking 0, work_cli 50/50 EX-* ok. Director FREEZE record follows in a strictly later commit pinning F. Boundaries unchanged: SCIENTIFIC_RUNS = 0; NL5 = IN_PROGRESS; NL6-001 = LOCKED; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST / NOT_ACTIVE; machine_launch_authorized = false; no scientific runs.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <FROZEN contract> --protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md --record <FROZEN seed record> --repo-root . -> exit 0, gate PASS, DISPATCH_BLOCKED",
+    "git cat-file blob F_HEAD:<path> | sha256sum -> exact Git-object SHA-256 of all three frozen artifacts",
+    "git push origin control/nl5-v02-director-freeze-r1 (non-force) -> F published at cb91ade761f6802fc40c500761d3e35022408822"
+  ],
+  "evidence_refs": [
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-freeze-contract-FROZEN_R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/repro-v0-2-seed-record-FROZEN_R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/frozen-package-delta-check-R1.json",
+    "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R1/evidence/frozen-gate-PASS-R1.json"
+  ],
+  "next_action": "Director FREEZE record commit (strict descendant of F) pinning F_HEAD/F_TREE + exact Git-object digests; then full validation; next actors: fresh SCIENTIFIC REVIEWER(F) then fresh independent VERIFIER(F). DO NOT START SCIENCE.",
+  "blocker": null
+}
