@@ -18,6 +18,24 @@
 
 Все машинные поля и enum — на английском. Путь файла не заменяет его идентичность: требуется checksum. Неизвестное значение явно отмечается UNKNOWN; отсутствие проверки не кодируется нулевой ошибкой или PASS.
 
+## Предлагаемые контракты для механической сборки
+
+Это **требования к будущим реализациям**, а не существующие API или JSON Schema. `component-card.v1` и исторические опубликованные результаты не меняются.
+
+| Будущий контракт | Обязательные инварианты |
+|---|---|
+| KnowledgePack | DOI/source ID, exact reference/commit, доступные входы/digests/rights, format, protocol, scientific model and limitations, список недостающих файлов |
+| MechanicalComponentSpec v1 | Дизайн+топология+mapping, local frame, `ports[]` с molecular anchors/orientation/interface type, mechanical DOFs, условия и UNKNOWN; ссылку на `ComponentCard` evidence |
+| AssemblySpec v1 | Состав компонентов+версии, positions/orientations, `connections[]`, разрешённые strand/bond edits, единая проверенная topology/config и provenance каждого изменения |
+| TestRigSpec v1 | Замороженные drive/load/controls, observables, repeated cycles, state distributions, uncertainty, integrity, energy convention, budget, seeds, stop/failure rule |
+| ReducedModelCard v1 | Функциональные степени свободы, источники detailed расчетов и модели, единицы, диапазоны валидности, независимый hold-out error/failure map |
+
+При несовместимых портах, скрытом изменении цепей, неизвестной системе единиц или неподдерживаемых физических силах валидатор **отказывает**: автоматического исправления путем фантазирования молекулярных связей нет. Различать claim levels: `DESIGN_VALID` (молекулярная корректность входа), `MODEL_STABLE` (условная устойчивость), `FUNCTIONAL_WITHIN_MODEL` (проверенная работа механизма в заданной модели), `PHYSICALLY_VALIDATED` (сопоставление с независимым экспериментом). Это не заменяет существующую научную лестницу C0–C5.
+
+Новые интерфейсы не позволяют автоматически вычислять реальный КПД, временные масштабы, полную химическую энергию или изготовимость. Модельное время, внешняя работа, гидродинамика и химический привод требуют явной постановки и самостоятельной проверки применимости.
+
+Подробнее: [LITERATURE_TO_MECHANISM_ROUTE_R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md).
+
 ## Представления
 
 Для DNA_COARSE_GRAINED необходимы ориентации, топология цепей и mapping к исходному дизайну. Для ATOMISTIC — атомы, ячейка/границы и соответствующие модельные данные. COMPONENT_REDUCED содержит степени свободы и проверенную эффективную модель, а не атомистическую правдоподобность по умолчанию.
