@@ -165,6 +165,10 @@ class SystemdLauncherChoice:
             return DirectLauncher()
         from .executor import SystemdTransientLauncher
 
+        if self.choice == "systemd-user":
+            # U2 readiness R1: unprivileged manager (outenemy machine-verified
+            # with linger=yes); system manager stays the default for U1.
+            return SystemdTransientLauncher(user_manager=True)
         return SystemdTransientLauncher()
 
 
@@ -300,7 +304,7 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("run", help="execute one attempt of a run spec (U1 only)")
     p.add_argument("--spec", required=True)
     p.add_argument("--ledger", required=True)
-    p.add_argument("--launcher", choices=["direct", "systemd"], default="systemd")
+    p.add_argument("--launcher", choices=["direct", "systemd", "systemd-user"], default="systemd")
     p.set_defaults(func=cmd_run)
 
     p = sub.add_parser("gate", help="record a gate status (PASS requires existing evidence file)")
