@@ -1,0 +1,920 @@
+{
+  "arm_manifest_summary": {
+    "0b": {
+      "angle_frame0_deg": 66.886745865,
+      "arm_a": 4006,
+      "arm_b": 3942,
+      "coverage": {
+        "manifest_fraction_of_paired": 0.999748428,
+        "manifest_fraction_of_topology": 0.948675101,
+        "manifest_nucleotides": 7948,
+        "paired_nucleotides": 7950,
+        "topology_nucleotides": 8378,
+        "unassigned_chains": 1,
+        "unassigned_paired_nucleotides": 2
+      },
+      "source": "docs/work/executions/EX-NL3-002-PROTO-R1/evidence/arm-manifest-0b.json (frozen, arm-manifest-v1)"
+    },
+    "11b": {
+      "angle_frame0_deg": 74.357957026,
+      "arm_a": 4218,
+      "arm_b": 3722,
+      "coverage": {
+        "manifest_fraction_of_paired": 1.0,
+        "manifest_fraction_of_topology": 0.940312648,
+        "topology_nucleotides": 8444
+      },
+      "determinism": {
+        "byte_identical": true,
+        "runs": 2,
+        "sha256_run1": "4078f285609a49532382a174539b0bd705f3744412779ffa4eea235fd10f84cd",
+        "sha256_run2": "4078f285609a49532382a174539b0bd705f3744412779ffa4eea235fd10f84cd"
+      },
+      "source": "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/arm-manifest-11b-report.json"
+    },
+    "32b": {
+      "angle_frame0_deg": 77.477102136,
+      "arm_a": 4814,
+      "arm_b": 3190,
+      "coverage": {
+        "manifest_fraction_of_paired": 0.9995005,
+        "manifest_fraction_of_topology": 0.933955659,
+        "topology_nucleotides": 8570
+      },
+      "determinism": {
+        "byte_identical": true,
+        "runs": 2,
+        "sha256_run1": "2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f",
+        "sha256_run2": "2e542a618d8189e172f9396afa4785f7d701270ef5bcdb2b407a02eb747d4d5f"
+      },
+      "source": "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/arm-manifest-32b-report.json"
+    },
+    "53b": {
+      "angle_frame0_deg": 132.949606811,
+      "arm_a": 4318,
+      "arm_b": 3638,
+      "coverage": {
+        "manifest_fraction_of_paired": 1.0,
+        "manifest_fraction_of_topology": 0.914903404,
+        "topology_nucleotides": 8696
+      },
+      "determinism": {
+        "byte_identical": true,
+        "runs": 2,
+        "sha256_run1": "8e58eb8901a97dc7f0598a826b1e08d3ffe9cd879746860aa33d6cbbba6bbb324",
+        "sha256_run2": "8e58eb8901a97dc7f0598a826b1e08d3ffe9cd879746860aa33d6cbbba6bbb324"
+      },
+      "source": "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/arm-manifest-53b-report.json"
+    },
+    "74b": {
+      "determinism": {
+        "attempts": 2,
+        "deterministic_identical_error": true
+      },
+      "source": "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+      "status": "MANIFEST_DERIVATION_FAILED (FAILED_TWO_DOMINANT_BLOCKS)"
+    }
+  },
+  "cross_checks": [
+    {
+      "check": "32b: common-window pooled == published (data fully inside window)",
+      "ok": true
+    },
+    {
+      "check": "53b: common-window pooled == published (data fully inside window)",
+      "ok": true
+    },
+    {
+      "check": "0b: window valid frames (111) <= published valid frames (150)",
+      "ok": true
+    },
+    {
+      "check": "11b: window valid frames (111) <= published valid frames (138)",
+      "ok": true
+    }
+  ],
+  "determinism": "pure function of published evidence JSONs; builder rerun must be byte-identical",
+  "execution_id": "EX-NL3-002-SUMMARY-R1",
+  "kind": "e2_parametric_series_common_window_summary",
+  "no_interpretation_note": "acceptance NL3-002 requires the parameter->angle table and the 0b component card; trend statements are explicitly out of scope here",
+  "physics_runs_in_this_execution": 0,
+  "protocol": "docs/research/E2_PROTO_R1.md (FROZEN, incl. addendum s.8: common comparison window t <= 150000) + docs/research/E2_OBSERVABLES_R2.md",
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (aggregated measured distributions; no cross-variant trend interpretation in this execution; comparisons/interpretation reserved for Director-level review)",
+  "statistics_method": "E2_PROTO_R1 s.6 as frozen: median/IQR/q5-q95 over valid in-window frames, pooled across replicas; bootstrap CI95 for the median, 10000 resamples, seed 424242 (same deterministic implementation as EX-NL3-002-R1 evidence/confirm_analysis.py)",
+  "variants": {
+    "0b": {
+      "common_window_steps": 150000,
+      "execution_id": "EX-NL3-002-R1",
+      "parameter": "0b",
+      "per_replica_common_window": {
+        "E2-R1-C001": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                64.756960095,
+                66.058586287
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              63.662679335,
+              66.335839171
+            ],
+            "max_deg": 67.724409143,
+            "mean_deg": 65.027842472,
+            "median_deg": 65.481249392,
+            "min_deg": 61.773071999,
+            "n_frames": 37,
+            "q05_deg": 62.095909504,
+            "q95_deg": 67.55990197
+          },
+          "seed": 201004,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 50,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 200000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "E2-R1-C002": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                64.89901302,
+                65.847541289
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              64.69741216,
+              65.997117907
+            ],
+            "max_deg": 67.05131125,
+            "mean_deg": 65.375131062,
+            "median_deg": 65.31223805,
+            "min_deg": 64.104812492,
+            "n_frames": 37,
+            "q05_deg": 64.335672542,
+            "q95_deg": 66.579487817
+          },
+          "seed": 202008,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 50,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 200000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "E2-R1-C003": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                66.290778094,
+                67.331195162
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              65.979018594,
+              67.45467222
+            ],
+            "max_deg": 68.410832656,
+            "mean_deg": 66.759502577,
+            "median_deg": 66.693707193,
+            "min_deg": 65.529113568,
+            "n_frames": 37,
+            "q05_deg": 65.613233767,
+            "q95_deg": 68.003463824
+          },
+          "seed": 203012,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 50,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 200000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        }
+      },
+      "pooled_common_window": {
+        "angle_stats_valid_frames": {
+          "bootstrap": {
+            "ci95": [
+              65.607023682,
+              66.118300188
+            ],
+            "resamples": 10000,
+            "seed": 424242,
+            "statistic": "median"
+          },
+          "iqr_deg": [
+            64.978234103,
+            66.578222971
+          ],
+          "max_deg": 68.410832656,
+          "mean_deg": 65.72082537,
+          "median_deg": 65.870460546,
+          "min_deg": 61.773071999,
+          "n_frames": 111,
+          "q05_deg": 62.487721419,
+          "q95_deg": 67.738097648
+        },
+        "valid_frames_total": 111
+      },
+      "published_as_recorded": {
+        "per_replica": {
+          "E2-R1-C001": {
+            "bootstrap_ci95": [
+              64.174332927,
+              65.569870376
+            ],
+            "iqr_deg": [
+              63.473476255,
+              66.01891106
+            ],
+            "median_deg": 65.095434789,
+            "n_frames": 50,
+            "q05_deg": 62.138948813,
+            "q95_deg": 67.405239442
+          },
+          "E2-R1-C002": {
+            "bootstrap_ci95": [
+              65.275402687,
+              66.167076524
+            ],
+            "iqr_deg": [
+              64.901873199,
+              66.367421601
+            ],
+            "median_deg": 65.708669763,
+            "n_frames": 50,
+            "q05_deg": 64.353821096,
+            "q95_deg": 67.521409198
+          },
+          "E2-R1-C003": {
+            "bootstrap_ci95": [
+              66.677584415,
+              67.519092266
+            ],
+            "iqr_deg": [
+              66.308394763,
+              67.948375702
+            ],
+            "median_deg": 67.236579608,
+            "n_frames": 50,
+            "q05_deg": 65.654095708,
+            "q95_deg": 68.764359103
+          }
+        },
+        "pooled": {
+          "bootstrap_ci95": [
+            65.674963662,
+            66.318271836
+          ],
+          "iqr_deg": [
+            64.93709665,
+            67.056610879
+          ],
+          "median_deg": 65.976921401,
+          "n_frames": 150,
+          "q05_deg": 63.00066167,
+          "q95_deg": 68.408819824
+        },
+        "steps_requested": 200000
+      },
+      "published_source": "docs/work/executions/EX-NL3-002-R1/evidence/confirmatory-summary.json (+c001-003-analysis.json frame rows)",
+      "reslice_note": "addendum s.8 item 3: secondary cross-variant table reslices 0b to t <= 150000; primary confirmatory result (200000 steps) is NOT revised",
+      "steps_mode": "200000 confirmatory (frozen primary; NOT resliced for the primary result)",
+      "window_method": "per-frame recorded time (oxDNA steps, print_conf_interval=4000) filtered to <= 150000"
+    },
+    "11b": {
+      "common_window_steps": 150000,
+      "execution_id": "EX-NL3-002-PARAM-11B-R1",
+      "parameter": "11b",
+      "per_replica_common_window": {
+        "PARAM-11B-S001": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                73.907409231,
+                74.53207261
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              73.80787423,
+              74.600821403
+            ],
+            "max_deg": 75.225792466,
+            "mean_deg": 74.206137541,
+            "median_deg": 74.218071238,
+            "min_deg": 73.00945776,
+            "n_frames": 37,
+            "q05_deg": 73.305258023,
+            "q95_deg": 75.182209794
+          },
+          "seed": 201004,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 46,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 184000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-11B-S002": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                71.854394686,
+                72.60209632
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              71.31992883,
+              73.183452253
+            ],
+            "max_deg": 74.308728866,
+            "mean_deg": 72.244054714,
+            "median_deg": 72.165683993,
+            "min_deg": 70.267845979,
+            "n_frames": 37,
+            "q05_deg": 70.713456079,
+            "q95_deg": 73.995079236
+          },
+          "seed": 202008,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 46,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 184000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-11B-S003": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                74.095688408,
+                74.834872162
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              73.973942956,
+              74.973936265
+            ],
+            "max_deg": 75.68164458,
+            "mean_deg": 74.457317475,
+            "median_deg": 74.533109426,
+            "min_deg": 72.869012963,
+            "n_frames": 37,
+            "q05_deg": 73.437352963,
+            "q95_deg": 75.418782071
+          },
+          "seed": 203012,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 46,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 184000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        }
+      },
+      "pooled_common_window": {
+        "angle_stats_valid_frames": {
+          "bootstrap": {
+            "ci95": [
+              73.709568565,
+              74.116753782
+            ],
+            "resamples": 10000,
+            "seed": 424242,
+            "statistic": "median"
+          },
+          "iqr_deg": [
+            73.055447548,
+            74.554783902
+          ],
+          "max_deg": 75.68164458,
+          "mean_deg": 73.635836577,
+          "median_deg": 73.928725839,
+          "min_deg": 70.267845979,
+          "n_frames": 111,
+          "q05_deg": 71.09381729,
+          "q95_deg": 75.236945887
+        },
+        "valid_frames_total": 111
+      },
+      "published_as_recorded": {
+        "per_replica": {
+          "PARAM-11B-S001": {
+            "bootstrap_ci95": [
+              74.116753782,
+              74.56773248
+            ],
+            "iqr_deg": [
+              73.847414031,
+              74.754721307
+            ],
+            "median_deg": 74.363089522,
+            "n_frames": 46,
+            "q05_deg": 73.355804715,
+            "q95_deg": 75.117552027
+          },
+          "PARAM-11B-S002": {
+            "bootstrap_ci95": [
+              71.433354161,
+              72.31723788
+            ],
+            "iqr_deg": [
+              71.249845288,
+              72.822787932
+            ],
+            "median_deg": 71.897893752,
+            "n_frames": 46,
+            "q05_deg": 70.745345464,
+            "q95_deg": 73.899354395
+          },
+          "PARAM-11B-S003": {
+            "bootstrap_ci95": [
+              74.11097547,
+              74.692414747
+            ],
+            "iqr_deg": [
+              73.987793768,
+              74.973746008
+            ],
+            "median_deg": 74.469555522,
+            "n_frames": 46,
+            "q05_deg": 73.49760176,
+            "q95_deg": 75.373200627
+          }
+        },
+        "pooled": {
+          "bootstrap_ci95": [
+            73.767611183,
+            74.169269784
+          ],
+          "iqr_deg": [
+            72.875847673,
+            74.592549173
+          ],
+          "median_deg": 73.979063396,
+          "n_frames": 138,
+          "q05_deg": 71.001788371,
+          "q95_deg": 75.220729355
+        },
+        "steps_requested": 200000,
+        "truncation": "SIGTERM budget interrupt at 3.5h (E2_PROTO_R1 s.5); 46/50 frames written, last t = 184000"
+      },
+      "published_source": "docs/work/executions/EX-NL3-002-PARAM-11B-R1/evidence/PARAM-11B-summary.json (+PARAM-11B-analysis.json frame rows)",
+      "reslice_note": "addendum s.8 item 1: 11b covers the window and is resliced to t <= 150000 without a rerun",
+      "steps_mode": "200000 requested, truncated at ~184000 steps (ABORTED_BUDGET_INTERRUPT; window covered)",
+      "window_method": "per-frame recorded time (oxDNA steps, print_conf_interval=4000) filtered to <= 150000"
+    },
+    "32b": {
+      "common_window_steps": 150000,
+      "execution_id": "EX-NL3-002-PARAM-32B-R1",
+      "parameter": "32b",
+      "per_replica_common_window": {
+        "PARAM-32B-S001": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                79.448763083,
+                80.253644739
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              79.058994972,
+              80.386488929
+            ],
+            "max_deg": 81.261668145,
+            "mean_deg": 79.637135549,
+            "median_deg": 79.877463339,
+            "min_deg": 76.888159701,
+            "n_frames": 37,
+            "q05_deg": 77.636006975,
+            "q95_deg": 81.227294159
+          },
+          "seed": 201004,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-32B-S002": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                76.951115414,
+                77.950171698
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              76.700036749,
+              78.035476386
+            ],
+            "max_deg": 79.339070275,
+            "mean_deg": 77.430162663,
+            "median_deg": 77.4927314,
+            "min_deg": 75.859948479,
+            "n_frames": 37,
+            "q05_deg": 75.922352865,
+            "q95_deg": 78.817949287
+          },
+          "seed": 202008,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-32B-S003": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                76.909285579,
+                78.312438191
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              76.564145458,
+              79.162966256
+            ],
+            "max_deg": 81.544445205,
+            "mean_deg": 77.886990633,
+            "median_deg": 77.794798276,
+            "min_deg": 73.98267031,
+            "n_frames": 37,
+            "q05_deg": 74.610465947,
+            "q95_deg": 81.311915368
+          },
+          "seed": 203012,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        }
+      },
+      "pooled_common_window": {
+        "angle_stats_valid_frames": {
+          "bootstrap": {
+            "ci95": [
+              77.794798276,
+              78.66512915
+            ],
+            "resamples": 10000,
+            "seed": 424242,
+            "statistic": "median"
+          },
+          "iqr_deg": [
+            77.044589742,
+            79.781487257
+          ],
+          "max_deg": 81.544445205,
+          "mean_deg": 78.318096281,
+          "median_deg": 78.091845516,
+          "min_deg": 73.98267031,
+          "n_frames": 111,
+          "q05_deg": 75.753118173,
+          "q95_deg": 81.213081515
+        },
+        "valid_frames_total": 111
+      },
+      "published_as_recorded": {
+        "per_replica": {
+          "PARAM-32B-S001": {
+            "bootstrap_ci95": [
+              79.448763083,
+              80.253644739
+            ],
+            "iqr_deg": [
+              79.058994972,
+              80.386488929
+            ],
+            "median_deg": 79.877463339,
+            "n_frames": 37,
+            "q05_deg": 77.636006975,
+            "q95_deg": 81.227294159
+          },
+          "PARAM-32B-S002": {
+            "bootstrap_ci95": [
+              76.951115414,
+              77.950171698
+            ],
+            "iqr_deg": [
+              76.700036749,
+              78.035476386
+            ],
+            "median_deg": 77.4927314,
+            "n_frames": 37,
+            "q05_deg": 75.922352866,
+            "q95_deg": 78.817949287
+          },
+          "PARAM-32B-S003": {
+            "bootstrap_ci95": [
+              76.909285579,
+              78.312438191
+            ],
+            "iqr_deg": [
+              76.564145458,
+              79.162966256
+            ],
+            "median_deg": 77.794798276,
+            "n_frames": 37,
+            "q05_deg": 74.610465946,
+            "q95_deg": 81.311915368
+          }
+        },
+        "pooled": {
+          "bootstrap_ci95": [
+            77.794798276,
+            78.66512915
+          ],
+          "iqr_deg": [
+            77.044589742,
+            79.781487257
+          ],
+          "median_deg": 78.091845516,
+          "n_frames": 111,
+          "q05_deg": 75.753118174,
+          "q95_deg": 81.213081516
+        },
+        "steps_requested": 150000
+      },
+      "published_source": "docs/work/executions/EX-NL3-002-PARAM-32B-R1/evidence/PARAM-32B-summary.json (+PARAM-32B-analysis.json frame rows)",
+      "reslice_note": "full data already within t <= 150000 (37 frames, last t = 148000); common-window stats recomputed here must equal published stats",
+      "steps_mode": "150000 (addendum s.8 item 1)",
+      "window_method": "per-frame recorded time (oxDNA steps, print_conf_interval=4000) filtered to <= 150000"
+    },
+    "53b": {
+      "common_window_steps": 150000,
+      "execution_id": "EX-NL3-002-PARAM-53B-R1",
+      "parameter": "53b",
+      "per_replica_common_window": {
+        "PARAM-53B-S001": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                131.527780332,
+                132.793084067
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              131.458858042,
+              132.988423322
+            ],
+            "max_deg": 133.982158972,
+            "mean_deg": 132.308252681,
+            "median_deg": 132.343978104,
+            "min_deg": 131.028963199,
+            "n_frames": 37,
+            "q05_deg": 131.134542686,
+            "q95_deg": 133.773415464
+          },
+          "seed": 201004,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-53B-S002": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                130.810138401,
+                131.381410476
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              130.5772807,
+              131.477652291
+            ],
+            "max_deg": 132.796557076,
+            "mean_deg": 131.091015535,
+            "median_deg": 131.049227687,
+            "min_deg": 129.910486794,
+            "n_frames": 37,
+            "q05_deg": 130.071739007,
+            "q95_deg": 132.023676601
+          },
+          "seed": 202008,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        },
+        "PARAM-53B-S003": {
+          "angle_stats_valid_frames_in_window": {
+            "bootstrap": {
+              "ci95": [
+                134.652220355,
+                135.734579592
+              ],
+              "resamples": 10000,
+              "seed": 424242,
+              "statistic": "median"
+            },
+            "iqr_deg": [
+              134.421299898,
+              135.800609076
+            ],
+            "max_deg": 136.34825654,
+            "mean_deg": 135.017941102,
+            "median_deg": 135.285186059,
+            "min_deg": 132.903152729,
+            "n_frames": 37,
+            "q05_deg": 133.229207791,
+            "q95_deg": 136.15850541
+          },
+          "seed": 203012,
+          "window": {
+            "frames_in_window": 37,
+            "frames_total": 37,
+            "frames_valid_in_window": 37,
+            "time_first_steps": 4000,
+            "time_last_in_window_steps": 148000,
+            "time_last_steps": 148000,
+            "valid_frame_fraction_in_window": 1.0
+          }
+        }
+      },
+      "pooled_common_window": {
+        "angle_stats_valid_frames": {
+          "bootstrap": {
+            "ci95": [
+              131.776207377,
+              132.988423322
+            ],
+            "resamples": 10000,
+            "seed": 424242,
+            "statistic": "median"
+          },
+          "iqr_deg": [
+            131.306849164,
+            134.406738791
+          ],
+          "max_deg": 136.34825654,
+          "mean_deg": 132.805736439,
+          "median_deg": 132.35778773,
+          "min_deg": 129.910486794,
+          "n_frames": 111,
+          "q05_deg": 130.488770052,
+          "q95_deg": 135.918211802
+        },
+        "valid_frames_total": 111
+      },
+      "published_as_recorded": {
+        "per_replica": {
+          "PARAM-53B-S001": {
+            "bootstrap_ci95": [
+              131.527780332,
+              132.793084067
+            ],
+            "iqr_deg": [
+              131.458858042,
+              132.988423322
+            ],
+            "median_deg": 132.343978104,
+            "n_frames": 37,
+            "q05_deg": 131.134542686,
+            "q95_deg": 133.773415464
+          },
+          "PARAM-53B-S002": {
+            "bootstrap_ci95": [
+              130.810138401,
+              131.381410476
+            ],
+            "iqr_deg": [
+              130.5772807,
+              131.477652291
+            ],
+            "median_deg": 131.049227687,
+            "n_frames": 37,
+            "q05_deg": 130.071739007,
+            "q95_deg": 132.023676602
+          },
+          "PARAM-53B-S003": {
+            "bootstrap_ci95": [
+              134.652220355,
+              135.734579592
+            ],
+            "iqr_deg": [
+              134.421299898,
+              135.800609076
+            ],
+            "median_deg": 135.285186059,
+            "n_frames": 37,
+            "q05_deg": 133.229207791,
+            "q95_deg": 136.158505409
+          }
+        },
+        "pooled": {
+          "bootstrap_ci95": [
+            131.776207377,
+            132.988423322
+          ],
+          "iqr_deg": [
+            131.306849164,
+            134.406738791
+          ],
+          "median_deg": 132.35778773,
+          "n_frames": 111,
+          "q05_deg": 130.488770052,
+          "q95_deg": 135.918211803
+        },
+        "steps_requested": 150000
+      },
+      "published_source": "docs/work/executions/EX-NL3-002-PARAM-53B-R1/evidence/PARAM-53B-analysis.json (+s001-003-analysis.json frame rows)",
+      "reslice_note": "full data already within t <= 150000 (37 frames, last t = 148000); common-window stats recomputed here must equal published stats",
+      "steps_mode": "150000 (addendum s.8 item 1)",
+      "window_method": "per-frame recorded time (oxDNA steps, print_conf_interval=4000) filtered to <= 150000"
+    },
+    "74b": {
+      "angle_stats": null,
+      "common_window_steps": 150000,
+      "execution_id": "EX-NL3-002-PARAM-74B-R1",
+      "failure_report": "docs/work/executions/EX-NL3-002-PARAM-74B-R1/evidence/arm-manifest-74b-failure.json",
+      "measurement_status": "NOT_MEASURED",
+      "parameter": "74b",
+      "reason": "arm-manifest-v1 derivation FAILED_TWO_DOMINANT_BLOCKS (deterministic, byte-identical over 2 attempts); per-variant stop rule -> BLOCKED, honest gap",
+      "runs": "NOT_RUN (0 physics runs for 74b)",
+      "steps_mode": "not run (blocked before runs)"
+    }
+  },
+  "window": {
+    "common_window_steps": 150000,
+    "frame_time_source": "per-frame recorded 'time' field (oxDNA steps) in published analysis JSONs; print_conf_interval = 4000 for all variants",
+    "time_reconstruction_assumption": null
+  }
+}

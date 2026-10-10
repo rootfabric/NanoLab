@@ -74,6 +74,53 @@ class TestExamplePackage(ReleaseContractTestBase):
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
 
+class TestPackageFilesExcludesGeneratedArtifacts(ReleaseContractTestBase):
+    """v0.1.2 packaging repair: generated CPython artifacts never enter a manifest.
+
+    v0.1.1 shipped a RELEASE_MANIFEST.json listing 7
+    convention/nlbl_convention/__pycache__/*.pyc files that were generated on
+    the author machine, are not git-tracked, and made reproduce.py verify fail
+    (exit 3) on any fresh copy of the package (finding reproduced on the U2
+    platform, EX-INFRA3-U2-OUTENEMY-READINESS-R1).
+    """
+
+    def test_package_files_skips_pycache_and_pyc(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pkg = Path(tmp)
+            (pkg / "convention" / "__pycache__").mkdir(parents=True)
+            (pkg / "convention" / "analyze_hinge.py").write_bytes(b"# analyzer\n")
+            (pkg / "convention" / "__pycache__" / "canonical.cpython-310.pyc").write_bytes(b"\x00residue")
+            (pkg / "loose.pyc").write_bytes(b"\x00residue")
+            (pkg / card_lint.MANIFEST_NAME).write_text("{}", encoding="utf-8")
+            rels = [p.relative_to(pkg).as_posix() for p in card_lint._package_files(pkg)]
+            self.assertEqual(rels, ["convention/analyze_hinge.py"])
+
+    def test_manifest_create_excludes_generated_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pkg = Path(tmp)
+            (pkg / "convention" / "__pycache__").mkdir(parents=True)
+            (pkg / "VERSION").write_text("9.9.9\n", encoding="utf-8")
+            (pkg / "convention" / "analyze_hinge.py").write_bytes(b"# analyzer\n")
+            (pkg / "convention" / "__pycache__" / "canonical.cpython-310.pyc").write_bytes(b"\x00residue")
+            manifest = card_lint.manifest_create(pkg)
+            rels = [entry["path"] for entry in manifest["files"]]
+            self.assertEqual(rels, ["VERSION", "convention/analyze_hinge.py"])
+            self.assertEqual(manifest["package_version"], "9.9.9")
+
+    def test_released_v012_package_contains_no_pyc_entries(self) -> None:
+        pkg = ROOT / "releases" / "nanolab-components-v0.1.2"
+        if not pkg.is_dir():
+            self.skipTest("nanolab-components-v0.1.2 not present in this checkout")
+        report = card_lint.run_package(pkg)
+        self.assertTrue(report["ok"], report["errors"])
+        manifest = load(pkg / card_lint.MANIFEST_NAME)
+        self.assertFalse(
+            [entry["path"] for entry in manifest["files"] if entry["path"].endswith(".pyc")],
+            "no generated .pyc artifact may be listed in the release manifest",
+        )
+        self.assertEqual(manifest["package_version"], "0.1.2")
+
+
 class TestCardSchema(ReleaseContractTestBase):
     def test_valid_examples_pass(self) -> None:
         for path in (CARD_0B, CARD_74B):
