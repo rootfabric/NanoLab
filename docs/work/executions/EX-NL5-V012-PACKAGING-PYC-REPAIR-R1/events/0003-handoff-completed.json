@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-10T15:45:00Z",
+  "execution_id": "EX-NL5-V012-PACKAGING-PYC-REPAIR-R1",
+  "work_order_id": "WO-NL5-V012-PACKAGING-PYC-REPAIR-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "summary": "HANDOFF: bounded packaging repair v0.1.2 ready for independent review. Exact HEAD/TREE at handoff are published by the branch push (review/verify MUST pin their exact reviewed head themselves per protocol; this record does not substitute exact-head pinning). Scope delivered: card_lint generated-artifact filter (single choke point) + 3 regression tests; releases/nanolab-components-v0.1.2 with regenerated manifest (35 files, 0 pyc); science byte-identical to v0.1.1 (5-file allowed diff only, diff proof in evidence); fresh-export reproduce.py self-test = verify ok 0 errors exit 0; full suite 608 OK; check-consistency ok; workflow_lint blocking 0. Open risks (none blocking): (a) convention/nlbl_convention/__init__.py docstring still mentions v0.1.1 - left UNCHANGED deliberately to keep convention bytes identical to v0.1.1 (frozen-convention conservatism); (b) v0.1.1 manifest defect remains in the historical package by design (immutable history). NEXT ACTION (single): fresh independent Reviewer + fresh exact-head Verifier on branch work/nl5-v012-packaging-pyc-repair-r1, then Human Gate merge. 0 scientific runs; statuses unchanged."
+}
