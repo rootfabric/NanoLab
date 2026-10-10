@@ -28,7 +28,7 @@ from r2.contract import (
     next_attempt_id,
     sha256_file,
 )
-from r2.executor import DirectLauncher, RunExecutor, RunSpec
+from r2.executor import DirectLauncher, RunExecutor, RunSpec, SystemdTransientLauncher
 from r2.fingerprint import (
     collect_fingerprint,
     fingerprint_markdown,
@@ -339,6 +339,34 @@ class SupervisorTest(unittest.TestCase):
         self.assertIn("--scope", argv)
         self.assertEqual(argv[-1], "./engine")
 
+    def test_transient_service_argv_user_manager(self):
+        # U2 readiness R1: unprivileged user-manager mode is explicit opt-in.
+        argv = transient_service_argv("nanolab-run-u2", ["./engine"], user_manager=True)
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--unit=nanolab-run-u2", argv)
+        default_argv = transient_service_argv("nanolab-run-u2", ["./engine"])
+        self.assertNotIn("--user", default_argv)
+
+    def test_scope_argv_user_manager(self):
+        argv = scope_argv("nanolab-scope-u2", ["./engine"], user_manager=True)
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--scope", argv)
+        self.assertNotIn("--user", scope_argv("nanolab-scope-u2", ["./engine"]))
+
+    def test_systemd_transient_launcher_user_manager_argv(self):
+        launcher = SystemdTransientLauncher(unit_prefix="nanolab-run", user_manager=True)
+        argv = launcher.argv("nanolab-run-ex-1-a0", ["./engine"], working_directory=Path("/tmp/w"))
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--collect", argv)
+        self.assertIn("--unit=nanolab-run-ex-1-a0", argv)
+        self.assertIn("--wait", argv)
+        self.assertIn("--pipe", argv)
+        plain = SystemdTransientLauncher().argv("u", ["./engine"])
+        self.assertNotIn("--user", plain)
+
     def test_parse_is_active(self):
         self.assertTrue(parse_is_active({"returncode": 0, "stdout": "active\n"}))
         self.assertFalse(parse_is_active({"returncode": 3, "stdout": "inactive\n"}))
@@ -476,7 +504,7 @@ class EngineBuildTest(unittest.TestCase):
             self.assertIn(flag, argv)
 
     def test_cache_pin_verification(self):
-        cache = "\n".join(f"{key}:={value}" for key, value in (
+        cache = "\n".join(f"{key}:BOOL={value}" for key, value in (
             ("CMAKE_BUILD_TYPE", "Release"), ("DOUBLE", "ON"), ("CUDA", "OFF"), ("MPI", "OFF"),
             ("NATIVE_COMPILATION", "ON"), ("JSON_ENABLED", "ON"),
         ))
@@ -487,6 +515,29 @@ class EngineBuildTest(unittest.TestCase):
         ok, deviations = engine_build.verify_cache_pins(values)
         self.assertFalse(ok)
         self.assertTrue(any("CUDA" in item for item in deviations))
+
+    def test_parse_cmake_cache_real_format(self):
+        # U2 readiness R1 (outenemy): real CMakeCache lines are KEY:TYPE=VALUE;
+        # the synthetic KEY:=VALUE grammar returned {} on an actual build.
+        cache = (
+            "# This is the CMakeCache file.\n"
+            "// For build in directory: /build\n"
+            "\n"
+            "CMAKE_BUILD_TYPE:STRING=Release\n"
+            "DOUBLE:BOOL=ON\n"
+            "CUDA:BOOL=OFF\n"
+            "MPI:BOOL=OFF\n"
+            "CUDA_DOUBLE:BOOL=OFF\n"
+            "CMAKE_CXX_COMPILER:PATH=/usr/bin/c++\n"
+        )
+        values = engine_build.parse_cmake_cache(cache)
+        self.assertEqual(values.get("CMAKE_BUILD_TYPE"), "Release")
+        self.assertEqual(values.get("DOUBLE"), "ON")
+        self.assertEqual(values.get("CUDA"), "OFF")
+        self.assertEqual(values.get("MPI"), "OFF")
+        self.assertEqual(values.get("CUDA_DOUBLE"), "OFF")
+        ok, deviations = engine_build.verify_cache_pins(values)
+        self.assertTrue(ok, deviations)
 
     def test_cache_missing_pin_detected(self):
         ok, deviations = engine_build.verify_cache_pins({"CMAKE_BUILD_TYPE": "Release"})
@@ -514,7 +565,7 @@ class EngineBuildTest(unittest.TestCase):
             build_dir.mkdir()
             (build_dir / "oxdna").write_bytes(b"\x7fELF-fake-binary")
             (build_dir / "CMakeCache.txt").write_text(
-                "CMAKE_BUILD_TYPE:=Release\nDOUBLE:=ON\nCUDA:=OFF\nMPI:=OFF\n",
+                "CMAKE_BUILD_TYPE:STRING=Release\nDOUBLE:BOOL=ON\nCUDA:BOOL=OFF\nMPI:BOOL=OFF\n",
                 encoding="utf-8",
             )
             record = engine_build.provenance_record(
@@ -540,6 +591,37 @@ class EngineBuildTest(unittest.TestCase):
             )
             self.assertEqual(verified["source_commit"], engine_build.ENGINE_PINNED_COMMIT)
             self.assertTrue(verified["source_commit_verified"])
+
+    def test_resolve_engine_binary_prefers_build_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "oxdna").write_bytes(b"\x7fELF-root")
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "oxDNA").write_bytes(b"\x7fELF-bin")
+            resolved = engine_build.resolve_engine_binary(build_dir)
+            self.assertEqual(resolved, build_dir / "oxdna")
+            self.assertEqual(engine_build.binary_digest(build_dir)["sha256"], engine_build.sha256_file(build_dir / "oxdna"))
+
+    def test_resolve_engine_binary_finds_cased_bin_layout(self):
+        # U2 readiness R1 (outenemy): pinned oxDNA emits bin/oxDNA (engine case).
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "oxDNA").write_bytes(b"\x7fELF-cased")
+            (build_dir / "bin" / "confGenerator").write_bytes(b"\x7fELF-other")
+            resolved = engine_build.resolve_engine_binary(build_dir)
+            self.assertEqual(resolved, build_dir / "bin" / "oxDNA")
+            digest = engine_build.binary_digest(build_dir)
+            self.assertEqual(digest["size"], len(b"\x7fELF-cased"))
+            self.assertTrue(digest["path"].endswith("bin/oxDNA"))
+
+    def test_resolve_engine_binary_missing_is_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "unrelated").write_bytes(b"\x7fELF-x")
+            with self.assertRaises(FileNotFoundError):
+                engine_build.resolve_engine_binary(build_dir)
 
 
 class CliNegativeControlTest(unittest.TestCase):

@@ -24,16 +24,26 @@ def transient_service_argv(
     working_directory: str | None = None,
     description: str | None = None,
     collect: bool = True,
+    user_manager: bool = False,
 ) -> list[str]:
     """Build `systemd-run` argv for a detached transient service unit.
 
-    The unit is owned by PID 1: closing the SSH session, restarting the
-    agent process or restarting the GitHub runner service does not affect
-    it. `--wait --pipe` lets the executor collect exit code/output; a
-    long-lived scientific campaign drops `--wait --pipe` and reads results
-    from the raw tree instead.
+    Default (``user_manager=False``) targets the system manager: the unit is
+    owned by PID 1, so closing the SSH session, restarting the agent process
+    or restarting the GitHub runner service does not affect it. With
+    ``user_manager=True`` the unit goes to the caller's user manager
+    (``systemd-run --user``), which is the mode that works unprivileged; it
+    survives session close only while user linger is enabled
+    (`loginctl show-user <uid> -p Linger` = yes). U2 readiness R1 (outenemy):
+    system-manager systemd-run requires interactive root authentication for a
+    non-root operator, while the user manager with linger=yes is machine-
+    verified to run detached transient units. `--wait --pipe` (executor path)
+    collects exit code/output; a long-lived campaign drops them and reads
+    results from the raw tree.
     """
     argv = ["systemd-run"]
+    if user_manager:
+        argv.append("--user")
     if collect:
         argv.append("--collect")
     argv.append(f"--unit={unit}")
@@ -44,9 +54,17 @@ def transient_service_argv(
     return argv + list(command)
 
 
-def scope_argv(unit: str, command: list[str], working_directory: str | None = None) -> list[str]:
+def scope_argv(
+    unit: str,
+    command: list[str],
+    working_directory: str | None = None,
+    user_manager: bool = False,
+) -> list[str]:
     """Build `systemd-run --scope` argv (job in a dedicated scope unit)."""
-    argv = ["systemd-run", "--scope", f"--unit={unit}"]
+    argv = ["systemd-run"]
+    if user_manager:
+        argv.append("--user")
+    argv += ["--scope", f"--unit={unit}"]
     if working_directory:
         argv.append(f"--working-directory={working_directory}")
     return argv + list(command)

@@ -1,0 +1,23 @@
+{
+  "probe": "nl5-u2-engine-smoke-r1",
+  "kind": "TECHNICAL_SMOKE_ONLY_NOT_A_SCIENTIFIC_CLAIM",
+  "host": "outenemy",
+  "binary_sha256": "6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78",
+  "input_basis": "oxDNA examples/HAIRPIN (upstream example, pinned source tree), reduced steps=2000 (NOT a protocol run)",
+  "exit_code": 0,
+  "engine_message": "END OF THE SIMULATION, everything went OK!",
+  "trajectory_frames": 4,
+  "energy_rows": 0,
+  "energy_values_finite": true,
+  "files": {
+    "energy.dat": 1029,
+    "initial.conf": 3192,
+    "initial.top": 166,
+    "input": 683,
+    "last_conf.dat": 3187,
+    "smoke_stderr.txt": 1536,
+    "smoke_stdout.txt": 1029,
+    "trajectory.dat": 12751
+  },
+  "workspace": "/home/rdpuser/nanolab/workspaces/u2-readiness/oxdna-smoke-r1"
+}

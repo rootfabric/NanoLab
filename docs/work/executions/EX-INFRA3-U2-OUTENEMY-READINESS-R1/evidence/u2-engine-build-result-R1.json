@@ -1,0 +1,16 @@
+{
+  "status": "COMPLETED",
+  "pin_verified": true,
+  "cache_pins_verified": true,
+  "cache_pin_deviations": [],
+  "binary": {
+    "path": "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA",
+    "sha256": "6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78",
+    "size": 3380728
+  },
+  "source_tree_sha256": "b1742ce91de072c59f4b3febea97647e813b9a5bd23900465bbbf227d22a911c",
+  "configure_seconds": 0.8,
+  "build_seconds": 66.7,
+  "provenance": "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2/build-r2-u2-provenance.json",
+  "log": "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2/build-r2-u2.log"
+}

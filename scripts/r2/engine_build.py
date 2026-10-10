@@ -19,6 +19,7 @@ guards execution behind native-U1 host validation.
 from __future__ import annotations
 
 import hashlib
+import re
 from pathlib import Path
 from typing import Any, Callable
 
@@ -67,13 +68,23 @@ def build_argv(build_dir: Path, jobs: int = 4) -> list[str]:
     return ["cmake", "--build", str(build_dir), "--parallel", str(jobs)]
 
 
+# U2 readiness R1 (outenemy): real CMakeCache entries are ``KEY:TYPE=VALUE``
+# (e.g. ``DOUBLE:BOOL=ON``); a synthetic ``KEY:=VALUE`` grammar parsed nothing
+# on an actual build and masked all intended pins. Comment lines start with
+# ``#`` or ``//``.
+_CACHE_ENTRY = re.compile(r"^\s*([^#:\s][^:=]*):[^=]*=(.*)$")
+
+
 def parse_cmake_cache(cache_text: str) -> dict[str, str]:
     values: dict[str, str] = {}
     for line in cache_text.splitlines():
-        if ":=" not in line:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or stripped.startswith("//"):
             continue
-        key, _, value = line.partition(":=")
-        values[key.strip()] = value.strip()
+        match = _CACHE_ENTRY.match(line)
+        if not match:
+            continue
+        values[match.group(1).strip()] = match.group(2).strip()
     return values
 
 
@@ -88,10 +99,35 @@ def verify_cache_pins(cache_values: dict[str, str]) -> tuple[bool, list[str]]:
     return (not deviations), deviations
 
 
+def resolve_engine_binary(build_dir: Path, binary_name: str = "oxdna") -> Path:
+    """Resolve the built engine binary location, fail-closed.
+
+    U2 readiness R1 (outenemy): the pinned oxDNA commit places its CPU binaries
+    in ``<build>/bin`` with engine-cased names (``bin/oxDNA``, ``bin/DNAnalysis``,
+    ``bin/confGenerator``); older layouts placed ``oxdna`` at the build root.
+    Resolution order: ``<build>/<name>``, then ``<build>/bin/<name>``, then a
+    single deterministic case-insensitive name match inside ``<build>/bin``.
+    """
+    candidates = [build_dir / binary_name, build_dir / "bin" / binary_name]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    bin_dir = build_dir / "bin"
+    if bin_dir.is_dir():
+        matches = sorted(
+            path for path in bin_dir.iterdir() if path.is_file() and path.name.lower() == binary_name.lower()
+        )
+        if matches:
+            return matches[0]
+    raise FileNotFoundError(
+        "engine binary not found: "
+        f"looked at {[str(candidate) for candidate in candidates]} "
+        f"and case-insensitive matches in {bin_dir}"
+    )
+
+
 def binary_digest(build_dir: Path, binary_name: str = "oxdna") -> dict[str, Any]:
-    binary = build_dir / binary_name
-    if not binary.is_file():
-        raise FileNotFoundError(f"engine binary not found: {binary}")
+    binary = resolve_engine_binary(build_dir, binary_name)
     return {
         "path": str(binary),
         "sha256": sha256_file(binary),

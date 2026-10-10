@@ -1,0 +1,53 @@
+{
+  "engine_source": "lorenzo-rovigatti/oxDNA",
+  "source_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+  "source_commit_verified": true,
+  "source_tree_sha256": "b1742ce91de072c59f4b3febea97647e813b9a5bd23900465bbbf227d22a911c",
+  "cmake_argv": [
+    "cmake",
+    "-S",
+    "/home/rdpuser/nanolab/cache/oxdna-src",
+    "-B",
+    "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DDOUBLE=ON",
+    "-DCUDA=OFF",
+    "-DMPI=OFF"
+  ],
+  "build_argv": [
+    "cmake",
+    "--build",
+    "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2",
+    "--parallel",
+    "4"
+  ],
+  "cmake_cache_pins": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "DOUBLE": "ON",
+    "CUDA": "OFF",
+    "MPI": "OFF"
+  },
+  "tools": {
+    "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "gxx": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "cmake": "cmake version 3.22.1",
+    "make": "GNU Make 4.3",
+    "python3": "Python 3.10.12",
+    "git": "git version 2.34.1"
+  },
+  "build_log": "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2/build-r2-u2.log",
+  "binary": {
+    "path": "/home/rdpuser/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA",
+    "sha256": "6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78",
+    "size": 3380728
+  },
+  "binary_sha_equality_with_r1_required": false,
+  "cache_pins_verified": true,
+  "cache_pin_deviations": [],
+  "u2_context": {
+    "leg": "P-B/U2 external reproduction platform",
+    "host": "outenemy",
+    "record_kind": "U2_ENGINE_BUILD_PROVENANCE",
+    "note": "authoritative U1 build path remains r2.cli build-engine; U1 host validation NOT claimed here"
+  }
+}

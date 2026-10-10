@@ -80,10 +80,16 @@ class SystemdTransientLauncher:
 
     The argv builder is pure and unit-tested; actual execution happens only
     on a host that passed validate_native_u1 (CLI-layer guard).
+
+    ``user_manager=False`` (default) targets the system manager (unit owned
+    by PID 1). ``user_manager=True`` emits ``systemd-run --user``: the mode
+    verified working unprivileged on the U2 platform (outenemy, linger=yes);
+    see supervisor.transient_service_argv for the machine facts.
     """
 
-    def __init__(self, unit_prefix: str = "nanolab-run"):
+    def __init__(self, unit_prefix: str = "nanolab-run", user_manager: bool = False):
         self.unit_prefix = unit_prefix
+        self.user_manager = user_manager
 
     def unit_name(self, execution_id: str, attempt: str) -> str:
         safe = f"{execution_id}-{attempt}".replace("/", "-")
@@ -97,6 +103,8 @@ class SystemdTransientLauncher:
         collect: bool = True,
     ) -> list[str]:
         base = ["systemd-run"]
+        if self.user_manager:
+            base.append("--user")
         if collect:
             base.append("--collect")
         base += [f"--unit={unit}"]
