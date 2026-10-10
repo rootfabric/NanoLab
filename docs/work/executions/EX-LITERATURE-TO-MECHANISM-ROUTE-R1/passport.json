@@ -11,7 +11,7 @@
   "worktree": "GitHub connector / API-only working branch",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "IN_PROGRESS",
+  "status": "HANDOFF_READY",
   "started_at_utc": "2026-10-10T14:31:28.614Z",
   "allowed_paths": [
     "docs/ROADMAP.md",
