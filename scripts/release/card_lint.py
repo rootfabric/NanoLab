@@ -171,7 +171,19 @@ def run_rights(path: Path, schema_path: Path) -> dict[str, Any]:
 
 
 def _package_files(pkg_root: Path) -> list[Path]:
-    return sorted(p for p in pkg_root.rglob("*") if p.is_file() and p.name != MANIFEST_NAME)
+    # v0.1.2 packaging repair (WO-NL5-V012-PACKAGING-PYC-REPAIR-R1): generated
+    # CPython artifacts (__pycache__ directories, *.pyc files) must never enter
+    # a release manifest — they are platform/version-specific build residues
+    # that are not tracked in git and break fail-closed manifest verification
+    # on any fresh copy of the package.
+    return sorted(
+        p
+        for p in pkg_root.rglob("*")
+        if p.is_file()
+        and p.name != MANIFEST_NAME
+        and "__pycache__" not in p.parts
+        and p.suffix != ".pyc"
+    )
 
 
 def _role_for(rel_path: str, file_name: str) -> str:
