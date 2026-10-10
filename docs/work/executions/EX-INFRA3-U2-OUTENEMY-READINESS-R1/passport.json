@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INFRA3-U2-OUTENEMY-READINESS-R1",
+  "work_order_id": "WO-INFRA3-U2-OUTENEMY-READINESS-R1",
+  "checkpoint": "INFRA3",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "branch": "infra/u2-outenemy-executor-readiness-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-INFRA3-U2-OUTENEMY-READINESS-R1.md",
+    "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/**",
+    "docs/evidence/INFRA3-U2-READINESS/**",
+    "docs/infra/U2_OUTENEMY_EXECUTOR_READINESS_R1.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-10T15:20:17Z",
+  "status": "IN_PROGRESS"
+}
