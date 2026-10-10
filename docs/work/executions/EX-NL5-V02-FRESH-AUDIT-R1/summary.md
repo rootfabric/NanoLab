@@ -54,3 +54,31 @@ native ext4/systemd, hostname не в forbidden list, доступные кре�
 
 **Next action (единственный):** owner → выделение U1 (или явное объявление
 host out of scope); после этого — исполнение runbook §6 и HG-A.
+
+## Addendum R1 — independent review + CI (2026-10-10, append-only)
+
+```text
+fresh Reviewer verdict  = PASS (отдельная real agent session, fresh temp-dir
+                          clone; independent identity NanoLab REVIEWER)
+review branch           = review/nl5-v02-fresh-audit-r1, tip 566399143faebf7ef1
+                          a55427607065cfc416d012, base = exact subject ff199f9b
+reviewed_head / tree    = ff199f9b11ad7b5324dc1549d48048b1813db711 /
+                          6791b39f247fba65b6f091321caaeca8eb4c57ad
+claims recomputed       = 11/11 PASS (F2 identity/ancestry, D2 sequencing,
+                          R/V branch verdicts, 3 artifact digests, freeze gate
+                          PASS + negative control exit 3, N-grid N=64, 605
+                          tests, R2 honesty, scope 15/15 allowed paths, U1
+                          record consistency с live check-host reproduction)
+not reproducible        = LAN-пробы u1-host-search-R1.json (env-dependent;
+                          REVIEWER_NOT_REPRODUCIBLE, не FAIL)
+findings                = 0 blocking; m-1 minor cosmetic (check-consistency
+                          branch=null warning из detached HEAD fresh clone)
+hosted CI               = run на ff199f9b (head_sha) = SUCCESS
+verdict evidence        = docs/evidence/NL5-V02-FREEZE/FRESH_REVIEW_FRESH_AUDIT_R1.{md,json}
+integration             = reviewer branch merged --no-ff в control/nl5-v02-fresh-audit-r1;
+                          post-review Director delta = только этот addendum +
+                          косметическая правка времени тестов (58.6→~57 s)
+                          в DIRECTOR_FRESH_AUDIT_R1.md §3; научное содержание
+                          unchanged; вердикт остаётся bound к exact subject
+                          ff199f9b/6791b39f
+```

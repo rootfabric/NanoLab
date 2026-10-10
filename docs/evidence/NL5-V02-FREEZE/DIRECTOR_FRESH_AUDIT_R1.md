@@ -83,7 +83,7 @@ feasibility N-grid    = SELECTED_N = 64 (bit-exact воспроизведени�
                         сохранены) на committed R1 planning data
                         (sha256 источника 2b0df07deb62add3… зафиксирован)
                         evidence: evidence/feasibility-n-grid-audit-R1.json
-harness suite         = 605 tests OK (58.6 s) — совпадает с числом верификации F2
+harness suite         = 605 tests OK (~57 s) — совпадает с числом верификации F2
 check-consistency     = ok (branch control/nl5-v02-fresh-audit-r1)
 workflow_lint         = blocking = 0
 ```
