@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "work_order_id": "WO-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "checkpoint": "control / roadmap scientific direction",
+  "base_branch": "main",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "base_tree_sha": "0eba7b901ab9991cca6b9439df227d71a90a82df",
+  "branch": "docs/literature-to-mechanism-roadmap-r1",
+  "worktree": "GitHub connector / API-only working branch",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "IN_PROGRESS",
+  "started_at_utc": "2026-10-10T14:31:28.614Z",
+  "allowed_paths": [
+    "docs/ROADMAP.md",
+    "docs/ARCHITECTURE.md",
+    "docs/DATA_CONTRACTS.md",
+    "docs/research/SOURCES.md",
+    "docs/work/WORK_QUEUE.md",
+    "project/plan.json",
+    "config/control/harness/checkpoint-catalog.v1.json",
+    "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md",
+    "docs/work/WO-LITERATURE-TO-MECHANISM-ROUTE-R1.md",
+    "docs/work/executions/EX-LITERATURE-TO-MECHANISM-ROUTE-R1/**"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "frozen scientific evidence",
+    "physics and analysis code",
+    "scientific runs",
+    "direct main push or merge"
+  ],
+  "dependencies": [
+    "main@8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad"
+  ],
+  "resource_budget": "docs/control only; zero scientific compute",
+  "deliverables": [
+    "roadmap literature-to-mechanism R1",
+    "plan/catalog reconciliation",
+    "scoped review-ready handoff"
+  ]
+}
