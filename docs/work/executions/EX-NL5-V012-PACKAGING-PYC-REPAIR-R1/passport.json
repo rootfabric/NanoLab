@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V012-PACKAGING-PYC-REPAIR-R1",
+  "work_order_id": "WO-NL5-V012-PACKAGING-PYC-REPAIR-R1",
+  "checkpoint": "NL5",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "branch": "work/nl5-v012-packaging-pyc-repair-r1",
+  "risk_class": "LOW",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V012-PACKAGING-PYC-REPAIR-R1.md",
+    "docs/work/executions/EX-NL5-V012-PACKAGING-PYC-REPAIR-R1/**",
+    "releases/nanolab-components-v0.1.2/**",
+    "scripts/release/card_lint.py",
+    "tests/test_release_contract.py",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-10T15:38:51Z",
+  "status": "IN_PROGRESS"
+}
