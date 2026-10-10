@@ -1,0 +1,128 @@
+{
+ "kind": "r3_feasibility_n_grid",
+ "n_grid": [
+  40,
+  48,
+  64,
+  80,
+  96,
+  128
+ ],
+ "headroom_ratio": 0.8,
+ "selection_rule": "minimal grid N with ratio_decision <= 0.80 for BOTH primaries",
+ "source": "docs/work/executions/EX-NL5-002-E-R1/evidence/paired/paired_platform_sensitivity.json",
+ "source_sha256": "2b0df07deb62add319d8d12f29cde276d0288a38474760b36978f92adb953096",
+ "grid": [
+  {
+   "n": 40,
+   "variants": {
+    "0b": {
+     "half_width": 0.096231551999999,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.12364041500434719,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 1.2190514775000096,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 1.298493623106047,
+     "passes_headroom": false
+    }
+   },
+   "passes_headroom_all_variants": false
+  },
+  {
+   "n": 48,
+   "variants": {
+    "0b": {
+     "half_width": 0.096231551999999,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.12364041500434719,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 1.2190514775000096,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 1.298493623106047,
+     "passes_headroom": false
+    }
+   },
+   "passes_headroom_all_variants": false
+  },
+  {
+   "n": 64,
+   "variants": {
+    "0b": {
+     "half_width": 0.0555835887500038,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.07141501760754627,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 0.6906565430000065,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 0.7356646814301315,
+     "passes_headroom": true
+    }
+   },
+   "passes_headroom_all_variants": true
+  },
+  {
+   "n": 80,
+   "variants": {
+    "0b": {
+     "half_width": 0.014935625500008598,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.01918962021074536,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 0.16226160850000326,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 0.172835739754216,
+     "passes_headroom": true
+    }
+   },
+   "passes_headroom_all_variants": true
+  },
+  {
+   "n": 96,
+   "variants": {
+    "0b": {
+     "half_width": 0.014935625500008598,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.01918962021074536,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 0.16226160850000326,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 0.172835739754216,
+     "passes_headroom": true
+    }
+   },
+   "passes_headroom_all_variants": true
+  },
+  {
+   "n": 128,
+   "variants": {
+    "0b": {
+     "half_width": 0.014935625500008598,
+     "margin": 0.7783179310471863,
+     "ratio_decision": 0.01918962021074536,
+     "passes_headroom": true
+    },
+    "32b": {
+     "half_width": 0.16226160850000326,
+     "margin": 0.9388197645391522,
+     "ratio_decision": 0.172835739754216,
+     "passes_headroom": true
+    }
+   },
+   "passes_headroom_all_variants": true
+  }
+ ],
+ "selected_n": 64,
+ "design_infeasible_at_grid": false,
+ "note": "fresh audit re-run on canonical main 8bf7e3a; frozen bootstrap seeds from FROZEN_R2 seed record; committed planning data unchanged"
+}

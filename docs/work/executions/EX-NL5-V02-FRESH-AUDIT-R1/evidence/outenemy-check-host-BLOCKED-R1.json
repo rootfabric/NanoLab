@@ -1,0 +1,8 @@
+{
+  "status": "NOT_ELIGIBLE",
+  "hostname": "outenemy",
+  "eligible": false,
+  "reasons": [
+    "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)"
+  ]
+}
