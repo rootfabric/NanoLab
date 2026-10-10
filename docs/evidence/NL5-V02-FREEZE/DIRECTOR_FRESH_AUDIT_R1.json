@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "record_kind": "DIRECTOR_FRESH_AUDIT",
+  "issuer_class": "DIRECTOR",
+  "record_id": "NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1",
+  "audit_date": "2026-10-10",
+  "base_main_head": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "base_main_tree": "0eba7b901ab9991cca6b9439df227d71a90a82df",
+  "audit_branch": "control/nl5-v02-fresh-audit-r1",
+  "execution_id": "EX-NL5-V02-FRESH-AUDIT-R1",
+  "work_order_id": "WO-NL5-V02-FRESH-AUDIT-R1",
+  "chain_verdict": "INTACT",
+  "chain": {
+    "hg_b": {
+      "record": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.md",
+      "decision": "APPROVED",
+      "decision_id": "NL5-ACCEPTANCE-POLICY/HG-B/R1"
+    },
+    "frozen_package_f2": {
+      "head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "in_main_history": true
+    },
+    "director_freeze_r2": {
+      "commit": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d",
+      "strict_descendant_of_f2": true
+    },
+    "fresh_reviewer": {
+      "verdict": "PASS",
+      "branch": "review/nl5-v02-frozen-r2-scientific-review-r1",
+      "tip": "d63eb5c088133f92ebd20501835a159cc3e4b865",
+      "reviewed_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "reviewed_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "tip_descendant_of_f2": true
+    },
+    "fresh_verifier": {
+      "verdict": "VERIFIED",
+      "branch": "verify/nl5-v02-frozen-r2-r1",
+      "tip": "f12d0b497cb28a2f18476ded90b4b1bd079bb414",
+      "verified_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "verified_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "tip_descendant_of_f2": true
+    },
+    "missing_lifecycle_element": "A (dispatch authority schema v3) — requires r2_record with R2 ACTIVE; cannot exist before activation",
+    "frozen_artifacts": {
+      "protocol": {
+        "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+        "git_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+        "canonical_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d"
+      },
+      "contract": {
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+        "git_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "canonical_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a"
+      },
+      "seed_record": {
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+        "git_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "canonical_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+      },
+      "digest_cross_check": "MATCH Director FREEZE R2 record + FRESH_VERIFIER_R2 (recomputed from Git blob bytes at F2 in this session)"
+    }
+  },
+  "machine_gates": {
+    "freeze_contract_gate": {
+      "result": "PASS",
+      "validation_stage": "PREFREEZE_VALIDATION_PASS",
+      "dispatch": "DISPATCH_BLOCKED",
+      "pinned_scan_rerun": true,
+      "evidence": "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/frozen-gate-PASS-audit-R1.json"
+    },
+    "feasibility_n_grid": {
+      "result": "PASS",
+      "selected_n": 64,
+      "ratios_at_64": {"0b": 0.071, "32b": 0.736},
+      "headroom": 0.8,
+      "reproduction": "bit-exact vs protocol §10.1 on committed R1 planning data",
+      "evidence": "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/feasibility-n-grid-audit-R1.json"
+    },
+    "harness": {
+      "unit_tests": "605 OK",
+      "check_consistency": "ok",
+      "workflow_lint_blocking": 0
+    }
+  },
+  "r2_probe": {
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "r2_activated": false,
+    "author_u1": "NOT_ASSIGNED",
+    "check_host_outenemy": "NOT_ELIGIBLE (hostname forbidden: EXTERNAL_U2_ONLY)",
+    "u1_search_conclusion": "NO eligible independent native Ubuntu host reachable with available credentials",
+    "blocker": "HARD_BLOCKER_U1_NOT_AVAILABLE",
+    "minimum_owner_action": "provision/designate one independent native Ubuntu host (never outenemy, never VM/LXD on outenemy) and publish its SSH access",
+    "evidence": [
+      "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json",
+      "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/outenemy-check-host-BLOCKED-R1.json",
+      "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/r2-activation-decision-WAITING_HOST-audit-R1.json",
+      "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/outenemy-fingerprint-audit-R1.json"
+    ]
+  },
+  "activation_readiness": {
+    "tooling": "scripts/r2/* merged in main; 605-test suite green",
+    "machine_contract": "config/infra/r2-activation.v1.json (engine pin 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591; CPU/DOUBLE=ON/CUDA=OFF/MPI=OFF)",
+    "frozen_science_package": "F2 verified fresh (see chain)",
+    "campaign_work_orders_declared": ["EX-NL5-REPRO-V0-2-U1-R1", "EX-NL5-REPRO-V0-2-U2-R1"],
+    "runbook": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.md §6"
+  },
+  "boundaries": {
+    "scientific_runs": 0,
+    "canonical_status_changes": "NONE",
+    "nl5": "IN_PROGRESS",
+    "nl6_001": "LOCKED",
+    "external_reproductions": 0,
+    "machine_launch_authorized": false,
+    "historical_terminals_untouched": ["NL5-002 MISMATCH", "PLATFORM_INSENSITIVE"]
+  }
+}

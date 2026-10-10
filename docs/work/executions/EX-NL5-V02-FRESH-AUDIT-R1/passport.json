@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-V02-FRESH-AUDIT-R1",
+  "work_order_id": "WO-NL5-V02-FRESH-AUDIT-R1",
+  "checkpoint": "NL5",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "branch": "control/nl5-v02-fresh-audit-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-NL5-V02-FRESH-AUDIT-R1.md",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/**",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.json",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "started_at_utc": "2026-10-10T12:57:55Z",
+  "status": "HANDOFF_COMPLETED"
+}

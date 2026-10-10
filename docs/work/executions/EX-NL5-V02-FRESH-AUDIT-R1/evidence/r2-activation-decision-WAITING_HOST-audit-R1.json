@@ -1,0 +1,23 @@
+{
+ "r2_activated": false,
+ "r2_status": "WAITING_HOST / NOT_ACTIVE",
+ "author_u1": "NOT_ASSIGNED",
+ "unmet": [
+  "gate U1=WAITING_HOST",
+  "gate U2=WAITING_HOST",
+  "gate U3=WAITING_HOST",
+  "gate U4=WAITING_HOST",
+  "gate U5=WAITING_HOST",
+  "gate NC-U1=WAITING_HOST",
+  "gate NC-U2=WAITING_HOST",
+  "gate NC-U3=WAITING_HOST",
+  "gate NC-U4=WAITING_HOST",
+  "gate NC-U5=WAITING_HOST",
+  "fingerprint native-U1 invalid: hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)",
+  "fresh review verdict None != PASS",
+  "fresh verify verdict None != VERIFIED",
+  "human gate not approved"
+ ],
+ "decided_utc": "2026-10-10T13:00:24Z",
+ "tooling_version": "r2-activation-r1"
+}
