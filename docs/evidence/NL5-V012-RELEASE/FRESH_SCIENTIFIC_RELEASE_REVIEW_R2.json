@@ -1,0 +1,98 @@
+{
+  "record_kind": "REVIEWER_VERDICT",
+  "issuer_class": "INDEPENDENT_REVIEWER",
+  "verdict": "PASS",
+  "reviewed_head": "998878236a1f06995f837ba1dac583eee3a68f0e",
+  "reviewed_tree": "c8fabd597a9adac87bbb5c9b39a695e202c65a62",
+  "reviewed_branch": "work/nl5-v012-packaging-pyc-repair-r1",
+  "base_head": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "merge_base": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "claim_ceiling": "PACKAGING_ONLY_NO_SCIENTIFIC_CLAIMS",
+  "findings": [
+    {
+      "id": "m-1",
+      "severity": "minor",
+      "blocking": false,
+      "summary": "summary.md R1 section still states 'RIGHTS byte-identical / 5 packaging surfaces'; superseded by the append-only R2 addendum in the same file; machine artifacts consistent (event 0004, WORK_QUEUE R2 update, evidence R2)."
+    }
+  ],
+  "gates": {
+    "r1_defect_reproduction_v011_verify": {
+      "method": "git archive 8bf7e3a -> fresh tmp -> reproduce.py verify",
+      "exit_code": 3,
+      "expected": "exit 3, exactly 7 __pycache__/*.pyc missing-file errors",
+      "ok": true
+    },
+    "card_lint_choke_point": {
+      "package_files_used_by": ["manifest_create", "manifest_verify"],
+      "excludes": ["__pycache__ dirs", "*.pyc files"],
+      "regression_tests_added": 3,
+      "ok": true
+    },
+    "version_surfaces": {
+      "v0_1_0": {"VERSION": "0.1.0", "RIGHTS": "0.1.0", "manifest": "0.1.0", "consistent": true},
+      "v0_1_1": {"VERSION": "0.1.1", "RIGHTS": "0.1.0", "manifest": "0.1.1", "stale_rights_diagnosis": true, "tree_identical_base_vs_head": true},
+      "v0_1_2": {"VERSION": "0.1.2", "RIGHTS": "0.1.2", "manifest": "0.1.2", "consistent": true},
+      "ok": true
+    },
+    "manifest_idempotence": {
+      "method": "manifest create into temp copy of releases/nanolab-components-v0.1.2 + byte compare",
+      "regenerated_sha256": "567314026bd1b2157cddd9b3831a5990cdad0862b0a15c0f22004c6c9e0f122b",
+      "committed_sha256": "567314026bd1b2157cddd9b3831a5990cdad0862b0a15c0f22004c6c9e0f122b",
+      "files": 35,
+      "delta_vs_r1_manifest": {"changed_entries": 1, "path": "RIGHTS.json", "sha256_before": "5292781ac4448112b3f3ecdaa47aede3f6539f8a68c357808e28dc896fa9bebf", "sha256_after": "a4650b970aeba60ed410a1dfe0964433df67799ba949cfe2606e7a8f7b9edc03"},
+      "ok": true
+    },
+    "version_surface_tests": {"class": "tests.test_release_contract.TestReleaseVersionSurfacesConsistency", "tests": 4, "result": "OK", "ok": true},
+    "science_byte_identity_v011_vs_v012": {
+      "method": "independent sha256 per-file tree comparison, excluding __pycache__/*.pyc",
+      "files_v011": 36,
+      "files_v012": 36,
+      "file_sets_identical": true,
+      "changed_surfaces": ["VERSION", "README.md", "CITATION.cff", "reproduction/README.md", "RELEASE_MANIFEST.json", "RIGHTS.json"],
+      "changed_count": 6,
+      "identical_count": 30,
+      "scientific_surfaces": {"total": 27, "changed": 0, "prefixes": ["families/", "convention/", "schema/", "reports/", "provenance/"]},
+      "ok": true
+    },
+    "fresh_export_self_test": {
+      "method": "git archive --format=tar 9988782 -> clean tmp -> reproduce.py self-test",
+      "exit_code": 0,
+      "verify_files": 35,
+      "verify_errors": 0,
+      "plans": 5,
+      "rights_package_version_in_export": "0.1.2",
+      "ok": true
+    },
+    "card_lint_package": {"exit_code": 0, "ok": true, "warnings": 0},
+    "card_lint_manifest_verify": {"exit_code": 0, "ok": true, "files": 35},
+    "full_unittest_suite": {"command": "python3 -m unittest discover -s tests -t .", "tests": 612, "result": "OK", "exit_code": 0},
+    "work_cli_validate_subject_ex": {"exit_code": 0, "status": "HANDOFF_COMPLETED", "has_post_terminal_corrections": true, "ok": true},
+    "check_consistency": {"exit_code": 0, "ok": true, "errors": 0, "warnings": 0, "echo_head": "998878236a1f06995f837ba1dac583eee3a68f0e", "echo_tree": "c8fabd597a9adac87bbb5c9b39a695e202c65a62"},
+    "workflow_lint": {"exit_code": 0, "ok": true, "blocking": 0},
+    "work_cli_validate_all_executions": {"directories": 52, "failures": 0, "ok": true},
+    "governance_post_terminal_corrections": {
+      "terminal_event": "0003-handoff-completed.json (HANDOFF_COMPLETED, 2026-10-10T15:45:00Z)",
+      "correction_event": "0004-continuation-rights-version-delta-r2.json (CONTINUATION_CHECKPOINT, 2026-10-11T13:06:00Z)",
+      "correction_after_terminal": true,
+      "events_0001_0003_blob_identical_to_3b3de38": true,
+      "work_cli_corrections_class_accepts": true,
+      "ok": true
+    },
+    "boundaries": {
+      "frozen_r2_blobs_unchanged": {
+        "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md": "4835719622bae49a8e8b480536a482b4b222d408",
+        "EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+      },
+      "project_state_json_unchanged": true,
+      "project_infra_state_json_unchanged": true,
+      "diff_scope": ["releases/nanolab-components-v0.1.2 (new package copy)", "docs/work (WO/WORK_QUEUE/EX record)", "scripts/release/card_lint.py", "tests/test_release_contract.py"],
+      "raw_data_or_engine_residue_in_diff": false,
+      "ok": true
+    }
+  },
+  "scientific_runs": 0,
+  "fresh_clone_statement": "Reviewed in a brand-new clone /tmp/review-v012-r2/clone created this session from the local origin /home/rdpuser/NanoLab/.git-store/repo.git with a fresh 'git fetch origin --prune'; no pre-existing worktrees reused; all numbers recomputed independently.",
+  "timestamp_utc": "2026-10-11T12:00:06Z"
+}
