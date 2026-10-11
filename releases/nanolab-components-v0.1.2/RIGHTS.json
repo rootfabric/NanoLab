@@ -28,7 +28,7 @@
   "own_code_license": "Apache-2.0",
   "own_docs_data_license": "CC-BY-4.0",
   "package": "nanolab-components",
-  "package_version": "0.1.0",
+  "package_version": "0.1.2",
   "policy": {
     "download_on_run": true,
     "durable_cache": "FORBIDDEN"

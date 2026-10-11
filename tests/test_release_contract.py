@@ -121,6 +121,82 @@ class TestPackageFilesExcludesGeneratedArtifacts(ReleaseContractTestBase):
         self.assertEqual(manifest["package_version"], "0.1.2")
 
 
+class TestReleaseVersionSurfacesConsistency(unittest.TestCase):
+    """RIGHTS.package_version must never silently disagree with VERSION.
+
+    R2 correction of EX-NL5-V012-PACKAGING-PYC-REPAIR-R1 (owner mission
+    «NL5 U2 Integration & Narrow Repair», step 2.2): RIGHTS.json carried
+    ``package_version = "0.1.0"`` in releases whose VERSION already said
+    0.1.1 / 0.1.2 — stale metadata inherited from the v0.1.0 original by the
+    bounded v0.1.1 repair copy and then by the v0.1.2 copy. Nothing used to
+    check the RIGHTS<->VERSION surface (the rights schema validates only the
+    semver FORMAT; manifest_verify checks manifest<->VERSION only), so the
+    ambiguity was machine-undetectable. Semantics fixed here:
+
+    - the CURRENT release surface (nanolab-components-v0.1.2) must be fully
+      consistent: VERSION == RIGHTS.package_version == manifest.package_version;
+    - the immutable HISTORICAL releases are pinned to their exact published
+      metadata state: v0.1 (0.1.0, consistent) and v0.1.1 (RIGHTS stays
+      "0.1.0" — the documented stale-metadata fact of that immutable release;
+      any silent drift of the historical bytes fails this test);
+    - every release directory must satisfy manifest.package_version == VERSION
+      (the invariant already enforced by card_lint.manifest_verify).
+    """
+
+    RELEASES = ROOT / "releases"
+
+    def _release(self, name: str) -> Path:
+        pkg = self.RELEASES / name
+        if not pkg.is_dir():
+            self.skipTest(f"{name} not present in this checkout")
+        return pkg
+
+    def _version(self, pkg: Path) -> str:
+        return (pkg / "VERSION").read_text(encoding="utf-8").strip()
+
+    def test_v012_all_version_surfaces_agree(self) -> None:
+        pkg = self._release("nanolab-components-v0.1.2")
+        version = self._version(pkg)
+        rights = load(pkg / "RIGHTS.json")
+        manifest = load(pkg / card_lint.MANIFEST_NAME)
+        self.assertEqual(version, "0.1.2")
+        self.assertEqual(rights["package_version"], version)
+        self.assertEqual(manifest["package_version"], version)
+
+    def test_v010_release_was_fully_consistent(self) -> None:
+        pkg = self._release("nanolab-components-v0.1")
+        version = self._version(pkg)
+        self.assertEqual(version, "0.1.0")
+        self.assertEqual(load(pkg / "RIGHTS.json")["package_version"], version)
+        self.assertEqual(load(pkg / card_lint.MANIFEST_NAME)["package_version"], version)
+
+    def test_v011_historical_stale_rights_pin_is_immutable(self) -> None:
+        # v0.1.1 is an immutable historical release: its stale
+        # RIGHTS.package_version = "0.1.0" is a documented fact (WO-NL5-V012
+        # R2 correction evidence), NOT a license/rights statement that may be
+        # quietly edited later. Pin it exactly.
+        pkg = self._release("nanolab-components-v0.1.1")
+        self.assertEqual(self._version(pkg), "0.1.1")
+        rights = load(pkg / "RIGHTS.json")
+        self.assertEqual(
+            rights["package_version"],
+            "0.1.0",
+            "v0.1.1 is immutable; its stale RIGHTS.package_version pin must not "
+            "drift silently (see EX-NL5-V012-PACKAGING-PYC-REPAIR-R1 R2 correction)",
+        )
+
+    def test_every_release_manifest_version_matches_version_file(self) -> None:
+        for pkg in sorted(self.RELEASES.glob("nanolab-components-*")):
+            if not (pkg / "VERSION").is_file() or not (pkg / card_lint.MANIFEST_NAME).is_file():
+                continue
+            manifest = load(pkg / card_lint.MANIFEST_NAME)
+            self.assertEqual(
+                manifest["package_version"],
+                self._version(pkg),
+                f"{pkg.name}: manifest package_version must equal VERSION",
+            )
+
+
 class TestCardSchema(ReleaseContractTestBase):
     def test_valid_examples_pass(self) -> None:
         for path in (CARD_0B, CARD_74B):
