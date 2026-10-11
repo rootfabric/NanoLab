@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "record_kind": "VERIFIER_VERDICT",
+  "issuer_class": "INDEPENDENT_VERIFIER",
+  "record_id": "NL5-V02-FRESH-AUDIT/DELTA_VERIFY_R1",
+  "verdict": "VERIFIED",
+  "verified_head": "483f9a2baf34eb5f9e73fc85f07866df0a0e74d9",
+  "verified_tree": "bf5d23a655c1c32d7ade44a4f365e664b2a062ce",
+  "verify_branch": "verify/nl5-v02-fresh-audit-delta-r1",
+  "subject_under_delta": {
+    "audit_subject_head": "ff199f9b11ad7b5324dc1549d48048b1813db711",
+    "audit_subject_tree": "6791b39f247fba65b6f091321caaeca8eb4c57ad",
+    "review_tip": "566399143faebf7ef1a55427607065cfc416d012",
+    "integration_merge": "2934e61e24714710f1560557518138f4c5fffed5",
+    "base_main_head": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+    "reviewer_verdict": "PASS",
+    "review_binding_confirmed": true
+  },
+  "delta_summary": {
+    "range": "ff199f9b11ad7b5324dc1549d48048b1813db711..483f9a2baf34eb5f9e73fc85f07866df0a0e74d9",
+    "files_changed": 4,
+    "insertions": 167,
+    "deletions": 1,
+    "strictly_review_integration_only": true,
+    "files": [
+      {
+        "path": "docs/evidence/NL5-V02-FREEZE/FRESH_REVIEW_FRESH_AUDIT_R1.json",
+        "status": "ADDED",
+        "delta_lines": 95,
+        "classification": "reviewer verdict file"
+      },
+      {
+        "path": "docs/evidence/NL5-V02-FREEZE/FRESH_REVIEW_FRESH_AUDIT_R1.md",
+        "status": "ADDED",
+        "delta_lines": 43,
+        "classification": "reviewer verdict file"
+      },
+      {
+        "path": "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/summary.md",
+        "status": "MODIFIED",
+        "delta_lines": 28,
+        "classification": "append-only summary addendum"
+      },
+      {
+        "path": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.md",
+        "status": "MODIFIED",
+        "delta_lines": 1,
+        "classification": "cosmetic test-timing fix (58.6 s -> ~57 s; 605 OK unchanged; no audit claim/number changed)"
+      }
+    ],
+    "code_changed": false,
+    "schemas_changed": false,
+    "frozen_artifacts_touched": false,
+    "project_state_touched": false
+  },
+  "gates": {
+    "pins_and_ancestry": {
+      "result": "PASS",
+      "head_revparse": "483f9a2baf34eb5f9e73fc85f07866df0a0e74d9",
+      "head_tree_revparse": "bf5d23a655c1c32d7ade44a4f365e664b2a062ce",
+      "ff199f9b_tree": "6791b39f247fba65b6f091321caaeca8eb4c57ad",
+      "ff199f9b_is_ancestor_of_head": true,
+      "merge_base_with_main": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+      "merge_base_equals_main": true,
+      "review_tip_5663991_is_ancestor_of_head": true
+    },
+    "unittest_discover": {
+      "result": "PASS",
+      "command": "python3 -m unittest discover -s tests -t .",
+      "tests": 605,
+      "outcome": "OK",
+      "duration_s": 55.672,
+      "exit_code": 0
+    },
+    "work_cli_validate_audit_execution": {
+      "result": "PASS",
+      "ok": true,
+      "status": "HANDOFF_COMPLETED",
+      "has_post_terminal_corrections": false,
+      "exit_code": 0
+    },
+    "check_consistency": {
+      "result": "PASS",
+      "ok": true,
+      "errors": 0,
+      "warnings": 0,
+      "head": "483f9a2baf34eb5f9e73fc85f07866df0a0e74d9",
+      "tree": "bf5d23a655c1c32d7ade44a4f365e664b2a062ce",
+      "exit_code": 0
+    },
+    "workflow_lint": {
+      "result": "PASS",
+      "ok": true,
+      "workflows": 1,
+      "violations": 0,
+      "blocking": 0
+    },
+    "work_cli_validate_all_executions": {
+      "result": "PASS",
+      "total_ex_dirs": 52,
+      "failures": 0
+    },
+    "frozen_artifacts_blob_identity": {
+      "result": "PASS",
+      "identical_across": ["ff199f9b", "483f9a2b", "main 8bf7e3a"],
+      "blobs": {
+        "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md": "4835719622bae49a8e8b480536a482b4b222d408",
+        "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+      },
+      "project_state_blob": "b819755783119ecc56be50cab1bc736c09c85b24",
+      "project_infra_state_blob": "5056b8f539d51ddb0e3b6a3d33c931b91e29885d",
+      "project_state_identical_to_main": true
+    },
+    "canonical_statuses": {
+      "result": "PASS",
+      "r2": "WAITING_HOST / NOT_ACTIVE",
+      "r2_activated": false,
+      "author_u1": "NOT_ASSIGNED",
+      "nl5": "IN_PROGRESS",
+      "nl6_001": "LOCKED",
+      "scientific_runs": 0,
+      "external_reproductions": 0,
+      "machine_launch_authorized": false,
+      "canonical_status_changes": "NONE",
+      "activation_language_found": false
+    },
+    "negative_control_check_host": {
+      "result": "PASS",
+      "host": "outenemy",
+      "status": "NOT_ELIGIBLE",
+      "reason": "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)",
+      "read_only": true
+    }
+  },
+  "conclusion": "Post-review delta ff199f9b..483f9a2b contains only review-integration material (reviewer verdict files, append-only summary addendum, one cosmetic test-timing line). No reviewed claim, frozen artifact, schema, code file or canonical status is touched; all machine gates independently re-pass on the integration subject 483f9a2b. Prior fresh-review PASS stands for the integration subject.",
+  "scientific_runs": 0,
+  "boundaries_respected_by_this_verification": {
+    "science_started": false,
+    "main_touched": false,
+    "force_push": false,
+    "repairs_performed": false,
+    "merges_performed": false,
+    "paid_services": false
+  },
+  "timestamp_utc": "2026-10-11T11:56:29Z"
+}
