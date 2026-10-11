@@ -106,7 +106,12 @@ def resolve_engine_binary(build_dir: Path, binary_name: str = "oxdna") -> Path:
     in ``<build>/bin`` with engine-cased names (``bin/oxDNA``, ``bin/DNAnalysis``,
     ``bin/confGenerator``); older layouts placed ``oxdna`` at the build root.
     Resolution order: ``<build>/<name>``, then ``<build>/bin/<name>``, then a
-    single deterministic case-insensitive name match inside ``<build>/bin``.
+    single case-insensitive name match inside ``<build>/bin``.
+
+    Tooling-repair R1 (EX-INFRA3-R2-TOOLING-REPAIR-R1, F-4): ambiguous
+    case-insensitive matches (e.g. ``oxDNA`` and ``oxdna`` both present) are a
+    fail-closed refusal, never an arbitrary first-file choice — a silently
+    picked binary would poison the provenance digest.
     """
     candidates = [build_dir / binary_name, build_dir / "bin" / binary_name]
     for candidate in candidates:
@@ -117,6 +122,12 @@ def resolve_engine_binary(build_dir: Path, binary_name: str = "oxdna") -> Path:
         matches = sorted(
             path for path in bin_dir.iterdir() if path.is_file() and path.name.lower() == binary_name.lower()
         )
+        if len(matches) > 1:
+            raise FileNotFoundError(
+                f"ambiguous case-insensitive engine binary matches in {bin_dir}: "
+                f"{[match.name for match in matches]}; refusing to pick one "
+                "(fail-closed: provenance must bind exactly one binary)"
+            )
         if matches:
             return matches[0]
     raise FileNotFoundError(

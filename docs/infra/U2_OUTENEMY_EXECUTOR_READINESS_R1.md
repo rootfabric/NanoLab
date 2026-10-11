@@ -186,6 +186,24 @@ R-4  release packaging pyc finding (§4) — подготовлен ОТДЕЛЬ
 Все ремонты — tooling/infrastructure; научное содержание frozen package F2,
 протокола и seed record не затронуто (0 scientific leaves).
 
+**ДОПОЛНЕНИЕ R2 (2026-10-11, append-only; tooling-repair
+`EX-INFRA3-R2-TOOLING-REPAIR-R1`):**
+
+```text
+SCOPE-REPAIR
+     правки F-1/F-2/F-3 (scripts/r2/*, tests/*) выполнены в этой ветке, но
+     остались вне docs-only allowed_paths родительского паспорта; по решению
+     владельца (mission шаг 1.2) расхождение закрыто самостоятельным bounded
+     WO-INFRA3-R2-TOOLING-REPAIR-R1 на ЭТОЙ ЖЕ ветке (история и START
+     checkpoint родителя сохранены, append-only).
+F-4  resolve_engine_binary: неоднозначные case-insensitive совпадения в
+     <build>/bin (например oxDNA + OXDNA) теперь fail-closed отказ
+     (FileNotFoundError с перечнем совпадений), а не произвольный выбор
+     первого файла — provenance обязан связывать ровно один binary; +3 теста.
+U2-DISPATCH-PATH
+     новый отдельный executor path `r2.cli run-u2` — см. §11.
+```
+
 ## 9. Что осталось для запуска кампании U2 (не в этом WO)
 
 ```text
@@ -211,3 +229,53 @@ R-4  release packaging pyc finding (§4) — подготовлен ОТДЕЛЬ
 паролей нет), прочие LAN-узлы без открытых портов — по ранее опубликованному
 inventory. Роль U1/U2 закреплена FROZEN-политикой и не переносится без
 нового протокольного решения.
+
+## 11. U2 executor path `run-u2` (tooling-repair R1, 2026-10-11; полномочия НЕ повышает)
+
+Отдельный безопасный executor path для БУДУЩЕГО U2-dispatch подготовлен и
+машинно проверен на disposable технических fixtures (0 scientific runs).
+`r2.cli run` (U1-only) НЕ ослаблен: на этой машине он по-прежнему отказывает
+(BLOCKED_HOST, exit 2 — hostname forbidden as author host).
+
+```text
+команда            = r2.cli run-u2 --spec S --ledger L [--launcher direct|systemd-user]
+host-role gate     = validate_u2_host: hostname ОБЯЗАН быть закреплённой U2-
+                     платформой (PINNED_U2_HOSTNAMES, case-insensitive),
+                     тот же native platform floor (Linux/virt=none/не-WSL/
+                     native fs/systemd), host обязан оставаться НЕ-U1-eligible;
+                     неизвестный hostname = fail-closed (BLOCKED_HOST_U2, exit 2)
+dispatch authority = ОБЯЗАТЕЛЬНА: без --dispatch-authority →
+                     BLOCKED_NO_DISPATCH_AUTHORITY (exit 3); с ней — полная
+                     schema-v3 валидация nanolab_v02_dispatch_authority
+                     (Git-bound lifecycle S -> F -> D/R/V -> A, rerun-scan)
+launch gate        = machine_launch_authorized всегда false; не-fixture план
+                     НИКОГДА не исполняется (BLOCKED_LAUNCH_GATE_PROTECTED_
+                     WRITER, exit 3) — настоящий launch gate остаётся внешним
+                     Human/Protected-Writer, CLI его не подменяет
+fixture ceiling    = исполняются ТОЛЬКО synthetic_test_fixture_only планы;
+                     spec обязан иметь fixture:true; execution id замороженной
+                     кампании (EX-NL5-REPRO-V0-2*) — жёсткий отказ
+ledger             = append-only, scientific_outcome = NOT_EVALUATED всегда
+```
+
+Машинные пробы на ЭТОЙ машине (native fingerprint outenemy, без инъекций;
+disposable /tmp fixtures, синтетический Git-репозиторий с fixture-authority
+S → F → R/V → A по образцу tests/test_nl5_v02_prefreeze_r4.py):
+
+```text
+e2e happy path      = exit 0, RECORDED, technical_outcome COMPLETED,
+                      scientific_outcome NOT_EVALUATED, attempt T001 в ledger,
+                      dispatch.synthetic_test_fixture_only=true,
+                      dispatch.machine_launch_authorized=false
+negative control 1  = без --dispatch-authority → exit 3,
+                      BLOCKED_NO_DISPATCH_AUTHORITY, ledger НЕ создан
+negative control 2  = r2.cli run (U1-only) на outenemy → exit 2 BLOCKED_HOST
+                      (U1 guard не ослаблен)
+negative control 3  = run-u2 на не-pinned hostname → exit 2 BLOCKED_HOST_U2
+                      (unit-тест; на hosted CI это основной маршрут)
+```
+
+Статус НЕ меняется: путь ПОДГОТОВЛЕН, но реальный U2-leg кампании остаётся
+ЗАКРЫТ до R2 ACTIVE + real dispatch authority (schema v3, не fixture) + Human
+Protected Writer Gate. Регрессионное покрытие: 630 tests OK на этой машине
+(612 до ремонта + 18 новых: F-4 ×3, validate_u2_host ×7, run-u2 ×8).
