@@ -1,0 +1,21 @@
+{
+  "kind": "r4_freeze_contract_gate",
+  "contract_revision": "r4",
+  "gate": "PASS",
+  "failures": [],
+  "validation_stage": "PREFREEZE_VALIDATION_PASS",
+  "freeze_status": "FROZEN",
+  "dispatch_ready": false,
+  "dispatch": "DISPATCH_BLOCKED",
+  "dispatch_blockers": [
+    "no validated nanolab_v02_dispatch_authority object was supplied (Director FREEZE record + HG-B APPROVED + review PASS + verify VERIFIED + R2 ACTIVE with both executor legs authorized)"
+  ],
+  "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+  "budget": {
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560
+  },
+  "frozen_declared": true
+}
