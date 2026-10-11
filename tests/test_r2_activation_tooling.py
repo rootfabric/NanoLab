@@ -7,8 +7,11 @@ no network, no oxDNA build, no scientific runs.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import os
+import socket
 import subprocess
 import sys
 import tempfile
@@ -28,7 +31,7 @@ from r2.contract import (
     next_attempt_id,
     sha256_file,
 )
-from r2.executor import DirectLauncher, RunExecutor, RunSpec
+from r2.executor import DirectLauncher, RunExecutor, RunSpec, SystemdTransientLauncher
 from r2.fingerprint import (
     collect_fingerprint,
     fingerprint_markdown,
@@ -36,6 +39,7 @@ from r2.fingerprint import (
     parse_root_filesystem,
     parse_virtualization,
     validate_native_u1,
+    validate_u2_host,
 )
 from r2.gates import GateError, GateReport, activation_decision
 from r2.supervisor import (
@@ -339,6 +343,34 @@ class SupervisorTest(unittest.TestCase):
         self.assertIn("--scope", argv)
         self.assertEqual(argv[-1], "./engine")
 
+    def test_transient_service_argv_user_manager(self):
+        # U2 readiness R1: unprivileged user-manager mode is explicit opt-in.
+        argv = transient_service_argv("nanolab-run-u2", ["./engine"], user_manager=True)
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--unit=nanolab-run-u2", argv)
+        default_argv = transient_service_argv("nanolab-run-u2", ["./engine"])
+        self.assertNotIn("--user", default_argv)
+
+    def test_scope_argv_user_manager(self):
+        argv = scope_argv("nanolab-scope-u2", ["./engine"], user_manager=True)
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--scope", argv)
+        self.assertNotIn("--user", scope_argv("nanolab-scope-u2", ["./engine"]))
+
+    def test_systemd_transient_launcher_user_manager_argv(self):
+        launcher = SystemdTransientLauncher(unit_prefix="nanolab-run", user_manager=True)
+        argv = launcher.argv("nanolab-run-ex-1-a0", ["./engine"], working_directory=Path("/tmp/w"))
+        self.assertEqual(argv[0], "systemd-run")
+        self.assertEqual(argv[1], "--user")
+        self.assertIn("--collect", argv)
+        self.assertIn("--unit=nanolab-run-ex-1-a0", argv)
+        self.assertIn("--wait", argv)
+        self.assertIn("--pipe", argv)
+        plain = SystemdTransientLauncher().argv("u", ["./engine"])
+        self.assertNotIn("--user", plain)
+
     def test_parse_is_active(self):
         self.assertTrue(parse_is_active({"returncode": 0, "stdout": "active\n"}))
         self.assertFalse(parse_is_active({"returncode": 3, "stdout": "inactive\n"}))
@@ -476,7 +508,7 @@ class EngineBuildTest(unittest.TestCase):
             self.assertIn(flag, argv)
 
     def test_cache_pin_verification(self):
-        cache = "\n".join(f"{key}:={value}" for key, value in (
+        cache = "\n".join(f"{key}:BOOL={value}" for key, value in (
             ("CMAKE_BUILD_TYPE", "Release"), ("DOUBLE", "ON"), ("CUDA", "OFF"), ("MPI", "OFF"),
             ("NATIVE_COMPILATION", "ON"), ("JSON_ENABLED", "ON"),
         ))
@@ -487,6 +519,29 @@ class EngineBuildTest(unittest.TestCase):
         ok, deviations = engine_build.verify_cache_pins(values)
         self.assertFalse(ok)
         self.assertTrue(any("CUDA" in item for item in deviations))
+
+    def test_parse_cmake_cache_real_format(self):
+        # U2 readiness R1 (outenemy): real CMakeCache lines are KEY:TYPE=VALUE;
+        # the synthetic KEY:=VALUE grammar returned {} on an actual build.
+        cache = (
+            "# This is the CMakeCache file.\n"
+            "// For build in directory: /build\n"
+            "\n"
+            "CMAKE_BUILD_TYPE:STRING=Release\n"
+            "DOUBLE:BOOL=ON\n"
+            "CUDA:BOOL=OFF\n"
+            "MPI:BOOL=OFF\n"
+            "CUDA_DOUBLE:BOOL=OFF\n"
+            "CMAKE_CXX_COMPILER:PATH=/usr/bin/c++\n"
+        )
+        values = engine_build.parse_cmake_cache(cache)
+        self.assertEqual(values.get("CMAKE_BUILD_TYPE"), "Release")
+        self.assertEqual(values.get("DOUBLE"), "ON")
+        self.assertEqual(values.get("CUDA"), "OFF")
+        self.assertEqual(values.get("MPI"), "OFF")
+        self.assertEqual(values.get("CUDA_DOUBLE"), "OFF")
+        ok, deviations = engine_build.verify_cache_pins(values)
+        self.assertTrue(ok, deviations)
 
     def test_cache_missing_pin_detected(self):
         ok, deviations = engine_build.verify_cache_pins({"CMAKE_BUILD_TYPE": "Release"})
@@ -514,7 +569,7 @@ class EngineBuildTest(unittest.TestCase):
             build_dir.mkdir()
             (build_dir / "oxdna").write_bytes(b"\x7fELF-fake-binary")
             (build_dir / "CMakeCache.txt").write_text(
-                "CMAKE_BUILD_TYPE:=Release\nDOUBLE:=ON\nCUDA:=OFF\nMPI:=OFF\n",
+                "CMAKE_BUILD_TYPE:STRING=Release\nDOUBLE:BOOL=ON\nCUDA:BOOL=OFF\nMPI:BOOL=OFF\n",
                 encoding="utf-8",
             )
             record = engine_build.provenance_record(
@@ -540,6 +595,37 @@ class EngineBuildTest(unittest.TestCase):
             )
             self.assertEqual(verified["source_commit"], engine_build.ENGINE_PINNED_COMMIT)
             self.assertTrue(verified["source_commit_verified"])
+
+    def test_resolve_engine_binary_prefers_build_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "oxdna").write_bytes(b"\x7fELF-root")
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "oxDNA").write_bytes(b"\x7fELF-bin")
+            resolved = engine_build.resolve_engine_binary(build_dir)
+            self.assertEqual(resolved, build_dir / "oxdna")
+            self.assertEqual(engine_build.binary_digest(build_dir)["sha256"], engine_build.sha256_file(build_dir / "oxdna"))
+
+    def test_resolve_engine_binary_finds_cased_bin_layout(self):
+        # U2 readiness R1 (outenemy): pinned oxDNA emits bin/oxDNA (engine case).
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "oxDNA").write_bytes(b"\x7fELF-cased")
+            (build_dir / "bin" / "confGenerator").write_bytes(b"\x7fELF-other")
+            resolved = engine_build.resolve_engine_binary(build_dir)
+            self.assertEqual(resolved, build_dir / "bin" / "oxDNA")
+            digest = engine_build.binary_digest(build_dir)
+            self.assertEqual(digest["size"], len(b"\x7fELF-cased"))
+            self.assertTrue(digest["path"].endswith("bin/oxDNA"))
+
+    def test_resolve_engine_binary_missing_is_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build_dir = Path(tmp)
+            (build_dir / "bin").mkdir()
+            (build_dir / "bin" / "unrelated").write_bytes(b"\x7fELF-x")
+            with self.assertRaises(FileNotFoundError):
+                engine_build.resolve_engine_binary(build_dir)
 
 
 class CliNegativeControlTest(unittest.TestCase):
@@ -665,6 +751,613 @@ class ConfigContractTest(unittest.TestCase):
         self.assertFalse(config["policy"]["r2_activated"])
         self.assertEqual(config["host_eligibility"]["forbidden_hostnames"], ["outenemy"])
         self.assertEqual(config["policy"]["new_science_without_r2"], "HARD_BLOCKED")
+
+
+# ---------------------------------------------------------------------------
+# Tooling-repair R1 (EX-INFRA3-R2-TOOLING-REPAIR-R1): F-4 ambiguous engine
+# binary resolution and the separate U2 executor path (run-u2).
+# ---------------------------------------------------------------------------
+
+
+class ResolveEngineBinaryAmbiguityTest(unittest.TestCase):
+    """F-4: ambiguous case-insensitive matches must fail closed."""
+
+    def test_ambiguous_case_insensitive_bin_matches_are_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build = Path(tmp)
+            (build / "bin").mkdir()
+            # Neither requested spelling exists exactly; two files collide
+            # case-insensitively (e.g. engine-cased + upper-cased copies).
+            (build / "bin" / "oxDNA").write_bytes(b"real")
+            (build / "bin" / "OXDNA").write_bytes(b"decoy")
+            with self.assertRaises(FileNotFoundError) as ctx:
+                engine_build.resolve_engine_binary(build, "oxdna")
+            message = str(ctx.exception)
+            self.assertIn("ambiguous", message)
+            self.assertIn("fail-closed", message)
+            self.assertIn("oxDNA", message)
+            self.assertIn("OXDNA", message)
+
+    def test_single_case_insensitive_match_still_resolves(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            build = Path(tmp)
+            (build / "bin").mkdir()
+            (build / "bin" / "oxDNA").write_bytes(b"engine")
+            resolved = engine_build.resolve_engine_binary(build, "oxdna")
+            self.assertEqual(resolved, build / "bin" / "oxDNA")
+
+    def test_ambiguity_is_detected_before_digest_is_taken(self):
+        # binary_digest goes through resolve_engine_binary, so provenance can
+        # never silently bind an arbitrarily-picked binary.
+        with tempfile.TemporaryDirectory() as tmp:
+            build = Path(tmp)
+            (build / "bin").mkdir()
+            (build / "bin" / "oxDNA").write_bytes(b"real")
+            (build / "bin" / "OXDNA").write_bytes(b"decoy")
+            with self.assertRaises(FileNotFoundError):
+                engine_build.binary_digest(build, "oxdna")
+
+
+class U2HostValidationTest(unittest.TestCase):
+    """The U2 host-role gate: pinned platform, native floor, never U1."""
+
+    def test_pinned_outenemy_fingerprint_is_eligible_u2(self):
+        eligible, reasons = validate_u2_host(ok_fingerprint("outenemy"))
+        self.assertTrue(eligible, reasons)
+
+    def test_pinned_hostname_matches_case_insensitively(self):
+        for hostname in ("OutEnemy", "OUTENEMY", "outenemy.lab.local"):
+            eligible, reasons = validate_u2_host(ok_fingerprint(hostname))
+            self.assertTrue(eligible, f"{hostname}: {reasons}")
+
+    def test_unknown_hostname_is_fail_closed(self):
+        eligible, reasons = validate_u2_host(ok_fingerprint("some-other-box"))
+        self.assertFalse(eligible)
+        self.assertTrue(any("not a pinned U2" in reason for reason in reasons))
+
+    def test_would_be_u1_host_can_never_act_as_u2(self):
+        eligible, reasons = validate_u2_host(ok_fingerprint("u1-lab"))
+        self.assertFalse(eligible)
+        self.assertTrue(any("not a pinned U2" in reason for reason in reasons))
+        self.assertTrue(any("never act as U2" in reason for reason in reasons))
+
+    def test_platform_floor_is_required(self):
+        fingerprint = ok_fingerprint("outenemy")
+        fingerprint["parsed"]["virtualization"] = "kvm"
+        eligible, reasons = validate_u2_host(fingerprint)
+        self.assertFalse(eligible)
+        self.assertTrue(any("virtualization" in reason for reason in reasons))
+
+    def test_wsl_marker_disqualifies_u2(self):
+        fingerprint = ok_fingerprint("outenemy")
+        fingerprint["parsed"]["wsl_marker"] = True
+        eligible, reasons = validate_u2_host(fingerprint)
+        self.assertFalse(eligible)
+        self.assertTrue(any("WSL" in reason for reason in reasons))
+
+    def test_u1_guard_is_not_weakened_by_u2_validation(self):
+        # The same fingerprint that is U2-eligible must stay U1-ineligible.
+        fingerprint = ok_fingerprint("outenemy")
+        self.assertFalse(validate_native_u1(fingerprint)[0])
+        eligible_u1, u1_reasons = validate_native_u1(fingerprint)
+        self.assertFalse(eligible_u1)
+        self.assertTrue(any("forbidden as author host" in reason for reason in u1_reasons))
+        self.assertTrue(validate_u2_host(fingerprint)[0])
+
+
+class U2DispatchPathTest(unittest.TestCase):
+    """run-u2: host-role gate + mandatory dispatch authority + fixture ceiling.
+
+    End-to-end on disposable technical fixtures only: the synthetic
+    S -> H -> F -> R -> V -> A authority package is built in a TEMPORARY git
+    repository from the committed historical FROZEN_R1 package (the same
+    fixture pattern as tests/test_nl5_v02_prefreeze_r4.py); the executed
+    command is ``python -c print(...)``. Zero scientific runs; the frozen
+    campaign legs are unreachable through this path by construction.
+    """
+
+    R4_EVIDENCE = REPO_ROOT / "docs" / "work" / "executions" / "EX-NL5-V02-PREFREEZE-HARDENING-R4" / "evidence"
+    R4_CONTRACT = R4_EVIDENCE / "repro-v0-2-freeze-contract-PRE_DATA_R4.json"
+    R4_RECORD = R4_EVIDENCE / "repro-v0-2-seed-record-PRE_DATA_R4.json"
+    R4_MANIFEST = R4_EVIDENCE / "r4-1-collision-scan-manifest-R4.json"
+    CANDIDATE_DOC = REPO_ROOT / "docs" / "research" / "NANOLAB_REPRO_V0_2_CANDIDATE_R1.md"
+    SYNTHETIC_FIXTURE_MARKER = "SYNTHETIC TEST FIXTURE ONLY"
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.tmp = Path(self._tmp.name)
+
+    # ---- fixture plumbing (temp git repo with real commits/trees/blobs) ----
+
+    def _git(self, root: Path, *args: str) -> str:
+        completed = subprocess.run(
+            ["git", "-C", str(root), *args], capture_output=True, text=True
+        )
+        if completed.returncode != 0:
+            raise AssertionError(f"git {' '.join(args)} failed: {completed.stderr.strip()}")
+        return completed.stdout.strip()
+
+    def _git_blob(self, root: Path, commit: str, relpath: str) -> str:
+        return self._git(root, "rev-parse", f"{commit}:{relpath}")
+
+    @staticmethod
+    def _sha256_bytes(raw: bytes) -> str:
+        import hashlib
+
+        return hashlib.sha256(raw).hexdigest()
+
+    def _write_json(self, path: Path, payload: dict) -> Path:
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return path
+
+    def _scan_allowlist_block(self, contract: dict) -> str:
+        """Canonical FROZEN-only ``scan-allowlist-v1`` declaration block.
+
+        Same machine-bound form as tests/test_nl5_v02_prefreeze_r4.py: ordered
+        exact allowlist entries + pinned scan tree from the contract.
+        """
+        paths = contract["seed_generation"]["scan_allowlist_paths_exact"]
+        pin = contract["seed_generation"]["exclusion_tree_pin"]
+        entries = "".join(f"path_{index} = {path}\n" for index, path in enumerate(paths, 1))
+        return (
+            "```text\n"
+            f"# scan-allowlist-v1 (authoritative collision-scan exact allowlist; "
+            f"pinned scan tree {pin}; frozen-package paths are NOT allowlist entries)\n"
+            f"{entries}"
+            "```\n"
+        )
+
+    def _fixture_authority(self, root: Path) -> Path:
+        """Build a SYNTHETIC TEST FIXTURE ONLY authority in a temp git repo.
+
+        Mirrors the R4.3 lifecycle S -> H -> F -> R -> V -> A exactly like
+        ``_authority_fixture`` in tests/test_nl5_v02_prefreeze_r4.py (happy
+        mode only, FROZEN package commit F pins everything): the base package
+        is the committed PRE_DATA_R4 candidate (contract/record/manifest/doc);
+        the FROZEN commit carries the candidate doc flipped to FROZEN plus the
+        machine-bound scan-allowlist block (FROZEN_R2 M-1 requirement).
+        """
+        contract = json.loads(self.R4_CONTRACT.read_text(encoding="utf-8"))
+        record_bytes = self.R4_RECORD.read_bytes()
+        doc_text = self.CANDIDATE_DOC.read_text(encoding="utf-8")
+        record_rel = contract["scientific_subject"]["seed_record_path"]
+        manifest_rel = contract["collision_scan_manifest"]["path"]
+        (root / "authority").mkdir(parents=True, exist_ok=True)
+        record_path = root / record_rel
+        record_path.parent.mkdir(parents=True, exist_ok=True)
+        record_path.write_bytes(record_bytes)
+        manifest_path = root / manifest_rel
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_bytes(self.R4_MANIFEST.read_bytes())
+        protocol_path = root / "candidate.md"
+        protocol_path.write_text(doc_text, encoding="utf-8")
+
+        def contract_bytes_frozen() -> bytes:
+            frozen = json.loads(json.dumps(contract))
+            frozen["scientific_subject"]["freeze_status"] = "FROZEN"
+            frozen["scientific_subject"]["frozen_subject_head"] = None
+            frozen["scientific_subject"]["frozen_subject_tree"] = None
+            return (json.dumps(frozen, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+        pre_contract = json.loads(json.dumps(contract))
+        pre_contract["scientific_subject"]["freeze_status"] = "NOT_FROZEN"
+        pre_contract["scientific_subject"]["frozen_subject_head"] = None
+        pre_contract["scientific_subject"]["frozen_subject_tree"] = None
+        pre_bytes = (json.dumps(pre_contract, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        (root / "authority" / "contract.json").write_bytes(pre_bytes)
+        self._git(root, "init", "-q")
+        self._git(root, "config", "user.name", "synthetic-fixture")
+        self._git(root, "config", "user.email", "synthetic-fixture@example.invalid")
+        self._git(root, "add", "-A")
+        self._git(root, "commit", "-q", "--allow-empty", "-m", "synthetic pre-freeze candidate subject")
+
+        frozen_doc = doc_text.replace("NOT FROZEN", "FROZEN") + "\n" + self._scan_allowlist_block(contract)
+        contract_bytes = contract_bytes_frozen()
+        record_sha = self._sha256_bytes(record_bytes)
+
+        payloads = {
+            "freeze": {
+                "record_kind": "DIRECTOR_FREEZE_RECORD",
+                "issuer_class": "DIRECTOR",
+                "director": "DIRECTOR-SYNTHETIC-FIXTURE",
+                "decision": "FREEZE",
+                "subject_head": None,
+                "subject_tree": None,
+                "contract_sha256": self._sha256_bytes(contract_bytes),
+                "seed_record_sha256": record_sha,
+            },
+            "hg_b": {
+                "record_kind": "HG_B_OWNER_APPROVAL",
+                "issuer_class": "HUMAN_GATE_OWNER",
+                "decision": "APPROVED",
+                "candidate_revision": str(contract["scientific_subject"]["candidate_revision"]),
+                "rule_id": contract["rule_id"],
+            },
+            "review": {
+                "record_kind": "REVIEWER_VERDICT",
+                "issuer_class": "INDEPENDENT_REVIEWER",
+                "verdict": "PASS",
+                "reviewed_head": None,
+                "reviewed_tree": None,
+            },
+            "verify": {
+                "record_kind": "VERIFIER_VERDICT",
+                "issuer_class": "INDEPENDENT_VERIFIER",
+                "verdict": "VERIFIED",
+                "verified_head": None,
+                "verified_tree": None,
+            },
+            "r2": {
+                "record_kind": "R2_ACTIVATION_RECORD",
+                "issuer_class": "R2_HOST",
+                "r2_status": "ACTIVE",
+                "author_executor": "AUTHOR_U1",
+                "external_executor": "EXTERNAL_U2",
+            },
+        }
+
+        def commit(message: str) -> str:
+            self._git(root, "add", "-A")
+            self._git(root, "commit", "-q", "--allow-empty", "-m", message)
+            return self._git(root, "rev-parse", "HEAD")
+
+        # commit H: HG-B + R2 records (pre-freeze)
+        for name in ("hg_b", "r2"):
+            self._write_json(root / "authority" / f"{name}.json", payloads[name])
+        hg_b_commit = commit("synthetic HG-B approval + R2 activation records")
+        record_source_commits = {"hg_b": hg_b_commit, "r2": hg_b_commit}
+        # commit F: the FROZEN PACKAGE COMMIT
+        protocol_path.write_text(frozen_doc, encoding="utf-8")
+        (root / "authority" / "contract.json").write_bytes(contract_bytes)
+        frozen_head = commit("synthetic frozen package commit")
+        frozen_tree = self._git(root, "rev-parse", "HEAD^{tree}")
+        for payload, head_key, tree_key in (
+            ("freeze", "subject_head", "subject_tree"),
+            ("review", "reviewed_head", "reviewed_tree"),
+            ("verify", "verified_head", "verified_tree"),
+        ):
+            payloads[payload][head_key] = frozen_head
+            payloads[payload][tree_key] = frozen_tree
+        # commits R, V, A: independent record commits descending from F
+        for name, message in (
+            ("review", "synthetic review record pinning the frozen package"),
+            ("verify", "synthetic verify record pinning the frozen package"),
+            ("freeze", "synthetic director freeze record pinning the package"),
+        ):
+            self._write_json(root / "authority" / f"{name}.json", payloads[name])
+            record_source_commits[name] = commit(message)
+
+        def embedded(name: str) -> dict:
+            rel = f"authority/{name}.json"
+            source = record_source_commits[name]
+            return {
+                "path": rel,
+                "source_commit": source,
+                "git_blob_sha1": self._git_blob(root, source, rel),
+                "canonical_sha256": self._sha256_bytes((root / rel).read_bytes()),
+                **payloads[name],
+            }
+
+        authority = {
+            "schema_version": 3,
+            "kind": "nanolab_v02_dispatch_authority",
+            "authority_revision": "synthetic-fixture-u2-r1",
+            "fixture": True,
+            "fixture_note": self.SYNTHETIC_FIXTURE_MARKER + " - not a real authorization",
+            "frozen": True,
+            "subject_head": frozen_head,
+            "subject_tree": frozen_tree,
+            "contract_sha256": self._sha256_bytes(contract_bytes),
+            "seed_record_sha256": record_sha,
+            "frozen_subject_binding": {
+                "contract": {
+                    "source_commit": frozen_head,
+                    "path": "authority/contract.json",
+                    "git_blob_sha1": self._git_blob(root, frozen_head, "authority/contract.json"),
+                    "canonical_sha256": self._sha256_bytes(contract_bytes),
+                },
+                "protocol": {
+                    "source_commit": frozen_head,
+                    "path": "candidate.md",
+                    "git_blob_sha1": self._git_blob(root, frozen_head, "candidate.md"),
+                    "canonical_sha256": self._sha256_bytes(frozen_doc.encode("utf-8")),
+                },
+                "seed_record": {
+                    "source_commit": frozen_head,
+                    "path": record_rel,
+                    "git_blob_sha1": self._git_blob(root, frozen_head, record_rel),
+                    "canonical_sha256": record_sha,
+                },
+            },
+            "freeze_record": embedded("freeze"),
+            "hg_b_record": embedded("hg_b"),
+            "review_verdict": embedded("review"),
+            "verify_verdict": embedded("verify"),
+            "r2_record": embedded("r2"),
+            "author_executor": "AUTHOR_U1",
+            "external_executor": "EXTERNAL_U2",
+            "executor_policy": {"author_leg_allowed": True, "external_leg_allowed": True},
+        }
+        return self._write_json(root / "authority" / "dispatch-authority.json", authority)
+
+    # ---- invocation helpers ----
+
+    def _authority_paths(self, root: Path) -> dict:
+        contract = json.loads(self.R4_CONTRACT.read_text(encoding="utf-8"))
+        return {
+            "dispatch_authority": str(root / "authority" / "dispatch-authority.json"),
+            "contract": str(root / "authority" / "contract.json"),
+            "protocol": str(root / "candidate.md"),
+            "seed_record": str(root / contract["scientific_subject"]["seed_record_path"]),
+            "repo_root": str(root),
+        }
+
+    def _fixture_spec(self, tmp: Path, execution_id: str = "EX-U2-TOOLING-FIXTURE-R1", fixture: bool = True) -> Path:
+        spec_path = tmp / "spec.json"
+        spec_path.write_text(
+            json.dumps(
+                {
+                    "execution_id": execution_id,
+                    "run_base": "T001",
+                    "attempt": 0,
+                    "fixture": fixture,
+                    "command": [sys.executable, "-c", "print('u2-fixture-ok')"],
+                    "raw_root": str(tmp / "raw"),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        return spec_path
+
+    def _run_cmd(self, argv: list[str], hostname: str = "outenemy") -> tuple[int, dict]:
+        from unittest import mock
+        from r2 import cli as r2_cli
+
+        buffer = io.StringIO()
+        with mock.patch.object(r2_cli, "collect_fingerprint", return_value=ok_fingerprint(hostname)):
+            with contextlib.redirect_stdout(buffer):
+                code = r2_cli.main(argv)
+        payload = None
+        try:
+            payload = json.loads(buffer.getvalue())
+        except json.JSONDecodeError:
+            pass
+        return code, payload
+
+    def _run_u2(self, tmp: Path, root: Path, hostname: str = "outenemy") -> tuple[int, dict]:
+        argv = [
+            "run-u2",
+            "--spec", str(self._fixture_spec(tmp)),
+            "--ledger", str(tmp / "ledger.jsonl"),
+            "--launcher", "direct",
+            "--no-rerun-scan",
+            "--fixture",
+        ]
+        argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items()]
+        return self._run_cmd(argv, hostname=hostname)
+
+    # ---- the actual tests ----
+
+    def test_end_to_end_fixture_dispatch_executes_and_records(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        code, payload = self._run_u2(work, root)
+        self.assertEqual(code, 0, payload)
+        self.assertEqual(payload["status"], "RECORDED")
+        self.assertTrue(payload["dispatch"]["synthetic_test_fixture_only"])
+        self.assertFalse(payload["dispatch"]["machine_launch_authorized"])
+        self.assertEqual(payload["dispatch"]["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertTrue(payload["dispatch"]["fixture"])
+        self.assertEqual(payload["dispatch"]["authority_status"], "DISPATCH_PRECONDITIONS_RECORDED")
+        authority_on_disk = json.loads((root / "authority" / "dispatch-authority.json").read_text(encoding="utf-8"))
+        self.assertIn("SYNTHETIC TEST FIXTURE ONLY", authority_on_disk["fixture_note"])
+        self.assertEqual(payload["record"]["scientific_outcome"], "NOT_EVALUATED")
+        self.assertEqual(payload["record"]["technical_outcome"], "COMPLETED")
+        self.assertEqual((work / "raw" / "EX-U2-TOOLING-FIXTURE-R1" / "T001").exists(), True)
+        ledger_lines = (work / "ledger.jsonl").read_text(encoding="utf-8").strip().splitlines()
+        self.assertEqual(len(ledger_lines), 1)
+        self.assertEqual(json.loads(ledger_lines[0])["attempt_id"], "T001")
+
+    def test_missing_dispatch_authority_is_fail_closed(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        argv = [
+            "run-u2",
+            "--spec", str(self._fixture_spec(work)),
+            "--ledger", str(work / "ledger.jsonl"),
+            "--launcher", "direct",
+            "--no-rerun-scan",
+            "--fixture",
+        ]
+        argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items() if key != "dispatch_authority"]
+        code, payload = self._run_cmd(argv)
+        self.assertEqual(code, 3)
+        self.assertEqual(payload["status"], "BLOCKED_NO_DISPATCH_AUTHORITY")
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_non_fixture_authority_never_executes_launch_gate_holds(self):
+        """A fully-bound NON-fixture authority validates but is refused.
+
+        The synthetic S->F->R/V->A records are self-consistent, so flipping
+        the authority's fixture flag yields a structurally VALID real
+        authority — exactly the shape a real campaign authority would have.
+        The machine cap must hold: plan machine_launch_authorized=False and
+        run-u2 refuses to be the launch authority (Human/Protected-Writer).
+        """
+        root = self.tmp / "repo"
+        root.mkdir()
+        authority_path = self._fixture_authority(root)
+        authority = json.loads(authority_path.read_text(encoding="utf-8"))
+        authority["fixture"] = False
+        authority["fixture_note"] = None
+        authority_path.write_text(json.dumps(authority, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        work = self.tmp / "run"
+        work.mkdir()
+        code, payload = self._run_u2(work, root)
+        self.assertEqual(code, 3)
+        self.assertEqual(payload["status"], "BLOCKED_LAUNCH_GATE_PROTECTED_WRITER")
+        self.assertIs(payload["machine_launch_authorized"], False)
+        self.assertEqual(payload["launch_gate"], "HUMAN_PROTECTED_WRITER")
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_invalid_authority_is_fail_closed(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        authority_path = self._fixture_authority(root)
+        # Tamper: point the frozen subject at a nonexistent commit — the
+        # Git-object binding must reject the authority (fail-closed).
+        authority = json.loads(authority_path.read_text(encoding="utf-8"))
+        authority["subject_head"] = "0" * 40
+        authority_path.write_text(json.dumps(authority, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        work = self.tmp / "run"
+        work.mkdir()
+        code, payload = self._run_u2(work, root)
+        self.assertEqual(code, 3)
+        self.assertEqual(payload["status"], "BLOCKED_DISPATCH_AUTHORITY")
+        self.assertIn("dispatch authority rejected", payload["error"])
+        self.assertIn("subject mismatch", payload["error"])
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_non_fixture_spec_is_refused(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        spec_path = self._fixture_spec(work, fixture=False)
+        argv = [
+            "run-u2",
+            "--spec", str(spec_path),
+            "--ledger", str(work / "ledger.jsonl"),
+            "--launcher", "direct",
+            "--no-rerun-scan",
+            "--fixture",
+        ]
+        argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items()]
+        code, payload = self._run_cmd(argv)
+        self.assertEqual(code, 3)
+        self.assertEqual(payload["status"], "BLOCKED_NON_FIXTURE_SPEC")
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_frozen_campaign_execution_id_is_refused_even_with_valid_authority(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        spec_path = work / "spec.json"
+        spec_path.write_text(
+            json.dumps(
+                {
+                    "execution_id": "EX-NL5-REPRO-V0-2-U2-R1",
+                    "run_base": "T001",
+                    "attempt": 0,
+                    "fixture": True,
+                    "command": ["true"],
+                }
+            ),
+            encoding="utf-8",
+        )
+        argv = [
+            "run-u2",
+            "--spec", str(spec_path),
+            "--ledger", str(work / "ledger.jsonl"),
+            "--launcher", "direct",
+            "--no-rerun-scan",
+            "--fixture",
+        ]
+        argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items()]
+        code, payload = self._run_cmd(argv)
+        self.assertEqual(code, 3)
+        self.assertEqual(payload["status"], "BLOCKED_FROZEN_CAMPAIGN_ID")
+        self.assertEqual(payload["execution_id"], "EX-NL5-REPRO-V0-2-U2-R1")
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_malformed_spec_is_a_named_fail_closed_refusal(self):
+        # Review m-1 (FRESH_REVIEW_U2_READINESS_R1): missing/ill-typed spec
+        # keys must produce BLOCKED_MALFORMED_SPEC, never a traceback.
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        for bad_spec in (
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "fixture": True, "command": ["true"]},
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "run_base": "T001", "fixture": True, "command": "true"},
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "run_base": "T001", "fixture": True, "command": [1, {"x": 2}]},
+        ):
+            spec_path = work / "spec-bad.json"
+            spec_path.write_text(json.dumps(bad_spec), encoding="utf-8")
+            argv = [
+                "run-u2",
+                "--spec", str(spec_path),
+                "--ledger", str(work / "ledger.jsonl"),
+                "--launcher", "direct",
+                "--no-rerun-scan",
+                "--fixture",
+            ]
+            argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items()]
+            code, payload = self._run_cmd(argv)
+            self.assertEqual(code, 3, bad_spec)
+            self.assertEqual(payload["status"], "BLOCKED_MALFORMED_SPEC", bad_spec)
+            self.assertFalse((work / "ledger.jsonl").exists(), bad_spec)
+
+    def test_non_u2_host_is_blocked_before_anything_else(self):
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        code, payload = self._run_u2(work, root, hostname="ci-runner-01")
+        self.assertEqual(code, 2)
+        self.assertEqual(payload["status"], "BLOCKED_HOST_U2")
+        self.assertTrue(any("not a pinned U2" in reason for reason in payload["reasons"]))
+        self.assertFalse((work / "ledger.jsonl").exists())
+
+    def test_run_u2_cli_subprocess_host_guard(self):
+        """Real subprocess control: off the pinned platform the CLI refuses."""
+        env = dict(os.environ)
+        env["PYTHONPATH"] = str(REPO_ROOT / "scripts")
+        on_outenemy = socket.gethostname().split(".")[0].lower() == "outenemy"
+        with tempfile.TemporaryDirectory() as tmp:
+            spec_path = Path(tmp) / "spec.json"
+            spec_path.write_text(json.dumps({
+                "execution_id": "EX-U2-PROBE",
+                "run_base": "T001",
+                "attempt": 0,
+                "fixture": True,
+                "command": ["true"],
+            }), encoding="utf-8")
+            completed = subprocess.run(
+                [sys.executable, "-m", "r2.cli", "run-u2",
+                 "--spec", str(spec_path), "--ledger", str(Path(tmp) / "l.jsonl"),
+                 "--launcher", "direct", "--fixture",
+                 "--dispatch-authority=/nonexistent.json", "--contract=/nonexistent.json",
+                 "--protocol=/nonexistent.md", "--seed-record=/nonexistent.json",
+                 "--repo-root=/tmp"],
+                capture_output=True, text=True, env=env, timeout=120, cwd=str(REPO_ROOT),
+            )
+            payload = json.loads(completed.stdout)
+            if on_outenemy:
+                # Pinned platform: the host gate passes and the mandatory
+                # authority check fires (fail-closed on the bogus path).
+                self.assertEqual(completed.returncode, 3)
+                self.assertEqual(payload["status"], "BLOCKED_DISPATCH_AUTHORITY")
+                self.assertFalse((Path(tmp) / "l.jsonl").exists())
+            else:
+                self.assertEqual(completed.returncode, 2)
+                self.assertEqual(payload["status"], "BLOCKED_HOST_U2")
+                self.assertFalse((Path(tmp) / "l.jsonl").exists())
 
 
 if __name__ == "__main__":

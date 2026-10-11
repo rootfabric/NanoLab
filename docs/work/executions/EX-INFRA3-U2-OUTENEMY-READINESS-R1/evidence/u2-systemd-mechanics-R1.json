@@ -1,0 +1,12 @@
+{
+  "probe": "nl5-u2-systemd-mech-r1",
+  "host": "outenemy",
+  "uid": 1001,
+  "linger": "yes",
+  "user_manager_transient_wait_pipe_rc": 0,
+  "user_manager_detached_is_active": "active",
+  "system_manager_rc": 1,
+  "system_manager_error": "Interactive authentication required.",
+  "journalctl_user_persist": true,
+  "conclusion": "U2 leg must use systemd-run --user (Linger=yes present); system manager requires root auth"
+}

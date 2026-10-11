@@ -1,9 +1,16 @@
 """CLI for the R2 activation tooling.
 
-Every executing subcommand (build-engine, run, nc-verify with real checks)
-is guarded by native-U1 host validation: on an ineligible host it prints a
-BLOCKED_HOST record and exits with code 2 — never a silent fallback, never a
-fabricated PASS (mission §5; NATIVE_UBUNTU_EXECUTION_POLICY_R1 §1).
+Executing subcommands are host-role-guarded, never silently permissive:
+- ``build-engine``, ``run``, ``gate`` and ``nc-verify`` (with real checks)
+  require native-U1 host validation — on an ineligible host they print a
+  BLOCKED_HOST record and exit with code 2;
+- ``run-u2`` (tooling-repair R1) requires the OPPOSITE pinned role — the
+  pinned external U2 platform (``validate_u2_host``) — plus a mandatory
+  machine-readable dispatch authority; it executes only synthetic technical
+  fixtures and never a frozen campaign leg.
+
+Never a silent fallback, never a fabricated PASS (mission §5;
+NATIVE_UBUNTU_EXECUTION_POLICY_R1 §1).
 """
 
 from __future__ import annotations
@@ -23,6 +30,7 @@ from .fingerprint import (
     collect_fingerprint,
     fingerprint_markdown,
     validate_native_u1,
+    validate_u2_host,
 )
 from .gates import GateError, GateReport, activation_decision
 from .supervisor import (
@@ -62,6 +70,189 @@ def require_u1_or_exit(args: argparse.Namespace) -> dict[str, Any] | None:
         )
         return None
     return fingerprint
+
+
+def require_u2_or_exit(args: argparse.Namespace) -> dict[str, Any] | None:
+    """U2 executor path host-role gate (tooling-repair R1).
+
+    Own validation — ``validate_u2_host``, NOT a relaxation of the U1 guard:
+    ``run`` keeps requiring ``validate_native_u1`` unchanged. The U2 gate
+    demands the pinned external platform (``outenemy``), the same native
+    platform floor, and that the host can never qualify as U1.
+    """
+    fingerprint = collect_fingerprint(real_runner)
+    eligible, reasons = validate_u2_host(fingerprint)
+    if not eligible:
+        emit(
+            {
+                "command": getattr(args, "command", ""),
+                "status": "BLOCKED_HOST_U2",
+                "eligible_u2": False,
+                "reasons": reasons,
+                "r2_status": "WAITING_HOST / NOT_ACTIVE",
+            }
+        )
+        return None
+    return fingerprint
+
+
+# Frozen confirmatory campaign legs can never be launched through the
+# technical fixture path (tooling-repair R1): an execution id under these
+# prefixes on ``run-u2`` is a hard refusal, whatever the authority says.
+FROZEN_CAMPAIGN_EXECUTION_ID_PREFIXES = ("EX-NL5-REPRO-V0-2",)
+
+
+def _build_u2_dispatch_plan(args: argparse.Namespace) -> dict[str, Any]:
+    """Validate the mandatory dispatch authority and build the execution plan.
+
+    Thin seam around ``nl5.repro_v02_freeze_contract.build_execution_plan``
+    (THE dispatch entrypoint) kept module-level so tests can patch it without
+    importing the heavyweight validator at ``r2.cli`` import time.
+    """
+    from nl5.repro_v02_freeze_contract import build_execution_plan
+
+    return build_execution_plan(
+        args.contract,
+        args.protocol,
+        args.seed_record,
+        repo_root=args.repo_root,
+        authority_path=args.dispatch_authority,
+        allow_fixture=bool(args.fixture),
+        rerun_scan=not args.no_rerun_scan,
+    )
+
+
+def cmd_run_u2(args: argparse.Namespace) -> int:
+    """Execute one attempt of a run spec on the pinned U2 platform.
+
+    Safety chain (every step fail-closed; tooling-repair R1):
+
+    1. host-role check — ``validate_u2_host`` (pinned external platform);
+    2. dispatch authority — MANDATORY: without ``--dispatch-authority`` the
+       command refuses (``BLOCKED_NO_DISPATCH_AUTHORITY``); with one, the
+       full ``nanolab_v02_dispatch_authority`` validation (schema v3:
+       Director FREEZE + HG-B APPROVED + review PASS + verify VERIFIED +
+       R2 ACTIVE + Git-bound records) must produce a plan;
+    3. launch gate — ``machine_launch_authorized`` is ``False`` by
+       construction; a NON-fixture plan is never executed here
+       (``BLOCKED_LAUNCH_GATE_PROTECTED_WRITER``): the real launch gate is
+       the external Human/Protected-Writer gate and this CLI is not one;
+    4. fixture ceiling — only a ``synthetic_test_fixture_only`` plan may
+       execute, the spec must declare ``"fixture": true`` and the execution
+       id must not be a frozen campaign leg;
+    5. technical execution on disposable fixtures via the chosen launcher;
+       the ledger stays append-only and ``scientific_outcome`` stays
+       NOT_EVALUATED.
+    """
+    if require_u2_or_exit(args) is None:
+        return 2
+    spec_json = load_json(Path(args.spec))
+    execution_id = str(spec_json.get("execution_id", ""))
+    if spec_json.get("fixture") is not True:
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_NON_FIXTURE_SPEC",
+                "reason": "run-u2 executes only technical fixture specs (spec key 'fixture' must be literally true)",
+            }
+        )
+        return 3
+    if any(execution_id.startswith(prefix) for prefix in FROZEN_CAMPAIGN_EXECUTION_ID_PREFIXES):
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_FROZEN_CAMPAIGN_ID",
+                "execution_id": execution_id,
+                "reason": "frozen confirmatory campaign legs can never run through the technical fixture path",
+            }
+        )
+        return 3
+    if not args.dispatch_authority:
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_NO_DISPATCH_AUTHORITY",
+                "reason": "run-u2 requires --dispatch-authority (nanolab_v02_dispatch_authority, schema v3); "
+                "dispatch authority is mandatory even for synthetic fixtures",
+                "r2_status": "WAITING_HOST / NOT_ACTIVE",
+            }
+        )
+        return 3
+    try:
+        plan = _build_u2_dispatch_plan(args)
+    except Exception as error:  # ContractError and any input error: fail closed
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_DISPATCH_AUTHORITY",
+                "error": str(error),
+                "r2_status": "WAITING_HOST / NOT_ACTIVE",
+            }
+        )
+        return 3
+    if not plan.get("synthetic_test_fixture_only"):
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_LAUNCH_GATE_PROTECTED_WRITER",
+                "machine_launch_authorized": plan.get("machine_launch_authorized"),
+                "launch_gate": plan.get("launch_gate"),
+                "reason": "only synthetic_test_fixture_only plans execute here; a real launch requires the "
+                "external Human/Protected-Writer gate, which this CLI does not impersonate",
+            }
+        )
+        return 3
+    try:
+        ledger = AttemptLedger(Path(args.ledger))
+        launcher = SystemdLauncherChoice(args.launcher)
+        executor = RunExecutor(ledger, launcher=launcher.resolve())
+        if not isinstance(spec_json["command"], list) or not all(
+            isinstance(item, (str, int, float)) and not isinstance(item, bool)
+            for item in spec_json["command"]
+        ):
+            raise ValueError("command must be a list of string/number argv items")
+        spec = RunSpec(
+            execution_id=execution_id,
+            run_base=str(spec_json["run_base"]),
+            attempt=int(spec_json.get("attempt", 0)),
+            command=[str(item) for item in spec_json["command"]],
+            seed=spec_json.get("seed"),
+            subject_pins=dict(spec_json.get("subject_pins", {})),
+            raw_root=Path(spec_json["raw_root"]) if spec_json.get("raw_root") else None,
+            workspace=Path(spec_json["workspace"]) if spec_json.get("workspace") else None,
+            timeout_seconds=spec_json.get("timeout_seconds"),
+        )
+    except (KeyError, TypeError, ValueError) as error:
+        # Review m-1 (FRESH_REVIEW_U2_READINESS_R1): a malformed spec must be a
+        # named fail-closed response, never an unstructured traceback.
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_MALFORMED_SPEC",
+                "reason": f"run spec is malformed: {error!r}",
+            }
+        )
+        return 3
+    try:
+        record = executor.execute(spec)
+    except AttemptReuseError as error:
+        emit({"status": "BLOCKED_ATTEMPT_REUSE", "reason": str(error)})
+        return 3
+    emit(
+        {
+            "status": "RECORDED",
+            "dispatch": {
+                "synthetic_test_fixture_only": True,
+                "authority_status": (plan.get("dispatch_authority") or {}).get("status"),
+                "authority_revision": (plan.get("dispatch_authority") or {}).get("authority_revision"),
+                "fixture": (plan.get("dispatch_authority") or {}).get("fixture"),
+                "launch_gate": plan.get("launch_gate"),
+                "machine_launch_authorized": plan.get("machine_launch_authorized"),
+            },
+            "record": record.to_dict(),
+        }
+    )
+    return 0
 
 
 def cmd_fingerprint(args: argparse.Namespace) -> int:
@@ -165,6 +356,10 @@ class SystemdLauncherChoice:
             return DirectLauncher()
         from .executor import SystemdTransientLauncher
 
+        if self.choice == "systemd-user":
+            # U2 readiness R1: unprivileged manager (outenemy machine-verified
+            # with linger=yes); system manager stays the default for U1.
+            return SystemdTransientLauncher(user_manager=True)
         return SystemdTransientLauncher()
 
 
@@ -300,8 +495,38 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("run", help="execute one attempt of a run spec (U1 only)")
     p.add_argument("--spec", required=True)
     p.add_argument("--ledger", required=True)
-    p.add_argument("--launcher", choices=["direct", "systemd"], default="systemd")
+    p.add_argument("--launcher", choices=["direct", "systemd", "systemd-user"], default="systemd")
     p.set_defaults(func=cmd_run)
+
+    p = sub.add_parser(
+        "run-u2",
+        help="execute one technical-fixture attempt on the pinned U2 platform "
+        "(mandatory dispatch authority; never a frozen campaign leg)",
+    )
+    p.add_argument("--spec", required=True)
+    p.add_argument("--ledger", required=True)
+    p.add_argument("--launcher", choices=["direct", "systemd-user"], default="systemd-user")
+    p.add_argument(
+        "--dispatch-authority", default="",
+        help="nanolab_v02_dispatch_authority JSON (schema v3); mandatory — "
+        "missing/invalid authority is a structured fail-closed refusal",
+    )
+    p.add_argument("--contract", required=True, help="freeze contract JSON bound by the authority")
+    p.add_argument("--protocol", required=True, help="frozen protocol document bound by the authority")
+    p.add_argument("--seed-record", required=True, help="seed record JSON bound by the authority")
+    p.add_argument("--repo-root", required=True, help="repository root owning the bound frozen subject")
+    p.add_argument(
+        "--fixture",
+        action="store_true",
+        help="accept a fixture authority (allow_fixture=True; plan marked synthetic_test_fixture_only)",
+    )
+    p.add_argument(
+        "--no-rerun-scan",
+        dest="no_rerun_scan",
+        action="store_true",
+        help="skip the collision-scan re-run inside authority validation (fixture/test use)",
+    )
+    p.set_defaults(func=cmd_run_u2, no_rerun_scan=False)
 
     p = sub.add_parser("gate", help="record a gate status (PASS requires existing evidence file)")
     p.add_argument("--report", required=True)

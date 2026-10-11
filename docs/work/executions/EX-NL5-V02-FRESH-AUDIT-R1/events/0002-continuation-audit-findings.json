@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-audit-findings",
+  "timestamp_utc": "2026-10-10T13:20:00Z",
+  "execution_id": "EX-NL5-V02-FRESH-AUDIT-R1",
+  "work_order_id": "WO-NL5-V02-FRESH-AUDIT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "summary": "Audit findings recorded. (1) Authority chain INTACT on fresh fetch: F2 60da9a846511265a8ac7564da088c3d74cb073f0 with tree e565c8a6cee9e829fac14008ebc9c2ea1609931d present in main history; Director FREEZE R2 a2f7304 strict descendant (merge-base --is-ancestor exit 0); fresh Reviewer PASS at review/nl5-v02-frozen-r2-scientific-review-r1 tip d63eb5c (REVIEWED_HEAD/TREE = F2 exact) and fresh Verifier VERIFIED at verify/nl5-v02-frozen-r2-r1 tip f12d0b4 (VERIFIED_HEAD/TREE = F2 exact), both tips proven descendants of F2; three frozen artifact SHA-256 recomputed from Git blob bytes at F2 and matched Director FREEZE R2 record (protocol 2658ee3e..., contract 7e647654..., seed record 8e844bff...). (2) Machine gates fresh PASS: freeze contract gate = PASS/PREFREEZE_VALIDATION_PASS/DISPATCH_BLOCKED with pinned collision-scan re-run (fail-closed dispatch_blockers enumerated by machine); feasibility N-grid bit-exact reproduction SELECTED_N=64 (0b 0.071 / 32b 0.736 <= 0.80) on committed R1 planning inputs. (3) Harness: 605 tests OK; check-consistency ok; workflow_lint blocking=0. (4) R2 probe: r2 check-host on outenemy = NOT_ELIGIBLE (hostname forbidden, EXTERNAL_U2_ONLY) - correct negative control; machine activation decision = r2_activated=false / WAITING_HOST NOT_ACTIVE / author_u1=NOT_ASSIGNED with 14 unmet preconditions. U1 host search (evidence u1-host-search-R1.json): outenemy forbidden as U1 (physically = U2); 192.168.0.19 Windows-class no SSH; 192.168.0.27 SSH open but publickey rejected for rdpuser/nanolab/ubuntu/root/ape/nobody with the only available key, no password credentials; other LAN neighbors no open ports; local VMs/LXD on outenemy = same physical machine as U2 = forbidden. HARD BLOCKER: U1 NOT AVAILABLE - activation not simulated per owner decree. (5) Activation package verified ready: scripts/r2 tooling + config/infra/r2-activation.v1.json + frozen F2 package + mechanical runbook published in DIRECTOR_FRESH_AUDIT_R1.md section 6. Boundaries: SCIENTIFIC_RUNS=0; no canonical status changes; NL5=IN_PROGRESS; NL6-001=LOCKED; external_reproductions=0; machine_launch_authorized=false.",
+  "command_refs": [
+    "git rev-parse 60da9a846511265a8ac7564da088c3d74cb073f0^{tree} -> e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "git merge-base --is-ancestor 60da9a8 a2f7304 -> exit 0; --is-ancestor 60da9a8 d63eb5c -> exit 0; --is-ancestor 60da9a8 f12d0b4 -> exit 0",
+    "git cat-file blob <blob> | sha256sum for 3 frozen artifacts -> all MATCH Director FREEZE R2 pins",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <F2 contract> --protocol <F2 protocol> --record <F2 seed record> --repo-root . -> PASS / PREFREEZE_VALIDATION_PASS / DISPATCH_BLOCKED",
+    "PYTHONPATH=scripts python3 -c run_n_grid(...) -> selected_n=64, N=64 ratios 0b 0.071 / 32b 0.736 (bit-exact vs frozen §10.1)",
+    "python3 -m unittest discover -s tests -> Ran 605 tests, OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency -> ok; workflow_lint -> blocking=0",
+    "PYTHONPATH=scripts python3 -m r2.cli check-host -> NOT_ELIGIBLE (hostname outenemy forbidden)",
+    "PYTHONPATH=scripts python3 -m r2.cli fingerprint --out <evidence>/outenemy-fingerprint-audit-R1.json -> RECORDED",
+    "GateReport(all WAITING_HOST) + activation_decision -> r2_activated=false, 14 unmet preconditions",
+    "LAN probes: /dev/tcp scans 192.168.0.0/24 ports 22/3389; nmap top-20 on .19/.27; ssh-keyscan .27; BatchMode ssh attempts (6 users) -> Permission denied (publickey,password)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/frozen-gate-PASS-audit-R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/feasibility-n-grid-audit-R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/outenemy-check-host-BLOCKED-R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/outenemy-fingerprint-audit-R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/r2-activation-decision-WAITING_HOST-audit-R1.json",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.json"
+  ],
+  "next_action": "Publish HANDOFF_COMPLETED with summary; open draft PR (merge = Human Gate); the ONLY actionable dependency for the scientific line remains owner-provisioned U1.",
+  "blocker": "HARD_BLOCKER_U1_NOT_AVAILABLE (R2 stays WAITING_HOST / NOT_ACTIVE; scientific dispatch blocked per frozen protocol §12 until full chain incl. R2 ACTIVE + HG-A + authority A + HUMAN_PROTECTED_WRITER launch decision)"
+}

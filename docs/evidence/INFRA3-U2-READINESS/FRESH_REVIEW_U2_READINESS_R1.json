@@ -1,0 +1,88 @@
+{
+  "record_kind": "REVIEWER_VERDICT",
+  "issuer_class": "INDEPENDENT_REVIEWER",
+  "schema_version": 1,
+  "evidence_id": "FRESH_REVIEW_U2_READINESS_R1",
+  "verdict": "PASS",
+  "reviewed_head": "9ded2bf7c230781111c9d90008502cbd8271aa45",
+  "reviewed_tree": "520c0e9245a405c0acab163bcfa1897c68fabeb9",
+  "base_main": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "merge_base": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "strict_descendant_of_base": true,
+  "branch": "infra/u2-outenemy-executor-readiness-r1",
+  "review_method": "fresh temp-dir clone (/tmp/review-u2-readiness-r1/clone) from origin, fresh git fetch; no reuse of existing worktrees",
+  "review_host": "outenemy (pinned U2 platform; r2.cli check-host NOT_ELIGIBLE = canonical negative control, correct)",
+  "claims_verified": {
+    "1_u2_readiness_wo_evidence_consistency": true,
+    "2a_tooling_wo_covers_divergence": true,
+    "2b_parent_history_and_start_checkpoint_unrewritten": true,
+    "2c_divergence_documented_in_parent_continuation_0003": true,
+    "3_f4_ambiguous_engine_binary_fail_closed": true,
+    "4a_validate_u2_host_pinned_fail_closed": true,
+    "4b_mandatory_dispatch_authority_schema_v3": true,
+    "4c_non_fixture_plans_never_execute_launch_gate_holds": true,
+    "4d_fixture_ceiling_and_frozen_campaign_id_refusal": true,
+    "4e_ledger_append_only_not_evaluated_always": true,
+    "5_u1_guard_not_weakened": true,
+    "6_frozen_science_and_canonical_state_untouched": true,
+    "7_full_test_suite_and_gates": true,
+    "8_internal_consistency_and_sha256_recomputation": true
+  },
+  "findings": [
+    {
+      "id": "m-1",
+      "severity": "MINOR",
+      "blocking": false,
+      "file": "scripts/r2/cli.py",
+      "lines": "210,212,215,216",
+      "title": "cmd_run_u2 reads spec keys with direct indexing",
+      "detail": "After all gates pass, keys run_base/command/raw_root/workspace are read via spec_json[...]: a malformed spec (with a valid authority) raises an unstructured KeyError traceback (exit 1) instead of a named structured refusal. Fail-closed in effect (no execution starts), but inconsistent with the named BLOCKED_* refills of the safety chain."
+    },
+    {
+      "id": "m-2",
+      "severity": "MINOR",
+      "blocking": false,
+      "file": "scripts/r2/cli.py",
+      "lines": "208-218",
+      "title": "Fixture ceiling is declarative for the executed command",
+      "detail": "The executed command list comes from the operator-provided spec and is not constrained to a fixture-command whitelist; the safety properties rest on host pinning + mandatory authority + fixture flags + scientific_outcome always NOT_EVALUATED. Honestly documented in WO-INFRA3-R2-TOOLING-REPAIR-R1 section 6 and U2_OUTENEMY_EXECUTOR_READINESS_R1 section 11; no scientific authority is elevated. Recommendation: pin expected fixture argv/digest in the future frozen campaign WO plan."
+    }
+  ],
+  "blocking_findings": [],
+  "tests": {
+    "suite": "630 OK",
+    "suite_command": "python3 -m unittest discover -s tests -t .",
+    "suite_runtime_seconds": 59.9,
+    "work_cli": "ok (EX-INFRA3-R2-TOOLING-REPAIR-R1 ok; EX-INFRA3-U2-OUTENEMY-READINESS-R1 ok; all EX-* dirs: 53/53 ok, 0 failures)",
+    "check_consistency": "ok (head 9ded2bf7c230781111c9d90008502cbd8271aa45, tree 520c0e9245a405c0acab163bcfa1897c68fabeb9)",
+    "workflow_lint": "ok (blocking=0, violations=0)"
+  },
+  "verification_details": {
+    "parent_events_blob_shas_vs_79671bc": {
+      "events/0001-work-order-started.json": "7b3001a7f2d2cf923dd7ff4c8cec453120b39965",
+      "events/0002-continuation-u2-readiness-executed.json": "97c7fa3a3ff5e0e90950bd29544740b46c377eb5",
+      "passport.json": "ee47dacca07d26d792a04b54bb0f18c3802adfd2"
+    },
+    "frozen_r2_blobs_identical_base_vs_head": {
+      "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md": "4835719622bae49a8e8b480536a482b4b222d408",
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+      "project/state.json": "b819755783119ecc56be50cab1bc736c09c85b24",
+      "project/infra-state.json": "5056b8f539d51ddb0e3b6a3d33c931b91e29885d"
+    },
+    "sha256_recomputed_exact": [
+      "scripts/r2/__init__.py",
+      "scripts/r2/cli.py",
+      "scripts/r2/engine_build.py",
+      "scripts/r2/executor.py",
+      "scripts/r2/fingerprint.py",
+      "scripts/r2/supervisor.py"
+    ],
+    "release_package_selftest": "exactly 7 errors, all convention/nlbl_convention/__pycache__/*.pyc, 0 non-pyc (documented finding class)",
+    "engine_binary_sha256": "6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78",
+    "negative_control_live": "r2.cli check-host on outenemy -> NOT_ELIGIBLE, exit 2 (correct canonical negative control, not a defect)"
+  },
+  "scientific_runs": 0,
+  "confirmatory_runs": 0,
+  "timestamp_utc": "2026-10-11T11:51:15Z"
+}

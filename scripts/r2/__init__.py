@@ -22,4 +22,15 @@ TOOLING_VERSION = "r2-activation-r1"
 
 FORBIDDEN_AUTHOR_HOSTNAMES = ("outenemy",)
 
+PINNED_U2_HOSTNAMES = ("outenemy",)
+"""Hostnames pinned as EXTERNAL_U2_ONLY reproduction platforms.
+
+U2 readiness R1 / tooling-repair R1: the U2 executor path (``r2.cli run-u2``)
+requires the host to BE the pinned external platform — the U2 role is pinned
+by policy (FROZEN_R2 protocol §5 P-B; NATIVE_UBUNTU_EXECUTION_POLICY_R1 §1
+OUTENEMY_ROLE = EXTERNAL_U2_ONLY), never self-declared. An unknown hostname is
+fail-closed rejected for U2 duty exactly like a forbidden hostname is rejected
+for U1 duty.
+"""
+
 NATIVE_FILESYSTEMS = ("ext4", "xfs", "btrfs")
