@@ -1283,6 +1283,35 @@ class U2DispatchPathTest(unittest.TestCase):
         self.assertEqual(payload["execution_id"], "EX-NL5-REPRO-V0-2-U2-R1")
         self.assertFalse((work / "ledger.jsonl").exists())
 
+    def test_malformed_spec_is_a_named_fail_closed_refusal(self):
+        # Review m-1 (FRESH_REVIEW_U2_READINESS_R1): missing/ill-typed spec
+        # keys must produce BLOCKED_MALFORMED_SPEC, never a traceback.
+        root = self.tmp / "repo"
+        root.mkdir()
+        self._fixture_authority(root)
+        work = self.tmp / "run"
+        work.mkdir()
+        for bad_spec in (
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "fixture": True, "command": ["true"]},
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "run_base": "T001", "fixture": True, "command": "true"},
+            {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "run_base": "T001", "fixture": True, "command": [1, {"x": 2}]},
+        ):
+            spec_path = work / "spec-bad.json"
+            spec_path.write_text(json.dumps(bad_spec), encoding="utf-8")
+            argv = [
+                "run-u2",
+                "--spec", str(spec_path),
+                "--ledger", str(work / "ledger.jsonl"),
+                "--launcher", "direct",
+                "--no-rerun-scan",
+                "--fixture",
+            ]
+            argv += [f"--{key.replace('_', '-')}={value}" for key, value in self._authority_paths(root).items()]
+            code, payload = self._run_cmd(argv)
+            self.assertEqual(code, 3, bad_spec)
+            self.assertEqual(payload["status"], "BLOCKED_MALFORMED_SPEC", bad_spec)
+            self.assertFalse((work / "ledger.jsonl").exists(), bad_spec)
+
     def test_non_u2_host_is_blocked_before_anything_else(self):
         root = self.tmp / "repo"
         root.mkdir()

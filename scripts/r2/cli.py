@@ -202,20 +202,37 @@ def cmd_run_u2(args: argparse.Namespace) -> int:
             }
         )
         return 3
-    ledger = AttemptLedger(Path(args.ledger))
-    launcher = SystemdLauncherChoice(args.launcher)
-    executor = RunExecutor(ledger, launcher=launcher.resolve())
-    spec = RunSpec(
-        execution_id=execution_id,
-        run_base=str(spec_json["run_base"]),
-        attempt=int(spec_json.get("attempt", 0)),
-        command=[str(item) for item in spec_json["command"]],
-        seed=spec_json.get("seed"),
-        subject_pins=dict(spec_json.get("subject_pins", {})),
-        raw_root=Path(spec_json["raw_root"]) if spec_json.get("raw_root") else None,
-        workspace=Path(spec_json["workspace"]) if spec_json.get("workspace") else None,
-        timeout_seconds=spec_json.get("timeout_seconds"),
-    )
+    try:
+        ledger = AttemptLedger(Path(args.ledger))
+        launcher = SystemdLauncherChoice(args.launcher)
+        executor = RunExecutor(ledger, launcher=launcher.resolve())
+        if not isinstance(spec_json["command"], list) or not all(
+            isinstance(item, (str, int, float)) and not isinstance(item, bool)
+            for item in spec_json["command"]
+        ):
+            raise ValueError("command must be a list of string/number argv items")
+        spec = RunSpec(
+            execution_id=execution_id,
+            run_base=str(spec_json["run_base"]),
+            attempt=int(spec_json.get("attempt", 0)),
+            command=[str(item) for item in spec_json["command"]],
+            seed=spec_json.get("seed"),
+            subject_pins=dict(spec_json.get("subject_pins", {})),
+            raw_root=Path(spec_json["raw_root"]) if spec_json.get("raw_root") else None,
+            workspace=Path(spec_json["workspace"]) if spec_json.get("workspace") else None,
+            timeout_seconds=spec_json.get("timeout_seconds"),
+        )
+    except (KeyError, TypeError, ValueError) as error:
+        # Review m-1 (FRESH_REVIEW_U2_READINESS_R1): a malformed spec must be a
+        # named fail-closed response, never an unstructured traceback.
+        emit(
+            {
+                "command": "run-u2",
+                "status": "BLOCKED_MALFORMED_SPEC",
+                "reason": f"run spec is malformed: {error!r}",
+            }
+        )
+        return 3
     try:
         record = executor.execute(spec)
     except AttemptReuseError as error:
