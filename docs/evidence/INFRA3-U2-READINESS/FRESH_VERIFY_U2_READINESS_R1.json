@@ -1,0 +1,125 @@
+{
+  "record_kind": "VERIFIER_VERDICT",
+  "issuer_class": "INDEPENDENT_VERIFIER",
+  "schema_version": 1,
+  "evidence_id": "FRESH_VERIFY_U2_READINESS_R1",
+  "verdict": "VERIFIED",
+  "verified_head": "ead9c256a5d1f26a2b9d43637b54a192d60da691",
+  "verified_tree": "76c9c63fac73cc1a39042549833a9b42ee2fce62",
+  "subject_branch": "infra/u2-outenemy-executor-readiness-r1",
+  "base_main": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "merge_base": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "strict_descendant_of_base": true,
+  "commits_ahead_of_base": 8,
+  "commits_behind_base": 0,
+  "review_binding": {
+    "reviewed_head": "9ded2bf7c230781111c9d90008502cbd8271aa45",
+    "reviewed_tree": "520c0e9245a405c0acab163bcfa1897c68fabeb9",
+    "review_branch_tip": "d588e2aa43a84e58736de2c737ca5f67dc6074f6",
+    "review_verdict": "PASS",
+    "review_evidence": "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.json",
+    "reviewed_head_is_ancestor_of_verified_head": true,
+    "review_branch_tip_is_ancestor_of_verified_head": true,
+    "review_integration_merge": "8afe8ae2c6daef44c0c9d9e29e544334f5e4ab56"
+  },
+  "post_review_commits_exhaustive": [
+    {
+      "sha": "5ce0a6318ea138a8875304b4b5884577437449c2",
+      "kind": "m-1 narrow repair",
+      "files": ["scripts/r2/cli.py", "tests/test_r2_activation_tooling.py"],
+      "scope_confirmed": "BLOCKED_MALFORMED_SPEC wrap + command argv validation only"
+    },
+    {
+      "sha": "8afe8ae2c6daef44c0c9d9e29e544334f5e4ab56",
+      "kind": "review integration merge",
+      "files": [
+        "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.json",
+        "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.md"
+      ]
+    },
+    {
+      "sha": "ead9c256a5d1f26a2b9d43637b54a192d60da691",
+      "kind": "corrections/bookkeeping",
+      "files": [
+        "docs/work/WORK_QUEUE.md",
+        "docs/work/executions/EX-INFRA3-R2-TOOLING-REPAIR-R1/events/0004-continuation-fresh-review-pass-integrated.json"
+      ]
+    }
+  ],
+  "safety_chain_files_untouched_since_reviewed_head": {
+    "diff_9ded2bf7..ead9c25_files": [
+      "scripts/r2/fingerprint.py",
+      "scripts/r2/engine_build.py",
+      "scripts/r2/supervisor.py",
+      "scripts/r2/executor.py"
+    ],
+    "diff_empty": true
+  },
+  "gates": {
+    "1_review_chain_integrity": {
+      "status": "PASS",
+      "verdict_file_at_d588e2a": "PASS with reviewed_head/reviewed_tree bound to 9ded2bf7c230781111c9d90008502cbd8271aa45 / 520c0e9245a405c0acab163bcfa1897c68fabeb9",
+      "reviewed_head_tree_recomputed": "520c0e9245a405c0acab163bcfa1897c68fabeb9",
+      "post_review_commit_set_exact": true,
+      "m1_repair_diff_is_guard_only": true
+    },
+    "2_machine_gates": {
+      "status": "PASS",
+      "unittest": {"result": "OK", "tests": 631, "runtime_seconds": 57.3, "exit_code": 0},
+      "work_cli_validate_EX-INFRA3-R2-TOOLING-REPAIR-R1": "ok (exit 0; has_post_terminal_corrections=true: event 0004, legitimate post-terminal corrections record)",
+      "work_cli_validate_EX-INFRA3-U2-OUTENEMY-READINESS-R1": "ok (exit 0)",
+      "work_cli_validate_all_EX_dirs": {"dirs": 53, "failures": 0},
+      "check_consistency": "ok (head/tree recomputed by the tool itself = verified pins)",
+      "workflow_lint": {"ok": true, "violations": 0, "blocking": 0}
+    },
+    "3_native_negative_controls_this_host_outenemy": {
+      "status": "PASS",
+      "check_host": {"status": "NOT_ELIGIBLE", "exit_code": 2, "canonical": true},
+      "u1_run_guard": {"status": "BLOCKED_HOST", "exit_code": 2, "ledger_created": false, "u1_guard_weakened": false}
+    },
+    "4_run_u2_safety_chain_code_at_head": {
+      "status": "PASS",
+      "validate_u2_host": "native platform floor (Linux, virtualization=none, no WSL marker, native root fs, systemd) + hostname pinned by policy (case-insensitive, fail-closed on unknown) + host must fail validate_native_u1 (+ defensive check that the pinned host's U1 rejection is the hostname policy)",
+      "missing_dispatch_authority": "BLOCKED_NO_DISPATCH_AUTHORITY, exit 3 (code + unit test + live control on this host, no ledger written)",
+      "non_fixture_plan": "BLOCKED_LAUNCH_GATE_PROTECTED_WRITER, exit 3 (code + unit test)",
+      "fixture_true_required": "BLOCKED_NON_FIXTURE_SPEC, exit 3 (code + unit test)",
+      "frozen_campaign_prefix_refusal": "FROZEN_CAMPAIGN_EXECUTION_ID_PREFIXES=('EX-NL5-REPRO-V0-2',) -> BLOCKED_FROZEN_CAMPAIGN_ID, exit 3 (code + unit test)",
+      "ledger_append_only": "AttemptLedger opens 'a' only; duplicate attempt_id raises AttemptReuseError (unit-tested, incl. after failure)",
+      "scientific_outcome": "constant NOT_EVALUATED in executor record + exit.json + AttemptRecord default; no override path",
+      "unit_tests_present_and_passing": "U2DispatchPathTest: 9 tests incl. end-to-end fixture dispatch, missing-authority, non-fixture-authority, invalid-authority, non-fixture spec, frozen campaign id, malformed spec (m-1), non-U2 host, CLI subprocess host guard — all inside the 631 OK suite"
+    },
+    "5_frozen_science_and_canonical_state_identity": {
+      "status": "PASS",
+      "blob_shas_identical_head_vs_main": {
+        "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md": "4835719622bae49a8e8b480536a482b4b222d408",
+        "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "project/state.json": "b819755783119ecc56be50cab1bc736c09c85b24",
+        "project/infra-state.json": "5056b8f539d51ddb0e3b6a3d33c931b91e29885d"
+      },
+      "scientific_runs_in_branch_diff": 0,
+      "raw_data_files_in_branch_diff": 0,
+      "changed_files_total": 34
+    },
+    "6_scope_coverage": {
+      "status": "PASS",
+      "changed_files": 34,
+      "uncovered_by_passports": [],
+      "code_paths_owner": "all scripts/r2/* + tests/test_r2_activation_tooling.py covered by EX-INFRA3-R2-TOOLING-REPAIR-R1 passport",
+      "shared_surfaces_declared_in_both_passports": [
+        "docs/evidence/INFRA3-U2-READINESS/**",
+        "docs/work/WORK_QUEUE.md",
+        "docs/infra/U2_OUTENEMY_EXECUTOR_READINESS_R1.md"
+      ]
+    }
+  },
+  "minor_notes_non_blocking": [
+    "Review m-2 stands as accepted-and-deferred by design: the executed fixture command argv comes from the operator spec and is not whitelist-constrained; safety rests on host pinning + mandatory dispatch authority + fixture ceiling + frozen-campaign-id refusal + NOT_EVALUATED; pinning expected fixture argv/digest is correctly deferred to the frozen campaign WO.",
+    "run-u2 with missing required CLI paths (--contract/--protocol/--seed-record/--repo-root) fails at argparse with usage error exit 2 before the named safety gates; fail-closed, not a hole."
+  ],
+  "blocking_findings": [],
+  "scientific_runs": 0,
+  "verify_method": "fresh temp-dir clone (/tmp/verify-u2-readiness-r1/clone) from local origin /home/rdpuser/NanoLab/.git-store/repo.git, fresh git fetch; no reuse of existing worktrees; all pins, ancestries, diffs, blob SHAs and gates recomputed in this session",
+  "verify_host": "outenemy (pinned U2 platform; NOT_ELIGIBLE for U1 = correct canonical negative control)",
+  "timestamp_utc": "2026-10-11T12:07:29Z"
+}
