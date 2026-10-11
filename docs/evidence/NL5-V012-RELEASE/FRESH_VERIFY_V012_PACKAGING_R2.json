@@ -1,0 +1,115 @@
+{
+  "record_kind": "VERIFIER_VERDICT",
+  "issuer_class": "INDEPENDENT_VERIFIER",
+  "verdict": "VERIFIED",
+  "verified_head": "998878236a1f06995f837ba1dac583eee3a68f0e",
+  "verified_tree": "c8fabd597a9adac87bbb5c9b39a695e202c65a62",
+  "base_head": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "merge_base": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "review_binding": {
+    "reviewed_head": "998878236a1f06995f837ba1dac583eee3a68f0e",
+    "reviewed_tree": "c8fabd597a9adac87bbb5c9b39a695e202c65a62",
+    "review_branch_tip": "0c9dcf17bcc7ee1268295dd83f6efcc3be285e53",
+    "review_verdict": "PASS",
+    "review_branch": "review/nl5-v012-packaging-r2",
+    "review_tip_parent": "998878236a1f06995f837ba1dac583eee3a68f0e",
+    "review_tip_descends_from_subject_head": true,
+    "head_not_ahead_of_reviewed_subject": true,
+    "review_files": [
+      "docs/evidence/NL5-V012-RELEASE/FRESH_SCIENTIFIC_RELEASE_REVIEW_R2.md",
+      "docs/evidence/NL5-V012-RELEASE/FRESH_SCIENTIFIC_RELEASE_REVIEW_R2.json"
+    ]
+  },
+  "byte_diff": {
+    "changed_surfaces": 6,
+    "scientific_changed": 0,
+    "files_v011": 36,
+    "files_v012": 36,
+    "file_sets_identical": true,
+    "excluded": ["__pycache__", "*.pyc"],
+    "changed_paths": [
+      "CITATION.cff",
+      "README.md",
+      "RELEASE_MANIFEST.json",
+      "RIGHTS.json",
+      "VERSION",
+      "reproduction/README.md"
+    ],
+    "identical_count": 30,
+    "scientific_total": 27,
+    "scientific_identical": 27,
+    "scientific_prefixes": ["families/", "convention/", "schema/", "reports/", "provenance/"]
+  },
+  "version_surfaces": {
+    "v0_1_2": {"VERSION": "0.1.2", "RIGHTS": "0.1.2", "manifest": "0.1.2", "consistent": true},
+    "v0_1_0_at_releases_nanolab_components_v0_1": {"VERSION": "0.1.0", "RIGHTS": "0.1.0", "manifest": "0.1.0", "consistent": true},
+    "v0_1_1": {"VERSION": "0.1.1", "RIGHTS": "0.1.0", "manifest": "0.1.1", "historical_stale_rights": true},
+    "v0_1_1_ls_tree_sha256_main": "9549f2403b52ec983dae5a86e46a97c509d2dc7020ff94f3242ee0026dbacca6",
+    "v0_1_1_ls_tree_sha256_head": "9549f2403b52ec983dae5a86e46a97c509d2dc7020ff94f3242ee0026dbacca6",
+    "v0_1_1_immutable": true,
+    "v0_1_0_immutable": true,
+    "ok": true
+  },
+  "manifest_determinism": {
+    "method": "manifest create in temp copy of releases/nanolab-components-v0.1.2, byte-compare against committed",
+    "regenerated_sha256": "567314026bd1b2157cddd9b3831a5990cdad0862b0a15c0f22004c6c9e0f122b",
+    "committed_sha256": "567314026bd1b2157cddd9b3831a5990cdad0862b0a15c0f22004c6c9e0f122b",
+    "byte_identical": true,
+    "verify_on_committed": {"ok": true, "files": 35, "errors": 0, "exit_code": 0},
+    "create_exit_code": 0,
+    "pyc_entries_in_v012_manifest": 0,
+    "pyc_entries_in_v011_manifest_historical": 7,
+    "ok": true
+  },
+  "fresh_export_self_test": {
+    "method": "git archive --format=tar 9988782 -> clean tmp -> reproduce.py self-test",
+    "exit_code": 0,
+    "verify_files": 35,
+    "verify_errors": 0,
+    "plans": 5,
+    "rights_package_version_in_export": "0.1.2",
+    "ok": true
+  },
+  "gates": {
+    "full_unittest_suite": {"command": "python3 -m unittest discover -s tests -t .", "tests": 612, "result": "OK", "exit_code": 0, "ok": true},
+    "work_cli_validate_subject_ex": {"exit_code": 0, "ok": true, "status": "HANDOFF_COMPLETED", "event_types": ["WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "HANDOFF_COMPLETED", "CONTINUATION_CHECKPOINT"], "post_terminal_correction_event_0004_after_terminal_0003": true, "legitimate": true},
+    "work_cli_validate_all_executions": {"directories": 52, "failures": 0, "ok": true},
+    "check_consistency": {"exit_code": 0, "ok": true, "errors": 0, "warnings": 0, "echo_head": "998878236a1f06995f837ba1dac583eee3a68f0e", "echo_tree": "c8fabd597a9adac87bbb5c9b39a695e202c65a62"},
+    "workflow_lint": {"exit_code": 0, "ok": true, "blocking": 0},
+    "card_lint_package_v012": {"exit_code": 0, "ok": true, "warnings": 0, "cards": 5}
+  },
+  "boundaries": {
+    "frozen_blobs_unchanged": {
+      "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md": "4835719622bae49a8e8b480536a482b4b222d408",
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+    },
+    "project_state_json": "b819755783119ecc56be50cab1bc736c09c85b24",
+    "project_infra_state_json": "5056b8f539d51ddb0e3b6a3d33c931b91e29885d",
+    "state_files_identical_to_main": true,
+    "diff_scope": ["docs/work/WO-NL5-V012-PACKAGING-PYC-REPAIR-R1.md", "docs/work/WORK_QUEUE.md", "docs/work/executions/EX-NL5-V012-PACKAGING-PYC-REPAIR-R1/**", "releases/nanolab-components-v0.1.2/** (new copy)", "scripts/release/card_lint.py", "tests/test_release_contract.py"],
+    "pyc_choke_point": {
+      "file": "scripts/release/card_lint.py",
+      "function": "_package_files",
+      "used_by": ["manifest_create", "manifest_verify"],
+      "filter": "__pycache__ not in p.parts and p.suffix != .pyc",
+      "live_test_planted_pyc_verify_ok_files_35": true,
+      "live_test_planted_pyc_create_byte_identical": true,
+      "negative_control_tamper_verify_exit_3_errors_2": true,
+      "ok": true
+    },
+    "ok": true
+  },
+  "scientific_runs": 0,
+  "checks": {
+    "1_byte_compare_v011_vs_v012": "PASS",
+    "2_version_surfaces_and_immutability": "PASS",
+    "3_manifest_determinism": "PASS",
+    "4_fresh_export_self_test": "PASS",
+    "5_gates": "PASS",
+    "6_boundaries": "PASS"
+  },
+  "fresh_clone_statement": "Verified in a brand-new clone /tmp/verify-v012-r2/clone created this session from the local origin /home/rdpuser/NanoLab/.git-store/repo.git; existing worktrees not reused; all values recomputed independently (own cmp_releases.py script plus own git/python commands), not copied from review or evidence files.",
+  "environment": {"host": "outenemy", "platform_pin": "U2", "note": "technical verification gates only; no scientific/confirmatory work executed"},
+  "timestamp_utc": "2026-10-11T12:11:01Z"
+}
