@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "record_kind": "REVIEWER_VERDICT",
+  "issuer_class": "INDEPENDENT_REVIEWER",
+  "review_id": "NL5-V02-FRESH-AUDIT/SCIENTIFIC_REVIEW_R1",
+  "verdict": "PASS",
+  "reviewed_head": "ff199f9b11ad7b5324dc1549d48048b1813db711",
+  "reviewed_tree": "6791b39f247fba65b6f091321caaeca8eb4c57ad",
+  "reviewed_branch": "control/nl5-v02-fresh-audit-r1",
+  "base_main_head": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "review_method": {
+    "fresh_clone": "git clone --no-checkout git@github.com:rootfabric/NanoLab.git into a clean temp directory; no implementer or Director conclusion reused as proof",
+    "live_tip_confirmed": "origin/control/nl5-v02-fresh-audit-r1 == ff199f9b11ad7b5324dc1549d48048b1813db711 at review time (branch had not moved past ff199f9)",
+    "environment": {
+      "python": "Python 3.10.12",
+      "git": "git version 2.34.1"
+    },
+    "scientific_runs": 0
+  },
+  "claims": {
+    "C1_f2_git_identity": {
+      "result": "PASS",
+      "note": "60da9a846511265a8ac7564da088c3d74cb073f0 exists (type commit), ^{tree}=e565c8a6cee9e829fac14008ebc9c2ea1609931d (recomputed), merge-base --is-ancestor F2 8bf7e3a => true"
+    },
+    "C2_director_freeze_r2_sequencing": {
+      "result": "PASS",
+      "note": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d exists; merge-base --is-ancestor F2 a2f7304 => true and merge-base != a2f7304 => strict descendant"
+    },
+    "C3_fresh_reviewer_branch": {
+      "result": "PASS",
+      "note": "tip d63eb5c088133f92ebd20501835a159cc3e4b865; FRESH_SCIENTIFIC_REVIEW_R2.json verdict=PASS, reviewed_head/tree == F2 head/tree; tip is descendant of F2"
+    },
+    "C4_fresh_verifier_branch": {
+      "result": "PASS",
+      "note": "tip f12d0b497cb28a2f18476ded90b4b1bd079bb414; FRESH_VERIFIER_R2.json verdict=VERIFIED, verified_head/tree == F2 head/tree; tip is descendant of F2"
+    },
+    "C5_frozen_artifact_digests": {
+      "result": "PASS",
+      "note": "sha256 recomputed from git cat-file blob bytes at F2: protocol 2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d (blob 4835719622bae49a8e8b480536a482b4b222d408), contract 7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a (blob d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b), seed record 8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28 (blob 0164e0e3f5dda6dbf63174df3730b1bd921d2c76); all equal DIRECTOR_FREEZE_R2.json pins (top-level and frozen_subject_binding)"
+    },
+    "C6_freeze_contract_gate": {
+      "result": "PASS",
+      "note": "from clean checkout of subject HEAD: gate=PASS, validation_stage=PREFREEZE_VALIDATION_PASS, dispatch=DISPATCH_BLOCKED, dispatch_ready=false, exit 0; negative control without --record on FROZEN contract: exit 3, FREEZE_GATE_FAIL 'frozen contract requires an explicit seed record binding'; frozen artifacts byte-identical F2..HEAD"
+    },
+    "C7_feasibility_n_grid": {
+      "result": "PASS",
+      "note": "pinned run_n_grid on paired_platform_sensitivity.json with FROZEN_R2 bootstrap_seeds, variants [0b,32b]: selected_n=64, ratios at N=64 0b=0.07142 / 32b=0.73566 (~0.071/0.736), headroom_ratio=0.8; source_sha256 matches audit evidence 2b0df07deb62add319d8d12f29cde276d0288a38474760b36978f92adb953096"
+    },
+    "C8_harness_gates": {
+      "result": "PASS",
+      "note": "unittest discover: Ran 605 tests, OK, exit 0; check-consistency ok=true; workflow_lint blocking=0; work_cli validate EX-NL5-V02-FRESH-AUDIT-R1 ok=true (HANDOFF_COMPLETED, no post-terminal corrections)"
+    },
+    "C9_r2_status_honesty": {
+      "result": "PASS",
+      "note": "config/infra/r2-activation.v1.json policy.r2_status='WAITING_HOST / NOT_ACTIVE', author_u1='NOT_ASSIGNED'; audit record states r2_activated=false everywhere (references to 'R2 ACTIVE' are lifecycle requirements/runbook steps, not activation claims); git diff main..HEAD -- project/state.json is empty"
+    },
+    "C10_scope_discipline": {
+      "result": "PASS",
+      "note": "git diff --name-only 8bf7e3a..HEAD = 15 paths, all inside passport allowed_paths (WO file, EX-NL5-V02-FRESH-AUDIT-R1/**, DIRECTOR_FRESH_AUDIT_R1.md/.json, WORK_QUEUE.md); no code changes, no frozen package edits, no historical evidence edits"
+    },
+    "C11_u1_host_search_internal_consistency": {
+      "result": "PASS",
+      "note": "u1-host-search-R1.json conclusions consistent with sibling evidence: outenemy check-host NOT_ELIGIBLE (independently reproduced live via PYTHONPATH=scripts python3 -m r2.cli check-host, identical reasons), activation decision r2_activated=false with 14 unmet preconditions (counted), config statuses match; external 192.168.0.x network probing claims are REVIEWER_NOT_REPRODUCIBLE"
+    }
+  },
+  "not_reproducible": [
+    {
+      "scope": "u1-host-search-R1.json candidates_inspected: LAN probes of 192.168.0.19 (Windows), 192.168.0.27 (SSH publickey rejected for 6 users), 192.168.0.11/.17/.22/.25/.26/.1 (no open ports), local libvirt/LXD inventory on outenemy",
+      "reason": "environment-dependent external network state at audit time; not re-probed by this reviewer",
+      "disposition": "REVIEWER_NOT_REPRODUCIBLE (not FAIL): no internal contradictions found; the fail-closed conclusions drawn from them (AUTHOR_U1=NOT_ASSIGNED, R2=WAITING_HOST/NOT_ACTIVE) match config and machine evidence"
+    }
+  ],
+  "findings": {
+    "m-1": "MINOR (non-blocking): check-consistency emits warning 'git metadata unavailable' / branch=null when run from a detached HEAD in a fresh clone (observed during C8); ok=true and head/tree are still correct, so gate integrity is unaffected"
+  },
+  "scientific_runs": 0,
+  "state_ceiling_acknowledged": {
+    "r2": "WAITING_HOST / NOT_ACTIVE",
+    "author_u1": "NOT_ASSIGNED",
+    "nl5": "IN_PROGRESS",
+    "nl6_001": "LOCKED",
+    "external_reproductions": 0,
+    "machine_launch_authorized": false
+  },
+  "boundaries_respected_by_this_review": {
+    "science_started": false,
+    "main_touched": false,
+    "force_push": false,
+    "existing_files_modified": false,
+    "paid_services": false
+  },
+  "next_actor": "OWNER / DIRECTOR",
+  "next_action": "provision independent native Ubuntu U1 (never outenemy, never VM/LXD on outenemy) per DIRECTOR_FRESH_AUDIT_R1.md section 6 runbook; statuses remain unchanged until real activation",
+  "recorded_at_utc": "2026-10-10T13:19:40Z"
+}

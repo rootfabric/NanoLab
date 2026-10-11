@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-10T13:45:00Z",
+  "execution_id": "EX-NL5-V02-FRESH-AUDIT-R1",
+  "work_order_id": "WO-NL5-V02-FRESH-AUDIT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "summary": "Fresh audit complete; durable record published. Authority chain S -> F -> D / R / V of FROZEN_R2 verified INTACT on fresh fetch (F2 60da9a8/e565c8a6 in main history; Director FREEZE R2 a2f7304 strict descendant; fresh Reviewer PASS d63eb5c and fresh Verifier VERIFIED f12d0b4, both exact-F2 subject and descendants; 3 frozen artifact SHA-256 match Director FREEZE R2 pins). Machine gates fresh: freeze contract gate PASS/PREFREEZE_VALIDATION_PASS/DISPATCH_BLOCKED with pinned scan re-run; feasibility N-grid bit-exact SELECTED_N=64; 605 tests OK; consistency ok; workflow lint blocking=0. R2 probe: outenemy check-host NOT_ELIGIBLE (correct negative control); honest machine activation decision WAITING_HOST / NOT_ACTIVE with 14 unmet preconditions; U1 host search = HARD BLOCKER (no eligible independent native Ubuntu host with available credentials: outenemy forbidden as U1 and physically equals U2; 192.168.0.19 Windows no SSH; 192.168.0.27 SSH open but publickey rejected for 6 users with the only available key, no password credentials; other LAN hosts no open ports; local VM/LXD on outenemy = same physical machine as U2, forbidden). Activation package mechanically ready (scripts/r2 tooling merged, machine contract config, frozen F2, runbook DIRECTOR_FRESH_AUDIT_R1.md section 6). Handoff: merge of branch control/nl5-v02-fresh-audit-r1 = Human Gate (draft PR). The single actionable dependency for the scientific line is owner-provisioned U1; nothing else blocks the mechanical activation path. Boundaries unchanged: SCIENTIFIC_RUNS=0; NL5=IN_PROGRESS; NL6-001=LOCKED; external_reproductions=0; machine_launch_authorized=false; historical terminals NL5-002 MISMATCH and PLATFORM_INSENSITIVE untouched.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 scripts/harness/work_cli.py validate docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1 -> ok",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency -> ok (0 errors, 0 warnings)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint -> blocking=0"
+  ],
+  "evidence_refs": [
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/"
+  ],
+  "next_action": "Owner: provision independent native Ubuntu U1 and publish SSH access; then execute DIRECTOR_FRESH_AUDIT_R1.md section 6 runbook on U1 (gates U1-U5 + NC-U1..U5), fresh activation review/verify, HG-A owner decision, R2 ACTIVE, dispatch authority v3, HUMAN_PROTECTED_WRITER launch authorization.",
+  "blocker": null
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-10T12:57:55Z",
+  "execution_id": "EX-NL5-V02-FRESH-AUDIT-R1",
+  "work_order_id": "WO-NL5-V02-FRESH-AUDIT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "summary": "Started bounded Director fresh audit of the NL5 v0.2 FROZEN_R2 authority chain and R2 activation readiness per central-agent mission 'NL5 FINAL CLOSURE'. Base: fresh fetch of rootfabric/NanoLab confirmed origin/main = 8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad (merge of PR #52, merged=True, merge_commit_sha=8bf7e3a). Pre-START facts already verified on this session (recorded in CONTINUATION with raw command refs): F2 commit 60da9a846511265a8ac7564da088c3d74cb073f0 exists with tree e565c8a6cee9e829fac14008ebc9c2ea1609931d (rev-parse ^{tree}); Director FREEZE R2 a2f7304ebbb5973b81cf49dee60c21c85c6a974d is a descendant; fresh Reviewer PASS at branch tip review/nl5-v02-frozen-r2-scientific-review-r1 = d63eb5c088133f92ebd20501835a159cc3e4b865; fresh Verifier VERIFIED at branch tip verify/nl5-v02-frozen-r2-r1 = f12d0b497cb28a2f18476ded90b4b1bd079bb414. Scope of this WO: (A) mechanical re-verification of the full chain S->F->D/R/V with SHA-256 digest cross-check of the three frozen artifacts vs Director FREEZE R2 record; (B) mandatory machine gates fresh run: repro_v02_freeze_contract gate (with pinned collision-scan re-run) and repro_v02_feasibility_gate N-grid on committed planning inputs; (C) harness stock checks: 605-test suite, check-consistency, workflow_lint; (D) R2 infrastructure probe: U1 host search per ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md contract + NATIVE_UBUNTU_EXECUTION_POLICY_R1 (outenemy = EXTERNAL_U2_ONLY, U1 physically != U2), outenemy check-host negative control + audit-time fingerprint capture; (E) honest WAITING_HOST record with exact blocker + mechanical activation runbook if U1 absent. Boundaries: SCIENTIFIC_RUNS = 0; no canonical status changes (NL5 = IN_PROGRESS, NL6-001 = LOCKED, AUTHOR_U1 = NOT_ASSIGNED, R2 = WAITING_HOST / NOT_ACTIVE, external_reproductions = 0, machine_launch_authorized = false); frozen package F2 and historical evidence are read-only; no merge to main (Human Gate).",
+  "command_refs": [
+    "git fetch origin (fresh; origin/main 8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad)",
+    "git worktree add ../audit-nl5-v02-r1 -b control/nl5-v02-fresh-audit-r1 origin/main"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-V02-FRESH-AUDIT-R1.md"
+  ],
+  "next_action": "Run chain verification + machine gates + harness checks; probe U1 candidates; publish CONTINUATION with all raw command outputs as evidence files.",
+  "blocker": null
+}
