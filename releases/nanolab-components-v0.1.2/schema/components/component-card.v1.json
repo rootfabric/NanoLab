@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rootfabric.github.io/NanoLab/schemas/components/component-card.v1.json",
+  "title": "NanoLab component card schema v1 (release v0.1 line)",
+  "description": "Normative machine-readable card for the NanoLab component library release v0.1. Executable by scripts/release/mini_schema.py (draft 2020-12 subset, fail-closed). Cross-field rules that this subset cannot express are enforced by release.card_lint semantic checks and documented in docs/release/RELEASE_CONTRACT_V0_1.md. UNKNOWN policy: an unknown value is the explicit string UNKNOWN; a missing check is never encoded as PASS. Source of truth for field semantics: docs/DATA_CONTRACTS.md (ComponentCard) and docs/release/RELEASE_CONTRACT_V0_1.md.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "component_id",
+    "family",
+    "variant",
+    "function",
+    "rights",
+    "claim_ceiling",
+    "measurement_status",
+    "protocol_pins",
+    "source_provenance",
+    "measured_observables",
+    "integrity",
+    "known_gaps",
+    "known_limitations",
+    "reproduction",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "nanolab_component_card"},
+    "component_id": {"type": "string", "minLength": 1},
+    "family": {"type": "string", "minLength": 1},
+    "variant": {"type": "string", "minLength": 1},
+    "function": {"type": "string", "minLength": 1},
+    "interfaces": {
+      "type": "object",
+      "description": "Attachment/measurement/control interfaces; explicit UNKNOWN entries allowed.",
+      "additionalProperties": {"type": "string"}
+    },
+    "operating_range": {
+      "type": "object",
+      "description": "Measured operating envelope only; extrapolation outside measured protocol is not claimed.",
+      "additionalProperties": {"type": ["string", "number", "boolean", "array", "null"]}
+    },
+    "rights": {
+      "type": "object",
+      "required": ["rights_mode", "derived_results_publishable", "durable_cache"],
+      "additionalProperties": false,
+      "properties": {
+        "rights_mode": {"enum": ["OWN", "REFERENCE_ONLY", "DOWNLOAD_ON_RUN", "MIXED", "UNKNOWN"]},
+        "upstream_repo": {"type": "string"},
+        "pinned_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "derived_results_publishable": {"type": "boolean"},
+        "durable_cache": {"enum": ["FORBIDDEN", "ALLOWED"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "design": {
+      "type": "object",
+      "description": "Design/arm-manifest facts for the variant (nucleotide counts, frame-0 angle, manifest coverage and determinism). Free-form typed values; explicit UNKNOWN allowed.",
+      "additionalProperties": {"type": ["string", "number", "boolean", "array", "null"]}
+    },
+    "claim_ceiling": {
+      "description": "New ceiling values require a new schema revision, never silent extension.",
+      "enum": ["C0_SOFTWARE_ONLY", "C1_COMPUTATIONAL_REPRODUCTION"]
+    },
+    "measurement_status": {
+      "enum": ["NOT_MEASURED", "MEASURED", "MEASURED_STATISTICALLY_VALIDATED"]
+    },
+    "scientific_outcome": {"type": "string"},
+    "protocol_pins": {
+      "type": "object",
+      "required": ["engine", "engine_commit", "model"],
+      "additionalProperties": false,
+      "properties": {
+        "engine": {"type": "string", "minLength": 1},
+        "engine_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "model": {"type": "string", "minLength": 1},
+        "temperature": {"type": ["string", "number", "null"]},
+        "steps": {"type": ["integer", "null"]},
+        "seeds": {"type": "array", "items": {"type": "integer"}},
+        "platform": {"type": "string"},
+        "options": {
+          "type": "object",
+          "additionalProperties": {"type": ["string", "number", "boolean", "null"]}
+        },
+        "protocol": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "source_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "upstream_repo": {"type": "string"},
+        "pinned_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "digest_gates": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["size_bytes", "blob_sha1"],
+            "additionalProperties": false,
+            "properties": {
+              "size_bytes": {"type": "integer", "minimum": 0},
+              "blob_sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "sha256_status": {
+                "description": "Amendment R1.1: sha256 is claimed only together with its verification level. The registry pin is blob_sha1 (Git blob SHA1); sha256 may be content-verified or merely computed at download for future re-use.",
+                "enum": ["CONTENT_VERIFIED", "COMPUTED_NOT_VERIFIED", "UNKNOWN"]
+              }
+            }
+          }
+        },
+        "digest_gate_result": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "measured_observables": {
+      "type": "object",
+      "description": "Named observables verbatim from published evidence; every number carries its source path. Empty object allowed only for NOT_MEASURED cards.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["units", "convention", "estimate", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "units": {"type": ["string", "null"]},
+          "convention": {"type": "string", "minLength": 1},
+          "estimate": {"type": ["number", "string", "array", "object", "null"]},
+          "uncertainty": {"type": ["number", "array", "string", "null"]},
+          "n": {"type": ["integer", "null"]},
+          "source": {"type": "string", "pattern": "^[^\\s]+$"},
+          "digests": {"type": "object"},
+          "distribution": {"type": "object"}
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": {"type": ["string", "number", "boolean", "array", "null"]}
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gap_id", "description", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "gap_id": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "status": {"enum": ["KNOWN_GAP", "NOT_MEASURED", "DEFERRED", "MITIGATED", "RESOLVED"]},
+          "blocking_release": {"type": "boolean"}
+        }
+      }
+    },
+    "known_limitations": {"type": "array", "items": {"type": "string"}},
+    "reproduction": {
+      "type": "object",
+      "required": ["requires", "steps", "expected"],
+      "additionalProperties": false,
+      "properties": {
+        "requires": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "steps": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "expected": {
+          "type": "object",
+          "additionalProperties": {"type": ["number", "array", "string"]}
+        },
+        "tolerance_policy": {"type": "string"},
+        "rights_constraints": {"type": "string"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["evidence_execution_id", "card_generated_from"],
+      "additionalProperties": false,
+      "properties": {
+        "evidence_execution_id": {"type": "string", "pattern": "^EX-[A-Za-z0-9._-]+$"},
+        "card_generated_from": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[^\\s]+$"}},
+        "generation": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

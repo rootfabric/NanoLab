@@ -1,0 +1,23 @@
+{
+  "schema": "nanolab.release_lint_output.v1",
+  "command": "PACKAGE",
+  "package_root": "/home/rdpuser/NanoLab/packaging-v012-repair/releases/nanolab-components-v0.1.2",
+  "version": "0.1.2",
+  "cards": [
+    "families/dna_hinge/cards/0b.card.json",
+    "families/dna_hinge/cards/11b.card.json",
+    "families/dna_hinge/cards/32b.card.json",
+    "families/dna_hinge/cards/53b.card.json",
+    "families/dna_hinge/cards/74b.card.json"
+  ],
+  "variant_status": {
+    "0b": "MEASURED",
+    "11b": "MEASURED",
+    "32b": "MEASURED",
+    "53b": "MEASURED",
+    "74b": "NOT_MEASURED"
+  },
+  "warnings": [],
+  "ok": true,
+  "errors": []
+}

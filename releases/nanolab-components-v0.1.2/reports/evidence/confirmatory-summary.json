@@ -1,0 +1,138 @@
+{
+  "execution_id": "EX-NL3-002-R1",
+  "kind": "e2_confirm_summary",
+  "pooled_angle_stats_valid_frames": {
+    "bootstrap": {
+      "ci95": [
+        65.674963662,
+        66.318271836
+      ],
+      "resamples": 10000,
+      "seed": 424242,
+      "statistic": "median"
+    },
+    "iqr_deg": [
+      64.93709665,
+      67.056610879
+    ],
+    "max_deg": 69.201730008,
+    "mean_deg": 65.91727642,
+    "median_deg": 65.976921401,
+    "min_deg": 61.773071999,
+    "n_frames": 150,
+    "q05_deg": 63.00066167,
+    "q95_deg": 68.408819824
+  },
+  "pooled_valid_frames_total": 150,
+  "protocol": "docs/research/E2_PROTO_R1.md (frozen)",
+  "runs": {
+    "E2-R1-C001": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            64.174332927,
+            65.569870376
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          63.473476255,
+          66.01891106
+        ],
+        "max_deg": 67.724409143,
+        "mean_deg": 64.834270719,
+        "median_deg": 65.095434789,
+        "min_deg": 61.773071999,
+        "n_frames": 50,
+        "q05_deg": 62.138948813,
+        "q95_deg": 67.405239442
+      },
+      "displacement_max_max": 7.429820168,
+      "energy_max_abs_drift_total": 0.009862,
+      "frames_total": 50,
+      "frames_valid": 50,
+      "long_bond_fraction_max": 0.055589124,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.986026731,
+      "pairs_fraction_v2_min": 0.981773998,
+      "reference_pairs_v2_count": 3292,
+      "seed": 201004,
+      "valid_frame_fraction": 1.0
+    },
+    "E2-R1-C002": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            65.275402687,
+            66.167076524
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          64.901873199,
+          66.367421601
+        ],
+        "max_deg": 68.162378237,
+        "mean_deg": 65.751286601,
+        "median_deg": 65.708669763,
+        "min_deg": 64.104812492,
+        "n_frames": 50,
+        "q05_deg": 64.353821096,
+        "q95_deg": 67.521409198
+      },
+      "displacement_max_max": 7.912041376,
+      "energy_max_abs_drift_total": 0.006647,
+      "frames_total": 50,
+      "frames_valid": 50,
+      "long_bond_fraction_max": 0.055951662,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.988791275,
+      "pairs_fraction_v2_min": 0.984550136,
+      "reference_pairs_v2_count": 3301,
+      "seed": 202008,
+      "valid_frame_fraction": 1.0
+    },
+    "E2-R1-C003": {
+      "angle_stats_valid_frames": {
+        "bootstrap": {
+          "ci95": [
+            66.677584415,
+            67.519092266
+          ],
+          "resamples": 10000,
+          "seed": 424242,
+          "statistic": "median"
+        },
+        "iqr_deg": [
+          66.308394763,
+          67.948375702
+        ],
+        "max_deg": 69.201730008,
+        "mean_deg": 67.166271942,
+        "median_deg": 67.236579608,
+        "min_deg": 65.529113568,
+        "n_frames": 50,
+        "q05_deg": 65.654095708,
+        "q95_deg": 68.764359103
+      },
+      "displacement_max_max": 8.401379567,
+      "energy_max_abs_drift_total": 0.004583,
+      "frames_total": 50,
+      "frames_valid": 50,
+      "long_bond_fraction_max": 0.055468278,
+      "pairs_fraction_v2_first": 1.0,
+      "pairs_fraction_v2_last": 0.988463874,
+      "pairs_fraction_v2_min": 0.980874317,
+      "reference_pairs_v2_count": 3294,
+      "seed": 203012,
+      "valid_frame_fraction": 1.0
+    }
+  },
+  "schema_version": 1,
+  "scientific_outcome": "MEASURED (measured distributions; no scientific conclusions; acceptance — Director after review)"
+}
+
