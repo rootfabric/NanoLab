@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "evidence_id": "u2-dispatch-fixture-selftest-R1",
+  "execution_id": "EX-INFRA3-U2-OUTENEMY-READINESS-R1",
+  "related_execution": "EX-INFRA3-R2-TOOLING-REPAIR-R1",
+  "recorded_at_utc": "2026-10-11T11:29:41Z",
+  "host": "outenemy",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "purpose": "Native (NO fingerprint injection) end-to-end check of the future U2-dispatch path r2.cli run-u2 on disposable technical fixtures, plus negative controls proving the U1 guard is intact.",
+  "fixture_setup": {
+    "location": "/tmp/u2-dispatch-e2e-r1/fixture (disposable; driver /tmp/u2-dispatch-e2e-r1/driver.py)",
+    "authority": "SYNTHETIC TEST FIXTURE ONLY nanolab_v02_dispatch_authority (schema v3) built in a temp Git repo with real commits/trees/blobs; lifecycle S -> H -> F -> R -> V -> A; base package = committed PRE_DATA_R4 candidate (contract/protocol/seed record/collision-scan manifest) - same proven pattern as tests/test_nl5_v02_prefreeze_r4.py::_authority_fixture",
+    "spec": {"execution_id": "EX-U2-TOOLING-FIXTURE-R1", "run_base": "T001", "attempt": 0, "fixture": true, "command": ["python3", "-c", "print('u2-fixture-ok')"]},
+    "note": "not a real authorization; no frozen campaign leg touched; raw artifacts disposable"
+  },
+  "probes": [
+    {
+      "probe": "e2e happy path (native outenemy fingerprint, no injection)",
+      "command": "python3 -m r2.cli run-u2 --spec spec.json --ledger ledger.jsonl --launcher direct --no-rerun-scan --fixture --dispatch-authority A --contract C --protocol P --seed-record R --repo-root <tmp-repo>",
+      "returncode": 0,
+      "status": "RECORDED",
+      "dispatch": {
+        "synthetic_test_fixture_only": true,
+        "authority_status": "DISPATCH_PRECONDITIONS_RECORDED",
+        "authority_revision": "synthetic-fixture-u2-r1",
+        "fixture": true,
+        "launch_gate": "HUMAN_PROTECTED_WRITER",
+        "machine_launch_authorized": false
+      },
+      "record": {
+        "attempt_id": "T001",
+        "technical_outcome": "COMPLETED",
+        "scientific_outcome": "NOT_EVALUATED",
+        "exit_code": 0,
+        "manifest_digest": "8810649cf8cf9e453eb108245c0747f5e5640cdc6de7e20af6bd6e5fc6997238"
+      },
+      "ledger_created": true
+    },
+    {
+      "probe": "negative control 1: missing --dispatch-authority",
+      "returncode": 3,
+      "status": "BLOCKED_NO_DISPATCH_AUTHORITY",
+      "ledger_created": false
+    },
+    {
+      "probe": "negative control 2: r2.cli run (U1-only) on outenemy",
+      "command": "python3 -m r2.cli run --spec spec2.json --ledger l2.jsonl",
+      "returncode": 2,
+      "status": "BLOCKED_HOST",
+      "reasons_head": "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)",
+      "u1_guard_weakened": false
+    },
+    {
+      "probe": "negative control 3: run-u2 off the pinned platform (unit test, CI-route)",
+      "returncode": 2,
+      "status": "BLOCKED_HOST_U2",
+      "where": "tests.test_r2_activation_tooling.U2DispatchPathTest.test_non_u2_host_is_blocked_before_anything_else + test_run_u2_cli_subprocess_host_guard"
+    }
+  ],
+  "regression_suite": {
+    "command": "python3 -m unittest discover -s tests -t .",
+    "result": "OK",
+    "tests": 630,
+    "delta": "612 base + 18 new (F-4 x3, validate_u2_host x7, run-u2 x8)"
+  },
+  "boundaries": {
+    "scientific_runs": 0,
+    "frozen_campaign_legs_launched": 0,
+    "real_dispatch_authority_created": false,
+    "r2_status": "WAITING_HOST / NOT_ACTIVE"
+  }
+}
