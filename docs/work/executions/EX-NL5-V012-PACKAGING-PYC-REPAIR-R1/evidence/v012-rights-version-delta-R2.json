@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "evidence_id": "v012-rights-version-delta-R2",
+  "execution_id": "EX-NL5-V012-PACKAGING-PYC-REPAIR-R1",
+  "recorded_at_utc": "2026-10-11T13:05:00Z",
+  "host": "outenemy",
+  "correction_of": "owner mission 'NL5 U2 Integration & Narrow Repair' step 2.2",
+  "subject_commit": "e72dc4b10218a138c13730682ed0eeb83cc825ea",
+  "subject_tree": "8aba53733d8efdcec53d7616c456b67f9bf55dc6",
+  "diagnosis": {
+    "question": "why RIGHTS.json.package_version = 0.1.0 while VERSION = 0.1.2",
+    "answer": "STALE METADATA ERROR, not a semantic historical pin",
+    "facts": [
+      "releases/nanolab-components-v0.1 (v0.1.0): VERSION=0.1.0, RIGHTS.package_version=0.1.0, manifest.package_version=0.1.0 — fully consistent",
+      "releases/nanolab-components-v0.1.1 (immutable historical): VERSION=0.1.1, manifest=0.1.1, RIGHTS.package_version=0.1.0 — the bounded v0.1.1 repair copied RIGHTS.json verbatim from v0.1.0 and never bumped it; the staleness was INTRODUCED here",
+      "releases/nanolab-components-v0.1.2: copied from v0.1.1 with only 5 version-surface files changed — RIGHTS.json was not among them, so the stale 0.1.0 was inherited",
+      "no tooling guarded the surface: rights.v1.json schema validates only the semver FORMAT of package_version; card_lint.manifest_verify checks manifest.package_version == VERSION only; nothing compared RIGHTS.package_version to anything"
+    ],
+    "classification_rationale": "no document defines RIGHTS.package_version as an independent/historical pin; the divergence is a packaging metadata defect inherited by copy. Per owner instruction the CURRENT release (v0.1.2, not yet merged) is fixed with an explicit packaging delta; the IMMUTABLE v0.1.1 is not edited — its stale pin is documented here and pinned immutably by a regression test so it can neither drift silently nor be mistaken for a license change."
+  },
+  "delta": {
+    "files_changed_vs_R1": [
+      "releases/nanolab-components-v0.1.2/RIGHTS.json (package_version 0.1.0 -> 0.1.2)",
+      "releases/nanolab-components-v0.1.2/RELEASE_MANIFEST.json (regenerated: only the RIGHTS.json sha256 entry changed)"
+    ],
+    "regeneration": "PYTHONPATH=scripts python3 -m release.card_lint manifest create releases/nanolab-components-v0.1.2 (deterministic sort_keys canonical form; generated_by unchanged: release.card_lint manifest create deterministic-r1.2)",
+    "manifest_verify": {"ok": true, "files": 35, "errors": []},
+    "rights_schema_check": {"ok": true, "errors": []},
+    "sha256": {
+      "RIGHTS.json_old_R1": "5292781ac4448112b3f3ecdaa47aede3f6539f8a68c357808e28dc896fa9bebf",
+      "RIGHTS.json_new_R2": "a4650b970aeba60ed410a1dfe0964433df67799ba949cfe2606e7a8f7b9edc03"
+    }
+  },
+  "byte_diff_R2": {
+    "method": "sha256 of every file in both release trees (excluding __pycache__/*.pyc residues)",
+    "files_v011": 36,
+    "files_v012": 36,
+    "file_set_diff": "none (identical sets)",
+    "changed_files": ["CITATION.cff", "README.md", "RELEASE_MANIFEST.json", "RIGHTS.json", "VERSION", "reproduction/README.md"],
+    "changed_count": 6,
+    "byte_identical_count": 30,
+    "scientific_surfaces": {"defined_as": "families/, convention/, schema/, reports/, provenance/", "count": 27, "changed": 0},
+    "note": "R1 evidence (v012-vs-v011-byte-diff-R1.txt) recorded the 5-file delta of the pyc repair; R2 adds RIGHTS.json as the 6th (and only additional) changed surface — exactly the packaging delta authorized by the owner mission"
+  },
+  "fresh_export_selftest_R2": {
+    "method": "git archive --format=tar HEAD (commit e72dc4b) -> clean /tmp extraction -> reproduction/reproduce.py self-test",
+    "returncode": 0,
+    "verify": {"ok": true, "files": 35, "errors": 0},
+    "plan": {"ok": true, "plans": 5},
+    "rights_package_version_in_fresh_export": "0.1.2",
+    "RIGHTS_sha256_in_fresh_export": "a4650b970aeba60ed410a1dfe0964433df67799ba949cfe2606e7a8f7b9edc03"
+  },
+  "regression_tests": {
+    "added": "tests/test_release_contract.py::TestReleaseVersionSurfacesConsistency (4 tests)",
+    "covers": [
+      "v0.1.2: VERSION == RIGHTS.package_version == manifest.package_version == 0.1.2",
+      "v0.1 (0.1.0): historical release fully consistent",
+      "v0.1.1: stale RIGHTS.package_version == 0.1.0 pinned immutable (documented historical fact; silent drift fails)",
+      "every releases/nanolab-components-*: manifest.package_version == VERSION"
+    ]
+  },
+  "boundaries": {
+    "scientific_runs": 0,
+    "frozen_F2_touched": false,
+    "v011_immutable_release_touched": false,
+    "convention_cards_rights_schemas_protocols_byte_identical": true
+  }
+}

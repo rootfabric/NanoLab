@@ -56,3 +56,35 @@ historical release; confirmatory runs = 0; merge = Human Gate.
 
 Fresh independent review + exact-head verify ветки
 `work/nl5-v012-packaging-pyc-repair-r1`, затем Human Gate.
+
+## ОБНОВЛЕНИЕ R2 (2026-10-11, append-only; owner mission шаг 2.2)
+
+**Вопрос:** почему `RIGHTS.json.package_version = 0.1.0` при `VERSION = 0.1.2`.
+
+**Диагноз (машинно проверен):** устаревшие метаданные (metadata error), НЕ
+исторический pin. v0.1.0 была полностью согласована; immutable v0.1.1 внесла
+расхождение (bounded repair скопировал RIGHTS.json дословно), v0.1.2
+унаследовала копированием. Поверхность RIGHTS↔VERSION никто не проверял
+(схема проверяет только формат semver; `manifest_verify` — только
+manifest↔VERSION).
+
+**Исправление** (текущий, ещё не слитый релиз; commit `e72dc4b`):
+- `RIGHTS.json`: `package_version` 0.1.0 → **0.1.2** (явная упаковочная дельта);
+- `RELEASE_MANIFEST.json` пересоздан `release.card_lint manifest create`
+  (детерминированно; изменилась ровно одна запись — sha256 RIGHTS.json);
+- v0.1.1 НЕ редактируется: её устаревший pin задокументирован и закреплён
+  регрессионным тестом как immutable исторический факт;
+- +4 теста `TestReleaseVersionSurfacesConsistency` (полное согласие поверхностей
+  v0.1.2; историческая согласованность v0.1.0; неизменяемый pin v0.1.1;
+  manifest↔VERSION для всех релизов).
+
+**Контроль:**
+- byte-diff v0.1.1 ↔ v0.1.2 (sha256, excl pyc): 36 файла, наборы совпадают,
+  изменено ровно 6 поверхностей (R1-дельта из 5 + RIGHTS.json), 30
+  byte-identical; все 27 научных поверхностей byte-identical (0 изменённых).
+- fresh git-archive self-test на `e72dc4b`: exit 0, verify ok 35 файлов /
+  0 ошибок, plan 5/5, RIGHTS в свежем экспорте = 0.1.2.
+- Evidence: `evidence/v012-rights-version-delta-R2.json`.
+
+Границы не изменены: 0 scientific runs; F2 не тронут; v0.1.1 immutable;
+merge = Human Gate (PR #56).
