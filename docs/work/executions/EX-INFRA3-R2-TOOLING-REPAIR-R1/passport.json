@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INFRA3-R2-TOOLING-REPAIR-R1",
+  "work_order_id": "WO-INFRA3-R2-TOOLING-REPAIR-R1",
+  "checkpoint": "INFRA3",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "branch": "infra/u2-outenemy-executor-readiness-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "scripts/r2/__init__.py",
+    "scripts/r2/cli.py",
+    "scripts/r2/engine_build.py",
+    "scripts/r2/executor.py",
+    "scripts/r2/fingerprint.py",
+    "scripts/r2/supervisor.py",
+    "tests/test_r2_activation_tooling.py",
+    "docs/work/WO-INFRA3-R2-TOOLING-REPAIR-R1.md",
+    "docs/work/executions/EX-INFRA3-R2-TOOLING-REPAIR-R1/**",
+    "docs/evidence/INFRA3-U2-READINESS/**",
+    "docs/work/WORK_QUEUE.md",
+    "docs/infra/U2_OUTENEMY_EXECUTOR_READINESS_R1.md"
+  ],
+  "started_at_utc": "2026-10-11T11:30:20Z",
+  "status": "IN_PROGRESS"
+}

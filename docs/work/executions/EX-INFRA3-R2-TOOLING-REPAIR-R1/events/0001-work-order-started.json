@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-11T11:30:20Z",
+  "execution_id": "EX-INFRA3-R2-TOOLING-REPAIR-R1",
+  "work_order_id": "WO-INFRA3-R2-TOOLING-REPAIR-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "79671bc2959ea01960eb524cebb61b3e67d9ebb5",
+  "summary": "Started bounded tooling-repair work order on the SHARED branch infra/u2-outenemy-executor-readiness-r1 (START checkpoint = branch state 79671bc2959ea01960eb524cebb61b3e67d9ebb5 / tree 213498d812878a218f23e9f40136f380d1637cbe; base main 8bf7e3a unchanged; branch history preserved append-only, no rewrite). PURPOSE: the parent execution EX-INFRA3-U2-OUTENEMY-READINESS-R1 (started 2026-10-10) repaired R2 tooling defects F-1/F-2/F-3 in scripts/r2/* and tests/* while its passport declared docs-only allowed_paths; owner mission 'NL5 U2 Integration & Narrow Repair' step 1.2 directs this divergence to be closed by a dedicated bounded tooling-repair WO instead of retro-editing the parent passport or its START event. This WO therefore (a) covers the already-committed F-1/F-2/F-3 changes explicitly (engine binary path bin/oxDNA; real CMakeCache KEY:TYPE=VALUE grammar; systemd-run --user opt-in), and (b) executes the owner-mandated narrow repairs: F-4 resolve_engine_binary ambiguous case-insensitive matches must fail-closed (never first-file pick); separate safe U2 executor path run-u2 with own pinned-host-role validation (validate_u2_host), MANDATORY machine-readable dispatch authority (nanolab_v02_dispatch_authority schema v3 via build_execution_plan), launch-gate ceiling BLOCKED_LAUNCH_GATE_PROTECTED_WRITER for non-fixture plans, fixture-only execution guard (spec fixture:true; frozen campaign execution ids EX-NL5-REPRO-V0-2* hard-refused). HARD BOUNDARIES: U1 guard NOT weakened (run/build-engine/gate/nc-verify keep validate_native_u1 unchanged); zero confirmatory scientific runs; F2/frozen artifacts untouched; canonical statuses untouched; no U1 assignment; no real dispatch authority created; merge stays Human Gate. Validation target: full unittest suite green on this host; work_cli validate ok; check-consistency ok; workflow_lint blocking=0; native (no fingerprint injection) end-to-end run-u2 technical-fixture check on outenemy recorded as evidence."
+}

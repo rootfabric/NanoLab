@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "evidence_id": "tooling-repair-validation-R1",
+  "execution_id": "EX-INFRA3-R2-TOOLING-REPAIR-R1",
+  "recorded_at_utc": "2026-10-11T11:40:00Z",
+  "host": "outenemy",
+  "subject_commit": "b87d61d1a101e8b85415a079288efa46384be201",
+  "subject_tree": "646592ec124380f76f650bac1e0471bce56776b5",
+  "repairs": {
+    "F-1": "engine binary path resolution (<build>/bin/<name> layout) - covered by this WO (committed in parent branch history, 79671bc)",
+    "F-2": "CMakeCache real KEY:TYPE=VALUE grammar - covered by this WO (committed in parent branch history, 79671bc)",
+    "F-3": "systemd-run --user explicit opt-in (launcher systemd-user; U1 default unchanged) - covered by this WO (committed in parent branch history, 79671bc)",
+    "F-4": "resolve_engine_binary ambiguous case-insensitive matches -> fail-closed FileNotFoundError (this commit b87d61d)",
+    "U2-PATH": "r2.cli run-u2 separate U2 executor path: validate_u2_host host-role gate, mandatory nanolab_v02_dispatch_authority (schema v3, Git-bound), fixture-only ceiling, frozen campaign id refusal, launch-gate ceiling (this commit b87d61d)"
+  },
+  "file_sha256": {
+    "scripts/r2/__init__.py": "1a16039553c2ade44d80addba22b3cb20d0fedb67cd9d783b09a48e66d2fab9e",
+    "scripts/r2/cli.py": "c6d6f482c06662f13248fb0c0c99957ee259133925d5fc75f0ea220a14d5d427",
+    "scripts/r2/engine_build.py": "f704df41043da0fe13e78feabd748d8fd13c03cc9e8bb18d60f2a0ad4d43210c",
+    "scripts/r2/executor.py": "db7d4d70885b40c34683dab025392d5e5459b3abfc1cd9cc9d10c8dad792f738",
+    "scripts/r2/fingerprint.py": "5c1f54efd7199611aa612bfa1103e6ebfbb3756123a7cf45d0c49bcaaa0c7b98",
+    "scripts/r2/supervisor.py": "183e4055292da8ad319e57fc91f68763545c8552c2049e54e6a442ffbc9477ec"
+  },
+  "validation": {
+    "unittest": {
+      "command": "python3 -m unittest discover -s tests -t .",
+      "result": "OK",
+      "tests": 630,
+      "note": "612 base (parent WO) + 18 new regression tests (F-4 x3, validate_u2_host x7, run-u2 x8); run on host outenemy 2026-10-11"
+    },
+    "work_cli_validate_tooling_repair": {
+      "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-INFRA3-R2-TOOLING-REPAIR-R1",
+      "result": "see handoff event (recorded after execution bookkeeping commit)",
+      "required": true
+    },
+    "check_consistency": {
+      "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root .",
+      "result": "see handoff event",
+      "required": true
+    },
+    "workflow_lint": {
+      "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint --root .",
+      "result": "see handoff event",
+      "required": true
+    }
+  },
+  "boundaries": {
+    "scientific_runs": 0,
+    "u1_guard_weakened": false,
+    "f2_touched": false,
+    "canonical_status_changes": false,
+    "real_dispatch_authority_created": false,
+    "merge": "Human Gate (not performed)"
+  }
+}
