@@ -1,0 +1,53 @@
+{
+  "reviewed_head": "527f588207f96371ff664b830eedcc575746f194",
+  "reviewed_tree": "2428f4ccfb3ad331b160a9a9613ef4f09009ef5f",
+  "re_review_of": {
+    "r1_head": "d9b7efd6737652adffbe71026b29fa1dc052a067",
+    "r1_review": "review/prep-s17-r1 @ 3370be0630e18d2a995a6b1b369284c257401072",
+    "r1_verdict": "FAIL (1 blocking + 6 minor)"
+  },
+  "verdict": "PASS",
+  "blocking": [],
+  "minor": [
+    "MINOR-R2-1: WORK_QUEUE WO-row R1 Acceptance cell edited by one word ('fresh review PASS' -> 'fresh re-review PASS') without being declared in the appended KORREKCIYA R2 block, which claims R1 records preserved without retro-edit; semantically accurate and git-visible; cosmetic"
+  ],
+  "observations": [
+    "Transient pre-merge repair states: event 0005 first committed with __REPAIR_COMMIT__ placeholder subject_sha (3e405ab) then pinned (aacdeb9); accidental duplicate terminal 0006 added (aacdeb9) and dropped at tip (527f588); final head conforms (single terminal, valid 40-hex, work_cli ok), gates verified only at reviewed head",
+    "evidence-map.json changed_surfaces retains tests/test_knowledge_pack_import.py - accurate at this head; R1 omission documented in corrections_r1.errata"
+  ],
+  "blocking_resolution": {
+    "status": "RESOLVED",
+    "evidence": "tests/test_knowledge_pack_import.py present in tree (9 tests = 7 original + 2 hardening); static def test_ counts: test_knowledge_pack.py=32, test_knowledge_pack_import.py=9; full suite at exact head: Ran 679 tests, OK, exit 0 (638 base + 41); true counts recorded in summary.md KORREKCIYA section, WORK_QUEUE KORREKCIYA R2 block, evidence-map.json unit_tests + corrections_r1, event 0005 (subject pinned to 3e405ab); R1 text preserved via append-only corrections (events 0001-0004 and passport.json byte-identical to R1 head); import_validation.py now has committed coverage"
+  },
+  "minor_fixes_reverified": {
+    "m1_zenodo_size": "pack diff is exactly one line: 20669125082 -> 20691250829; matches Zenodo API size fetched in R1; pack validates clean",
+    "m2_timestamp_errata": "erratum recorded in event 0005 + summary.md KORREKCIYA; events untouched",
+    "m3_schema_bool": "isinstance-bool guard added; probe schema_version=true now rejected; unit test added",
+    "m4_root_containment": "resolve+is_relative_to guard; outside-root ../outside.txt now rejected with 'path escapes the verification root'; unit test added",
+    "m5_non_utf8": "non-UTF-8 corruption now raises ImportValidationError (fail-closed); unit test added",
+    "m6_linkage_digest": "topology_linkage_sha256 over sid:base:n3:n5 rows; linkage-corrupted NE.top now yields different digest AND fails chain integrity; digests regenerated in evidence R2"
+  },
+  "gates": {
+    "unittest_discover": {"claimed": "679 OK", "observed": "Ran 679 tests, OK, exit 0", "pass": true},
+    "check_consistency": {"observed": "ok:true, tasks:19, stages:9, experiments:7, head/tree == pins", "exit_code": 0, "pass": true},
+    "workflow_lint": {"observed": "blocking:0", "exit_code": 0, "pass": true},
+    "work_cli_validate_all_ex": {"observed": "56/56 ok:true, 0 failures; EX-PREP-S17-R1 ok:true, HANDOFF_READY, single terminal, corrections tail sanctioned (has_post_terminal_corrections:true, 0005 ts 18:25Z >= terminal 17:45Z, valid 40-hex subject 3e405ab)", "pass": true},
+    "state_json_unchanged": {"observed": "blob b819755783119ecc56be50cab1bc736c09c85b24 identical to main", "pass": true},
+    "frozen_artifacts_untouched": {"observed": "all frozen + NANOLAB_REPRO_V0_2_* + scripts/{e2,nl4,nl5,r2,hinge_family} byte-identical at new head", "pass": true},
+    "repair_scope": {"observed": "diff d9b7efd..HEAD touches only allowed surfaces (S17 docs, WORK_QUEUE, EX records incl. 0005/evidence R2, scripts/knowledge_pack, tests/test_knowledge_pack*)", "pass": true},
+    "no_rewrites": {"observed": "d9b7efd is ancestor of HEAD; 3 linear conventional commits; remote tip == reviewed head", "pass": true}
+  },
+  "web_checks": {
+    "note": "source surfaces unchanged by the repair; R1 live web verification stands (12/12 Nanobase SHA-256, 4/4 Zenodo MD5s + README sha256, 4/4 hinges digests + license null, Nature CC BY 4.0); the one defective field (pull_release23.zip size) corrected to the value this reviewer fetched from the Zenodo API",
+    "import_validation_r2_reexecution": {
+      "NE": "14343/161, chain 160+1, digest c227e0b585983820... matches R2 evidence",
+      "NE_NB": "14011/163, chain 162+1, digest 5e7610a84bed1881... matches R2 evidence",
+      "nNE": "14343/163, chain 162+1, digest 20c3912671280b71... matches R2 evidence",
+      "evidence_schema": "schema_version 2, explicit supersedes of R1; R1 kept as historical",
+      "negative_controls": "both corruption modes re-executed fail-closed (ImportValidationError; chain-integrity + now digest-differs)"
+    },
+    "adversarial_probes": "49/49 behave as expected against hardened validator (incl. previously-leaky bool and traversal cases); committed pack validates clean via validate_pack and load_pack"
+  },
+  "method": "fresh clone to /tmp/prep-s17-review-r2; pins re-derived; repair diff inspected file-by-file incl. word-level WORK_QUEUE row diff; all machine gates re-executed at exact new head; 49-probe adversarial suite re-run; import validation re-run on R1-review's freshly-downloaded source bytes against R2 evidence digests; both negative controls re-executed",
+  "review_artifacts": ["docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R2.md", "docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R2.json"]
+}
