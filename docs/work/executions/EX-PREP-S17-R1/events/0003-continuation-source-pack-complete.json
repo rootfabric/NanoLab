@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "event_id": "0003-continuation-source-pack-complete",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "director-prep-s17-r1",
+  "subject_sha": "3cf7818877fc7d442c396a90e737cda510fb4cf7",
+  "timestamp_utc": "2026-10-14T17:39:12.028Z",
+  "summary": "Batch 2 complete: independent source audit received (Nature CC BY 4.0 open access; Nanobase 196 12/12 files SHA-256 verified; Zenodo 8248808 inventoried by name/size/MD5 without download; sulcgroup/hinges @7c8b04a6 has NO license -> REFERENCE_ONLY). S17_KNOWLEDGEPACK instance, S17_PREP_AUDIT_R1 report, import validation evidence (NE/NE_NB/nNE: parse OK, counts match, chain integrity OK, deterministic re-import, corruption negative control fail-closed) and WORK_QUEUE WO row published. Branch gates: 675 tests OK, check-consistency ok, workflow_lint blocking 0.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .  # 675 OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency  # ok:true tasks:19",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint  # blocking:0"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_KNOWLEDGEPACK.json",
+    "docs/research/S17_PREP_AUDIT_R1.md",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-import-validation-R1.json",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-source-sha256sums-R1.txt",
+    "docs/work/executions/EX-PREP-S17-R1/evidence-map.json"
+  ],
+  "next_action": "Summary + HANDOFF_COMPLETED; fresh independent Reviewer and exact-head Verifier of this branch.",
+  "blocker": null
+}

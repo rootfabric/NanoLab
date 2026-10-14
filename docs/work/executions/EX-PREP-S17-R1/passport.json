@@ -11,7 +11,7 @@
   "worktree": "/home/rdpuser/NanoLab/prep-s17",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "IN_PROGRESS",
+  "status": "HANDOFF_READY",
   "started_at_utc": "2026-10-14T17:19:14.064Z",
   "allowed_paths": [
     "docs/work/WO-PREP-S17-R1.md",

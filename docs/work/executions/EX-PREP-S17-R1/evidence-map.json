@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "work_order": "WO-PREP-S17-R1",
+  "risk": "MEDIUM",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "base_sha": "32d3c6840341ad3954d5001235a3cc35b8ca0e01",
+  "base_tree_sha": "474249da8fee669c85aa763274e33a16d4293f40",
+  "implementation_subject_head": "3cf7818877fc7d442c396a90e737cda510fb4cf7",
+  "changed_surfaces": [
+    "docs/work/WO-PREP-S17-R1.md",
+    "docs/work/WORK_QUEUE.md (append WO-PREP-S17-R1 row)",
+    "docs/research/S17_PREP_AUDIT_R1.md",
+    "docs/research/S17_KNOWLEDGEPACK.json",
+    "scripts/knowledge_pack/**",
+    "tests/test_knowledge_pack.py",
+    "tests/test_knowledge_pack_import.py",
+    "docs/work/executions/EX-PREP-S17-R1/**"
+  ],
+  "validation": {
+    "unit_tests": "675 OK (638 base + 37 new; includes committed-pack and import tests)",
+    "check_consistency": "ok:true, tasks:19, stages:9, experiments:7",
+    "workflow_lint_blocking": 0,
+    "work_cli_all_ex": "0 failures",
+    "pack_contract": "validate_pack(S17_KNOWLEDGEPACK.json) = [] (enforced by tests)",
+    "import_validation": "NE/NE_NB/nNE pairs parse OK, counts match, chain integrity OK, deterministic re-import; negative control (single-byte corruption) fails closed",
+    "science_runs": 0,
+    "state_json_unchanged": true,
+    "frozen_artifacts_touched": false,
+    "independent_reviewer": "NOT_YET",
+    "independent_verifier": "NOT_YET"
+  },
+  "source_pins": {
+    "article_doi": "10.1038/s41565-023-01516-x",
+    "nanobase_structure": "https://nanobase.org/structures/196 (12 files, SHA-256 verified)",
+    "zenodo_record": "10.5281/zenodo.8248808 (inventory only, 46.17 GB NOT downloaded)",
+    "analysis_repo": "sulcgroup/hinges main@7c8b04a654b2440e4b6bab5b0abcb7e4335824d9 (NO license - REFERENCE_ONLY)"
+  },
+  "known_limits": [
+    "Claim level achieved: PINNED_IMPORT_VERIFIED (file structure only)",
+    "No oxDNA run performed on the imported pairs",
+    "Ports/index mappings UNVERIFIED; linked.top recipe missing",
+    "KnowledgePack v1 is a scoped prototype; contract evolution requires a new revision"
+  ],
+  "review_status": "REVIEW_REQUIRED",
+  "verifier_status": "VERIFY_REQUIRED",
+  "human_gate": "MERGE_REQUIRED",
+  "next_action": "Fresh Reviewer; exact-head Verifier; Human Gate merge"
+}
