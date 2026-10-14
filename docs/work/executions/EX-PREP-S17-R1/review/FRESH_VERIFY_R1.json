@@ -1,0 +1,159 @@
+{
+  "record_kind": "VERIFIER_VERDICT",
+  "issuer_class": "INDEPENDENT_VERIFIER",
+  "schema_version": 1,
+  "evidence_id": "FRESH_VERIFY_R1",
+  "generated_at_utc": "2026-10-14T18:24:50Z",
+  "verdict": "VERIFIED",
+  "verified_head": "4fe3a6c9aaa39e4d35d3f2f9161c5aa86f177eff",
+  "verified_tree": "985adc3cff5623fb8ad88828dd3b09a8f8e77806",
+  "subject_branch": "work/prep-s17-r1",
+  "remote_tip_matches_verified_head": true,
+  "base_main": "32d3c6840341ad3954d5001235a3cc35b8ca0e01",
+  "merge_base_equals_base": true,
+  "commits_ahead_of_base": 9,
+  "delta_check": {
+    "pass": true,
+    "range": "527f588207f96371ff664b830eedcc575746f194..4fe3a6c9aaa39e4d35d3f2f9161c5aa86f177eff",
+    "files_changed": ["docs/work/WORK_QUEUE.md"],
+    "insertions": 1,
+    "deletions": 1,
+    "erratum_declared": "WO-PREP-S17-R1 row R2.1 errata: the one-word Acceptance-cell edit made during the R2 repair (\"fresh review PASS\" -> \"fresh re-review PASS\") is declared verbatim in the replaced row; nothing else changed",
+    "notes": "exact one-line replacement + addition in a single file; no other paths touched"
+  },
+  "review_chain_ok": true,
+  "review_chain": {
+    "review_branch": "review/prep-s17-r1",
+    "review_branch_remote_tip": "74e6bc9580ddb309df7f21574c30d19b1e5776eb",
+    "r1_review_commit": "3370be0630e18d2a995a6b1b369284c257401072",
+    "r1_verdict": "FAIL",
+    "r1_blocking": 1,
+    "r1_minor": 6,
+    "r1_reviewed_head": "d9b7efd6737652adffbe71026b29fa1dc052a067",
+    "r1_reviewed_tree": "0abed1da7b5ee035d27d9f111189b636c12aa148",
+    "r2_review_commit": "74e6bc9580ddb309df7f21574c30d19b1e5776eb",
+    "r2_verdict": "PASS",
+    "r2_blocking": 0,
+    "r2_minor": 1,
+    "r2_reviewed_head": "527f588207f96371ff664b830eedcc575746f194",
+    "r2_reviewed_tree": "2428f4ccfb3ad331b160a9a9613ef4f09009ef5f",
+    "r2_reviewed_tree_matches_git": true,
+    "r1_commit_is_ancestor_of_r2_commit": true,
+    "evidence_files": [
+      "docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R1.{md,json} @ 3370be06",
+      "docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R2.{md,json} @ 74e6bc95"
+    ],
+    "ancestry_note": "74e6bc9 is a descendant of 3370be0 and of the R1 subject d9b7efd (review branch rooted at the reviewed subject per repo convention); it is NOT a git-ancestor-descendant of 527f588/3e405ab - the R2 binding is carried inside FRESH_REVIEW_R2.json (reviewed_head/reviewed_tree pins), which match git exactly"
+  },
+  "integration": {
+    "state_json_blob": "b819755783119ecc56be50cab1bc736c09c85b24",
+    "state_json_identical_to_base": true,
+    "frozen_sweep_paths": 15,
+    "frozen_sweep_mismatches": 0,
+    "protected_runtime_dirs_diff_empty": true,
+    "protected_runtime_dirs": ["scripts/e2", "scripts/nl4", "scripts/nl5", "scripts/r2", "scripts/hinge_family"],
+    "diff_scope_vs_base_files": 20,
+    "diff_scope_all_allowed": true,
+    "allowed_surfaces": ["docs/work/WO-PREP-S17-R1.md (WO doc)", "docs/work/WORK_QUEUE.md", "docs/work/executions/EX-PREP-S17-R1/**", "docs/research/S17_*", "scripts/knowledge_pack/**", "tests/test_knowledge_pack*.py"]
+  },
+  "gates": {
+    "unittest_discover": {
+      "command": "python3 -m unittest discover -s tests -t .",
+      "exit_code": 0,
+      "expected": "679 OK",
+      "observed": "Ran 679 tests in 50.374s / OK",
+      "pass": true
+    },
+    "check_consistency": {
+      "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+      "exit_code": 0,
+      "ok": true,
+      "tasks": 19,
+      "stages": 9,
+      "experiments": 7,
+      "head_tree_match_pins": true,
+      "pass": true
+    },
+    "workflow_lint": {
+      "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+      "exit_code": 0,
+      "blocking": 0,
+      "violations": 0,
+      "pass": true
+    },
+    "work_cli_validate_all_ex": {
+      "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-*/ (each dir)",
+      "total": 56,
+      "failures": 0,
+      "ex_prep_s17_r1": {
+        "ok": true,
+        "status": "HANDOFF_READY",
+        "has_terminal_handoff": true,
+        "has_post_terminal_corrections": true,
+        "event_types": ["WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "CONTINUATION_CHECKPOINT", "HANDOFF_COMPLETED", "CONTINUATION_CHECKPOINT"]
+      },
+      "pass": true
+    }
+  },
+  "claim_ceiling": {
+    "pass": true,
+    "pack_validate_errors": [],
+    "pack_claim_level": "PINNED_IMPORT_VERIFIED",
+    "no_MODEL_REPRODUCED_claims": true,
+    "no_NL5_acceptance_claims": true,
+    "no_E5_execution_claims": true,
+    "no_R2_active_claims": true,
+    "no_U1_assigned_claims": true,
+    "no_runs_gt_zero_claims": true,
+    "unknown_unverified_discipline": "7 explicit missing_inputs, 6 known_limitations, rights mark sulcgroup/hinges as UNKNOWN/no-license REFERENCE_ONLY, nothing vendored",
+    "state_boundaries": "state.json identical to base: NL5=IN_PROGRESS, NL5-002=WAITING_HUMAN, NL6-001=PLANNED; S17 adds zero scientific runs"
+  },
+  "independent_reexecution": {
+    "import_validation_pairs": {
+      "NE": {"nucleotides": 14343, "strands": 161, "structural_digest_prefix": "c227e0b585983820", "matches_evidence_R2": true},
+      "NE_NB": {"nucleotides": 14011, "strands": 163, "structural_digest_prefix": "5e7610a84bed1881", "matches_evidence_R2": true},
+      "nNE": {"nucleotides": 14343, "strands": 163, "structural_digest_prefix": "20c3912671280b71", "matches_evidence_R2": true}
+    },
+    "pack_manifest_sha256_vs_evidence": "all 6 topology/configuration sha256 values in s17-import-validation-R2.json match docs/research/S17_KNOWLEDGEPACK.json input_file_manifest entries; pull_release23.zip size_bytes = 20691250829 (minor-1 fix present)",
+    "negative_controls": "non-UTF-8 corruption raises ImportValidationError (fail-closed); 4 linkage corruptions (bogus n3 index, cleared n5, adjacent n3 swap, reciprocal rewire) all yield ok=false with chain-integrity TopologyError AND structural digest differs from baseline"
+  },
+  "ci": {
+    "check_runs_total": 0,
+    "conclusions": [],
+    "combined_status": "pending (0 statuses registered)",
+    "pr_for_subject_branch": null,
+    "rechecked_after_wait": false,
+    "expected_by_design": true,
+    "reason": "hosted-ci.yml trust route is ONLY pull_request targeting main (TR-PR) and push to refs/heads/main (TR-PUSH-MAIN); branch pushes without an open PR intentionally register zero check-runs; CI will execute when the Human-Gate PR to main is opened",
+    "pass": "N/A - structural absence, not a failure; recorded per instructions"
+  },
+  "lineage": {
+    "linear_single_parent_chain": true,
+    "commits_base_to_head": ["93cf561", "c78d5ef", "3553e44", "3cf7818", "d9b7efd", "3e405ab", "aacdeb9", "527f588", "4fe3a6c"],
+    "merges": 0,
+    "required_pins_present": {
+      "d9b7efd": true,
+      "tree_0abed1d_of_d9b7efd": true,
+      "3e405ab": true,
+      "aacdeb9": true,
+      "527f588": true,
+      "tree_2428f4c_of_527f588": true,
+      "4fe3a6c": true,
+      "tree_985adc3_of_4fe3a6c": true
+    },
+    "no_rewrites_evidence": "fresh clone; origin/work/prep-s17-r1 tip == 4fe3a6c; origin/review/prep-s17-r1 tip == 74e6bc9; chain base..HEAD is linear with single parents; 3e405ab..aacdeb9..527f588 repair tail matches event-0005 subject pin"
+  },
+  "notes": [
+    "Review-branch ancestry: 74e6bc9 (PASS) is rooted at the R1 subject d9b7efd, not at the R2 tip 527f588; the R2 binding lives in FRESH_REVIEW_R2.json pins (verified correct against git). Accepted as repo convention; recorded for transparency.",
+    "Erratum wording: commit 4fe3a6c and the WORK_QUEUE errata declare the edit as \"one letter\" in Russian (\"odna bukva\") while the re-review minor MINOR-R2-1 calls it one word; both name the identical edit (\"fresh review PASS\" -> \"fresh re-review PASS\"). Cosmetic phrasing only; the declaration requirement is satisfied.",
+    "WORK_QUEUE R1 row (preserved text) says the pack manifest has \"20 pozitsiy\" but input_file_manifest holds 21 entries at BOTH d9b7efd and FINAL_HEAD (12 Nanobase + 5 Zenodo + 4 GitHub); pre-existing cosmetic count in frozen R1 prose, no R2 drift.",
+    "WORK_QUEUE R1 row says \"NL6-001 = LOCKED\" while project/state.json (byte-identical to base) has task_status.NL6-001=\"PLANNED\"; plan.json gates NL6-001 on depends_on NL5-002 (WAITING_HUMAN), so the substantive restriction holds; conservative wording in preserved R1 prose only.",
+    "Task brief said git identity CONTROL <control@nanolab.local> was configured globally; it was NOT set in this environment (verified empty). Verifier set it (repo-local + global) to the pinned identity before committing.",
+    "CI check-runs on FINAL_HEAD: total_count=0 with no open PR for work/prep-s17-r1 - structurally expected (hosted-ci serves only PR->main and push->main); not a gate failure."
+  ],
+  "method": "fresh clone to /home/rdpuser/NanoLab/verify-prep-s17-r1 (no prior involvement); pins re-derived via rev-parse/ls-remote; full diffs inspected; all four machine gates re-executed at exact FINAL_HEAD; knowledge pack validate_pack re-run; import validation re-executed against local pinned Nanobase bytes with sha256 pre-check, plus 5 negative controls; frozen/protected/scope sweeps at blob level; GitHub check-runs API queried",
+  "verify_artifacts": [
+    "docs/work/executions/EX-PREP-S17-R1/review/FRESH_VERIFY_R1.md",
+    "docs/work/executions/EX-PREP-S17-R1/review/FRESH_VERIFY_R1.json"
+  ]
+}
