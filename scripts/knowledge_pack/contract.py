@@ -121,8 +121,8 @@ def validate_pack(pack: object) -> list[str]:
     if not isinstance(pack, dict):
         return ["pack must be a JSON object"]
 
-    if pack.get("schema_version") != PACK_SCHEMA_VERSION:
-        errors.append(f"schema_version must be {PACK_SCHEMA_VERSION}")
+    if isinstance(pack.get("schema_version"), bool) or pack.get("schema_version") != PACK_SCHEMA_VERSION:
+        errors.append(f"schema_version must be exactly {PACK_SCHEMA_VERSION} (boolean is not an integer)")
     if pack.get("kind") != PACK_KIND:
         errors.append(f'kind must be "{PACK_KIND}"')
 
@@ -338,8 +338,17 @@ def verify_manifest(root: Path, pack: object) -> list[str]:
         if not isinstance(entry, dict) or entry.get("availability") != "ON_DISK_VERIFIED":
             continue
         rel = entry.get("path")
-        path = root / str(rel)
+        path = (root / str(rel))
         where = f"manifest[{rel}]"
+        # Containment: a manifest path must resolve inside root (no ../ escape).
+        try:
+            resolved = path.resolve()
+            contained = resolved.is_relative_to(Path(root).resolve())
+        except (OSError, ValueError):
+            contained = False
+        if not contained:
+            errors.append(f"{where}: path escapes the verification root")
+            continue
         if not path.is_file():
             errors.append(f"{where}: pinned file missing on disk")
             continue

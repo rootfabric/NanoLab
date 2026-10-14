@@ -116,7 +116,7 @@ class TestCommittedPack(unittest.TestCase):
             / "executions"
             / "EX-PREP-S17-R1"
             / "evidence"
-            / "s17-import-validation-R1.json"
+            / "s17-import-validation-R2.json"
         )
         if not evidence_path.is_file():
             self.skipTest("import evidence not present on this branch")
@@ -304,6 +304,24 @@ class TestNegativeControls(unittest.TestCase):
         pack = _minimal_pack()
         pack["input_file_manifest"][0]["upstream_checksum"] = {"algorithm": "crc32", "value": "x"}
         self._assert_error_contains(pack, "upstream_checksum")
+
+    def test_schema_version_boolean_rejected(self) -> None:
+        pack = _minimal_pack()
+        pack["schema_version"] = True  # bool == 1 in Python; must be rejected
+        self._assert_error_contains(pack, "boolean is not an integer")
+
+    def test_verify_manifest_rejects_path_traversal(self) -> None:
+        pack = _minimal_pack()
+        entry = pack["input_file_manifest"][0]
+        entry.update(availability="ON_DISK_VERIFIED", sha256_provenance="CONTENT_VERIFIED")
+        with tempfile.TemporaryDirectory() as tmp:
+            outside = Path(tmp) / "secret.txt"
+            outside.write_bytes(b"secret")
+            pack["input_file_manifest"][0]["path"] = "../secret.txt"
+            pack["input_file_manifest"][0]["sha256"] = sha256_file(outside)
+            pack["input_file_manifest"][0]["size_bytes"] = outside.stat().st_size
+            errors = verify_manifest(Path(tmp) / "root", pack)
+            self.assertTrue(any("escapes the verification root" in e for e in errors))
 
     def test_duplicate_manifest_path_rejected(self) -> None:
         pack = _minimal_pack()

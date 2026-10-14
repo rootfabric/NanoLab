@@ -98,3 +98,5 @@ python3 -m unittest discover -s tests -t .
 PYTHONPATH=scripts python3 -m harness.cli check-consistency
 PYTHONPATH=scripts python3 -m harness.workflow_lint
 ```
+
+> **Коррекция R2 (2026-10-14):** в R1-снапшоте `tests/test_knowledge_pack_import.py` не был закоммичен (заявлялось 675 тестов, фактически 668); после repair R2 оба тест-модуля в дереве, полный набор = **679 OK**, evidence импорт-валидации — `s17-import-validation-R2.json` (supersedes R1; структурные digest'ы обновлены с учётом linkage-чувствительности). Подробности — `EX-PREP-S17-R1/summary.md` §КОРРЕКЦИЯ R2 и event 0005.

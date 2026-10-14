@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "event_id": "0005-continuation-review-repair-r2",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "director-prep-s17-r1",
+  "subject_sha": "__REPAIR_COMMIT__",
+  "timestamp_utc": "2026-10-14T18:25:00.000Z",
+  "summary": "Repair R2 after fresh independent Reviewer FAIL (review/prep-s17-r1 @ 3370be06: 1 blocking + 6 minor). Blocking (evidence accuracy) FIXED: the real tests/test_knowledge_pack_import.py (existed on disk since batch 1 but was never git-added by the implementer) is now committed; R1 subject 3cf7818 actually contained 668 tests, repair head contains 679 (638 base + 41). Minors fixed: m-1 Zenodo pull_release23.zip size 20669125082 -> 20691250829; m-3 schema_version boolean rejected; m-4 verify_manifest root containment (../ rejected); m-5 non-UTF-8 input raises ImportValidationError (fail-closed); m-6 structural digest now includes topology_linkage_sha256 -> evidence regenerated as s17-import-validation-R2.json (supersedes historical R1). m-2 timestamp errata: event 0002 was stamped 18:05:00Z after 0003 (17:39:12Z) due to pre-drafted stamping; events are immutable, this event and summary.md CORRECTION section record the erratum. Passport allowed_paths omission of the import test file recorded as erratum; passport NOT retro-edited. All substantive R1 claims (pins, digests, import facts, rights) were independently reproduced TRUE by the reviewer.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .  # 679 OK at repair head",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R1/  # ok",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency  # ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint  # blocking:0"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R1.md (on review/prep-s17-r1)",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-import-validation-R2.json",
+    "docs/work/executions/EX-PREP-S17-R1/summary.md",
+    "docs/work/executions/EX-PREP-S17-R1/evidence-map.json"
+  ],
+  "next_action": "Re-review by reviewer; then fresh exact-head Verifier; Human Gate merge.",
+  "blocker": null
+}

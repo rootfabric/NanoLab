@@ -44,3 +44,14 @@
 ## Next action
 
 Fresh independent Reviewer + fresh exact-head Verifier ветки `work/prep-s17-r1`, затем Human Gate merge.
+
+## КОРРЕКЦИЯ R2 (2026-10-14, append-only; не ретро-редакция разделов выше)
+
+Fresh independent Reviewer (review `review/prep-s17-r1` @ `3370be06`) = **FAIL / 1 blocking + 6 minor** на exact R1 subject `d9b7efd`/`0abed1d`. Blocking подтверждён исполнителем: реализация-субъект R1 `3cf7818` содержал 668 тестов (638 base + 30), а разделы выше заявляли 675/37 и ссылались на `tests/test_knowledge_pack_import.py`, НЕ добавленный в git (ошибка `git add`; файл существовал на диске и локально проходил). Repair R2:
+
+- Реальный import-test файл добавлен в дерево (+7 тестов); валидатор ужесточён (minor-3 schema_version-bool reject; minor-4 `verify_manifest` root-containment; minor-5 non-UTF-8 → `ImportValidationError`; minor-6 linkage-чувствительный structural digest через `topology_linkage_sha256`).
+- Evidence пересоздан как `evidence/s17-import-validation-R2.json` (schema_version 2, supersedes R1; R1 сохранён как historical; структурные digest'ы обновлены — c227e0b585983820… / 5e7610a84bed1881… / 20c3912671280b71…).
+- Pack: размер `pull_release23.zip` исправлен 20 669 125 082 → 20 691 250 829 (minor-1, MD5 был верен).
+- Errata (minor-2): timestamp события 0002 (18:05:00Z) был проставлен позже фактического порядка работ, чем 0003 (17:39:12Z); события неизменяемы — errata фиксируются здесь и в event 0005.
+- Точные числа финального head: **679 tests OK** (638 base + 41: 32 в `test_knowledge_pack.py`, 9 в `test_knowledge_pack_import.py`).
+- Passport не ретро-редактируется: omission `tests/test_knowledge_pack_import.py` в `allowed_paths` зафиксирована как erratum R1 здесь и в event 0005.

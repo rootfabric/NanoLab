@@ -91,6 +91,13 @@ def canonical_structural_digest(top: Topology, conf: Configuration) -> tuple:
         "conf_particles": len(conf.particles),
         "conf_time": str(conf.time),
         "conf_box": [float(x) for x in conf.box],
+        # Defense in depth: the structural digest must also be sensitive to the
+        # n3/n5 neighbour linkage. Chain-integrity violations are additionally
+        # rejected by Topology.check_chain_integrity() before this digest is
+        # trusted, so a corrupt link can never produce an ok=True result.
+        "topology_linkage_sha256": hashlib.sha256(
+            ";".join(f"{sid}:{base}:{n3}:{n5}" for sid, base, n3, n5 in top.rows).encode("utf-8")
+        ).hexdigest(),
     }
     canonical = json.dumps(summary, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest(), summary
@@ -101,8 +108,14 @@ def import_paired(top_path: Path, conf_path: Path) -> ImportPairResult:
     top_path, conf_path = Path(top_path), Path(conf_path)
     top_bytes = top_path.read_bytes()
     conf_bytes = conf_path.read_bytes()
-    top_text = top_bytes.decode("utf-8")
-    conf_text = conf_bytes.decode("utf-8")
+    try:
+        top_text = top_bytes.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ImportValidationError(f"topology is not valid UTF-8: {exc}") from exc
+    try:
+        conf_text = conf_bytes.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ImportValidationError(f"configuration is not valid UTF-8: {exc}") from exc
 
     errors: list = []
     top = conf = None

@@ -18,17 +18,23 @@
     "docs/work/executions/EX-PREP-S17-R1/**"
   ],
   "validation": {
-    "unit_tests": "675 OK (638 base + 37 new; includes committed-pack and import tests)",
+    "unit_tests": "679 OK at repair head (R1 subject 3cf7818 actually contained 668; repair added tests/test_knowledge_pack_import.py with 7 tests + 4 hardening tests)",
     "check_consistency": "ok:true, tasks:19, stages:9, experiments:7",
     "workflow_lint_blocking": 0,
     "work_cli_all_ex": "0 failures",
     "pack_contract": "validate_pack(S17_KNOWLEDGEPACK.json) = [] (enforced by tests)",
-    "import_validation": "NE/NE_NB/nNE pairs parse OK, counts match, chain integrity OK, deterministic re-import; negative control (single-byte corruption) fails closed",
+    "import_validation": "NE/NE_NB/nNE pairs parse OK, counts match, chain integrity OK, deterministic re-import; negative control (single-byte corruption) fails closed; evidence R2 supersedes R1 (linkage-sensitive digests)",
     "science_runs": 0,
     "state_json_unchanged": true,
     "frozen_artifacts_touched": false,
-    "independent_reviewer": "NOT_YET",
+    "independent_reviewer": "FAIL_R1_REVIEW_INTEGRATED (review/prep-s17-r1 @ 3370be06: 1 blocking evidence-accuracy + 6 minor; repair R2 addresses all)",
     "independent_verifier": "NOT_YET"
+  },
+  "corrections_r1": {
+    "review_ref": "review/prep-s17-r1 @ 3370be0630e18d2a995a6b1b369284c257401072",
+    "blocking_fixed": "import tests committed (existed on disk, missing from R1 subject); counts corrected to actuals (R1=668, repair head=679)",
+    "minor_fixed": ["m1 zenodo size transposition", "m2 timestamp errata recorded (events immutable)", "m3 schema_version bool leak", "m4 verify_manifest root containment", "m5 non-UTF-8 fail-closed exception", "m6 linkage-sensitive structural digest"],
+    "errata": ["passport allowed_paths omits tests/test_knowledge_pack_import.py (R1 omission documented, passport NOT retro-edited)"]
   },
   "source_pins": {
     "article_doi": "10.1038/s41565-023-01516-x",
