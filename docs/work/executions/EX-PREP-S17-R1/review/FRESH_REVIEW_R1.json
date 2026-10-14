@@ -1,0 +1,41 @@
+{
+  "reviewed_head": "d9b7efd6737652adffbe71026b29fa1dc052a067",
+  "reviewed_tree": "0abed1da7b5ee035d27d9f111189b636c12aa148",
+  "verdict": "FAIL",
+  "blocking": [
+    "BLOCKING-1: handoff evidence records claim gates the committed tree does not reproduce - claimed 675 tests OK (638 base + 37 new) and a second test file tests/test_knowledge_pack_import.py; actual tree: 30 new tests in tests/test_knowledge_pack.py only, full suite 668 OK exit 0 (base main = 638); the phantom file never existed in branch history; false/phantom references in docs/work/WORK_QUEUE.md WO row, EX-PREP-S17-R1/summary.md, evidence-map.json (changed_surfaces + unit_tests; also outside passport allowed_paths), events 0003/0004 command_refs, S17_PREP_AUDIT_R1.md section 8; consequence: scripts/knowledge_pack/import_validation.py ships with zero committed test coverage while advertised as tested (behaviour itself reproduced by this review)"
+  ],
+  "minor": [
+    "MINOR-1: S17_KNOWLEDGEPACK.json pull_release23.zip size_bytes=20669125082 vs Zenodo actual 20691250829 (transposed digits, delta 22125747 B; MD5 correct; '46.17 GB' total elsewhere matches true sizes)",
+    "MINOR-2: event timestamps non-monotonic - 0002 stamped 2026-10-14T18:05:00.000Z after 0003 (17:39:12.028Z) and terminal 0004 (17:45:00.000Z); work_cli only enforces monotonicity for corrections-tail events",
+    "MINOR-3: contract.py accepts schema_version=true (JSON bool) as 1 via Python bool/int equality",
+    "MINOR-4: contract.verify_manifest lacks root containment; '../' entry verifies a file outside the declared root (demonstrated)",
+    "MINOR-5: import_validation.import_paired raises uncaught UnicodeDecodeError on non-UTF-8 corruption (fail-closed but unstructured)",
+    "MINOR-6: canonical_structural_digest insensitive to n3/n5 linkage corruption (digest unchanged; caught by chain-integrity check instead) - digest name overstates coverage"
+  ],
+  "gates": {
+    "unittest_discover": {"claimed": "675 OK", "observed": "668 tests OK, exit 0 (static def test_ count 668 at HEAD; 638 at origin/main; 30 new)", "pass": false},
+    "check_consistency": {"observed": "ok:true, tasks:19, stages:9, experiments:7", "exit_code": 0, "pass": true},
+    "workflow_lint": {"observed": "blocking:0, violations:0", "exit_code": 0, "pass": true},
+    "work_cli_validate_all_ex": {"observed": "56/56 ok:true, 0 FAIL; EX-PREP-S17-R1 ok:true status=HANDOFF_READY terminal=HANDOFF_COMPLETED", "pass": true},
+    "state_json_unchanged": {"observed": "blob b819755783119ecc56be50cab1bc736c09c85b24 identical to origin/main", "pass": true},
+    "frozen_artifacts_untouched": {"observed": "15 'frozen' paths + NANOLAB_REPRO_V0_2_* + scripts/{e2,nl4,nl5,r2,hinge_family} byte-identical (blob-level)", "pass": true},
+    "scope": {"observed": "17 changed files, all within allowed surfaces; WORK_QUEUE.md one-row append", "pass": true},
+    "history": {"observed": "5 commits, linear single-parent from base 32d3c68, conventional prefixes, remote tip == reviewed head (no force-push)", "pass": true}
+  },
+  "web_checks": {
+    "nanobase_structure_196_manifest": {"result": "12/12 files match pack entries exactly", "source": "https://api.nanobase.org/api/v1/structure/structure-files?id=196"},
+    "nanobase_NE_top_sha256": {"expected": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb", "reproduced": true},
+    "nanobase_NE_dat_sha256": {"expected": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66", "reproduced": true},
+    "nanobase_all_12_sha256": {"result": "all 12 independently reproduced (beyond required 2-file spot-check)", "reproduced": true},
+    "zenodo_8248808_md5_4_zips": {"result": "all 4 MD5s match (NE23, NE37, pull_release23, pull_release37)", "reproduced": true},
+    "zenodo_8248808_sizes": {"result": "3/4 match; pull_release23.zip MISMATCH pack=20669125082 actual=20691250829", "reproduced": false},
+    "zenodo_README_sha256": {"expected": "7ea24d8114edd29052ad4ba00dc7d14c7e5495c1652772c1945c7cab74ff39d4", "reproduced": true},
+    "github_hinges_pinned_commit": {"commit": "7c8b04a654b2440e4b6bab5b0abcb7e4335824d9", "tree": "d730871cd13a8c64d9e97d52ce8e04ca6909ba2f", "digests": ["get_k.py 6b9a3682... reproduced", "hinge_bonds.py 4c0348ff... reproduced", "extract_data.py 8fc35a59... reproduced", "README.md 85f1c9d2... reproduced"], "license": "GitHub license null; no LICENSE/COPYING/LEGAL in full 83-path tree; REFERENCE_ONLY justified"},
+    "nature_article_open_access": {"url": "https://www.nature.com/articles/s41565-023-01516-x", "http": 200, "license_jsonld": "http://creativecommons.org/licenses/by/4.0/", "title_pages_match": true},
+    "t7_force_and_input_claims": {"result": "constant_trap 8694/7374/0.3290/8.8 verified; input_pull references polymerase_positioning.txt (absent from 12-file set) and linked.top/first_conf.dat (recipe absent); DNA2/salt 2.0/nvt/john/dt 0.003 verified"},
+    "import_validation_reexecution": {"pairs": {"NE": "14343/161/14343, chain 160+1, digest 2722f75f... match", "NE_NB": "14011/163/14011, chain 162+1, digest c34da652... match", "nNE": "14343/163/14343, chain 162+1, digest 93787ca9... match"}, "deterministic_reimport": true, "negative_controls": "both corruption modes fail closed (parse error; chain-integrity n5 error)"}
+  },
+  "method": "fresh clone to /tmp/prep-s17-review; pins re-derived; full diff inspected; live re-download of Nanobase (12 files), Zenodo README, 4 hinges files at pinned commit; 49 adversarial validator probes; import validation re-run on fresh bytes; all machine gates re-executed at SUBJECT_HEAD; review artifacts committed on review/prep-s17-r1 and pushed non-force",
+  "review_artifacts": ["docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R1.md", "docs/work/executions/EX-PREP-S17-R1/review/FRESH_REVIEW_R1.json"]
+}
