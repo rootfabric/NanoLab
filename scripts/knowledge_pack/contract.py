@@ -191,7 +191,7 @@ def validate_pack(pack: object) -> list[str]:
             continue
         unknown_entry = set(entry) - {
             "path", "size_bytes", "sha256", "role", "availability",
-            "sha256_provenance", "source_url", "vendored",
+            "sha256_provenance", "source_url", "vendored", "upstream_checksum",
         }
         if unknown_entry:
             errors.append(f"{where}: unknown fields {sorted(unknown_entry)}")
@@ -206,8 +206,23 @@ def validate_pack(pack: object) -> list[str]:
         else:
             seen_paths.add(path_value)
         sha = entry.get("sha256")
-        if not isinstance(sha, str) or not SHA256_RE.match(sha):
-            errors.append(f"{where}.sha256 must be 64 lowercase hex characters")
+        sha_unknown = sha == "UNKNOWN"
+        if not isinstance(sha, str) or (not sha_unknown and not SHA256_RE.match(sha)):
+            errors.append(f"{where}.sha256 must be 64 lowercase hex characters or the explicit string UNKNOWN")
+        if sha_unknown and entry.get("sha256_provenance") != "NOT_VERIFIED":
+            errors.append(f"{where}: sha256 UNKNOWN is only valid with sha256_provenance NOT_VERIFIED")
+        upstream = entry.get("upstream_checksum")
+        if upstream is not None:
+            if (
+                not isinstance(upstream, dict)
+                or set(upstream) != {"algorithm", "value"}
+                or upstream.get("algorithm") not in ("md5", "sha1", "sha256", "git_blob_sha1")
+                or not isinstance(upstream.get("value"), str)
+                or not upstream.get("value")
+            ):
+                errors.append(f"{where}.upstream_checksum must be {{algorithm, value}} with a known algorithm")
+        if sha_unknown and upstream is None:
+            errors.append(f"{where}: sha256 UNKNOWN requires an upstream_checksum record")
         size = entry.get("size_bytes")
         if not isinstance(size, int) or isinstance(size, bool) or size < 0:
             errors.append(f"{where}.size_bytes must be a non-negative integer")

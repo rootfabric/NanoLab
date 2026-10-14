@@ -108,6 +108,38 @@ class TestCommittedPack(unittest.TestCase):
     def test_no_inflated_claim_level(self) -> None:
         self.assertNotIn(self.pack["claim_level"], FORBIDDEN_CLAIM_LEVELS)
 
+    def test_pack_digests_match_import_evidence(self) -> None:
+        evidence_path = (
+            REPO_ROOT
+            / "docs"
+            / "work"
+            / "executions"
+            / "EX-PREP-S17-R1"
+            / "evidence"
+            / "s17-import-validation-R1.json"
+        )
+        if not evidence_path.is_file():
+            self.skipTest("import evidence not present on this branch")
+        evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+        pack_by_name = {
+            Path(e["path"]).name: e for e in self.pack["input_file_manifest"]
+        }
+        for struct in ("NE", "NE_NB", "nNE"):
+            pair = evidence["pairs"][struct]
+            self.assertTrue(pair["ok"], f"{struct} import evidence must be ok")
+            self.assertEqual(
+                pack_by_name[f"{struct}.top"]["sha256"], pair["topology_sha256"]
+            )
+            self.assertEqual(
+                pack_by_name[f"{struct}.dat"]["sha256"], pair["configuration_sha256"]
+            )
+            self.assertEqual(
+                pack_by_name[f"{struct}.top"]["size_bytes"], pair["topology_size_bytes"]
+            )
+            self.assertEqual(
+                pack_by_name[f"{struct}.dat"]["size_bytes"], pair["configuration_size_bytes"]
+            )
+
 
 class TestPositiveSynthetic(unittest.TestCase):
     def test_minimal_pack_validates(self) -> None:
@@ -253,6 +285,25 @@ class TestNegativeControls(unittest.TestCase):
         self._assert_error_contains(pack, "requires an explicit missing_inputs entry")
         pack["missing_inputs"] = ["observables not yet audited"]
         self.assertEqual(validate_pack(pack), [])
+
+    def test_unknown_sha256_requires_not_verified_and_md5(self) -> None:
+        pack = _minimal_pack()
+        entry = pack["input_file_manifest"][0]
+        entry["availability"] = "MISSING"
+        entry["sha256"] = "UNKNOWN"
+        entry["sha256_provenance"] = "NOT_VERIFIED"
+        # missing upstream checksum record
+        self._assert_error_contains(pack, "upstream_checksum record")
+        entry["upstream_checksum"] = {"algorithm": "md5", "value": "01e22e1d02da8d55364b63e724952afa"}
+        self.assertEqual(validate_pack(pack), [])
+        # UNKNOWN sha256 with CONTENT_VERIFIED provenance is contradictory
+        entry["sha256_provenance"] = "CONTENT_VERIFIED"
+        self._assert_error_contains(pack, "only valid with sha256_provenance NOT_VERIFIED")
+
+    def test_bad_upstream_checksum_rejected(self) -> None:
+        pack = _minimal_pack()
+        pack["input_file_manifest"][0]["upstream_checksum"] = {"algorithm": "crc32", "value": "x"}
+        self._assert_error_contains(pack, "upstream_checksum")
 
     def test_duplicate_manifest_path_rejected(self) -> None:
         pack = _minimal_pack()
