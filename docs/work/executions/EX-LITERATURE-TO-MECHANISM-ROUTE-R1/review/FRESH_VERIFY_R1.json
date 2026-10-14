@@ -1,0 +1,28 @@
+{
+  "verified_head": "910b4a717746d97f4226c3d9c403565e627fb0bc",
+  "verified_tree": "8ecaec1329686ea1ab2f96e642cd777ab3132424",
+  "delta_check": "M1_ONLY",
+  "review_evidence_ok": true,
+  "gates": {
+    "unittest_discover": {"exit_code": 0, "tests": 638, "result": "OK"},
+    "check_consistency": {"exit_code": 0, "ok": true, "tasks": 19, "stages": 9, "experiments": 7, "frontier": "NL5", "next_work_order": "NL5-002"},
+    "workflow_lint": {"exit_code": 0, "blocking": 0, "violations": 0, "workflows": 1},
+    "work_cli_validate_all_ex": {"exit_code": 0, "total_ex_dirs": 56, "passed": 56, "failures": 0},
+    "work_cli_validate_subject": {"exit_code": 0, "ok": true, "execution_id": "EX-LITERATURE-TO-MECHANISM-ROUTE-R1", "status": "HANDOFF_READY"}
+  },
+  "ci": {
+    "commit": "910b4a717746d97f4226c3d9c403565e627fb0bc",
+    "total_check_runs": 1,
+    "check_runs": [{"name": "RC0 hosted validation (H0)", "status": "completed", "conclusion": "success", "completed_at": "2026-10-14T17:32:46Z"}]
+  },
+  "verdict": "VERIFIED",
+  "notes": [
+    "Pins: HEAD=910b4a7, HEAD^{tree}=8ecaec13, remote docs/literature-to-mechanism-roadmap-r1 tip == FINAL_HEAD, merge-base(origin/main,HEAD)==origin/main==32d3c684 (all MATCH).",
+    "V1: git diff c1f2e80..910b4a7 = docs/work/WORK_QUEUE.md only, exactly 2 deleted blank lines (cat -A verified); no 3+ consecutive blank lines remain (m-1 fixed); exit 0.",
+    "V2: review branch d9af15c contains FRESH_REVIEW_R1.{md,json}; reviewed_head/tree == c1f2e80/406021a (c1f2e80^{tree}==406021a); verdict PASS, 0 blocking / 1 minor m-1; merge-base --is-ancestor c1f2e80 d9af15c exit 0.",
+    "V3: state.json 0-byte diff vs main; 15/15 frozen paths (case-insensitive 'frozen', incl. NANOLAB_REPRO_V0_2_FROZEN_R2.md) byte-identical; POST_MVP_DEVELOPMENT_ROUTE_R1.md byte-identical; WO row block md5 d7a4acad6d4dd1bc7b0b5023e37ac158 identical to main with all required rows (WO-NL5-002 x2, DIRECTOR-FREEZE-R1 incl. R2 update, FRESH-AUDIT-R1, U2-OUTENEMY-READINESS-R1, PACKAGING-PYC-REPAIR-R1); plan.json 19 tasks, same ID set/order, NL6-001<-NL5-002, NL7-001<-NL6-001 (not NL6-002), NL6-002<-NL6-001 non-gating, NL8-001<-NL7-001, acyclic; catalog==plan revision literature-to-mechanism-route-r1; LITERATURE_TO_MECHANISM_ROUTE_R1.md exists and referenced from plan/ROADMAP/ARCHITECTURE/DATA_CONTRACTS/WORK_QUEUE/WO doc.",
+    "V5: no added-line claims of NL5 acceptance, R2 activation, U1 assignment, S17 MODEL_REPRODUCED, or scientific runs > 0; MODEL_REPRODUCED only as lifecycle name + explicit not-assigned statement; PREP-S17 prep-only, NOT_DISPATCHED; state.json unchanged corroborates.",
+    "V6: GitHub check-runs on final head: 1 run 'RC0 hosted validation (H0)' completed/success (2026-10-14T17:32:46Z).",
+    "Method: fresh clone /tmp/pr54-verify, no prior involvement; all gates locally re-executed on exact pinned HEAD; adversarial extras: lineage check (910b4a7 parent == c1f2e80; c1f2e80 true 2-parent merge 7a246ee+32d3c68), diff scope 15 files (8A/7M, 399+/37-), case-insensitive frozen-path sweep (9 lowercase vs 15 full)."
+  ]
+}
