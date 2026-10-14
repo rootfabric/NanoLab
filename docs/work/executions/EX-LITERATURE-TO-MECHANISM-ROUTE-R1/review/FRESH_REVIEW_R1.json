@@ -1,0 +1,74 @@
+{
+  "reviewed_head": "c1f2e8003a2f3e2c18ef6933cb87539de6d325a0",
+  "reviewed_tree": "406021adcafcb65dab96f2ed21da493ebfa9338d",
+  "base_head": "32d3c6840341ad3954d5001235a3cc35b8ca0e01",
+  "base_tree": "474249da8fee669c85aa763274e33a16d4293f40",
+  "verdict": "PASS",
+  "blocking": [],
+  "minor": [
+    "m-1 (cosmetic): docs/work/WORK_QUEUE.md:43-45 three consecutive blank lines between last WO row and '## Как брать задание' left by merge resolution; no semantic or rendering impact"
+  ],
+  "tests": 638,
+  "gates": {
+    "unittest_discover": {"exit_code": 0, "result": "Ran 638 tests, OK"},
+    "check_consistency": {"exit_code": 0, "ok": true, "tasks": 19, "stages": 9, "experiments": 7, "frontier": "NL5", "next_work_order": "NL5-002"},
+    "workflow_lint": {"exit_code": 0, "blocking": 0, "violations": 0, "workflows": 1},
+    "work_cli_validate_subject": {"exit_code": 0, "ok": true, "status": "HANDOFF_READY", "has_terminal_handoff": true, "has_post_terminal_corrections": false},
+    "work_cli_validate_all_ex": {"exit_code": 0, "total_ex_dirs": 56, "failures": 0}
+  },
+  "checks": {
+    "C1_merge_integrity": {
+      "diff_stat_scope": "15 files, exactly the intended roadmap surfaces; tree diff is additions-only",
+      "state_json_identical_to_main": true,
+      "frozen_artifacts_identical": 15,
+      "frozen_artifacts_total": 15,
+      "historical_wo_rows_byte_identical_md5": "d7a4acad6d4dd1bc7b0b5023e37ac158",
+      "merge_parents": ["7a246ee4d3ca681fc15c87afc05a2cebcd9d1395", "32d3c6840341ad3954d5001235a3cc35b8ca0e01"],
+      "merge_resolution_delta_vs_branch_tip": "docs/work/WORK_QUEUE.md +10 lines (4 main-side WO rows re-inserted byte-identical to main)"
+    },
+    "C2_dependency_semantics": {
+      "revision": "literature-to-mechanism-route-r1",
+      "catalog_revision_matches_plan": true,
+      "task_count": 19,
+      "task_id_set_preserved_same_order": true,
+      "nl6_001_depends_on": ["NL5-002"],
+      "nl6_002_depends_on": ["NL6-001"],
+      "nl6_002_non_gating_declared": true,
+      "nl7_001_depends_on": ["NL6-001"],
+      "nl7_001_depends_on_nl6_002": false,
+      "nl8_001_depends_on": ["NL7-001"],
+      "acyclic": true,
+      "catalog_stage_deps_match_plan": true
+    },
+    "C3_document_consistency": {
+      "internal_links_checked": 22,
+      "internal_links_broken": 0,
+      "post_mvp_route_doc_diff_bytes": 0,
+      "route_doc_status_claims_match_state_json": true,
+      "s18_s21_literature_entries_verified_real": true
+    },
+    "C4_process_records": {
+      "passport_present": true,
+      "events_present": ["0001-work-order-started", "0002-continuation-checkpoint", "0003-handoff-completed"],
+      "evidence_map_present": true,
+      "summary_present": true,
+      "work_cli_validate_ok": true,
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "prep_s17_status": "NOT_DISPATCHED",
+      "science_runs_claimed": 0,
+      "implementation_subject_head": "22681d5e29e745170fa51a5d93bf96463bb68729",
+      "implementation_subject_tree": "22a53b7838c27b27130270ad2cc69f23f36bff23"
+    },
+    "C6_claim_ceiling": {
+      "nl5_accepted_claimed": false,
+      "r2_active_claimed": false,
+      "u1_assigned_claimed": false,
+      "model_reproduced_s17_claimed": false,
+      "model_reproduced_explicitly_not_assigned_in_sources": true,
+      "scientific_runs_unchanged": true
+    }
+  },
+  "reviewed_at_utc": "2026-10-12",
+  "review_branch": "review/literature-to-mechanism-roadmap-r1",
+  "method": "fresh clone, no prior involvement; all C1-C6 checks executed locally on exact pinned HEAD; verdict derived from Git evidence and re-run machine gates"
+}
