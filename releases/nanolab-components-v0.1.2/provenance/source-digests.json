@@ -1,0 +1,134 @@
+{
+  "digest_vocabulary": {
+    "blob_sha1": "registry pin (Git blob SHA1), verified for every listed file",
+    "sha256_status:COMPUTED_NOT_VERIFIED": "sha256 computed at download for future re-use; no registry claim (G1 vocabulary)",
+    "sha256_status:CONTENT_VERIFIED": "sha256 verified against a registry claim"
+  },
+  "kind": "nanolab_components_source_digests",
+  "notes": "upstream-файлы в пакет не включены (REFERENCE_ONLY); доступ — download-on-run пользователем по exact pinned commit",
+  "schema_version": 1,
+  "upstream": {
+    "pinned_commit": "23fd1ff7731e9017bd776f49206dc42d70d9fe91",
+    "repository": "gauravarya77/DNA-hinge-simulations",
+    "rights_mode": "REFERENCE_ONLY",
+    "tree": "b2d6cebc7a33ed13e4e9c8d79fe8350ce11e82b9"
+  },
+  "variants": {
+    "0b": {
+      "digest_gate_all": "PASS",
+      "files": {
+        "MD_Hinges/0b.conf": {
+          "blob_sha1": "181373f0eb16fb90b0b8c66fe5cbf658cc6134da",
+          "sha256": "506c41fccd45c09958c5c74399b33018bb370719a32615dd57ed588f73bfd263",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 2294162
+        },
+        "MD_Hinges/0b.top": {
+          "blob_sha1": "84edad43593f1d5eb9debb9493a7bd86d743e44b",
+          "sha256": "cd0461275e69a452cedba4586af55b1f8f6b857ab1737f374daf46c389aae01f",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 120204
+        },
+        "MD_Hinges/pro_CPU.in": {
+          "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+          "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 933
+        }
+      },
+      "provenance": "sha256_provenance from source_pins.json (R1_CONTENT_VERIFIED)"
+    },
+    "11b": {
+      "digest_gate_all": "PASS",
+      "files": {
+        "MD_Hinges/11b.conf": {
+          "blob_sha1": "ce9402560649d9337487371944ce15cd1b74b50d",
+          "sha256": "8a29b2eabcb6bb4da9779a8809fbf65db136522e7e11efec8bf938d6dd1becdc",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 2309610
+        },
+        "MD_Hinges/11b.top": {
+          "blob_sha1": "c8d34a47e584cd43b1de3107e9c8e57a992f8688",
+          "sha256": "0a71e29c9de969950ba330aa297082e8866983cb5db3aaf532bac72a264ba697",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 121176
+        },
+        "MD_Hinges/pro_CPU.in": {
+          "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+          "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 933
+        }
+      }
+    },
+    "32b": {
+      "digest_gate_all": "PASS",
+      "files": {
+        "MD_Hinges/32b.conf": {
+          "blob_sha1": "83dda807e5dfcfc1f72aeae0f3847c52de0b0dae",
+          "sha256": "9b9db1698ec0defb730af734edf1e2c10c45be24a488783c613e3791661f612a",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 2345114
+        },
+        "MD_Hinges/32b.top": {
+          "blob_sha1": "a0891d6562e4694839b0394bc5a9b3967e0acb6b",
+          "sha256": "b230ee96ca1c5beb4568a9f38f7aefc65348fcb342d94bf10efe8c447f67f47f",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 123024
+        },
+        "MD_Hinges/pro_CPU.in": {
+          "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+          "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 933
+        }
+      }
+    },
+    "53b": {
+      "digest_gate_all": "PASS",
+      "files": {
+        "MD_Hinges/53b.conf": {
+          "blob_sha1": "74fb97380b4099a7df6e3b0ee316224ac82b7d6a",
+          "sha256": "42214bfdf214099ff61f12360868da616b13856e1b90dc45e59951b68ff0c599",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 2379246
+        },
+        "MD_Hinges/53b.top": {
+          "blob_sha1": "171fcb419b97dbb8099aff400bc5791ec47f4fc9",
+          "sha256": "880d0945b1733e48b71fc67dbcd4b3b256ee0a5ec455f311ac43805f6629bdaf",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 124872
+        },
+        "MD_Hinges/pro_CPU.in": {
+          "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+          "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 933
+        }
+      }
+    },
+    "74b": {
+      "digest_gate_all": "PASS",
+      "files": {
+        "MD_Hinges/74b.conf": {
+          "blob_sha1": "70ea81cd22f382162d69468895f87dac6675dd02",
+          "sha256": "711bb36a3e1d3113ef3cd8875020af30d1fdece8fb88f9a9e5134a77b4478bcb",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 2403188
+        },
+        "MD_Hinges/74b.top": {
+          "blob_sha1": "68e23a5faf4729ff9efbd085be3c8cd9c582a4a5",
+          "sha256": "80477acacac3892590085cc6caee08f6b07ded64144ffc5732234569d36890b7",
+          "sha256_status": "COMPUTED_NOT_VERIFIED",
+          "size_bytes": 126116
+        },
+        "MD_Hinges/pro_CPU.in": {
+          "blob_sha1": "89d76310ce726eaec9e7acb312bd7b0fc43fa735",
+          "sha256": "bd6cd4181403128cc67f433d6439f20509a9ade60a720017b0db763507f5e673",
+          "sha256_status": "CONTENT_VERIFIED",
+          "size_bytes": 933
+        }
+      }
+    }
+  }
+}

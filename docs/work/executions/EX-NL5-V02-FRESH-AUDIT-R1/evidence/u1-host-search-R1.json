@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "record_kind": "U1_HOST_SEARCH_AUDIT",
+  "audit_date": "2026-10-10",
+  "conclusion": "AUTHOR_U1 = NOT_ASSIGNED (no eligible independent native Ubuntu host reachable with available credentials); R2 stays WAITING_HOST / NOT_ACTIVE",
+  "policy_basis": [
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md (U1 host contract)",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md (outenemy = EXTERNAL_U2_ONLY; U1 != U2 physically)",
+    "config/infra/r2-activation.v1.json (forbidden_hostnames: outenemy)"
+  ],
+  "candidates_inspected": [
+    {
+      "host": "outenemy (192.168.0.15, this host)",
+      "os": "Ubuntu 22.04.5 LTS, native kernel 5.15.0-190-generic, virt=none, 2x Xeon E5-2698 v3 (64 threads)",
+      "ssh": "local",
+      "verdict": "FORBIDDEN_AS_U1",
+      "reason": "hostname 'outenemy' is on the forbidden list (EXTERNAL_U2_ONLY per owner decree); it is the designated independent external reproduction platform U2; using it as U1 would collapse author/external independence"
+    },
+    {
+      "host": "192.168.0.19",
+      "os": "Windows-class host (ports 135/139/445/3389 open; SMB+RDP, no SSH)",
+      "verdict": "NOT_ELIGIBLE",
+      "reason": "no SSH; Windows cannot be a native Ubuntu U1 (WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO)"
+    },
+    {
+      "host": "192.168.0.27",
+      "os": "undetermined (SSH 22 + RDP 3389 open)",
+      "ssh_probe": "publickey authentication rejected for users rdpuser, nanolab, ubuntu, root, ape, nobody with the only available key (id_ed25519); password credentials not available to this session",
+      "verdict": "BLOCKED_NO_CREDENTIALS",
+      "reason": "SSH reachable but no authorized credential available; host is in known_hosts (connected historically). Minimum owner action: provide SSH access (user+key) or declare the host out of scope"
+    },
+    {
+      "host": "192.168.0.11, 192.168.0.17, 192.168.0.22, 192.168.0.25, 192.168.0.26, 192.168.0.1",
+      "os": "no open TCP ports detected (top-20 port scan)",
+      "verdict": "NOT_ELIGIBLE",
+      "reason": "no reachable service"
+    },
+    {
+      "host": "local VMs (libvirt domain robot-aiten, shut off) and LXD (snap, socket not accessible without sudo) on outenemy",
+      "verdict": "FORBIDDEN_AS_U1",
+      "reason": "same physical machine as U2 (outenemy); U1 and U2 must be physically distinct (mission + NATIVE_UBUNTU_EXECUTION_POLICY_R1 architecture)"
+    }
+  ],
+  "blocker_statement": "No machine satisfying the U1 contract (independent physical host, native Ubuntu, native filesystem, native systemd, hostname not forbidden, credentials available) is reachable in this environment. Per owner decree the activation cannot be simulated: AUTHOR_U1 = NOT_ASSIGNED and R2 = WAITING_HOST / NOT_ACTIVE remain the honest canonical statuses.",
+  "minimum_owner_action": "Provision or designate one independent native Ubuntu host (never outenemy, never a VM/container on outenemy) and publish its SSH access for the executor session; then run the activation runbook in DIRECTOR_FRESH_AUDIT_R1.md section 6."
+}

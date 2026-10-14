@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-10T15:20:17Z",
+  "execution_id": "EX-INFRA3-U2-OUTENEMY-READINESS-R1",
+  "work_order_id": "WO-INFRA3-U2-OUTENEMY-READINESS-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "summary": "Started bounded INFRA3 work order: technical readiness of the U2 external-reproduction executor on host outenemy (pinned P-B per FROZEN_R2 protocol section 5), per central-agent mission 'NL5 continuation on the existing server' (Case B). Pre-START facts already machine-verified this session: hostname=outenemy, Ubuntu 22.04.5 LTS native (systemd-detect-virt=none), 2x Xeon E5-2698 v3 (64 threads), 125Gi RAM (26Gi available, server shared with unrelated workloads: microk8s/docker, load ~14.5), / ext4 34.5Gi free, /mnt/gig ext4 (nvme1n1) 49.2Gi free; r2.cli fingerprint RECORDED; r2.cli check-host = NOT_ELIGIBLE (hostname 'outenemy' forbidden as author host, external reproduction platform only) - negative control CORRECT, machine is NOT U1 and is NOT presented as U1. Scope of this WO: (A) release package nanolab-components-v0.1.1 self-test with documented pyc findings classified per R2 contract section 6; (B) pinned oxDNA source acquisition 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 + CPU/DOUBLE=ON/CUDA=OFF/MPI=OFF build with full provenance via reuse of scripts/r2/engine_build.py; (C) technical engine smoke (NOT a scientific claim); (D) canonical U2 storage layout ~/nanolab/{workspaces,raw,cache,tools} + raw capacity plan for 296+56 runs from historical EX-NL5-002-B-R2 sizes; (E) disposable systemd transient unit mechanics + journal persistence check (no foreign services touched); (F) full repo unit test suite on this host. HARD BOUNDARIES: zero confirmatory scientific runs (EX-NL5-REPRO-V0-2-U2-R1 stays closed until R2 ACTIVE + dispatch authority v3 + Human Protected Writer Gate); no F2/frozen-artifact changes; no canonical status changes; no U1 assignment; no merge to main; no hostname/system config changes; no wide LAN scan (U1 host search already published in EX-NL5-V02-FRESH-AUDIT-R1)."
+}

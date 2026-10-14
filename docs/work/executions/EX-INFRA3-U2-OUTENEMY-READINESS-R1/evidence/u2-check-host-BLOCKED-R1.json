@@ -1,0 +1,11 @@
+{
+  "status": "NOT_ELIGIBLE",
+  "hostname": "outenemy",
+  "eligible": false,
+  "reasons": [
+    "hostname 'outenemy' is forbidden as author host (external reproduction platform only: outenemy)"
+  ],
+  "exit_code": 2,
+  "stderr": "",
+  "note": "raw machine record of r2.cli check-host on outenemy (canonical negative control)"
+}

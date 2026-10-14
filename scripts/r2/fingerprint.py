@@ -21,7 +21,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Iterable
 
-from . import FORBIDDEN_AUTHOR_HOSTNAMES, NATIVE_FILESYSTEMS
+from . import FORBIDDEN_AUTHOR_HOSTNAMES, NATIVE_FILESYSTEMS, PINNED_U2_HOSTNAMES
 
 Runner = Callable[[Iterable[str]], dict[str, Any]]
 
@@ -180,6 +180,82 @@ def validate_native_u1(
         )
     if hostname in ("", "unknown"):
         reasons.append("hostname could not be determined")
+    return (not reasons), reasons
+
+
+def validate_u2_host(
+    fingerprint: dict[str, Any],
+    pinned_hostnames: Iterable[str] = PINNED_U2_HOSTNAMES,
+) -> tuple[bool, list[str]]:
+    """Return (eligible_u2, reasons) for the pinned external-reproduction role.
+
+    U2 executor path (tooling-repair R1, EX-INFRA3-R2-TOOLING-REPAIR-R1): the
+    mirror image of :func:`validate_native_u1` — the host must BE the pinned
+    external platform, and must never qualify as the author host:
+
+    - the same native platform floor as U1 (Linux kernel, virtualization
+      "none", no WSL marker, native root filesystem, systemd available) so the
+      executor mechanics hold;
+    - hostname MUST match a pinned U2 platform (case-insensitive) — an unknown
+      host is fail-closed rejected: the U2 role is pinned by policy
+      (FROZEN_R2 §5 P-B), never self-declared;
+    - the host must remain NOT U1-eligible (:func:`validate_native_u1` must
+      reject it) — on this policy the pinned U2 hostnames are forbidden as
+      author hosts, so an eligible-for-U1 fingerprint can never act as U2.
+
+    The U1 guard is NOT weakened: ``r2.cli run`` keeps requiring
+    ``validate_native_u1``; this function only gates the separate U2 path.
+    """
+    parsed = fingerprint.get("parsed", fingerprint)
+    reasons: list[str] = []
+    uname = str(parsed.get("uname", ""))
+    if "Linux" not in uname:
+        reasons.append("kernel is not Linux")
+    if parsed.get("virtualization") != "none":
+        reasons.append(f"virtualization is {parsed.get('virtualization')!r}, native required")
+    if parsed.get("wsl_marker"):
+        reasons.append("Microsoft kernel marker present (WSL family)")
+    if parsed.get("root_filesystem") not in NATIVE_FILESYSTEMS:
+        reasons.append(
+            f"root filesystem {parsed.get('root_filesystem')!r} is not native "
+            f"(expected one of {', '.join(NATIVE_FILESYSTEMS)})"
+        )
+    if not parsed.get("systemd_available"):
+        reasons.append("systemd (systemctl) is not available")
+    hostname = str(parsed.get("hostname", ""))
+    pinned = tuple(pinned_hostnames)
+    short_name = hostname.split(".")[0].lower()
+    pinned_short = {str(item).split(".")[0].lower() for item in pinned}
+    if (
+        not pinned
+        or (
+            hostname.lower() not in {str(item).lower() for item in pinned}
+            and short_name not in pinned_short
+        )
+    ):
+        reasons.append(
+            f"hostname {hostname!r} is not a pinned U2 reproduction platform "
+            f"(pinned: {', '.join(pinned) if pinned else 'none'}); the U2 role "
+            "is pinned by policy and never self-declared"
+        )
+    if hostname in ("", "unknown"):
+        reasons.append("hostname could not be determined")
+    u1_eligible, u1_reasons = validate_native_u1(fingerprint)
+    if u1_eligible:
+        reasons.append(
+            "host passes native-U1 validation and can never act as U2 "
+            "(U1/U2 roles are disjoint by policy)"
+        )
+    elif hostname.lower() in {str(item).lower() for item in pinned} and not any(
+        "forbidden as author host" in reason for reason in u1_reasons
+    ):
+        # Defensive: a pinned U2 host whose U1 rejection comes from something
+        # other than the hostname policy (e.g. broken systemd) is not a valid
+        # U2 platform either.
+        reasons.append(
+            f"pinned U2 hostname {hostname!r} fails U1 validation for an "
+            "unexpected reason; platform floor broken"
+        )
     return (not reasons), reasons
 
 
