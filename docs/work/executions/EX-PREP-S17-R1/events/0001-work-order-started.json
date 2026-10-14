@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "director-prep-s17-r1",
+  "subject_sha": "32d3c6840341ad3954d5001235a3cc35b8ca0e01",
+  "timestamp_utc": "2026-10-14T17:19:14.064Z",
+  "summary": "START PREP-S17 from fresh canonical main 32d3c68 (tree 474249da); bounded source audit + KnowledgePack v1 prototype, 0 scientific runs, no status promotion; PR #54 route treated as proposed-only.",
+  "command_refs": [
+    "git fetch --all --prune",
+    "git worktree add /home/rdpuser/NanoLab/prep-s17 -b work/prep-s17-r1 origin/main"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R1.md",
+    "docs/work/executions/EX-PREP-S17-R1/passport.json"
+  ],
+  "next_action": "Implement source registry, KnowledgePack prototype and tests; publish CONTINUATION after first substantive batch.",
+  "blocker": null
+}
