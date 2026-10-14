@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "event_id": "0006-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "director-prep-s17-r1",
+  "subject_sha": "3e405abf2b09df388739779cc6a981b871a79f81",
+  "timestamp_utc": "2026-10-14T18:35:00.000Z",
+  "summary": "PREP-S17 repair R2 ready for re-review. Review-integrated state: blocking evidence-accuracy finding fixed (import tests committed; real counts recorded: R1 subject 668 tests, repair head 679 tests = 638 base + 41), review minors m-1..m-6 fixed with evidence R2 superseding historical R1. 0 scientific runs; statuses unchanged; project/state.json and frozen artifacts untouched; claim ceiling still PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .  # 679 OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency  # ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint  # blocking:0",
+    "for d in docs/work/executions/EX-*/; do PYTHONPATH=scripts python3 -m harness.work_cli validate \"$d\"; done  # 0 FAIL"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_PREP_AUDIT_R1.md",
+    "docs/research/S17_KNOWLEDGEPACK.json",
+    "docs/work/executions/EX-PREP-S17-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R1/summary.md",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-import-validation-R2.json"
+  ],
+  "next_action": "Fresh re-review of repair R2 + fresh exact-head Verifier, then Human Gate merge.",
+  "blocker": null
+}
