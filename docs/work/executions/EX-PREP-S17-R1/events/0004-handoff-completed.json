@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R1",
+  "event_id": "0004-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "director-prep-s17-r1",
+  "subject_sha": "3cf7818877fc7d442c396a90e737cda510fb4cf7",
+  "timestamp_utc": "2026-10-14T17:45:00.000Z",
+  "summary": "PREP-S17 ready for independent review. Deliverables complete per WO: source registry + rights/provenance report, KnowledgePack v1 prototype + validated S17 instance, deterministic import path with negative controls, preliminary MechanicalComponentSpec (ports UNVERIFIED/UNKNOWN, no fabricated links), missing-inputs list, draft boundary for future HIGH WO NL6-001/E5. 0 scientific runs; no status changes; project/state.json and frozen artifacts untouched; E5 not started; claim level capped at PINNED_IMPORT_VERIFIED.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .  # 675 OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency  # ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint  # blocking:0",
+    "for d in docs/work/executions/EX-*/; do PYTHONPATH=scripts python3 -m harness.work_cli validate \"$d\"; done  # 0 FAIL"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_PREP_AUDIT_R1.md",
+    "docs/research/S17_KNOWLEDGEPACK.json",
+    "docs/work/executions/EX-PREP-S17-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R1/summary.md",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-import-validation-R1.json",
+    "docs/work/executions/EX-PREP-S17-R1/evidence/s17-source-sha256sums-R1.txt"
+  ],
+  "next_action": "Fresh independent Reviewer + fresh exact-head Verifier of work/prep-s17-r1, then Human Gate merge; after PR #54 merges, reconcile PREP-S17 registration with the canonical route.",
+  "blocker": null
+}

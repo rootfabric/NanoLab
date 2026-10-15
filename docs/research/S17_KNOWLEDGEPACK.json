@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "kind": "knowledge_pack",
+  "pack_id": "S17-LEAF-SPRING-NANOENGINE-R1",
+  "source_id": "S17",
+  "source_version": "Nature Nanotechnology 19:226-236 (issue 2024-02, online 2023-10-19, Version of Record); Nanobase structure 196 (https://nanobase.org/structures/196; no entry versioning exposed, retrieved 2026-10-15 UTC); Zenodo record 8248808 (single version 'Original upload', published 2023-08-28); analysis repo sulcgroup/hinges branch main @ 7c8b04a654b2440e4b6bab5b0abcb7e4335824d9 (tree d730871cd13a8c64d9e97d52ce8e04ca6909ba2f, pushed 2023-03-09)",
+  "doi": "10.1038/s41565-023-01516-x",
+  "license": "Article + Zenodo MD dataset: CC BY 4.0. Nanobase entry: no per-structure license field; Nanobase terms state copyright for deposited structures is owned by the publication authors, so the article's CC BY 4.0 governs the design/structure files in practice (documented inference, not an explicit Nanobase grant). sulcgroup/hinges analysis code: NO LICENSE found (GitHub license null; no LICENSE/COPYING anywhere in the pinned tree) - all rights reserved, REFERENCE_ONLY. smFRET analysis code (walterlab-um/rhythmically-pulsing-leaf-spring_SMCodes): MIT per GitHub (not further audited here).",
+  "rights": {
+    "license": "CC BY 4.0 (article, Zenodo dataset, Nanobase structure files by documented inference); UNKNOWN/no-license (sulcgroup/hinges analysis code)",
+    "redistribution": "RESTRICTED",
+    "access_mode": "REFERENCE_ONLY",
+    "notes": "Nothing is vendored into NanoLab Git in this pack revision. CC BY 4.0 surfaces may be re-downloaded and redistributed with attribution; the unlicensed analysis code may only be viewed/reference-consulted at the pinned commit. A vendor or redistribution decision for any surface requires an explicit owner decision and a new pack revision (fail-closed: vendored entries are rejected while redistribution is not ALLOWED)."
+  },
+  "input_file_manifest": [
+    {
+      "path": "s17/nanobase/structure/NE.top",
+      "size_bytes": 215903,
+      "sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+      "role": "DESIGN_TOPOLOGY",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE.top",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/NE.dat",
+      "size_bytes": 3955400,
+      "sha256": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66",
+      "role": "STARTING_CONFIGURATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE.dat",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/nNE.top",
+      "size_bytes": 215616,
+      "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+      "role": "DESIGN_TOPOLOGY",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/nNE.top",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/nNE.dat",
+      "size_bytes": 3961974,
+      "sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+      "role": "STARTING_CONFIGURATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/nNE.dat",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/NE_NB.top",
+      "size_bytes": 210225,
+      "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+      "role": "DESIGN_TOPOLOGY",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE_NB.top",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/NE_NB.dat",
+      "size_bytes": 3853788,
+      "sha256": "c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf",
+      "role": "STARTING_CONFIGURATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE_NB.dat",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/structure/NE_halo_dsDNA.json",
+      "size_bytes": 320937,
+      "sha256": "8cbc247002158dc4955adac59b8a73dae15590303537691ef0809d0728f9c67a",
+      "role": "DESIGN_TOPOLOGY",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE_halo_dsDNA.json",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/simProtocol/input_equilibrium",
+      "size_bytes": 959,
+      "sha256": "822e0f493ac2d76a4863d356c7cece17be0e425e12821a4859d83b524eeaf216",
+      "role": "SIMULATION_INPUT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/simProtocol/input_equilibrium",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/simProtocol/input_pull",
+      "size_bytes": 1018,
+      "sha256": "dc3d643908ad14890ff62fab698c4655a5720b717674a7126f281752237941ad",
+      "role": "SIMULATION_INPUT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/simProtocol/input_pull",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/simProtocol/input_release",
+      "size_bytes": 941,
+      "sha256": "69bca7e542f36e71f39830c4bfba1da07a44ab9d21c26222c54d16090ab53528",
+      "role": "SIMULATION_INPUT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/simProtocol/input_release",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/simProtocol/T7_force.txt",
+      "size_bytes": 96,
+      "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+      "role": "SIMULATION_INPUT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/simProtocol/T7_force.txt",
+      "vendored": false
+    },
+    {
+      "path": "s17/nanobase/expProtocol/Suppl. Dataset S1 V3.docx",
+      "size_bytes": 101900,
+      "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+      "role": "DOCUMENTATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl. Dataset S1 V3.docx",
+      "vendored": false
+    },
+    {
+      "path": "s17/zenodo/README.md",
+      "size_bytes": 1478,
+      "sha256": "7ea24d8114edd29052ad4ba00dc7d14c7e5495c1652772c1945c7cab74ff39d4",
+      "role": "DOCUMENTATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://zenodo.org/api/records/8248808/files/README.md/content",
+      "vendored": false
+    },
+    {
+      "path": "s17/zenodo/NE23.zip",
+      "size_bytes": 3224726030,
+      "sha256": "UNKNOWN",
+      "role": "DATA_PRODUCT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "NOT_VERIFIED",
+      "source_url": "https://zenodo.org/api/records/8248808/files/NE23.zip/content",
+      "upstream_checksum": {
+        "algorithm": "md5",
+        "value": "b69783a1524a275ab424d0d6bde56548"
+      },
+      "vendored": false
+    },
+    {
+      "path": "s17/zenodo/NE37.zip",
+      "size_bytes": 2597347235,
+      "sha256": "UNKNOWN",
+      "role": "DATA_PRODUCT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "NOT_VERIFIED",
+      "source_url": "https://zenodo.org/api/records/8248808/files/NE37.zip/content",
+      "upstream_checksum": {
+        "algorithm": "md5",
+        "value": "000079d02366b5330657c8488a736755"
+      },
+      "vendored": false
+    },
+    {
+      "path": "s17/zenodo/pull_release23.zip",
+      "size_bytes": 20691250829,
+      "sha256": "UNKNOWN",
+      "role": "DATA_PRODUCT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "NOT_VERIFIED",
+      "source_url": "https://zenodo.org/api/records/8248808/files/pull_release23.zip/content",
+      "upstream_checksum": {
+        "algorithm": "md5",
+        "value": "c119986daa90f55b5f091f9d143952b5"
+      },
+      "vendored": false
+    },
+    {
+      "path": "s17/zenodo/pull_release37.zip",
+      "size_bytes": 19660214357,
+      "sha256": "UNKNOWN",
+      "role": "DATA_PRODUCT",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "NOT_VERIFIED",
+      "source_url": "https://zenodo.org/api/records/8248808/files/pull_release37.zip/content",
+      "upstream_checksum": {
+        "algorithm": "md5",
+        "value": "b2fb222a77121a7e0ad8ea9d412a0f62"
+      },
+      "vendored": false
+    },
+    {
+      "path": "s17/github/get_k.py",
+      "size_bytes": 8204,
+      "sha256": "6b9a368269aa7117d4db8f859b97467074434c7cf70463a265c6487208700646",
+      "role": "ANALYSIS_CODE",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://raw.githubusercontent.com/sulcgroup/hinges/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9/scripts/get_k.py",
+      "vendored": false
+    },
+    {
+      "path": "s17/github/extract_data.py",
+      "size_bytes": 399,
+      "sha256": "8fc35a59b18ffcd9b16f52b67b8fd9e21001122f411abbf43b1ea2f78e48027d",
+      "role": "ANALYSIS_CODE",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://raw.githubusercontent.com/sulcgroup/hinges/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9/scripts/extract_data.py",
+      "vendored": false
+    },
+    {
+      "path": "s17/github/hinge_bonds.py",
+      "size_bytes": 3418,
+      "sha256": "4c0348ff6de223abf12e812db5990fead2648bb752548a1b2515558142962349",
+      "role": "ANALYSIS_CODE",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://raw.githubusercontent.com/sulcgroup/hinges/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9/scripts/hinge_bonds.py",
+      "vendored": false
+    },
+    {
+      "path": "s17/github/README.md",
+      "size_bytes": 1440,
+      "sha256": "85f1c9d2d142a330e2b2f742da4e64b7fd6a30ca12cf2b4a6f602820cde2c02c",
+      "role": "DOCUMENTATION",
+      "availability": "REMOTE_ONLY",
+      "sha256_provenance": "CONTENT_VERIFIED",
+      "source_url": "https://raw.githubusercontent.com/sulcgroup/hinges/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9/README.md",
+      "vendored": false
+    }
+  ],
+  "scientific_model": "DNA_COARSE_GRAINED (oxDNA2; Nanobase input files declare interaction_type=DNA2, salt_concentration=2.0, sim_type=MD, ensemble=nvt, thermostat=john, dt=0.003; equilibrium 1e9 steps, pull 1e7, release 2e7; temperatures 23C/37C across the source campaign - provided Nanobase inputs are 37C)",
+  "simulation_engine": "oxDNA (Zenodo README: 'the oxDNA2 model using the late-2020 version of the oxDNA simulation package'; exact engine commit/tag UNKNOWN - no pin recorded in any audited surface)",
+  "topology_format": "oxDNA_top; cadnano JSON design also provided (NE_halo_dsDNA.json, internal name hinge-ok-halo-tag-dsDNA.json) importable via TacoxDNA",
+  "configuration_format": "oxDNA_dat (equilibrium endpoint configurations, e.g. NE.dat header t=1000000000, box 310x310x310)",
+  "observables": [
+    {
+      "name": "inter_arm_angle",
+      "definition": "angle between principal axes (SVD) of the two origami arms, computed from aligned oxDNA trajectories; source script pins reference nucleotide indices arm1 [2034, 6657], arm2 [4593, 4411]",
+      "status": "DEFINED_IN_SOURCE",
+      "definition_source": "sulcgroup/hinges get_k.py @ 7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+    },
+    {
+      "name": "arm_center_distance_nm",
+      "definition": "distance between arm centers in oxDNA units multiplied by 0.85 nm/unit conversion",
+      "status": "DEFINED_IN_SOURCE",
+      "definition_source": "sulcgroup/hinges get_k.py @ 7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+    },
+    {
+      "name": "equipartition_spring_constant",
+      "definition": "effective angular spring constant K = 0.5/variance from equilibrium angle fluctuations",
+      "status": "DEFINED_IN_SOURCE",
+      "definition_source": "sulcgroup/hinges get_k.py @ 7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+    },
+    {
+      "name": "closing_rate_under_16pN",
+      "definition": "structure closing rate under 16 pN external pulling applied between the polymerase attachment point and the dsDNA template terminator (T7_force.txt constant_trap: particle 8694, ref 7374, stiff 0.3290, r0 8.8)",
+      "status": "DEFINED_IN_SOURCE",
+      "definition_source": "paper Methods + Nanobase input_pull / T7_force.txt (pinned digests in this pack)"
+    },
+    {
+      "name": "flexure_hbond_occupancy",
+      "definition": "hydrogen-bond occupancy matrix inside the six ssDNA flexure windows",
+      "status": "DEFINED_IN_SOURCE",
+      "definition_source": "sulcgroup/hinges hinge_bonds.py @ 7c8b04a654b2440e4b6bab5b0abcb7e4335824d9"
+    },
+    {
+      "name": "driver_follower_motion_transfer",
+      "definition": "correlation/transfer of pulsation between driver (nanoengine) and passive follower; candidate NanoLab E5/NL7 observable",
+      "status": "PROPOSED",
+      "definition_source": "paper reports D-F pair analysis (driver_*/follower_* data files exist in sulcgroup/hinges); exact processing provenance UNKNOWN - UNVERIFIED for NanoLab until a dedicated analysis protocol is written"
+    },
+    {
+      "name": "nucleotide_index_mapping_for_ne_top",
+      "definition": "verification that get_k.py reference indices map to the arm structures of the pinned NE.top/nNE.top imports",
+      "status": "UNVERIFIED",
+      "definition_source": "index-to-structure mapping not documented in any audited surface"
+    }
+  ],
+  "protocol_references": [
+    "Centola et al., Nature Nanotechnology 19:226-236 (2024), Methods 'Molecular dynamics simulations', DOI 10.1038/s41565-023-01516-x (CC BY 4.0)",
+    "Nanobase structure 196 simProtocol: input_equilibrium / input_pull / input_release + T7_force.txt (pinned digests in this pack)",
+    "Zenodo record 8248808 README (decimated trajectories 1/20; oxDNA2 late-2020; 23/37C equilibrium + pull/release campaigns)",
+    "Nanobase citation: Poppleton et al., Nanobase.org, Nucleic Acids Research 2021, doi:10.1093/nar/gkab1000",
+    "oxDNA citations: Poppleton JOSS 2023; Rovigatti J Comput Chem 2015; Poppleton NAR 2020"
+  ],
+  "missing_inputs": [
+    "polymerase_positioning.txt - referenced by Nanobase input_pull (external_forces_file) but absent from the 12-file Nanobase set; UNKNOWN whether it is inside the Zenodo zips",
+    "linked.top / first_conf.dat build recipe - input files reference a combined engine+follower/template topology; the recipe is not in the Nanobase set",
+    "exact oxDNA engine version pin ('late-2020' per Zenodo README; no commit/tag recorded anywhere)",
+    "23C oxDNA input variants (Nanobase set provides 37C inputs only)",
+    "Nanobase entry-level metadata (curator, deposition date, entry title/description) - not exposed by probed API endpoints",
+    "driver_*/follower_* processed-data provenance mapping in sulcgroup/hinges (which figure/table each file feeds)",
+    "smFRET dataset (U-M Deep Blue concern/data_sets/474299762) - HTTP 403 to scripted requests; accessibility and license UNKNOWN"
+  ],
+  "known_limitations": [
+    "GPU non-determinism: source trajectories are not bit-reproducible from a seed (Zenodo README); NanoLab reproductions can only reproduce statistical trends",
+    "Zenodo trajectories are decimated to every 20th configuration (2000 -> 100 confs per trajectory)",
+    "Analysis scripts are research-grade: hard-coded personal paths, missing index files (ss_ids.txt), SLURM assumptions - not runnable as-is",
+    "Transcription actuation is modeled in MD only as an external 16 pN pulling force; the chemical fuel (NTP/T7RNAP transcription) is NOT part of the coarse-grained simulation",
+    "Import validation in EX-PREP-S17-R1 verifies file structure only (PINNED_IMPORT_VERIFIED); no NanoLab simulation, reproduction or mechanism claim is made",
+    "Physical fabricability in a wet lab is NOT established by any of this"
+  ],
+  "claim_level": "PINNED_IMPORT_VERIFIED",
+  "provenance": {
+    "audit_work_order": "WO-PREP-S17-R1",
+    "audit_execution_id": "EX-PREP-S17-R1",
+    "audit_date_utc": "2026-10-15T00:00:00.000Z",
+    "audit_method": "Independent bounded source-audit session (live HTTP captures of Nature page, Nanobase API/pages, Zenodo API, GitHub API at pinned commit; all downloaded files SHA-256 verified; strict oxDNA parsers reused from scripts/hinge_family; import validation evidence docs/work/executions/EX-PREP-S17-R1/evidence/s17-import-validation-R1.json with deterministic re-import and single-byte-corruption negative controls)",
+    "base_repo_sha": "32d3c6840341ad3954d5001235a3cc35b8ca0e01"
+  }
+}

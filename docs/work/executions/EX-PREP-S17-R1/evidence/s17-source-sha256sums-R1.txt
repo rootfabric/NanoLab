@@ -1,0 +1,25 @@
+# S17 source audit - SHA-256 manifest (files actually downloaded)
+
+## Zenodo record 8248808
+7ea24d8114edd29052ad4ba00dc7d14c7e5495c1652772c1945c7cab74ff39d4  raw/zenodo/README.md
+
+## GitHub sulcgroup/hinges @ main
+85f1c9d2d142a330e2b2f742da4e64b7fd6a30ca12cf2b4a6f602820cde2c02c  raw/github/README.md
+8fc35a59b18ffcd9b16f52b67b8fd9e21001122f411abbf43b1ea2f78e48027d  raw/github/extract_data.py
+6b9a368269aa7117d4db8f859b97467074434c7cf70463a265c6487208700646  raw/github/get_k.py
+4c0348ff6de223abf12e812db5990fead2648bb752548a1b2515558142962349  raw/github/hinge_bonds.py
+4506457a6a2c4ac388c2155b5f8de937c29bf1164c7aa457eb347fa20a125bdc  raw/github/final_figures.ipynb
+
+## Nanobase structure 196
+c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66  raw/nanobase/files/structure/NE.dat
+8cbc247002158dc4955adac59b8a73dae15590303537691ef0809d0728f9c67a  raw/nanobase/files/structure/NE_halo_dsDNA.json
+c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf  raw/nanobase/files/structure/NE_NB.dat
+5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9  raw/nanobase/files/structure/NE_NB.top
+5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb  raw/nanobase/files/structure/NE.top
+b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f  raw/nanobase/files/structure/nNE.dat
+71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f  raw/nanobase/files/structure/nNE.top
+822e0f493ac2d76a4863d356c7cece17be0e425e12821a4859d83b524eeaf216  raw/nanobase/files/simProtocol/input_equilibrium
+dc3d643908ad14890ff62fab698c4655a5720b717674a7126f281752237941ad  raw/nanobase/files/simProtocol/input_pull
+69bca7e542f36e71f39830c4bfba1da07a44ab9d21c26222c54d16090ab53528  raw/nanobase/files/simProtocol/input_release
+71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3  raw/nanobase/files/simProtocol/T7_force.txt
+dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c  raw/nanobase/files/expProtocol/Suppl. Dataset S1 V3.docx
