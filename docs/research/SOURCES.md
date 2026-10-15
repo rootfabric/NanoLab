@@ -132,7 +132,31 @@ Centola et al., *A rhythmically pulsing leaf-spring DNA-origami nanoengine that 
 
 [Статья](https://www.nature.com/articles/s41565-023-01516-x), [Zenodo MD data](https://doi.org/10.5281/zenodo.8248808), [analysis repository](https://github.com/sulcgroup/hinges).
 
-Статья ссылается на Nanobase structure 196 для design/starting structures, Zenodo для generated MD trajectories и `sulcgroup/hinges` для processed data/analysis. Zenodo dataset содержит десятки гигабайт, поэтому это не E1 и не первый E2, а будущий benchmark для driven/composite mechanisms.
+Статья ссылается на Nanobase structure 196 для design/starting structures, Zenodo для generated MD trajectories и `sulcgroup/hinges` для processed data/analysis. Zenodo dataset содержит десятки гигабайт, поэтому это не E1 и не первый E2, а **приоритетный будущий исполняемый эталон E5/NL7**, но статус `MODEL_REPRODUCED` для NanoLab не присвоен. Exact topology/trajectory/analysis inputs, лицензии, версия и модельные условия должны пройти новый bounded audit до импорта.
+
+## S18 — DNA origami mechanical-frustration lattice (2025): NL7 candidate
+
+Madhvacharyula et al., *Realizing mechanical frustration at the nanoscale using DNA origami*, [Nature Communications](https://www.nature.com/articles/s41467-025-60492-z), DOI **10.1038/s41467-025-60492-z**.
+
+В работе сопоставлены экспериментальные упругие конфигурации и расчёты oxDNA; полезно как будущий benchmark для переноса деформации/энергетических состояний между связанными элементами. **Кандидат / не импортирован:** article Source Data доступны, полный машинный пакет model-inputs не подтверждён, доступ к остальным данным по запросу. Licensing, pins и соответствие модели — новый audit.
+
+## S19 — Spring-loaded DNA origami arrays (2025): NL8 candidate
+
+Pfeiffer et al., *Spring-loaded DNA origami arrays as energy-supplied hardware for modular nanorobots*, *Science Robotics* 10 (2025), DOI **10.1126/scirobotics.adu3679**.
+
+[Открытый авторский текст](https://pmc.ncbi.nlm.nih.gov/articles/PMC12955726/), [данные Zenodo](https://doi.org/10.5281/zenodo.15818029). Опорная работа для подпружиненных состояний, каскадов и механического управления. **Кандидат / не импортирован:** dataset велик, raw data ≠ исполняемая молекулярная модель; выяснить format/topology, license/rights и сборочные протоколы.
+
+## S20 — Generative SNUPI (2026): optional generator candidate
+
+Truong-Quoc et al., *De novo design of DNA origami with a generative diffusion model*, [Nature Communications](https://www.nature.com/articles/s41467-026-73578-z), DOI **10.1038/s41467-026-73578-z**.
+
+[GitHub](https://github.com/SSDL-SNU/GenerativeSNUPI), [архив версии из статьи](https://doi.org/10.5281/zenodo.19309767). Согласно статье, исходный код опубликован под Apache-2.0; исходные данные, веса, сторонние зависимости и exact publication pin потребуют отдельного rights audit. Авторский README описывает генерирование design с export для oxDNA и преимущественно Linux/NVIDIA GPU execution (CPU-only не поддержан). **Кандидат / не интегрирован:** генератор формулирует гипотезу; независимый NanoLab oxDNA run проверяет результат. Не делать GPU обязательным NL6/NL7 gate.
+
+## S21 — MagicDNA (2021): optional multi-component CAD reference
+
+Huang et al., *Integrated computer-aided engineering and design for DNA assemblies*, [Nature Materials](https://doi.org/10.1038/s41563-021-00978-5), DOI **10.1038/s41563-021-00978-5**.
+
+[Авторский репозиторий](https://github.com/cmhuang2011/MagicDNA). Инструмент использует graphical interface для multicomponent DNA origami assembly; README указывает MATLAB и toolboxes. **Кандидат / не интегрирован:** изучить инженерные принципы и форматы, но не вводить обязательную MATLAB зависимость и не переносить сторонний код без license audit.
 
 ## Как расширять реестр
 
