@@ -15,34 +15,47 @@ NL4  AI NanoLab MVP и измерение вклада ИИ
  ↓
 NL5  Проверенная библиотека и внешнее воспроизведение
  ↓
-NL6  Управляемый DNA-компонент (E5) + E3-R2 на богатом design space
+NL6  Управляемый DNA-компонент (E5)
  ↓
-NL7  Составные системы и проверенные упрощённые модели
+NL7  Сборка DNA-механизмов и проверенные упрощённые модели
  ↓
 NL8  Исследование специализированных наномашин
 ```
 
 ## Выбранная post-MVP траектория
 
-После закрытия MVP проект развивается **depth-first по DNA nanomechanics**:
+После закрытия MVP проект развивается **depth-first по DNA nanomechanics**. [Literature-to-Mechanism Route R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md) (2026-10-11) уточняет старый post-MVP маршрут (исторический [R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md)):
 
 ```text
-NL5-001  component library + release package
+NL5-001  validated components (ACCEPTED)
    ↓
-NL5-002  external reproduction
+NL5-002  external reproduction (NOT ACCEPTED / Human Gate)
+   ↓ [NL5 acceptance + authorised native Ubuntu executor]
+NL6-001  E5 driven DNA component / S17 reference
+   ├──────────────────→ NL6-002 E3-R2 AI benchmark (parallel, NON-GATING)
    ↓
-NL6-001  E5 driven DNA component
+NL7-001  DNA ports + driver→follower assembly + reduced models
    ↓
-NL6-002  E3-R2 richer-space AI benchmark
-   ↓
-NL7-001  composition + reduced models
-   ↓
-NL8      specialized nanomachine study
+NL8-001  programmable nanomechanism / energy and control
 ```
+
+`PREP-S17` (проверка открытых данных, точных input pins, прав и импортных форматов) готовится как **отдельный bounded WO без scientific runs**, параллельно NL5. `NL6-002` остаётся исследованием вклада ИИ, но больше не блокирует NL7. Прежний `NO_ADVANTAGE` сохраняется и является допустимым будущим исходом.
 
 `E4` free-energy challenge не отменён: он открывается targeted, если E5/NL7 создаёт конкретный вопрос о состояниях, переходах, барьерах или sampling. `E6` atomistic adapter остаётся поздним/demand-driven расширением и не должен задерживать основную DNA-механическую вертикаль до NL7.
 
 Параллельная capability-линия `INFRA2 → INFRA3` может развиваться одновременно с NL5, но INFRA не владеет scientific truth и не закрывает NL5/NL6 автоматически.
+
+## Повторное использование существующих результатов
+
+| Источник | Практическое действие для NanoLab |
+|---|---|
+| S16 — проверенный DNA hinge family | Переиспользовать topology/validation/observable routines как опорные tests |
+| **S17 — Centola leaf-spring / Nanobase 196 / Zenodo / hinges** | Подготовить exact source-pack и протокол E5, затем driver→follower NL7 |
+| S18 — mechanical frustration 2025 | Исследовать локализацию деформаций/связь упругих узлов |
+| S19 — spring-loaded arrays 2025 | Использовать как образец программируемой механической логики NL8 |
+| S20 — Generative SNUPI; S21 — MagicDNA | Опциональные инструменты генерации/САПР; проверять независимым physical engine и права |
+
+Новые перспективные контракты: `KnowledgePack`, `MechanicalComponentSpec` (molecular ports/anchors/DOF), `AssemblySpec`, `TestRigSpec`, `ReducedModelCard`. Первое воплощение — **узкий компилятор одного типа DNA-соединения**. Подробные gates/ограничения в [маршруте R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md). Это план, не утверждение об имеющемся работающем инструменте.
 
 ## Этапы и условия завершения
 
@@ -54,9 +67,9 @@ NL8      specialized nanomachine study
 | NL3 | Семейство допустимых шарниров и воспроизводимая серия E2 | Определено распределение угла, оценены целостность и статистика, получена зависимость от параметров без заранее навязанного тренда |
 | NL4 | Пользовательская цель → ограниченный агент → расчёты → отчёт | Выполнен E3, работают бюджеты и восстановление; вклад ИИ измерен относительно контроля; готов публичный воспроизводимый сценарий |
 | NL5 | Несколько карточек/вариантов в честно оформленном component package, эталоны и архивы | Хотя бы один release package воспроизведён вне авторской среды; независимость проверки описана честно; rights/claim ceiling явны |
-| NL6 | E5 driven DNA component + E3-R2 на обогащённом post-E5 design space | Управляемый цикл проверен под явным воздействием/нагрузкой; ошибки и целостность измерены; AI benchmark повторён при равном бюджете и fresh revalidation победителя |
-| NL7 | Соединённые компоненты и модели уменьшенной сложности | Поведение сборки проверено относительно подробных расчётов; учтены нагрузка, среда, coupling и обратное влияние |
-| NL8 | Конкретная специализированная наномашина как исследовательская задача | Определены источник энергии, полный цикл, управление, ошибки и физическая проверка; критерии уточняются после NL7 |
+| NL6 | E5 — проверенный управляемый DNA-компонент под воздействием/нагрузкой | Отдельные no-drive/load controls; цикл, возврат, ошибки, целостность и неопределённости измерены. E3-R2 остаётся non-gating benchmark |
+| NL7 | Исполняемая 2-компонентная сборка + reduced models | Порты/anchors/topology обоснованы; драйвер + follower функционируют в общей подробной модели; coupling, back-reaction, нагрузка и hold-out для reduced model проверены |
+| NL8 | Специализированная управляемая многокомпонентная наномашина как исследовательская задача | Есть энергия, механическое управление/защёлка, полный цикл, ошибки, диапазон модели и план независимой экспериментальной проверки |
 
 **NL4 — закрытая граница первого продукта.** Следующее развитие не должно превращать NanoLab в широкий набор несвязанных physics adapters до проверки основной DNA-механической вертикали.
 
@@ -85,15 +98,17 @@ Release `nanolab-components 0.1.0` включает machine-readable schema, fam
 
 ### 5. NL6-001 — E5 driven DNA component
 
+До scientific Work Order: `PREP-S17` — аудит exact входов и прав Nanobase 196 / Zenodo 8248808 / `sulcgroup/hinges`; без новых scientific runs. Работа E5 допустима после принятия NL5, U1/R2 host gates и frozen preregistration.
+
 Отдельный HIGH scientific Work Order и preregistration: явное внешнее воздействие, нагрузка, state/angle distributions, success/failure rule, return/reversibility, repeated cycles, structural integrity, uncertainty и ограничения модели. Результат называется externally driven component, не автономным мотором/нанороботом.
 
-### 6. NL6-002 — E3-R2
+### 6. NL6-002 — E3-R2 (non-gating; возможно параллельно NL7)
 
 Только после E5 сформировать более богатое пространство параметров и сравнить random/grid/optimization/LLM-guided стратегии при равном бюджете и информации. Победитель обязательно получает anti-selection-bias revalidation на fresh seeds. `NO_ADVANTAGE` остаётся допустимым исходом.
 
-### 7. NL7 — composition
+### 7. NL7 — modular DNA mechanism assembly
 
-Соединить проверенные компоненты/нагрузки/интерфейсы; измерять coupling, back-reaction, failure propagation и проверять reduced models относительно detailed evidence.
+Разработать `MechanicalComponentSpec` с молекулярными портами/frames/anchors и `AssemblySpec` с явными соединениями; собрать S17-подобный узел «driver → follower» и один ограниченный вариант. Fail-closed compiler должен выдавать одну проверяемую oxDNA topology/config. Испытать coupling, back-reaction, load transfer, errors/failures; reduced models сравнить с независимыми detailed evidence. CAD preview не доказывает самосборку или изготовимость.
 
 ### 8. E4/E6 по условию
 
@@ -117,4 +132,4 @@ E0 проверяет программный измерительный трак
 
 Параллельные агенты не меняют одни контракты, не запускают одну кампанию дважды и не создают альтернативную систему статусов.
 
-После NL5 направление научного расширения в R1 уже выбрано: **E5 driven DNA component**, затем E3-R2 и NL7 composition. Пересмотр возможен только новым durable roadmap decision при появлении существенного evidence, blocker или внешнего спроса. Планируемые наноматериалы, наноэлектроника, сенсоры и машинные компоненты сохранены в [портфеле исследований](RESEARCH_PORTFOLIO.md).
+После NL5 обновлённая научная вертикаль: **E5 driven DNA component → NL7 2-component DNA assembly → NL8 controlled mechanism**. E3-R2 — отдельный non-gating benchmark после E5; подробнее [LITERATURE_TO_MECHANISM_ROUTE_R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md). Смена приоритетов не меняет frozen scientific claims или NL5 gate; новый пересмотр требует durable roadmap decision. Планируемые наноматериалы, наноэлектроника, сенсоры и машинные компоненты сохранены в [портфеле исследований](RESEARCH_PORTFOLIO.md).

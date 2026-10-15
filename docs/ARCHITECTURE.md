@@ -35,8 +35,23 @@ AiiDA: исполнение и происхождение данных
 | Campaign controller | Очередь, бюджет, состояния, восстановление | Запускать бесконечные повторы |
 | AI researcher | Предложение гипотез и следующих опытов, объяснение | Подменять вычисления языковой уверенностью |
 | Component library | Функции, интерфейсы, границы и evidence | Объявлять изолированный компонент пригодным для любой сборки |
+| KnowledgePack importer (планируется) | Точные версии источников, права, форматы, provenance, reproducibility gates | Считать опубликованную статью исполняемым пакетом без проверки входов |
+| Component/Assembly specs (планируется) | Молекулярные порты, anchors, frames, topology edits, model compatibility | Подменять реальную molecular connectivity геометрической картинкой |
+| Assembly compiler (планируется) | Сформировать проверяемую общую DNA topology/config, fail-closed | Обещать изготовимость или смешивать incompatible engines |
+| Standard test rigs (планируется) | Контроли, нагрузки, циклы, integrity, coupling/back-reaction, uncertainty | Выдавать анимацию за доказанное действие или КПД без источника энергии |
+| Candidate generator (optional) | Генерировать кандидаты, отдавать на независимый физический расчёт | Принимать prediction генератора за validated result |
 
 AiiDA ведёт происхождение вычислений; внешние источники, версии агентов и дополнительные артефакты регистрируются явно. aiida-shell используется как возможный стартовый путь, а не как доказательство уже существующего NanoLab-плагина. [S05–S06](research/SOURCES.md).
+
+## Новая прикладная вертикаль — построение DNA-механизмов (NL6/NL7)
+
+[Маршрут Literature-to-Mechanism R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md) задаёт будущие возможности, не утверждая их текущую реализацию. Исходная научная вертикаль остаётся DNA_COARSE_GRAINED: сначала импорт одного известного S17-привода/ведомого узла с exact versions, inputs, rights и алгоритмами измерений. Объект `MechanicalComponentSpec` добавляется к существующему `component-card.v1`, а не заменяет старые claims. `ports` должны иметь локальную геометрию, идентификаторы молекул и способ реального соединения цепей.
+
+Узкий `AssemblySpec` compiler принимает явные связи и преобразования, выполняет fail-closed проверки молекулярной топологии/единиц/совместимости, выдаёт одну oxDNA topology/config плюс traceable mapping. Нельзя просто совместить meshes и объявить химическую связь. Подготовительные restraints, физическое нагружение и сигнал управления разделены в protocol.
+
+Первое испытание — `driver → follower`: no-drive и no-load controls, load transfer, return/reversibility, repeated cycles, structural integrity, error modes, uncertainty. Уменьшенная модель механических DOFs обучается/калибруется по detailed runs, затем отдельно сравнивается с hold-out данными. Это `COMPONENT_REDUCED`, а не независимая универсальная физика.
+
+Генерация геометрии через Generative SNUPI или многокомпонентные редакторы (MagicDNA) — необязательные инструменты; их выходы всегда должны пройти независимую проверку topology/model. GUI и автоматическая сборка произвольных деталей откладываются до работающего CLI. Успешная релаксация ≠ доказанная экспериментальная самосборка. Новые E5 runs заблокированы до NL5 acceptance и активации native Ubuntu U1/R2.
 
 ## Первый научный адаптер
 

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "work_order": "WO-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "risk": "MEDIUM",
+  "claim_ceiling": "C0_SOFTWARE_ONLY",
+  "base_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "implementation_subject_head": "22681d5e29e745170fa51a5d93bf96463bb68729",
+  "implementation_subject_tree": "22a53b7838c27b27130270ad2cc69f23f36bff23",
+  "changed_surfaces": [
+    "docs/ROADMAP.md",
+    "project/plan.json",
+    "config/control/harness/checkpoint-catalog.v1.json",
+    "docs/work/WORK_QUEUE.md",
+    "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md",
+    "docs/research/SOURCES.md",
+    "docs/ARCHITECTURE.md",
+    "docs/DATA_CONTRACTS.md",
+    "docs/work/WO-LITERATURE-TO-MECHANISM-ROUTE-R1.md",
+    "docs/work/executions/EX-LITERATURE-TO-MECHANISM-ROUTE-R1/**"
+  ],
+  "validation": {
+    "static_json_parse": "PASS",
+    "state_sha_unchanged": true,
+    "stage_count": 9,
+    "task_count": 19,
+    "plan_all_dependencies_valid": true,
+    "nl7_unblocked_from_nl6_002": true,
+    "nl6_001_retains_nl5_002_gate": true,
+    "main_drift_at_implementation": "NONE",
+    "science_runs": 0,
+    "physics_runtime_changed": false,
+    "cli_regression_tests": "NOT_RUN_CONNECTOR_ONLY",
+    "independent_reviewer": "NOT_YET",
+    "independent_verifier": "NOT_YET"
+  },
+  "known_limits": [
+    "No published source accepted or imported in this documentation change",
+    "S18-S21 candidate input/rights audits required",
+    "No host activation or new scientific experiment",
+    "Human Gate required to merge"
+  ],
+  "review_status": "REVIEW_REQUIRED",
+  "verifier_status": "VERIFY_REQUIRED",
+  "human_gate": "MERGE_REQUIRED",
+  "next_action": "Fresh Reviewer; exact-head Verifier; Human Gate merge; PREP-S17 afterwards"
+}

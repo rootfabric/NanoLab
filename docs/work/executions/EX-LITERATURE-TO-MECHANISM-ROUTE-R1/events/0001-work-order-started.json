@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-LITERATURE-TO-MECHANISM-ROUTE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-roadmap-editor",
+  "subject_sha": "8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad",
+  "timestamp_utc": "2026-10-10T14:31:28.614Z",
+  "summary": "START roadmap R1 from fresh canonical main; docs/control-only, no science or status promotion."
+}
