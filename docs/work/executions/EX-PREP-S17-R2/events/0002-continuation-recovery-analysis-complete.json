@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0002-continuation-recovery-analysis-complete",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r2",
+  "subject_sha": "ff4b3f802d109d284ab5289abc19093a6e4a6ae0",
+  "timestamp_utc": "2026-10-16T13:05:00.000Z",
+  "summary": "Batch 1+2 complete (stages A-D). Bounded multi-range recovery from Zenodo 8248808 tails fetched and CRC-verified 99 members (ne23 53/53, ne37 9/9, pr23 25/25, pr37 12/12) within budget (~28.4 MiB unique; <=256 MiB). ALL R1 content pins re-derived byte-identical from Zenodo members: NE.top/nNE.top/NE_NB.top, NE.dat/nNE.dat/NE_NB.dat, input_equilibrium (hinge37/nNE1/input), input_pull (pr37/nNE_pull1/input), T7_force.txt (5 polymerase_positioning.txt members, nNE family). polymerase_positioning.txt RESOLVED: three design-family variants - nNE(8694,7374)=Nanobase pin, NE/NE_NS(8514,14288), soft(14102,13840, namespace soft_pull.top); r0=8.8 oxDNA units = 7.496 nm = article's 7.5 nm T7RNAP cutoff. Index ports resolved against verified index maps (get_k arm refs on scaffold in both NE/nNE; ss_ids 322 indices, 7 scaffold windows; 12 arm files exceed NE_NB bounds - hard exclusion). Driver-follower MD assembly: NOT_RECONSTRUCTED - zero driver/follower directories in complete CD enumerations of all four archives; linked.top == nNE.top byte-identity closes the R1 linked.top recipe gap (negative). Tools: s17_zip_probe.py, s17_index_map.py, s17_assembly.py, s17_recovery.py, s17_range_fetch.py + 66 offline tests with negative controls. Deliverables published: S17_SOURCE_RECOVERY_R2.md, S17_R2_PORT_MAP.json, S17_R2_ASSEMBLY_MANIFEST.json, S17_KNOWLEDGEPACK_R2.json, evidence pack. Claim ceiling PINNED_IMPORT_VERIFIED; 0 scientific runs.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m unittest tests.test_s17_r2_zip_probe tests.test_s17_r2_index_map tests.test_s17_r2_assembly tests.test_s17_r2_recovery tests.test_s17_r2_range_fetch  # 66 OK",
+    "git add scripts/knowledge_pack tests/test_s17_r2_* && git commit  # 97d9703, ff4b3f8",
+    "python3 batch multi-range extraction, 4 archives, manifests in EX evidence"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-pin-identity.json",
+    "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-force-file-variants.json",
+    "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-static-preflight.json",
+    "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-df-not-reconstructed.json",
+    "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-structures-analysis.json",
+    "docs/research/S17_R2_PORT_MAP.json"
+  ],
+  "next_action": "Full gates on branch (unittest all, check-consistency, workflow_lint, work_cli validate), summary.md + evidence-map + WORK_QUEUE append, HANDOFF_COMPLETED, push, draft PR, dispatch independent Reviewer + Verifier.",
+  "blocker": null
+}

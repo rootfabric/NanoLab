@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0003-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r2",
+  "subject_sha": "ff4b3f802d109d284ab5289abc19093a6e4a6ae0",
+  "timestamp_utc": "2026-10-16T13:20:00.000Z",
+  "summary": "WO-PREP-S17-R2 executed to software-complete handoff (stages A-E; 0 scientific runs). Bounded multi-range recovery: 99 CRC-verified members from Zenodo 8248808 tails (~28.4 MiB unique of 256 MiB budget); all 9 R1 content pins re-derived byte-identical; polymerase_positioning.txt RESOLVED (3 design-family variants; nNE variant == Nanobase T7_force.txt pin; r0=8.8 units = 7.496 nm = article 7.5 nm cutoff); index ports resolved (get_k arm refs on scaffold; ss_ids 322 indices; 12 arm files hard-excluded from NE_NB bounds); driver-follower MD assembly NOT_RECONSTRUCTED (zero driver/follower directories in complete CD enumerations); linked.top == nNE.top byte-identity closes the R1 recipe gap. Tools: s17_zip_probe/s17_index_map/s17_assembly/s17_recovery/s17_range_fetch + 66 offline tests. Branch gates: 745 tests OK (679 base + 66), check-consistency ok:true, workflow_lint blocking:0, work_cli validate ok:true. Claim ceiling PINNED_IMPORT_VERIFIED preserved; statuses SOURCE_CONFIRMED/INFERRED_CANDIDATE/UNKNOWN only; no E5, no NL5/NL6 status change, state.json/plan.json untouched, frozen artifacts untouched, raw files not vendored. Exact HEAD ff4b3f802d109d284ab5289abc19093a6e4a6ae0 (tree b9b3de937ab14119f9f1c042f8d61c860d164571 at evidence-map write; this event is append-only tail). Draft PR + independent Reviewer/Verifier dispatch follow this event.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .  # 745 OK",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency  # ok:true",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint  # blocking:0",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R2  # ok:true",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R2/summary.md",
+    "docs/work/executions/EX-PREP-S17-R2/evidence-map.json",
+    "docs/research/S17_SOURCE_RECOVERY_R2.md",
+    "docs/research/S17_R2_PORT_MAP.json",
+    "docs/research/S17_R2_ASSEMBLY_MANIFEST.json",
+    "docs/research/S17_KNOWLEDGEPACK_R2.json",
+    "docs/work/executions/EX-PREP-S17-R2/evidence/"
+  ],
+  "next_action": "Push branch; open draft PR; dispatch fresh independent Reviewer and exact-head Verifier; Human Gate for merge.",
+  "blocker": null
+}

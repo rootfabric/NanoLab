@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r2",
+  "subject_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "timestamp_utc": "2026-10-15T23:45:57.185Z",
+  "summary": "START WO-PREP-S17-R2 (issue #58) from fresh canonical main 513c4fa8 (tree 6d3a2132, fresh fetch 2026-10-15T23:45Z; equals observed main in the work order). Stages A-E: source recovery, nucleotide index-space mapping, driver-follower topology recipe/static preflight, narrow s17_* tooling + negative-control tests, evidence/handoff. Claim ceiling: static index/topology/recipe accuracy only, PINNED_IMPORT_VERIFIED inherited; 0 scientific runs, no E5, no NL5/NL6 status change, no full Zenodo archive download (<=256 MiB transfer budget).",
+  "command_refs": [
+    "git fetch origin",
+    "git worktree add /home/rdpuser/NanoLab/prep-s17-r2 -b work/prep-s17-r2-r1 origin/main",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R2.md",
+    "docs/work/executions/EX-PREP-S17-R2/passport.json"
+  ],
+  "next_action": "R2-A source recovery: verify prior-session pinned captures against KnowledgePack R1 digests, hunt polymerase_positioning.txt / linked.top / first_conf.dat / 23C inputs / oxDNA pin via remote listings and Range probes within budget; then CONTINUATION.",
+  "blocker": null
+}

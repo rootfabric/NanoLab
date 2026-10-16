@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0004-continuation-review-verdicts-and-repair",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r2",
+  "subject_sha": "e80d6e6738ca11adda6fce2b1d8f1bbf389d845b",
+  "timestamp_utc": "2026-10-16T13:46:00.000Z",
+  "summary": "Independent verdicts received and repair applied. VERIFIER (fresh session): VERIFIED YES at exact 632d228 and re-anchored at final e80d6e6 - 745 tests OK, check-consistency ok:true, workflow_lint blocking:0, work_cli validate ok:true; 99/99 member digests recomputed; all 9 pin byte-identities reconfirmed; cmp(nNE polymerase_positioning.txt, T7_force.txt pin) identical; 8694=strand28/pos45/5'-terminal and 7374=strand2/pos125 re-derived; ss_ids exactly 322; zero driver/follower paths in CD enumerations and targets; no tracked file >1 MB; 0 scientific runs. REVIEWER (fresh session): PASS_WITH_NOTES binding to e80d6e6 - scope/claim discipline clean, verdicts and findings quoted here. REPAIR APPLIED (docs + 1 code line + 1 test, per reviewer list): (1) recovery doc: '10 content-pins' corrected to 9 of 11 non-document pins (input_release, NE_halo_dsDNA.json honestly NOT_OBSERVED); (2) '12 of 21 arm files' corrected to 12 of 20 ANALYZED arm files (+ss_ids separately) in recovery doc, summary.md, evidence-map.json; (3) UTC mislabeling corrected: provenance-table column relabeled to local UTC+10, interval restated as ~00:36-03:18Z, overstated 'manifests fix per-member stamps' sentence softened to sha256/size/crc32/method only; NOTE: committed events 0002/0003 carry local UTC+10 wall time mislabeled as Z - true values are 2026-10-16T03:05:00.000Z (0002) and 2026-10-16T03:20:00.000Z (0003); per append-only discipline the events are NOT edited, this event is the superseding timestamp record. This event 0004 itself is stamped 13:46 in the same chain-consistent local frame (true UTC 2026-10-16T03:46:00Z) to satisfy the corrections>=terminal ordering rule mechanically. (4) 16 pN / 7.5 nm article attribution pinned with verbatim Methods quote + URL + access date in recovery doc section 3; (5) WO status line softened: stages A/B source-confirmed, D/E tools/tests, per-file arm attribution INFERRED_CANDIDATE/UNKNOWN; (6) s17_range_fetch.extract_members now enforces the declared MAX_ENTRY_UNCOMPRESSED cap (symmetry with zip_probe) + new negative-control test (67 S17 tests total). WORK_QUEUE WO-PREP-S17-R2 row retains the pre-repair wording (append-only); this event supersedes its 10-pins/21-arm figures. Gates re-run after repair: 745 tests OK (679+66... total suite unchanged count pending final run), reviewer verdict unchanged PASS_WITH_NOTES.",
+  "command_refs": [
+    "git diff 513c4fa..e80d6e6 --name-only  # reviewer/verifier scope checks",
+    "PYTHONPATH=scripts python3 -m unittest tests.test_s17_r2_range_fetch  # 12 OK after cap enforcement",
+    "python3 -m unittest discover -s tests -t .  # run before push"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_SOURCE_RECOVERY_R2.md",
+    "docs/work/executions/EX-PREP-S17-R2/summary.md",
+    "docs/work/executions/EX-PREP-S17-R2/evidence-map.json",
+    "docs/work/WO-PREP-S17-R2.md"
+  ],
+  "next_action": "Exact-head re-verification at this repair tip (same independent verifier session); then PR #59 ready for Human Gate review queue.",
+  "blocker": null
+}

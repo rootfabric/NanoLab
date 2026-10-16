@@ -1,0 +1,91 @@
+{
+ "NE.top": {
+  "sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne37:hinge37/NE1/stiff.top",
+   "pr23:pull_release23/NE_pull_fine1/stiff.top",
+   "pr23:pull_release23/NE_pull_long/stiff.top",
+   "pr37:pull_release37/NE_pull1/stiff.top"
+  ]
+ },
+ "NE.dat": {
+  "sha256": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne37:hinge37/NE1/last_conf_trap.dat"
+  ]
+ },
+ "nNE.top": {
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne23:hinge23/nNE1/linked.top",
+   "ne37:hinge37/nNE1/linked.top",
+   "pr23:pull_release23/nNE_pull_fine1/linked.top",
+   "pr37:pull_release37/nNE_pull1/linked.top"
+  ]
+ },
+ "nNE.dat": {
+  "sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne23:hinge23/nNE1/last_conf_trap.dat"
+  ]
+ },
+ "NE_NB.top": {
+  "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne23:hinge23/NE_NB1/hinge_correct_seq.top",
+   "ne23:hinge23/NE_NS.top"
+  ]
+ },
+ "NE_NB.dat": {
+  "sha256": "c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne23:hinge23/NE_NB1/last_conf_trap.dat"
+  ]
+ },
+ "input_equilibrium": {
+  "sha256": "822e0f493ac2d76a4863d356c7cece17be0e425e12821a4859d83b524eeaf216",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "ne37:hinge37/nNE1/input"
+  ]
+ },
+ "input_pull": {
+  "sha256": "dc3d643908ad14890ff62fab698c4655a5720b717674a7126f281752237941ad",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "pr37:pull_release37/nNE_pull1/input"
+  ]
+ },
+ "T7_force.txt": {
+  "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+  "status": "SOURCE_CONFIRMED",
+  "zenodo_members": [
+   "pr23:pull_release23/nNE_NS_pull_fine1/polymerase_positioning.txt",
+   "pr23:pull_release23/nNE_pull_fine1/polymerase_positioning.txt",
+   "pr23:pull_release23/polymerase_positioning.txt",
+   "pr37:pull_release37/nNE_NS_pull1/polymerase_positioning.txt",
+   "pr37:pull_release37/nNE_pull1/polymerase_positioning.txt"
+  ]
+ },
+ "input_release": {
+  "sha256": "69bca7e542f36e71f39830c4bfba1da07a44ab9d21c26222c54d16090ab53528",
+  "status": "NOT_OBSERVED_IN_R2_MEMBERS",
+  "zenodo_members": []
+ },
+ "Suppl. Dataset S1 V3.docx": {
+  "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+  "status": "NOT_OBSERVED_IN_R2_MEMBERS",
+  "zenodo_members": []
+ },
+ "NE_halo_dsDNA.json": {
+  "sha256": "8cbc247002158dc4955adac59b8a73dae15590303537691ef0809d0728f9c67a",
+  "status": "NOT_OBSERVED_IN_R2_MEMBERS",
+  "zenodo_members": []
+ }
+}
