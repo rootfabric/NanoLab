@@ -1,0 +1,65 @@
+{
+ "hinge37/loose_bridge2/input": {
+  "sha256": "2298b34b918185e5a58510e6fd32dd37b58a196ffa4a294eff212f0fcd61cfb2",
+  "size": 973,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 973
+ },
+ "hinge37/loose_bridge2/loose_bridge.top": {
+  "sha256": "7c5c55e03d98d48f4385798d84120f35bf25c9fc4e95e439bc5a45a8496ad56e",
+  "size": 215904,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215904
+ },
+ "hinge37/NE1/submit.sh": {
+  "sha256": "01418891d04b9c26d410f415aafe60dc9dc00e97b71d36ce12441d43540fb9c3",
+  "size": 626,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 626
+ },
+ "hinge37/NE1/input": {
+  "sha256": "28951dae0693822c20e54dadbc7be9649edc59270c282e57aa1ad5960cfac7ff",
+  "size": 958,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 958
+ },
+ "hinge37/NE1/start_conf.dat": {
+  "sha256": "397c8f4ffe58da6adbd88e508a18a160866c1795f919be5b183267b3b4cb8bae",
+  "size": 3937724,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 3937724
+ },
+ "hinge37/NE1/last_conf_trap.dat": {
+  "sha256": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66",
+  "size": 3955400,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 3955400
+ },
+ "hinge37/NE1/stiff.top": {
+  "sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+  "size": 215903,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215903
+ },
+ "hinge37/nNE1/input": {
+  "sha256": "822e0f493ac2d76a4863d356c7cece17be0e425e12821a4859d83b524eeaf216",
+  "size": 959,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 959
+ },
+ "hinge37/nNE1/linked.top": {
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "size": 215616,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215616
+ }
+}

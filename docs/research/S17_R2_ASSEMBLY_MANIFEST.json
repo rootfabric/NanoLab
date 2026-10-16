@@ -1,0 +1,91 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r2_assembly_manifest",
+ "claim_ceiling": "PINNED_IMPORT_VERIFIED",
+ "assembly_semantics": "STATIC_FILE_OPERATION_ONLY: file identity, index mapping and preflight; never ASSEMBLY_VALIDATED, no physics run (WO-PREP-S17-R2 stage E prohibition)",
+ "design_families": {
+  "NE": {
+   "topology": {
+    "source": "Nanobase pin NE.top; re-derived byte-identical from 4 Zenodo members (NE37/NE1/stiff.top etc.)"
+   },
+   "configuration": {
+    "source": "Nanobase pin NE.dat == NE37/NE1/last_conf_trap.dat"
+   },
+   "inputs": {
+    "equilibrium_37C": "hinge37/NE1/input (958 B)",
+    "force_file": "97 B variant (particle=8514, ref=14288)"
+   },
+   "static_preflight": {
+    "status": "PASS",
+    "nucleotides": 14343,
+    "strand_count": 161,
+    "errors": []
+   }
+  },
+  "nNE": {
+   "topology": {
+    "source": "Nanobase pin nNE.top; re-derived byte-identical from 4 Zenodo members (linked.top in NE23/NE37/pr23/pr37)"
+   },
+   "configuration": {
+    "source": "Nanobase pin nNE.dat == hinge23/nNE1/last_conf_trap.dat"
+   },
+   "inputs": {
+    "equilibrium_23C": "hinge23/nNE1/input == pin input_equilibrium except T=37C->23C",
+    "equilibrium_37C": "hinge37/nNE1/input == pin input_equilibrium (byte-identical)",
+    "pull_37C": "pull_release37/nNE_pull1/input == pin input_pull (byte-identical)",
+    "relax_23C": "hinge23/nNE1/input_relax (dt=0.0003, conf=last_conf_trap.dat)"
+   },
+   "force_file": {
+    "source": "polymerase_positioning.txt == pin T7_force.txt",
+    "particle": 8694,
+    "ref_particle": 7374
+   },
+   "static_preflight": {
+    "status": "PASS",
+    "nucleotides": 14343,
+    "strand_count": 163,
+    "errors": []
+   }
+  },
+  "NE_NB": {
+   "topology": {
+    "source": "Nanobase pin NE_NB.top == hinge23/NE_NB1/hinge_correct_seq.top == hinge23/NE_NS.top"
+   },
+   "configuration": {
+    "source": "Nanobase pin NE_NB.dat == hinge23/NE_NB1/last_conf_trap.dat"
+   },
+   "force_file": {
+    "note": "NE_NS runs reuse the NE-family 97 B variant; NE_NS.top topology == NE_NB.top"
+   },
+   "static_preflight": {
+    "status": "PASS",
+    "nucleotides": 14011,
+    "strand_count": 163,
+    "errors": []
+   }
+  },
+  "soft/soft_linked/loose_bridge/NE_NS_NB/nNE_NS_NB": {
+   "status": "RECOVERED_TOPOLOGY_FACTS_ONLY",
+   "note": "topologies parsed (see evidence/s17-r2-static-preflight.json recovered_topologies); no Nanobase configuration pin; bridge-containing designs (NE_NS*=nanoengine with bridge, NB=no bridge) documented as separate design axes",
+   "nucleotides": {
+    "soft": 13927,
+    "soft_linked": 14259,
+    "soft_pull": 14258,
+    "NE_NS": 14011,
+    "loose_bridge": 14343
+   }
+  }
+ },
+ "molecular_driver_follower_MD_assembly": {
+  "assembly_status": "NOT_RECONSTRUCTED",
+  "receipt": "docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-df-not-reconstructed.json",
+  "reason": "no driver/follower run directories exist in any of the four archives (complete central-directory enumerations); no assembly recipe exists in any audited source"
+ },
+ "replicate_determinism_observation": "identical sha256 across replicates 1-3 for soft.top, soft_linked.top, pairs.txt, NE_NS1-3 stiff_no_seq.top, nNE_NS1-3 linked_no_seq.top (same-design run directories carry byte-identical static inputs)",
+ "transfer_budget": {
+  "unique_bytes_downloaded_approx_MiB": 28.4,
+  "budget_MiB": 256,
+  "within_budget": true,
+  "note": "tails 18.0 MiB + unique member spans 10.4 MiB; failed curl attempts add bounded retry overhead"
+ }
+}

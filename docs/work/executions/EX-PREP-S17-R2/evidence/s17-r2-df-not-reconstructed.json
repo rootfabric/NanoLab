@@ -1,0 +1,17 @@
+{
+ "schema_version": 1,
+ "kind": "s17_static_assembly_receipt",
+ "assembly_status": "NOT_RECONSTRUCTED",
+ "claim": "STATIC_FILE_OPERATION_ONLY (never ASSEMBLY_VALIDATED, never a physics claim)",
+ "recipe": null,
+ "components": {},
+ "blocked_inputs": [
+  "NE23.zip (3,224,726,030 B; 276 CD entries; run families NE_NB1-3, NE_NS1-3, NE_NS_NB1-3, nNE1-3, nNE_NS1-3, soft1-3, soft_linked1-3): no driver/follower run directories in the central directory (full enumeration)",
+  "NE37.zip (2,597,347,235 B; 207 CD entries; run families NE1-3, NE_NB1-3, NE_NS1-3, NE_NS_NB1-3, nNE1-3, nNE_NS1-3, loose_bridge1-3): no driver/follower run directories in the central directory (full enumeration)",
+  "pull_release23.zip (20,691,250,829 B; 949 CD entries; families NE_pull/release_fine|long, NE_NB_release_fine|long, NE_NS_pull/release_fine|long, NE_NS_NB_release_fine|long, nNE_pull_fine, nNE_release_fine, nNE_NS_pull/release_fine|long, soft_pull_fine|long): no driver/follower run directories in the central directory (full enumeration)",
+  "pull_release37.zip (19,660,214,357 B; 894 CD entries; families NE_pull/release1-10|long, NE_NB_release1-10, NE_NS_pull/release1-10|long, NE_NS_NB_release1-10, nNE_pull/release1-10, nNE_NS_pull/release1-10|long): no driver/follower run directories in the central directory (full enumeration)"
+ ],
+ "reason": "no source-confirmed assembly recipe exists in any audited surface",
+ "assembled": null,
+ "subject": "S17-R2 D-F molecular-driver/follower MD assembly"
+}

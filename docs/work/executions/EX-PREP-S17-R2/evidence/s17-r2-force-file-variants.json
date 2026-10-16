@@ -1,0 +1,51 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r2_force_file_variants",
+ "source": "Zenodo record 8248808 (CC-BY-4.0), polymerase_positioning.txt members",
+ "method": "multi-range bounded fetch + CRC-32 verification (see knowledge_pack/s17_range_fetch.py)",
+ "note": "content quotes are complete 96-98 byte recovered force files",
+ "variants": {
+  "nNE_family": {
+   "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+   "size": 96,
+   "member_examples": [
+    "pr23/pull_release23/nNE_pull_fine1/polymerase_positioning.txt",
+    "pr23/pull_release23/nNE_NS_pull_fine1/polymerase_positioning.txt",
+    "pr23/pull_release23/polymerase_positioning.txt",
+    "pr37/pull_release37/nNE_pull1/polymerase_positioning.txt",
+    "pr37/pull_release37/nNE_NS_pull1/polymerase_positioning.txt"
+   ],
+   "equals_nanobase_pin_T7_force": true,
+   "content": "{\ntype = constant_trap\nparticle = 8694\nref_particle = 7374\nstiff = 0.3290\nr0 = 8.8 \nPBC = 1\n}\n\n\n"
+  },
+  "NE_NE_NS_family": {
+   "sha256": "3f70c7e6bf566a6e8f4d649ac7cf88aebc73b20c3b138e693ce7c2a7c50a1f3f",
+   "size": 97,
+   "member_examples": [
+    "pr23/pull_release23/NE_pull_long/polymerase_positioning.txt",
+    "pr23/pull_release23/NE_pull_fine1/polymerase_positioning.txt",
+    "pr23/pull_release23/NE_NS_pull_fine1/polymerase_positioning.txt",
+    "pr37/pull_release37/NE_pull1/polymerase_positioning.txt",
+    "pr37/pull_release37/NE_NS_pull1/polymerase_positioning.txt",
+    "pr37/pull_release37/polymerase_positioning.txt"
+   ],
+   "equals_nanobase_pin_T7_force": false,
+   "content": "{\ntype = constant_trap\nparticle = 8514\nref_particle = 14288\nstiff = 0.3290\nr0 = 8.8 \nPBC = 1\n}\n\n\n"
+  },
+  "soft_family": {
+   "sha256": "e98af49533c1b92e438d4c665a093de99d7d8bc36bbfc26c18122f849e7aaddd",
+   "size": 98,
+   "member_examples": [
+    "pr23/pull_release23/soft_pull_fine3/polymerase_positioning.txt"
+   ],
+   "equals_nanobase_pin_T7_force": false,
+   "content": "{\ntype = constant_trap\nparticle = 14102\nref_particle = 13840\nstiff = 0.3290\nr0 = 8.8 \nPBC = 1\n}\n\n\n"
+  },
+  "nanobase_pin_T7_force": {
+   "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+   "size": 96,
+   "member_examples": [],
+   "equals_nanobase_pin_T7_force": true
+  }
+ }
+}

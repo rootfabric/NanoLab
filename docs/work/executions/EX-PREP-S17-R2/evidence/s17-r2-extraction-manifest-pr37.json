@@ -1,0 +1,86 @@
+{
+ "pull_release37/polymerase_positioning.txt": {
+  "sha256": "3f70c7e6bf566a6e8f4d649ac7cf88aebc73b20c3b138e693ce7c2a7c50a1f3f",
+  "size": 97,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 97
+ },
+ "pull_release37/NE_NS_pull1/input": {
+  "sha256": "12e18d98ba20c7ec953026b1c52377bcab3e236c39e12d8ee69fc087804d88ee",
+  "size": 1024,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1024
+ },
+ "pull_release37/NE_NS_pull1/polymerase_positioning.txt": {
+  "sha256": "3f70c7e6bf566a6e8f4d649ac7cf88aebc73b20c3b138e693ce7c2a7c50a1f3f",
+  "size": 97,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 97
+ },
+ "pull_release37/nNE_NS_pull1/input": {
+  "sha256": "c94801ba78480e73ad22a4e15c65d4ff0ac92f21d0406bdfb8c807a1112a54d9",
+  "size": 1022,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1022
+ },
+ "pull_release37/nNE_NS_pull1/polymerase_positioning.txt": {
+  "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+  "size": 96,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 96
+ },
+ "pull_release37/NE_pull1/stiff.top": {
+  "sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+  "size": 215903,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215903
+ },
+ "pull_release37/NE_pull1/input": {
+  "sha256": "6bb1967d20ca4325ab59af836f5794ca02c4681934bc52e713a5450cb1c4f633",
+  "size": 1017,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1017
+ },
+ "pull_release37/NE_pull1/polymerase_positioning.txt": {
+  "sha256": "3f70c7e6bf566a6e8f4d649ac7cf88aebc73b20c3b138e693ce7c2a7c50a1f3f",
+  "size": 97,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 97
+ },
+ "pull_release37/NE_NB_release1/input": {
+  "sha256": "b0c58f14510799c20cea5eba304cdbd0981a677a3aa2d153cb2ceb8d17a011be",
+  "size": 986,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 986
+ },
+ "pull_release37/nNE_pull1/input": {
+  "sha256": "dc3d643908ad14890ff62fab698c4655a5720b717674a7126f281752237941ad",
+  "size": 1018,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1018
+ },
+ "pull_release37/nNE_pull1/linked.top": {
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "size": 215616,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215616
+ },
+ "pull_release37/nNE_pull1/polymerase_positioning.txt": {
+  "sha256": "71c69b4855e48fba0fe21f6d20d9b13522351df4bfc0d7e1c2ada7e7b807c8f3",
+  "size": 96,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 96
+ }
+}

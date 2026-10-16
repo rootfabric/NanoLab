@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "work_order": "WO-PREP-S17-R2",
+  "risk": "MEDIUM",
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED",
+  "base_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "base_tree_sha": "6d3a2132ae6ecdfed6269fe39697e8ac9bab152a",
+  "implementation_subject_head": "ff4b3f802d109d284ab5289abc19093a6e4a6ae0",
+  "implementation_subject_tree": "b9b3de937ab14119f9f1c042f8d61c860d164571 (pre-handoff batch; HANDOFF event is append-only)",
+  "changed_surfaces": [
+    "docs/work/WO-PREP-S17-R2.md",
+    "docs/work/WORK_QUEUE.md (append WO-PREP-S17-R2 row)",
+    "docs/research/S17_SOURCE_RECOVERY_R2.md",
+    "docs/research/S17_R2_PORT_MAP.json",
+    "docs/research/S17_R2_ASSEMBLY_MANIFEST.json",
+    "docs/research/S17_KNOWLEDGEPACK_R2.json",
+    "scripts/knowledge_pack/s17_zip_probe.py",
+    "scripts/knowledge_pack/s17_index_map.py",
+    "scripts/knowledge_pack/s17_assembly.py",
+    "scripts/knowledge_pack/s17_recovery.py",
+    "scripts/knowledge_pack/s17_range_fetch.py",
+    "tests/test_s17_r2_zip_probe.py",
+    "tests/test_s17_r2_index_map.py",
+    "tests/test_s17_r2_assembly.py",
+    "tests/test_s17_r2_recovery.py",
+    "tests/test_s17_r2_range_fetch.py",
+    "docs/work/executions/EX-PREP-S17-R2/**"
+  ],
+  "validation": {
+    "unit_tests": "745 OK (base 679 + 66 new S17 R2 tests with negative controls)",
+    "check_consistency": "ok:true, stages:9, tasks:19, experiments:7",
+    "workflow_lint_blocking": 0,
+    "work_cli_validate": "docs/work/executions/EX-PREP-S17-R2 ok:true",
+    "extraction_crc": "99/99 fetched members CRC-32 verified against central directories",
+    "pin_rederivation": "9/9 R1 content pins byte-identical from Zenodo members",
+    "science_runs": 0,
+    "state_json_unchanged": true,
+    "frozen_artifacts_touched": false,
+    "transfer_budget": "~28.4 MiB unique of 256 MiB (tails 18.0 + member spans 10.4); retries bounded, not itemized",
+    "independent_reviewer": "NOT_YET",
+    "independent_verifier": "NOT_YET"
+  },
+  "source_pins": {
+    "article_doi": "10.1038/s41565-023-01516-x (CC BY 4.0)",
+    "nanobase_structure": "https://nanobase.org/structures/196 (R1 pins, re-derived byte-identical from Zenodo in R2)",
+    "zenodo_record": "10.5281/zenodo.8248808 (CC-BY-4.0; bounded multi-range member fetch, no full downloads)",
+    "analysis_repo": "sulcgroup/hinges main@7c8b04a654b2440e4b6bab5b0abcb7e4335824d9 (NO license - REFERENCE_ONLY)"
+  },
+  "key_facts": [
+    "All three design topologies and configurations re-derived byte-identical from Zenodo members (NE/nNE/NE_NB)",
+    "T7_force.txt pin binds to the nNE family only: particle=8694, ref_particle=7374; NE/NE_NS family uses (8514,14288); soft uses (14102,13840) in soft_pull.top namespace",
+    "r0 = 8.8 oxDNA units = 7.496 nm = the 7.5 nm T7RNAP cut-off radius reported in the article",
+    "get_k arm reference indices [2034,6657]/[4593,4411] and old-design [2609,6336] all resolve to the circular 7,249-nt scaffold (strand 1) in NE and nNE",
+    "ss_ids.txt = 322 indices, 7 scaffold windows (refines the R1 estimate of 319)",
+    "12 of 21 hinge23/structures arm files exceed NE_NB (14,011) particle bounds - hard namespace exclusion",
+    "linked.top == nNE.top byte-identical in all four archives: the R1 'combined build recipe' hypothesis is closed (negative)",
+    "Driver-follower MD assembly NOT_RECONSTRUCTED: zero driver/follower directories in complete CD enumerations of all four archives",
+    "Bridge ODN ports remain UNKNOWN (placeholder sequences in all pinned topologies)"
+  ],
+  "known_limits": [
+    "99 members extracted of 2,324 total CD entries (WO-defined target set only)",
+    "Per-file namespace attribution of arm files beyond bounds tests is INFERRED_CANDIDATE at most",
+    "Transfer accounting counts unique successful range bytes; retry overhead bounded but not itemized",
+    "Exact oxDNA engine pin remains UNKNOWN (source does not publish it)",
+    "Replicate byte-determinism is an observation on static inputs, not a guarantee"
+  ],
+  "review_status": "REVIEW_REQUIRED",
+  "verifier_status": "VERIFY_REQUIRED",
+  "human_gate": "MERGE_REQUIRED",
+  "next_action": "Fresh Reviewer; exact-head Verifier; Human Gate merge"
+}
