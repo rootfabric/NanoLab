@@ -156,6 +156,16 @@ class ExtractTests(unittest.TestCase):
             # second run is a no-op (already in manifest)
             self.assertEqual(rf.extract_members(cd, ["dir/f.txt"], blocks, out, man), [])
 
+    def test_extract_oversize_member_rejected(self):
+        import tempfile
+        from pathlib import Path as P
+        blob = build_zip_bytes({"big": b"x" * 64})
+        cd = rf.parse_central_directory(blob, len(blob))
+        cd["big"].uncompressed_size = rf.MAX_ENTRY_UNCOMPRESSED + 1
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaises(rf.RangeFetchError):
+                rf.extract_members(cd, ["big"], {0: blob}, P(td), P(td) / "m.json")
+
     def test_extract_crc_mismatch_rejected(self):
         import tempfile
         from pathlib import Path

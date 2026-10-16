@@ -234,6 +234,10 @@ def extract_members(members: dict[str, Member], names: list[str],
             data = zlib.decompress(data, -15)
         elif method != 0:
             raise RangeFetchError(f"{name}: unsupported compression method {method}")
+        if m.uncompressed_size > MAX_ENTRY_UNCOMPRESSED:
+            raise RangeFetchError(
+                f"{name}: uncompressed size {m.uncompressed_size} exceeds the "
+                f"{MAX_ENTRY_UNCOMPRESSED}-byte safety cap")
         if len(data) != m.uncompressed_size:
             raise RangeFetchError(f"{name}: decompressed length mismatch")
         if (zlib.crc32(data) & 0xFFFFFFFF) != m.crc32:

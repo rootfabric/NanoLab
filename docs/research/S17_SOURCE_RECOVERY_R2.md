@@ -8,7 +8,9 @@ Work Order: `WO-PREP-S17-R2` (исполнение: EX-PREP-S17-R2, ветка `
 R2 восстанавливает недостающие входы S17 из публичного датасета Zenodo (record 8248808,
 CC-BY-4.0) ограниченным range-фетчем без скачивания архивов целиком:
 
-- **Все 10 content-пинов R1 (кроме документов) подтверждены байт-в-байт из Zenodo-членов**:
+- **9 из 11 не-документных content-пинов R1 подтверждены байт-в-байт из Zenodo-членов**
+  (2 остальных — `input_release`, `NE_halo_dsDNA.json` — среди извлечённых R2-членов
+  честно NOT_OBSERVED; их пины остаются на Nanobase-источнике R1):
   3 топологии (NE.top, nNE.top, NE_NB.top), 3 конфигурации (NE.dat, nNE.dat, NE_NB.dat),
   3 входа симуляции (input_equilibrium, input_pull, T7_force.txt) — см.
   `docs/work/executions/EX-PREP-S17-R2/evidence/s17-r2-pin-identity.json`.
@@ -60,7 +62,7 @@ body (лечится max-time + парсинг полного ответа че�
 
 Происхождение каждого восстановленного входа (canonical retrieval):
 
-| Вход | Точный источник (URL + member) | Размер, B | SHA-256 (12) | Rights | Retrieval (UTC) |
+| Вход | Точный источник (URL + member) | Размер, B | SHA-256 (12) | Rights | Retrieval (локальное UTC+10) |
 |---|---|---|---|---|---|
 | NE.top | `https://zenodo.org/api/records/8248808/files/NE37.zip/content` :: `hinge37/NE1/stiff.top` | 215,903 | 5074d559a092 | CC-BY-4.0 | 2026-10-16T09:00–13:00 |
 | NE.dat | `…/NE37.zip` :: `hinge37/NE1/last_conf_trap.dat` | 3,955,400 | c73aeb86fc67 | CC-BY-4.0 | 2026-10-16T11:5x |
@@ -73,10 +75,11 @@ body (лечится max-time + парсинг полного ответа че�
 | T7_force.txt (= nNE polymerase_positioning.txt) | `…/pull_release23.zip` :: `pull_release23/nNE_pull_fine1/polymerase_positioning.txt` | 96 | 71c69b4855e4 | CC-BY-4.0 | 2026-10-16T12:4x |
 
 Полные 64-hex sha256 — в `evidence/s17-r2-pin-identity.json` и
-`evidence/s17-r2-extraction-manifest-*.json`; точные per-member штампы извлечения
-фixerуются манифестами (пакетное извлечение шло 10:00–13:00 UTC 2026-10-16,
-окно указано честно как интервал). Nanobase-пины R1 остаются вторым независимым
-источником тех же байтов.
+`evidence/s17-r2-extraction-manifest-*.json`; манифесты фиксируют sha256/size/crc32/method
+(без per-member временных штампов). Пакетное извлечение шло в интервале
+~00:36–03:18Z 2026-10-16 (значения в колонке выше — локальное время машины UTC+10;
+в events 0002/0003 тот же сдвиг зон исправлен корректирующим event 0004).
+Nanobase-пины R1 остаются вторым независимым источником тех же байтов.
 
 Ключевые результаты (полная таблица — `evidence/s17-r2-pin-identity.json`):
 
@@ -115,7 +118,13 @@ body (лечится max-time + парсинг полного ответа че�
 (позиция 125/183/125). Разрешение по verified-картам — в `S17_R2_PORT_MAP.json`.
 
 Semantic-привязка к статье (16 pN между точкой присоединения полимеразы и первым
-стоп-кодоном, cut-off 7.5 нм): r0=8.8 ед = 7.496 нм совпадает с cut-off; прямая
+стоп-кодоном, cut-off 7.5 нм). Дословная цитата (проверено независимым Reviewer
+2026-10-16 по https://www.nature.com/articles/s41565-023-01516-x, Methods,
+«Closing rates were measured by running ten replicates of simulations with a
+constant force of 16 pN … applied between the nucleotide where HT–T7RNAP is
+covalently linked to the first nucleotide in the first stop sequence in the
+dsDNA-t with a cut-off radius of T7RNAP (7.5 nm)»): r0=8.8 ед = 7.496 нм совпадает
+с cut-off; прямая
 проверка «пара сближена на r0 в first_conf» НЕ выполняется (в стартовых конфигурациях
 пара на 18.8–52.8 нм — trap сводит её к r0 в ходе прогона). Семантика trap =
 акт постоянного сближения пары до 7.5 нм. Превышение claim-потолка не допускаем:
@@ -127,8 +136,9 @@ Semantic-привязка к статье (16 pN между точкой при�
   только circular-скаффолд strand 1, 7 окон: 6×53 (7248–7196, 1834–1782, 1421–1369,
   1112–1060, 699–647, 412–360) + 4 (7195–7192). В границах всех трёх дизайнов
   (скаффолд 7,249 nt везде).
-- **arm-файлы** (по 6,1–6,6 тыс. индексов): 12 из 21 файлов выходят за 14,011 частиц
-  NE_NB ⇒ для NE_NB исключены по границам (жёсткий тест). Остальные разрешения
+- **arm-файлы** (по 6,1–6,6 тыс. индексов; 20 проанализированных файлов + ss_ids.txt
+  отдельно): 12 из 20 выходят за 14,011 частиц NE_NB ⇒ для NE_NB исключены по
+  границам (жёсткий тест). Остальные разрешения
   против NE/nNE возможны; per-file namespace-атрибуция по выравниванию на границы
   цепей НЕубедительна (лучший счёт 73/74 для NE_NB на hinge_arm_1, но без
   независимого эталона) → фиксируем как bounds-факты + наблюдения, статус

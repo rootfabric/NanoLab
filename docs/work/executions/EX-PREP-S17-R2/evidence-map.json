@@ -53,7 +53,7 @@
     "r0 = 8.8 oxDNA units = 7.496 nm = the 7.5 nm T7RNAP cut-off radius reported in the article",
     "get_k arm reference indices [2034,6657]/[4593,4411] and old-design [2609,6336] all resolve to the circular 7,249-nt scaffold (strand 1) in NE and nNE",
     "ss_ids.txt = 322 indices, 7 scaffold windows (refines the R1 estimate of 319)",
-    "12 of 21 hinge23/structures arm files exceed NE_NB (14,011) particle bounds - hard namespace exclusion",
+    "12 of the 20 analyzed hinge23/structures arm files exceed NE_NB (14,011) particle bounds - hard namespace exclusion",
     "linked.top == nNE.top byte-identical in all four archives: the R1 'combined build recipe' hypothesis is closed (negative)",
     "Driver-follower MD assembly NOT_RECONSTRUCTED: zero driver/follower directories in complete CD enumerations of all four archives",
     "Bridge ODN ports remain UNKNOWN (placeholder sequences in all pinned topologies)"
