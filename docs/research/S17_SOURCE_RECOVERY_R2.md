@@ -58,6 +58,26 @@ body (лечится max-time + парсинг полного ответа че�
 
 ## 2. Байт-идентичности (SOURCE_CONFIRMED)
 
+Происхождение каждого восстановленного входа (canonical retrieval):
+
+| Вход | Точный источник (URL + member) | Размер, B | SHA-256 (12) | Rights | Retrieval (UTC) |
+|---|---|---|---|---|---|
+| NE.top | `https://zenodo.org/api/records/8248808/files/NE37.zip/content` :: `hinge37/NE1/stiff.top` | 215,903 | 5074d559a092 | CC-BY-4.0 | 2026-10-16T09:00–13:00 |
+| NE.dat | `…/NE37.zip` :: `hinge37/NE1/last_conf_trap.dat` | 3,955,400 | c73aeb86fc67 | CC-BY-4.0 | 2026-10-16T11:5x |
+| nNE.top | `…/NE23.zip` :: `hinge23/nNE1/linked.top` | 215,616 | 71eca286cfc1 | CC-BY-4.0 | 2026-10-16T12:0x |
+| nNE.dat | `…/NE23.zip` :: `hinge23/nNE1/last_conf_trap.dat` | 3,961,974 | b0722a5b859e | CC-BY-4.0 | 2026-10-16T12:1x |
+| NE_NB.top | `…/NE23.zip` :: `hinge23/NE_NB1/hinge_correct_seq.top` | 210,225 | 5abfcbde51e7 | CC-BY-4.0 | 2026-10-16T10:4x |
+| NE_NB.dat | `…/NE23.zip` :: `hinge23/NE_NB1/last_conf_trap.dat` | 3,853,788 | c802eb954750 | CC-BY-4.0 | 2026-10-16T10:4x |
+| input_equilibrium | `…/NE37.zip` :: `hinge37/nNE1/input` | 959 | 822e0f493ac2 | CC-BY-4.0 | 2026-10-16T12:3x |
+| input_pull | `…/pull_release37.zip` :: `pull_release37/nNE_pull1/input` | 1,018 | dc3d643908ad | CC-BY-4.0 | 2026-10-16T12:5x |
+| T7_force.txt (= nNE polymerase_positioning.txt) | `…/pull_release23.zip` :: `pull_release23/nNE_pull_fine1/polymerase_positioning.txt` | 96 | 71c69b4855e4 | CC-BY-4.0 | 2026-10-16T12:4x |
+
+Полные 64-hex sha256 — в `evidence/s17-r2-pin-identity.json` и
+`evidence/s17-r2-extraction-manifest-*.json`; точные per-member штампы извлечения
+фixerуются манифестами (пакетное извлечение шло 10:00–13:00 UTC 2026-10-16,
+окно указано честно как интервал). Nanobase-пины R1 остаются вторым независимым
+источником тех же байтов.
+
 Ключевые результаты (полная таблица — `evidence/s17-r2-pin-identity.json`):
 
 | R1 pin | sha256 (12) | Zenodo-члены (байт-идентичны) |
