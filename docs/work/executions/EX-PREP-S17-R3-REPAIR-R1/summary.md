@@ -82,3 +82,14 @@ append-only; без force-push; PR #59/#60 не слиты. Claim ceiling
 **exact-head Verifier** на draft PR `work/prep-s17-r3-repair-r1` →
 `work/prep-s17-r3-r1` (стек на PR #60, который стекается на PR #59; R2 не
 каноничен). One next action: fresh independent Reviewer на repair-ветку.
+
+## 7. Hosted CI evidence (append; 2026-10-18T14:29:09.658Z)
+
+Workflow hostится только на PR→main, поэтому для точного repair-кода открыт
+review-only evidence PR **#68** (`[DO NOT MERGE]`, head `review/prep-s17-r3-repair-ci-r1`
+= tip PR #67, прецедент — закрытый PR #61). Результат: run
+[39135996558](https://github.com/rootfabric/NanoLab/actions/runs/39135996558),
+job `RC0 hosted validation (H0)` = **completed / success**, hosted
+`unittest discover` = **846 tests OK**, включая все 4 adversarial falsifier'а
+GREEN — hosted-парный контракт к failed run 39124902081 (4 FAILED на faulty
+base). PR #68 будет закрыт без merge после записи evidence.
