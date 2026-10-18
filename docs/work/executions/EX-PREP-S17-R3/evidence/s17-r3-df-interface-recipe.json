@@ -1,0 +1,273 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r3_df_interface_recipe",
+ "generated_at_utc": "2026-10-18T01:13:59.528Z",
+ "claim": "SEQUENCE_LEVEL_INTERFACE_ONLY: verified reciprocal reverse-complement segments of published connecting ODNs. This is NOT an assembled structure, NOT nucleotide-index anchors in any .top, and NOT evidence of hybridization kinetics or motion transfer.",
+ "source_pins": {
+  "dataset_s1": {
+   "file": "Suppl. Dataset S1 V3.docx",
+   "source_url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl.%20Dataset%20S1%20V3.docx",
+   "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+   "size_bytes": 101900,
+   "sha256_provenance": "CONTENT_VERIFIED (byte-identical to the EX-PREP-S17-R1 knowledge-pack pin)",
+   "retrieved_at_utc": "2026-10-18",
+   "license": "CC BY 4.0 (article supplementary material)"
+  },
+  "article": {
+   "doi": "10.1038/s41565-023-01516-x",
+   "url": "https://www.nature.com/articles/s41565-023-01516-x",
+   "html_sha256": "e6f49f5d4d272db6eceb834243bdaeef6658600344459168809b1b970e4ab7cf",
+   "license": "CC BY 4.0"
+  },
+  "supplementary_pdf": {
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM1_ESM.pdf",
+   "sha256": "66074e7d0c07139ecfb2d65f0526e3386fb91853d2218badbc27cd32f1a42c66",
+   "size_bytes": 13861585
+  }
+ },
+ "index_convention": "segment offsets are 0-based character offsets into the LNA-stripped ODN sequence; driver_segment == reverse_complement(follower_segment) for every pair (machine-verified); overhang_end marks which ODN terminus carries the protruding segment",
+ "driver_connecting_odns": {
+  "HI-MC-163-con-D-LNA": "TTTTTGGGTAAAGTTCCCGTGGGGCGGC(LC)(LA)(LG)AATTACCTACCGGC",
+  "Hi-MC-165-con-D-LNA": "GACTGGGCGCGTCACGATAGTTTTTTATAGCCGC(LG)(LC)(LT)ATCCGGCGA",
+  "Hi-MC-174-con-D-LNA": "GTGCTCATCTTTTCCTCGTCTTTTTTGCCGCCCGGGGC(LG)(LC)(LA)CGAGC",
+  "Hi-MC-173-con-D-LNA": "TTTTTGGCTTACAGAGAATCGGCTGTGCC(LC)(LG)(LA)GTCCCCACCGTCC",
+  "HI-MC-172-con-driver": "CAGCCGATTCTTTCTGTGAAAGATGAGCACTGCGATCGGGCCGGCGCCGC",
+  "Hi-MC-151-con-drive": "CGCACCAGGCGCTGCAAGGCGATTACGCCAGATCCGCTCAGCCCCGTCACGGTCGTGTTC",
+  "Hi-MC-153-con-drive": "CGCGGCTCGCGAAGCGCCCGGGTGTATCAAGTTTTGAGACGTTAGTAAATAGCT",
+  "Hi-MC-89-con-drive": "CTGTCCTTGAACGCATACCTCAGCTGATTGCCCTTCCCAGTGATAGATGGCAGCTTTCCGGCACGCCG",
+  "Hi-MC-149-con-drive": "TGCGAGGGAGACAAAAGCTGAACCTAAATCGTCGCTATTCCCTTAGCAAGCCGTCGCGCGGCAGCTCCCGAGCA",
+  "Hi-MC-164-con-driver": "GCCCCACGGGCTGGTCGCTTGCGCCCAGTCTCTCCAAATCACAACGTACC"
+ },
+ "follower_connecting_odns": {
+  "Hi-MC-151-con-replica": "CGCACCAGGCGCTGCAAGGCGATTACGCCAGATCCGCTCATGCTCGGGAGCTGCCGCGCG",
+  "Hi-MC-153-con-replica": "AGGTATGCGTTCAAGGACAGGGTGTATCAAGTTTTGAGACGTTAGTAAATAGCT",
+  "Hi-MC-89-con-replica": "CGGGCGCTTCGCGAGCCGCGCAGCTGATTGCCCTTCCCAGTGATAGATGGCAGCTTTCCGGCACGCCG",
+  "Hi-MC-149-con-replica": "TGCGAGGGAGACAAAAGCTGAACCTAAATCGTCGCTATTCCCTTAGCAAGCCGTGAACACGACCGTGACGGGGC",
+  "Hi-MC-174-con-replica": "CGTGCGCCACTTTCCTCGTCTTTTTTTCGCCGGATAGCGCGGCTAT",
+  "HI-MC-172-con-replica": "GTCCGCCCGGTTTCTGTGAAGTGGCGCACGGGTACGTTGTGATTTGGAGA",
+  "Hi-MC-173-con-replica": "TTTTTGGCTTACAGACCGGGCGGACGCCGGTAGGTAATTCTGGCC",
+  "HI-MC-163-con-replica": "TTTTTGGGTAAAGTTCGCCAGGATGGGACGGTGGGGACTCGGGCA",
+  "Hi-MC-164-con-replica": "CATCCTGGCGCTGGTCGCTTGTAGACTGCGGCGGCGCCGGCCCGATCGCA",
+  "Hi-MC-165-con-replica": "CGCAGTCTACGTCACGATAGTTTTTTGCTCGTGCGCCCCGGGCGGC"
+ },
+ "lna_notes": "(LX) denotes locked nucleic acid base X; LNAs appear only in the four driver ODNs named *-con-D-LNA; each carries exactly 3 LNA bases, consistent with the main-text statement 'three LNA modifications were included in two of the overhanging sequences on each D arm' (Methods 'Assembly of the D-F system')",
+ "pairs": [
+  {
+   "pair_id": 1,
+   "driver_odn": "HI-MC-163-con-D-LNA",
+   "follower_odn": "Hi-MC-173-con-replica",
+   "driver_segment": "GGCCAGAATTACCTACCGGC",
+   "follower_segment": "GCCGGTAGGTAATTCTGGCC",
+   "driver_segment_offsets": [
+    25,
+    45
+   ],
+   "follower_segment_offsets": [
+    25,
+    45
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": true,
+   "second_best_match_nt": 6,
+   "unique_best": true
+  },
+  {
+   "pair_id": 2,
+   "driver_odn": "Hi-MC-165-con-D-LNA",
+   "follower_odn": "Hi-MC-174-con-replica",
+   "driver_segment": "ATAGCCGCGCTATCCGGCGA",
+   "follower_segment": "TCGCCGGATAGCGCGGCTAT",
+   "driver_segment_offsets": [
+    26,
+    46
+   ],
+   "follower_segment_offsets": [
+    26,
+    46
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": true,
+   "second_best_match_nt": 7,
+   "unique_best": true
+  },
+  {
+   "pair_id": 3,
+   "driver_odn": "Hi-MC-174-con-D-LNA",
+   "follower_odn": "Hi-MC-165-con-replica",
+   "driver_segment": "GCCGCCCGGGGCGCACGAGC",
+   "follower_segment": "GCTCGTGCGCCCCGGGCGGC",
+   "driver_segment_offsets": [
+    26,
+    46
+   ],
+   "follower_segment_offsets": [
+    26,
+    46
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": true,
+   "second_best_match_nt": 8,
+   "unique_best": true
+  },
+  {
+   "pair_id": 4,
+   "driver_odn": "Hi-MC-173-con-D-LNA",
+   "follower_odn": "HI-MC-163-con-replica",
+   "driver_segment": "TGCCCGAGTCCCCACCGTCC",
+   "follower_segment": "GGACGGTGGGGACTCGGGCA",
+   "driver_segment_offsets": [
+    25,
+    45
+   ],
+   "follower_segment_offsets": [
+    25,
+    45
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": true,
+   "second_best_match_nt": 6,
+   "unique_best": true
+  },
+  {
+   "pair_id": 5,
+   "driver_odn": "HI-MC-172-con-driver",
+   "follower_odn": "Hi-MC-164-con-replica",
+   "driver_segment": "TGCGATCGGGCCGGCGCCGC",
+   "follower_segment": "GCGGCGCCGGCCCGATCGCA",
+   "driver_segment_offsets": [
+    30,
+    50
+   ],
+   "follower_segment_offsets": [
+    30,
+    50
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 6,
+   "unique_best": true
+  },
+  {
+   "pair_id": 6,
+   "driver_odn": "Hi-MC-151-con-drive",
+   "follower_odn": "Hi-MC-149-con-replica",
+   "driver_segment": "GCCCCGTCACGGTCGTGTTC",
+   "follower_segment": "GAACACGACCGTGACGGGGC",
+   "driver_segment_offsets": [
+    40,
+    60
+   ],
+   "follower_segment_offsets": [
+    54,
+    74
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 6,
+   "unique_best": true
+  },
+  {
+   "pair_id": 7,
+   "driver_odn": "Hi-MC-153-con-drive",
+   "follower_odn": "Hi-MC-89-con-replica",
+   "driver_segment": "CGCGGCTCGCGAAGCGCCCG",
+   "follower_segment": "CGGGCGCTTCGCGAGCCGCG",
+   "driver_segment_offsets": [
+    0,
+    20
+   ],
+   "follower_segment_offsets": [
+    0,
+    20
+   ],
+   "driver_overhang_end": "5p",
+   "follower_overhang_end": "5p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 8,
+   "unique_best": true
+  },
+  {
+   "pair_id": 8,
+   "driver_odn": "Hi-MC-89-con-drive",
+   "follower_odn": "Hi-MC-153-con-replica",
+   "driver_segment": "CTGTCCTTGAACGCATACCT",
+   "follower_segment": "AGGTATGCGTTCAAGGACAG",
+   "driver_segment_offsets": [
+    0,
+    20
+   ],
+   "follower_segment_offsets": [
+    0,
+    20
+   ],
+   "driver_overhang_end": "5p",
+   "follower_overhang_end": "5p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 7,
+   "unique_best": true
+  },
+  {
+   "pair_id": 9,
+   "driver_odn": "Hi-MC-149-con-drive",
+   "follower_odn": "Hi-MC-151-con-replica",
+   "driver_segment": "CGCGCGGCAGCTCCCGAGCA",
+   "follower_segment": "TGCTCGGGAGCTGCCGCGCG",
+   "driver_segment_offsets": [
+    54,
+    74
+   ],
+   "follower_segment_offsets": [
+    40,
+    60
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 7,
+   "unique_best": true
+  },
+  {
+   "pair_id": 10,
+   "driver_odn": "Hi-MC-164-con-driver",
+   "follower_odn": "HI-MC-172-con-replica",
+   "driver_segment": "TCTCCAAATCACAACGTACC",
+   "follower_segment": "GGTACGTTGTGATTTGGAGA",
+   "driver_segment_offsets": [
+    30,
+    50
+   ],
+   "follower_segment_offsets": [
+    30,
+    50
+   ],
+   "driver_overhang_end": "3p",
+   "follower_overhang_end": "3p",
+   "match_length_nt": 20,
+   "lna": false,
+   "second_best_match_nt": 6,
+   "unique_best": true
+  }
+ ],
+ "verification_method": "deterministic pairwise scan: for every (driver ODN, follower ODN) combination the maximal exact reverse-complement match was computed over the full LNA-stripped sequences ((LX)->X substitution); each driver ODN has a unique best partner (all strictly maximal); every pair is an exact 20-nt reciprocal reverse-complement match; offsets are 0-based [start, end) into the forward LNA-stripped ODN sequences; driver_segment == reverse_complement(follower_segment) for every pair",
+ "unresolved": {
+  "nucleotide_index_anchors_nNE_top": "UNKNOWN - all pinned topologies carry placeholder sequences; the connecting ODN bodies cannot be localized to nNE.top particle indices",
+  "per_odn_helix_arm_assignment": "INFERRED_CANDIDATE - readable only from the Suppl. Fig. 5a bitmap (helices 0-17, five overhangs per arm); not machine-readable",
+  "follower_structure_files": "NOT_RECONSTRUCTED - no follower topology/configuration/caDNAno file exists in any audited source",
+  "overhang_terminal_verification": "per-ODN 5'/3' terminus assignment is derived computationally from segment position in the ODN and is consistent with the staple-overhang reading of Suppl. Fig. 5b; it is NOT independently confirmed by any machine-readable design file (INFERRED_CANDIDATE)"
+ }
+}

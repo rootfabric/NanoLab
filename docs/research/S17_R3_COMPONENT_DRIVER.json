@@ -1,0 +1,427 @@
+{
+ "schema_version": 1,
+ "kind": "mechanical_component_spec",
+ "spec_version": "v1",
+ "component_id": "S17-NNE-DRIVER",
+ "version": "1.0.0",
+ "source_id": "S17",
+ "title": "S17 nicked nanoengine (nNE) mechanical driver - DNA origami leaf-spring nanoengine actuated by HT-T7RNAP transcription",
+ "knowledge_pack_ref": {
+  "pack_id": "S17-LEAF-SPRING-NANOENGINE-R1_R2",
+  "pack_path": "docs/research/S17_KNOWLEDGEPACK_R2.json",
+  "pack_sha256": "f1dee52e946f9ed421fb550c3b7cad1b9a5537a65b1fdd4301541024dc13ff63",
+  "interface_audit": "docs/research/S17_R3_INTERFACE_AUDIT.md",
+  "interface_recipe": {
+   "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+   "sha256": "5f485b0ac8d1e822a424a73f065ede7df36245ee4cd8a8e27cbe93681f1b61b6",
+   "status": "SOURCE_CONFIRMED"
+  }
+ },
+ "source_pin": {
+  "role": "DESIGN_TOPOLOGY",
+  "url": "https://api.nanobase.org/api/v1/structure/files/196/structure/nNE.top",
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "sha256_provenance": "CONTENT_VERIFIED",
+  "status": "SOURCE_CONFIRMED",
+  "license": "CC BY 4.0 (article + Nanobase structure files by documented inference)",
+  "note": "nNE.top byte-identical to 4 Zenodo members (linked.top in hinge23/hinge37/pull_release23/pull_release37 runs); verified in EX-PREP-S17-R2"
+ },
+ "claim_level": "PINNED_IMPORT_VERIFIED",
+ "topology": {
+  "uri": "https://api.nanobase.org/api/v1/structure/files/196/structure/nNE.top",
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "sha256_provenance": "CONTENT_VERIFIED",
+  "nucleotides": 14343,
+  "strand_count": 163,
+  "status": "SOURCE_CONFIRMED"
+ },
+ "configuration": {
+  "uri": "https://api.nanobase.org/api/v1/structure/files/196/structure/nNE.dat",
+  "sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+  "sha256_provenance": "CONTENT_VERIFIED",
+  "nucleotides": 14343,
+  "strand_count": 163,
+  "status": "SOURCE_CONFIRMED"
+ },
+ "molecular_namespaces": {
+  "nNE": {
+   "index_space": "0-based particle index; .top body row i == particle i; strand ids 1-based contiguous in-file order; -1 = no n3/n5 neighbour",
+   "particle_count": 14343,
+   "strand_count": 163,
+   "topology_sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f"
+  }
+ },
+ "local_frame": {
+  "status": "UNKNOWN",
+  "note": "no annotated local coordinate frame is published for nNE.top/nNE.dat; the mapping between the caDNAno design (NE_halo_dsDNA.json is a different, halo-tag design without D-F overhangs) and particle indices is not machine-readable"
+ },
+ "ports": [
+  {
+   "port_id": "DF-OVH-D163",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN",
+     "note": "all pinned topologies carry placeholder sequences; the connecting ODN staple body cannot be localized to particle indices"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "5'-terminal overhang per recipe offsets [25,45) at the 3' end of the ODN; physical arm/helix assignment readable only from the Suppl. Fig. 5a bitmap"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "HI-MC-163-con-D-LNA",
+    "sequence": "TTTTTGGGTAAAGTTCCCGTGGGGCGGC(LC)(LA)(LG)AATTACCTACCGGC",
+    "lna": true,
+    "lna_bases": 3,
+    "overhang_segment": "GGCCAGAATTACCTACCGGC",
+    "complement_follower_odn": "Hi-MC-173-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist (placeholder sequences) and physical orientation is not machine-readable; the published 20-nt reverse-complement match alone never makes a port physically connectable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver' (sha256 dc3cc6c5...); pairing machine-verified in interface recipe"
+  },
+  {
+   "port_id": "DF-OVH-D165",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [26,46)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-165-con-D-LNA",
+    "sequence": "GACTGGGCGCGTCACGATAGTTTTTTATAGCCGC(LG)(LC)(LT)ATCCGGCGA",
+    "lna": true,
+    "lna_bases": 3,
+    "overhang_segment": "ATAGCCGCGCTATCCGGCGA",
+    "complement_follower_odn": "Hi-MC-174-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D174",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [26,46)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-174-con-D-LNA",
+    "sequence": "GTGCTCATCTTTTCCTCGTCTTTTTTGCCGCCCGGGGC(LG)(LC)(LA)CGAGC",
+    "lna": true,
+    "lna_bases": 3,
+    "overhang_segment": "GCCGCCCGGGGCGCACGAGC",
+    "complement_follower_odn": "Hi-MC-165-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D173",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [25,45)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-173-con-D-LNA",
+    "sequence": "TTTTTGGCTTACAGAGAATCGGCTGTGCC(LC)(LG)(LA)GTCCCCACCGTCC",
+    "lna": true,
+    "lna_bases": 3,
+    "overhang_segment": "TGCCCGAGTCCCCACCGTCC",
+    "complement_follower_odn": "HI-MC-163-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D172",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [30,50)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "HI-MC-172-con-driver",
+    "sequence": "CAGCCGATTCTTTCTGTGAAAGATGAGCACTGCGATCGGGCCGGCGCCGC",
+    "lna": false,
+    "overhang_segment": "TGCGATCGGGCCGGCGCCGC",
+    "complement_follower_odn": "Hi-MC-164-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D151",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [40,60)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-151-con-drive",
+    "sequence": "CGCACCAGGCGCTGCAAGGCGATTACGCCAGATCCGCTCAGCCCCGTCACGGTCGTGTTC",
+    "lna": false,
+    "overhang_segment": "GCCCCGTCACGGTCGTGTTC",
+    "complement_follower_odn": "Hi-MC-149-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D153",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "5'-terminal overhang per recipe offsets [0,20)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-153-con-drive",
+    "sequence": "CGCGGCTCGCGAAGCGCCCGGGTGTATCAAGTTTTGAGACGTTAGTAAATAGCT",
+    "lna": false,
+    "overhang_segment": "CGCGGCTCGCGAAGCGCCCG",
+    "complement_follower_odn": "Hi-MC-89-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D89",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "5'-terminal overhang per recipe offsets [0,20)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-89-con-drive",
+    "sequence": "CTGTCCTTGAACGCATACCTCAGCTGATTGCCCTTCCCAGTGATAGATGGCAGCTTTCCGGCACGCCG",
+    "lna": false,
+    "overhang_segment": "CTGTCCTTGAACGCATACCT",
+    "complement_follower_odn": "Hi-MC-153-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D149",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [54,74)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-149-con-drive",
+    "sequence": "TGCGAGGGAGACAAAAGCTGAACCTAAATCGTCGCTATTCCCTTAGCAAGCCGTCGCGCGGCAGCTCCCGAGCA",
+    "lna": false,
+    "overhang_segment": "CGCGCGGCAGCTCCCGAGCA",
+    "complement_follower_odn": "Hi-MC-151-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  },
+  {
+   "port_id": "DF-OVH-D164",
+   "role": "driver",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "nNE",
+     "index_space": "0-based particle index (nNE.top)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN",
+    "note": "3'-terminal overhang per recipe offsets [30,50)"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-164-con-driver",
+    "sequence": "GCCCCACGGGCTGGTCGCTTGCGCCCAGTCTCTCCAAATCACAACGTACC",
+    "lna": false,
+    "overhang_segment": "TCTCCAAATCACAACGTACC",
+    "complement_follower_odn": "HI-MC-172-con-replica",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: nucleotide-index anchors do not exist; orientation not machine-readable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Driver'"
+  }
+ ],
+ "mechanical_dofs": [
+  {
+   "dof_id": "inter_arm_angle",
+   "kind": "COMPLIANT",
+   "description": "pulsating opening/closing of the two rigid origami arms against the dsDNA flat spring, driven by 16 pN transcription pull of HT-T7RNAP on the dsDNA-t (force anchors nNE: particle 8694 toward ref_particle 7374, stiff 0.329, r0 8.8 oxDNA units = 7.496 nm)",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "article Fig. 2-3 and Methods; force pair SOURCE_CONFIRMED in EX-PREP-S17-R2 (polymerase_positioning.txt == Nanobase T7_force.txt for nNE)"
+  }
+ ],
+ "model_and_units": {
+  "model": "DNA_COARSE_GRAINED (oxDNA2, sequence-dependent)",
+  "length_unit": "oxDNA_length_unit",
+  "length_unit_nm": 0.8518,
+  "energy_unit": "oxDNA_energy_unit",
+  "temperature_C_compatible": [
+   23,
+   37
+  ],
+  "compatible_conditions": [
+   "oxDNA2 nucleotide model; salt conditions of the published runs (see Zenodo input files pinned in the knowledge pack)",
+   "constant_trap force semantics: F pulls particle toward ref_particle to rest separation r0; stiff=0.3290; PBC=1",
+   "do not mix oxDNA reduced units with SI units without the explicit 0.8518 nm/length-unit factor"
+  ]
+ },
+ "observables": [
+  {
+   "name": "inter_arm_angle_distribution",
+   "definition": "angle between the two origami arms measured from TEM 2D class averages (published: median 67 no-transcription / 41-75 transcription; Fig. 6f,g for D-F)",
+   "status": "PROPOSED",
+   "note": "smFRET/TEM observables defined in publication; E5-style MD observables are NOT_EVALUATED and require the frozen NL6 protocol path"
+  }
+ ],
+ "actuation": {
+  "mechanism": "HT-T7RNAP transcription of dsDNA-t pulls the arms together against the leaf spring (chemical fuel: NTPs)",
+  "force_pair": {
+   "particle": 8694,
+   "ref_particle": 7374,
+   "stiff": 0.329,
+   "r0_oxdna_units": 8.8,
+   "r0_nm": 7.496,
+   "status": "SOURCE_CONFIRMED"
+  },
+  "note": "actuation inputs are documented for provenance only; R3 performs no MD runs"
+ },
+ "unverified_fields": [
+  "local_frame",
+  "ports[*].anchors",
+  "ports[*].orientation",
+  "connection capability of all D-F ports (blocked by UNKNOWN anchors)"
+ ],
+ "known_limitations": [
+  "pinned topologies carry placeholder sequences: nucleotide-index anchors of the 10 D-F overhangs are UNKNOWN",
+  "the caDNAno design surface available on Nanobase (NE_halo_dsDNA.json) is a halo-tag design that does NOT contain the D-F connecting ODNs",
+  "this spec documents the driver as published; it is not a claim of motion transfer, of engine efficiency, or of fabricability",
+  "NE/NE_NB/soft design families exist as separate namespaces and are intentionally not mixed into this spec"
+ ],
+ "provenance": {
+  "execution": "EX-PREP-S17-R3",
+  "work_order": "WO-PREP-S17-R3",
+  "created_at_utc": "2026-10-18T01:20:00.000Z",
+  "source_registry": "S17-LEAF-SPRING-NANOENGINE-R1_R2 (docs/research/S17_KNOWLEDGEPACK_R2.json); no second provenance registry introduced"
+ }
+}
