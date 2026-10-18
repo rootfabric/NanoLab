@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0005-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r4-source",
+  "subject_sha": "98c3d72dec14d44f3b90254dac9c57f55737fbe5",
+  "timestamp_utc": "2026-10-18T14:45:10.737Z",
+  "summary": "HANDOFF_COMPLETED for WO-PREP-S17-R4-SOURCE-R1. Verdict: G1 (follower topology/config/design files) = BLOCKED_SOURCE with 10-surface negative evidence machine (receipt in S17_R4_FOLLOWER_PROVENANCE.json, resume conditions recorded); G2 = UNKNOWN (placeholder-sequence topologies, R2); G3 partially closed = all 10 driver+10 follower helix/arm assignments digitized from Suppl. Fig. S5b (SI PDF 66074e7d p.19) as INFERRED_CANDIDATE; G4 = UNKNOWN; G6 = SOURCE_CONFIRMED force pairs + UNKNOWN coordinates. Deliverables: S17_R4_PORT_CANDIDATES.json (10 pairs, sequence hops SOURCE_CONFIRMED, hypothesis-only interface map marked CANDIDATE_DESIGN/HYPOTHESIS, no fabricated .top/.dat), S17_R4_FOLLOWER_PROVENANCE.json (13 provenance records + blocked_source_receipt + NOT-the-follower workflow test vehicle Nanobase 256/257), S17_R4_SOURCE_GAP_CLOSURE.md (RU matrix + 8 drafted author questions, NOT sent), tests/test_s17_r4_source.py (19 offline tests). Validation on exact head 98c3d72d/tree d836baff: 698 tests OK, check-consistency ok, workflow_lint blocking 0, work_cli validate ok. Budget: ~20.7 MiB of <=256 MiB network, 0 scientific runs, 0 outbound messages, no forbidden paths, no raw vendoring. Statuses unchanged: NL5 = IN_PROGRESS; NL6-001 = LOCKED; merge = Human Gate. NEXT_ACTION (single): owner - approve sending drafted author questions OR route two-component workflow test to Nanobase 256/257 in a separate bounded WO.",
+  "command_refs": [
+    "git rev-parse HEAD HEAD^{tree}",
+    "python3 -m unittest discover -s tests -t .",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R4-SOURCE-R1",
+    "git push origin work/prep-s17-r4-source-r1"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_R4_PORT_CANDIDATES.json",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md",
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/summary.md"
+  ],
+  "next_action": "Fresh independent Reviewer + exact-head Verifier on this branch, then Human Gate merge; owner decision on author questions vs Nanobase 256/257 test vehicle.",
+  "blocker": null
+}

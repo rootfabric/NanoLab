@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "implementation_subject_head": "98c3d72dec14d44f3b90254dac9c57f55737fbe5",
+  "implementation_subject_tree": "d836baff56362700f202af077d06582594ad1d59",
+  "base_head": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "base_tree": "6d3a2132ae6ecdfed6269fe39697e8ac9bab152a",
+  "canonical_main_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "claim_ceiling": {
+    "level": "PINNED_IMPORT_VERIFIED",
+    "forbidden": ["MODEL_REPRODUCED", "COMPONENT_CHARACTERIZED", "ASSEMBLY_VALIDATED", "NL6_ACCEPTED", "NL7_ACCEPTED"],
+    "verdict": "G1_BLOCKED_SOURCE_INTERFACE_MAP_CANDIDATE_ONLY"
+  },
+  "verdict": {
+    "g1_follower_structure": "BLOCKED_SOURCE",
+    "g2_index_anchors": "UNKNOWN",
+    "g3_helix_arm_assignment": "INFERRED_CANDIDATE (digitized from Suppl. Fig. S5b bitmap)",
+    "g4_3d_port_orientation": "UNKNOWN",
+    "g6_trap_polymerase_coordination": "SOURCE_CONFIRMED force pairs + UNKNOWN coordinates (=G2 dependency)",
+    "candidate_reconstruction": "HYPOTHESIS interface map only (CANDIDATE_DESIGN/HYPOTHESIS; no fabricated .top/.dat)",
+    "workflow_test_vehicle": "Nanobase 256/257 Narcissus/Echo - explicitly NOT the S17 follower; own WO required",
+    "scientific_runs": 0
+  },
+  "budget": {
+    "network_transfer_mib_unique": 20.7,
+    "network_budget_mib": 256,
+    "scratch_bytes": 25319317,
+    "scratch_budget_mib": 2048,
+    "scientific_runs": 0,
+    "paid_compute": 0,
+    "outbound_messages": 0,
+    "within_budget": true
+  },
+  "validation_on_exact_head": {
+    "head": "98c3d72dec14d44f3b90254dac9c57f55737fbe5",
+    "tree": "d836baff56362700f202af077d06582594ad1d59",
+    "tests": {"command": "python3 -m unittest discover -s tests -t .", "result": "Ran 698 tests in 58.4s, OK (679 base + 19 new R4)"},
+    "consistency": {"command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency", "result": "ok: true; errors: []; warnings: []"},
+    "workflow_lint": {"command": "PYTHONPATH=scripts python3 -m harness.workflow_lint", "result": "workflows: 1, violations: 0, blocking: 0"},
+    "work_output": {"command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R4-SOURCE-R1", "result": "ok: true"}
+  },
+  "invariants": {
+    "state_plan_untouched": true,
+    "frozen_evidence_untouched": true,
+    "r1_r2_knowledge_pack_surfaces_untouched": true,
+    "no_large_raw_files_vendored": true,
+    "work_queue_append_only": true,
+    "no_author_messages_sent": true,
+    "no_multi_gb_archive_downloads": true
+  },
+  "deliverable_sha256": {
+    "docs/research/S17_R4_PORT_CANDIDATES.json": "a5240e5b522deb6917b0e9c25bbe391c297e06d351c9e53d392d9161ebee46fb",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json": "9ad9ed41254b1f83496c6f51e9fa63ca480adac0b91c5074b523c769c203762d",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md": "c129113b4804a039c37d0486651efacea15c6361e72b66215c12505af2ab63c7",
+    "tests/test_s17_r4_source.py": "a77a77d7abb1b1d29bbe35213b7aded50548ccd911a3eb54ead59f72417eab9f"
+  },
+  "open_risks": [
+    "Deep Blue 474299762 and bioRxiv DC1 were machine-inaccessible from this sandbox (Cloudflare/403); contents remain UNVERIFIED (both low-probability follower-design surfaces)",
+    "GitHub CODE search was unavailable unauthenticated; exact-sequence search substituted via web_search (limitation recorded)",
+    "All helix/arm assignments are bitmap digitizations; author confirmation required before any engineering use",
+    "R2/R3 remain unmerged stacked branches; their artifacts are referenced as pinned read-only git objects only"
+  ],
+  "next_action": "owner: approve sending the drafted author questions (S17_R4_SOURCE_GAP_CLOSURE.md section 5) or route the two-component workflow test to Nanobase 256/257 in a separate bounded WO; merge of this branch = Human Gate"
+}
