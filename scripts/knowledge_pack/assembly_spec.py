@@ -52,6 +52,19 @@ Repair R1 (WO-PREP-S17-R3-REPAIR-R1, issue #62) additions:
   5′/3′ ends declared, LNA notation stripped consistently, and each segment
   must be part of its port's full sequence.
 
+Hardening R2 (WO-S17-STATIC-ASSEMBLY-HARDENING-R1, issue #66) — the two
+non-blocking minors recorded by the independent R3 repair review:
+
+* minor (a) — ``unit_conversion`` / ``coordinate_transforms`` are now
+  role-symmetric: a *driver*-side entry is APPLIED to driver particles and
+  driver anchor hints through the same shared pipeline
+  (``_component_transform_params``); with no driver transform declared the
+  pipeline is the identity, so historical behavior is unchanged.
+* minor (b) — in SOURCE_VERIFIED recipe verification a recipe entry without
+  the declared segment key, or a port without a declared
+  ``overhang_segment``, refuses with ``BLOCKED_SOURCE`` instead of silently
+  skipping the segment cross-check. CANDIDATE_DESIGN stays permissive.
+
 Claim ceiling: ``ASSEMBLED_STATIC_ONLY`` refers to deterministic file-level
 construction. It is never ``ASSEMBLY_VALIDATED``, never evidence of
 hybridization occurring, of motion transfer, of functionality, or of wet-lab
@@ -708,20 +721,38 @@ def _verify_interface_recipe(spec: dict, component_specs: dict,
         entry = matches[0]
         dport = _port_index(component_specs)[("driver", conn["driver_port"])]
         fport = _port_index(component_specs)[("follower", conn["follower_port"])]
-        for role, port, entry_keys in (
-            ("driver", dport, ("driver_segment",)),
-            ("follower", fport, ("follower_segment",)),
+        # Repair-review minor (b) (WO-S17-STATIC-ASSEMBLY-HARDENING-R1): for a
+        # SOURCE_VERIFIED assembly the segment cross-check is mandatory on BOTH
+        # sides. A recipe entry without the declared segment key, or a port
+        # whose chemistry declares no overhang_segment, refuses (BLOCKED_SOURCE)
+        # instead of silently skipping the check: the pinned recipe bytes must
+        # machine-cover the declared interface. CANDIDATE_DESIGN never reaches
+        # this function and stays permissive.
+        for role, port, key in (
+            ("driver", dport, "driver_segment"),
+            ("follower", fport, "follower_segment"),
         ):
+            if key not in entry:
+                return blocked(
+                    "BLOCKED_SOURCE",
+                    f"connection {cid}: verified recipe entry carries no {key} - a SOURCE_VERIFIED "
+                    "recipe must machine-cover the declared interface segment "
+                    "(the cross-check is never silently skipped)",
+                )
             declared = (port.get("chemistry") or {}).get("overhang_segment")
-            for key in entry_keys:
-                if key in entry and declared is not None:
-                    if strip_lna(str(entry[key])) != strip_lna(str(declared)):
-                        return blocked(
-                            "BLOCKED_SOURCE",
-                            f"connection {cid}: recipe {role} segment {entry[key]!r} contradicts the "
-                            f"port chemistry overhang_segment {declared!r} (recipe bytes do not "
-                            "cover the declared interface)",
-                        )
+            if not isinstance(declared, str) or not declared.strip() or declared == "UNKNOWN":
+                return blocked(
+                    "BLOCKED_SOURCE",
+                    f"connection {cid}: {role} port chemistry declares no overhang_segment - the "
+                    "recipe segment cross-check cannot be skipped for SOURCE_VERIFIED",
+                )
+            if strip_lna(str(entry[key])) != strip_lna(str(declared)):
+                return blocked(
+                    "BLOCKED_SOURCE",
+                    f"connection {cid}: recipe {role} segment {entry[key]!r} contradicts the "
+                    f"port chemistry overhang_segment {declared!r} (recipe bytes do not "
+                    "cover the declared interface)",
+                )
     return None
 
 
@@ -890,15 +921,23 @@ def _fmt(value: float) -> str:
 # used by particle merging, artifact rebuilding AND anchor geometry checks.
 # --------------------------------------------------------------------------
 
-def _follower_transform_params(spec: dict) -> tuple[float, list | None, list[float]]:
-    """Return (unit_factor, rotation_matrix|None, translation) for the follower."""
+def _component_transform_params(spec: dict, role: str) -> tuple[float, list | None, list[float]]:
+    """Return (unit_factor, rotation_matrix|None, translation) for a component role.
+
+    Repair-review minor (a) (WO-S17-STATIC-ASSEMBLY-HARDENING-R1): the pipeline
+    is role-symmetric. For ``role="follower"`` this is exactly the historical
+    ``_follower_transform_params``; a *driver*-side ``unit_conversion`` /
+    ``coordinate_transforms`` entry is now APPLIED through the same
+    unit factor -> rotation -> translation pipeline (to driver particles and to
+    driver anchor hints) instead of being validated and silently ignored.
+    """
     conversion = spec.get("unit_conversion")
     factor = 1.0
-    if isinstance(conversion, dict) and conversion.get("component") == "follower":
+    if isinstance(conversion, dict) and conversion.get("component") == role:
         factor = float(conversion["length_factor"])
     transform = next(
         (tr for tr in (spec.get("coordinate_transforms") or [])
-         if isinstance(tr, dict) and tr.get("component") == "follower"),
+         if isinstance(tr, dict) and tr.get("component") == role),
         None,
     )
     rot = None
@@ -907,6 +946,11 @@ def _follower_transform_params(spec: dict) -> tuple[float, list | None, list[flo
         rot = _rotation_matrix(transform["rotation_axis"], float(transform["rotation_angle_deg"]))
     trans = [float(x) for x in (transform or {}).get("translation", [0.0, 0.0, 0.0])]
     return factor, rot, trans
+
+
+def _follower_transform_params(spec: dict) -> tuple[float, list | None, list[float]]:
+    """Return (unit_factor, rotation_matrix|None, translation) for the follower."""
+    return _component_transform_params(spec, "follower")
 
 
 def _rotate(vec: list, rot: list | None) -> list:
@@ -939,12 +983,17 @@ def _transform_particle(particle: tuple, factor: float, rot: list | None, trans:
     )
 
 
-def _transform_follower_particles(particles: list, spec: dict) -> list:
-    """Apply the shared follower pipeline (unit conversion + rigid transform)."""
-    factor, rot, trans = _follower_transform_params(spec)
+def _transform_component_particles(particles: list, spec: dict, role: str) -> list:
+    """Apply the shared role pipeline (unit conversion + rigid transform)."""
+    factor, rot, trans = _component_transform_params(spec, role)
     if factor == 1.0 and rot is None and trans == [0.0, 0.0, 0.0]:
         return list(particles)
     return [_transform_particle(p, factor, rot, trans) for p in particles]
+
+
+def _transform_follower_particles(particles: list, spec: dict) -> list:
+    """Apply the shared follower pipeline (unit conversion + rigid transform)."""
+    return _transform_component_particles(particles, spec, "follower")
 
 
 def assemble(spec: dict, component_specs: dict[str, dict],
@@ -1150,7 +1199,12 @@ def assemble(spec: dict, component_specs: dict[str, dict],
             out.append(" ".join(_fmt(v) for v in nums))
         return "".join(line + "\n" for line in out)
 
-    driver_text = particles_text(driver_conf.particles)
+    driver_text = particles_text(
+        # Repair-review minor (a): a declared driver-side unit_conversion /
+        # coordinate_transform is APPLIED here through the same shared pipeline
+        # (identity when no driver transform is declared).
+        _transform_component_particles(driver_conf.particles, spec, "driver")
+    )
     # R3-F03: the single shared transform pipeline (unit conversion + rigid
     # transform) drives particle merging, artifact rebuilding and geometry.
     follower_particles = _transform_follower_particles(follower_conf.particles, spec)
@@ -1257,8 +1311,10 @@ def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict,
                      + "".join(f"{sid} {base} {n3} {n5}\n" for (sid, base, n3, n5) in rows))
     driver_conf = _load_configuration(Path(inputs["driver"]["configuration_path"]))
     follower_conf = _load_configuration(Path(inputs["follower"]["configuration_path"]))
-    # R3-F03: the same shared pipeline as assemble(); no duplicated transform
-    # math can drift between the receipt and the exported artifacts.
+    # R3-F03 + repair-review minor (a): the same shared pipeline as assemble()
+    # for BOTH roles; no duplicated transform math can drift between the
+    # receipt and the exported artifacts.
+    driver_particles = _transform_component_particles(driver_conf.particles, spec, "driver")
     follower_particles = _transform_follower_particles(follower_conf.particles, spec)
 
     def particles_text(particles) -> str:
@@ -1269,7 +1325,7 @@ def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict,
 
     box = spec.get("assembly_box") or [max(a, b) for a, b in zip(driver_conf.box, follower_conf.box)]
     config_text = (f"t = {driver_conf.time}\nb = {box[0]} {box[1]} {box[2]}\nE = 0 0 0\n"
-                   + particles_text(driver_conf.particles) + particles_text(follower_particles))
+                   + particles_text(driver_particles) + particles_text(follower_particles))
     if _sha256_text(topology_text) != receipt["assembled"]["topology_text_sha256"]:
         raise AssemblySpecError("internal determinism failure: topology digest mismatch")
     if _sha256_text(config_text) != receipt["assembled"]["configuration_text_sha256"]:
@@ -1299,6 +1355,11 @@ def _geometry_checks(spec, driver_conf, follower_particles, follower_conf) -> tu
         anchor_follower = spec_geometry_anchors(spec_geometry_ports(spec, "follower"))
         band = geometry.get("connected_anchor_distance_range")
         factor, rot, trans = _follower_transform_params(spec)
+        # Repair-review minor (a): the driver anchor hint passes through the
+        # SAME role-symmetric pipeline (identity when no driver transform is
+        # declared), so a declared driver-side transform is judged by its true
+        # geometry instead of being silently ignored.
+        dfactor, drot, dtrans = _component_transform_params(spec, "driver")
         for (cid, dpid, fpid) in conn_ports:
             da = anchor_driver.get(dpid)
             fa = anchor_follower.get(fpid)
@@ -1309,7 +1370,8 @@ def _geometry_checks(spec, driver_conf, follower_particles, follower_conf) -> tu
             # pipeline as follower particles (unit factor -> rotation ->
             # translation); a rotated assembly is judged by its true geometry.
             fp = _transform_point(fa, factor, rot, trans)
-            delta = [fp[a] - da[a] for a in range(3)]
+            dp = _transform_point(da, dfactor, drot, dtrans)
+            delta = [fp[a] - dp[a] for a in range(3)]
             for a in range(3):
                 delta[a] -= box[a] * round(delta[a] / box[a])
             dist = math.sqrt(sum(x * x for x in delta))
