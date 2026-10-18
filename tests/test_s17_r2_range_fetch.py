@@ -163,7 +163,10 @@ class ExtractTests(unittest.TestCase):
         cd = rf.parse_central_directory(blob, len(blob))
         cd["big"].uncompressed_size = rf.MAX_ENTRY_UNCOMPRESSED + 1
         with tempfile.TemporaryDirectory() as td:
-            with self.assertRaises(rf.RangeFetchError):
+            # R2.1 correction: the cap fires BEFORE the local-header cross-check
+            # (guard moved to the top of the member loop, zip-bomb window closed);
+            # pin the reason so this control cannot pass for a different error.
+            with self.assertRaisesRegex(rf.RangeFetchError, "safety cap"):
                 rf.extract_members(cd, ["big"], {0: blob}, P(td), P(td) / "m.json")
 
     def test_extract_crc_mismatch_rejected(self):

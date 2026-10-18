@@ -28,7 +28,7 @@
     "docs/work/executions/EX-PREP-S17-R2/**"
   ],
   "validation": {
-    "unit_tests": "745 OK (base 679 + 66 new S17 R2 tests with negative controls)",
+    "unit_tests": "746 OK (base 679 + 67 new S17 R2 tests with negative controls; R2.1 erratum: 745/66 recorded pre-final-run)",
     "check_consistency": "ok:true, stages:9, tasks:19, experiments:7",
     "workflow_lint_blocking": 0,
     "work_cli_validate": "docs/work/executions/EX-PREP-S17-R2 ok:true",
@@ -68,5 +68,19 @@
   "review_status": "REVIEW_REQUIRED",
   "verifier_status": "VERIFY_REQUIRED",
   "human_gate": "MERGE_REQUIRED",
-  "next_action": "Fresh Reviewer; exact-head Verifier; Human Gate merge"
+  "next_action": "Fresh Reviewer; exact-head Verifier; Human Gate merge",
+  "post_review_corrections": {
+    "review_verdict": "PASS (independent fresh Reviewer session, no blocking findings)",
+    "applied": [
+      "N1 test-count erratum 745->746=679+67",
+      "N2 cap negative controls now reach the cap (range_fetch guard moved before header parse/inflate; zip_probe test uses consistent local header; both assert 'safety cap')",
+      "N3 CD total 2,324->2,326 per df-receipt full enumeration",
+      "N4 stale 66->67 test count in recovery doc and summary"
+    ],
+    "deferred": [
+      "N5 passport status convention",
+      "N6 EOCD count cross-check in range_fetch, docstring fix, multipart CRLF strictness, retry-byte accounting, scratch cleanup"
+    ],
+    "final_head_note": "see event 0005 for the exact post-correction HEAD"
+  }
 }

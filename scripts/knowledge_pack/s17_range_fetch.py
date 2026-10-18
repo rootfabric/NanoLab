@@ -210,6 +210,13 @@ def extract_members(members: dict[str, Member], names: list[str],
         m = members.get(name)
         if m is None or name.endswith("/") or name in manifest:
             continue
+        # zip-bomb guard BEFORE any header parsing or decompression (post-review
+        # correction R2.1: the cap previously sat behind the header cross-check
+        # and the inflate call, leaving a decompress-before-cap window).
+        if m.uncompressed_size > MAX_ENTRY_UNCOMPRESSED:
+            raise RangeFetchError(
+                f"{name}: uncompressed size {m.uncompressed_size} exceeds the "
+                f"{MAX_ENTRY_UNCOMPRESSED}-byte safety cap")
         blob, blob_start = None, None
         for a in sorted(blocks_data):
             if a <= m.local_header_offset <= a + len(blocks_data[a]):
@@ -234,10 +241,6 @@ def extract_members(members: dict[str, Member], names: list[str],
             data = zlib.decompress(data, -15)
         elif method != 0:
             raise RangeFetchError(f"{name}: unsupported compression method {method}")
-        if m.uncompressed_size > MAX_ENTRY_UNCOMPRESSED:
-            raise RangeFetchError(
-                f"{name}: uncompressed size {m.uncompressed_size} exceeds the "
-                f"{MAX_ENTRY_UNCOMPRESSED}-byte safety cap")
         if len(data) != m.uncompressed_size:
             raise RangeFetchError(f"{name}: decompressed length mismatch")
         if (zlib.crc32(data) & 0xFFFFFFFF) != m.crc32:

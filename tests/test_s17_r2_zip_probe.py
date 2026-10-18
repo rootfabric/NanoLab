@@ -132,11 +132,17 @@ class ExtractionPathSafety(unittest.TestCase):
             zp.safe_target_name("bad\x00name", root)
 
     def test_local_entry_rejects_oversized_uncompressed(self):
+        # R2.1 correction: the local header is CONSISTENT with the oversized
+        # central-directory entry, so the guard that fires is genuinely the
+        # uncompressed-size cap, not the header-disagreement check.
         e = zp.ZipEntry(name="bomb", compressed_size=4, uncompressed_size=zp.MAX_ENTRY_UNCOMPRESSED + 1,
                         crc32=0, method=0, local_header_offset=0)
-        need = 30 + len(e.name) + e.compressed_size
-        with self.assertRaises(zp.ZipProbeError):
-            zp.parse_local_entry(lambda s, end: b"\x00" * need, e)
+        nb = e.name.encode()
+        header = struct.pack("<IHHHHHIIIHH", 0x04034b50, 20, 0, 0, 0, 0, 0,
+                             e.compressed_size, e.uncompressed_size, len(nb), 0) + nb
+        window = header + b"\x00" * e.compressed_size
+        with self.assertRaisesRegex(zp.ZipProbeError, "safety cap"):
+            zp.parse_local_entry(lambda s, end: window[s:end + 1], e)
 
     @staticmethod
     def ranged(blob):

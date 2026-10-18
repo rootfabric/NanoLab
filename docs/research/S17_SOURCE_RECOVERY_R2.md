@@ -34,7 +34,7 @@ CC-BY-4.0) ограниченным range-фетчем без скачивани
 
 Инструменты: `scripts/knowledge_pack/s17_zip_probe.py` (EOCD/ZIP64/CD-парсер, CRC),
 `scripts/knowledge_pack/s17_range_fetch.py` (multi-range batch fetch, multipart-парсер),
-тесты `tests/test_s17_r2_*.py` (66 offline-тестов, все зелёные).
+тесты `tests/test_s17_r2_*.py` (67 offline-тестов, все зелёные; **эратум R2.1:** было 66).
 
 Процедура (воспроизводимо, без raw-загрузок в Git):
 
@@ -166,7 +166,9 @@ MD-сборка D–F остаётся невоспроизводимой из �
 
 ## 6. Ограничения и честные оговорки
 
-- Извлечение покрывает 99 членов из 2,324 суммарных записей CD; целевые наборы
+- Извлечение покрывает 99 членов из 2,326 суммарных записей CD (276+207+949+894;
+  **эратум R2.1:** ранее ошибочно указывалось 2,324; канонический источник —
+  full enumeration в `EX-PREP-S17-R2/evidence/s17-r2-df-not-reconstructed.json`); целевые наборы
   выбраны по критериям WO (pins, force-файлы, structures, topologies, inputs).
 - `polymerase_positioning.txt` в корнях архивов различается: pr23 корень = 96 B
   (nNE-вариант), pr37 корень = 97 B (NE-вариант) — корневые файлы не являются
@@ -184,4 +186,4 @@ MD-сборка D–F остаётся невоспроизводимой из �
 - `docs/research/S17_KNOWLEDGEPACK_R2.json` — обновлённый knowledge pack.
 - `docs/work/executions/EX-PREP-S17-R2/evidence/*` — manifests, pin-identity,
   force-variants, preflight, structures, D–F receipt (digests + цитаты ≤100 B).
-- `scripts/knowledge_pack/s17_range_fetch.py`, `s17_zip_probe.py` + 66 offline-тестов.
+- `scripts/knowledge_pack/s17_range_fetch.py`, `s17_zip_probe.py` + 67 offline-тестов (**эратум R2.1:** было 66).

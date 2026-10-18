@@ -69,12 +69,12 @@ PASS (NE 14,343/161; nNE 14,343/163; NE_NB 14,011/163).
 - `scripts/knowledge_pack/s17_range_fetch.py` — bounded multi-range fetcher
   (ZIP64 extra **сканируется** в списке extra-полей — реальный кейс Zenodo; multipart
   парсер с length-валидацией; CRC fail-closed).
-- `tests/test_s17_r2_*.py` — **66 offline-тестов** с негативными контролами
+- `tests/test_s17_r2_*.py` — **67 offline-тестов** с негативными контролами (**эратум R2.1:** было 66)
   (CRC-повреждение, усечённые окна, нерезолвимый ZIP64, короткие части, oversize).
 
 ## Validation (exact HEAD/TREE см. evidence-map.json)
 
-- `python3 -m unittest discover -s tests -t .` → **745 tests OK** (base 679 + 66 новых).
+- `python3 -m unittest discover -s tests -t .` → **746 tests OK** (base 679 + 67 новых; **эратум R2.1:** ранее записано 745/66 до финального прогона).
 - `PYTHONPATH=scripts python3 -m harness.cli check-consistency` → ok:true (stages 9, tasks 19, experiments 7).
 - `PYTHONPATH=scripts python3 -m harness.workflow_lint` → blocking:0.
 - `PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R2` → ok:true.
@@ -90,7 +90,7 @@ PASS (NE 14,343/161; nNE 14,343/163; NE_NB 14,011/163).
 
 ## Ограничения / честные оговорки
 
-- Извлечено 99 членов из 2,324 суммарных CD-записей (целевой набор по WO); остальной
+- Извлечено 99 членов из 2,326 суммарных CD-записей (**эратум R2.1:** было 2,324; канон — df-receipt full enumeration) (целевой набор по WO); остальной
   контент архивов не скачивался и не анализировался.
 - Per-file namespace-атрибуция arm-файлов по выравниванию цепей статистически неубедительна;
   зафиксированы только bounds-факты и наблюдения.
@@ -102,3 +102,22 @@ PASS (NE 14,343/161; nNE 14,343/163; NE_NB 14,011/163).
 ## Next action (single)
 
 Fresh independent Reviewer + exact-head Verifier ветки `work/prep-s17-r2-r1`; затем Human Gate.
+
+## Errata R2.1 (post-review corrections, append-only)
+
+Independent fresh Reviewer (отдельная сессия, scratch-клон `/tmp/review-r2`): **PASS**,
+blocking findings отсутствуют, 6 non-blocking находок (N1–N6). Применённые коррекции:
+
+- **N1**: счётчик гейта 745 → **746 = 679 + 67** (событие 0004 признавало «pending final run»;
+  финальный прогон на исправленном дереве: 746 OK — см. событие 0005).
+- **N2**: негативные контроли капы теперь реально доходят до капы:
+  `s17_range_fetch.extract_members` — zip-bomb guard перенесён ВЫШЕ парсинга
+  local-header и inflate (закрыто окно decompress-before-cap, часть N6), оба теста
+  (`test_extract_oversize_member_rejected`, `test_local_entry_rejects_oversized_uncompressed`)
+  требуют «safety cap» в сообщении — пройти по чужой причине больше нельзя.
+- **N3**: «2,324» → **2,326** (276+207+949+894; канон — full enumeration df-receipt).
+- **N4**: «66 offline-тестов» → **67** (recovery doc §1/§7, summary).
+- Отложено (non-blocking, отдельный scoped follow-up): N5 (passport status
+  «STARTED» при HANDOFF_COMPLETED — sibling-конвенция), N6 (EOCD count cross-check в
+  range_fetch `parse_central_directory`; docstring `iter_member_blobs`; CRLF-хрупкость
+  multipart-парсера; учёт retry-трафика в `--fetch`; чистка scratch `.range_*.bin`).
