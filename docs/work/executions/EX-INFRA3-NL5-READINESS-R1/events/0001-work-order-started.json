@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-18T13:52:10Z",
+  "execution_id": "EX-INFRA3-NL5-READINESS-R1",
+  "work_order_id": "WO-INFRA3-NL5-READINESS-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "summary": "START of bounded INFRA3 work order WO-INFRA3-NL5-READINESS-R1 (GitHub issue #65, parent program #63): produce a machine-checkable DRY-RUN ONLY readiness package for native Ubuntu host U1 (AUTHOR_UBUNTU) + frozen NL5 v0.2 campaign (FROZEN_R2, F2 60da9a846511265a8ac7564da088c3d74cb073f0). HARD BOUNDARIES: 0 scientific runs; no oxDNA/MD/E5 execution; no runner instantiation; no changes to frozen NL5 v0.2 acceptance criteria or protocol files; no changes to project/state.json, project/infra-state.json, project/plan.json; outenemy (U2) is never proposed as author executor; no new scientific runs on Windows/WSL2. Honest expected outcome class: READY_FOR_HOST - machine U1 is NOT assigned (canonical evidence: EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json, AUTHOR_U1 = NOT_ASSIGNED, R2 = WAITING_HOST / NOT_ACTIVE). Deliverables: docs/infra/U1_PROVISIONING_CHECKLIST_R1.md, docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json, docs/infra/INFRA3_NL5_READINESS_REPORT_R1.md, tests/test_infra3_nl5_readiness.py, execution pack, one WORK_QUEUE.md line. Pre-START reconciliation done on base 513c4fa (PR #47 R2 activation tooling, PR #55 U2 readiness + tooling repairs, PR #56 v0.1.2 packaging, PR #52 FROZEN_R2 package, PR #53 fresh audit + U1 blocker - all verified merged into canonical main; canonical campaign numbers 296/56/352 re-derived from frozen protocol sha256 2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d, not trusted from the mission text)."
+}
