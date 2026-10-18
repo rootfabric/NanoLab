@@ -13,7 +13,13 @@
   },
   "claim_ceiling": {
     "level": "PINNED_IMPORT_VERIFIED",
-    "forbidden": ["MODEL_REPRODUCED", "COMPONENT_CHARACTERIZED", "ASSEMBLY_VALIDATED", "NL6_ACCEPTED", "NL7_ACCEPTED"],
+    "forbidden": [
+      "MODEL_REPRODUCED",
+      "COMPONENT_CHARACTERIZED",
+      "ASSEMBLY_VALIDATED",
+      "NL6_ACCEPTED",
+      "NL7_ACCEPTED"
+    ],
     "note": "repair changes software fail-closed behavior only; static assembly remains ASSEMBLED_STATIC_ONLY + GEOMETRY_UNVERIFIED"
   },
   "subjects": {
@@ -25,44 +31,114 @@
   },
   "validation_on_exact_head": {
     "head": "82dddb02704c9a850e86f8799ce6e68e24f9cb83",
-    "falsifiers": {"command": "python3 -m unittest tests.test_s17_r3_fresh_review_falsifiers", "result": "4 tests OK (GREEN)"},
-    "tests": {"command": "python3 -m unittest discover -s tests -t .", "result": "846 tests OK"},
-    "consistency": {"command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency", "result": "ok: true"},
-    "workflow_lint": {"command": "PYTHONPATH=scripts python3 -m harness.workflow_lint", "result": "blocking: 0"},
-    "work_output_repair": {"command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3-REPAIR-R1", "result": "ok: true"},
-    "work_output_parent": {"command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3", "result": "ok: true"}
+    "falsifiers": {
+      "command": "python3 -m unittest tests.test_s17_r3_fresh_review_falsifiers",
+      "result": "4 tests OK (GREEN)"
+    },
+    "tests": {
+      "command": "python3 -m unittest discover -s tests -t .",
+      "result": "846 tests OK"
+    },
+    "consistency": {
+      "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+      "result": "ok: true"
+    },
+    "workflow_lint": {
+      "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+      "result": "blocking: 0"
+    },
+    "work_output_repair": {
+      "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3-REPAIR-R1",
+      "result": "ok: true"
+    },
+    "work_output_parent": {
+      "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3",
+      "result": "ok: true"
+    }
   },
   "defect_fix_map": {
     "F01_port_without_confirmed_connection": {
       "defect": "assembler accepted connection_capable=false with UNKNOWN anchors/orientation",
       "fix": "_executable_port_violation gate on the executable path (after structural pass); validate_component_spec untouched (PR #61 expectation preserved)",
-      "tests": ["falsifier test_f01", "test_f01_capable_false_with_concrete_anchors_blocks", "test_f01_incapable_port_blocks_before_anchor_audit", "test_f01_boolean_anchor_index_blocks", "test_f01_string_anchor_index_blocks_in_validation", "test_f01_structureless_pair_keeps_not_reconstructed_over_port_gate"]
+      "tests": [
+        "falsifier test_f01",
+        "test_f01_capable_false_with_concrete_anchors_blocks",
+        "test_f01_incapable_port_blocks_before_anchor_audit",
+        "test_f01_boolean_anchor_index_blocks",
+        "test_f01_string_anchor_index_blocks_in_validation",
+        "test_f01_structureless_pair_keeps_not_reconstructed_over_port_gate"
+      ]
     },
     "F02_recipe_substitution": {
       "defect": "SOURCE_VERIFIED accepted nonexistent recipe + forged sha256",
       "fix": "_verify_interface_recipe: safe relative path, on-disk existence, byte sha256, JSON parse, kind, per-connection binding (recipe_pair_ref or odn_name join), segment cross-check",
-      "tests": ["falsifier test_f02", "test_f02_missing_recipe_file_blocks_source", "test_f02_forged_digest_blocks_input", "test_f02_non_json_recipe_blocks_input", "test_f02_wrong_recipe_kind_blocks_source", "test_f02_recipe_not_covering_connections_blocks_source", "test_f02_recipe_segment_contradicting_port_blocks_source", "test_f02_unsafe_paths_rejected_in_validation", "test_f02_recipe_path_pointing_to_directory_blocks_source", "test_f02_verified_recipe_assembles_source_verified", "test_f02_binding_via_explicit_recipe_pair_ref"]
+      "tests": [
+        "falsifier test_f02",
+        "test_f02_missing_recipe_file_blocks_source",
+        "test_f02_forged_digest_blocks_input",
+        "test_f02_non_json_recipe_blocks_input",
+        "test_f02_wrong_recipe_kind_blocks_source",
+        "test_f02_recipe_not_covering_connections_blocks_source",
+        "test_f02_recipe_segment_contradicting_port_blocks_source",
+        "test_f02_unsafe_paths_rejected_in_validation",
+        "test_f02_recipe_path_pointing_to_directory_blocks_source",
+        "test_f02_verified_recipe_assembles_source_verified",
+        "test_f02_binding_via_explicit_recipe_pair_ref"
+      ]
     },
     "F03_wrong_geometry": {
       "defect": "follower rotation not applied to anchor hints (false BLOCKED_GEOMETRY)",
       "fix": "shared pipeline unit factor -> rotation -> translation for particles and anchors; dedup assemble/assemble_artifacts/geometry",
-      "tests": ["falsifier test_f03", "test_f03_90degree_rotation_distance_uses_transform", "test_f03_180degree_rotation_band_only_satisfied_by_rotation", "test_f03_rotated_out_of_band_conflicts", "test_f03_unit_conversion_plus_rotation_compose", "test_f03_artifacts_match_receipt_digests_under_rotation"]
+      "tests": [
+        "falsifier test_f03",
+        "test_f03_90degree_rotation_distance_uses_transform",
+        "test_f03_180degree_rotation_band_only_satisfied_by_rotation",
+        "test_f03_rotated_out_of_band_conflicts",
+        "test_f03_unit_conversion_plus_rotation_compose",
+        "test_f03_artifacts_match_receipt_digests_under_rotation"
+      ]
     },
     "F04_wrong_hybridization_check": {
       "defect": "full-ODN complementarity masked mismatched exposed overhangs",
       "fix": "_check_overhang_interface: declared segments, >=12nt, exact rc equality, declared 5p/3p ends, LNA stripping, segment-substring membership; full-ODN check kept secondary",
-      "tests": ["falsifier test_f04", "test_f04_missing_overhang_segment_blocks", "test_f04_unknown_overhang_end_blocks", "test_f04_segment_not_part_of_sequence_blocks", "test_f04_short_segment_blocks", "test_f04_lna_notation_is_stripped_consistently", "test_f04_same_end_pair_is_allowed", "test_f04_receipt_records_interface_record"]
+      "tests": [
+        "falsifier test_f04",
+        "test_f04_missing_overhang_segment_blocks",
+        "test_f04_unknown_overhang_end_blocks",
+        "test_f04_segment_not_part_of_sequence_blocks",
+        "test_f04_short_segment_blocks",
+        "test_f04_lna_notation_is_stripped_consistently",
+        "test_f04_same_end_pair_is_allowed",
+        "test_f04_receipt_records_interface_record"
+      ]
     }
   },
   "hardening": {
-    "finite_numbers": ["translation", "rotation_axis", "rotation_angle_deg", "anchor_position", "length_factor", "connected_anchor_distance_range", "clash_scan_threshold", "assembly_box"],
-    "extra_controls": ["test_nan_translation_rejected", "test_infinite_anchor_position_rejected", "test_nan_length_factor_rejected", "test_nan_assembly_box_rejected", "test_nonpositive_assembly_box_rejected", "test_decreasing_anchor_band_rejected", "test_unparseable_configuration_with_matching_digest_blocks"]
+    "finite_numbers": [
+      "translation",
+      "rotation_axis",
+      "rotation_angle_deg",
+      "anchor_position",
+      "length_factor",
+      "connected_anchor_distance_range",
+      "clash_scan_threshold",
+      "assembly_box"
+    ],
+    "extra_controls": [
+      "test_nan_translation_rejected",
+      "test_infinite_anchor_position_rejected",
+      "test_nan_length_factor_rejected",
+      "test_nan_assembly_box_rejected",
+      "test_nonpositive_assembly_box_rejected",
+      "test_decreasing_anchor_band_rejected",
+      "test_unparseable_configuration_with_matching_digest_blocks"
+    ]
   },
   "discovered_findings": [
     {
       "id": "R3-REPAIR-ERRATUM-1",
       "severity": "evidence (not software)",
-      "finding": "pinned R3 follower component spec declares 21nt overhang windows on 7/10 ports (DFC-02..05,07,08,09) while the pinned interface recipe pairs carry the exact 20nt complements (complement_length_nt=20); driver-side segments match exactly on 10/10",
+      "finding": "pinned R3 follower component spec declares 21nt overhang windows on 7/10 ports (DFC-02..05,07,08,09) while the pinned interface recipe pairs carry the exact 20nt complements (recipe pair field match_length_nt: 20); driver-side segments match exactly on 10/10",
       "handling": "refused fail-closed by the new byte-level recipe verification; pinned by test_real_recipe_verification_surfaces_known_segment_erratum; follower evidence files are OUTSIDE this repair's allowed paths and were NOT modified; follow-up: align follower overhang_segment windows to the exact 20nt recipe segments in a separate scoped change",
       "impact_on_verdicts": "none on NOT_RECONSTRUCTED (structural refusal precedes); a future SOURCE_VERIFIED assembly requires the erratum fix first"
     }
@@ -77,5 +153,10 @@
     "append_only_events": true
   },
   "independent_review": "WAIT_EXTERNAL - fresh Reviewer + exact-head Verifier requested on draft PR; IMPLEMENTER cannot self-accept",
-  "budget": {"network_transfer_mib": 0, "scientific_runs": 0, "paid_compute": 0, "within_budget": true}
+  "budget": {
+    "network_transfer_mib": 0,
+    "scientific_runs": 0,
+    "paid_compute": 0,
+    "within_budget": true
+  }
 }
