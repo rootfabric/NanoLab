@@ -59,7 +59,7 @@
     "Bridge ODN ports remain UNKNOWN (placeholder sequences in all pinned topologies)"
   ],
   "known_limits": [
-    "99 members extracted of 2,324 total CD entries (WO-defined target set only)",
+    "99 members extracted of 2,326 total CD entries (R2.1 erratum: 2,324 was a transcription error; canonical = df-receipt full enumeration 276+207+949+894; WO-defined target set only)",
     "Per-file namespace attribution of arm files beyond bounds tests is INFERRED_CANDIDATE at most",
     "Transfer accounting counts unique successful range bytes; retry overhead bounded but not itemized",
     "Exact oxDNA engine pin remains UNKNOWN (source does not publish it)",
