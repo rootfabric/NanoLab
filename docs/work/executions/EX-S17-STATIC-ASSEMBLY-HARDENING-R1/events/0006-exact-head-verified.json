@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "event_id": "0006-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-s17-assembly-hardening (fresh independent agent session)",
+  "subject_sha": "5231b1d4650bd37ad39a63cbe1d18c451bb889a8",
+  "timestamp_utc": "2026-10-18T16:32:02.318Z",
+  "summary": "Fresh independent exact-head VERIFIER verdict (separate agent session, scratch clone /tmp/verify-asmcli, heads self-resolved): VERIFIED at HEAD 5231b1d4650bd37ad39a63cbe1d18c451bb889a8 (tree 2fa2231118b7f3a3342961efebde0859d404b520; first-parent chain 0b9311c -> d9c3e05 -> cadb310 -> e1c48f6 -> 966f2cc -> adffcbd -> 5231b1d; reviewed head adffcbd tree 2abcc11e; subject e1c48f6 tree 724cb5ba). Verified personally: gates at tip - 877 tests OK, 4/4 falsifiers OK, check-consistency ok, workflow_lint blocking 0, work_cli validate ok; scope = exactly 22 files all in allowed set, WORK_QUEUE pure append, 26/26 protected files blob-identical to base 0b9311c (falsifiers, R3 fixtures, mechanical_component_spec.py, contract.py, import_validation.py, other s17_*.py, project/*.json, S17_R3 pins), all frozen NL5 surfaces untouched; validate_component_spec invariance proven (lives blob-identical in mechanical_component_spec.py; WO's pointer to assembly_spec.py inaccurate - invariant holds all the more; validate_assembly_spec AST-identical; live call returns [] on both example specs); CLI determinism reproduced (two runs byte-identical: receipt 4504ebf7..., .dat b2315a5a..., .top e33bdc07...; receipt byte-equal to committed expected_receipt.json); fail-closed reproduced (traversal outdir exit 2 zero artifacts; tampered .top verify exit 1); claim ceiling intact (forbidden markers only in guards/docstrings/disclaimers; receipt ASSEMBLED_STATIC_ONLY + GEOMETRY_UNVERIFIED + CANDIDATE_DESIGN/HYPOTHESIS; example pair zero substring and zero reverse-complement overlap with all 16 real S17 sequences); CI cross-checked via GitHub API (run 39143109982 success, head adffcbd); review trail: events 0001-0004 untouched, timestamps distinct and strictly monotonic, all 5 subject_shas resolve as commits. Two documentation-level notes (non-blocking): WO located validate_component_spec in the wrong file; pre-existing stdout-JSON line from frozen scripts/nl4/__main__.py interleaves into unittest logs (byte-identical to base, benign). Merge remains Human Gate. This completes the independent chain for WO-S17-STATIC-ASSEMBLY-HARDENING-R1: implementer -> independent Reviewer PASS (0 blocking, 5 minors recorded) -> hosted CI success (run 39143109982) -> independent Verifier VERIFIED.",
+  "command_refs": [
+    "git ls-remote origin work/s17-static-assembly-hardening-r1 (== 5231b1d)",
+    "python3 -m unittest discover -s tests -t . (877 OK)",
+    "GitHub API actions run 39143109982 (success, head adffcbd)"
+  ],
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/71",
+    "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/evidence-map.json"
+  ],
+  "next_action": "READY_FOR_HUMAN_GATE (PR #71, stacked on the #59 -> #60 -> #67 chain).",
+  "blocker": null
+}
