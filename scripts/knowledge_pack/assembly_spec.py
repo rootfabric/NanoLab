@@ -18,7 +18,11 @@ Scope (narrow by design):
 
 Modes:
   SOURCE_VERIFIED — only when a pinned, SOURCE_CONFIRMED interface recipe
-      exists and every assembled fact is covered by it.
+      exists and every assembled fact is covered by it. The recipe is verified
+      against its actual on-disk bytes (existence, declared SHA-256, JSON
+      parse) and every declared connection must be bound to exactly one
+      machine-checked recipe entry (repair R3-F02: a forged digest or a
+      nonexistent recipe file can never authorize SOURCE_VERIFIED).
   CANDIDATE_DESIGN — an explicitly-marked hypothetical construction; useful as
       a software test case; it never raises a scientific claim and is never
       reported as source-verified.
@@ -29,6 +33,24 @@ polarity, ID reuse, backbone corruption, geometry conflicts — every invalid
 case produces a deterministic refusal receipt (never a silent guess). The
 coarse geometric check can never exclude steric conflicts; outcomes therefore
 carry ``GEOMETRY_UNVERIFIED`` instead of an unqualified PASS.
+
+Repair R1 (WO-PREP-S17-R3-REPAIR-R1, issue #62) additions:
+
+* R3-F01 — an executed connection requires a *usable* port: the component
+  spec must guarantee ``connection_capable=true``, concrete anchor indices
+  (never the literal UNKNOWN, never UNKNOWN status) and a non-UNKNOWN
+  orientation. The gate runs on the executable assembly path only, after the
+  decisive structural-existence pass, so the honest real-S17
+  ``NOT_RECONSTRUCTED`` (structure-less follower) is preserved.
+* R3-F02 — interface recipe verification against actual bytes, declared
+  SHA-256, safe relative paths and per-connection recipe/port binding.
+* R3-F03 — one shared transform pipeline (unit factor → rotation →
+  translation) applied to follower particles *and* to anchor hint positions,
+  so rotated assemblies are judged by their true geometry.
+* R3-F04 — hybridization evidence is bound to the declared exposed overhang
+  segments: exact reverse-complement match of the intended interface, both
+  5′/3′ ends declared, LNA notation stripped consistently, and each segment
+  must be part of its port's full sequence.
 
 Claim ceiling: ``ASSEMBLED_STATIC_ONLY`` refers to deterministic file-level
 construction. It is never ``ASSEMBLY_VALIDATED``, never evidence of
@@ -79,6 +101,13 @@ GEOMETRY_STATUSES = (
 )
 
 MIN_HYBRIDIZATION_MATCH_NT = 12
+
+# Declared exposed-overhang end vocabulary (R3-F04). Both ends must be
+# declared; same-end pairs are allowed (the pinned real S17 recipe is 3p/3p),
+# an undeclared/UNKNOWN end never assembles.
+OVERHANG_ENDS = ("5p", "3p")
+# Recipe object kinds accepted for SOURCE_VERIFIED verification (R3-F02).
+RECIPE_KINDS = ("interface_recipe", "s17_r3_df_interface_recipe")
 
 TOP_LEVEL_KEYS = (
     "schema_version",
@@ -141,6 +170,13 @@ def strip_lna(sequence: str) -> str:
 
 def reverse_complement(sequence: str) -> str:
     return sequence[::-1].translate(str.maketrans("ACGT", "TGCA"))
+
+
+def _is_finite_number(value: object) -> bool:
+    """True for a real, non-boolean, finite (not NaN/Inf) number."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    return math.isfinite(float(value))
 
 
 def max_complementary_match(a: str, b: str) -> int:
@@ -242,6 +278,11 @@ def validate_assembly_spec(spec: object, component_specs: dict[str, dict]) -> li
                     errors.append(
                         f"components[{i}].port_geometry[{j}].anchor_position must be [x, y, z]"
                     )
+                elif not all(_is_finite_number(v) for v in pg["anchor_position"]):
+                    errors.append(
+                        f"components[{i}].port_geometry[{j}].anchor_position must contain finite "
+                        "numbers (NaN/Inf/non-numeric values are rejected)"
+                    )
         cs = component_specs.get(comp.get("role"))
         if cs is None:
             continue
@@ -322,6 +363,21 @@ def validate_assembly_spec(spec: object, component_specs: dict[str, dict]) -> li
                     "mode SOURCE_VERIFIED requires interface_recipe_ref.status SOURCE_CONFIRMED; "
                     "a recipe without published proof is BLOCKED_INFERRED_INTERFACE"
                 )
+            # R3-F02: the declared path must already be structurally safe before
+            # any file access: relative, traversal-free, non-empty. The bytes/
+            # digest/coverage verification happens on the executable path.
+            raw_path = ref.get("path")
+            if isinstance(raw_path, str) and raw_path.strip():
+                p = Path(raw_path)
+                if p.is_absolute() or ".." in p.parts or "\\" in raw_path:
+                    errors.append(
+                        "interface_recipe_ref.path must be a safe relative path without traversal "
+                        "(no absolute path, no '..' segments, no backslashes)"
+                    )
+            elif raw_path is not None:
+                errors.append(
+                    "interface_recipe_ref.path must be a non-empty safe relative path string"
+                )
 
     # transforms.
     transforms = spec.get("coordinate_transforms", [])
@@ -347,6 +403,25 @@ def validate_assembly_spec(spec: object, component_specs: dict[str, dict]) -> li
                 not isinstance(tr["translation"], list) or len(tr["translation"]) != 3
             ):
                 errors.append(f"coordinate_transforms[{i}].translation must be [x, y, z]")
+            elif "translation" in tr:
+                if not all(_is_finite_number(v) for v in tr["translation"]):
+                    errors.append(
+                        f"coordinate_transforms[{i}].translation must contain finite numbers "
+                        "(NaN/Inf/non-numeric values are rejected)"
+                    )
+            axis = tr.get("rotation_axis")
+            if axis is not None:
+                if not isinstance(axis, list) or len(axis) != 3 or not all(
+                    _is_finite_number(v) for v in axis
+                ):
+                    errors.append(
+                        f"coordinate_transforms[{i}].rotation_axis must be 3 finite numbers"
+                    )
+            angle = tr.get("rotation_angle_deg")
+            if angle is not None and not _is_finite_number(angle):
+                errors.append(
+                    f"coordinate_transforms[{i}].rotation_angle_deg must be a finite number"
+                )
 
     # unit conversion + expected units consistency.
     expected_units = spec["expected_units"]
@@ -361,8 +436,11 @@ def validate_assembly_spec(spec: object, component_specs: dict[str, dict]) -> li
                 if key not in conversion:
                     errors.append(f"unit_conversion missing {key}")
             factor = conversion.get("length_factor")
-            if not isinstance(factor, (int, float)) or isinstance(factor, bool) or factor <= 0:
-                errors.append("unit_conversion.length_factor must be a positive number")
+            if not _is_finite_number(factor) or factor <= 0:
+                errors.append(
+                    "unit_conversion.length_factor must be a positive finite number "
+                    "(NaN/Inf are rejected)"
+                )
 
     # connections.
     connections = spec["connections"]
@@ -395,6 +473,31 @@ def validate_assembly_spec(spec: object, component_specs: dict[str, dict]) -> li
     else:
         if "enabled" not in geometry:
             errors.append("geometry must declare enabled")
+        band = geometry.get("connected_anchor_distance_range")
+        if band is not None:
+            if (
+                not isinstance(band, list)
+                or len(band) != 2
+                or not all(_is_finite_number(v) for v in band)
+            ):
+                errors.append(
+                    "geometry.connected_anchor_distance_range must be two finite numbers"
+                )
+            elif float(band[0]) > float(band[1]):
+                errors.append("geometry.connected_anchor_distance_range must be non-decreasing")
+        threshold = geometry.get("clash_scan_threshold")
+        if threshold is not None and (not _is_finite_number(threshold) or threshold <= 0):
+            errors.append("geometry.clash_scan_threshold must be a positive finite number")
+    box = spec.get("assembly_box")
+    if box is not None:
+        if (
+            not isinstance(box, list)
+            or len(box) != 3
+            or not all(_is_finite_number(v) for v in box)
+        ):
+            errors.append("assembly_box must be three finite numbers")
+        elif any(float(v) <= 0 for v in box):
+            errors.append("assembly_box values must be positive")
 
     if "notes" in spec and not isinstance(spec["notes"], (str, list)):
         errors.append("notes must be a string or list")
@@ -455,6 +558,256 @@ def _validate_connection(conn: object, i: int, port_index: dict, spec: dict, see
         if not isinstance(edit, dict):
             errors.append(f"{where}: BACKBONE_CONTINUATION requires backbone_edit")
     return errors
+
+
+# --------------------------------------------------------------------------
+# R3-F01 / R3-F02 / R3-F04 fail-closed gates (executable assembly path)
+# --------------------------------------------------------------------------
+
+def _executable_port_violation(role: str, connection_id: str, port: dict) -> str | None:
+    """Return a refusal reason when an executed connection sits on an unusable port.
+
+    R3-F01: ``connection_capable=false``, literal-UNKNOWN anchors, UNKNOWN
+    anchor status or UNKNOWN orientation block the assembly even when the rest
+    of the spec is perfectly formed. Structural validation deliberately does
+    NOT enforce this (a structure-less component with incapable ports must keep
+    its honest NOT_RECONSTRUCTED); the gate applies only when an assembly is
+    actually attempted.
+    """
+    where = f"connection {connection_id}: {role} port {port.get('port_id')!r}"
+    if port.get("connection_capable") is not True:
+        return (
+            f"{where}: connection_capable is {port.get('connection_capable')!r} - the component "
+            "spec does not guarantee a usable interface, so the connection is refused"
+        )
+    anchors = port.get("anchors")
+    if not isinstance(anchors, list) or not anchors:
+        return f"{where}: no concrete anchors declared (an interface without anchors never assembles)"
+    for j, anchor in enumerate(anchors):
+        if not isinstance(anchor, dict):
+            return f"{where}: anchors[{j}] must be an object"
+        value = anchor.get("anchor")
+        if not isinstance(value, int) or isinstance(value, bool):
+            return (
+                f"{where}: anchors[{j}].anchor is {value!r} - only a concrete integer particle "
+                "index can be assembled (literal UNKNOWN refuses)"
+            )
+        if _status_of_block(anchor) == "UNKNOWN":
+            return f"{where}: anchors[{j}] has status UNKNOWN - an unconfirmed anchor never assembles"
+    orientation = port.get("orientation")
+    if not isinstance(orientation, dict):
+        return f"{where}: orientation must be an object"
+    if _status_of_block(orientation) == "UNKNOWN":
+        return f"{where}: orientation status UNKNOWN - an unoriented interface never assembles"
+    return None
+
+
+def _verify_interface_recipe(spec: dict, component_specs: dict,
+                             recipe_base: Path | str | None) -> dict | None:
+    """R3-F02: verify the SOURCE_VERIFIED interface recipe against real bytes.
+
+    Checks, in order: safe path, file existence, declared SHA-256 of the actual
+    bytes, JSON parse, recipe kind, and per-connection binding: every declared
+    hybridization connection must map to exactly one recipe entry (via an
+    explicit ``recipe_pair_ref`` on the connection, or via the pinned port
+    chemistry ``odn_name`` linkage), and the bound entry's declared segments
+    must equal the ports' declared overhang segments. Returns a failure receipt
+    or None when the recipe is verified.
+    """
+    ref = spec["interface_recipe_ref"]
+    assembly_id = spec.get("assembly_id", "UNKNOWN")
+
+    def blocked(status: str, reason: str) -> dict:
+        receipt = _receipt(status, "NOT_PERFORMED", reason)
+        receipt["assembly_id"] = assembly_id
+        receipt["mode"] = spec.get("mode", "UNKNOWN")
+        return receipt
+
+    raw = ref.get("path")
+    if not isinstance(raw, str) or not raw.strip():
+        return blocked("BLOCKED_SPEC", "interface_recipe_ref.path must be a non-empty relative path")
+    rel = Path(raw)
+    if rel.is_absolute() or ".." in rel.parts or "\\" in raw:
+        return blocked("BLOCKED_SPEC",
+                       f"interface_recipe_ref.path {raw!r} is not a safe relative path")
+    base = Path(recipe_base) if recipe_base is not None else Path.cwd()
+    recipe_path = base / rel
+    if not recipe_path.is_file():
+        return blocked(
+            "BLOCKED_SOURCE",
+            f"interface recipe file not found on disk: {recipe_path} (a SOURCE_VERIFIED assembly "
+            "refuses a recipe that cannot be read; status on the ref object alone proves nothing)",
+        )
+    data = recipe_path.read_bytes()
+    actual_sha = hashlib.sha256(data).hexdigest()
+    if actual_sha != ref.get("sha256"):
+        return blocked(
+            "BLOCKED_INPUT",
+            f"interface recipe digest mismatch: declared {ref.get('sha256')!r}, actual file bytes "
+            f"hash to {actual_sha} (tampered or wrong recipe)",
+        )
+    try:
+        recipe = json.loads(data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return blocked("BLOCKED_INPUT", f"interface recipe is not valid UTF-8 JSON: {exc}")
+    if not isinstance(recipe, dict) or recipe.get("kind") not in RECIPE_KINDS:
+        return blocked(
+            "BLOCKED_SOURCE",
+            f"interface recipe kind {recipe.get('kind') if isinstance(recipe, dict) else None!r} "
+            f"is not one of {RECIPE_KINDS} (the pinned bytes are not an interface recipe)",
+        )
+    entries = recipe.get("pairs")
+    if entries is None:
+        entries = recipe.get("connections")
+    if not isinstance(entries, list):
+        return blocked("BLOCKED_SOURCE", "interface recipe carries no machine-readable pairing list "
+                                         "(expected 'pairs' or 'connections')")
+
+    def entry_id(entry, keys):
+        for key in keys:
+            if key in entry:
+                return entry[key]
+        return None
+
+    for conn in spec["connections"]:
+        if conn["kind"] != "SS_DNA_OVERHANG_HYBRIDIZATION":
+            continue
+        cid = conn["connection_id"]
+        ref_value = conn.get("recipe_pair_ref")
+        matches = []
+        if ref_value is not None:
+            matches = [e for e in entries if isinstance(e, dict)
+                       and entry_id(e, ("pair_id", "connection_id")) == ref_value]
+            if not matches:
+                return blocked(
+                    "BLOCKED_SOURCE",
+                    f"connection {cid}: recipe_pair_ref {ref_value!r} matches no entry in the "
+                    "verified recipe bytes",
+                )
+        else:
+            dport = _port_index(component_specs)[("driver", conn["driver_port"])]
+            fport = _port_index(component_specs)[("follower", conn["follower_port"])]
+            dodn = (dport.get("chemistry") or {}).get("odn_name")
+            fodn = (fport.get("chemistry") or {}).get("odn_name")
+            if dodn is not None and fodn is not None:
+                matches = [e for e in entries if isinstance(e, dict)
+                           and e.get("driver_odn") == dodn and e.get("follower_odn") == fodn]
+            if not matches:
+                return blocked(
+                    "BLOCKED_SOURCE",
+                    f"connection {cid}: not bound to any verified recipe entry (declare an explicit "
+                    "recipe_pair_ref or pin chemistry.odn_name on both ports so the recipe pairing "
+                    "can be joined deterministically)",
+                )
+        if len(matches) > 1:
+            return blocked(
+                "BLOCKED_SOURCE",
+                f"connection {cid}: ambiguous recipe binding, {len(matches)} entries match "
+                "(fail-closed)",
+            )
+        entry = matches[0]
+        dport = _port_index(component_specs)[("driver", conn["driver_port"])]
+        fport = _port_index(component_specs)[("follower", conn["follower_port"])]
+        for role, port, entry_keys in (
+            ("driver", dport, ("driver_segment",)),
+            ("follower", fport, ("follower_segment",)),
+        ):
+            declared = (port.get("chemistry") or {}).get("overhang_segment")
+            for key in entry_keys:
+                if key in entry and declared is not None:
+                    if strip_lna(str(entry[key])) != strip_lna(str(declared)):
+                        return blocked(
+                            "BLOCKED_SOURCE",
+                            f"connection {cid}: recipe {role} segment {entry[key]!r} contradicts the "
+                            f"port chemistry overhang_segment {declared!r} (recipe bytes do not "
+                            "cover the declared interface)",
+                        )
+    return None
+
+
+def _check_overhang_interface(connection_id: str, dchem: dict, fchem: dict) -> tuple[dict | None, dict]:
+    """R3-F04: bind hybridization evidence to the declared exposed overhangs.
+
+    Returns ``(failure_receipt, interface_record)``. The record carries the
+    intended-interface facts when every check passes.
+    """
+
+    def failure(reason: str) -> tuple[dict | None, dict]:
+        return (
+            _receipt(
+                "BLOCKED_INFERRED_INTERFACE", "NOT_PERFORMED",
+                f"connection {connection_id}: {reason}",
+            ),
+            {},
+        )
+
+    def segment(chem, role):
+        value = chem.get("overhang_segment")
+        if not isinstance(value, str) or not value.strip() or value == "UNKNOWN":
+            return value, failure(
+                f"{role} overhang_segment is {value!r} - hybridization evidence must be bound to "
+                "the declared exposed interface segment, not to any match inside the full ODN"
+            )
+        return value, None
+
+    dseg, err = segment(dchem, "driver")
+    if err:
+        return err
+    fseg, err = segment(fchem, "follower")
+    if err:
+        return err
+    dplain, fplain = strip_lna(dseg), strip_lna(fseg)
+    if len(dplain) < MIN_HYBRIDIZATION_MATCH_NT or len(fplain) < MIN_HYBRIDIZATION_MATCH_NT:
+        return failure(
+            f"declared overhang segments are too short for interface evidence "
+            f"(driver {len(dplain)} nt, follower {len(fplain)} nt, "
+            f"minimum {MIN_HYBRIDIZATION_MATCH_NT})"
+        )
+    if fplain != reverse_complement(dplain):
+        best = max_complementary_match(dplain, fplain)
+        return failure(
+            f"declared exposed overhang segments are not complementary "
+            f"(driver {dplain!r}, follower {fplain!r}, best reverse-complement match {best} nt; "
+            "a complementary match elsewhere in the full ODN never authorizes the interface)"
+        )
+    ends = {}
+    for role, chem in (("driver", dchem), ("follower", fchem)):
+        end = chem.get("overhang_end")
+        if end not in OVERHANG_ENDS:
+            return failure(
+                f"{role} overhang_end is {end!r} - the exposed end must be declared as one of "
+                f"{OVERHANG_ENDS} (an undeclared 5'/3' polarity never assembles)"
+            )
+        ends[role] = end
+    # Full-ODN consistency: the sequences hosting the complementary interface
+    # must themselves be complementary over the threshold.
+    dfull = strip_lna(str(dchem.get("sequence", "")))
+    ffull = strip_lna(str(fchem.get("sequence", "")))
+    seq_match = max_complementary_match(dfull, ffull)
+    if seq_match < MIN_HYBRIDIZATION_MATCH_NT:
+        return failure(
+            f"sequences are not complementary "
+            f"(max reverse-complement match {seq_match} nt < {MIN_HYBRIDIZATION_MATCH_NT})"
+        )
+    if dplain not in dfull:
+        return failure(
+            f"driver overhang_segment {dplain!r} is not part of the driver port sequence "
+            "(the declared interface contradicts the declared molecule)"
+        )
+    if fplain not in ffull:
+        return failure(
+            f"follower overhang_segment {fplain!r} is not part of the follower port sequence "
+            "(the declared interface contradicts the declared molecule)"
+        )
+    record = {
+        "match_nt": len(dplain),
+        "exact_reverse_complement": True,
+        "driver_overhang_end": ends["driver"],
+        "follower_overhang_end": ends["follower"],
+        "lna": bool(dchem.get("lna")) or bool(fchem.get("lna")),
+        "note": "evidence bound to the declared exposed overhang segments (R3-F04)",
+    }
+    return None, record
 
 
 # --------------------------------------------------------------------------
@@ -532,12 +885,77 @@ def _fmt(value: float) -> str:
     return text
 
 
+# --------------------------------------------------------------------------
+# R3-F03: one shared transform pipeline (unit factor -> rotation -> translation)
+# used by particle merging, artifact rebuilding AND anchor geometry checks.
+# --------------------------------------------------------------------------
+
+def _follower_transform_params(spec: dict) -> tuple[float, list | None, list[float]]:
+    """Return (unit_factor, rotation_matrix|None, translation) for the follower."""
+    conversion = spec.get("unit_conversion")
+    factor = 1.0
+    if isinstance(conversion, dict) and conversion.get("component") == "follower":
+        factor = float(conversion["length_factor"])
+    transform = next(
+        (tr for tr in (spec.get("coordinate_transforms") or [])
+         if isinstance(tr, dict) and tr.get("component") == "follower"),
+        None,
+    )
+    rot = None
+    if transform is not None and transform.get("rotation_axis") is not None \
+            and transform.get("rotation_angle_deg") is not None:
+        rot = _rotation_matrix(transform["rotation_axis"], float(transform["rotation_angle_deg"]))
+    trans = [float(x) for x in (transform or {}).get("translation", [0.0, 0.0, 0.0])]
+    return factor, rot, trans
+
+
+def _rotate(vec: list, rot: list | None) -> list:
+    if rot is None:
+        return list(vec)
+    return [
+        rot[0][0] * vec[0] + rot[0][1] * vec[1] + rot[0][2] * vec[2],
+        rot[1][0] * vec[0] + rot[1][1] * vec[1] + rot[1][2] * vec[2],
+        rot[2][0] * vec[0] + rot[2][1] * vec[1] + rot[2][2] * vec[2],
+    ]
+
+
+def _transform_point(point: list, factor: float, rot: list | None, trans: list) -> list:
+    """Transform an anchor/position hint: scale -> rotate -> translate."""
+    scaled = [float(point[a]) * factor for a in range(3)]
+    rotated = _rotate(scaled, rot)
+    return [rotated[a] + trans[a] for a in range(3)]
+
+
+def _transform_particle(particle: tuple, factor: float, rot: list | None, trans: list) -> tuple:
+    """Transform one oxDNA particle (positions get translation; orientations don't)."""
+    (pos, o1, o2, v1, v2) = particle
+    new_pos = _transform_point(pos, factor, rot, trans)
+    return (
+        new_pos,
+        _rotate(list(o1), rot),
+        _rotate(list(o2), rot),
+        _rotate([x * factor for x in v1], rot),
+        _rotate([x * factor for x in v2], rot),
+    )
+
+
+def _transform_follower_particles(particles: list, spec: dict) -> list:
+    """Apply the shared follower pipeline (unit conversion + rigid transform)."""
+    factor, rot, trans = _follower_transform_params(spec)
+    if factor == 1.0 and rot is None and trans == [0.0, 0.0, 0.0]:
+        return list(particles)
+    return [_transform_particle(p, factor, rot, trans) for p in particles]
+
+
 def assemble(spec: dict, component_specs: dict[str, dict],
-             inputs: dict[str, dict]) -> dict:
+             inputs: dict[str, dict], recipe_base: Path | str | None = None) -> dict:
     """Deterministic static two-component assembly; returns a fail-closed receipt.
 
     ``inputs[role] = {"topology_path": ..., "configuration_path": ...}``.
-    Nothing is ever written to disk by this function.
+    ``recipe_base`` is the directory relative to which a SOURCE_VERIFIED
+    interface recipe path is resolved (default: the current working directory;
+    the path itself must be relative and traversal-free). Nothing is ever
+    written to disk by this function.
     """
     # 1. validate everything structurally first.
     if sorted(component_specs) != sorted(COMPONENT_ROLES):
@@ -621,10 +1039,30 @@ def assemble(spec: dict, component_specs: dict[str, dict],
         else:
             follower_top, follower_conf = top, conf
 
+    # 2c. R3-F01 executable-interface gate: a connection is only executable on
+    #     a port the component spec itself guarantees to be usable. This runs
+    #     AFTER the decisive structural pass (2), so a structure-less pair
+    #     keeps its honest NOT_RECONSTRUCTED instead of a spec error.
+    port_index = _port_index(component_specs)
+    for conn in spec["connections"]:
+        if conn["kind"] != "SS_DNA_OVERHANG_HYBRIDIZATION":
+            continue
+        for role_key, role in (("driver_port", "driver"), ("follower_port", "follower")):
+            port = port_index[(role, conn[role_key])]
+            violation = _executable_port_violation(role, conn["connection_id"], port)
+            if violation is not None:
+                return _receipt("BLOCKED_SPEC", "NOT_PERFORMED", violation)
+
+    # 2d. R3-F02 SOURCE_VERIFIED requires the interface recipe to actually
+    #     exist, match its declared digest, and cover the declared connections.
+    if spec["mode"] == "SOURCE_VERIFIED":
+        failure = _verify_interface_recipe(spec, component_specs, recipe_base)
+        if failure is not None:
+            return failure
+
     # 3. hybridization connections must be backed by reverse-complement evidence
     #    from the component specs' port chemistry (polarity + complementarity)
     #    and every concrete anchor index must be inside its component bounds.
-    port_index = _port_index(component_specs)
     conn_results = []
     for conn in spec["connections"]:
         if conn["kind"] != "SS_DNA_OVERHANG_HYBRIDIZATION":
@@ -637,7 +1075,7 @@ def assemble(spec: dict, component_specs: dict[str, dict],
         ):
             for anchor in port.get("anchors", []):
                 value = anchor.get("anchor")
-                if isinstance(value, int) and not (0 <= value < limit):
+                if isinstance(value, int) and not isinstance(value, bool) and not (0 <= value < limit):
                     return _receipt(
                         "BLOCKED_SPEC", "NOT_PERFORMED",
                         f"connection {conn['connection_id']}: {role} anchor index {value} outside "
@@ -651,6 +1089,12 @@ def assemble(spec: dict, component_specs: dict[str, dict],
                 f"connection {conn['connection_id']}: port sequence UNKNOWN - a connection without "
                 "published sequence evidence is never assembled",
             )
+        # R3-F04: the *intended interface* — the declared exposed overhang
+        # segments — must carry the complementarity evidence. A match anywhere
+        # inside the full ODN sequences can never mask a mismatched interface.
+        failure, interface = _check_overhang_interface(conn["connection_id"], dchem, fchem)
+        if failure is not None:
+            return failure
         match = max_complementary_match(strip_lna(dseq), strip_lna(fseq))
         if match < MIN_HYBRIDIZATION_MATCH_NT:
             return _receipt(
@@ -658,14 +1102,16 @@ def assemble(spec: dict, component_specs: dict[str, dict],
                 f"connection {conn['connection_id']}: sequences are not complementary "
                 f"(max reverse-complement match {match} nt < {MIN_HYBRIDIZATION_MATCH_NT})",
             )
-        conn_results.append({
+        conn_result = {
             "connection_id": conn["connection_id"],
             "kind": conn["kind"],
             "covalent": False,
-            "complementarity_match_nt": match,
+            "complementarity_match_nt": interface["match_nt"],
+            "overhang_interface": interface,
             "evidence_status": conn["evidence_status"],
             "note": "recorded as a non-covalent hybridization interface; no backbone link created",
-        })
+        }
+        conn_results.append(conn_result)
 
     # 4. backbone edits: allow-listed BACKBONE_CONTINUATION connections only.
     edits_applied = []
@@ -705,38 +1151,9 @@ def assemble(spec: dict, component_specs: dict[str, dict],
         return "".join(line + "\n" for line in out)
 
     driver_text = particles_text(driver_conf.particles)
-    follower_particles = follower_conf.particles
-    conversion = spec.get("unit_conversion")
-    if conversion is not None and conversion.get("component") == "follower":
-        factor = float(conversion["length_factor"])
-        scaled = []
-        for (pos, o1, o2, v1, v2) in follower_particles:
-            scaled.append((
-                [x * factor for x in pos], o1, o2,
-                [x * factor for x in v1], [x * factor for x in v2],
-            ))
-        follower_particles = scaled
-    transform = next((tr for tr in spec.get("coordinate_transforms", [])
-                      if tr.get("component") == "follower"), None)
-    if transform is not None:
-        rot = None
-        if transform.get("rotation_axis") is not None and transform.get("rotation_angle_deg") is not None:
-            rot = _rotation_matrix(transform["rotation_axis"], float(transform["rotation_angle_deg"]))
-        trans = [float(x) for x in transform["translation"]]
-        transformed = []
-        for (pos, o1, o2, v1, v2) in follower_particles:
-            def apply(vec):
-                if rot is None:
-                    return list(vec)
-                return [
-                    rot[0][0] * vec[0] + rot[0][1] * vec[1] + rot[0][2] * vec[2],
-                    rot[1][0] * vec[0] + rot[1][1] * vec[1] + rot[1][2] * vec[2],
-                    rot[2][0] * vec[0] + rot[2][1] * vec[1] + rot[2][2] * vec[2],
-                ]
-            new_pos = apply(pos)
-            new_pos = [new_pos[a] + trans[a] for a in range(3)]
-            transformed.append((new_pos, apply(o1), apply(o2), apply(v1), apply(v2)))
-        follower_particles = transformed
+    # R3-F03: the single shared transform pipeline (unit conversion + rigid
+    # transform) drives particle merging, artifact rebuilding and geometry.
+    follower_particles = _transform_follower_particles(follower_conf.particles, spec)
     follower_text = particles_text(follower_particles)
 
     box = spec.get("assembly_box")
@@ -764,7 +1181,7 @@ def assemble(spec: dict, component_specs: dict[str, dict],
 
     # 7. coarse geometric checks.
     geometry_status, geometry_facts = _geometry_checks(spec, driver_conf, follower_particles,
-                                                       follower_conf, transform, conversion)
+                                                       follower_conf)
     if geometry_status == "GEOMETRIC_CONFLICT":
         receipt = _receipt("BLOCKED_GEOMETRY", geometry_status,
                            geometry_facts.get("violation", "geometric conflict"))
@@ -819,10 +1236,11 @@ def assemble(spec: dict, component_specs: dict[str, dict],
     return receipt
 
 
-def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict) -> tuple[str, str, dict]:
+def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict,
+                       recipe_base: Path | str | None = None) -> tuple[str, str, dict]:
     """Return (topology_text, configuration_text, receipt)."""
     # Re-run assemble for validation; then rebuild the texts deterministically.
-    receipt = assemble(spec, component_specs, inputs)
+    receipt = assemble(spec, component_specs, inputs, recipe_base=recipe_base)
     if receipt["assembly_status"] != "ASSEMBLED_STATIC_ONLY":
         return "", "", receipt
     driver_top = load_topology_verified(Path(inputs["driver"]["topology_path"]),
@@ -839,34 +1257,9 @@ def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict) -> tuple
                      + "".join(f"{sid} {base} {n3} {n5}\n" for (sid, base, n3, n5) in rows))
     driver_conf = _load_configuration(Path(inputs["driver"]["configuration_path"]))
     follower_conf = _load_configuration(Path(inputs["follower"]["configuration_path"]))
-    follower_particles = follower_conf.particles
-    conversion = spec.get("unit_conversion")
-    if conversion is not None and conversion.get("component") == "follower":
-        factor = float(conversion["length_factor"])
-        follower_particles = [
-            ([x * factor for x in pos], o1, o2, [x * factor for x in v1], [x * factor for x in v2])
-            for (pos, o1, o2, v1, v2) in follower_particles
-        ]
-    transform = next((tr for tr in spec.get("coordinate_transforms", [])
-                      if tr.get("component") == "follower"), None)
-    if transform is not None:
-        rot = None
-        if transform.get("rotation_axis") is not None and transform.get("rotation_angle_deg") is not None:
-            rot = _rotation_matrix(transform["rotation_axis"], float(transform["rotation_angle_deg"]))
-        trans = [float(x) for x in transform["translation"]]
-        transformed = []
-        for (pos, o1, o2, v1, v2) in follower_particles:
-            def apply(vec):
-                if rot is None:
-                    return list(vec)
-                return [
-                    rot[0][0] * vec[0] + rot[0][1] * vec[1] + rot[0][2] * vec[2],
-                    rot[1][0] * vec[0] + rot[1][1] * vec[1] + rot[1][2] * vec[2],
-                    rot[2][0] * vec[0] + rot[2][1] * vec[1] + rot[2][2] * vec[2],
-                ]
-            new_pos = apply(pos)
-            transformed.append(([new_pos[a] + trans[a] for a in range(3)], apply(o1), apply(o2), apply(v1), apply(v2)))
-        follower_particles = transformed
+    # R3-F03: the same shared pipeline as assemble(); no duplicated transform
+    # math can drift between the receipt and the exported artifacts.
+    follower_particles = _transform_follower_particles(follower_conf.particles, spec)
 
     def particles_text(particles) -> str:
         return "".join(
@@ -884,7 +1277,7 @@ def assemble_artifacts(spec: dict, component_specs: dict, inputs: dict) -> tuple
     return topology_text, config_text, receipt
 
 
-def _geometry_checks(spec, driver_conf, follower_particles, follower_conf, transform, conversion) -> tuple[str, dict]:
+def _geometry_checks(spec, driver_conf, follower_particles, follower_conf) -> tuple[str, dict]:
     geometry = spec["geometry"]
     facts: dict = {"enabled": bool(geometry.get("enabled")), "clash_scan": None, "connected_anchor_distances": None}
     if not geometry.get("enabled"):
@@ -905,17 +1298,17 @@ def _geometry_checks(spec, driver_conf, follower_particles, follower_conf, trans
         anchor_driver = spec_geometry_anchors(spec_geometry_ports(spec, "driver"))
         anchor_follower = spec_geometry_anchors(spec_geometry_ports(spec, "follower"))
         band = geometry.get("connected_anchor_distance_range")
+        factor, rot, trans = _follower_transform_params(spec)
         for (cid, dpid, fpid) in conn_ports:
             da = anchor_driver.get(dpid)
             fa = anchor_follower.get(fpid)
             if da is None or fa is None:
                 facts["note"] = "connected anchor indices not resolvable; anchor distances not evaluated"
                 continue
-            trans = [float(x) for x in (transform or {}).get("translation", [0, 0, 0])]
-            factor = 1.0
-            if conversion is not None and conversion.get("component") == "follower":
-                factor = float(conversion["length_factor"])
-            fp = [fa[a] * factor + trans[a] for a in range(3)]
+            # R3-F03: the follower anchor hint passes through the SAME shared
+            # pipeline as follower particles (unit factor -> rotation ->
+            # translation); a rotated assembly is judged by its true geometry.
+            fp = _transform_point(fa, factor, rot, trans)
             delta = [fp[a] - da[a] for a in range(3)]
             for a in range(3):
                 delta[a] -= box[a] * round(delta[a] / box[a])
