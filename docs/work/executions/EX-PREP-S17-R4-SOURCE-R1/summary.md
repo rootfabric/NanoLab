@@ -82,3 +82,21 @@ PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-
 - NEXT_ACTION (одно): owner — разрешить отправку drafted author questions
   (`S17_R4_SOURCE_GAP_CLOSURE.md` §5) авторам, либо направить two-component workflow-обкатку на
   Nanobase 256/257 отдельным bounded WO.
+
+
+## Errata R4.1 (post-review, append-only)
+
+Independent fresh Reviewer (отдельная сессия, scratch-клон /tmp/review-r4): **PASS**,
+blocking findings отсутствуют, 6 non-blocking замечаний (m1–m6). Применено:
+
+- **m1**: события 0003/0005 называют «13 provenance records» — фактически в
+  `S17_R4_FOLLOWER_PROVENANCE.json` **14** записей (файл не менялся с subject 98c3d72;
+  счёт устарел на момент записи событий; события append-only, текст не переписывается).
+- **m4**: опечатки RU в `S17_R4_SOURCE_GAP_CLOSURE.md` исправлены in-place
+  (evidenc-машиной → evidence-машиной ×2, Вfollower-паре → В follower-паре, включяя → включая)
+  — содержательных изменений нет.
+- Отложено (non-blocking): m2 (записи github_surveys/author_web_surfaces без одиночного
+  url и с sha256=null — допустимо офлайн-тестом, ограничения честно записаны),
+  m3 (sha256 записи Deep Blue хэширует challenge-страницу, помечено «pins: nothing»),
+  m5 (12-hex префиксы в summary при полных дайджестах в evidence-map),
+  m6 (позиция «стр. 19 = Suppl. Fig. S5b» не перепроверялась удалённо; сам пин верифицирован).
