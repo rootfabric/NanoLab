@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "kind": "s17_r4_port_candidates",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "generated_at_utc": "2026-10-18T15:20:00Z",
+  "claim": "INTERFACE_MAP_CANDIDATE_ONLY: the 10 driver-follower connecting 20nt pairs are SOURCE_CONFIRMED at sequence level (R3, Dataset S1); per-ODN helix/arm assignment is digitized from the published Supplementary Figure S5b bitmap and is INFERRED_CANDIDATE only; nucleotide-index anchors in any pinned oxDNA topology are UNKNOWN (pinned topologies carry placeholder sequences, R2); exact 3D port orientation is UNKNOWN. This file never asserts an assembled or author-original follower structure.",
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY; statuses used: SOURCE_CONFIRMED, INFERRED_CANDIDATE, UNKNOWN. No SOURCE_CONFIRMED status is claimed for any helix/index/3D hop.",
+  "status_vocabulary": {
+    "SOURCE_CONFIRMED": "fact byte-pinned or verbatim-quoted from pinned published source (sequence pairs, Dataset S1)",
+    "INFERRED_CANDIDATE": "digitized from a published bitmap figure with residual reading uncertainty; not machine-readable in the original source",
+    "UNKNOWN": "not recoverable from any audited surface in this execution"
+  },
+  "conventions": {
+    "helix_numbering": "helices 0-17 per Suppl. Fig. S5a/b caption: 'Helices are numbered from 0 to 17 as a guide to better follow the positioning of the single-strand overhangs. The numbering of the helices is equivalent in both origami structures, please note how it is necessary to flip one of the two units upside down to be able to join the structures.'",
+    "diagram_ends": "Suppl. Fig. S5b shows two diagrams: 'top' = upper axial end connections drawn with blue dashes; 'bottom' = lower axial end connections drawn with red dashes. The two diagrams are front views of the two axial ends; each object has 2 arms of an 18-helix bundle, and only front helices are drawn, so a drawn attachment may sit on a hidden back helix.",
+    "figure_markers": "in the bitmap, arrowheads mark 3' termini and small squares mark 5' termini as drawn; the follower is drawn flipped upside down relative to the driver, so square/arrow placement on the follower side must not be over-interpreted geometrically",
+    "overhang_segments": "20-nt LNA-stripped reverse-complement segments from EX-PREP-S17-R3 recipe (docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json @ git 2cf8297f10ab5ec98b8c8023ff76b39d92ef398b); driver_segment == reverse_complement(follower_segment) machine-verified in R3"
+  },
+  "source_pins": {
+    "dataset_s1": {
+      "file": "Suppl. Dataset S1 V3.docx",
+      "url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl.%20Dataset%20S1%20V3.docx",
+      "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+      "size_bytes": 101900,
+      "sha256_provenance": "CONTENT_VERIFIED re-downloaded 2026-10-18 (EX-PREP-S17-R4-SOURCE-R1), byte-identical to R1/R2/R3 pin",
+      "license": "CC BY 4.0 (article supplementary material)",
+      "pins": "all 20 connecting ODN sequences (SOURCE_CONFIRMED)"
+    },
+    "suppl_figure_s5": {
+      "file": "Supplementary Information PDF, page 19, Suppl. Fig. S5b",
+      "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM1_ESM.pdf",
+      "sha256": "66074e7d0c07139ecfb2d65f0526e3386fb91853d2218badbc27cd32f1a42c66",
+      "size_bytes": 13861585,
+      "sha256_provenance": "CONTENT_VERIFIED re-downloaded 2026-10-18 (EX-PREP-S17-R4-SOURCE-R1), byte-identical to R3 pin",
+      "license": "CC BY 4.0",
+      "pins": "bitmap helix/arm placement of the overhang arrows (INFERRED_CANDIDATE digitization only)"
+    },
+    "si_engine_caDNAno_map": {
+      "file": "Supplementary figures PDF (engine caDNAno map + soft/ss hinge variants), 3 pages",
+      "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM5_ESM.pdf",
+      "sha256": "dae20e281294ffa19d8d39931b6b1f1ba5b422bfb43a2ac365d10ab938f33b09",
+      "size_bytes": 2295898,
+      "sha256_provenance": "CONTENT_VERIFIED re-downloaded 2026-10-18, byte-identical to R3 pin",
+      "license": "CC BY 4.0",
+      "pins": "engine (driver) helix map with fake helices 18-24, hinge region helices 6-11, 95 staples + M13; supports F10 (connecting ODN are assembly staples)"
+    },
+    "r3_recipe": {
+      "file": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+      "git_object": "2cf8297f10ab5ec98b8c8023ff76b39d92ef398b",
+      "license": "project documentation (CC BY 4.0 per owner decision D2)",
+      "pins": "exact 20-nt segments, offsets, overhang ends, uniqueness of pairing (machine-verified in R3)"
+    },
+    "nNE_top_pin": {
+      "file": "s17/nanobase/structure/nNE.top (R1) == zenodo NE23.zip::hinge23/nNE1/linked.top (R2)",
+      "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+      "sha256_provenance": "pinned in R1/R2 (not re-downloaded in R4; full multi-GB archive download forbidden)",
+      "pins": "driver topology only; placeholder sequences prevent sequence-based index anchoring (R2 finding)"
+    }
+  },
+  "pairs": [
+    {
+      "pair_id": 1,
+      "driver_odn": "HI-MC-163-con-D-LNA",
+      "follower_odn": "Hi-MC-173-con-replica",
+      "driver_segment": "GGCCAGAATTACCTACCGGC",
+      "follower_segment": "GCCGGTAGGTAATTCTGGCC",
+      "lna": true,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "9-10", "note": "3' overhang arrow on inner column between circles 9 and 10; 5' TTTTT square at circle 11; body CCCGTGGGGCGGC vertical 10->9", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "pinned nNE.top carries placeholder sequences (R2); no author caDNAno with connecting ODN"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "1-2", "note": "3' overhang arrow toward driver; 5' TTTTT square at circle 0; body GGCTTACAGA vertical 0->1", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists in any audited surface (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 2,
+      "driver_odn": "Hi-MC-165-con-D-LNA",
+      "follower_odn": "Hi-MC-174-con-replica",
+      "driver_segment": "ATAGCCGCGCTATCCGGCGA",
+      "follower_segment": "TCGCCGGATAGCGCGGCTAT",
+      "lna": true,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "6", "note": "3' overhang arrow from circle 6; 5' body GACTGGGCGCG vertical near 8; LNA GCT in overhang", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "4", "note": "attached at circle 4 (5' square CGTGCGCCAC as drawn); protruding overhang is the 3' end per Dataset S1 - the flipped drawing of the follower makes square/arrow sides ambiguous; exact 3D side UNKNOWN", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 3,
+      "driver_odn": "Hi-MC-174-con-D-LNA",
+      "follower_odn": "Hi-MC-165-con-replica",
+      "driver_segment": "GCCGCCCGGGGCGCACGAGC",
+      "follower_segment": "GCTCGTGCGCCCCGGGCGGC",
+      "lna": true,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "5", "note": "3' overhang arrow from circle 5 (line touches 5/6 boundary; 5 or 6); LNA GCA in overhang; blue dash to follower", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "6", "note": "3' overhang arrow (drawn pointing down-left); 5' square CGCAGTCTAC at circle 7; body GTCACGATAG vertical 7->6", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 4,
+      "driver_odn": "Hi-MC-173-con-D-LNA",
+      "follower_odn": "HI-MC-163-con-replica",
+      "driver_segment": "TGCCCGAGTCCCCACCGTCC",
+      "follower_segment": "GGACGGTGGGGACTCGGGCA",
+      "lna": true,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "1", "note": "3' overhang arrow from circle 1 (arrow text GAATCGGCTGTGCCCGAGTCCCCACCGTCC = last 14 body nt + 20 nt overhang incl. LNA CGA); 5' TTTTT square at circle 0", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "10", "note": "3' overhang arrow at 10/9 boundary (text GCCAGGATGGGACGGTGGGGACTCGGGCA); 5' TTTTT square at circle 11; body GGGTAAAGTT vertical 11->10", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 5,
+      "driver_odn": "HI-MC-172-con-driver",
+      "follower_odn": "Hi-MC-164-con-replica",
+      "driver_segment": "TGCGATCGGGCCGGCGCCGC",
+      "follower_segment": "GCGGCGCCGGCCCGATCGCA",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "3", "note": "3' overhang arrow from circle 3 (arrow text AGATGAGCACTGCGATCGGGCCGGCGCCGC = last 30 nt); body CAGCCGATTCTTTCTG from ~circle 1/2", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "9", "note": "5' square CATCCTGGCG at circle 9; body CTGGTCGCTT vertical 9->8; protruding 3' overhang arrow toward driver; intermediate domain routing partially hidden", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 6,
+      "driver_odn": "Hi-MC-151-con-drive",
+      "follower_odn": "Hi-MC-149-con-replica",
+      "driver_segment": "GCCCCGTCACGGTCGTGTTC",
+      "follower_segment": "GAACACGACCGTGACGGGGC",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "12", "note": "3' domain GCCCCGTCACGGTCGTGTTC drawn from below circles 11/12 toward the red dash; body on hidden helices", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "11", "note": "3' overhang arrow GAACACGACCGTGACGGGGC at bottom-left, thin line toward circle 11 (0 or 11 possible); long body on hidden helices", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 7,
+      "driver_odn": "Hi-MC-153-con-drive",
+      "follower_odn": "Hi-MC-89-con-replica",
+      "driver_segment": "CGCGGCTCGCGAAGCGCCCG",
+      "follower_segment": "CGGGCGCTTCGCGAGCCGCG",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "5-6", "note": "5' overhang drawn as long line ending in a 5' square near circles 5/6; the staple body is routed on front/hidden helices; exact attachment circle ambiguous (+/-1 or hidden back helix)", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "17", "note": "5' overhang square CGGGCGCTTCGCGAGCCGCG at line from circle 17 (bottom row of the follower top cluster)", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 8,
+      "driver_odn": "Hi-MC-89-con-drive",
+      "follower_odn": "Hi-MC-153-con-replica",
+      "driver_segment": "CTGTCCTTGAACGCATACCT",
+      "follower_segment": "AGGTATGCGTTCAAGGACAG",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "17", "note": "5' overhang square CTGTCCTTGAACGCATACCT at top of driver bottom cluster, thin line toward circle 17 (16 or 6 possible, +/-1)", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "5", "note": "5' overhang square AGGTATGCGTTCAAGGACAG at line from circle 5 (top row of follower bottom cluster)", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 9,
+      "driver_odn": "Hi-MC-149-con-drive",
+      "follower_odn": "Hi-MC-151-con-replica",
+      "driver_segment": "CGCGCGGCAGCTCCCGAGCA",
+      "follower_segment": "TGCTCGGGAGCTGCCGCGCG",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "0", "note": "3' overhang arrow CGCGCGGCAGCTCCCGAGCA from circle 0 (uppermost driver arrow, blue dash); 53-nt body on hidden helices", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "top", "helix": "11-12", "note": "3' overhang arrow TGCTCGGGAGCTGCCGCGCG, thin line from 11/12 boundary; topmost follower arrow", "figure": "suppl_figure_s5 p.19 upper diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    },
+    {
+      "pair_id": 10,
+      "driver_odn": "Hi-MC-164-con-driver",
+      "follower_odn": "HI-MC-172-con-replica",
+      "driver_segment": "TCTCCAAATCACAACGTACC",
+      "follower_segment": "GGTACGTTGTGATTTGGAGA",
+      "lna": false,
+      "sequence_hop": {"status": "SOURCE_CONFIRMED", "evidence": ["dataset_s1", "r3_recipe"]},
+      "driver_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "7", "note": "3' overhang arrow from circle 7 (arrow text GCGCCCAGTCTCTCCAAATCACAACGTACC = last 30 nt)", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "placeholder sequences in pinned topologies (R2)"}
+      },
+      "follower_hop": {
+        "sequence_status": "SOURCE_CONFIRMED",
+        "helix_arm_assignment": {"status": "INFERRED_CANDIDATE", "end": "bottom", "helix": "3", "note": "3' overhang arrow GGTACGTTGTGATTTGGAGA toward driver; body GGTTTCTGTGAA vertical 2->3", "figure": "suppl_figure_s5 p.19 lower diagram"},
+        "index_anchor": {"status": "UNKNOWN", "reason": "no follower topology/design file exists (G1 BLOCKED_SOURCE)"}
+      }
+    }
+  ],
+  "candidate_following_interface_map": {
+    "kind": "HYPOTHESIS",
+    "marked": "CANDIDATE_DESIGN / HYPOTHESIS - explicitly NOT the author original, NOT a topology, NOT a configuration",
+    "content": "helix-level attachment candidates above are the only follower-side structural data recoverable from the published bitmap; they are insufficient to reconstruct scaffold routing, staple bodies, or 3D coordinates. No oxDNA .top/.dat follower model is fabricated in this WO.",
+    "missing_for_reconstruction": ["author caDNAno/scadnano/oxview design of F (and F-soft-hinge, F-ss-hinge)", "scaffold identity/routing for the follower", "5'/3' orientation per follower staple in design coordinates", "3D transform ('flip upside down') between driver and follower coordinate frames"]
+  },
+  "digitization_observations": {
+    "status": "INFERRED_CANDIDATE",
+    "mirror_hint": "for pairs 9,4,3 (top diagram) drawn driver/follower helix numbers suggest a mirror pairing (0<->11, 1<->10, 5<->6); pairs 7 (5-6<->17) and 8 (17<->5) do not fit this pattern - flagged as digitization question for the authors",
+    "uncertainty_sources": ["front view hides back helices of the 18-helix bundle", "thin leader lines attach to circle boundaries, not centers", "follower is drawn flipped, making square/arrow sides ambiguous", "400-600 dpi render of a raster-in-PDF figure"]
+  }
+}

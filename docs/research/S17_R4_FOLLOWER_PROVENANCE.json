@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "kind": "s17_r4_follower_provenance",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "generated_at_utc": "2026-10-18T15:20:00Z",
+  "verdict": {
+    "follower_topology_config_design_files": "BLOCKED_SOURCE",
+    "g1_status": "BLOCKED_SOURCE",
+    "reason": "No original follower (F, F-soft-hinge, F-ss-hinge) topology (.top), configuration (.dat), caDNAno/scadnano/oxview design, or scaffold routing map exists in ANY audited surface as of 2026-10-18. The only follower-side structural information ever published is the Suppl. Fig. S5 bitmap (digitized in S17_R4_PORT_CANDIDATES.json as INFERRED_CANDIDATE) and the ODN lists of Dataset S1 (SOURCE_CONFIRMED).",
+    "g2_g3_g4_g6_partial_closures": "G3 partially closed (INFERRED_CANDIDATE bitmap digitization); G2/G4/G6 remain open pending author design files; see S17_R4_SOURCE_GAP_CLOSURE.md"
+  },
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY; no candidate reconstruction of the follower structure is fabricated; a hypothesis-only interface map (no .top/.dat) is delivered in S17_R4_PORT_CANDIDATES.json marked CANDIDATE_DESIGN/HYPOTHESIS",
+  "network_budget": {
+    "budget_mib": 256,
+    "used_mib_unique_downloads": 20.7,
+    "scratch_total_bytes": 25319317,
+    "note": "all fetches targeted and small; the 2.6-20.7 GB Zenodo archives were NOT downloaded (R2 central-directory enumerations reused); pdftoppm page renders are local scratch, not network",
+    "scientific_runs": 0,
+    "paid_services": 0,
+    "outbound_messages_to_authors": 0
+  },
+  "provenance_records": [
+    {
+      "id": "article_pmc_vor_html",
+      "role": "Data/Code availability statement (primary pointer source)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10873200/",
+      "retrieved_at_utc": "2026-10-18T13:55:00Z",
+      "sha256": "ead500029ef9483f0ad2e9d4b16ca960722ab0d90b540680191c880f3f90da86",
+      "size_bytes": 288161,
+      "license": "CC BY 4.0 (article VoR)",
+      "content_summary": "PMC-hosted VoR of Centola et al., Nat. Nanotechnol. 19:226-236 (2024); Data availability statement enumerates exactly three repositories: smFRET data at U-M Deep Blue Data (concern/data_sets/474299762), original design file + edited oxDNA structures at Nanobase structure 196, all simulation trajectories at Zenodo record 8248808. No follower design surface is mentioned anywhere in the statement.",
+      "pins": "the complete official list of data surfaces; absence of any follower design repository is itself negative evidence",
+      "does_not_pin": "any follower structure"
+    },
+    {
+      "id": "nanobase_196_file_listing",
+      "role": "complete file inventory of Nanobase entry 196",
+      "url": "https://api.nanobase.org/api/v1/structure/structure-files?id=196",
+      "retrieved_at_utc": "2026-10-18T14:30:00Z",
+      "sha256": "b4c4a64594b1f2ada2ac5be2e6e1eb279d54b97074c54a648346cdd849b9f6d3",
+      "size_bytes": 995,
+      "license": "metadata via public API; deposited files CC BY 4.0 in practice (documented Nanobase-terms inference, R1)",
+      "content_summary": "exactly 12 files: 7 structure (NE_halo_dsDNA.json, NE_NB.dat/.top, NE.dat/.top, nNE.dat/.top), 4 simProtocol (T7_force.txt, input_equilibrium, input_pull, input_release), 1 expProtocol (Suppl. Dataset S1 V3.docx). Zero follower files.",
+      "pins": "entry 196 contains no follower design/structure file (G1 negative evidence, machine-readable)"
+    },
+    {
+      "id": "nanobase_196_entry_metadata",
+      "role": "full structure-196 metadata including descriptions and uploader",
+      "url": "https://api.nanobase.org/api/v1/structure/getAllPublicStructures_paginated?skip=0&take=120",
+      "retrieved_at_utc": "2026-10-18T14:35:00Z",
+      "sha256": "4637ff04e86245401e7cdd36d83abbffb8d8712715d008b6faa039f3d38e2bf4",
+      "size_bytes": 196987,
+      "license": "metadata via public API",
+      "content_summary": "full enumeration of ALL 109 public Nanobase structures (count endpoint: 109). Keyword scan (engine/follower/leaf/hinge/spring/rotor/Centola/Famulok/Poppleton/Sulc/driver) matches entry 196 only; no follower entry exists. Entry 196 metadata: title 'Leaf-spring nanoengine', uploader Erik Poppleton, lastUpdated 2025-03-10, structureFileDescriptions explicitly 'Cadnano file for the body of the NE' - body only, no follower.",
+      "pins": "negative evidence: no separate follower entry anywhere in the Nanobase repository (109/109 enumerated)"
+    },
+    {
+      "id": "supplementary_si_pdf",
+      "role": "Supplementary Information (SI text + Suppl. Figs. S1-S8), page 19 = Suppl. Fig. S5",
+      "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM1_ESM.pdf",
+      "retrieved_at_utc": "2026-10-18T15:40:00Z",
+      "sha256": "66074e7d0c07139ecfb2d65f0526e3386fb91853d2218badbc27cd32f1a42c66",
+      "size_bytes": 13861585,
+      "sha256_provenance": "byte-identical to R3 pin (re-verified 2026-10-18)",
+      "license": "CC BY 4.0",
+      "content_summary": "Suppl. Fig. S5b (p.19) is the ONLY published depiction of which connecting ODN sits on which numbered helix of Driver and Follower at each axial end (blue/red dash pairing). Caption: helices numbered 0-17 in both structures; one unit must be flipped upside down to join. No scale, no coordinates, no scaffold routing.",
+      "pins": "helix/arm placement INFERRED_CANDIDATE (digitized); pairing dashes consistent with R3 sequence pairing",
+      "does_not_pin": "nucleotide indices, 3D coordinates, follower scaffold routing, staple body layout"
+    },
+    {
+      "id": "supplementary_figures_engine_map",
+      "role": "engine caDNAno map + soft-hinge/ss-hinge variant maps (3 pages)",
+      "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM5_ESM.pdf",
+      "retrieved_at_utc": "2026-10-18T15:35:00Z",
+      "sha256": "dae20e281294ffa19d8d39931b6b1f1ba5b422bfb43a2ac365d10ab938f33b09",
+      "size_bytes": 2295898,
+      "sha256_provenance": "byte-identical to R3 pin (re-verified 2026-10-18)",
+      "license": "CC BY 4.0",
+      "content_summary": "caDNAno-style bitmap of the ENGINE (driver): helices 0-17 real + 18,20,21,22,23,24 fake (staple design aid); hinge = helices 6-11; 95 staples + M13; chloroalkane handle helix 15->20; biotin handles; F-soft-hinge removes staples 7,8,9,10 interrupted twice by short ss; F-ss-hinge removes all hinge-region staples. Driver-only: no follower map.",
+      "pins": "driver design conventions and the definition of the three follower VARIANTS as engine modifications (but not their designs); F10 support",
+      "does_not_pin": "follower scaffold routing"
+    },
+    {
+      "id": "dataset_s1_docx",
+      "role": "Suppl. Dataset S1 V3 (ODN lists incl. all 20 connecting ODNs)",
+      "url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl.%20Dataset%20S1%20V3.docx",
+      "retrieved_at_utc": "2026-10-18T14:03:00Z",
+      "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+      "size_bytes": 101900,
+      "sha256_provenance": "byte-identical to the R1/R2/R3 pinned sha256 (re-verified 2026-10-18)",
+      "license": "CC BY 4.0",
+      "content_summary": "sections 'Connecting ODN for the Driver' (10) and 'Connecting ODN for the Follower' (10; identical for F, F-soft-hinge, F-ss-hinge per R3 line check) - sequences only, no helix/index/structure data",
+      "pins": "the 20 interface sequences (SOURCE_CONFIRMED)"
+    },
+    {
+      "id": "zenodo_8248808_api_record",
+      "role": "Zenodo record metadata (MD simulation data)",
+      "url": "https://zenodo.org/api/records/8248808",
+      "retrieved_at_utc": "2026-10-18T13:50:00Z",
+      "sha256": "5d26ec0a97331a0dd3fd79a04a0e9a49f0d4418008740b17fa9a0d1c0e0c7377",
+      "size_bytes": 5095,
+      "license": "CC-BY-4.0",
+      "content_summary": "record 8248808 v1 ('Original upload', 2023-08-28), creators Poppleton/Sulc, 5 files: README.md (1,478 B), NE37.zip (2,597,347,235 B), NE23.zip (3,224,726,030 B), pull_release23.zip (20,691,250,829 B), pull_release37.zip (19,660,214,357 B); md5s recorded; no new version; no related identifiers",
+      "pins": "record unchanged since R2; archive md5s match R2 inventory; driver-only per R2 full central-directory enumerations (2,324 entries, 0 follower) - reused without re-downloading archives",
+      "does_not_pin": "any follower member"
+    },
+    {
+      "id": "sulcgroup_hinges_pinned_tree",
+      "role": "analysis repository re-audit at R1/R2/R3-pinned commit",
+      "url": "https://api.github.com/repos/sulcgroup/hinges/git/trees/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9?recursive=1",
+      "retrieved_at_utc": "2026-10-18T14:15:00Z",
+      "sha256": "fb5ef0d2c8017c8f99df23dcbe29205b7d790f07a53db88679ff270fe2e50021",
+      "size_bytes": 24823,
+      "license": "NO LICENSE - all rights reserved, REFERENCE_ONLY (metadata query only; no code copied)",
+      "content_summary": "83 entries; single branch 'main' (pushed 2023-03-09); only analysis scripts (get_k.py, hinge_bonds.py, extract_data.py) and processed angle *_data.txt files; zero .top/.dat/.json design files. README (85f1c9d2d142..., byte-identical to R1 pin) points to a Google Drive folder of raw trajectories (not enumerable within budget; presumed driver-only per Zenodo equivalence - presumption labeled UNVERIFIED).",
+      "pins": "negative evidence at the exact pinned commit: no follower structures in the analysis repo"
+    },
+    {
+      "id": "walterlab_smcodes_tree",
+      "role": "smFRET analysis repository full tree audit",
+      "url": "https://api.github.com/repos/walterlab-um/rhythmically-pulsing-leaf-spring_SMCodes/git/trees/HEAD?recursive=1",
+      "retrieved_at_utc": "2026-10-18T14:12:00Z",
+      "sha256": "1f0e12c06460f3085e66adc40898b50c9304004d8e92abfaaf3e5c8154c1ae23",
+      "size_bytes": 7935,
+      "license": "MIT (per GitHub LICENSE file, 1,067 B)",
+      "content_summary": "26 files: MATLAB smFRET analysis codes only (SM_Analysis.m, drift correction, trace viewing, peak finding) + README (43 B). No design files, no sequences, no structures.",
+      "pins": "negative evidence: the MIT smFRET code repo carries no follower design"
+    },
+    {
+      "id": "deepblue_smfret_dataset",
+      "role": "U-M Deep Blue Data smFRET dataset (cited by article Data availability)",
+      "url": "http://deepblue.lib.umich.edu/data/concern/data_sets/474299762",
+      "retrieved_at_utc": "2026-10-18T13:58:00Z",
+      "sha256": "853509f0a059395cebb49fad4c5ebcd1551fb4c042043960e94467cf22f876b0",
+      "size_bytes": 5519,
+      "license": "UNKNOWN (page unreachable)",
+      "content_summary": "ACCESS_DENIED: every route (concern page, catalog, OAI-PMH) returns a Cloudflare JS challenge ('Just a moment...') to this sandbox; dataset inventory could not be retrieved. Per the article statement this dataset holds smFRET DATA (D-F angle trajectories), so it is a LOW-probability follower-design surface, but this remains UNVERIFIED - flagged as an open item for a human with a browser.",
+      "pins": "nothing (blocked)",
+      "does_not_pin": "dataset contents"
+    },
+    {
+      "id": "biorxiv_preprint_si",
+      "role": "bioRxiv preprint 2021.12.22.473833 supplementary (possible earlier follower description)",
+      "url": "https://www.biorxiv.org/content/10.1101/2021.12.22.473833v1.full.pdf",
+      "retrieved_at_utc": "2026-10-18T15:05:00Z",
+      "sha256": null,
+      "size_bytes": 5676,
+      "license": "bioRxiv (preprint)",
+      "content_summary": "ACCESS_DENIED: biorxiv.org returns HTTP 403 (anti-bot) for both the DC1 supplementary embed and the full-text PDF from this sandbox; the downloaded file is a 5,676-byte HTML challenge/error page, not a PDF. The published Nature SI supersedes the preprint; preprint pages were NOT audited in R2/R3 and could theoretically contain an earlier follower figure - flagged as a minor open item.",
+      "pins": "nothing (blocked)"
+    },
+    {
+      "id": "zenodo_related_record_search",
+      "role": "Zenodo site search for sibling records",
+      "url": "https://zenodo.org/api/records?q=%22leaf-spring%22%20OR%20%22nanoengine%22%20OR%20%22hinges%22&size=10",
+      "retrieved_at_utc": "2026-10-18T16:05:00Z",
+      "sha256": "c22d3c4372f5b80de87d2497e3f07b179dd0c4286fc736ec7c78ee854b74042d",
+      "size_bytes": 66768,
+      "license": "metadata via public API",
+      "content_summary": "1,685 total hits, all irrelevant except record 8248808 itself; no follower-design record exists on Zenodo under these queries",
+      "pins": "negative evidence: no sibling Zenodo record with follower design"
+    },
+    {
+      "id": "github_surveys",
+      "role": "GitHub repository/user surveys (unauthenticated API)",
+      "urls": [
+        "https://api.github.com/search/repositories?q=nanoengine+origami (total: 0)",
+        "https://api.github.com/users/ErikPoppleton/repos?per_page=100 (29 repos, none follower/design-related; topology_wrangling is Gromacs tooling)",
+        "https://api.github.com/users/sulcgroup/repos?per_page=100 (25 repos, hinges only; nanobase is the registry)",
+        "https://api.github.com/repos/ErikPoppleton/topology_wrangling/git/trees/HEAD (Gromacs/AMBER tooling, unrelated)"
+      ],
+      "retrieved_at_utc": "2026-10-18T14:20:00Z",
+      "sha256": null,
+      "size_bytes": 0,
+      "license": "metadata via public API",
+      "content_summary": "no open repository carrying an S17 follower design was found; GitHub CODE search was unavailable (unauthenticated), so exact-sequence code search was substituted by web_search on unique 20-mer overhang strings and on ODN name fragments ('con-replica', 'con-D-LNA') - zero relevant hits",
+      "pins": "negative evidence (with the method limitation recorded)"
+    },
+    {
+      "id": "author_web_surfaces",
+      "role": "web_search surveys of author/group and design-tool surfaces",
+      "urls": ["web_search queries (search-engine metadata only, no downstream downloads beyond audited surfaces)"],
+      "queries": [
+        "Centola Famulok rhythmically pulsing leaf-spring DNA nanoengine follower origami design files caDNAno",
+        "DNA nanoengine follower origami oxDNA topology GitHub leaf-spring follower design",
+        "site:nanobase.org follower OR nanoengine structure",
+        "deepblue.lib.umich.edu data concern data_sets 474299762",
+        "scadnano OR cadnano nanoengine follower design file oxview published"
+      ],
+      "retrieved_at_utc": "2026-10-18T14:00:00Z",
+      "sha256": null,
+      "size_bytes": 0,
+      "license": "n/a (search metadata)",
+      "content_summary": "all hits resolve to already-audited surfaces (Nature/PMC SI, Nanobase, Zenodo, MPG pure full-text copy of the article); no follower design file found anywhere; MPG pure server hosts the accepted manuscript PDF only (not fetched: duplicate content of pinned VoR)",
+      "pins": "negative evidence"
+    }
+  ],
+  "blocked_source_receipt": {
+    "kind": "BLOCKED_SOURCE",
+    "gap": "G1",
+    "target": "original follower topology (.top) / configuration (.dat) / caDNAno-scadnano-oxview design for F, F-soft-hinge, F-ss-hinge",
+    "searched_surfaces": [
+      {"surface": "Article + PMC VoR (Data availability statement)", "queries": ["full text read"], "found_absent": "no follower design surface listed or linked"},
+      {"surface": "Nanobase entry 196 (12/12 files)", "queries": ["structure-files?id=196"], "found_absent": "0 follower files; descriptions say caDNAno file = body of the NE only"},
+      {"surface": "Nanobase full catalog", "queries": ["getAllPublicStructures_paginated take=120 (109/109) + keyword scan"], "found_absent": "no follower entry anywhere in the registry"},
+      {"surface": "Zenodo 8248808", "queries": ["R2 full CD enumerations of 4 archives (276+207+949+894 entries) reused"], "found_absent": "0 driver/follower directories; driver-only"},
+      {"surface": "Zenodo site search", "queries": ["leaf-spring OR nanoengine OR hinges", "record metadata"], "found_absent": "no sibling record, no new version"},
+      {"surface": "sulcgroup/hinges @ 7c8b04a6", "queries": ["full tree 83 entries", "branches: main only", "README"], "found_absent": "no .top/.dat/.json design files; processed angle data only"},
+      {"surface": "walterlab-um/rhythmically-pulsing-leaf-spring_SMCodes", "queries": ["full tree 26 files"], "found_absent": "MATLAB smFRET analysis only"},
+      {"surface": "GitHub repo/user search + web sequence search", "queries": ["nanoengine origami (0 repos)", "ErikPoppleton 29 repos", "sulcgroup 25 repos", "20-mer overhang strings", "con-replica / con-D-LNA"], "found_absent": "no follower design; code-search API unavailable unauthenticated (limitation)"},
+      {"surface": "U-M Deep Blue Data 474299762", "queries": ["concern page", "catalog", "OAI-PMH"], "found_absent": "CLOUDFLARE_BLOCKED in this sandbox; per article statement it is smFRET data; contents UNVERIFIED - human follow-up possible"},
+      {"surface": "bioRxiv preprint 2021.12.22.473833 + DC1", "queries": ["full.pdf", "media-1.pdf"], "found_absent": "HTTP 403 anti-bot; unpublished angle; published SI supersedes; minor open item"}
+    ],
+    "resume_conditions": [
+      "author response publishing follower caDNAno/scadnano/oxview or oxDNA design files (requires owner-approved author contact; question list drafted in S17_R4_SOURCE_GAP_CLOSURE.md, NOT sent)",
+      "human browser retrieval + audit of the Deep Blue 474299762 inventory (low probability of design content)",
+      "human browser retrieval of the bioRxiv DC1 supplementary (low probability)",
+      "third-party deposition of the follower design to Nanobase/Zenodo (monitor on future R rounds)"
+    ],
+    "negative_evidence_digests": ["ead500029ef9483f0ad2e9d4b16ca960722ab0d90b540680191c880f3f90da86", "b4c4a64594b1f2ada2ac5be2e6e1eb279d54b97074c54a648346cdd849b9f6d3", "4637ff04e86245401e7cdd36d83abbffb8d8712715d008b6faa039f3d38e2bf4", "5d26ec0a97331a0dd3fd79a04a0e9a49f0d4418008740b17fa9a0d1c0e0c7377", "c22d3c4372f5b80de87d2497e3f07b179dd0c4286fc736ec7c78ee854b74042d"]
+  },
+  "workflow_test_vehicle_alternative": {
+    "kind": "NOT_THE_S17_FOLLOWER",
+    "candidate": "Nanobase entries 256 (Narcissus) + 257 (Echo): two published DNA-origami half-prisms that dimerize into a nanocompartment via nucleobase hybridization at shape-complementary interfaces (Huang, J., Jaekel, A., van den Boom, J. et al., 'A modular DNA origami nanocompartment for engineering', published 2024-06-01)",
+    "available_files": ["256: structure/N.oxview, structure/N_nanobase.json, Narcissus staples p7560.xlsx", "257: structure/E.oxview, structure/E_nanobase.json, Echo staples p7560.xlsx"],
+    "why_suitable": "a real published two-component DNA system with COMPLETE design files for both components and an explicit hybridization interface - suitable as a workflow test vehicle for future two-component import/assembly tooling",
+    "boundary": "explicitly NOT the S17 follower; using it would require its own bounded WO; no files downloaded in R4"
+  }
+}
