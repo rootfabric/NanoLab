@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R3",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3",
+  "subject_sha": "26c4cd51151167634815c531b9c49dcc54ba6243",
+  "timestamp_utc": "2026-10-18T01:01:58.969Z",
+  "summary": "START WO-PREP-S17-R3 as a stacked branch: fresh fetch 2026-10-18T01:01Z shows PR #59 (R2) still OPEN and origin/main unchanged at 513c4fa8, so R3 starts from exact PR #59 head 26c4cd51 (tree 110193d5) and opens a draft PR against work/prep-s17-r2-r1; R2 is explicitly NOT canonical yet. Stages A-E: (A) targeted driver-follower interface audit (article/supplement/Nanobase/Zenodo/sulcgroup-hinges, per-claim SOURCE_CONFIRMED/INFERRED_CANDIDATE/UNKNOWN), (B) MechanicalComponentSpec v1 executable contract + driver/follower component specs, (C) AssemblySpec v1 + minimal deterministic fail-closed two-component assembler (SOURCE_VERIFIED / CANDIDATE_DESIGN modes), (D) offline tests with full negative-control matrix, (E) evidence/handoff. Real S17 D-F assembly verdict restricted to SOURCE_VERIFIED_STATIC_ASSEMBLY or NOT_RECONSTRUCTED. Claim ceiling PINNED_IMPORT_VERIFIED/C0_SOFTWARE_ONLY; static assembly is never ASSEMBLY_VALIDATED or motion-transfer evidence; 0 scientific runs; <=256 MiB transfer budget; no merge of PR #59 (Human Gate).",
+  "command_refs": [
+    "git fetch origin --prune",
+    "gh pr view 59 --repo rootfabric/NanoLab --json state (state=open)",
+    "git worktree add /home/rdpuser/NanoLab/prep-s17-r3 -b work/prep-s17-r3-r1 26c4cd51151167634815c531b9c49dcc54ba6243",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R3.md",
+    "docs/work/executions/EX-PREP-S17-R3/passport.json"
+  ],
+  "next_action": "Stage A targeted interface audit; then CONTINUATION event.",
+  "blocker": null
+}
