@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0004-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "82dddb02704c9a850e86f8799ce6e68e24f9cb83",
+  "timestamp_utc": "2026-10-18T14:20:55.009Z",
+  "summary": "HANDOFF COMPLETED (IMPLEMENTED, independent review pending): all four issue-#62 defects repaired with durable RED->GREEN proof (RED cd384dd on faulty 2cf8297 = 4/4 falsifier failures matching hosted run 39124902081; GREEN 82dddb0 = 4/4 pass). Exact tested HEAD 82dddb02704c9a850e86f8799ce6e68e24f9cb83, tree 5751fb36afd00e6c3ef9338b7212e48650918e61. Full regression 846 tests OK; check-consistency ok; workflow_lint blocking=0; work_cli valid for EX-PREP-S17-R3-REPAIR-R1 and EX-PREP-S17-R3. Real S17 pair verdict remains NOT_RECONSTRUCTED (pinned by test); claim ceiling PINNED_IMPORT_VERIFIED/C0_SOFTWARE_ONLY unchanged; frozen NL5 and project state files untouched; mechanical_component_spec.py untouched. Durable finding recorded: R3-REPAIR-ERRATUM-1 (7/10 follower ports carry 21nt overhang windows vs exact 20nt recipe segments; refused fail-closed; evidence files outside allowed paths; separate scoped follow-up required before any future real SOURCE_VERIFIED assembly). Branch published non-force; draft PR opened against work/prep-s17-r3-r1 (stacked on PR #60, itself stacked on unmerged PR #59). OPEN RISKS: (1) repair is stacked on two unmerged draft PRs - integration order must be R2 -> R3 -> repair or a rebase-only re-stack onto fresh main after merges; (2) R3-REPAIR-ERRATUM-1 blocks any real SOURCE_VERIFIED assembly until corrected; (3) verify/review are separate agent sessions spawned by the Director harness, not human reviewers - recorded honestly. One next action: fresh independent Reviewer on exact head 82dddb0.",
+  "command_refs": [
+    "git push origin work/prep-s17-r3-repair-r1",
+    "git rev-parse HEAD HEAD^{tree}",
+    "python3 -m unittest discover -s tests -t . (846 OK)",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency (ok)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint (blocking: 0)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/summary.md",
+    "docs/work/WO-PREP-S17-R3-REPAIR-R1.md"
+  ],
+  "next_action": "Fresh independent Reviewer, then fresh exact-head Verifier, then Human Gate (merge remains owner decision).",
+  "blocker": null
+}
