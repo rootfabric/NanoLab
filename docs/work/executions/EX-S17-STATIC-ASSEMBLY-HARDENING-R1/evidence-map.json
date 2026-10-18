@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "verdict": {
+    "deliverable_cli": "DONE - assemble + verify subcommands, deterministic offline, fail-closed boundaries, atomic writes, exit codes 0/1/2",
+    "deliverable_example": "DONE - CANDIDATE_DESIGN synthetic two-ODN pair with committed expected receipt; two-run byte-determinism pinned by test",
+    "deliverable_tests": "DONE - 31 new tests (877 total OK incl. untouched 846-test R3 matrix)",
+    "minor_a_driver_transforms": "DONE - APPLY option: driver-side unit_conversion/coordinate_transforms executed via the shared role-symmetric pipeline (particles + anchor hints); identity when undeclared",
+    "minor_b_recipe_strictness": "DONE - SOURCE_VERIFIED recipe entries without segment keys / ports without overhang_segment refuse BLOCKED_SOURCE; CANDIDATE_DESIGN stays permissive; validate_component_spec unchanged (PR #61 contract)",
+    "full_regression": "877 tests OK at exact head e1c48f6",
+    "real_s17_verdict": "NOT_RECONSTRUCTED (unchanged, pinned by untouched R3 test)",
+    "scientific_runs": 0,
+    "network_calls": 0
+  },
+  "claim_ceiling": {
+    "level": "PINNED_IMPORT_VERIFIED",
+    "forbidden": [
+      "MODEL_REPRODUCED",
+      "ASSEMBLY_VALIDATED",
+      "NL6_ACCEPTED",
+      "NL7_ACCEPTED"
+    ],
+    "note": "CLI outputs statuses only from assembly_spec.ASSEMBLY_STATUSES (ASSEMBLED_STATIC_ONLY / NOT_RECONSTRUCTED / BLOCKED_*) with GEOMETRY_UNVERIFIED discipline; exit code 0 is a software outcome, never a scientific pass; artifact bytes are timestamp-free and deterministic"
+  },
+  "subjects": {
+    "base_sha": "0b9311c380a2d228be0bdb35701287a2b9e9339a",
+    "base_tree_sha": "487335fbd4782825d6ab2d85674ad2ada7e4ff50",
+    "start_commit": "d9c3e0559532f4b8d2fcb4ae0f602c1a220ee1f0",
+    "implementation_head": "e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6",
+    "implementation_tree": "724cb5ba7eb1b3c8db80d640d123977a5eb9e29e",
+    "canonical_main_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57"
+  },
+  "validation_on_exact_head": {
+    "head": "e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6",
+    "tests": {
+      "command": "python3 -m unittest discover -s tests -t .",
+      "result": "Ran 877 tests in 62.140s - OK (846 base + 31 new)"
+    },
+    "consistency": {
+      "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+      "result": "ok: true, errors: []"
+    },
+    "workflow_lint": {
+      "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+      "result": "blocking: 0, violations: 0"
+    },
+    "work_output": {
+      "command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+      "result": "recorded after the evidence-pack commits (this map is part of the validated tree)"
+    }
+  },
+  "deliverable_map": {
+    "scripts/knowledge_pack/assembly_cli.py": {
+      "assemble": "driver+follower+assembly specs [+ --recipe/--recipe-base] -> <assembly_id>.top + <assembly_id>.dat + receipt.json, atomic temp+rename writes, sorted keys, fixed float formatting, no timestamps in artifact bytes",
+      "verify": "receipt kind/status checks, sha256 cross-check of both oxDNA files, strict hinge_family reparse (Topology.parse + check_chain_integrity + Configuration.parse) with count cross-checks; exit 0/1; no stdout science",
+      "fail_closed_boundaries": [
+        "unknown args (argparse exit 2)",
+        "missing/non-file inputs",
+        ">4MiB input JSON cap",
+        "absolute or '..' (out-of-tree) outdir; backslash outdir; non-empty existing outdir",
+        "duplicate particle ids: one anchor particle bound by two different connections",
+        "--recipe on non-SOURCE_VERIFIED mode (contradictory input)",
+        "--recipe not matching interface_recipe_ref.path (recipe substitution)",
+        "remote-only topology/configuration pins (offline discipline)",
+        "unsafe assembly_id artifact stem"
+      ],
+      "exit_codes": {
+        "0": "ASSEMBLED_STATIC_ONLY (three artifacts) or honest NOT_RECONSTRUCTED (receipt only); never a scientific pass",
+        "1": "verify mismatch / incomplete artifact set",
+        "2": "refusal; BLOCKED_* refusal receipt written as evidence, never .top/.dat"
+      },
+      "claim_guard": "statuses outside ASSEMBLY_STATUSES or equal to forbidden markers are refused before any write"
+    },
+    "repair_review_minors": {
+      "a_driver_transforms": {
+        "decision": "APPLY (preferred option)",
+        "implementation": "_component_transform_params role-symmetric pipeline; driver particles transformed in assemble()/assemble_artifacts(), driver anchor hints in _geometry_checks(); identity when undeclared",
+        "tests": [
+          "test_driver_translation_moves_driver_particles_and_geometry",
+          "test_driver_unit_conversion_scales_driver_anchor_geometry",
+          "test_driverless_transforms_keep_identity",
+          "test_cli_applies_driver_translation_end_to_end"
+        ]
+      },
+      "b_recipe_strictness": {
+        "decision": "SOURCE_VERIFIED strict, CANDIDATE_DESIGN permissive",
+        "implementation": "_verify_interface_recipe refuses BLOCKED_SOURCE when the bound entry lacks driver_segment/follower_segment or the port chemistry lacks overhang_segment",
+        "tests": [
+          "test_recipe_entry_without_driver_segment_blocks_source",
+          "test_recipe_entry_without_follower_segment_blocks_source",
+          "test_port_without_declared_overhang_segment_blocks_source",
+          "test_candidate_design_stays_permissive_without_recipe",
+          "test_complete_recipe_still_assembles_source_verified"
+        ]
+      },
+      "validate_component_spec": "UNCHANGED (PR #61 contract: returns [] on valid spec)"
+    },
+    "example_pair": {
+      "dir": "docs/examples/s17_static_assembly_example/",
+      "status": "CANDIDATE_DESIGN / HYPOTHESIS (synthetic; NOT the real S17 sequences)",
+      "content": "12nt + 12nt exact reverse-complement two-ODN pair, one SS_DNA_OVERHANG_HYBRIDIZATION connection, follower translation [6,0,0], committed expected_receipt.json",
+      "determinism": "two CLI runs produce identical sha256 for all three artifacts (pinned by test)"
+    }
+  },
+  "cli_usage_example": {
+    "assemble": "PYTHONPATH=scripts python3 -m knowledge_pack.assembly_cli assemble --driver-spec docs/examples/s17_static_assembly_example/driver_component_spec.json --follower-spec docs/examples/s17_static_assembly_example/follower_component_spec.json --assembly-spec docs/examples/s17_static_assembly_example/assembly_spec.json --input-root . --outdir example-output/s17-static",
+    "verify": "PYTHONPATH=scripts python3 -m knowledge_pack.assembly_cli verify --artifact-dir example-output/s17-static"
+  },
+  "invariants": {
+    "state_plan_infra_state_untouched": true,
+    "frozen_evidence_untouched": true,
+    "s17_r3_research_pins_untouched": true,
+    "falsifier_file_and_r3_fixtures_untouched": true,
+    "mechanical_component_spec_untouched": true,
+    "r1_r2_surfaces_untouched": true,
+    "no_scientific_runs": 0,
+    "no_network_calls": 0,
+    "no_force_push": true,
+    "append_only_events": true
+  },
+  "open_risks": [
+    "branch is stacked on the unmerged R3-repair chain (PR #59/#60/#68 not merged): integration order must be R2 -> R3 -> repair -> this branch, or a rebase-only re-stack after those merges",
+    "dup-particle-id rule is the CLI-level interpretation of the WO failure class: one physical anchor particle bound by two different connections; the library-level contract is unchanged",
+    "real SOURCE_VERIFIED assembly remains blocked by the known R3-REPAIR-ERRATUM-1 follower-window inconsistency (recorded in EX-PREP-S17-R3-REPAIR-R1); out of scope here",
+    "verify does not re-check the receipt's inputs digests (no input files at verify time); artifact integrity rests on the assembled-text digests + strict reparse, documented"
+  ],
+  "independent_review": "WAIT_EXTERNAL - fresh Reviewer + fresh exact-head Verifier requested; IMPLEMENTER cannot self-accept",
+  "budget": {
+    "network_transfer_mib": 0,
+    "scientific_runs": 0,
+    "paid_compute": 0,
+    "within_budget": true
+  }
+}
