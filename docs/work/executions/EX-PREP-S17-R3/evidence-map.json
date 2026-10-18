@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "work_order_id": "WO-PREP-S17-R3",
+  "implementation_subject_head": "49be26701596032bb0924f56a33dab536a5f9ffe",
+  "implementation_subject_tree": "b72e567914b10de96063f7e4d35db86a3e6ec89c",
+  "base_head": "26c4cd51151167634815c531b9c49dcc54ba6243",
+  "parent_execution_head": "7ceba4b4f8d5838bbdb33a41e57d4a5da99f4e96",
+  "claim_ceiling": {
+    "level": "PINNED_IMPORT_VERIFIED",
+    "forbidden": ["MODEL_REPRODUCED", "COMPONENT_CHARACTERIZED", "ASSEMBLY_VALIDATED", "NL6_ACCEPTED", "NL7_ACCEPTED"],
+    "verdict": "SOURCE_VERIFIED_INTERFACE_NOT_RECONSTRUCTED_ASSEMBLY"
+  },
+  "verdict": {
+    "real_s17_df_pair": "NOT_RECONSTRUCTED",
+    "interface_sequence_level": "SOURCE_CONFIRMED",
+    "follower_structure": "NOT_RECONSTRUCTED",
+    "scientific_runs": 0
+  },
+  "budget": {
+    "network_transfer_mib": 48.3,
+    "network_budget_mib": 256,
+    "scratch_used_mib": "<200 (worktree + /tmp fetch cache)",
+    "scratch_budget_mib": 2048,
+    "scientific_runs": 0,
+    "within_budget": true
+  },
+  "validation_on_exact_head": {
+    "head": "49be26701596032bb0924f56a33dab536a5f9ffe",
+    "tests": {"command": "python3 -m unittest discover -s tests -t .", "result": "804 tests OK (746 base + 58 new R3)"},
+    "consistency": {"command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency", "result": "ok: true"},
+    "workflow_lint": {"command": "PYTHONPATH=scripts python3 -m harness.workflow_lint", "result": "blocking: 0"},
+    "work_output": {"command": "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3", "result": "ok: true"}
+  },
+  "invariants": {
+    "state_plan_untouched": true,
+    "frozen_evidence_untouched": true,
+    "r1_r2_surfaces_untouched": true,
+    "no_large_raw_files_vendored": true,
+    "work_queue_append_only": true,
+    "no_merge_of_pr_59": true
+  },
+  "evidence_index": [
+    {
+      "id": "E1",
+      "path": "docs/research/S17_R3_INTERFACE_AUDIT.md",
+      "kind": "analysis",
+      "claim": "Targeted D-F interface audit: pin table, facts F1-F10 with statuses, 10 overhang pairs, UNKNOWN/negative-result sections, mission answers, author-question draft (not sent)"
+    },
+    {
+      "id": "E2",
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+      "kind": "dataset",
+      "sha256": "5f485b0ac8d1e822a424a73f065ede7df36245ee4cd8a8e27cbe93681f1b61b6",
+      "claim": "Machine-readable D-F interface recipe: 10 pairs with exact 0-based offsets, 20-nt reciprocal reverse-complement matches, strict uniqueness, LNA notation, source pins, unresolved items"
+    },
+    {
+      "id": "E3",
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-fetch-manifest.json",
+      "kind": "manifest",
+      "claim": "12 fetch records, unique_transfer 48.3 MiB within 256 MiB budget, vendored: false"
+    },
+    {
+      "id": "E4",
+      "path": "docs/research/S17_R3_COMPONENT_DRIVER.json",
+      "kind": "spec",
+      "claim": "Driver component spec (nNE): pinned topology/configuration (CONTENT_VERIFIED remote pins), 10 D-F ports with chemistry, all connection_capable=false (capability_basis UNKNOWN), force pair 8694/7374"
+    },
+    {
+      "id": "E5",
+      "path": "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
+      "kind": "spec",
+      "claim": "Follower component spec: sequence-level interface SOURCE_CONFIRMED, topology/configuration honestly UNKNOWN (NOT_RECONSTRUCTED)"
+    },
+    {
+      "id": "E6",
+      "path": "docs/research/S17_R3_ASSEMBLY_SPEC.json",
+      "kind": "spec",
+      "claim": "Real-pair assembly spec (SOURCE_VERIFIED, recipe-pinned, 10 connections)"
+    },
+    {
+      "id": "E7",
+      "path": "docs/research/S17_R3_ASSEMBLY_RECEIPT.json",
+      "kind": "artifact_receipt",
+      "claim": "Real-pair assembler receipt: NOT_RECONSTRUCTED with explicit blocked inputs (follower topology+configuration); deterministic"
+    },
+    {
+      "id": "E8",
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-synthetic-assembly-receipt.json",
+      "kind": "artifact_receipt",
+      "claim": "Synthetic-pair positive run: ASSEMBLED_STATIC_ONLY / GEOMETRY_UNVERIFIED, deterministic double-run, valid oxDNA artifacts, strand renumbering verified"
+    },
+    {
+      "id": "E9",
+      "path": "docs/research/S17_R3_SOURCE_GAPS.md",
+      "kind": "analysis",
+      "claim": "Exact source gaps G1-G6 with blockers and closure actions; prioritized next steps"
+    },
+    {
+      "id": "E10",
+      "path": "scripts/knowledge_pack/mechanical_component_spec.py",
+      "kind": "code",
+      "claim": "MechanicalComponentSpec v1 executable contract: strict fail-closed validation + repo cross-verification"
+    },
+    {
+      "id": "E11",
+      "path": "scripts/knowledge_pack/assembly_spec.py",
+      "kind": "code",
+      "claim": "AssemblySpec v1 + minimal deterministic fail-closed two-component static assembler"
+    },
+    {
+      "id": "E12",
+      "path": "tests/test_s17_r3_component_spec.py",
+      "kind": "tests",
+      "claim": "Offline contract tests incl. capability gate, UNKNOWN honesty, claim ceiling, recipe re-verification, real-pair determinism"
+    },
+    {
+      "id": "E13",
+      "path": "tests/test_s17_r3_assembly.py",
+      "kind": "tests",
+      "claim": "Offline assembler tests: positive deterministic static assembly + full negative-control matrix (26 refusal case classes)"
+    }
+  ],
+  "independent_review": {
+    "status": "WAIT_EXTERNAL",
+    "note": "Single-session self-checks (suite, lint, consistency, work_cli) are recorded but are NOT independent acceptance; fresh Reviewer and exact-head Verifier must act on the draft PR before any ACCEPTED/ASSEMBLY_VALIDATED wording. Self-review/self-acceptance explicitly not performed (AGENTS.md).",
+    "reviewer": null,
+    "verifier": null
+  },
+  "review_request": {
+    "pr_base": "work/prep-s17-r2-r1",
+    "pr_head": "work/prep-s17-r3-r1",
+    "pr_kind": "draft",
+    "note": "Stacked branch: R2 (PR #59) not merged at R3 start - Human Gate respected; after R2 merge, R3's own changes move to fresh main with full re-validation."
+  }
+}

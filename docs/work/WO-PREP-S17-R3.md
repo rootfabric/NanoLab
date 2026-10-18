@@ -1,6 +1,6 @@
 # WO-PREP-S17-R3 — DNA Driver–Follower Molecular Interface & Static Assembly (0 scientific runs)
 
-Статус: **IN_PROGRESS** (START 2026-10-18). Родитель: `WO-PREP-S17-R2` (PR #59, **OPEN — ещё не слит**; execution R2 завершено `HANDOFF_COMPLETED`, independent Reviewer PASS_WITH_NOTES и Verifier VERIFIED опубликованы в PR #59, merge = Human Gate). Маршрут: [LITERATURE_TO_MECHANISM_ROUTE_R1](../control/LITERATURE_TO_MECHANISM_ROUTE_R1.md) — этот WO впервые реализует первые исполняемые контракты `MechanicalComponentSpec v1` и `AssemblySpec v1` (требования в [DATA_CONTRACTS.md](../DATA_CONTRACTS.md)).
+Статус: **HANDOFF_COMPLETED** (2026-10-18; реализация `49be26701596032bb0924f56a33dab536a5f9ffe`; verdict реальной пары `NOT_RECONSTRUCTED` при `SOURCE_CONFIRMED` интерфейсе на уровне последовательностей; 804 tests OK; independent review — **WAIT_EXTERNAL**: fresh Reviewer + exact-head Verifier по draft PR; merge = Human Gate). START 2026-10-18. Родитель: `WO-PREP-S17-R2` (PR #59, **OPEN — ещё не слит**; execution R2 завершено `HANDOFF_COMPLETED`, independent Reviewer PASS_WITH_NOTES и Verifier VERIFIED опубликованы в PR #59, merge = Human Gate). Маршрут: [LITERATURE_TO_MECHANISM_ROUTE_R1](../control/LITERATURE_TO_MECHANISM_ROUTE_R1.md) — этот WO впервые реализует первые исполняемые контракты `MechanicalComponentSpec v1` и `AssemblySpec v1` (требования в [DATA_CONTRACTS.md](../DATA_CONTRACTS.md)).
 
 ## Base rule (согласно mission)
 
