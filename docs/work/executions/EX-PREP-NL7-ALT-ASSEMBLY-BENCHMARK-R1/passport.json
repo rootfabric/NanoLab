@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "checkpoint": "NL7 alternative published two-component DNA source pack & static source readiness gate",
+  "base_branch": "main",
+  "base_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "base_tree_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "branch": "work/prep-nl7-alt-assembly-benchmark-r1",
+  "worktree": "GITHUB_CONNECTOR_SCOPED_BRANCH",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "STARTED",
+  "started_at_utc": "2026-10-21T01:47:00.000Z",
+  "allowed_paths": [
+    "docs/work/WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/**",
+    "docs/research/ALT_DNA_TWO_PART_SOURCE_AUDIT_R1.md",
+    "docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json",
+    "scripts/knowledge_pack/alt_pair_source_gate.py",
+    "tests/test_alt_pair_source_gate.py"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "frozen NL5 evidence",
+    "scientific execution",
+    "direct main push",
+    "unlicensed raw vendoring"
+  ],
+  "dependencies": [
+    "main@fb3148b46a9638167168a46cb170902a4ad9e8d2",
+    "issue #75",
+    "PR #73 pending (read-only, not canonical)"
+  ],
+  "resource_budget": "<=256 MiB source transfer, <=2 GiB scratch, GitHub H0 offline validation; 0 scientific runs and paid compute",
+  "deliverables": [
+    "Comparative primary-source audit",
+    "machine-readable candidate two-part file inventory",
+    "offline source-ready gate with tamper, rights and UNKNOWN negative controls",
+    "draft PR with evidence and bounded source gap outcome"
+  ]
+}
