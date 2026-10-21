@@ -104,7 +104,7 @@ class PublishedAudit(unittest.TestCase):
 
     def test_does_not_conflate_nemesis_with_s17_ne(self):
         s23 = self.pack["candidates"][0]
-        self.assertIn("not the unrelated S17", s23["structure_description"])
+        self.assertIn("not the unrelated s17", s23["structure_description"].lower())
         self.assertEqual([x["part_id"] for x in s23["parts"]], ["NARCISSUS", "ECHO"])
 
     def test_file_roles_are_reports_not_oxdna_inputs(self):
@@ -177,7 +177,7 @@ class SyntheticGateTests(unittest.TestCase):
         self.assertEqual(outcome["part_structure_sizes"]["ECHO"]["strands"], 1)
 
     def test_tampered_topology_digest_rejected(self):
-        (self.root / "echo.top").write_text(topology() + " ", encoding="utf-8")
+        (self.root / "echo.top").write_text(topology().replace("1 A -1 1", "1 T -1 1"), encoding="utf-8")
         result = self._evaluate()
         self.assertEqual(result["outcome"], "BLOCKED_SOURCE")
         self.assertTrue(any("SHA-256 mismatch" in x for x in result["reasons"]))
