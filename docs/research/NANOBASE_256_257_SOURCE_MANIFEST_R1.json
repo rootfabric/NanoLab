@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "source75_nanobase_256_257_manifest",
+  "work_order": "SOURCE-75 (Issue #75, Source Work Order)",
+  "execution": "source-nanobase-r1 (independent executor)",
+  "base_commit": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "generated_at_utc": "2026-10-21T12:30:00Z",
+  "claim_ceiling": "C0_SOFTWARE_ONLY: network retrieval + metadata only; 0 scientific runs",
+  "targets": {
+    "priority_1": [
+      {"nanobase_id": 256, "title": "Narcissus", "role": "half-prism N of Nemesis compartment"},
+      {"nanobase_id": 257, "title": "Echo", "role": "half-prism E of Nemesis compartment"}
+    ],
+    "priority_2_fallback": [
+      {"nanobase_id": 263, "title": "moDON (per WO)", "paper_doi": "10.1038/s41467-025-56846-2",
+       "note": "same single dependency nanobase.org; not attempted because the shared host is unreachable"}
+    ]
+  },
+  "network_status": {
+    "nanobase.org": {
+      "dns_a": "206.207.50.88 (local resolver AND dns.google DoH agree; TTL 600)",
+      "observed": "TCP connection REFUSED on ports 80 and 443 from first probe 2026-10-21T11:51:09Z through at least 2026-10-21T12:05:22Z (retry loop continues)",
+      "interpretation": "server-side outage or takedown; RST received, not a local network fault (github.com=200, nature.com=303, web.archive.org=200, api.crossref.org=200 from the same host at the same time)",
+      "history": "same API was reachable from this environment on 2026-10-18 (EX-PREP-S17-R4-SOURCE-R1: 12/12 files of entry 196 downloaded; catalog of 109/109 structures enumerated)"
+    },
+    "wayback": {
+      "nanobase.org/structure/256": "no snapshots (CDX [])",
+      "nanobase.org/structure/257": "no snapshots (CDX [])",
+      "nanobase.org/oxdna*": "no snapshots (CDX [])",
+      "api.nanobase.org/api/v1/structure*": "no snapshots (CDX []); only root /api/v1 crawls 2026-09-09/2026-10-14 (404)",
+      "conclusion": "Internet Archive holds NO copy of the 256/257 design files or their listings"
+    }
+  },
+  "prior_captures_r4_digest_verified": {
+    "note": "raw live API responses captured 2026-10-18 by EX-PREP-S17-R4-SOURCE-R1, preserved in /tmp/s17r4/, copied to prior_captures_r4/; digests byte-match the R4-pinned records in docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "files": [
+      {"path": "prior_captures_r4/nb_all.json", "url": "https://api.nanobase.org/api/v1/structure/getAllPublicStructures_paginated?skip=0&take=120", "captured_utc": "2026-10-19T00:01Z(+05 conversion of Oct 18 23:51-00:25 session)", "size_bytes": 196987, "sha256": "4637ff04e86245401e7cdd36d83abbffb8d8712715d008b6faa039f3d38e2bf4", "sha1": "f16b8486ab7255c2fe694b9a6b860b0d13bab3b1", "digest_match_vs_r4_pin": true},
+      {"path": "prior_captures_r4/nb_files_256.json", "url": "https://api.nanobase.org/api/v1/structure/structure-files?id=256", "size_bytes": 277, "sha256": "d086416ea6927fb63fe515ac4f3792f90b21d53f01f8162d3975462e1bc3e7bb", "sha1": "769b653a7a0bee476834a7291a50e6c435ca9dad"},
+      {"path": "prior_captures_r4/nb_files_257.json", "url": "https://api.nanobase.org/api/v1/structure/structure-files?id=257", "size_bytes": 267, "sha256": "c5d037a902cb19004ff7111c1a4e74370b9eefd2a04d9b9b106f82df062d5bd1", "sha1": "ba615c39e030fb2050c8d8834c310d797b4e796d"},
+      {"path": "prior_captures_r4/nb_files196.json", "url": "https://api.nanobase.org/api/v1/structure/structure-files?id=196", "size_bytes": 995, "sha256": "b4c4a64594b1f2ada2ac5be2e6e1eb279d54b97074c54a648346cdd849b9f6d3", "sha1": "2b3c657513a05f0991da8188cf38a318cad7ccaf", "digest_match_vs_r4_pin": true}
+    ]
+  },
+  "nanobase_entry_metadata_from_catalog": {
+    "256": {
+      "title": "Narcissus", "type": "DNA", "private": false,
+      "citation": "Huang, J., Jaekel, A., van den Boom, J. et al. A modular DNA origami nanocompartment for engineering a cell-free, protein unfolding and degradation pathway. Nat. Nanotechnol. (2024). https://doi.org/10.1038/s41565-024-01738-7",
+      "licensing_field": "",
+      "files": [
+        {"name": "N_nanobase.json", "description": "cadnano file"},
+        {"name": "Narcissus staples p7560.xlsx", "description": "Sequences"},
+        {"name": "N.oxview", "description": "Relaxed structure"}
+      ],
+      "statsData_n_staples": 209,
+      "uploader": "Ivan Grishchuk", "uploadDate": "2024-09-10", "lastUpdated": "2025-03-10"
+    },
+    "257": {
+      "title": "Echo", "type": "DNA", "private": false,
+      "citation": "same DOI 10.1038/s41565-024-01738-7",
+      "licensing_field": "",
+      "files": [
+        {"name": "E_nanobase.json", "description": "cadnano file"},
+        {"name": "Echo staples p7560.xlsx", "description": "Sequences"},
+        {"name": "E.oxview", "description": "Relaxed structure"}
+      ],
+      "statsData_n_staples": 218,
+      "uploader": "Ivan Grishchuk", "uploadDate": "2024-09-10", "lastUpdated": "2025-03-10"
+    }
+  },
+  "official_artifacts_downloaded_this_run": [
+    {"path": "files_pmc_vor.html", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11486656/", "http": 200, "content_type": "text/html; charset=utf-8", "size_bytes": 234539, "sha256": "da8a3e7b26ad3056ff7751d954d9c2a9e657e95b7e01c5532ec8d2cf7d6a89ae", "sha1": "dc4ef62e3b46dcb22b4fa89afc598b633d24ab28", "license": "CC BY 4.0 (article VoR)", "role": "official full text; Data availability statement; Narcissus/Echo naming"},
+    {"path": "files_si_moems1.pdf", "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-024-01738-7/MediaObjects/41565_2024_1738_MOESM1_ESM.pdf", "http": 200, "content_type": "application/pdf", "size_bytes": 26002583, "sha256": "7b50b833f0db982c9421c67db1b13a27315b40f0ae4e25ebc7c39c7beabf219b", "sha1": "c57b6acb2c3a2601c2e42434a91efc8834ff7db3", "license": "CC BY 4.0 (SI of OA article)", "role": "Supplementary Figs 1-41 + Tables 1-3 (design documentation)"},
+    {"path": "files_si_moems5_sequences.xlsx", "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-024-01738-7/MediaObjects/41565_2024_1738_MOESM5_ESM.xlsx", "http": 200, "content_type": "application/octet-stream", "size_bytes": 73352, "sha256": "90c1493ea26d4b5cd7de2d487ddafe1005b0a4e4a28ccbdd3d0522076cbf008c", "sha1": "1c89a216bae13847b9496d37bef6247819e72efe", "license": "CC BY 4.0 (SI of OA article)", "role": "Supplementary Data 2 'List of DNA sequences'; OOXML sheets: Narcissus, Echo, Nemesis, multimers, lid"},
+    {"path": "files_nature_modon_263_da.html", "url": "https://www.nature.com/articles/s41467-025-56846-2", "http": 200, "content_type": "text/html; charset=utf-8", "size_bytes": 462766, "sha256": "2e2c79d7a18fbaa0184c21b6c80739863daef11610ed76beda408a26944e4198", "sha1": "3bfa31307b0b4de8669efb4b517617c25011d84e", "license": "CC BY 4.0 (Nat Commun OA article)", "role": "fallback-263 due diligence: Data availability quote 'caDNAno files of the structure are also available on nanobase.org/structure/263' proves same single blocked dependency"}
+  ],
+  "rights_analysis": {
+    "article_and_si": "CC BY 4.0 (Crossref license records: both 'vor' and 'tdm' = https://creativecommons.org/licenses/by/4.0; Springer hosts SI of the OA article; PMC copy same license). Redistribution permitted with attribution.",
+    "nanobase_deposited_files": {
+      "per_entry_licensing_field": "EMPTY for entries 256 and 257 (licensing: \"\")",
+      "repository_terms_quote": "Nanobase paper (Nucleic Acids Research 2022, PMC8728195, itself CC BY 4.0): 'On this page, it is also possible to note if the structure is covered under any licensing or patent restrictions.' and 'Below the structure information is publication and licensing information. Here you will find the citation and link to the original publication, plus any licensing and patent information, if provided.'",
+      "conclusion": "no explicit license is attached to the deposited design files; CC BY 4.0 of the article does not automatically extend to Nanobase-deposited files (per WO and per project license matrix REFERENCE_ONLY/UNKNOWN per record)",
+      "status": "RIGHTS_NOT_ESTABLISHED"
+    }
+  },
+  "budget": {
+    "transfer_budget_mib": 256,
+    "transfer_used_bytes_unique_downloads": 45122116,
+    "transfer_used_mib_approx": 43.03,
+    "scratch_bytes_in_artifacts": "see du report in receipt",
+    "scratch_budget_gib": 2,
+    "paid_services": 0,
+    "scientific_runs": 0
+  }
+}
