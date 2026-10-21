@@ -1,0 +1,4 @@
+Ran 4 tests in 0.026s
+
+FAILED (failures=4)
+(context: /tmp clone at 2cf8297 + falsifier file from HEAD; result: FAILED (failures=4) = RED 4/4, matching CI 39124902081 claim)

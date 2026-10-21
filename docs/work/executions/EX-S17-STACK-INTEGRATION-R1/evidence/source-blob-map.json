@@ -56,7 +56,12 @@
     },
     {
       "path": "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
-      "blob_sha1": "c44374a9263b636acd29afc1fdfc7b038473e9c5"
+      "blob_sha1": "c44374a9263b636acd29afc1fdfc7b038473e9c5",
+      "superseded_by_erratum": {
+        "commit": "4f9583d84f0047f21f8dc22eddaea4e592788e01",
+        "head_blob_sha1": "3a09fab4f7adf88fde62061f3545c5d0b8229038",
+        "note": "R3.1 erratum: seven follower overhang segments realigned to pinned 20nt author pairs; this map's blob_sha1 is the ORIGINAL R3 import blob (c44374a), retained for provenance; the erratum commit supersedes it at the integration tip"
+      }
     },
     {
       "path": "docs/research/S17_R3_INTERFACE_AUDIT.md",
@@ -212,7 +217,12 @@
     },
     {
       "path": "tests/test_s17_r3_assembly.py",
-      "blob_sha1": "91729bb968aba219701c50e3dc1c89aabf3e044f"
+      "blob_sha1": "91729bb968aba219701c50e3dc1c89aabf3e044f",
+      "superseded_by_erratum": {
+        "commit": "1bfafb959b6f7cda695a560bc46082bfc83117df",
+        "head_blob_sha1": "074619eb5ec3e86ee09bf7a8e6fd01a3e67d20be",
+        "note": "R3.1 erratum regression: 21nt historical expected-failure replaced by corrected 20nt expectations + deliberate 21nt tamper -> BLOCKED_SOURCE regression; map's blob_sha1 (91729bb) is the ORIGINAL R3 import blob, retained for provenance"
+      }
     },
     {
       "path": "tests/test_s17_r3_component_spec.py",
@@ -253,6 +263,11 @@
     "repair_exact_verifier": "VERIFIED",
     "cli_review": "PASS",
     "cli_exact_verifier": "VERIFIED",
-    "integration_exact_verifier": "WAIT_EXTERNAL"
+    "integration_exact_verifier": "WAIT_EXTERNAL",
+    "erratum_annotation_r1": {
+      "applied_by": "DIRECTOR (event 0006) per independent REVIEWER-73 finding M1",
+      "paths_annotated": 2,
+      "remaining_map_status": "other 53/55 source_paths remain byte-identical at the integration tip (reviewer-verified)"
+    }
   }
 }
