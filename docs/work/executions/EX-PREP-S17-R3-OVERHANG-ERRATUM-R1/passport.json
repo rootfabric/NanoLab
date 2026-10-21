@@ -15,7 +15,8 @@
     "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
     "tests/test_s17_r3_overhang_erratum.py",
     "docs/work/WO-PREP-S17-R3-OVERHANG-ERRATUM-R1.md",
-    "docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/**"
+    "docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/**",
+    "tests/test_s17_r3_assembly.py"
   ],
   "forbidden_paths": [
     "project/state.json",

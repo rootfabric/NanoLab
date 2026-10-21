@@ -1064,14 +1064,21 @@ class TestRepairR1FalsifierMatrix(unittest.TestCase):
             spec["interface_recipe_ref"]["sha256"],
         )
 
-    def test_real_recipe_verification_surfaces_known_segment_erratum(self):
-        """DURABLE FINDING (repair R1): the pinned R3 follower component spec
-        declares 21nt overhang windows on 7 of 10 ports while the pinned recipe
-        pairs carry the exact 20nt complements; byte-level recipe verification
-        must keep refusing this inconsistency (fail-closed) until the evidence
-        is corrected in a separate scoped change."""
+    def test_real_recipe_after_20nt_erratum_is_valid_and_tampering_still_refused(self):
+        """ERRATUM-1: source-pinned 20nt follower segments now match the recipe.
+
+        Preserve the original RED evidence in CI 39523456603. A deliberately
+        reintroduced 21nt error must still be rejected as BLOCKED_SOURCE.
+        """
         spec, parts = self._load_real()
-        failure = aps._verify_interface_recipe(spec, parts, REPO_ROOT)
+        self.assertIsNone(aps._verify_interface_recipe(spec, parts, REPO_ROOT))
+        tampered = copy.deepcopy(parts)
+        follower_port = next(p for p in tampered["follower"]["ports"]
+                             if p["port_id"] == "DF-OVH-F174")
+        follower_port["chemistry"]["overhang_segment"] = (
+            "T" + follower_port["chemistry"]["overhang_segment"]
+        )
+        failure = aps._verify_interface_recipe(spec, tampered, REPO_ROOT)
         self.assertIsNotNone(failure)
         self.assertEqual("BLOCKED_SOURCE", failure["assembly_status"])
         self.assertIn("contradicts", failure["reason"])
