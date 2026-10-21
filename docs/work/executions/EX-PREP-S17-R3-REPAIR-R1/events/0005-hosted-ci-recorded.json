@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0005-hosted-ci-recorded",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "82dddb02704c9a850e86f8799ce6e68e24f9cb83",
+  "timestamp_utc": "2026-10-18T14:29:09.658Z",
+  "summary": "Append-only continuation after handoff (event 0004): HOSTED CI evidence recorded. Because the hosted-ci workflow triggers only on pull_request targeting main, a review-only evidence PR #68 ([DO NOT MERGE], head review/prep-s17-r3-repair-ci-r1 == PR #67 branch tip bec4c8b8, precedent: closed PR #61) was opened to run the exact repair code on hosted CI. Result: run https://github.com/rootfabric/NanoLab/actions/runs/39135996558, job 'RC0 hosted validation (H0)' id 117700509888 = completed/success; hosted unittest discover = 'Ran 846 tests ... OK' including all four PR #61 adversarial falsifiers GREEN (test_f01..test_f04) - the hosted counterpart of faulty-base run 39124902081 (4 FAILED). PR #68 stays DO NOT MERGE and will be closed unmerged after evidence recording. Implementation subject unchanged: 82dddb02704c9a850e86f8799ce6e68e24f9cb83 (tree 5751fb36). No new commits to the repair subject; 0 scientific runs.",
+  "command_refs": [
+    "git push origin bec4c8b8afc89345c931c070ac22b0ad0ca9df2e:refs/heads/review/prep-s17-r3-repair-ci-r1",
+    "curl actions/runs?head_sha=bec4c8b8 (run 39135996558 completed success)",
+    "jobs/117700509888/logs: 'Ran 846 tests in 17.960s / OK'"
+  ],
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/actions/runs/39135996558",
+    "https://github.com/rootfabric/NanoLab/pull/68"
+  ],
+  "next_action": "Independent Reviewer verdict (in progress), then fresh exact-head Verifier, then Human Gate.",
+  "blocker": null
+}

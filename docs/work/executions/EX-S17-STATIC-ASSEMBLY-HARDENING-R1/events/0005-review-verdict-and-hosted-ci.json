@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "event_id": "0005-review-verdict-and-hosted-ci",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "actor_role": "REVIEWER",
+  "actor_id": "reviewer-s17-assembly-hardening (independent agent session); recorded by Director",
+  "subject_sha": "adffcbd178717358c2c374049b273376d58179f8",
+  "timestamp_utc": "2026-10-18T16:21:23.436Z",
+  "summary": "Independent fresh Reviewer verdict (separate agent session, adversarial): PASS, 0 blocking, 5 non-blocking minors. Verified personally at exact tip adffcbd178717358c2c374049b273376d58179f8 (tree 2abcc11e7b74a70fe1d222e40c67b4b5f3cdd7a1; subject e1c48f6; base 0b9311c): (1) scope = exactly 21 files in allowed paths; falsifiers, R3 fixtures, mechanical_component_spec.py, contract.py, import_validation.py, project/*.json, S17_R3 pins all byte-identical to base; (2) assembly_spec.py delta audited: _component_transform_params role-symmetric refactor provably preserves follower behavior; 4/4 falsifiers GREEN; full suite 877 OK; SOURCE_VERIFIED-only strictness (line 1107), CANDIDATE_DESIGN permissive; validate_component_spec and validate_assembly_spec AST-byte-identical to base (PR #61 contract preserved); malformed driver unit_conversion -> BLOCKED_SPEC receipt; (3) CLI determinism: 3 runs byte-identical (.top e33bdc07..., .dat b2315a5a..., receipt 4504ebf7...) across PYTHONHASHSEED 0/random/424242 and LC_ALL=C; receipt byte-equals committed expected_receipt.json; no datetime/time/random/locale in artifact paths; (4) fail-closed boundaries personally exercised (12+ refusals: traversal, absolute outdir, missing spec, 5 MiB input, duplicate anchor particle, recipe substitution/wrong bytes/forged sha, recipe-on-CANDIDATE_DESIGN, remote-only pin, unknown subcommand/flag) - all exit 2 with stderr and ZERO artifacts; BLOCKED receipts written as evidence; (5) verify honest: pristine 0, flipped .top byte 1, tampered receipt 1; stdlib-only, no network; (6) claim ceiling intact; example pair synthetic 12nt with ZERO overlap to the 16 real S17 sequences; real S17 pin NOT_RECONSTRUCTED test green; (7) execution pack: 4 append-only events, monotonic distinct timestamps, resolvable 40-hex subject_shas. Non-blocking minors (deferred, recorded): m1 module docstring overstates the claim-ceiling guard as a byte-scan (actually structured status fields only); m2 theoretical mid-rename I/O failure could strand a renamed artifact prefix (verify detects incomplete set; outside claimed refusal paths); m3 symlinked empty outdir edge; m4 read-side traversal in pinned uri (integrity covered by sha256 pins); m5 event 0003 timestamp ~1s after 0002 (distinct, monotonic). ALSO RECORDED: hosted CI success on this exact head via review-only PR #72, run 39143109982 (conclusion success, head adffcbd, expected 877 tests); PR #72 to be closed unmerged per the PR #61/#68 precedent.",
+  "command_refs": [
+    "git ls-remote origin work/s17-static-assembly-hardening-r1 (== adffcbd)",
+    "python3 -m unittest discover -s tests -t . (877 OK)",
+    "GitHub API actions run 39143109982 (success, head adffcbd)"
+  ],
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/71",
+    "https://github.com/rootfabric/NanoLab/pull/72",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39143109982"
+  ],
+  "next_action": "Fresh exact-head Verifier on the final tip; then Human Gate (Director comment on PR #71).",
+  "blocker": null
+}

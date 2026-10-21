@@ -1,0 +1,27 @@
+{
+ "schema_version": 1,
+ "kind": "assembly_receipt",
+ "assembly_status": "NOT_RECONSTRUCTED",
+ "claim": "STATIC_FILE_OPERATION_ONLY: deterministic file-level construction. Never ASSEMBLY_VALIDATED; never evidence of hybridization occurring, of motion transfer, of function, or of wet-lab fabricability.",
+ "geometry_status": "NOT_PERFORMED",
+ "reason": "required published inputs are missing; no assembly is attempted and no link is invented",
+ "assembled": null,
+ "assembly_id": "S17-DF-ORIGINAL-R3",
+ "mode": "SOURCE_VERIFIED",
+ "components": {
+  "driver": {
+   "component_id": "S17-NNE-DRIVER",
+   "version": "1.0.0",
+   "topology_sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f"
+  },
+  "follower": {
+   "component_id": "S17-FOLLOWER",
+   "version": "1.0.0",
+   "topology_sha256": "UNKNOWN"
+  }
+ },
+ "blocked_inputs": [
+  "follower: pinned topology does not exist in any audited source (component spec status UNKNOWN)",
+  "follower: component spec has no pinned configuration (coordinates are required for static assembly)"
+ ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0003-validation-recorded",
+  "event_type": "VALIDATION_RECORDED",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "82dddb02704c9a850e86f8799ce6e68e24f9cb83",
+  "timestamp_utc": "2026-10-18T14:20:54.005Z",
+  "summary": "Validation on exact repair head 82dddb02704c9a850e86f8799ce6e68e24f9cb83 (tree 5751fb36afd00e6c3ef9338b7212e48650918e61): (1) falsifiers tests.test_s17_r3_fresh_review_falsifiers = 4 tests OK (GREEN; same tests gave 4 FAIL on base 2cf8297 = RED); (2) python3 -m unittest discover -s tests -t . = Ran 846 tests OK (804 base + 4 falsifiers + 38 repair matrix); (3) PYTHONPATH=scripts python3 -m harness.cli check-consistency = ok: true; (4) PYTHONPATH=scripts python3 -m harness.workflow_lint = blocking: 0; (5) work_cli validate EX-PREP-S17-R3-REPAIR-R1 = ok: true; (6) work_cli validate EX-PREP-S17-R3 (parent, with append-only event 0006) = ok: true. 0 scientific runs, 0 network transfers, 0 paid compute.",
+  "command_refs": [
+    "python3 -m unittest tests.test_s17_r3_fresh_review_falsifiers",
+    "python3 -m unittest discover -s tests -t .",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R3-REPAIR-R1"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/summary.md"
+  ],
+  "next_action": "HANDOFF: push branch, open draft PR, request fresh independent Reviewer then exact-head Verifier.",
+  "blocker": null
+}
