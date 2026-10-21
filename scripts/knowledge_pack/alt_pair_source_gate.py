@@ -189,7 +189,48 @@ def _read_verified_file(root: Path, record: dict, role: str) -> tuple[bytes | No
     return data, None
 
 
-def _validate_anchor_map(data: bytes, parts: dict[str, int]) -> str | None:
+def _verified_terminal_segment(top: Topology, anchor: int, end: str, segment_length: int) -> tuple[str | None, str | None]:
+    """Read actual oxDNA bases at a proven 3p/5p strand terminus, in 5p->3p order.
+
+    Standard legacy oxDNA .top rows are indexed globally and traversed 3p->5p
+    via n5, while n3 traverses in the reverse direction. A numeric index alone
+    does NOT establish an exposed DNA overhang or its molecular identity.
+    No unknown/placeholder base, internal index or short strand is accepted.
+    The existence of a base sequence at a terminus does NOT prove it is
+    unpaired or accessible; separate source evidence/review is still required.
+    """
+    if end not in ("3p", "5p"):
+        return None, "unknown terminal direction"
+    if not isinstance(anchor, int) or isinstance(anchor, bool) or anchor < 0 or anchor >= top.nucleotides:
+        return None, "out-of-bounds anchor"
+    sid, _base, n3, n5 = top.rows[anchor]
+    if end == "3p" and n3 != -1:
+        return None, "anchor is not a 3p strand terminus (internal anchor)"
+    if end == "5p" and n5 != -1:
+        return None, "anchor is not a 5p strand terminus (internal anchor)"
+    if not isinstance(segment_length, int) or segment_length <= 0 or segment_length > top.nucleotides:
+        return None, "invalid segment length"
+    bases = []
+    visited = set()
+    cursor = anchor
+    for _ in range(segment_length):
+        if cursor == -1:
+            return None, "exposed segment exceeds the length of this strand"
+        if cursor in visited or cursor >= top.nucleotides or cursor < 0:
+            return None, "circular/ambiguous or invalid terminal trace"
+        visited.add(cursor)
+        row_sid, base, neighbor3, neighbor5 = top.rows[cursor]
+        if row_sid != sid:
+            return None, "terminal trace crosses strands"
+        if base not in "ACGT":
+            return None, "source topology base unknown or not canonical A/C/G/T"
+        bases.append(base)
+        cursor = neighbor5 if end == "3p" else neighbor3
+    # Traversing 3p->5p reverses the conventional sequence representation.
+    return "".join(reversed(bases) if end == "3p" else bases), None
+
+
+def _validate_anchor_map(data: bytes, parts: dict[str, Topology]) -> str | None:
     try:
         j = parse_json_no_duplicate_keys(data.decode("utf-8"))
     except (ValueError, UnicodeDecodeError) as exc:
@@ -210,8 +251,8 @@ def _validate_anchor_map(data: bytes, parts: dict[str, int]) -> str | None:
         ia, ib = p.get("a_index"), p.get("b_index")
         if a not in parts or b not in parts or a == b:
             return f"pair {index}: wrong parts"
-        if (not isinstance(ia, int) or isinstance(ia, bool) or ia < 0 or ia >= parts[a] or
-                not isinstance(ib, int) or isinstance(ib, bool) or ib < 0 or ib >= parts[b]):
+        if (not isinstance(ia, int) or isinstance(ia, bool) or ia < 0 or ia >= parts[a].nucleotides or
+                not isinstance(ib, int) or isinstance(ib, bool) or ib < 0 or ib >= parts[b].nucleotides):
             return f"pair {index}: out-of-bounds anchor"
         if (a, ia, b, ib) in used:
             return f"pair {index}: duplicate anchor pair"
@@ -223,6 +264,19 @@ def _validate_anchor_map(data: bytes, parts: dict[str, int]) -> str | None:
             return f"pair {index}: exposed segments are not reverse complements"
         if p.get("a_end") not in ("5p", "3p") or p.get("b_end") not in ("5p", "3p"):
             return f"pair {index}: unknown overhang terminal direction"
+        # Structural provenance gate: the declared terminal segment must occur
+        # at the actual nominated strand end in the digest-verified topology.
+        # Pairwise reverse-complementarity is necessary but insufficient.
+        for role, part, particle, terminal, declared in (
+            ("part_a", a, ia, p["a_end"], sa),
+            ("part_b", b, ib, p["b_end"], sb),
+        ):
+            observed, error = _verified_terminal_segment(parts[part], particle, terminal, len(declared))
+            if error:
+                return f"pair {index} {role}: {error}"
+            if observed != declared:
+                return (f"pair {index} {role}: declared overhang segment is not present "
+                        f"at source topology {terminal} terminal (topology sequence mismatch)")
     return None
 
 
@@ -262,7 +316,7 @@ def evaluate(pack: dict, candidate_id: str, root: Path) -> dict:
             conf = Configuration.parse(pieces["configuration"].decode("utf-8"))
             if len(conf.particles) != top.nucleotides:
                 raise ValueError("topology/configuration particle-count mismatch")
-            parsed[pid] = top.nucleotides
+            parsed[pid] = top
             result["part_structure_sizes"][pid] = {
                 "nucleotides": top.nucleotides, "strands": top.strand_count
             }
