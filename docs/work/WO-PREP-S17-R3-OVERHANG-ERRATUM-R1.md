@@ -7,3 +7,7 @@ Work base: integration/s17-r3-repair-assembly-cli-r1 @ `7236461353293ca1bb542b04
 Allowed: `docs/research/S17_R3_COMPONENT_FOLLOWER.json`; new `tests/test_s17_r3_overhang_erratum.py` plus a narrow update to `tests/test_s17_r3_assembly.py` (existing historical negative assertion becomes corrected-case positive assertion plus deliberately reintroduced 21nt tamper refusal); `docs/work/WO-PREP-S17-R3-OVERHANG-ERRATUM-R1.md`; `docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/**` and one append-only WORK_QUEUE line if needed. Forbidden: R2, NL5 frozen artifacts, project state/plan, physics code, original recipe, DOI/source pins, topology/config replacements, direct main/force-push, artificial anchors. Claim ceiling PINNED_IMPORT_VERIFIED (sequence-level source only); true S17 follower topology/config still UNKNOWN and original assembly NOT_RECONSTRUCTED.
 
 Required: durable START, RED→GREEN negative tests (or clearly identified existing RED), exact git diff seven values only, full offline suite & Harness CI, independent Reviewer/Verifier on final integration subject before merge. No self-accept.
+
+## 2026-10-21: execution handoff
+
+Seven exact 20nt corrections, RED hosted #39523456603 → GREEN #39524159028 (930 tests OK). Full ODN sequences and source pins untouched; reviewer/verifier WAIT_EXTERNAL.

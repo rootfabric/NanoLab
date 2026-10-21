@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "s17_r3_follower_20nt_overhang_erratum",
+  "work_order_id": "WO-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "source_recipe_sha256": "5f485b0ac8d1e822a424a73f065ede7df36245ee4cd8a8e27cbe93681f1b61b6",
+  "source_dataset_sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+  "old_follower_git_blob_sha1": "c44374a9263b636acd29afc1fdfc7b038473e9c5",
+  "corrected_follower_git_blob_sha1": "3a09fab4f7adf88fde62061f3545c5d0b8229038",
+  "mutations": [
+    {
+      "pair_id": 2,
+      "follower_odn": "Hi-MC-174-con-replica",
+      "old": "TTCGCCGGATAGCGCGGCTAT",
+      "new": "TCGCCGGATAGCGCGGCTAT",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 3,
+      "follower_odn": "Hi-MC-165-con-replica",
+      "old": "TGCTCGTGCGCCCCGGGCGGC",
+      "new": "GCTCGTGCGCCCCGGGCGGC",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 4,
+      "follower_odn": "HI-MC-163-con-replica",
+      "old": "GGGACGGTGGGGACTCGGGCA",
+      "new": "GGACGGTGGGGACTCGGGCA",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 5,
+      "follower_odn": "Hi-MC-164-con-replica",
+      "old": "GGCGGCGCCGGCCCGATCGCA",
+      "new": "GCGGCGCCGGCCCGATCGCA",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 7,
+      "follower_odn": "Hi-MC-89-con-replica",
+      "old": "CGGGCGCTTCGCGAGCCGCGC",
+      "new": "CGGGCGCTTCGCGAGCCGCG",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 8,
+      "follower_odn": "Hi-MC-153-con-replica",
+      "old": "AGGTATGCGTTCAAGGACAGG",
+      "new": "AGGTATGCGTTCAAGGACAG",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    },
+    {
+      "pair_id": 9,
+      "follower_odn": "Hi-MC-151-con-replica",
+      "old": "ATGCTCGGGAGCTGCCGCGCG",
+      "new": "TGCTCGGGAGCTGCCGCGCG",
+      "old_len": 21,
+      "new_len": 20,
+      "full_seq_unchanged": true
+    }
+  ],
+  "observed_red": {
+    "run": 39523456603,
+    "tests": 930,
+    "failures": 7
+  },
+  "observed_green": {
+    "run": 39524159028,
+    "tests": 930,
+    "failures": 0,
+    "head": "1bfafb959b6f7cda695a560bc46082bfc83117df"
+  },
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED",
+  "original_s17_df": "NOT_RECONSTRUCTED",
+  "scientific_runs": 0,
+  "independent_review": "WAIT_EXTERNAL"
+}

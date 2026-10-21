@@ -1,0 +1,3 @@
+# EX-PREP-S17-R3-OVERHANG-ERRATUM-R1 — исправление семи follower overhang-деклараций
+
+7/7 заменены на точные закреплённые 20nt-сегменты из неизменённого R3 recipe; полные ODN, topology и исходные pins не изменены. Original Git blob c44374a9263b636acd29afc1fdfc7b038473e9c5; corrected blob 3a09fab4f7adf88fde62061f3545c5d0b8229038. RED [CI #39523456603](https://github.com/rootfabric/NanoLab/actions/runs/39523456603): 930 tests/7 failures. GREEN [CI #39524159028](https://github.com/rootfabric/NanoLab/actions/runs/39524159028): **930 tests OK**; deliberate 21nt tamper again returns BLOCKED_SOURCE. True S17 follower topology/config still UNKNOWN. Scientific runs 0. Fresh Reviewer + exact-head Verifier = WAIT_EXTERNAL.

@@ -28,3 +28,7 @@ Status: STARTED / integration gate. Owner mission 2026-10-21: close validated Na
 ## Acceptance
 
 Exact clean integration branch with byte-preserved source blobs except documented scoped repair; all 4 F01–F04 fail-closed, deterministic CLI, full H0 gates PASS, no regression or science inflation, explicit independent Reviewer/Verifier and Human Gate before merge. If any gate absent, report READY_FOR_REVIEW / WAIT_EXTERNAL rather than accepted.
+
+## 2026-10-21: integration handoff
+
+Original source blobs preserved; erratum-1 corrected; H0 run #39524159028 (930 tests OK), reviewer/verifier WAIT_EXTERNAL, no merge.

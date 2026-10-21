@@ -9,7 +9,7 @@
   "branch": "integration/s17-r3-repair-assembly-cli-r1",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "STARTED",
+  "status": "HANDOFF_READY",
   "started_at_utc": "2026-10-21T00:46:32.966Z",
   "allowed_paths": [
     "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
