@@ -2,7 +2,7 @@
   "schema_version": 1,
   "execution_id": "EX-S17-STACK-INTEGRATION-R1",
   "event_id": "0006-review-pass-and-corrections",
-  "event_type": "REVIEW_PASS",
+  "event_type": "REVIEW_CORRECTIONS",
   "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
   "actor_role": "DIRECTOR",
   "actor_id": "director-central (recording independent REVIEWER-73 session; applying reviewer-recommended M1 erratum)",

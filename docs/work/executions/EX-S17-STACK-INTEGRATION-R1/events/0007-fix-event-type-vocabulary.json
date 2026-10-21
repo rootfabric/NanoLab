@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0007-fix-event-type-vocabulary",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "DIRECTOR",
+  "actor_id": "director-central",
+  "subject_sha": "7a1bb285d096a0b804b362e5718f421eb7f7c1b7",
+  "timestamp_utc": "2026-10-21T12:22:42.000Z",
+  "summary": "Director defect found by hosted H0 CI run 39598725537 on 7a1bb28: event 0006 used invented event_type REVIEW_PASS, outside the harness vocabulary (scripts/harness/work_cli.py: ALLOWED_EVENTS; post-terminal events must be CONTINUATION_CHECKPOINT or REVIEW_CORRECTIONS). Fix: event 0006 event_type corrected to REVIEW_CORRECTIONS (content unchanged; reviewer verdict, M1 annotation rationale, subject and evidence refs identical); this event records the negative result and the repair. No code/test changes; reviewed subject baac137 and all Reviewer evidence untouched; M1 annotation of source-blob-map.json itself validated by work_cli (annotation is in evidence/, not an event).",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-S17-STACK-INTEGRATION-R1 (must be ok:true after fix)",
+    "gh run view 39598725537 (failed check 3/5 execution passports and work events integrity)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/events/0006-review-pass-and-corrections.json"
+  ],
+  "next_action": "Re-run hosted H0 on the fixed tip; VERIFIER-73 continues on the new exact tip.",
+  "blocker": null
+}
