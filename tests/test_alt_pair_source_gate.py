@@ -372,7 +372,7 @@ class SyntheticGateTests(unittest.TestCase):
         row = lines[3].split()
         row[3:6] = ["0.0", "0.0", "0.0"]
         lines[3] = " ".join(row)
-        p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+        p.write_text("\n".join(lines) + "\n", encoding="utf-8")
         self.candidate["parts"][0]["configuration"] = as_input(p, self.root)
         result = self._evaluate()
         self.assertEqual(result["outcome"], "BLOCKED_SOURCE",
