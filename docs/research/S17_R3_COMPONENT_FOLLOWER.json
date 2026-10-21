@@ -106,7 +106,7 @@
     "odn_name": "Hi-MC-174-con-replica",
     "sequence": "CGTGCGCCACTTTCCTCGTCTTTTTTTCGCCGGATAGCGCGGCTAT",
     "lna": false,
-    "overhang_segment": "TTCGCCGGATAGCGCGGCTAT",
+    "overhang_segment": "TCGCCGGATAGCGCGGCTAT",
     "complement_driver_odn": "Hi-MC-165-con-D-LNA",
     "complement_length_nt": 20
    },
@@ -135,7 +135,7 @@
     "odn_name": "Hi-MC-165-con-replica",
     "sequence": "CGCAGTCTACGTCACGATAGTTTTTTGCTCGTGCGCCCCGGGCGGC",
     "lna": false,
-    "overhang_segment": "TGCTCGTGCGCCCCGGGCGGC",
+    "overhang_segment": "GCTCGTGCGCCCCGGGCGGC",
     "complement_driver_odn": "Hi-MC-174-con-D-LNA",
     "complement_length_nt": 20
    },
@@ -164,7 +164,7 @@
     "odn_name": "HI-MC-163-con-replica",
     "sequence": "TTTTTGGGTAAAGTTCGCCAGGATGGGACGGTGGGGACTCGGGCA",
     "lna": false,
-    "overhang_segment": "GGGACGGTGGGGACTCGGGCA",
+    "overhang_segment": "GGACGGTGGGGACTCGGGCA",
     "complement_driver_odn": "Hi-MC-173-con-D-LNA",
     "complement_length_nt": 20
    },
@@ -193,7 +193,7 @@
     "odn_name": "Hi-MC-164-con-replica",
     "sequence": "CATCCTGGCGCTGGTCGCTTGTAGACTGCGGCGGCGCCGGCCCGATCGCA",
     "lna": false,
-    "overhang_segment": "GGCGGCGCCGGCCCGATCGCA",
+    "overhang_segment": "GCGGCGCCGGCCCGATCGCA",
     "complement_driver_odn": "HI-MC-172-con-driver",
     "complement_length_nt": 20
    },
@@ -251,7 +251,7 @@
     "odn_name": "Hi-MC-89-con-replica",
     "sequence": "CGGGCGCTTCGCGAGCCGCGCAGCTGATTGCCCTTCCCAGTGATAGATGGCAGCTTTCCGGCACGCCG",
     "lna": false,
-    "overhang_segment": "CGGGCGCTTCGCGAGCCGCGC",
+    "overhang_segment": "CGGGCGCTTCGCGAGCCGCG",
     "complement_driver_odn": "Hi-MC-153-con-drive",
     "complement_length_nt": 20
    },
@@ -280,7 +280,7 @@
     "odn_name": "Hi-MC-153-con-replica",
     "sequence": "AGGTATGCGTTCAAGGACAGGGTGTATCAAGTTTTGAGACGTTAGTAAATAGCT",
     "lna": false,
-    "overhang_segment": "AGGTATGCGTTCAAGGACAGG",
+    "overhang_segment": "AGGTATGCGTTCAAGGACAG",
     "complement_driver_odn": "Hi-MC-89-con-drive",
     "complement_length_nt": 20
    },
@@ -309,7 +309,7 @@
     "odn_name": "Hi-MC-151-con-replica",
     "sequence": "CGCACCAGGCGCTGCAAGGCGATTACGCCAGATCCGCTCATGCTCGGGAGCTGCCGCGCG",
     "lna": false,
-    "overhang_segment": "ATGCTCGGGAGCTGCCGCGCG",
+    "overhang_segment": "TGCTCGGGAGCTGCCGCGCG",
     "complement_driver_odn": "Hi-MC-149-con-drive",
     "complement_length_nt": 20
    },
