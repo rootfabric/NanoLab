@@ -84,6 +84,41 @@
       "claim_ceiling": "BIBLIOGRAPHIC / C0_SOFTWARE_ONLY",
       "real_source_verdict": "BLOCKED_SOURCE",
       "scientific_runs": 0
+    },
+    {
+      "revision": "R1.2",
+      "subject_head": "a8b3512a64d3efc2948a6aa820aa7731151a7f4d",
+      "code_blob_git_sha1": "c2fdf3a1d5e4edb8fc5f1bb5ec843a264d71f670",
+      "test_blob_git_sha1": "136a957f33df65054dfcf8b33b567858a0d3b7ce",
+      "red": {
+        "run_id": 39547500409,
+        "head": "b0945180cda58cab3a8a8d3edfbf67ff50603376",
+        "tests": 835,
+        "failures": 3
+      },
+      "green": {
+        "run_id": 39547978810,
+        "head": "a8b3512a64d3efc2948a6aa820aa7731151a7f4d",
+        "tests": 837,
+        "conclusion": "SUCCESS",
+        "hosted_checks": "5/5 PASS"
+      },
+      "falsifiers": [
+        "A/B-swapped same physical DNA terminus accepted twice",
+        "zero-norm particle orientation accepted from checksum-pinned .dat",
+        "NaN box dimension accepted from checksum-pinned .dat"
+      ],
+      "additional_regressions": [
+        "six-base opposite-end nonoverlapping ports accepted in synthetic fixture",
+        "eight-base opposite-end nucleotide-overlapping ports refused"
+      ],
+      "fix_scope": "Reserve each validated topology nucleotide for at most one interface bond; check strict particle orientation and positive finite box. Do not require wrapped positions under PBC.",
+      "claim_ceiling": "BIBLIOGRAPHIC / C0_SOFTWARE_ONLY",
+      "source_verdict": "BLOCKED_SOURCE",
+      "external_source_bytes": 0,
+      "scientific_runs": 0,
+      "independent_reviewer": "WAIT_EXTERNAL",
+      "independent_verifier": "WAIT_EXTERNAL"
     }
   ]
 }

@@ -61,3 +61,14 @@ PYTHONPATH=scripts python3 -m knowledge_pack.alt_pair_source_gate \
 ## 6. Следующий шаг
 
 Отдельный источник-исполнитель с доступом к Nanobase проверяет listings/файлы 256/257 (первый приоритет), затем 263; создаёт pinned evidence и не дописывает unsupported pins. R3 integration #73 и reviewer #74 — отдельные задачи, не должны мешать source-audit. Передача наружу/авторам без явного Human Gate запрещена.
+
+
+## 7. Additional original-file retrieval route (not verified source data, 2026-10-21)
+
+Upstream oxView [source index.html](https://github.com/sulcgroup/oxdna-viewer/blob/047e0bf718f315577556de2ba5a6be64dede48dc/index.html) includes a Nanobase importer using HTTPS GET endpoint:
+
+    https://api.nanobase.org/api/v1/structure/getStructureOxdnaFiles?id=256
+
+The same code treats a successful HTTP response as an oxDNA ZIP. This is an actionable route to probe independently for IDs 256, 257 and 263. The available web executor could not access this endpoint and produced no archive bytes, file list, SHA-256, rights evidence, or SOURCE_VERIFIED result. The endpoint may have moved or become unavailable; do not invent success.
+
+A separate network-capable and permitted executor should record HTTP status, bytes and URL; enforce transfer/ZIP entry-size/path limits; independently inspect exact original CAD/oxDNA contents and per-file license before any CONTENT_VERIFIED/ALLOWED assertion. An archived design cannot be treated as the missing S17 follower. Current verdict stays BLOCKED_SOURCE.

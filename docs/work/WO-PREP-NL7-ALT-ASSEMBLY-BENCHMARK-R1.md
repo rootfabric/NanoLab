@@ -43,3 +43,8 @@ Code/test subject 06569eaf9360ba363695c508ac2b9ff4c02cef3b passed hosted H0 run 
 ## Additional C0 adversarial hardening (R1.1 / 2026-10-21)
 
 Two independent new fail-closed falsifiers caught numeric-only molecular anchors and full-ODN complementarity without matching verified topology bases: hosted RED #39538287299 (830 tests, 2 FAIL), hosted GREEN #39538562254 on exact code subject `3d0b55b948c6d1decb5863d8f1bf528c1abf9c10` (832 tests OK). Repair traces n3/n5 at a terminal and compares the declared exposed segment to actual validated 5′→3′ source bases. Positives remain synthetic, not wet-lab evidence. Two more tests reject wrong terminus polarity and internal anchor. New tests=37. STATUS remains HANDOFF_READY / independent REVIEW WAIT_EXTERNAL. Also corrected clerical base_tree_sha from commit id `fb3148b46a9638167168a46cb170902a4ad9e8d2` to real canonical tree `1275a3faba16b6e9528651b12deec83b4337d6f0`, preserving original passport blob in Git ancestry and explicit correction event (not silent rewrite).
+
+
+## Continuation R1.2 — terminal allocation / geometry (2026-10-21)
+
+[RED H0 39547500409](https://github.com/rootfabric/NanoLab/actions/runs/39547500409): 835 tests / 3 expected failures on b0945180. [GREEN H0 39547978810](https://github.com/rootfabric/NanoLab/actions/runs/39547978810): 837 tests OK, all 5 hosted checks PASS on a8b3512a64d3efc2948a6aa820aa7731151a7f4d. Fail-closed repair prevents A/B-swapped or overlapping DNA-port nucleotide reuse and rejects invalid .dat orientation or nonfinite box. Positive six-base disjoint-port control retained; positions may be unwrapped under PBC. Source files and rights still unverified; no scientific runs, no merge or review claim. See execution amendment R1.2 and event 0006.
