@@ -347,6 +347,47 @@ class SyntheticGateTests(unittest.TestCase):
         self.candidate["parts"][0]["topology"]["rights"] = "CC_BY_INFERRED_FROM_PAPER"
         self.assertTrue(any("unknown rights" in x for x in gate.validate_manifest(self.pack)))
 
+
+    def test_falsifier_reversed_duplicate_port_pair_must_block(self):
+        """Reversing A/B cannot reuse the same physical terminal twice."""
+        p = self.root / "ports.json"
+        j = anchor_map()
+        duplicate = copy.deepcopy(j["pairs"][0])
+        for a, b in (
+            ("part_a", "part_b"), ("a_index", "b_index"),
+            ("a_end", "b_end"), ("segment_a", "segment_b"),
+        ):
+            duplicate[a], duplicate[b] = duplicate[b], duplicate[a]
+        j["pairs"].append(duplicate)
+        p.write_text(json.dumps(j), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(p, self.root)
+        result = self._evaluate()
+        self.assertEqual(result["outcome"], "BLOCKED_SOURCE",
+                         "same nucleotide must not be allocated to two bonds")
+
+    def test_falsifier_nonunit_particle_orientation_must_block(self):
+        """Digest pinning alone cannot turn a degenerate .dat frame into geometry."""
+        p = self.root / "narcissus.dat"
+        lines = config().splitlines()
+        row = lines[3].split()
+        row[3:6] = ["0.0", "0.0", "0.0"]
+        lines[3] = " ".join(row)
+        p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+        self.candidate["parts"][0]["configuration"] = as_input(p, self.root)
+        result = self._evaluate()
+        self.assertEqual(result["outcome"], "BLOCKED_SOURCE",
+                         "invalid 3D orientation cannot pass source preflight")
+
+    def test_falsifier_nonfinite_box_must_block(self):
+        """A manifest-pinned box NaN is not a valid finite oxDNA box."""
+        p = self.root / "echo.dat"
+        p.write_text(config().replace("b = 30 30 30", "b = nan 30 30"),
+                     encoding="utf-8")
+        self.candidate["parts"][1]["configuration"] = as_input(p, self.root)
+        result = self._evaluate()
+        self.assertEqual(result["outcome"], "BLOCKED_SOURCE",
+                         "nonfinite periodic simulation box cannot pass preflight")
+
     def test_cli_produces_fail_closed_json_and_exit_code(self):
         fp = self.root / "pack.json"
         published = gate.parse_json_no_duplicate_keys(PACK_FILE.read_text(encoding="utf-8"))
