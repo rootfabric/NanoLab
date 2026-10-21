@@ -11,7 +11,7 @@
   "worktree": "GITHUB_CONNECTOR_SCOPED_BRANCH",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "STARTED",
+  "status": "HANDOFF_READY",
   "started_at_utc": "2026-10-21T01:47:00.000Z",
   "allowed_paths": [
     "docs/work/WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1.md",

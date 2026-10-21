@@ -35,3 +35,7 @@ B. A source-only machine manifest and strict offline source-ready gate. `READY_F
 C. Synthetic-only positive/negative tests; no S17 model replacement. Data + docs + summary/passport/event chain + draft PR. Fresh independent Reviewer/Verifier requested as a separate actual executor; until then `WAIT_EXTERNAL`.
 
 Budget: ≤256 MiB network, ≤2 GiB scratch, 0 science/paid compute. If no original file bytes can be retrieved, output honest `BLOCKED_SOURCE` and do not claim new imports. This C0 task may finish with gaps.
+
+## Implementation handoff (2026-10-21)
+
+Code/test subject 06569eaf9360ba363695c508ac2b9ff4c02cef3b passed hosted H0 run 39530778687 attempt2 (828 tests OK). Source model remains BIBLIOGRAPHIC/BLOCKED_SOURCE: 0 raw CAD/design files downloaded or pinned; no real assembly and no scientific runs. See EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/evidence-map.json for initial test failures and details. Independent Reviewer and exact-head Verifier = WAIT_EXTERNAL; PR #76 draft, Human Gate pending.
