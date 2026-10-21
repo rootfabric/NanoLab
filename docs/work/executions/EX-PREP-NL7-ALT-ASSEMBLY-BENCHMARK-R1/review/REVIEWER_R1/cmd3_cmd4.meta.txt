@@ -1,0 +1,39 @@
+=== CMD: PYTHONPATH=scripts python3 -m harness.workflow_lint --root . ===
+exit_code=0
+    {
+      "path": "/home/rdpuser/NanoLab/review-pr76-r1/.github/workflows/hosted-ci.yml",
+      "ok": true,
+      "violations": []
+    }
+  ],
+  "summary": {
+    "workflows": 1,
+    "violations": 0,
+    "blocking": 0
+  }
+}
+
+=== CMD: PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1 ===
+exit_code=0
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "status": "HANDOFF_READY",
+  "profile": "standard_work_order",
+  "passport_sha256": "d4f594a7e8552a8b978a491b3cd687957a93afab6ac0bc3e286be631933e46d0",
+  "event_types": [
+    "WORK_ORDER_STARTED",
+    "CONTINUATION_CHECKPOINT",
+    "VALIDATION_RECORDED",
+    "HANDOFF_COMPLETED",
+    "CONTINUATION_CHECKPOINT",
+    "CONTINUATION_CHECKPOINT"
+  ],
+  "has_terminal_handoff": true,
+  "has_post_terminal_corrections": true,
+  "has_summary": true
+}
