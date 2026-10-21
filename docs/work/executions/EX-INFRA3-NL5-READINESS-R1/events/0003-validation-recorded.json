@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "timestamp_utc": "2026-10-18T14:09:29Z",
+  "execution_id": "EX-INFRA3-NL5-READINESS-R1",
+  "work_order_id": "WO-INFRA3-NL5-READINESS-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "d8842c2f51870cbf3adf5eae28078ff9d996aa31",
+  "summary": "Validation recorded on implementation commit d8842c2f51870cbf3adf5eae28078ff9d996aa31 (tree 2b49d54ff8c122ef5112442a75afe57dd56ca7e2), all offline on the dev host (0 scientific runs): (1) python3 -m unittest discover -s tests -t . => Ran 709 tests in 58.376s, OK (includes 30 new tests of tests/test_infra3_nl5_readiness.py: manifest parses; dry_run/run_mode/NONE absolute; frozen protocol sha256 recomputed from disk == manifest pin == Director FREEZE R2 pin 2658ee3e...; F2 commit/tree pins agree; engine pin == config/infra/r2-activation.v1.json == 00dc7fb9...; budget arithmetic 296+56=352, wall 560h, N_min 52/8; variant cardinality 148/leg; deterministic enumeration of 296 unique run ids; gate/NC ids unique, entries complete, all statuses in {HOST_NOT_ASSIGNED, NOT_MET}; no execute-now directives; outenemy never author (EXTERNAL_U2_ONLY); Windows fallback FORBIDDEN; 74b production FORBIDDEN; companion documents consistent). (2) PYTHONPATH=scripts python3 -m harness.cli check-consistency => ok (head d8842c2f51870cbf3adf5eae28078ff9d996aa31, tree 2b49d54ff8c122ef5112442a75afe57dd56ca7e2, frontier NL5, next_work_order NL5-002, warnings: none). (3) PYTHONPATH=scripts python3 -m harness.workflow_lint => workflows 1, violations 0, blocking 0. (4) work_cli validate of this execution => recorded in summary.md (final pack commit). Honesty invariant preserved: no gate PASS declared anywhere; all 10 gate/NC entries HOST_NOT_ASSIGNED; dispatch BLOCKED; machine_launch_authorized=false."
+}

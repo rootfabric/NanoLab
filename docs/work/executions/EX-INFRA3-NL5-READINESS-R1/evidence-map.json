@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "evidence_map",
+  "evidence_map_id": "EX-INFRA3-NL5-READINESS-R1",
+  "work_order_id": "WO-INFRA3-NL5-READINESS-R1",
+  "branch": "infra/infra3-nl5-readiness-r1",
+  "implementation_subject": {
+    "head": "d8842c2f51870cbf3adf5eae28078ff9d996aa31",
+    "tree": "2b49d54ff8c122ef5112442a75afe57dd56ca7e2",
+    "base": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+    "base_tree": "6d3a2132ae6ecdfed6269fe39697e8ac9bab152a",
+    "note": "events/evidence/summary of this execution are appended by the terminal packaging commit on top of this implementation subject"
+  },
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "entries": [
+    {
+      "id": "deliverable-wo",
+      "path": "docs/work/WO-INFRA3-NL5-READINESS-R1.md",
+      "sha256": "888a5db39013023145b14f802c7629a85c84b99f01cc8fff2704344e6b5e550d",
+      "kind": "work_order_document",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0001"
+    },
+    {
+      "id": "deliverable-u1-checklist",
+      "path": "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md",
+      "sha256": "c86deb681cac9a7fca71a07c265e0f47a0da4d4362c178983d0b867c7b51c2bc",
+      "kind": "provisioning_checklist",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0002"
+    },
+    {
+      "id": "deliverable-dryrun-manifest",
+      "path": "docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json",
+      "sha256": "4b4f1d0d249964be33f9c917d97e04efb7fb261feb931361da551a18efc2353d",
+      "kind": "dry_run_manifest",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0002"
+    },
+    {
+      "id": "deliverable-readiness-report",
+      "path": "docs/infra/INFRA3_NL5_READINESS_REPORT_R1.md",
+      "sha256": "a45804b1d2a4f45d516e4328787a0043d0cfe7054d11d70e4f6008cac7a1f1cf",
+      "kind": "readiness_report",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0002"
+    },
+    {
+      "id": "deliverable-tests",
+      "path": "tests/test_infra3_nl5_readiness.py",
+      "sha256": "826584ac602e69bec68a22255af6be078b2f03e74e39baffdaa31feacc431096",
+      "kind": "offline_unit_tests",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0002"
+    },
+    {
+      "id": "canonical-frozen-protocol-verified",
+      "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+      "sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+      "kind": "read_only_canonical_input",
+      "producer": "merged by PR #52 (F2 60da9a846511265a8ac7564da088c3d74cb073f0); recomputed on this branch and cross-checked against docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json pins; NOT modified by this execution",
+      "verified_facts": "confirmatory_runs=296=2*(64+64+10+10); replacement_runs_cap=56; max_runs=352; wall<=560h/platform; N_min 52/8; SELECTED_N=64; 74b forbidden"
+    },
+    {
+      "id": "canonical-u1-blocker-evidence",
+      "path": "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json",
+      "sha256": "read_only_canonical_input_untouched",
+      "kind": "read_only_canonical_input",
+      "producer": "merged by PR #53; canonical fact AUTHOR_U1 = NOT_ASSIGNED; NOT modified by this execution"
+    },
+    {
+      "id": "validation-unittest-full-suite",
+      "path": "docs/work/executions/EX-INFRA3-NL5-READINESS-R1/summary.md",
+      "sha256": "see summary.md section 3",
+      "kind": "validation_transcript",
+      "producer": "EX-INFRA3-NL5-READINESS-R1 event 0003: Ran 709 tests OK"
+    }
+  ],
+  "note": "Raw artifacts: none (dry-run documentation package; no compute outputs exist). All canonical inputs were read-only; digests of frozen artifacts re-verified in tests/test_infra3_nl5_readiness.py."
+}

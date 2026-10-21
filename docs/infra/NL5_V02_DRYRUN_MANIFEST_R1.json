@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "kind": "nl5_v02_dryrun_manifest",
+  "manifest_id": "NL5-V02-DRYRUN-R1",
+  "dry_run": true,
+  "run_mode": "NONE",
+  "scientific_runs_triggered_by_this_manifest": 0,
+  "note": "DRY-RUN ONLY dispatch manifest skeleton (machine-checkable readiness package, WO-INFRA3-NL5-READINESS-R1, issue #65). Nothing in this manifest authorizes or triggers any calculation: host U1 is not assigned, R2 is WAITING_HOST / NOT_ACTIVE, dispatch is BLOCKED by the frozen S->F->D/R/V->A chain. All numbers re-derived from the canonical frozen protocol at manifest creation; statuses are honest (HOST_NOT_ASSIGNED / NOT_MET); no PASS is declared anywhere.",
+  "readiness_class": "READY_FOR_HOST",
+  "host_assignment": {
+    "author_u1": "NOT_ASSIGNED",
+    "external_u2": "PINNED_OUTENEMY",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "r2_activated": false,
+    "evidence": "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json"
+  },
+  "campaign": {
+    "campaign_id": "NL5-REPRO-V0-2",
+    "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+    "candidate_revision": "R4",
+    "frozen_revision": "FROZEN_R2",
+    "freeze_status": "FROZEN",
+    "scientific_question": "Distributional equivalence of per-replica median hinge angle between author platform U1 and external platform U2 (paired fresh seeds); primary variants 0b/32b, controls 11b/53b; 74b excluded (NOT_MEASURED / KNOWN_GAP).",
+    "frozen_protocol": {
+      "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+      "sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+      "git_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+      "frozen_package_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "frozen_package_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "verified_on_branch_head": "513c4fa86470d939e9f9b7829e9c67c489c15a57"
+    },
+    "authoritative_contract": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+      "sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+      "git_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+      "role": "single source of truth for seeds, bootstrap seeds, replacement pools, cursors and digests; this dry-run manifest duplicates none of them"
+    },
+    "seed_record": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+      "sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+      "git_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76"
+    },
+    "director_freeze_record": {
+      "path": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+      "decision_id": "NL5-V02-FREEZE/DIRECTOR/R2",
+      "decision": "FREEZE"
+    },
+    "owner_basis": {
+      "hg_b": "APPROVED",
+      "decision_id": "NL5-ACCEPTANCE-POLICY/HG-B/R1",
+      "record": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json"
+    },
+    "freeze_chain": {
+      "S": "HG-B APPROVED (549b687a9171ea3636dbb00078d7018f619cebd3)",
+      "F": "60da9a846511265a8ac7564da088c3d74cb073f0 (tree e565c8a6cee9e829fac14008ebc9c2ea1609931d)",
+      "D": "DIRECTOR_FREEZE_R2 record published",
+      "R": "MISSING (fresh SCIENTIFIC REVIEWER(F) does not exist yet)",
+      "V": "MISSING (fresh independent VERIFIER(F) does not exist yet)",
+      "A": "MISSING (dispatch authority record schema v3 does not exist yet)"
+    }
+  },
+  "engine_pin": {
+    "engine": "oxDNA",
+    "upstream": "lorenzo-rovigatti/oxDNA",
+    "pinned_commit": "00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591",
+    "rights": "GPL-3.0 (NL0-002); DOWNLOAD_ON_SETUP",
+    "build_flags": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "DOUBLE": "ON",
+      "CUDA": "OFF",
+      "MPI": "OFF",
+      "mode": "CPU"
+    },
+    "build_provenance_required": [
+      "source sha",
+      "compiler identification",
+      "cmake command",
+      "CMakeCache relevant pins",
+      "binary size",
+      "binary sha256",
+      "build log"
+    ],
+    "binary_sha_equality_with_r1_required": false,
+    "provenance_capture_tool": "scripts/r2/engine_build.py (r2.cli build-engine)",
+    "pin_sources": [
+      "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 1 and 5",
+      "config/infra/r2-activation.v1.json"
+    ]
+  },
+  "calculation_scheme": {
+    "variants": [
+      {
+        "variant": "0b",
+        "class": "primary",
+        "n_per_leg": 64,
+        "run_length_steps": 200000,
+        "gate_role": "gating"
+      },
+      {
+        "variant": "32b",
+        "class": "primary",
+        "n_per_leg": 64,
+        "run_length_steps": 150000,
+        "gate_role": "gating"
+      },
+      {
+        "variant": "11b",
+        "class": "control",
+        "n_per_leg": 10,
+        "run_length_steps": 150000,
+        "gate_role": "non-gating downgrade only"
+      },
+      {
+        "variant": "53b",
+        "class": "control",
+        "n_per_leg": 10,
+        "run_length_steps": 150000,
+        "gate_role": "non-gating downgrade only"
+      },
+      {
+        "variant": "74b",
+        "class": "excluded",
+        "n_per_leg": 0,
+        "status": "NOT_MEASURED / KNOWN_GAP - production FORBIDDEN until separate arm-manifest-v2 repair WO"
+      }
+    ],
+    "legs": [
+      {
+        "leg": "U1",
+        "role": "AUTHOR",
+        "platform": "P-A = AUTHOR_U1 native Ubuntu R2",
+        "execution_id_reserved": "EX-NL5-REPRO-V0-2-U1-R1",
+        "host_status": "HOST_NOT_ASSIGNED"
+      },
+      {
+        "leg": "U2",
+        "role": "EXTERNAL_REPRODUCTION",
+        "platform": "P-B = outenemy (independent external session from release package; workspace never copied from author)",
+        "execution_id_reserved": "EX-NL5-REPRO-V0-2-U2-R1",
+        "host_status": "PINNED_OUTENEMY",
+        "note": "outenemy is EXTERNAL_U2_ONLY and is never proposed as author executor"
+      }
+    ],
+    "excluded_platforms": [
+      "Windows",
+      "WSL2 (WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO, owner decree 2026-09-27)"
+    ],
+    "run_id_template": "nl5v02-<leg>-<variant>-r<NNNN>",
+    "run_id_rules": [
+      "<leg> in {u1, u2}; <variant> in {0b, 32b, 11b, 53b}",
+      "<NNNN> = 4-digit zero-paired replica index i of the frozen seed record (paired design: identity i on P-A and identity i on P-B form pair i); replacement runs continue the deterministic identity stream from next_candidate_index and keep the same template",
+      "bootstrap leg runs use nl5v02-<leg>-<variant>-boot (one bootstrap seed per variant, 4 total)",
+      "attempt id = <run_base> or <run_base>-R<n> (n >= 1); attempt reuse FORBIDDEN, including after FAILED_TECHNICAL; append-only ledger",
+      "actual seed identities, bootstrap seeds, replacement pools, cursors and digests are NOT duplicated here - they are bound at dispatch from the authoritative contract + seed record"
+    ],
+    "enumeration": {
+      "method": "deterministic cross product legs x variants x replica indices",
+      "confirmatory_runs_per_leg": 148,
+      "legs_count": 2,
+      "confirmatory_runs_total": 296,
+      "verification": "tests/test_infra3_nl5_readiness.py enumerates the cross product from this manifest and asserts 296 unique run ids and max_runs budget consistency"
+    },
+    "input_digests": {
+      "status": "PENDING_DISPATCH",
+      "note": "Placeholder by design: no workspaces/inputs exist yet (dry-run). At dispatch every run binds its input digests (topology, initial configuration, oxDNA input file, seed identity) from the authoritative contract + seed record via the pinned digest contract; digests are recorded in the per-attempt raw manifest (path, sha256, size, producer, retention) and the append-only ledger.",
+      "entries": [],
+      "required_digest_fields_per_run": [
+        "topology_sha256",
+        "initial_configuration_sha256",
+        "oxdna_input_sha256",
+        "seed_identity",
+        "engine_binary_sha256"
+      ]
+    }
+  },
+  "attempt_semantics": {
+    "execution_ids": ["EX-NL5-REPRO-V0-2-U1-R1", "EX-NL5-REPRO-V0-2-U2-R1"],
+    "run_base": "see calculation_scheme.run_id_template",
+    "attempt_id": "<run_base> | <run_base>-R<n>",
+    "ledger": "append-only; reuse of run/attempt id forbidden in all cases including FAILED_TECHNICAL",
+    "technical_outcomes": ["COMPLETED", "FAILED_TECHNICAL", "ABORTED", "BLOCKED_ENVIRONMENT"],
+    "scientific_outcome_at_dispatch": "NOT_EVALUATED until analysis + review (separate surfaces)",
+    "replacement_policy": {
+      "cell_class": "pair-level one-shot (R4.1 M-4)",
+      "trigger": "terminal PAIR_FAILED_TECHNICAL only",
+      "max_replacements_per_failed_pair": 1,
+      "identity_source": "frozen replacement pool, next index in order from next_candidate_index (raw N+1 FORBIDDEN); both legs of the new pair are planned",
+      "outcome_driven_seed_selection": "FORBIDDEN"
+    }
+  },
+  "stop_semantics": {
+    "environment_unavailable": "BLOCKED_ENVIRONMENT",
+    "three_consecutive_failed_technical_in_cell": "cell stopped",
+    "protocol_change_demand_after_data": "STOP + new WO + new freeze revision",
+    "r2_not_active_or_authority_chain_incomplete": "HARD_BLOCKED (both legs gated on R2 ACTIVE + dispatch authority)",
+    "feasibility_gate_fail": "BLOCKED (no accept-risk bypass, protocol 10.3)",
+    "budget_exceeded": "STOP / BUDGET_EXCEEDED - no automatic expansion",
+    "additional_dispatch_gates": "fresh Reviewer(F) PASS + fresh Verifier(F) VERIFIED + authority record (lifecycle S -> F -> R/V -> A)"
+  },
+  "budgets": {
+    "selected_n": 64,
+    "headroom_ratio": 0.8,
+    "n_grid_declared": [40, 48, 64, 80, 96, 128],
+    "confirmatory_runs": 296,
+    "confirmatory_runs_formula": "2 * (64 + 64 + 10 + 10)",
+    "replacement_quota_pairs_primary": 12,
+    "replacement_quota_pairs_control": 2,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560,
+    "paid_compute": "FORBIDDEN without separate owner authorization",
+    "n_min_valid_pairs": {
+      "primary": 52,
+      "control": 8
+    },
+    "integer_policy": "ceil-nmin-floor-replacement-pairs-v1",
+    "statistics_pin": {
+      "delta": 0.5,
+      "bootstrap_resamples": 10000,
+      "bootstrap_scheme": "PAIRED",
+      "bootstrap_rng": "python random.Random(bootstrap_seed_v), quantile linear",
+      "s_floor_deg": 0.01
+    },
+    "budget_sources": [
+      "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md sections 7, 10.1, 10.2, 11"
+    ]
+  },
+  "platform_split": {
+    "U1_author_runs": "campaign leg EX-NL5-REPRO-V0-2-U1-R1 on AUTHOR_U1 only (host not assigned)",
+    "U2_independent_reproduction_only": "campaign leg EX-NL5-REPRO-V0-2-U2-R1 on outenemy as pinned external platform P-B (EXTERNAL_U2_ONLY); outenemy NEVER authors runs, never develops, never serves as U1 substitute",
+    "physical_distinctness_required": true,
+    "both_legs_gated_on_r2_active_before_dispatch": true
+  },
+  "gates": [
+    {
+      "id": "U1",
+      "name": "engine_build",
+      "description": "Fresh clean oxDNA build on U1 from pinned commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 with CPU / Release / DOUBLE=ON / CUDA=OFF / MPI=OFF and full provenance (source SHA, compiler, cmake argv, CMakeCache pins, binary size, binary sha256, build log).",
+      "check_command": "PYTHONPATH=scripts python3 -m r2.cli build-engine --src <oxdna-src> --build-dir <build-dir> --jobs <n>",
+      "check_artifact": "engine build provenance record + build log (raw manifest, sha256-bound)",
+      "pass_condition": "clean build exit 0 with intended flags; provenance record complete and digest-bound; binary resolvable uniquely",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "policy_source": "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 6"
+    },
+    {
+      "id": "U2",
+      "name": "package_verify",
+      "description": "nanolab-components release package verify on U1 (documented v0.1.1 pyc findings acceptable; v0.1.2 repair published by PR #56).",
+      "check_command": "releases/nanolab-components-v0.1.2/reproduction/reproduce.py verify (fresh git-archive export; recording via r2.cli gate --gate U2)",
+      "check_artifact": "package verify output record",
+      "pass_condition": "verify ok (0 errors) on fresh export, or only the documented v0.1.1 pyc findings class",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "policy_source": "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 6; PR #56"
+    },
+    {
+      "id": "U3",
+      "name": "frame0_oracle",
+      "description": "Frame0 oracle against protocol fixtures: 0b exact; 11b exact; 32b exact; 53b exact; 74b NOT_MEASURED (if the gap was not repaired by a separate arm-manifest-v2 WO).",
+      "check_command": "gate U3 execution per r2 activation runbook (r2.cli gate --gate U3) with protocol fixtures",
+      "check_artifact": "frame0 oracle comparison record (per-variant exact/not-measured)",
+      "pass_condition": "0b/11b/32b/53b exact; 74b NOT_MEASURED and production not attempted",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "policy_source": "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 6"
+    },
+    {
+      "id": "U4",
+      "name": "engine_smoke",
+      "description": "Short technical oxDNA smoke on U1: exit=0, finite outputs, expected frames/files. NOT a scientific claim.",
+      "check_command": "technical smoke fixture per r2 activation runbook step; result recorded via r2.cli gate --gate U4 --evidence <file>",
+      "check_artifact": "smoke stdout/stderr/exit record in raw manifest",
+      "pass_condition": "exit 0, finite outputs, expected frame/file counts; explicitly NOT a scientific PASS",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "policy_source": "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 6"
+    },
+    {
+      "id": "U5",
+      "name": "harness_validation",
+      "description": "Harness validation on U1: unit tests, check-consistency, workflow lint, work_cli validation.",
+      "check_command": "python3 -m unittest discover -s tests -t . && PYTHONPATH=scripts python3 -m harness.cli check-consistency && PYTHONPATH=scripts python3 -m harness.workflow_lint && PYTHONPATH=scripts python3 -m harness.work_cli validate <execution-dir>",
+      "check_artifact": "harness validation transcript record",
+      "pass_condition": "all four commands green on U1",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "policy_source": "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md section 6"
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "NC-U1",
+      "name": "ssh_session_close_survival",
+      "description": "Scientific test job continues running after SSH/session close (job lives outside agent session in a systemd scope/transient unit).",
+      "check_command": "r2.cli nc-plan --nc NC-U1 ; r2.cli nc-verify --nc NC-U1 --evidence <file>",
+      "check_artifact": "NC-U1 evidence record (job alive after session close)",
+      "pass_condition": "job still running/completed after SSH disconnect; no silent retry storm",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "root_cause_reference": "NL5-002-E P1 CI cycle -> wsl --shutdown -> retry storm (RECOVERY_INCIDENTS)"
+    },
+    {
+      "id": "NC-U2",
+      "name": "agent_process_restart_survival",
+      "description": "Scientific test job continues running after agent process restart.",
+      "check_command": "r2.cli nc-plan --nc NC-U2 ; r2.cli nc-verify --nc NC-U2 --evidence <file>",
+      "check_artifact": "NC-U2 evidence record",
+      "pass_condition": "job unaffected by agent restart",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "root_cause_reference": "same CI/lifecycle decoupling root cause"
+    },
+    {
+      "id": "NC-U3",
+      "name": "github_runner_service_restart_survival",
+      "description": "Scientific test job continues running after github-actions-runner.service restart (CI and executor are separate units).",
+      "check_command": "r2.cli nc-plan --nc NC-U3 ; r2.cli nc-verify --nc NC-U3 --evidence <file>",
+      "check_artifact": "NC-U3 evidence record",
+      "pass_condition": "job unaffected by CI runner service restart",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "root_cause_reference": "CI must never own the scientific executor lifecycle"
+    },
+    {
+      "id": "NC-U4",
+      "name": "ci_cleanup_isolation",
+      "description": "CI cleanup attempt does not touch the raw workspace (raw workspace lives outside CI and is not deleted).",
+      "check_command": "r2.cli nc-plan --nc NC-U4 ; r2.cli nc-verify --nc NC-U4 --evidence <file>",
+      "check_artifact": "NC-U4 evidence record (raw workspace intact + digest match)",
+      "pass_condition": "raw workspace and manifest digests unchanged after CI cleanup",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "root_cause_reference": "raw evidence outside CI blast radius"
+    },
+    {
+      "id": "NC-U5",
+      "name": "deliberate_kill_failed_technical",
+      "description": "Deliberate kill of the scientific process: supervisor records FAILED_TECHNICAL and never reuses the run/attempt id (next attempt gets -R<n>).",
+      "check_command": "r2.cli nc-plan --nc NC-U5 ; r2.cli nc-verify --nc NC-U5 --evidence <file>",
+      "check_artifact": "NC-U5 evidence record + append-only ledger fragment",
+      "pass_condition": "FAILED_TECHNICAL recorded; run id not reused; replacement/attempt follows attempt_semantics",
+      "host_required": "U1",
+      "status": "HOST_NOT_ASSIGNED",
+      "root_cause_reference": "DO NOT REUSE A FAILED RUN ID"
+    }
+  ],
+  "dispatch": {
+    "status": "BLOCKED",
+    "launch_gate": "HUMAN_PROTECTED_WRITER",
+    "machine_launch_authorized": false,
+    "blockers": [
+      "AUTHOR_U1 = NOT_ASSIGNED (no physical host)",
+      "R2 = WAITING_HOST / NOT_ACTIVE (gates U1-U5 and NC-U1..U5 not executed)",
+      "fresh Reviewer(F) = missing",
+      "fresh Verifier(F) = missing",
+      "dispatch authority record (schema v3, chain A) = missing",
+      "human launch decision = not made (HUMAN_PROTECTED_WRITER)"
+    ],
+    "blocked_execution_ids": ["EX-NL5-REPRO-V0-2-U1-R1", "EX-NL5-REPRO-V0-2-U2-R1"]
+  },
+  "boundaries": {
+    "nl5": "IN_PROGRESS",
+    "nl6_001": "LOCKED",
+    "external_reproductions": 0,
+    "scientific_runs_at_manifest_creation": 0,
+    "windows_allowed_for_new_science": false,
+    "silent_windows_fallback": "FORBIDDEN",
+    "outenemy_role": "EXTERNAL_U2_ONLY",
+    "this_manifest_does_not": [
+      "change frozen NL5 v0.2 acceptance criteria or protocol files",
+      "change project/state.json, project/infra-state.json or project/plan.json",
+      "assign AUTHOR_U1",
+      "authorize any calculation",
+      "declare any gate PASS"
+    ]
+  }
+}

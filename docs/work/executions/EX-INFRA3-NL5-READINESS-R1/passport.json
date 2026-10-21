@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-INFRA3-NL5-READINESS-R1",
+  "work_order_id": "WO-INFRA3-NL5-READINESS-R1",
+  "checkpoint": "INFRA3",
+  "base_branch": "main",
+  "base_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "base_tree_sha": "6d3a2132ae6ecdfed6269fe39697e8ac9bab152a",
+  "branch": "infra/infra3-nl5-readiness-r1",
+  "worktree": "/home/rdpuser/NanoLab/infra3-nl5-readiness",
+  "issue": 65,
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "STARTED",
+  "started_at_utc": "2026-10-18T13:52:10Z",
+  "allowed_paths": [
+    "docs/work/WO-INFRA3-NL5-READINESS-R1.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-INFRA3-NL5-READINESS-R1/**",
+    "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md",
+    "docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json",
+    "docs/infra/INFRA3_NL5_READINESS_REPORT_R1.md",
+    "tests/test_infra3_nl5_readiness.py"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/infra-state.json",
+    "project/plan.json",
+    "frozen NL5 v0.2 artifacts (docs/research/NANOLAB_REPRO_V0_2_FROZEN_R*.md, docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/*, docs/evidence/NL5-V02-FREEZE/*, releases/**)",
+    "scripts/r2/** and scripts/nl5/** (read/import allowed, modification forbidden)",
+    "any scientific run / oxDNA / MD / E5 execution",
+    "gate U1-U5 / NC-U1..U5 execution or PASS declaration",
+    "runner registration, credentials, secrets, paid compute",
+    "direct main push, force-push, other worktrees"
+  ],
+  "dependencies": [
+    "main@513c4fa86470d939e9f9b7829e9c67c489c15a57 (PR #57 merged; includes PRs #45/#46/#47/#50/#51/#52/#53/#55/#56)",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md sha256=2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d (FROZEN_R2, F2 60da9a846511265a8ac7564da088c3d74cb073f0, tree e565c8a6cee9e829fac14008ebc9c2ea1609931d)",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json (F_HEAD/F_TREE + artifact digest pins)",
+    "config/infra/r2-activation.v1.json + scripts/r2 (merged PR #47, repaired PR #55)",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json (AUTHOR_U1 = NOT_ASSIGNED)",
+    "docs/infra/U2_OUTENEMY_EXECUTOR_READINESS_R1.md (outenemy = EXTERNAL_U2_ONLY, pinned P-B)",
+    "GitHub issue #65 (this work order), parent program issue #63"
+  ],
+  "resource_budget": "local dev-host CPU for docs/JSON/unittest only; 0 scientific runs; 0 paid compute; network limited to git push of this branch; no LAN scans; no oxDNA builds",
+  "claim_ceiling": "C0_SOFTWARE_ONLY: readiness package (documents + machine-checkable dry-run manifest + tests) only; never READY_FOR_EXECUTION / R2 ACTIVE / gate PASS; expected outcome class READY_FOR_HOST (HOST_NOT_ASSIGNED)",
+  "deliverables": [
+    "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md (verifiable provisioning requirements for physical U1)",
+    "docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json (machine-readable dry-run dispatch manifest skeleton with gates U1-U5 / NC-U1..U5 as honest machine-checkable entries)",
+    "docs/infra/INFRA3_NL5_READINESS_REPORT_R1.md (compact readiness report + HOST_NOT_ASSIGNED declaration + human action list)",
+    "tests/test_infra3_nl5_readiness.py (offline unittest, honest statuses, no scientific run triggered)",
+    "EX-INFRA3-NL5-READINESS-R1 evidence pack: passport, append-only events, evidence-map.json, summary.md",
+    "WORK_QUEUE.md append-only line for this WO"
+  ]
+}
