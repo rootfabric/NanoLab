@@ -1,0 +1,10 @@
+[P-NEG-1 non-terminal a_index=2] expect=BLOCKED_SOURCE got=BLOCKED_SOURCE -> PASS
+  reasons: ['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)']
+  manifest_errors: [] scientific_runs: 0
+[P-NEG-2 non-terminal b_index=3] expect=BLOCKED_SOURCE got=BLOCKED_SOURCE -> PASS
+  reasons: ['pair 0 part_b: anchor is not a 3p strand terminus (internal anchor)']
+  manifest_errors: [] scientific_runs: 0
+[P-POS-1 disjoint terminal ports] expect=TEST_FIXTURE_STATIC_INPUTS_OK got=TEST_FIXTURE_STATIC_INPUTS_OK -> PASS
+  reasons: []
+  manifest_errors: [] scientific_runs: 0
+SUMMARY: 3 / 3 probes behaved as expected

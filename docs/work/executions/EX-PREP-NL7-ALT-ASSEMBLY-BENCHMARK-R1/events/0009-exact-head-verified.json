@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0009-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-prep-nl7-alt-assembly-benchmark (two independent agent sessions: redirected v1 session + fresh R2 session; verdict text recorded by DIRECTOR verbatim from their reports)",
+  "subject_sha": "022a7a376864f3dce4f92b6959e73fb298fbbca2",
+  "timestamp_utc": "2026-10-21T12:52:38.000Z",
+  "summary": "Fresh independent exact-head VERIFIER verdicts on the final tip of work/prep-nl7-alt-assembly-benchmark-r1: VERIFIED at HEAD 022a7a376864f3dce4f92b6959e73fb298fbbca2 (tree 20ab4d60b24adfe3752959b392a2a3a1a82e403a; remote tip byte-identical; chain fb3148b -> 2e199d6 reviewed subject -> d59258a event 0007 -> 022a7a3 event_type fix + event 0008). Two verifier generations agree: (V1) session that earlier correctly returned FAILED for d59258a (invalid event_type REVIEW_PASS, CI 39598714603 FAILURE) re-verified the repaired tip; (V2) a fully fresh R2 verifier session with no prior involvement. Verified personally by each: 837/837 tests OK; check-consistency ok:true; workflow_lint violations 0; work_cli validate ok:true HANDOFF_READY (event_types all in vocabulary, REVIEW_CORRECTIONS x2); real-pack gate exits 2 BLOCKED_SOURCE 5x SOURCE_BYTES_NOT_OBSERVED (correct fail-closed); hosted CI 39599152605 SUCCESS on exact SHA; negative run 39598714603 durable, not deleted; diff 2e199d6..022a7a3 touches only this execution dir (reviewed code byte-identical); independent probes (non-terminal index rejected; disjoint terminal ports accepted; base_tree_sha 1275a3fa == git rev-parse fb3148b^{tree}) all pass; scope clean (no project/state.json, plan.json, releases/ changes; no fabricated .top/.dat; no secrets; statuses not promoted). Repair-pattern judgment by both: ACCEPTABLE - one-token vocabulary fix of a Director publication defect, pre-merge, original blob in ancestry, negative durably recorded twice; both note it is not strict append-only and requires policy codification (non-blocking, adds to the same M2-class caveat as events 0003/0004 disposition in EX-S17-STACK-INTEGRATION-R1). Source pack remains BIBLIOGRAPHIC / BLOCKED_SOURCE; 0 scientific runs; no NL status promotion. MERGE = HUMAN GATE, owner authorization for PR #76 not granted in the current mission.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . (837 OK)",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1 (ok:true)",
+    "PYTHONPATH=scripts python3 -m knowledge_pack.alt_pair_source_gate docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json --candidate S23_NARCISSUS_ECHO --root . (exit 2 BLOCKED_SOURCE - correct fail-closed)",
+    "gh api repos/rootfabric/NanoLab/actions/runs/39599152605 (SUCCESS @ 022a7a376864f3dce4f92b6959e73fb298fbbca2)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/review/VERIFIER_S1/ (incl. VERIFY_PR76_R1.md VERIFIED R2 + VERIFY_PR76_R1_SUBJECT_d59258a_FAILED.md preserved negative)",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/review/VERIFIER_S2/VERIFY_PR76_R2.md",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/review/REVIEWER_R1/REVIEW_PR76_R1.md"
+  ],
+  "next_action": "READY_FOR_HUMAN_GATE. Owner decision required for merge of PR #76; minors N1-N5 and policy codification (append-only exception, event vocabulary supersede mechanism) recommended as follow-up bounded WOs.",
+  "blocker": null
+}
