@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import re
 from pathlib import Path
 
@@ -241,6 +242,9 @@ def _validate_anchor_map(data: bytes, parts: dict[str, Topology]) -> str | None:
     if not isinstance(pairs, list) or not pairs:
         return "anchor map has no pair records"
     used = set()
+    # A physical nucleotide cannot be consumed by two distinct declared bonds.
+    # Occupancy is indexed by source part + topology nucleotide, not A/B order.
+    used_nucleotides: set[tuple[str, int]] = set()
     rc = str.maketrans("ACGT", "TGCA")
     for index, p in enumerate(pairs):
         if not isinstance(p, dict) or p.get("status") != "SOURCE_CONFIRMED":
@@ -277,6 +281,17 @@ def _validate_anchor_map(data: bytes, parts: dict[str, Topology]) -> str | None:
             if observed != declared:
                 return (f"pair {index} {role}: declared overhang segment is not present "
                         f"at source topology {terminal} terminal (topology sequence mismatch)")
+            # The validated trace gives the exact occupied nucleotide positions.
+            # Merely checking the (A-index, B-index) tuple misses A/B-swapped
+            # duplicates and overlapping overhangs on opposite strand ends.
+            occupied = []
+            cursor = particle
+            for _ in range(len(declared)):
+                occupied.append((part, cursor))
+                cursor = parts[part].rows[cursor][3 if terminal == "3p" else 2]
+            if any(site in used_nucleotides for site in occupied):
+                return f"pair {index} {role}: nucleotide already assigned to another interface bond"
+            used_nucleotides.update(occupied)
     return None
 
 
@@ -314,6 +329,13 @@ def evaluate(pack: dict, candidate_id: str, root: Path) -> dict:
             top = Topology.parse(pieces["topology"].decode("utf-8"))
             top.check_chain_integrity()
             conf = Configuration.parse(pieces["configuration"].decode("utf-8"))
+            # Configuration.parse checks finite particle values but permits
+            # nonfinite box dimensions; orientation checks are separate.
+            if not all(math.isfinite(v) and v > 0 for v in conf.box):
+                raise ValueError("nonfinite or invalid configuration box")
+            conf.check_orientation()
+            # Do not require wrapped positions: valid oxDNA PBC configurations
+            # can contain unwrapped coordinates outside the simulation box.
             if len(conf.particles) != top.nucleotides:
                 raise ValueError("topology/configuration particle-count mismatch")
             parsed[pid] = top
