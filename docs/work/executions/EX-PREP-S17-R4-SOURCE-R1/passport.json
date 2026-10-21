@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "checkpoint": "PREP-S17 R4 targeted source recovery for the S17 follower component: close gaps G1-G4/G6 with (a) recovered original design files + exact provenance, or (b) explicitly labeled CANDIDATE_DESIGN/HYPOTHESIS reconstruction, or (c) honest BLOCKED_SOURCE receipt with drafted (never sent) author questions",
+  "base_branch": "main (fresh canonical, merge of PR #57)",
+  "base_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "base_tree_sha": "6d3a2132ae6ecdfed6269fe39697e8ac9bab152a",
+  "canonical_main_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "branch": "work/prep-s17-r4-source-r1",
+  "worktree": "/home/rdpuser/NanoLab/prep-s17-r4-source",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "STARTED",
+  "started_at_utc": "2026-10-18T13:48:24.096Z",
+  "parent_program": "GitHub issue #63 (PREP-S17 program)",
+  "work_order_issue": "GitHub issue #64",
+  "pinned_readonly_references": [
+    "2cf8297f10ab5ec98b8c8023ff76b39d92ef398b (R3 head: S17_R3_SOURCE_GAPS.md, S17_R3_INTERFACE_AUDIT.md, S17_KNOWLEDGEPACK_R2.json, S17_SOURCE_RECOVERY_R2.md, df-interface-recipe.json)",
+    "26c4cd51151167634815c531b9c49dcc54ba6243 (R2 head: S17_R2_PORT_MAP.json, S17_KNOWLEDGEPACK_R2.json, S17_SOURCE_RECOVERY_R2.md)",
+    "Dataset S1 pin sha256 dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c (R1/R2/R3 agreed)",
+    "Article DOI 10.1038/s41565-023-01516-x; Nanobase structure 196; Zenodo record 8248808"
+  ],
+  "allowed_paths": [
+    "docs/work/WO-PREP-S17-R4-SOURCE-R1.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/**",
+    "docs/research/S17_R4_PORT_CANDIDATES.json",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md",
+    "tests/test_s17_r4_source.py"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "frozen scientific evidence / NL5 freeze artifacts",
+    "scientific protocols and campaigns",
+    "scripts/nl4/**, scripts/nl5/**, scripts/e2/**, scripts/r2/**, scripts/hinge_family/** (import reuse allowed, modification forbidden)",
+    "R1/R2 knowledge-pack surfaces (scripts/knowledge_pack/contract.py, import_validation.py, s17_*.py - import reuse allowed, modification forbidden)",
+    "canonical NL5/NL6 status fields",
+    "raw vendored source files (Nanobase/Zenodo/Nature/sulcgroup-hinges and any third-party repository content - only digests + urls + small excerpts inside docs)",
+    "R2/R3 branch history (no rebase/rewrite of work/prep-s17-r2-r1, work/prep-s17-r3-r1)",
+    "direct main push, force-push, merge; outbound messages to authors/repositories"
+  ],
+  "dependencies": [
+    "PR #57 merged into main (513c4fa8): PREP-S17 R1 knowledge pack (S17_KNOWLEDGEPACK.json, S17_PREP_AUDIT_R1.md, scripts/knowledge_pack contract/import_validation)",
+    "PR #59 (R2, branch work/prep-s17-r2-r1 @ 26c4cd51) and PR #60-lineage (R3, branch work/prep-s17-r3-r1 @ 2cf8297): stacked, NOT canonical; facts reused only via pinned git reads",
+    "R3 verdicts reused as inputs: 10 connecting ODN pairs SOURCE_CONFIRMED at sequence level; follower topology NOT_RECONSTRUCTED; gaps G1-G4/G6 open"
+  ],
+  "resource_budget": "network transfer <= 256 MiB total (bounded targeted fetches only; never full multi-GB Zenodo archives; zip listing before selective extraction), scratch <= 2 GiB, local Python only; 0 scientific runs; 0 paid compute; no outbound author/repo messages",
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY inherited. R4 may deliver: recovered source pins (SOURCE_CONFIRMED digests), an explicitly labeled CANDIDATE_DESIGN/HYPOTHESIS reconstruction (never the author original, never raises claims), or BLOCKED_SOURCE receipt. MODEL_REPRODUCED / ASSEMBLY_VALIDATED / COMPONENT_CHARACTERIZED / NL6 ACCEPTED / NL7 ACCEPTED are forbidden outputs; follower structure remains NOT_RECONSTRUCTED unless a real author design file with full topology is byte-verified.",
+  "deliverables": [
+    "S17_R4_PORT_CANDIDATES.json machine-readable evidence map: 10 connecting 20nt pairs, driver/follower side evidence, per-hop SOURCE_CONFIRMED/INFERRED_CANDIDATE/UNKNOWN, source digests",
+    "S17_R4_FOLLOWER_PROVENANCE.json per candidate source file (url, retrieved_at_utc, sha256, size_bytes, license, content summary, pins/does-not-pin) OR BLOCKED_SOURCE receipt with per-gap negative evidence",
+    "S17_R4_SOURCE_GAP_CLOSURE.md (Russian): per-gap G1/G2/G3/G4/G6 closure matrix + drafted (NOT sent) author questions",
+    "tests/test_s17_r4_source.py offline validator for the JSON deliverables",
+    "EX-PREP-S17-R4-SOURCE-R1 evidence pack, evidence-map.json, append-only events, summary, WORK_QUEUE append"
+  ]
+}

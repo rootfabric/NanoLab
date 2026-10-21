@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0003-implementation-committed",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r4-source",
+  "subject_sha": "98c3d72dec14d44f3b90254dac9c57f55737fbe5",
+  "timestamp_utc": "2026-10-18T14:40:10.873Z",
+  "summary": "Implementation committed on work/prep-s17-r4-source-r1 at 98c3d72dec14d44f3b90254dac9c57f55737fbe5 (tree d836baff56362700f202af077d06582594ad1d59), base 513c4fa86470d939e9f9b7829e9c67c489c15a57 (tree 6d3a2132ae6ecdfed6269fe39697e8ac9bab152a). Deliverables: docs/research/S17_R4_PORT_CANDIDATES.json (10 pairs; sequence hops SOURCE_CONFIRMED via Dataset S1 pin dc3cc6c5/R3 recipe; helix/arm assignments INFERRED_CANDIDATE digitized from Suppl. Fig. S5b @ SI PDF 66074e7d p.19; index anchors UNKNOWN; candidate_following_interface_map marked CANDIDATE_DESIGN/HYPOTHESIS), docs/research/S17_R4_FOLLOWER_PROVENANCE.json (13 provenance records with sha256/url/license/what-pins; blocked_source_receipt for G1 with 10 searched surfaces + resume conditions; workflow test vehicle Nanobase 256/257 explicitly NOT the S17 follower), docs/research/S17_R4_SOURCE_GAP_CLOSURE.md (RU closure matrix G1-G4/G6 + 8 drafted author questions NOT sent), tests/test_s17_r4_source.py (19 offline tests), event 0002. Allowed paths only; no forbidden paths touched; no raw third-party files vendored (digests/urls/short quotes only); 0 scientific runs; ~20.7 MiB network of <=256 MiB.",
+  "command_refs": [
+    "git rev-parse HEAD HEAD^{tree}",
+    "git status --short (clean after commit)"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_R4_PORT_CANDIDATES.json",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md",
+    "tests/test_s17_r4_source.py"
+  ],
+  "next_action": "Record validation results on exact head (event 0004), then handoff (event 0005) + evidence map + summary + WORK_QUEUE final row + push.",
+  "blocker": null
+}
