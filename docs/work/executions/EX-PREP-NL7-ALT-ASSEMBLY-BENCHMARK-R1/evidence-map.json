@@ -52,5 +52,38 @@
     "reviewer": "WAIT_EXTERNAL",
     "verifier": "WAIT_EXTERNAL"
   },
-  "next_action": "Fresh separate Reviewer/Verifier on PR #76, then lawful source retrieval for actual Nanobase 256/257 with exact pins"
+  "next_action": "Fresh separate Reviewer/Verifier on PR #76, then lawful source retrieval for actual Nanobase 256/257 with exact pins",
+  "amendments": [
+    {
+      "revision": "R1.1",
+      "subject_head": "3d0b55b948c6d1decb5863d8f1bf528c1abf9c10",
+      "code_blob_git_sha1": "1064c879baca5bc21db31298413a141f901dd252",
+      "test_blob_git_sha1": "09d6dc6b4b578ab006b14560f7773ba8ee1b9859",
+      "red": {
+        "run_id": 39538287299,
+        "head": "d088f9ed6aaee4a2d7a9e9aa58af652c496cdcf9",
+        "tests": 830,
+        "failures": 2
+      },
+      "green": {
+        "run_id": 39538562254,
+        "head": "3d0b55b948c6d1decb5863d8f1bf528c1abf9c10",
+        "tests": 832,
+        "conclusion": "SUCCESS"
+      },
+      "falsifiers": [
+        "numeric internal anchor previously accepted",
+        "base-complementary segment absent from topology previously accepted"
+      ],
+      "implementation": "n3/n5 terminal strand trace with 5′→3′ source base identity; fail closed for internal/unknown bases, invalid orientation; synthetic fixture 12nt",
+      "meta_correction": {
+        "field": "base_tree_sha",
+        "previous_commit_sha_wrong": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+        "correct_tree_sha": "1275a3faba16b6e9528651b12deec83b4337d6f0"
+      },
+      "claim_ceiling": "BIBLIOGRAPHIC / C0_SOFTWARE_ONLY",
+      "real_source_verdict": "BLOCKED_SOURCE",
+      "scientific_runs": 0
+    }
+  ]
 }

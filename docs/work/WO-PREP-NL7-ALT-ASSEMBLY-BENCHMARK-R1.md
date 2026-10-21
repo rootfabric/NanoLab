@@ -2,7 +2,7 @@
 
 **Status:** STARTED / scoped preparatory C0 work; issue #75. Parent track: NL7 preparation, **NOT** NL7-001 scientific acceptance.
 
-**Canonical base:** `main@fb3148b46a9638167168a46cb170902a4ad9e8d2`, tree `fb3148b46a9638167168a46cb170902a4ad9e8d2`; branch `work/prep-nl7-alt-assembly-benchmark-r1`.
+**Canonical base:** `main@fb3148b46a9638167168a46cb170902a4ad9e8d2`, tree `1275a3faba16b6e9528651b12deec83b4337d6f0`; branch `work/prep-nl7-alt-assembly-benchmark-r1`.
 **Risk:** MEDIUM; **claim** C0_SOFTWARE_ONLY; `scientific_runs=0`; `paid_compute=0`.
 **Executor:** GitHub-hosted H0 for offline tests, public source audit; U1/U2 scientific hosts not used.
 
@@ -39,3 +39,7 @@ Budget: ≤256 MiB network, ≤2 GiB scratch, 0 science/paid compute. If no orig
 ## Implementation handoff (2026-10-21)
 
 Code/test subject 06569eaf9360ba363695c508ac2b9ff4c02cef3b passed hosted H0 run 39530778687 attempt2 (828 tests OK). Source model remains BIBLIOGRAPHIC/BLOCKED_SOURCE: 0 raw CAD/design files downloaded or pinned; no real assembly and no scientific runs. See EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/evidence-map.json for initial test failures and details. Independent Reviewer and exact-head Verifier = WAIT_EXTERNAL; PR #76 draft, Human Gate pending.
+
+## Additional C0 adversarial hardening (R1.1 / 2026-10-21)
+
+Two independent new fail-closed falsifiers caught numeric-only molecular anchors and full-ODN complementarity without matching verified topology bases: hosted RED #39538287299 (830 tests, 2 FAIL), hosted GREEN #39538562254 on exact code subject `3d0b55b948c6d1decb5863d8f1bf528c1abf9c10` (832 tests OK). Repair traces n3/n5 at a terminal and compares the declared exposed segment to actual validated 5′→3′ source bases. Positives remain synthetic, not wet-lab evidence. Two more tests reject wrong terminus polarity and internal anchor. New tests=37. STATUS remains HANDOFF_READY / independent REVIEW WAIT_EXTERNAL. Also corrected clerical base_tree_sha from commit id `fb3148b46a9638167168a46cb170902a4ad9e8d2` to real canonical tree `1275a3faba16b6e9528651b12deec83b4337d6f0`, preserving original passport blob in Git ancestry and explicit correction event (not silent rewrite).

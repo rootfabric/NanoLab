@@ -6,7 +6,7 @@
   "checkpoint": "NL7 alternative published two-component DNA source pack & static source readiness gate",
   "base_branch": "main",
   "base_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
-  "base_tree_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "base_tree_sha": "1275a3faba16b6e9528651b12deec83b4337d6f0",
   "branch": "work/prep-nl7-alt-assembly-benchmark-r1",
   "worktree": "GITHUB_CONNECTOR_SCOPED_BRANCH",
   "risk_class": "MEDIUM",
