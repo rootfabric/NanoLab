@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0004-validation-recorded",
+  "event_type": "VALIDATION_RECORDED",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r4-source",
+  "subject_sha": "98c3d72dec14d44f3b90254dac9c57f55737fbe5",
+  "timestamp_utc": "2026-10-18T14:41:17.140Z",
+  "summary": "Validation on exact implementation head 98c3d72dec14d44f3b90254dac9c57f55737fbe5 (tree d836baff56362700f202af077d06582594ad1d59): (1) python3 -m unittest discover -s tests -t . => Ran 698 tests, OK (679 base + 19 new test_s17_r4_source); (2) PYTHONPATH=scripts python3 -m harness.cli check-consistency => ok: true, 0 errors, 0 warnings, frontier NL5, next WO NL5-002 (statuses untouched by this WO); (3) PYTHONPATH=scripts python3 -m harness.workflow_lint => workflows: 1, violations: 0, blocking: 0; (4) PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R4-SOURCE-R1 => ok: true (events WORK_ORDER_STARTED, CONTINUATION_CHECKPOINT at validation time; 0003-0005 follow). JSON parse of both deliverables is covered by the 19 offline tests. Claim discipline: no scientific claim raised; G1 BLOCKED_SOURCE; G3 INFERRED_CANDIDATE; G2/G4 UNKNOWN; 0 scientific runs.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t .",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R4-SOURCE-R1"
+  ],
+  "evidence_refs": [
+    "tests/test_s17_r4_source.py",
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/evidence-map.json"
+  ],
+  "next_action": "Write evidence-map.json + summary.md, handoff event 0005, append final WORK_QUEUE row, commit and push.",
+  "blocker": null
+}

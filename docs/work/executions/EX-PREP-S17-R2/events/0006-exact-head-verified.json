@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0006-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-prep-s17-r2 (fresh independent agent session)",
+  "subject_sha": "530bd6925dd0f189297a0ffa03251f54f7cd80e7",
+  "timestamp_utc": "2026-10-18T15:21:55.327Z",
+  "summary": "Fresh independent exact-head VERIFIER verdict (separate agent session, scratch clone /tmp/verify-r2, heads self-resolved): VERIFIED at HEAD 530bd6925dd0f189297a0ffa03251f54f7cd80e7 (tree 6056a6f073ef3bdabb102df082e097399e9681cd; chain 26c4cd5 -> a886aa6 -> 6ce17fe -> 530bd69). First pass at 6ce17fe returned NOT_VERIFIED with ONE narrow documentation deviation: evidence-map.json known_limits[0] retained an unannotated live '2,324' contradicting the file's own N3-applied claim - root cause: the implementer's errata walk skipped bare string elements inside the known_limits list. Repaired in 530bd69 (single-file, single-line fix) per the verifier's prescribed one-line correction. Verifier re-check at 530bd69: diff touches only evidence-map.json known_limits[0] (1+/1-); ZERO unannotated '2,324' mentions branch-wide (all remaining are explicit erratum annotations); work_cli validate ok. All 8 original verification items PASS at 6ce17fe and carry over: (1) heads/chain exact; (2) corrections diff 26c4cd5..a886aa6 = exactly 7 claimed files, guard moved above header-parse/inflate, both cap controls assert 'safety cap', control-efficacy PROVEN by reverse-mutation (reverting the guard-move or mutating the packed header makes the tests FAIL); (3) gates at tip: 746 tests OK, check-consistency ok, workflow_lint blocking 0, work_cli ok; (4) N3 ground truth = 2,326 (276+207+949+894, df-receipt full enumeration), no evidence backs 2,324; (5) scope vs main: 33 files +4865/-0, zero changes to project/*.json, scripts/harness/**, releases/, docs/evidence/, WORK_QUEUE append-only; (6) claim discipline: NOT_RECONSTRUCTED everywhere, forbidden terms only inside prohibitions; (7) review trail: events 0001-0004 untouched, event 0005 subject a886aa6. Merge remains Human Gate.",
+  "command_refs": [
+    "git ls-remote origin work/prep-s17-r2-r1 (== 530bd69)",
+    "git diff 6ce17fe..530bd69 (1 file, 1+/1-)",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-S17-R2 (ok:true)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R2/evidence-map.json (post_review_corrections)",
+    "docs/work/executions/EX-PREP-S17-R2/summary.md (Errata R2.1)"
+  ],
+  "next_action": "READY_FOR_HUMAN_GATE (stack root of PR #59 -> #60 -> #67).",
+  "blocker": null
+}

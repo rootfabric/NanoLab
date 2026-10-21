@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r4-source",
+  "subject_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "timestamp_utc": "2026-10-18T13:48:24.096Z",
+  "summary": "START WO-PREP-S17-R4-SOURCE-R1 (issue #64, parent issue #63) on a dedicated worktree branch from fresh canonical main 513c4fa86470d939e9f9b7829e9c67c489c15a57 (tree 6d3a2132ae6ecdfed6269fe39697e8ac9bab152a, merge of PR #57). Mission: close as many source gaps G1-G4/G6 as possible for the S17 follower component via bounded web research + targeted fetches (article, SI/Dataset S1, Nanobase 196, Zenodo 8248808, GitHub/GitLab open repositories), producing either recovered original follower design files with exact provenance, an explicitly labeled CANDIDATE_DESIGN/HYPOTHESIS reconstruction, or an honest BLOCKED_SOURCE receipt with drafted (never sent) author questions. R2/R3 artifacts (26c4cd51, 2cf8297) used as pinned read-only references only. Claim ceiling PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY; 0 scientific runs; network budget <= 256 MiB (no multi-GB archive downloads; zip listing before selective extraction); no outbound author messages; merge = Human Gate.",
+  "command_refs": [
+    "git fetch origin --prune",
+    "git rev-parse HEAD HEAD^{tree}",
+    "git show 2cf8297f10ab5ec98b8c8023ff76b39d92ef398b:docs/research/S17_R3_SOURCE_GAPS.md",
+    "git show 26c4cd51151167634815c531b9c49dcc54ba6243:docs/research/S17_R2_PORT_MAP.json"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R4-SOURCE-R1.md",
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/passport.json"
+  ],
+  "next_action": "Stage A targeted web research on follower design surfaces; then CONTINUATION event.",
+  "blocker": null
+}

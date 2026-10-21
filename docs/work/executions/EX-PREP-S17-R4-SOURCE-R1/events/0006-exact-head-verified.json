@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0006-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-prep-s17-r4-source (fresh independent agent session)",
+  "subject_sha": "80e4b25f4ee780679bf6615e7526a37da116c861",
+  "timestamp_utc": "2026-10-18T15:33:57.407Z",
+  "summary": "Fresh independent exact-head VERIFIER verdict (separate agent session, scratch clone /tmp/verify-r4, heads self-resolved): VERIFIED at HEAD 80e4b25f4ee780679bf6615e7526a37da116c861 (tree 99f8fab208c2159a1dac174a48bdbe832909067a; chain 513c4fa -> 591bb6fa START -> 98c3d72d implementation -> 25257299 review-state -> 80e4b25 R4.1 corrections). Verified personally: (1) corrections diff 25257299..80e4b25 touches only S17_R4_SOURCE_GAP_CLOSURE.md (3 typo lines) and summary.md (errata section); content/meaning unchanged; (2) gates at 80e4b25: 698 tests OK (679 base + 19 new), check-consistency ok:true, workflow_lint blocking 0, work_cli validate ok with terminal handoff; (3) scope vs main: 13 added files + WORK_QUEUE append-only, no project/*.json, no frozen NL5, no vendored raw files (largest added 19,455 B); (4) claim integrity: 20/20 helix_arm_assignment=INFERRED_CANDIDATE, 20/20 sequence_status=SOURCE_CONFIRMED, 20/20 index_anchor=UNKNOWN, interface map HYPOTHESIS/CANDIDATE_DESIGN; provenance exactly 14 records, blocked_source_receipt gap=G1, exactly 10 searched_surfaces, Deep Blue and bioRxiv honest failure records, outbound_messages_to_authors=0; forbidden vocabulary only inside prohibitions; (5) review trail: events strictly append-only across the whole chain (only A, zero M), R4.1 corrections did not touch events, reviewer PASS state 25257299 contains all 5 events, timestamps monotonic 13:48:24Z -> 14:45:10Z; (6) cross-pins: R4 SI PDF sha 66074e7d... (13,861,585 B) and MOESM5 dae20e28... (2,295,898 B) byte-identical to R3 fetch-manifest pins on work/prep-s17-r3-r1; Dataset S1 scratch file sha256 = dc3cc6c5... at 101,900 B matches R4 pin and R3 KNOWLEDGEPACK. Two wording-level deviations recorded, substance unaffected: D1 - errata section overcounts the typo occurrences ('x2' for evidenc-machine; actual single occurrence, fully fixed); D2 - the verifier-prompt's trail invariant was phrased against the wrong base commit (events 0003-0005 were ADDED by the reviewed commit 25257299 itself; correct invariant - append-only chain integrity plus empty diff 25257299..80e4b25 on events/ - both hold). Merge remains Human Gate.",
+  "command_refs": [
+    "git ls-remote origin work/prep-s17-r4-source-r1 (== 80e4b25)",
+    "python3 -m unittest discover -s tests -t . (698 OK)",
+    "sha256sum /home/rdpuser/NanoLab/datasetS1.docx (dc3cc6c5..., 101900 B)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R4-SOURCE-R1/evidence-map.json",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "docs/research/S17_R4_PORT_CANDIDATES.json"
+  ],
+  "next_action": "READY_FOR_HUMAN_GATE. Owner decision pending on author questions (section 5 of S17_R4_SOURCE_GAP_CLOSURE.md, drafted, never sent) or routing the two-component workflow test to Nanobase 256/257 in a separate bounded WO.",
+  "blocker": null
+}

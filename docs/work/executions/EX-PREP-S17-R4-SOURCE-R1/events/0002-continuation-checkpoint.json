@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R4-SOURCE-R1",
+  "event_id": "0002-continuation-checkpoint",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R4-SOURCE-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r4-source",
+  "subject_sha": "591bb6faf5e5616478f8d4ba5634be7f60451cdc",
+  "timestamp_utc": "2026-10-18T14:39:20.692Z",
+  "summary": "Stage A/B/C completed: targeted web research + bounded fetches + digitization + deliverables drafted (staged, not yet committed). Key results: (1) G1 = BLOCKED_SOURCE - no follower topology/config/design file exists on any audited surface; Data availability statement (PMC VoR sha256 ead50002) lists exactly 3 repositories (Deep Blue smFRET, Nanobase 196, Zenodo 8248808); Nanobase fully enumerated 109/109 public structures (sha256 4637ff04) - no follower entry; entry 196 = exactly 12 files (sha256 b4c4a645); Zenodo 8248808 unchanged (API sha256 5d26ec0a), R2 archive enumerations reused (no multi-GB downloads); sulcgroup/hinges @ 7c8b04a6 tree sha256 fb5ef0d2 = 83 entries, 0 design files; walterlab-um SMCodes full tree (MIT) = MATLAB smFRET only; GitHub repo searches 0 relevant; Deep Blue 474299762 CLOUDFLARE_BLOCKED from sandbox (contents UNVERIFIED, low-probability design surface); bioRxiv DC1 HTTP 403 (minor open item). (2) G3 partially closed: all 10 driver-side + 10 follower-side helix/arm assignments digitized from Suppl. Fig. S5b (page 19 of SI PDF sha256 66074e7d, byte-identical to R3 pin) with status INFERRED_CANDIDATE; index anchors UNKNOWN (placeholder sequences, R2); 3D orientation UNKNOWN. (3) Dataset S1 re-verified byte-identical (dc3cc6c5...). Deliverables drafted: docs/research/S17_R4_PORT_CANDIDATES.json, docs/research/S17_R4_FOLLOWER_PROVENANCE.json (with BLOCKED_SOURCE receipt), docs/research/S17_R4_SOURCE_GAP_CLOSURE.md (RU, drafted author questions NOT sent), tests/test_s17_r4_source.py (19 offline tests OK). Network: ~20.7 MiB unique downloads of <=256 MiB budget; 0 scientific runs; 0 outbound messages. Workflow test vehicle identified (NOT the S17 follower): Nanobase 256/257 Narcissus/Echo two-component system with complete design files. Next: commit implementation batch, full validation, handoff.",
+  "command_refs": [
+    "curl https://zenodo.org/api/records/8248808",
+    "curl https://api.nanobase.org/api/v1/structure/getAllPublicStructures_paginated?skip=0&take=120",
+    "curl -o MOESM1_SI.pdf https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM1_ESM.pdf (sha256 66074e7d...)",
+    "pdftoppm -r 400..600 page 19 digitization of Suppl. Fig. S5b",
+    "python3 -m unittest tests.test_s17_r4_source (19 tests OK)"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_R4_PORT_CANDIDATES.json",
+    "docs/research/S17_R4_FOLLOWER_PROVENANCE.json",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md",
+    "tests/test_s17_r4_source.py"
+  ],
+  "next_action": "Commit implementation batch (docs/research R4 deliverables + tests), run full validation suite, record events 0003-0005 with evidence map and summary, push.",
+  "blocker": null
+}
