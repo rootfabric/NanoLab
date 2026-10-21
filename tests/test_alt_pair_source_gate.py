@@ -263,6 +263,35 @@ class SyntheticGateTests(unittest.TestCase):
         self.candidate["interface"]["anchor_map"] = as_input(p, self.root)
         self.assertTrue(any("duplicate anchor pair" in x for x in self._evaluate()["reasons"]))
 
+    def test_falsifier_numeric_in_bounds_but_nonterminal_anchor_must_block(self):
+        """A numeric particle inside a strand is not an exposed overhang port."""
+        port = self.root / "ports.json"
+        j = anchor_map()
+        j["pairs"][0]["a_index"] = 2  # inside 0..3, but not a 3p/5p terminal
+        port.write_text(json.dumps(j), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(port, self.root)
+        result = self._evaluate()
+        self.assertEqual(
+            result["outcome"], "BLOCKED_SOURCE",
+            "F01 numeric anchor alone must never establish physical connectability",
+        )
+
+    def test_falsifier_complementary_oligos_absent_from_topology_must_block(self):
+        """Pair complementarity is not enough if declared strands lack those bases."""
+        port = self.root / "ports.json"
+        j = anchor_map()
+        j["pairs"][0]["a_index"] = 0
+        j["pairs"][0]["b_index"] = 0
+        j["pairs"][0]["segment_a"] = "CCCCCC"
+        j["pairs"][0]["segment_b"] = "GGGGGG"
+        port.write_text(json.dumps(j), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(port, self.root)
+        result = self._evaluate()
+        self.assertEqual(
+            result["outcome"], "BLOCKED_SOURCE",
+            "F02 source-ready requires nucleotide-resolved terminal sequence mapping",
+        )
+
     def test_modified_backbone_fails_strict_preflight(self):
         p = self.root / "narcissus.top"
         p.write_text(topology().replace("1 A -1 1", "1 A 3 1"), encoding="utf-8")
