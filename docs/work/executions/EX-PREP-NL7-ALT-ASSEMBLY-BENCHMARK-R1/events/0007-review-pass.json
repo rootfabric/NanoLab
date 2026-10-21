@@ -2,7 +2,7 @@
   "schema_version": 1,
   "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
   "event_id": "0007-review-pass",
-  "event_type": "REVIEW_PASS",
+  "event_type": "REVIEW_CORRECTIONS",
   "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
   "actor_role": "DIRECTOR",
   "actor_id": "director-central (recording independent REVIEWER-76 session)",
