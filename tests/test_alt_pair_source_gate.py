@@ -38,13 +38,23 @@ def as_input(path: Path, root: Path) -> dict:
     }
 
 
-def topology() -> str:
-    return "4 1\n1 A -1 1\n1 C 0 2\n1 G 1 3\n1 T 2 -1\n"
+def topology(terminal_segment: str = "ACGTAC") -> str:
+    """A 12nt linear synthetic strand with a 3p exposed-segment candidate.
+
+    Legacy oxDNA body rows traverse 3p->5p; the conventional 5p->3p
+    segment is the reverse of the first six nucleotide bases.
+    """
+    assert len(terminal_segment) == 6
+    bases = terminal_segment[::-1] + "TTGGAA"
+    return f"{len(bases)} 1\n" + "".join(
+        f"1 {base} {i-1 if i else -1} {i+1 if i+1 < len(bases) else -1}\n"
+        for i, base in enumerate(bases)
+    )
 
 
 def config() -> str:
     lines = ["t = 0", "b = 30 30 30", "E = 0 0 0"]
-    for i in range(4):
+    for i in range(12):
         vals = [float(i + 1), 5.0, 5.0, 1.0, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lines.append(" ".join(str(x) for x in vals))
@@ -57,7 +67,7 @@ def anchor_map() -> dict:
         "pairs": [{
             "part_a": "NARCISSUS",
             "part_b": "ECHO",
-            "a_index": 1, "b_index": 1,
+            "a_index": 0, "b_index": 0,
             "a_end": "3p", "b_end": "3p",
             "segment_a": "ACGTAC", "segment_b": "GTACGT",
             "kind": "NONCOVALENT_DNA_HYBRIDIZATION",
@@ -153,7 +163,7 @@ class SyntheticGateTests(unittest.TestCase):
             pid = part["part_id"].lower()
             top = self.root / f"{pid}.top"
             conf = self.root / f"{pid}.dat"
-            top.write_text(topology(), encoding="utf-8")
+            top.write_text(topology("ACGTAC" if pid == "narcissus" else "GTACGT"), encoding="utf-8")
             conf.write_text(config(), encoding="utf-8")
             part["topology"] = as_input(top, self.root)
             part["configuration"] = as_input(conf, self.root)
@@ -173,11 +183,14 @@ class SyntheticGateTests(unittest.TestCase):
         outcome = self._evaluate()
         self.assertEqual(outcome["outcome"], "TEST_FIXTURE_STATIC_INPUTS_OK", outcome)
         self.assertEqual(outcome["scientific_runs"], 0)
-        self.assertEqual(outcome["part_structure_sizes"]["NARCISSUS"]["nucleotides"], 4)
+        self.assertEqual(outcome["part_structure_sizes"]["NARCISSUS"]["nucleotides"], 12)
         self.assertEqual(outcome["part_structure_sizes"]["ECHO"]["strands"], 1)
 
     def test_tampered_topology_digest_rejected(self):
-        (self.root / "echo.top").write_text(topology().replace("1 A -1 1", "1 T -1 1"), encoding="utf-8")
+        echo = self.root / "echo.top"
+        echo.write_text(echo.read_text(encoding="utf-8").replace(
+            "1 T -1 1", "1 A -1 1", 1
+        ), encoding="utf-8")
         result = self._evaluate()
         self.assertEqual(result["outcome"], "BLOCKED_SOURCE")
         self.assertTrue(any("SHA-256 mismatch" in x for x in result["reasons"]))
@@ -242,7 +255,7 @@ class SyntheticGateTests(unittest.TestCase):
     def test_bad_anchor_index_fails(self):
         p = self.root / "ports.json"
         j = anchor_map()
-        j["pairs"][0]["b_index"] = 4
+        j["pairs"][0]["b_index"] = 12
         p.write_text(json.dumps(j), encoding="utf-8")
         self.candidate["interface"]["anchor_map"] = as_input(p, self.root)
         self.assertTrue(any("out-of-bounds" in x for x in self._evaluate()["reasons"]))
@@ -276,6 +289,26 @@ class SyntheticGateTests(unittest.TestCase):
             "F01 numeric anchor alone must never establish physical connectability",
         )
 
+    def test_correct_sequence_wrong_polarity_terminal_fails(self):
+        """A real 3p terminal declared 5p is not rescued by base complementarity."""
+        port = self.root / "ports.json"
+        j = anchor_map()
+        j["pairs"][0]["a_end"] = "5p"
+        port.write_text(json.dumps(j), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(port, self.root)
+        self.assertTrue(any("not a 5p strand terminus" in reason
+                            for reason in self._evaluate()["reasons"]))
+
+    def test_reverse_complements_do_not_prove_exposed_single_strand_by_themselves(self):
+        """Internal reciprocal matches are insufficient even when source topology parses."""
+        port = self.root / "ports.json"
+        j = anchor_map()
+        # Internal particle index 3 is valid globally but not a free 3p end.
+        j["pairs"][0]["a_index"] = 3
+        port.write_text(json.dumps(j), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(port, self.root)
+        self.assertEqual(self._evaluate()["outcome"], "BLOCKED_SOURCE")
+
     def test_falsifier_complementary_oligos_absent_from_topology_must_block(self):
         """Pair complementarity is not enough if declared strands lack those bases."""
         port = self.root / "ports.json"
@@ -294,7 +327,7 @@ class SyntheticGateTests(unittest.TestCase):
 
     def test_modified_backbone_fails_strict_preflight(self):
         p = self.root / "narcissus.top"
-        p.write_text(topology().replace("1 A -1 1", "1 A 3 1"), encoding="utf-8")
+        p.write_text(topology().replace("1 C -1 1", "1 C 11 1"), encoding="utf-8")
         self.candidate["parts"][0]["topology"] = as_input(p, self.root)
         result = self._evaluate()
         self.assertTrue(any("strict oxDNA structural preflight failed" in x for x in result["reasons"]))
