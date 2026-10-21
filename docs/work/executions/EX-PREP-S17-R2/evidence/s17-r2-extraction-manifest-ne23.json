@@ -1,0 +1,373 @@
+{
+ "hinge23/soft3/soft.top": {
+  "sha256": "4ec473c8fd6c86ca6902b21d9ee5bcccc3e0c31f3a23e7fc9134fc8bfdbc568a",
+  "size": 208436,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 208436
+ },
+ "hinge23/soft_linked2/soft_linked.top": {
+  "sha256": "7eb57e42c917a36d1e23844eaa5e73455bf903cd94e4466de8e880285eb937f9",
+  "size": 214399,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 214399
+ },
+ "hinge23/NE_NS_NB1/hinge_no_seq.top": {
+  "sha256": "8469e2b649ec545848283d1fe8c9826b2141f1af29eb652132bdbfe21cc5b17f",
+  "size": 210544,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 210544
+ },
+ "hinge23/soft2/soft.top": {
+  "sha256": "4ec473c8fd6c86ca6902b21d9ee5bcccc3e0c31f3a23e7fc9134fc8bfdbc568a",
+  "size": 208436,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 208436
+ },
+ "hinge23/soft2/pairs.txt": {
+  "sha256": "de26e6e6e6551576270e4341126b2ca09ffa503a816da589bc835a0b9da48930",
+  "size": 69395,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 69395
+ },
+ "hinge23/NE_NB1/hinge_correct_seq.top": {
+  "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+  "size": 210225,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 210225
+ },
+ "hinge23/NE_NB1/last_conf_trap.dat": {
+  "sha256": "c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf",
+  "size": 3853788,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 3853788
+ },
+ "hinge23/NE_NS3/stiff_no_seq.top": {
+  "sha256": "f4089e311cf9b597170b90bb099bdc22375c406224a6efece88aaab4d54a8390",
+  "size": 216221,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 216221
+ },
+ "hinge23/submit.sh": {
+  "sha256": "c9a4fe28d0648afd5d6283a5e60345f03122b02b6a446f42a74834df776265a7",
+  "size": 318,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 318
+ },
+ "hinge23/submit_align.sh": {
+  "sha256": "537a10437d2e9da11cd1766c2c5c616e256d6f2d88990d382af3bf017a1d45e0",
+  "size": 412,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 412
+ },
+ "hinge23/nNE_NS3/linked_no_seq.top": {
+  "sha256": "6bee60f11cbc0d94553771318fb67dd30f3ac09b68e856af65d50b57ef7652b6",
+  "size": 215934,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215934
+ },
+ "hinge23/soft_linked3/soft_linked.top": {
+  "sha256": "7eb57e42c917a36d1e23844eaa5e73455bf903cd94e4466de8e880285eb937f9",
+  "size": 214399,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 214399
+ },
+ "hinge23/soft_linked1/soft_linked.top": {
+  "sha256": "7eb57e42c917a36d1e23844eaa5e73455bf903cd94e4466de8e880285eb937f9",
+  "size": 214399,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 214399
+ },
+ "hinge23/NE_NS1/stiff_no_seq.top": {
+  "sha256": "f4089e311cf9b597170b90bb099bdc22375c406224a6efece88aaab4d54a8390",
+  "size": 216221,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 216221
+ },
+ "hinge23/nNE_NS2/linked_no_seq.top": {
+  "sha256": "6bee60f11cbc0d94553771318fb67dd30f3ac09b68e856af65d50b57ef7652b6",
+  "size": 215934,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215934
+ },
+ "hinge23/NE_NS.top": {
+  "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+  "size": 210225,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 210225
+ },
+ "hinge23/get_rate.py": {
+  "sha256": "43ededadab65a9d4ec2e2cc8db917d26b43733b15436992cd3d47119e68661cb",
+  "size": 1984,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1984
+ },
+ "hinge23/soft1/soft.top": {
+  "sha256": "4ec473c8fd6c86ca6902b21d9ee5bcccc3e0c31f3a23e7fc9134fc8bfdbc568a",
+  "size": 208436,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 208436
+ },
+ "hinge23/soft1/input": {
+  "sha256": "36dcb627cad04157000ebb04960e7224f9c85bf5ff994dd914c5934c908f5894",
+  "size": 965,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 965
+ },
+ "hinge23/soft1/pairs.txt": {
+  "sha256": "de26e6e6e6551576270e4341126b2ca09ffa503a816da589bc835a0b9da48930",
+  "size": 69395,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 69395
+ },
+ "hinge23/nNE1/submit.sh": {
+  "sha256": "a1099b5341101b1875ca9fe6d68cf8458a4d9bdc1b42edd479a4f4ba08da4b8e",
+  "size": 628,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 628
+ },
+ "hinge23/nNE1/input": {
+  "sha256": "c7ebf77422a8ed1e6d151a3394ab06c7147a0be0ccd723cf08017c7fe415dfcd",
+  "size": 959,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 959
+ },
+ "hinge23/nNE1/input_relax": {
+  "sha256": "e0026debd923468a1a2166869745e4f998fe6b70f7891fb1ef9b8c36c6be21a0",
+  "size": 964,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 964
+ },
+ "hinge23/nNE1/linked.top": {
+  "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+  "size": 215616,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215616
+ },
+ "hinge23/nNE1/first_conf.dat": {
+  "sha256": "bca1c9954af8e8e3f5d18494bf099bd3399c27eb756db45d568e60c898d6e65b",
+  "size": 3922414,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 3922414
+ },
+ "hinge23/nNE1/last_conf_trap.dat": {
+  "sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+  "size": 3961974,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 3961974
+ },
+ "hinge23/submit_mean.sh": {
+  "sha256": "b15cba54a4c8c9df3b9c4f126dd945e72ed7072fd451064161fe7b96a6e85287",
+  "size": 416,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 416
+ },
+ "hinge23/soft3/pairs.txt": {
+  "sha256": "de26e6e6e6551576270e4341126b2ca09ffa503a816da589bc835a0b9da48930",
+  "size": 69395,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 69395
+ },
+ "hinge23/submit_bonds.sh": {
+  "sha256": "8fc9da053aff670cea7ee98e1643be55071a49510e5d8fdb36a89900ae4b8cb2",
+  "size": 279,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 279
+ },
+ "hinge23/NE_NS2/stiff_no_seq.top": {
+  "sha256": "f4089e311cf9b597170b90bb099bdc22375c406224a6efece88aaab4d54a8390",
+  "size": 216221,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 216221
+ },
+ "hinge23/nNE_NS1/linked_no_seq.top": {
+  "sha256": "6bee60f11cbc0d94553771318fb67dd30f3ac09b68e856af65d50b57ef7652b6",
+  "size": 215934,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 215934
+ },
+ "hinge23/structures/loose_arm_1.txt": {
+  "sha256": "4302376453b50e6100a1294d202273779aa2dbe2b1982563446d98fe36c814ab",
+  "size": 33670,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33670
+ },
+ "hinge23/structures/soft_closed_no_bridge_arm_2.txt": {
+  "sha256": "84a9fe3df94bc64248f8a55d03e0e3a98e0ae17bbc6b39f17d946498d74659e0",
+  "size": 33303,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33303
+ },
+ "hinge23/structures/stiff_closed_no_bridge_arm_1.txt": {
+  "sha256": "182a52f0114a2a02fec12db80a6342e2eb64985fa551479080c41f6e27a8b682",
+  "size": 32479,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32479
+ },
+ "hinge23/structures/linked_arm_2.txt": {
+  "sha256": "8d9ce1a7bdec9b1ac1d8907786195490858b0bef9188cc75f644ee2f7db97024",
+  "size": 33843,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33843
+ },
+ "hinge23/structures/linked_arm_1.txt": {
+  "sha256": "a1a0038234ca0e4264f778e1c7e245b202bdaf38200e5f23eeb2ffbe95fdb4aa",
+  "size": 32710,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32710
+ },
+ "hinge23/structures/stiff_arm_1.txt": {
+  "sha256": "34ece9d6ac0e4f5db5ec2378604c3db133077c93887efcff98f2a44ba20ec4a2",
+  "size": 32935,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32935
+ },
+ "hinge23/structures/ss_ids.txt": {
+  "sha256": "9ea8f6fc27fac62953a273de300d3883773f55b277e2232392af4a2e0714eb07",
+  "size": 1504,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 1504
+ },
+ "hinge23/structures/closed_no_bridge_arm_2.txt": {
+  "sha256": "e00720990635b0af5d04a0638c69b06be9c6d901fa5dc55fbaf3d10e46e20be4",
+  "size": 33288,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33288
+ },
+ "hinge23/structures/#stiff_closed_no_bridge_arm_1.txt#": {
+  "sha256": "c761b413fd0cf3d78c37102b22c91ed3b564397b00f1ca55e5e2e32659f11179",
+  "size": 38666,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 38666
+ },
+ "hinge23/structures/soft_arm_1.txt": {
+  "sha256": "689fc17103acd6ce6bf388d2cb232f579a5e2a0cf5a00a982b40aa925ce83e74",
+  "size": 32718,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32718
+ },
+ "hinge23/structures/soft_arm_2.txt": {
+  "sha256": "27f1a29e64ed38ab8ff17bd3c5ac2de215d239da232f0ec593eeac6ada674f3f",
+  "size": 33934,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33934
+ },
+ "hinge23/structures/loose_arm_2.txt": {
+  "sha256": "e38d17dd3324484f6e792a41d154fcfcc2fe946f5bdb177e7a0250257cce52b5",
+  "size": 33943,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33943
+ },
+ "hinge23/structures/stiff_arm_2.txt": {
+  "sha256": "f860390a05a204d99711600d11e2d849897597747876aa19bd4efb0353d1e840",
+  "size": 34014,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 34014
+ },
+ "hinge23/structures/soft_closed_no_bridge_arm_1.txt": {
+  "sha256": "dd76f99e7a8bedcc27d801257dd2d537c73008f720a34ff5481dc8e4ab799220",
+  "size": 32811,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32811
+ },
+ "hinge23/structures/soft_linked_arm_2.txt": {
+  "sha256": "1b23c7fa0122f920701b77e896b090c5b09355948db7ebc501f4df211aed6122",
+  "size": 33209,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33209
+ },
+ "hinge23/structures/stiff_closed_no_bridge_arm_2.txt": {
+  "sha256": "5f0b8bd8f7efcd7c9c66f0d94e6a5803acf143892715ef60883bf36138a51f76",
+  "size": 33827,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33827
+ },
+ "hinge23/structures/hinge_arm_2.txt": {
+  "sha256": "2a74a361583548ad1d81a77f8b983ec55638b839de3a96d642cd10beea1505f5",
+  "size": 33919,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33919
+ },
+ "hinge23/structures/hinge_arm_1.txt": {
+  "sha256": "696d87f2628ba4d013f749de610dfb0b4cc909490fa3902f88d5fd9470b5e8c5",
+  "size": 32467,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32467
+ },
+ "hinge23/structures/soft_pull_arm_2.txt": {
+  "sha256": "c71be1105fd5d15b5fedfd67cf281f0827ac82c189c2aef45d0d3378134ae19b",
+  "size": 33895,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 33895
+ },
+ "hinge23/structures/soft_linked_arm_1.txt": {
+  "sha256": "586b436416d30b3056fbcbbda007da83e0928d26324f6ea27498029badf23f57",
+  "size": 32769,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32769
+ },
+ "hinge23/structures/closed_no_bridge_arm_1.txt": {
+  "sha256": "8ee1ff6f540da6c948ef6ad86e8e222b2d5d83bb1337159d1e1ea1a4e040a812",
+  "size": 32670,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32670
+ },
+ "hinge23/structures/soft_pull_arm_1.txt": {
+  "sha256": "d9599a2dffbd79211545cc68eceef21ad06ddd2613b1ef0338c90e44519278c3",
+  "size": 32656,
+  "crc32_ok": true,
+  "method": 8,
+  "usize": 32656
+ }
+}

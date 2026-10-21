@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R2",
+  "event_id": "0005-review-verdict-and-corrections",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-S17-R2",
+  "actor_role": "DIRECTOR",
+  "actor_id": "director-central (applying independent Reviewer findings)",
+  "subject_sha": "a886aa656dc9146c2083624be9c349882c40d22c",
+  "timestamp_utc": "2026-10-18T15:02:47.381Z",
+  "summary": "Independent fresh Reviewer session (scratch clone /tmp/review-r2, fully self-verified: 746 tests OK at exact head, all gates green, scope inside allowed_paths, all 12 pin-identity entries cross-checked, 3 vendored quotes re-hashed, 9 re-derived digests match R1 pins) returned VERDICT PASS with ZERO blocking findings and six non-blocking findings (N1-N6). Reviewer evidence highlights: main baseline 679 OK; branch 746 OK; range_fetch byte accounting exact; cap enforcement proven reachable; chain-integrity real (strict reparse, fail-closed recipes); claim discipline clean; r0 arithmetic correct (8.8*0.8518=7.496nm); 16pN/7.5nm Methods quote pinned verbatim. This corrections event applies the reviewer's recommended errata BEFORE Human Gate: N1 stale gate count 745 -> 746 = 679+67 (summary, evidence-map, WORK_QUEUE row; event 0003/0004 texts remain immutable, their 'pending final run' caveat superseded here); N2 cap negative controls now genuinely reach the cap - range_fetch zip-bomb guard MOVED ABOVE local-header parsing and inflate (also closes the decompress-before-cap memory window, part of N6); both controls now assert 'safety cap' so they cannot pass for a different error; N3 CD total 2,324 -> 2,326 (276+207+949+894; canonical source = s17-r2-df-not-reconstructed.json full enumeration; 2,324 had no evidential backing); N4 stale '66 offline tests' -> 67 (recovery doc sections 1/7, summary). DEFERRED as non-blocking follow-ups (recorded, not silently dropped): N5 passport status convention (STARTED vs terminal; sibling executions share it), N6 remaining hardening (EOCD count cross-check in range_fetch parse_central_directory, iter_member_blobs docstring, multipart CRLF strictness, retry-byte accounting, scratch .range_*.bin cleanup). Post-correction gates on exact head a886aa656dc9146c2083624be9c349882c40d22c: full suite 746 tests OK (59.0s), check-consistency ok:true, workflow_lint blocking:0, work_cli validate EX-PREP-S17-R2 ok:true. Verifier must use the NEW tip.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . -p 'test_s17_r2_*.py' (67 OK after corrections)",
+    "git diff 26c4cd5..HEAD -- scripts/knowledge_pack/s17_range_fetch.py tests/test_s17_r2_*.py"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R2/summary.md (Errata R2.1 section)",
+    "docs/work/executions/EX-PREP-S17-R2/evidence-map.json (post_review_corrections)",
+    "docs/research/S17_SOURCE_RECOVERY_R2.md"
+  ],
+  "next_action": "Fresh exact-head Verifier on the post-correction tip; then Human Gate.",
+  "blocker": null
+}

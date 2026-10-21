@@ -1,0 +1,256 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r2_structures_analysis",
+ "source": "Zenodo NE23.zip hinge23/structures/ (CRC-verified members)",
+ "note": "namespace_fit is a hard bounds test (all indices < design particle count); files exceeding NE_NB=14011 cannot belong to the NE_NB design",
+ "files": {
+  "ss_ids": {
+   "count": 322,
+   "windows": [
+    {
+     "first": 7248,
+     "last": 7196,
+     "count": 53
+    },
+    {
+     "first": 1834,
+     "last": 1782,
+     "count": 53
+    },
+    {
+     "first": 1421,
+     "last": 1369,
+     "count": 53
+    },
+    {
+     "first": 1112,
+     "last": 1060,
+     "count": 53
+    },
+    {
+     "first": 699,
+     "last": 647,
+     "count": 53
+    },
+    {
+     "first": 412,
+     "last": 360,
+     "count": 53
+    },
+    {
+     "first": 7195,
+     "last": 7192,
+     "count": 4
+    }
+   ],
+   "strands": [
+    1
+   ],
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "hinge_arm_1": {
+   "count": 6209,
+   "max_index": 13626,
+   "min_index": 233,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "hinge_arm_2": {
+   "count": 6544,
+   "max_index": 14010,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "linked_arm_1": {
+   "count": 6218,
+   "max_index": 14333,
+   "min_index": 414,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "linked_arm_2": {
+   "count": 6524,
+   "max_index": 14278,
+   "min_index": 7,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "soft_arm_1": {
+   "count": 6212,
+   "max_index": 13870,
+   "min_index": 415,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "soft_arm_2": {
+   "count": 6578,
+   "max_index": 13825,
+   "min_index": 2,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "stiff_arm_1": {
+   "count": 6271,
+   "max_index": 14156,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "stiff_arm_2": {
+   "count": 6579,
+   "max_index": 14342,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "loose_arm_1": {
+   "count": 6400,
+   "max_index": 14193,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "loose_arm_2": {
+   "count": 6571,
+   "max_index": 14135,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "closed_no_bridge_arm_1": {
+   "count": 6217,
+   "max_index": 14040,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "closed_no_bridge_arm_2": {
+   "count": 6446,
+   "max_index": 13982,
+   "min_index": 8,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "soft_closed_no_bridge_arm_1": {
+   "count": 6225,
+   "max_index": 13955,
+   "min_index": 401,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "soft_closed_no_bridge_arm_2": {
+   "count": 6472,
+   "max_index": 13929,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  },
+  "soft_linked_arm_1": {
+   "count": 6214,
+   "max_index": 14194,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "soft_linked_arm_2": {
+   "count": 6454,
+   "max_index": 14253,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "soft_pull_arm_1": {
+   "count": 6188,
+   "max_index": 14257,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "soft_pull_arm_2": {
+   "count": 6580,
+   "max_index": 14226,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "stiff_closed_no_bridge_arm_1": {
+   "count": 6188,
+   "max_index": 14034,
+   "min_index": 413,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": false
+   }
+  },
+  "stiff_closed_no_bridge_arm_2": {
+   "count": 6540,
+   "max_index": 13982,
+   "min_index": 0,
+   "namespace_fit": {
+    "NE": true,
+    "nNE": true,
+    "NE_NB": true
+   }
+  }
+ }
+}

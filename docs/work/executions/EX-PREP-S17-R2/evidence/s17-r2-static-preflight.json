@@ -1,0 +1,101 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r2_static_preflight_receipts",
+ "engine": "oxDNA (single-engine static file preflight only; no physics run)",
+ "nanobase_designs": {
+  "NE": {
+   "topology_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/NE.top",
+   "configuration_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/NE.dat",
+   "topology_sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+   "configuration_sha256": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66",
+   "nucleotides": 14343,
+   "strand_count": 161,
+   "linear_strands": 160,
+   "circular_strands": 1,
+   "valency_ok": true,
+   "counts_match": true,
+   "index_map_digest": "a2b7e224bc654e593c70dc4a8700fc62a15320806cfe1b61ffe905183a5c093d",
+   "structural_digest": "c227e0b585983820509961bd2e51236c152e74ce2443540e937f45f4f325e885",
+   "deterministic_reimport": true,
+   "errors": [],
+   "claim": "STATIC_FILE_OPERATION_ONLY"
+  },
+  "nNE": {
+   "topology_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/nNE.top",
+   "configuration_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/nNE.dat",
+   "topology_sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+   "configuration_sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+   "nucleotides": 14343,
+   "strand_count": 163,
+   "linear_strands": 162,
+   "circular_strands": 1,
+   "valency_ok": true,
+   "counts_match": true,
+   "index_map_digest": "22447c356c409861bfb43d7c958c3f9eadc0d7f8a050787966549d963f4f3df1",
+   "structural_digest": "20c3912671280b7183cd4a81e6cbe839bef6a21a5f42247d63a77694a2d60216",
+   "deterministic_reimport": true,
+   "errors": [],
+   "claim": "STATIC_FILE_OPERATION_ONLY"
+  },
+  "NE_NB": {
+   "topology_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/NE_NB.top",
+   "configuration_path": "/home/rdpuser/NanoLab/prep-s17-audit/raw/nanobase/files/structure/NE_NB.dat",
+   "topology_sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+   "configuration_sha256": "c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf",
+   "nucleotides": 14011,
+   "strand_count": 163,
+   "linear_strands": 162,
+   "circular_strands": 1,
+   "valency_ok": true,
+   "counts_match": true,
+   "index_map_digest": "e52d344d5f321f28819a921b2fb61298effa0ada997bd3833cc856e22553588b",
+   "structural_digest": "5e7610a84bed18815d3b0042f63d873524750bea47e6b1e50e2b8cae0b8edcf1",
+   "deterministic_reimport": true,
+   "errors": [],
+   "claim": "STATIC_FILE_OPERATION_ONLY"
+  }
+ },
+ "recovered_topologies": {
+  "soft": {
+   "sha256": "4ec473c8fd6c86ca6902b21d9ee5bcccc3e0c31f3a23e7fc9134fc8bfdbc568a",
+   "size": 208436,
+   "nucleotides": 13927,
+   "strand_count": 161,
+   "linear_strands": 160,
+   "circular_strands": 1
+  },
+  "soft_linked": {
+   "sha256": "7eb57e42c917a36d1e23844eaa5e73455bf903cd94e4466de8e880285eb937f9",
+   "size": 214399,
+   "nucleotides": 14259,
+   "strand_count": 164,
+   "linear_strands": 163,
+   "circular_strands": 1
+  },
+  "soft_pull": {
+   "sha256": "e70b8ee7cbcc38561b87a375c5f771c54a521c20daffcaa68c26b8a570e88a52",
+   "size": 214381,
+   "nucleotides": 14258,
+   "strand_count": 164,
+   "linear_strands": 163,
+   "circular_strands": 1
+  },
+  "NE_NS": {
+   "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+   "size": 210225,
+   "nucleotides": 14011,
+   "strand_count": 163,
+   "linear_strands": 162,
+   "circular_strands": 1
+  },
+  "loose_bridge": {
+   "sha256": "7c5c55e03d98d48f4385798d84120f35bf25c9fc4e95e439bc5a45a8496ad56e",
+   "size": 215904,
+   "nucleotides": 14343,
+   "strand_count": 164,
+   "linear_strands": 163,
+   "circular_strands": 1
+  }
+ },
+ "claim_ceiling": "PINNED_IMPORT_VERIFIED"
+}

@@ -1,0 +1,284 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r2_port_map",
+ "source": "Zenodo record 8248808 (CC-BY-4.0) + Nanobase structure 196 files (R1 pins)",
+ "index_convention": "0-based particle index; .top body row i == particle i; strand ids are 1-based contiguous in-file order; -1 = no n3/n5 neighbour",
+ "claim_ceiling": "PINNED_IMPORT_VERIFIED",
+ "namespaces": {
+  "NE": {
+   "sha256": "5074d559a092271f097c5da2a181aa8a399a7f8bc13dc0c8a2c5abc250acc3fb",
+   "nucleotides": 14343,
+   "strand_count": 161,
+   "R1_pin": "s17/nanobase/structure/NE.top",
+   "zenodo_members_byte_identical": [
+    "ne37:hinge37/NE1/stiff.top",
+    "pr23:pull_release23/NE_pull_fine1/stiff.top",
+    "pr23:pull_release23/NE_pull_long/stiff.top",
+    "pr37:pull_release37/NE_pull1/stiff.top"
+   ],
+   "configuration_pin": {
+    "file": "NE.dat",
+    "sha256": "c73aeb86fc67bbf9ff2e1588ad78441eb75248ba18aaa66257af5f280e805a66",
+    "member": "ne37:hinge37/NE1/last_conf_trap.dat"
+   }
+  },
+  "nNE": {
+   "sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+   "nucleotides": 14343,
+   "strand_count": 163,
+   "R1_pin": "s17/nanobase/structure/nNE.top",
+   "zenodo_members_byte_identical": [
+    "ne23:hinge23/nNE1/linked.top",
+    "ne37:hinge37/nNE1/linked.top",
+    "pr23:pull_release23/nNE_pull_fine1/linked.top",
+    "pr37:pull_release37/nNE_pull1/linked.top"
+   ],
+   "configuration_pin": {
+    "file": "nNE.dat",
+    "sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f",
+    "member": "ne23:hinge23/nNE1/last_conf_trap.dat"
+   }
+  },
+  "NE_NB": {
+   "sha256": "5abfcbde51e757e0ea0dfb8ba2923092d1bd542a9ac590be7c3f6d04c230d2a9",
+   "nucleotides": 14011,
+   "strand_count": 163,
+   "R1_pin": "s17/nanobase/structure/NE_NB.top",
+   "zenodo_members_byte_identical": [
+    "ne23:hinge23/NE_NB1/hinge_correct_seq.top",
+    "ne23:hinge23/NE_NS.top"
+   ],
+   "configuration_pin": {
+    "file": "NE_NB.dat",
+    "sha256": "c802eb9547507a4af0b234d078e6fcc08ac700948e4994ce613c9f854ef20fdf",
+    "member": "ne23:hinge23/NE_NB1/last_conf_trap.dat"
+   }
+  },
+  "soft_pull": {
+   "sha256": "e70b8ee7cbcc38561b87a375c5f771c54a521c20daffcaa68c26b8a570e88a52",
+   "nucleotides": 14258,
+   "strand_count": 164,
+   "R1_pin": null,
+   "zenodo_members_byte_identical": [
+    "pr23:pull_release23/soft_pull_fine3/soft_pull.top"
+   ],
+   "note": "design not in the R1 Nanobase set; topology-only namespace used by the soft pull runs"
+  }
+ },
+ "actuation_force_pairs": {
+  "semantics": "oxDNA constant_trap: F pulls particle toward ref_particle to rest separation r0; stiff=0.3290, r0=8.8 oxDNA units = 7.496 nm (= the 7.5 nm T7RNAP cut-off radius reported in the article), PBC=1",
+  "pairs": [
+   {
+    "family": "nNE (and nNE_NS)",
+    "particle": 8694,
+    "ref_particle": 7374,
+    "status": "SOURCE_CONFIRMED",
+    "evidence": "polymerase_positioning.txt byte-identical to Nanobase pin T7_force.txt in all nNE/nNE_NS pull runs (23C and 37C) and both archive-root copies",
+    "resolved": {
+     "nNE": [
+      {
+       "particle": 8694,
+       "strand_id": 28,
+       "position_in_strand": 45,
+       "base": "T",
+       "five_prime_terminal": true,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      },
+      {
+       "particle": 7374,
+       "strand_id": 2,
+       "position_in_strand": 125,
+       "base": "A",
+       "five_prime_terminal": false,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      }
+     ]
+    }
+   },
+   {
+    "family": "NE (and NE_NS)",
+    "particle": 8514,
+    "ref_particle": 14288,
+    "status": "SOURCE_CONFIRMED",
+    "evidence": "single force-file variant sha256=3f70c7e6bf56... shared by all NE/NE_NS pull runs (23C and 37C); differs from the Nanobase exhibit",
+    "resolved": {
+     "NE": [
+      {
+       "particle": 8514,
+       "strand_id": 27,
+       "position_in_strand": 45,
+       "base": "T",
+       "five_prime_terminal": true,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      },
+      {
+       "particle": 14288,
+       "strand_id": 161,
+       "position_in_strand": 183,
+       "base": "A",
+       "five_prime_terminal": false,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      }
+     ]
+    }
+   },
+   {
+    "family": "soft",
+    "particle": 14102,
+    "ref_particle": 13840,
+    "status": "SOURCE_CONFIRMED",
+    "evidence": "soft-family polymerase_positioning.txt (98 B variant); indices resolve against soft_pull.top (14258 nt), NOT soft.top (13927 nt)",
+    "resolved": {
+     "soft_pull": [
+      {
+       "particle": 14102,
+       "strand_id": 159,
+       "position_in_strand": 24,
+       "base": "T",
+       "five_prime_terminal": true,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      },
+      {
+       "particle": 13840,
+       "strand_id": 157,
+       "position_in_strand": 125,
+       "base": "A",
+       "five_prime_terminal": false,
+       "three_prime_terminal": false,
+       "strand_circular": false
+      }
+     ]
+    }
+   }
+  ],
+  "shared_structure_observation": "in every design family the pulled particle is a 5'-terminal nucleotide of a short protruding strand (46/46/25 nt), and ref_particle sits mid-strand (position 125/183/125) of a longer strand; sequence semantics (promoter/terminator positions) remain UNKNOWN because all pinned topologies carry placeholder sequences",
+  "nanobase_pin_binding": "T7_force.txt pin (sha256 71c69b48...) binds to the nNE family only"
+ },
+ "get_k_arm_reference_indices": {
+  "source": "R1 pin s17/github/get_k.py: arm refs [2034,6657] and [4593,4411] ('for all others'); [2609,6336] marked old-design",
+  "resolved": {
+   "NE": [
+    {
+     "particle": 2034,
+     "strand_id": 1,
+     "position_in_strand": 2034,
+     "base": "T",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 6657,
+     "strand_id": 1,
+     "position_in_strand": 6657,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 4593,
+     "strand_id": 1,
+     "position_in_strand": 4593,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 4411,
+     "strand_id": 1,
+     "position_in_strand": 4411,
+     "base": "A",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 2609,
+     "strand_id": 1,
+     "position_in_strand": 2609,
+     "base": "G",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 6336,
+     "strand_id": 1,
+     "position_in_strand": 6336,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    }
+   ],
+   "nNE": [
+    {
+     "particle": 2034,
+     "strand_id": 1,
+     "position_in_strand": 2034,
+     "base": "T",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 6657,
+     "strand_id": 1,
+     "position_in_strand": 6657,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 4593,
+     "strand_id": 1,
+     "position_in_strand": 4593,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 4411,
+     "strand_id": 1,
+     "position_in_strand": 4411,
+     "base": "A",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 2609,
+     "strand_id": 1,
+     "position_in_strand": 2609,
+     "base": "G",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    },
+    {
+     "particle": 6336,
+     "strand_id": 1,
+     "position_in_strand": 6336,
+     "base": "C",
+     "five_prime_terminal": false,
+     "three_prime_terminal": false,
+     "strand_circular": true
+    }
+   ]
+  },
+  "note": "all six indices fall on the circular 7,249-nt scaffold (strand 1) in both NE and nNE; positions equal the particle index on the scaffold span"
+ },
+ "bridge_odns": {
+  "status": "UNKNOWN",
+  "reason": "the transcribable bridge sequence (T7 promoter TAATACGACTCACTATAGGG + terminators) is absent from all pinned topologies (placeholder sequences); NE vs NE_NB are entirely different scaffold designs, so sequence-based port identification is impossible from available sources; bridge ODN names/sequences exist only in the supplementary docx (R1)"
+ }
+}
