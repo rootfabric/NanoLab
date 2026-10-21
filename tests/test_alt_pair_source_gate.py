@@ -388,6 +388,50 @@ class SyntheticGateTests(unittest.TestCase):
         self.assertEqual(result["outcome"], "BLOCKED_SOURCE",
                          "nonfinite periodic simulation box cannot pass preflight")
 
+
+    def _two_opposite_terminal_ports(self, segment_len: int):
+        """Construct source-pinned, reciprocal 5p/3p ports on the same 12nt strand."""
+        sequence_a = "AAGGTTACGTAC"  # conventional 5p->3p
+        sequence_b = "GTACGTAACCTT"  # full reciprocal reverse complement
+        for part, seq in zip(self.candidate["parts"], (sequence_a, sequence_b)):
+            pid = part["part_id"].lower()
+            f = self.root / (pid + ".top")
+            rows_3p_to_5p = seq[::-1]
+            f.write_text(f"12 1\n" + "".join(
+                f"1 {base} {i-1 if i else -1} {i+1 if i < 11 else -1}\n"
+                for i, base in enumerate(rows_3p_to_5p)
+            ), encoding="utf-8")
+            part["topology"] = as_input(f, self.root)
+        j = anchor_map()
+        first = j["pairs"][0]
+        first.update({
+            "a_end": "3p", "b_end": "5p", "a_index": 0, "b_index": 11,
+            "segment_a": sequence_a[-segment_len:],
+            "segment_b": sequence_b[:segment_len],
+        })
+        second = copy.deepcopy(first)
+        second.update({
+            "a_end": "5p", "b_end": "3p", "a_index": 11, "b_index": 0,
+            "segment_a": sequence_a[:segment_len],
+            "segment_b": sequence_b[-segment_len:],
+        })
+        j["pairs"].append(second)
+        f = self.root / "ports.json"
+        f.write_text(json.dumps(j, sort_keys=True), encoding="utf-8")
+        self.candidate["interface"]["anchor_map"] = as_input(f, self.root)
+        return self._evaluate()
+
+    def test_distinct_terminal_bonds_with_nonoverlapping_nucleotides_allowed(self):
+        """Two six-base opposite-end ports can coexist when nucleotide sets are disjoint."""
+        result = self._two_opposite_terminal_ports(6)
+        self.assertEqual(result["outcome"], "TEST_FIXTURE_STATIC_INPUTS_OK", result)
+
+    def test_distinct_terminal_bonds_with_overlapping_nucleotides_blocked(self):
+        """Different terminal indices still conflict if their claimed bases overlap."""
+        result = self._two_opposite_terminal_ports(8)
+        self.assertEqual(result["outcome"], "BLOCKED_SOURCE", result)
+        self.assertTrue(any("already assigned" in x for x in result["reasons"]), result)
+
     def test_cli_produces_fail_closed_json_and_exit_code(self):
         fp = self.root / "pack.json"
         published = gate.parse_json_no_duplicate_keys(PACK_FILE.read_text(encoding="utf-8"))
