@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "event_id": "0002-implementation-committed",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "work_order_id": "WO-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-s17-static-assembly-hardening",
+  "subject_sha": "e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6",
+  "timestamp_utc": "2026-10-18T15:48:44.037Z",
+  "summary": "Implementation committed on branch work/s17-static-assembly-hardening-r1: subject e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6 (tree 724cb5ba7eb1b3c8db80d640d123977a5eb9e29e), base START d9c3e05 on verified R3-repair tip 0b9311c. Deliverables in exactly the allowed paths: (1) scripts/knowledge_pack/assembly_cli.py - deterministic offline stdlib CLI over the repaired assembler library: subcommand assemble (driver+follower+assembly MechanicalComponentSpec/AssemblySpec JSON + optional --recipe resolved against --recipe-base through assembly_spec.assemble_artifacts(recipe_base=...); writes <assembly_id>.top + <assembly_id>.dat + receipt.json atomically via temp files + os.replace with cleanup on failure; sorted JSON keys, library fixed float formatting, no timestamps anywhere in artifact bytes) and subcommand verify (receipt kind/status checks, sha256 cross-check of both oxDNA files against receipt assembled manifest, strict hinge_family Topology.parse+check_chain_integrity and Configuration.parse reparse with count cross-checks; exit 0/1, single stdout status line, no stdout science); fail-closed CLI boundaries: unknown args (argparse), missing/non-file inputs, >4MiB input JSON cap, absolute or '..' outdir (out-of-tree refusal), backslash outdir, non-empty existing outdir, duplicate particle ids (one anchor particle index bound by two different connections - the oxDNA index-space reading of the duplicate-id failure class), --recipe on non-SOURCE_VERIFIED mode, --recipe not matching the declared interface_recipe_ref.path (substitution refused), remote-only topology/configuration pins (offline discipline: never fetches), unsafe assembly_id stem; exit codes 0 = assembled or honest NOT_RECONSTRUCTED (never a scientific pass), 1 = verify mismatch, 2 = refusal (BLOCKED_* refusal receipt still written as evidence; NEVER .top/.dat on any failure path); claim-ceiling guard refuses to write any status outside ASSEMBLY_STATUSES or equal to forbidden markers. (2) assembly_spec.py repair-review minors: (a) role-symmetric _component_transform_params - driver-side unit_conversion/coordinate_transforms are now APPLIED through the same unit factor -> rotation -> translation pipeline to driver particles and driver anchor hints in assemble(), assemble_artifacts() and _geometry_checks() (identity when undeclared, so the 846-test behavior is unchanged; APPLY option chosen over loud-rejection per WO decision); (b) _verify_interface_recipe segment cross-check is mandatory for SOURCE_VERIFIED: a recipe entry without driver_segment/follower_segment or a port chemistry without declared overhang_segment refuses BLOCKED_SOURCE instead of silently skipping (CANDIDATE_DESIGN never reaches the function and stays permissive; validate_component_spec untouched - PR #61 contract preserved). (3) docs/examples/s17_static_assembly_example/ - CANDIDATE_DESIGN/HYPOTHESIS synthetic two-ODN pair (12nt + 12nt exact reverse complements, one non-covalent connection, follower translation [6,0,0]) with component+assembly specs, .top/.dat inputs, README and committed expected_receipt.json. (4) tests/test_s17_static_assembly_cli.py - 31 tests: example byte-determinism (two runs identical sha256 incl. PYTHONHASHSEED variance), receipt == expected_receipt.json bytes, verify roundtrip, tampered artifact/receipt/unparseable/missing receipt detection, unknown arg, missing input, oversized input, absolute+traversal outdir, duplicate particle ids, recipe wrong bytes BLOCKED_INPUT, recipe substitution, recipe-on-CANDIDATE_DESIGN, NOT_RECONSTRUCTED clean exit with receipt-only dir, unsafe assembly_id, remote-pin refusal, driver-transform application (library + CLI end-to-end), SOURCE_VERIFIED recipe strictness + CANDIDATE_DESIGN permissiveness. 0 scientific runs, 0 network calls.",
+  "command_refs": [
+    "git commit e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6",
+    "git rev-parse HEAD HEAD^{tree}",
+    "python3 -m py_compile scripts/knowledge_pack/assembly_cli.py scripts/knowledge_pack/assembly_spec.py",
+    "adversarial self-probes: same-spec driver==follower -> BLOCKED_SPEC receipt exit 2; verify on non-dir -> exit 1; no-args -> argparse exit 2"
+  ],
+  "evidence_refs": [
+    "scripts/knowledge_pack/assembly_cli.py",
+    "scripts/knowledge_pack/assembly_spec.py",
+    "docs/examples/s17_static_assembly_example/expected_receipt.json",
+    "tests/test_s17_static_assembly_cli.py"
+  ],
+  "next_action": "Full validation gate on the exact implementation head, then handoff.",
+  "blocker": null
+}

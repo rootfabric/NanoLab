@@ -1,0 +1,85 @@
+{
+  "assembled": {
+    "assembly_box": [
+      30.0,
+      12.0,
+      12.0
+    ],
+    "configuration_text_sha256": "b2315a5ada684460bfe432b3b7f1ae9bd4eec04ddc4d5f78a026ec062189e8dc",
+    "index_map_policy": {
+      "covalent_links": "created only inside each component by its own n3/n5 rows; hybridization connections never create n3/n5 links",
+      "particle_index_space": "0-based; driver particles keep their local indices; follower particle g = local f + driver nucleotide count",
+      "strand_ids": "fresh contiguous 1..S in file order (driver strands, then follower strands); collisions are impossible by construction"
+    },
+    "note": "topology_text/configuration_text themselves are returned by assemble_artifacts()",
+    "nucleotides": 24,
+    "strands": 2,
+    "topology_text_sha256": "e33bdc0749da49dc070ef6e0698e3ef21de9adf15df87879345bfef0b545450c"
+  },
+  "assembly_id": "SYN-EX-DF-1",
+  "assembly_status": "ASSEMBLED_STATIC_ONLY",
+  "backbone_edits_applied": [],
+  "claim": "STATIC_FILE_OPERATION_ONLY: deterministic file-level construction. Never ASSEMBLY_VALIDATED; never evidence of hybridization occurring, of motion transfer, of function, or of wet-lab fabricability.",
+  "components": {
+    "driver": {
+      "component_id": "SYN-EX-DRIVER",
+      "topology_sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87",
+      "version": "1.0.0"
+    },
+    "follower": {
+      "component_id": "SYN-EX-FOLLOWER",
+      "topology_sha256": "8320ce44b97fcf22e65999a3124db8eee80f5da1ddc8bcf250fb2aef5e5c7afb",
+      "version": "1.0.0"
+    }
+  },
+  "connections": [
+    {
+      "complementarity_match_nt": 12,
+      "connection_id": "c1",
+      "covalent": false,
+      "evidence_status": "INFERRED_CANDIDATE",
+      "kind": "SS_DNA_OVERHANG_HYBRIDIZATION",
+      "note": "recorded as a non-covalent hybridization interface; no backbone link created",
+      "overhang_interface": {
+        "driver_overhang_end": "3p",
+        "exact_reverse_complement": true,
+        "follower_overhang_end": "5p",
+        "lna": false,
+        "match_nt": 12,
+        "note": "evidence bound to the declared exposed overhang segments (R3-F04)"
+      }
+    }
+  ],
+  "design_basis": "HYPOTHESIS",
+  "geometry": {
+    "clash_scan": {
+      "method": "centroid nucleotide positions, minimum-image distance; no excluded-volume model",
+      "min_inter_component_distance": 3.5,
+      "overlapping_pairs": 0,
+      "threshold": 0.5
+    },
+    "connected_anchor_distances": [
+      {
+        "connection_id": "c1",
+        "distance": 6.946222
+      }
+    ],
+    "enabled": true,
+    "note": "coarse scan found no hard conflict, but an excluded-volume/steric impossibility proof is out of scope for this checker"
+  },
+  "geometry_status": "GEOMETRY_UNVERIFIED",
+  "inputs": {
+    "driver": {
+      "configuration_sha256": "c12b32de9bdbb98cbfda5dbaebd6322b991583c582fd7f22c5cead1d13205c4a",
+      "topology_sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87"
+    },
+    "follower": {
+      "configuration_sha256": "a757d389179ec57b0b740f237812e2c1416cbf30dd983cdf6f04d96ba1bbdcf6",
+      "topology_sha256": "8320ce44b97fcf22e65999a3124db8eee80f5da1ddc8bcf250fb2aef5e5c7afb"
+    }
+  },
+  "kind": "assembly_receipt",
+  "mode": "CANDIDATE_DESIGN",
+  "reason": null,
+  "schema_version": 1
+}

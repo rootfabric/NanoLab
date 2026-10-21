@@ -1,0 +1,2 @@
+driver ports: 10 follower ports: 10
+pairs failing (20nt | exact-RC | segment-in-own-LNA-stripped-seq): none — 10/10 OK

@@ -1,0 +1,2 @@
+assembly_cli: assembly refused: BLOCKED_INFERRED_INTERFACE: connection c1: sequences are not complementary (max reverse-complement match 11 nt < 12)
+{"artifact_dir": "/tmp/tamper_ctl2/out_tamperA", "artifacts": {"receipt.json": "e11e76faa859e03b9ee2078fef9123965914cfef479cefe90bb4e8f05df22f08"}, "assembly_status": "BLOCKED_INFERRED_INTERFACE", "command": "assemble", "geometry_status": "NOT_PERFORMED", "schema": "nanolab.assembly_cli.v1"}

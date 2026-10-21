@@ -1,0 +1,62 @@
+{
+ "schema_version": 1,
+ "kind": "assembly_spec",
+ "spec_version": "v1",
+ "assembly_id": "S17-DF-ORIGINAL-R3",
+ "mode": "SOURCE_VERIFIED",
+ "design_basis": "PUBLISHED_SOURCE",
+ "claim_level": "PINNED_IMPORT_VERIFIED",
+ "knowledge_pack_ref": {
+  "pack_id": "S17-LEAF-SPRING-NANOENGINE-R1_R2",
+  "pack_path": "docs/research/S17_KNOWLEDGEPACK_R2.json",
+  "pack_sha256": "f1dee52e946f9ed421fb550c3b7cad1b9a5537a65b1fdd4301541024dc13ff63"
+ },
+ "components": [
+  {
+   "role": "driver",
+   "component_id": "S17-NNE-DRIVER",
+   "version": "1.0.0",
+   "topology_sha256": "71eca286cfc171b19b2ce2891b98613fe2ae1106cf76e468d9c128a44011976f",
+   "configuration_sha256": "b0722a5b859e0b94d603a370ba3da2f7b7dc76cdeb3dfe2fef652042777e971f"
+  },
+  {
+   "role": "follower",
+   "component_id": "S17-FOLLOWER",
+   "version": "1.0.0",
+   "topology_sha256": "UNKNOWN",
+   "configuration_sha256": "UNKNOWN"
+  }
+ ],
+ "interface_recipe_ref": {
+  "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+  "sha256": "5f485b0ac8d1e822a424a73f065ede7df36245ee4cd8a8e27cbe93681f1b61b6",
+  "status": "SOURCE_CONFIRMED",
+  "note": "10 connecting ODN pairs machine-verified as exact 20-nt reciprocal reverse-complement matches from Suppl. Dataset S1 (sha256 dc3cc6c5...)"
+ },
+ "coordinate_transforms": [],
+ "unit_conversion": null,
+ "connections": [
+  {"connection_id": "DFC-01", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D163", "follower_port": "DF-OVH-F173", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-02", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D165", "follower_port": "DF-OVH-F174", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-03", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D174", "follower_port": "DF-OVH-F165", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-04", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D173", "follower_port": "DF-OVH-F163", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-05", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D172", "follower_port": "DF-OVH-F164", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-06", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D151", "follower_port": "DF-OVH-F149", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-07", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D153", "follower_port": "DF-OVH-F89", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-08", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D89", "follower_port": "DF-OVH-F153", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-09", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D149", "follower_port": "DF-OVH-F151", "evidence_status": "SOURCE_CONFIRMED"},
+  {"connection_id": "DFC-10", "kind": "SS_DNA_OVERHANG_HYBRIDIZATION", "driver_port": "DF-OVH-D164", "follower_port": "DF-OVH-F172", "evidence_status": "SOURCE_CONFIRMED"}
+ ],
+ "allowed_backbone_edits": [],
+ "geometry": {
+  "enabled": true,
+  "note": "no follower coordinates exist; anchor-distance and clash checks cannot run even if the assembly were attempted"
+ },
+ "expected_units": {
+  "length_unit": "oxDNA_length_unit"
+ },
+ "notes": [
+  "the follower component has no published topology/configuration: the assembler must refuse with NOT_RECONSTRUCTED and must never invent strands or links",
+  "D-F connection chemistry per article Methods 'Assembly of the D-F system': equimolar D+F, 30 C, 2 h; LNA-stabilized 10 overhang pairs"
+ ]
+}

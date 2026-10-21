@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "2cf8297f10ab5ec98b8c8023ff76b39d92ef398b",
+  "timestamp_utc": "2026-10-18T13:46:43.335Z",
+  "summary": "START WO-PREP-S17-R3-REPAIR-R1 on exact faulty R3 product head 2cf8297f (tree 58919173): fresh fetch 2026-10-18 shows PR #60 (R3) still OPEN draft with head 2cf8297, PR #59 (R2) OPEN at 26c4cd51, origin/main unchanged at 513c4fa8, review-only PR #61 CLOSED UNMERGED at f0310f8e - exactly the state issue #62 hands off. Repair scope: port the four independent falsifiers from PR #61 verbatim into tests/, prove RED on this base (4 failures expected, matching hosted CI run 39124902081), then fix assembly_spec.py only: F01 refuse connections on ports with connection_capable=false or UNKNOWN anchors/orientation; F02 verify interface recipe bytes/SHA/coverage/paths on disk for SOURCE_VERIFIED; F03 apply the full rigid transform (unit factor -> rotation -> translation) to anchor positions in geometry checks via one shared pipeline; F04 bind hybridization evidence to the declared exposed overhang segments with 5p/3p polarity and LNA stripping. Then extend the negative matrix, keep the real S17 pair NOT_RECONSTRUCTED, run the full regression + harness gates, append cross-ref event 0006 to EX-PREP-S17-R3, publish branch work/prep-s17-r3-repair-r1 by non-force push. 0 scientific runs; claim ceiling PINNED_IMPORT_VERIFIED/C0_SOFTWARE_ONLY unchanged; merge stays Human Gate.",
+  "command_refs": [
+    "git fetch origin --prune",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/pulls/60 (state=open, head=2cf8297)",
+    "git worktree add /home/rdpuser/NanoLab/prep-s17-r3-repair -b work/prep-s17-r3-repair-r1 2cf8297f10ab5ec98b8c8023ff76b39d92ef398b",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R3-REPAIR-R1.md",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/passport.json",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39124902081"
+  ],
+  "next_action": "Port falsifier tests verbatim, run RED on base, commit RED evidence, then implement F01-F04 repairs.",
+  "blocker": null
+}

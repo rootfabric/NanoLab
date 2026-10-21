@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "integration_evidence_map",
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "implementation_subject_head": "1bfafb959b6f7cda695a560bc46082bfc83117df",
+  "base_main": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "origin_cli_tip": "ca6eabd84c0712af87d8ab571b1e3caf549bfb16",
+  "source_blob_manifest": "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/evidence/source-blob-map.json",
+  "erratum_evidence": "docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/evidence/20nt-overhang-red-green-r1.json",
+  "claims": {
+    "level": "PINNED_IMPORT_VERIFIED",
+    "real_s17_assembly": "NOT_RECONSTRUCTED",
+    "scientific_runs": 0
+  },
+  "ci": {
+    "red_run": 39523456603,
+    "red_failures": 7,
+    "green_run": 39524159028,
+    "green_tests": 930
+  },
+  "gates": {
+    "hosted_ci": "SUCCESS",
+    "r3_fresh_reviewer": "WAIT_EXTERNAL",
+    "integration_exact_head_verifier": "WAIT_EXTERNAL",
+    "human_merge": "NOT_PERFORMED"
+  }
+}

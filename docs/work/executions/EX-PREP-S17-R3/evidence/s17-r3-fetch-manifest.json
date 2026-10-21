@@ -1,0 +1,142 @@
+{
+ "schema_version": 1,
+ "kind": "s17_r3_fetch_manifest",
+ "generated_at_utc": "2026-10-18T01:13:59.528Z",
+ "budget_MiB": 256,
+ "unique_transfer_bytes": 50678743,
+ "unique_transfer_MiB": 48.3,
+ "within_budget": true,
+ "note": "byte count sums unique downloaded files; API calls and failed probes are negligible and not itemized",
+ "files": [
+  {
+   "name": "article_html",
+   "url": "https://www.nature.com/articles/s41565-023-01516-x",
+   "size_bytes": 556433,
+   "sha256": "e6f49f5d4d272db6eceb834243bdaeef6658600344459168809b1b970e4ab7cf",
+   "license": "CC BY 4.0 (article page)",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "supplementary_pdf_MOESM1",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM1_ESM.pdf",
+   "size_bytes": 13861585,
+   "sha256": "66074e7d0c07139ecfb2d65f0526e3386fb91853d2218badbc27cd32f1a42c66",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "dataset_S1_docx_nanobase",
+   "url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl.%20Dataset%20S1%20V3.docx",
+   "size_bytes": 101900,
+   "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+   "license": "CC BY 4.0 (article supplementary)",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "dataset_S1_pdf_MOESM4",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM4_ESM.pdf",
+   "size_bytes": 386233,
+   "sha256": "04793a32c8f025876392af8a9bf35889e05641111bee292e4a1ab5ab9cdfd19e",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM2_interactive",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM2_ESM.pdf",
+   "size_bytes": 1666126,
+   "sha256": "f47df503b0cdf03703b715ec19bada5248b327033c6bcb214e1b5363d4bf0784",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM5_figures",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM5_ESM.pdf",
+   "size_bytes": 2295898,
+   "sha256": "dae20e281294ffa19d8d39931b6b1f1ba5b422bfb43a2ac365d10ab938f33b09",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM6_constructs_glossary",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM6_ESM.pdf",
+   "size_bytes": 9291970,
+   "sha256": "8887c18c95a36c875f624614be1267ac338afc152f6a5ce0bae046349b18a370",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM7_angle_datasets_xlsx",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM7_ESM.xlsx",
+   "size_bytes": 788580,
+   "sha256": "a9d0024419b595425c7fed9409a959d7fbd397ca670bebb214a5a5fed7194aa0",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM8_datasets_xlsx",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM8_ESM.xlsx",
+   "size_bytes": 16085,
+   "sha256": "287a80c0bbbdc89b3ef4dc1e8c5e8de24e541c73f85818e786b4b10dfc08bca7",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "MOESM9_uncropped_scans",
+   "url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41565-023-01516-x/MediaObjects/41565_2023_1516_MOESM9_ESM.pdf",
+   "size_bytes": 21368173,
+   "sha256": "a9cf01d699fba27da4c537e0031036a29d11e22c54f83cc87aae00072dcdb1a0",
+   "license": "CC BY 4.0",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "cadnano_NE_halo_dsDNA",
+   "url": "https://api.nanobase.org/api/v1/structure/files/196/structure/NE_halo_dsDNA.json",
+   "size_bytes": 320937,
+   "sha256": "8cbc247002158dc4955adac59b8a73dae15590303537691ef0809d0728f9c67a",
+   "license": "CC BY 4.0 (by Nanobase terms, documented inference)",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "hinges_tree_api",
+   "url": "https://api.github.com/repos/sulcgroup/hinges/git/trees/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9?recursive=1",
+   "size_bytes": 24823,
+   "sha256": "fb5ef0d2c8017c8f99df23dcbe29205b7d790f07a53db88679ff270fe2e50021",
+   "license": "NO LICENSE - REFERENCE_ONLY (API response only)",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "temporary audit material; only digests/quotes stored in Git"
+  },
+  {
+   "name": "hinges_data_driver_follower_headers",
+   "url": "https://raw.githubusercontent.com/sulcgroup/hinges/7c8b04a654b2440e4b6bab5b0abcb7e4335824d9/data/{driver,follower}_data.txt",
+   "size_bytes": null,
+   "sha256": null,
+   "license": "NO LICENSE - REFERENCE_ONLY",
+   "retrieved_at_utc": "2026-10-18",
+   "vendored": false,
+   "note": "header lines only viewed to classify files as processed angle time series; content NOT copied into NanoLab"
+  }
+ ]
+}

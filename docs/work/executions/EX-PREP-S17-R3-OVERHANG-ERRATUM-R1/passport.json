@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "work_order_id": "WO-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "checkpoint": "S17 follower 20-nt overhang declaration repair, no science",
+  "base_branch": "integration/s17-r3-repair-assembly-cli-r1",
+  "base_sha": "7236461353293ca1bb542b0404e385cccb681e82",
+  "branch": "integration/s17-r3-repair-assembly-cli-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "HANDOFF_READY",
+  "started_at_utc": "2026-10-21T00:46:32.966Z",
+  "allowed_paths": [
+    "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
+    "tests/test_s17_r3_overhang_erratum.py",
+    "docs/work/WO-PREP-S17-R3-OVERHANG-ERRATUM-R1.md",
+    "docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/**",
+    "tests/test_s17_r3_assembly.py"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "frozen scientific evidence",
+    "S17 pinned recipe",
+    "source topology/config",
+    "direct main"
+  ],
+  "dependencies": [
+    "PR #67 ERRATUM-1",
+    "source pinned R3 20-nt complementary recipe",
+    "integrated stack PR #73"
+  ],
+  "resource_budget": "0 scientific runs, H0 hosted CI tests only",
+  "deliverables": [
+    "7 exact overhang corrections",
+    "10-pair machine verifiable regression",
+    "durable mapping receipt and 20nt source rationale",
+    "Review/verifier handoff"
+  ]
+}

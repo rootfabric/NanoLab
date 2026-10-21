@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0006-review-pass-and-corrections",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "DIRECTOR",
+  "actor_id": "director-central (recording independent REVIEWER-73 session; applying reviewer-recommended M1 erratum)",
+  "subject_sha": "baac1378b3de604cdad99c546e1cf9d9b5b000b3",
+  "timestamp_utc": "2026-10-21T12:19:03.000Z",
+  "summary": "Fresh independent REVIEWER-73 session (separate agent executor, own checkout /home/rdpuser/NanoLab/review-pr73-r1, HEAD/TREE self-resolved = baac1378b3de604cdad99c546e1cf9d9b5b000b3 / e63caed7c5922e83add2696abb6dc5c0fe8787b4) returned VERDICT PASS with ZERO blockers and 4 non-blocking minors. Reviewer-verified: 930/930 tests OK (62.2s); check-consistency ok:true; workflow_lint blocking 0; work_cli validate EX-S17-STACK-INTEGRATION-R1 ok:true HANDOFF_READY (4 related execution dirs ok:true); all 55 imported blobs byte-identical to source-blob-map.json at integration commit 7236461 (each of 55 cross-checked via git rev-parse against ca6eabd/a4b4cf3/2cf8297/49be267); 10/10 author pairs are exactly 20nt with follower == exact reverse complement of driver, segments subset of own LNA-stripped ODN (reviewer's own script); Dataset S1 pin dc3cc6c5 consistent across 4 surfaces; F01-F04 independently RED-reproduced on faulty base 2cf8297 (failures=4, matching CI #39124902081) and GREEN at tip; 21nt->20nt erratum on 7 follower ports fixed (RED CI #39523456603 = 7 failures reproduced locally on f15d6f4 -> GREEN CI #39524159028); recipe SHA binding executes in code (byte sha256 + per-connection join; deliberate 21nt tamper -> BLOCKED_SOURCE); coordinate pipeline single Rodrigues factor->rotation->translation correct; all 20 port anchors UNKNOWN/capable=false (nothing fabricated); S17 follower NOT_RECONSTRUCTED preserved by test; claim ceiling respected. Append-only verdict on events 0003/0004 timestamp normalization (+1/+2 ms, non-force commit baac137 inside this unmerged PR, original blobs preserved at 4db05c2: 00ba2a3c/10303b5b/f6e3bffc, correction documented by event 0005 + summary + commit message): ACCEPTABLE WITH CAVEAT, not a blocker; caveat M2 - the append-only exception must be codified in control policy by an explicit owner decision, not silently precedented. Post-review corrections applied by DIRECTOR in the commit carrying this event, strictly per reviewer finding M1: source-blob-map.json now annotates the exactly 2/55 source_paths whose HEAD blobs supersede the mapped original R3 import blobs via erratum commits 4f9583d/1bfafb9 (S17_R3_COMPONENT_FOLLOWER.json c44374a->3a09fab; tests/test_s17_r3_assembly.py 91729bb->074619e); other 53/55 remain byte-identical at the tip. DEFERRED non-blocking: M2 (codify append-only exception policy - owner), M3 (check-consistency 'git metadata unavailable' warning), M4 (STARTED-vs-terminal passport convention unification). Fresh exact-head VERIFIER-73 (separate session) required on the new tip of this branch before Human Gate merge; S17_FOLLOWER remains NOT_RECONSTRUCTED; science runs 0.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . (930 OK)",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . (ok:true)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . (blocking 0)",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-S17-STACK-INTEGRATION-R1 (ok:true)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/review/REVIEWER_R1/REVIEW_PR73_R1.md",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/evidence/source-blob-map.json",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/review/REVIEWER_R1/00_head_tree_check.txt .. 09_erratum_red_repro.txt"
+  ],
+  "next_action": "Fresh exact-head VERIFIER-73 on the new tip of integration/s17-r3-repair-assembly-cli-r1; then Human Gate merge per owner authorization recorded in Issue #74.",
+  "blocker": null
+}

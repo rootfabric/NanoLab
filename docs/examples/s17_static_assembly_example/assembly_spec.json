@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "assembly_spec",
+  "spec_version": "v1",
+  "assembly_id": "SYN-EX-DF-1",
+  "mode": "CANDIDATE_DESIGN",
+  "design_basis": "HYPOTHESIS",
+  "claim_level": "PINNED_IMPORT_VERIFIED",
+  "knowledge_pack_ref": {
+    "pack_id": "S17-STATIC-ASSEMBLY-EXAMPLE",
+    "pack_path": "docs/examples/s17_static_assembly_example/README.md",
+    "pack_sha256": "c87fb008b8f75fb861e7fda7ee270ec99313b9bffad8f065191c16b5769b095e"
+  },
+  "components": [
+    {
+      "role": "driver",
+      "component_id": "SYN-EX-DRIVER",
+      "version": "1.0.0",
+      "topology_sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87",
+      "port_geometry": [
+        {
+          "port_id": "p-driver-A",
+          "anchor_position": [
+            1.0,
+            5.0,
+            5.0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "follower",
+      "component_id": "SYN-EX-FOLLOWER",
+      "version": "1.0.0",
+      "topology_sha256": "8320ce44b97fcf22e65999a3124db8eee80f5da1ddc8bcf250fb2aef5e5c7afb",
+      "port_geometry": [
+        {
+          "port_id": "p-follower-A",
+          "anchor_position": [
+            1.0,
+            8.5,
+            5.0
+          ]
+        }
+      ]
+    }
+  ],
+  "coordinate_transforms": [
+    {
+      "component": "follower",
+      "translation": [
+        6.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "unit_conversion": null,
+  "connections": [
+    {
+      "connection_id": "c1",
+      "kind": "SS_DNA_OVERHANG_HYBRIDIZATION",
+      "driver_port": "p-driver-A",
+      "follower_port": "p-follower-A",
+      "evidence_status": "INFERRED_CANDIDATE"
+    }
+  ],
+  "allowed_backbone_edits": [],
+  "geometry": {
+    "enabled": true,
+    "connected_anchor_distance_range": [
+      6.0,
+      9.0
+    ],
+    "clash_scan_threshold": 0.5
+  },
+  "expected_units": {
+    "length_unit": "oxDNA_length_unit"
+  },
+  "notes": "CANDIDATE_DESIGN example (HYPOTHESIS): synthetic two-ODN pair for offline CLI tests; NOT the real S17 sequences; static file operation only, never a scientific claim."
+}

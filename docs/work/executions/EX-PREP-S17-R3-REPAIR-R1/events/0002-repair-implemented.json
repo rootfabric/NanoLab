@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0002-repair-implemented",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "82dddb02704c9a850e86f8799ce6e68e24f9cb83",
+  "timestamp_utc": "2026-10-18T14:17:28.899Z",
+  "summary": "Repair implemented in exactly one scoped file (scripts/knowledge_pack/assembly_spec.py) + test matrix. RED->GREEN chain: RED commit cd384dd (falsifiers ported verbatim from PR #61 head f0310f8e; 4/4 FAIL on faulty base 2cf8297 = hosted run 39124902081), GREEN commit 82dddb0 (tree 5751fb36; 4/4 falsifiers PASS). F01: executable-interface gate (connection_capable=true + concrete integer anchors + non-UNKNOWN anchor status + non-UNKNOWN orientation) placed after the decisive structural-existence pass so the real structureless S17 pair keeps NOT_RECONSTRUCTED (pinned by a dedicated test). F02: _verify_interface_recipe checks safe relative path, on-disk existence, declared sha256 of actual bytes, UTF-8 JSON parse, recipe kind, per-connection binding via explicit recipe_pair_ref or pinned chemistry.odn_name join, and segment equality cross-check; statuses BLOCKED_SOURCE/BLOCKED_INPUT/BLOCKED_SPEC by failure class. F03: single shared pipeline _follower_transform_params/_transform_point/_transform_particle (unit factor -> rotation -> translation) used by assemble(), assemble_artifacts() and _geometry_checks() - rotation now applied to anchor hints; 90/180-degree and unit-conversion+rotation tests pass, duplicate transform code removed. F04: _check_overhang_interface requires declared non-UNKNOWN overhang segments (>=12 nt), exact reverse-complement equality of the exposed pair, declared 5p/3p ends (same-end allowed - the pinned real recipe is 3p/3p), LNA (LX) stripping consistency and segment-substring membership; the full-ODN match check remains as secondary consistency. Hardening: finite checks for translation/anchors/rotation/factor/band/threshold/box; bool-anchor rejection; unparseable-configuration control. DURABLE FINDING: byte-level recipe verification surfaces a pre-existing R3 evidence erratum - 7/10 follower ports declare 21nt overhang windows vs the pinned recipe's exact 20nt segments (DFC-02..05,07,08,09); refused fail-closed and recorded, evidence files NOT modified (outside allowed paths).",
+  "command_refs": [
+    "git show f0310f8e1f1ad691675363ca0528f3d7e3609104:tests/test_s17_r3_fresh_review_falsifiers.py > tests/test_s17_r3_fresh_review_falsifiers.py",
+    "git commit cd384dd (RED evidence on 2cf8297)",
+    "git commit 82dddb0 (repair); git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "scripts/knowledge_pack/assembly_spec.py",
+    "tests/test_s17_r3_assembly.py",
+    "tests/test_s17_r3_fresh_review_falsifiers.py",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39124902081"
+  ],
+  "next_action": "Full regression + harness gates, then handoff event.",
+  "blocker": null
+}

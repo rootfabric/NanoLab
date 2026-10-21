@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "event_id": "0005-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-S17-R3",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3",
+  "subject_sha": "49be26701596032bb0924f56a33dab536a5f9ffe",
+  "timestamp_utc": "2026-10-18T01:43:03.527Z",
+  "summary": "WO-PREP-S17-R3 execution complete: IMPLEMENTED_WITH_SOURCE_GAP (handoff to independent review). Verdict for the real S17 driver-follower pair: molecular interface SOURCE_CONFIRMED at sequence level (hybridization of 10 unique complementary ssDNA overhang pairs, all 20 connecting ODNs pinned from Suppl. Dataset S1 V3.docx sha256 dc3cc6c5... byte-identical to the R1 pack pin; machine-verified exact 20-nt reciprocal reverse-complement pairing with strict uniqueness; LNA-stabilized driver overhangs per Methods); the follower 3D structure is NOT_RECONSTRUCTED (no topology/configuration/design file in any audited source) so the original D-F static assembly is honestly NOT_RECONSTRUCTED with machine-readable blocked inputs - no link invented. Universal software deliverables complete and tested: MechanicalComponentSpec v1 + AssemblySpec v1 executable contracts with strict fail-closed validation, minimal deterministic two-component static assembler (SOURCE_VERIFIED/CANDIDATE_DESIGN modes, non-covalent hybridization records, coarse geometry with GEOMETRY_UNVERIFIED discipline), 58 offline tests incl. full negative-control matrix; suite 804 OK; check-consistency ok; workflow_lint blocking:0; work_cli validate ok. Claim ceiling PINNED_IMPORT_VERIFIED/C0_SOFTWARE_ONLY: static assembly is never ASSEMBLY_VALIDATED and never motion-transfer, functionality or fabricability evidence. Independent review status: WAIT_EXTERNAL - no independent Reviewer/Verifier has acted on R3; per AGENTS.md this single session does not perform independent roles; review request is raised via the draft PR. Branch work/prep-s17-r3-r1 is stacked on PR #59 head 26c4cd51 (R2 NOT canonical yet, not merged - Human Gate); after R2 merges, R3's own changes move to a fresh main with full re-validation. Next action: independent fresh Reviewer, then exact-head Verifier, on the draft PR; then (owner decision) author questions for gaps G1-G4 in S17_R3_SOURCE_GAPS.md.",
+  "command_refs": [
+    "git log --oneline -3",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R3/evidence-map.json",
+    "docs/work/executions/EX-PREP-S17-R3/summary.md",
+    "docs/research/S17_R3_SOURCE_GAPS.md"
+  ],
+  "next_action": "Independent fresh Reviewer + exact-head Verifier on the draft PR (WAIT_EXTERNAL); owner decision on author questions; after R2 merge - rebase own R3 changes onto fresh main and re-validate.",
+  "blocker": null
+}
