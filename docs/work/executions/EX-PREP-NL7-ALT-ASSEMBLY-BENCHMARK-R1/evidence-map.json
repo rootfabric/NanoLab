@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "nl7_alt_source_evidence_map",
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "implementation_subject_head": "06569eaf9360ba363695c508ac2b9ff4c02cef3b",
+  "base_main": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "source_maturity": "BIBLIOGRAPHIC",
+  "real_source_verdict": "BLOCKED_SOURCE",
+  "scientific_runs": 0,
+  "observed_external_design_bytes": 0,
+  "artifacts": [
+    {
+      "path": "docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json",
+      "git_blob_sha1": "a5423471cb90d1f2ab60fb911b2f2a366f133c1e"
+    },
+    {
+      "path": "docs/research/ALT_DNA_TWO_PART_SOURCE_AUDIT_R1.md",
+      "git_blob_sha1": "04b785fe5fa1d3a02d91e7edd67b2066ad0d321b"
+    },
+    {
+      "path": "scripts/knowledge_pack/alt_pair_source_gate.py",
+      "git_blob_sha1": "b455b1094e4bde8d25963258829cdcef7e109c6e"
+    },
+    {
+      "path": "tests/test_alt_pair_source_gate.py",
+      "git_blob_sha1": "6ffbabd1b4c788a5025e3a150ead16c374a65094"
+    }
+  ],
+  "new_tests": 33,
+  "ci_runs": [
+    {
+      "run_id": 39530605362,
+      "conclusion": "FAIL",
+      "findings": "2 initial new test expectation issues; repaired by scoped test-only update"
+    },
+    {
+      "run_id": 39530778687,
+      "attempt": 1,
+      "conclusion": "FAIL",
+      "findings": "2 inherited U2 tempdir cleanup races (Directory not empty: objects), no source code changed"
+    },
+    {
+      "run_id": 39530778687,
+      "attempt": 2,
+      "conclusion": "SUCCESS",
+      "tests": 828,
+      "subject_sha": "06569eaf9360ba363695c508ac2b9ff4c02cef3b"
+    }
+  ],
+  "independent_review": {
+    "reviewer": "WAIT_EXTERNAL",
+    "verifier": "WAIT_EXTERNAL"
+  },
+  "next_action": "Fresh separate Reviewer/Verifier on PR #76, then lawful source retrieval for actual Nanobase 256/257 with exact pins"
+}

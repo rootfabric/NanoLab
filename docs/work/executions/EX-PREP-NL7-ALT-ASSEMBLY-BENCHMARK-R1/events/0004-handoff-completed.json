@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0004-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "source-benchmark-implementer",
+  "subject_sha": "06569eaf9360ba363695c508ac2b9ff4c02cef3b",
+  "timestamp_utc": "2026-10-21T02:11:00.000Z",
+  "summary": "C0 source audit+gate finished with truthful BLOCKED_SOURCE. No original CAD or oxDNA files materialized, independent Reviewer/Verifier still WAIT_EXTERNAL.",
+  "command_refs": [
+    "H0 hosted run 39530778687 attempt 2 - 828 tests OK on 06569eaf9360ba363695c508ac2b9ff4c02cef3b"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/summary.md"
+  ],
+  "next_action": "Fresh separate Reviewer + Verifier, then source retrieval on a capable lawful executor; no science or main merge.",
+  "blocker": null
+}
