@@ -1,0 +1,30 @@
+=== E1: manifest = JSON array ===
+  File "/home/rdpuser/NanoLab/review-pr76-r1/scripts/knowledge_pack/alt_pair_source_gate.py", line 301, in evaluate
+    candidate = next((c for c in pack.get("candidates", []) if isinstance(c, dict)
+AttributeError: 'list' object has no attribute 'get'
+exit_code=1
+
+=== E2: manifest = string ===
+  File "/home/rdpuser/NanoLab/review-pr76-r1/scripts/knowledge_pack/alt_pair_source_gate.py", line 301, in evaluate
+    candidate = next((c for c in pack.get("candidates", []) if isinstance(c, dict)
+AttributeError: 'str' object has no attribute 'get'
+exit_code=1
+
+=== E3: candidate missing interface ===
+  ],
+  "scientific_runs": 0
+}
+exit_code=2
+
+=== E5: nonexistent --root ===
+  ],
+  "scientific_runs": 0
+}
+exit_code=2
+
+=== E7: scientific_runs=true ===
+  ],
+  "scientific_runs": 0
+}
+exit_code=2
+

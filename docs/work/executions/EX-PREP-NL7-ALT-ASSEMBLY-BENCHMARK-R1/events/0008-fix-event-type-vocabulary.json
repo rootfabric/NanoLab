@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0008-fix-event-type-vocabulary",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "DIRECTOR",
+  "actor_id": "director-central",
+  "subject_sha": "d59258a60c5e95e188f7e1a1e9a37b9723c2962e",
+  "timestamp_utc": "2026-10-21T12:22:24.000Z",
+  "summary": "Director defect found by hosted H0 CI run 39598714603 on d59258a: event 0007 used invented event_type REVIEW_PASS, which is outside the harness vocabulary (scripts/harness/work_cli.py: ALLOWED_EVENTS; post-terminal events must be CONTINUATION_CHECKPOINT or REVIEW_CORRECTIONS). Fix: event 0007 event_type corrected to REVIEW_CORRECTIONS (content unchanged; verdict, subject, evidence refs identical); this event records the negative result and the repair. No code/test changes; reviewed subject 2e199d6 and all Reviewer evidence untouched.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1 (must be ok:true after fix)",
+    "gh run view 39598714603 (failed check 3/5 execution passports and work events integrity)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/events/0007-review-pass.json"
+  ],
+  "next_action": "Re-run hosted H0 on the fixed tip; VERIFIER-76 continues on the new exact tip.",
+  "blocker": null
+}

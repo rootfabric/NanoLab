@@ -1,0 +1,7 @@
+=== CMD: python3 -m unittest discover -s tests -t . ===
+exit_code=0
+  "candidate": null,
+  "reason": "CANDIDATE_PARAM_NOT_IN_ALLOWLIST",
+  "valid": false
+}
+

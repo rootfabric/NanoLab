@@ -1,0 +1,124 @@
+{
+  "id": 119217437169,
+  "run_id": 39598714603,
+  "workflow_name": "hosted-ci",
+  "head_branch": "work/prep-nl7-alt-assembly-benchmark-r1",
+  "run_url": "https://api.github.com/repos/rootfabric/NanoLab/actions/runs/39598714603",
+  "run_attempt": 1,
+  "node_id": "CR_kwDOURU7zM8AAAAbwem58Q",
+  "head_sha": "d59258a60c5e95e188f7e1a1e9a37b9723c2962e",
+  "url": "https://api.github.com/repos/rootfabric/NanoLab/actions/jobs/119217437169",
+  "html_url": "https://github.com/rootfabric/NanoLab/actions/runs/39598714603/job/119217437169",
+  "status": "completed",
+  "conclusion": "failure",
+  "created_at": "2026-10-21T12:19:45Z",
+  "started_at": "2026-10-21T12:19:47Z",
+  "completed_at": "2026-10-21T12:20:47Z",
+  "name": "RC0 hosted validation (H0)",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1,
+      "started_at": "2026-10-21T12:19:48Z",
+      "completed_at": "2026-10-21T12:19:49Z"
+    },
+    {
+      "name": "Check out subject (action pinned to full commit SHA, no persisted credentials)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2,
+      "started_at": "2026-10-21T12:19:49Z",
+      "completed_at": "2026-10-21T12:19:50Z"
+    },
+    {
+      "name": "Environment fingerprint (executor-contract context, no secrets emitted)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3,
+      "started_at": "2026-10-21T12:19:50Z",
+      "completed_at": "2026-10-21T12:19:50Z"
+    },
+    {
+      "name": "Check 1/5 — machine contracts JSON syntax (all tracked *.json)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-10-21T12:19:50Z",
+      "completed_at": "2026-10-21T12:20:41Z"
+    },
+    {
+      "name": "Check 2/5 — harness control consistency (plan/state/goals/catalog/scheduler)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5,
+      "started_at": "2026-10-21T12:20:41Z",
+      "completed_at": "2026-10-21T12:20:41Z"
+    },
+    {
+      "name": "Check 3/5 — execution passports and work events integrity (all EX-*)",
+      "status": "completed",
+      "conclusion": "failure",
+      "number": 6,
+      "started_at": "2026-10-21T12:20:41Z",
+      "completed_at": "2026-10-21T12:20:44Z"
+    },
+    {
+      "name": "Check 4/5 — workflow negative-control lint (NC-1..NC-7, blocking)",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 7,
+      "started_at": "2026-10-21T12:20:44Z",
+      "completed_at": "2026-10-21T12:20:44Z"
+    },
+    {
+      "name": "Check 5/5 — validation gate unit tests (validator + lint, stdlib only)",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 8,
+      "started_at": "2026-10-21T12:20:44Z",
+      "completed_at": "2026-10-21T12:20:44Z"
+    },
+    {
+      "name": "Build debug artifact manifest (failure only)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 9,
+      "started_at": "2026-10-21T12:20:44Z",
+      "completed_at": "2026-10-21T12:20:44Z"
+    },
+    {
+      "name": "Upload debug artifacts (failure only, ephemeral, no secrets)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10,
+      "started_at": "2026-10-21T12:20:44Z",
+      "completed_at": "2026-10-21T12:20:45Z"
+    },
+    {
+      "name": "Post Check out subject (action pinned to full commit SHA, no persisted credentials)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20,
+      "started_at": "2026-10-21T12:20:45Z",
+      "completed_at": "2026-10-21T12:20:45Z"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 21,
+      "started_at": "2026-10-21T12:20:45Z",
+      "completed_at": "2026-10-21T12:20:45Z"
+    }
+  ],
+  "check_run_url": "https://api.github.com/repos/rootfabric/NanoLab/check-runs/119217437169",
+  "labels": [
+    "ubuntu-latest"
+  ],
+  "runner_id": 1000011071,
+  "runner_name": "GitHub Actions 1000011071",
+  "runner_group_id": 0,
+  "runner_group_name": "GitHub Actions"
+}

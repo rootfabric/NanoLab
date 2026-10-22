@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0006-continuation-port-occupancy-and-geometry-r12",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "source-benchmark-implementer",
+  "subject_sha": "a8b3512a64d3efc2948a6aa820aa7731151a7f4d",
+  "timestamp_utc": "2026-10-21T05:15:51.128Z",
+  "summary": "R1.2 C0 RED-to-GREEN: A/B-swapped duplicate terminal and bad .dat orientation/NaN box were false positives. RED H0 39547500409 835/3; GREEN H0 39547978810 837 OK with five checks. Overlap/disjoint regression added. No original CAD bytes, no scientific work, no status promotion, no merge.",
+  "command_refs": [
+    "https://github.com/rootfabric/NanoLab/actions/runs/39547500409",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39547978810"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/summary.md",
+    "docs/research/ALT_DNA_TWO_PART_SOURCE_AUDIT_R1.md"
+  ],
+  "next_action": "Fresh independent Reviewer and different exact-HEAD Verifier for PR #76; obtain legally cleared original Nanobase source bytes in separate task before any real molecular assembly.",
+  "blocker": null
+}
