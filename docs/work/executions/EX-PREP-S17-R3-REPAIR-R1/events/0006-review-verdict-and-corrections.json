@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0006-review-verdict-and-corrections",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "REVIEWER",
+  "actor_id": "reviewer-prep-s17-r3-repair (independent agent session)",
+  "subject_sha": "19367ad826c20705ee3a78120bbe8c8d7b8954e9",
+  "timestamp_utc": "2026-10-18T14:53:46.923Z",
+  "summary": "Independent fresh Reviewer verdict (separate agent session, scratch clone /tmp/review-r3-repair, ~35 adversarial probes): PASS, BLOCKING FINDINGS: NONE. Reviewed final tip 19367ad826c20705ee3a78120bbe8c8d7b8954e9 (tree 87a3f7b2ff03b1809e391b5f464daa047ec6c492; start fetch bec4c8b8 also checked; product files byte-identical across 82dddb0/bec4c8b8/19367ad). Verified personally: diff scope strictly allowed paths; protected surfaces byte-identical to base 2cf8297; falsifier file byte-identical to f0310f8e (sha256 08563a12...); RED 4/4 FAIL reproduced on base; GREEN 4/4 + 846 tests OK + check-consistency ok + workflow_lint blocking:0 + work_cli ok on final head; F01-F04 not bypassed by ~35 adversarial probes (incl. bool/float anchors, second connection on incapable port, forged capable=true, traversal variants, symlink recipe, digest-of-other-file, partial coverage, ambiguous odn/pair_id binding, arbitrary-axis rotation with unit factor, PYTHONHASHSEED 0/1/12345/99999 determinism); 90-degree anchor math recomputed by hand (24.005208 vs RED 29.004310); R3-REPAIR-ERRATUM-1 independently recounted = exactly {DFC-02..05,07,08,09} 21nt-vs-20nt, driver 10/10 exact, window-size discrepancy not sequence contradiction; hosted runs verified via GitHub API (39124902081 failure@f0310f8e RED, 39135996558 success@bec4c8b8 GREEN). Non-blocking minors recorded: (1) summary/evidence-map cited recipe field name 'complement_length_nt' instead of actual 'match_length_nt' - CORRECTED by implementer immediately after verdict in a docs-only commit (this event's commit); (2) PRE-EXISTING (also in base): driver-side unit_conversion/coordinate_transforms validate but are silently not applied - scoped follow-up candidate; (3) overhang_end not positionally verified within the full sequence (defense-in-depth; segments/ends come from pinned component specs); (4) recipe entries without segment keys skip the segment cross-check (F04 independently binds the interface, so no forged-interface assembly path); (5) passport status STARTED at HANDOFF_COMPLETED - sibling convention, work_cli does not flag. Recorded verbatim by the Director on behalf of the reviewer session; reviewer fixed nothing.",
+  "command_refs": [
+    "git ls-remote origin work/prep-s17-r3-repair-r1 (== 19367ad)",
+    "/tmp/review_probes.py (~35 adversarial probes)",
+    "GitHub API actions runs 39124902081 (failure) and 39135996558 (success)"
+  ],
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/67",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/evidence-map.json"
+  ],
+  "next_action": "Apply minor-1 docs correction (this commit), then fresh exact-head Verifier on the final tip.",
+  "blocker": null
+}

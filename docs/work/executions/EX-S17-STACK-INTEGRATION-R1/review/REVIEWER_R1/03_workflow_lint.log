@@ -1,0 +1,19 @@
+== CMD: PYTHONPATH=scripts python3 -m harness.workflow_lint --root . ==
+{
+  "schema": "nanolab.infra_workflow_lint_output.v1",
+  "ok": true,
+  "config_revision": "VALIDATION-GATES-R1",
+  "workflows": [
+    {
+      "path": "/home/rdpuser/NanoLab/review-pr73-r1/.github/workflows/hosted-ci.yml",
+      "ok": true,
+      "violations": []
+    }
+  ],
+  "summary": {
+    "workflows": 1,
+    "violations": 0,
+    "blocking": 0
+  }
+}
+EXIT_CODE=0

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "event_id": "0002-interface-audit-complete",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R3",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3",
+  "subject_sha": "26c4cd51151167634815c531b9c49dcc54ba6243",
+  "timestamp_utc": "2026-10-18T01:20:00.000Z",
+  "summary": "Stage A complete: targeted S17 driver-follower interface audit. Connection mechanism SOURCE_CONFIRMED: DNA hybridization of 10 unique complementary ssDNA overhang pairs (5 per arm, axial arm extremities), rhomboid D-F heterodimer; driver = nNE; follower variants F / F-soft-hinge / F-ss-hinge. All 20 connecting ODN sequences recovered from pinned Suppl. Dataset S1 V3.docx (sha256 dc3cc6c5... byte-identical to the R1 knowledge-pack pin; re-derived from Nanobase). Deterministic offline verification: every driver-follower ODN pair forms an exact 20-nt reciprocal reverse-complement match with strictly unique pairing (second-best <= 8 nt); 4 driver ODNs carry 3 LNA bases each (matches Methods text). Machine-readable recipe published (evidence/s17-r3-df-interface-recipe.json). Negative results hold: no follower topology/configuration/caDNAno in any audited surface (Zenodo CD enumerations from R2 reused, sulcgroup/hinges driver_/follower_ files are processed angle time series only, NE_halo_dsDNA.json contains none of the connecting segments); nucleotide-index anchors in nNE.top remain UNKNOWN (placeholder sequences); original S17 D-F static assembly verdict = NOT_RECONSTRUCTED at structure level. Interface audit doc: docs/research/S17_R3_INTERFACE_AUDIT.md (incl. draft author questions, NOT sent). Transfer 48.3 MiB of 256 MiB budget; 0 scientific runs.",
+  "command_refs": [
+    "curl Nature article HTML + Springer static-content MOESM1-9 (bounded)",
+    "curl Nanobase API Suppl. Dataset S1 V3.docx (sha256 verified vs R1 pin)",
+    "python3 deterministic pairwise reverse-complement scan (offline, in evidence recipe)"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_R3_INTERFACE_AUDIT.md",
+    "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+    "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-fetch-manifest.json"
+  ],
+  "next_action": "Stage B: implement MechanicalComponentSpec v1 contract + validator; component specs for driver (pinned nNE) and follower (partial, UNKNOWN structure).",
+  "blocker": null
+}

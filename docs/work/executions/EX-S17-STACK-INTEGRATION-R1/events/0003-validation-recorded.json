@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0003-validation-recorded",
+  "event_type": "VALIDATION_RECORDED",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-s17-integration-director",
+  "subject_sha": "1bfafb959b6f7cda695a560bc46082bfc83117df",
+  "timestamp_utc": "2026-10-21T01:01:29.765Z",
+  "summary": "H0 CI #39524159028 succeeded with 930 tests, consistency, lint and work-cli; independent reviewer/verifier outstanding.",
+  "command_refs": [
+    "H0 CI #39524159028, 930 tests OK at 1bfafb959b6f7cda695a560bc46082bfc83117df"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/evidence-map.json"
+  ],
+  "next_action": "Publish HANDOFF_COMPLETED for independent roles.",
+  "blocker": null
+}

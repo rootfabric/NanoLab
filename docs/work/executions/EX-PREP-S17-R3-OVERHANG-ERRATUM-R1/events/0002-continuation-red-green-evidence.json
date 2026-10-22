@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "event_id": "0002-continuation-red-green-evidence",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-s17-integration-director",
+  "subject_sha": "1bfafb959b6f7cda695a560bc46082bfc83117df",
+  "timestamp_utc": "2026-10-21T01:01:29.764Z",
+  "summary": "7/7 source-mapped 20nt corrections, RED 930/7 FAIL to GREEN 930 OK; historical failure retained.",
+  "command_refs": [
+    "H0 CI #39524159028, 930 tests OK at 1bfafb959b6f7cda695a560bc46082bfc83117df"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R3-OVERHANG-ERRATUM-R1/evidence/20nt-overhang-red-green-r1.json"
+  ],
+  "next_action": "Publish implementation handoff, request independent reviewer.",
+  "blocker": null
+}

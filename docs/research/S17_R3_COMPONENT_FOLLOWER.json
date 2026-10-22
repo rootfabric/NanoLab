@@ -1,0 +1,395 @@
+{
+ "schema_version": 1,
+ "kind": "mechanical_component_spec",
+ "spec_version": "v1",
+ "component_id": "S17-FOLLOWER",
+ "version": "1.0.0",
+ "source_id": "S17",
+ "title": "S17 passive follower unit F (rigid dsDNA-hinge variant) - partial spec: sequence-level interface confirmed, 3D structure NOT_RECONSTRUCTED",
+ "knowledge_pack_ref": {
+  "pack_id": "S17-LEAF-SPRING-NANOENGINE-R1_R2",
+  "pack_path": "docs/research/S17_KNOWLEDGEPACK_R2.json",
+  "pack_sha256": "f1dee52e946f9ed421fb550c3b7cad1b9a5537a65b1fdd4301541024dc13ff63",
+  "interface_audit": "docs/research/S17_R3_INTERFACE_AUDIT.md",
+  "interface_recipe": {
+   "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+   "sha256": "5f485b0ac8d1e822a424a73f065ede7df36245ee4cd8a8e27cbe93681f1b61b6",
+   "status": "SOURCE_CONFIRMED"
+  }
+ },
+ "source_pin": {
+  "role": "SEQUENCE_MANIFEST",
+  "url": "https://api.nanobase.org/api/v1/structure/files/196/expProtocol/Suppl.%20Dataset%20S1%20V3.docx",
+  "sha256": "dc3cc6c53a9a116630db25a423c8439910d9e2d0ba159ef32424b546bcf3036c",
+  "sha256_provenance": "CONTENT_VERIFIED",
+  "status": "SOURCE_CONFIRMED",
+  "license": "CC BY 4.0 (article supplementary material)",
+  "note": "the follower is published only as an ODN manifest (F / Soft-hinge Follower / Single-strand-hinge Follower sections); no topology, configuration or caDNAno design file exists in any audited source"
+ },
+ "claim_level": "PINNED_IMPORT_VERIFIED",
+ "topology": {
+  "uri": "UNKNOWN",
+  "sha256": "UNKNOWN",
+  "nucleotides": "UNKNOWN",
+  "strand_count": "UNKNOWN",
+  "status": "UNKNOWN",
+  "note": "NOT_RECONSTRUCTED: follower structure files do not exist in Nanobase 196, Zenodo 8248808 (complete central-directory enumerations, EX-PREP-S17-R2), sulcgroup/hinges (angle data only) or the supplementary material"
+ },
+ "configuration": {
+  "uri": "UNKNOWN",
+  "sha256": "UNKNOWN",
+  "nucleotides": "UNKNOWN",
+  "strand_count": "UNKNOWN",
+  "status": "UNKNOWN",
+  "note": "NOT_RECONSTRUCTED: no published coordinates"
+ },
+ "molecular_namespaces": {
+  "follower_sequence_manifest": {
+   "index_space": "UNKNOWN - no scaffold routing published; ODN names are the only stable identifiers",
+   "particle_count": "UNKNOWN",
+   "strand_count": "UNKNOWN",
+   "topology_sha256": null,
+   "note": "sequence-level identity only (Suppl. Dataset S1 V3.docx sections 'Follower', 'Soft-hinge Follower', 'Single-strand-hinge Follower')"
+  }
+ },
+ "local_frame": {
+  "status": "UNKNOWN",
+  "note": "no coordinates exist; Suppl. Fig. 5a states helices are numbered 0-17 equivalently in both units and that one unit must be flipped upside down to join them"
+ },
+ "ports": [
+  {
+   "port_id": "DF-OVH-F173",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-173-con-replica",
+    "sequence": "TTTTTGGCTTACAGACCGGGCGGACGCCGGTAGGTAATTCTGGCC",
+    "lna": false,
+    "overhang_segment": "GCCGGTAGGTAATTCTGGCC",
+    "complement_driver_odn": "HI-MC-163-con-D-LNA",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist, so no port can be declared physically connectable",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F174",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-174-con-replica",
+    "sequence": "CGTGCGCCACTTTCCTCGTCTTTTTTTCGCCGGATAGCGCGGCTAT",
+    "lna": false,
+    "overhang_segment": "TCGCCGGATAGCGCGGCTAT",
+    "complement_driver_odn": "Hi-MC-165-con-D-LNA",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F165",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-165-con-replica",
+    "sequence": "CGCAGTCTACGTCACGATAGTTTTTTGCTCGTGCGCCCCGGGCGGC",
+    "lna": false,
+    "overhang_segment": "GCTCGTGCGCCCCGGGCGGC",
+    "complement_driver_odn": "Hi-MC-174-con-D-LNA",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F163",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "HI-MC-163-con-replica",
+    "sequence": "TTTTTGGGTAAAGTTCGCCAGGATGGGACGGTGGGGACTCGGGCA",
+    "lna": false,
+    "overhang_segment": "GGACGGTGGGGACTCGGGCA",
+    "complement_driver_odn": "Hi-MC-173-con-D-LNA",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F164",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-164-con-replica",
+    "sequence": "CATCCTGGCGCTGGTCGCTTGTAGACTGCGGCGGCGCCGGCCCGATCGCA",
+    "lna": false,
+    "overhang_segment": "GCGGCGCCGGCCCGATCGCA",
+    "complement_driver_odn": "HI-MC-172-con-driver",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F149",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-149-con-replica",
+    "sequence": "TGCGAGGGAGACAAAAGCTGAACCTAAATCGTCGCTATTCCCTTAGCAAGCCGTGAACACGACCGTGACGGGGC",
+    "lna": false,
+    "overhang_segment": "GAACACGACCGTGACGGGGC",
+    "complement_driver_odn": "Hi-MC-151-con-drive",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F89",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-89-con-replica",
+    "sequence": "CGGGCGCTTCGCGAGCCGCGCAGCTGATTGCCCTTCCCAGTGATAGATGGCAGCTTTCCGGCACGCCG",
+    "lna": false,
+    "overhang_segment": "CGGGCGCTTCGCGAGCCGCG",
+    "complement_driver_odn": "Hi-MC-153-con-drive",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F153",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-153-con-replica",
+    "sequence": "AGGTATGCGTTCAAGGACAGGGTGTATCAAGTTTTGAGACGTTAGTAAATAGCT",
+    "lna": false,
+    "overhang_segment": "AGGTATGCGTTCAAGGACAG",
+    "complement_driver_odn": "Hi-MC-89-con-drive",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F151",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "Hi-MC-151-con-replica",
+    "sequence": "CGCACCAGGCGCTGCAAGGCGATTACGCCAGATCCGCTCATGCTCGGGAGCTGCCGCGCG",
+    "lna": false,
+    "overhang_segment": "TGCTCGGGAGCTGCCGCGCG",
+    "complement_driver_odn": "Hi-MC-149-con-drive",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  },
+  {
+   "port_id": "DF-OVH-F172",
+   "role": "follower",
+   "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "anchors": [
+    {
+     "namespace": "follower_sequence_manifest",
+     "index_space": "ODN-name identity (no particle indices exist)",
+     "anchor": "UNKNOWN",
+     "status": "UNKNOWN"
+    }
+   ],
+   "orientation": {
+    "status": "UNKNOWN"
+   },
+   "chemistry": {
+    "kind": "DNA_HYBRIDIZATION",
+    "odn_name": "HI-MC-172-con-replica",
+    "sequence": "GTCCGCCCGGTTTCTGTGAAGTGGCGCACGGGTACGTTGTGATTTGGAGA",
+    "lna": false,
+    "overhang_segment": "GGTACGTTGTGATTTGGAGA",
+    "complement_driver_odn": "Hi-MC-164-con-driver",
+    "complement_length_nt": 20
+   },
+   "connection_capable": false,
+   "capability_basis": "UNKNOWN: the follower structure does not exist",
+   "status": "SOURCE_CONFIRMED",
+   "evidence": "Suppl. Dataset S1 V3.docx 'Connecting ODN for the Follower'"
+  }
+ ],
+ "mechanical_dofs": [
+  {
+   "dof_id": "inter_arm_angle_compliant_hinge",
+   "kind": "COMPLIANT",
+   "description": "published F variants differ in hinge compliance: rigid F (dsDNA hinge), F-soft-hinge, F-ss-hinge ('F does not assume a defined angle'); bound to D the dimer angle follows the driver",
+   "status": "INFERRED_CANDIDATE",
+   "evidence": "article Fig. 6h and Extended Data Fig. 9 discussion; DOF structure inferred from behaviour description, no coordinates exist"
+  }
+ ],
+ "model_and_units": {
+  "model": "UNKNOWN - no model representation published for the follower",
+  "length_unit": "UNKNOWN",
+  "compatible_conditions": [
+   "aqueous assembly buffer (1x NEOB) at 30 C for D-F combination per Methods; simulation model UNKNOWN"
+  ]
+ },
+ "observables": [
+  {
+   "name": "D-F_duplex_formation_yield",
+   "definition": "fraction of correct driver-follower duplexes among surface structures on TEM micrographs (published: 60% +/- 20%, 199 micrographs, n = 2718)",
+   "status": "DEFINED_IN_SOURCE"
+  }
+ ],
+ "unverified_fields": [
+  "topology",
+  "configuration",
+  "local_frame",
+  "molecular_namespaces.follower_sequence_manifest.index_space",
+  "ports[*].anchors",
+  "ports[*].orientation",
+  "model_and_units.model"
+ ],
+ "known_limitations": [
+  "NOT_RECONSTRUCTED: the follower 3D structure is not published; this spec is sequence-level only and cannot be assembled or simulated as-is",
+  "Minimal staple mix contents for the follower are not enumerated in a machine-readable scaffold-routing form; the ODN list alone does not determine the structure",
+  "the three published variants (F, F-soft-hinge, F-ss-hinge) share the same 10 connecting ODNs; variant identity beyond the hinge ODN lists is not machine-readable",
+  "this spec never justifies a physical connection claim: ports are deliberately connection_capable=false"
+ ],
+ "provenance": {
+  "execution": "EX-PREP-S17-R3",
+  "work_order": "WO-PREP-S17-R3",
+  "created_at_utc": "2026-10-18T01:20:00.000Z",
+  "source_registry": "S17-LEAF-SPRING-NANOENGINE-R1_R2 (docs/research/S17_KNOWLEDGEPACK_R2.json); no second provenance registry introduced"
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-S17-R3-OVERHANG-ERRATUM-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-s17-erratum-r1",
+  "subject_sha": "7236461353293ca1bb542b0404e385cccb681e82",
+  "timestamp_utc": "2026-10-21T00:46:32.966Z",
+  "summary": "Begin narrow 7-port follower overhang-segment correction sourced exclusively from pinned 20-nt R3 pairs, with no science or new provenance claims.",
+  "command_refs": [
+    "read S17_R3_COMPONENT_FOLLOWER.json and R3 recipe on 7236461353293ca1bb542b0404e385cccb681e82"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-S17-R3-OVERHANG-ERRATUM-R1.md"
+  ],
+  "next_action": "Add 10-pair RED falsifier test to integration candidate before altering follower data.",
+  "blocker": null
+}

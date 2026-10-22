@@ -1,0 +1,21 @@
+== CMD: PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . ==
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "git metadata unavailable"
+  ],
+  "frontier": "NL5",
+  "next_work_order": "NL5-002",
+  "branch": null,
+  "head": "baac1378b3de604cdad99c546e1cf9d9b5b000b3",
+  "tree": "e63caed7c5922e83add2696abb6dc5c0fe8787b4",
+  "counts": {
+    "stages": 9,
+    "tasks": 19,
+    "experiments": 7
+  }
+}
+EXIT_CODE=0

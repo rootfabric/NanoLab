@@ -1,0 +1,273 @@
+{
+  "kind": "s17_stack_blob_mapping",
+  "base_main": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "source_old_base": "26c4cd51151167634815c531b9c49dcc54ba6243",
+  "source_cli_tip": "ca6eabd84c0712af87d8ab571b1e3caf549bfb16",
+  "source_repair_tip": "a4b4cf3a1072b9139720bb4420e3bc53154cff6a",
+  "source_additions_count": 55,
+  "source_paths": [
+    {
+      "path": "docs/examples/s17_static_assembly_example/README.md",
+      "blob_sha1": "df2f9fc7a4545c275432c0a569b8b4f2ee5f06da"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/assembly_spec.json",
+      "blob_sha1": "eeea6b31e7ad73f90ca3321a5d17588c542e336e"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/driver.dat",
+      "blob_sha1": "2b440a6dde8a45998a4c07ff7c54869caf575d76"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/driver.top",
+      "blob_sha1": "064dd533958d8d43d73e2461bd1b10344689bb05"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/driver_component_spec.json",
+      "blob_sha1": "2204920f83ed2e9b94fdcee4ffe217a61f6e2e98"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/expected_receipt.json",
+      "blob_sha1": "60a1c34a02865f8ccadcd4ed59fb8bf42475c077"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/follower.dat",
+      "blob_sha1": "e8faa5e15e8b3705fc2e863a75bb287df2f598a8"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/follower.top",
+      "blob_sha1": "aa4f7450f76f207fd74942232ec8665e531864be"
+    },
+    {
+      "path": "docs/examples/s17_static_assembly_example/follower_component_spec.json",
+      "blob_sha1": "c09177e5367b256db50384e44d8d184aef1e329b"
+    },
+    {
+      "path": "docs/research/S17_R3_ASSEMBLY_RECEIPT.json",
+      "blob_sha1": "f6251fe08cc4c1c4654af4aa342a88e7a22f0b2d"
+    },
+    {
+      "path": "docs/research/S17_R3_ASSEMBLY_SPEC.json",
+      "blob_sha1": "f22c656ecd41da183558d9faac930797d5002093"
+    },
+    {
+      "path": "docs/research/S17_R3_COMPONENT_DRIVER.json",
+      "blob_sha1": "cf465855ce90f17a584faa05b0c6cb64a1dd6b92"
+    },
+    {
+      "path": "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
+      "blob_sha1": "c44374a9263b636acd29afc1fdfc7b038473e9c5",
+      "superseded_by_erratum": {
+        "commit": "4f9583d84f0047f21f8dc22eddaea4e592788e01",
+        "head_blob_sha1": "3a09fab4f7adf88fde62061f3545c5d0b8229038",
+        "note": "R3.1 erratum: seven follower overhang segments realigned to pinned 20nt author pairs; this map's blob_sha1 is the ORIGINAL R3 import blob (c44374a), retained for provenance; the erratum commit supersedes it at the integration tip"
+      }
+    },
+    {
+      "path": "docs/research/S17_R3_INTERFACE_AUDIT.md",
+      "blob_sha1": "534abd4fe2ca0c0cc3955a5da68f121180c13230"
+    },
+    {
+      "path": "docs/research/S17_R3_SOURCE_GAPS.md",
+      "blob_sha1": "57f2ed1bfa7524fdef12fe3b5b6ec3d2276b26ff"
+    },
+    {
+      "path": "docs/work/WO-PREP-S17-R3-REPAIR-R1.md",
+      "blob_sha1": "e3d10cc7ac60d106b43f5afafae72f6004c98dbb"
+    },
+    {
+      "path": "docs/work/WO-PREP-S17-R3.md",
+      "blob_sha1": "fa65aea90f598b792ce5af0266293df4362aeda7"
+    },
+    {
+      "path": "docs/work/WO-S17-STATIC-ASSEMBLY-HARDENING-R1.md",
+      "blob_sha1": "3e81cf7f77f386c0837e90434457f4c6a979ce6e"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0001-work-order-started.json",
+      "blob_sha1": "405f5452a21e9112dc6df27fcbb1f1f7604b4131"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0002-repair-implemented.json",
+      "blob_sha1": "044d9f28c4ad64852561a5cdb906e37a4b9d60de"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0003-validation-recorded.json",
+      "blob_sha1": "6506f43f9cdf27145c9d0b933042265d86e4e38b"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0004-handoff-completed.json",
+      "blob_sha1": "500c201e4955511f8626ad2137e533b4603a6c30"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0005-hosted-ci-recorded.json",
+      "blob_sha1": "e0f84c74d20af0c9bec2d6be3d43537772b5c030"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0006-review-verdict-and-corrections.json",
+      "blob_sha1": "71a6d6ca0bcbf08c015ceba0e89e4e5169258a7e"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/evidence-map.json",
+      "blob_sha1": "22c922ba3e0ddbaa60ab3a88b4e9daae2cac214c"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/passport.json",
+      "blob_sha1": "8dbd4683c0f91efab1aa6728f18d223fcf3b7fc3"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/summary.md",
+      "blob_sha1": "c3c06ef4347329db3d6a1914a49f439658bd29f1"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0001-work-order-started.json",
+      "blob_sha1": "032271329ff64e6322a6c7425c3d23800de943e2"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0002-interface-audit-complete.json",
+      "blob_sha1": "16d1b32f3b0873b187640a6407c2dd2fbde952c5"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0003-implementation-committed.json",
+      "blob_sha1": "f21ac21e98ee7ff82071658057231da44004d963"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0004-validation-recorded.json",
+      "blob_sha1": "a44740c8ab1e19a918f8b519a4fdefc69b2ded60"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0005-handoff-completed.json",
+      "blob_sha1": "76a5b4c2b19ef92d446264793ae2959fcd9ae2cc"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/events/0006-repair-dispatched.json",
+      "blob_sha1": "5094c4c199aae6a258897e8ca86956e1531a8dd7"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence-map.json",
+      "blob_sha1": "7977a7d8b4bd29ead2596a74dfb7dac3b22fac1a"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+      "blob_sha1": "bb8bfa2f46e00a04ec1b189789587f852a66581e"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-fetch-manifest.json",
+      "blob_sha1": "9edc9ca11ffb981982375c3eb1687b0a4b5ba3d7"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-synthetic-assembly-receipt.json",
+      "blob_sha1": "e057e6c293231e6de33cb407b3c52621ec5c401d"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/passport.json",
+      "blob_sha1": "5515716912cc4ef75fc8ecd0fc1bf09e8b4dd1e8"
+    },
+    {
+      "path": "docs/work/executions/EX-PREP-S17-R3/summary.md",
+      "blob_sha1": "d0808ba044c571284d09cdcbd5475b1ee76e65f7"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0001-work-order-started.json",
+      "blob_sha1": "4da1f4f96c641bd45c5f7b8a6938fbb333bc949d"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0002-implementation-committed.json",
+      "blob_sha1": "af043ef672bb2169bc504dbd82800d77e16bdcbf"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0003-validation-recorded.json",
+      "blob_sha1": "7f36493a38ab32c0411ec039555d292ba8100968"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0004-handoff-completed.json",
+      "blob_sha1": "253f5aa4f1f226e742b1aba832a067b9850e9eec"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0005-review-verdict-and-hosted-ci.json",
+      "blob_sha1": "33204135e7e85ec9a07f6cc03fc1bcf0e5d94c2d"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/events/0006-exact-head-verified.json",
+      "blob_sha1": "495939c666367e37b61c752f49f9b64c92be38f6"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/evidence-map.json",
+      "blob_sha1": "cc2c0d2dc87d5db86a29be2430d53219b3d0404a"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/passport.json",
+      "blob_sha1": "313cb0a1af9d7f595f3c468a503174f19caaa39f"
+    },
+    {
+      "path": "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/summary.md",
+      "blob_sha1": "ac3859f62a94eb81ab70c2cd29381c907ad47aac"
+    },
+    {
+      "path": "scripts/knowledge_pack/assembly_cli.py",
+      "blob_sha1": "0fb891d776f4db6edc0d130aaf14c1b8ce9197dd"
+    },
+    {
+      "path": "scripts/knowledge_pack/assembly_spec.py",
+      "blob_sha1": "0447a421bd5766de6c8a8e98ef081a77a81cb7af"
+    },
+    {
+      "path": "scripts/knowledge_pack/mechanical_component_spec.py",
+      "blob_sha1": "3742415a4b6107b91076de6c401ce09cafaff1d0"
+    },
+    {
+      "path": "tests/test_s17_r3_assembly.py",
+      "blob_sha1": "91729bb968aba219701c50e3dc1c89aabf3e044f",
+      "superseded_by_erratum": {
+        "commit": "1bfafb959b6f7cda695a560bc46082bfc83117df",
+        "head_blob_sha1": "074619eb5ec3e86ee09bf7a8e6fd01a3e67d20be",
+        "note": "R3.1 erratum regression: 21nt historical expected-failure replaced by corrected 20nt expectations + deliberate 21nt tamper -> BLOCKED_SOURCE regression; map's blob_sha1 (91729bb) is the ORIGINAL R3 import blob, retained for provenance"
+      }
+    },
+    {
+      "path": "tests/test_s17_r3_component_spec.py",
+      "blob_sha1": "62df3fa864de0e1f928fe5801e0ad0d55c14be3d"
+    },
+    {
+      "path": "tests/test_s17_r3_fresh_review_falsifiers.py",
+      "blob_sha1": "e0ae3631f33788b5e4981521d6c85aa554d30f36"
+    },
+    {
+      "path": "tests/test_s17_static_assembly_cli.py",
+      "blob_sha1": "49dae4a967e7e5c406c56a5c413e0a95d11dddd3"
+    }
+  ],
+  "missing_repair_verified_event": {
+    "path": "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0007-exact-head-verified.json",
+    "sha": "096dfa46fb408ab15bfe574d9bfc821879f9f80a"
+  },
+  "work_queue": {
+    "method": "append-only source R3+repair+CLI lines onto canonical main; main content retained",
+    "added_rows": [
+      "| WO-PREP-S17-R3 (PREP-S17 line, R3) | **Driver–follower interface + первые исполняемые контракты сборки (2026",
+      "| WO-PREP-S17-R3-REPAIR-R1 (child execution, PREP-S17 line; 0 scientific runs) | **IN_PROGRESS — repair четырё",
+      "| WO-PREP-S17-R3-REPAIR-R1 (child execution, PREP-S17 line; 0 scientific runs) | **IMPLEMENTED — HANDOFF_COMPL",
+      "| WO-S17-STATIC-ASSEMBLY-HARDENING-R1 (child execution, PREP-S17 line; 0 scientific runs) | **IN_PROGRESS — де",
+      "| WO-S17-STATIC-ASSEMBLY-HARDENING-R1 (child execution, PREP-S17 line; 0 scientific runs) | **IMPLEMENTED — HA"
+    ],
+    "full_row_count": 5
+  },
+  "claims": {
+    "scientific_runs": 0,
+    "source_real_follower": "NOT_RECONSTRUCTED",
+    "claim_ceiling": "PINNED_IMPORT_VERIFIED"
+  },
+  "review": {
+    "original_r3_standalone_fresh_review": "WAIT_EXTERNAL",
+    "repair_review": "PASS",
+    "repair_exact_verifier": "VERIFIED",
+    "cli_review": "PASS",
+    "cli_exact_verifier": "VERIFIED",
+    "integration_exact_verifier": "WAIT_EXTERNAL",
+    "erratum_annotation_r1": {
+      "applied_by": "DIRECTOR (event 0006) per independent REVIEWER-73 finding M1",
+      "paths_annotated": 2,
+      "remaining_map_status": "other 53/55 source_paths remain byte-identical at the integration tip (reviewer-verified)"
+    }
+  }
+}

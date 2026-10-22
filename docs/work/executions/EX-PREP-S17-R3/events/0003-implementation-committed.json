@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "event_id": "0003-implementation-committed",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "work_order_id": "WO-PREP-S17-R3",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3",
+  "subject_sha": "49be26701596032bb0924f56a33dab536a5f9ffe",
+  "timestamp_utc": "2026-10-18T01:43:01.520Z",
+  "summary": "Implementation batch committed at 49be2670 (tree b72e5679). Stages B/C complete: (B) MechanicalComponentSpec v1 executable contract in scripts/knowledge_pack/mechanical_component_spec.py - strict fail-closed validation (unknown top-level fields rejected, 64-hex digest discipline, UNKNOWN honesty rules, claim-ceiling enforcement via knowledge_pack.contract CLAIM_LEVELS_V1/FORBIDDEN_CLAIM_LEVELS, port capability gate: connection_capable=true requires concrete interface type + all anchors SOURCE_CONFIRMED + orientation SOURCE_CONFIRMED; a numeric index alone never makes a port connectable; a fully confirmed port must not be marked non-connectable), repo cross-verification (KnowledgePack digest, local pin digests, remote-pin provenance); component specs published: docs/research/S17_R3_COMPONENT_DRIVER.json (nNE driver: pinned topology 71eca286..., configuration b0722a5b..., namespace nNE 14343/163, 10 D-F overhang ports with full connecting-ODN chemistry incl. LNA notation, force pair 8694/7374, all ports connection_capable=false with capability_basis UNKNOWN), docs/research/S17_R3_COMPONENT_FOLLOWER.json (partial spec: sequence-level interface SOURCE_CONFIRMED, topology/configuration explicitly UNKNOWN/NOT_RECONSTRUCTED). (C) AssemblySpec v1 + minimal deterministic fail-closed two-component assembler in scripts/knowledge_pack/assembly_spec.py: modes SOURCE_VERIFIED/CANDIDATE_DESIGN, exactly two components, digest-pinned inputs, hybridization complementarity verification (reverse-complement, min 12 nt, polarity), index-space offsetting + fresh contiguous strand ids, rigid-body transform, unit conversion, coarse geometry checks (connected-anchor distance band + inter-component clash scan; no conflict found still yields GEOMETRY_UNVERIFIED, never a bare PASS), GEOMETRIC_CONFLICT/BLOCKED_GEOMETRY on violations, canonical deterministic receipts. Real S17 D-F pair: docs/research/S17_R3_ASSEMBLY_SPEC.json (SOURCE_VERIFIED, recipe-pinned) -> docs/research/S17_R3_ASSEMBLY_RECEIPT.json = NOT_RECONSTRUCTED (blocked inputs: follower topology + configuration do not exist in any audited source; no link invented). Synthetic pair full positive run as durable evidence: evidence/s17-r3-synthetic-assembly-receipt.json = ASSEMBLED_STATIC_ONLY / GEOMETRY_UNVERIFIED, deterministic double-run. Stage A audit doc + recipe evidence + fetch manifest (48.3/256 MiB) published. WORK_QUEUE row appended.",
+  "command_refs": [
+    "git add <implementation files> && git commit",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/research/S17_R3_INTERFACE_AUDIT.md",
+    "docs/research/S17_R3_COMPONENT_DRIVER.json",
+    "docs/research/S17_R3_COMPONENT_FOLLOWER.json",
+    "docs/research/S17_R3_ASSEMBLY_SPEC.json",
+    "docs/research/S17_R3_ASSEMBLY_RECEIPT.json",
+    "docs/research/S17_R3_SOURCE_GAPS.md",
+    "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-df-interface-recipe.json",
+    "docs/work/executions/EX-PREP-S17-R3/evidence/s17-r3-synthetic-assembly-receipt.json",
+    "scripts/knowledge_pack/mechanical_component_spec.py",
+    "scripts/knowledge_pack/assembly_spec.py"
+  ],
+  "next_action": "Stage D full validation on exact HEAD; then handoff.",
+  "blocker": null
+}

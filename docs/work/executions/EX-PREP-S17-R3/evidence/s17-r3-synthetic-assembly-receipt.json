@@ -1,0 +1,96 @@
+{
+ "schema_version": 1,
+ "kind": "assembly_receipt",
+ "assembly_status": "ASSEMBLED_STATIC_ONLY",
+ "claim": "STATIC_FILE_OPERATION_ONLY: deterministic file-level construction. Never ASSEMBLY_VALIDATED; never evidence of hybridization occurring, of motion transfer, of function, or of wet-lab fabricability.",
+ "geometry_status": "GEOMETRY_UNVERIFIED",
+ "reason": null,
+ "assembled": {
+  "nucleotides": 44,
+  "strands": 5,
+  "index_map_policy": {
+   "particle_index_space": "0-based; driver particles keep their local indices; follower particle g = local f + driver nucleotide count",
+   "strand_ids": "fresh contiguous 1..S in file order (driver strands, then follower strands); collisions are impossible by construction",
+   "covalent_links": "created only inside each component by its own n3/n5 rows; hybridization connections never create n3/n5 links"
+  },
+  "topology_text_sha256": "1df60c2559cf9499889a84f6cafdaf323212b7f35aa17945e986e0741545383e",
+  "configuration_text_sha256": "377741bd9cd2c849f94d32706f1d8dd1733c0adc0f66153bacbdb9a337c3e406",
+  "assembly_box": [
+   45.0,
+   12.0,
+   12.0
+  ],
+  "note": "topology_text/configuration_text themselves are returned by assemble_artifacts()",
+  "topology_text_preview": "44 5",
+  "configuration_header_preview": "t = 0\nb = 45.0 12.0 12.0\nE = 0 0 0"
+ },
+ "assembly_id": "SYN-DF-1",
+ "mode": "CANDIDATE_DESIGN",
+ "design_basis": "HYPOTHESIS",
+ "components": {
+  "driver": {
+   "component_id": "SYN-DRIVER",
+   "version": "1.0.0",
+   "topology_sha256": "27bbed7e621035e9ef0cb5f85aad3498d312a52c77a727af0629ec606f63054a"
+  },
+  "follower": {
+   "component_id": "SYN-FOLLOWER",
+   "version": "1.0.0",
+   "topology_sha256": "562e96a33c35db477b8ac442fbf945917a083d3ba280f678cc684d48386c1031"
+  }
+ },
+ "connections": [
+  {
+   "connection_id": "c1",
+   "kind": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "covalent": false,
+   "complementarity_match_nt": 20,
+   "evidence_status": "INFERRED_CANDIDATE",
+   "note": "recorded as a non-covalent hybridization interface; no backbone link created"
+  },
+  {
+   "connection_id": "c2",
+   "kind": "SS_DNA_OVERHANG_HYBRIDIZATION",
+   "covalent": false,
+   "complementarity_match_nt": 20,
+   "evidence_status": "INFERRED_CANDIDATE",
+   "note": "recorded as a non-covalent hybridization interface; no backbone link created"
+  }
+ ],
+ "backbone_edits_applied": [],
+ "geometry": {
+  "enabled": true,
+  "clash_scan": {
+   "threshold": 0.5,
+   "overlapping_pairs": 0,
+   "min_inter_component_distance": 3.5,
+   "method": "centroid nucleotide positions, minimum-image distance; no excluded-volume model"
+  },
+  "connected_anchor_distances": [
+   {
+    "connection_id": "c1",
+    "distance": 17.356555
+   },
+   {
+    "connection_id": "c2",
+    "distance": 17.356555
+   }
+  ],
+  "note": "coarse scan found no hard conflict, but an excluded-volume/steric impossibility proof is out of scope for this checker"
+ },
+ "inputs": {
+  "driver": {
+   "topology_sha256": "27bbed7e621035e9ef0cb5f85aad3498d312a52c77a727af0629ec606f63054a",
+   "configuration_sha256": "3ae5a8bd2c72de5fc1c1e54e5e827d20f6c4ebaeb37c36cbbc8acf6369a9db23"
+  },
+  "follower": {
+   "topology_sha256": "562e96a33c35db477b8ac442fbf945917a083d3ba280f678cc684d48386c1031",
+   "configuration_sha256": "98062b2de131df98f4809e4a0f5bc1ce0517b5c510412036ca05e12a478343a9"
+  }
+ },
+ "determinism_double_run": {
+  "topology_text_sha256_repeat": "1df60c2559cf9499889a84f6cafdaf323212b7f35aa17945e986e0741545383e",
+  "configuration_text_sha256_repeat": "377741bd9cd2c849f94d32706f1d8dd1733c0adc0f66153bacbdb9a337c3e406",
+  "receipts_identical": true
+ }
+}

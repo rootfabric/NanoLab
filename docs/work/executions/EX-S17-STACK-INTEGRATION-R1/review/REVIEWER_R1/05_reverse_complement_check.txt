@@ -1,0 +1,7 @@
+driver overhang entries: 10 follower overhang entries: 10
+pairs checked: 10
+follower segs not 20nt: none
+follower seg != revcomp(driver seg): none
+driver seg lengths: [20]
+follower seg not substring of own ODN sequence: none
+driver seg not substring of own ODN sequence: [('HI-MC-163-con-D-LNA',), ('Hi-MC-165-con-D-LNA',), ('Hi-MC-174-con-D-LNA',), ('Hi-MC-173-con-D-LNA',)]

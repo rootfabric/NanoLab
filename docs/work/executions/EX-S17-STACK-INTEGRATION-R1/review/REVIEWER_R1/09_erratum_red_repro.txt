@@ -1,0 +1,8 @@
+== Local RED repro of erratum (independent, /tmp clone of review checkout) ==
+cmd: git clone --no-hardlines <checkout> /tmp/nanolab-red-check; git checkout f15d6f4
+     PYTHONPATH=scripts:. python3 -m unittest tests.test_s17_r3_overhang_erratum
+result: Ran 4 tests ... FAILED (failures=7)
+matches hosted CI #39523456603 claim (930 tests / 7 failures) — RED leg confirmed.
+At HEAD baac137 the same module passes within full suite: 930 tests OK.
+Also reproduced F01-F04 RED on faulty base 2cf8297 with falsifiers from HEAD:
+     Ran 4 tests ... FAILED (failures=4)  (matches CI 39124902081 claim)

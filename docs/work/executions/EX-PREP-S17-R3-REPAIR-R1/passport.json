@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "checkpoint": "WO-PREP-S17-R3-REPAIR-R1: fix 4 reproduced fail-closed assembler violations (F01-F04) with RED->GREEN proof; extend negative-control matrix; no scientific runs",
+  "base_branch": "work/prep-s17-r3-r1 (faulty R3 head; PR #60 OPEN draft stacked on PR #59 OPEN - neither is canonical)",
+  "base_sha": "2cf8297f10ab5ec98b8c8023ff76b39d92ef398b",
+  "base_tree_sha": "589191731f92256e311f5f7a70a13b31d83ffd42",
+  "canonical_main_sha": "513c4fa86470d939e9f9b7829e9c67c489c15a57",
+  "branch": "work/prep-s17-r3-repair-r1",
+  "worktree": "/home/rdpuser/NanoLab/prep-s17-r3-repair",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "STARTED",
+  "started_at_utc": "2026-10-18T13:46:43.335Z",
+  "allowed_paths": [
+    "docs/work/WO-PREP-S17-R3-REPAIR-R1.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/**",
+    "docs/work/executions/EX-PREP-S17-R3/events/0006-*.json",
+    "scripts/knowledge_pack/assembly_spec.py",
+    "tests/test_s17_r3_assembly.py",
+    "tests/test_s17_r3_fresh_review_falsifiers.py"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "frozen NL5 scientific evidence / freeze artifacts",
+    "scientific protocols and campaigns (no E5, no oxDNA MD, no new scientific runs)",
+    "scripts/knowledge_pack/mechanical_component_spec.py (validator surface unchanged by this repair; F01 gate lives at assembly level)",
+    "scripts/knowledge_pack/contract.py, import_validation.py, s17_*.py (R1/R2 surfaces; import reuse only)",
+    "scripts/nl5/**, scripts/r2/**, scripts/e2/**, scripts/nl4/**, scripts/hinge_family/** (reuse by import only)",
+    "raw vendored third-party source files",
+    "R2/R3 branch history (no rebase/rewrite of work/prep-s17-r2-r1 or work/prep-s17-r3-r1)",
+    "direct main push, force-push, merge of PR #59/#60"
+  ],
+  "dependencies": [
+    "Issue #62 (WO-PREP-S17-R3-REPAIR-R1 handoff): four reproduced defects R3-F01..F04 with Repair Map",
+    "PR #60 review comment + CI run 39124902081 (808 tests, 4 FAILED on faulty head 2cf8297)",
+    "Closed review-only PR #61, test-only head f0310f8e1f1ad691675363ca0528f3d7e3609104 (falsifier source to port)",
+    "R3 execution EX-PREP-S17-R3 (implementation head 49be267, handoff head 2cf8297) - parent execution, append-only cross-reference event 0006",
+    "Claim ceiling inherited: PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY; real S17 D-F assembly stays NOT_RECONSTRUCTED"
+  ],
+  "resource_budget": "local Python only; 0 network fetches required (falsifier text already in local git objects as origin/review/prep-s17-r3-adversarial-r1); 0 scientific runs; 0 paid compute",
+  "claim_ceiling": "PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY. This repair changes software behavior only: every invalid case class must produce a deterministic fail-closed refusal; the real S17 driver-follower verdict remains NOT_RECONSTRUCTED; static assembly remains ASSEMBLED_STATIC_ONLY + GEOMETRY_UNVERIFIED and is never ASSEMBLY_VALIDATED, never hybridization/motion-transfer/function evidence. Forbidden outputs: MODEL_REPRODUCED, ASSEMBLY_VALIDATED, NL6/NL7 ACCEPTED, any new scientific claim.",
+  "deliverables": [
+    "tests/test_s17_r3_fresh_review_falsifiers.py ported verbatim from PR #61 head f0310f8 into the product suite",
+    "RED proof on faulty base 2cf8297 (4 falsifiers fail) and GREEN proof on repaired head (all pass)",
+    "assembly_spec.py repair: F01 connection-capability gate, F02 recipe byte/SHA/port/path verification, F03 unified transform pipeline (rotation-aware geometry), F04 exposed-overhang interface complementarity with 5p/3p + LNA discipline",
+    "extended negative controls in tests/test_s17_r3_assembly.py (bad indices, corrupted files, bad geometry, unit mismatches, duplicate ids, non-numeric/NaN/Inf, missing sources, unproven interfaces, unsafe recipe paths, forged recipe digest, recipe/connection mismatch, polarity)",
+    "EX-PREP-S17-R3-REPAIR-R1 passport + append-only events + evidence-map + summary; EX-PREP-S17-R3 cross-ref event 0006; WORK_QUEUE append; repair branch pushed"
+  ]
+}

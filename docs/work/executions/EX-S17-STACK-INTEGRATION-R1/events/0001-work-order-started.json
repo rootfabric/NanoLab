@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-s17-integration-director",
+  "subject_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "timestamp_utc": "2026-10-21T00:31:00.000Z",
+  "summary": "Canonical main-based integration preparation after merged #59 #69 #70. Source branch product code is R3+Repair+CLI only; no scientific runs. New branch START durable before importing product blobs.",
+  "command_refs": [
+    "GitHub exact main HEAD fb3148b46a9638167168a46cb170902a4ad9e8d2"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-S17-STACK-INTEGRATION-R1.md"
+  ],
+  "next_action": "Apply reviewed R3+repair+CLI exact blobs onto current main, preserving prior main evidence and WORK_QUEUE append-only.",
+  "blocker": null
+}

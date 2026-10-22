@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0005-continuation-timestamp-normalization",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "chatgpt-s17-integration-director",
+  "subject_sha": "4db05c2dd9663c08244cefaf440b6a49c0703c72",
+  "timestamp_utc": "2026-10-21T01:05:16.802Z",
+  "summary": "PRE-ACCEPTANCE DOCUMENTED CORRECTION: three newly batched work events 0002–0004 had identical UTC timestamps 2026-10-21T01:01:29.764Z (CI #39524871712 Check 3 failure). 0003/0004 timestamp fields normalized to +1ms/+2ms for ordered event ledger; original Git blobs remain immutable in commit 4db05c2dd9663c08244cefaf440b6a49c0703c72 and no force-push/history rewrite occurred. This modified two event-file contents in a new commit rather than pure append-only: REVIEWER MUST EXAMINE THIS EXCEPTION. All other event fields/source/scientific evidence unchanged; 0 scientific runs.",
+  "command_refs": [
+    "https://github.com/rootfabric/NanoLab/actions/runs/39524871712"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/events/0002-continuation-stack-integrated.json",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/events/0003-validation-recorded.json",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/events/0004-handoff-completed.json",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/summary.md"
+  ],
+  "next_action": "Repeat H0 CI after transparent timestamp normalization; independent Reviewer/Verifier still required.",
+  "blocker": null
+}

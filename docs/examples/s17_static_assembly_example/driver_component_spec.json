@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "mechanical_component_spec",
+  "spec_version": "v1",
+  "component_id": "SYN-EX-DRIVER",
+  "version": "1.0.0",
+  "source_id": "SYNTHETIC-EXAMPLE",
+  "knowledge_pack_ref": {
+    "pack_id": "S17-STATIC-ASSEMBLY-EXAMPLE",
+    "pack_path": "docs/examples/s17_static_assembly_example/README.md",
+    "pack_sha256": "c87fb008b8f75fb861e7fda7ee270ec99313b9bffad8f065191c16b5769b095e"
+  },
+  "source_pin": {
+    "role": "SYNTHETIC",
+    "url": "https://example.org/nanolab-s17-example/driver.top",
+    "sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87",
+    "status": "INFERRED_CANDIDATE",
+    "license": "synthetic example (CANDIDATE_DESIGN) - no external source; original synthetic sequences"
+  },
+  "claim_level": "PINNED_IMPORT_VERIFIED",
+  "topology": {
+    "uri": "docs/examples/s17_static_assembly_example/driver.top",
+    "sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87",
+    "nucleotides": 12,
+    "strand_count": 1,
+    "status": "SOURCE_CONFIRMED"
+  },
+  "configuration": {
+    "uri": "docs/examples/s17_static_assembly_example/driver.dat",
+    "sha256": "c12b32de9bdbb98cbfda5dbaebd6322b991583c582fd7f22c5cead1d13205c4a",
+    "nucleotides": 12,
+    "strand_count": 1,
+    "status": "SOURCE_CONFIRMED"
+  },
+  "molecular_namespaces": {
+    "example_driver": {
+      "index_space": "0-based particle index",
+      "particle_count": 12,
+      "topology_sha256": "3982731ce057a1244200544804c9f15dde6063ddbecc893ed2acbabced460b87"
+    }
+  },
+  "local_frame": {
+    "status": "INFERRED_CANDIDATE",
+    "origin": "particle 0",
+    "axes": "config axes",
+    "units": "oxDNA_length_unit"
+  },
+  "ports": [
+    {
+      "port_id": "p-driver-A",
+      "role": "driver",
+      "interface_type": "SS_DNA_OVERHANG_HYBRIDIZATION",
+      "anchors": [
+        {
+          "namespace": "example_driver",
+          "index_space": "0-based particle index",
+          "anchor": 0,
+          "status": "SOURCE_CONFIRMED"
+        }
+      ],
+      "orientation": {
+        "status": "SOURCE_CONFIRMED",
+        "note": "synthetic example: overhang at the declared terminal of the single strand"
+      },
+      "chemistry": {
+        "kind": "DNA_HYBRIDIZATION",
+        "odn_name": "ex-odn-driver-A",
+        "sequence": "ACGTGACTGGAG",
+        "overhang_segment": "ACGTGACTGGAG",
+        "overhang_end": "3p",
+        "lna": false
+      },
+      "connection_capable": true,
+      "status": "SOURCE_CONFIRMED"
+    }
+  ],
+  "mechanical_dofs": [
+    {
+      "dof_id": "rigid",
+      "kind": "RIGID_BODY",
+      "status": "INFERRED_CANDIDATE"
+    }
+  ],
+  "model_and_units": {
+    "model": "oxDNA2 (synthetic example, not a published model)",
+    "length_unit": "oxDNA_length_unit",
+    "compatible_conditions": [
+      "synthetic CANDIDATE_DESIGN example only"
+    ]
+  },
+  "unverified_fields": [
+    "local_frame",
+    "mechanical_dofs",
+    "source_pin"
+  ],
+  "known_limitations": [
+    "CANDIDATE_DESIGN/HYPOTHESIS: hypothetical synthetic construction, not a published structure",
+    "sequences are NOT the real S17 driver/follower sequences",
+    "no scientific claim: static file operation only"
+  ]
+}

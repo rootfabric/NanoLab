@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STACK-INTEGRATION-R1",
+  "event_id": "0008-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-S17-STACK-INTEGRATION-R1",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-s17-stack-integration (two independent agent sessions: redirected v1 session + fresh R2 session; verdict text recorded by DIRECTOR verbatim from their reports)",
+  "subject_sha": "7c99802cd010f6c2a848c024b03d11c41cb3dcd0",
+  "timestamp_utc": "2026-10-21T12:53:31.000Z",
+  "summary": "Fresh independent exact-head VERIFIER verdicts on the final tip of integration/s17-r3-repair-assembly-cli-r1: VERIFIED at HEAD 7c99802cd010f6c2a848c024b03d11c41cb3dcd0 (tree 9f7c704ce83722cb998aa168bee1e8dc070d64d7; remote tip byte-identical; chain fb3148b -> ... -> baac137 reviewed subject -> 7a1bb28 M1+event 0006 -> 7c99802 event_type fix + event 0007). Two verifier generations agree: (V1) session that earlier correctly returned FAILED for 7a1bb28 (invalid event_type REVIEW_PASS, CI 39598725537 FAILURE) re-verified the repaired tip; (V2) a fully fresh R2 verifier session with no prior involvement. Verified personally by each: 930/930 tests OK; check-consistency ok:true; workflow_lint blocking 0; work_cli validate ok:true HANDOFF_READY (ledger ends REVIEW_CORRECTIONS x2); 55-blob map check converged 53 byte-identical at HEAD + exactly 2 expected superseded_by_erratum paths (S17_R3_COMPONENT_FOLLOWER.json -> 4f9583d8, tests/test_s17_r3_assembly.py -> 1bfafb95) with annotations matching git; bonus 55/55 byte-identical at integration commit 7236461; hosted CI 39599164149 SUCCESS on exact SHA; negative run 39598725537 durable, not deleted; negative controls fresh on the tip: 62 repo tamper/negative tests OK plus own /tmp tampering of the pinned recipe (21nt extension -> BLOCKED_SOURCE, nucleotide substitution -> BLOCKED_SOURCE, byte substitution -> BLOCKED_INPUT, 3/3 fail-closed); NOT_RECONSTRUCTED preserved (test_s17_r3_assembly 71 OK, erratum module 4/4, claims scientific_runs=0); scope from main touches only docs/, scripts/ (3), tests/ (5); project/state.json byte-identical to main; no secrets; NL5/NL6/NL7 not promoted. Repair-pattern judgment by both: LEGITIMATE/append-only-compatible (single-field vocabulary fix, pre-merge, old blob durable at 7a1bb28, negative recorded in event 0007); events 0003/0004 timestamp normalization exception re-affirmed ACCEPTABLE WITH CAVEAT (M2) - pattern now applied twice, owner policy codification is urgent but non-blocking. S17_FOLLOWER remains NOT_RECONSTRUCTED; 0 scientific runs.",
+  "command_refs": [
+    "python3 -m unittest discover -s tests -t . (930 OK)",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-S17-STACK-INTEGRATION-R1 (ok:true)",
+    "python3 - <<55-blob check: 53 identical + 2 superseded_by_erratum = 55",
+    "gh api repos/rootfabric/NanoLab/actions/runs/39599164149 (SUCCESS @ 7c99802cd010f6c2a848c024b03d11c41cb3dcd0)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/review/VERIFIER_S1/VERIFY_PR73_R1.md (incl. FAILED @ 7a1bb28 v1 history preserved)",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/review/VERIFIER_S2/VERIFY_PR73_R2.md",
+    "docs/work/executions/EX-S17-STACK-INTEGRATION-R1/review/REVIEWER_R1/REVIEW_PR73_R1.md"
+  ],
+  "next_action": "All mandated technical gates of GATE-S17-R3-INTEGRATION-REVIEW-R1 (Issue #74) are complete: fresh independent Reviewer PASS, fresh exact-head Verifier VERIFIED x2 on the final tip, hosted CI SUCCESS on exact final SHA, negatives durable. Owner Human Gate for integration was expressed 2026-10-21 ('zakryvaj i davaj prodolzhat') and applies only after these gates - gates are now satisfied; PR #73 merge authorized per Issue #74 section 7. Close superseded staged PRs #60/#67/#71 after merge without loss of evidence (reviewer-confirmed traceability).",
+  "blocker": null
+}

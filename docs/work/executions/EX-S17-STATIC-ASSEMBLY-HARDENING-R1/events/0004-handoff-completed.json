@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "event_id": "0004-handoff-completed",
+  "event_type": "HANDOFF_COMPLETED",
+  "work_order_id": "WO-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-s17-static-assembly-hardening",
+  "subject_sha": "e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6",
+  "timestamp_utc": "2026-10-18T15:51:53.493Z",
+  "summary": "HANDOFF COMPLETED (IMPLEMENTED, independent review pending). Deliverables closed on exact tested implementation head e1c48f6cb1e81a3bb7ff7161c56ea3708604fbe6 (tree 724cb5ba7eb1b3c8db80d640d123977a5eb9e29e); the only commits after it are docs-only evidence-pack commits (966f2cc = events 0002-0003 + evidence map; this commit = handoff event + summary + WORK_QUEUE completion row). Deliverables: (1) scripts/knowledge_pack/assembly_cli.py - deterministic offline stdlib CLI (assemble + verify) with atomic artifact writes, timestamp-free deterministic artifact bytes, fail-closed boundaries and exit codes 0/1/2 as specified in the WO; (2) CANDIDATE_DESIGN example pair docs/examples/s17_static_assembly_example/ with committed expected receipt and end-to-end byte-determinism test; (3) tests/test_s17_static_assembly_cli.py - 31 new tests; (4) repair-review minors folded: (a) driver-side unit_conversion/coordinate_transforms now APPLIED via the shared role-symmetric transform pipeline (chosen over loud rejection per WO decision; validate_component_spec unchanged, PR #61 contract preserved), (b) SOURCE_VERIFIED recipe entries without segment keys refuse BLOCKED_SOURCE instead of silently skipping the cross-check, CANDIDATE_DESIGN stays permissive. Validation at exact head e1c48f6: 877 tests OK (846 base incl. 4/4 falsifiers + 31 new); check-consistency ok: true; workflow_lint blocking: 0; work_cli validate of this execution dir ok (recorded in summary after the pack commits). Claim ceiling PINNED_IMPORT_VERIFIED / C0_SOFTWARE_ONLY held: statuses only ASSEMBLED_STATIC_ONLY / NOT_RECONSTRUCTED / BLOCKED_*; GEOMETRY_UNVERIFIED discipline; never ASSEMBLY_VALIDATED / MODEL_REPRODUCED; exit code 0 never a scientific pass; real S17 pair verdict NOT_RECONSTRUCTED unchanged. OPEN RISKS: stacked on unmerged R3 chain (PR #59/#60/#68) - integration order R2 -> R3 -> repair -> this branch; dup-particle-id rule is the documented CLI-level reading of the WO failure class; real SOURCE_VERIFIED assembly still blocked by R3-REPAIR-ERRATUM-1 (out of scope); verify rests on assembled-text digests + strict reparse (receipt input digests not re-checkable without inputs, documented). 0 scientific runs, 0 network calls. Merge = Human Gate (Director opens the PR). One next action: fresh independent Reviewer on the branch tip, then fresh exact-head Verifier.",
+  "command_refs": [
+    "git commit 966f2cc1267a20fba0c24dc84f19656c0ba10bfb (events 0002-0003 + evidence map)",
+    "git rev-parse HEAD HEAD^{tree}",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1 (ok: true, after pack)",
+    "git push origin work/s17-static-assembly-hardening-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/evidence-map.json",
+    "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/summary.md",
+    "docs/work/WO-S17-STATIC-ASSEMBLY-HARDENING-R1.md"
+  ],
+  "next_action": "Fresh independent Reviewer on the branch tip, then fresh exact-head Verifier, then Human Gate.",
+  "blocker": null
+}

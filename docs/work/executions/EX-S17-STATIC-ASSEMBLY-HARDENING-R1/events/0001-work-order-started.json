@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-S17-STATIC-ASSEMBLY-HARDENING-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-s17-static-assembly-hardening",
+  "subject_sha": "d9c3e0559532f4b8d2fcb4ae0f602c1a220ee1f0",
+  "timestamp_utc": "2026-10-18T15:26:02.810Z",
+  "summary": "START WO-S17-STATIC-ASSEMBLY-HARDENING-R1 (issue #66, program issue #63) on the verified R3-repair tip: START commit d9c3e0559532f4b8d2fcb4ae0f602c1a220ee1f0 (tree 8126d1ba) on branch work/s17-static-assembly-hardening-r1, base_sha 0b9311c380a2d228be0bdb35701287a2b9e9339a (tree 487335fb) - the exact head where all four falsifiers F01-F04 are GREEN (846 tests OK) and the independent Reviewer recorded PASS with 5 non-blocking minors. Scope: minimal deterministic OFFLINE CLI scripts/knowledge_pack/assembly_cli.py (assemble: driver+follower+assembly specs [+optional --recipe resolved via --recipe-base over assembly_spec.assemble(recipe_base=...)] -> topology + dat config + receipt.json, atomic write, sorted keys, fixed float formatting, no timestamps in artifact bytes; verify: sha256 cross-check + strict hinge_family reparse, exit 0/1, no stdout science); fail-closed boundaries (unknown args, missing files, absolute/../ outdir, >4MiB inputs, duplicate particle ids, recipe-with-wrong-bytes -> BLOCKED_INPUT); CANDIDATE_DESIGN example pair under docs/examples/s17_static_assembly_example/ with byte-determinism test; new tests in tests/test_s17_static_assembly_cli.py. Repair-review minors folded into scope per WO decision: (a) driver-side unit_conversion/coordinate_transforms are APPLIED through the same shared transform pipeline (preferred option over loud rejection; validate_component_spec stays untouched, PR #61 contract preserved), (b) SOURCE_VERIFIED recipe entries without segment keys stop silently skipping the segment cross-check (BLOCKED_SOURCE), CANDIDATE_DESIGN stays permissive. Claim ceiling PINNED_IMPORT_VERIFIED/C0_SOFTWARE_ONLY: statuses only ASSEMBLED_STATIC_ONLY/NOT_RECONSTRUCTED/BLOCKED_* from assembly_spec.ASSEMBLY_STATUSES, GEOMETRY_UNVERIFIED note, never ASSEMBLY_VALIDATED/MODEL_REPRODUCED; honest NOT_RECONSTRUCTED for the real S17 pair preserved. 0 scientific runs, 0 network calls. Merge = Human Gate.",
+  "command_refs": [
+    "git -C /home/rdpuser/NanoLab/s17-assembly-hardening status (clean at 0b9311c)",
+    "git rev-parse origin/main (513c4fa86470d939e9f9b7829e9c67c489c15a57)",
+    "git commit d9c3e0559532f4b8d2fcb4ae0f602c1a220ee1f0 (WO + passport + WORK_QUEUE row)",
+    "git rev-parse HEAD HEAD^{tree}"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-S17-STATIC-ASSEMBLY-HARDENING-R1.md",
+    "docs/work/executions/EX-S17-STATIC-ASSEMBLY-HARDENING-R1/passport.json",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/events/0006-review-verdict-and-corrections.json"
+  ],
+  "next_action": "Implement assembly_cli.py (assemble + verify), fold minors (a)+(b) into assembly_spec.py, create the CANDIDATE_DESIGN example pair and the end-to-end test matrix; then the full validation gate and handoff.",
+  "blocker": null
+}

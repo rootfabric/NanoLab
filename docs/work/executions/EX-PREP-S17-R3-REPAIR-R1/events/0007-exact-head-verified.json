@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3-REPAIR-R1",
+  "event_id": "0007-exact-head-verified",
+  "event_type": "REVIEW_CORRECTIONS",
+  "work_order_id": "WO-PREP-S17-R3-REPAIR-R1",
+  "actor_role": "VERIFIER",
+  "actor_id": "verifier-prep-s17-r3-repair (fresh independent agent session)",
+  "subject_sha": "0b9311c380a2d228be0bdb35701287a2b9e9339a",
+  "timestamp_utc": "2026-10-18T15:15:02.702Z",
+  "summary": "Fresh independent exact-head VERIFIER verdict (separate agent session, scratch clone /tmp/verify-r3-repair, all heads self-resolved via git ls-remote): VERIFIED, no deviations. Verified personally on exact tip 0b9311c380a2d228be0bdb35701287a2b9e9339a (tree 487335fbd4782825d6ab2d85674ad2ada7e4ff50; implementation subject 82dddb02704c9a850e86f8799ce6e68e24f9cb83, tree 5751fb36, base 2cf8297f): (1) falsifiers 4/4 OK at tip, byte-identical to PR #61 blob e0ae3631f33788b5e4981521d6c85aa554d30f36; (2) RED witness reproduced on base worktree 2cf8297 = 4/4 FAIL with intent-matching messages; (3) full regression 846 tests OK; check-consistency ok; workflow_lint blocking 0; work_cli validate ok for EX-PREP-S17-R3-REPAIR-R1 and EX-PREP-S17-R3; (4) base->tip diff = exactly the 15 allowed paths, protected files (mechanical_component_spec.py, contract.py, import_validation.py, other s17_*.py, project/{state,plan,infra-state}.json, S17_R3_ASSEMBLY_RECEIPT.json) blob-identical to base; (5) zero diffs under frozen surfaces docs/research/NANOLAB_REPRO*, releases/nl5*, experiments/** (890 files identical); (6) claim ceiling intact (forbidden terms only in explicit forbidden lists; real S17 NOT_RECONSTRUCTED test passes; receipt untouched); (7) hosted run 39135996558 verified via GitHub API (success, head bec4c8b8 = review CI head, product files identical to subject); (8) R3-REPAIR-ERRATUM-1 independently recounted: follower 21nt-vs-20nt set == {DFC-02,03,04,05,07,08,09}, driver 10/10 exact, every 21nt window contains the exact 20nt recipe segment (window-size discrepancy, not a sequence contradiction); (9) determinism: falsifiers + s17 assembly tests identical across PYTHONHASHSEED 0/random, 2 runs each. All four original falsifiers F01-F04 stand GREEN on the exact verified head. Issue #62 repair chain complete: RED (cd384dd on 2cf8297, matching hosted run 39124902081 4 FAILED) -> GREEN (82dddb0; hosted 39135996558 846 OK) -> independent Reviewer PASS (19367ad) -> independent Verifier VERIFIED (0b9311c). Merge remains Human Gate. Non-blocking verifier caveats: hosted job log text not fetchable unauthenticated (run metadata + local reproduction used); benign 'git metadata unavailable' warning from check-consistency in scratch clone.",
+  "command_refs": [
+    "git ls-remote origin work/prep-s17-r3-repair-r1",
+    "python3 -m unittest tests.test_s17_r3_fresh_review_falsifiers -v (4/4 OK)",
+    "python3 -m unittest discover -s tests -t . (846 OK)",
+    "git diff --name-status 2cf8297 0b9311c (15 allowed paths only)"
+  ],
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/67",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39135996558",
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/evidence-map.json"
+  ],
+  "next_action": "READY_FOR_HUMAN_GATE (stacked: PR #59 -> PR #60 -> PR #67). Direction D (issue #66) dependency satisfied.",
+  "blocker": null
+}

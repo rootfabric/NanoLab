@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-S17-R3",
+  "event_id": "0006-repair-dispatched",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-S17-R3",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "implementer-prep-s17-r3-repair",
+  "subject_sha": "2cf8297f10ab5ec98b8c8023ff76b39d92ef398b",
+  "timestamp_utc": "2026-10-18T13:46:43.335Z",
+  "summary": "Append-only cross-reference after this execution's terminal handoff (event 0005): the independent adversarial review reproduced four fail-closed violations (F01-F04) on this exact head 2cf8297f - hosted falsifier run https://github.com/rootfabric/NanoLab/actions/runs/39124902081 shows 808 tests / 4 FAILED, original 804 pass; findings recorded in PR #60 review comment and issue #62. Repair is dispatched as a separate scoped execution EX-PREP-S17-R3-REPAIR-R1 on branch work/prep-s17-r3-repair-r1 (stacked on this head, non-force). Prior events of EX-PREP-S17-R3 are unchanged; this record only appends the dispatch fact. Repair RED->GREEN evidence will live in EX-PREP-S17-R3-REPAIR-R1; this execution's claims otherwise stand as handed off.",
+  "command_refs": [
+    "git ls-remote origin refs/heads/work/prep-s17-r3-r1 (== 2cf8297f10ab5ec98b8c8023ff76b39d92ef398b)",
+    "git worktree add /home/rdpuser/NanoLab/prep-s17-r3-repair -b work/prep-s17-r3-repair-r1 2cf8297f10ab5ec98b8c8023ff76b39d92ef398b"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-S17-R3-REPAIR-R1/passport.json",
+    "docs/work/WO-PREP-S17-R3-REPAIR-R1.md",
+    "https://github.com/rootfabric/NanoLab/issues/62"
+  ],
+  "next_action": "Execute the repair in EX-PREP-S17-R3-REPAIR-R1; RED on this head, GREEN on repair head, then fresh Reviewer + exact-head Verifier.",
+  "blocker": null
+}
