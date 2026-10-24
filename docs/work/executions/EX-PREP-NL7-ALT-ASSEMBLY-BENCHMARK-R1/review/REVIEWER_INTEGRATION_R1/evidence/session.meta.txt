@@ -1,0 +1,18 @@
+REVIEWER_SESSION=REVIEWER-76-INT-R1-cb193b02
+utc_start_review=2026-10-24T01:19:55Z
+executor_host=outenemy
+executor_user=rdpuser
+os=Ubuntu 22.04.5 LTS kernel=5.15.0-190-generic
+git=git version 2.34.1
+python=Python 3.10.12
+checkout=/home/rdpuser/NanoLab-review76 (fresh clone, detached HEAD, porcelain-clean)
+remote_origin=https://github.com/rootfabric/NanoLab.git
+commands:
+  git clone https://github.com/rootfabric/NanoLab.git ~/NanoLab-review76
+  git fetch --all --prune; git checkout --detach cf413b053677de17beaf2dcf3ce9b86868361b3e
+  python3 -m unittest discover -s tests -t .
+  PYTHONPATH=scripts python3 -m harness.cli check-consistency --root .
+  PYTHONPATH=scripts python3 -m harness.workflow_lint --root .
+  PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1
+  PYTHONPATH=scripts python3 -m knowledge_pack.alt_pair_source_gate docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json --candidate S23_NARCISSUS_ECHO --root .
+  (plus independent probes: evidence/probe_r12_v2.out, evidence/probe_n1_n4.out)

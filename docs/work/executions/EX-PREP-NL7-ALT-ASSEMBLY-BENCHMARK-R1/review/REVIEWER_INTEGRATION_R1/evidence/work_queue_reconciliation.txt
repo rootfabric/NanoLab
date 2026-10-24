@@ -1,0 +1,25 @@
+fb3148b46a9638167168a46cb170902a4ad9e8d2 blob=3d511a284caa9623163ca430832262fbcdfb7cfa bytes=67261
+862c7c579cc667c7ed2bae85b4b4fbbb3dfa8fba blob=6d278ea6cce6b70375ab136da90b16fae5eaee8e bytes=80329
+9fed48a88bb60d5bdfa4a8280e22366366e42f69 blob=a95c98f1d1f37b1a2670e02d029eb5a23f34df35 bytes=68156
+cf413b053677de17beaf2dcf3ce9b86868361b3e blob=f5555fd1079da6acc00051b18d03ea2480fbe286 bytes=81224
+
+FINAL == MAIN + PR76_APPEND : byte-exact OK
+FINAL == BASE + MAIN_APPEND + PR76_APPEND : byte-exact OK
+MAIN queue starts with exact BASE prefix: OK
+PR76_APPEND bytes: 895 | occurrences in FINAL: 1 | occurrences in MAIN: 0
+
+PR76_APPEND (two NL7 records, verbatim):
+---8<---
+
+| WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1 (NL7 preparatory C0, issue #75; 0 science) | **HANDOFF_READY / BLOCKED_SOURCE:** S23 Narcissus+Echo/Nanobase 256/257 source inventory reported but CAD file bytes, oxDNA .top/.dat, mapping and rights UNKNOWN; S22 moDON/Nanobase 263 is secondary. BIBLIOGRAPHIC source pack + offline strict source gate, 33 new tests, hosted H0 #39530778687 attempt2 828 tests OK. Real assembly not executed; independent Reviewer/Verifier and Human Gate pending via PR #76. |
+
+| WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1 R1.1 (C0 narrow continued) | **CODE_REPAIR_RED_GREEN**: 2 additional falsifiers (internal anchor and topology-unbound overhang) reproduced in H0 #39538287299 (830 tests/2 failures) and fixed in #39538562254 (832 tests OK); exact terminal n3/n5 sequence bound. Original S23/S22 file bytes UNKNOWN; no science; independent reviewer/verifier pending PR #76. |
+---8<---
+
+SHA-256:
+ea1d3aaafef504b111765dcc63e200686bb6a87161c51723e11a246c1dc0cbeb  /tmp/eq_base.bin
+7530418112100054f3bfd0ffae1484c5a780f9e6feb47dede1d2182cca64aeab  /tmp/eq_main.bin
+6ec2e0a2b2c0225a3c4334dc500ff7af1a7b28114ff608007983a462c4505511  /tmp/eq_p1.bin
+9dfabc8f3f2d0f9b3faf371c220d9613ed9701f05dbc9e75ae2a63f2d5bafd97  /tmp/eq_final.bin
+d276ae0b64fa834cf134535bf7ae824b888c068c4477c830e33887a4388a6e47  /tmp/eq_main_app.bin
+72e27ad1c2d19c0ed18e2f17e277724b7c73cc5ee467d6a5fab197abcccab503  /tmp/eq_p1_app.bin

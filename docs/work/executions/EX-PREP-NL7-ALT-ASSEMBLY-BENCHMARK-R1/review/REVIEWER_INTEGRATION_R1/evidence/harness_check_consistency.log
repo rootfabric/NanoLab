@@ -1,0 +1,19 @@
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "git metadata unavailable"
+  ],
+  "frontier": "NL5",
+  "next_work_order": "NL5-002",
+  "branch": null,
+  "head": "cf413b053677de17beaf2dcf3ce9b86868361b3e",
+  "tree": "560dc913a71a237d3c452a5a2e492e213b232911",
+  "counts": {
+    "stages": 9,
+    "tasks": 19,
+    "experiments": 7
+  }
+}

@@ -1,0 +1,35 @@
+HEAD=cf413b053677de17beaf2dcf3ce9b86868361b3e
+TREE=560dc913a71a237d3c452a5a2e492e213b232911
+PARENT1=9fed48a88bb60d5bdfa4a8280e22366366e42f69
+PARENT2=862c7c579cc667c7ed2bae85b4b4fbbb3dfa8fba
+MERGE_BASE_P1_P2=fb3148b46a9638167168a46cb170902a4ad9e8d2
+ORIGIN_MAIN=862c7c579cc667c7ed2bae85b4b4fbbb3dfa8fba
+PR76_HEAD_REF=cf413b053677de17beaf2dcf3ce9b86868361b3e
+PR76_MERGE_REF=5adb3e4ac07d9180b607d8f3bfabd380f87f97f7
+STATUS_PORCELAIN=[1 entries before evidence add]
+
+ancestry:
+  main IS ancestor of HEAD
+  parent1 IS ancestor of HEAD
+  merge-base IS ancestor of main
+  PR73 head baac1378 IS ancestor of main
+
+no-rewrite: all previously documented PR76 heads are ancestors:
+  OK 3a7acbbfb144
+  OK b7300b2b49a1
+  OK a17ecba164a5
+  OK 415ebfd72a9e
+  OK 06569eaf9360
+  OK 83305589d768
+  OK 0fed72f03e84
+  OK d088f9ed6aae
+  OK 559f87219283
+  OK 3d0b55b948c6
+  OK 5e5712eba8fc
+  OK a780293090e9
+  OK b0945180cda5
+  OK a8b3512a64d3
+  OK 2e199d68af31
+  OK d59258a60c5e
+  OK 022a7a376864
+  OK 9fed48a88bb6

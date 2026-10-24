@@ -1,0 +1,6 @@
+N1 empty_list: exit=1 attributeerror_in_traceback=True fail_open=NO
+N1 string: exit=1 attributeerror_in_traceback=True fail_open=NO
+N1 null: exit=1 attributeerror_in_traceback=True fail_open=NO
+N4 dot-slash path: exit=2 outcome=BLOCKED_SOURCE
+   reasons mentioning path/bytes: ['NARCISSUS.topology: missing or outside-root source file', 'ECHO.topology: SOURCE_BYTES_NOT_OBSERVED']
+PROBE_N1N4_EXIT=0

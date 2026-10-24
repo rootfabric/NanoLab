@@ -1,0 +1,27 @@
+== exact commands and exit codes (this session, tree cf413b0) ==
+Ran 972 tests in 54.467s
+OK
+check-consistency EXIT=0
+workflow_lint EXIT=0
+work_cli validate EXIT=0
+gate real pack EXIT=2 (2 expected, BLOCKED_SOURCE fail-closed)
+P1 unwrapped-PBC positive: outcome=TEST_FIXTURE_STATIC_INPUTS_OK expect=TEST_FIXTURE_STATIC_INPUTS_OK => PASS
+P2 NaN box: outcome=BLOCKED_SOURCE expect=BLOCKED_SOURCE => PASS
+P3 zero orientation: outcome=BLOCKED_SOURCE expect=BLOCKED_SOURCE => PASS
+P4 A/B-swapped terminus reuse: BLOCKED_SOURCE | occupancy reason: True | ['pair 1 part_a: nucleotide already assigned to another interface bond']
+P5 internal anchor: BLOCKED_SOURCE | internal-anchor reason: True
+P6 wrong polarity: BLOCKED_SOURCE | polarity reason: True | ['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)']
+P7 digest tamper: BLOCKED_SOURCE | SHA reason: True
+P8 RESTRICTED rights: BLOCKED_SOURCE | rights reason: True
+P9 unbound-overhang index: BLOCKED_SOURCE | reason: ['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)']
+PROBE_R12_EXIT=0
+N1 empty_list: exit=1 attributeerror_in_traceback=True fail_open=NO
+N1 string: exit=1 attributeerror_in_traceback=True fail_open=NO
+N1 null: exit=1 attributeerror_in_traceback=True fail_open=NO
+N4 dot-slash path: exit=2 outcome=BLOCKED_SOURCE
+PROBE_N1N4_EXIT=0
+
+== hosted CI (API, read-only) ==
+run 39868768984: head_sha=cf413b053677de17beaf2dcf3ce9b86868361b3e status=completed conclusion=success event=pull_request
+check-run: RC0 hosted validation (H0): completed/success; steps 4-8 = Check 1/5..5/5 all success
+PR #76: state=open mergeable=true mergeable_state=clean head=cf413b0 base=862c7c5

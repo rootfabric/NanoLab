@@ -1,0 +1,10 @@
+P1 unwrapped-PBC positive: outcome=TEST_FIXTURE_STATIC_INPUTS_OK expect=TEST_FIXTURE_STATIC_INPUTS_OK => PASS
+P2 NaN box: outcome=BLOCKED_SOURCE expect=BLOCKED_SOURCE => PASS
+P3 zero orientation: outcome=BLOCKED_SOURCE expect=BLOCKED_SOURCE => PASS
+P4 A/B-swapped terminus reuse: BLOCKED_SOURCE | occupancy reason: True | ['pair 1 part_a: nucleotide already assigned to another interface bond']
+P5 internal anchor: BLOCKED_SOURCE | internal-anchor reason: True
+P6 wrong polarity: BLOCKED_SOURCE | polarity reason: True | ['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)']
+P7 digest tamper: BLOCKED_SOURCE | SHA reason: True
+P8 RESTRICTED rights: BLOCKED_SOURCE | rights reason: True
+P9 unbound-overhang index: BLOCKED_SOURCE | reason: ['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)']
+PROBE_R12_EXIT=0
