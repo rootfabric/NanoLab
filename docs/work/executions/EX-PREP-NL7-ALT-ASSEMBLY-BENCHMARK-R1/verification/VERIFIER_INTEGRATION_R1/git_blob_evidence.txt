@@ -1,0 +1,37 @@
+# VERIFIER-76-INT-R1 git evidence (independently computed)
+
+## path counts
+main 862c7c5: 2501 tracked paths
+parent1 9fed48a: 2458 tracked paths
+HEAD cf413b0: 2556 tracked paths
+union(main,p1): 2556 == HEAD paths: YES
+
+## blob drift main->HEAD (expect only WORK_QUEUE.md)
+docs/work/WORK_QUEUE.md 6d278ea6cce6b70375ab136da90b16fae5eaee8e f5555fd1079da6acc00051b18d03ea2480fbe286
+
+## modified/deleted structure
+modified base->p1: 1 (WORK_QUEUE.md only)
+modified base->main: 1 (WORK_QUEUE.md only)
+deleted in any direction: 0
+added base->p1: 55, added base->main: 98, intersection: 0
+
+## PR76 55/55 blob identity (p1 vs HEAD)
+identical blobs: 55/55
+
+## work queue reconciliation (python byte-exact)
+sizes: base=67261 main=80329 p1=68156 final=81224
+FINAL == MAIN + ORIGINAL_PR76_APPEND: True
+FINAL == BASE + MAIN_APPEND + PR76_APPEND: True
+append bytes: 895; occurs in FINAL: 1; occurs in MAIN: 0
+blob contents sha256:
+  base         ea1d3aaafef504b111765dcc63e200686bb6a87161c51723e11a246c1dc0cbeb
+  main         7530418112100054f3bfd0ffae1484c5a780f9e6feb47dede1d2182cca64aeab
+  p1           6ec2e0a2b2c0225a3c4334dc500ff7af1a7b28114ff608007983a462c4505511
+  final        9dfabc8f3f2d0f9b3faf371c220d9613ed9701f05dbc9e75ae2a63f2d5bafd97
+  pr76_append  72e27ad1c2d19c0ed18e2f17e277724b7c73cc5ee467d6a5fab197abcccab503
+
+## frozen files blob identity vs main
+project/state.json b819755783119ecc56be50cab1bc736c09c85b24 == b819755783119ecc56be50cab1bc736c09c85b24
+project/plan.json 89975c1bf1fe032934e103d6ee6fbec4fd0df0ea == 89975c1bf1fe032934e103d6ee6fbec4fd0df0ea
+project/infra-state.json 5056b8f539d51ddb0e3b6a3d33c931b91e29885d == 5056b8f539d51ddb0e3b6a3d33c931b91e29885d
+project/infra-plan.json d400669ddf46f8fbf0f71516a25961d3b7a14f1d == d400669ddf46f8fbf0f71516a25961d3b7a14f1d

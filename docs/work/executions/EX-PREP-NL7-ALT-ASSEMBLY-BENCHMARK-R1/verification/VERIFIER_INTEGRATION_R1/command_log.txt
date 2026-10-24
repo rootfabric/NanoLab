@@ -1,0 +1,101 @@
+# VERIFIER-76-INT-R1 command log (exact tree cf413b053677de17beaf2dcf3ce9b86868361b3e)
+# date: 2026-10-24T11:57:07Z
+
+## git subject
+$ git rev-parse HEAD
+cf413b053677de17beaf2dcf3ce9b86868361b3e
+$ git rev-parse HEAD^{tree}
+560dc913a71a237d3c452a5a2e492e213b232911
+$ git show -s --format=%P HEAD
+9fed48a88bb60d5bdfa4a8280e22366366e42f69 862c7c579cc667c7ed2bae85b4b4fbbb3dfa8fba
+$ git status --porcelain
+?? docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/verification/
+
+## harness commands
+$ PYTHONPATH=scripts python3 -m harness.cli check-consistency --root .
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "git metadata unavailable"
+  ],
+  "frontier": "NL5",
+  "next_work_order": "NL5-002",
+  "branch": null,
+  "head": "cf413b053677de17beaf2dcf3ce9b86868361b3e",
+  "tree": "560dc913a71a237d3c452a5a2e492e213b232911",
+  "counts": {
+    "stages": 9,
+    "tasks": 19,
+    "experiments": 7
+  }
+}
+EXIT=0
+
+$ PYTHONPATH=scripts python3 -m harness.workflow_lint --root .
+{
+  "schema": "nanolab.infra_workflow_lint_output.v1",
+  "ok": true,
+  "config_revision": "VALIDATION-GATES-R1",
+  "workflows": [
+    {
+      "path": "/home/rdpuser/NanoLab-verify76/.github/workflows/hosted-ci.yml",
+      "ok": true,
+      "violations": []
+    }
+  ],
+  "summary": {
+    "workflows": 1,
+    "violations": 0,
+    "blocking": 0
+  }
+}
+EXIT=0
+
+$ PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1
+{
+  "schema": "nanolab.control_work_output.v1",
+  "command": "VALIDATE",
+  "ok": true,
+  "errors": [],
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "status": "HANDOFF_READY",
+  "profile": "standard_work_order",
+  "passport_sha256": "d4f594a7e8552a8b978a491b3cd687957a93afab6ac0bc3e286be631933e46d0",
+  "event_types": [
+    "WORK_ORDER_STARTED",
+    "CONTINUATION_CHECKPOINT",
+    "VALIDATION_RECORDED",
+    "HANDOFF_COMPLETED",
+    "CONTINUATION_CHECKPOINT",
+    "CONTINUATION_CHECKPOINT",
+    "REVIEW_CORRECTIONS",
+    "REVIEW_CORRECTIONS",
+    "REVIEW_CORRECTIONS"
+  ],
+  "has_terminal_handoff": true,
+  "has_post_terminal_corrections": true,
+  "has_summary": true
+}
+EXIT=0
+
+$ PYTHONPATH=scripts python3 -m knowledge_pack.alt_pair_source_gate docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json --candidate S23_NARCISSUS_ECHO --root .
+{
+  "candidate_id": "S23_NARCISSUS_ECHO",
+  "claim": "C0_INPUT_FILE_PREFLIGHT_ONLY; NO SIMULATION; NO ASSEMBLY_VALIDATED",
+  "kind": "alt_two_part_source_readiness_receipt",
+  "outcome": "BLOCKED_SOURCE",
+  "part_structure_sizes": {},
+  "reasons": [
+    "NARCISSUS.topology: SOURCE_BYTES_NOT_OBSERVED",
+    "NARCISSUS.configuration: SOURCE_BYTES_NOT_OBSERVED",
+    "ECHO.topology: SOURCE_BYTES_NOT_OBSERVED",
+    "ECHO.configuration: SOURCE_BYTES_NOT_OBSERVED",
+    "interface.anchor_map: SOURCE_BYTES_NOT_OBSERVED"
+  ],
+  "scientific_runs": 0
+}
+EXIT=2
