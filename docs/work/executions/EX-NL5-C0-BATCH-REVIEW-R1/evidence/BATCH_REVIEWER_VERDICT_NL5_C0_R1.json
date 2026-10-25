@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "record_kind": "BATCH_REVIEWER_VERDICT",
+  "verdict_id": "BATCH_REVIEWER_VERDICT_NL5_C0_R1",
+  "execution_id": "EX-NL5-C0-BATCH-REVIEW-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-REVIEW-R1",
+  "program": "NL5-CLOSE-R1",
+  "program_issue": 81,
+  "review_scope_issues": [83, 84, 86],
+  "role": "REVIEWER",
+  "session_ref": {
+    "launcher": "DSH subagent tool (real separate session, fresh, no implementer context)",
+    "dsh_subagent_id": "b8eca5d9-8ad0-419d-8092-58da4d471487",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "review_branch": "review/nl5-c0-batch-f02-f03-f05-r1",
+  "review_base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "review_start_head": "a70057000d97ad64979207391bf980ee7e240fae",
+  "review_start_tree": "f49af7ba7588e62e4d9a486958a732254285c2f2",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "subjects": [
+    {
+      "wo": "F02",
+      "issue": 83,
+      "branch": "work/nl5-f02-u1-host-r1",
+      "head": "c38ad687d87bfa0c33d69bfee4fe40020d34ba45",
+      "tree": "8dbfeb02311d659c1a961434d3eb0a55502de569",
+      "verdict": "PASS",
+      "scope_compliance": "PASS",
+      "frozen_integrity": "PASS",
+      "events_chain": "PASS",
+      "claims_vs_evidence": "PASS",
+      "self_accept_check": "PASS",
+      "passport_status_at_subject": "BLOCKED_OWNER_U1",
+      "harness_work_cli_validate": {"ok": true, "errors": []},
+      "findings_non_blocking": ["F02-NF-1"]
+    },
+    {
+      "wo": "F03",
+      "issue": 84,
+      "branch": "work/nl5-f03-u2-readiness-r1",
+      "head": "1831585fa70169c4e473acfe38e9603e45cfe22c",
+      "tree": "8a89d2a446e4f05fcec7a6daade6572ff5a75212",
+      "verdict": "PASS",
+      "scope_compliance": "PASS",
+      "frozen_integrity": "PASS",
+      "events_chain": "PASS_WITH_NON_BLOCKING_FINDING",
+      "claims_vs_evidence": "PASS",
+      "self_accept_check": "PASS",
+      "passport_status_at_subject": "HANDOFF_READY",
+      "harness_work_cli_validate": {"ok": true, "errors": []},
+      "findings_non_blocking": ["F03-NF-1", "F03-NF-2", "F03-NF-3", "F03-NF-4"]
+    },
+    {
+      "wo": "F05-prep",
+      "issue": 86,
+      "branch": "work/nl5-f05-dispatch-prep-r1",
+      "head": "4c9d8fd30300a2f48504d1b914693f0a66bb3555",
+      "tree": "17e2a7141295c9f6e5bf6fc302bc8d977b210a4d",
+      "verdict": "PASS",
+      "scope_compliance": "PASS",
+      "frozen_integrity": "PASS",
+      "events_chain": "PASS",
+      "claims_vs_evidence": "PASS",
+      "self_accept_check": "PASS",
+      "passport_status_at_subject": "HANDOFF_READY",
+      "harness_work_cli_validate": {"ok": true, "errors": []},
+      "findings_non_blocking": ["F05-NF-1"]
+    }
+  ],
+  "batch_verdict": "PASS",
+  "blocking_findings": [],
+  "non_blocking_findings": [
+    {
+      "id": "F02-NF-1",
+      "subject": "F02",
+      "severity": "non-blocking",
+      "text": "Director-authored dispatch proof 0000 (commit edd7952) describes F01 handoff as 'ACCEPTED (documentary)'; descriptive of F01 documentary transfer, not a scientific authorization and not an implementer self-accept; no effect on F02 verdict."
+    },
+    {
+      "id": "F03-NF-1",
+      "subject": "F03",
+      "severity": "non-blocking",
+      "text": "Pre-terminal events 0001 and 0002 were edited in handoff commit 39e9aec: actor_role EXTERNAL-PREFLIGHT-IMPLEMENTER -> IMPLEMENTER (only change; timestamps/subject_sha/summary untouched; original preserved in git history; transparently declared in commit message). Violates the letter of append-only events; correct pattern would be a corrections event. No factual impact."
+    },
+    {
+      "id": "F03-NF-2",
+      "subject": "F03",
+      "severity": "non-blocking",
+      "text": "Claim '9/9 files changed by F2 blob-SAME at main' is imprecise: commit F2 changes 8 files (all 8 SAME, independently recomputed); the 9th composition entry is DIRECTOR_FREEZE_R2.json marked SAME_DIR (added by a descendant of F2 per its own lifecycle note). Substantive integrity claim holds."
+    },
+    {
+      "id": "F03-NF-3",
+      "subject": "F03",
+      "severity": "non-blocking",
+      "text": "WORK_QUEUE append is 1 entry + 1 blank separator line (0 deletions); existing lines unchanged."
+    },
+    {
+      "id": "F03-NF-4",
+      "subject": "F03",
+      "severity": "non-blocking",
+      "text": "actor_id 'nl5-f03-u2-preflight-r1' in events differs from execution/WO naming 'u2-readiness' (legacy early-phase label; dsh_session_id consistent)."
+    },
+    {
+      "id": "F05-NF-1",
+      "subject": "F05-prep",
+      "severity": "non-blocking",
+      "text": "All three event files (including WORK_ORDER_STARTED, timestamp 17:15:00Z) were committed in the single final commit 4c9d8fd; durable START record was not pushed before substantive work (AGENTS.md work protocol step 3). Low risk for a C0 documentary WO; timestamps plausible and monotonic; evidence complete."
+    }
+  ],
+  "independent_recomputations": [
+    "exact HEAD/TREE of 3 subjects via git fetch + git rev-parse (3/3 match passport)",
+    "scope diff BASE..subject per subject (allowed paths only, 3/3)",
+    "frozen paths diff F2..subject and F2..origin/main (empty)",
+    "canonical SHA-256 of protocol/contract/seed at each subject (3 subjects x 3 artifacts = 9/9 match DIRECTOR_FREEZE_R2.json)",
+    "git blob SHA-1 of 3 frozen artifacts (3/3 match)",
+    "hostname/~/.ssh/config/env owner-allocation channels (0/5, outenemy in forbidden_hostnames)",
+    "origin/main == BASE (unmoved)",
+    "F2 commit file list: 8 files, blob-SHA1 F2 vs main 8/8 SAME",
+    "engine binary sha256 + size at ~/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA = 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78 / 3380728 (exact match)",
+    "df -h / = 96% used, 19G available (matches F03 addendum L-03 MEASURED_FAIL_ON_THRESHOLD)",
+    "frozen seed record recount: seeds 64/64/10/10=148, bootstrap 4, pools 12/12/2/2=28, skipped 10/11/10/10=41, total distinct 180 all unique, 0 seed/pool overlap",
+    "checks_log length 85, all ok (85/85)",
+    "budget arithmetic: 296=148x2, 56=28x2, 296+56=352, 176/platform, wall 560h == HG_B_OWNER_DECISION_R1.json (sha256 b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9, blob 61d1491233aeb2537f9800d6183def5b8fb0c8e0)",
+    "storage basis per-run sizes from run_output_digests_p1.json: mean 105.9 MB, max 119.8 MB (n=20); 176x119.8MB = 21.08 GB <= 21.2 GB",
+    "adversarial reproduction: gate T1 pristine PASS exit0; T2 prose tamper (N=64->65 line 263) PASS exit0 (F05-F-1 confirmed); T3 machine-block tamper (n_0b 64->63) FREEZE_GATE_FAIL exit3",
+    "prose-tamper byte drift: sha256 2658ee3e... -> 23666bf6... (detectable at authority stage)",
+    "scripts/nl5/repro_v02_freeze_contract.py lines ~1840-1950: frozen_subject_binding canonical_sha256 recomputed from Git object bytes (F05-F-1 compensation exists)",
+    "work_cli validate on git-archive trees of all 3 subjects: ok:true errors:[] x3"
+  ],
+  "launch_gates_preserved": {
+    "machine_launch_authorized": false,
+    "r2_active": false,
+    "author_u1": "NOT_ASSIGNED",
+    "scientific_authorization_declared_by_any_subject": false
+  },
+  "work_queue": {
+    "f02": "1 added line, 0 deleted",
+    "f03": "1 entry + 1 blank separator added, 0 deleted",
+    "f05": "1 added line, 0 deleted",
+    "existing_lines_modified": false
+  },
+  "next_action": "Director dispatches a fresh Verifier over the same exact HEAD/TREE of all three subjects, then Human Gate; no auto-activation; F04 stays blocked pending real U1 allocation (owner actions A1-A6); U2 storage L-03 threshold currently failing (96% used) requires remediation or owner accept-risk before F07.",
+  "divergence_note": "Directive named events 'REVIEW_STARTED/REVIEW_PASS'; canonical harness ALLOWED_EVENTS has no such types. Enum-valid mapping used: 0001-review-started = WORK_ORDER_STARTED; 0002-review-verdict-pass = HANDOFF_COMPLETED.",
+  "recorded_at_utc": "2026-10-25T18:02:17Z"
+}

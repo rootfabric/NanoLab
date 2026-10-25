@@ -10,8 +10,20 @@
   "worktree": "/home/rdpuser/NanoLab/review-nl5-c0-batch",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "DISPATCHED",
+  "status": "REVIEW_PASS",
   "started_at_utc": "2026-10-25T17:45:35Z",
+  "review_completed_at_utc": "2026-10-25T18:02:17Z",
+  "review_verdict": {
+    "batch_verdict": "PASS",
+    "per_subject": {
+      "F02": "PASS",
+      "F03": "PASS",
+      "F05-prep": "PASS"
+    },
+    "blocking_findings": 0,
+    "non_blocking_findings": 6,
+    "verdict_evidence": "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/evidence/BATCH_REVIEWER_VERDICT_NL5_C0_R1.md"
+  },
   "program": "NL5-CLOSE-R1",
   "parent_issue": 81,
   "review_scope_issues": [
