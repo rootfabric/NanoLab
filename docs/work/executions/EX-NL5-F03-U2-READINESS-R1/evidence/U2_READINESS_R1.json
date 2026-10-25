@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "record_kind": "U2_READINESS_ASSESSMENT",
+  "evidence_id": "U2_READINESS_R1",
+  "issuer_class": "EXTERNAL_PREFLIGHT_IMPLEMENTER_U2",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "program": "NL5-CLOSE-R1",
+  "task_issue": 84,
+  "parent_issue": 81,
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "dsh_session_id": "ce662f0f-4b0d-4388-b3e0-96e018fecf94",
+  "generated_at_utc": "2026-10-25T17:41:00Z",
+  "observation_pins": {
+    "base_main": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "origin_main_at_audit": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "branch": "work/nl5-f03-u2-readiness-r1",
+    "worktree": "/home/rdpuser/NanoLab/nl5-f03-u2-readiness",
+    "dispatch_head": "7e1e0bce1346d1884dc314409e812f7f8e815296",
+    "frozen_package_f2_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+    "frozen_package_f2_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "f2_is_ancestor_of_main": true,
+    "hash_terminology": "GIT_BLOB_SHA1 and CANONICAL_BLOB_SHA256 recorded separately; working-tree SHA-256 recomputed via 'git show <commit>:<path> | sha256sum' equals canonical blob bytes"
+  },
+  "verdict": {
+    "readiness": "READY_FOR_DISPATCH_PREP",
+    "live_u2_leg": "BLOCKED_NO_U2_ACCESS_FROM_SESSION",
+    "constraints": [
+      "Live host-identity/fingerprint/capacity/systemd checks on outenemy are NOT executable from this session (no ~/.ssh/config; 'outenemy' absent from ~/.ssh/known_hosts); nothing simulated; owner/U2 operator must execute the live checklist before F07",
+      "All outenemy host-state facts (fingerprint, storage, systemd, engine binary digests) date from 2026-10-10/11 and are STALE_BY_TIME (14-15 days) until re-verified live",
+      "Reviewed tooling HEAD 9ded2bf7 (2026-10-11) is NOT current main: main adds the post-review m-1 narrow repair (BLOCKED_MALFORMED_SPEC, commit 5ce0a63 lineage, scripts/r2/cli.py +45/-14 lines, tests/test_r2_activation_tooling.py +29 lines); no fresh Reviewer/Verifier has pinned current main head for the r2 tooling chain",
+      "U2-ready != R2_ACTIVE != scientific authorization: R2 remains WAITING_HOST / NOT_ACTIVE (AUTHOR_U1 = NOT_ASSIGNED, gates U1-U5 / NC-U1..U5 not executed); campaign legs stay HARD_BLOCKED behind the S->F->D/R/V->A chain and HUMAN_PROTECTED_WRITER launch gate",
+      "Dispatch authority record (schema v3, lifecycle A) for the real frozen campaign does not exist yet; fixture-only synthetic authority was used by prior tooling self-tests",
+      "F01-F-1 (carried): fresh Reviewer(F2) PASS tip d63eb5c and Verifier(F2) VERIFIED tip f12d0b4 exist append-only on their branches but are NOT merged into main"
+    ],
+    "declaration_limits": [
+      "This record does not assign U1, does not activate R2, does not authorize any scientific run, and does not change any canonical status",
+      "PASS-like wording in prior receipts refers to tooling review, not to platform readiness; platform readiness stays UNVERIFIED_LIVE until the live checklist passes"
+    ]
+  },
+  "stale_assessment": {
+    "method": "Each prior receipt classified by anchor type: GIT_ANCHORED facts (immutable commits/blobs) re-verified today by independent recomputation; TOOLING_STATE facts compared by git diff across reviewed HEAD -> PR head -> main; HOST_STATE facts timestamped and marked STALE_BY_TIME (no live access from this session); DISPATCH_CHAIN facts cross-read from dryrun manifest and F01 handoff.",
+    "receipts": [
+      {
+        "receipt": "EX-INFRA3-U2-OUTENEMY-READINESS-R1 (WO-INFRA3-U2-OUTENEMY-READINESS-R1, PR #55 chain, branch infra/u2-outenemy-executor-readiness-r1)",
+        "recorded": "2026-10-10T15:20:17Z .. 2026-10-11",
+        "anchored_facts": "outenemy host fingerprint (Ubuntu 22.04.5 LTS, kernel 5.15.0-190-generic, 64x Xeon E5-2698 v3, virt=none, uid 1001), engine build 66.7s binary sha256 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78 size 3380728 source_tree_sha256 b1742ce91de072c59f4b3febea97647e813b9a5bd23900465bbbf227d22a911c, smoke HAIRPIN 2000 steps exit 0, systemd user-manager RC 0 Linger=yes system-manager RC 1, storage dirs ~/nanolab/{workspaces,raw,cache,tools}, raw projection ~15 GB with ~2x margin and 80% control threshold, release v0.1.1 self-test exactly 7 pyc findings, run-u2 fixture e2e + negative controls",
+        "status": "HOST_STATE_STALE_BY_TIME",
+        "stale_reason": "Host facts are 14-15 days old at audit time; unverifiable from this session (no U2 access); every one of them must be re-derived live before F07",
+        "evidence": [
+          "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/evidence/u2-fingerprint-R1.json",
+          "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/evidence/u2-engine-build-result-R1.json",
+          "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/evidence/u2-systemd-mechanics-R1.json",
+          "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/evidence/u2-check-host-BLOCKED-R1.json",
+          "docs/work/executions/EX-INFRA3-U2-OUTENEMY-READINESS-R1/evidence/u2-dispatch-fixture-selftest-R1.json"
+        ]
+      },
+      {
+        "receipt": "FRESH_REVIEW_U2_READINESS_R1.{md,json} (independent reviewer verdict on the U2 readiness branch)",
+        "recorded": "2026-10-11",
+        "anchored_facts": "verdict PASS on exact subject HEAD 9ded2bf7c230781111c9d90008502cbd8271aa45 / tree 520c0e9245a405c0acab163bcfa1897c68fabeb9, base main 8bf7e3a0dec5c3898cdc920f78d94d03b927c4ad; 8 claim groups verified; findings m-1 (malformed spec KeyError) and m-2 (declarative fixture ceiling)",
+        "status": "GIT_ANCHORED_VALID_BUT_SUPERSEDED_HEAD",
+        "stale_reason": "Review is immutable and remains valid FOR ITS PINNED SUBJECT, but 9ded2bf7 is no longer any branch tip: the m-1 repair (commit 5ce0a63 lineage) landed after review, PR #55 merge head is 3b6ead17f0c3a4d789e46425959481c79d9407fd, and current main is 3b567ae. Diff 9ded2bf7..main touches only scripts/r2/cli.py (45 lines: m-1 BLOCKED_MALFORMED_SPEC fail-closed spec validation) and tests/test_r2_activation_tooling.py (+29 lines) - the repair directly implements reviewer recommendation m-1, so no regression is known, but the PASS does not pin current main head.",
+        "verification_this_session": [
+          "git merge-base --is-ancestor 9ded2bf7 3b6ead17 -> yes (review head is strict ancestor of PR head)",
+          "git merge-base --is-ancestor 3b6ead17 3b567ae -> yes (PR head merged into current main)",
+          "git diff --stat 9ded2bf7..3b567ae -- scripts/r2 tests/test_r2_activation_tooling.py -> 2 files, 60 insertions, 14 deletions"
+        ],
+        "evidence": [
+          "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.md",
+          "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.json"
+        ]
+      },
+      {
+        "receipt": "PR #55 (infra: U2 (outenemy) executor readiness R1)",
+        "recorded": "merged:true (fetched 2026-10-25T17:18Z)",
+        "anchored_facts": "head infra/u2-outenemy-executor-readiness-r1 @ 3b6ead17f0c3a4d789e46425959481c79d9407fd merged into main",
+        "status": "GIT_ANCHORED_VALID",
+        "stale_reason": null,
+        "evidence": ["https://api.github.com/repos/rootfabric/NanoLab/pulls/55"]
+      },
+      {
+        "receipt": "FROZEN_R2 package F2 (release package targeted for U2 delivery)",
+        "recorded": "2026-10-06T02:00:49+10:00 (commit 60da9a8), Director freeze record 2026-10-06T02:03:57+10:00 (a2f7304)",
+        "anchored_facts": "F2 predates the 2026-10-10/11 U2 readiness line; the readiness review verified frozen blobs untouched (claim 6) BEFORE the post-review tooling repairs; frozen blob identities re-verified independently this session: 3/3 MATCH vs DIRECTOR_FREEZE_R2.json at F2 and at current main",
+        "status": "GIT_ANCHORED_VALID",
+        "stale_reason": null,
+        "evidence": [
+          "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+          "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/NL5_F01_IMMUTABLE_AUDIT_R1.json"
+        ]
+      },
+      {
+        "receipt": "docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json (dry-run dispatch manifest skeleton)",
+        "recorded": "WO-INFRA3-NL5-READINESS-R1 (issue #65), freeze_chain snapshot R=MISSING V=MISSING A=MISSING",
+        "anchored_facts": "attempt semantics, budgets, gates/negative-controls map, dispatch BLOCKED with HUMAN_PROTECTED_WRITER; frozen protocol/contract/seed-record pins identical to DIRECTOR_FREEZE_R2.json",
+        "status": "PARTIALLY_STALE_DISPATCH_CHAIN_VIEW",
+        "stale_reason": "Its R/V=MISSING snapshot predates F01 (2026-10-25) which found Reviewer(F2) PASS tip d63eb5c and Verifier(F2) VERIFIED tip f12d0b4 (append-only, unmerged - F01-F-1); the A (dispatch authority schema v3) record still does not exist, so dispatch remains BLOCKED - direction unchanged, snapshot detail outdated",
+        "evidence": ["docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json", "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/events/0003-handoff-completed.json"]
+      }
+    ],
+    "stale_answer_to_wo_question": "FROZEN_R2 (F2, 2026-10-06) was frozen BEFORE the U2 readiness review (2026-10-11), not after: the review already checked frozen-blob identity (its claim 6). What IS newer than the review: (a) post-review tooling repair m-1 merged into main (reviewed HEAD superseded); (b) 14-15 days of host-state drift risk on outenemy; (c) F01 handoff (2026-10-25) which advanced the R/V dispatch-chain view. So: git-anchored facts VALID, tooling review VALID_FOR_OLD_HEAD only, host facts STALE until live re-check."
+  },
+  "frozen_release_package_audit": {
+    "f2_composition": [
+      {"path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md", "role": "protocol", "git_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408", "canonical_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json", "role": "authoritative_contract", "git_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b", "canonical_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json", "role": "seed_record", "git_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76", "canonical_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28", "identity_at_current_main": "SAME"},
+      {"path": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json", "role": "director_freeze_record", "source_commit": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d", "pins_protocol_contract_seed": "subject_head 60da9a8.., subject_tree e565c8a6.., canonical_sha256 for all 3 frozen blobs", "identity_at_current_main": "SAME_DIR"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-gate-PASS-R2.json", "role": "freeze_gate_evidence", "git_blob_sha1": "7c7c315a7523c1156416b3cce4fcc49063c4b2ce", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-package-delta-check-R2.json", "role": "delta_check", "git_blob_sha1": "5cca086e1da1a6c539674d4372f1ff74d78a567e", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/m1-negative-control-R2.json", "role": "negative_control", "git_blob_sha1": "c6c1a689426add50e84688ea450e16aacc37ce95", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/seed-record-identity-R2.json", "role": "seed_identity", "git_blob_sha1": "be01cf9d023b6768602336f60172064bd51992e9", "identity_at_current_main": "SAME"},
+      {"path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/REPAIR_MAP_M1.md", "role": "repair_map", "git_blob_sha1": "c505b3516a9e6a896857ee4bf2bfe0f98ec7222a", "identity_at_current_main": "SAME"}
+    ],
+    "identity_verification_this_session": "For every file changed by commit 60da9a8: git rev-parse 60da9a8:<path> == git rev-parse main:<path> (9/9 SAME); canonical SHA-256 of protocol/contract/seed record recomputed from 'git show 60da9a8:<path>' = 3/3 MATCH vs DIRECTOR_FREEZE_R2.json; F2 tree recomputed = e565c8a6cee9e829fac14008ebc9c2ea1609931d.",
+    "input_sufficiency_for_independent_build": {
+      "verdict": "SUFFICIENT_WITH_TWO_PROVISIONS",
+      "sufficient_inputs": [
+        "Engine pin: upstream lorenzo-rovigatti/oxDNA commit 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (rights GPL-3.0, DOWNLOAD_ON_SETUP); build flags CMAKE_BUILD_TYPE=Release, DOUBLE=ON, CUDA=OFF, MPI=OFF (frozen contract environment_pins + dryrun manifest engine_pin)",
+        "Science inputs complete in frozen contract (single source of truth): confirmatory seeds 0b/32b n=64 (primary), 11b/53b n=10 (controls); bootstrap seeds (10000 resamples, PAIRED, python Random, quantile linear); replacement pools 12/12/2/2 with next_candidate_index cursors; replacement_pool_sha256 369a63c0..; seed_record_r4_sha256 51a88192..; historical exclusions (34 seeds); integer rounding policy; attempt_id_rule; run budgets",
+        "Analyzer pins: nanolab-components 0.1.0, analyze_hinge.py packaged frozen convention, per-replica median_deg of frame-valid frames, quantile linear",
+        "Budgets: confirmatory 296, replacement cap 56, max 352, <=560 wall-hours/platform, CPU-only",
+        "Digest chain for delivery: F2 head/tree + per-blob GIT_BLOB_SHA1 + CANONICAL_BLOB_SHA256 in DIRECTOR_FREEZE_R2.json - U2 can verify every received byte",
+        "Delivery vehicle exists and is rehearsal-tested: releases/nanolab-components (v0.1.1 rehearsed on outenemy with exactly 7 documented pyc findings; v0.1.2 repair published via PR #56 targeting 0 errors) + r2.cli run-u2 dispatch path with host pin, mandatory schema-v3 authority, fixture ceiling, protected launch gate, append-only ledger"
+      ],
+      "provisions": [
+        "PROVISION-1 (network/staging): engine source is DOWNLOAD_ON_SETUP - U2 needs either egress to fetch pinned commit 00dc7fb9 or a pre-staged source tree whose source_tree_sha256 equals b1742ce91de072c59f4b3febea97647e813b9a5bd23900465bbbf227d22a911c; both routes must be proven live before F07",
+        "PROVISION-2 (package version): live checklist must pin the exact release package ref (v0.1.2 per PR #56, or v0.1.1 with the 7 documented pyc findings accepted) in the future dispatch authority record; it is not yet pinned in any authority record"
+      ]
+    }
+  },
+  "platform_independence_matrix": [
+    {"aspect": "OS floor (native Linux, virt=none, non-WSL, native fs, systemd present)", "pin_source": "scripts/r2 fingerprint validators (validate_native_u1 / validate_u2_host share the same floor)", "u1_status": "UNASSIGNED (AUTHOR_U1=NOT_ASSIGNED)", "u2_status": "RECORDED_2026-10-11 (Ubuntu 22.04.5, kernel 5.15.0-190, virt=none) - STALE, live re-check required", "independence_note": "Same floor, different physical hosts required (physical_distinctness_required=true)"},
+    {"aspect": "Host-role guard", "pin_source": "PINNED_U2_HOSTNAMES=('outenemy',); outenemy excluded from U1-eligible hostnames", "u1_status": "validate_native_u1 must PASS on U1", "u2_status": "check-host -> NOT_ELIGIBLE exit 2 is the CANONICAL NEGATIVE CONTROL on outenemy; validate_u2_host passes only for run-u2", "independence_note": "Role non-intersection is enforced in code: a host passing U1 validation cannot serve as U2 and vice versa"},
+    {"aspect": "Engine identity", "pin_source": "frozen contract environment_pins + build provenance", "u1_status": "fresh clean build from commit 00dc7fb9 (gate U1)", "u2_status": "pinned build cached on outenemy (binary sha256 6effd00a.., size 3380728, source_tree_sha256 b1742ce9..) - STALE, digest re-check live required", "independence_note": "Byte-identical pin, independently rebuilt/staged per platform; no binary transfer from author host"},
+    {"aspect": "Job launcher / lifecycle isolation", "pin_source": "r2 launcher defaults; u2-systemd-mechanics-R1", "u1_status": "systemd-run default (system manager)", "u2_status": "systemd-run --user ONLY (Linger=yes; system manager requires root auth, RC 1) - STALE, live re-check required", "independence_note": "Scientific job must survive SSH/agent/CI-restart on both platforms (NC-U1..U5); CI never owns executor lifecycle"},
+    {"aspect": "Release package ingress", "pin_source": "releases/nanolab-components reproduction reproduce.py verify", "u1_status": "same package verify (gate U2 evidence pattern)", "u2_status": "v0.1.1 rehearsed 2026-10-11: plan 5/5 ok, verify exactly 7 documented pyc findings; v0.1.2 (PR #56) NOT yet rehearsed on U2", "independence_note": "Package delivered via git-archive export of pinned ref; U2 never receives author working trees"},
+    {"aspect": "Dispatch authority", "pin_source": "nanolab_v02_dispatch_authority schema v3, Git-bound lifecycle S->F->D/R/V->A", "u1_status": "same authority record covers both legs", "u2_status": "run-u2 refuses missing/invalid authority (BLOCKED_NO_DISPATCH_AUTHORITY exit 3); fixture self-tests used synthetic authority only", "independence_note": "A-record for the real campaign does not exist yet; issuance is Human Gate, never implementer"},
+    {"aspect": "Storage layout", "pin_source": "WO-INFRA3-R2-ACTIVATION-R1 raw-evidence convention + u2 readiness doc", "u1_status": "~/nanolab/{workspaces,raw,cache,tools} (to be provisioned when U1 assigned)", "u2_status": "dirs exist 2026-10-11; raw projection ~15 GB/leg, ~2x margin, 80% control threshold - STALE, live df required", "independence_note": "Per-execution/per-attempt raw dirs; workspaces never copied from author"},
+    {"aspect": "Windows/WSL exclusion", "pin_source": "NATIVE_UBUNTU_EXECUTION_POLICY_R1 (WINDOWS_WSL_EXECUTOR=HISTORICAL_ONLY effective 2026-09-27)", "u1_status": "in force", "u2_status": "in force", "independence_note": "PLATFORM_INSENSITIVE is a property of the frozen R1 study, NOT a claim that all platforms give identical trajectories; cross-platform comparison happens only inside the frozen campaign"},
+    {"aspect": "Scientific boundary", "pin_source": "NATIVE_UBUNTU_EXECUTION_POLICY_R1 section 5 + AGENTS.md hard rules", "u1_status": "author leg reserved EX-NL5-REPRO-V0-2-U1-R1", "u2_status": "external reproduction leg reserved EX-NL5-REPRO-V0-2-U2-R1; external_reproductions=0", "independence_note": "U2 never authors runs, never develops, never substitutes U1; outenemy role EXTERNAL_U2_ONLY"}
+  ],
+  "storage_evidence_capacity_inventory": {
+    "method": "Derived ONLY from existing evidence records (2026-10-10/11) and frozen budgets; NO live capacity measurement was possible from this session.",
+    "u2_storage_layout": {"dirs": ["~/nanolab/workspaces", "~/nanolab/raw", "~/nanolab/cache", "~/nanolab/tools"], "recorded_owner_uid": 1001, "source": "u2 readiness summary section 6 + u2-engine-build-result-R1.json paths"},
+    "u2_projected_need": {"raw_per_u2_leg": "~15 GB", "margin": "~2x", "control_threshold": "alert at 80% usage", "engine_build_cache": "oxDNA build tree + binary 3380728 bytes (binary sha256 6effd00a..5126b78)"},
+    "campaign_run_budget": {"confirmatory_runs": 296, "replacement_runs_cap": 56, "max_runs": 352, "wall_hours_per_platform": 560, "compute": "CPU-only", "paid_compute": "FORBIDDEN without separate owner authorization"},
+    "git_evidence_policy": "Git stores compact evidence (JSON/MD manifests with digests) only; raw artifacts live under ~/nanolab/raw/<execution-id>/<attempt-id>/ and enter any reuse path only via digest + provenance (AGENTS.md: RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE)",
+    "unknown_from_this_session": ["actual free/used disk on outenemy today", "inode availability", "actual raw footprint of 352 runs", "any storage drift since 2026-10-11"],
+    "live_fill_in": "Live checklist items L-03/L-04 must replace the projections with measured numbers before any F07 dispatch decision"
+  },
+  "raw_manifest_schema_proposal": {
+    "status": "PROPOSED_NON_NORMATIVE",
+    "basis": "No machine-readable raw-artifact manifest schema exists in the repo; the prose convention (WO-INFRA3-R2-ACTIVATION-R1 section 2 item 3) requires path + sha256 + size + producer + retention with the manifest digest recorded in the ledger. This proposal formalizes it; adoption requires a new bounded WO with fresh Reviewer + distinct Verifier (per review/stop rules).",
+    "required_fields": {
+      "schema_version": "integer, currently 1",
+      "kind": "'nanolab_raw_artifact_manifest'",
+      "manifest_id": "unique, e.g. 'RAW-<execution_id>-<attempt_id>-R1'",
+      "execution_id": "campaign execution id (e.g. EX-NL5-REPRO-V0-2-U2-R1)",
+      "attempt_id": "'<run_base>' or '<run_base>-R<n>'",
+      "artifact_path": "path relative to the run raw root ~/nanolab/raw/<execution-id>/<attempt-id>/",
+      "artifact_sha256": "canonical SHA-256 of artifact bytes",
+      "artifact_size_bytes": "integer size in bytes",
+      "producer": "command/binary + its digest (engine binary sha256 or script sha256) + host (hostname) + uid",
+      "subject_head": "Git HEAD (full SHA) of the nanolab checkout that produced the artifact",
+      "subject_tree": "Git tree SHA of that checkout",
+      "storage_location": "URI/class of durable storage (local raw root, archive target), plus copies if any",
+      "retention": "retention class + minimum retention period + deletion authority (owner-only)",
+      "created_at_utc": "ISO-8601 UTC timestamp of artifact creation",
+      "scientific_outcome": "always NOT_EVALUATED at dispatch/production time; analysis is a separate surface"
+    },
+    "invariants": [
+      "One manifest per attempt; manifest digest recorded in the append-only ledger entry for that attempt",
+      "No raw artifact may be reused or referenced in analysis without its manifest digest + provenance",
+      "Manifest itself is append-only evidence; corrections are new manifests referencing the old manifest_id",
+      "Scientific interpretation NEVER attaches to raw artifacts at production time (scientific_outcome=NOT_EVALUATED)"
+    ]
+  },
+  "unique_job_id_scheme": {
+    "campaign_execution_ids_reserved": ["EX-NL5-REPRO-V0-2-U1-R1 (author leg, HOST_NOT_ASSIGNED)", "EX-NL5-REPRO-V0-2-U2-R1 (external leg, outenemy)"],
+    "run_base": "from frozen protocol run-id template (see calculation_scheme.run_id_template of docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json)",
+    "attempt_id_rule": "'<run_base>' for original pair legs; '<run_base>-R<n>' for retry/replacement attempts; attempt ids globally unique forever (frozen contract replacement.attempt_id_rule)",
+    "ledger": "append-only; AttemptReuseError on any reuse including after FAILED_TECHNICAL (scripts/r2/contract.py); pair-level one-shot replacement (R4.1 M-4)",
+    "tooling_guards_on_u2": "r2.cli run-u2 refuses: missing authority (BLOCKED_NO_DISPATCH_AUTHORITY exit 3), non-fixture specs (BLOCKED_NON_FIXTURE_SPEC / BLOCKED_LAUNCH_GATE_PROTECTED_WRITER exit 3), frozen campaign id prefixes (BLOCKED_FROZEN_CAMPAIGN_ID exit 3), unknown host (BLOCKED_HOST_U2 exit 2), malformed spec (BLOCKED_MALFORMED_SPEC exit 3, post-review m-1 repair now in main)",
+    "fixture_namespace": "pre-campaign technical fixtures use separate ids (e.g. EX-U2-TOOLING-FIXTURE-R1, T001) and are never mixed with campaign ids",
+    "hard_rule": "DO NOT REUSE A FAILED RUN ID (AGENTS.md); replacement identity comes only from the frozen pool cursor, never outcome-driven seed selection"
+  },
+  "safe_paths_and_permissions": {
+    "u2_layout": {"workspaces": "~/nanolab/workspaces/<execution-id>/", "raw": "~/nanolab/raw/<execution-id>/<attempt-id>/", "cache": "~/nanolab/cache/ (engine builds + provenance + logs)", "tools": "~/nanolab/tools/"},
+    "rules": [
+      "run_base and raw_root/workspace are operator-spec inputs validated by the run-u2 gate; they must resolve inside ~/nanolab/** and must not point at author or shared temp locations",
+      "all U2 paths owned by the U2 service account (recorded uid 1001); no world-writable dirs; no root execution",
+      "ledger append-only; raw dirs are write-once from the job's perspective; no in-place edits of evidence",
+      "launch via systemd-run --user (Linger=yes) so jobs survive SSH/agent/CI restarts; system manager not used on U2",
+      "CI and scientific executor never share lifecycle (PUBLIC PR CODE MUST NOT AUTOMATICALLY RUN ON TRUSTED SELF-HOSTED SCIENTIFIC NODES)"
+    ],
+    "forbidden_on_u2": ["project/*.json mutation", "canonical status changes", "frozen package mutation", "secret storage beyond the platform's own credential store", "running frozen campaign ids outside an issued authority record"]
+  },
+  "isolation_from_author_data": {
+    "delivery_inputs_to_u2": [
+      "frozen package F2 via Git (digest-pinned: F2 head/tree + 3 canonical blob SHA-256 + blob SHA-1)",
+      "release package via git-archive export of a pinned ref (v0.1.2 target per PR #56)",
+      "pinned upstream oxDNA source (commit 00dc7fb9) or digest-verified staged source (source_tree_sha256 b1742ce9..)"
+    ],
+    "never_delivered_to_u2": ["U1 raw outputs or intermediates", "author workspace copies (workspace never copied from author - dryrun manifest platform_split)", "author credentials", "any pre-analysis U1-side data"],
+    "reverse_isolation": "U2 evidence returns to canon only as digest+provenance records reviewed independently; scientific_outcome stays NOT_EVALUATED on U2 surfaces",
+    "code_level_enforcement": "U1-guard intact (validate_native_u1 untouched by readiness branch, additive diff verified by FRESH_REVIEW_U2_READINESS_R1 claim 5); run (U1 path) hard-blocked on outenemy (BLOCKED_HOST exit 2, canonical negative control); host-role non-intersection enforced in validators"
+  },
+  "blocked_items": [
+    {
+      "id": "BLK-1",
+      "item": "All live outenemy checks: host identity/fingerprint freshness, disk capacity measurement, systemd user-manager recheck, engine binary digest recheck, package v0.1.2 rehearsal, run-u2 fixture re-run",
+      "status": "BLOCKED_NO_U2_ACCESS_FROM_SESSION",
+      "evidence": "~/.ssh/config does not exist (~/.ssh contains only authorized_keys, id_ed25519(.pub), known_hosts(.old)); 'outenemy' appears 0 times in ~/.ssh/known_hosts; no network route/credential to the U2 host is provided to this session",
+      "resolution": "owner/U2 operator executes the live_checklist below (or a future WO grants a dedicated access route); nothing may be simulated to fill these gaps"
+    }
+  ],
+  "live_checklist_for_owner_or_u2_operator": [
+    {"id": "L-01", "check": "Host fingerprint freshness: re-run r2.cli fingerprint on outenemy; diff against u2-fingerprint-R1.json (hostname=outenemy, Ubuntu 22.04.5 LTS, kernel 5.15.0-190-generic, 64x Xeon E5-2698 v3, virt=none); any drift -> record and re-pin before F07", "pass_condition": "fingerprint matches recorded pins or drift is owner-accepted and re-pinned", "records_to_update": "new dated fingerprint evidence on the U2 evidence path"},
+    {"id": "L-02", "check": "Host-role guards: r2.cli check-host -> NOT_ELIGIBLE exit 2 (canonical negative control); r2.cli run (U1 path) -> BLOCKED_HOST exit 2; validate_u2_host passes only for run-u2", "pass_condition": "all three outcomes reproduced", "records_to_update": "dated check-host negative-control record"},
+    {"id": "L-03", "check": "Storage capacity: df -h (and df -i) on ~/nanolab filesystem; confirm dirs workspaces/raw/cache/tools exist, owner uid matches service account, no world-writable perms", "pass_condition": "free space >= 2x projected ~15 GB raw need and 80% alert threshold configured", "records_to_update": "measured capacity record replacing the ~15 GB projection"},
+    {"id": "L-04", "check": "Engine binary identity: sha256sum ~/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA == 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78, size 3380728; source_tree_sha256 b1742ce91de072c59f4b3febea97647e813b9a5bd23900465bbbf227d22a911c", "pass_condition": "digests match; on drift -> rebuild from pin 00dc7fb9 with recorded flags and new provenance", "records_to_update": "dated engine identity record"},
+    {"id": "L-05", "check": "systemd user mechanics: systemctl --user is-system-running = active; loginctl show-user $(id -u) -p Linger = yes; systemd-run --user transient unit RC 0; system manager refusal preserved", "pass_condition": "user manager path works, jobs survive session close", "records_to_update": "dated systemd-mechanics record"},
+    {"id": "L-06", "check": "Tooling at CURRENT main: fresh clone/checkout of exact main HEAD (>= 3b567ae), python3 -m unittest discover -s tests -t . all OK (>= 631 tests incl. 3 BLOCKED_MALFORMED_SPEC cases); then optional fresh Reviewer/Verifier pass pinning the new head (recommended, closes the superseded-head gap)", "pass_condition": "suite green at pinned head; R/V gap acknowledged or closed", "records_to_update": "exact-head tooling verification record"},
+    {"id": "L-07", "check": "run-u2 gate rehearsals on synthetic fixture at current main: happy-path fixture OK; negative set reproduced - missing authority exit 3, non-fixture spec exit 3, frozen campaign id exit 3, malformed spec BLOCKED_MALFORMED_SPEC exit 3", "pass_condition": "all gates fail closed as named", "records_to_update": "dated run-u2 rehearsal record"},
+    {"id": "L-08", "check": "Release package: fresh git-archive export of the pinned package ref (v0.1.2 per PR #56) -> reproduce.py verify = 0 errors; decide and record final package pin for the authority record", "pass_condition": "verify 0 errors at the pinned ref", "records_to_update": "dated package verification + pin decision"},
+    {"id": "L-09", "check": "Ingress/egress: on outenemy, git fetch from origin works (read-only), pinned oxDNA commit 00dc7fb9 obtainable (fetch or digest-verified staged source); evidence return path agreed (git push of evidence branch from U2 or digest-manifest transfer)", "pass_condition": "both directions proven with digests", "records_to_update": "dated connectivity/ingress record"},
+    {"id": "L-10", "check": "Raw-manifest pilot: execute one synthetic fixture attempt writing ~/nanolab/raw/<execution-id>/<attempt-id>/ + manifest per raw_manifest_schema_proposal; verify all required fields, digest recorded in ledger", "pass_condition": "schema-complete manifest produced and ledger-linked", "records_to_update": "pilot manifest as adopt-before-campaign evidence"},
+    {"id": "L-11", "check": "Time sync: timedatectl on outenemy (NTP active, no drift) - timestamps enter ledgers, manifests and digests", "pass_condition": "NTP synchronized", "records_to_update": "note in dated readiness evidence"},
+    {"id": "L-12", "check": "Independence attestation: outenemy shares no workspace/credentials/history with author U1 host; no SSH trust to author host; physical distinctness owner-attested", "pass_condition": "owner attestation recorded", "records_to_update": "owner attestation record"}
+  ],
+  "handoff_targets": {
+    "next": "F05 authority planning consumes this record: the authority record (schema v3, lifecycle A) must pin F2 chain + package ref + both platform pins; live checklist L-01..L-12 must be green before F07 dispatch at shared permissions",
+    "review_note": "Adding/adopting the raw-manifest schema as canonical requires fresh Reviewer + distinct Verifier per WO review rules; this record only proposes it"
+  },
+  "boundaries": {
+    "nl5": "IN_PROGRESS",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "author_u1": "NOT_ASSIGNED",
+    "external_reproductions": 0,
+    "u2_ready_meaning": "U2 logistics are preparable; it is NOT R2 activation, NOT canonical acceptance, NOT scientific authorization",
+    "scientific_runs_this_execution": 0,
+    "windows_fallback": "FORBIDDEN (silent fallback prohibited)",
+    "canonical_state_untouched": true
+  }
+}

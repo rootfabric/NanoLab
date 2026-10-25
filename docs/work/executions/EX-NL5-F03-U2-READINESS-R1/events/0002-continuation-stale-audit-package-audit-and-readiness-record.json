@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-stale-audit-package-audit-and-readiness-record",
+  "timestamp_utc": "2026-10-25T17:26:20Z",
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "EXTERNAL-PREFLIGHT-IMPLEMENTER",
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "subject_sha": "cc3430e36be185739f69b93a2842a005e7094f77",
+  "summary": "C0 audit complete, U2_READINESS_R1.{json,md} published. (1) Frozen package integrity recomputed independently: for all 9 files changed by F2=60da9a8 blob-SHA1 at F2 == blob-SHA1 at origin/main 3b567ae (9/9 SAME); canonical SHA-256 of protocol/contract/seed record = 3/3 MATCH vs docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json; F2 tree recomputed e565c8a6cee9e829fac14008ebc9c2ea1609931d; F2 and reviewed U2 tooling HEAD 9ded2bf7 both strict ancestors of main (merge-base --is-ancestor exit 0 both). (2) STALE assessment: host-state facts of EX-INFRA3-U2-OUTENEMY-READINESS-R1 (fingerprint/build/smoke/systemd/storage, 2026-10-10/11) = HOST_STATE_STALE_BY_TIME (14-15 days, live re-check required); FRESH_REVIEW_U2_READINESS_R1 PASS = GIT_ANCHORED_VALID_BUT_SUPERSEDED_HEAD (post-review m-1 repair BLOCKED_MALFORMED_SPEC in main; diff 9ded2bf7..main touches only scripts/r2/cli.py + tests/test_r2_activation_tooling.py, 60+/14-); PR #55 merged:true (head 3b6ead17); NL5_V02_DRYRUN_MANIFEST_R1.json dispatch-chain view PARTIALLY_STALE (R/V tips found by F01 exist unmerged; A record still missing). F2 (2026-10-06) frozen BEFORE the readiness review (2026-10-11), not after. (3) Package input sufficiency: SUFFICIENT_WITH_TWO_PROVISIONS - complete digest-pinned inputs (engine pin 00dc7fb9 + flags; seeds/bootstrap/pools/cursors/budget/analyzer pins; F2 digest chain) but (P-1) engine source route (egress fetch or digest-verified staging, source_tree b1742ce9) must be proven live, (P-2) exact release package ref (v0.1.2 per PR #56 vs v0.1.1 + 7 pyc findings) not yet pinned in any authority record. (4) Proposed raw-artifact manifest schema (PROPOSED_NON_NORMATIVE, adoption = separate bounded WO with fresh Reviewer + distinct Verifier): hash+size+producer+HEAD+storage+retention + manifest digest in append-only ledger. (5) Unique job ID scheme fixed (attempt_id = <run_base> | <run_base>-R<n>, globally unique, append-only ledger, six named fail-closed run-u2 BLOCKED_* gates incl. m-1 now in main); safe paths/permissions (~/nanolab/**, uid 1001, no root, systemd-run --user only); isolation from author data (only F2 + package export + pinned engine source delivered; never U1 raw/intermediates/workspaces/credentials). (6) Live U2 leg: BLOCKED_NO_U2_ACCESS_FROM_SESSION - ~/.ssh/config absent, 'outenemy' 0 times in ~/.ssh/known_hosts; nothing simulated; 12-item live checklist (L-01..L-12) published for owner/U2 operator before F07. (7) Verdict: READY_FOR_DISPATCH_PREP with explicit constraints; U2-ready != R2_ACTIVE != scientific authorization; R2 stays WAITING_HOST/NOT_ACTIVE, AUTHOR_U1=NOT_ASSIGNED, dispatch authority (lifecycle A) does not exist, machine_launch_authorized=false by construction. SCIENTIFIC_RUNS=0; no paid compute; no canonical state changes; no self-accept.",
+  "command_refs": [
+    "git rev-parse 60da9a8^{tree} -> e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "for f in $(git show --name-only --format= 60da9a8): git rev-parse 60da9a8:$f vs git rev-parse main:$f -> 9/9 SAME",
+    "git show 60da9a8:<protocol|contract|seed> | sha256sum -> 3/3 MATCH DIRECTOR_FREEZE_R2.json",
+    "git merge-base --is-ancestor 9ded2bf7 3b6ead17 / 3b6ead17 3b567ae / 60da9a8 3b567ae -> exit 0 x3",
+    "git diff --stat 9ded2bf7..3b567ae -- scripts/r2 tests/test_r2_activation_tooling.py -> 2 files, 60 insertions, 14 deletions",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/84 and /pulls/55 -> scope + merged:true",
+    "cat ~/.ssh/config -> No such file; grep -c outenemy ~/.ssh/known_hosts -> 0",
+    "python3 -m json.tool evidence/U2_READINESS_R1.json -> strict parse OK"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_READINESS_R1.json",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_READINESS_R1.md",
+    "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "docs/infra/NL5_V02_DRYRUN_MANIFEST_R1.json"
+  ],
+  "next_action": "Record HANDOFF_COMPLETED, update passport status DISPATCHED -> HANDOFF_READY, append single WORK_QUEUE.md entry, add summary.md, run full validation suite (work_cli validate, check-consistency, workflow_lint, json.tool), push.",
+  "blocker": null
+}
