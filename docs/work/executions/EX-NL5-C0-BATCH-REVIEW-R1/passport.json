@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-C0-BATCH-REVIEW-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-REVIEW-R1",
+  "checkpoint": "NL5",
+  "base_branch": "main",
+  "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "base_tree_sha": "560dc913a71a237d3c452a5a2e492e213b232911",
+  "branch": "review/nl5-c0-batch-f02-f03-f05-r1",
+  "worktree": "/home/rdpuser/NanoLab/review-nl5-c0-batch",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "DISPATCHED",
+  "started_at_utc": "2026-10-25T17:45:35Z",
+  "program": "NL5-CLOSE-R1",
+  "parent_issue": 81,
+  "review_scope_issues": [
+    83,
+    84,
+    86
+  ],
+  "assigned_role": "REVIEWER",
+  "launcher": "DSH subagent tool (real separate session, fresh, no implementer context)",
+  "subjects": [
+    {
+      "wo": "F02",
+      "branch": "work/nl5-f02-u1-host-r1",
+      "head": "c38ad687d87bfa0c33d69bfee4fe40020d34ba45",
+      "tree": "8dbfeb02311d659c1a961434d3eb0a55502de569"
+    },
+    {
+      "wo": "F03",
+      "branch": "work/nl5-f03-u2-readiness-r1",
+      "head": "1831585fa70169c4e473acfe38e9603e45cfe22c",
+      "tree": "8a89d2a446e4f05fcec7a6daade6572ff5a75212"
+    },
+    {
+      "wo": "F05-prep",
+      "branch": "work/nl5-f05-dispatch-prep-r1",
+      "head": "4c9d8fd30300a2f48504d1b914693f0a66bb3555",
+      "tree": "17e2a7141295c9f6e5bf6fc302bc8d977b210a4d"
+    }
+  ],
+  "allowed_paths": [
+    "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/**",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "resource_budget": "C0 offline review only; scientific runs=0; wall <= 3h",
+  "deliverables": [
+    "BATCH_REVIEWER_VERDICT_NL5_C0_R1.md",
+    "BATCH_REVIEWER_VERDICT_NL5_C0_R1.json",
+    "events",
+    "WORK_QUEUE append"
+  ]
+}
