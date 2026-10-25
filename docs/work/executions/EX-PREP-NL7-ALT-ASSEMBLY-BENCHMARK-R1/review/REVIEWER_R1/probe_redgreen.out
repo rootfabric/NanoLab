@@ -1,0 +1,21 @@
+=== gate build r11_old: b''
+run=r11_old tests=42 failures=4 errors=0
+  raw failures on this build: ['test_distinct_terminal_bonds_with_overlapping_nucleotides_blocked', 'test_falsifier_nonfinite_box_must_block', 'test_falsifier_nonunit_particle_orientation_must_block', 'test_falsifier_reversed_duplicate_port_pair_must_block']
+  FAIL  test_falsifier_reversed_duplicate_port_pair_must_block
+  FAIL  test_falsifier_nonunit_particle_orientation_must_block
+  FAIL  test_falsifier_nonfinite_box_must_block
+  FAIL  test_distinct_terminal_bonds_with_overlapping_nucleotides_blocked
+  PASS  test_distinct_terminal_bonds_with_nonoverlapping_nucleotides_allowed
+=== gate build head: b''
+run=head tests=42 failures=0 errors=0
+  raw failures on this build: []
+  PASS  test_falsifier_reversed_duplicate_port_pair_must_block
+  PASS  test_falsifier_nonunit_particle_orientation_must_block
+  PASS  test_falsifier_nonfinite_box_must_block
+  PASS  test_distinct_terminal_bonds_with_overlapping_nucleotides_blocked
+  PASS  test_distinct_terminal_bonds_with_nonoverlapping_nucleotides_allowed
+
+=== REVIEWER CONCLUSION ===
+old R1.1 build falsifier failures: ['test_distinct_terminal_bonds_with_overlapping_nucleotides_blocked', 'test_falsifier_nonfinite_box_must_block', 'test_falsifier_nonunit_particle_orientation_must_block', 'test_falsifier_reversed_duplicate_port_pair_must_block']
+HEAD build falsifier failures: []
+RED->GREEN independently reproduced: True

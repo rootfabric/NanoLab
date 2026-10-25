@@ -1,0 +1,17 @@
+=== CMD: PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . ===
+exit_code=0
+  "errors": [],
+  "warnings": [
+    "git metadata unavailable"
+  ],
+  "frontier": "NL5",
+  "next_work_order": "NL5-002",
+  "branch": null,
+  "head": "2e199d68af3119aaeb4194b2d622c365da8f6bfe",
+  "tree": "9e8cd2c7a2ddbf5616b38e6922a14f458cac1e8b",
+  "counts": {
+    "stages": 9,
+    "tasks": 19,
+    "experiments": 7
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "candidate_id": "S23_NARCISSUS_ECHO",
+  "claim": "C0_INPUT_FILE_PREFLIGHT_ONLY; NO SIMULATION; NO ASSEMBLY_VALIDATED",
+  "kind": "alt_two_part_source_readiness_receipt",
+  "outcome": "BLOCKED_SOURCE",
+  "part_structure_sizes": {},
+  "reasons": [
+    "NARCISSUS.topology: SOURCE_BYTES_NOT_OBSERVED",
+    "NARCISSUS.configuration: SOURCE_BYTES_NOT_OBSERVED",
+    "ECHO.topology: SOURCE_BYTES_NOT_OBSERVED",
+    "ECHO.configuration: SOURCE_BYTES_NOT_OBSERVED",
+    "interface.anchor_map: SOURCE_BYTES_NOT_OBSERVED"
+  ],
+  "scientific_runs": 0
+}

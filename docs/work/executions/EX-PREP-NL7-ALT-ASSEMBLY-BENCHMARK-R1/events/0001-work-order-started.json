@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "source-benchmark-implementer",
+  "subject_sha": "fb3148b46a9638167168a46cb170902a4ad9e8d2",
+  "timestamp_utc": "2026-10-21T01:47:00.000Z",
+  "summary": "Issue #75: start bounded C0 source audit of two published DNA building-block systems. Public pages verified, exact data files not yet byte verified, no scientific runs.",
+  "command_refs": [
+    "github fresh main fb3148b46a9638167168a46cb170902a4ad9e8d2",
+    "DOI 10.1038/s41565-024-01738-7",
+    "DOI 10.1038/s41467-025-56846-2"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1.md"
+  ],
+  "next_action": "Build honest machine source pack and static source-ready validator.",
+  "blocker": null
+}

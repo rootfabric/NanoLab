@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "kind": "alt_dna_two_part_source_pack",
+  "claim_ceiling": "BIBLIOGRAPHIC",
+  "scientific_runs": 0,
+  "network_bytes_downloaded": 0,
+  "selected_candidate_id": "S23_NARCISSUS_ECHO",
+  "evidence_date_utc": "2026-10-21",
+  "candidates": [
+    {
+      "candidate_id": "S23_NARCISSUS_ECHO",
+      "design_basis": "PUBLISHED_SOURCE",
+      "doi": "10.1038/s41565-024-01738-7",
+      "publication_url": "https://www.nature.com/articles/s41565-024-01738-7",
+      "paper_evidence": "SOURCE_ARTICLE_CONFIRMED",
+      "structure_description": "Nemesis compartment consists of Narcissus and Echo shape-complementary origami halves; paper states nucleobase-hybridization association. Not the unrelated S17 NE nanoengine.",
+      "parts": [
+        {
+          "part_id": "NARCISSUS",
+          "topology": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          },
+          "configuration": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          }
+        },
+        {
+          "part_id": "ECHO",
+          "topology": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          },
+          "configuration": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          }
+        }
+      ],
+      "interface": {
+        "mechanism": "DNA_HYBRIDIZATION",
+        "paper_status": "SOURCE_ARTICLE_CONFIRMED",
+        "anchor_map": {
+          "status": "UNKNOWN",
+          "path": "UNKNOWN",
+          "sha256": "UNKNOWN",
+          "size_bytes": "UNKNOWN",
+          "rights": "UNKNOWN",
+          "source_url": "UNKNOWN"
+        },
+        "geometry_status": "UNKNOWN"
+      },
+      "reported_design_files": [
+        {
+          "part_id": "NARCISSUS",
+          "source_entry_id": "256",
+          "name": "N.oxview",
+          "format": "OXVIEW_JSON",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "NARCISSUS",
+          "source_entry_id": "256",
+          "name": "N_nanobase.json",
+          "format": "NANOBASE_DESIGN",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "NARCISSUS",
+          "source_entry_id": "256",
+          "name": "Narcissus staples p7560.xlsx",
+          "format": "STAPLE_SPREADSHEET",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "ECHO",
+          "source_entry_id": "257",
+          "name": "E.oxview",
+          "format": "OXVIEW_JSON",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "ECHO",
+          "source_entry_id": "257",
+          "name": "E_nanobase.json",
+          "format": "NANOBASE_DESIGN",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "ECHO",
+          "source_entry_id": "257",
+          "name": "Echo staples p7560.xlsx",
+          "format": "STAPLE_SPREADSHEET",
+          "status": "R4_REPORTED_NOT_BYTE_VERIFIED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        }
+      ],
+      "provenance_note": "File names and entry assignments are previously reported by NanoLab S17-R4 provenance in canonical main; fresh direct binary download unavailable to this execution. No .top/.dat, coordinates or rights are verified.",
+      "source_verdict": "BLOCKED_SOURCE",
+      "next_required_input": "Download 256/257 design files lawfully; pin SHA/rights; convert each design to separately auditable oxDNA top/dat and map hybridization anchors. Never equate oxView with a relaxed simulation."
+    },
+    {
+      "candidate_id": "S22_MODON",
+      "design_basis": "PUBLISHED_SOURCE",
+      "doi": "10.1038/s41467-025-56846-2",
+      "publication_url": "https://www.nature.com/articles/s41467-025-56846-2",
+      "paper_evidence": "SOURCE_ARTICLE_CONFIRMED",
+      "structure_description": "moDON: same 78-helix-bundle core instantiated twice with modifiable connection sites; xy scaffold rerouting and directional z three-strand handles; author correction DOI 10.1038/s41467-025-57186-x.",
+      "parts": [
+        {
+          "part_id": "MODON_A",
+          "topology": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          },
+          "configuration": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          }
+        },
+        {
+          "part_id": "MODON_B",
+          "topology": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          },
+          "configuration": {
+            "status": "UNKNOWN",
+            "path": "UNKNOWN",
+            "sha256": "UNKNOWN",
+            "size_bytes": "UNKNOWN",
+            "rights": "UNKNOWN",
+            "source_url": "UNKNOWN"
+          }
+        }
+      ],
+      "interface": {
+        "mechanism": "MODULAR_XY_SHAPE_MATCH_OR_Z_THREE_STRAND",
+        "paper_status": "SOURCE_ARTICLE_CONFIRMED",
+        "anchor_map": {
+          "status": "UNKNOWN",
+          "path": "UNKNOWN",
+          "sha256": "UNKNOWN",
+          "size_bytes": "UNKNOWN",
+          "rights": "UNKNOWN",
+          "source_url": "UNKNOWN"
+        },
+        "geometry_status": "UNKNOWN"
+      },
+      "reported_design_files": [
+        {
+          "part_id": "MODON_A",
+          "source_entry_id": "263",
+          "name": "UNKNOWN",
+          "format": "CADNANO",
+          "status": "PAPER_REPORTS_FILE_NOT_FETCHED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        },
+        {
+          "part_id": "MODON_B",
+          "source_entry_id": "263",
+          "name": "UNKNOWN",
+          "format": "CADNANO",
+          "status": "PAPER_REPORTS_FILE_NOT_FETCHED",
+          "sha256": "UNKNOWN",
+          "redistribution": "UNKNOWN"
+        }
+      ],
+      "provenance_note": "Data Availability of published 2025 article says caDNAno at Nanobase structure 263. Website not available through current access path, no file inventory or bytes checked; article CC BY 4.0 does not automatically establish file-level redistribution.",
+      "source_verdict": "BLOCKED_SOURCE",
+      "next_required_input": "Recover exact caDNAno file and two concrete connector arrangements/ODN sequences with source rights, then convert to auditable separated topology/conf inputs before any assembly preflight."
+    }
+  ]
+}

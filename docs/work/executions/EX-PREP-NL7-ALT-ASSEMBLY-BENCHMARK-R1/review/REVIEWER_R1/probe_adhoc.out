@@ -1,0 +1,23 @@
+test_parser_semantics (__main__.P1_ChainSemantics) ... ok
+test_raw_file_order_segment_must_block (__main__.P2_Polarity)
+Declared segment equal to the raw 3p->5p file-order slice (wrong polarity) is refused. ... ok
+test_unwrapped_pbc_and_rotated_orientation_pass (__main__.P3_NoFalsePositives)
+Valid oxDNA PBC unwrapped coords + rotated orthonormal frame must NOT block. ... ok
+test_bool_index_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_covalent_kind_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_duplicate_json_key_in_anchor_map_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_float_index_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_inferred_status_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_same_part_pair_blocked (__main__.P4_AnchorMapNegatives) ... ok
+test_inf_box_blocked (__main__.P5_NonfiniteBox) ... ok
+test_forbidden_rights_blocked (__main__.P6_Rights) ... ok
+test_restricted_anchor_map_blocked (__main__.P6_Rights) ... ok
+test_dot_segment_is_normalized_not_an_escape (__main__.P7_Paths)
+'./x' is normalized by pathlib; it must stay inside root (no escape either way). ... ok
+test_nested_traversal_blocked (__main__.P7_Paths) ... ok
+test_symlinked_parent_dir_blocked (__main__.P7_Paths) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.046s
+
+OK

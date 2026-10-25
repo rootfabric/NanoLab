@@ -1,0 +1,4 @@
+P1 nonterminal_index_7: outcome=BLOCKED_SOURCE reasons=['pair 0 part_a: anchor is not a 3p strand terminus (internal anchor)'] -> PASS
+P2 disjoint_6nt_ports: outcome=TEST_FIXTURE_STATIC_INPUTS_OK reasons=[] -> PASS
+P3 overlapping_8nt_ports: outcome=BLOCKED_SOURCE overlap=['pair 1 part_a: nucleotide already assigned to another interface bond'] -> PASS
+PROBE_RESULT: ALL_PASS

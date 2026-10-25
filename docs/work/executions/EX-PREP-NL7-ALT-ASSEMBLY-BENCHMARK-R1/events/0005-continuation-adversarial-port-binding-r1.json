@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "event_id": "0005-continuation-adversarial-port-binding-r1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "work_order_id": "WO-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "source-benchmark-implementer",
+  "subject_sha": "3d0b55b948c6d1decb5863d8f1bf528c1abf9c10",
+  "timestamp_utc": "2026-10-21T03:30:49.577Z",
+  "summary": "Additional R1.1 C0 port-anchor security review: two RED falsifiers on CI #39538287299 (830/2 expected FAIL), repaired at exact head, GREEN CI #39538562254 (832 tests OK). Terminal nucleotide sequence binding via n3/n5, base matching and 5p/3p polarity. Prior R1.0 evidence preserved. Corrected erroneously reported base_tree_sha (commit id) to true Git tree sha, prior blob retained in immutable ancestry. No external CAD source bytes, no physical assembly, 0 scientific runs.",
+  "command_refs": [
+    "https://github.com/rootfabric/NanoLab/actions/runs/39538287299",
+    "https://github.com/rootfabric/NanoLab/actions/runs/39538562254"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/evidence-map.json",
+    "docs/work/executions/EX-PREP-NL7-ALT-ASSEMBLY-BENCHMARK-R1/summary.md"
+  ],
+  "next_action": "Fresh independent reviewer/Verifier for PR #76 exact final head; legally obtain original Nanobase 256/257 design files and rights before any published-source claim.",
+  "blocker": null
+}
