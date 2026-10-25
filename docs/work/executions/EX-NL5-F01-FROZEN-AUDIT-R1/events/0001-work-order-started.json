@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-25T16:57:31Z",
+  "execution_id": "EX-NL5-F01-FROZEN-AUDIT-R1",
+  "work_order_id": "WO-NL5-F01-FROZEN-AUDIT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f01-auditor-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
+    "dsh_session_id": "454dea06-3e76-4c1e-80bd-d5287bc2cae0",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "subject_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "summary": "Started C0 documentation/control audit WO-NL5-F01-FROZEN-AUDIT-R1 (Issue #82, program NL5-CLOSE-R1 #81) as a real separate DSH subagent session (durable id above; Director session e49ea301c3d2 recorded in dispatch proof). Fresh git fetch origin confirmed origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE -> no epoch change since program publication. Worktree /home/rdpuser/NanoLab/nl5-f01-audit, branch work/nl5-f01-frozen-audit-r1, dispatch HEAD 11f901bfc49b5b6b3c086865f5d73c48f94c520b. Scope: immutable FROZEN_R2 integrity (F2 = 60da9a846511265a8ac7564da088c3d74cb073f0, F2_TREE = e565c8a6cee9e829fac14008ebc9c2ea1609931d), HG-B/Reviewer/Verifier authority chain, feasibility grid N=64, freeze gate PASS + DISPATCH_BLOCKED, AUTHOR_U1/R2 current status, science_runs=0 since freeze, old NL5-002 terminal MISMATCH preservation, real subagent capability profile, open branch/PR duplication scan, evidence matrix READY/BLOCKED/STALE for F02/F03/F05 with C0 launch list + separate science launch gate. Boundaries: SCIENTIFIC_RUNS = 0 (hard zero); no oxDNA/MD/physics; no paid compute; read-only on project/*.json, docs/evidence/NL5-V02-FREEZE/**, frozen protocol/contract/seed record, scripts/**, tests/**; no canonical status changes; no self-accept; merge to main = Human Gate (Director).",
+  "command_refs": [
+    "git fetch origin --prune (fresh) -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE, no epoch change)",
+    "git rev-parse HEAD -> 11f901bfc49b5b6b3c086865f5d73c48f94c520b (Director dispatch commit)",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/82 -> task scope confirmed",
+    "cat docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/passport.json -> DISPATCHED, allowed/forbidden paths confirmed"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-F01-FROZEN-AUDIT-R1.md",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md"
+  ],
+  "next_action": "Recompute GIT_BLOB_SHA1 + CANONICAL_BLOB_SHA256 for the 3 frozen blobs at exact F2; verify ancestry/authority chain; extract feasibility grid from frozen contract/seed record; rerun machine freeze gate read-only on pinned F2 bytes; build evidence matrix and deliverables.",
+  "blocker": null
+}
