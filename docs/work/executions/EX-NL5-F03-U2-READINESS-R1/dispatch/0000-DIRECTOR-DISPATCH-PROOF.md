@@ -18,6 +18,6 @@ SAFE STOP          = any need to fake U2 access or touch forbidden paths -> STOP
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = ce662f0f-4b0d-4388-b3e0-96e018fecf94
+STATUS          = DISPATCHED_RUNNING (separate background session; ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF)
 ```
