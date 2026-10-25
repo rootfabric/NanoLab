@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "checkpoint": "NL5",
+  "base_branch": "main",
+  "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "base_tree_sha": "560dc913a71a237d3c452a5a2e492e213b232911",
+  "branch": "work/nl5-f02-u1-host-r1",
+  "worktree": "/home/rdpuser/NanoLab/nl5-f02-u1-host",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "DISPATCHED",
+  "started_at_utc": "2026-10-25T17:10:49Z",
+  "program": "NL5-CLOSE-R1",
+  "task_issue": 83,
+  "parent_issue": 81,
+  "assigned_role": "HOST-PROVISIONING",
+  "launcher": "DSH subagent tool (real separate session, durable id recorded by Director in dispatch/)",
+  "allowed_paths": [
+    "docs/work/WO-NL5-F02-U1-HOST-R1.md",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/**",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "project/infra-plan.json",
+    "docs/evidence/NL5-V02-FREEZE/**",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "scripts/**",
+    "tests/**"
+  ],
+  "dependencies": [
+    "main@3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "Issue #83",
+    "F01 handoff EX-NL5-F01-FROZEN-AUDIT-R1 @ c7c5be6edbcdb5a304705ff6d53863fa735d7d0c (READY C0)",
+    "owner-provided U1 host (absent -> BLOCKED_OWNER_U1)"
+  ],
+  "resource_budget": "C0 offline read-only host inspection only; scientific runs=0; paid compute=0; no apt/global installs; wall <= 3h",
+  "deliverables": [
+    "U1_HOST_ELIGIBILITY_R1.json",
+    "U1_HOST_ELIGIBILITY_R1.md",
+    "passport + START/CONTINUATION/HANDOFF events",
+    "evidence matrix incl. owner action list"
+  ]
+}
