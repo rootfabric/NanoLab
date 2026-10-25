@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-25T17:23:20Z",
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f02-u1-host-r1",
+  "subject_sha": "436be082954e1c608033bd38e92ad28e955c3ef0",
+  "summary": "HANDOFF_COMPLETED for WO-NL5-F02-U1-HOST-R1 (documentary C0 handoff to Director; no scientific acceptance declared - self-accept forbidden). VERDICT: BLOCKED_OWNER_U1; candidate marked CANDIDATE_NOT_ALLOCATED; canonical AUTHOR_U1=NOT_ASSIGNED and R2=WAITING_HOST/NOT_ACTIVE unchanged. Facts: (1) owner allocation 0/5 channels - ~/.ssh/config ABSENT; env allocation variables NOT_FOUND; Git post-freeze NOT_FOUND (fresh fetch: origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE unmoved; policy/research docs still NOT_ASSIGNED/WAITING_HOST; only new U1 mentions are this WO's dispatch commits edd7952/59b59be); F01 handoff origin/work/nl5-f01-frozen-audit-r1 @ c7c5be6 read-only confirms NOT_ASSIGNED; local candidate hostname = outenemy, listed in config/infra/r2-activation.v1.json forbidden_hostnames (EXTERNAL_U2_ONLY) -> FORBIDDEN_AS_U1. (2) Read-only fingerprint of the local candidate (read commands only; zero modifications): Ubuntu 22.04.5 LTS, native kernel 5.15.0-190-generic (systemd-detect-virt=none, PID1 systemd, is-system-running=degraded), machine-id e06fe756a6ce49cabc9ebaf394fd6837, 2x Xeon E5-2698 v3 32C/64T 2 NUMA, RAM 125Gi total / 14Gi available (swap 8/8 used), ext4 root 96% used (19Gi free) + nvme1n1 ext4 + sda1 ntfs, toolchain gcc/g++ 11.4.0 / cmake 3.22.1 / make 4.3 / python 3.10.12 / git 2.34.1, listening TCP far beyond sshd (NET-1 fail), github egress 200 - even without the deny-list the host would fail HW-2/HW-3/HW-4/NET-1, confirming the policy that U1 must be a dedicated machine, never a reuse of U2. (3) Eligibility checklist published: gates U1-U5 and NC-U1..U5 all WAITING_HOST (not executable without an allocated U1; EN-4 forbids crediting a U2 build chain); deny-list/roles (U2=outenemy != U1, Windows/WSL2 HISTORICAL_ONLY, no silent fallback); scientific-executor vs CI isolation (separate units, CI forbidden reboot/shutdown/executor-cgroup kill; public PR code never on trusted self-hosted scientific nodes); canonical paths ~/src/NanoLab + ~/nanolab/{workspaces,raw,cache,tools} with raw manifest contract (sha256/size/producer/retention); credential scope key-only with ZERO secrets in Git/evidence/logs. (4) Evidence matrix published: what blocks R2 activation (missing allocation record + SSH host alias -> fingerprint freeze/build/gates/NC/review/verify/HG-A all WAITING_HOST; F04 does not start) and the exact owner action list A1-A6 (HG-A chain). (5) Issue #83 vs repo divergences recorded (verdict BLOCKED_OWNER_U1 is more precise than the issue's BLOCKED_HOST; verified fingerprint only possible on an allocated U1; WO #65 chain = WO-NATIVE-UBUNTU-EXECUTOR-R1.md + U1_PROVISIONING_CHECKLIST_R1.md). Boundaries held: SCIENTIFIC_RUNS=0; zero host modifications; zero apt/global installs; zero new network scans; canonical state files untouched; U1 never impersonated; no self-acceptance. Deliverables under allowed paths: evidence/U1_HOST_ELIGIBILITY_R1.json (+.md), events 0001-0003, summary.md, single append-only WORK_QUEUE.md entry, passport status -> BLOCKED_OWNER_U1.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F02-U1-HOST-R1 -> ok:true, errors [], status BLOCKED_OWNER_U1, event_types [WORK_ORDER_STARTED, CONTINUATION_CHECKPOINT] (pre-terminal run at subject 436be08); re-run green after this event (verified on final tree)",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> exit 0 (pre-terminal run; re-run green after this event)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> violations 0, blocking 0 (pre-terminal run; re-run green after this event)",
+    "python3 -m json.tool passport.json events/0001 events/0002 evidence/U1_HOST_ELIGIBILITY_R1.json -> strict parse OK for all",
+    "git add <7 explicit paths> && git commit -> 436be082954e1c608033bd38e92ad28e955c3ef0 (this handoff event is committed on top; non-force push follows)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.json",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.md",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/summary.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  ],
+  "next_action": "Director: принять документальную передачу BLOCKED_OWNER_U1 на ветке work/nl5-f02-u1-host-r1; эскалировать владельцу точный список A1-A6 (выделение физической машины, allocation record, SSH host alias). Только после реального выделения U1 - отдельный bounded WO на фактическом хосте (fingerprint -> build-engine -> gates U1-U5 -> NC-U1..U5 -> activation-check), затем fresh review/verify -> HG-A -> R2 ACTIVE -> F04. Никакой auto-активации; F04 остаётся заблокированным.",
+  "blocker": "OWNER_ALLOCATION_ABSENT: владелец не выделил физическую машину U1 и не опубликовал SSH host alias / allocation record (проверки OA-1..OA-5, 0/5 каналов); единственный инспектируемый хост outenemy запрещён deny-list'ом как U2 (EXTERNAL_U2_ONLY). Снятие - только owner actions A1-A6."
+}
