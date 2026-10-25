@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-NL5-SUBAGENT-ORCHESTRATION-R1",
+  "event_id": "0001-work-order-started",
+  "event_type": "WORK_ORDER_STARTED",
+  "work_order_id": "WO-NL5-SUBAGENT-ORCHESTRATION-R1",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-c0-planning-implementer",
+  "subject_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "timestamp_utc": "2026-10-25T10:28:26.008Z",
+  "summary": "Begin a bounded C0 documentation-only NL5 subagent execution plan. Issue #81 and 12 child issues #82-#93 created; 0 scientific runs; F2 immutable and U1 remains unassigned. No subagents launched or claimed.",
+  "command_refs": [
+    "Fresh GitHub main 3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "Issue #81",
+    "Issues #82-#93"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-SUBAGENT-ORCHESTRATION-R1.md"
+  ],
+  "next_action": "Publish machine-readable DAG and Director execution prompt in a scoped branch; validate and ask for independent review.",
+  "blocker": null
+}

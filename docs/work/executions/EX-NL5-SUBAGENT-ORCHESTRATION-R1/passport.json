@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "work_execution",
+  "execution_id": "EX-NL5-SUBAGENT-ORCHESTRATION-R1",
+  "work_order_id": "WO-NL5-SUBAGENT-ORCHESTRATION-R1",
+  "checkpoint": "NL5 v0.2 subagent orchestration proposed roadmap and role-bound DAG (documentation only)",
+  "base_branch": "main",
+  "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "base_tree_sha": "560dc913a71a237d3c452a5a2e492e213b232911",
+  "branch": "plan/nl5-subagent-orchestration-r1",
+  "worktree": "GITHUB_CONNECTOR_SCOPED_BRANCH",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "status": "STARTED",
+  "started_at_utc": "2026-10-25T10:28:26.008Z",
+  "allowed_paths": [
+    "docs/work/WO-NL5-SUBAGENT-ORCHESTRATION-R1.md",
+    "docs/control/NL5_SUBAGENT_EXECUTION_PLAN_R1.md",
+    "docs/control/NL5_SUBAGENT_TASK_GRAPH_R1.json",
+    "docs/work/prompts/NL5_DIRECTOR_SUBAGENT_R1.md",
+    "docs/work/executions/EX-NL5-SUBAGENT-ORCHESTRATION-R1/**",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "forbidden_paths": [
+    "project/state.json",
+    "project/plan.json",
+    "project/infra-state.json",
+    "project/infra-plan.json",
+    "docs/evidence/NL5-V02-FREEZE/**",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "scripts/nl5/**",
+    "scripts/r2/**",
+    "scientific execution",
+    "direct main push",
+    "force push"
+  ],
+  "dependencies": [
+    "main@3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "Issue #81",
+    "HG-B/FROZEN_R2 integrity read-only",
+    "R2 WAITING_HOST/NOT_ACTIVE"
+  ],
+  "resource_budget": "C0 documentation+offline host CI only; scientific runs=0; paid compute=0; no U1/U2 modifications",
+  "deliverables": [
+    "human readable NL5 subagent plan",
+    "machine task dependency DAG",
+    "Director agent launch/handoff prompt",
+    "evidence, 12 child issue links, draft PR"
+  ]
+}
