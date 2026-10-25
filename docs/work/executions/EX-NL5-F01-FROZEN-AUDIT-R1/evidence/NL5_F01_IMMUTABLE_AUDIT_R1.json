@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "kind": "nl5_f01_immutable_audit",
+  "audit_id": "NL5-F01-IMMUTABLE-AUDIT-R1",
+  "execution_id": "EX-NL5-F01-FROZEN-AUDIT-R1",
+  "work_order_id": "WO-NL5-F01-FROZEN-AUDIT-R1",
+  "task_issue": 82,
+  "program_issue": 81,
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "risk_class": "MEDIUM",
+  "scientific_runs": 0,
+  "actor": {
+    "role": "IMPLEMENTER-AUDITOR",
+    "actor_id": "nl5-f01-auditor-r1",
+    "launcher": "DSH subagent tool (real separate session)",
+    "dsh_session_id": "454dea06-3e76-4c1e-80bd-d5287bc2cae0",
+    "director_session_ref": "e49ea301c3d2 (dispatch/0000-DIRECTOR-DISPATCH-PROOF.md)"
+  },
+  "baseline": {
+    "base_branch": "work/nl5-f01-frozen-audit-r1",
+    "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "base_tree": "560dc913a71a237d3c452a5a2e492e213b232911",
+    "dispatch_head": "11f901bfc49b5b6b3c086865f5d73c48f94c520b",
+    "frozen_f2": "60da9a846511265a8ac7564da088c3d74cb073f0",
+    "frozen_f2_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d"
+  },
+  "epoch_check": {
+    "command": "git fetch origin --prune && git rev-parse origin/main",
+    "origin_main": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "epoch_change": false,
+    "verdict": "ORIGIN_MAIN_EQUALS_BASE"
+  },
+  "frozen_hash_recount": {
+    "commands": [
+      "git rev-parse F2:<path>          # GIT_BLOB_SHA1",
+      "git show F2:<path> | sha256sum   # CANONICAL_BLOB_SHA256"
+    ],
+    "expected_source": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "blobs": [
+      {
+        "artifact": "frozen_protocol",
+        "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+        "size_bytes": 37240,
+        "git_blob_sha1_recomputed": "4835719622bae49a8e8b480536a482b4b222d408",
+        "canonical_sha256_recomputed": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+        "expected_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+        "expected_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+        "verdict": "MATCH"
+      },
+      {
+        "artifact": "freeze_contract",
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+        "size_bytes": 9729,
+        "git_blob_sha1_recomputed": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "canonical_sha256_recomputed": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+        "expected_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "expected_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+        "verdict": "MATCH"
+      },
+      {
+        "artifact": "seed_record",
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+        "size_bytes": 10681,
+        "git_blob_sha1_recomputed": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "canonical_sha256_recomputed": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+        "expected_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "expected_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+        "verdict": "MATCH"
+      }
+    ],
+    "internal_bindings_checked": {
+      "contract.scientific_subject.seed_record_file_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+      "contract.seed_record_r4_sha256": "51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91",
+      "contract.replacement_pool_sha256": "369a63c05592c400a2d6c160ecad940d1b0654948c1165650dbd1cce6a7ee821"
+    },
+    "summary": "3/3 MATCH"
+  },
+  "ancestry_authority": {
+    "f2_ancestor_of_origin_main": true,
+    "f2_ancestor_of_head": true,
+    "director_freeze_r2_record": {
+      "path": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+      "added_in_commit": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d",
+      "ancestor_of_origin_main": true,
+      "pins_subject_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "pins_subject_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d"
+    },
+    "hg_b": {
+      "path": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+      "record_kind": "HG_B_OWNER_APPROVAL",
+      "issuer_class": "HUMAN_GATE_OWNER",
+      "decision": "APPROVED",
+      "candidate_revision": "R4",
+      "recorded_at_utc": "2026-10-05T02:15:00Z"
+    },
+    "reviewer_f2": {
+      "branch": "review/nl5-v02-frozen-r2-scientific-review-r1",
+      "tip": "d63eb5c088133f92ebd20501835a159cc3e4b865",
+      "verdict": "PASS",
+      "pinned_subject": "60da9a846511265a8ac7564da088c3d74cb073f0 / e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "descends_from_f2": true,
+      "merged_into_main": false,
+      "append_only_confirmed": true
+    },
+    "verifier_f2": {
+      "branch": "verify/nl5-v02-frozen-r2-r1",
+      "tip": "f12d0b497cb28a2f18476ded90b4b1bd079bb414",
+      "verdict": "VERIFIED",
+      "pinned_subject": "60da9a846511265a8ac7564da088c3d74cb073f0 / e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "descends_from_f2": true,
+      "merged_into_main": false,
+      "append_only_confirmed": true
+    },
+    "main_referenced_records": {
+      "director_fresh_audit_r1_commit": "ff199f9",
+      "fresh_review_of_audit_commit": "5663991",
+      "chain_verdict_recorded": "INTACT",
+      "note": "main references R/V verdicts by exact branch tip SHA via DIRECTOR_FRESH_AUDIT_R1; the R/V evidence files themselves are not in the main tree (integration finding, see findings)"
+    }
+  },
+  "feasibility_grid": {
+    "sources": [
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json (at F2, sha256 7e647654...)",
+      "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json (at F2, sha256 8e844bff...)",
+      "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md lines 415-422, 490-494"
+    ],
+    "values": {
+      "primary_variants": {"0b": {"role": "primary", "n": 64, "n_min": 52}, "32b": {"role": "primary", "n": 64, "n_min": 52}},
+      "control_variants": {"11b": {"role": "control", "n": 10, "n_min": 8}, "53b": {"role": "control", "n": 10, "n_min": 8}},
+      "confirmatory_runs": 296,
+      "replacement_runs_cap": 56,
+      "replacement_quota_pairs_per_variant": {"0b": 12, "32b": 12, "11b": 2, "53b": 2},
+      "replacement_runs_per_pair": 2,
+      "max_runs": 352,
+      "wall_hours_per_platform": 560,
+      "compute": "CPU-only (cuda=OFF, mpi=OFF); paid compute forbidden without separate owner decision",
+      "platforms": "P-A = U1 native Ubuntu R2; P-B = U2 external (outenemy, EXTERNAL_U2_ONLY); Windows/WSL = HISTORICAL_ONLY",
+      "n_grid": [40, 48, 64, 80, 96, 128],
+      "selected_n": 64,
+      "headroom_ratio": 0.8,
+      "seed_record_counts": {"primary_replicas": 64, "control_replicas": 10, "fresh_seed_total": 148, "bootstrap_seed_total": 4, "exclusion_list_size": 34, "exclusion_tree_pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f"}
+    },
+    "verdict": "CONFIRMED_FROM_FROZEN_BYTES (no invented values)"
+  },
+  "freeze_gate": {
+    "evidence_at_f2": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/frozen-gate-PASS-R2.json",
+    "recorded": {"gate": "PASS", "validation_stage": "PREFREEZE_VALIDATION_PASS", "freeze_status": "FROZEN", "dispatch": "DISPATCH_BLOCKED", "dispatch_ready": false},
+    "independent_rerun": {
+      "command": "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract <contract> --protocol <protocol> --record <seed_record> --repo-root .",
+      "exit_code": 0,
+      "gate": "PASS",
+      "validation_stage": "PREFREEZE_VALIDATION_PASS",
+      "dispatch": "DISPATCH_BLOCKED",
+      "dispatch_ready": false,
+      "failures": [],
+      "report_copy": "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/frozen-gate-rerun-F2-audit-R1.json",
+      "report_sha256": "300575f54a07743127936ccbd6124e9792da6e6735165485e763485a587f7e23",
+      "method_note": "same rerun on a git-less extraction of the F2 tree fails closed (exit 3): the pinned scan tree a9d7d07f is unavailable without the git object store - designed fail-closed behavior, not an artifact defect"
+    },
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER"
+  },
+  "current_status": {
+    "author_u1": "NOT_ASSIGNED",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "r2_activated": false,
+    "new_science": "HARD_BLOCKED",
+    "sources": [
+      "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md (lines 11-33)",
+      "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json state_ceiling_at_freeze",
+      "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FRESH_AUDIT_R1.json r2_probe"
+    ],
+    "science_runs_since_freeze": {
+      "value": 0,
+      "method": "git log/diff F2..origin/main over docs/evidence + docs/work/executions: 25 commits, zero new scientific run artifacts (no trajectory/energy/stdout/raw .dat additions); new EX-* dirs are documentation/code (NL7/PREP-S17, INFRA3 readiness, fresh audit) with offline tests only",
+      "state_counters_unchanged": {"physics_runs_at_F2": 35, "physics_runs_at_main": 35, "external_reproductions": 0}
+    }
+  },
+  "nl5_002_legacy": {
+    "state_json": {"NL5": "IN_PROGRESS", "NL5_001": "ACCEPTED", "NL5_002": "WAITING_HUMAN", "external_reproductions": 0, "paid_compute_authorized": false},
+    "terminal_mismatch_preserved": true,
+    "evidence": [
+      "docs/evidence/NL5-002/FRESH_VERIFY_R1.md (0b/32b MISMATCH, WO-level MISMATCH, numeric_repro_condition_met=false)",
+      "docs/evidence/NL5-002/FRESH_REVIEW_R1.md",
+      "docs/work/WORK_QUEUE.md preamble (canonical 2026-09-20, PR #43 merge 7504b38)"
+    ],
+    "verdict_files_never_modified": true,
+    "post_terminal_changes": [
+      {"commit": "c55229a", "date": "2026-09-20", "scope": "cosmetic SHA-rendering fix in DIRECTOR_DECISION_R1.md (review Finding-1), verdict files untouched"}
+    ]
+  },
+  "environment_capabilities": {
+    "dsh_subagent_launcher": {"status": "WORKING", "proof": "this session DSH_SESSION_ID=454dea06-3e76-4c1e-80bd-d5287bc2cae0; director session e49ea301c3d2"},
+    "ssh_push_origin": {"status": "WORKING", "proof": "ssh -T git@github.com -> 'Hi rootfabric!'"},
+    "github_api_read": {"status": "WORKING", "proof": "unauthenticated GET issues/pulls -> 200"},
+    "github_issue_comment_write": {"status": "BLOCKED", "proof": "POST /issues/82/comments with stored fine-grained PAT (identity rootfabric) -> HTTP 403 'Resource not accessible by personal access token' (reproduces Director finding 2026-10-25); empty-body probe, no side effects"},
+    "external_lan_probes": {"status": "NOT_ATTEMPTED", "reason": "out of F01 scope; U2 host not assigned"},
+    "implication": "Director DAG on real DSH subagent sessions is feasible; durable proof publication must use Git, not issue comments"
+  },
+  "duplication_scan": {
+    "open_prs": [
+      {"number": 78, "title": "docs: SOURCE-75 Nanobase 256/257 retrieval receipt", "duplicates_f01": false},
+      {"number": 16, "title": "docs: multi-worktree layout standard RU", "duplicates_f01": false}
+    ],
+    "open_branches_conflicting_with_f01": [],
+    "note": "existing nl5-v02 control/review/verify/audit branches are the completed S/F/D/R/V chains already recorded on main; no re-implementation of closed tasks found"
+  },
+  "evidence_matrix": {
+    "F02_u1_host": {
+      "issue": 83,
+      "matrix_status": "READY_C0_START",
+      "goal_blocker": "BLOCKED: AUTHOR_U1=NOT_ASSIGNED (owner host not provided)",
+      "prior_art": "EX-INFRA3-NL5-READINESS-R1 dry-run package on main (U1_PROVISIONING_CHECKLIST_R1.md, NL5_V02_DRYRUN_MANIFEST_R1.json) - reconfirmed fresh, not stale",
+      "true_blockers": ["no physical U1 machine", "R2 activation gates U1-U5/NC-U1..U5 cannot start without host"]
+    },
+    "F03_u2_readiness": {
+      "issue": 84,
+      "matrix_status": "READY_C0_START",
+      "goal_blocker": "BLOCKED: U2 external host/owner coordination (EXTERNAL_U2_ONLY)",
+      "prior_art": "docs/evidence/INFRA3-U2-READINESS + review PASS d588e2a on main - relevant, not stale",
+      "true_blockers": ["outenemy machine/access is outside C0 and outside this session"]
+    },
+    "F05_dispatch_prep": {
+      "issue": 86,
+      "matrix_status": "READY_C0_PREP",
+      "goal_blocker": "BLOCKED: final authority A requires F04/R2 ACTIVE + AUTHOR_U1 assigned",
+      "inputs": "all numeric inputs already frozen (296/56/352/560h, CPU-only, N=64); machine blocker 'no validated nanolab_v02_dispatch_authority object'",
+      "true_blockers": ["R2 ACTIVE=false", "AUTHOR_U1=NOT_ASSIGNED", "F04 not started", "R/V records not integrated into main (reference by exact tip SHA or integrate)"]
+    },
+    "F04_r2_activation": {"issue": 85, "matrix_status": "BLOCKED", "reason": "no U1 host; not a permitted C0 launch of F01"},
+    "F06_F07_science_legs": {"issues": [87, 88], "matrix_status": "BLOCKED_HARD", "reason": "machine_launch_authorized=false; launch_gate=HUMAN_PROTECTED_WRITER; outside F01 jurisdiction"}
+  },
+  "c0_launch_list": [
+    {"task": "F02-C0", "issue": 83, "allowed_scope": "host checklists, fingerprint tooling prep, host security baseline docs; actual machine only from owner"},
+    {"task": "F03-C0", "issue": 84, "allowed_scope": "U2 readiness verification docs, raw-manifest templates, isolation spec; no external paid runs"},
+    {"task": "F05-prep-C0", "issue": 86, "allowed_scope": "draft dispatch authority v3 + feasibility/budget guard from frozen numbers; no status grants"}
+  ],
+  "science_launch_gate": {
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER",
+    "requirements_to_unlock": ["F04: R2 ACTIVE (fingerprint frozen + gates U1-U5 + NC-U1..U5 + review/verify)", "AUTHOR_U1 assigned", "fresh dispatch authority A", "Human Gate"],
+    "frozen_campaign_budget": {"confirmatory_runs": 296, "replacement_runs_cap": 56, "max_runs": 352, "wall_hours_per_platform": 560, "compute": "CPU-only"},
+    "f01_grants_no_science_authority": true
+  },
+  "findings_blocked_inconclusive": [
+    {"id": "F01-F-1", "severity": "MEDIUM", "text": "Reviewer(F2)/Verifier(F2) evidence records are append-only and pin exact F2, but their branch tips (d63eb5c/f12d0b4) are NOT merged into main; DIRECTOR_FRESH_AUDIT_R1 on main references them by tip SHA. Director should integrate the records or reference exact tips in dispatch authority v3. Does not block C0 F02/F03/F05-prep."},
+    {"id": "F01-F-2", "severity": "LOW", "text": "GitHub issue-comment write API = HTTP 403 with the stored fine-grained PAT (reproduced); durable proof must be published in Git only."},
+    {"id": "F01-F-3", "severity": "INFO", "text": "Physical state of U1/U2 hosts is NOT_VERIFIABLE_FROM_SESSION; canonical NOT_ASSIGNED / WAITING_HOST remain authoritative."},
+    {"id": "F01-F-4", "severity": "INFO", "text": "Freeze gate rerun on a git-less F2 extraction fails closed by design (pinned scan tree unavailable); repository rerun = PASS exit 0."},
+    {"id": "F01-F-5", "severity": "LOW", "text": "D2 dispatch_blockers text ('fresh Reviewer/Verifier = missing') reflects the freeze moment, superseded by completed R/V branches; canonical blockers (R2/U1) remain in force."}
+  ],
+  "issue_vs_repo_discrepancies": [
+    "Issue #82 wording 'sha256 Git blob' conflates GIT_BLOB_SHA1 and CANONICAL_BLOB_SHA256; both recomputed, both MATCH (terminological, not substantive).",
+    "No other discrepancies: BASE matches, frozen hashes match, state.json/policy statuses match issue/program declarations."
+  ],
+  "validation_results": {
+    "work_cli_validate": "see HANDOFF event for final run",
+    "check_consistency": "see HANDOFF event for final run",
+    "workflow_lint": "see HANDOFF event for final run"
+  },
+  "handoff": {
+    "status": "HANDOFF_READY",
+    "next_action": "Director accepts documentary handoff (no scientific acceptance); may start C0 sessions F02 (#83) / F03 (#84) / F05-prep (#86) as separate subagents; F04/F06/F07 remain blocked by science launch gates."
+  },
+  "recorded_at_utc": "2026-10-25T17:05:00Z"
+}
