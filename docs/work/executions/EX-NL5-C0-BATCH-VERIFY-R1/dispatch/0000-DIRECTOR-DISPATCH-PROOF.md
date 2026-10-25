@@ -15,6 +15,6 @@ SAFE STOP     = any mismatch -> FAIL/NOT_VERIFIED with findings; no role identit
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = bd0c45d7-6bfd-40c4-8aea-879c9afd546c
+STATUS          = DISPATCHED_RUNNING
 ```
