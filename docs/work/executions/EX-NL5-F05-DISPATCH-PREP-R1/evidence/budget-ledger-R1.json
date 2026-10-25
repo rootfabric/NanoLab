@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "record_kind": "NL5_F05_BUDGET_LEDGER",
+  "ledger_id": "NL5-F05-BUDGET-LEDGER-R1",
+  "execution_id": "EX-NL5-F05-DISPATCH-PREP-R1",
+  "work_order_id": "WO-NL5-F05-DISPATCH-PREP-R1",
+  "program_issue": 81,
+  "task_issue": 86,
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_recorded_in_this_ledger": 0,
+  "immutable": true,
+  "immutability_policy": "append/revision-only: any correction is published as a new ledger revision (R2+) with a supersede pointer; in-place edits of a published ledger revision are forbidden (same class as freeze records)",
+  "binding_sources": {
+    "frozen_contract": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+      "source_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "canonical_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a"
+    },
+    "seed_record": {
+      "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+      "source_commit": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "canonical_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28"
+    },
+    "hg_b_owner_decision": {
+      "path": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+      "git_blob_sha1": "61d1491233aeb2537f9800d6183def5b8fb0c8e0",
+      "canonical_sha256": "b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9",
+      "decision": "APPROVED"
+    },
+    "validator_budget_block": "scripts/nl5/repro_v02_freeze_contract.py gate output on F2 bytes: budget.confirmatory_runs=296 budget.replacement_runs_cap=56 budget.max_runs=352 budget.wall_hours_per_platform=560"
+  },
+  "run_budget": {
+    "confirmatory_runs": 296,
+    "derivation": "148 frozen fresh seed identities x 2 runs per pair (author leg + external leg)",
+    "replacement_runs_cap": 56,
+    "replacement_derivation": "28 frozen pool identities (12+12+2+2, one per replacement pair) x 2 runs per pair",
+    "max_runs": 352,
+    "max_runs_per_platform": 176,
+    "runs_executed_so_far": 0,
+    "runs_remaining": 352,
+    "replacement_admission_rule": "FAILED_TECHNICAL pairs only; at most one replacement assignment per failed pair; frozen pool order, frozen cursors 75/76/21/21; never raw N+1",
+    "hard_ceiling": "the machine gate refuses plan sizes beyond the frozen budget; budget changes require a NEW owner decision + NEW contract revision (v0.3+), never an in-place edit"
+  },
+  "wall_budget": {
+    "wall_hours_per_platform": 560,
+    "source": "frozen contract run_budget.wall_hours_per_platform == HG-B approved_parameters.wall_hours_per_platform",
+    "historical_reference": {
+      "campaign": "NL5-002-E platform-sensitivity (P1 leg, n=20 final runs)",
+      "evidence": "docs/work/executions/EX-NL5-002-E-R1/evidence/p1/run_output_digests_p1.json",
+      "per_run_wall_hours": {"mean": 3.97, "median": 4.22, "max": 4.93},
+      "note": "P2 external leg digests carry no size/wall fields (external outenemy evidence kept outside Git); P1 CPU numbers are the only in-repo wall reference"
+    },
+    "planning_note_non_binding": "at the observed ~4.0h/run CPU wall, the 176-run/platform ceiling is ~704h sequential: the 560h/platform cap is feasible only with >=2 concurrent run slots per platform (or a faster host). This is a derived planning observation from historical evidence, NOT a frozen parameter and NOT a feasibility failure; the frozen feasibility verdict (N=64 grid PASS, HG-B mandatory_feasibility_gate) remains the binding record."
+  },
+  "compute_budget": {
+    "mode": "CPU-only",
+    "pins": "environment_pins: cuda=OFF, mpi=OFF; engine = lorenzo-rovigatti/oxDNA @ 00dc7fb9a25bbd8cadbc7503ee2b9f38983c6591 (Release, double=ON); NL5-002 precedent ran build-oxdna-cpu",
+    "gpu_authorized": false,
+    "paid_compute_authorized": false,
+    "platforms": "P-A = U1 native Ubuntu R2 (AUTHOR_U1, currently NOT_ASSIGNED); P-B = U2 external outenemy (EXTERNAL_U2); Windows/WSL2 = HISTORICAL_ONLY, forbidden for new science",
+    "this_work_order_consumption": "offline validators + offline replay arithmetic only; 0 engine invocations; wall << 4h"
+  },
+  "storage_budget": {
+    "basis": "NL5-002-E P1 final-run raw artifacts (n=20), docs/work/executions/EX-NL5-002-E-R1/evidence/p1/run_output_digests_p1.json",
+    "per_run_raw_bytes": {"mean_MB": 105.9, "max_MB": 119.8, "trajectory_dat_mean_MB": 100.7},
+    "estimate_max_campaign_per_platform_GB": 21.2,
+    "estimate_formula": "176 runs/platform x 119.8 MB max-observed run = 21.1 GB upper bound; 176 x 105.9 MB mean = 18.6 GB expected",
+    "estimate_max_campaign_total_GB": 42.4,
+    "retry_reserve_note": "superseded/interrupted attempts are preserved (NL5-002 kept 8 superseded attempts alongside 20 finals); provision >= 1.5x => >= 32 GB/platform, >= 64 GB total across P-A+P-B",
+    "raw_evidence_location_policy": "raw trajectories stay OUTSIDE Git (NL5-002 precedent); Git carries manifests with sha256+size per artifact (digests JSON), never the raw bytes",
+    "git_growth_this_wo": "documentation/evidence JSON+MD only, no binary payloads"
+  },
+  "pricing_notes": {
+    "purchases_made": "none",
+    "authorized_paid_resources": "none",
+    "cloud_cpu_alternative_pricing": "NOT_PRICED: no cloud CPU purchase is authorized or planned; any substitution of U1/U2 by paid compute requires a separate owner decision + budget authorization BEFORE any run; no price quotes were solicited in this WO",
+    "hosted_ci": "NOT_RUN for this WO (offline validators only)",
+    "currency": "n/a"
+  },
+  "stop_rules": [
+    {"id": "STOP-1", "rule": "mandatory feasibility gate FAIL => BLOCKED; accept-risk bypass is forbidden (HG-B approved_protective_properties.machine_precondition class)", "binding": true},
+    {"id": "STOP-2", "rule": "confirmatory counter hard-stops at 296 runs; only FAILED_TECHNICAL pairs may draw frozen replacements, cap 56, frozen pool order", "binding": true},
+    {"id": "STOP-3", "rule": "total campaign ceiling 352 runs (176/platform) is a hard stop; no additional runs of any kind", "binding": true},
+    {"id": "STOP-4", "rule": "wall clock 560h/platform is a hard stop; exceeded wall => stop and record, no extensions in place", "binding": true},
+    {"id": "STOP-5", "rule": "any non-CPU execution attempt (GPU/CUDA/MPI) violates frozen environment pins => immediate stop", "binding": true},
+    {"id": "STOP-6", "rule": "seed/pool/cursor exhaustion or a scan-error during replacement => stop; scan errors are fatal (fail-closed, F2 tree_collision_rule)", "binding": true},
+    {"id": "STOP-7", "rule": "missing/expired authority A (schema v3) or absence of owner scientific launch approval => zero runs; machine precondition status stays DISPATCH_PRECONDITIONS_RECORDED, never DISPATCH_AUTHORIZED", "binding": true}
+  ],
+  "attestations": [
+    "HG-B OWNER decision APPROVED binds n=64/64/10/10, n_min=52/52/8/8, quotas 12/12/2/2, 296+56<=352, 560h/platform (recomputed from blob b68dd341... at main 3b567ae)",
+    "FROZEN_R2 contract at F2 byte-pins the same budget block (gate rerun exit 0 this session)",
+    "this ledger records planning facts only; it authorizes nothing",
+    "machine_launch_authorized = false; launch_gate = HUMAN_PROTECTED_WRITER"
+  ],
+  "recorded_at_utc": "2026-10-25T17:36:00Z"
+}
