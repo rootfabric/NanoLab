@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-25T17:12:00Z",
+  "execution_id": "EX-NL5-F01-FROZEN-AUDIT-R1",
+  "work_order_id": "WO-NL5-F01-FROZEN-AUDIT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f01-auditor-r1",
+  "subject_sha": "c65bd26f8fc4f12adfaddda8fba2716660464694",
+  "summary": "HANDOFF_COMPLETED for WO-NL5-F01-FROZEN-AUDIT-R1 (documentary C0 handoff to Director; no scientific acceptance declared - self-accept forbidden). All deliverables published under allowed paths: evidence/NL5_F01_IMMUTABLE_AUDIT_R1.md (+.json machine mirror), evidence/frozen-gate-rerun-F2-audit-R1.json, events 0001-0003, summary.md, single append-only WORK_QUEUE.md entry, passport status -> HANDOFF_READY. Canonical facts established independently: origin/main = BASE 3b567ae33f247b182b2ae451d2cc4598a9e76019 (no epoch change); F2 = 60da9a846511265a8ac7564da088c3d74cb073f0 (tree e565c8a6cee9e829fac14008ebc9c2ea1609931d) ancestor of main; frozen blob identities 3/3 MATCH vs DIRECTOR_FREEZE_R2.json (protocol 48357196/2658ee3e, contract d6a9ccde/7e647654, seed record 0164e0e3/8e844bff); HG-B APPROVED; D2 record a2f7304 in main; Reviewer(F2) PASS tip d63eb5c and Verifier(F2) VERIFIED tip f12d0b4 append-only and pin exact F2 (finding F01-F-1: tips not merged into main); feasibility grid confirmed from frozen bytes (0b/32b N=64 primary, 11b/53b N=10 controls, 296+56<=352 runs, <=560h/platform, CPU-only); machine freeze gate rerun exit 0 = PASS/PREFREEZE_VALIDATION_PASS/DISPATCH_BLOCKED; machine_launch_authorized=false, launch_gate=HUMAN_PROTECTED_WRITER; AUTHOR_U1=NOT_ASSIGNED, R2=WAITING_HOST/NOT_ACTIVE; science_runs since freeze = 0; NL5-002 terminal MISMATCH preserved append-only with state.json NL5-002=WAITING_HUMAN, NL5=IN_PROGRESS, NL5-001=ACCEPTED, external_reproductions=0. Environment profile: real DSH subagent launcher confirmed (session 454dea06-3e76-4c1e-80bd-d5287bc2cae0; director session e49ea301c3d2), SSH push as rootfabric works, GitHub issue-comment write = HTTP 403 with stored fine-grained PAT (reproduced, no side effects) -> durable proofs via Git only. Open PRs #78/#16: no duplication of F01-F05 work. Evidence matrix: F02 READY (C0)/goal BLOCKED (no U1 host); F03 READY (C0)/external leg BLOCKED (U2 coordination); F05-prep READY (C0)/authority A BLOCKED (F04/R2 ACTIVE/U1); F04 BLOCKED; F06/F07 HARD BLOCKED by separate science launch gate (outside F01 jurisdiction). Permitted C0 launches after this handoff: F02-C0 (#83), F03-C0 (#84), F05-prep-C0 (#86) as separate subagent sessions.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1 -> ok:true, events [WORK_ORDER_STARTED, CONTINUATION_CHECKPOINT, HANDOFF_COMPLETED]",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok (final run recorded in evidence JSON)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0 (final run recorded in evidence JSON)",
+    "python3 -m json.tool <every new json> -> strict parse OK",
+    "git push origin work/nl5-f01-frozen-audit-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/NL5_F01_IMMUTABLE_AUDIT_R1.md",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/NL5_F01_IMMUTABLE_AUDIT_R1.json",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/frozen-gate-rerun-F2-audit-R1.json",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/summary.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "next_action": "Director: accept documentary handoff on branch work/nl5-f01-frozen-audit-r1, then dispatch separate C0 subagent sessions for F02 (#83) and F03 (#84) (parallelizable) and F05-prep (#86); keep F04/F06/F07 blocked behind the science launch gate (HUMAN_PROTECTED_WRITER); merge of this branch to main remains a Human Gate.",
+  "blocker": null
+}

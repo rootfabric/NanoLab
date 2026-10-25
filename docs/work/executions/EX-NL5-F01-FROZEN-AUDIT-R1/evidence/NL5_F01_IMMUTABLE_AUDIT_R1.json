@@ -254,9 +254,10 @@
     "No other discrepancies: BASE matches, frozen hashes match, state.json/policy statuses match issue/program declarations."
   ],
   "validation_results": {
-    "work_cli_validate": "see HANDOFF event for final run",
-    "check_consistency": "see HANDOFF event for final run",
-    "workflow_lint": "see HANDOFF event for final run"
+    "work_cli_validate": {"ok": true, "status": "HANDOFF_READY", "event_types": ["WORK_ORDER_STARTED", "CONTINUATION_CHECKPOINT", "HANDOFF_COMPLETED"], "has_summary": true},
+    "check_consistency": {"ok": true, "errors": []},
+    "workflow_lint": {"workflows": 1, "violations": 0, "blocking": 0},
+    "json_strict_parse": ["passport.json", "events/0001-work-order-started.json", "events/0002-continuation-frozen-integrity-and-matrix-verified.json", "events/0003-handoff-completed.json", "evidence/NL5_F01_IMMUTABLE_AUDIT_R1.json", "evidence/frozen-gate-rerun-F2-audit-R1.json", "all OK"]
   },
   "handoff": {
     "status": "HANDOFF_READY",
