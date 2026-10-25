@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-25T17:20:41Z",
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "EXTERNAL-PREFLIGHT-IMPLEMENTER",
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
+    "dsh_session_id": "ce662f0f-4b0d-4388-b3e0-96e018fecf94",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "subject_sha": "7e1e0bce1346d1884dc314409e812f7f8e815296",
+  "summary": "Started C0 U2 external readiness WO-NL5-F03-U2-READINESS-R1 (Issue #84, program NL5-CLOSE-R1 #81) as a real separate DSH subagent session (durable id above; NOT the author U1 session). Fresh git fetch origin confirmed origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE (no epoch change). Worktree /home/rdpuser/NanoLab/nl5-f03-u2-readiness, branch work/nl5-f03-u2-readiness-r1, dispatch HEAD 7e1e0bce1346d1884dc314409e812f7f8e815296. Scope: (1) STALE assessment of existing U2 receipts (docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.{md,json} @ reviewed HEAD 9ded2bf7, PR #55 chain infra/u2-outenemy-executor-readiness-r1, EX-INFRA3-U2-OUTENEMY-READINESS-R1) against current main 3b567ae and FROZEN_R2 F2=60da9a846511265a8ac7564da088c3d74cb073f0; (2) offline C0 audit of frozen release package readiness for delivery to U2 (F2 composition via docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json pins, read-only; input/digest sufficiency for independent build; raw-manifest schema proposal hash+size+producer+HEAD+storage+retention; unique job ID scheme; safe paths/permissions; isolation from author intermediates); (3) live U2 host checks (identity/fingerprint/capacity on outenemy) are NOT executable from this session: no ~/.ssh/config exists and 'outenemy' absent from known_hosts -> honest BLOCKED_NO_U2_ACCESS_FROM_SESSION, nothing simulated; deliver exact live-check list for owner/U2 operator before F07. Boundaries: SCIENTIFIC_RUNS = 0 (hard zero); no oxDNA/MD/physics; no paid compute; read-only on project/*.json, docs/evidence/NL5-V02-FREEZE/**, docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md, scripts/**, tests/**; no new data classifications; no canonical status changes; no self-accept; U2-ready != R2_ACTIVE != scientific authorization; merge to main = Human Gate (Director).",
+  "command_refs": [
+    "git fetch origin --prune -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE, no epoch change)",
+    "git rev-parse HEAD -> 7e1e0bce1346d1884dc314409e812f7f8e815296 (Director dispatch bind commit)",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/84 -> task scope + Director proof protocol confirmed",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/pulls/55 -> merged:true, head infra/u2-outenemy-executor-readiness-r1 @ 3b6ead17f0c3a4d789e46425959481c79d9407fd",
+    "ls ~/.ssh/config -> absent; grep -c outenemy ~/.ssh/known_hosts -> 0 (live U2 access impossible from this session)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-F03-U2-READINESS-R1.md",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "docs/evidence/INFRA3-U2-READINESS/FRESH_REVIEW_U2_READINESS_R1.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md"
+  ],
+  "next_action": "Recompute frozen blob identities at exact F2 vs main; STALE-classify existing receipts; audit package inputs/digests; propose raw-manifest schema; build U2_READINESS_R1.{json,md} with platform matrix, capacity inventory, budgets, live-check list, verdict.",
+  "blocker": null
+}
