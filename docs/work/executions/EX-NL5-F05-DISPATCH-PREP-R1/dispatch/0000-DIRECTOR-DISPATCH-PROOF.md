@@ -17,6 +17,6 @@ SAFE STOP          = authority A draft temptation, science dry-run on real data,
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = 3e3c6aa5-d615-49a0-8b6a-1805d8f7431a
+STATUS          = DISPATCHED_RUNNING (separate background session; ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF)
 ```
