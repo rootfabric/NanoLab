@@ -18,6 +18,6 @@ SAFE STOP          = no host allocation found -> BLOCKED_OWNER_U1 evidence; any 
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = aa17776a-86cf-45c5-9921-d4fef9ac2c89
+STATUS          = DISPATCHED_RUNNING (separate background session; ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF)
 ```
