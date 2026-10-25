@@ -10,7 +10,7 @@
   "worktree": "/home/rdpuser/NanoLab/nl5-f03-u2-readiness",
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
-  "status": "DISPATCHED",
+  "status": "HANDOFF_READY",
   "started_at_utc": "2026-10-25T17:11:32Z",
   "program": "NL5-CLOSE-R1",
   "task_issue": 84,

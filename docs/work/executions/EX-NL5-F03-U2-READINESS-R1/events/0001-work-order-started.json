@@ -5,7 +5,7 @@
   "execution_id": "EX-NL5-F03-U2-READINESS-R1",
   "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
   "event_type": "WORK_ORDER_STARTED",
-  "actor_role": "EXTERNAL-PREFLIGHT-IMPLEMENTER",
+  "actor_role": "IMPLEMENTER",
   "actor_id": "nl5-f03-u2-preflight-r1",
   "actor_session": {
     "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-25T17:27:35Z",
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "subject_sha": "52798b79881e4be6df2b328da27b0bc338e8f972",
+  "summary": "HANDOFF_COMPLETED for WO-NL5-F03-U2-READINESS-R1 (Issue #84; documentary C0 handoff to Director; no scientific acceptance declared - self-accept forbidden). All deliverables published under allowed paths: evidence/U2_READINESS_R1.{md,json}, events 0001-0003, passport DISPATCHED -> HANDOFF_READY, summary.md, single append-only WORK_QUEUE.md entry. Verdict: READY_FOR_DISPATCH_PREP (C0 logistics) with live U2 leg honestly BLOCKED_NO_U2_ACCESS_FROM_SESSION (~/.ssh/config absent; 'outenemy' 0x in ~/.ssh/known_hosts; nothing simulated). Core facts established independently this session: origin/main = 3b567ae = BASE (no epoch change); frozen F2=60da9a8/tree e565c8a6 - 9/9 changed-file blobs SAME at main, canonical SHA-256 protocol/contract/seed 3/3 MATCH DIRECTOR_FREEZE_R2.json; STALE verdict: host facts of EX-INFRA3-U2-OUTENEMY-READINESS-R1 (2026-10-10/11) HOST_STATE_STALE_BY_TIME; FRESH_REVIEW_U2_READINESS_R1 PASS = GIT_ANCHORED_VALID_BUT_SUPERSEDED_HEAD (9ded2bf7 strict ancestor of PR head 3b6ead17 and main; post-review m-1 repair in main, diff limited to scripts/r2/cli.py + tests, 60+/14-); F2 frozen 2026-10-06 BEFORE the 2026-10-11 review. Package input sufficiency SUFFICIENT_WITH_TWO_PROVISIONS (P-1 engine source route unproven live; P-2 package ref unpinned). Deliverables include: PROPOSED_NON_NORMATIVE raw-artifact manifest schema (hash+size+producer+HEAD+storage+retention, digest in append-only ledger; adoption = separate bounded WO with fresh Reviewer + distinct Verifier), unique job ID scheme (six named fail-closed run-u2 BLOCKED_* gates incl. BLOCKED_MALFORMED_SPEC now in main), safe paths/permissions, author-isolation map, platform independence matrix, storage/evidence capacity inventory from existing evidence only (live numbers unknown), budgets (296+56<=352 runs, <=560h/platform, CPU-only), 12-item live checklist L-01..L-12 for owner/U2 operator before F07. Boundaries preserved: SCIENTIFIC_RUNS=0; no oxDNA/MD; no paid compute; U2-ready != R2_ACTIVE != scientific authorization; R2=WAITING_HOST/NOT_ACTIVE; AUTHOR_U1=NOT_ASSIGNED; dispatch authority record (lifecycle A) does not exist; machine_launch_authorized=false; no canonical state changes; F01-F-1 carried (Reviewer(F2)/Verifier(F2) tips unmerged in main).",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F03-U2-READINESS-R1 -> ok:true (final run in summary.md)",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok (final run in summary.md)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0 (final run in summary.md)",
+    "python3 -m json.tool <every new json> -> strict parse OK",
+    "git push origin work/nl5-f03-u2-readiness-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_READINESS_R1.md",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_READINESS_R1.json",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/summary.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "next_action": "Director: accept documentary handoff on branch work/nl5-f03-u2-readiness-r1 (fresh Reviewer + distinct Verifier before any contract adoption, esp. the raw-manifest schema proposal); route to F05 authority planning (authority record schema v3 must pin F2 chain + package ref + both platform pins); owner/U2 operator executes live checklist L-01..L-12 (evidence/U2_READINESS_R1.md section 7) before F07; merge to main remains Human Gate.",
+  "blocker": null
+}
