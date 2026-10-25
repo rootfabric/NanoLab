@@ -16,6 +16,6 @@ SAFE STOP     = any forbidden write or scope breach -> STOP, verdict FAIL with f
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = b8eca5d9-8ad0-419d-8092-58da4d471487
+STATUS          = DISPATCHED_RUNNING
 ```
