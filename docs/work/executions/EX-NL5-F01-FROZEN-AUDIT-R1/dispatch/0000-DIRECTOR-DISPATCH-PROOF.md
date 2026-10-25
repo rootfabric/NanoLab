@@ -55,6 +55,10 @@ SAFE STOP       = any hash mismatch / forbidden-path need / missing data -> BLOC
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (to be appended by Director immediately after launcher returns the real id)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = 454dea06-3e76-4c1e-80bd-d5287bc2cae0
+LAUNCHED_AT_UTC = 2026-10-25T11:10:00Z (approximately; launcher returned id synchronously)
+STATUS          = DISPATCHED_RUNNING (separate background session; its own context and commits)
+NOTE            = per DIRECTOR.md invariant ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF:
+                  this id proves protocol role separation, not an independent
+                  model/credential; production identity proof remains a separate gate
 ```
