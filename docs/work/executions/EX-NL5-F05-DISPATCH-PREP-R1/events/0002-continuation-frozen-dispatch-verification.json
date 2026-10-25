@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-frozen-dispatch-verification",
+  "timestamp_utc": "2026-10-25T17:37:09Z",
+  "execution_id": "EX-NL5-F05-DISPATCH-PREP-R1",
+  "work_order_id": "WO-NL5-F05-DISPATCH-PREP-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f05-dispatch-implementer-r1",
+  "subject_sha": "cfaea0aad8eadf54076eac6879715250930c946e",
+  "summary": "CONTINUATION: all offline verification phases completed and evidence committed (cfaea0aad8eadf54076eac6879715250930c946e). (1) HG-B recheck MATCH: blob 61d1491233aeb2537f9800d6183def5b8fb0c8e0, canonical sha256 b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9 at main 3b567ae, decision=APPROVED, source_commit 549b687 in main ancestry. (2) F2 recheck 3/3 MATCH independently recomputed from the Git object store: HEAD 60da9a846511265a8ac7564da088c3d74cb073f0 / tree e565c8a6cee9e829fac14008ebc9c2ea1609931d; protocol 48357196/2658ee3e, contract d6a9ccde/7e647654, seed record 0164e0e3/8e844bff; worktree bytes byte-identical to F2 blobs. (3) R/V chain confirmed first-hand: Reviewer(F2) PASS @ tip d63eb5c088133f92ebd20501835a159cc3e4b865 and Verifier(F2) VERIFIED @ tip f12d0b497cb28a2f18476ded90b4b1bd079bb414, both pin exact F2 head/tree, both append-only (insertions only), both NOT merged into main (F01-F-1 reconfirmed); D2 record commit a2f7304 in main pins F2. (4) Feasibility from frozen bytes: grid 0b/32b N=64 (n_min 52), 11b/53b N=10 (n_min 8), ceil/floor rounding rules PASS; seed identities counted by independent replay = 148 fresh (64/64/10/10) + 4 bootstrap + 28 pool (12/12/2/2) = 180 distinct, 41 recorded collision skips reproduced; run budget 296 + <=56 <= 352, <=560h/platform, CPU-only; HG-B <-> F2 contract grid equality PASS; collision manifest digests recomputed (file-bytes 77ef5b6a = binding, canonical 6966b216 = internal manifest_sha256); independent corpus rescan (2102 pinned-tree blobs): 176/176 run identities CLEAN outside allowlist, 41/41 skips backed by real hits. (5) Offline validator on F2 bytes read-only: exit 0, gate=PASS/PREFREEZE_VALIDATION_PASS/FROZEN/DISPATCH_BLOCKED with frozen budget block - correct fail-closed state (no authority exists). (6) Adversarial fail-closed matrix on /tmp copies OUTSIDE the repo (nothing committed, no authority A created): ADV-1 tampered contract -> exit 3 REJECTED; ADV-2 tampered seed record -> exit 3 REJECTED; ADV-4 empty authority -> exit 3 REJECTED; ADV-5 authority without r2_record -> exit 3 REJECTED; ADV-6 schema_version 2 -> exit 3 REJECTED; ADV-7 authority without hg_b_record -> exit 3 REJECTED; ADV-8 missing authority file -> exit 3 REJECTED; ADV-3 tampered protocol PROSE line (non-machine-bound) passed the gate (exit 0) -> recorded as finding F05-F-1 (LOW, compensated: F2 immutability + authority-stage byte binding of protocol canonical_sha256 at validator ~L1933-1945 + R/V exact-F2 pins). Findings F05-F-2 (INFO: freeze-WO allowlist-path wording vs pinned tree reality, mechanically inert), F05-F-3 (INFO: bootstrap statistics seeds occur in historical PRE_DATA records; collision rule covers run identities only, all CLEAN). (7) Budget ledger written (immutable, revision-only): 352-run ceiling, 560h/platform, CPU-only, storage estimate from NL5-002 P1 facts (~106 MB/run mean, <=21 GB/platform upper bound, >=64 GB provisioning with retry reserve), pricing NOT_PRICED/no purchases, stop rules STOP-1..STOP-7. (8) Pre-launch gate list fixed: F04 R2 ACTIVE (U1-U5 + NC-U1..U5 + review/verify + AUTHOR_U1 assigned) -> authority A schema v3 in a SEPARATE follow-up WO (NOT created here) -> distinct owner scientific launch approval -> budget authorization -> R/V integration-or-exact-tip pin. machine_launch_authorized=false; launch_gate=HUMAN_PROTECTED_WRITER; SCIENTIFIC_RUNS=0. Next: handoff event, passport HANDOFF_READY, WORK_QUEUE append, validation suite, push.",
+  "command_refs": [
+    "git rev-parse 3b567ae:docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json + git show ... | sha256sum -> MATCH",
+    "git rev-parse F2 and F2^{tree}; git rev-parse F2:<path>; git show F2:<path> | sha256sum (x3) -> 3/3 MATCH",
+    "git show d63eb5c...:FRESH_SCIENTIFIC_REVIEW_R2.json -> PASS; git show f12d0b4...:FRESH_VERIFIER_R2.json -> VERIFIED; git merge-base --is-ancestor tips origin/main -> NO (both)",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate ... --repo-root . -> exit 0 PASS/DISPATCH_BLOCKED",
+    "8x adversarial runs from /tmp/f05_adv (gate with tampered copies; plan with incomplete/temp authorities) -> 7x exit 3 REJECTED, 1x gate-scope prose limitation (F05-F-1)",
+    "python3 /tmp/f05_adv/nl5f05_seed_feasibility_check.py -> exit 0, 85/85 checks PASS"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/DISPATCH_READINESS_R1.json",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/DISPATCH_READINESS_R1.md",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/budget-ledger-R1.json"
+  ],
+  "next_action": "Publish handoff event + passport HANDOFF_READY + summary + one append-only WORK_QUEUE line; run work_cli/check-consistency/workflow_lint/json.tool; push non-force.",
+  "blocker": null
+}

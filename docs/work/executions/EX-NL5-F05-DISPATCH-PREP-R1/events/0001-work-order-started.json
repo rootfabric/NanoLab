@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-25T17:15:00Z",
+  "execution_id": "EX-NL5-F05-DISPATCH-PREP-R1",
+  "work_order_id": "WO-NL5-F05-DISPATCH-PREP-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f05-dispatch-implementer-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
+    "dsh_session_id": "3e3c6aa5-d615-49a0-8b6a-1805d8f7431a",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "timestamp_note": "session-start stamp is an honest approximation within the first minutes after the Director dispatch commit 9da777bd (2026-10-25T17:11:36Z)"
+  },
+  "subject_sha": "9da777bd7c9039ac6ec0365b6561f992001279ec",
+  "summary": "Started C0 preparatory WO-NL5-F05-DISPATCH-PREP-R1 (Issue #86, program NL5-CLOSE-R1 #81) as a real separate DSH subagent session (durable id above; Director dispatch proof in dispatch/0000). Fresh git fetch origin confirmed origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE (no epoch change); worktree /home/rdpuser/NanoLab/nl5-f05-dispatch-prep, branch work/nl5-f05-dispatch-prep-r1, dispatch HEAD 9da777bd7c9039ac6ec0365b6561f992001279ec. Scope: recheck ALL FROZEN_R2 dispatch preconditions offline - HG-B canonical owner record, exact F2 HEAD/TREE + protocol/contract/seed blob identities (recomputed independently, not trusting F01), D2 freeze record + Reviewer(F2)/Verifier(F2) tips (d63eb5c/f12d0b4 expected), feasibility grid + exact frozen seed identity count, offline validator rerun on F2 bytes, adversarial fail-closed preflight with incomplete authority, immutable budget ledger, and the exact pre-launch gate list. Hard boundaries: SCIENTIFIC_RUNS = 0 (no engine invocations, no dry-run on real frozen data); authority A schema v3 is explicitly NOT created (separate future WO after F04 R2 ACTIVE + Human launch approval); no canonical status changes; scripts/** and tests/** read-only; adversarial tests only on temporary copies outside the repo; no self-accept.",
+  "command_refs": [
+    "git fetch origin --prune && git rev-parse origin/main -> 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE)",
+    "git rev-parse HEAD -> 9da777bd7c9039ac6ec0365b6561f992001279ec (Director dispatch commit)",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/86 -> task scope confirmed (C0 part)",
+    "cat docs/work/WO-NL5-F05-DISPATCH-PREP-R1.md + AGENTS.md + DIRECTOR.md + WO-NL5-V02-DIRECTOR-FREEZE-R2.md -> scope and freeze context"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-F05-DISPATCH-PREP-R1.md",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1 @ origin/work/nl5-f01-frozen-audit-r1 c7c5be6edbcdb5a304705ff6d53863fa735d7d0c (read-only input)"
+  ],
+  "next_action": "Recompute HG-B + F2 blob identities; confirm R/V tips; recount seed identities with an independent replay; rerun offline validator; run adversarial fail-closed matrix on /tmp copies; write readiness + budget ledger + pre-launch gate list.",
+  "blocker": null
+}
