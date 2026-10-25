@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "record_kind": "U2_LIVE_HOST_OBSERVATION_ADDENDUM",
+  "evidence_id": "U2_LIVE_HOST_OBSERVATION_R1",
+  "issuer_class": "EXTERNAL_PREFLIGHT_IMPLEMENTER_U2",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "program": "NL5-CLOSE-R1",
+  "task_issue": 84,
+  "parent_issue": 81,
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "dsh_session_id": "ce662f0f-4b0d-4388-b3e0-96e018fecf94",
+  "append_only_note": "Post-terminal addendum recorded as new evidence + new event 0004 (CONTINUATION_CHECKPOINT corrections class). No prior event or evidence file of EX-NL5-F03-U2-READINESS-R1 was edited; event 0001 BLK-1 and the handoff event 0003 stand as history. This addendum supersedes the ACCESS CLASSIFICATION only, not the verdict class.",
+  "addendum_provenance": {
+    "source": "DIRECTOR ADDENDUM for F03 (post-handoff): F02 (work/nl5-f02-u1-host-r1 @ c38ad687d87bfa0c33d69bfee4fe40020d34ba45, handoff 2026-10-25T17:24:02Z) independently established and the Director personally confirmed that the hostname of THIS environment is 'outenemy' - the current session executes DIRECTLY ON the U2 machine.",
+    "cross_checked_f02_evidence": "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.{json,md} on origin/work/nl5-f02-u1-host-r1 @ c38ad68 (fetched this session; read-only reference)",
+    "scope_of_this_observation": "Read-only host observation only (same class as F02: OS/kernel/CPU/RAM/disk/ports + read-only digests of existing files). No tooling execution rehearsals (L-02/L-06/L-07/L-08/L-09/L-10), no state changes, no service operations, no science."
+  },
+  "environment_topology_observation": {
+    "fact": "DSH Director orchestration and its role-subagent sessions (including this EXTERNAL-PREFLIGHT IMPLEMENTER U2 session and the parallel F02 session) physically execute on the U2 machine (hostname outenemy).",
+    "independence_interpretation": "Independence of the scientific legs (author leg vs external reproduction leg) is determined by the processes, credentials and hosts that EXECUTE THE SCIENCE, not by the location where the Director chat/orchestration runs. Orchestration-on-U2 neither weakens nor fakes external reproduction independence, and it does NOT make this session an author session: 0 scientific runs were executed, no author artifacts produced, and outenemy remains forbidden as an author host (EXTERNAL_U2_ONLY). AGENTS.md invariants apply unchanged: ROLE ACTOR IDENTITY IS NOT PROOF OF INDEPENDENT EXECUTOR IDENTITY; ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF.",
+    "role_consequence": "U2 as a scientific operator still requires owner coordination and a separate protected session. This observation session remains a C0 documentary/read-only actor."
+  },
+  "access_classification_correction": {
+    "supersedes": "event 0001 BLK-1 wording 'BLOCKED_NO_U2_ACCESS_FROM_SESSION'",
+    "historical_truth": "At dispatch time no SSH route/config to a separate U2 login was visible from the session (~/.ssh/config absent; 'outenemy' 0 entries in ~/.ssh/known_hosts) - that statement was true as recorded and remains true as a statement about SSH credentials.",
+    "corrected_classification": "The session itself was already running ON the U2 host (topology fact established by F02 + Director addendum). Read-only local host observation was therefore POSSIBLE and was performed (this record). BLOCKED now applies only to: (a) operator-style state-changing or executing activities (tooling rehearsals L-02/L-06..L-10, service operations), which require owner coordination and a separate protected session; (b) U2 acting as scientific operator.",
+    "verdict_impact": "NONE on verdict class: READY_FOR_DISPATCH_PREP (C0) stands, now with refreshed, partly measured constraints."
+  },
+  "live_readonly_snapshot": {
+    "collected_at_utc": "2026-10-25T17:33:42Z",
+    "method": "read-only commands only: hostname, /etc/machine-id, uname, /etc/os-release, systemd-detect-virt, systemctl is-system-running (system+user), timedatectl, lscpu, free, swapon --show, df -h/-i, ls/stat, sha256sum of existing binary, du -sh, ss -tuln counts. No writes outside the execution evidence path; no tooling runs; no service operations.",
+    "identity": {"hostname": "outenemy", "machine_id": "e06fe756a6ce49cabc9ebaf394fd6837", "user": "rdpuser", "uid": 1001, "matches_f02": true, "matches_2026-10-11_record": true},
+    "os_kernel": {"os": "Ubuntu 22.04.5 LTS (VERSION_ID 22.04)", "kernel": "5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64", "virtualization": "none (systemd-detect-virt exit 1)", "drift_vs_2026-10-11": "NONE (identity/os/kernel/virt/cpu all match u2-fingerprint-R1.json)"},
+    "cpu": {"model": "Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz", "cpus": 64, "sockets": 2, "numa_nodes": 2},
+    "memory": {"total": "125Gi", "available": "14Gi", "used": "109Gi", "swap_total": "8.0Gi", "swap_used": "8.0Gi (FULL)", "note": "swap exhausted and only 14Gi available under concurrent load; HW-class threshold 'available >= 32Gi' NOT met at measurement time"},
+    "disks": [
+      {"mount": "/", "device": "/dev/nvme0n1p2", "fs": "ext4", "size": "458G", "avail": "19G", "use_percent": 96},
+      {"mount": "/mnt/gig", "device": "/dev/nvme1n1", "fs": "ext4", "size": "938G", "avail": "50G", "use_percent": 95},
+      {"mount": "/mnt/sda1", "device": "/dev/sda1", "fs": "ntfs", "size": "932G", "avail": "78G", "use_percent": 92}
+    ],
+    "inodes_root": {"total": 30531584, "used": 4044090, "use_percent": 14, "note": "inode pressure none; byte pressure severe"},
+    "nanolab_dirs": {"paths": ["~/nanolab/workspaces", "~/nanolab/raw", "~/nanolab/cache", "~/nanolab/tools"], "present": true, "owner": "rdpuser uid=1001", "mode_dir": "775", "matches_record": true},
+    "footprint_now": {"raw": "12K", "cache": "162M", "workspaces": "832K", "note": "campaign raw projection (~15 GB/leg) not yet consumed"},
+    "engine_binary_identity_live": {"path": "~/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA", "sha256": "6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78", "size_bytes": 3380728, "mtime": "Oct 11 01:30", "matches_u2_engine_build_result_R1": "EXACT (no drift since 2026-10-11)", "provenance_file_present": true},
+    "systemd_state": {"system_manager": "degraded (is-system-running exit 1)", "user_manager": "degraded (systemctl --user is-system-running exit 1)", "drift_vs_2026-10-11": "DRIFT: u2-systemd-mechanics-R1 recorded user manager active (RC 0) + Linger=yes on 2026-10-11; on 2026-10-25 BOTH managers report degraded. Degraded unit state does not by itself disprove Linger/user-scope mechanics, but NC-class job-survival gates cannot be declared from a degraded state - operator diagnosis of failed units required.", "linger_recheck": "NOT performed this session (outside read-only observation scope; loginctl/operator checks belong to the protected operator session)"},
+    "time_sync": {"ntp_service": "active", "system_clock_synchronized": true},
+    "network_listen_summary": {"listening_socket_entries_tcp_udp": 1264, "broadly_bound_tcp_listeners": 44, "note": "confirms F02 observation: a wide set of third-party services listens on this host (single-user desktop/production box), relevant to NET hygiene and to the requirement that scientific jobs are isolated from foreign services"},
+    "egress": "github.com reachable (verified by F02 2026-10-25T17:18Z; this session's git fetch origin also succeeded)"
+  },
+  "live_checklist_status_refresh": {
+    "L-01": {"status": "PARTIAL_PASS_LIVE", "detail": "hostname/machine-id/os/kernel/virt/cpu re-verified live and match 2026-10-11 pins and F02; full r2.cli fingerprint tool run still recommended in the operator session for the canonical record format"},
+    "L-02": {"status": "OPEN_OPERATOR_SESSION", "detail": "r2.cli check-host/run negative controls not executed this session (outside read-only scope); expected results unchanged"},
+    "L-03": {"status": "MEASURED_FAIL_ON_THRESHOLD", "detail": "measured live: free 19G (/) 50G (/mnt/gig) 78G (/mnt/sda1); required >= 2x ~15GB=30G per U2 leg is nominally available on /mnt/gig and /mnt/sda1, BUT the readiness control threshold (alert at 80% use) is EXCEEDED on ALL volumes (96/95/92%); plus swap FULL and 14Gi RAM available. Capacity remediation/freeing or explicit owner accept-risk is REQUIRED before any campaign dispatch; raw target volume choice must prefer native ext4 (/mnt/gig) not ntfs"},
+    "L-04": {"status": "PASS_LIVE", "detail": "engine binary sha256 6effd00a..5126b78 size 3380728 EXACT match, provenance file present, no drift"},
+    "L-05": {"status": "DRIFT_OPERATOR_DIAGNOSIS_REQUIRED", "detail": "both systemd managers report degraded (vs user-manager-active record of 2026-10-11); failed units must be diagnosed and job-survival NC gates re-proven in the operator session before any dispatch"},
+    "L-06": {"status": "OPEN", "detail": "tooling suite on exact main not run this session (scope)"},
+    "L-07": {"status": "OPEN", "detail": "run-u2 gate rehearsals not run this session (scope)"},
+    "L-08": {"status": "OPEN", "detail": "package v0.1.2 verify not run this session (scope)"},
+    "L-09": {"status": "PARTIAL_EVIDENCE", "detail": "egress to github confirmed live (git fetch + F02 HTTP 200); pinned oxDNA fetch route and evidence return channel still unproven"},
+    "L-10": {"status": "OPEN", "detail": "raw-manifest pilot not run (scope; also requires free disk decision)"},
+    "L-11": {"status": "PASS_LIVE", "detail": "NTP active, clock synchronized"},
+    "L-12": {"status": "OPEN_OWNER", "detail": "independence attestation remains an owner action; NOTE (topology): Director orchestration physically runs on U2 - this does not by itself violate independence (see environment_topology_observation), but process/credential separation of future science execution must be attested"}
+  },
+  "updated_constraints": [
+    "Host capacity: all volumes >92% used (80% control threshold breached), swap 8Gi/8Gi FULL, RAM available 14Gi - capacity remediation or explicit owner accept-risk REQUIRED before any F07 dispatch; measured numbers supersede the 2026-10-11 ~15GB projection-based assumption of ~2x margin",
+    "systemd degraded (system AND user managers) - NC-U1..U5 job-survival gates cannot be declared; operator diagnosis required",
+    "Wide third-party listening surface (44 broadly bound TCP listeners) - NET hygiene/isolation constraints for future science execution",
+    "U2 as scientific operator requires owner coordination + separate protected session; this session stays C0 read-only/documentary",
+    "Environment topology: Director orchestration executes on U2 - recorded as observation; scientific-leg independence is defined by processes/credentials/hosts of science execution, not by chat location"
+  ],
+  "verdict_after_addendum": {
+    "readiness": "READY_FOR_DISPATCH_PREP",
+    "constraints_updated": true,
+    "live_u2_leg_classification": "READ_ONLY_OBSERVATION_DONE_ON_HOST (2026-10-25T17:33:42Z); operator-session checks remain BLOCKED_PENDING_OWNER_COORDINATION",
+    "scientific_authorization": "NONE - this record does not authorize any scientific run, does not activate R2, does not assign U1, does not change canonical state; R2 remains WAITING_HOST / NOT_ACTIVE",
+    "honesty_notes": "The earlier 'blocked' wording described missing SSH credentials to a separate U2 login; with the Director-confirmed topology fact the honest classification is 'on-host read-only observation performed; operator activities still require the protected session'. No result was simulated: every number in live_readonly_snapshot was collected this session by read-only commands."
+  },
+  "boundaries": {
+    "scientific_runs_this_execution": 0,
+    "state_changes_on_host": 0,
+    "tooling_executions": 0,
+    "frozen_package_untouched": true,
+    "canonical_state_untouched": true,
+    "append_only": true
+  }
+}

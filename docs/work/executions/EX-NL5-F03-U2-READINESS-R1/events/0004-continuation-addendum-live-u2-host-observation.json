@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-addendum-live-u2-host-observation",
+  "timestamp_utc": "2026-10-25T17:36:29Z",
+  "execution_id": "EX-NL5-F03-U2-READINESS-R1",
+  "work_order_id": "WO-NL5-F03-U2-READINESS-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f03-u2-preflight-r1",
+  "subject_sha": "39e9aec3ff6de517dcde239da4b38fde764db928",
+  "summary": "POST-TERMINAL APPEND-ONLY ADDENDUM per DIRECTOR ADDENDUM for F03 (addendum received after handoff event 0003; recorded as new corrections-class event per AGENTS.md corrections rule; no prior event/evidence edited). Basis: F02 (origin/work/nl5-f02-u1-host-r1 @ c38ad687d87bfa0c33d69bfee4fe40020d34ba45) independently established and Director confirmed that THIS environment's hostname is 'outenemy' - the session executes directly ON the U2 machine. (1) Environment topology observation recorded: Director orchestration and its role-subagent sessions (this U2 session and parallel F02) physically run on the U2 host; independence of scientific legs is determined by processes/credentials/hosts executing the science, not by the location of the Director chat; this does NOT make the session an author session (0 scientific runs) and does not change the role: U2 as scientific operator still requires owner coordination + separate protected session. (2) Live read-only host observation performed (read-only commands only, 2026-10-25T17:33:42Z; method and every number in evidence/U2_LIVE_HOST_OBSERVATION_R1.json): identity/machine-id/uid match F02 and the 2026-10-11 record; OS/kernel/virt/CPU NO DRIFT vs u2-fingerprint-R1.json; engine binary sha256 6effd00a..5126b78 size 3380728 EXACT match (L-04 live PASS); NTP active (L-11 live PASS); DRIFTS/risk facts measured: systemd BOTH managers degraded (vs user-manager-active 2026-10-11), swap 8Gi/8Gi FULL, RAM available 14Gi, disks / 96% (19G avail), /mnt/gig 95% (50G), /mnt/sda1 92% (78G) - the 80% control threshold is EXCEEDED on ALL volumes, so L-03 = MEASURED_FAIL_ON_THRESHOLD: capacity remediation or explicit owner accept-risk REQUIRED before any F07 dispatch (raw target must prefer native ext4 /mnt/gig over ntfs); inodes fine (14%); nanolab dirs present uid 1001 mode 775; campaign raw footprint not yet consumed (raw 12K); wide third-party listening surface (44 broadly bound TCP listeners) confirms F02 NET observation. (3) Access classification corrected honestly: BLOCKED_NO_U2_ACCESS_FROM_SESSION (event 0001) was true as an SSH-credentials statement at record time; with the Director-confirmed topology the honest classification is 'on-host read-only observation DONE; operator-style state-changing/executing activities remain BLOCKED_PENDING_OWNER_COORDINATION'. Nothing simulated. (4) Verdict class unchanged: READY_FOR_DISPATCH_PREP with updated, partly measured constraints; U2-ready != R2_ACTIVE != scientific authorization; R2 = WAITING_HOST/NOT_ACTIVE; AUTHOR_U1 = NOT_ASSIGNED; machine_launch_authorized remains false by construction. Live checklist status refresh published (L-01 partial-PASS, L-03 fail-on-threshold, L-04 PASS, L-05 drift-diagnosis required, L-11 PASS, others open for the protected operator session). SCIENTIFIC_RUNS=0; host state changes=0; tooling executions=0; frozen package and canonical state untouched.",
+  "command_refs": [
+    "git fetch origin work/nl5-f02-u1-host-r1 -> c38ad687d87bfa0c33d69bfee4fe40020d34ba45 (cross-read U1_HOST_ELIGIBILITY_R1.json, read-only)",
+    "hostname -> outenemy; cat /etc/machine-id -> e06fe756a6ce49cabc9ebaf394fd6837; id -u -> 1001 (all read-only)",
+    "systemd-detect-virt -> none; systemctl is-system-running -> degraded exit 1; systemctl --user is-system-running -> degraded exit 1",
+    "free -h -> 125Gi total/14Gi available; swapon --show -> 8G/8G used; df -h -> / 96% (19G), /mnt/gig 95% (50G), /mnt/sda1 92% (78G); df -i / -> 14%",
+    "sha256sum ~/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA -> 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78 (size 3380728, EXACT match)",
+    "timedatectl -> NTP active, synchronized; du -sh nanolab/raw|cache|workspaces -> 12K/162M/832K; ss -tuln counts -> 1264 entries / 44 broad TCP listeners",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F03-U2-READINESS-R1 -> ok:true (post-addendum re-run recorded below)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_LIVE_HOST_OBSERVATION_R1.json",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_LIVE_HOST_OBSERVATION_R1.md",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.json (on origin/work/nl5-f02-u1-host-r1 @ c38ad68, read-only cross-reference)",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_READINESS_R1.md"
+  ],
+  "next_action": "Director: treat this addendum as part of the F03 handoff package (fresh Reviewer + distinct Verifier on exact HEAD); feed measured capacity/systemd risks into F05 authority planning and the F07 go/no-go; owner/U2 operator still executes the protected-session checks (L-02, L-05 diagnosis, L-06..L-10, L-12) after capacity remediation or accept-risk decision.",
+  "blocker": null
+}
