@@ -56,7 +56,7 @@ SAFE STOP       = any hash mismatch / forbidden-path need / missing data -> BLOC
 
 ```text
 DSH_SUBAGENT_ID = 454dea06-3e76-4c1e-80bd-d5287bc2cae0
-LAUNCHED_AT_UTC = 2026-10-25T11:10:00Z (approximately; launcher returned id synchronously)
+LAUNCHED_AT_UTC = 2026-10-25T16:46:00Z (launcher returned id immediately after dispatch commit 11f901b @ 2026-10-25T16:44:57Z)
 STATUS          = DISPATCHED_RUNNING (separate background session; its own context and commits)
 NOTE            = per DIRECTOR.md invariant ACTOR_ID != INDEPENDENT_EXECUTOR_PROOF:
                   this id proves protocol role separation, not an independent

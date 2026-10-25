@@ -11,7 +11,7 @@
   "risk_class": "MEDIUM",
   "claim_class": "C0_SOFTWARE_ONLY",
   "status": "DISPATCHED",
-  "started_at_utc": "2026-10-25T11:05:00Z",
+  "started_at_utc": "2026-10-25T16:44:57Z",
   "program": "NL5-CLOSE-R1",
   "task_issue": 82,
   "parent_issue": 81,
