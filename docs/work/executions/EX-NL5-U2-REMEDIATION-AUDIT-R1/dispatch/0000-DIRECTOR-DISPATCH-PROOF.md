@@ -16,6 +16,6 @@ SAFE STOP          = any mutation temptation or forbidden path -> STOP with BLOC
 ## Executor identity binding (Director addendum)
 
 ```text
-DSH_SUBAGENT_ID = (appended after launch)
-STATUS          = DISPATCH_PENDING_LAUNCH
+DSH_SUBAGENT_ID = 7e172f80-927f-446e-af8c-4e5aeea2fd59
+STATUS          = DISPATCHED_RUNNING
 ```
