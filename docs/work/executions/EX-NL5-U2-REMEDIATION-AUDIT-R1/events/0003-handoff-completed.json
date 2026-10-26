@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-26T03:38:39Z",
+  "execution_id": "EX-NL5-U2-REMEDIATION-AUDIT-R1",
+  "work_order_id": "WO-NL5-U2-REMEDIATION-AUDIT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-u2-remediation-audit-r1",
+  "subject_sha": "8dab0abedb335143cecebef3eaf5f80ed5c3f355",
+  "summary": "HANDOFF_READY with VERDICT_CLASS = REMEDIATION_REQUIRED (no PASS-by-inspection; no accept-risk; 0 scientific runs; 0 mutations). C0 read-only U2 resource audit complete on outenemy (external role ONLY): all required diagnostics measured with raw command logs, quantitative remediation plan + alternatives table + 8 owner approval requests (APR-1..APR-8) published in U2_REMEDIATION_PLAN_R1.{json,md}. Five MEASURED_FAIL facts: (1) disk usage 96%/95%/92% on / (ext4), /mnt/gig (ext4), /mnt/sda1 (ntfs) vs 80% guard; (2) MemAvailable 13.99 GiB vs 32 GiB recommendation (top consumer cisco vpnagentd 57.57 GiB RSS leak-suspect); (3) swap 8GiB 99.995% FULL; (4) systemd degraded on BOTH levels - system: clickhouse-server.service (232/ADDRESS_FAMILIES since 2026-08-26 boot, journal rotated) + vms-startup.service (exit-code, same boot); user: xdg-desktop-portal{,-gnome,-gtk}.service (timeout/exit1 since 2026-10-21); Linger=yes; (5) free-2x-raw margin unmet on only raw-approved ext4 volume /mnt/gig (52.76 GB < 64 GB; to reach 80% guard needs 97413734400 B freed). Recommendation: PRIMARY = dedicated native ext4 volume >=512GB mounted /mnt/nanolab-raw for raw evidence (all targets PASS structurally; rollback = umount) + memory track (vpnagentd restart/fix, expected +~55 GiB) + protected U2_INFRA_OPERATOR window for 5 failed units + swap policy decision; BRIDGE = reversible tune2fs -m 1 on /mnt/gig (+40.6 GiB unpriv, does not fix 80% guard); verified-cache relocation quantified INSUFFICIENT (NanoLab disposable ~3-5GB vs needed 53.51/97.41 GB). BLOCKED/INCONCLUSIVE (6): tune2fs superblock exact params (root-blocked; statvfs 5.10%/5.09% compensation), docker on-disk bytes (permission; docker system df compensation), ~630G /mnt/gig split incl. LIVE postgres pgdata (permission-bounded), robot-full img exact size (root-only; loop19 bound 116223467520 B), failed-unit boot journal text (rotated; exit codes kept), L-04 engine SHA not rechecked (F03 PASS_LIVE stands). NEXT (owner-gated): owner selects/approves APR-1..APR-8 -> separate protected U2_INFRA_OPERATOR session executes strictly allowlisted changes with before/after receipts -> fresh Reviewer + distinct Verifier -> re-run F03 L-01..L-12 in protected session -> only then F07 dispatch decision. NO remediation executed by this session; NO restarts/mounts/deletions/tune2fs performed; forbidden paths untouched; corrections-if-any = new append-only events only.",
+  "command_refs": [
+    "git add (explicit paths only) + commit 8dab0ab (evidence + 17 raw logs + event 0002) + push origin work/nl5-u2-remediation-audit-r1",
+    "passport.json status DISPATCHED -> REMEDIATION_REQUIRED (final verdict class per WO classification set)",
+    "WORK_QUEUE.md single append-only row (this commit)",
+    "validation: PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1; check-consistency; workflow_lint; python3 -m json.tool on all new JSON"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/U2_REMEDIATION_PLAN_R1.json",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/U2_REMEDIATION_PLAN_R1.md",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/events/0001-work-order-started.json",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/events/0002-continuation-diagnostics-complete-and-remediation-plan.json",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/raw/ (17 logs)"
+  ],
+  "next_action": "Director relays REMEDIATION_REQUIRED + APR-1..APR-8 owner approval request; upon owner approval dispatch separate U2_INFRA_OPERATOR session (not this session); this session terminal.",
+  "blocker": "NONE_TERMINAL (verdict is a measured REMEDIATION_REQUIRED, not an execution blocker for this C0 WO; remediation itself is owner-gated by design)",
+  "assigned_wo_role": "U2_RESOURCE_AUDITOR"
+}

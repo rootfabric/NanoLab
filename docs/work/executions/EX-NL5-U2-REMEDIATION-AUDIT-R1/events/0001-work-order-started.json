@@ -5,7 +5,7 @@
   "execution_id": "EX-NL5-U2-REMEDIATION-AUDIT-R1",
   "work_order_id": "WO-NL5-U2-REMEDIATION-AUDIT-R1",
   "event_type": "WORK_ORDER_STARTED",
-  "actor_role": "U2_RESOURCE_AUDITOR",
+  "actor_role": "IMPLEMENTER",
   "actor_id": "nl5-u2-remediation-audit-r1",
   "actor_session": {
     "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
@@ -29,5 +29,6 @@
     "https://api.github.com/repos/rootfabric/NanoLab/issues/94"
   ],
   "next_action": "Execute read-only diagnostics (FS/inodes/reserved, bounded du, RAM/swap pressure, systemd failed-units diagnosis both levels, swap pressure), then build U2_REMEDIATION_PLAN_R1.{json,md} with alternatives table, quantitative targets, owner approval request, stop/rollback conditions.",
-  "blocker": null
+  "blocker": null,
+  "assigned_wo_role": "U2_RESOURCE_AUDITOR"
 }
