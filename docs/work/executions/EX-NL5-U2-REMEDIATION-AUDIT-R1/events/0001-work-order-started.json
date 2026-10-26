@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-26T03:19:24Z",
+  "execution_id": "EX-NL5-U2-REMEDIATION-AUDIT-R1",
+  "work_order_id": "WO-NL5-U2-REMEDIATION-AUDIT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "U2_RESOURCE_AUDITOR",
+  "actor_id": "nl5-u2-remediation-audit-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
+    "dsh_session_id": "7e172f80-927f-446e-af8c-4e5aeea2fd59",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "subject_sha": "2637058885e84477f34eb2c7144c0ceecefc84c1",
+  "summary": "Started C0 READ-ONLY U2 resource remediation audit WO-NL5-U2-REMEDIATION-AUDIT-R1 (Issue #94, program NL5-CLOSE-R1 #81) as a real separate DSH subagent session (durable id above; NOT the author U1 session; this session physically executes ON host U2 'outenemy', external role ONLY). Fresh git fetch origin: origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE (epoch-check OK, no epoch change; BASE is strict ancestor of HEAD 2637058). Origin evidence ref re-resolved: work/nl5-f03-u2-readiness-r1 @ 1831585fa70169c4e473acfe38e9603e45cfe22c (L-03 MEASURED_FAIL_ON_THRESHOLD, L-05 DRIFT; F03 subject immutable, this is a NEW separate C0 WO, not a retro-edit). Task Issue #94 fetched live via GitHub API (title/state/labels confirmed, created 2026-10-26T02:48:11Z). Scope: (1) independent read-only re-measurement of FS (df -h/-B1/-i, lsblk -f, findmnt, tune2fs reserved blocks, inode headroom) for /, /mnt/gig, /mnt/sda1 and raw/workspace mounts; (2) bounded du -x -h -d 1 on authorized paths only (~/nanolab, /var/log, /tmp, docker root if visible read-only) - NO full-disk scan; (3) RAM/swap pressure (free -h, swapon --show, top consumers, /proc/vmstat pswpin/out) vs 32 GiB MemAvailable recommendation; (4) exact systemd degraded-unit diagnosis system+user (systemctl --failed both levels, is-system-running, loginctl show-user linger, bounded journalctl -p err -n 50) - NO restarts; (5) remediation alternatives table (dedicated native ext4 disk vs owner-approved disposable-cache relocation vs planned capacity reclamation; raw-artifact/git-checkout/Docker/log deletion BY AGE FORBIDDEN; NTFS not approved for canonical raw); (6) quantitative target: native-ext4 raw FS usage <=80%, free >=2x projected raw needs (>=64 GB, F05 >=32 GB/platform), minimum >=30 GB free (L-03), RAM >=32 GiB MemAvailable or explicit owner capacity envelope. Boundaries: SCIENTIFIC_RUNS = 0 (hard zero); MUTATIONS = 0 (no deletes, swapoff, service restarts, package upgrades, mounts, data moves, docker prune); no secrets in evidence; read-only on project/*.json, docs/evidence/NL5-V02-FREEZE/**, docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md, scripts/**, tests/**; verdict class restricted to REMEDIATION_REQUIRED | READY_AFTER_APPROVED_REMEDIATION | BLOCKED_OWNER (PASS-by-inspection forbidden); no self-accept; owner approval + separate protected U2_INFRA_OPERATOR session required before any allowlisted change.",
+  "command_refs": [
+    "git fetch origin --prune -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE, no epoch change)",
+    "git merge-base --is-ancestor 3b567ae HEAD -> exit 0 (epoch-check OK)",
+    "git rev-parse origin/work/nl5-f03-u2-readiness-r1 -> 1831585fa70169c4e473acfe38e9603e45cfe22c (matches WO pin)",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/94 -> task scope + gates confirmed (STATE open, created 2026-10-26T02:48:11Z)",
+    "git show 1831585f:docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_LIVE_HOST_OBSERVATION_R1.json -> F03 live-2026-10-25 baseline read (96/95/92% volumes, swap FULL, 14Gi avail, systemd degraded both levels)",
+    "hostname -> outenemy; date -u -> 2026-10-26T03:17:41Z (this session runs on U2)"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-U2-REMEDIATION-AUDIT-R1.md",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "docs/work/executions/EX-NL5-F03-U2-READINESS-R1/evidence/U2_LIVE_HOST_OBSERVATION_R1.json (@1831585f, read-only)",
+    "https://api.github.com/repos/rootfabric/NanoLab/issues/94"
+  ],
+  "next_action": "Execute read-only diagnostics (FS/inodes/reserved, bounded du, RAM/swap pressure, systemd failed-units diagnosis both levels, swap pressure), then build U2_REMEDIATION_PLAN_R1.{json,md} with alternatives table, quantitative targets, owner approval request, stop/rollback conditions.",
+  "blocker": null
+}
