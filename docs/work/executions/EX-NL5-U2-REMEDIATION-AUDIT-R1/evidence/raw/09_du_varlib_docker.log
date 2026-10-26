@@ -1,0 +1,30 @@
+=== CMD: docker system df (read-only) ===
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          37        25        26.74GB   2.084GB (7%)
+Containers      31        23        4.429GB   631.7kB (0%)
+Local Volumes   16        14        6.627GB   460.7kB (0%)
+Build Cache     55        0         30.54MB   30.54MB
+=== CMD: docker info -f root dir ===
+ Docker Root Dir: /var/lib/docker
+=== CMD: du -x -h -d 1 /var/lib 2>/dev/null | sort -rh | head -20 ===
+8.4G	/var/lib
+7.8G	/var/lib/snapd
+347M	/var/lib/apt
+114M	/var/lib/dpkg
+108M	/var/lib/plocate
+55M	/var/lib/dsh
+22M	/var/lib/swcatalog
+17M	/var/lib/smartmontools
+7.3M	/var/lib/ubuntu-advantage
+4.1M	/var/lib/aspell
+3.5M	/var/lib/ucf
+3.4M	/var/lib/command-not-found
+1.1M	/var/lib/systemd
+704K	/var/lib/usbutils
+416K	/var/lib/k8s
+324K	/var/lib/fwupd
+296K	/var/lib/cloud
+76K	/var/lib/turn
+56K	/var/lib/colord
+44K	/var/lib/sss
+EXIT: 0

@@ -1,0 +1,100 @@
+=== CMD: lsblk -f ===
+NAME        FSTYPE   FSVER LABEL     UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0       squashfs 4.0                                                        0   100% /snap/bare/5
+loop1       squashfs 4.0                                                        0   100% /snap/core22/2955
+loop2       squashfs 4.0                                                        0   100% /snap/core18/2999
+loop3       squashfs 4.0                                                        0   100% /snap/core24/2124
+loop4       squashfs 4.0                                                        0   100% /snap/core20/2866
+loop5       squashfs 4.0                                                        0   100% /snap/core20/2922
+loop6       squashfs 4.0                                                        0   100% /snap/core22/2437
+loop8       squashfs 4.0                                                        0   100% /snap/core24/1643
+loop9       squashfs 4.0                                                        0   100% /snap/distrobuilder/2302
+loop10      squashfs 4.0                                                        0   100% /snap/distrobuilder/2307
+loop11      squashfs 4.0                                                        0   100% /snap/firefox/9057
+loop12      squashfs 4.0                                                        0   100% /snap/snapd/27738
+loop13      squashfs 4.0                                                        0   100% /snap/gnome-3-38-2004/143
+loop14      squashfs 4.0                                                        0   100% /snap/gnome-42-2204/247
+loop15      squashfs 4.0                                                        0   100% /snap/gnome-42-2204/263
+loop16      squashfs 4.0                                                        0   100% /snap/gnome-46-2404/153
+loop17      squashfs 4.0                                                        0   100% /snap/gnome-46-2404/164
+loop18      squashfs 4.0                                                        0   100% /snap/gtk-common-themes/1535
+loop19      ext4     1.0   SB@       22931b2b-55c0-415d-a904-665852739afa                
+loop20      squashfs 4.0                                                                 
+loop21      squashfs 4.0                                                        0   100% /snap/mesa-2404/1165
+loop22      squashfs 4.0                                                        0   100% /snap/mesa-2404/1839
+loop23      squashfs 4.0                                                        0   100% /snap/microk8s/8511
+loop24      squashfs 4.0                                                        0   100% /snap/microk8s/8702
+loop25      squashfs 4.0                                                        0   100% /snap/core18/3084
+loop26      squashfs 4.0                                                                 
+loop27      squashfs 4.0                                                        0   100% /snap/winbox/184
+loop28      squashfs 4.0                                                        0   100% /snap/winbox/185
+loop29      squashfs 4.0                                                        0   100% /snap/wine-platform-5-stable/18
+loop30      squashfs 4.0                                                        0   100% /snap/wine-platform-7-stable-core20/6
+loop31      squashfs 4.0                                                        0   100% /snap/wine-platform-runtime/408
+loop32      squashfs 4.0                                                        0   100% /snap/wine-platform-runtime/409
+loop33      squashfs 4.0                                                        0   100% /snap/wine-platform-runtime-core20/160
+loop34      squashfs 4.0                                                        0   100% /snap/wine-platform-runtime-core20/161
+loop35      squashfs 4.0                                                        0   100% /snap/lxd/40575
+loop36      squashfs 4.0                                                        0   100% /snap/lxd/40911
+loop37      squashfs 4.0                                                        0   100% /snap/snapd/28254
+loop38      squashfs 4.0                                                        0   100% /snap/firefox/8995
+sda                                                                                      
+└─sda1      ntfs           Новый том 4A4AD3354AD31D0F                       77.3G    92% /mnt/sda1
+nvme0n1                                                                                  
+├─nvme0n1p1                                                                              
+└─nvme0n1p2 ext4     1.0             850e1294-91a2-4621-bf9f-ba2072113d50   18.3G    91% /var/snap/microk8s/common/var/lib/kubelet/pods/5321c9e5-fd80-4ac4-a870-0b088356bf94/volume-subpaths/kb-config/kanboard/2
+                                                                                         /var/snap/firefox/common/host-hunspell
+                                                                                         /
+nvme1n1     ext4     1.0             b9d9f2e3-f9eb-49ff-b7eb-f7228ebf02c9   49.1G    90% /var/snap/microk8s/common/var/lib/kubelet/pods/ed16fd73-372d-4bf1-bfb1-eca71886e94d/volume-subpaths/filebrowser-se/filebrowser/1
+                                                                                         /var/snap/microk8s/common/var/lib/kubelet/pods/ed16fd73-372d-4bf1-bfb1-eca71886e94d/volume-subpaths/filebrowser-se/filebrowser/0
+                                                                                         /var/snap/microk8s/common/var/lib/kubelet/pods/75d6b866-7bb8-4abe-940f-10fde1f00471/volume-subpaths/filebrowser-se-stage/filebrowser/1
+                                                                                         /var/snap/microk8s/common/var/lib/kubelet/pods/75d6b866-7bb8-4abe-940f-10fde1f00471/volume-subpaths/filebrowser-se-stage/filebrowser/0
+                                                                                         /mnt/gig
+=== CMD: lsblk -b -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT,ROTA ===
+NAME                 SIZE TYPE FSTYPE   MOUNTPOINT                             ROTA
+loop0                4096 loop squashfs /snap/bare/5                              0
+loop1            77574144 loop squashfs /snap/core22/2955                         0
+loop2            58183680 loop squashfs /snap/core18/2999                         0
+loop3            70033408 loop squashfs /snap/core24/2124                         0
+loop4            66879488 loop squashfs /snap/core20/2866                         0
+loop5            66883584 loop squashfs /snap/core20/2922                         0
+loop6            77586432 loop squashfs /snap/core22/2437                         0
+loop8            70049792 loop squashfs /snap/core24/1643                         0
+loop9            11644928 loop squashfs /snap/distrobuilder/2302                  0
+loop10           11710464 loop squashfs /snap/distrobuilder/2307                  0
+loop11          297603072 loop squashfs /snap/firefox/9057                        0
+loop12           52711424 loop squashfs /snap/snapd/27738                         0
+loop13          366682112 loop squashfs /snap/gnome-3-38-2004/143                 0
+loop14          557187072 loop squashfs /snap/gnome-42-2204/247                   0
+loop15          557309952 loop squashfs /snap/gnome-42-2204/263                   0
+loop16          635518976 loop squashfs /snap/gnome-46-2404/153                   0
+loop17          644382720 loop squashfs /snap/gnome-46-2404/164                   0
+loop18           96141312 loop squashfs /snap/gtk-common-themes/1535              0
+loop19       116223467520 loop ext4                                               0
+loop20          120856576 loop squashfs                                           0
+loop21          414167040 loop squashfs /snap/mesa-2404/1165                      0
+loop22          421507072 loop squashfs /snap/mesa-2404/1839                      0
+loop23          172232704 loop squashfs /snap/microk8s/8511                       0
+loop24          172576768 loop squashfs /snap/microk8s/8702                       0
+loop25           58200064 loop squashfs /snap/core18/3084                         0
+loop26           52535296 loop squashfs                                           0
+loop27           47190016 loop squashfs /snap/winbox/184                          0
+loop28           47190016 loop squashfs /snap/winbox/185                          0
+loop29          317800448 loop squashfs /snap/wine-platform-5-stable/18           0
+loop30          437477376 loop squashfs /snap/wine-platform-7-stable-core20/6     0
+loop31          363741184 loop squashfs /snap/wine-platform-runtime/408           0
+loop32          363540480 loop squashfs /snap/wine-platform-runtime/409           0
+loop33          485830656 loop squashfs /snap/wine-platform-runtime-core20/160    0
+loop34          488615936 loop squashfs /snap/wine-platform-runtime-core20/161    0
+loop35          120909824 loop squashfs /snap/lxd/40575                           0
+loop36          120782848 loop squashfs /snap/lxd/40911                           0
+loop37           46882816 loop squashfs /snap/snapd/28254                         0
+loop38          274960384 loop squashfs /snap/firefox/8995                        0
+sda         1000204886016 disk                                                    1
+└─sda1      1000202043392 part ntfs     /mnt/sda1                                 1
+nvme0n1      500107862016 disk                                                    0
+├─nvme0n1p1       1048576 part                                                    0
+└─nvme0n1p2  500104691712 part ext4     /                                         0
+nvme1n1     1024209543168 disk ext4     /mnt/gig                                  0
+=== CMD: findmnt / /mnt/gig /mnt/sda1 -o TARGET,SOURCE,FSTYPE,SIZE,USED,AVAIL,USE%,OPTIONS ===
+EXIT: 1

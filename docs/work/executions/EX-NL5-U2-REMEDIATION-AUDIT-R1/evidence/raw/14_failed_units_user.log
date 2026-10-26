@@ -1,0 +1,23 @@
+=== CMD: systemctl --user status xdg-desktop-portal.service --no-pager -l -n 8 ===
+× xdg-desktop-portal.service - Portal service
+     Loaded: loaded (/usr/lib/systemd/user/xdg-desktop-portal.service; static)
+     Active: failed (Result: timeout) since Wed 2026-10-21 12:45:50 +10; 5 days ago
+    Process: 1291999 ExecStart=/usr/libexec/xdg-desktop-portal (code=killed, signal=TERM)
+   Main PID: 1291999 (code=killed, signal=TERM)
+        CPU: 55ms
+
+Notice: journal has been rotated since unit was started, output may be incomplete.
+=== CMD: systemctl --user status xdg-desktop-portal-gnome.service --no-pager -l -n 8 ===
+× xdg-desktop-portal-gnome.service - Portal service (GNOME implementation)
+     Loaded: loaded (/usr/lib/systemd/user/xdg-desktop-portal-gnome.service; static)
+     Active: failed (Result: exit-code) since Wed 2026-10-21 12:44:20 +10; 5 days ago
+    Process: 1292020 ExecStart=/usr/libexec/xdg-desktop-portal-gnome (code=exited, status=1/FAILURE)
+   Main PID: 1292020 (code=exited, status=1/FAILURE)
+        CPU: 66ms
+
+Notice: journal has been rotated since unit was started, output may be incomplete.
+=== CMD: journalctl --user -u xdg-desktop-portal -n 15 --no-pager (bounded) ===
+-- No entries --
+=== CMD: journalctl --user -u xdg-desktop-portal-gnome -n 10 --no-pager ===
+-- No entries --
+EXIT: 0

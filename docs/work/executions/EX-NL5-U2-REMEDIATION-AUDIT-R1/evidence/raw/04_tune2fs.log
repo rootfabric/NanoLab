@@ -1,0 +1,7 @@
+=== CMD: tune2fs -l /dev/nvme0n1p2 (read-only dump) ===
+EXIT_NONZERO
+=== CMD: sudo -n tune2fs -l /dev/nvme0n1p2 (non-interactive) ===
+EXIT_NONZERO_NO_SUDO
+=== CMD: sudo -n tune2fs -l /dev/nvme1n1 (non-interactive) ===
+EXIT_NONZERO_NO_SUDO
+EXIT: 0

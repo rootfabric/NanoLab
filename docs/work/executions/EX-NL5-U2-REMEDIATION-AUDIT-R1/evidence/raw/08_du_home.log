@@ -1,0 +1,27 @@
+=== CMD: du -x -h -d 1 /home/rdpuser 2>/dev/null | sort -rh | head -25 ===
+256G	/home/rdpuser
+109G	/home/rdpuser/vm
+26G	/home/rdpuser/robot-aiten
+19G	/home/rdpuser/.qrl
+15G	/home/rdpuser/VirtualBox VMs
+14G	/home/rdpuser/.local
+11G	/home/rdpuser/.config
+7.2G	/home/rdpuser/hermes
+7.1G	/home/rdpuser/actions-runner
+5.6G	/home/rdpuser/rust
+4.6G	/home/rdpuser/bitrush
+4.3G	/home/rdpuser/dont_starve_together
+3.5G	/home/rdpuser/build
+3.1G	/home/rdpuser/minecraft
+2.3G	/home/rdpuser/actions-runner-outenemy-backend
+2.2G	/home/rdpuser/nl5-002-e-p2
+2.2G	/home/rdpuser/actions-runners
+2.1G	/home/rdpuser/actions-runner-ti2
+1.6G	/home/rdpuser/NanoLab
+1.5G	/home/rdpuser/nl5-002-external-r2
+1.4G	/home/rdpuser/nl5-001-c-env
+1.1G	/home/rdpuser/.npm
+1.1G	/home/rdpuser/nl5-002-external
+741M	/home/rdpuser/camhi
+729M	/home/rdpuser/snap
+EXIT: 0

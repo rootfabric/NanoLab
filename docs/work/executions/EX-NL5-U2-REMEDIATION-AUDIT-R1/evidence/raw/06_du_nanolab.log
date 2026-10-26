@@ -1,0 +1,9 @@
+=== CMD: du -x -h -d 1 ~/nanolab 2>/dev/null (bounded, one-fs) ===
+162M	/home/rdpuser/nanolab/cache
+162M	/home/rdpuser/nanolab
+832K	/home/rdpuser/nanolab/workspaces
+12K	/home/rdpuser/nanolab/tools
+12K	/home/rdpuser/nanolab/raw
+=== CMD: du -x -sh ~/nanolab 2>/dev/null ===
+162M	/home/rdpuser/nanolab
+EXIT: 0

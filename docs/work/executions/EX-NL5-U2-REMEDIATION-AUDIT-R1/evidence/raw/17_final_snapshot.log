@@ -1,0 +1,37 @@
+=== CMD: timedatectl ===
+               Local time: Mon 2026-10-26 13:28:25 +10
+           Universal time: Mon 2026-10-26 03:28:25 UTC
+                 RTC time: Mon 2026-10-26 03:28:25
+                Time zone: Asia/Vladivostok (+10, +1000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+=== CMD: uptime ===
+ 13:28:25 up 61 days, 13:14,  0 users,  load average: 14.34, 15.06, 15.20
+=== CMD: ls -la ~/nanolab/raw ~/nanolab/cache ===
+/home/rdpuser/nanolab/cache:
+total 16
+drwxrwxr-x  4 rdpuser rdpuser 4096 Oct 11 01:29 .
+drwxrwxr-x  6 rdpuser rdpuser 4096 Oct 11 01:20 ..
+drwxrwxr-x  7 rdpuser rdpuser 4096 Oct 11 01:30 oxdna-build-r2-u2
+drwxrwxr-x 13 rdpuser rdpuser 4096 Oct 11 01:21 oxdna-src
+
+/home/rdpuser/nanolab/raw:
+total 12
+drwxrwxr-x 3 rdpuser rdpuser 4096 Oct 11 01:45 .
+drwxrwxr-x 6 rdpuser rdpuser 4096 Oct 11 01:20 ..
+drwxrwxr-x 2 rdpuser rdpuser 4096 Oct 11 01:45 EX-INFRA3-U2-OUTENEMY-READINESS-R1
+=== CMD: df -h / /mnt/gig /mnt/sda1 (re-read for reproducibility) ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p2  458G  416G   19G  96% /
+/dev/nvme1n1    938G  841G   50G  95% /mnt/gig
+/dev/sda1       932G  855G   78G  92% /mnt/sda1
+=== CMD: df -B1 / /mnt/gig (re-read) ===
+Filesystem         1B-blocks         Used   Available Use% Mounted on
+/dev/nvme0n1p2  491104411648 446395604992 19686797312  96% /
+/dev/nvme1n1   1006980812800 902998384640 52755177472  95% /mnt/gig
+=== CMD: free -b (re-read) ===
+               total        used        free      shared  buff/cache   available
+Mem:     135021649920 117695856640  1200943104   554721280 16124850176 15026679808
+Swap:     8589930496  8589885440       45056
+EXIT: 0

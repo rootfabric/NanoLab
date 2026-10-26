@@ -1,0 +1,20 @@
+=== CMD: id; groups ===
+uid=1001(rdpuser) gid=1001(rdpuser) groups=1001(rdpuser),27(sudo),101(systemd-journal),140(libvirt),999(docker),1004(microk8s)
+rdpuser sudo systemd-journal libvirt docker microk8s
+=== CMD: du -x -h -d 1 /var/snap 2>/dev/null | sort -rh | head -8 ===
+20G	/var/snap/microk8s
+20G	/var/snap
+3.0M	/var/snap/firefox
+1.1M	/var/snap/winbox
+56K	/var/snap/lxd
+24K	/var/snap/mesa-2404
+16K	/var/snap/wine-platform-runtime-core20
+16K	/var/snap/wine-platform-runtime
+=== CMD: du -x -sh /usr /opt /srv /snap 2>/dev/null ===
+21G	/usr
+3.0G	/opt
+8.0K	/srv
+92K	/snap
+=== CMD: sudo -n du -sh /var/lib/docker /var/snap/microk8s 2>&1 (expect fail, non-interactive) ===
+sudo: a password is required
+EXIT: 0

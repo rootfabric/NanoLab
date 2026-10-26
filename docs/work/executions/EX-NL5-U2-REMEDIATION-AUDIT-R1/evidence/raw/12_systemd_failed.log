@@ -1,0 +1,51 @@
+=== CMD: systemctl is-system-running ===
+degraded
+rc=1
+=== CMD: systemctl --user is-system-running ===
+degraded
+rc=1
+=== CMD: systemctl --failed --no-pager ===
+  UNIT                      LOAD   ACTIVE SUB    DESCRIPTION
+● clickhouse-server.service loaded failed failed ClickHouse Server
+● vms-startup.service       loaded failed failed Start multiple VirtualBox VMs
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+2 loaded units listed.
+=== CMD: systemctl --user --failed --no-pager ===
+  UNIT                             LOAD   ACTIVE SUB    DESCRIPTION
+● xdg-desktop-portal-gnome.service loaded failed failed Portal service (GNOME implementation)
+● xdg-desktop-portal-gtk.service   loaded failed failed Portal service (GTK/GNOME implementation)
+● xdg-desktop-portal.service       loaded failed failed Portal service
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+3 loaded units listed.
+=== CMD: systemctl list-units --state=failed --no-pager ===
+  UNIT                      LOAD   ACTIVE SUB    DESCRIPTION
+● clickhouse-server.service loaded failed failed ClickHouse Server
+● vms-startup.service       loaded failed failed Start multiple VirtualBox VMs
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+2 loaded units listed.
+=== CMD: loginctl show-user rdpuser ===
+UID=1001
+GID=1001
+Name=rdpuser
+Timestamp=Wed 2026-08-26 00:13:54 +10
+TimestampMonotonic=25505204
+RuntimePath=/run/user/1001
+Service=user@1001.service
+Slice=user-1001.slice
+Display=c4
+State=active
+Sessions=15699 10201 c4
+IdleHint=no
+IdleSinceHint=0
+IdleSinceHintMonotonic=0
+Linger=yes
+EXIT: 0

@@ -1,0 +1,25 @@
+=== CMD: systemctl status clickhouse-server.service --no-pager -l -n 10 (read-only) ===
+× clickhouse-server.service - ClickHouse Server
+     Loaded: loaded (/etc/systemd/system/clickhouse-server.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Wed 2026-08-26 00:13:56 +10; 2 months 0 days ago
+       Docs: https://clickhouse.tech/docs/en/
+   Main PID: 4190 (code=exited, status=232/ADDRESS_FAMILIES)
+        CPU: 123ms
+
+Oct 24 06:23:48 outenemy systemd[1]: /etc/systemd/system/clickhouse-server.service:15: Standard output type syslog is obsolete, automatically updating to journal. Please update your unit file, and consider removing the setting altogether.
+Oct 24 06:23:48 outenemy systemd[1]: /etc/systemd/system/clickhouse-server.service:16: Standard output type syslog is obsolete, automatically updating to journal. Please update your unit file, and consider removing the setting altogether.
+Oct 24 06:23:50 outenemy systemd[1]: /etc/systemd/system/clickhouse-server.service:15: Standard output type syslog is obsolete, automatically updating to journal. Please update your unit file, and consider removing the setting altogether.
+Oct 24 06:23:50 outenemy systemd[1]: /etc/systemd/system/clickhouse-server.service:16: Standard output type syslog is obsolete, automatically updating to journal. Please update your unit file, and consider removing the setting altogether.
+Notice: journal has been rotated since unit was started, output may be incomplete.
+=== CMD: systemctl status vms-startup.service --no-pager -l -n 10 ===
+× vms-startup.service - Start multiple VirtualBox VMs
+     Loaded: loaded (/etc/systemd/system/vms-startup.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Wed 2026-08-26 00:13:54 +10; 2 months 0 days ago
+        CPU: 151ms
+
+Notice: journal has been rotated since unit was started, output may be incomplete.
+=== CMD: journalctl -u clickhouse-server -p err -n 15 --no-pager (bounded) ===
+-- No entries --
+=== CMD: journalctl -u vms-startup -n 15 --no-pager (bounded) ===
+-- No entries --
+EXIT: 0

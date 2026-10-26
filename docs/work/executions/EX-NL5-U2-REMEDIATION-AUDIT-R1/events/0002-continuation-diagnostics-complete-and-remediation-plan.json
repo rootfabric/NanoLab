@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-diagnostics-complete-and-remediation-plan",
+  "timestamp_utc": "2026-10-26T03:36:01Z",
+  "execution_id": "EX-NL5-U2-REMEDIATION-AUDIT-R1",
+  "work_order_id": "WO-NL5-U2-REMEDIATION-AUDIT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "U2_RESOURCE_AUDITOR",
+  "actor_id": "nl5-u2-remediation-audit-r1",
+  "subject_sha": "c04f5e11335f48a6fe1f29e46d6a7f92386c936b",
+  "summary": "C0 read-only diagnostics complete on host U2 (outenemy, external role ONLY); U2_REMEDIATION_PLAN_R1.{json,md} published with 17 raw command logs. MEASURED FACTS (2026-10-26T03:20:44Z..03:28:25Z): (1) FS - / (nvme0n1p2 ext4) 96% used (446395604992/491104411648 B, free 19686797312 B = 18.33 GiB unpriv, reserved ~25022009344 B = 5.10% via statvfs f_bfree-f_bavail; tune2fs -l root-blocked), /mnt/gig (nvme1n1 whole-disk ext4) 95% (902998384640/1006980812800 B, free 52755177472 B = 49.12 GiB unpriv, reserved ~51227250688 B = 5.09%), /mnt/sda1 (ntfs-3g fuseblk, spinning) 92%; ALL >80% guard = MEASURED_FAIL; inodes max 13.3% on / (no inode pressure); NEW: /robot-full-2026-09-24.img root-only ext4 loop19 108.2GiB attached-but-unmounted on /; microk8s 20G + ~100 sandbox mounts; docker system df Images 26.74GB (reclaimable 2.08GB)/Containers 4.43GB/Volumes 6.63GB; /mnt/gig unpriv du 211G visible (Dayz 70G, SE2023 50G, 7 dayz 50G, Ubunta Rust Server 28G) with ~630G permission-bounded INCONCLUSIVE (root clickhouse/, LIVE postgres pgdata/, filebrowser/); /home/rdpuser 256G (vm 109G, robot-aiten 26G, .qrl 19G, VirtualBox VMs 15G); NanoLab-attributable ~10G total (~/nanolab 162M) -> disposable-cache relocation quantified INSUFFICIENT (need 53512075673 B on / and 97413734400 B on /mnt/gig to reach 80%). (2) RAM/swap - MemAvailable 15026679808 B = 13.99 GiB vs 32 GiB target = MEASURED_FAIL; swap /swap.img 8589885440/8589930496 B = 99.995% FULL; vmstat si 0-4/so 0 (no active storm, zero headroom); top consumer cisco vpnagentd RSS 57.57 GiB (45.7% MEM, leak-suspect, error-spams journal ~1/min), VBoxHeadless SE2023 15.66 GiB, ubuntu-proxy VM 7.84 GiB, Jitsi 3.36 GiB, GitLab stack ~5 GiB, kubelite 1.03 GiB. (3) systemd degraded BOTH levels with attribution: system = clickhouse-server.service (failed since 2026-08-26 boot, status=232/ADDRESS_FAMILIES = bind address-family failure at startup, journal rotated -> detail INCONCLUSIVE) + vms-startup.service (failed since 2026-08-26 boot, exit-code, custom VirtualBox VM autostart wrapper, VMs actually run independently); user = xdg-desktop-portal.service (timeout/SIGTERM) + xdg-desktop-portal-gnome.service (exit 1/FAILURE) + xdg-desktop-portal-gtk.service (exit 1/FAILURE) all since 2026-10-21; Linger=yes; NO restarts/resets performed. (4) VERDICT_CLASS = REMEDIATION_REQUIRED (5 independent MEASURED_FAIL threshold facts; PASS-by-inspection forbidden; no accept-risk authorized). Alternatives table published: A dedicated native ext4 disk >=512GB for raw (RECOMMENDED, all targets PASS structurally, rollback = umount) vs B owner-per-item reclamation >=97.41GB on /mnt/gig (HIGH risk, live pgdata) vs C root-FS reclamation >=53.51GB owner-assets + verified-cache hygiene 3-5GB (insufficient alone) vs D reversible tune2fs -m 1 bridge (+40.6GiB unpriv, does NOT fix 80% guard). 8 owner approval requests APR-1..APR-8 (hardware/mount, per-item reclamation, vpnagentd restart-or-envelope, systemd operator window, swap extension, tune2fs bridge, per-item hygiene, governance sequence operator->Reviewer->Verifier->L-01..L-12 rerun->F07). Stop/rollback conditions explicit. BLOCKED/INCONCLUSIVE: tune2fs superblock params (root), docker on-disk bytes (permission; docker df compensation), ~630G /mnt/gig split (permission), robot-full exact size (root; loop19 bound), boot-time journal text (rotated; exit codes kept), L-04 engine SHA not rechecked this session (F03 PASS_LIVE stands, no drift claim). SCIENTIFIC_RUNS=0; MUTATIONS=0; no secrets; forbidden paths untouched.",
+  "command_refs": [
+    "df -h / df -B1 / df -i / findmnt -no ... / /mnt/gig / /mnt/sda1 / lsblk -f -> byte-exact volumes, 96/95/92%",
+    "python3 os.statvfs /, /mnt/gig, /mnt/sda1 -> reserved 25022009344 / 51227250688 / 0 B (tune2fs -l and sudo -n both root-blocked)",
+    "du -x -h -d 1 on ~/nanolab, /var/log, /tmp, /home/rdpuser, /var/lib, /var/snap, /usr, /mnt/gig (bounded, timeout-wrapped, one-fs) -> consumers mapped; /mnt/gig 211G visible / ~630G permission-bounded",
+    "docker system df (docker group, read-only) -> Images 26.74GB total/2.08GB reclaimable; Containers 4.43GB; Volumes 6.63GB",
+    "free -h/-b; swapon --show; ps aux --sort=-%mem; grep pswpin/out /proc/vmstat; vmstat 1 3 -> MemAvailable 13.99GiB; swap 99.995% full; vpnagentd 57.57GiB RSS",
+    "systemctl is-system-running (both) -> degraded/degraded; systemctl --failed (both) -> 2 system + 3 user units; systemctl status <unit> -> exit codes; loginctl show-user rdpuser -> Linger=yes",
+    "journalctl -p err -n 50 --no-pager (system) + unit-scoped bounded journalctl -> acvpnagent error stream dominant; failed-unit boot text rotated",
+    "cat /sys/block/loop19/loop/backing_file -> /robot-full-2026-09-24.img; lsblk -b -> loop19 116223467520B ext4, not mounted",
+    "timedatectl -> NTP active synchronized; uptime -> 61 days, load ~15; df/free re-read -> reproducible"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/U2_REMEDIATION_PLAN_R1.json",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/U2_REMEDIATION_PLAN_R1.md",
+    "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/raw/01_df.log .. 17_final_snapshot.log",
+    "work/nl5-f03-u2-readiness-r1 @ 1831585f (L-03/L-05 origin facts, read-only)"
+  ],
+  "next_action": "Record HANDOFF_COMPLETED (event 0003), set passport final status, append single WORK_QUEUE.md entry, add summary.md, run validation suite (work_cli validate, check-consistency, workflow_lint, json.tool), commit and push; Director relays owner approval request (APR-1..APR-8) - NO execution of any remediation from this session.",
+  "blocker": null
+}

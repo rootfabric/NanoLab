@@ -1,0 +1,12 @@
+=== CMD: findmnt -no TARGET,SOURCE,FSTYPE,SIZE,USED,AVAIL,USE%,OPTIONS / ===
+/      /dev/nvme0n1p2 ext4   457.4G 415.8G 18.3G  91% rw,relatime
+=== CMD: findmnt -no TARGET,SOURCE,FSTYPE,SIZE,USED,AVAIL,USE%,OPTIONS /mnt/gig ===
+/mnt/gig /dev/nvme1n1 ext4   937.8G  841G 49.1G  90% rw,relatime
+=== CMD: findmnt -no TARGET,SOURCE,FSTYPE,SIZE,USED,AVAIL,USE%,OPTIONS /mnt/sda1 ===
+/mnt/sda1 /dev/sda1 fuseblk 931.5G 854.2G 77.3G  92% rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096
+=== CMD: cat /proc/swaps ===
+Filename				Type		Size		Used		Priority
+/swap.img                               file		8388604		8376704		-2
+=== CMD: loop19 backing_file (read-only sysfs) ===
+/robot-full-2026-09-24.img
+EXIT: 0

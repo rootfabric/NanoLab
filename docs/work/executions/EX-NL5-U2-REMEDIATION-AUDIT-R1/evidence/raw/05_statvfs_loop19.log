@@ -1,0 +1,8 @@
+=== CMD: python3 os.statvfs reserved-block estimate (f_bfree - f_bavail) ===
+/: total=491104411648 used=446324154368 free_user(unpriv)=19758247936 free_root=44780257280 reserved~=25022009344 (6108889.0 blocks of 4096B)
+/mnt/gig: total=1006980812800 used=902998540288 free_user(unpriv)=52755021824 free_root=103982272512 reserved~=51227250688 (12506653.0 blocks of 4096B)
+/mnt/sda1: total=1000202039296 used=917158621184 free_user(unpriv)=83043418112 free_root=83043418112 reserved~=0 (0.0 blocks of 4096B)
+=== CMD: ls -la /robot-full-2026-09-24.img (stat only, read-only) ===
+not readable/absent at /
+stat failed
+EXIT: 0

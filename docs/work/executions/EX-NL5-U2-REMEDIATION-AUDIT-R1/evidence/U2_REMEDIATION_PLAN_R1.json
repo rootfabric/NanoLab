@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "record_kind": "U2_REMEDIATION_PLAN",
+  "evidence_id": "U2_REMEDIATION_PLAN_R1",
+  "issuer_class": "U2_RESOURCE_AUDITOR_C0_READONLY",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "mutations_performed": 0,
+  "execution_id": "EX-NL5-U2-REMEDIATION-AUDIT-R1",
+  "work_order_id": "WO-NL5-U2-REMEDIATION-AUDIT-R1",
+  "program": "NL5-CLOSE-R1",
+  "task_issue": 94,
+  "parent_issue": 81,
+  "actor_id": "nl5-u2-remediation-audit-r1",
+  "dsh_session_id": "7e172f80-927f-446e-af8c-4e5aeea2fd59",
+  "host_identity": {
+    "hostname": "outenemy",
+    "role": "EXTERNAL_U2_ONLY",
+    "os": "Ubuntu 22.04.5 LTS",
+    "kernel": "5.15.0-190-generic",
+    "cpu": "Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz x64 (64 threads)",
+    "uptime": "61 days, 13:14 (at 2026-10-26T03:28:25Z)",
+    "load_avg_1m": 14.34,
+    "ntp": "active, synchronized",
+    "note": "session physically executes ON host U2; read-only diagnostics only"
+  },
+  "measurement_window_utc": {
+    "first_snapshot": "2026-10-26T03:20:44Z",
+    "last_snapshot": "2026-10-26T03:28:25Z",
+    "reproducibility": "df/free re-read at end matches first read within in-flight noise (see evidence/raw/17_final_snapshot.log)"
+  },
+  "raw_command_evidence": [
+    "evidence/raw/01_df.log",
+    "evidence/raw/02_lsblk_findmnt.log",
+    "evidence/raw/03_findmnt.log",
+    "evidence/raw/04_tune2fs.log",
+    "evidence/raw/05_statvfs_loop19.log",
+    "evidence/raw/06_du_nanolab.log",
+    "evidence/raw/07_du_varlog_tmp.log",
+    "evidence/raw/08_du_home.log",
+    "evidence/raw/09_du_varlib_docker.log",
+    "evidence/raw/10_du_varsnap_usr.log",
+    "evidence/raw/11_mem_swap.log",
+    "evidence/raw/12_systemd_failed.log",
+    "evidence/raw/13_failed_units_system.log",
+    "evidence/raw/14_failed_units_user.log",
+    "evidence/raw/15_journal_err_system.log",
+    "evidence/raw/16_du_mnt_gig.log",
+    "evidence/raw/17_final_snapshot.log"
+  ],
+  "fs_measurements": {
+    "method": "df -h / df -B1 / df -i / findmnt / lsblk -f / os.statvfs (reserved = f_bfree - f_bavail); tune2fs -l requires root, sudo -n unavailable -> reserved estimated via statvfs, matches ext4 default 5%",
+    "volumes": [
+      {
+        "mount": "/",
+        "device": "/dev/nvme0n1p2",
+        "fstype": "ext4",
+        "rota": false,
+        "total_bytes": 491104411648,
+        "used_bytes": 446395604992,
+        "available_unpriv_bytes": 19686797312,
+        "available_unpriv_gib": 18.33,
+        "reserved_bytes_approx": 25022009344,
+        "reserved_gib_approx": 23.3,
+        "reserved_pct_of_total_approx": 5.1,
+        "use_percent_df": 96,
+        "use_percent_df_without_reserved": 90.9,
+        "inodes_total": 30531584,
+        "inodes_used": 4058560,
+        "inodes_use_percent": 13.3,
+        "guard_80pct": {
+          "status": "MEASURED_FAIL",
+          "used_max_bytes_at_80pct": 392883529319,
+          "bytes_to_free_to_meet_guard": 53512075673,
+          "bytes_to_free_gib": 49.83
+        },
+        "top_consumers_measured_unpriv": {
+          "/home/rdpuser": 256000000000,
+          "/robot-full-2026-09-24.img (root-only, loop19 attached NOT mounted, size from loop device)": 116223467520,
+          "/usr": 21000000000,
+          "/var/snap (microk8s 20G)": 20000000000,
+          "/var/lib (readable part)": 8400000000,
+          "/var/log (journal 4.1G)": 4100000000,
+          "/tmp": 2300000000,
+          "/opt": 3000000000,
+          "closure_note": "visible unpriv sum ~423G vs df used 415.7GiB(446G): consistent; root-only subtrees (/var/lib/docker, /root, parts of /var/snap) bounded INCONCLUSIVE"
+        }
+      },
+      {
+        "mount": "/mnt/gig",
+        "device": "/dev/nvme1n1 (whole NVMe, no partition table)",
+        "fstype": "ext4",
+        "rota": false,
+        "total_bytes": 1006980812800,
+        "used_bytes": 902998384640,
+        "available_unpriv_bytes": 52755177472,
+        "available_unpriv_gib": 49.12,
+        "reserved_bytes_approx": 51227250688,
+        "reserved_gib_approx": 47.71,
+        "reserved_pct_of_total_approx": 5.09,
+        "use_percent_df": 95,
+        "use_percent_df_without_reserved": 89.7,
+        "inodes_total": 62513152,
+        "inodes_used": 148801,
+        "inodes_use_percent": 0.24,
+        "guard_80pct": {
+          "status": "MEASURED_FAIL",
+          "used_max_bytes_at_80pct": 805584650240,
+          "bytes_to_free_to_meet_guard": 97413734400,
+          "bytes_to_free_gib": 90.73
+        },
+        "measured_content_unpriv_du_d1": {
+          "visible_total": "211G",
+          "items": {
+            "Dayz": "70G",
+            "SE2023": "50G",
+            "7 dayz": "50G",
+            "Ubunta Rust Server": "28G",
+            "install": "5.1G",
+            "filebrowser": "3.6G",
+            "FlukyCoin": "668M",
+            "ai-provider-observer-stage": "374M",
+            "testovoe-zadanie-data": "236M",
+            "lubuntu-26.04-desktop-amd64.iso": "3918290944B"
+          },
+          "permission_bounded_unaccounted_bytes_approx": 630000000000,
+          "unaccounted_note": "clickhouse/ (root), pgdata/ (postgres, LIVE DB), filebrowser/ trees not readable by uid 1001; exact split INCONCLUSIVE for this session"
+        },
+        "third_party_sharing": "volume is shared with third-party tenants (clickhouse data, live postgres pgdata, filebrowser, games, other-user dirs yurig/rdpuser) - NOT a clean raw-evidence surface even if capacity were freed"
+      },
+      {
+        "mount": "/mnt/sda1",
+        "device": "/dev/sda1",
+        "fstype": "ntfs (ntfs-3g fuseblk)",
+        "rota": true,
+        "total_bytes": 1000202039296,
+        "used_bytes": 917158621184,
+        "available_unpriv_bytes": 83043418112,
+        "available_unpriv_gib": 77.34,
+        "reserved_bytes_approx": 0,
+        "use_percent_df": 92,
+        "inodes": "not applicable (NTFS)",
+        "guard_80pct": {
+          "status": "MEASURED_FAIL",
+          "note": "92% > 80%; additionally NTFS/FUSE on spinning disk NOT APPROVED for canonical raw storage per Issue #94 and F03"
+        }
+      }
+    ],
+    "inode_headroom_verdict": "NO inode pressure anywhere (max 13.3% on /); pressure is purely byte capacity",
+    "l03_numeric_minimum_30GB_free": {
+      "target_bytes": 30000000000,
+      "root": { "free_unpriv_bytes": 19686797312, "verdict": "FAIL" },
+      "mnt_gig": { "free_unpriv_bytes": 52755177472, "verdict": "PASS_NUMERIC_ONLY" },
+      "mnt_sda1": { "free_unpriv_bytes": 83043418112, "verdict": "PASS_NUMERIC_ONLY_NOT_RAW_APPROVED" },
+      "nuance": "L-03 numeric >=30GB minimum is nominally met on /mnt/gig, but the binding FAIL is the 80% usage guard (95%) and the 2x projected-raw margin (below), both measured"
+    }
+  },
+  "growth_candidates_bounded": {
+    "method": "du -x -h -d 1 (one-filesystem, depth-1) on authorized paths only; NO full-disk scan; timeout-bounded",
+    "nanolab_owned": {
+      "~/nanolab total": "162M",
+      "~/nanolab/cache": "162M (oxdna-build-r2-u2 + oxdna-src; engine binary sha 6effd00a... provenance present per F03; rebuildable)",
+      "~/nanolab/raw": "12K (empty EX-INFRA3-U2-OUTENEMY-READINESS-R1 subdir)",
+      "~/nanolab/workspaces": "832K",
+      "NanoLab git worktrees under ~/": "~7.8G total (NanoLab 1.6G + nl5-002-e-p2 2.2G + nl5-002-external-r2 1.5G + nl5-001-c-env 1.4G + nl5-002-external 1.1G)",
+      "conclusion": "NanoLab-attributable disk use is ~10G of 416G on / and ~0 of 841G on /mnt/gig: NanoLab-owned disposable caches CANNOT solve the capacity breach"
+    },
+    "host_owned_other": {
+      "/home/rdpuser/vm": "109G",
+      "/robot-full-2026-09-24.img": "116223467520B (108.2GiB; root-only loop19, attached but NOT mounted; dated 2026-09-24)",
+      "/home/rdpuser/robot-aiten": "26G",
+      "/home/rdpuser/.qrl": "19G",
+      "/home/rdpuser/VirtualBox VMs": "15G",
+      "/home/rdpuser/.local": "14G",
+      "/home/rdpuser/.config": "11G",
+      "actions-runner x3": "~11.5G",
+      "/home/rdpuser/hermes": "7.2G",
+      "/mnt/gig third-party (visible)": "211G (games/VM/other users)",
+      "/var/snap/microk8s": "20G",
+      "/var/log/journal": "4.1G",
+      "/tmp": "2.3G (camhi 651M + old dsh/review/verify worktrees)",
+      "docker (docker system df via docker group)": "Images 26.74GB total / 2.08GB reclaimable (7%); Containers 4.43GB; Local Volumes 6.63GB reclaimable ~0; Build Cache 30.54MB"
+    },
+    "explicit_non_targets": "raw artifacts, git checkouts, Docker images/volumes, logs-by-age are NOT proposed for deletion anywhere in this plan (per WO/Issue #94 hard rule); any of them only via provenance + owner signoff + rollback in a separate operator session"
+  },
+  "memory_swap": {
+    "method": "free -h/-b, swapon --show, ps aux --sort=-%mem, /proc/vmstat, vmstat 1 3",
+    "mem_total_bytes": 135021649920,
+    "mem_used_bytes": 117695856640,
+    "mem_available_bytes": 15026679808,
+    "mem_available_gib": 13.99,
+    "recommendation_32GiB": {
+      "target_bytes": 34359738368,
+      "deficit_bytes": 19333058560,
+      "deficit_gib": 18.0,
+      "verdict": "MEASURED_FAIL"
+    },
+    "swap": {
+      "device": "/swap.img (file, prio -2)",
+      "total_bytes": 8589930496,
+      "used_bytes": 8589885440,
+      "free_bytes": 45056,
+      "use_percent": 99.995,
+      "verdict": "MEASURED_FAIL (FULL)"
+    },
+    "swap_pressure": {
+      "pswpin_cumulative": 32178963,
+      "pswpout_cumulative": 35971300,
+      "vmstat_si_samples": [0, 0, 4],
+      "vmstat_so_samples": [0, 0, 0],
+      "interpretation": "no active swap storm at measurement time (si/so ~0), but swap is 100% full and MemAvailable 14GiB: ANY new memory consumer (e.g. an oxDNA leg ~1-4GB, JVM, or CI runner) forces immediate swap-out/EOF pressure; zero headroom"
+    },
+    "top_consumers_rss": [
+      { "process": "/opt/cisco/anyconnect/bin/vpnagentd", "user": "root", "rss_kib": 60370156, "rss_gib": 57.57, "mem_percent": 45.7, "since": "Sep13 (61d)", "cpu_percent": 79.4, "note": "suspected leak; error-spams journal (CERTSTORE_ERROR_NULL_POINTER ~1/min); single largest RAM lever on host" },
+      { "process": "VBoxHeadless --comment SE2023", "user": "rdpuser", "rss_kib": 16421160, "rss_gib": 15.66, "mem_percent": 12.4 },
+      { "process": "VirtualBoxVM --comment ubuntu-proxy", "user": "rdpuser", "rss_kib": 8222904, "rss_gib": 7.84, "mem_percent": 6.2 },
+      { "process": "jitsi-videobridge (java -Xmx3072m)", "user": "clickho+", "rss_kib": 3605488, "rss_gib": 3.36, "mem_percent": 2.7 },
+      { "process": "uvicorn app.main:app (port 8000)", "user": "10001", "rss_kib": 1487760, "rss_gib": 1.39 },
+      { "process": "sidekiq (gitlab)", "user": "clickho+", "rss_kib": 1242668, "rss_gib": 1.16 },
+      { "process": "gitlab puma workers x4", "user": "clickho+", "rss_kib_each": "~1.0-1.1M KiB", "rss_gib_total": 4.0 },
+      { "process": "microk8s kubelite", "user": "root", "rss_kib": 1109832, "rss_gib": 1.03 },
+      { "process": "node apps/cli/lib/bin.js web :3080 (DSH GUI, this session's host app)", "user": "rdpuser", "rss_kib": 1069120, "rss_gib": 1.0 }
+    ],
+    "other_workloads_demand_note": "host is multi-tenant: microk8s cluster, GitLab, Jitsi, ClickHouse, postgres (pgdata on /mnt/gig), 3x GitHub actions-runners, 2 VirtualBox VMs, Cisco VPN, xrdp desktop - memory demand from other workloads is structural, not transient"
+  },
+  "systemd_diagnosis": {
+    "method": "systemctl is-system-running / --failed (system+user), systemctl list-units --state=failed, loginctl show-user, systemctl status <unit>, bounded journalctl; NO restarts, NO resets-failed",
+    "system_manager": {
+      "is_system_running": "degraded (rc=1)",
+      "failed_units": [
+        {
+          "unit": "clickhouse-server.service",
+          "state": "failed (Result: exit-code) since 2026-08-26 00:13:56 +10",
+          "main_pid_exit": "status=232/ADDRESS_FAMILIES",
+          "interpretation": "process exited 232/ADDRESS_FAMILIES at boot - could not bind requested address family (socket/IPv6-style bind failure at startup); unit enabled, retries visible in journal (syslog-obsolete warnings)",
+          "detail_source": "systemctl status; journal excerpts for the failing boot are ROTATED (journal has been rotated since unit was started) -> exact bind error text INCONCLUSIVE",
+          "blast_radius": "third-party analytics service; not a NanoLab dependency"
+        },
+        {
+          "unit": "vms-startup.service",
+          "state": "failed (Result: exit-code) since 2026-08-26 00:13:54 +10",
+          "main_pid_exit": "exit-code (CPU 151ms)",
+          "interpretation": "custom enabled unit 'Start multiple VirtualBox VMs' fails at every boot since 2026-08-26 (boot day of current 61d uptime)",
+          "detail_source": "systemctl status; journal ROTATED -> root cause text INCONCLUSIVE",
+          "blast_radius": "VM autostart wrapper; VBoxHeadless SE2023 IS running anyway (started independently)"
+        }
+      ]
+    },
+    "user_manager": {
+      "is_system_running": "degraded (rc=1)",
+      "failed_units": [
+        { "unit": "xdg-desktop-portal.service", "state": "failed (Result: timeout) since 2026-10-21 12:45:50 +10", "exit": "killed, signal=TERM" },
+        { "unit": "xdg-desktop-portal-gnome.service", "state": "failed (Result: exit-code) since 2026-10-21 12:44:20 +10", "exit": "status=1/FAILURE" },
+        { "unit": "xdg-desktop-portal-gtk.service", "state": "failed (Result: exit-code) since 2026-10-21 12:45:10 +10", "exit": "status=1/FAILURE" }
+      ],
+      "interpretation": "desktop portal stack (screen-share/file-dialogs for the xrdp GNOME session) died 2026-10-21 and stayed failed; cosmetic for headless science but keeps user manager degraded -> NC job-survival gates cannot be declared while manager is degraded",
+      "linger": "Linger=yes (user manager runs at boot; persistent sessions 15699/10201/c4)"
+    },
+    "journal_error_stream_now": "dominated by acvpnagent CERTSTORE_ERROR_NULL_POINTER every ~60s (matches vpnagentd 57.6GiB RSS leak) - bounded excerpt in evidence/raw/15_journal_err_system.log",
+    "l05_status_this_session": "DRIFT_OPERATOR_DIAGNOSIS_REQUIRED -> CONFIRMED with unit-level attribution; remediation belongs to protected U2_INFRA_OPERATOR session",
+    "mutations": "none performed (no restart, no reset-failed, no disable)"
+  },
+  "quantitative_targets": {
+    "raw_target_fs_choice": "/mnt/gig is the ONLY existing approved-class native ext4 candidate (NVMe, whole-disk); / is the root FS (96%, shared); /mnt/sda1 NTFS NOT approved",
+    "raw_fs_requirements": {
+      "usage_guard": "<= 80%",
+      "free_2x_projected_raw": ">= 64 GB (2 x F05 >=32 GB/platform)",
+      "l03_minimum": ">= 30 GB free",
+      "mem_available": ">= 32 GiB pre-protected-pilot OR separately approved owner capacity envelope"
+    },
+    "current_gaps_on_mnt_gig": {
+      "usage_now_pct": 95,
+      "usage_target_pct": 80,
+      "bytes_to_free_for_guard": 97413734400,
+      "bytes_to_free_gib": 90.73,
+      "free_unpriv_now_bytes": 52755177472,
+      "free_2x_target_bytes": 64000000000,
+      "free_deficit_bytes": 11248225228,
+      "free_deficit_gb": 11.25,
+      "note": "guard deficit (90.7GiB) dominates; if a new dedicated volume is used instead, this volume's breach remains owner's third-party concern, not NanoLab's"
+    },
+    "new_dedicated_volume_sizing": {
+      "minimum_viable_decimal_gb": 200,
+      "minimum_math": "after writing 32GB raw: usage 16% <=80% OK; free 168GB >= 64GB OK",
+      "recommended_decimal_gb": "512 GB - 1 TB SSD/NVMe",
+      "recommended_math": "usage after 32GB raw <= 6.3%; free >= 480GB; margin for multiple campaigns, manifests, replication"
+    },
+    "mem_recovery_levers_measured": [
+      { "lever": "restart/fix cisco vpnagentd (57.57 GiB RSS leak)", "expected_mem_available_gain_gib_approx": 55, "authorizes": "root service restart - owner/infra action, forbidden to this session" },
+      { "lever": "suspend VBoxHeadless SE2023 during science runs", "expected_gain_gib_approx": 15.7, "note": "owner choice" },
+      { "lever": "suspend VirtualBoxVM ubuntu-proxy during science runs", "expected_gain_gib_approx": 7.8 },
+      { "combined_potential_gib_approx": 78, "note": "vpnagentd fix ALONE exceeds the 32GiB target" }
+    ]
+  },
+  "remediation_alternatives": [
+    {
+      "id": "A",
+      "name": "Dedicated native ext4 disk/raw mount for NanoLab raw evidence",
+      "description": "Owner provisions new SSD/NVMe (>=512 GB recommended), protected U2_INFRA_OPERATOR session creates GPT+ext4 (mkfs.ext4), mounts at e.g. /mnt/nanolab-raw, adds fstab entry by UUID, chown rdpuser:rdpuser, raw+manifests written there per F03 raw-manifest schema",
+      "capacity_effect": "raw target usage starts ~0%, free = full volume (>=480 GiB on 512GB): usage<=80% PASS structurally, 2x>=64GB PASS structurally, L-03 >=30GB PASS",
+      "risks": "LOW: touches no existing data; one fstab line; typo risk mitigated by UUID+nofail options",
+      "rollback": "umount + fstab line removal; zero data dependency",
+      "tco": "hardware cost + 1-2h operator window; zero recurring",
+      "caveats": "does NOT remediate / (96%) or /mnt/gig (95%) usage guards - those are owner's third-party capacity concerns; U2 host readiness for OTHER workloads remains degraded until owner addresses them",
+      "owner_approval_needed": "hardware provisioning + operator window + exact mountpoint/fstab choices",
+      "verdict": "RECOMMENDED_PRIMARY"
+    },
+    {
+      "id": "B",
+      "name": "Owner-approved reclamation of >=97.41GB (90.73GiB) on /mnt/gig",
+      "description": "Per-item owner-signed list to delete/archive/relocate EXISTING third-party/other-project data on /mnt/gig (visible candidates: Dayz 70G, SE2023 50G, '7 dayz' 50G, Ubunta Rust Server 28G, lubuntu iso 3.9G; permission-bounded clickhouse//pgdata//filebrowser/ sizes UNKNOWN to this session)",
+      "capacity_effect": "if >=97.41GB reclaimed: usage <=80% PASS, free >=64GB PASS on existing volume",
+      "risks": "HIGH: third-party and live-service data (postgres pgdata is LIVE; clickhouse data root-owned); one wrong item = data loss; volume remains shared with noisy tenants",
+      "rollback": "only if per-item backups/archives exist BEFORE any deletion (operator must create restore point first)",
+      "tco": "high owner review cost per item; slow; recurring (volume refills)",
+      "owner_approval_needed": "per-item explicit signoff + provenance + backup-first + operator window; root access for root-owned subtrees",
+      "verdict": "POSSIBLE_FALLBACK_NOT_RECOMMENDED"
+    },
+    {
+      "id": "C",
+      "name": "Planned capacity reclamation on / + verified disposable-cache relocation (hygiene track)",
+      "description": "Owner-signed per-item plan on / (biggest measured levers: /robot-full-2026-09-24.img 108.2GiB root-only loop image attached-but-unmounted, dated 2026-09-24; ~/vm 109G; robot-aiten 26G; .qrl 19G; VirtualBox VMs 15G) + relocation of VERIFIED rebuildable caches (~/nanolab/cache 162M with provenance+rebuild recipe; /tmp stale worktrees ~1.6G; ~/.npm 1.1G; plocate index 108M) totaling ~3-5GB",
+      "capacity_effect": "root-FS guard needs >=53.51GB freed: only owner-asset items can deliver; cache relocation ALONE is 1-2 orders of magnitude insufficient (quantified: NanoLab disposable caches ~3-5GB vs needed 53.51GB on / and 97.41GB on /mnt/gig)",
+      "risks": "MEDIUM-HIGH on owner assets (VMs, images, .qrl unknown provenance); LOW on verified caches (rebuildable, digest-checked)",
+      "rollback": "caches: rebuild from provenance; owner assets: backup-first archive then delete",
+      "tco": "owner review effort; hygiene items cheap",
+      "owner_approval_needed": "every item; root-only items need root window",
+      "verdict": "HYGIENE_ONLY_FOR_CACHES; OWNER_ASSETS_BY_SIGNOFF"
+    },
+    {
+      "id": "D",
+      "name": "Bridge: reduce ext4 root-reserved blocks on /mnt/gig (tune2fs -m 1, reversible)",
+      "description": "Operator (root) runs tune2fs -m 1 /dev/nvme1n1: reserved drops 5%->1%, unprivileged free rises ~+40.6GiB (51.23GB - 10.25GB) from 49.12GiB to ~89.7GiB; revert with tune2fs -m 5",
+      "capacity_effect": "2x>=64GB PASS (bridge), L-03 PASS; usage guard REMAINS FAIL (95%)",
+      "risks": "LOW-MEDIUM: less root headroom on a 95%-full volume (risk of root write pressure on live postgres/clickhouse data on same FS); one command, no data movement, no remount needed",
+      "rollback": "tune2fs -m 5 (exact inverse), immediate",
+      "tco": "minutes; zero cost",
+      "owner_approval_needed": "explicit (root mutation on volume holding live third-party DBs)",
+      "verdict": "BRIDGE_ONLY_IF_DISK_A_DELAYED; DOES_NOT_SATISFY_80PCT_GUARD"
+    }
+  ],
+  "recommendation": {
+    "primary": "Option A (dedicated native ext4 raw volume, >=512GB SSD/NVMe) + independent memory track (vpnagentd leak fix, expected +~55GiB MemAvailable -> 32GiB target met) + protected operator session for 5 systemd failed units (diagnose, then fix or owner-declare harmless) + swap policy decision (extend /swap.img to 16-32GB or owner-approved envelope)",
+    "sequencing": "1) owner picks options and signs allowlist; 2) separate U2_INFRA_OPERATOR session executes strictly allowlisted changes with before/after receipts; 3) fresh Reviewer + distinct Verifier; 4) re-run F03 L-01..L-12 live in protected session; 5) only then F07 dispatch decision",
+    "verdict_class": "REMEDIATION_REQUIRED",
+    "verdict_rationale": "5 independent MEASURED_FAIL facts on thresholds that Issue #94 explicitly guards: (1) usage 96/95/92% > 80% guard on ALL volumes; (2) MemAvailable 13.99GiB < 32GiB; (3) swap 99.995% full; (4) systemd degraded both levels (5 failed units attributed); (5) free 2x-raw margin unmet on only approved raw-class volume (52.76GB < 64GB). No PASS-by-inspection is possible; no owner accept-risk is authorized here per Issue #94 Gates.",
+    "post_remediation_projection": "READY_AFTER_APPROVED_REMEDIATION is reachable: Option A + vpnagentd fix + unit cleanup close all 5 gaps on their own metrics; re-measurement in protected operator session decides"
+  },
+  "owner_approval_requests": [
+    { "req_id": "APR-1", "ask": "Option A: provision dedicated SSD/NVMe >=512GB, approve /mnt/nanolab-raw mount plan (mkfs.ext4, fstab UUID+nofail, chown rdpuser), grant protected operator window", "type": "hardware+operator" },
+    { "req_id": "APR-2", "ask": "OR Option B: per-item signed reclamation list on /mnt/gig (>=97.41GB) with backup-first provenance; NOTE pgdata is LIVE postgres, clickhouse data root-owned", "type": "data-deletion-per-item" },
+    { "req_id": "APR-3", "ask": "Memory: authorize root investigation/restart of cisco anyconnect vpnagentd (57.57GiB RSS, leak-suspect) OR issue explicit capacity envelope accepting current RAM for bounded pilot", "type": "service-restart-or-envelope" },
+    { "req_id": "APR-4", "ask": "systemd: protected operator window to diagnose/resolve clickhouse-server (232/ADDRESS_FAMILIES), vms-startup (exit-code, boot), 3x user xdg-desktop-portal units (timeout/exit1 since 2026-10-21); restarts allowed ONLY in that session", "type": "operator-window" },
+    { "req_id": "APR-5", "ask": "Swap: approve extension of /swap.img (8G->16-32G) or confirm existing 8G+32GiB-MemAvailable-post-fix is the approved envelope", "type": "disk-mutation" },
+    { "req_id": "APR-6", "ask": "Optional bridge APR: tune2fs -m 1 on /mnt/gig if Option A hardware is delayed (reversible -m 5)", "type": "fs-parameter" },
+    { "req_id": "APR-7", "ask": "Optional hygiene APR (each item separately, never age-based-automatic): /tmp stale worktrees ~1.6G, ~/.npm cache 1.1G, journal vacuum 4.1G->1G, plocate 108M", "type": "cache-hygiene" },
+    { "req_id": "APR-8", "ask": "Confirm U2 remains EXTERNAL ONLY; all executions in protected U2_INFRA_OPERATOR session with before/after capacity receipts, then fresh Reviewer + distinct Verifier + F03 L-01..L-12 re-run before any F07", "type": "governance" }
+  ],
+  "stop_conditions": [
+    "any temptation to mutate outside owner-approved allowlist -> STOP, record BLOCKED evidence",
+    "origin/main moves from BASE 3b567ae (epoch change) -> STOP, re-baseline via Director",
+    "wall clock > 3h budget -> STOP and handoff",
+    "owner rejects APR-1..APR-5 entirely -> verdict reclassify BLOCKED_OWNER by new append-only event (never edit this record)",
+    "any failed unit found to be NanoLab-Science-critical -> STOP and escalate to Director"
+  ],
+  "rollback_conditions": [
+    "Option A: umount /mnt/nanolab-raw + remove fstab line; no data loss path (empty new volume)",
+    "Option D bridge: tune2fs -m 5 /dev/nvme1n1 (exact inverse), effective immediately",
+    "APR-7 hygiene: each item restored from its own backup/rebuild recipe; caches are rebuildable by construction",
+    "ANY option: if post-change L-01..L-12 re-run fails worse than baseline -> operator restores prior state from receipts and re-dispatches"
+  ],
+  "blocked_inconclusive_items": [
+    { "item": "tune2fs -l exact reserved-block/superblock params for / and /mnt/gig", "reason": "requires root; sudo -n unavailable (password required)", "compensation": "reserved computed via statvfs f_bfree-f_bavail = 5.10%/5.09% (matches mke2fs default 5%); treated as approximate" },
+    { "item": "/var/lib/docker exact on-disk bytes", "reason": "directory unreadable by uid 1001 (du permission-denied)", "compensation": "docker system df (docker group): Images 26.74GB total/2.08GB reclaimable, Containers 4.43GB, Volumes 6.63GB" },
+    { "item": "/mnt/gig ~630G unaccounted split (clickhouse/, pgdata/, filebrowser/ trees)", "reason": "root/postgres-owned subtrees unreadable by uid 1001", "compensation": "bounded as INCONCLUSIVE; visible unpriv du total 211G vs df used 841.1GiB" },
+    { "item": "/robot-full-2026-09-24.img exact file size + contents", "reason": "root-only stat/read", "compensation": "loop19 device size 116223467520B (108.2GiB); attached but NOT mounted; file dated 2026-09-24" },
+    { "item": "exact boot-time journal text of failed units", "reason": "journal rotated since unit start (clickhouse/vms-startup since 2026-08-26)", "compensation": "exit codes from unit status: 232/ADDRESS_FAMILIES, exit-code; root-cause text INCONCLUSIVE" },
+    { "item": "re-verification of oxDNA engine binary SHA (L-04) this session", "reason": "out of C0 resource-audit scope; F03 L-04 = PASS_LIVE 2026-10-25 stands as last verified fact", "compensation": "no drift claim made" }
+  ],
+  "issue94_vs_facts_discrepancies": [
+    "Issue #94 volume/RAM/swap numbers CONFIRMED byte-level (minor: df -h rounding 19G/50G/78G vs exact 19.69/52.76/83.04 GB avail)",
+    "Issue #94 'degraded' CONFIRMED with attribution: system = clickhouse-server + vms-startup (both failed since 2026-08-26 boot); user = 3x xdg-desktop-portal (since 2026-10-21); issue did not enumerate units - this record does",
+    "NEW facts not in Issue #94: cisco vpnagentd 57.57GiB RSS leak = top RAM consumer (45.7%); microk8s cluster (20G, kubelite, ~100 sandbox mounts); GitLab+Jitsi+postgres+liveness; /robot-full-2026-09-24.img 108.2GiB root-only loop attached-but-unmounted; docker 26.74GB images; uptime 61d; load ~15; Linger=yes; NTP ok",
+    "L-03 nuance: numeric minimum >=30GB free is MET on /mnt/gig (52.76GB) - the L-03 FAIL is specifically the 80% usage guard + 2x margin, both measured FAIL",
+    "Issue #94 framing 'RAM demand from other workloads' CONFIRMED structural: microk8s, GitLab, Jitsi, 2 VMs, 3 CI runners, postgres are all live tenants"
+  ],
+  "boundaries": {
+    "scientific_runs": 0,
+    "mutations": 0,
+    "read_only_commands_only": true,
+    "no_secrets_in_evidence": true,
+    "forbidden_paths_respected": ["project/*.json", "docs/evidence/NL5-V02-FREEZE/**", "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md", "scripts/**", "tests/**"],
+    "u2_role": "EXTERNAL_U2_ONLY; not an author host; U1 request (#83) independent",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE; F07 HARD_BLOCKED; F2 frozen unchanged",
+    "self_accept": "none; owner approval + separate U2_INFRA_OPERATOR + fresh Reviewer + distinct Verifier required downstream"
+  }
+}

@@ -1,0 +1,28 @@
+=== CMD: du -x -h -d 1 /var/log 2>/dev/null | sort -rh | head -15 ===
+4.1G	/var/log/journal
+4.1G	/var/log
+7.7M	/var/log/containers
+456K	/var/log/apt
+116K	/var/log/mosquitto
+100K	/var/log/pods
+60K	/var/log/nginx
+44K	/var/log/postgresql
+44K	/var/log/cups
+24K	/var/log/libvirt
+12K	/var/log/AmneziaVPN
+8.0K	/var/log/hp
+4.0K	/var/log/xrdp
+4.0K	/var/log/unattended-upgrades
+4.0K	/var/log/sysstat
+=== CMD: du -x -h -d 1 /tmp 2>/dev/null | sort -rh | head -10 ===
+2.3G	/tmp
+651M	/tmp/camhi
+113M	/tmp/dsh-subprocess-0GxvqQ
+63M	/tmp/review-v012-r2
+45M	/tmp/verify-v012-r2
+45M	/tmp/s17_r2_fetch
+41M	/tmp/verifier76_repair
+40M	/tmp/baac137-check
+39M	/tmp/nanolab-red-check
+36M	/tmp/integration-dryrun
+EXIT: 0
