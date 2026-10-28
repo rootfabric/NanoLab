@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-28T03:43:32.888051Z",
+  "execution_id": "EX-FLOW-THROUGHPUT-R1",
+  "work_order_id": "WO-FLOW-THROUGHPUT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ae35bf592d18e071dfecca74744d0315ae17f4af",
+  "summary": "Implementation published in PR #95; scientific runs=0; no self-acceptance and no main merge.",
+  "evidence_refs": [
+    "docs/work/executions/EX-FLOW-THROUGHPUT-R1/evidence/validation-R1.json",
+    "docs/work/executions/EX-FLOW-THROUGHPUT-R1/summary.md"
+  ],
+  "next_action": "Independent Reviewer of ae35bf592d18e071dfecca74744d0315ae17f4af; separate Verifier and existing Human Gate remain."
+}
