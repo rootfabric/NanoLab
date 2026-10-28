@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "FLOW-R1",
+  "title": "Ускорение harness и roadmap",
+  "track": "CONTROL",
+  "status": "WAITING_REVIEW",
+  "actor": "REVIEWER",
+  "priority": 5,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "Независимое review exact candidate, затем отдельная проверка изменения control/security policy.",
+  "next_action": "Реализация и регрессия в PR #95; не self-accept.",
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/95"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

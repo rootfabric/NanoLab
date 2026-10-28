@@ -95,6 +95,11 @@ def check_consistency(root: Path) -> dict[str, Any]:
 
     if set(state.get("task_status", {})) != set(tasks):
         errors.append("project/state.json task_status ids differ from project/plan.json")
+    policy_states = set(load_json(root / "config/control/harness/harness-policy.v1.json").get("work_order_states", [])) | {"READY"}
+    for task_id, status in state.get("task_status", {}).items():
+        if not isinstance(status, str) or status not in policy_states:
+            errors.append(f"{task_id}: unknown task status {status!r}")
+
     if set(state.get("stage_status", {})) != set(stages):
         errors.append("project/state.json stage_status ids differ from project/plan.json")
     if set(state.get("experiment_status", {})) != set(experiments):
@@ -116,6 +121,11 @@ def check_consistency(root: Path) -> dict[str, Any]:
     if scheduler.get("next_work_order") != next_work:
         errors.append("scheduler next_work_order differs from project state")
 
+    from .operations import load_tasks, route
+    operational = load_tasks(root, plan, state)
+    errors.extend(operational["errors"])
+    readiness = route(state, plan, operational["tasks"])
+
     branch = git_value(root, "branch", "--show-current")
     head = git_value(root, "rev-parse", "HEAD")
     tree = git_value(root, "rev-parse", "HEAD^{tree}")
@@ -132,4 +142,6 @@ def check_consistency(root: Path) -> dict[str, Any]:
         "head": head,
         "tree": tree,
         "counts": {"stages": len(stages), "tasks": len(tasks), "experiments": len(experiments)},
+        "frontier_readiness": {k: readiness[k] for k in ("canonical_task_status", "dispatchable", "next_actor", "human_decision_required", "unmet_dependencies")},
+        "operational_tasks": operational["tasks"],
     }

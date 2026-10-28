@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "NL7-OFFLINE-SLICE",
+  "title": "Законченный offline-сценарий на реальной паре",
+  "track": "NL7_PREP",
+  "status": "BLOCKED_DEPENDENCY",
+  "actor": "IMPLEMENTER",
+  "priority": 40,
+  "depends_on": [
+    "NL7-REAL-SOURCE"
+  ],
+  "blockers": [
+    "REAL_INPUTS_REQUIRED"
+  ],
+  "resume_condition": "NL7-REAL-SOURCE завершён с файлами, происхождением и проверенными правами.",
+  "next_action": "Import → ports → assembly → .top/.dat → preview/export → receipt. Статическая сборка не доказывает передачу движения.",
+  "evidence_refs": [
+    "docs/examples/s17_static_assembly_example/README.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

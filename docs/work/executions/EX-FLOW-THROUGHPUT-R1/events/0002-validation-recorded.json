@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "timestamp_utc": "2026-10-28T03:43:32.887963Z",
+  "execution_id": "EX-FLOW-THROUGHPUT-R1",
+  "work_order_id": "WO-FLOW-THROUGHPUT-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ae35bf592d18e071dfecca74744d0315ae17f4af",
+  "summary": "1026 tests PASS; JSON/67 executions/consistency/security lint PASS; GitHub CI 40628140699 SUCCESS. Implementer validation only.",
+  "evidence_refs": [
+    "docs/work/executions/EX-FLOW-THROUGHPUT-R1/evidence/validation-R1.json",
+    "docs/work/executions/EX-FLOW-THROUGHPUT-R1/summary.md"
+  ],
+  "next_action": "Publish handoff and request independent HIGH review."
+}

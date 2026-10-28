@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "kind": "development_plan",
-  "revision": "literature-to-mechanism-route-r1",
+  "revision": "flow-throughput-r1",
   "runtime_schema_implemented": false,
   "mission": "Reproducible AI-assisted design and testing of nanostructures, components and future nanomachines",
   "mvp_stage": "NL4",
@@ -46,5 +46,8 @@
     {"id": "NL6-002", "stage": "NL6", "title": "Execute non-gating E3-R2 AI benchmark on enriched post-E5 design space", "depends_on": ["NL6-001"], "doc": "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md"},
     {"id": "NL7-001", "stage": "NL7", "title": "Validate two-component DNA assembly and reduced models", "depends_on": ["NL6-001"], "doc": "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md"},
     {"id": "NL8-001", "stage": "NL8", "title": "Specify programmable nanomechanism energy and control study", "depends_on": ["NL7-001"], "doc": "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md"}
-  ]
+  ],
+  "operational_task_directory": "project/operations",
+  "throughput_policy": "docs/control/FLOW_THROUGHPUT_R1.md",
+  "parallel_preparation": {"NL6_PREP": "C0 TestRig preparation may proceed before NL5 closure; science remains gated by NL5/R2/launch authority.", "NL7_PREP": "Real-source import and static assembly may proceed in parallel; no NL7 scientific acceptance.", "scale_infrastructure": "INFRA6/7 and Task Bus production postponed until measured demand; not default gates."}
 }

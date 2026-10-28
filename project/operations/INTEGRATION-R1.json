@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "INTEGRATION-R1",
+  "title": "Один пакет C0 и актуальная очередь",
+  "track": "CONTROL",
+  "status": "READY",
+  "actor": "DIRECTOR",
+  "priority": 25,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Подготовить одну интеграцию совместимых C0 материалов F01/F02/F03/F05; проверить зависимости и действующее разрешение. Не требовать нового Verifier только из-за отчётного SHA.",
+  "evidence_refs": [
+    "docs/control/FLOW_THROUGHPUT_R1.md",
+    "https://github.com/rootfabric/NanoLab/issues/81"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

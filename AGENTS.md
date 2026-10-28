@@ -1,154 +1,48 @@
 # NanoLab — Agent Router
 
-Канонический репозиторий: `rootfabric/NanoLab`. Root `AGENTS.md` маршрутизирует работу; roadmap и scientific truth берутся из `main`.
+Канонический репозиторий `rootfabric/NanoLab`; scientific truth и принятая policy — свежий `main`. Рабочие ветки публикуют execution facts, не self-acceptance.
 
-## Central agent / Director fast path
+## Начало обычной задачи
 
-Если владелец назначил тебя **центральным/главным агентом**, `DIRECTOR`, попросил организовать распределённое выполнение дорожной карты, запускать/ожидать других агентов или продолжить task-bus workflow, **сразу после этого файла читай `DIRECTOR.md`**.
+Прочитать `PROJECT_CONTROL.md`, `HARNESS_CONTROL.md`, `project/state.json`, `project/plan.json`, текущий Work Order и ближайшие scoped инструкции. Для risk routing и исправлений применять `docs/control/FLOW_THROUGHPUT_R1.md` (после её canonical merge она имеет приоритет над старым общим требованием повторять все роли после каждого коммита). Команда:
 
-```text
-CENTRAL / MAIN AGENT / DIRECTOR / DISTRIBUTED WORKFLOW
-    -> DIRECTOR.md
-    -> docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md
-    -> fresh canonical state
-    -> fresh Git Task Bus status/history
-    -> dispatch real role session OR WAIT_EXTERNAL
+```bash
+PYTHONPATH=scripts python3 -m harness.cli drive --root .
 ```
 
-Не пытайся восстановить распределённый workflow из чата и не выполняй независимые роли под разными именами в одной сессии. `DIRECTOR.md` является коротким входом; полные правила находятся в `docs/control/GIT_TASK_BUS_RU.md`, `docs/control/GIT_TASK_BUS_POST_PILOT_CORRECTION_R1.md` и `docs/control/GIT_TASK_BUS_PROMPTS_RU.md`.
+`project/operations/*.json` и `docs/work/CURRENT_QUEUE.md` — актуальные C0 задачи. Исторические roadmap/WORK_QUEUE сохранены отдельно и не являются dispatch. WAITING_HUMAN/BLOCKED нельзя трактовать как разрешение запуска; доступные C0 PREP работы показаны параллельно.
 
-Текущее обязательное ограничение Task Bus: `BUS-SMOKE-001` уже завершён как `COMPLETED_SANDBOX`; это не `ACCEPTED`. До Fresh Reviewer + Fresh exact-head Verifier + Human Gate самого `BUS-001` **не начинать P2 production activation**.
+Назначен центральным агентом / Director / интегратором — дополнительно читать `DIRECTOR.md`. Не имитировать независимые роли одной сессией. Task Bus применяется только к явно назначенной bus-работе; до его P1.1–P1.4 gates production P2 запрещён. COMPLETED_SANDBOX не ACCEPTED, actor_id не доказательство отдельного executor.
 
-## Mandatory read order
+## Дополнительное чтение по риску
 
-Перед изменением кода, запуском эксперимента, review или объявлением checkpoint читать:
+Scientific protocol/run/model/analysis/inputs/claim: `docs/SCIENTIFIC_METHOD.md`, `docs/control/EXPERIMENT_HARNESS_RU.md`, `HARNESS_REVIEW_AND_EVIDENCE_RU.md`, паспорт эксперимента, frozen protocol/authority и source provenance. Scientific gates не сокращаются административной policy.
 
-```text
-PROJECT_CONTROL.md
-HARNESS_CONTROL.md
-docs/control/DEVELOPMENT_HARNESS_RU.md
-docs/control/HARNESS_REVIEW_AND_EVIDENCE_RU.md
-docs/control/HARNESS_AUTONOMOUS_EXECUTION_RU.md
-docs/control/EXPERIMENT_HARNESS_RU.md
-docs/control/BRANCHING_AND_GIT_RU.md
-project/state.json
-project/plan.json
-config/control/harness/project-goals.v1.json
-config/control/harness/checkpoint-catalog.v1.json
-```
+CI/runner/storage/compute: `docs/infra/SECURITY_MODEL.md`, `EXECUTION_BACKENDS.md`, `ROADMAP.md`, `project/infra-plan.json`, `project/infra-state.json`. INFRA предоставляет capability, не scientific truth.
 
-Если задача относится к CI, runner, GPU, artifact storage, scheduler, AiiDA/HPC или другой вычислительной инфраструктуре, дополнительно читать:
-
-```text
-docs/infra/README.md
-docs/infra/ROADMAP.md
-docs/infra/SECURITY_MODEL.md
-docs/infra/EXECUTION_BACKENDS.md
-project/infra-plan.json
-project/infra-state.json
-```
-
-Научный frontier и INFRA frontier независимы. INFRA не может самостоятельно закрывать `NL*` checkpoint или повышать scientific claim. Конкретный scientific Work Order объявляет зависимость от INFRA capability только явно.
-
-Затем читать `docs/SCIENTIFIC_METHOD.md`, активный Work Order, паспорт эксперимента и ближайшие scoped инструкции.
-
-## Hard rules
-
-```text
-MAIN DECLARES PROJECT STATE
-BRANCHES REPORT EXECUTION FACTS
-GIT IS DURABLE MEMORY; CHAT IS NOT
-WORK ORDER IS THE EXECUTION UNIT
-EXPERIMENT RUN IS THE SCIENTIFIC EXECUTION UNIT
-COMMIT IS THE RECOVERY UNIT
-EVIDENCE MAP IS THE REVIEW UNIT
-IMPLEMENTER CANNOT SELF-ACCEPT
-EXIT CODE 0 IS NOT A SCIENTIFIC PASS
-SCIENTIFIC CLAIM MUST NOT EXCEED EVIDENCE
-NEGATIVE / FAILED / INCONCLUSIVE RESULTS MUST BE PRESERVED
-DO NOT CHANGE ACCEPTANCE CRITERIA AFTER SEEING RESULTS WITHOUT A NEW PROTOCOL REVISION
-DO NOT REUSE A FAILED RUN ID
-RAW ARTIFACT REUSE REQUIRES DIGEST + PROVENANCE
-INFRASTRUCTURE PROVIDES CAPABILITY; IT DOES NOT DECLARE SCIENTIFIC TRUTH
-PUBLIC PR CODE MUST NOT AUTOMATICALLY RUN ON TRUSTED SELF-HOSTED SCIENTIFIC NODES
-COMPLETED_SANDBOX IS NOT CANONICAL ACCEPTANCE
-ROLE ACTOR IDENTITY IS NOT PROOF OF INDEPENDENT EXECUTOR IDENTITY
-DO NOT START TASK-BUS P2 BEFORE P1.1-P1.4 GATES
-```
+Полный development/branching протокол: `docs/control/DEVELOPMENT_HARNESS_RU.md`, `HARNESS_AUTONOMOUS_EXECUTION_RU.md`, `BRANCHING_AND_GIT_RU.md`. Machine contracts: `config/control/harness/`.
 
 ## Work protocol
 
-1. Проверить fresh `main`, соответствующий state (`project/state.json` или `project/infra-state.json`) и next Work Order.
-2. Создать scoped branch от exact main; записать base SHA.
-3. До substantive work создать durable START record и commit/push.
-4. Выполнять только bounded scope и утверждённый resource budget.
-5. После смыслового этапа/batch/blocker/handoff публиковать CONTINUATION checkpoint.
-6. Для experiment campaign до запуска freeze protocol, code/model subject, inputs/digests, observables, statistics, exclusions, budget и stop conditions.
-7. Каждый run получает уникальный ID; технический outcome и научный conclusion фиксируются отдельно.
-8. Большие raw outputs не обязаны жить в Git, но manifest с SHA-256, размером и location обязателен.
-9. MEDIUM+ получает Reviewer; HIGH scientific work — Reviewer + Verifier + Director. Implementer не self-accept.
-10. `FIX_REQUIRED` исправляется с Repair Map и новым evidence, а не повторением того же действия.
-11. Перед handoff оставить exact HEAD/TREE, commands, results, evidence paths, open risks и одно next action.
-12. Merge в `main` остаётся Human Gate, если владелец явно не разрешил его в текущей mission.
+1. Проверить fresh main и exact base, создать scoped branch/worktree.
+2. До substantive change сохранить Work Order, execution passport и WORK_ORDER_STARTED; commit + non-force push.
+3. Работать только в scope/budget. После содержательного этапа, blocker или handoff — durable checkpoint, не commit на каждую строку.
+4. Для новых C0 records использовать `harness.work_cli start|record|finish|correct` (примеры `docs/work/FLOW_R1_COMMANDS.md`). Sequence-v1 допускает одинаковые реальные UTC timestamps; искусственные миллисекунды не нужны. Старые/научные records не мигрировать.
+5. LOW administrative-only — автоматическая проверка + существующий Human merge gate. Ordinary MEDIUM tooling — один независимый Reviewer, включающий механическую проверку, + CI. HIGH protocol/inputs/topology/analysis/claim/authority/security — отдельные Reviewer и Verifier + Director. CRITICAL — дополнительно Human/domain gate. C0 и Markdown не означают низкий риск.
+6. Чужой repair может проверить тот же независимый Reviewer/Verifier. Publication-only commit требует доказанной неизменности product/input subject и delta review текста, а не нового полного цикла. Неясное влияние — полный/affected путь. Этот FLOW-R1 пакет сам проходит HIGH review, не self-accepts.
+7. Перед handoff: exact subject HEAD/TREE, команды/результаты, evidence, оставшиеся риски и одно next action. Отрицательные/failed/inconclusive результаты сохранять. Исторические events не редактировать; corrections добавляются.
+8. Merge main остаётся Human Gate, если явное scoped разрешение уже не выдано; его условия должны фактически выполниться. Разрешение на implementation не является независимым acceptance.
 
-## INFRA work protocol
+## Неизменные scientific правила
 
-INFRA — отдельный parallel capability train `INFRA0..INFRA7`. Каждая крупная стадия выполняется отдельной bounded веткой `infra/<checkpoint>-<slug>-rN` от свежего `main`; не поддерживать бесконечную long-lived infra branch.
+Exit code 0 не scientific PASS. Claim не выше evidence. До кампании freeze protocol/code/model/inputs/digests, observables/statistics/exclusions/budget/stop conditions. Run ID уникален; failed ID не использовать заново. Raw reuse требует digest и provenance; raw вне Git допустим с manifest sha256/size/producer/subject/location. Не менять threshold/N/seeds после просмотра результата без новой protocol revision. Технический outcome и научный conclusion разделяются. Никаких фиктивных source models или SOURCE_VERIFIED из библиографии.
 
-До self-hosted execution сначала закрывается security/control baseline. Для публичного repository PR checks используют untrusted/ephemeral route; trusted self-hosted runner выбирается только explicit protected dispatch с exact subject и budget.
+## Исполнители и безопасность
 
-## Experiment Git checkpoints
+WINDOWS_WSL_EXECUTOR=HISTORICAL_ONLY (owner decree 2026-09-27); Windows/WSL не для новых scientific runs, кроме explicit bounded environment-comparison WO. Author — отдельный native Ubuntu U1; outenemy — независимый EXTERNAL_U2, не author/dev host. До frozen fingerprint + U1–U5/NC-U1..U5 + review/verify/Human Gate R2 science остаётся WAITING_HOST. См. `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`, `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`, `docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`. Новые owner minima U1 не отменяются.
 
-Обязательные точки:
+Public PR выполняется только на ephemeral hosted route, никогда автоматически на trusted self-hosted scientific node. Никаких секретов, глобальных установок/изменений узлов или paid compute сверх разрешённого scope/budget. Wet-lab/hardware — CRITICAL с отдельным human/domain gate. READY карточка не запускает worker.
 
-```text
-START
-  manifest + protocol + frozen subject + inputs
+## Git и язык
 
-CONTINUATION
-  phase/batch completed, blocker, repair, role handoff
-
-END_EXECUTION
-  completed/failed/aborted/blocked + artifact manifest
-
-END_ANALYSIS
-  observable/statistics + scientific outcome
-
-REVIEW
-  independent verdict + claim ceiling
-```
-
-Старые experiment events не редактировать; corrections/superseding — новым event.
-
-## Executor environment policy
-
-```text
-WINDOWS_WSL_EXECUTOR            = HISTORICAL_ONLY   (effective 2026-09-27)
-WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO                (exception: explicit bounded
-                                                     environment comparison WO)
-DEFAULT_AUTHOR_EXECUTOR         = NATIVE_UBUNTU_R2  (PROPOSED -> ACTIVE после
-                                                     validation gates R2)
-```
-
-Новые scientific runs на Windows/WSL2 запрещены (owner decree 2026-09-27);
-Windows/WSL2 = historical evidence + UI only. Новые local agents ищут native
-Ubuntu host (U1 = AUTHOR_UBUNTU) первым: `ssh <u1>`, `cd ~/src/NanoLab`,
-`git fetch --all --prune`. outenemy = внешняя независимая репродукция/верификация
-(U2), НЕ author/dev host. До фактической активации R2 (frozen fingerprint +
-gates U1-U5 + NC-U1..U5 + review/verify + Human Gate — см.
-`docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`,
-`docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`) научные execution-запросы
-ожидают выделения U1; тихий fallback на Windows запрещён. Детали:
-`docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`.
-
-## Resources and safety
-
-Не запускать платные GPU/CI/внешние сервисы сверх budget. Не запускать физический wet-lab/hardware experiment по правилам вычислительного harness: такие работы `CRITICAL` и требуют отдельного human/domain gate. Не скрывать секреты и не изменять систему владельца глобальными установками без scope.
-
-## Git authority
-
-Внутри активного Work Order без нового запроса разрешены: scoped branch/worktree, stage, commit, non-force push, draft PR, evidence publication, review request. Не разрешены: direct push main, force-push/history rewrite, destructive remote deletion, foundation authority change.
-
-## Language
-
-Проектные документы и отчёты — русский. Code identifiers, schemas, event/status names и commit type — английский. Conventional Commits обязателен для обычных development commits.
+Внутри Work Order разрешены scoped branch/worktree, stage, commit, non-force push, draft PR, evidence publication и review request. Запрещены direct push main, force/history rewrite, destructive remote deletion и неразрешённое расширение полномочий. Git — durable memory, не чат. Документы/отчёты — русский, identifiers/schemas/events и Conventional Commit types — английский.

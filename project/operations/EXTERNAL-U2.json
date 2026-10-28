@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "EXTERNAL-U2",
+  "title": "Подготовка внешнего узла outenemy",
+  "track": "INFRA",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
+  "priority": 20,
+  "depends_on": [],
+  "blockers": [
+    "OPERATOR_ACTION_REQUIRED"
+  ],
+  "resume_condition": "Выбран и разрешён scoped план операторских действий; свежие замеры ресурсов после исполнения.",
+  "next_action": "Выбрать действия по U2 с поправкой арифметики df и классификацией служб. Снимок 26 октября не является текущим readiness.",
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/issues/94",
+    "docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}
