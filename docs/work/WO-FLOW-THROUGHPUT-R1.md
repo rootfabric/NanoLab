@@ -3,16 +3,12 @@
 START: 2026-10-28T03:11:46.106Z. Owner request: внедрить предложенные по аудиту изменения harness и roadmap; продолжить прерванную операцию.
 
 Base: `main@3b567ae33f247b182b2ae451d2cc4598a9e76019`, tree `560dc913a71a237d3c452a5a2e492e213b232911`.
-Branch: `control/flow-throughput-r1`. Risk: HIGH (control/CI policy), claim: C0_SOFTWARE_ONLY. Implementer не является независимым Reviewer/Verifier.
+Branch: `control/flow-throughput-r1`. Risk HIGH: control/risk/CI. Claim C0_SOFTWARE_ONLY.
 
-## Scope
-Readiness-aware drive и operational task records; генерация валидных work events; пакетная CI-валидация без удаления тестов; impact-based review policy и перенос evidence при доказанной неизменности subject; актуальная навигация/roadmap с параллельными NL6/NL7 PREP; исправления ресурсной арифметики отдельным addendum без редактирования исторических evidence.
+Scope: readiness-aware routing и отдельные operational cards; writer новых work events; пакетная CI-валидация без удаления tests; impact-based review и reuse только при доказанной неизменности subject; актуальная roadmap, команды и source/integrator roles; resource correction addendum.
 
-## Границы
-Научные протоколы, inputs, seeds, N, критерии приёмки, frozen F2 и исторические experiment events неизменны. U1 не назначается фиктивно, U2 не объявляется исправленным, R2 не активируется. Scientific runs=0. Paid compute=0. Main не меняется без Human Gate и независимого review. Никакой автоматической активации Task Bus P2, self-hosted PR execution или глобальной настройки узлов.
+Scientific protocols, inputs, seeds, N, criteria, frozen F2 и исторические experiment events неизменны. U1 не назначается фиктивно, U2 не объявляется исправленным, R2 не активируется. Scientific runs=0, paid compute=0. Main не меняется без Human Gate и независимого review. Task Bus production и self-hosted PR execution не активируются.
 
-## Validation / outputs
-Focused regression/negative tests, полный существующий unittest suite, consistency, все execution passports/events, workflow security lint; exact HEAD/TREE, evidence и один PR. Для runtime recovery разрешён временный H0 read-only export публичной Git-истории exact base в debug artifact (1 день); exporter удаляется из final diff. Budget: до 6 H0 CI jobs по <=15 минут, локальные C0 tests; при исчерпании остановить повторные запуски и опубликовать результат.
+Validation: focused negative/regression tests, полный unittest suite, consistency, все passports/events, workflow security lint. Budget: до 6 H0 CI jobs <=15 минут каждый и локальные C0 tests. Временный read-only H0 recovery exporter публичной Git-истории base удаляется до handoff; его artifact имеет TTL 1 день, secrets/config не экспортируются.
 
-## Next
-Получить exact checkout, реализовать пакет, прогнать проверки и передать независимому Reviewer. Научный frontier NL5 и external_reproductions=0 не повышаются этой работой.
+Outputs: code, tests, operational roadmap, planning corrections и один PR #95. Реализация не self-accepts; HIGH-политика для этого пакета не понижается им самим.

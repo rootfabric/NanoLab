@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "RESOURCE-R1",
+  "title": "Исправленный ресурсный план NL5",
+  "track": "NL5_PREP",
+  "status": "READY",
+  "actor": "IMPLEMENTER",
+  "priority": 10,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Использовать RESOURCE_PLAN_CORRECTIONS_R1; подготовить профиль измерения целевой сборки U1/U2 и проверку памяти/хранилища. Ничего не запускать без разрешённых host/launch gates.",
+  "evidence_refs": [
+    "docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

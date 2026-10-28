@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "NL7-REAL-SOURCE",
+  "title": "Получение реальных исходных компонентов",
+  "track": "NL7_PREP",
+  "status": "READY",
+  "actor": "IMPLEMENTER",
+  "priority": 30,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Получить реальные CAD/oxDNA файлы, права и provenance для пары. Максимум два содержательных прохода; затем явный выбор альтернативы или BLOCKED_SOURCE. Не считать библиографию готовой моделью.",
+  "evidence_refs": [
+    "docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json",
+    "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

@@ -1,5 +1,10 @@
 # NanoLab — Harness Control
 
+## FLOW-R1: исполнение без административных повторов
+
+Актуальные C0 задачи: `project/operations/*.json`, обзор `docs/work/CURRENT_QUEUE.md`. Правила risk routing и publication-only delta review: `docs/control/FLOW_THROUGHPUT_R1.md`; они заменяют общий обязательный повтор всех ролей после каждого отчётного commit. Специальные frozen science / Task Bus activation gates не изменяются. `PYTHONPATH=scripts python3 -m harness.cli drive --root .` показывает реальные blockers и параллельные READY задачи; карточка не запускает агента и не разрешает science/merge.
+
+
 **Revision:** `NL-H0-2026-09-08-R1`  
 **Canonical owner:** `main`
 

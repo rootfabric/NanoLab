@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "AUTHOR-U1",
+  "title": "Назначить авторский native Ubuntu узел",
+  "track": "INFRA",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
+  "priority": 15,
+  "depends_on": [],
+  "blockers": [
+    "AUTHOR_U1_NOT_ASSIGNED"
+  ],
+  "resume_condition": "Владелец выделил физический U1, параметры/доступ записаны; затем R2 activation gates.",
+  "next_action": "Выделить U1 согласно ранее принятому owner requirement. U2 не переименовывать в author.",
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/blob/9b24f93092e917cb6064d5c7723e5b4d1f05d67d/docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_OWNER_REQUIREMENTS_ADDENDUM_R1.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

@@ -6,17 +6,13 @@
 
 ## Текущее состояние
 
-```text
-CURRENT FRONTIER = NL5
-NL5-002 = WAITING_HUMAN (terminal verified MISMATCH / NOT accepted, canonical; активный дочерний WO: platform sensitivity)
-E0 = RUN · E1 = SUPPORTED · E2 = RUN · NL4 = MVP COMPLETE · NL5-001 = ACCEPTED
-```
+Научный frontier — **NL5**. NL0–NL4 и библиотека NL5-001 приняты. Внешнее воспроизведение v0.1 завершилось terminal MISMATCH; `external_reproductions=0`. Platform-sensitivity работа завершена, frozen v0.2 подготовлен. Новый scientific запуск ожидает U1, готовности U2, R2 и действующей launch authority; этот FLOW-R1 пакет их не подменяет.
 
-**Научная стадия `NL5` в работе. `NL5-001` принят (2026-09-18): библиотека и release-пакет `nanolab-components 0.1.0` опубликованы — family/variant cards (0b/11b/32b/53b измерены; 74b honest gap), machine-readable schema, protocols, provenance, reproduction, rights, citation/version, детерминированный release manifest; лицензии финализированы owner-решением D2 (код Apache-2.0; документация + derived data CC-BY-4.0; сторонние права не перелицензованы). Clean release reproduction NL5-001-C: 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b NOT_MEASURED/KNOWN_GAP (frozen NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE; claim не повышен). Стадия `NL4` закрыта ранее: AI NanoLab MVP собран и верифицирован clean-room'ом; NL4-001/002/003 приняты после батчевого Reviewer; claimed-скор ИИ E3 аннулирован anti-bias re-validation (честный negative-on-advantage). Стадия `NL3`: параметрика измерена (0b 65.98° [65.67, 66.32]; 11b 73.93°; 32b 78.09°; 53b 132.36°).** Канонические статусы: [project/state.json](project/state.json), сводка приёмок: [WORK_QUEUE](docs/work/WORK_QUEUE.md). `NL5-002` закрыт как terminal MISMATCH / NOT accepted (canonical 2026-09-20): внешний reproduction пакета v0.1.1 дал **MISMATCH** (0b/32b вне frozen envelopes, 11b/53b MATCH; Fresh Reviewer + Verifier PASS; threshold tuning отсутствует) — evidence chain смержена (PR #43, `7504b38`), **NL5 acceptance НЕ объявлен**, `external_reproductions = 0`; активный дочерний WO — [WO-NL5-002-E-R1](docs/work/WO-NL5-002-E-R1.md) platform sensitivity (preregistration FROZEN; dispatch BLOCKED_ON_P1_AVAILABILITY); каноническое решение: [DIRECTOR_DECISION_R1](docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md). Карточка компонента 0b: [EX-NL3-002-SUMMARY-R1](docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.md), протокол E2: [E2_PROTO_R1](docs/research/E2_PROTO_R1.md).
+Программно доступны pinned import, контракты компонентов/портов и offline assembly CLI. Реальная S17 follower-модель остаётся NOT_RECONSTRUCTED; синтетический пример не является доказательством реальной сборки или передачи движения. Подготовка NL6 TestRig и NL7 реальных исходников/offline slice идёт отдельно от научной приёмки.
 
-С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
+**Что делать сейчас:** [текущая очередь](docs/work/CURRENT_QUEUE.md), [правила FLOW-R1](docs/control/FLOW_THROUGHPUT_R1.md), [поправки к ресурсному плану](docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md). Машинный статус: `project/state.json`; оперативные карточки: `project/operations/*.json`. Исторические handoffs сохранены в WORK_QUEUE.md, но не являются текущим dispatch.
 
-Параллельно научной линии ведётся отдельный [INFRA track](docs/infra/README.md): safe CI → self-hosted CPU → reproducible executor → artifact store → GPU → scheduler/AiiDA → HPC. Статус: `INFRA0–INFRA1` приняты, frontier `INFRA2-001` (self-hosted CPU executor). INFRA предоставляет вычислительные возможности, но по умолчанию не является hard gate научной дорожной карты и не владеет scientific truth. Git Task Bus: пилот `BUS-SMOKE-001` завершён как `COMPLETED_SANDBOX` (не ACCEPTED); P2 production activation заблокировано до отдельного owner-решения.
+Лицензии собственного кода и материалов зафиксированы решением D2: Apache-2.0 для кода, CC-BY-4.0 для документации/derived data; права на сторонние исходники проверяются отдельно. INFRA предоставляет возможности, не scientific truth. Production Task Bus не активируется этой работой.
 
 ## К чему идём
 
@@ -80,4 +76,4 @@ Windows PowerShell:
 
 Успешный запуск программы ≠ научная достоверность. Совпадение моделей ≠ экспериментальное подтверждение. Красивая анимация ≠ работающая наномашина. Отрицательный результат сохраняется наравне с положительным.
 
-Правила участия: [CONTRIBUTING](CONTRIBUTING.md), правила агентов: [AGENTS](AGENTS.md). Лицензия собственного проекта ещё требует решения владельца: [LICENSE_POLICY](LICENSE_POLICY.md).
+Правила участия: [CONTRIBUTING](CONTRIBUTING.md), правила агентов: [AGENTS](AGENTS.md). Права и принятые лицензионные решения: [LICENSE_POLICY](LICENSE_POLICY.md).

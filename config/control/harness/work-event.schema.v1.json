@@ -17,6 +17,8 @@
     "command_refs": {"type": "array", "items": {"type": "string"}},
     "evidence_refs": {"type": "array", "items": {"type": "string"}},
     "next_action": {"type": ["string", "null"]},
-    "blocker": {"type": ["string", "null"]}
+    "blocker": {"type": ["string", "null"]},
+    "sequence": {"type": "integer", "minimum": 1},
+    "timestamp_source": {"const": "machine", "description": "Clock source declaration, not independent identity/attestation proof."}
   }
 }
