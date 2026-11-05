@@ -183,7 +183,7 @@ def run(config, output_root, run_id, *, timeout_seconds=MAX_WALL_SECONDS, cancel
     write_json(run_dir / "manifest.json", manifest)
     from . import budget
     try:
-        reservation = budget.reserve(run_dir, timeout_seconds, MAX_OUTPUT_BYTES)
+        reservation = budget.reserve(run_dir, run_id, timeout_seconds, MAX_OUTPUT_BYTES)
     except Exception as exc:
         manifest.update(status="FAILED", execution_outcome="BLOCKED_ENVIRONMENT", failure_class="MISSION_BUDGET_BLOCKED", failure_detail=str(exc))
         manifest["files"] = {p.name: digest(p) for p in run_dir.iterdir() if p.is_file() and p.name != "manifest.json"}

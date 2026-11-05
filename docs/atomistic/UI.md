@@ -35,10 +35,12 @@ event, backend завершает worker и сохраняет failed/cancelled 
 масштаб/центр первого кадра. График показывает потенциальную и полную энергию
 всей системы в эВ относительно времени MD в фс; релаксация в этот график не входит.
 
-Конфигурация JSON сохраняется из формы независимо от запуска. ZIP результата
-содержит четыре JSON: config, trajectory, metrics, manifest. Это сокращённый
-экспорт для просмотра; для полного `verify-run` нужен исходный run directory
-со всеми файлами из manifest (protocol, environment, logs и прочие).
+Конфигурация JSON сохраняется из формы независимо от запуска. ZIP результата содержит manifest и все объявленные исходные артефакты
+(config, protocol, trajectory, metrics, environment, numerical control,
+relaxation evidence, report и logs) с исходными байтами. После распаковки
+применим `python -m atomistic.cli verify-run <directory>`. Перед экспортом
+проверяются run ID, доверенный run directory, allowlist имён, отсутствие
+symlink, размер и SHA-256 каждого файла. Нарушение целостности блокирует ZIP.
 Последний результат доступен в текущем процессе; импорт старых runs через UI
 пока не реализован. Исходные runs остаются в указанном output directory.
 
@@ -67,15 +69,37 @@ PYTHONPATH=scripts python3 -m unittest discover -s tests -p 'test_atomistic*.py'
 node --check scripts/atomistic/static/app.js
 ```
 
-25 tests: 24 PASS, один явно SKIPPED (реальная MD требует отдельного budget).
-В том числе 13 HTTP tests с синтетическим runner: state/static, JSON+ZIP,
+28 tests: 27 PASS, один явно SKIPPED (реальная MD требует отдельного budget).
+В том числе 16 HTTP tests с синтетическим runner: state/static, JSON+ZIP,
 отсутствие подставного результата до запуска, Host/Origin/token, traversal,
 nonfinite/duplicate JSON, body cap, реальная backend validation до worker,
 single job/cancel, failed attempt без retry, session caps и loopback binding.
+Добавлены SHA/size + byte-exact ZIP round-trip с `verify_run`, повреждённые
+файлы/путь/manifest и проверка валидности default HTML числовых полей.
 Синтетические fixtures не являются научным или material evidence.
 
-Browser QA ещё не подтверждена на этом checkpoint: Playwright browser binary
-отсутствовал; isolated download Chromium вернул неполный ZIP; cloud browser
-не имеет доступа к loopback этого container (`ERR_CONNECTION_REFUSED`).
+Browser mock QA выполнена настоящим headless Chromium 153 через Playwright:
+форма валидна, нажатие запуска достигает completed fixture, atom count 1,
+pageerror отсутствуют; screenshots начального/готового состояния просмотрены.
+Fixture намеренно синтетический, не физический run. Browser binary получен
+из isolated npm `@sparticuz/chromium`; первоначальный Playwright CDN download
+вернул неполный ZIP. Server/browser запускаются в одной exec network namespace;
+cloud browser не имеет доступа к loopback container (`ERR_CONNECTION_REFUSED`).
 Согласован один последующий реальный UI smoke после интеграции в общем budget.
 Независимые review/verification остаются необходимы; это не self-acceptance.
+
+
+## Repair map (до actual UI smoke)
+
+1. Browser QA выявила default HTML friction step mismatch: min 0.0001 и step
+   0.001 делали default 0.01 невалидным. Исправлен step 0.0001; generic
+   Decimal-check всех default input min/max/step предотвращает повторение.
+2. Независимый review выявил неполный ZIP и несовпадение manifest SHA из-за
+   повторной JSON-сериализации. Источник ошибки — экспорт in-memory dictionaries
+   вместо исходных артефактов. Каноническое исправление `LocalApp.export` читает
+   только server-generated run directory и фиксированный набор объявленных
+   файлов, сверяет байты с manifest и включает полный комплект без сериализации.
+   Изменения касаются HTTP/export/UI; физическая модель и calculation inputs
+   не изменены. Regression: fixture byte equality, SHA/size каждого файла,
+   распаковка + verify_run, tamper/path/unknown entry rejection; 28 tests PASS/skip
+   как выше. До публикации repaired exact source реальный UI smoke не запускался.

@@ -52,9 +52,15 @@ def _locked():
         os.replace(temporary, path)
 
 
-def reserve(run_dir, seconds, max_output_bytes):
+def reserve(run_dir, run_id, seconds, max_output_bytes):
+    if not isinstance(run_id, str) or not run_id or Path(run_dir).name != run_id:
+        raise RuntimeError("run_id must match the reserved run directory name")
     with _locked() as ledger:
         runs = ledger["runs"]
+        # Read older rows without migrating them: the original contract used
+        # run_dir's basename as run_id. Failed/cancelled IDs remain consumed.
+        if any(row.get("run_id", Path(row["run_dir"]).name) == run_id for row in runs):
+            raise RuntimeError("run_id already used in this mission; use a new ID")
         if any(row["status"] == "RUNNING" for row in runs):
             raise RuntimeError("mission already has an active reservation; stale reservations require operator audit")
         if len(runs) >= MAX_RUNS:
@@ -64,7 +70,7 @@ def reserve(run_dir, seconds, max_output_bytes):
         if sum(row["charged_bytes"] for row in runs) + max_output_bytes > MAX_BYTES:
             raise RuntimeError("mission output budget exhausted")
         reservation = uuid.uuid4().hex
-        runs.append({"reservation_id": reservation, "run_dir": str(Path(run_dir).absolute()), "status": "RUNNING", "started_utc": datetime.now(timezone.utc).isoformat(), "owner_pid": os.getpid(), "charged_seconds": seconds, "charged_bytes": max_output_bytes})
+        runs.append({"reservation_id": reservation, "run_id": run_id, "run_dir": str(Path(run_dir).absolute()), "status": "RUNNING", "started_utc": datetime.now(timezone.utc).isoformat(), "owner_pid": os.getpid(), "charged_seconds": seconds, "charged_bytes": max_output_bytes})
         return reservation
 
 

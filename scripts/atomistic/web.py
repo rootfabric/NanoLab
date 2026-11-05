@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import hmac
 import io
 import json
@@ -14,6 +15,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 MAX_BODY = 16_384
+EXPORT_FILES = frozenset({"config.json", "protocol.json", "worker.log", "metrics.json",
+                          "trajectory.json", "report.md", "environment.json",
+                          "numerical-control.json", "relaxation.json", "relaxation.log"})
 STATIC = Path(__file__).with_name("static")
 DEFAULT_CONFIG = {
     "schema_version": "atomistic-config-v1",
@@ -118,14 +122,47 @@ class LocalApp:
         return self.result[name]
 
     def export(self):
-        # Capture all files under one lock: a second tab cannot mix two runs.
+        # Only the server-generated run directory is eligible. Serve the exact
+        # original bytes, so the downloaded manifest remains verifiable.
         with self.lock:
-            files = {name: json_bytes(self._artifact_locked(name))
-                     for name in ("config", "trajectory", "metrics", "manifest")}
+            self._artifact_locked("manifest")
+            run_dir = self.output_root / self.job["run_id"]
+            if Path(self.result.get("run_dir", "")).absolute() != run_dir:
+                raise ValueError("Путь результата не совпадает с каталогом расчёта.")
+            if ".." in run_dir.parts or any(p.is_symlink() for p in [run_dir, *run_dir.parents]):
+                raise ValueError("Небезопасный каталог результата.")
+            manifest_path = run_dir / "manifest.json"
+            if manifest_path.is_symlink() or manifest_path.stat().st_size > 65536:
+                raise ValueError("Небезопасный manifest результата.")
+            manifest_bytes = manifest_path.read_bytes()
+            manifest = json.loads(manifest_bytes)
+            from .api import CLAIM, MAX_OUTPUT_BYTES
+            if (manifest.get("schema_version") != "atomistic-manifest-v1"
+                    or manifest.get("status") != "COMPLETED"
+                    or manifest.get("run_id") != self.job["run_id"]
+                    or manifest.get("claim_ceiling") != CLAIM
+                    or manifest != self.result["manifest"]):
+                raise ValueError("Manifest результата изменён или некорректен.")
+            declared = manifest.get("files")
+            if not isinstance(declared, dict) or set(declared) != EXPORT_FILES:
+                raise ValueError("Неполный или неизвестный состав результата.")
+            files = {"manifest.json": manifest_bytes}
+            total = len(manifest_bytes)
+            for name, expected in declared.items():
+                target = run_dir / name
+                if target.is_symlink() or not target.is_file():
+                    raise ValueError("Небезопасный артефакт результата: " + name)
+                total += target.stat().st_size
+                if total > MAX_OUTPUT_BYTES + 65536:
+                    raise ValueError("Превышен предел размера результата.")
+                data = target.read_bytes()
+                if expected != {"sha256": hashlib.sha256(data).hexdigest(), "size_bytes": len(data)}:
+                    raise ValueError("Нарушена целостность результата: " + name)
+                files[name] = data
         payload = io.BytesIO()
         with zipfile.ZipFile(payload, "w", zipfile.ZIP_DEFLATED) as archive:
             for name, data in files.items():
-                archive.writestr(name + ".json", data)
+                archive.writestr(name, data)
         return payload.getvalue()
 
 
@@ -182,12 +219,12 @@ def make_server(app, port=8765):
             elif path in ("/api/trajectory", "/api/metrics", "/api/manifest", "/api/config"):
                 try:
                     self._json(200, app.artifact(path.rsplit("/", 1)[1]))
-                except (ValueError, KeyError) as exc:
+                except (ValueError, KeyError, OSError) as exc:
                     self._json(409, {"error": str(exc)})
             elif path == "/api/export.zip":
                 try:
                     self._send(200, app.export(), "application/zip", "nanolab-result.zip")
-                except (ValueError, KeyError) as exc:
+                except (ValueError, KeyError, OSError) as exc:
                     self._json(409, {"error": str(exc)})
             else:
                 self._json(404, {"error": "Не найдено."})

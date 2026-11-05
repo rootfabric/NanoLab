@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-RUN-ID-REPAIR-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "checkpoint": "NL6",
+  "base_sha": "61790c05a738d43a9be276b08d7be00d0758ea04",
+  "branch": "repair/atomistic-mission-run-id-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "scripts/atomistic/api.py",
+    "scripts/atomistic/budget.py",
+    "tests/test_atomistic_backend.py"
+  ],
+  "started_at_utc": "2026-11-05T10:54:07.585597Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}

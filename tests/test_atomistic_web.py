@@ -1,5 +1,8 @@
 """Local HTTP integration tests. Runner fixtures do not perform physics."""
 import copy
+from decimal import Decimal
+import hashlib
+from html.parser import HTMLParser
 import http.client
 import io
 import json
@@ -8,9 +11,11 @@ import threading
 import time
 import unittest
 import zipfile
+from pathlib import Path
 
 from atomistic.web import DEFAULT_CONFIG, LocalApp, MAX_BODY, make_server
-from atomistic.api import validate_config
+from atomistic.api import CLAIM, digest, validate_config, verify_run, write_json
+from atomistic.web import EXPORT_FILES, STATIC
 
 
 def fixture_validator(config):
@@ -21,13 +26,29 @@ def fixture_validator(config):
 
 def fixture_runner(config, output_root, run_id, **kwargs):
     """Intentionally synthetic, used only by these tests."""
-    return {"status": "COMPLETED", "run_id": run_id,
+    result = {"status": "COMPLETED", "run_id": run_id,
             "trajectory": {"schema_version": "atomistic-trajectory-v1", "atom_count": 1,
                            "symbols": ["Cu"], "material": "Cu", "frames": [
                                {"step": 0, "time_fs": 0.0, "positions_angstrom": [[0, 0, 0]],
                                 "potential_energy_ev": 0.1, "kinetic_energy_ev": 0.0,
                                 "temperature_k": 0.0}]},
-            "metrics": {"fixture": True}, "manifest": {"fixture": True}}
+            "metrics": {"fixture": True}}
+    root = Path(output_root) / run_id
+    root.mkdir(parents=True)
+    result["run_dir"] = str(root)
+    for name in EXPORT_FILES:
+        if name == "config.json":
+            write_json(root / name, config)
+        elif name in ("trajectory.json", "metrics.json"):
+            write_json(root / name, result[name[:-5]])
+        else:
+            (root / name).write_bytes(b"Explicit synthetic test fixture\n")
+    manifest = {"schema_version": "atomistic-manifest-v1", "status": "COMPLETED",
+                "run_id": run_id, "claim_ceiling": CLAIM, "fixture": True,
+                "files": {name: digest(root / name) for name in sorted(EXPORT_FILES)}}
+    write_json(root / "manifest.json", manifest)
+    result["manifest"] = manifest
+    return result
 
 
 class LocalHTTPTests(unittest.TestCase):
@@ -90,9 +111,51 @@ class LocalHTTPTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(headers["Content-Type"], "application/zip")
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), {"config.json", "trajectory.json", "metrics.json", "manifest.json"})
+            self.assertEqual(set(archive.namelist()), EXPORT_FILES | {"manifest.json"})
             self.assertEqual(json.loads(archive.read("config.json")), DEFAULT_CONFIG)
-            self.assertTrue(json.loads(archive.read("manifest.json"))["fixture"])
+            manifest = json.loads(archive.read("manifest.json"))
+            self.assertTrue(manifest["fixture"])
+            original = Path(self.app.result["run_dir"])
+            for name, expected in manifest["files"].items():
+                raw = archive.read(name)
+                self.assertEqual(raw, (original / name).read_bytes())
+                self.assertEqual(expected, {"sha256": hashlib.sha256(raw).hexdigest(), "size_bytes": len(raw)})
+            with tempfile.TemporaryDirectory() as extracted:
+                archive.extractall(extracted)
+                self.assertEqual(verify_run(extracted)["run_id"], manifest["run_id"])
+
+    def test_export_rejects_changed_artifacts_and_untrusted_paths(self):
+        self.completed_run()
+        root = Path(self.app.result["run_dir"])
+        (root / "metrics.json").write_text("tampered")
+        self.assertEqual(self.request(path="/api/export.zip")[0], 409)
+        self.app.result["run_dir"] = "/etc"
+        self.assertEqual(self.request(path="/api/export.zip")[0], 409)
+
+    def test_export_rejects_unknown_manifest_entry_even_with_valid_digest(self):
+        self.completed_run()
+        root = Path(self.app.result["run_dir"])
+        manifest = self.app.result["manifest"]
+        manifest["files"]["../../secret"] = {"sha256": "0"*64, "size_bytes": 0}
+        write_json(root / "manifest.json", manifest)
+        self.assertEqual(self.request(path="/api/export.zip")[0], 409)
+
+    def test_default_numeric_inputs_satisfy_html_constraints(self):
+        class Inputs(HTMLParser):
+            fields = []
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == "input" and attrs.get("type") == "number":
+                    self.fields.append(attrs)
+        parser = Inputs()
+        parser.feed((STATIC / "index.html").read_text())
+        self.assertGreater(len(parser.fields), 10)
+        for attrs in parser.fields:
+            value, minimum, maximum = [Decimal(attrs[key]) for key in ("value", "min", "max")]
+            self.assertGreaterEqual(value, minimum, attrs["id"])
+            self.assertLessEqual(value, maximum, attrs["id"])
+            step = Decimal(attrs.get("step", "1"))
+            self.assertEqual((value-minimum) % step, 0, attrs["id"])
 
     def test_result_is_not_fabricated_before_run(self):
         for path in ("/api/trajectory", "/api/export.zip"):

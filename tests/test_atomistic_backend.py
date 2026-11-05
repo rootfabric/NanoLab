@@ -137,18 +137,81 @@ class ValidationTests(unittest.TestCase):
 
     def test_mission_ledger_restart_count_and_serial_guard(self):
         from atomistic import budget
-        first = budget.reserve("/tmp/first", 120, 256 * 1024**2)
+        first = budget.reserve("/tmp/first", "first", 120, 256 * 1024**2)
         with self.assertRaisesRegex(RuntimeError, "active reservation"):
-            budget.reserve("/tmp/second", 120, 256 * 1024**2)
+            budget.reserve("/tmp/second", "second", 120, 256 * 1024**2)
         budget.finish(first, "FAILED", 0.5, 100)
         for index in range(7):
-            reservation = budget.reserve(f"/tmp/other-output-{index}", 120, 256 * 1024**2)
+            reservation = budget.reserve(f"/tmp/other-output-{index}", f"other-output-{index}", 120, 256 * 1024**2)
             budget.finish(reservation, "COMPLETED", 0.5, 100)
         with self.assertRaisesRegex(RuntimeError, "count exhausted"):
-            budget.reserve("/tmp/new-root", 120, 256 * 1024**2)
+            budget.reserve("/tmp/new-root", "new-root", 120, 256 * 1024**2)
         ledger = json.loads(next(Path(self.budget_dir.name).glob("*.json")).read_text())
         self.assertEqual(len(ledger["runs"]), 8)
         self.assertEqual(sum(row["charged_seconds"] for row in ledger["runs"]), 4)
+
+    def test_failed_run_id_cannot_be_reused_in_different_output_root(self):
+        with tempfile.TemporaryDirectory() as first_root, tempfile.TemporaryDirectory() as second_root:
+            with mock.patch("atomistic.api._subject", return_value={}), mock.patch("atomistic.api.subprocess.Popen", side_effect=OSError("mock launch failure")) as popen:
+                with self.assertRaises(RunError):
+                    run(self.config, first_root, "failed-run")
+                popen.assert_called_once()
+            ledger_path = next(Path(self.budget_dir.name).glob("*.json"))
+            original_ledger = ledger_path.read_bytes()
+            with mock.patch("atomistic.api._subject", return_value={}), mock.patch("atomistic.api.subprocess.Popen") as popen:
+                with self.assertRaisesRegex(RunError, "run_id already used in this mission"):
+                    run(self.config, second_root, "failed-run")
+                popen.assert_not_called()
+            self.assertEqual(ledger_path.read_bytes(), original_ledger)
+            ledger = json.loads(original_ledger)
+            self.assertEqual(len(ledger["runs"]), 1)
+            self.assertEqual(ledger["runs"][0]["run_id"], "failed-run")
+            self.assertEqual(ledger["runs"][0]["status"], "FAILED")
+            blocked = verify_run(Path(second_root) / "failed-run")
+            self.assertEqual(blocked["failure_class"], "MISSION_BUDGET_BLOCKED")
+            self.assertNotIn("reservation_id", blocked)
+
+    def test_legacy_ledger_run_id_is_derived_without_migration(self):
+        from atomistic import budget
+        reservation = budget.reserve("/tmp/original/legacy-run", "legacy-run", 120, 1000)
+        budget.finish(reservation, "FAILED", 0.5, 100)
+        ledger_path = next(Path(self.budget_dir.name).glob("*.json"))
+        data = json.loads(ledger_path.read_text())
+        del data["runs"][0]["run_id"]  # old ledger row, including original pilot
+        write_json(ledger_path, data)
+        historical_row = copy.deepcopy(data["runs"][0])
+        original_bytes = ledger_path.read_bytes()
+        with self.assertRaisesRegex(RuntimeError, "run_id already used in this mission"):
+            budget.reserve("/tmp/different/legacy-run", "legacy-run", 120, 1000)
+        self.assertEqual(ledger_path.read_bytes(), original_bytes)
+        new = budget.reserve("/tmp/different/new-run", "new-run", 120, 1000)
+        budget.finish(new, "FAILED", 0.5, 100)
+        updated = json.loads(ledger_path.read_text())
+        self.assertEqual(updated["runs"][0], historical_row)
+        self.assertEqual(updated["runs"][1]["run_id"], "new-run")
+
+    def test_concurrent_duplicate_reservations_consume_only_one_slot(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from atomistic import budget
+        ready = threading.Barrier(2)
+
+        def attempt(root):
+            ready.wait(timeout=5)
+            try:
+                return ("RESERVED", budget.reserve(f"/tmp/{root}/same-run", "same-run", 120, 1000))
+            except RuntimeError as exc:
+                return ("BLOCKED", str(exc))
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            outcomes = list(pool.map(attempt, ["root-a", "root-b"]))
+        self.assertEqual(sorted(status for status, _ in outcomes), ["BLOCKED", "RESERVED"])
+        self.assertIn("run_id already used in this mission", next(detail for status, detail in outcomes if status == "BLOCKED"))
+        data = json.loads(next(Path(self.budget_dir.name).glob("*.json")).read_text())
+        self.assertEqual(len(data["runs"]), 1)
+        self.assertEqual(data["runs"][0]["charged_seconds"], 120)
+        self.assertEqual(data["runs"][0]["charged_bytes"], 1000)
+        self.assertEqual(data["runs"][0]["run_id"], "same-run")
+        budget.finish(next(detail for status, detail in outcomes if status == "RESERVED"), "FAILED", 0.5, 100)
 
 
 @unittest.skipUnless(__import__("os").environ.get("NANOLAB_REAL_ATOMISTIC_TEST") == "1", "real MD requires explicit pilot budget; use dedicated integration command")
