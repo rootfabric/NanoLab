@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:44:20.292712Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ca8ae3136231c6b69fb79331374d4ecd599b6bd0",
+  "summary": "Product DAG/task/status and unchanged scientific contracts checked; consistency/JSON and 54 FLOW tests PASS",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-ROADMAP-R1/summary.md"
+  ],
+  "next_action": "Интегрировать roadmap с adapter/UI actual evidence, затем independent review"
+}

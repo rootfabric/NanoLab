@@ -46,9 +46,10 @@ def compare(root: Path, base: str, head: str, publication_paths=()) -> dict:
     publication_only = bool(changes) and all(c["path"] in allowed and c["status"] in {"A", "M"} and
         ("/events/" not in c["path"] or c["status"] == "A") for c in changes)
     for path in allowed:
-        entry = git(root, "ls-tree", "-z", head, "--", path)
-        if not entry.startswith(b"100644 blob "):
-            publication_only = False  # symlinks/executable files are not report-only
+        base_entry = git(root, "ls-tree", "-z", base, "--", path)
+        head_entry = git(root, "ls-tree", "-z", head, "--", path)
+        if not head_entry.startswith(b"100644 blob ") or (base_entry and not base_entry.startswith(b"100644 blob ")):
+            publication_only = False  # either existing entry must be a non-executable report
     before, after = tree_digest(root, base, allowed), tree_digest(root, head, allowed)
     equivalent = before == after and (publication_only or not changes)
     return {"ok": True, "base": base, "head": head,

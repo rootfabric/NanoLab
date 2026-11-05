@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:48:45.208374Z",
+  "execution_id": "EX-ATOMISTIC-BACKEND-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+  "summary": "11 deterministic tests PASS, 1 real test explicit skip; published source frozen; pilot cu-emt-demo-r1-001 COMPLETED, NOT_EVALUATED, 0.655380319 s, digest readback PASS",
+  "evidence_refs": [
+    "examples/atomistic/runs/cu-emt-demo-r1-001/manifest.json",
+    "docs/atomistic/PILOT_PROTOCOL_R1.md"
+  ],
+  "next_action": null
+}

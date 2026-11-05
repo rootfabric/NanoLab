@@ -1,5 +1,7 @@
 # NanoLab — Post-MVP Development Route R1
 
+Исторический маршрут. Текущий owner-directed product приоритет и независимая atomistic P0–P3 линия — [ROADMAP, ATOMISTIC-PRODUCT-R1](../ROADMAP.md) и `project/product-plan.json`. Прежние общие deferred/NL5 ограничения не применяются к narrow engineering validation нового adapter; scientific acceptance и frozen DNA gates сохраняются.
+
 Статус: **OWNER-DIRECTED CANDIDATE**, требует review/verifier и Human Gate merge в `main`.
 
 Base: `main @ 50318c7b32576cf444f36a29ebd7c94a0cc38564` (`NL4 = MVP COMPLETE`).

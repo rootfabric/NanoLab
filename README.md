@@ -6,13 +6,13 @@
 
 ## Текущее состояние
 
-Научный frontier — **NL5**. NL0–NL4 и библиотека NL5-001 приняты. Внешнее воспроизведение v0.1 завершилось terminal MISMATCH; `external_reproductions=0`. Platform-sensitivity работа завершена, frozen v0.2 подготовлен. Новый scientific запуск ожидает U1, готовности U2, R2 и действующей launch authority; этот FLOW-R1 пакет их не подменяет.
+Ближайший продукт — **ограниченная атомистическая лаборатория P0–P3**: один материал/модель → структура → реальная релаксация и короткая MD → траектория/метрики → сохранение и сравнение вариантов. Первый инженерный сценарий строится на **ASE EMT Cu**; это демонстрация программы с реальным расчётом, `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. **P0 OPEN, принятых P-стадий нет**: требуется независимый material reference, а не только успешный запуск.
 
-Программно доступны pinned import, контракты компонентов/портов и offline assembly CLI. Реальная S17 follower-модель остаётся NOT_RECONSTRUCTED; синтетический пример не является доказательством реальной сборки или передачи движения. Подготовка NL6 TestRig и NL7 реальных исходников/offline slice идёт отдельно от научной приёмки.
+Атомистическая разработка идёт независимо от DNA NL5. Историческая научная линия сохранена: NL0–NL4 и NL5-001 приняты, frontier NL5; внешнее v0.1 воспроизведение завершилось terminal MISMATCH, `external_reproductions=0`. Новые NL5/E5 scientific runs требуют прежних U1/U2/R2/launch gates. S17 follower остаётся NOT_RECONSTRUCTED; static/synthetic assembly не доказывает передачу движения.
 
-**Что делать сейчас:** [текущая очередь](docs/work/CURRENT_QUEUE.md), [правила FLOW-R1](docs/control/FLOW_THROUGHPUT_R1.md), [поправки к ресурсному плану](docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md). Машинный статус: `project/state.json`; оперативные карточки: `project/operations/*.json`. Исторические handoffs сохранены в WORK_QUEUE.md, но не являются текущим dispatch.
+**Что делать сейчас:** [P0–P6 roadmap](docs/ROADMAP.md), [product plan](project/product-plan.json), [product state](project/product-state.json), [текущая очередь](docs/work/CURRENT_QUEUE.md). `harness.cli drive` показывает atomistic C0 preparation рядом с отдельным NL5 gate. Карточки не разрешают запуск; узкая инженерная проверка регулируется [mission WO](docs/work/WO-ATOMISTIC-PRODUCT-R1.md): до 4096 atoms, 2000 MD steps/run, 8 actual pilot runs, 20 минут compute и 2 GiB суммарно в disposable Linux. Это не разрешение будущей material campaign.
 
-Лицензии собственного кода и материалов зафиксированы решением D2: Apache-2.0 для кода, CC-BY-4.0 для документации/derived data; права на сторонние исходники проверяются отдельно. INFRA предоставляет возможности, не scientific truth. Production Task Bus не активируется этой работой.
+Лицензии собственного кода и материалов: Apache-2.0 для кода, CC-BY-4.0 для документации/derived data; права сторонних источников проверяются отдельно. INFRA предоставляет capability; production Task Bus не активирован этой работой.
 
 ## К чему идём
 
@@ -29,26 +29,43 @@
 
 ## Первый полезный продукт
 
-**DNA Nanomechanics Lab:** взять проверенную конструкцию ДНК-шарнира, изменять ограниченный набор параметров, вычислять распределение угла раскрытия и сохранность структуры, сравнивать варианты и выдавать воспроизводимый отчёт.
+**Atomistic Lab:** создать небольшую поддерживаемую структуру одного материала, выполнить реальный расчёт, просмотреть движение атомов и численные метрики, сохранить inputs/trajectory/manifest. Сначала — один проверяемый reference P0 и законченный сценарий P1; затем ограниченный конструктор P2 и сравнение вариантов P3. P4–P6 — условные исследования функции компонента, двухкомпонентной системы и специализированного механизма.
 
-ИИ организует исследование. Физические движки считают. Отдельные проверки решают, что результат действительно позволяет утверждать. Сначала эталон воспроизводится без ИИ, затем измеряется вклад агента относительно простых алгоритмов.
+ИИ организует работу; физический adapter считает; независимая validation ограничивает выводы. EMT Cu не выдаётся за validated EAM или доказанные свойства материала. Старый DNA Nanomechanics Lab и его научная история сохранены как отдельная специализация: scadnano → oxDNA/oxpy → analysis/PyMBAR → oxView. AiiDA/aiida-shell и Ax/BoTorch подключаются по потребности работающего сценария.
 
-Планируемая первая связка: **scadnano → oxDNA/oxpy → oxDNA analysis tools/PyMBAR → oxView**, с **AiiDA/aiida-shell** для исполнения и происхождения данных. Для выбора следующего опыта рассматриваются **Ax/BoTorch**. Это план интеграции, не готовая поставка; основания и ограничения находятся в [реестре источников](docs/research/SOURCES.md).
+## Запуск atomistic demo
+
+После установки isolated venv с pinned atomistic dependencies:
+
+```bash
+PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.web --port 8765 --output-root atomistic-runs
+```
+
+Открыть `http://127.0.0.1:8765`: Cu/ASE_EMT_Cu, fcc cuboid → relaxation/MD → trajectory playback/метрики → JSON/ZIP export. Это engineering demo с real adapter; до интеграционных evidence статус — candidate. Изменения формы должны оставаться в общей mission budget; restart браузера/сервера его не обнуляет.
+
+CLI того же сценария:
+
+```bash
+PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.cli run --config examples/atomistic/cu-demo.json --output-root atomistic-runs --run-id unique-run-id
+```
+
+Для каждого фактического запуска нужен новый run ID и свободный остаток общего бюджета. P1 software demo может поставляться с `NOT_SCIENTIFICALLY_VALIDATED`, пока P0 material reference остаётся OPEN; работающий сценарий не переписывается только из-за этого научного пробела.
 
 ## Навигация
 
 | Документ | Назначение |
 |---|---|
 | [VISION](docs/VISION.md) | Миссия, дальняя цель и измеримый вклад |
-| [ROADMAP](docs/ROADMAP.md) | NL0–NL8, зависимости и условия завершения |
+| [ROADMAP](docs/ROADMAP.md) | Product P0–P6 и сохранённая DNA линия NL0–NL8 |
 | [INFRA ROADMAP](docs/infra/ROADMAP.md) | Параллельная вычислительная линия INFRA0–INFRA7 |
-| [MVP](docs/MVP.md) | Первый пользовательский сценарий и приёмка |
+| [MVP](docs/MVP.md) | Исторический DNA MVP и его критерии |
 | [PROJECT CONTROL](PROJECT_CONTROL.md) | Каноническое состояние, ветвление и control invariants |
 | [HARNESS CONTROL](HARNESS_CONTROL.md) | Короткая точка входа для агентов |
 | [EXPERIMENT HARNESS](docs/control/EXPERIMENT_HARNESS_RU.md) | Начало/продолжение/завершение научных запусков и evidence |
 | [ARCHITECTURE](docs/ARCHITECTURE.md) | Ядро, адаптеры, ИИ и будущие расширения |
 | [EXPERIMENTS](docs/experiments/README.md) | E0–E6: контрольные опыты и исследования |
-| [WORK QUEUE](docs/work/WORK_QUEUE.md) | Очередь ограниченных заданий |
+| [CURRENT QUEUE](docs/work/CURRENT_QUEUE.md) | Доступные software задачи и условия возврата |
+| [WORK QUEUE](docs/work/WORK_QUEUE.md) | Историческая очередь и evidence |
 | [AGENT START](docs/work/AGENT_START.md) | С чего начинать следующему агенту |
 | [INDEX](docs/INDEX.md) | Полная карта документации |
 

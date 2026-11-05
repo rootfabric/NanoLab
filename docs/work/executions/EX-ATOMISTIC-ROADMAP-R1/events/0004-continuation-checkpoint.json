@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-checkpoint",
+  "sequence": 4,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:45:31.848797Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "fb737b85e6ed10dd91942fddd3e9c5ff9324bb57",
+  "summary": "Integrator explicitly extended scope to E6/experiment index and historical post-MVP pointer; active engineering priority, unchanged NOT_RUN scientific status",
+  "evidence_refs": [
+    "docs/experiments/E6_ATOMISTIC_ADAPTER.md",
+    "docs/experiments/README.md",
+    "docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md"
+  ],
+  "next_action": "Интегрировать candidate; обновить delivery status по actual adapter/UI evidence"
+}

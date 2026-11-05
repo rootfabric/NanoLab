@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "ATOMISTIC-APP-PREP",
+  "title": "Связать атомистический сценарий с приложением",
+  "track": "ATOMISTIC_PRODUCT",
+  "status": "IN_PROGRESS",
+  "actor": "IMPLEMENTER",
+  "priority": 6,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Consumer: исследователь. Demo: структура → actual adapter → trajectory/metrics → save. Бюджет: один материал/сценарий, reuse actual artifacts; не расходовать pilot runs ради screenshots. Stop: missing adapter/artifact — явная ошибка/unavailable; никакой synthetic substitute. P1 acceptance требует P0 и независимой проверки.",
+  "evidence_refs": [
+    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+    "project/product-plan.json",
+    "project/product-state.json"
+  ],
+  "updated_at_utc": "2026-11-05T10:42:36Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

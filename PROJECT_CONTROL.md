@@ -8,7 +8,7 @@ NanoLab использует адаптированный control/harness-под
 
 ## Канонические источники
 
-Научная/product линия:
+Историческая научная DNA линия:
 
 ```text
 README.md
@@ -19,6 +19,16 @@ project/state.json
 config/control/harness/project-goals.v1.json
 config/control/harness/checkpoint-catalog.v1.json
 ```
+
+Независимая atomistic product линия (candidate P0–P6):
+
+```text
+project/product-plan.json
+project/product-state.json
+project/operations/ATOMISTIC-*.json
+```
+
+P0–P3 — ближайший инженерный продукт; P4–P6 — conditional research. Их acceptance не наследуется от NL0–NL8. Старые `project/state.json`, counters, goals/catalog и frozen protocols не переписываются ради нового UI или расчёта. Product tasks читаются дополнительно к старому NL frontier; `drive` уже показывает их через совместимые C0 operations cards.
 
 Параллельная вычислительная capability линия:
 
@@ -47,12 +57,16 @@ RAW DATA MUST BE ADDRESSABLE BY DIGEST
 INFRASTRUCTURE PROVIDES CAPABILITY; IT DOES NOT OWN SCIENTIFIC TRUTH
 ```
 
-## Два независимых frontiers
+## Независимые frontiers
 
 ```text
-SCIENTIFIC / PRODUCT
+HISTORICAL DNA SCIENTIFIC
 NL0 → NL1 → ... → NL8
 owned by project/state.json
+
+ATOMISTIC PRODUCT
+P0 → P1 → ... → P6
+owned by project/product-plan.json + product-state.json
 
 COMPUTE CAPABILITY
 INFRA0 → INFRA1 → ... → INFRA7
@@ -85,7 +99,8 @@ docs/<slug>-rN
 ## Единицы управления
 
 ```text
-checkpoint      = продуктовая/научная граница NL0..NL8
+checkpoint      = историческая scientific граница NL0..NL8
+product stage   = независимая atomistic граница P0..P6
 infra checkpoint= вычислительная capability граница INFRA0..INFRA7
 work order      = ограниченная задача
 experiment run  = один замороженный вычислительный опыт
@@ -115,3 +130,9 @@ Checkpoint считается принятым только когда в кан
 Для INFRA acceptance проверяется capability/security/reproducibility evidence. Для scientific acceptance проверяется scientific evidence. Эти verdicts не взаимозаменяемы.
 
 До отдельного изменения policy merge в `main` остаётся Human Gate. Рутинные ветка/commit/non-force push/draft PR/evidence внутри Work Order не требуют повторного разрешения владельца.
+
+## Узкий engineering launch profile
+
+[WO-ATOMISTIC-PRODUCT-R1](docs/work/WO-ATOMISTIC-PRODUCT-R1.md) явно разрешает implementation validation нового atomistic adapter в disposable Linux, isolated venv: один material/model, ≤4096 atoms, ≤2000 MD steps/run, ≤8 actual pilot runs, ≤1200 секунд compute, ≤2 GiB результатов суммарно, последовательно. Это реальные расчёты модели с ceiling `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. Machine limits и stops — `project/product-plan.json`; actual budget ledger/evidence ведёт adapter, roadmap не подставляет run counters.
+
+Это дополнение scope только данной mission: никаких paid compute/U1/U2 mutations/NL5/E5 dispatch; контейнер не становится U1/U2. Все future scientific/material campaigns требуют собственного protocol/model validation и принятой среды. Existing operations schema остаётся C0-only; карточка, READY и зелёный CI не дают launch authority. P0/validated P1 не принимаются successful exit или trajectory viewer; P1 engineering delivery учитывается отдельно и не блокируется открытым P0 reference. WIP ≤3 substantive tasks, consumer/demo/budget/stop обязательны; неизменный blocker не вызывает повторный аудит.

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-BACKEND-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "checkpoint": "NL6",
+  "base_sha": "0d8537cc368dc03ee39a543c835f72c40b651ae6",
+  "branch": "work/atomistic-adapter-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "scripts/atomistic",
+    "examples/atomistic",
+    "docs/atomistic",
+    "tests/test_atomistic_backend.py"
+  ],
+  "started_at_utc": "2026-11-05T10:38:58.818594Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}

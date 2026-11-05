@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:44:20.335122Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ca8ae3136231c6b69fb79331374d4ecd599b6bd0",
+  "summary": "Roadmap candidate готов; science не менялась, P0 OPEN, adapter/app IN_PROGRESS до evidence",
+  "evidence_refs": [],
+  "next_action": "Интегратор: интеграция exact product subject с adapter/UI и независимый HIGH review"
+}

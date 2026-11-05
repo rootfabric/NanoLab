@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "atomistic_product_state",
+  "revision": "ATOMISTIC-PRODUCT-R1",
+  "record_class": "CANDIDATE_NOT_CANONICAL_ACCEPTANCE",
+  "plan": "project/product-plan.json",
+  "frontier": "P0",
+  "stage_status": {
+    "P0": "OPEN",
+    "P1": "PLANNED",
+    "P2": "PLANNED",
+    "P3": "PLANNED",
+    "P4": "PLANNED",
+    "P5": "PLANNED",
+    "P6": "PLANNED"
+  },
+  "accepted_stages": [],
+  "task_status": {
+    "AP-P0-REFERENCE": "READY",
+    "AP-P1-ADAPTER": "IN_PROGRESS",
+    "AP-P1-APP": "IN_PROGRESS",
+    "AP-P2-CONSTRUCTOR": "PLANNED"
+  },
+  "next_task": "AP-P0-REFERENCE",
+  "implementation_status": "IN_PROGRESS_PENDING_INDEPENDENT_REVIEW",
+  "material_validation": "NOT_SCIENTIFICALLY_VALIDATED",
+  "evidence_refs": [
+    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md"
+  ],
+  "execution_ledger": "Not populated by roadmap author; actual run receipts/ledger are owned by adapter implementation. Do not infer zero runs or material validation.",
+  "historical_scientific_state_unchanged": true,
+  "open_gaps": [
+    "Pinned material benchmark/reference protocol and accepted validation evidence for P0",
+    "Integrated actual adapter/app evidence and independent review for P1"
+  ],
+  "updated_at_utc": "2026-11-05T10:42:36Z",
+  "engineering_delivery_status": "IN_PROGRESS",
+  "scientific_validation_status": "OPEN_NOT_VALIDATED"
+}

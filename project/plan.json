@@ -49,5 +49,11 @@
   ],
   "operational_task_directory": "project/operations",
   "throughput_policy": "docs/control/FLOW_THROUGHPUT_R1.md",
-  "parallel_preparation": {"NL6_PREP": "C0 TestRig preparation may proceed before NL5 closure; science remains gated by NL5/R2/launch authority.", "NL7_PREP": "Real-source import and static assembly may proceed in parallel; no NL7 scientific acceptance.", "scale_infrastructure": "INFRA6/7 and Task Bus production postponed until measured demand; not default gates."}
+  "parallel_preparation": {"NL6_PREP": "C0 TestRig preparation may proceed before NL5 closure; science remains gated by NL5/R2/launch authority.", "NL7_PREP": "Real-source import and static assembly may proceed in parallel; no NL7 scientific acceptance.", "scale_infrastructure": "INFRA6/7 and Task Bus production postponed until measured demand; not default gates."},
+  "product_track": {
+    "plan": "project/product-plan.json",
+    "state": "project/product-state.json",
+    "roadmap": "docs/ROADMAP.md",
+    "relationship": "Independent atomistic product track P0–P6; historical NL stages/tasks/experiments and acceptance unchanged. Engineering delivery does not depend on NL5-002 or accepted material validation; scientific claims retain validation gates."
+  }
 }

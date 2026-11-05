@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "ATOMISTIC-ADAPTER-PREP",
+  "title": "Подготовить atomistic adapter и инженерный validation contract",
+  "track": "ATOMISTIC_PRODUCT",
+  "status": "IN_PROGRESS",
+  "actor": "IMPLEMENTER",
+  "priority": 5,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Consumer: пользователь/приложение. Demo: Cu structure → actual relaxation/MD → trajectory/metrics/manifest. Бюджет: один сценарий, launch profile project/product-plan.json; карточка разрешает только software работу, не запуск. Stop: missing rights/pin, non-finite/integrity/budget failure; сохранить outcome. Actual runs только по WO-ATOMISTIC-PRODUCT-R1; не C0-physics claim.",
+  "evidence_refs": [
+    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+    "project/product-plan.json",
+    "project/product-state.json"
+  ],
+  "updated_at_utc": "2026-11-05T10:42:36Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:37:46.925150Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0d8537cc368dc03ee39a543c835f72c40b651ae6",
+  "summary": "Administrative product roadmap P0–P6 attached to current NL5 harness frontier; no scientific change",
+  "evidence_refs": [],
+  "next_action": "Создать additive product plan, ближайшие C0 cards и согласовать статус реализации"
+}

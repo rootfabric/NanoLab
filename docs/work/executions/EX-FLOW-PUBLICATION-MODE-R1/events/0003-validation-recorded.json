@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:41:57.592930Z",
+  "execution_id": "EX-FLOW-PUBLICATION-MODE-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ff35e283985f1eed1bacda9a3b3be191782e3700",
+  "summary": "Полный unittest discover: 1028 tests OK; JSON 1523 и executions 69 проходят проверки",
+  "evidence_refs": [
+    "docs/work/executions/EX-FLOW-PUBLICATION-MODE-R1/evidence/green-all-tests.txt",
+    "docs/work/executions/EX-FLOW-PUBLICATION-MODE-R1/evidence/json-check.json",
+    "docs/work/executions/EX-FLOW-PUBLICATION-MODE-R1/evidence/executions-check.json"
+  ],
+  "next_action": null
+}

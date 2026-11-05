@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "kind": "atomistic_product_plan",
+  "revision": "ATOMISTIC-PRODUCT-R1",
+  "canonical_owner": "main",
+  "candidate_work_order": "WO-ATOMISTIC-PRODUCT-R1",
+  "historical_scientific_plan": "project/plan.json",
+  "historical_scientific_state": "project/state.json",
+  "status_file": "project/product-state.json",
+  "operations_directory": "project/operations",
+  "mission": "Ограниченная атомистическая лаборатория: структура → расчёт → траектория/метрики → сравнение → проверенная функция.",
+  "consumer": "Исследователь, которому нужен один воспроизводимый расчёт структуры и честный отчёт об ограничениях.",
+  "stage_acceptance": "Only durable independent acceptance of exact subject/evidence in canonical main; software demo does not accept P0 or P1.",
+  "nl_dependencies": [],
+  "mvp_target": "P3",
+  "stages": [
+    {
+      "id": "P0",
+      "title": "Эталон одного материала",
+      "depends_on": [],
+      "horizon": "ENGINEERING_NEAR_TERM",
+      "acceptance_criteria": [
+        "Один материал, одна named/pinned модель, один ограниченный reference scenario с правами и provenance.",
+        "До оценки результата зафиксированы единицы, boundary conditions, observables, reference values, tolerances/uncertainty, convergence checks, budget и stop conditions.",
+        "Сохранены inputs/code/environment digests, actual outputs и независимая проверка; benchmark не заменён software smoke test."
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "Атомы, релаксация, MD и траектория в приложении",
+      "depends_on": [
+        "P0"
+      ],
+      "horizon": "ENGINEERING_NEAR_TERM",
+      "acceptance_criteria": [
+        "Пользователь создаёт поддерживаемую структуру, запускает реальную relaxation/MD, видит траекторию/метрики и сохраняет результат с provenance.",
+        "Ошибки, non-finite results, превышение бюджета и неподдерживаемые inputs завершаются явно; структура/траектория не генерируются для вида.",
+        "Validated P1 stage acceptance requires P0 and independent review of exact product subject. P1 engineering software delivery can be IMPLEMENTED_DEMO/UNVERIFIED with material validation OPEN; no NL5 dependency."
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Ограниченный конструктор",
+      "depends_on": [
+        "P1"
+      ],
+      "horizon": "ENGINEERING_NEAR_TERM",
+      "acceptance_criteria": [
+        "Конечный набор поддерживаемых геометрий и параметров для выбранной модели; явные пределы размера, единицы, boundary и model applicability.",
+        "Изменение геометрии → fail-closed validation → реальный расчёт → сохранённый результат; unsupported composition/bonding отклоняются."
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Сравнение вариантов экспериментом",
+      "depends_on": [
+        "P2"
+      ],
+      "horizon": "ENGINEERING_NEAR_TERM",
+      "acceptance_criteria": [
+        "Одна цель и preregistered comparator/control, fixed inputs/seeds/observables/tolerances/budget до запуска.",
+        "Сравнение вариантов с uncertainty, всеми failed/negative outcomes и воспроизводимым отчётом.",
+        "Вклад ИИ сравнивается с baseline отдельно от model/material validation; никакой подгонки tolerance после результата."
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "Один функциональный компонент",
+      "depends_on": [
+        "P3"
+      ],
+      "horizon": "CONDITIONAL_RESEARCH",
+      "acceptance_criteria": [
+        "Отдельный protocol и проверенная модель для выбранной функции, actuation/energy/load, controls, cycles, integrity, failure modes и uncertainty.",
+        "Полезная функция количественно подтверждена в области применимости; красивая динамика не принимается за компонент."
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "Система из двух компонентов",
+      "depends_on": [
+        "P4"
+      ],
+      "horizon": "CONDITIONAL_RESEARCH",
+      "acceptance_criteria": [
+        "Проверены interfaces/topology/model compatibility, quantitative coupling/load transfer и back-reaction.",
+        "Assembly/reduced model проверены на независимых detailed data; статическая сборка не доказывает работающий механизм."
+      ]
+    },
+    {
+      "id": "P6",
+      "title": "Специализированный механизм",
+      "depends_on": [
+        "P5"
+      ],
+      "horizon": "CONDITIONAL_RESEARCH",
+      "acceptance_criteria": [
+        "Один конкретный механизм с energy source, control, cycle, useful output, losses/errors, failure envelope и validation contracts.",
+        "Продолжение обосновано evidence P4/P5 и отдельным решением; универсальная наномашина и физическая изготовимость не обещаются."
+      ]
+    }
+  ],
+  "engineering_launch_profile": {
+    "id": "ATOMISTIC-ENGINEERING-R1",
+    "authority": "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+    "scope": "Only this mission, new atomistic adapter implementation validation; not future scientific campaigns.",
+    "environment": "disposable Linux; isolated venv; sequential runs",
+    "material_count": 1,
+    "candidate_material": "Cu",
+    "candidate_model": "ASE_EMT_Cu; package/version/model implementation digest required before run",
+    "candidate_model_status": "ENGINEERING_DEMONSTRATOR_NOT_MATERIAL_VALIDATED",
+    "claim_ceiling": [
+      "SOFTWARE_DEMONSTRATION",
+      "NOT_SCIENTIFICALLY_VALIDATED"
+    ],
+    "actual_physics_runs": true,
+    "limits": {
+      "max_atoms": 4096,
+      "max_md_steps_per_run": 2000,
+      "max_actual_pilot_runs_total": 8,
+      "max_compute_seconds_total": 1200,
+      "max_result_bytes_total": 2147483648,
+      "max_parallel_runs": 1
+    },
+    "required_before_run": [
+      "saved deterministic config/protocol",
+      "exact code, dependency, model and input pins/digests with rights",
+      "negative validation tests for units/NaN/unsupported material/oversize/unsafe paths",
+      "mission-wide run ledger shared by every executor; actual pilot runs and budgets cumulative"
+    ],
+    "stop_conditions": [
+      "any budget reached or predicted to be exceeded",
+      "missing model rights/pin",
+      "non-finite forces or energies",
+      "failed integrity",
+      "unexpected host mutation or scope expansion"
+    ],
+    "forbidden": [
+      "paid compute",
+      "U1/U2 mutation",
+      "NL5/E5 dispatch",
+      "claiming current container as U1 or U2",
+      "material/scientific acceptance from demo",
+      "reusing failed run ID",
+      "retrying without preserving failed result"
+    ],
+    "future_validation": "Separate frozen material/reference protocol and accepted execution environment; this profile does not authorize it.",
+    "preset": "Cu fcc 2x2x2, 32 atoms; deterministic config examples/atomistic/cu-demo.json"
+  },
+  "work_policy": {
+    "max_active_substantive_tasks": 3,
+    "unchanged_blockers": "Resume only with new input, actor action or evidence; do not repeat the same audit.",
+    "task_contract": [
+      "consumer",
+      "demo",
+      "budget",
+      "stop_condition"
+    ],
+    "infrastructure": "Existing harness and files; scheduler/Task Bus/AiiDA scale-up only on measured demand."
+  },
+  "nearest_tasks": [
+    {
+      "id": "AP-P0-REFERENCE",
+      "stage": "P0",
+      "operation_card": "ATOMISTIC-REFERENCE-PREP",
+      "depends_on": [],
+      "consumer": "Исследователь и независимый material reviewer",
+      "demo": "Один пакет pinned source/model/reference для Cu или явно обоснованной замены, с protocol draft и зафиксированными критериями до будущего запуска.",
+      "budget": "Один материал/модель; максимум два содержательных source passes без нового факта; никаких science runs этой C0 задачей.",
+      "stop_condition": "Нет доступного reference/прав/model applicability: BLOCKED_SOURCE с одним missing input, не объявлять P0 завершённым.",
+      "deliverables": [
+        "reference provenance/rights/pins",
+        "reference protocol with observables/tolerances/uncertainty and convergence plan",
+        "model applicability and explicit unresolved validation gaps"
+      ],
+      "run_authority": null
+    },
+    {
+      "id": "AP-P1-ADAPTER",
+      "stage": "P1",
+      "operation_card": "ATOMISTIC-ADAPTER-PREP",
+      "depends_on": [],
+      "consumer": "Пользователь первого атомистического сценария и UI adapter",
+      "demo": "Одна Cu структура → реальная relaxation/короткая MD → trajectory/metrics/manifest, с инженерным claim ceiling.",
+      "budget": "Engineering launch profile ATOMISTIC-ENGINEERING-R1, cumulative across mission.",
+      "stop_condition": "Любой launch-profile stop; сохранить failed/negative result. Если модель не validated — сохранить P0 OPEN.",
+      "deliverables": [
+        "CLI and isolated dependency pin",
+        "deterministic config and negative tests",
+        "bounded actual calculation receipts and cumulative budget ledger",
+        "trajectory, metrics, provenance manifest"
+      ],
+      "run_authority": "engineering_launch_profile; operational card itself never authorizes a run",
+      "commands": [
+        {
+          "purpose": "actual bounded CLI calculation; use unique run ID and cumulative mission ledger",
+          "env": {
+            "PYTHONPATH": "scripts"
+          },
+          "argv": [
+            ".venv-atomistic/bin/python",
+            "-m",
+            "atomistic.cli",
+            "run",
+            "--config",
+            "examples/atomistic/cu-demo.json",
+            "--output-root",
+            "atomistic-runs",
+            "--run-id",
+            "<unique-run-id>"
+          ],
+          "authority": "Only ATOMISTIC-ENGINEERING-R1 after required-before-run gates; not automatic from plan."
+        }
+      ],
+      "acceptance_dependency": [
+        "P0 for validated P1 stage acceptance; not for delivery of explicitly unvalidated engineering demo"
+      ]
+    },
+    {
+      "id": "AP-P1-APP",
+      "stage": "P1",
+      "operation_card": "ATOMISTIC-APP-PREP",
+      "depends_on": [],
+      "consumer": "Исследователь в приложении",
+      "demo": "Создать структуру, вызвать actual adapter, просмотреть frames/metrics и сохранить bundle; явный NOT_SCIENTIFICALLY_VALIDATED и реальные ошибки.",
+      "budget": "Один материал/модель/сценарий; общий engineering run budget, без новых runs ради UI screenshots.",
+      "stop_condition": "Отсутствует adapter/valid bundle: показать unavailable/error, не заменять результат синтетической анимацией.",
+      "deliverables": [
+        "app entrypoint and bounded request contract",
+        "trajectory/metrics viewer and result export",
+        "integration validation with actual artifact"
+      ],
+      "run_authority": "Reuse existing verified engineering outputs; any new run consumes same mission profile",
+      "commands": [
+        {
+          "purpose": "start loopback application",
+          "env": {
+            "PYTHONPATH": "scripts"
+          },
+          "argv": [
+            ".venv-atomistic/bin/python",
+            "-m",
+            "atomistic.web",
+            "--port",
+            "8765",
+            "--output-root",
+            "atomistic-runs"
+          ],
+          "open_url": "http://127.0.0.1:8765",
+          "authority": "Server start does not authorize launch; app requests must obey shared mission ledger/profile."
+        }
+      ]
+    },
+    {
+      "id": "AP-P2-CONSTRUCTOR",
+      "stage": "P2",
+      "operation_card": null,
+      "depends_on": [
+        "AP-P0-REFERENCE",
+        "AP-P1-ADAPTER",
+        "AP-P1-APP"
+      ],
+      "consumer": "Исследователь ограниченного family конструкций",
+      "demo": "Поддерживаемые параметры → валидная структура → расчёт, с отказом для unsupported inputs.",
+      "budget": "One bounded design family; define new validation budget before runs.",
+      "stop_condition": "P0/P1 not accepted or applicability undefined: keep PLANNED, no dispatch.",
+      "deliverables": [
+        "bounded constructor contract",
+        "same-model geometry validation and reproducible export"
+      ],
+      "run_authority": null
+    }
+  ],
+  "engineering_delivery": "P1 engineering demo can be delivered before P0 material acceptance. Report software delivery and scientific validation separately; do not rerun/rewrite a working P1 solely because P0 stays OPEN."
+}

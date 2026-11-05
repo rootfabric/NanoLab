@@ -1,0 +1,49 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "dependencies": {
+    "ase": "3.26.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "installed_distributions": {
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "tzdata": "2026.6",
+    "kiwisolver": "1.5.1",
+    "ase": "3.26.0",
+    "matplotlib": "3.10.3",
+    "scipy": "1.15.3",
+    "python-dateutil": "4.0.0",
+    "pip": "25.0.1",
+    "pyparsing": "3.3.3",
+    "contourpy": "1.4.0",
+    "fonttools": "4.68.0",
+    "pillow": "13.0.0",
+    "cycler": "0.12.1"
+  },
+  "source_model": {
+    "module": "ase.calculators.emt",
+    "module_digest": {
+      "sha256": "b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d",
+      "size_bytes": 13429
+    },
+    "Cu_parameters": [
+      -3.51,
+      2.67,
+      2.476,
+      1.652,
+      2.74,
+      1.906,
+      0.0091
+    ],
+    "asap_cutoff": false
+  },
+  "resource_limits": {
+    "address_space_bytes": 2147483648,
+    "cpu_seconds": 120,
+    "single_file_bytes": 268435456
+  },
+  "threads": 1
+}

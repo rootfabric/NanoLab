@@ -1,0 +1,18 @@
+test_existing_report_mode_and_type_transitions_require_full_review (tests.test_flow_throughput.ReviewImpactTests.test_existing_report_mode_and_type_transitions_require_full_review) ... 
+  test_existing_report_mode_and_type_transitions_require_full_review (tests.test_flow_throughput.ReviewImpactTests.test_existing_report_mode_and_type_transitions_require_full_review) (before='executable', after='regular') ... FAIL
+
+======================================================================
+FAIL: test_existing_report_mode_and_type_transitions_require_full_review (tests.test_flow_throughput.ReviewImpactTests.test_existing_report_mode_and_type_transitions_require_full_review) (before='executable', after='regular')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/48cb7a65c9c0/NanoLab-flow-repair/tests/test_flow_throughput.py", line 386, in test_existing_report_mode_and_type_transitions_require_full_review
+    self.assertEqual(result['classification'], 'FULL_REVIEW')
+AssertionError: 'PUBLICATION_ONLY_CANDIDATE' != 'FULL_REVIEW'
+- PUBLICATION_ONLY_CANDIDATE
++ FULL_REVIEW
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.192s
+
+FAILED (failures=1)

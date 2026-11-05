@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "ATOMISTIC-REFERENCE-PREP",
+  "title": "Подготовить эталон одного материала для P0",
+  "track": "ATOMISTIC_PRODUCT",
+  "status": "READY",
+  "actor": "IMPLEMENTER",
+  "priority": 7,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Consumer: исследователь/material reviewer. Demo: pinned source/model/rights + draft reference protocol/observables/tolerances/convergence до оценки. Бюджет: один материал, максимум два содержательных source passes без нового факта; без runs. Stop: missing source/rights/applicability → BLOCKED_SOURCE с resume condition; P0 остаётся OPEN.",
+  "evidence_refs": [
+    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+    "project/product-plan.json",
+    "project/product-state.json"
+  ],
+  "updated_at_utc": "2026-11-05T10:42:36Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

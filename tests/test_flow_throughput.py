@@ -367,6 +367,32 @@ class ReviewImpactTests(GitCase):
         result = review_impact.compare(self.root, self.base, self.commit(), [self.report])
         self.assertEqual(result['classification'], 'FULL_REVIEW')
 
+    def test_existing_report_mode_and_type_transitions_require_full_review(self):
+        path = self.root / self.report; path.parent.mkdir(parents=True)
+        for before, after in (('executable', 'regular'), ('regular', 'executable'),
+                              ('symlink', 'regular'), ('regular', 'symlink')):
+            with self.subTest(before=before, after=after):
+                commits = []
+                for kind in (before, after):
+                    if path.exists() or path.is_symlink():
+                        path.unlink()
+                    if kind == 'symlink':
+                        path.symlink_to(self.root / 'marker.txt')
+                    else:
+                        path.write_text(f'report {before} to {after}')
+                        path.chmod(0o755 if kind == 'executable' else 0o644)
+                    commits.append(self.commit())
+                result = review_impact.compare(self.root, *commits, [self.report])
+                self.assertEqual(result['classification'], 'FULL_REVIEW')
+                self.assertFalse(result['subject_equivalent'])
+
+    def test_existing_regular_report_update_remains_publication_candidate(self):
+        base = self.add_report()
+        (self.root / self.report).write_text('updated report')
+        result = review_impact.compare(self.root, base, self.commit(), [self.report])
+        self.assertEqual(result['classification'], 'PUBLICATION_ONLY_CANDIDATE')
+        self.assertTrue(result['subject_equivalent'])
+
     def test_unchanged_subject_is_not_new_approval(self):
         result = review_impact.compare(self.root, self.base, self.base)
         self.assertEqual(result['classification'], 'UNCHANGED')

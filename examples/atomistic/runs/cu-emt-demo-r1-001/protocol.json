@@ -1,0 +1,128 @@
+{
+  "schema_version": "atomistic-protocol-v1",
+  "revision": "CU-EMT-DEMO-R1",
+  "run_id": "cu-emt-demo-r1-001",
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "scientific_outcome": "NOT_EVALUATED",
+  "objective": "Bounded real Cu cluster relaxation and short MD software demonstration",
+  "config": {
+    "schema_version": "atomistic-config-v1",
+    "material": "Cu",
+    "model": "ASE_EMT_Cu",
+    "structure": {
+      "kind": "fcc_cuboid",
+      "size": [
+        2,
+        2,
+        2
+      ],
+      "lattice_constant_angstrom": 3.61
+    },
+    "relaxation": {
+      "max_steps": 100,
+      "fmax_ev_per_angstrom": 0.05
+    },
+    "md": {
+      "steps": 50,
+      "timestep_fs": 1.0,
+      "temperature_k": 100.0,
+      "friction_per_fs": 0.01,
+      "sample_interval": 5,
+      "seed": 1729
+    }
+  },
+  "source_model": {
+    "id": "ASE_EMT_Cu",
+    "ase_version": "3.26.0",
+    "module_digest": {
+      "sha256": "b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d",
+      "size_bytes": 13429
+    },
+    "calculator": "ase.calculators.emt.EMT(asap_cutoff=False)",
+    "boundary": "nonperiodic finite FCC cuboid",
+    "license": "LGPL-2.1-or-later (ASE distribution)",
+    "upstream_source": "https://gitlab.com/ase/ase/-/blob/3.26.0/ase/calculators/emt.py"
+  },
+  "dependency_pins": {
+    "ase": "3.26.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "subject": {
+    "adapter_sources": {
+      "__init__.py": {
+        "sha256": "ee7f97a5eec6436cbe2b56d0e3650e18ad0f3bfac70b63ce3bcbb0105bd84fdf",
+        "size_bytes": 72
+      },
+      "api.py": {
+        "sha256": "cac936df8b52062acee2e713f1f166dedf0ee48209c64f27eeb6f6a592f11c78",
+        "size_bytes": 13629
+      },
+      "budget.py": {
+        "sha256": "9b4b66c49c94e6c942eeca128c4a1d3478a5be326b6141bc0fbc5ab47b4afecc",
+        "size_bytes": 3693
+      },
+      "cli.py": {
+        "sha256": "676935f0357b53e93ad72947301926b416272f87f9bdfedf2dace00b0de19371",
+        "size_bytes": 1714
+      },
+      "integration.py": {
+        "sha256": "4424b591ad7b3617fc864dfcc5d39a77bad53fc8ebdbce79c59b8510d1a0c712",
+        "size_bytes": 1510
+      },
+      "worker.py": {
+        "sha256": "ca11fbc99602ebbe89a62826b5e6e715eae43730da9dd15c624f8eb93008fc4d",
+        "size_bytes": 8200
+      }
+    },
+    "git_head": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+    "git_tree": "d1e1359ba0e06230aeed0197f2b548f6e9b7f1d1",
+    "dirty_tracked_files": []
+  },
+  "observables": {
+    "positions": "angstrom",
+    "energy": "eV total",
+    "temperature": "K, ASE 3N kinetic definition",
+    "time": "fs since MD start",
+    "max_force": "eV/angstrom"
+  },
+  "analysis": "Record every MD step in metrics; trajectory interval plus initial/final. No equilibrium or uncertainty inference.",
+  "numerical_control": {
+    "method": "central difference of Cu EMT energy at displaced atom x coordinate",
+    "displacement_angstrom": 1e-05,
+    "absolute_force_tolerance_ev_per_angstrom": 0.0001,
+    "interpretation": "same-engine internal derivative consistency, not independent material validation"
+  },
+  "budget": {
+    "max_atoms": 4096,
+    "max_md_steps": 2000,
+    "max_frames": 201,
+    "wall_seconds": 120,
+    "cpu_seconds": 120,
+    "address_space_bytes": 2147483648,
+    "output_bytes": 268435456,
+    "threads": 1
+  },
+  "stop_conditions": [
+    "nonfinite positions/forces/energy/temperature",
+    "relaxation not converged",
+    "force derivative check failed",
+    "integrity failure",
+    "timeout/resource cap/cancellation"
+  ],
+  "seed_policy": "single exploratory seed from config; no retries or replicas within run ID",
+  "exclusions": "none; failed IDs retained and never overwritten",
+  "limitations": [
+    "Engineering demonstration only",
+    "No reviewed external material benchmark",
+    "No E6/P0 or NL checkpoint acceptance",
+    "Short thermostat trajectory is not a stability or equilibrium result",
+    "Current container is not accepted U1/U2"
+  ],
+  "input_config": {
+    "sha256": "9b9da6d1074bdc05c1bd4dcdccdaaf2c5950d1e5dcc8d6f3a7b01e11ac127970",
+    "size_bytes": 458,
+    "filename": "config.json"
+  }
+}

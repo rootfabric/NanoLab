@@ -10,6 +10,8 @@
 PYTHONPATH=scripts python3 -m harness.cli drive --root .
 ```
 
+Для нового atomistic product читать также `project/product-plan.json`, `project/product-state.json` и `docs/ROADMAP.md`: P0–P6 независимы от исторических DNA NL0–NL8. Не менять `project/state.json`/NL counters или frozen protocols ради product status.
+
 `project/operations/*.json` и `docs/work/CURRENT_QUEUE.md` — актуальные C0 задачи. Исторические roadmap/WORK_QUEUE сохранены отдельно и не являются dispatch. WAITING_HUMAN/BLOCKED нельзя трактовать как разрешение запуска; доступные C0 PREP работы показаны параллельно.
 
 Назначен центральным агентом / Director / интегратором — дополнительно читать `DIRECTOR.md`. Не имитировать независимые роли одной сессией. Task Bus применяется только к явно назначенной bus-работе; до его P1.1–P1.4 gates production P2 запрещён. COMPLETED_SANDBOX не ACCEPTED, actor_id не доказательство отдельного executor.
@@ -40,6 +42,8 @@ Exit code 0 не scientific PASS. Claim не выше evidence. До кампа�
 ## Исполнители и безопасность
 
 WINDOWS_WSL_EXECUTOR=HISTORICAL_ONLY (owner decree 2026-09-27); Windows/WSL не для новых scientific runs, кроме explicit bounded environment-comparison WO. Author — отдельный native Ubuntu U1; outenemy — независимый EXTERNAL_U2, не author/dev host. До frozen fingerprint + U1–U5/NC-U1..U5 + review/verify/Human Gate R2 science остаётся WAITING_HOST. См. `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`, `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`, `docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md`. Новые owner minima U1 не отменяются.
+
+Исключение scope только WO-ATOMISTIC-PRODUCT-R1: новый atomistic adapter разрешено engineering-validate в disposable Linux/isolated venv по одному named/pinned material/model: ≤4096 atoms, ≤2000 MD steps/run, ≤8 actual pilot runs/1200 секунд compute/2 GiB суммарно, последовательно; cumulative ledger общий. Claim ceiling SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED, P0 остаётся OPEN без material reference. Actual runs не называть mock/C0 physics. Это не U1/U2, не NL5/E5 dispatch, не future scientific launch; stop conditions и pins/rights — в WO и product-plan. C0 operations cards остаются только software routing, не launch authority.
 
 Public PR выполняется только на ephemeral hosted route, никогда автоматически на trusted self-hosted scientific node. Никаких секретов, глобальных установок/изменений узлов или paid compute сверх разрешённого scope/budget. Wet-lab/hardware — CRITICAL с отдельным human/domain gate. READY карточка не запускает worker.
 
