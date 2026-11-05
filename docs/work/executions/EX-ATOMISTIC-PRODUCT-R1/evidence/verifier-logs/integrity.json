@@ -1,0 +1,56 @@
+{
+  "artifact_git_blob_checks": {
+    "config.json": true,
+    "environment.json": true,
+    "metrics.json": true,
+    "numerical-control.json": true,
+    "protocol.json": true,
+    "relaxation.json": true,
+    "relaxation.log": true,
+    "report.md": true,
+    "trajectory.json": true,
+    "worker.log": true
+  },
+  "current_adapter_source_checks": {
+    "__init__.py": true,
+    "api.py": true,
+    "budget.py": true,
+    "cli.py": true,
+    "integration.py": true,
+    "worker.py": true
+  },
+  "recorded_source_head": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+  "recorded_source_tree_resolved": "d1e1359ba0e06230aeed0197f2b548f6e9b7f1d1",
+  "recorded_source_tree_matches": true,
+  "origin_source_checks": {
+    "__init__.py": true,
+    "api.py": true,
+    "budget.py": true,
+    "cli.py": true,
+    "integration.py": true,
+    "worker.py": true
+  },
+  "scientific_fields_unchanged": {
+    "frontier": true,
+    "next_work_order": true,
+    "completed_tasks": true,
+    "active_tasks": true,
+    "task_status": true,
+    "stage_status": true,
+    "experiment_status": true,
+    "execution": true,
+    "github_tracking": true
+  },
+  "project_state_unchanged_from_flow": true,
+  "frozen_prefixes": [
+    "experiments/",
+    "data/",
+    "protocols/",
+    "config/control/harness/project-goals.v1.json",
+    "config/control/harness/checkpoint-catalog.v1.json",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R1.md",
+    "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+    "docs/work/executions/EX-NL5"
+  ],
+  "frozen_changed_paths": []
+}

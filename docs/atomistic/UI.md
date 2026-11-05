@@ -38,7 +38,7 @@ event, backend завершает worker и сохраняет failed/cancelled 
 Конфигурация JSON сохраняется из формы независимо от запуска. ZIP результата содержит manifest и все объявленные исходные артефакты
 (config, protocol, trajectory, metrics, environment, numerical control,
 relaxation evidence, report и logs) с исходными байтами. После распаковки
-применим `python -m atomistic.cli verify-run <directory>`. Перед экспортом
+применим `PYTHONPATH=scripts python -m atomistic.cli verify <directory>`. Перед экспортом
 проверяются run ID, доверенный run directory, allowlist имён, отсутствие
 symlink, размер и SHA-256 каждого файла. Нарушение целостности блокирует ZIP.
 Последний результат доступен в текущем процессе; импорт старых runs через UI
@@ -103,3 +103,50 @@ cloud browser не имеет доступа к loopback container (`ERR_CONNECT
    не изменены. Regression: fixture byte equality, SHA/size каждого файла,
    распаковка + verify_run, tamper/path/unknown entry rejection; 28 tests PASS/skip
    как выше. До публикации repaired exact source реальный UI smoke не запускался.
+
+## Фактический UI smoke после repairs
+
+Один разрешённый расчёт выполнен из clean detached source
+`71bc62102cc36bf49b04d40d81d3070d87cccad6`, TREE
+`f86af90728797541594396ac0bef0964d9f8dd28`. Run ID:
+`ui-22337abacb144a9e88191bfc167c383b`. Конфигурация формы: 32 Cu атома,
+`ASE_EMT_Cu`, 2×2×2 ячеек, 3.61 Å, relaxation max 100 steps / 0.05 эВ/Å,
+MD 10 steps / 1 фс, 100 K, friction 0.01 фс⁻¹, sample every 2, seed 1729.
+Нормализованная requested config сохранена до запуска. Backend записал
+config/protocol/STARTED manifest до запуска физического worker.
+
+Команда (из отдельного clean checkout frozen source):
+
+```bash
+NANOLAB_ATOMISTIC_MISSION_ROOT=/workspace/scratch/48cb7a65c9c0/NanoLab/.git/nanolab-atomistic PYTHONPATH=scripts /workspace/scratch/48cb7a65c9c0/atomistic-venv/bin/python /workspace/scratch/48cb7a65c9c0/ui-real-smoke.py
+```
+
+Playwright + isolated Chromium 153 открыли реальную форму и нажали запуск:
+HTTP `POST /api/run` → 202, затем `completed`; backend wall time
+0.655919482 с. Получены 6 фактических кадров, 11 MD metric rows; relaxation
+сошлась за 10 steps. Playback изменил кадр 1/6 → 2/6; End выбрал 6/6 (10 фс).
+Проверены drag rotation и zoom. JS page errors: 0. Скриншот полного UI просмотрен:
+видны рассчитанные 32 атома, последний кадр, energy plot, статус и export.
+Mobile mock check при ширине 390 px: horizontal overflow отсутствует.
+
+ZIP скачан настоящим нажатием «Скачать результат», 13 815 байт, все 11 файлов
+распакованы и `verify_run` завершился успешно с тем же run ID. SHA-256 ZIP:
+`5b2b2c923203b9a81bff2644b0368e12d600fd97b96128746c95d3cd33681753`.
+HTTP/UI evidence `http-ui.json`, 1826 байт, SHA-256
+`375f6690509e1478e918143a41a6a4adea481ba505324b64d8af8fa4571523c6`.
+Скриншот `ui-real.png`, 317615 байт, SHA-256
+`09684dc10df672bebcf4d18d4ec18afcb1c76ee3466965bf81695b4cd1d6c421`.
+
+Исходный run: `/workspace/scratch/48cb7a65c9c0/ui-real-runs/ui-22337abacb144a9e88191bfc167c383b`.
+Пакет UI evidence: `/workspace/scratch/48cb7a65c9c0/ui-real-evidence/`,
+включая summary.json с source HEAD/TREE, artifact sizes/digests, исходную
+requested config, browser log, HTTP result, ZIP и его распакованные файлы.
+Director публикует этот evidence отдельно; source/product после smoke не менялся.
+
+Execution outcome: COMPLETED. Scientific outcome: NOT_EVALUATED.
+Claim ceiling остаётся `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`.
+Один UI attempt без retries; после него общий mission ledger содержал два
+расчёта (первый CLI pilot + этот UI smoke). Слот передан независимому Verifier.
+Ограничения: нет импорта прошлых runs в UI, точного процента backend, material
+benchmark или внешней физической валидации. Следующее действие: независимый
+review/verification frozen source и evidence, затем действующий merge gate.

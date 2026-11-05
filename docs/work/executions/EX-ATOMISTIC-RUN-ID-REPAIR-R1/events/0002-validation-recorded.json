@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:56:44.536940Z",
+  "execution_id": "EX-ATOMISTIC-RUN-ID-REPAIR-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "58173bdd70c42263b96dff30d849446cdb79f2fd",
+  "summary": "27 tests PASS + 1 explicit real skip; mission-wide duplicate/legacy/concurrent regressions verified with mocks, zero new simulations",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-RUN-ID-REPAIR-R1/validation.json"
+  ],
+  "next_action": null
+}

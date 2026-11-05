@@ -1,0 +1,29 @@
+test_budget_restart_block_and_ledger_shared_without_using_real_grant (__main__.ProductFalsifiers.test_budget_restart_block_and_ledger_shared_without_using_real_grant) ... ok
+test_failed_run_id_cannot_be_reused_by_changing_output_root (__main__.ProductFalsifiers.test_failed_run_id_cannot_be_reused_by_changing_output_root) ... FAIL
+test_published_real_artifact_lineage_and_receipt (__main__.ProductFalsifiers.test_published_real_artifact_lineage_and_receipt) ... ok
+test_saved_zip_is_self_contained_and_verifiable (__main__.ProductFalsifiers.test_saved_zip_is_self_contained_and_verifiable) ... ERROR
+
+======================================================================
+ERROR: test_saved_zip_is_self_contained_and_verifiable (__main__.ProductFalsifiers.test_saved_zip_is_self_contained_and_verifiable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/48cb7a65c9c0/product-review-adversarial.py", line 49, in test_saved_zip_is_self_contained_and_verifiable
+    api.verify_run(tmp)
+  File "/workspace/scratch/48cb7a65c9c0/NanoLab-product-review/scripts/atomistic/api.py", line 163, in verify_run
+    raise RunError(f"artifact integrity failure: {name}")
+atomistic.api.RunError: artifact integrity failure: config.json
+
+======================================================================
+FAIL: test_failed_run_id_cannot_be_reused_by_changing_output_root (__main__.ProductFalsifiers.test_failed_run_id_cannot_be_reused_by_changing_output_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/48cb7a65c9c0/product-review-adversarial.py", line 64, in test_failed_run_id_cannot_be_reused_by_changing_output_root
+    self.assertEqual(popen.call_count,first_count,'same failed ID launched again under another root')
+AssertionError: 2 != 1 : same failed ID launched again under another root
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.064s
+
+FAILED (failures=1, errors=1)
+same run ID: launch attempts 2 ledger rows 2
+export missing: ['environment.json', 'numerical-control.json', 'protocol.json', 'relaxation.json', 'relaxation.log', 'report.md', 'worker.log'] hash mismatch: ['config.json', 'metrics.json', 'trajectory.json']

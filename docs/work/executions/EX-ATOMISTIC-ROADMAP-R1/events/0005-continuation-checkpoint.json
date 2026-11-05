@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0005-continuation-checkpoint",
+  "sequence": 5,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T11:00:06.114540Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "a0b4a7d563b09a19d2e4b3ce21a2bcc22ccd2e41",
+  "summary": "Actual CLI/UI engineering demo completed; product delivery IMPLEMENTED_DEMO, material NOT_EVALUATED/P0 OPEN; independent final recheck pending",
+  "evidence_refs": [
+    "project/product-state.json"
+  ],
+  "next_action": "Independent final recheck integrated subject; reference preparation remains first READY work"
+}

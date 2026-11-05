@@ -1,0 +1,25 @@
+{
+  "subject": "61790c05a738d43a9be276b08d7be00d0758ea04",
+  "actual_calculator_runs": 0,
+  "zip_members": [
+    "config.json",
+    "trajectory.json",
+    "metrics.json",
+    "manifest.json"
+  ],
+  "missing_manifest_files": [
+    "environment.json",
+    "numerical-control.json",
+    "protocol.json",
+    "relaxation.json",
+    "relaxation.log",
+    "report.md",
+    "worker.log"
+  ],
+  "mismatched_manifest_files": [
+    "config.json",
+    "metrics.json",
+    "trajectory.json"
+  ],
+  "roundtrip_valid": false
+}

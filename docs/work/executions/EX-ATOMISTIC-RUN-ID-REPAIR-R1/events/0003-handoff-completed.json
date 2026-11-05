@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:56:44.584745Z",
+  "execution_id": "EX-ATOMISTIC-RUN-ID-REPAIR-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "58173bdd70c42263b96dff30d849446cdb79f2fd",
+  "summary": "Mission-wide run ID repair передан интегратору, independent acceptance pending",
+  "evidence_refs": [],
+  "next_action": "Интегратор объединяет UI repairs и передаёт immutable subject Reviewer/Verifier"
+}

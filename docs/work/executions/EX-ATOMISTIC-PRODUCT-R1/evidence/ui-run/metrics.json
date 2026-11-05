@@ -1,0 +1,139 @@
+{
+  "schema_version": "atomistic-metrics-v1",
+  "status": "COMPLETED",
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "scientific_outcome": "NOT_EVALUATED",
+  "material": "Cu",
+  "model": "ASE_EMT_Cu",
+  "atom_count": 32,
+  "relaxation": {
+    "converged": true,
+    "steps": 10,
+    "initial_potential_energy_ev": 20.96948006423002,
+    "final_potential_energy_ev": 20.02719702583866,
+    "final_max_force_ev_per_angstrom": 0.03241324020962668,
+    "fmax_ev_per_angstrom": 0.05
+  },
+  "md": {
+    "steps": 10,
+    "timestep_fs": 1,
+    "temperature_k": 100,
+    "sample_interval": 2,
+    "friction_per_fs": 0.01,
+    "seed": 1729,
+    "integrator": "ASE Langevin",
+    "boundary": "nonperiodic",
+    "temperature_definition": "ASE 3N kinetic temperature",
+    "fix_center_of_mass": true
+  },
+  "numerical_control": {
+    "analytic_force_ev_per_angstrom": 0.5980235923072748,
+    "central_difference_force_ev_per_angstrom": 0.5980235915359344,
+    "absolute_error_ev_per_angstrom": 7.713403249454132e-10,
+    "tolerance_ev_per_angstrom": 0.0001,
+    "passed": true
+  },
+  "series": [
+    {
+      "step": 0,
+      "time_fs": 0,
+      "potential_energy_ev": 20.02719702583866,
+      "kinetic_energy_ev": 0.3378756291840352,
+      "temperature_k": 81.68510817787515,
+      "total_energy_ev": 20.365072655022697
+    },
+    {
+      "step": 1,
+      "time_fs": 1,
+      "potential_energy_ev": 20.02737365499765,
+      "kinetic_energy_ev": 0.33217774290003227,
+      "temperature_k": 80.30758219703415,
+      "total_energy_ev": 20.359551397897683
+    },
+    {
+      "step": 2,
+      "time_fs": 2,
+      "potential_energy_ev": 20.02807608339778,
+      "kinetic_energy_ev": 0.3283439246273783,
+      "temperature_k": 79.38071493202204,
+      "total_energy_ev": 20.35642000802516
+    },
+    {
+      "step": 3,
+      "time_fs": 3,
+      "potential_energy_ev": 20.029295286228425,
+      "kinetic_energy_ev": 0.3319801278949506,
+      "temperature_k": 80.25980662024381,
+      "total_energy_ev": 20.361275414123376
+    },
+    {
+      "step": 4,
+      "time_fs": 4,
+      "potential_energy_ev": 20.030995459043456,
+      "kinetic_energy_ev": 0.3373007307510298,
+      "temperature_k": 81.5461202289522,
+      "total_energy_ev": 20.368296189794485
+    },
+    {
+      "step": 5,
+      "time_fs": 5,
+      "potential_energy_ev": 20.033154724894004,
+      "kinetic_energy_ev": 0.33395398964702405,
+      "temperature_k": 80.73700916703794,
+      "total_energy_ev": 20.36710871454103
+    },
+    {
+      "step": 6,
+      "time_fs": 6,
+      "potential_energy_ev": 20.035797678090326,
+      "kinetic_energy_ev": 0.32295459570436114,
+      "temperature_k": 78.07778604914891,
+      "total_energy_ev": 20.358752273794686
+    },
+    {
+      "step": 7,
+      "time_fs": 7,
+      "potential_energy_ev": 20.038794987217788,
+      "kinetic_energy_ev": 0.32123658204966365,
+      "temperature_k": 77.66243756256543,
+      "total_energy_ev": 20.360031569267452
+    },
+    {
+      "step": 8,
+      "time_fs": 8,
+      "potential_energy_ev": 20.042165070758802,
+      "kinetic_energy_ev": 0.33142744043533046,
+      "temperature_k": 80.12618841570904,
+      "total_energy_ev": 20.373592511194133
+    },
+    {
+      "step": 9,
+      "time_fs": 9,
+      "potential_energy_ev": 20.045927183849635,
+      "kinetic_energy_ev": 0.3274885786547084,
+      "temperature_k": 79.1739257401653,
+      "total_energy_ev": 20.373415762504344
+    },
+    {
+      "step": 10,
+      "time_fs": 10,
+      "potential_energy_ev": 20.050057705435798,
+      "kinetic_energy_ev": 0.3151456371846785,
+      "temperature_k": 76.18988539476528,
+      "total_energy_ev": 20.365203342620475
+    }
+  ],
+  "final": {
+    "step": 10,
+    "time_fs": 10,
+    "potential_energy_ev": 20.050057705435798,
+    "kinetic_energy_ev": 0.3151456371846785,
+    "temperature_k": 76.18988539476528,
+    "total_energy_ev": 20.365203342620475
+  },
+  "resource_usage": {
+    "cpu_user_seconds": 0.349296,
+    "cpu_system_seconds": 0.194942,
+    "peak_rss_kib": 84740
+  }
+}

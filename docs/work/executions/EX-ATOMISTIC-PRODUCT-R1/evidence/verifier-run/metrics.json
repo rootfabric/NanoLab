@@ -1,0 +1,459 @@
+{
+  "schema_version": "atomistic-metrics-v1",
+  "status": "COMPLETED",
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "scientific_outcome": "NOT_EVALUATED",
+  "material": "Cu",
+  "model": "ASE_EMT_Cu",
+  "atom_count": 32,
+  "relaxation": {
+    "converged": true,
+    "steps": 10,
+    "initial_potential_energy_ev": 20.96948006423002,
+    "final_potential_energy_ev": 20.02719702583866,
+    "final_max_force_ev_per_angstrom": 0.03241324020962668,
+    "fmax_ev_per_angstrom": 0.05
+  },
+  "md": {
+    "steps": 50,
+    "timestep_fs": 1.0,
+    "temperature_k": 100.0,
+    "friction_per_fs": 0.01,
+    "sample_interval": 5,
+    "seed": 1729,
+    "integrator": "ASE Langevin",
+    "boundary": "nonperiodic",
+    "temperature_definition": "ASE 3N kinetic temperature",
+    "fix_center_of_mass": true
+  },
+  "numerical_control": {
+    "analytic_force_ev_per_angstrom": 0.5980235923072748,
+    "central_difference_force_ev_per_angstrom": 0.5980235915359344,
+    "absolute_error_ev_per_angstrom": 7.713403249454132e-10,
+    "tolerance_ev_per_angstrom": 0.0001,
+    "passed": true
+  },
+  "series": [
+    {
+      "step": 0,
+      "time_fs": 0.0,
+      "potential_energy_ev": 20.02719702583866,
+      "kinetic_energy_ev": 0.3378756291840352,
+      "temperature_k": 81.68510817787515,
+      "total_energy_ev": 20.365072655022697
+    },
+    {
+      "step": 1,
+      "time_fs": 1.0,
+      "potential_energy_ev": 20.02737365499765,
+      "kinetic_energy_ev": 0.33217774290003227,
+      "temperature_k": 80.30758219703415,
+      "total_energy_ev": 20.359551397897683
+    },
+    {
+      "step": 2,
+      "time_fs": 2.0,
+      "potential_energy_ev": 20.02807608339778,
+      "kinetic_energy_ev": 0.3283439246273783,
+      "temperature_k": 79.38071493202204,
+      "total_energy_ev": 20.35642000802516
+    },
+    {
+      "step": 3,
+      "time_fs": 3.0,
+      "potential_energy_ev": 20.029295286228425,
+      "kinetic_energy_ev": 0.3319801278949506,
+      "temperature_k": 80.25980662024381,
+      "total_energy_ev": 20.361275414123376
+    },
+    {
+      "step": 4,
+      "time_fs": 4.0,
+      "potential_energy_ev": 20.030995459043456,
+      "kinetic_energy_ev": 0.3373007307510298,
+      "temperature_k": 81.5461202289522,
+      "total_energy_ev": 20.368296189794485
+    },
+    {
+      "step": 5,
+      "time_fs": 5.0,
+      "potential_energy_ev": 20.033154724894004,
+      "kinetic_energy_ev": 0.33395398964702405,
+      "temperature_k": 80.73700916703794,
+      "total_energy_ev": 20.36710871454103
+    },
+    {
+      "step": 6,
+      "time_fs": 6.0,
+      "potential_energy_ev": 20.035797678090326,
+      "kinetic_energy_ev": 0.32295459570436114,
+      "temperature_k": 78.07778604914891,
+      "total_energy_ev": 20.358752273794686
+    },
+    {
+      "step": 7,
+      "time_fs": 7.0,
+      "potential_energy_ev": 20.038794987217788,
+      "kinetic_energy_ev": 0.32123658204966365,
+      "temperature_k": 77.66243756256543,
+      "total_energy_ev": 20.360031569267452
+    },
+    {
+      "step": 8,
+      "time_fs": 8.0,
+      "potential_energy_ev": 20.042165070758802,
+      "kinetic_energy_ev": 0.33142744043533046,
+      "temperature_k": 80.12618841570904,
+      "total_energy_ev": 20.373592511194133
+    },
+    {
+      "step": 9,
+      "time_fs": 9.0,
+      "potential_energy_ev": 20.045927183849635,
+      "kinetic_energy_ev": 0.3274885786547084,
+      "temperature_k": 79.1739257401653,
+      "total_energy_ev": 20.373415762504344
+    },
+    {
+      "step": 10,
+      "time_fs": 10.0,
+      "potential_energy_ev": 20.050057705435798,
+      "kinetic_energy_ev": 0.3151456371846785,
+      "temperature_k": 76.18988539476528,
+      "total_energy_ev": 20.365203342620475
+    },
+    {
+      "step": 11,
+      "time_fs": 11.0,
+      "potential_energy_ev": 20.05455477883697,
+      "kinetic_energy_ev": 0.31147803586699063,
+      "temperature_k": 75.30320288643478,
+      "total_energy_ev": 20.36603281470396
+    },
+    {
+      "step": 12,
+      "time_fs": 12.0,
+      "potential_energy_ev": 20.059378200639216,
+      "kinetic_energy_ev": 0.3102051747289379,
+      "temperature_k": 74.99547486234394,
+      "total_energy_ev": 20.369583375368155
+    },
+    {
+      "step": 13,
+      "time_fs": 13.0,
+      "potential_energy_ev": 20.064541102265625,
+      "kinetic_energy_ev": 0.3027878153444892,
+      "temperature_k": 73.20224755803649,
+      "total_energy_ev": 20.367328917610116
+    },
+    {
+      "step": 14,
+      "time_fs": 14.0,
+      "potential_energy_ev": 20.069988486995218,
+      "kinetic_energy_ev": 0.29580897058627353,
+      "temperature_k": 71.51503593401925,
+      "total_energy_ev": 20.36579745758149
+    },
+    {
+      "step": 15,
+      "time_fs": 15.0,
+      "potential_energy_ev": 20.075611410051913,
+      "kinetic_energy_ev": 0.2863909234579851,
+      "temperature_k": 69.23812060764178,
+      "total_energy_ev": 20.3620023335099
+    },
+    {
+      "step": 16,
+      "time_fs": 16.0,
+      "potential_energy_ev": 20.081259050619572,
+      "kinetic_energy_ev": 0.28170832274771673,
+      "temperature_k": 68.10605095675929,
+      "total_energy_ev": 20.36296737336729
+    },
+    {
+      "step": 17,
+      "time_fs": 17.0,
+      "potential_energy_ev": 20.08706402377075,
+      "kinetic_energy_ev": 0.28745177214861406,
+      "temperature_k": 69.49459231666576,
+      "total_energy_ev": 20.374515795919365
+    },
+    {
+      "step": 18,
+      "time_fs": 18.0,
+      "potential_energy_ev": 20.092697420397656,
+      "kinetic_energy_ev": 0.2685779831041979,
+      "temperature_k": 64.93164853897237,
+      "total_energy_ev": 20.361275403501853
+    },
+    {
+      "step": 19,
+      "time_fs": 19.0,
+      "potential_energy_ev": 20.098448541395435,
+      "kinetic_energy_ev": 0.27041427079698455,
+      "temperature_k": 65.3755910606429,
+      "total_energy_ev": 20.36886281219242
+    },
+    {
+      "step": 20,
+      "time_fs": 20.0,
+      "potential_energy_ev": 20.10448177955997,
+      "kinetic_energy_ev": 0.27490738896036315,
+      "temperature_k": 66.46185124495365,
+      "total_energy_ev": 20.37938916852033
+    },
+    {
+      "step": 21,
+      "time_fs": 21.0,
+      "potential_energy_ev": 20.11073078238161,
+      "kinetic_energy_ev": 0.27385473547165917,
+      "temperature_k": 66.20736081512815,
+      "total_energy_ev": 20.384585517853267
+    },
+    {
+      "step": 22,
+      "time_fs": 22.0,
+      "potential_energy_ev": 20.117181907944804,
+      "kinetic_energy_ev": 0.2816849219936635,
+      "temperature_k": 68.10039356995428,
+      "total_energy_ev": 20.398866829938466
+    },
+    {
+      "step": 23,
+      "time_fs": 23.0,
+      "potential_energy_ev": 20.12372474738612,
+      "kinetic_energy_ev": 0.2673413411669404,
+      "temperature_k": 64.63267690060317,
+      "total_energy_ev": 20.39106608855306
+    },
+    {
+      "step": 24,
+      "time_fs": 24.0,
+      "potential_energy_ev": 20.13035695311425,
+      "kinetic_energy_ev": 0.27283739822397846,
+      "temperature_k": 65.9614084706786,
+      "total_energy_ev": 20.40319435133823
+    },
+    {
+      "step": 25,
+      "time_fs": 25.0,
+      "potential_energy_ev": 20.137131905891195,
+      "kinetic_energy_ev": 0.2624121772693067,
+      "temperature_k": 63.44099791749021,
+      "total_energy_ev": 20.399544083160503
+    },
+    {
+      "step": 26,
+      "time_fs": 26.0,
+      "potential_energy_ev": 20.143833290735948,
+      "kinetic_energy_ev": 0.2627359755127252,
+      "temperature_k": 63.51927966454998,
+      "total_energy_ev": 20.406569266248674
+    },
+    {
+      "step": 27,
+      "time_fs": 27.0,
+      "potential_energy_ev": 20.1506318506197,
+      "kinetic_energy_ev": 0.26826272559249686,
+      "temperature_k": 64.8554316066965,
+      "total_energy_ev": 20.418894576212196
+    },
+    {
+      "step": 28,
+      "time_fs": 28.0,
+      "potential_energy_ev": 20.15728048409842,
+      "kinetic_energy_ev": 0.25386259749758877,
+      "temperature_k": 61.374044020238976,
+      "total_energy_ev": 20.411143081596006
+    },
+    {
+      "step": 29,
+      "time_fs": 29.0,
+      "potential_energy_ev": 20.163629655608226,
+      "kinetic_energy_ev": 0.23766333007382276,
+      "temperature_k": 57.45769493312589,
+      "total_energy_ev": 20.401292985682048
+    },
+    {
+      "step": 30,
+      "time_fs": 30.0,
+      "potential_energy_ev": 20.169492560573765,
+      "kinetic_energy_ev": 0.24706952345790423,
+      "temperature_k": 59.73174448791696,
+      "total_energy_ev": 20.416562084031668
+    },
+    {
+      "step": 31,
+      "time_fs": 31.0,
+      "potential_energy_ev": 20.17552033434391,
+      "kinetic_energy_ev": 0.2569865414625583,
+      "temperature_k": 62.12929145059201,
+      "total_energy_ev": 20.43250687580647
+    },
+    {
+      "step": 32,
+      "time_fs": 32.0,
+      "potential_energy_ev": 20.181265151456245,
+      "kinetic_energy_ev": 0.23905789849476736,
+      "temperature_k": 57.79484701657569,
+      "total_energy_ev": 20.420323049951012
+    },
+    {
+      "step": 33,
+      "time_fs": 33.0,
+      "potential_energy_ev": 20.18668121755836,
+      "kinetic_energy_ev": 0.23421037772454864,
+      "temperature_k": 56.622906147487036,
+      "total_energy_ev": 20.420891595282907
+    },
+    {
+      "step": 34,
+      "time_fs": 34.0,
+      "potential_energy_ev": 20.191822501944007,
+      "kinetic_energy_ev": 0.2433921348378702,
+      "temperature_k": 58.842695792795034,
+      "total_energy_ev": 20.435214636781875
+    },
+    {
+      "step": 35,
+      "time_fs": 35.0,
+      "potential_energy_ev": 20.196844843184813,
+      "kinetic_energy_ev": 0.23139429511761456,
+      "temperature_k": 55.94208754881874,
+      "total_energy_ev": 20.428239138302427
+    },
+    {
+      "step": 36,
+      "time_fs": 36.0,
+      "potential_energy_ev": 20.201835808905507,
+      "kinetic_energy_ev": 0.22300576844380685,
+      "temperature_k": 53.914069989642414,
+      "total_energy_ev": 20.424841577349312
+    },
+    {
+      "step": 37,
+      "time_fs": 37.0,
+      "potential_energy_ev": 20.20655849100146,
+      "kinetic_energy_ev": 0.21146709371172945,
+      "temperature_k": 51.12446987555525,
+      "total_energy_ev": 20.418025584713188
+    },
+    {
+      "step": 38,
+      "time_fs": 38.0,
+      "potential_energy_ev": 20.211040758436162,
+      "kinetic_energy_ev": 0.19718241575498713,
+      "temperature_k": 47.67099361566483,
+      "total_energy_ev": 20.40822317419115
+    },
+    {
+      "step": 39,
+      "time_fs": 39.0,
+      "potential_energy_ev": 20.214914139228505,
+      "kinetic_energy_ev": 0.18690492523967484,
+      "temperature_k": 45.186298502946,
+      "total_energy_ev": 20.401819064468178
+    },
+    {
+      "step": 40,
+      "time_fs": 40.0,
+      "potential_energy_ev": 20.218607815593977,
+      "kinetic_energy_ev": 0.18125065950178101,
+      "temperature_k": 43.819318263555196,
+      "total_energy_ev": 20.39985847509576
+    },
+    {
+      "step": 41,
+      "time_fs": 41.0,
+      "potential_energy_ev": 20.22217005502751,
+      "kinetic_energy_ev": 0.2001892636448374,
+      "temperature_k": 48.397931796290614,
+      "total_energy_ev": 20.42235931867235
+    },
+    {
+      "step": 42,
+      "time_fs": 42.0,
+      "potential_energy_ev": 20.22603717584711,
+      "kinetic_energy_ev": 0.20176423029944424,
+      "temperature_k": 48.77869711478605,
+      "total_energy_ev": 20.427801406146557
+    },
+    {
+      "step": 43,
+      "time_fs": 43.0,
+      "potential_energy_ev": 20.229544167094495,
+      "kinetic_energy_ev": 0.20862636428403866,
+      "temperature_k": 50.43769263990383,
+      "total_energy_ev": 20.438170531378535
+    },
+    {
+      "step": 44,
+      "time_fs": 44.0,
+      "potential_energy_ev": 20.232749913183874,
+      "kinetic_energy_ev": 0.20936042803193866,
+      "temperature_k": 50.61516053482563,
+      "total_energy_ev": 20.442110341215812
+    },
+    {
+      "step": 45,
+      "time_fs": 45.0,
+      "potential_energy_ev": 20.23607327566601,
+      "kinetic_energy_ev": 0.20445788848149882,
+      "temperature_k": 49.42991827722005,
+      "total_energy_ev": 20.440531164147508
+    },
+    {
+      "step": 46,
+      "time_fs": 46.0,
+      "potential_energy_ev": 20.239206200918808,
+      "kinetic_energy_ev": 0.2066031762161311,
+      "temperature_k": 49.94856491977105,
+      "total_energy_ev": 20.44580937713494
+    },
+    {
+      "step": 47,
+      "time_fs": 47.0,
+      "potential_energy_ev": 20.242132755309093,
+      "kinetic_energy_ev": 0.2026781448890828,
+      "temperature_k": 48.999645906802364,
+      "total_energy_ev": 20.444810900198178
+    },
+    {
+      "step": 48,
+      "time_fs": 48.0,
+      "potential_energy_ev": 20.24506358091761,
+      "kinetic_energy_ev": 0.21194009069555783,
+      "temperature_k": 51.238822040833156,
+      "total_energy_ev": 20.457003671613165
+    },
+    {
+      "step": 49,
+      "time_fs": 49.0,
+      "potential_energy_ev": 20.248144609837397,
+      "kinetic_energy_ev": 0.21049017030766193,
+      "temperature_k": 50.88828801735059,
+      "total_energy_ev": 20.458634780145058
+    },
+    {
+      "step": 50,
+      "time_fs": 50.0,
+      "potential_energy_ev": 20.251185363522744,
+      "kinetic_energy_ev": 0.1939812499630337,
+      "temperature_k": 46.89707696875389,
+      "total_energy_ev": 20.445166613485778
+    }
+  ],
+  "final": {
+    "step": 50,
+    "time_fs": 50.0,
+    "potential_energy_ev": 20.251185363522744,
+    "kinetic_energy_ev": 0.1939812499630337,
+    "temperature_k": 46.89707696875389,
+    "total_energy_ev": 20.445166613485778
+  },
+  "resource_usage": {
+    "cpu_user_seconds": 0.472869,
+    "cpu_system_seconds": 0.087389,
+    "peak_rss_kib": 84524
+  }
+}

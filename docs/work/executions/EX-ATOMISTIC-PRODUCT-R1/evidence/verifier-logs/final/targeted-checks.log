@@ -1,0 +1,40 @@
+EXECUTION_ERROR:OSError; retained evidence: /tmp/tmp9w9ltxyv/first/verifier-reuse-probe
+mission budget blocked: run_id already used in this mission; use a new ID; retained evidence: /tmp/tmp9w9ltxyv/second/verifier-reuse-probe
+{
+  "subject": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "actual_calculator_runs": 0,
+  "run_id_reuse": {
+    "mock_launch_attempts": 1,
+    "ledger_rows": 1,
+    "second_manifest_failure": "MISSION_BUDGET_BLOCKED"
+  },
+  "zip_export": {
+    "members": [
+      "manifest.json",
+      "config.json",
+      "environment.json",
+      "metrics.json",
+      "numerical-control.json",
+      "protocol.json",
+      "relaxation.json",
+      "relaxation.log",
+      "report.md",
+      "trajectory.json",
+      "worker.log"
+    ],
+    "all_original_bytes_match": true,
+    "extracted_verify_run": "PASS"
+  },
+  "friction": {
+    "attributes": {
+      "id": "friction",
+      "type": "number",
+      "value": "0.01",
+      "min": "0.0001",
+      "max": "0.1",
+      "step": "0.0001",
+      "required": null
+    },
+    "decimal_html_step_valid": true
+  }
+}

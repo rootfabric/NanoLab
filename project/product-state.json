@@ -7,7 +7,7 @@
   "frontier": "P0",
   "stage_status": {
     "P0": "OPEN",
-    "P1": "PLANNED",
+    "P1": "IMPLEMENTED_DEMO",
     "P2": "PLANNED",
     "P3": "PLANNED",
     "P4": "PLANNED",
@@ -17,23 +17,102 @@
   "accepted_stages": [],
   "task_status": {
     "AP-P0-REFERENCE": "READY",
-    "AP-P1-ADAPTER": "IN_PROGRESS",
-    "AP-P1-APP": "IN_PROGRESS",
+    "AP-P1-ADAPTER": "WAITING_HUMAN",
+    "AP-P1-APP": "WAITING_HUMAN",
     "AP-P2-CONSTRUCTOR": "PLANNED"
   },
   "next_task": "AP-P0-REFERENCE",
-  "implementation_status": "IN_PROGRESS_PENDING_INDEPENDENT_REVIEW",
-  "material_validation": "NOT_SCIENTIFICALLY_VALIDATED",
+  "implementation_status": "IMPLEMENTED_DEMO",
+  "material_validation": "NOT_EVALUATED",
   "evidence_refs": [
-    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md"
+    "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+    "examples/atomistic/runs/cu-emt-demo-r1-001/manifest.json",
+    "examples/atomistic/runs/cu-emt-demo-r1-001/report.md",
+    "docs/atomistic/UI.md",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md"
   ],
-  "execution_ledger": "Not populated by roadmap author; actual run receipts/ledger are owned by adapter implementation. Do not infer zero runs or material validation.",
+  "execution_ledger": "Persistent mission ledger shared by CLI/UI/worktrees remains authoritative; final observed summary: 3 completed actual runs, no active reservation, approximately 1.967 seconds, less than 200 KB actual raw. Documentation publication does not authorize a new run.",
   "historical_scientific_state_unchanged": true,
   "open_gaps": [
     "Pinned material benchmark/reference protocol and accepted validation evidence for P0",
-    "Integrated actual adapter/app evidence and independent review for P1"
+    "Canonical merge decision for PR #96; engineering technical PASS does not accept P0 or validate material properties"
   ],
-  "updated_at_utc": "2026-11-05T10:42:36Z",
-  "engineering_delivery_status": "IN_PROGRESS",
-  "scientific_validation_status": "OPEN_NOT_VALIDATED"
+  "updated_at_utc": "2026-11-05T11:02:18Z",
+  "engineering_delivery_status": "IMPLEMENTED_DEMO",
+  "scientific_validation_status": "NOT_EVALUATED",
+  "verification_status": "VERIFIED",
+  "demonstrated_results": [
+    {
+      "entrypoint": "CLI",
+      "execution_outcome": "COMPLETED",
+      "source_sha": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+      "source_tree": "d1e1359ba0e06230aeed0197f2b548f6e9b7f1d1",
+      "run_id": "cu-emt-demo-r1-001",
+      "material_model": "32 Cu / ASE_EMT_Cu",
+      "relaxation_steps": 10,
+      "md_steps": 50,
+      "wall_seconds": 0.655380319,
+      "evidence": "examples/atomistic/runs/cu-emt-demo-r1-001",
+      "manifest_digest_check": "PASS",
+      "material_validation": "NOT_EVALUATED"
+    },
+    {
+      "entrypoint": "APP",
+      "execution_outcome": "COMPLETED",
+      "source_sha": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+      "source_tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+      "material_model": "32 Cu / ASE_EMT_Cu",
+      "md_steps": 10,
+      "trajectory_frames": 6,
+      "wall_seconds": 0.655919,
+      "browser_actions": [
+        "form run",
+        "trajectory playback",
+        "rotate",
+        "zoom",
+        "ZIP export"
+      ],
+      "zip_digest_check": "PASS",
+      "material_validation": "NOT_EVALUATED"
+    }
+  ],
+  "pending_publication": {
+    "owner": "INTEGRATOR",
+    "screenshot_destination": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/evidence/ui-real.png",
+    "review_directory": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review",
+    "summary": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/summary.md",
+    "status": "DOCS_ONLY_PUBLICATION_PENDING; exact-source technical review and verification PASS, canonical acceptance false"
+  },
+  "canonical_acceptance": false,
+  "technical_review": {
+    "status": "PASS",
+    "subject_sha": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+    "subject_tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+    "closed_findings": 3,
+    "report": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md"
+  },
+  "independent_verification": {
+    "status": "PASS",
+    "subject_sha": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+    "subject_tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+    "tests_run": 1059,
+    "tests_skipped": 1,
+    "skip_reason": "Explicit real-MD budget gate; separate actual verifier run completed.",
+    "actual_run": "32 Cu / 50 MD steps, approximately 0.656 seconds; same-host/same-environment numerical match to pilot 1.",
+    "report": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md",
+    "external_reproduction": false
+  },
+  "mission_run_summary": {
+    "completed_actual_runs": 3,
+    "active_reservations": 0,
+    "total_wall_seconds_approx": 1.967,
+    "actual_raw_size": "less than 200 KB",
+    "scope": "Shared host/environment engineering validation; not external material reproduction."
+  },
+  "next_gate": {
+    "actor": "HUMAN",
+    "action": "Canonical merge decision for reviewed candidate; no repeated implementation/review unless subject changes.",
+    "pull_request": "https://github.com/rootfabric/NanoLab/pull/96"
+  }
 }

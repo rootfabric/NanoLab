@@ -1,0 +1,1 @@
+Initial comparator asserted whole metrics.json byte equality and failed. Inspection: only resource_usage differs (expected runtime CPU/RSS values); all numerical metrics and series equal. No rerun. Corrected comparison separates runtime metadata.

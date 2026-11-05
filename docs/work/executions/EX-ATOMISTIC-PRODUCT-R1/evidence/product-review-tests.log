@@ -1,0 +1,30 @@
+test_real_engine (tests.test_atomistic_backend.RealIntegrationTest.test_real_engine) ... skipped 'real MD requires explicit pilot budget; use dedicated integration command'
+test_bad_ids_and_duplicate_directory_no_worker (tests.test_atomistic_backend.ValidationTests.test_bad_ids_and_duplicate_directory_no_worker) ... ok
+test_bad_parameters (tests.test_atomistic_backend.ValidationTests.test_bad_parameters) ... ok
+test_cancellation_terminates_child_without_simulation (tests.test_atomistic_backend.ValidationTests.test_cancellation_terminates_child_without_simulation) ... ok
+test_duplicate_input_keys (tests.test_atomistic_backend.ValidationTests.test_duplicate_input_keys) ... ok
+test_missing_success_artifacts_rejected (tests.test_atomistic_backend.ValidationTests.test_missing_success_artifacts_rejected) ... ok
+test_mission_ledger_restart_count_and_serial_guard (tests.test_atomistic_backend.ValidationTests.test_mission_ledger_restart_count_and_serial_guard) ... ok
+test_unknown_keys_units_and_frame_cap (tests.test_atomistic_backend.ValidationTests.test_unknown_keys_units_and_frame_cap) ... ok
+test_unsafe_root_and_timeout (tests.test_atomistic_backend.ValidationTests.test_unsafe_root_and_timeout) ... ok
+test_valid_config_copy (tests.test_atomistic_backend.ValidationTests.test_valid_config_copy) ... ok
+test_verify_detects_tampering_and_traversal (tests.test_atomistic_backend.ValidationTests.test_verify_detects_tampering_and_traversal) ... ok
+test_worker_launch_failure_retained (tests.test_atomistic_backend.ValidationTests.test_worker_launch_failure_retained) ... ok
+test_empty_state_and_static_security_headers (tests.test_atomistic_web.LocalHTTPTests.test_empty_state_and_static_security_headers) ... ok
+test_failed_runner_does_not_get_silent_retry_or_results (tests.test_atomistic_web.LocalHTTPTests.test_failed_runner_does_not_get_silent_retry_or_results) ... ok
+test_full_fixture_calculation_and_export (tests.test_atomistic_web.LocalHTTPTests.test_full_fixture_calculation_and_export) ... ok
+test_loopback_binding (tests.test_atomistic_web.LocalHTTPTests.test_loopback_binding) ... ok
+test_no_arbitrary_files_or_paths (tests.test_atomistic_web.LocalHTTPTests.test_no_arbitrary_files_or_paths) ... ok
+test_real_backend_validation_blocks_units_material_caps_and_paths (tests.test_atomistic_web.LocalHTTPTests.test_real_backend_validation_blocks_units_material_caps_and_paths) ... ok
+test_refuse_external_host_origin_and_missing_token (tests.test_atomistic_web.LocalHTTPTests.test_refuse_external_host_origin_and_missing_token) ... ok
+test_reject_bad_json_nonfinite_and_wrong_type (tests.test_atomistic_web.LocalHTTPTests.test_reject_bad_json_nonfinite_and_wrong_type) ... ok
+test_request_size_and_content_type_limit (tests.test_atomistic_web.LocalHTTPTests.test_request_size_and_content_type_limit) ... ok
+test_result_is_not_fabricated_before_run (tests.test_atomistic_web.LocalHTTPTests.test_result_is_not_fabricated_before_run) ... ok
+test_session_budget_refuses_ninth_job_or_time_overrun (tests.test_atomistic_web.LocalHTTPTests.test_session_budget_refuses_ninth_job_or_time_overrun) ... ok
+test_single_job_and_cancellation (tests.test_atomistic_web.LocalHTTPTests.test_single_job_and_cancellation) ... ok
+test_validation_precedes_worker_and_budget (tests.test_atomistic_web.LocalHTTPTests.test_validation_precedes_worker_and_budget) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 6.609s
+
+OK (skipped=1)

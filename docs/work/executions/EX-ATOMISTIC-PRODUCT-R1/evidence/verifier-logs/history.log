@@ -1,0 +1,180 @@
+commit 61790c05a738d43a9be276b08d7be00d0758ea04
+Author:     root <yglamazdin@gmail.com>
+AuthorDate: Thu Nov 5 20:50:08 2026 +1000
+Commit:     root <yglamazdin@gmail.com>
+CommitDate: Thu Nov 5 20:50:08 2026 +1000
+
+    feat(product): add atomistic roadmap, real Cu dynamics and local application
+
+ AGENTS.md                                          |    4 +
+ PROJECT_CONTROL.md                                 |   29 +-
+ README.md                                          |   37 +-
+ docs/ARCHITECTURE.md                               |   16 +-
+ docs/ROADMAP.md                                    |   72 +-
+ docs/VISION.md                                     |   10 +-
+ docs/atomistic/MODEL_CARD.md                       |   18 +
+ docs/atomistic/PILOT_PROTOCOL_R1.md                |   15 +
+ docs/atomistic/README.md                           |   59 +
+ docs/atomistic/UI.md                               |   81 +
+ docs/atomistic/requirements.txt                    |   13 +
+ docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md      |    2 +
+ docs/experiments/E6_ATOMISTIC_ADAPTER.md           |   10 +-
+ docs/experiments/README.md                         |    8 +-
+ docs/work/CURRENT_QUEUE.md                         |   10 +-
+ docs/work/WO-ATOMISTIC-PRODUCT-R1.md               |    2 +-
+ .../events/0001-work-order-started.json            |   15 +
+ .../events/0002-validation-recorded.json           |   18 +
+ .../events/0003-handoff-completed.json             |   15 +
+ .../EX-ATOMISTIC-BACKEND-R1/passport.json          |   19 +
+ .../executions/EX-ATOMISTIC-BACKEND-R1/summary.md  |   34 +
+ .../events/0001-work-order-started.json            |   15 +
+ .../events/0002-validation-recorded.json           |   17 +
+ .../events/0003-handoff-completed.json             |   15 +
+ .../events/0004-continuation-checkpoint.json       |   19 +
+ .../EX-ATOMISTIC-ROADMAP-R1/passport.json          |   23 +
+ .../executions/EX-ATOMISTIC-ROADMAP-R1/summary.md  |   29 +
+ .../events/0001-work-order-started.json            |   15 +
+ .../events/0002-repair-completed.json              |   18 +
+ .../events/0003-validation-recorded.json           |   19 +
+ .../events/0004-handoff-completed.json             |   15 +
+ .../evidence/executions-check.json                 |    5 +
+ .../evidence/green-all-tests.txt                   | 1361 ++++++++++++++
+ .../evidence/green-flow.txt                        |   61 +
+ .../evidence/json-check.json                       |    6 +
+ .../EX-FLOW-PUBLICATION-MODE-R1/evidence/red.txt   |   18 +
+ .../EX-FLOW-PUBLICATION-MODE-R1/passport.json      |   18 +
+ .../EX-FLOW-PUBLICATION-MODE-R1/repair-map.md      |   19 +
+ .../EX-FLOW-PUBLICATION-MODE-R1/summary.md         |   20 +
+ examples/atomistic/cu-demo.json                    |    8 +
+ .../atomistic/runs/cu-emt-demo-r1-001/config.json  |   26 +
+ .../runs/cu-emt-demo-r1-001/environment.json       |   49 +
+ .../runs/cu-emt-demo-r1-001/manifest.json          |  106 ++
+ .../atomistic/runs/cu-emt-demo-r1-001/metrics.json |  459 +++++
+ .../runs/cu-emt-demo-r1-001/numerical-control.json |    7 +
+ .../runs/cu-emt-demo-r1-001/protocol.json          |  128 ++
+ .../runs/cu-emt-demo-r1-001/relaxation.json        |    8 +
+ .../runs/cu-emt-demo-r1-001/relaxation.log         |   12 +
+ .../atomistic/runs/cu-emt-demo-r1-001/report.md    |   13 +
+ .../runs/cu-emt-demo-r1-001/trajectory.json        | 1935 ++++++++++++++++++++
+ .../atomistic/runs/cu-emt-demo-r1-001/worker.log   |    0
+ project/operations/ATOMISTIC-ADAPTER-PREP.json     |   21 +
+ project/operations/ATOMISTIC-APP-PREP.json         |   21 +
+ project/operations/ATOMISTIC-REFERENCE-PREP.json   |   21 +
+ project/plan.json                                  |    8 +-
+ project/product-plan.json                          |  275 +++
+ project/product-state.json                         |   39 +
+ scripts/atomistic/__init__.py                      |    1 +
+ scripts/atomistic/api.py                           |  240 +++
+ scripts/atomistic/budget.py                        |   77 +
+ scripts/atomistic/cli.py                           |   38 +
+ scripts/atomistic/integration.py                   |   31 +
+ scripts/atomistic/static/app.js                    |  101 +
+ scripts/atomistic/static/index.html                |   32 +
+ scripts/atomistic/static/style.css                 |    1 +
+ scripts/atomistic/web.py                           |  267 +++
+ scripts/atomistic/worker.py                        |  121 ++
+ scripts/harness/review_impact.py                   |    7 +-
+ tests/test_atomistic_backend.py                    |  164 ++
+ tests/test_atomistic_web.py                        |  187 ++
+ tests/test_flow_throughput.py                      |   26 +
+ 71 files changed, 6542 insertions(+), 67 deletions(-)
+
+commit 0d8537cc368dc03ee39a543c835f72c40b651ae6
+Author:     root <yglamazdin@gmail.com>
+AuthorDate: Thu Nov 5 20:36:09 2026 +1000
+Commit:     root <yglamazdin@gmail.com>
+CommitDate: Thu Nov 5 20:36:09 2026 +1000
+
+    docs(work): start bounded atomistic product mission
+
+ docs/work/WO-ATOMISTIC-PRODUCT-R1.md               | 26 ++++++++++++++++++++++
+ .../events/0001-work-order-started.json            | 15 +++++++++++++
+ .../EX-ATOMISTIC-PRODUCT-R1/passport.json          | 24 ++++++++++++++++++++
+ 3 files changed, 65 insertions(+)
+
+commit ddbc5cb68a5b720cbbaaadeba96f087d82d82732
+Author:     root <yglamazdin@gmail.com>
+AuthorDate: Wed Oct 28 13:46:21 2026 +1000
+Commit:     root <yglamazdin@gmail.com>
+CommitDate: Wed Oct 28 13:46:21 2026 +1000
+
+    docs(harness): publish FLOW-R1 validation and independent review handoff
+    
+    Product subject ae35bf592d18e071dfecca74744d0315ae17f4af unchanged. Record 1026 passing local tests and successful hosted CI 40628140699; keep scientific gates and main unchanged. This commit adds evidence only, not independent approval.
+
+ .../events/0002-validation-recorded.json           |  16 +++
+ .../events/0003-handoff-completed.json             |  16 +++
+ .../evidence/validation-R1.json                    | 111 +++++++++++++++++++++
+ .../executions/EX-FLOW-THROUGHPUT-R1/summary.md    |  33 ++++++
+ 4 files changed, 176 insertions(+)
+
+commit ae35bf592d18e071dfecca74744d0315ae17f4af
+Author:     root <yglamazdin@gmail.com>
+AuthorDate: Wed Oct 28 13:41:22 2026 +1000
+Commit:     root <yglamazdin@gmail.com>
+CommitDate: Wed Oct 28 13:41:22 2026 +1000
+
+    feat(harness): add readiness routing and lean review workflow
+    
+    Implement FLOW-THROUGHPUT-R1: operational task cards, C0 append-only event writer, batch validation, explicit review-subject comparison, corrected resource arithmetic and parallel preparation roadmap.
+    
+    Local full suite: 1026 tests PASS (972 retained + 54 new). Scientific criteria/inputs/frozen F2 unchanged; no scientific runs, host mutations or launch authority. Remove temporary source-recovery workflow. Independent HIGH review and Human merge gate remain required.
+
+ .github/workflows/flow-source-recovery.yml         |  41 --
+ .github/workflows/hosted-ci.yml                    |  55 +--
+ AGENTS.md                                          | 158 ++------
+ DIRECTOR.md                                        | 348 +----------------
+ HARNESS_CONTROL.md                                 |   5 +
+ README.md                                          |  14 +-
+ .../harness/execution-passport.schema.v1.json      |   3 +-
+ config/control/harness/review-policy.v1.json       |  10 +-
+ config/control/harness/risk-policy.v1.json         |  12 +-
+ config/control/harness/work-event.schema.v1.json   |   4 +-
+ docs/ROADMAP.md                                    | 151 ++------
+ docs/ROADMAP_HISTORY_PRE_FLOW_R1.md                | 135 +++++++
+ docs/control/DIRECTOR_TASK_BUS_LEGACY_R1.md        | 348 +++++++++++++++++
+ docs/control/FLOW_THROUGHPUT_R1.md                 |  52 +++
+ docs/control/HARNESS_REVIEW_AND_EVIDENCE_RU.md     |  12 +-
+ docs/control/RESOURCE_PLAN_CORRECTIONS_R1.json     |  67 ++++
+ docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md       |  31 ++
+ docs/work/CURRENT_QUEUE.md                         |  14 +
+ docs/work/FLOW_R1_COMMANDS.md                      |  25 ++
+ docs/work/WO-FLOW-THROUGHPUT-R1.md                 |  14 +-
+ docs/work/WORK_QUEUE.md                            |  84 +---
+ docs/work/WORK_QUEUE_HISTORY_PRE_FLOW_R1.md        |  80 ++++
+ project/infra-plan.json                            |   7 +-
+ project/infra-state.json                           |   1 +
+ project/operations/AUTHOR-U1.json                  |  21 +
+ project/operations/EXTERNAL-U2.json                |  22 ++
+ project/operations/FLOW-R1.json                    |  19 +
+ project/operations/INTEGRATION-R1.json             |  20 +
+ project/operations/NL6-TESTRIG-PREP.json           |  20 +
+ project/operations/NL7-OFFLINE-SLICE.json          |  23 ++
+ project/operations/NL7-REAL-SOURCE.json            |  20 +
+ project/operations/RESOURCE-R1.json                |  19 +
+ project/plan.json                                  |   7 +-
+ project/state.json                                 |   9 +-
+ scripts/harness/batch_validate.py                  |  71 ++++
+ scripts/harness/cli.py                             |  15 +-
+ scripts/harness/contracts.py                       |  12 +
+ scripts/harness/operations.py                      | 152 ++++++++
+ scripts/harness/resource_plan.py                   |  88 +++++
+ scripts/harness/review_impact.py                   |  82 ++++
+ scripts/harness/work_cli.py                        |  41 +-
+ scripts/harness/work_events.py                     | 178 +++++++++
+ tests/test_flow_throughput.py                      | 423 +++++++++++++++++++++
+ 43 files changed, 2109 insertions(+), 804 deletions(-)
+
+commit bd6bd7c2cd42da80f7db4a0600bc2d68fb8f6c5f
+Author:     root <yglamazdin@gmail.com>
+AuthorDate: Wed Oct 28 13:12:46 2026 +1000
+Commit:     root <yglamazdin@gmail.com>
+CommitDate: Wed Oct 28 13:12:46 2026 +1000
+
+    chore(harness): start FLOW-THROUGHPUT-R1 and exact-base recovery
+
+ .github/workflows/flow-source-recovery.yml         | 41 ++++++++++++++++++++++
+ docs/work/WO-FLOW-THROUGHPUT-R1.md                 | 18 ++++++++++
+ .../events/0001-work-order-started.json            | 13 +++++++
+ .../executions/EX-FLOW-THROUGHPUT-R1/passport.json | 19 ++++++++++
+ 4 files changed, 91 insertions(+)

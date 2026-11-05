@@ -3,19 +3,25 @@
   "id": "ATOMISTIC-ADAPTER-PREP",
   "title": "Подготовить atomistic adapter и инженерный validation contract",
   "track": "ATOMISTIC_PRODUCT",
-  "status": "IN_PROGRESS",
-  "actor": "IMPLEMENTER",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
   "priority": 5,
   "depends_on": [],
-  "blockers": [],
-  "resume_condition": "",
-  "next_action": "Consumer: пользователь/приложение. Demo: Cu structure → actual relaxation/MD → trajectory/metrics/manifest. Бюджет: один сценарий, launch profile project/product-plan.json; карточка разрешает только software работу, не запуск. Stop: missing rights/pin, non-finite/integrity/budget failure; сохранить outcome. Actual runs только по WO-ATOMISTIC-PRODUCT-R1; не C0-physics claim.",
+  "blockers": [
+    "CANONICAL_MERGE_PENDING"
+  ],
+  "resume_condition": "Решение о canonical merge PR #96 после docs-only publication delta review; не повторять implementation/review неизменного проверенного subject.",
+  "next_action": "Принять merge-решение по https://github.com/rootfabric/NanoLab/pull/96. Technical Reviewer и отдельный Verifier PASS для exact source 71bc62102cc36bf49b04d40d81d3070d87cccad6/tree f86af90728797541594396ac0bef0964d9f8dd28. Actual CLI/UI demo завершён, P1 IMPLEMENTED_DEMO. Осталась docs-only publication/delta review; P0 OPEN, material NOT_EVALUATED, science acceptance не объявлена.",
   "evidence_refs": [
     "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
     "project/product-plan.json",
-    "project/product-state.json"
+    "project/product-state.json",
+    "examples/atomistic/runs/cu-emt-demo-r1-001/manifest.json",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md",
+    "https://github.com/rootfabric/NanoLab/pull/96"
   ],
-  "updated_at_utc": "2026-11-05T10:42:36Z",
+  "updated_at_utc": "2026-11-05T11:02:18Z",
   "claim_class": "C0_SOFTWARE_ONLY",
   "scientific_runs_allowed": false
 }

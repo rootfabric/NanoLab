@@ -3,17 +3,22 @@
   "id": "FLOW-R1",
   "title": "Ускорение harness и roadmap",
   "track": "CONTROL",
-  "status": "WAITING_REVIEW",
-  "actor": "REVIEWER",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
   "priority": 5,
   "depends_on": [],
-  "blockers": [],
-  "resume_condition": "Независимое review exact candidate, затем отдельная проверка изменения control/security policy.",
-  "next_action": "Реализация и регрессия в PR #95; не self-accept.",
-  "evidence_refs": [
-    "https://github.com/rootfabric/NanoLab/pull/95"
+  "blockers": [
+    "CANONICAL_MERGE_PENDING"
   ],
-  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "resume_condition": "Решение о canonical merge PR #96 после docs-only publication delta review; не повторять implementation/review неизменного проверенного subject.",
+  "next_action": "Принять merge-решение по https://github.com/rootfabric/NanoLab/pull/96. Technical Reviewer и отдельный Verifier PASS для exact source 71bc62102cc36bf49b04d40d81d3070d87cccad6/tree f86af90728797541594396ac0bef0964d9f8dd28. FLOW repair проверен в составе candidate; повторная реализация не требуется. Осталась docs-only publication/delta review; P0 OPEN, material NOT_EVALUATED, science acceptance не объявлена.",
+  "evidence_refs": [
+    "https://github.com/rootfabric/NanoLab/pull/95",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md",
+    "https://github.com/rootfabric/NanoLab/pull/96"
+  ],
+  "updated_at_utc": "2026-11-05T11:02:18Z",
   "claim_class": "C0_SOFTWARE_ONLY",
   "scientific_runs_allowed": false
 }

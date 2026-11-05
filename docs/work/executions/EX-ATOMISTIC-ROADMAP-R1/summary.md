@@ -27,3 +27,13 @@ Candidate, независимый HIGH review/verification и canonical merge е
 ## Дополнение по поручению интегратора после handoff
 
 Scope явно расширен интегратором: `docs/experiments/E6_ATOMISTIC_ADAPTER.md`, `docs/experiments/README.md`, исторический `docs/control/POST_MVP_DEVELOPMENT_ROUTE_R1.md`. Убрана двусмысленность «E6 deferred/после NL5» для нового ACTIVE P0–P3 engineering приоритета; исторический E6 scientific NOT_RUN/NOT_ACCEPTED, P0 OPEN и старые machine NL acceptance/dependencies не изменены. Старый post-MVP route помечен историческим с pointer на current roadmap. Initial passport/events не переписывались. Architecture уже имеет узкий candidate capability label вместо глобального «интеграция не реализована».
+
+## Factual status update после actual CLI/UI evidence
+
+По фактическим данным интегратора и прочитанному CLI manifest: P1 delivery IMPLEMENTED_DEMO, adapter/app WAITING_REVIEW, material NOT_EVALUATED/P0 OPEN. CLI source `599ba8d1f089d74dc5f67a33011cba020f6df57a`: 32 Cu, 10 relaxation + 50 MD steps, 0.655380319 с, manifest/digests PASS. Browser demo repaired source `71bc62102cc36bf49b04d40d81d3070d87cccad6`: 32 Cu, 10 MD steps/6 frames, 0.655919 с, form/run/playback/rotate/zoom/ZIP digest PASS. Запуски выполнены другими mission исполнителями; roadmap agent новых runs не выполнял. Final independent recheck ещё pending; будущие screenshot/review/summary paths помечены pending publication destinations, не завершёнными verdicts. Product-state не объявляет перечисленные два результата полным mission ledger. Scientific state/frozen protocols не изменены.
+
+## Final technical status по независимым отчётам
+
+Reviewer PASS (3 findings closed) и отдельный Verifier PASS: exact source `71bc62102cc36bf49b04d40d81d3070d87cccad6`, tree `f86af90728797541594396ac0bef0964d9f8dd28`. Verifier: 1059 tests, один явный MD skip, дополнительный actual run 32 Cu/50 MD steps (~0.656 с), same-host/same-environment numeric match к pilot 1. Всего mission 3 actual runs/~1.967 с/<200 KB raw, active reservations=0; это не external reproduction. Reports интегратор публикует в `EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md` и `product-verifier-report.md`.
+
+P1 delivery IMPLEMENTED_DEMO / technical VERIFIED, canonical_acceptance=false; P0 OPEN/material NOT_EVALUATED. Adapter/app/FLOW cards WAITING_HUMAN actor HUMAN: merge PR #96 после docs-only publication delta review, без повторной реализации/review неизменного source. P0 reference-prep остаётся первой READY задачей. Старое scientific state и physics inputs не менялись.

@@ -1,0 +1,32 @@
+{
+  "source_head": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "source_tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+  "run_id": "ui-22337abacb144a9e88191bfc167c383b",
+  "run_dir": "/workspace/scratch/48cb7a65c9c0/ui-real-runs/ui-22337abacb144a9e88191bfc167c383b",
+  "manifest_status": "COMPLETED",
+  "wall_seconds": 0.6559194819999448,
+  "export_verified_run_id": "ui-22337abacb144a9e88191bfc167c383b",
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "files": {
+    "result.zip": {
+      "sha256": "5b2b2c923203b9a81bff2644b0368e12d600fd97b96128746c95d3cd33681753",
+      "size_bytes": 13815
+    },
+    "ui-real.png": {
+      "sha256": "09684dc10df672bebcf4d18d4ec18afcb1c76ee3466965bf81695b4cd1d6c421",
+      "size_bytes": 317615
+    },
+    "http-ui.json": {
+      "sha256": "375f6690509e1478e918143a41a6a4adea481ba505324b64d8af8fa4571523c6",
+      "size_bytes": 1826
+    },
+    "browser.log": {
+      "sha256": "c4593d91d70fb8beb90d82fc674be7feac02cbcf61f5d0f9cf0b8d5598109b9b",
+      "size_bytes": 1177
+    },
+    "requested-config.json": {
+      "sha256": "ec546d1f20d165a2ae9079d001131bead854ce1023550c36a7b282405b53ecf3",
+      "size_bytes": 454
+    }
+  }
+}

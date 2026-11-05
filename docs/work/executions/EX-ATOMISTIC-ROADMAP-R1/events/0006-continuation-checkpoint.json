@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0006-continuation-checkpoint",
+  "sequence": 6,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T11:02:18.919467Z",
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3612ce1ed5f66f8ba3d90920ab327f5d00986c0a",
+  "summary": "Independent technical Reviewer and Verifier PASS exact source71bc621; demo VERIFIED, merge PR96 waiting HUMAN; P0 OPEN/material NOT_EVALUATED",
+  "evidence_refs": [
+    "project/product-state.json"
+  ],
+  "next_action": "Docs-only publication delta review and canonical merge decision PR96; reference-prep first READY"
+}

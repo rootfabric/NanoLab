@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-checkpoint",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T11:03:43.574874Z",
+  "execution_id": "EX-ATOMISTIC-PRODUCT-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "summary": "Sol implementation, independent technical review and verification complete; 3 bounded actual runs; material validation remains OPEN.",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md",
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md"
+  ],
+  "next_action": "Publish durable evidence and factual status; verify publication delta and CI before merge gate."
+}

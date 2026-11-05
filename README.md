@@ -6,7 +6,7 @@
 
 ## Текущее состояние
 
-Ближайший продукт — **ограниченная атомистическая лаборатория P0–P3**: один материал/модель → структура → реальная релаксация и короткая MD → траектория/метрики → сохранение и сравнение вариантов. Первый инженерный сценарий строится на **ASE EMT Cu**; это демонстрация программы с реальным расчётом, `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. **P0 OPEN, принятых P-стадий нет**: требуется независимый material reference, а не только успешный запуск.
+Ближайший продукт — **ограниченная атомистическая лаборатория P0–P3**: один материал/модель → структура → реальная релаксация и короткая MD → траектория/метрики → сохранение и сравнение вариантов. Первый инженерный сценарий реализован на **ASE EMT Cu** (`P1 IMPLEMENTED_DEMO`, технические Reviewer/Verifier PASS; ожидается canonical merge); это демонстрация программы с реальным расчётом, `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. **P0 OPEN, принятых P-стадий нет**: требуется независимый material reference, а не только успешный запуск.
 
 Атомистическая разработка идёт независимо от DNA NL5. Историческая научная линия сохранена: NL0–NL4 и NL5-001 приняты, frontier NL5; внешнее v0.1 воспроизведение завершилось terminal MISMATCH, `external_reproductions=0`. Новые NL5/E5 scientific runs требуют прежних U1/U2/R2/launch gates. S17 follower остаётся NOT_RECONSTRUCTED; static/synthetic assembly не доказывает передачу движения.
 
@@ -41,7 +41,7 @@
 PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.web --port 8765 --output-root atomistic-runs
 ```
 
-Открыть `http://127.0.0.1:8765`: Cu/ASE_EMT_Cu, fcc cuboid → relaxation/MD → trajectory playback/метрики → JSON/ZIP export. Это engineering demo с real adapter; до интеграционных evidence статус — candidate. Изменения формы должны оставаться в общей mission budget; restart браузера/сервера его не обнуляет.
+Открыть `http://127.0.0.1:8765`: Cu/ASE_EMT_Cu, fcc cuboid → relaxation/MD → trajectory playback/метрики → JSON/ZIP export. Реальный browser demo завершён: 32 Cu, 10 MD steps, 6 frames; проверены форма/запуск, playback, вращение/масштаб и ZIP export с digest PASS. CLI pilot: 32 Cu, 10 relaxation + 50 MD steps, [manifest/report](examples/atomistic/runs/cu-emt-demo-r1-001/report.md). Поставка — `IMPLEMENTED_DEMO`, независимые Reviewer/Verifier PASS для source `71bc62102cc36bf49b04d40d81d3070d87cccad6`; ожидается [merge PR №96](https://github.com/rootfabric/NanoLab/pull/96), material validation `NOT_EVALUATED`. Изменения формы должны оставаться в общей mission budget; restart браузера/сервера его не обнуляет.
 
 CLI того же сценария:
 

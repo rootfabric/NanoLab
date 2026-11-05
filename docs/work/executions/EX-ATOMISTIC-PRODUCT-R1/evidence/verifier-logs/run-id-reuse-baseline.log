@@ -1,0 +1,9 @@
+EXECUTION_ERROR:OSError; retained evidence: /tmp/tmpy6lkc_tc/first/verifier-reuse-probe
+EXECUTION_ERROR:OSError; retained evidence: /tmp/tmpy6lkc_tc/second/verifier-reuse-probe
+{
+  "subject": "61790c05a738d43a9be276b08d7be00d0758ea04",
+  "actual_calculator_runs": 0,
+  "mock_launch_attempts": 4,
+  "ledger_rows": 2,
+  "same_id_was_admitted_twice": false
+}
