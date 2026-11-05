@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+.venv-atomistic/
 venv/
 .env
 .env.*
@@ -12,6 +13,7 @@ dist/
 *.egg-info/
 /local-data/
 /local-runs/
+/atomistic-runs/
 /local-models/
 /local-secrets/
 /experiments/raw/

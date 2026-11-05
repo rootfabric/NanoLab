@@ -77,13 +77,6 @@
       "material_validation": "NOT_EVALUATED"
     }
   ],
-  "pending_publication": {
-    "owner": "INTEGRATOR",
-    "screenshot_destination": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/evidence/ui-real.png",
-    "review_directory": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review",
-    "summary": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/summary.md",
-    "status": "DOCS_ONLY_PUBLICATION_PENDING; exact-source technical review and verification PASS, canonical acceptance false"
-  },
   "canonical_acceptance": false,
   "technical_review": {
     "status": "PASS",
@@ -114,5 +107,12 @@
     "actor": "HUMAN",
     "action": "Canonical merge decision for reviewed candidate; no repeated implementation/review unless subject changes.",
     "pull_request": "https://github.com/rootfabric/NanoLab/pull/96"
+  },
+  "publication_evidence": {
+    "owner": "INTEGRATOR",
+    "screenshot_destination": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/evidence/ui-real.png",
+    "review_directory": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review",
+    "summary": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/summary.md",
+    "status": "INCLUDED_IN_THIS_CANDIDATE"
   }
 }
