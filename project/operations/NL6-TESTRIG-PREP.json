@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "NL6-TESTRIG-PREP",
+  "title": "Подготовить стенд одиночного driver",
+  "track": "NL6_PREP",
+  "status": "READY",
+  "actor": "IMPLEMENTER",
+  "priority": 50,
+  "depends_on": [],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "C0 TestRig: drive/load/controls/observable contracts и подготовка launch inputs для одиночного driver; без MD, новых научных выводов и закрытия E5.",
+  "evidence_refs": [
+    "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md",
+    "docs/work/WO-PREP-S17-R2.md"
+  ],
+  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

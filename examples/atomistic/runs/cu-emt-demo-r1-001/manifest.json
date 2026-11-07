@@ -1,0 +1,106 @@
+{
+  "schema_version": "atomistic-manifest-v1",
+  "run_id": "cu-emt-demo-r1-001",
+  "status": "COMPLETED",
+  "execution_outcome": "COMPLETED",
+  "scientific_outcome": "NOT_EVALUATED",
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "started_utc": "2026-11-05T10:47:27.124869+00:00",
+  "subject": {
+    "adapter_sources": {
+      "__init__.py": {
+        "sha256": "ee7f97a5eec6436cbe2b56d0e3650e18ad0f3bfac70b63ce3bcbb0105bd84fdf",
+        "size_bytes": 72
+      },
+      "api.py": {
+        "sha256": "cac936df8b52062acee2e713f1f166dedf0ee48209c64f27eeb6f6a592f11c78",
+        "size_bytes": 13629
+      },
+      "budget.py": {
+        "sha256": "9b4b66c49c94e6c942eeca128c4a1d3478a5be326b6141bc0fbc5ab47b4afecc",
+        "size_bytes": 3693
+      },
+      "cli.py": {
+        "sha256": "676935f0357b53e93ad72947301926b416272f87f9bdfedf2dace00b0de19371",
+        "size_bytes": 1714
+      },
+      "integration.py": {
+        "sha256": "4424b591ad7b3617fc864dfcc5d39a77bad53fc8ebdbce79c59b8510d1a0c712",
+        "size_bytes": 1510
+      },
+      "worker.py": {
+        "sha256": "ca11fbc99602ebbe89a62826b5e6e715eae43730da9dd15c624f8eb93008fc4d",
+        "size_bytes": 8200
+      }
+    },
+    "git_head": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+    "git_tree": "d1e1359ba0e06230aeed0197f2b548f6e9b7f1d1",
+    "dirty_tracked_files": []
+  },
+  "source_model": {
+    "id": "ASE_EMT_Cu",
+    "ase_version": "3.26.0",
+    "module_digest": {
+      "sha256": "b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d",
+      "size_bytes": 13429
+    },
+    "calculator": "ase.calculators.emt.EMT(asap_cutoff=False)",
+    "boundary": "nonperiodic finite FCC cuboid",
+    "license": "LGPL-2.1-or-later (ASE distribution)",
+    "upstream_source": "https://gitlab.com/ase/ase/-/blob/3.26.0/ase/calculators/emt.py"
+  },
+  "dependency_pins": {
+    "ase": "3.26.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "files": {
+    "config.json": {
+      "sha256": "9b9da6d1074bdc05c1bd4dcdccdaaf2c5950d1e5dcc8d6f3a7b01e11ac127970",
+      "size_bytes": 458
+    },
+    "environment.json": {
+      "sha256": "a40165a98a5aec9fdababc83c6eb5c070c7562b3980b75485b4eb9be78774dfb",
+      "size_bytes": 1070
+    },
+    "metrics.json": {
+      "sha256": "6f2454be10eec703046bd763fb20f4121576384db30befb53f0ee045a0451396",
+      "size_bytes": 13511
+    },
+    "numerical-control.json": {
+      "sha256": "8e55808dcbe3a05dc68b2344b513c953481f6db7afe6ae36bbbd97765b93de52",
+      "size_bytes": 241
+    },
+    "protocol.json": {
+      "sha256": "5f02db62c2146fa36d7c6fac7071539369b63886f168110884cdaa2f16112de0",
+      "size_bytes": 4170
+    },
+    "relaxation.json": {
+      "sha256": "1a5227e75279f81d57f8461625d5cbc3f9e03d6503999438fb7a96059fac5bf6",
+      "size_bytes": 231
+    },
+    "relaxation.log": {
+      "sha256": "a122157fb5dbfef37cd55f4681e2b06c2247e7525f52c209741dae12ff9f8d21",
+      "size_bytes": 622
+    },
+    "report.md": {
+      "sha256": "19b2bb22d42c81c7149e9818e8718b578a95b0ab1fae136278c45857876811a2",
+      "size_bytes": 1133
+    },
+    "trajectory.json": {
+      "sha256": "4bb5bd97aec42597b37f336dfc50e0212da650f10ba210164e1398454119eca8",
+      "size_bytes": 41767
+    },
+    "worker.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  },
+  "mission_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "reservation_id": "a36b03c0e9d04f87afccf71ab926b450",
+  "failure_class": null,
+  "exit_code": 0,
+  "ended_utc": "2026-11-05T10:47:27.816868+00:00",
+  "wall_seconds": 0.6553803189999599
+}

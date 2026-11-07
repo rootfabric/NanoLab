@@ -6,17 +6,13 @@
 
 ## Текущее состояние
 
-```text
-CURRENT FRONTIER = NL5
-NL5-002 = WAITING_HUMAN (terminal verified MISMATCH / NOT accepted, canonical; активный дочерний WO: platform sensitivity)
-E0 = RUN · E1 = SUPPORTED · E2 = RUN · NL4 = MVP COMPLETE · NL5-001 = ACCEPTED
-```
+Ближайший продукт — **ограниченная атомистическая лаборатория P0–P3**: один материал/модель → структура → реальная релаксация и короткая MD → траектория/метрики → сохранение и сравнение вариантов. Первый инженерный сценарий реализован на **ASE EMT Cu** (`P1 IMPLEMENTED_DEMO`, технические Reviewer/Verifier PASS; ожидается canonical merge); это демонстрация программы с реальным расчётом, `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. **P0 OPEN, принятых P-стадий нет**: требуется независимый material reference, а не только успешный запуск.
 
-**Научная стадия `NL5` в работе. `NL5-001` принят (2026-09-18): библиотека и release-пакет `nanolab-components 0.1.0` опубликованы — family/variant cards (0b/11b/32b/53b измерены; 74b honest gap), machine-readable schema, protocols, provenance, reproduction, rights, citation/version, детерминированный release manifest; лицензии финализированы owner-решением D2 (код Apache-2.0; документация + derived data CC-BY-4.0; сторонние права не перелицензованы). Clean release reproduction NL5-001-C: 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b NOT_MEASURED/KNOWN_GAP (frozen NANOLAB_REPRO_V0_1_REPLICA_ENVELOPE; claim не повышен). Стадия `NL4` закрыта ранее: AI NanoLab MVP собран и верифицирован clean-room'ом; NL4-001/002/003 приняты после батчевого Reviewer; claimed-скор ИИ E3 аннулирован anti-bias re-validation (честный negative-on-advantage). Стадия `NL3`: параметрика измерена (0b 65.98° [65.67, 66.32]; 11b 73.93°; 32b 78.09°; 53b 132.36°).** Канонические статусы: [project/state.json](project/state.json), сводка приёмок: [WORK_QUEUE](docs/work/WORK_QUEUE.md). `NL5-002` закрыт как terminal MISMATCH / NOT accepted (canonical 2026-09-20): внешний reproduction пакета v0.1.1 дал **MISMATCH** (0b/32b вне frozen envelopes, 11b/53b MATCH; Fresh Reviewer + Verifier PASS; threshold tuning отсутствует) — evidence chain смержена (PR #43, `7504b38`), **NL5 acceptance НЕ объявлен**, `external_reproductions = 0`; активный дочерний WO — [WO-NL5-002-E-R1](docs/work/WO-NL5-002-E-R1.md) platform sensitivity (preregistration FROZEN; dispatch BLOCKED_ON_P1_AVAILABILITY); каноническое решение: [DIRECTOR_DECISION_R1](docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md). Карточка компонента 0b: [EX-NL3-002-SUMMARY-R1](docs/work/executions/EX-NL3-002-SUMMARY-R1/evidence/component-card-0b.md), протокол E2: [E2_PROTO_R1](docs/research/E2_PROTO_R1.md).
+Атомистическая разработка идёт независимо от DNA NL5. Историческая научная линия сохранена: NL0–NL4 и NL5-001 приняты, frontier NL5; внешнее v0.1 воспроизведение завершилось terminal MISMATCH, `external_reproductions=0`. Новые NL5/E5 scientific runs требуют прежних U1/U2/R2/launch gates. S17 follower остаётся NOT_RECONSTRUCTED; static/synthetic assembly не доказывает передачу движения.
 
-С 8 сентября 2026 года проект использует собственный development/experiment harness, адаптированный из `rootfabric/distributed-world-simulator`: [PROJECT_CONTROL](PROJECT_CONTROL.md), [HARNESS_CONTROL](HARNESS_CONTROL.md), [Experiment Harness](docs/control/EXPERIMENT_HARNESS_RU.md). `main` является каноническим project state; рабочие ветки обязаны сохранять начало, продолжение и завершение работы в Git.
+**Что делать сейчас:** [P0–P6 roadmap](docs/ROADMAP.md), [product plan](project/product-plan.json), [product state](project/product-state.json), [текущая очередь](docs/work/CURRENT_QUEUE.md). `harness.cli drive` показывает atomistic C0 preparation рядом с отдельным NL5 gate. Карточки не разрешают запуск; узкая инженерная проверка регулируется [mission WO](docs/work/WO-ATOMISTIC-PRODUCT-R1.md): до 4096 atoms, 2000 MD steps/run, 8 actual pilot runs, 20 минут compute и 2 GiB суммарно в disposable Linux. Это не разрешение будущей material campaign.
 
-Параллельно научной линии ведётся отдельный [INFRA track](docs/infra/README.md): safe CI → self-hosted CPU → reproducible executor → artifact store → GPU → scheduler/AiiDA → HPC. Статус: `INFRA0–INFRA1` приняты, frontier `INFRA2-001` (self-hosted CPU executor). INFRA предоставляет вычислительные возможности, но по умолчанию не является hard gate научной дорожной карты и не владеет scientific truth. Git Task Bus: пилот `BUS-SMOKE-001` завершён как `COMPLETED_SANDBOX` (не ACCEPTED); P2 production activation заблокировано до отдельного owner-решения.
+Лицензии собственного кода и материалов: Apache-2.0 для кода, CC-BY-4.0 для документации/derived data; права сторонних источников проверяются отдельно. INFRA предоставляет capability; production Task Bus не активирован этой работой.
 
 ## К чему идём
 
@@ -33,26 +29,43 @@ E0 = RUN · E1 = SUPPORTED · E2 = RUN · NL4 = MVP COMPLETE · NL5-001 = ACCEPT
 
 ## Первый полезный продукт
 
-**DNA Nanomechanics Lab:** взять проверенную конструкцию ДНК-шарнира, изменять ограниченный набор параметров, вычислять распределение угла раскрытия и сохранность структуры, сравнивать варианты и выдавать воспроизводимый отчёт.
+**Atomistic Lab:** создать небольшую поддерживаемую структуру одного материала, выполнить реальный расчёт, просмотреть движение атомов и численные метрики, сохранить inputs/trajectory/manifest. Сначала — один проверяемый reference P0 и законченный сценарий P1; затем ограниченный конструктор P2 и сравнение вариантов P3. P4–P6 — условные исследования функции компонента, двухкомпонентной системы и специализированного механизма.
 
-ИИ организует исследование. Физические движки считают. Отдельные проверки решают, что результат действительно позволяет утверждать. Сначала эталон воспроизводится без ИИ, затем измеряется вклад агента относительно простых алгоритмов.
+ИИ организует работу; физический adapter считает; независимая validation ограничивает выводы. EMT Cu не выдаётся за validated EAM или доказанные свойства материала. Старый DNA Nanomechanics Lab и его научная история сохранены как отдельная специализация: scadnano → oxDNA/oxpy → analysis/PyMBAR → oxView. AiiDA/aiida-shell и Ax/BoTorch подключаются по потребности работающего сценария.
 
-Планируемая первая связка: **scadnano → oxDNA/oxpy → oxDNA analysis tools/PyMBAR → oxView**, с **AiiDA/aiida-shell** для исполнения и происхождения данных. Для выбора следующего опыта рассматриваются **Ax/BoTorch**. Это план интеграции, не готовая поставка; основания и ограничения находятся в [реестре источников](docs/research/SOURCES.md).
+## Запуск atomistic demo
+
+После установки isolated venv с pinned atomistic dependencies:
+
+```bash
+PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.web --port 8765 --output-root atomistic-runs
+```
+
+Открыть `http://127.0.0.1:8765`: Cu/ASE_EMT_Cu, fcc cuboid → relaxation/MD → trajectory playback/метрики → JSON/ZIP export. Реальный browser demo завершён: 32 Cu, 10 MD steps, 6 frames; проверены форма/запуск, playback, вращение/масштаб и ZIP export с digest PASS. CLI pilot: 32 Cu, 10 relaxation + 50 MD steps, [manifest/report](examples/atomistic/runs/cu-emt-demo-r1-001/report.md). Поставка — `IMPLEMENTED_DEMO`, независимые Reviewer/Verifier PASS для source `71bc62102cc36bf49b04d40d81d3070d87cccad6`; ожидается [merge PR №96](https://github.com/rootfabric/NanoLab/pull/96), material validation `NOT_EVALUATED`. Изменения формы должны оставаться в общей mission budget; restart браузера/сервера его не обнуляет.
+
+CLI того же сценария:
+
+```bash
+PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.cli run --config examples/atomistic/cu-demo.json --output-root atomistic-runs --run-id unique-run-id
+```
+
+Для каждого фактического запуска нужен новый run ID и свободный остаток общего бюджета. P1 software demo может поставляться с `NOT_SCIENTIFICALLY_VALIDATED`, пока P0 material reference остаётся OPEN; работающий сценарий не переписывается только из-за этого научного пробела.
 
 ## Навигация
 
 | Документ | Назначение |
 |---|---|
 | [VISION](docs/VISION.md) | Миссия, дальняя цель и измеримый вклад |
-| [ROADMAP](docs/ROADMAP.md) | NL0–NL8, зависимости и условия завершения |
+| [ROADMAP](docs/ROADMAP.md) | Product P0–P6 и сохранённая DNA линия NL0–NL8 |
 | [INFRA ROADMAP](docs/infra/ROADMAP.md) | Параллельная вычислительная линия INFRA0–INFRA7 |
-| [MVP](docs/MVP.md) | Первый пользовательский сценарий и приёмка |
+| [MVP](docs/MVP.md) | Исторический DNA MVP и его критерии |
 | [PROJECT CONTROL](PROJECT_CONTROL.md) | Каноническое состояние, ветвление и control invariants |
 | [HARNESS CONTROL](HARNESS_CONTROL.md) | Короткая точка входа для агентов |
 | [EXPERIMENT HARNESS](docs/control/EXPERIMENT_HARNESS_RU.md) | Начало/продолжение/завершение научных запусков и evidence |
 | [ARCHITECTURE](docs/ARCHITECTURE.md) | Ядро, адаптеры, ИИ и будущие расширения |
 | [EXPERIMENTS](docs/experiments/README.md) | E0–E6: контрольные опыты и исследования |
-| [WORK QUEUE](docs/work/WORK_QUEUE.md) | Очередь ограниченных заданий |
+| [CURRENT QUEUE](docs/work/CURRENT_QUEUE.md) | Доступные software задачи и условия возврата |
+| [WORK QUEUE](docs/work/WORK_QUEUE.md) | Историческая очередь и evidence |
 | [AGENT START](docs/work/AGENT_START.md) | С чего начинать следующему агенту |
 | [INDEX](docs/INDEX.md) | Полная карта документации |
 
@@ -80,4 +93,4 @@ Windows PowerShell:
 
 Успешный запуск программы ≠ научная достоверность. Совпадение моделей ≠ экспериментальное подтверждение. Красивая анимация ≠ работающая наномашина. Отрицательный результат сохраняется наравне с положительным.
 
-Правила участия: [CONTRIBUTING](CONTRIBUTING.md), правила агентов: [AGENTS](AGENTS.md). Лицензия собственного проекта ещё требует решения владельца: [LICENSE_POLICY](LICENSE_POLICY.md).
+Правила участия: [CONTRIBUTING](CONTRIBUTING.md), правила агентов: [AGENTS](AGENTS.md). Права и принятые лицензионные решения: [LICENSE_POLICY](LICENSE_POLICY.md).

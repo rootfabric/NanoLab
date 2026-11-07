@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "sequence": 4,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:41:57.636874Z",
+  "execution_id": "EX-FLOW-PUBLICATION-MODE-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ff35e283985f1eed1bacda9a3b3be191782e3700",
+  "summary": "Узкий mode/type repair передан независимому Reviewer; принятие не заявляется",
+  "evidence_refs": [],
+  "next_action": "Независимый Reviewer перепроверяет ff35e283985f1eed1bacda9a3b3be191782e3700 и publication delta handoff"
+}

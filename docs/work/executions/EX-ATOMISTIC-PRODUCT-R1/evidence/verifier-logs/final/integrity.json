@@ -1,0 +1,43 @@
+{
+  "head": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+  "old_pilot_git_blob_checks": {
+    "config.json": true,
+    "environment.json": true,
+    "metrics.json": true,
+    "numerical-control.json": true,
+    "protocol.json": true,
+    "relaxation.json": true,
+    "relaxation.log": true,
+    "report.md": true,
+    "trajectory.json": true,
+    "worker.log": true
+  },
+  "new_run_source_checks": {
+    "__init__.py": true,
+    "api.py": true,
+    "budget.py": true,
+    "cli.py": true,
+    "integration.py": true,
+    "worker.py": true
+  },
+  "worker_unchanged_from_pilot1": true,
+  "old_pilot_changed_source_modules": [
+    "api.py",
+    "budget.py"
+  ],
+  "scientific_fields_unchanged": {
+    "frontier": true,
+    "next_work_order": true,
+    "completed_tasks": true,
+    "active_tasks": true,
+    "task_status": true,
+    "stage_status": true,
+    "experiment_status": true,
+    "execution": true,
+    "github_tracking": true
+  },
+  "state_byte_equal_flow": true,
+  "frozen_changed_paths": [],
+  "git_status_porcelain": ""
+}

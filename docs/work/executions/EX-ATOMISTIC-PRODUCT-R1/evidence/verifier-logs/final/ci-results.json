@@ -1,0 +1,42 @@
+[
+  {
+    "name": "json",
+    "command": "PYTHONPATH=scripts python3 -m harness.batch_validate json --root .",
+    "started_utc": "2026-11-05T10:57:13.732045+00:00",
+    "seconds": 0.116623,
+    "exit_code": 0,
+    "log": "/workspace/scratch/48cb7a65c9c0/product-verifier-logs/final/json.log"
+  },
+  {
+    "name": "consistency",
+    "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root .",
+    "started_utc": "2026-11-05T10:57:13.848909+00:00",
+    "seconds": 0.06252,
+    "exit_code": 0,
+    "log": "/workspace/scratch/48cb7a65c9c0/product-verifier-logs/final/consistency.log"
+  },
+  {
+    "name": "executions",
+    "command": "PYTHONPATH=scripts python3 -m harness.batch_validate executions --root .",
+    "started_utc": "2026-11-05T10:57:13.911645+00:00",
+    "seconds": 0.067382,
+    "exit_code": 0,
+    "log": "/workspace/scratch/48cb7a65c9c0/product-verifier-logs/final/executions.log"
+  },
+  {
+    "name": "workflow",
+    "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint --root .",
+    "started_utc": "2026-11-05T10:57:13.979099+00:00",
+    "seconds": 0.046036,
+    "exit_code": 0,
+    "log": "/workspace/scratch/48cb7a65c9c0/product-verifier-logs/final/workflow.log"
+  },
+  {
+    "name": "unittest",
+    "command": "python3 -m unittest discover -s tests -t . -v",
+    "started_utc": "2026-11-05T10:57:14.025209+00:00",
+    "seconds": 40.043507,
+    "exit_code": 0,
+    "log": "/workspace/scratch/48cb7a65c9c0/product-verifier-logs/final/unittest.log"
+  }
+]

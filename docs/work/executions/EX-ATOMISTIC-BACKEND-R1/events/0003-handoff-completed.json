@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:48:46.075375Z",
+  "execution_id": "EX-ATOMISTIC-BACKEND-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "599ba8d1f089d74dc5f67a33011cba020f6df57a",
+  "summary": "Cu EMT backend и один реальный bounded pilot переданы; scientific NOT_EVALUATED",
+  "evidence_refs": [],
+  "next_action": "Интегратор публикует evidence, объединяет UI и передаёт exact subject Reviewer/Verifier"
+}

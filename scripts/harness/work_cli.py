@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -139,6 +140,11 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         return {"ok": False, "errors": ["missing passport.json"]}
 
     passport = load(passport_path)
+    sequence_profile = passport.get("event_ordering") == "sequence-v1"
+    if passport.get("event_ordering") not in (None, "sequence-v1"):
+        errors.append("unknown event_ordering")
+    if sequence_profile and passport.get("claim_class") != "C0_SOFTWARE_ONLY":
+        errors.append("sequence-v1 is limited to C0 work records, not scientific runs")
     required = ["schema_version", "execution_id", "work_order_id", "checkpoint", "base_sha", "branch", "risk_class", "claim_class", "allowed_paths", "started_at_utc", "status"]
     for key in required:
         if key not in passport:
@@ -146,7 +152,7 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
     if not SHA40.fullmatch(str(passport.get("base_sha", ""))):
         errors.append("passport base_sha must be 40 lowercase hex characters")
     # NL2-003 (O2/F3 class): a date-only placeholder in the passport start stamp.
-    if MIDNIGHT_PLACEHOLDER.match(str(passport.get("started_at_utc", "") or "")):
+    if not sequence_profile and MIDNIGHT_PLACEHOLDER.match(str(passport.get("started_at_utc", "") or "")):
         errors.append("passport started_at_utc is a midnight placeholder timestamp; record the actual machine time")
 
     event_files = sorted(events_dir.glob("*.json")) if events_dir.is_dir() else []
@@ -184,7 +190,7 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         else:
             if parse_utc_timestamp(timestamp_value) is None:
                 errors.append(f"{path.name}: timestamp_utc {timestamp_value!r} is not a parseable ISO-8601 timestamp")
-            if MIDNIGHT_PLACEHOLDER.match(timestamp_value.strip()):
+            if not sequence_profile and MIDNIGHT_PLACEHOLDER.match(timestamp_value.strip()):
                 errors.append(f"{path.name}: timestamp_utc {timestamp_value!r} is a midnight placeholder; record the actual machine time")
 
     if ids != sorted(ids):
@@ -206,13 +212,35 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
             if legacy_key not in LEGACY_BATCH_TIMESTAMP_EVENTS:
                 stamps.setdefault(value.strip(), []).append(path.name)
     for value, names in sorted(stamps.items()):
-        if len(names) >= 3:
+        if not sequence_profile and len(names) >= 3:
             errors.append(
                 "constant copy timestamp across " + str(len(names)) + " events ("
                 + ", ".join(names) + "): " + value
                 + ": record a per-event machine stamp (legacy batch events are whitelisted; "
                 + LEGACY_BATCH_TIMESTAMP_PROVENANCE + ")"
             )
+
+    # New C0 records order by contiguous event sequence, never fabricated milliseconds.
+    # Existing/experiment profiles retain their previously accepted validation rules.
+    if sequence_profile:
+        previous_time = parse_utc_timestamp(passport.get("started_at_utc"))
+        if previous_time is None:
+            errors.append("sequence-v1 passport requires a valid started_at_utc")
+        for position, (path, event) in enumerate(zip(event_files, events), 1):
+            seq = event.get("sequence")
+            if type(seq) is not int or seq != position or not path.stem.startswith(f"{position:04d}-"):
+                errors.append(path.name + ": sequence must be contiguous and match event_id")
+            if event.get("timestamp_source") != "machine":
+                errors.append(path.name + ": timestamp_source must be machine")
+            moment = parse_utc_timestamp(event.get("timestamp_utc"))
+            stamp = event.get("timestamp_utc", "")
+            if not isinstance(stamp, str) or not stamp.endswith(("Z", "+00:00")):
+                errors.append(path.name + ": sequence-v1 requires explicit UTC")
+            if moment is not None and previous_time is not None and moment < previous_time:
+                errors.append(path.name + ": event timestamp must not precede prior event/start")
+            previous_time = moment
+        if event_types and event_types[0] == EXTERNAL_OPENER:
+            errors.append("sequence-v1 does not change the external execution profile")
 
     # Profile selection: an external executor campaign opens with
     # EXTERNAL_EXECUTOR_DISPATCHED and uses its own vocabulary/roles.
@@ -300,6 +328,10 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
         "work_order_id": passport.get("work_order_id"),
         "status": passport.get("status"),
         "profile": "standard_work_order",
+        "event_ordering": passport.get("event_ordering", "legacy"),
+        "effective_status": ("HANDOFF_READY" if "HANDOFF_COMPLETED" in event_types else
+                             "BLOCKED" if "WORK_ORDER_BLOCKED" in event_types else
+                             "CANCELLED" if "WORK_ORDER_CANCELLED" in event_types else passport.get("status")),
         "passport_sha256": digest_file(passport_path),
         "event_types": event_types,
         "has_terminal_handoff": bool(terminal_positions),
@@ -309,6 +341,9 @@ def inspect_execution(execution_dir: Path) -> dict[str, Any]:
 
 
 def main() -> int:
+    if len(sys.argv) > 1 and sys.argv[1] in {"start", "record", "finish", "correct"}:
+        from .work_events import main as writer_main
+        return writer_main(sys.argv[1:])
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=["validate", "status", "close"])
     parser.add_argument("execution_dir")

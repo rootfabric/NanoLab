@@ -1,0 +1,8 @@
+{
+  "converged": true,
+  "steps": 10,
+  "initial_potential_energy_ev": 20.96948006423002,
+  "final_potential_energy_ev": 20.02719702583866,
+  "final_max_force_ev_per_angstrom": 0.03241324020962668,
+  "fmax_ev_per_angstrom": 0.05
+}

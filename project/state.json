@@ -69,7 +69,11 @@
     "external_reproductions": 0,
     "paid_compute_authorized": false
   },
-  "open_decisions": [],
+  "open_decisions": [
+    "AUTHOR_U1: assign native Ubuntu physical author host under existing owner requirements",
+    "EXTERNAL_U2: authorize scoped remediation and obtain fresh resource profile",
+    "Scientific launch: only after existing R2/frozen protocol/authority/Human gates; no authorization from FLOW-R1"
+  ],
   "github_tracking": {
     "roadmap_issue": 1,
     "task_issues": {
@@ -83,5 +87,6 @@
       "NL3": 7,
       "NL4": 8
     }
-  }
+  },
+  "operational_queue": "project/operations"
 }

@@ -1,0 +1,7 @@
+{
+  "analytic_force_ev_per_angstrom": 0.5980235923072748,
+  "central_difference_force_ev_per_angstrom": 0.5980235915359344,
+  "absolute_error_ev_per_angstrom": 7.713403249454132e-10,
+  "tolerance_ev_per_angstrom": 0.0001,
+  "passed": true
+}

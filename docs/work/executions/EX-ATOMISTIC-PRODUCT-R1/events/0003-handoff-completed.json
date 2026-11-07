@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T11:03:43.621639Z",
+  "execution_id": "EX-ATOMISTIC-PRODUCT-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "summary": "IMPLEMENTED_DEMO; independent source PASS/VERIFIED; scientific NOT_EVALUATED; ready for final publication verification and owner merge.",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/summary.md"
+  ],
+  "next_action": "Final publication delta and CI, then owner merge PR #96; ATOMISTIC-REFERENCE-PREP next."
+}

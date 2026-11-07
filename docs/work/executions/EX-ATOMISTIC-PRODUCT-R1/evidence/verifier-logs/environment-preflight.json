@@ -1,0 +1,23 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "versions": {
+    "ase": "3.26.0",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "dependency_pins_match": true,
+  "emt_module_digest": {
+    "sha256": "b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d",
+    "size_bytes": 13429
+  },
+  "matches_pilot1": true,
+  "ase_license_paths": [
+    "ase-3.26.0.dist-info/licenses/LICENSE"
+  ],
+  "license_file_sha256": {
+    "ase-3.26.0.dist-info/licenses/LICENSE": "21d7520250857d24adf0fbf80e01c966d8bae2a2d797f14cc038baf237cfe599"
+  },
+  "actual_calculator_runs": 0
+}

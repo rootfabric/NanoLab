@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:35:52.011471Z",
+  "execution_id": "EX-ATOMISTIC-PRODUCT-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ddbc5cb68a5b720cbbaaadeba96f087d82d82732",
+  "summary": "Owner-directed atomistic product revision; FLOW-R1 stacked dependency; Sol roles; bounded engineering pilot only.",
+  "evidence_refs": [],
+  "next_action": "Delegate roadmap, adapter, interface and independent FLOW review."
+}

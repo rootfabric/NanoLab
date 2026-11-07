@@ -1,135 +1,60 @@
-# Дорожная карта NanoLab
+# NanoLab — дорожная карта
 
-**Текущий frontier: `NL5` — внешнее воспроизведение release-пакета; `NL5-002` закрыт как terminal `MISMATCH` / NOT accepted (verified, canonical 2026-09-20; PR #43 merge `7504b38`); дочерний WO `WO-NL5-002-E-R1` platform sensitivity ИСПОЛНЕН И ЗАКРЫТ (2026-09-27, canonical science integration: P1 20/20 + P2 20/20; paired verdict **PLATFORM_INSENSITIVE** — 0b shift +0.6846952455000022° CI95 [-0.5502640344999961, +1.199043819], 32b shift -1.207386400499999° CI95 [-2.090432681000003, +2.1491488160000074]; **PLATFORM-SENSITIVITY-R1 = FULLY VERIFIED** — fresh paired review PASS `c14759a`, fresh verify VERIFIED `a2f1f57`, P1 raw replay 60/60 hashes + 60/60 sizes + 20/20 medians bit-exact, raw-replay verifier `verify/nl5-002-e-p1-raw-replay-r1 @ 9e6200a` VERIFIED, Director addendum `docs/evidence/NL5-002-E/DIRECTOR_ACCEPTANCE_R2.md` P1_RAW_GAP = CLOSED; frozen v0.1 envelopes, thresholds и NL5-002 MISMATCH disposition не пересматриваются; NL5 acceptance — отдельное owner-решение `NL5-ACCEPTANCE-POLICY`). `NL0–NL4` приняты целиком (NL4 = AI NanoLab MVP COMPLETE); `NL5-001` принят (2026-09-18): опубликован пакет `nanolab-components 0.1.0` с финализированными лицензиями (код Apache-2.0; docs/data CC-BY-4.0; сторонние права не перелицензованы) и clean reproduction классификацией 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b honest gap до arm-manifest-v2; NL5-002 external reproduction (пакет v0.1.1 после bounded repair): 11b/53b MATCH, 0b/32b MISMATCH по frozen rule (пороги не менялись; Fresh Reviewer PASS be945f1 + Verifier PASS 4116468) — NL5 acceptance НЕ объявлен; статусы экспериментов: `E0 = RUN`, `E1 = SUPPORTED`, `E2 = RUN`, `E3 = RUN` (честный negative-on-AI-advantage).** Актуальные статусы хранятся в [state.json](../project/state.json), зависимости работ — в [plan.json](../project/plan.json), post-MVP решение — в [POST_MVP_DEVELOPMENT_ROUTE_R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md), сводка приёмок — в [WORK_QUEUE](work/WORK_QUEUE.md). Сроки и стоимость устанавливаются по измерениям, а не по обещанию ускорения от ИИ.
+Revision: ATOMISTIC-PRODUCT-R1, 5 ноября 2026. Это candidate revision по [WO-ATOMISTIC-PRODUCT-R1](work/WO-ATOMISTIC-PRODUCT-R1.md), поверх явно названной FLOW-R1 dependency; принятие требует независимой проверки и canonical merge.
 
-```text
-NL0  Научная постановка и доступные эталоны
- ↓
-NL1  Первый исполняемый физический эксперимент без ИИ
- ↓
-NL2  Проверяемость, статистика, происхождение данных
- ↓
-NL3  Параметризованная лаборатория нанокомпонента
- ↓
-NL4  AI NanoLab MVP и измерение вклада ИИ
- ↓
-NL5  Проверенная библиотека и внешнее воспроизведение
- ↓
-NL6  Управляемый DNA-компонент (E5)
- ↓
-NL7  Сборка DNA-механизмов и проверенные упрощённые модели
- ↓
-NL8  Исследование специализированных наномашин
-```
+## Ближайший полезный продукт
 
-## Выбранная post-MVP траектория
+Один исследователь создаёт ограниченную атомистическую структуру одного материала, выполняет реальную релаксацию/MD, просматривает траекторию и метрики, сохраняет воспроизводимый результат, затем сравнивает варианты. Первые P0–P3 — инженерный продукт. P4–P6 — исследования, продолжение которых зависит от физических результатов, проверенной модели и отдельного протокола; срок и успех заранее не обещаются.
 
-После закрытия MVP проект развивается **depth-first по DNA nanomechanics**. [Literature-to-Mechanism Route R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md) (2026-10-11) уточняет старый post-MVP маршрут (исторический [R1](control/POST_MVP_DEVELOPMENT_ROUTE_R1.md)):
+Два научных представления развиваются отдельно: новая атомистическая product линия P0–P6 и историческая DNA линия NL0–NL8. Подготовка и узкий инженерный atomistic demo **не заблокированы DNA NL5**. Принятие старых NL checkpoints не доказывает атомистическую validation. E6 не переименован в P0, его прежние NL dependencies сохранены.
 
-```text
-NL5-001  validated components (ACCEPTED)
-   ↓
-NL5-002  external reproduction (NOT ACCEPTED / Human Gate)
-   ↓ [NL5 acceptance + authorised native Ubuntu executor]
-NL6-001  E5 driven DNA component / S17 reference
-   ├──────────────────→ NL6-002 E3-R2 AI benchmark (parallel, NON-GATING)
-   ↓
-NL7-001  DNA ports + driver→follower assembly + reduced models
-   ↓
-NL8-001  programmable nanomechanism / energy and control
-```
+## Продуктовая линия P0–P6
 
-`PREP-S17` (проверка открытых данных, точных input pins, прав и импортных форматов) готовится как **отдельный bounded WO без scientific runs**, параллельно NL5. `NL6-002` остаётся исследованием вклада ИИ, но больше не блокирует NL7. Прежний `NO_ADVANTAGE` сохраняется и является допустимым будущим исходом.
-
-`E4` free-energy challenge не отменён: он открывается targeted, если E5/NL7 создаёт конкретный вопрос о состояниях, переходах, барьерах или sampling. `E6` atomistic adapter остаётся поздним/demand-driven расширением и не должен задерживать основную DNA-механическую вертикаль до NL7.
-
-Параллельная capability-линия `INFRA2 → INFRA3` может развиваться одновременно с NL5, но INFRA не владеет scientific truth и не закрывает NL5/NL6 автоматически.
-
-## Повторное использование существующих результатов
-
-| Источник | Практическое действие для NanoLab |
-|---|---|
-| S16 — проверенный DNA hinge family | Переиспользовать topology/validation/observable routines как опорные tests |
-| **S17 — Centola leaf-spring / Nanobase 196 / Zenodo / hinges** | Подготовить exact source-pack и протокол E5, затем driver→follower NL7 |
-| S18 — mechanical frustration 2025 | Исследовать локализацию деформаций/связь упругих узлов |
-| S19 — spring-loaded arrays 2025 | Использовать как образец программируемой механической логики NL8 |
-| S20 — Generative SNUPI; S21 — MagicDNA | Опциональные инструменты генерации/САПР; проверять независимым physical engine и права |
-
-Новые перспективные контракты: `KnowledgePack`, `MechanicalComponentSpec` (molecular ports/anchors/DOF), `AssemblySpec`, `TestRigSpec`, `ReducedModelCard`. Первое воплощение — **узкий компилятор одного типа DNA-соединения**. Подробные gates/ограничения в [маршруте R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md). Это план, не утверждение об имеющемся работающем инструменте.
-
-## Этапы и условия завершения
-
-| Этап | Результат | Проверяемая граница |
+| Этап | Результат и условие завершения | Зависимость / горизонт |
 |---|---|---|
-| NL0 | Выбран небольшой эталон E1 и кандидат семейства шарниров E2; проверены источники, доступ и права | Есть исходные файлы либо явно оформленный путь их получения; определения наблюдений и предварительные критерии сравнения; нет скрытых допущений |
-| NL1 | Зафиксированная среда, запуск oxDNA без ИИ, первичный анализ | Исходный файл → подготовка → расчёт → сохранённый результат проходит в чистой среде; измерена стоимость |
-| NL2 | Контракты, provenance, E0, статистический анализ и воспроизведение E1 | Обнаруживаются заданные ошибки; повторный запуск подтверждает вывод в согласованных пределах; исходники и анализ связаны с результатом |
-| NL3 | Семейство допустимых шарниров и воспроизводимая серия E2 | Определено распределение угла, оценены целостность и статистика, получена зависимость от параметров без заранее навязанного тренда |
-| NL4 | Пользовательская цель → ограниченный агент → расчёты → отчёт | Выполнен E3, работают бюджеты и восстановление; вклад ИИ измерен относительно контроля; готов публичный воспроизводимый сценарий |
-| NL5 | Несколько карточек/вариантов в честно оформленном component package, эталоны и архивы | Хотя бы один release package воспроизведён вне авторской среды; независимость проверки описана честно; rights/claim ceiling явны |
-| NL6 | E5 — проверенный управляемый DNA-компонент под воздействием/нагрузкой | Отдельные no-drive/load controls; цикл, возврат, ошибки, целостность и неопределённости измерены. E3-R2 остаётся non-gating benchmark |
-| NL7 | Исполняемая 2-компонентная сборка + reduced models | Порты/anchors/topology обоснованы; драйвер + follower функционируют в общей подробной модели; coupling, back-reaction, нагрузка и hold-out для reduced model проверены |
-| NL8 | Специализированная управляемая многокомпонентная наномашина как исследовательская задача | Есть энергия, механическое управление/защёлка, полный цикл, ошибки, диапазон модели и план независимой экспериментальной проверки |
+| P0 — эталон одного материала | Один материал и named/pinned модель; права/provenance, reference values, observables, единицы/boundary, tolerances/uncertainty и convergence checks зафиксированы до оценки; actual outputs и независимая validation | Нет NL5 dependency; ближайшая инженерная основа |
+| P1 — атомы и расчёт в приложении | Создать структуру → actual relaxation/MD → trajectory/metrics → сохранить bundle с manifest; явные ошибки и limits, независимая проверка exact subject | Validated acceptance после P0; unvalidated engineering demo поставляется отдельно |
+| P2 — ограниченный конструктор | Конечный family геометрий/параметров в области применимости выбранной модели; unsupported inputs отклоняются; geometry → actual calculation → result | После P1; ближайший продукт |
+| P3 — сравнение экспериментом | Одна цель, comparator/controls, заранее фиксированные seeds/observables/budget; uncertainty, negative/failed outcomes и воспроизводимый отчёт; вклад ИИ отдельно от validation модели | После P2; ближайший продукт |
+| P4 — функциональный компонент | Одна измеренная функция, actuation/energy/load, controls/cycles/integrity/failure envelope и uncertainty | После P3; условное исследование с отдельным протоколом |
+| P5 — два компонента | Совместимые interfaces/topology, количественные coupling/load transfer/back-reaction; reduced model проверен на hold-out detailed data | После P4; условное исследование |
+| P6 — специализированный механизм | Конкретные energy source/control/cycle/useful output/losses/errors и validation contracts | После P5 и отдельного решения о продолжении |
 
-**NL4 — закрытая граница первого продукта.** Следующее развитие не должно превращать NanoLab в широкий набор несвязанных physics adapters до проверки основной DNA-механической вертикали.
+Машинные критерии, task dependencies, consumer/demo/budget/stop: [product-plan](../project/product-plan.json). Текущий product status: [product-state](../project/product-state.json). **Ни один P checkpoint не принят. P0 остаётся OPEN до проверенного material reference.** Software demo с ASE EMT Cu не является validated EAM, материальным эталоном или подтверждением свойств меди. P1 engineering demo допускает поставку до P0 как IMPLEMENTED_DEMO/UNVERIFIED с отдельным material status OPEN. Работающий P1 не переписывается и не перезапускается лишь потому, что P0 ещё не принят. P1 delivery сейчас **IMPLEMENTED_DEMO**, adapter/app/FLOW ждут Human merge [PR №96](https://github.com/rootfabric/NanoLab/pull/96); material validation **NOT_EVALUATED**. CLI pilot: 32 Cu, 10 relaxation + 50 MD steps, 0.655380319 с, [actual manifest](../examples/atomistic/runs/cu-emt-demo-r1-001/manifest.json). Browser demo на repaired source `71bc62102cc36bf49b04d40d81d3070d87cccad6`: 32 Cu, 10 MD steps, 6 frames, 0.655919 с; проверены форма/запуск, playback, rotate/zoom и ZIP digest. Независимые technical Reviewer и Verifier дали PASS для exact source `71bc62102cc36bf49b04d40d81d3070d87cccad6`, tree `f86af90728797541594396ac0bef0964d9f8dd28`: 1059 tests с одним явным MD skip плюс отдельный actual verifier run 32 Cu/50 MD steps. Итого три actual runs около 1.967 с на одном host/environment; это не external material reproduction. Осталась docs-only publication/delta review и canonical merge; P0 не принят. Exact evidence/report paths — product-state.
 
-## Ближайший план действий
+## Ближайшая работа и демонстрация
 
-### 1. Control/release hygiene (текущее состояние)
+| Работа | Потребитель / проверяемый результат | Бюджет и остановка |
+|---|---|---|
+| ATOMISTIC-REFERENCE-PREP | Исследователь/material reviewer: pinned source/model/rights и draft protocol одного material reference | Один материал; до двух содержательных source passes без нового факта; затем BLOCKED_SOURCE с точным missing input |
+| ATOMISTIC-ADAPTER-PREP | Пользователь/приложение: структура Cu → actual relaxation/короткая MD → trajectory/metrics/manifest | Software contract и negative tests; actual runs только по нижеуказанному mission profile; stop при missing rights/pin, non-finite/integrity/budget failure |
+| ATOMISTIC-APP-PREP | Исследователь: создать → рассчитать → просмотреть → сохранить, с честным claim ceiling | Один material/scenario, reuse actual outputs для UI; missing adapter/artifact даёт явную ошибку, без synthetic substitute |
 
-- `project/state.json` синхронизирован: `NL5-001 = ACCEPTED`, `next = NL5-002`, лицензионное open decision закрыто (D2);
-- owner decision по лицензии получен 2026-09-18 (D2): код Apache-2.0; документация + derived data CC-BY-4.0; сторонние права не перелицензованы;
-- stale PR/старые control surfaces закрывать или supersede отдельным housekeeping решением;
-- protection/required checks для `main` усилить отдельным bounded control/infra WO.
+Операционные карточки совместимы с существующим C0 registry и **не разрешают расчёт**. Отдельный [mission WO](work/WO-ATOMISTIC-PRODUCT-R1.md) разрешает только implementation validation нового adapter в disposable Linux: один материал/модель, до **4096 atoms**, **2000 MD steps/run**, **8 actual pilot runs суммарно**, **1200 секунд compute**, **2 GiB результатов**, последовательно, isolated venv. Все исполнители используют общий cumulative run ledger; новые IDs уникальны, failed outcomes сохраняются. Никаких paid compute/U1/U2 mutations/NL5/E5 dispatch. Stop при превышении бюджета, отсутствии pin/прав, non-finite forces/energies или failed integrity. Claim ceiling: `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`.
 
-### 2. NL5-001 — component library v0.1 (ВЫПОЛНЕНО и ПРИНЯТО, 2026-09-18)
+Это реальные атомистические расчёты, а не mock. Этот профиль не признаёт контейнер U1/U2 и не разрешает будущую material/scientific campaign: для неё нужен отдельный frozen protocol/model validation и принятая среда. Отсутствие validated benchmark оставляет P0 OPEN, сохраняя полезность честного инженерного demo.
 
-Release `nanolab-components 0.1.0` включает machine-readable schema, family/variant cards, protocols, reports, provenance, reproduction, rights, citation/version и детерминированный release manifest. Первое DNA hinge family опубликовано как **одно семейство с измеренными вариантами**; clean reproduction: 0b/32b/53b MATCH, 11b INCONCLUSIVE, 74b `KNOWN_GAP / NOT_MEASURED` — честное состояние v0.1 (arm-manifest-v2 — отдельный будущий WO).
+## Историческая DNA линия
 
-### 3. NL5-002 — external reproduction (ЗАКРЫТ: terminal MISMATCH / NOT accepted, canonical 2026-09-20)
+Научный status и счётчики остаются в `project/state.json`; NL0–NL8 dependencies/experiments — в `project/plan.json`; acceptance — в прежних `config/control/harness/project-goals.v1.json` и `checkpoint-catalog.v1.json`. Эти records не расширяются P-стадиями.
 
-Цепочка 2026-09-19: A frozen protocol → B-R1 INCONCLUSIVE+PORTABILITY_FINDING (сохранён) → C bounded repair v0.1.1 (science byte-identical) → B-R2 12/12 валидных реплик exit=0 → C2 binding MISMATCH (0b/32b вне frozen envelopes, 11b/53b MATCH; 74b NOT_MEASURED; threshold tuning отсутствует). Fresh Reviewer PASS `be945f1`, Fresh Verifier PASS `4116468`; после bounded tooling repair (external execution profile, `616ecea`+`932481e`) evidence merge исполнен: **PR #43 MERGED (merge `7504b38`)** — tooling review PASS `review/nl5-002-integration-r1 @ 61edc42`, tooling/integration Verifier PASS `verify/nl5-002-integration-r1 @ 776bb82`, hosted CI `35480129676` SUCCESS; post-merge main: 369 tests OK, consistency ok, lint blocking=0, 43/43 EX-* valid, CI `35506654447` SUCCESS. Приёмка NL5 требует успешного воспроизведения — НЕ выполнено: `NL5-002 = WAITING_HUMAN` (terminal MISMATCH, NOT accepted), `external_reproductions = 0`. Owner disposition 2026-09-20: следующий научный шаг — **platform sensitivity `WO-NL5-002-E-R1`** (preregistration FROZEN: Reviewer PASS `1f8c063` + Verifier PASS `bd25baf`, freeze record `PREREGISTRATION_FREEZE_R1`; dispatch остановлен честно — P1 author environment недоступна, resume по owner-решению; v0.1 envelope и R1 MISMATCH не пересматриваются); открытые вопросы: NL5 acceptance policy после platform study, optional packaging v0.1.2, optional P3. Record: `docs/evidence/NL5-002/DIRECTOR_DECISION_R1.md`.
+| Стадия | Состояние / gate |
+|---|---|
+| NL0–NL4, NL5-001 | Принятые исторические checkpoints; scope исходной DNA линии |
+| NL5-002 | WAITING_HUMAN; NL5 IN_PROGRESS; terminal v0.1 MISMATCH сохранён, external_reproductions=0; v0.2 FROZEN_R2 требует U1/U2/R2/launch gates |
+| NL6-001 | PLANNED после NL5-002: E5 driven DNA component, прежние controls/load/cycles/integrity/uncertainty |
+| NL6-002 | PLANNED после NL6-001: отдельный non-gating E3-R2 AI benchmark |
+| NL7-001 | PLANNED после NL6-001: two-component DNA assembly, coupling и validated reduced model |
+| NL8-001 | PLANNED после NL7-001: специализированное mechanism research |
 
-### 4. Параллельно INFRA2 → INFRA3
+NL6 TestRig C0 PREP и NL7 real-source/offline slice могут идти параллельно по действующим карточкам. S17 follower остаётся NOT_RECONSTRUCTED. Нельзя заменять реальный source синтетическим примером. Waiting U1/U2 задачи не требуют повторного аудита без нового факта.
 
-Подготовить protected self-hosted CPU route и reproducible scientific executor. Это capability work, а не scientific acceptance.
+## Исполнение без лишней работы
 
-Активная задача линии (2026-09-27): `WO-NATIVE-UBUNTU-EXECUTOR-R1` — native Ubuntu R2 author/executor environment (`U1 = AUTHOR_UBUNTU`) и вывод Windows/WSL2 из mandatory execution path (`WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY` effective; `DEFAULT_AUTHOR_EXECUTOR = NATIVE_UBUNTU_R2` PROPOSED до validation gates U1–U5 + NC-U1..U5). INFRA3 определяется как native Ubuntu reproducible scientific executor. Контракт: `docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md`, policy: `docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md`. Это не scientific acceptance и не меняет NL5/NL6 границы.
+[CURRENT_QUEUE](work/CURRENT_QUEUE.md) и `PYTHONPATH=scripts python3 -m harness.cli drive --root .` показывают доступную software работу отдельно от canonical NL5 gate. WIP — максимум три содержательные активные задачи; waiters сохраняют actor/resume condition. Каждая задача имеет consumer, demo, budget/stop. После двух repairs одной причины пересматривается контракт. Не вводить scheduler, новый task bus, новые отчётные ступени или каталоги моделей без работающего пользовательского сценария и измеренной потребности.
 
-### 5. NL6-001 — E5 driven DNA component
+[FLOW-R1](control/FLOW_THROUGHPUT_R1.md) сохраняет risk-based review и publication delta review. HIGH scope этой mission требует независимых Reviewer/Verifier и действующего merge gate; implementer не принимает собственный результат. INFRA6/7/AiiDA scale-up — по измеренной необходимости, не hard gate первого atomistic demo. CI, host readiness и trajectory animation не являются scientific acceptance.
 
-До scientific Work Order: `PREP-S17` — аудит exact входов и прав Nanobase 196 / Zenodo 8248808 / `sulcgroup/hinges`; без новых scientific runs. Работа E5 допустима после принятия NL5, U1/R2 host gates и frozen preregistration.
+## История
 
-Отдельный HIGH scientific Work Order и preregistration: явное внешнее воздействие, нагрузка, state/angle distributions, success/failure rule, return/reversibility, repeated cycles, structural integrity, uncertainty и ограничения модели. Результат называется externally driven component, не автономным мотором/нанороботом.
-
-### 6. NL6-002 — E3-R2 (non-gating; возможно параллельно NL7)
-
-Только после E5 сформировать более богатое пространство параметров и сравнить random/grid/optimization/LLM-guided стратегии при равном бюджете и информации. Победитель обязательно получает anti-selection-bias revalidation на fresh seeds. `NO_ADVANTAGE` остаётся допустимым исходом.
-
-### 7. NL7 — modular DNA mechanism assembly
-
-Разработать `MechanicalComponentSpec` с молекулярными портами/frames/anchors и `AssemblySpec` с явными соединениями; собрать S17-подобный узел «driver → follower» и один ограниченный вариант. Fail-closed compiler должен выдавать одну проверяемую oxDNA topology/config. Испытать coupling, back-reaction, load transfer, errors/failures; reduced models сравнить с независимыми detailed evidence. CAD preview не доказывает самосборку или изготовимость.
-
-### 8. E4/E6 по условию
-
-E4 подключается для конкретного free-energy/state-transition вопроса из E5/NL7. E6 — позже либо при явном внешнем спросе, когда его проверяемая ценность выше стоимости расширения physics stack.
-
-## Связь с экспериментами
-
-E0 проверяет программный измерительный тракт, E1 — небольшой известный физический пример, E2 — шарнир и параметрическую зависимость, E3 — пользу ИИ в первом MVP. E5 становится основной следующей научной специализацией; E3-R2 повторно проверяет пользу ИИ уже на более содержательном post-E5 пространстве. E4 исследует сложный свободноэнергетический ландшафт по конкретной необходимости; E6 — второй физический адаптер. [Подробная программа](experiments/README.md).
-
-Простой запуск E1 относится к NL1. Его научная приёмка со статистикой и проверками относится к NL2. Это разные результаты, а не двойной подсчёт одного успеха.
-
-## Правила продвижения
-
-Завершение стадии требует ссылок на конкретный commit/tree, протоколы, исходные данные и отчёт. Документ, PR или сообщение агента сами по себе стадию не закрывают. Неудача гипотезы может быть полноценным научным результатом, если метод прошёл проверки.
-
-Изменение критерия после просмотра результатов оформляется новой версией протокола. Предыдущая кампания остаётся доступной. При нехватке статистики результат — INCONCLUSIVE, при недоступном оборудовании — BLOCKED_ENVIRONMENT, а не научное опровержение.
-
-## Параллельная работа
-
-До NL4 разрешались ограниченные вспомогательные работы: библиография, проверка прав, независимые тестовые данные, рецензирование критериев и документация. После MVP научный runtime по-прежнему сохраняет одну основную вертикаль; параллельно может развиваться INFRA capability line и bounded release/reproduction work без конфликтующих scientific subjects.
-
-Параллельные агенты не меняют одни контракты, не запускают одну кампанию дважды и не создают альтернативную систему статусов.
-
-После NL5 обновлённая научная вертикаль: **E5 driven DNA component → NL7 2-component DNA assembly → NL8 controlled mechanism**. E3-R2 — отдельный non-gating benchmark после E5; подробнее [LITERATURE_TO_MECHANISM_ROUTE_R1](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md). Смена приоритетов не меняет frozen scientific claims или NL5 gate; новый пересмотр требует durable roadmap decision. Планируемые наноматериалы, наноэлектроника, сенсоры и машинные компоненты сохранены в [портфеле исследований](RESEARCH_PORTFOLIO.md).
+[Pre-FLOW roadmap](ROADMAP_HISTORY_PRE_FLOW_R1.md), [WORK_QUEUE history](work/WORK_QUEUE.md), [DNA literature route](control/LITERATURE_TO_MECHANISM_ROUTE_R1.md), [научный метод](SCIENTIFIC_METHOD.md), [INFRA roadmap](infra/ROADMAP.md), [resource corrections](control/RESOURCE_PLAN_CORRECTIONS_R1.md). Frozen protocols, thresholds, seeds и scientific counters не изменяются этой revision.

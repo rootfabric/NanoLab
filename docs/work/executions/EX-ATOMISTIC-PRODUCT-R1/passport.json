@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-PRODUCT-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "checkpoint": "NL6",
+  "base_sha": "ddbc5cb68a5b720cbbaaadeba96f087d82d82732",
+  "branch": "work/atomistic-product-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/**",
+    "project/**",
+    "scripts/atomistic/**",
+    "tests/test_atomistic*",
+    "examples/atomistic/**",
+    "README.md",
+    "AGENTS.md",
+    "PROJECT_CONTROL.md",
+    "config/control/harness/**"
+  ],
+  "started_at_utc": "2026-11-05T10:35:52.011445Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}

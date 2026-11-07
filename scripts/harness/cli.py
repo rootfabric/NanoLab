@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from .contracts import check_consistency, load_json
+from .operations import route
 
 SCHEMA = "nanolab.control_development_output.v1"
 
@@ -16,7 +17,7 @@ def output(payload: dict, code: int = 0) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=["overview", "check-consistency", "status", "plan", "drive", "close-role", "close-mission"])
+    parser.add_argument("mode", choices=["overview", "check-consistency", "status", "plan", "drive", "close-role", "close-mission", "queue"])
     parser.add_argument("--root", default=".")
     args = parser.parse_args()
     root = Path(args.root).resolve()
@@ -42,16 +43,10 @@ def main() -> int:
     if args.mode in {"overview", "status"}:
         return output({"command": args.mode.upper(), **base})
 
-    task = next((item for item in plan.get("tasks", []) if item["id"] == state["next_work_order"]), None)
-    if args.mode in {"plan", "drive"}:
+    if args.mode in {"plan", "drive", "queue"}:
         return output({
-            "command": args.mode.upper(),
-            **base,
-            "next_actor": "DIRECTOR" if task is None else "IMPLEMENTER_OR_DIRECTOR",
-            "next_action": None if task is None else task.get("title"),
-            "work_order": task,
-            "mission_complete": False,
-            "human_decision_required": False,
+            "command": args.mode.upper(), **base,
+            **route(state, plan, result.get("operational_tasks", [])),
         })
 
     if args.mode == "close-role":

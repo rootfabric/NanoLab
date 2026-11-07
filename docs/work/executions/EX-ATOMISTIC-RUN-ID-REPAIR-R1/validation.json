@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "kind": "atomistic_repair_validation",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "execution_id": "EX-ATOMISTIC-RUN-ID-REPAIR-R1",
+  "base_sha": "61790c05a738d43a9be276b08d7be00d0758ea04",
+  "source_sha": "58173bdd70c42263b96dff30d849446cdb79f2fd",
+  "source_tree": "560fcf5ed89b08fd2776c84cac9f0847e0f909c6",
+  "command": "PYTHONPATH=scripts python3 -m unittest tests.test_atomistic_backend tests.test_atomistic_web -v",
+  "exit_code": 0,
+  "tests_run": 28,
+  "tests_passed": 27,
+  "tests_skipped": 1,
+  "skip_reason": "Real MD is opt-in and not authorized or needed for this mock-only repair",
+  "test_wall_seconds": 6.662,
+  "actual_simulations": 0,
+  "production_ledger_modified": false,
+  "regressions": [
+    "FAILED ID reused in a different output root is rejected before second worker launch; ledger bytes and charged budget unchanged",
+    "Legacy ledger row without run_id is matched by original run_dir basename and preserved without migration",
+    "Concurrent duplicate requests under flock reserve exactly one slot, 120 seconds and 1000 output bytes"
+  ],
+  "claim_ceiling": "SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED",
+  "scientific_outcome": "NOT_EVALUATED",
+  "independent_acceptance": "PENDING"
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "implementer_validation_receipt",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "independent_review": false,
+  "scientific_runs": 0,
+  "product_head": "ae35bf592d18e071dfecca74744d0315ae17f4af",
+  "product_tree": "e00ad4758626c6f529377d71e8861a66e610324d",
+  "local_base_head": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "local_worktree_tree_matches_published_product": true,
+  "validation_time_utc": "2026-10-28T03:42:43.381786+00:00",
+  "full_suite": {
+    "command": "python3 -m unittest discover -s tests -t . -v",
+    "start_utc": "2026-10-28T03:31:21.022471+00:00",
+    "end_utc": "2026-10-28T03:32:24.250402+00:00",
+    "elapsed_seconds": 63.227937268000005,
+    "exit_code": 0,
+    "tests": 1026,
+    "failures": 0,
+    "errors": 0,
+    "existing_tests_retained": 972,
+    "new_focused_tests": 54
+  },
+  "checks": [
+    {
+      "name": "consistency",
+      "command": "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root .",
+      "exit_code": 0,
+      "ok": true,
+      "elapsed_seconds": 0.717362,
+      "checked": null,
+      "log_sha256": "97ecb0e96942eb82e45baed2896855f37bcf691d90f09271c987e4058fc7f87a",
+      "log_bytes": 7971
+    },
+    {
+      "name": "drive",
+      "command": "PYTHONPATH=scripts python3 -m harness.cli drive --root .",
+      "exit_code": 0,
+      "ok": true,
+      "elapsed_seconds": 0.750084,
+      "checked": null,
+      "log_sha256": "5ca16018b71f992a79f6e89f169a2c04d20c86ae72b784f325b30fb35f055e03",
+      "log_bytes": 12758
+    },
+    {
+      "name": "json",
+      "command": "PYTHONPATH=scripts python3 -m harness.batch_validate json --root .",
+      "exit_code": 0,
+      "ok": true,
+      "elapsed_seconds": 0.760885,
+      "checked": 1516,
+      "log_sha256": "a97870b14f90f076105b0d62d39c9918f040ee71eab4297fe24c842149a900cf",
+      "log_bytes": 76
+    },
+    {
+      "name": "executions",
+      "command": "PYTHONPATH=scripts python3 -m harness.batch_validate executions --root .",
+      "exit_code": 0,
+      "ok": true,
+      "elapsed_seconds": 0.679948,
+      "checked": 67,
+      "log_sha256": "005ae72fa5a451a9378984682f547d974a617d7faa4253034f148f4aac78796f",
+      "log_bytes": 47573
+    },
+    {
+      "name": "lint",
+      "command": "PYTHONPATH=scripts python3 -m harness.workflow_lint --root .",
+      "exit_code": 0,
+      "ok": true,
+      "elapsed_seconds": 0.657698,
+      "checked": null,
+      "log_sha256": "7e38e3f70d946700de49ffc8ccf250821ce9275f12f3e4cc690db8779a3b10a4",
+      "log_bytes": 335
+    }
+  ],
+  "scientific_state_fields_unchanged": [
+    "frontier",
+    "next_work_order",
+    "completed_tasks",
+    "active_tasks",
+    "task_status",
+    "stage_status",
+    "experiment_status",
+    "execution"
+  ],
+  "scientific_plan_tasks_stages_experiments_unchanged": true,
+  "protected_scientific_paths_changed": [],
+  "main_merged": false,
+  "independent_review_status": "NOT_PERFORMED",
+  "next_actor": "INDEPENDENT_REVIEWER",
+  "github_ci": {
+    "run_id": 40628140699,
+    "job_id": 122617914043,
+    "head_sha": "ae35bf592d18e071dfecca74744d0315ae17f4af",
+    "conclusion": "success",
+    "job_started_at_utc": "2026-10-28T03:41:43Z",
+    "job_completed_at_utc": "2026-10-28T03:42:21Z",
+    "job_wall_seconds": 38,
+    "all_five_gates_passed": true,
+    "logs_location": "https://github.com/rootfabric/NanoLab/actions/runs/40628140699/job/122617914043",
+    "note": "PR event CI; local staged tree equals published product tree; timing is single observation, not comparative benchmark."
+  },
+  "local_log_bundle": {
+    "filename": "NanoLab_FLOW_R1_validation.zip",
+    "sha256": "e73b47b748813be5cba89f1442f228e6df6f2f58e51e5b6bc072998e76a7e5d6",
+    "size_bytes": 178462,
+    "location": "conversation attachment NanoLab_FLOW_R1_validation.zip",
+    "durable_alternative": "GitHub CI run/job above plus reproducible commands; conversation file is not canonical scientific evidence"
+  },
+  "start_event_preserved_blob_sha": "753c0765da982db2ce024162af01cb1b077fb620"
+}

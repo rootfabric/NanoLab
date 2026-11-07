@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-28T03:11:46.106Z",
+  "execution_id": "EX-FLOW-THROUGHPUT-R1",
+  "work_order_id": "WO-FLOW-THROUGHPUT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "summary": "Начата owner-requested реализация ускорения harness/roadmap; scientific runs=0; canonical scientific state неизменен.",
+  "evidence_refs": ["docs/work/WO-FLOW-THROUGHPUT-R1.md"],
+  "next_action": "Exact checkout, implementation and full C0 validation; no self-acceptance."
+}

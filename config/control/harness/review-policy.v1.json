@@ -1,10 +1,14 @@
 {
   "schema_version": 1,
-  "revision": "NL-H0-2026-09-08-R1",
+  "revision": "FLOW-THROUGHPUT-R1",
   "reviewer_verdicts": ["PASS", "FAIL", "INSUFFICIENT_EVIDENCE"],
   "exact_head_required_for": ["scientific_analysis_code", "physics_adapter", "validation_logic", "claim_affecting_runtime"],
   "artifact_reuse_requires": ["sha256", "size_bytes", "producer_run_id", "subject_sha", "storage_location"],
-  "independent_role_required_for": ["HIGH", "CRITICAL"],
+  "independent_role_required_for": ["MEDIUM", "HIGH", "CRITICAL"],
   "independent_machine_required_when": ["work_order_explicit", "risk_contract_explicit", "untrusted_provenance", "reviewer_requests_reexecution"],
-  "negative_results_must_be_preserved": true
+  "negative_results_must_be_preserved": true,
+  "impact_policy": "docs/control/FLOW_THROUGHPUT_R1.md",
+  "same_independent_reviewer_may_verify_repair": true,
+  "publication_only_revalidation": "explicit Git-subject equivalence + independent delta review; never automatically inherit verdict",
+  "high_risk_roles_unchanged": true
 }

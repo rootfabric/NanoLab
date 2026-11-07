@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:39:26.754332Z",
+  "execution_id": "EX-FLOW-PUBLICATION-MODE-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "0d8537cc368dc03ee39a543c835f72c40b651ae6",
+  "summary": "Узкий repair независимого finding FLOW-R1: исключаемый report проверяется только в head; executable base может ошибочно стать publication-only",
+  "evidence_refs": [],
+  "next_action": "Воспроизвести red, исправить проверку обеих сторон, передать независимому Reviewer"
+}

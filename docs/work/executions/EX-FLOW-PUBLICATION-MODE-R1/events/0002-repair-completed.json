@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-repair-completed",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:40:43.108282Z",
+  "execution_id": "EX-FLOW-PUBLICATION-MODE-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "REPAIR_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "77f799e7f6a060196f72f5861a4f495bfb445d27",
+  "summary": "Исправлена проверка base/head mode/type; red воспроизведён, 56 FLOW tests прошли",
+  "evidence_refs": [
+    "docs/work/executions/EX-FLOW-PUBLICATION-MODE-R1/evidence/red.txt",
+    "docs/work/executions/EX-FLOW-PUBLICATION-MODE-R1/evidence/green-flow.txt"
+  ],
+  "next_action": null
+}

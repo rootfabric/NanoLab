@@ -1,6 +1,6 @@
 # NanoLab — Evidence-Driven Review
 
-**Revision:** `NL-H0-REVIEW-2026-09-08-R1`
+**Revision:** `FLOW-THROUGHPUT-R1`
 
 ## Единицы review
 
@@ -21,9 +21,9 @@ Reviewer verdict: `PASS | FAIL | INSUFFICIENT_EVIDENCE`. Scientific conclusion �
 ## Risk routing
 
 ```text
-LOW      docs/metadata → Implementer + Verifier
-MEDIUM   harness/tooling без scientific claim → Implementer + Reviewer + Verifier
-HIGH     protocol/observable/analysis/model/data transform/claim → + Director
+LOW      administrative-only → Implementer + automated CI (existing Human merge gate)
+MEDIUM   ordinary tooling → Implementer + independent Reviewer (includes mechanical verification) + CI
+HIGH     protocol/observable/analysis/topology/inputs/claim/authority/security → separate Reviewer + Verifier + Director
 CRITICAL physical lab/hardware, hazardous, bio/medical, foundation, major budget → + Human
 ```
 
@@ -55,3 +55,7 @@ MEDIUM+ и scientific claims фиксируют: intent, Work Order, risk/claim,
 ## Provenance
 
 Повторно используемый artifact обязан иметь `sha256`, `size`, producer run, exact subject, producer tool/command и storage location. Если raw data вне Git — manifest в Git обязателен.
+
+## Проверка исправлений и публикаций
+
+Применять [FLOW-THROUGHPUT-R1](FLOW_THROUGHPUT_R1.md). Тот же независимый Reviewer/Verifier может проверить чужой repair. При доказанном неизменном product/input subject новый publication SHA требует delta review, не автоматического повторного полного цикла. Новый reviewer нужен при конфликте независимости, а не просто новом коммите. C0 и Markdown сами по себе не понижают риск. `review_impact` выдаёт сравнение, а не approval.

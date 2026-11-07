@@ -1,0 +1,27 @@
+test_batch_continues_after_bad_execution (__main__.IndependentFalsifiers.test_batch_continues_after_bad_execution) ... ok
+test_operations_mutation_matrix (__main__.IndependentFalsifiers.test_operations_mutation_matrix) ... ok
+test_real_concurrent_writers_and_no_rewrite (__main__.IndependentFalsifiers.test_real_concurrent_writers_and_no_rewrite) ... ok
+test_resource_integer_minimum_exhaustive (__main__.IndependentFalsifiers.test_resource_integer_minimum_exhaustive) ... ok
+test_resource_published_arithmetic_and_source_digest (__main__.IndependentFalsifiers.test_resource_published_arithmetic_and_source_digest) ... ok
+test_review_executable_base_must_not_be_report_only (__main__.IndependentFalsifiers.test_review_executable_base_must_not_be_report_only) ... FAIL
+test_review_mode_deletion_and_nonpublication_product (__main__.IndependentFalsifiers.test_review_mode_deletion_and_nonpublication_product) ... ok
+
+======================================================================
+FAIL: test_review_executable_base_must_not_be_report_only (__main__.IndependentFalsifiers.test_review_executable_base_must_not_be_report_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/48cb7a65c9c0/flow-review-adversarial.py", line 110, in test_review_executable_base_must_not_be_report_only
+    self.assertEqual(result['classification'],'FULL_REVIEW')
+AssertionError: 'PUBLICATION_ONLY_CANDIDATE' != 'FULL_REVIEW'
+- PUBLICATION_ONLY_CANDIDATE
++ FULL_REVIEW
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.349s
+
+FAILED (failures=1)
+malformed operations rejected: 9
+concurrent writers: ['published', 'locked', 'locked', 'locked', 'locked', 'locked', 'locked', 'locked']
+resource exact-rational cases: 49995
+base executable -> head regular: PUBLICATION_ONLY_CANDIDATE True

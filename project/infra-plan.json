@@ -2,7 +2,7 @@
   "schema_version": 1,
   "kind": "parallel_capability_plan",
   "track": "INFRA",
-  "revision": "infra-roadmap-r1",
+  "revision": "flow-throughput-r1",
   "canonical_owner": "main",
   "purpose": "Provide safe reproducible compute, CI, artifact and scale infrastructure without owning scientific truth",
   "mvp_checkpoint": "INFRA3",
@@ -40,5 +40,8 @@
     {"science":"NL3","infra":"INFRA5","relationship":"gpu_scale_capability_when_required"},
     {"science":"NL4","infra":"INFRA6","relationship":"bounded_ai_campaign_compute"},
     {"science":"NL5+","infra":"INFRA7","relationship":"external_reproduction_and_scale"}
-  ]
+  ],
+  "near_term_priority": ["INFRA3-003", "U2 scoped remediation", "durable raw storage for frozen NL5"],
+  "deferred_until_demand": ["INFRA6-002", "INFRA7-001"],
+  "operational_task_directory": "project/operations"
 }

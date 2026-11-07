@@ -1,0 +1,41 @@
+{
+  "schema_version": "atomistic-mission-budget-v1",
+  "mission_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "max_runs": 8,
+  "max_seconds": 1200,
+  "max_output_bytes": 2147483648,
+  "runs": [
+    {
+      "reservation_id": "a36b03c0e9d04f87afccf71ab926b450",
+      "run_dir": "/workspace/scratch/48cb7a65c9c0/NanoLab-atomistic/examples/atomistic/runs/cu-emt-demo-r1-001",
+      "status": "COMPLETED",
+      "started_utc": "2026-11-05T10:47:27.160089+00:00",
+      "owner_pid": 2,
+      "charged_seconds": 0.6553803189999599,
+      "charged_bytes": 66811,
+      "ended_utc": "2026-11-05T10:47:27.820426+00:00"
+    },
+    {
+      "reservation_id": "80d354b2a46a4f92b0aeed73995459cd",
+      "run_id": "ui-22337abacb144a9e88191bfc167c383b",
+      "run_dir": "/workspace/scratch/48cb7a65c9c0/ui-real-runs/ui-22337abacb144a9e88191bfc167c383b",
+      "status": "COMPLETED",
+      "started_utc": "2026-11-05T10:57:20.024872+00:00",
+      "owner_pid": 2,
+      "charged_seconds": 0.6559194819999448,
+      "charged_bytes": 38678,
+      "ended_utc": "2026-11-05T10:57:20.683243+00:00"
+    },
+    {
+      "reservation_id": "1ba812eeed4d484b9eeb17d7c0c640dc",
+      "run_id": "cu-emt-verifier-r1-001",
+      "run_dir": "/workspace/scratch/48cb7a65c9c0/verification-runs/cu-emt-verifier-r1-001",
+      "status": "COMPLETED",
+      "started_utc": "2026-11-05T10:58:05.939033+00:00",
+      "owner_pid": 5,
+      "charged_seconds": 0.6556336020000799,
+      "charged_bytes": 66797,
+      "ended_utc": "2026-11-05T10:58:06.597617+00:00"
+    }
+  ]
+}

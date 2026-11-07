@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-05T10:54:07.585622Z",
+  "execution_id": "EX-ATOMISTIC-RUN-ID-REPAIR-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "61790c05a738d43a9be276b08d7be00d0758ea04",
+  "summary": "Repair mission-wide run_id uniqueness по independent review, без новых расчётов",
+  "evidence_refs": [],
+  "next_action": "Добавить atomic duplicate check в shared ledger и mock-only regression tests"
+}

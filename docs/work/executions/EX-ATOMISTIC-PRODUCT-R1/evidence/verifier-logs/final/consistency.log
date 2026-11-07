@@ -1,0 +1,255 @@
+{
+  "schema": "nanolab.control_development_output.v1",
+  "command": "CHECK_CONSISTENCY",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "git metadata unavailable"
+  ],
+  "frontier": "NL5",
+  "next_work_order": "NL5-002",
+  "branch": null,
+  "head": "71bc62102cc36bf49b04d40d81d3070d87cccad6",
+  "tree": "f86af90728797541594396ac0bef0964d9f8dd28",
+  "counts": {
+    "stages": 9,
+    "tasks": 19,
+    "experiments": 7
+  },
+  "frontier_readiness": {
+    "canonical_task_status": "WAITING_HUMAN",
+    "dispatchable": false,
+    "next_actor": "HUMAN",
+    "human_decision_required": true,
+    "unmet_dependencies": []
+  },
+  "operational_tasks": [
+    {
+      "schema_version": 1,
+      "id": "ATOMISTIC-ADAPTER-PREP",
+      "title": "Подготовить atomistic adapter и инженерный validation contract",
+      "track": "ATOMISTIC_PRODUCT",
+      "status": "IN_PROGRESS",
+      "actor": "IMPLEMENTER",
+      "priority": 5,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Consumer: пользователь/приложение. Demo: Cu structure → actual relaxation/MD → trajectory/metrics/manifest. Бюджет: один сценарий, launch profile project/product-plan.json; карточка разрешает только software работу, не запуск. Stop: missing rights/pin, non-finite/integrity/budget failure; сохранить outcome. Actual runs только по WO-ATOMISTIC-PRODUCT-R1; не C0-physics claim.",
+      "evidence_refs": [
+        "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+        "project/product-plan.json",
+        "project/product-state.json"
+      ],
+      "updated_at_utc": "2026-11-05T10:42:36Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "FLOW-R1",
+      "title": "Ускорение harness и roadmap",
+      "track": "CONTROL",
+      "status": "WAITING_REVIEW",
+      "actor": "REVIEWER",
+      "priority": 5,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "Независимое review exact candidate, затем отдельная проверка изменения control/security policy.",
+      "next_action": "Реализация и регрессия в PR #95; не self-accept.",
+      "evidence_refs": [
+        "https://github.com/rootfabric/NanoLab/pull/95"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "ATOMISTIC-APP-PREP",
+      "title": "Связать атомистический сценарий с приложением",
+      "track": "ATOMISTIC_PRODUCT",
+      "status": "IN_PROGRESS",
+      "actor": "IMPLEMENTER",
+      "priority": 6,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Consumer: исследователь. Demo: структура → actual adapter → trajectory/metrics → save. Бюджет: один материал/сценарий, reuse actual artifacts; не расходовать pilot runs ради screenshots. Stop: missing adapter/artifact — явная ошибка/unavailable; никакой synthetic substitute. P1 acceptance требует P0 и независимой проверки.",
+      "evidence_refs": [
+        "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+        "project/product-plan.json",
+        "project/product-state.json"
+      ],
+      "updated_at_utc": "2026-11-05T10:42:36Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "ATOMISTIC-REFERENCE-PREP",
+      "title": "Подготовить эталон одного материала для P0",
+      "track": "ATOMISTIC_PRODUCT",
+      "status": "READY",
+      "actor": "IMPLEMENTER",
+      "priority": 7,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Consumer: исследователь/material reviewer. Demo: pinned source/model/rights + draft reference protocol/observables/tolerances/convergence до оценки. Бюджет: один материал, максимум два содержательных source passes без нового факта; без runs. Stop: missing source/rights/applicability → BLOCKED_SOURCE с resume condition; P0 остаётся OPEN.",
+      "evidence_refs": [
+        "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
+        "project/product-plan.json",
+        "project/product-state.json"
+      ],
+      "updated_at_utc": "2026-11-05T10:42:36Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "RESOURCE-R1",
+      "title": "Исправленный ресурсный план NL5",
+      "track": "NL5_PREP",
+      "status": "READY",
+      "actor": "IMPLEMENTER",
+      "priority": 10,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Использовать RESOURCE_PLAN_CORRECTIONS_R1; подготовить профиль измерения целевой сборки U1/U2 и проверку памяти/хранилища. Ничего не запускать без разрешённых host/launch gates.",
+      "evidence_refs": [
+        "docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "AUTHOR-U1",
+      "title": "Назначить авторский native Ubuntu узел",
+      "track": "INFRA",
+      "status": "WAITING_HUMAN",
+      "actor": "HUMAN",
+      "priority": 15,
+      "depends_on": [],
+      "blockers": [
+        "AUTHOR_U1_NOT_ASSIGNED"
+      ],
+      "resume_condition": "Владелец выделил физический U1, параметры/доступ записаны; затем R2 activation gates.",
+      "next_action": "Выделить U1 согласно ранее принятому owner requirement. U2 не переименовывать в author.",
+      "evidence_refs": [
+        "https://github.com/rootfabric/NanoLab/blob/9b24f93092e917cb6064d5c7723e5b4d1f05d67d/docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_OWNER_REQUIREMENTS_ADDENDUM_R1.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "EXTERNAL-U2",
+      "title": "Подготовка внешнего узла outenemy",
+      "track": "INFRA",
+      "status": "WAITING_HUMAN",
+      "actor": "HUMAN",
+      "priority": 20,
+      "depends_on": [],
+      "blockers": [
+        "OPERATOR_ACTION_REQUIRED"
+      ],
+      "resume_condition": "Выбран и разрешён scoped план операторских действий; свежие замеры ресурсов после исполнения.",
+      "next_action": "Выбрать действия по U2 с поправкой арифметики df и классификацией служб. Снимок 26 октября не является текущим readiness.",
+      "evidence_refs": [
+        "https://github.com/rootfabric/NanoLab/issues/94",
+        "docs/control/RESOURCE_PLAN_CORRECTIONS_R1.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "INTEGRATION-R1",
+      "title": "Один пакет C0 и актуальная очередь",
+      "track": "CONTROL",
+      "status": "READY",
+      "actor": "DIRECTOR",
+      "priority": 25,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Подготовить одну интеграцию совместимых C0 материалов F01/F02/F03/F05; проверить зависимости и действующее разрешение. Не требовать нового Verifier только из-за отчётного SHA.",
+      "evidence_refs": [
+        "docs/control/FLOW_THROUGHPUT_R1.md",
+        "https://github.com/rootfabric/NanoLab/issues/81"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "NL7-REAL-SOURCE",
+      "title": "Получение реальных исходных компонентов",
+      "track": "NL7_PREP",
+      "status": "READY",
+      "actor": "IMPLEMENTER",
+      "priority": 30,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "Получить реальные CAD/oxDNA файлы, права и provenance для пары. Максимум два содержательных прохода; затем явный выбор альтернативы или BLOCKED_SOURCE. Не считать библиографию готовой моделью.",
+      "evidence_refs": [
+        "docs/research/ALT_DNA_TWO_PART_SOURCE_PACK_R1.json",
+        "docs/research/S17_R4_SOURCE_GAP_CLOSURE.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "NL7-OFFLINE-SLICE",
+      "title": "Законченный offline-сценарий на реальной паре",
+      "track": "NL7_PREP",
+      "status": "BLOCKED_DEPENDENCY",
+      "actor": "IMPLEMENTER",
+      "priority": 40,
+      "depends_on": [
+        "NL7-REAL-SOURCE"
+      ],
+      "blockers": [
+        "REAL_INPUTS_REQUIRED"
+      ],
+      "resume_condition": "NL7-REAL-SOURCE завершён с файлами, происхождением и проверенными правами.",
+      "next_action": "Import → ports → assembly → .top/.dat → preview/export → receipt. Статическая сборка не доказывает передачу движения.",
+      "evidence_refs": [
+        "docs/examples/s17_static_assembly_example/README.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    },
+    {
+      "schema_version": 1,
+      "id": "NL6-TESTRIG-PREP",
+      "title": "Подготовить стенд одиночного driver",
+      "track": "NL6_PREP",
+      "status": "READY",
+      "actor": "IMPLEMENTER",
+      "priority": 50,
+      "depends_on": [],
+      "blockers": [],
+      "resume_condition": "",
+      "next_action": "C0 TestRig: drive/load/controls/observable contracts и подготовка launch inputs для одиночного driver; без MD, новых научных выводов и закрытия E5.",
+      "evidence_refs": [
+        "docs/control/LITERATURE_TO_MECHANISM_ROUTE_R1.md",
+        "docs/work/WO-PREP-S17-R2.md"
+      ],
+      "updated_at_utc": "2026-10-28T03:20:00Z",
+      "claim_class": "C0_SOFTWARE_ONLY",
+      "scientific_runs_allowed": false
+    }
+  ]
+}

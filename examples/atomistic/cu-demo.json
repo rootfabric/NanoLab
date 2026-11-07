@@ -1,0 +1,8 @@
+{
+  "schema_version": "atomistic-config-v1",
+  "material": "Cu",
+  "model": "ASE_EMT_Cu",
+  "structure": {"kind": "fcc_cuboid", "size": [2, 2, 2], "lattice_constant_angstrom": 3.61},
+  "relaxation": {"max_steps": 100, "fmax_ev_per_angstrom": 0.05},
+  "md": {"steps": 50, "timestep_fs": 1.0, "temperature_k": 100.0, "friction_per_fs": 0.01, "sample_interval": 5, "seed": 1729}
+}

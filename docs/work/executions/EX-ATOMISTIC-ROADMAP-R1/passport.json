@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-ROADMAP-R1",
+  "work_order_id": "WO-ATOMISTIC-PRODUCT-R1",
+  "checkpoint": "NL5",
+  "base_sha": "0d8537cc368dc03ee39a543c835f72c40b651ae6",
+  "branch": "work/atomistic-roadmap-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "README.md",
+    "docs/ROADMAP.md",
+    "docs/ARCHITECTURE.md",
+    "docs/VISION.md",
+    "PROJECT_CONTROL.md",
+    "AGENTS.md",
+    "project",
+    "docs/work/CURRENT_QUEUE.md"
+  ],
+  "started_at_utc": "2026-11-05T10:37:46.925127Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}

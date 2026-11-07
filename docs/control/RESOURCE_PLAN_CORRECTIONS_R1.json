@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "resource_planning_correction",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "dispatch_authorized": false,
+  "supersedes_planning_only": [
+    {
+      "source_commit": "4c9d8fd30300a2f48504d1b914693f0a66bb3555",
+      "path": "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/budget-ledger-R1.json",
+      "correction": "P2 wall/size data exists; P1-only timing assumption insufficient"
+    },
+    {
+      "source_commit": "57a368939f7b1b7d0de0b18beeddf11ab36f7ff5",
+      "path": "docs/work/executions/EX-NL5-U2-REMEDIATION-AUDIT-R1/evidence/U2_REMEDIATION_PLAN_R1.json",
+      "correction": "df guard denominator is used+unprivileged available, not total"
+    }
+  ],
+  "p2_source": {
+    "commit": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "path": "docs/work/executions/EX-NL5-002-E-R1/evidence/p2/run_output_digests_p2.json",
+    "sha256": "8cdad386602a08aae4b28885156109a1f3cf7e242c2089d1507ef1e05631258f"
+  },
+  "p2_primary_projection": {
+    "historical_runs": 20,
+    "mean_wall_hours": {
+      "0b": 13.461222222222222,
+      "32b": 10.168583333333334
+    },
+    "primary_runs_projected": 128,
+    "primary_job_wall_hours": 1512.3075555555556,
+    "slots": 2,
+    "ideal_primary_elapsed_lower_bound_hours": 756.1537777777778,
+    "frozen_wall_hours_per_platform": 560,
+    "excludes_controls_and_replacements": true,
+    "assumptions": "Historical speed unchanged; ideal parallelism; no contention/setup; NOT a new-build benchmark. CPU-hours are not wall-hours.",
+    "requires_current_profile_measurement": true,
+    "dispatch_authorized": false
+  },
+  "filesystem_snapshot_date_utc": "2026-10-26",
+  "filesystem_corrections": [
+    {
+      "mount": "/",
+      "used_bytes": 446395604992,
+      "available_unpriv_bytes": 19686797312,
+      "old_proposed_free_bytes": 53512075673,
+      "correct_min_free_bytes_for_df_80": 73529683149,
+      "ratio_after_old_free": 0.8429486446534912,
+      "assumptions": "unchanged reservation/capacity; no concurrent growth; chosen raw filesystem only; not deletion authorization"
+    },
+    {
+      "mount": "/mnt/gig",
+      "used_bytes": 902998384640,
+      "available_unpriv_bytes": 52755177472,
+      "old_proposed_free_bytes": 97413734400,
+      "correct_min_free_bytes_for_df_80": 138395534951,
+      "ratio_after_old_free": 0.8428790455772296,
+      "assumptions": "unchanged reservation/capacity; no concurrent growth; chosen raw filesystem only; not deletion authorization"
+    }
+  ],
+  "frozen_limits_unchanged": {
+    "confirmatory_runs": 296,
+    "replacement_runs_cap": 56,
+    "max_runs": 352,
+    "wall_hours_per_platform": 560
+  }
+}
