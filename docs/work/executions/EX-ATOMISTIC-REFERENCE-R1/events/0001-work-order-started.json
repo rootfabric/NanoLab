@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-07T11:02:55.784229Z",
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "work_order_id": "WO-ATOMISTIC-REFERENCE-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "ddf8a25cdd95a1598338816f6a585ffdde1e0f2a",
+  "summary": "Начало P0 reference preparation; без physics runs",
+  "evidence_refs": [],
+  "next_action": "Primary source selection and bounded reference contract"
+}

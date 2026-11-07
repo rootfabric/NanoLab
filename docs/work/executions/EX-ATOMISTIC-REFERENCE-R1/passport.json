@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "work_order_id": "WO-ATOMISTIC-REFERENCE-R1",
+  "checkpoint": "NL6",
+  "base_sha": "ddf8a25cdd95a1598338816f6a585ffdde1e0f2a",
+  "branch": "work/atomistic-reference-r1",
+  "risk_class": "HIGH",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/atomistic/**",
+    "docs/work/WO-ATOMISTIC-REFERENCE-R1.md",
+    "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/**",
+    "docs/ROADMAP.md",
+    "scripts/atomistic/reference.py",
+    "tests/test_atomistic_reference.py",
+    "project/product-*.json",
+    "project/operations/ATOMISTIC-*.json",
+    "project/operations/FLOW-R1.json"
+  ],
+  "started_at_utc": "2026-11-07T11:02:55.784209Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}
