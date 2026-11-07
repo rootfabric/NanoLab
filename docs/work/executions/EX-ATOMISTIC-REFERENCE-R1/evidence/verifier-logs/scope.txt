@@ -1,0 +1,32 @@
+M	docs/ROADMAP.md
+M	docs/atomistic/MODEL_CARD.md
+M	docs/atomistic/README.md
+A	docs/atomistic/reference/cu-r1/PROTOCOL.md
+A	docs/atomistic/reference/cu-r1/SOURCES.md
+A	docs/atomistic/reference/cu-r1/protocol.json
+A	docs/atomistic/reference/cu-r1/source-artifacts/overton-gaffney-1955-facts.json
+A	docs/atomistic/reference/cu-r1/sources.json
+A	docs/work/WO-ATOMISTIC-REFERENCE-R1.md
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/events/0001-work-order-started.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/events/0002-implementation-committed.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/package-validation.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/pr96-merge.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/repair-map.md
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/passport.json
+M	project/operations/ATOMISTIC-ADAPTER-PREP.json
+M	project/operations/ATOMISTIC-APP-PREP.json
+A	project/operations/ATOMISTIC-BENCHMARK-PREP.json
+M	project/operations/ATOMISTIC-REFERENCE-PREP.json
+M	project/operations/FLOW-R1.json
+M	project/product-plan.json
+M	project/product-state.json
+A	scripts/atomistic/reference.py
+A	tests/test_atomistic_reference.py
+PASS diff scope, no runtime/CI/historic state/frozen input or old evidence changes
+PASS merge #96 delivery readback, no launch authority or acceptance, benchmark PLANNED
+PASS candidate exact sources.json matches independently verified source bytes: 9a01999e6dee15f5f0d06358137ae6e089b825a58885c94a4da96011da9c1716
+PASS candidate exact source-artifacts/overton-gaffney-1955-facts.json matches independently verified source bytes: 674d2903462c56447da195907b5127630d1249854c89096612d8a9ea62f21f9c
+exact docs/atomistic/reference/cu-r1/protocol.json: 4a11264f823b690e2458a420dd707cb4047bcd8f22584658f103b2b4e0d4e3a1
+exact docs/atomistic/reference/cu-r1/PROTOCOL.md: 45398fbb0992c5a074f3caef9c1f32b57119950f7460045349d206c1e2c7c278
+exact docs/atomistic/reference/cu-r1/SOURCES.md: 1b96b8087caf8d1f9f5a33b606815efb761f3e14b01c0645b153c296bc7e9ca6
+PASS reference validator stdlib only; no published PDF/wheel/sdist

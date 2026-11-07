@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-validation-recorded",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-07T11:16:57.641359Z",
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "work_order_id": "WO-ATOMISTIC-REFERENCE-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7c3391696a788ca15d92139adc5a184928a0a67b",
+  "summary": "Independent Reviewer/Verifier PASS; all5gates,1069tests1expectedskip;0physics",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/artifacts.manifest.json"
+  ],
+  "next_action": "Human merge reviewable PR97"
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "subject_sha": "7c3391696a788ca15d92139adc5a184928a0a67b",
+  "subject_tree": "861af479f3465d85acbd9d804dfaa8437dc808cc",
+  "physics_runs": 0,
+  "scientific_outcome": "NOT_EVALUATED",
+  "artifacts": [
+    {
+      "path": "review/reference-review.md",
+      "sha256": "7342ebc2f7bca61656abb3ea4f33b552445e0cda175677db32f28ac6fa6ce701",
+      "size_bytes": 9282
+    },
+    {
+      "path": "review/reference-verifier.md",
+      "sha256": "6c76d35b1b679e3791983744935f68061867458019cd4ec9b5b9e246f37ccb9d",
+      "size_bytes": 8306
+    },
+    {
+      "path": "evidence/package-validation.json",
+      "sha256": "1128beda9eeef37dbdc23968257242ee1ee984f993be992084250a43aa74a92b",
+      "size_bytes": 589
+    },
+    {
+      "path": "evidence/pr96-merge.json",
+      "sha256": "e30bec01a8ca3fa113ad0034f9f4059f514a793cb52d7d2d9721565aae98fa67",
+      "size_bytes": 238
+    },
+    {
+      "path": "evidence/repair-map.md",
+      "sha256": "38d601b0804e93951adb2ed3be0c5f6c1ec523112d4b20fd0e4a49d09f9fb23f",
+      "size_bytes": 2311
+    },
+    {
+      "path": "evidence/verifier-logs/aps-direct-access.txt",
+      "sha256": "ca67e1442c559b06909b6a65ce6a3ecf292afeac25e0c45d2a0ef2626d4159bb",
+      "size_bytes": 140
+    },
+    {
+      "path": "evidence/verifier-logs/aps-facts-readback.txt",
+      "sha256": "0fd94c31c190436943a1276ca2a54c660984770e4f782c077a3170c6c14eee24",
+      "size_bytes": 990
+    },
+    {
+      "path": "evidence/verifier-logs/check-consistency.txt",
+      "sha256": "0846f20455a7866ae4b4a1b610e44d801f4f79f4ccf0f329cfbb61e1e5708892",
+      "size_bytes": 13070
+    },
+    {
+      "path": "evidence/verifier-logs/check-executions.txt",
+      "sha256": "be543b17e51bcf32867c78b72472f4b93153d650b852395f98e240298e20c401",
+      "size_bytes": 51769
+    },
+    {
+      "path": "evidence/verifier-logs/check-json.txt",
+      "sha256": "87921ff6dd73bfeaf4f831e9425ff84d5e3c503d93222606528d47a0c5dd1c7e",
+      "size_bytes": 76
+    },
+    {
+      "path": "evidence/verifier-logs/check-unittest.txt",
+      "sha256": "a286b7bf5bf9742496f3ed8ea3188f57a264f9f1c401589d7653b5d479452bec",
+      "size_bytes": 159887
+    },
+    {
+      "path": "evidence/verifier-logs/check-workflow-lint.txt",
+      "sha256": "dca5705909614d3c87fa3a2e2ce897b0f55e93b59d7096413c97f47143daa38e",
+      "size_bytes": 374
+    },
+    {
+      "path": "evidence/verifier-logs/checkout.txt",
+      "sha256": "6155de6683c9317b6cca6bf83b6410728db3245e6e4427fc868754b7306caed2",
+      "size_bytes": 579
+    },
+    {
+      "path": "evidence/verifier-logs/gates-receipt.txt",
+      "sha256": "7c5211b6f35d3d34bac7ff80c3ba257d1f34066975104bc9afbfe0f5d89ee007",
+      "size_bytes": 2008
+    },
+    {
+      "path": "evidence/verifier-logs/negative-cli.txt",
+      "sha256": "87278df353cd0aaff195321e09275cc112c5336489b640479964264e8a43d0f3",
+      "size_bytes": 767
+    },
+    {
+      "path": "evidence/verifier-logs/reference-cli.txt",
+      "sha256": "1128beda9eeef37dbdc23968257242ee1ee984f993be992084250a43aa74a92b",
+      "size_bytes": 589
+    },
+    {
+      "path": "evidence/verifier-logs/run-gates.py",
+      "sha256": "2f3494aa316e6e368efd672bc7de66325c6a2b1c97bbd954768d16b0dbaf998d",
+      "size_bytes": 2841
+    },
+    {
+      "path": "evidence/verifier-logs/scope-precheck-error.txt",
+      "sha256": "ebb3c37f51bd8d78b7313a75a83f6f646bb710872a3d44dc0f21434b3bc51201",
+      "size_bytes": 2356
+    },
+    {
+      "path": "evidence/verifier-logs/scope.txt",
+      "sha256": "16708c07f886c5698c6ee24f525a8d0b905268567aa401daafdeb0e75b62595e",
+      "size_bytes": 2111
+    },
+    {
+      "path": "evidence/verifier-logs/source-pins-preliminary.txt",
+      "sha256": "a1d76a1936243eeff2baaf2c33883d82181859d5eb2d0d5fff6208f41571ff98",
+      "size_bytes": 1034
+    },
+    {
+      "path": "evidence/verifier-logs/standalone-cli-stdlib.txt",
+      "sha256": "1128beda9eeef37dbdc23968257242ee1ee984f993be992084250a43aa74a92b",
+      "size_bytes": 589
+    },
+    {
+      "path": "evidence/verifier-logs/unittest-receipt.txt",
+      "sha256": "5b15082fa86a2558dc0b29e0a1305415f36b78fe5e0419be07ce7852cc0b49ac",
+      "size_bytes": 1870
+    },
+    {
+      "path": "evidence/verifier-logs/verifier-log-index.json",
+      "sha256": "9ba9d068229d360908ad6880b472a90b9e0d3f7ad7304bd093534b096cd6e3d5",
+      "size_bytes": 2585
+    },
+    {
+      "path": "evidence/verifier-logs/verify-negative-cli.py",
+      "sha256": "3cad46365f7b7cf17865f8406c4902803ce5dafd016a8d0c7e9476995fbb3ca6",
+      "size_bytes": 3289
+    },
+    {
+      "path": "evidence/verifier-logs/verify-scope.py",
+      "sha256": "840d88d9ecd759f8ce06d9838a64df8052de8798be7c5f461084d3083c80b011",
+      "size_bytes": 5888
+    },
+    {
+      "path": "evidence/verifier-logs/verify-source-pins.py",
+      "sha256": "a3bb08e3f30cad886d0bf0c0a4ff323e2e279ae8b26a0623197e41dc5ac367c8",
+      "size_bytes": 3733
+    }
+  ]
+}

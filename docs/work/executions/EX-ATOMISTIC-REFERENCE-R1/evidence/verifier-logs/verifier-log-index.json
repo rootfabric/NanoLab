@@ -1,0 +1,83 @@
+{
+  "subject_sha": "7c3391696a788ca15d92139adc5a184928a0a67b",
+  "subject_tree": "861af479f3465d85acbd9d804dfaa8437dc808cc",
+  "scientific_evidence": false,
+  "physics_runs": 0,
+  "artifacts": [
+    {
+      "file": "checkout.txt",
+      "sha256": "6155de6683c9317b6cca6bf83b6410728db3245e6e4427fc868754b7306caed2",
+      "size_bytes": 579
+    },
+    {
+      "file": "gates-receipt.txt",
+      "sha256": "7c5211b6f35d3d34bac7ff80c3ba257d1f34066975104bc9afbfe0f5d89ee007",
+      "size_bytes": 2008
+    },
+    {
+      "file": "check-json.txt",
+      "sha256": "87921ff6dd73bfeaf4f831e9425ff84d5e3c503d93222606528d47a0c5dd1c7e",
+      "size_bytes": 76
+    },
+    {
+      "file": "check-consistency.txt",
+      "sha256": "0846f20455a7866ae4b4a1b610e44d801f4f79f4ccf0f329cfbb61e1e5708892",
+      "size_bytes": 13070
+    },
+    {
+      "file": "check-executions.txt",
+      "sha256": "be543b17e51bcf32867c78b72472f4b93153d650b852395f98e240298e20c401",
+      "size_bytes": 51769
+    },
+    {
+      "file": "check-workflow-lint.txt",
+      "sha256": "dca5705909614d3c87fa3a2e2ce897b0f55e93b59d7096413c97f47143daa38e",
+      "size_bytes": 374
+    },
+    {
+      "file": "check-unittest.txt",
+      "sha256": "a286b7bf5bf9742496f3ed8ea3188f57a264f9f1c401589d7653b5d479452bec",
+      "size_bytes": 159887
+    },
+    {
+      "file": "unittest-receipt.txt",
+      "sha256": "5b15082fa86a2558dc0b29e0a1305415f36b78fe5e0419be07ce7852cc0b49ac",
+      "size_bytes": 1870
+    },
+    {
+      "file": "standalone-cli-stdlib.txt",
+      "sha256": "1128beda9eeef37dbdc23968257242ee1ee984f993be992084250a43aa74a92b",
+      "size_bytes": 589
+    },
+    {
+      "file": "scope.txt",
+      "sha256": "16708c07f886c5698c6ee24f525a8d0b905268567aa401daafdeb0e75b62595e",
+      "size_bytes": 2111
+    },
+    {
+      "file": "scope-precheck-error.txt",
+      "sha256": "ebb3c37f51bd8d78b7313a75a83f6f646bb710872a3d44dc0f21434b3bc51201",
+      "size_bytes": 2356
+    },
+    {
+      "file": "negative-cli.txt",
+      "sha256": "87278df353cd0aaff195321e09275cc112c5336489b640479964264e8a43d0f3",
+      "size_bytes": 767
+    },
+    {
+      "file": "source-pins-preliminary.txt",
+      "sha256": "a1d76a1936243eeff2baaf2c33883d82181859d5eb2d0d5fff6208f41571ff98",
+      "size_bytes": 1034
+    },
+    {
+      "file": "aps-direct-access.txt",
+      "sha256": "ca67e1442c559b06909b6a65ce6a3ecf292afeac25e0c45d2a0ef2626d4159bb",
+      "size_bytes": 140
+    },
+    {
+      "file": "aps-facts-readback.txt",
+      "sha256": "0fd94c31c190436943a1276ca2a54c660984770e4f782c077a3170c6c14eee24",
+      "size_bytes": 990
+    }
+  ]
+}

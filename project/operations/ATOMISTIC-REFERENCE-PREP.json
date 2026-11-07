@@ -3,13 +3,15 @@
   "id": "ATOMISTIC-REFERENCE-PREP",
   "title": "Подготовить эталон одного материала для P0",
   "track": "ATOMISTIC_PRODUCT",
-  "status": "WAITING_REVIEW",
-  "actor": "REVIEWER",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
   "priority": 7,
   "depends_on": [],
-  "blockers": [],
-  "resume_condition": "",
-  "next_action": "Независимо проверить Cu bulk source/model pins, draft protocol и offline validator. Preparation implemented; 0 physics runs, P0 OPEN. После review/verification и merge следующий scope — ATOMISTIC-BENCHMARK-PREP.",
+  "blockers": [
+    "REFERENCE_PACKAGE_MERGE_PENDING"
+  ],
+  "resume_condition": "Владелец разрешил merge проверенного PR #97; затем ATOMISTIC-BENCHMARK-PREP, без повторного source search.",
+  "next_action": "Merge reviewable reference preparation PR #97. Independent Reviewer/Verifier PASS на source 7c3391696a788ca15d92139adc5a184928a0a67b; 1069 tests, 1 expected real-MD skip; physics runs=0. P0 остаётся OPEN. После merge реализовать benchmark runner/analysis и freeze до отдельного scientific launch.",
   "evidence_refs": [
     "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
     "project/product-plan.json",
@@ -17,9 +19,11 @@
     "docs/work/WO-ATOMISTIC-REFERENCE-R1.md",
     "docs/atomistic/reference/cu-r1/sources.json",
     "docs/atomistic/reference/cu-r1/protocol.json",
-    "scripts/atomistic/reference.py"
+    "scripts/atomistic/reference.py",
+    "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/summary.md",
+    "https://github.com/rootfabric/NanoLab/pull/97"
   ],
-  "updated_at_utc": "2026-11-07T11:09:50.608882Z",
+  "updated_at_utc": "2026-11-07T11:16:40.351075Z",
   "claim_class": "C0_SOFTWARE_ONLY",
   "scientific_runs_allowed": false
 }

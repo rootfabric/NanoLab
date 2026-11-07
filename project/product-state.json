@@ -16,7 +16,7 @@
   },
   "accepted_stages": [],
   "task_status": {
-    "AP-P0-REFERENCE": "WAITING_REVIEW",
+    "AP-P0-REFERENCE": "WAITING_HUMAN",
     "AP-P1-ADAPTER": "DONE",
     "AP-P1-APP": "DONE",
     "AP-P2-CONSTRUCTOR": "PLANNED",
@@ -40,7 +40,7 @@
   "open_gaps": [
     "Pinned material benchmark/reference protocol and accepted validation evidence for P0"
   ],
-  "updated_at_utc": "2026-11-07T11:09:50.608882Z",
+  "updated_at_utc": "2026-11-07T11:16:40.351075Z",
   "engineering_delivery_status": "IMPLEMENTED_DEMO",
   "scientific_validation_status": "NOT_EVALUATED",
   "verification_status": "VERIFIED",
@@ -106,9 +106,9 @@
     "scope": "Shared host/environment engineering validation; not external material reproduction."
   },
   "next_gate": {
-    "actor": "REVIEWER",
-    "action": "Review/verify Cu reference preparation; P0 remains OPEN and no physical run authorization",
-    "work_order": "docs/work/WO-ATOMISTIC-REFERENCE-R1.md"
+    "actor": "HUMAN",
+    "action": "Merge reviewed reference preparation PR #97; this is not a scientific launch or material acceptance",
+    "pull_request": "https://github.com/rootfabric/NanoLab/pull/97"
   },
   "publication_evidence": {
     "owner": "INTEGRATOR",
@@ -124,11 +124,18 @@
     "scope": "Engineering delivery and roadmap; no material/stage acceptance"
   },
   "reference_preparation": {
-    "status": "IMPLEMENTED_PENDING_REVIEW",
+    "status": "VERIFIED_PREPARATION_PENDING_MERGE",
     "package": "docs/atomistic/reference/cu-r1",
     "protocol_status": "DRAFT_PREP_ONLY",
     "physics_runs": 0,
     "scope": "Cu periodic bulk isothermal modulus consistency; no nanosurface/finite-temperature validation",
-    "next_task_after_merge": "AP-P0-BENCHMARK"
+    "next_task_after_merge": "AP-P0-BENCHMARK",
+    "subject_sha": "7c3391696a788ca15d92139adc5a184928a0a67b",
+    "subject_tree": "861af479f3465d85acbd9d804dfaa8437dc808cc",
+    "review": "PASS",
+    "verification": "PASS",
+    "tests_run": 1069,
+    "tests_skipped": 1,
+    "report": "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/summary.md"
   }
 }

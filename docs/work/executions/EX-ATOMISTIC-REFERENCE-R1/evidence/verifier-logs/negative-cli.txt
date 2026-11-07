@@ -1,0 +1,7 @@
+primary locators replaced and ledger rehashed: exit=1; stderr='INVALID_PACKAGE: source.url: unexpected value'
+theory DOI absent and ledger rehashed: exit=1; stderr='INVALID_PACKAGE: model.theory_doi: unexpected value'
+wrong source uncertainty basis, all downstream SHA repinned: exit=1; stderr='INVALID_PACKAGE: source uncertainty.basis: unexpected value'
+human protocol changed without re-pinning: exit=1; stderr='INVALID_PACKAGE: PROTOCOL.md: SHA-256 or byte count does not match local file'
+force launch: exit=1; stderr='INVALID_PACKAGE: protocol.scientific_runs_allowed: unexpected value'
+expand future budget from 41 to 42: exit=1; stderr='INVALID_PACKAGE: protocol.proposed_future_budget: unexpected value'
+PASS 6 independent negative CLI cases; physics runs=0

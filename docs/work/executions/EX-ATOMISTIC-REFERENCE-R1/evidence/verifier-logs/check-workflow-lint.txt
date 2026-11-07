@@ -1,0 +1,17 @@
+{
+  "schema": "nanolab.infra_workflow_lint_output.v1",
+  "ok": true,
+  "config_revision": "VALIDATION-GATES-R1",
+  "workflows": [
+    {
+      "path": "/workspace/scratch/48cb7a65c9c0/NanoLab-reference-verify/.github/workflows/hosted-ci.yml",
+      "ok": true,
+      "violations": []
+    }
+  ],
+  "summary": {
+    "workflows": 1,
+    "violations": 0,
+    "blocking": 0
+  }
+}

@@ -1,0 +1,10 @@
+PASS ase-wheel sha256=77fd0e609bd3868006d4bb3bb95cdc4081d9e292ac84f6c9fb564b5751d2689e bytes=2946787
+PASS ase-emt-module sha256=b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d bytes=13429
+PASS ase-license-notice sha256=21d7520250857d24adf0fbf80e01c966d8bae2a2d797f14cc038baf237cfe599 bytes=608
+PASS ase-wheel-metadata sha256=96d8dfbf2510de404a99514401c06bf4f17252f5e0af634f5f13ffac668c8663 bytes=4080
+PASS ase-sdist sha256=a071a355775b0a8062d23e9266e9d811b19d9f6d9ec5215e8032f7d93dc65075 bytes=2405567
+PASS ase-lgpl-text sha256=dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551 bytes=26530
+PASS PyPI metadata; tagged raw = wheel EMT = sdist EMT; wheel notice and LGPL 2.1 text
+PASS only local sparse facts source-artifacts/overton-gaffney-1955-facts.json sha256=674d2903462c56447da195907b5127630d1249854c89096612d8a9ea62f21f9c bytes=972; no original PDF hash
+PASS Decimal conversion 14.203 × 10 = 142.03 GPa; source K^T uncertainty null
+No archive installed or extracted to filesystem; physics runs=0

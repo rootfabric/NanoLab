@@ -1,0 +1,18 @@
+{
+  "validation": "PACKAGE_VALID",
+  "reference_id": "CU_BULK_EMT_R1",
+  "status": "DRAFT_PREP_ONLY",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_outcome": "NOT_EVALUATED",
+  "scientific_runs_allowed": false,
+  "physics_runs": 0,
+  "protocol_sha256": "4a11264f823b690e2458a420dd707cb4047bcd8f22584658f103b2b4e0d4e3a1",
+  "sources_sha256": "9a01999e6dee15f5f0d06358137ae6e089b825a58885c94a4da96011da9c1716",
+  "remote_pins": "DECLARED_NOT_RECHECKED",
+  "observable": "bulk_modulus_isothermal_0k",
+  "reference_gpa": 142.03,
+  "engineering_band_gpa": [
+    127.827,
+    156.233
+  ]
+}

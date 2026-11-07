@@ -1,0 +1,7 @@
+Primary source: W. C. Overton, Jr., J. Gaffney, Phys. Rev. 98 (1955), 969–977, DOI 10.1103/PhysRev.98.969.
+Publisher metadata and copyright: https://journals.aps.org/pr/abstract/10.1103/PhysRev.98.969
+Publisher indexed full text: https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.98.969/fulltext
+Independently read publisher PDF via indexed search; p. 975, Table II, T = 0 K row, K^T column = 14.203 in units 10^11 dyn/cm^2. This is an extrapolation of measurements over 4.2–300 K. Decimal conversion to SI: 14.203 * 10 = 142.03 GPa.
+On p. 974 the probable relative error 0.34% is stated for the calculated adiabatic bulk modulus, before Eq. (5); not a separately given uncertainty of the 0 K isothermal Table II value.
+Direct GET reports 401 at Harvest and 403 at the journal PDF endpoint. No original PDF bytes or digest used in the package.
+Copyright © 1955 American Physical Society; repository reproduces only a concise factual record, not the original PDF or a table.
