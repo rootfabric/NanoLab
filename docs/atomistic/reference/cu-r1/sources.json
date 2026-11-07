@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "reference_id": "CU_BULK_EMT_R1",
+  "material": {
+    "element": "Cu",
+    "crystal_structure": "fcc",
+    "boundary": "periodic_bulk"
+  },
+  "model": {
+    "id": "ASE_EMT_Cu",
+    "ase_version": "3.26.0",
+    "calculator": "ase.calculators.emt.EMT",
+    "parameters": {"asap_cutoff": false},
+    "license": "LGPL-2.1-or-later",
+    "distribution_policy": "download_on_setup",
+    "upstream_url": "https://gitlab.com/ase/ase/-/raw/3.26.0/ase/calculators/emt.py",
+    "release_metadata_url": "https://pypi.org/pypi/ase/3.26.0/json",
+    "theory_url": "https://docs.ase-lib.org/ase/calculators/emt.html#theory",
+    "theory_doi": "10.1016/0039-6028(96)00816-3",
+    "artifacts": [
+      {
+        "id": "ase-wheel",
+        "url": "https://files.pythonhosted.org/packages/dd/f0/6e52d797bee63530f4b778cb4cbb3a01970f104197c364a8ff51bc9f5a21/ase-3.26.0-py3-none-any.whl",
+        "sha256": "77fd0e609bd3868006d4bb3bb95cdc4081d9e292ac84f6c9fb564b5751d2689e",
+        "size_bytes": 2946787
+      },
+      {
+        "id": "ase-emt-module",
+        "url": "https://files.pythonhosted.org/packages/dd/f0/6e52d797bee63530f4b778cb4cbb3a01970f104197c364a8ff51bc9f5a21/ase-3.26.0-py3-none-any.whl",
+        "member": "ase/calculators/emt.py",
+        "sha256": "b8384ffed58deb1182134a0e5088260b7118971488c35cdb6b29e51f6e604f9d",
+        "size_bytes": 13429
+      },
+      {
+        "id": "ase-license-notice",
+        "url": "https://files.pythonhosted.org/packages/dd/f0/6e52d797bee63530f4b778cb4cbb3a01970f104197c364a8ff51bc9f5a21/ase-3.26.0-py3-none-any.whl",
+        "member": "ase-3.26.0.dist-info/licenses/LICENSE",
+        "sha256": "21d7520250857d24adf0fbf80e01c966d8bae2a2d797f14cc038baf237cfe599",
+        "size_bytes": 608
+      },
+      {
+        "id": "ase-wheel-metadata",
+        "url": "https://files.pythonhosted.org/packages/dd/f0/6e52d797bee63530f4b778cb4cbb3a01970f104197c364a8ff51bc9f5a21/ase-3.26.0-py3-none-any.whl",
+        "member": "ase-3.26.0.dist-info/METADATA",
+        "sha256": "96d8dfbf2510de404a99514401c06bf4f17252f5e0af634f5f13ffac668c8663",
+        "size_bytes": 4080
+      },
+      {
+        "id": "ase-sdist",
+        "url": "https://files.pythonhosted.org/packages/30/33/2ffa44950267450f6a5cdb711c68e12d0d72d626e246e5897e3bada7bac6/ase-3.26.0.tar.gz",
+        "sha256": "a071a355775b0a8062d23e9266e9d811b19d9f6d9ec5215e8032f7d93dc65075",
+        "size_bytes": 2405567
+      },
+      {
+        "id": "ase-lgpl-text",
+        "url": "https://files.pythonhosted.org/packages/30/33/2ffa44950267450f6a5cdb711c68e12d0d72d626e246e5897e3bada7bac6/ase-3.26.0.tar.gz",
+        "member": "ase-3.26.0/COPYING.LESSER",
+        "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+        "size_bytes": 26530
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "overton-gaffney-1955",
+      "doi": "10.1103/PhysRev.98.969",
+      "url": "https://journals.aps.org/pr/abstract/10.1103/PhysRev.98.969",
+      "full_text_url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.98.969/fulltext",
+      "citation": "W. C. Overton, Jr., J. Gaffney, Physical Review 98 (1955), 969–977.",
+      "locator": "pp. 969 and 972–976; Eq. (5), Tables I–III; reference datum: p. 975, Table II, T = 0 K row, K^T column",
+      "rights": {
+        "copyright": "© 1955 American Physical Society",
+        "redistribute_full_text": false,
+        "policy": "reference_only"
+      },
+      "access": {
+        "full_text_inspected": true,
+        "inspection_method": "publisher_pdf_via_web_index",
+        "direct_pdf_status": "HTTP_401_OR_403",
+        "original_pdf_sha256": null
+      },
+      "artifact": {
+        "local_path": "source-artifacts/overton-gaffney-1955-facts.json",
+        "sha256": "674d2903462c56447da195907b5127630d1249854c89096612d8a9ea62f21f9c",
+        "size_bytes": 972
+      }
+    }
+  ],
+  "observables": [
+    {
+      "id": "bulk_modulus_isothermal_0k",
+      "source_id": "overton-gaffney-1955",
+      "locator": "p. 975, Table II, T = 0 K row, K^T column",
+      "role": "fit_sensitive_bulk_consistency",
+      "value": 142.03,
+      "unit": "GPa",
+      "temperature_k": 0,
+      "temperature_basis": "extrapolated_from_measurements",
+      "pressure_basis": "ambient_pressure_not_quantified",
+      "original": {
+        "value": 14.203,
+        "unit": "1e11 dyn/cm^2"
+      },
+      "source_uncertainty": {
+        "value": null,
+        "unit": "GPa",
+        "basis": "Отдельная погрешность K^T для строки 0 K в статье не указана. Число 0,34 % относится к вероятной погрешности K^S (с. 974, текст перед Eq. (5)), не к интервалу неопределённости K^T.",
+        "related_reported_relative_percent": 0.34
+      }
+    }
+  ]
+}

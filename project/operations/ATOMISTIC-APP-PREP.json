@@ -3,15 +3,13 @@
   "id": "ATOMISTIC-APP-PREP",
   "title": "Связать атомистический сценарий с приложением",
   "track": "ATOMISTIC_PRODUCT",
-  "status": "WAITING_HUMAN",
-  "actor": "HUMAN",
+  "status": "DONE",
+  "actor": "DIRECTOR",
   "priority": 6,
   "depends_on": [],
-  "blockers": [
-    "CANONICAL_MERGE_PENDING"
-  ],
-  "resume_condition": "Решение о canonical merge PR #96 после docs-only publication delta review; не повторять implementation/review неизменного проверенного subject.",
-  "next_action": "Принять merge-решение по https://github.com/rootfabric/NanoLab/pull/96. Technical Reviewer и отдельный Verifier PASS для exact source 71bc62102cc36bf49b04d40d81d3070d87cccad6/tree f86af90728797541594396ac0bef0964d9f8dd28. Actual CLI/UI demo завершён, P1 IMPLEMENTED_DEMO. Осталась docs-only publication/delta review; P0 OPEN, material NOT_EVALUATED, science acceptance не объявлена.",
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "Software delivery включена в main через PR #96, merge ddf8a25cdd95a1598338816f6a585ffdde1e0f2a. Повторная реализация не требуется. P0/material validation остаётся OPEN/NOT_EVALUATED; следующая product работа — ATOMISTIC-REFERENCE-PREP.",
   "evidence_refs": [
     "docs/work/WO-ATOMISTIC-PRODUCT-R1.md",
     "project/product-plan.json",
@@ -21,7 +19,7 @@
     "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md",
     "https://github.com/rootfabric/NanoLab/pull/96"
   ],
-  "updated_at_utc": "2026-11-05T11:02:18Z",
+  "updated_at_utc": "2026-11-07T11:04:42.650596Z",
   "claim_class": "C0_SOFTWARE_ONLY",
   "scientific_runs_allowed": false
 }

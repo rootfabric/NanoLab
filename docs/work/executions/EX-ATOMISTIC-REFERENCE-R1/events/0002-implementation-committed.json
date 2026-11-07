@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-implementation-committed",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-07T11:12:43.460674Z",
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "work_order_id": "WO-ATOMISTIC-REFERENCE-R1",
+  "event_type": "IMPLEMENTATION_COMMITTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "69a25429c9237bcd0b6084ed1e9215cfafd770fc",
+  "summary": "Cu source pins, draft protocol, offline validator и negative tests реализованы; reviewer findings repaired; 0 physics runs",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/package-validation.json"
+  ],
+  "next_action": "Exact subject independent review and verification"
+}

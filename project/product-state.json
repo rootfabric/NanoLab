@@ -16,10 +16,11 @@
   },
   "accepted_stages": [],
   "task_status": {
-    "AP-P0-REFERENCE": "READY",
-    "AP-P1-ADAPTER": "WAITING_HUMAN",
-    "AP-P1-APP": "WAITING_HUMAN",
-    "AP-P2-CONSTRUCTOR": "PLANNED"
+    "AP-P0-REFERENCE": "WAITING_REVIEW",
+    "AP-P1-ADAPTER": "DONE",
+    "AP-P1-APP": "DONE",
+    "AP-P2-CONSTRUCTOR": "PLANNED",
+    "AP-P0-BENCHMARK": "PLANNED"
   },
   "next_task": "AP-P0-REFERENCE",
   "implementation_status": "IMPLEMENTED_DEMO",
@@ -30,15 +31,16 @@
     "examples/atomistic/runs/cu-emt-demo-r1-001/report.md",
     "docs/atomistic/UI.md",
     "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-review-repair-report.md",
-    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md"
+    "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review/product-verifier-report.md",
+    "docs/work/WO-ATOMISTIC-REFERENCE-R1.md",
+    "docs/atomistic/reference/cu-r1/protocol.json"
   ],
   "execution_ledger": "Persistent mission ledger shared by CLI/UI/worktrees remains authoritative; final observed summary: 3 completed actual runs, no active reservation, approximately 1.967 seconds, less than 200 KB actual raw. Documentation publication does not authorize a new run.",
   "historical_scientific_state_unchanged": true,
   "open_gaps": [
-    "Pinned material benchmark/reference protocol and accepted validation evidence for P0",
-    "Canonical merge decision for PR #96; engineering technical PASS does not accept P0 or validate material properties"
+    "Pinned material benchmark/reference protocol and accepted validation evidence for P0"
   ],
-  "updated_at_utc": "2026-11-05T11:02:18Z",
+  "updated_at_utc": "2026-11-07T11:09:50.608882Z",
   "engineering_delivery_status": "IMPLEMENTED_DEMO",
   "scientific_validation_status": "NOT_EVALUATED",
   "verification_status": "VERIFIED",
@@ -104,9 +106,9 @@
     "scope": "Shared host/environment engineering validation; not external material reproduction."
   },
   "next_gate": {
-    "actor": "HUMAN",
-    "action": "Canonical merge decision for reviewed candidate; no repeated implementation/review unless subject changes.",
-    "pull_request": "https://github.com/rootfabric/NanoLab/pull/96"
+    "actor": "REVIEWER",
+    "action": "Review/verify Cu reference preparation; P0 remains OPEN and no physical run authorization",
+    "work_order": "docs/work/WO-ATOMISTIC-REFERENCE-R1.md"
   },
   "publication_evidence": {
     "owner": "INTEGRATOR",
@@ -114,5 +116,19 @@
     "review_directory": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/review",
     "summary": "docs/work/executions/EX-ATOMISTIC-PRODUCT-R1/summary.md",
     "status": "INCLUDED_IN_THIS_CANDIDATE"
+  },
+  "delivery_merge": {
+    "pull_request": "https://github.com/rootfabric/NanoLab/pull/96",
+    "merge_commit": "ddf8a25cdd95a1598338816f6a585ffdde1e0f2a",
+    "merged_at_utc": "2026-11-07T10:54:33Z",
+    "scope": "Engineering delivery and roadmap; no material/stage acceptance"
+  },
+  "reference_preparation": {
+    "status": "IMPLEMENTED_PENDING_REVIEW",
+    "package": "docs/atomistic/reference/cu-r1",
+    "protocol_status": "DRAFT_PREP_ONLY",
+    "physics_runs": 0,
+    "scope": "Cu periodic bulk isothermal modulus consistency; no nanosurface/finite-temperature validation",
+    "next_task_after_merge": "AP-P0-BENCHMARK"
   }
 }

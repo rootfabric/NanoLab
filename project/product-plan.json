@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "kind": "atomistic_product_plan",
-  "revision": "ATOMISTIC-PRODUCT-R1",
+  "revision": "ATOMISTIC-REFERENCE-R1",
   "canonical_owner": "main",
-  "candidate_work_order": "WO-ATOMISTIC-PRODUCT-R1",
+  "candidate_work_order": "WO-ATOMISTIC-REFERENCE-R1",
   "historical_scientific_plan": "project/plan.json",
   "historical_scientific_state": "project/state.json",
   "status_file": "project/product-state.json",
@@ -173,7 +173,29 @@
         "reference protocol with observables/tolerances/uncertainty and convergence plan",
         "model applicability and explicit unresolved validation gaps"
       ],
-      "run_authority": null
+      "run_authority": null,
+      "reference_package": "docs/atomistic/reference/cu-r1",
+      "scope": "Cu periodic bulk low-temperature consistency preparation; no automatic transfer to nanoparticle surface/finite-temperature accuracy"
+    },
+    {
+      "id": "AP-P0-BENCHMARK",
+      "stage": "P0",
+      "operation_card": "ATOMISTIC-BENCHMARK-PREP",
+      "depends_on": [
+        "AP-P0-REFERENCE"
+      ],
+      "consumer": "Исполнитель и независимый reviewer материального benchmark",
+      "demo": "Код генерации/анализа до 41 статической геометрии Cu bulk по детерминированной схеме, synthetic algorithm checks и frozen launch package; затем actual outputs на разрешённой среде отдельной scientific campaign.",
+      "budget": "Preparation: один Cu/EMT protocol R1, без physics runs. Future campaign budget в protocol.json лишь proposed, требует отдельного launch approval.",
+      "stop_condition": "Не менять источник/допуски по результатам. Нет принятого executor/launch authority — BLOCKED_HOST или WAITING_HUMAN для actual campaign; не запускать science в disposable container.",
+      "deliverables": [
+        "deterministic bulk benchmark runner and analysis",
+        "algorithm tests without calculator execution",
+        "frozen code/model/reference/environment and launch record before actual campaign",
+        "actual benchmark evidence and independent scientific conclusion only after launch gates"
+      ],
+      "run_authority": null,
+      "protocol": "docs/atomistic/reference/cu-r1/protocol.json"
     },
     {
       "id": "AP-P1-ADAPTER",
@@ -257,6 +279,7 @@
       "operation_card": null,
       "depends_on": [
         "AP-P0-REFERENCE",
+        "AP-P0-BENCHMARK",
         "AP-P1-ADAPTER",
         "AP-P1-APP"
       ],
