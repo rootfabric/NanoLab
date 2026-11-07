@@ -16,3 +16,7 @@ Primary sources:
 Не выполнены: независимый lattice/cohesive-energy/elastic/surface benchmark, сравнение с DFT/экспериментом или вторым потенциалом, timestep convergence study, статистическая оценка равновесия, оценка uncertainty, внешнее воспроизведение на принятом U1/U2. Finite-difference контроль использует тот же calculator, поэтому проверяет внутреннюю производную, а не физическую точность. Короткая MD не доказывает долговременную устойчивость, самосборку или работоспособность наномашины.
 
 Claim ceiling: `SOFTWARE_DEMONSTRATION / NOT_SCIENTIFICALLY_VALIDATED`. Scientific outcome: `NOT_EVALUATED`. P0/E6 acceptance остаётся OPEN и требует отдельного reviewed material-validation protocol и принятого исполнителя. R2/NL5/E5 не активируются этой поставкой.
+
+## Подготовленный bulk reference R1
+
+[Cu reference protocol](reference/cu-r1/PROTOCOL.md) и [source ledger](reference/cu-r1/sources.json) выделяют один первичный низкотемпературный bulk observable для будущего сопоставления: изотермический объёмный модуль. Это **подготовка**, без расчётов модели и без материальной приёмки. Calibration independence не установлена; совпадение fit-sensitive bulk quantity не считается независимой predictive validation. Открытые поверхности нынешнего непериодического UI-кластера и динамика требуют отдельных проверок. P0 остаётся OPEN, scientific outcome NOT_EVALUATED.

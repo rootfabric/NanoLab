@@ -1,0 +1,2 @@
+401 https://harvest.aps.org/v2/journals/articles/10.1103/PhysRev.98.969/fulltext
+403 https://journals.aps.org/pr/pdf/10.1103/PhysRev.98.969

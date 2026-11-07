@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "source_id": "overton-gaffney-1955",
+  "doi": "10.1103/PhysRev.98.969",
+  "observable": {
+    "id": "bulk_modulus_isothermal_0k",
+    "locator": "p. 975, Table II, T = 0 K row, K^T column",
+    "value": 142.03,
+    "unit": "GPa",
+    "temperature_k": 0,
+    "temperature_basis": "extrapolated_from_measurements",
+    "pressure_basis": "ambient_pressure_not_quantified",
+    "original": {
+      "value": 14.203,
+      "unit": "1e11 dyn/cm^2"
+    },
+    "source_uncertainty": {
+      "value": null,
+      "unit": "GPa",
+      "basis": "Отдельная погрешность K^T для строки 0 K в статье не указана. Число 0,34 % относится к вероятной погрешности K^S (с. 974, текст перед Eq. (5)), не к интервалу неопределённости K^T.",
+      "related_reported_relative_percent": 0.34
+    }
+  },
+  "measurement_temperature_range_k": [4.2, 300]
+}

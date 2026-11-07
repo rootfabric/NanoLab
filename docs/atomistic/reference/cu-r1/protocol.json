@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "reference_id": "CU_BULK_EMT_R1",
+  "status": "DRAFT_PREP_ONLY",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_outcome": "NOT_EVALUATED",
+  "scientific_runs_allowed": false,
+  "physics_runs": 0,
+  "source_manifest": {
+    "local_path": "sources.json",
+    "sha256": "9a01999e6dee15f5f0d06358137ae6e089b825a58885c94a4da96011da9c1716",
+    "size_bytes": 4840
+  },
+  "method_document": {
+    "local_path": "PROTOCOL.md",
+    "sha256": "45398fbb0992c5a074f3caef9c1f32b57119950f7460045349d206c1e2c7c278",
+    "size_bytes": 13626
+  },
+  "source_document": {
+    "local_path": "SOURCES.md",
+    "sha256": "1b96b8087caf8d1f9f5a33b606815efb761f3e14b01c0645b153c296bc7e9ca6",
+    "size_bytes": 8359
+  },
+  "model": {
+    "id": "ASE_EMT_Cu",
+    "ase_version": "3.26.0",
+    "calculator": "ase.calculators.emt.EMT",
+    "parameters": {
+      "asap_cutoff": false
+    }
+  },
+  "scenario": {
+    "element": "Cu",
+    "crystal_structure": "fcc",
+    "boundary": "periodic_bulk",
+    "pbc": [true, true, true],
+    "temperature_k": 0,
+    "external_pressure_gpa": 0,
+    "reference_temperature_basis": "extrapolated_from_measurements",
+    "reference_pressure_basis": "ambient_pressure_not_quantified",
+    "phase": "static_classical_perfect_crystal",
+    "conventional_cell_atoms": 4,
+    "repeat_cubes_per_axis": [4, 5],
+    "anchor_lattice_angstrom": 3.60,
+    "reference_calibration_independence": "UNVERIFIED"
+  },
+  "observable": {
+    "id": "bulk_modulus_isothermal_0k",
+    "source_id": "overton-gaffney-1955",
+    "role": "fit_sensitive_bulk_consistency",
+    "reference_value": 142.03,
+    "unit": "GPa",
+    "engineering_tolerance_relative": 0.10,
+    "numerical_envelope_limit_relative": 0.01,
+    "comparison": "full_numerical_envelope_vs_closed_engineering_band"
+  },
+  "numerics": {
+    "energy_unit": "eV/atom",
+    "volume_unit": "angstrom^3/atom",
+    "gpa_per_ev_per_angstrom3": 160.2176634,
+    "primary_method": "narrow_cubic_energy_volume_fit",
+    "coarse_volume_fraction_offsets": [-0.08, -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06, 0.08],
+    "wide_volume_fraction_offsets": [-0.04, -0.03, -0.02, -0.01, 0, 0.01, 0.02, 0.03, 0.04],
+    "narrow_volume_fraction_offsets": [-0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02],
+    "finite_difference_volume_fraction_steps": [0.005, 0.0025],
+    "checks": ["wide_cubic", "narrow_quartic", "larger_cell_narrow_cubic", "direct_finite_differences"],
+    "max_force_ev_per_angstrom": 0.000001,
+    "max_deviatoric_stress_gpa": 0.000001,
+    "max_absolute_equilibrium_pressure_gpa": 0.10
+  },
+  "proposed_future_budget": {
+    "max_campaign_attempts": 1,
+    "max_static_evaluations": 41,
+    "max_atoms": 500,
+    "max_threads": 1,
+    "max_wall_seconds": 120,
+    "max_output_bytes": 16777216,
+    "md_steps": 0
+  }
+}

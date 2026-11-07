@@ -1,0 +1,11 @@
+UTC 2026-11-07T11:14:05.416828+00:00
+Python 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+subject 7c3391696a788ca15d92139adc5a184928a0a67b 861af479f3465d85acbd9d804dfaa8437dc808cc
+NANOLAB_REAL_ATOMISTIC_TEST unset; ASE not available; PYTHONNOUSERSITE=1
+check-json: exit=0 elapsed_s=0.114 log_sha256=87921ff6dd73bfeaf4f831e9425ff84d5e3c503d93222606528d47a0c5dd1c7e log_bytes=76 PYTHONPATH='scripts' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'harness.batch_validate', 'json', '--root', '.']
+check-consistency: exit=0 elapsed_s=0.056 log_sha256=0846f20455a7866ae4b4a1b610e44d801f4f79f4ccf0f329cfbb61e1e5708892 log_bytes=13070 PYTHONPATH='scripts' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'harness.cli', 'check-consistency', '--root', '.']
+check-executions: exit=0 elapsed_s=0.070 log_sha256=be543b17e51bcf32867c78b72472f4b93153d650b852395f98e240298e20c401 log_bytes=51769 PYTHONPATH='scripts' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'harness.batch_validate', 'executions', '--root', '.']
+check-workflow-lint: exit=0 elapsed_s=0.038 log_sha256=dca5705909614d3c87fa3a2e2ce897b0f55e93b59d7096413c97f47143daa38e log_bytes=374 PYTHONPATH='scripts' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'harness.workflow_lint', '--root', '.']
+check-unittest: exit=0 elapsed_s=35.844 log_sha256=a286b7bf5bf9742496f3ed8ea3188f57a264f9f1c401589d7653b5d479452bec log_bytes=159887 PYTHONPATH='' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'unittest', 'discover', '-s', 'tests', '-t', '.', '-v']
+reference-cli: exit=0 elapsed_s=0.033 log_sha256=1128beda9eeef37dbdc23968257242ee1ee984f993be992084250a43aa74a92b log_bytes=589 PYTHONPATH='scripts' argv=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3', '-m', 'atomistic.reference']
+clean detached checkout unchanged

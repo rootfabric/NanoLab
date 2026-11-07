@@ -1,0 +1,38 @@
+fatal: path 'data' does not exist in 'ddf8a25cdd95a1598338816f6a585ffdde1e0f2a'
+M	docs/ROADMAP.md
+M	docs/atomistic/MODEL_CARD.md
+M	docs/atomistic/README.md
+A	docs/atomistic/reference/cu-r1/PROTOCOL.md
+A	docs/atomistic/reference/cu-r1/SOURCES.md
+A	docs/atomistic/reference/cu-r1/protocol.json
+A	docs/atomistic/reference/cu-r1/source-artifacts/overton-gaffney-1955-facts.json
+A	docs/atomistic/reference/cu-r1/sources.json
+A	docs/work/WO-ATOMISTIC-REFERENCE-R1.md
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/events/0001-work-order-started.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/events/0002-implementation-committed.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/package-validation.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/pr96-merge.json
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/evidence/repair-map.md
+A	docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/passport.json
+M	project/operations/ATOMISTIC-ADAPTER-PREP.json
+M	project/operations/ATOMISTIC-APP-PREP.json
+A	project/operations/ATOMISTIC-BENCHMARK-PREP.json
+M	project/operations/ATOMISTIC-REFERENCE-PREP.json
+M	project/operations/FLOW-R1.json
+M	project/product-plan.json
+M	project/product-state.json
+A	scripts/atomistic/reference.py
+A	tests/test_atomistic_reference.py
+Traceback (most recent call last):
+  File "/workspace/scratch/48cb7a65c9c0/reference-verifier-logs/verify-scope.py", line 43, in <module>
+    assert git("rev-parse", f"{base}:{path}") == git("rev-parse", f"{head}:{path}"), path
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/48cb7a65c9c0/reference-verifier-logs/verify-scope.py", line 14, in git
+    return subprocess.check_output(["git", *args]).decode().strip()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', 'rev-parse', 'ddf8a25cdd95a1598338816f6a585ffdde1e0f2a:data']' returned non-zero exit status 128.

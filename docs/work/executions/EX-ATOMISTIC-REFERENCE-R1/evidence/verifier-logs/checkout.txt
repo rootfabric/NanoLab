@@ -1,0 +1,10 @@
+From https://github.com/rootfabric/NanoLab
+   69a2542..7c33916  work/atomistic-reference-r1 -> origin/work/atomistic-reference-r1
+HEAD is now at 7c33916 feat(atomistic): prepare pinned Cu bulk reference and offline validation
+HEAD=7c3391696a788ca15d92139adc5a184928a0a67b
+TREE=861af479f3465d85acbd9d804dfaa8437dc808cc
+PARENTS=69a25429c9237bcd0b6084ed1e9215cfafd770fc
+SUBJECT=feat(atomistic): prepare pinned Cu bulk reference and offline validation
+ORIGIN_MAIN=ddf8a25cdd95a1598338816f6a585ffdde1e0f2a
+ORIGIN_CANDIDATE=7c3391696a788ca15d92139adc5a184928a0a67b
+## HEAD (no branch)

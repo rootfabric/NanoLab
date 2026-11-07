@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "ATOMISTIC-BENCHMARK-PREP",
+  "title": "Реализовать и заморозить Cu bulk benchmark",
+  "track": "ATOMISTIC_PRODUCT",
+  "status": "PLANNED",
+  "actor": "IMPLEMENTER",
+  "priority": 8,
+  "depends_on": [
+    "ATOMISTIC-REFERENCE-PREP"
+  ],
+  "blockers": [],
+  "resume_condition": "",
+  "next_action": "После merge reference package реализовать фиксированный bulk generator/analysis и synthetic tests, закрепить exact source/environment. Это C0 подготовка, без physical runs; actual campaign только после approved executor/launch gates, бюджет protocol.json proposed.",
+  "evidence_refs": [
+    "docs/work/WO-ATOMISTIC-REFERENCE-R1.md",
+    "docs/atomistic/reference/cu-r1/PROTOCOL.md",
+    "project/product-plan.json"
+  ],
+  "updated_at_utc": "2026-11-07T11:08:25.274437Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs_allowed": false
+}

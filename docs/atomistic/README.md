@@ -57,3 +57,13 @@ PYTHONPATH=scripts .venv-atomistic/bin/python -m atomistic.integration --output-
 Она проверяет сходимость, уменьшение potential energy при релаксации, finite-difference контроль, число шагов/кадров, движение атомов и digest readback. Optional unittest запускается только при `NANOLAB_REAL_ATOMISTIC_TEST=1`, с обязательным `NANOLAB_ATOMISTIC_OUTPUT_ROOT` и новым `NANOLAB_ATOMISTIC_RUN_ID`; он тоже расходует один pilot. Побитовое совпадение между платформами не заявляется.
 
 См. [MODEL_CARD.md](MODEL_CARD.md) и [PILOT_PROTOCOL_R1.md](PILOT_PROTOCOL_R1.md).
+
+## Подготовка материального эталона P0
+
+Пакет [Cu bulk reference R1](reference/cu-r1/PROTOCOL.md) содержит первичный источник, модельные pins/права и draft protocol одного ограниченного сравнения. Offline validator проверяет пакет и целостность локальных источников без ASE, сети и расчётов энергии/сил:
+
+```bash
+PYTHONPATH=scripts python3 -m atomistic.reference
+```
+
+Дальнейшая material campaign требует отдельного frozen subject и разрешённой среды. Bulk consistency не подтверждает автоматически точность наночастиц и поверхностей; работающий UI остаётся инженерным demo.

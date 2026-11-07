@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-handoff-completed",
+  "sequence": 4,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-07T11:16:57.687213Z",
+  "execution_id": "EX-ATOMISTIC-REFERENCE-R1",
+  "work_order_id": "WO-ATOMISTIC-REFERENCE-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "7c3391696a788ca15d92139adc5a184928a0a67b",
+  "summary": "Reference preparation handoff; P0 OPEN, no scientific launch",
+  "evidence_refs": [
+    "docs/work/executions/EX-ATOMISTIC-REFERENCE-R1/summary.md"
+  ],
+  "next_action": "Human merge PR97 then AP-P0-BENCHMARK"
+}
