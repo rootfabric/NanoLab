@@ -1,5 +1,7 @@
 # NanoLab — Branching и Git protocol
 
+Репозиторий использует multi-worktree layout: общее Git-хранилище — `PROJECT_ROOT/.git-store/repo.git` (bare), каждая рабочая ветка — отдельный worktree непосредственно под `PROJECT_ROOT`. Полный стандарт и команды работы с worktree: `docs/control/WORKTREE_LAYOUT_RU.md`.
+
 ## Canonical branch
 
 `main` — единственный canonical project state. Рабочая ветка создаётся от проверенного fresh `main`.
