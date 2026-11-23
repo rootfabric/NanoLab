@@ -10,13 +10,13 @@ Work Order: [WO-INTEGRATION-NL5-C0-R1](../../WO-INTEGRATION-NL5-C0-R1.md). Direc
 
 | Gate | main | candidate |
 |---|---|---|
-| JSON syntax | 1591 ok | 1626 ok |
+| JSON syntax | 1591 ok | 1624 (merge-only `7096923`) / 1628 (final head) ok |
 | consistency | ok | ok |
 | executions | 72 ok | 79 ok, errors 0 |
 | workflow lint | 0 | 0 |
 | unittest (Windows, не авторитетно) | 1054 ran, 73 failing methods (env) | 1054 ran, то же множество, **0 новых** |
 
-Authoritative gate — hosted CI H0 на PR #98 (5 checks) на финальном HEAD. Локальные логи: `scratch/lead-2026-11-24/` (вне Git).
+Authoritative gate — hosted CI H0 на PR #98 (5 checks) на HEAD `17ba164`: **SUCCESS** (run `45196307985`; hosted Linux `unittest discover`: Ran 1059 tests, OK, skipped=1). Независимый review fresh-сессией `reviewer-nl5-c0-integration`: **PASS, 0 BLOCKING**, 2 NON-BLOCKING неточности текста исправлены (event 0004); вердикт — `review/REVIEWER_R1.md`. Локальные логи: `scratch/lead-2026-11-24/` (вне Git).
 
 ## Exact subject / commands
 

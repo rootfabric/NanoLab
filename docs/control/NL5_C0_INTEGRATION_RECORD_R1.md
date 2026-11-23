@@ -38,7 +38,7 @@ Director record (integrator function, `docs/control/FLOW_THROUGHPUT_R1.md` §6),
 
 Карта ожидала «механическую конкатенацию» append-строк. После карты в `main` принят FLOW-R1 (PR #95, merge `3b567ae..ddf8a25`), который **заменил общую таблицу** на `project/operations/*.json` и прямо запретил дописывать handoffs в общий файл («Это устраняет конфликты независимых веток на общей таблице»); предыдущая очередь сохранена побайтово в `docs/work/WORK_QUEUE_HISTORY_PRE_FLOW_R1.md` (копия `main@3b567ae`).
 
-Разрешение: `WORK_QUEUE.md` в candidate **побайтово равен `main@ddf8a25`** (проверено `git diff HEAD origin/main -- docs/work/WORK_QUEUE.md` пуст после каждого merge). Шесть append-строк веток (F01, F02, F03, F05, review, verify) не переносятся в новую очередь; их факты сохранены: (а) в `summary.md` каждого из шести execution directories, включённых в candidate; (б) в историях subject-веток и в merge commits этого PR; (в) в operations cards `AUTHOR-U1.json` / `EXTERNAL-U2.json` / `RESOURCE-R1.json` (ссылки на F02/F03 evidence). Удаления строк в `main` не происходит. Это решение заменяет ожидание карты; карта как Director record 2026-10-26 не редактируется.
+Разрешение: `WORK_QUEUE.md` в candidate **побайтово равен `main@ddf8a25`** (проверено `git diff HEAD origin/main -- docs/work/WORK_QUEUE.md` пуст после каждого merge). Шесть append-строк веток (F01, F02, F03, F05, review, verify) не переносятся в новую очередь; их факты сохранены: (а) в execution directories шести subjects, включённых в candidate (`summary.md`, а также passports / dispatch proofs / evidence — точнее, чем строки); (б) в историях subject-веток и в merge commits этого PR; (в) в operations card `AUTHOR-U1.json` (exact-SHA ссылка на evidence F02); карточки `EXTERNAL-U2.json` и `RESOURCE-R1.json` прямых ссылок на F03/evidence не содержат (поправка по finding NON-BLOCKING-1 независимого review, event 0004). Удаления строк в `main` не происходит. Это решение заменяет ожидание карты; карта как Director record 2026-10-26 не редактируется.
 
 ## 5. Проверки
 
@@ -52,7 +52,11 @@ Director record (integrator function, `docs/control/FLOW_THROUGHPUT_R1.md` §6),
 | Check 4 workflow lint | 0 violations | 0 violations | |
 | Check 5 unittest | Ran 1054; FAILED 49/27, skipped 3 | Ran 1054; FAILED 49/27, skipped 3 | **множество failing-методов идентично** (73 уникальных, все — Windows-окружение: symlink privilege WinError 1314, CRLF- digest, case-insensitive paths, `git commit` во временных fixture); **0 новых failures** |
 
-Логи: `scratch/lead-2026-11-24/{main,integration}-unittest.log`, `*-failset.txt` (локальные, вне Git; hosted CI — канонический gate).
+Логи: `scratch/lead-2026-11-24/{main,integration}-unittest.log`, `*-failset.txt` (локальные, вне Git; hosted CI — канонический gate). Числа JSON в таблице относятся к merge-only tree `7096923` (1624); с файлами самого integration record: 1626 на `87b11b4`, 1628 на final HEAD `17ba164` (+ events 0002/0003).
+
+**Authoritative gate — hosted CI H0 (PR #98, run `45196307985`, headSha `17ba1647133ba437b41c150e9df0867771664191`): SUCCESS, 2026-11-23T14:38:07–14:38:51Z.** Все 5 шагов: JSON 1628 ok; consistency ok; executions 79 ok; workflow lint 0 violations; полный `unittest discover` на hosted Linux — **Ran 1059 tests, OK (skipped=1)**.
+
+**Независимый review (fresh DSH teammate-сессия `reviewer-nl5-c0-integration`, отдельный detached worktree, собственные команды): PASS, 0 BLOCKING.** Проверены merge-цепочка (7 двухродительских коммитов, P2 == pin == origin tip), 58/58 blob-identity, `WORK_QUEUE.md`/`WORK_QUEUE_HISTORY_PRE_FLOW_R1.md` == main, финальный diff 65 A + 1 M + 0 D, все gates exit 0, policy FLOW-R1, claim ceiling. Два NON-BLOCKING неточности текста (завышенное утверждение о ссылках в карточках; число JSON «1626» для final head) исправлены этим correction commit (event 0004). Полный текст вердикта: `docs/work/executions/EX-INTEGRATION-NL5-C0-R1/review/REVIEWER_R1.md`.
 
 ## 6. Зависимости и действующее разрешение
 
