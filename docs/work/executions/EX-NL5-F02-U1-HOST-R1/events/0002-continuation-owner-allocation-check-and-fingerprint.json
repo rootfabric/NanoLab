@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-owner-allocation-check-and-fingerprint",
+  "timestamp_utc": "2026-10-25T17:21:35Z",
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f02-u1-host-r1",
+  "subject_sha": "59b59beba94690b813aa9ae4af09d57500b4d5d8",
+  "summary": "C0-фаза выполнена, evidence опубликован, hard gate сработал: BLOCKED_OWNER_U1. (1) Owner allocation: OA-1 ~/.ssh/config ABSENT (только личные ключи исполнителя, содержимое в evidence не копировалось); OA-2 env NOT_FOUND; OA-3 Git post-freeze NOT_FOUND (origin/main = BASE 3b567ae33f247b182b2ae451d2cc4598a9e76019 без движения, policy/research docs остаются AUTHOR_U1=NOT_ASSIGNED / WAITING_HOST, новые упоминания U1 — только dispatch-записи этого WO); OA-4 F01 handoff @ c7c5be6 подтверждает NOT_ASSIGNED; OA-5 локальный кандидат = hostname outenemy, входящий в forbidden_hostnames (EXTERNAL_U2_ONLY) -> FORBIDDEN_AS_U1. Итог 0/5 каналов с allocation -> BLOCKED_OWNER_U1 (ожидаемый честный исход). (2) Read-only fingerprint локального кандидата собран и помечен CANDIDATE_NOT_ALLOCATED: Ubuntu 22.04.5 LTS, kernel 5.15.0-190-generic native (virt=none, PID1 systemd, state degraded), machine-id e06fe756a6ce49cabc9ebaf394fd6837, 2x Xeon E5-2698 v3 (32C/64T, 2 NUMA), RAM 125Gi total / 14Gi available (swap full), ext4 root 96% used (19Gi free), доп. nvme1n1 ext4 + sda1 ntfs, toolchain gcc 11.4.0 / cmake 3.22.1 / make 4.3 / python 3.10.12 / git 2.34.1, слушающие порты далеко за пределами sshd (NET-1 fail), github egress 200. Даже без deny-list хост не прошёл бы HW-2/HW-3/HW-4/NET-1 — подтверждение политики 'U1 = отдельная машина, не переиспользование U2'. (3) Eligibility checklist собран: gates U1-U5 и NC-U1..U5 = WAITING_HOST (невыполнимы без выделенного U1; EN-4 запрещает зачёт build-цепочки U2), deny-list/roles (U2=outenemy != U1), изоляция scientific executor от CI (+ public-PR правило SECURITY_MODEL), канонические пути ~/nanolab/... + raw manifest contract, credential scope key-only БЕЗ секретов (в evidence секретов 0). (4) Evidence matrix: блокирует R2 activation отсутствие allocation record + SSH host alias; точный owner action list A1-A6 (HG-A chain -> F04) опубликован. (5) Расхождения Issue #83 <-> репо зафиксированы в evidence. Границы: SCIENTIFIC_RUNS=0, модификаций хоста 0, apt/глобальных установок 0, новых сетевых сканов 0, canonical state не менялся, U1 не имперсонировался. passport.json -> status BLOCKED_OWNER_U1.",
+  "command_refs": [
+    "test -f ~/.ssh/config -> false (ABSENT); ls ~/.ssh -> authorized_keys, id_ed25519, id_ed25519.pub, known_hosts (names only)",
+    "env | grep -iE 'u1|nanolab|author_ubuntu|host' -> no allocation variables",
+    "git fetch origin --prune -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE); git log --all --oneline --grep U1 -> only edd7952/59b59be dispatch records post-freeze",
+    "hostname -> outenemy; grep forbidden_hostnames config/infra/r2-activation.v1.json -> [outenemy] => FORBIDDEN_AS_U1",
+    "cat /etc/os-release; uname -a; systemd-detect-virt (=none); ps -p 1 (=systemd); systemctl is-system-running (=degraded); lscpu; free -h; lsblk; findmnt -T / (ext4); df -h /; cat /etc/machine-id; gcc/g++/cmake/make/python3/git --version; ss -tln; curl -sSf https://github.com (=200) — все команды read-only",
+    "git show origin/work/nl5-f01-frozen-audit-r1:docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/{passport.json,summary.md} -> F01 matrix: F02 READY(C0)/goal BLOCKED"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.json",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_HOST_ELIGIBILITY_R1.md",
+    "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md",
+    "config/infra/r2-activation.v1.json",
+    "docs/work/executions/EX-NL5-V02-FRESH-AUDIT-R1/evidence/u1-host-search-R1.json"
+  ],
+  "next_action": "Записать HANDOFF_COMPLETED (документальная передача вердикта BLOCKED_OWNER_U1 Director'у), append единственной строки в WORK_QUEUE.md, финальная валидация, push.",
+  "blocker": "OWNER_ALLOCATION_ABSENT: владелец не выделил физическую машину U1 и не опубликовал SSH host alias / allocation record; единственный инспектируемый хост (outenemy) запрещён deny-list'ом как U2 (EXTERNAL_U2_ONLY). Снятие блокировки — только owner actions A1-A6 (см. evidence matrix)."
+}
