@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "EX-INTEGRATION-NL5-C0-R1",
+  "work_order_id": "WO-INTEGRATION-NL5-C0-R1",
+  "checkpoint": "NL5",
+  "base_sha": "70969235169318db7af4aa019ce1304e40523fcc",
+  "branch": "integration/nl5-c0-r1",
+  "risk_class": "MEDIUM",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "allowed_paths": [
+    "docs/work/WO-INTEGRATION-NL5-C0-R1.md",
+    "docs/control/NL5_C0_INTEGRATION_RECORD_R1.md",
+    "project/operations/INTEGRATION-R1.json",
+    "docs/work/executions/EX-INTEGRATION-NL5-C0-R1/**"
+  ],
+  "started_at_utc": "2026-11-23T14:34:09.999771Z",
+  "status": "STARTED",
+  "event_ordering": "sequence-v1"
+}

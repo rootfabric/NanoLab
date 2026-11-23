@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "sequence": 1,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-23T14:34:09.999771Z",
+  "execution_id": "EX-INTEGRATION-NL5-C0-R1",
+  "work_order_id": "WO-INTEGRATION-NL5-C0-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "subject_sha": "70969235169318db7af4aa019ce1304e40523fcc",
+  "summary": "Начата подготовка одного C0 integration candidate для NL5-CLOSE-R1 (#81): F01/F02/F03/F05 + batch review/verify + integration map собраны в integration/nl5-c0-r1 на fresh main ddf8a25 (7 no-ff merges @ 7096923, 58 добавленных путей blob-идентичны subject). Director integrator function (FLOW-R1 §6); scientific runs=0; canonical state, frozen F2, U1/R2/authority A не меняются.",
+  "evidence_refs": [],
+  "next_action": "Интеграционные gates, запись integration record, обновление карточки INTEGRATION-R1, push и один PR как merge-рекомендация; merge = Human Gate."
+}
