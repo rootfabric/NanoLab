@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "kind": "nl5_f05_dispatch_readiness",
+  "readiness_id": "NL5-F05-DISPATCH-READINESS-R1",
+  "execution_id": "EX-NL5-F05-DISPATCH-PREP-R1",
+  "work_order_id": "WO-NL5-F05-DISPATCH-PREP-R1",
+  "program": "NL5-CLOSE-R1",
+  "program_issue": 81,
+  "task_issue": 86,
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "risk_class": "MEDIUM",
+  "scientific_runs": 0,
+  "actor": {
+    "role": "CONTROL-IMPLEMENTER",
+    "actor_id": "nl5-f05-dispatch-implementer-r1",
+    "launcher": "DSH subagent tool (real separate session spawned by Director)",
+    "dsh_session_id": "3e3c6aa5-d615-49a0-8b6a-1805d8f7431a",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "baseline": {
+    "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "base_tree": "560dc913a71a237d3c452a5a2e492e213b232911",
+    "branch": "work/nl5-f05-dispatch-prep-r1",
+    "worktree": "/home/rdpuser/NanoLab/nl5-f05-dispatch-prep",
+    "dispatch_head": "9da777bd7c9039ac6ec0365b6561f992001279ec",
+    "f01_handoff_ref": "origin/work/nl5-f01-frozen-audit-r1 @ c7c5be6edbcdb5a304705ff6d53863fa735d7d0c (read-only input)"
+  },
+  "epoch_check": {
+    "command": "git fetch origin --prune && git rev-parse origin/main",
+    "origin_main": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+    "epoch_change": false,
+    "verdict": "ORIGIN_MAIN_EQUALS_BASE"
+  },
+  "hg_b_recheck": {
+    "path": "docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+    "commands": [
+      "git rev-parse 3b567ae33f247b182b2ae451d2cc4598a9e76019:docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json",
+      "git show 3b567ae33f247b182b2ae451d2cc4598a9e76019:docs/evidence/NL5-ACCEPTANCE-POLICY/HG_B_OWNER_DECISION_R1.json | sha256sum",
+      "git merge-base --is-ancestor 549b687a9171ea3636dbb00078d7018f619cebd3 3b567ae33f247b182b2ae451d2cc4598a9e76019"
+    ],
+    "git_blob_sha1_recomputed": "61d1491233aeb2537f9800d6183def5b8fb0c8e0",
+    "canonical_blob_sha256_recomputed": "b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9",
+    "expected_blob_sha1_d2": "61d1491233aeb2537f9800d6183def5b8fb0c8e0",
+    "expected_sha256_d2": "b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9",
+    "decision": "APPROVED",
+    "record_kind": "HG_B_OWNER_APPROVAL",
+    "issuer_class": "HUMAN_GATE_OWNER",
+    "candidate_revision": "R4",
+    "rule_id": "NANOLAB_REPRO_V0_2_DISTRIBUTIONAL",
+    "source_commit_in_main_ancestry": true,
+    "identical_at_branch_head": true,
+    "verdict": "MATCH (decision=APPROVED; blob identities equal DIRECTOR_FREEZE_R2.json hg_b_record binding)"
+  },
+  "frozen_subject_recheck": {
+    "F2": "60da9a846511265a8ac7564da088c3d74cb073f0",
+    "F2_TREE": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "method": "recomputed independently from the Git object store (not trusting F01/D2): git rev-parse F2:<path> for GIT_BLOB_SHA1; git show F2:<path> | sha256sum for CANONICAL_BLOB_SHA256",
+    "f2_ancestor_of_origin_main": true,
+    "f2_ancestor_of_branch_head": true,
+    "blobs": [
+      {
+        "artifact": "frozen_protocol",
+        "path": "docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md",
+        "size_bytes": 37240,
+        "git_blob_sha1_recomputed": "4835719622bae49a8e8b480536a482b4b222d408",
+        "canonical_sha256_recomputed": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+        "expected_blob_sha1": "4835719622bae49a8e8b480536a482b4b222d408",
+        "expected_sha256": "2658ee3e0cd0216245f0ab63b67f73969d2d060e703e2e94819e0d93fc997c6d",
+        "verdict": "MATCH"
+      },
+      {
+        "artifact": "freeze_contract",
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json",
+        "size_bytes": 9729,
+        "git_blob_sha1_recomputed": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "canonical_sha256_recomputed": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+        "expected_blob_sha1": "d6a9ccde4d1dadf42d1a8cd9b88faa02646cf70b",
+        "expected_sha256": "7e6476544e82af73d5d7e0672666ece99bf4d499a0da30645b02886bcdc45b3a",
+        "verdict": "MATCH"
+      },
+      {
+        "artifact": "seed_record",
+        "path": "docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json",
+        "size_bytes": 10681,
+        "git_blob_sha1_recomputed": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "canonical_sha256_recomputed": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+        "expected_blob_sha1": "0164e0e3f5dda6dbf63174df3730b1bd921d2c76",
+        "expected_sha256": "8e844bff299df82bcbc5d524b5881de56190a59fc8e39a4a8bdeeddc97fa7e28",
+        "verdict": "MATCH"
+      }
+    ],
+    "summary": "3/3 MATCH; worktree checkout of the same paths is byte-identical to F2 blobs (worktree sha256 == canonical blob sha256, git status clean)"
+  },
+  "d2_freeze_record": {
+    "path": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "decision": "FREEZE",
+    "decision_id": "NL5-V02-FREEZE/DIRECTOR/R2",
+    "pinned_subject_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+    "pinned_subject_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "record_commit": "a2f7304ebbb5973b81cf49dee60c21c85c6a974d",
+    "record_branch": "repair/nl5-v02-director-freeze-r2 (tip 9ba73579550f1b21d832dd7a7a6f9cb61beb5e17)",
+    "in_main_ancestry": true,
+    "strict_descendant_of_F2": true
+  },
+  "reviewer_verifier_chain": {
+    "reviewer_f2": {
+      "branch": "review/nl5-v02-frozen-r2-scientific-review-r1",
+      "tip": "d63eb5c088133f92ebd20501835a159cc3e4b865",
+      "record": "docs/evidence/NL5-V02-FREEZE/FRESH_SCIENTIFIC_REVIEW_R2.json @ tip",
+      "record_kind": "REVIEWER_VERDICT",
+      "issuer_class": "INDEPENDENT_REVIEWER",
+      "verdict": "PASS",
+      "pinned_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "pinned_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "descends_from_F2": true,
+      "append_only_confirmed": "git log --stat 60da9a8..tip: 3 commits, 3 files, 557 insertions, 0 deletions/modifications",
+      "merged_into_main": false
+    },
+    "verifier_f2": {
+      "branch": "verify/nl5-v02-frozen-r2-r1",
+      "tip": "f12d0b497cb28a2f18476ded90b4b1bd079bb414",
+      "record": "docs/evidence/NL5-V02-FREEZE/FRESH_VERIFIER_R2.json @ tip",
+      "record_kind": "VERIFIER_VERDICT",
+      "issuer_class": "INDEPENDENT_VERIFIER",
+      "verdict": "VERIFIED",
+      "pinned_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+      "pinned_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+      "descends_from_F2": true,
+      "append_only_confirmed": "git log --stat 60da9a8..tip: 1 commit, 10 files, 618 insertions, 0 deletions/modifications",
+      "merged_into_main": false
+    },
+    "f01_f_1_reconfirmed": true,
+    "f01_f_1_statement": "Reviewer(F2)/Verifier(F2) evidence is append-only and pins exact F2, but tips d63eb5c/f12d0b4 are NOT merged into main (verified this session via git merge-base --is-ancestor: NO for both); main references them by exact tip SHA via DIRECTOR_FRESH_AUDIT_R1. Authority A (schema v3) must bind these records by exact tip commit/path/blob or the records must first be integrated.",
+    "d2_dispatch_blockers_note": "D2 dispatch_blockers text 'fresh Reviewer/Verifier = missing' reflects the freeze moment and is superseded by the completed R/V branches (F01-F-5); canonical blockers (R2 ACTIVE=false, AUTHOR_U1=NOT_ASSIGNED) remain in force."
+  },
+  "feasibility": {
+    "sources": [
+      "FROZEN_R2 freeze contract @ F2 (sha256 7e647654...)",
+      "FROZEN_R2 seed record @ F2 (sha256 8e844bff...)",
+      "HG_B_OWNER_DECISION_R1.json (blob b68dd341...)"
+    ],
+    "grid": {
+      "primary_variants": {
+        "0b": {
+          "n": 64,
+          "n_min": 52
+        },
+        "32b": {
+          "n": 64,
+          "n_min": 52
+        }
+      },
+      "control_variants": {
+        "11b": {
+          "n": 10,
+          "n_min": 8
+        },
+        "53b": {
+          "n": 10,
+          "n_min": 8
+        }
+      },
+      "n_grid_search": [
+        40,
+        48,
+        64,
+        80,
+        96,
+        128
+      ],
+      "selected_n": 64,
+      "headroom_ratio": 0.8,
+      "n_min_rule_check": "ceil(0.80*N): ceil(51.2)=52, ceil(8.0)=8 PASS",
+      "quota_rule_check": "floor(0.20*N): 12/12/2/2 PASS"
+    },
+    "collision_scan": {
+      "allowlist_paths_exact": [
+        "docs/research/NANOLAB_REPRO_V0_2_CANDIDATE_R1.md",
+        "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json"
+      ],
+      "scan_tree_pin": "a9d7d07fa264e9907b67ca244b00ba2da3430b0f",
+      "manifest_binding": {
+        "path": "docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/r4-1-collision-scan-manifest-R4.json",
+        "sha256_file_bytes_recomputed": "77ef5b6a6acbaf2d3217b75dec4cec5b54e9c48cc5a6e0336160726e7272614c",
+        "internal_canonical_manifest_sha256_recomputed": "6966b216309fd62e29dc93e31f26f00c2dc4735a6a68dd7ae047628a0c581857"
+      },
+      "independent_rescan": "2102 text blobs of the pinned tree re-scanned this session with substring semantics; all 176 accepted identities CLEAN outside allowlist; all 41 recorded skips backed by >=1 non-allowlisted hit"
+    },
+    "seed_identities": {
+      "fresh_confirmatory": 148,
+      "per_variant": {
+        "0b": 64,
+        "32b": 64,
+        "11b": 10,
+        "53b": 10
+      },
+      "bootstrap": 4,
+      "replacement_pool": 28,
+      "per_variant_pool": {
+        "0b": 12,
+        "32b": 12,
+        "11b": 2,
+        "53b": 2
+      },
+      "recorded_collision_skips": {
+        "0b": 10,
+        "32b": 11,
+        "11b": 10,
+        "53b": 10
+      },
+      "total_distinct_identities": 180,
+      "count_command_basis": "independent replay script (git show F2 bytes -> sha256 anchor derivation seed(v,i)=int(sha256('{anchor}|{v}|replica-{i:04d}')[:4]) & 0x7FFFFFFF, replica indices start at 1; bootstrap = sha256('{anchor}|bootstrap-{v}')[:4] & 0x7FFFFFFF; collision rule replayed against a rebuilt pinned-tree corpus)",
+      "note_on_148": "148 = (64+64)+(10+10) fresh identities; x2 runs/pair = 296 confirmatory runs; the '(64+64+10+10)*2' guess = 296 is the RUN count, the IDENTITY count is 148"
+    },
+    "run_budget": {
+      "confirmatory_runs": 296,
+      "replacement_runs_cap": 56,
+      "max_runs": 352,
+      "wall_hours_per_platform": 560,
+      "compute": "CPU-only (cuda=OFF, mpi=OFF)"
+    },
+    "budget_arithmetic_check": "148x2=296; 28x2=56; 296+56=352 == contract max_runs == HG-B max_runs PASS",
+    "hg_b_contract_grid_equality": "PASS (all four variants n/n_min/quota + 296/56/352/560h equal between HG-B approved_parameters and F2 frozen bytes)",
+    "verdict": "FEASIBILITY_CONFIRMED_FROM_FROZEN_BYTES"
+  },
+  "seed_identity_replay": {
+    "scope": "full independent regeneration of every fresh/bootstrap/pool identity from the frozen anchor + collision-rule replay + 85 mechanical checks",
+    "checks_total": 85,
+    "checks_failed": [],
+    "verdict": "PASS",
+    "counts": {
+      "fresh_seed_identities": 148,
+      "per_variant": {
+        "0b": 64,
+        "32b": 64,
+        "11b": 10,
+        "53b": 10
+      },
+      "bootstrap_seeds": 4,
+      "replacement_pool_identities": 28,
+      "per_variant_pool": {
+        "0b": 12,
+        "32b": 12,
+        "11b": 2,
+        "53b": 2
+      },
+      "skipped_collision_identities": {
+        "0b": 10,
+        "32b": 11,
+        "11b": 10,
+        "53b": 10
+      },
+      "total_distinct_identities": 180,
+      "runs": {
+        "confirmatory": 296,
+        "replacement_cap": 56,
+        "max_runs": 352,
+        "wall_hours_per_platform": 560,
+        "compute": "CPU-only"
+      }
+    },
+    "bootstrap_observation": "the 4 bootstrap statistics seeds regenerate exactly; their decimal literals occur in historical PRE_DATA/PRE_DATA_R2 seed-record evidence inside the pinned tree (substring + exact-literal hits). The collision-scan rule covers run identities (confirmatory+pools) only; the validator requires bootstrap regeneration, not tree-cleanliness. No overlap with any of the 176 run identities (all CLEAN).",
+    "script_location_note": "verification script run from /tmp (outside the repo); scripts/** is read-only in this WO, so the script is not committed; the full 85-check log is embedded below",
+    "checks_log": [
+      {
+        "id": "manifest_digest_self",
+        "ok": true,
+        "detail": "canonical recompute 6966b216309f... == internal manifest_sha256"
+      },
+      {
+        "id": "manifest_binding_file_bytes",
+        "ok": true,
+        "detail": "file-bytes sha256 77ef5b6a6acb... == contract collision_scan_manifest.sha256"
+      },
+      {
+        "id": "manifest_pin",
+        "ok": true,
+        "detail": "pinned scan tree a9d7d07fa264e9907b67ca244b00ba2da3430b0f"
+      },
+      {
+        "id": "manifest_allowlist_sorted_equal",
+        "ok": true,
+        "detail": "manifest/contract/record allowlists agree (order-exact for contract+record)"
+      },
+      {
+        "id": "manifest_accepted_clean",
+        "ok": true,
+        "detail": "every accepted confirmatory+pool identity CLEAN outside allowlist in recorded scan"
+      },
+      {
+        "id": "manifest_skips_proven",
+        "ok": true,
+        "detail": "all 41 recorded skips backed by >=1 non-allowlisted pinned-tree hit"
+      },
+      {
+        "id": "corpus_built",
+        "ok": true,
+        "detail": "2102 text blobs scanned from pinned tree (0 binary skipped, 2 allowlisted excluded)"
+      },
+      {
+        "id": "replay_seeds[0b]",
+        "ok": true,
+        "detail": "64 identities regenerated + collision-rule verified"
+      },
+      {
+        "id": "replay_skips[0b]",
+        "ok": true,
+        "detail": "10 skips regenerated identically"
+      },
+      {
+        "id": "indices_consumed[0b]",
+        "ok": true,
+        "detail": "74 == accepted 64 + skipped 10"
+      },
+      {
+        "id": "next_candidate_index[0b]",
+        "ok": true,
+        "detail": "cursor 75"
+      },
+      {
+        "id": "bootstrap_seed[0b]",
+        "ok": true,
+        "detail": "323707441 regenerated"
+      },
+      {
+        "id": "bootstrap_regenerated_and_classified[0b]",
+        "ok": true,
+        "detail": "hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json']; exact-literal hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json'] (validator requires regeneration only; no tree-cleanliness gate for bootstrap)"
+      },
+      {
+        "id": "replay_seeds[32b]",
+        "ok": true,
+        "detail": "64 identities regenerated + collision-rule verified"
+      },
+      {
+        "id": "replay_skips[32b]",
+        "ok": true,
+        "detail": "11 skips regenerated identically"
+      },
+      {
+        "id": "indices_consumed[32b]",
+        "ok": true,
+        "detail": "75 == accepted 64 + skipped 11"
+      },
+      {
+        "id": "next_candidate_index[32b]",
+        "ok": true,
+        "detail": "cursor 76"
+      },
+      {
+        "id": "bootstrap_seed[32b]",
+        "ok": true,
+        "detail": "1702258603 regenerated"
+      },
+      {
+        "id": "bootstrap_regenerated_and_classified[32b]",
+        "ok": true,
+        "detail": "hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json']; exact-literal hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json'] (validator requires regeneration only; no tree-cleanliness gate for bootstrap)"
+      },
+      {
+        "id": "replay_seeds[11b]",
+        "ok": true,
+        "detail": "10 identities regenerated + collision-rule verified"
+      },
+      {
+        "id": "replay_skips[11b]",
+        "ok": true,
+        "detail": "10 skips regenerated identically"
+      },
+      {
+        "id": "indices_consumed[11b]",
+        "ok": true,
+        "detail": "20 == accepted 10 + skipped 10"
+      },
+      {
+        "id": "next_candidate_index[11b]",
+        "ok": true,
+        "detail": "cursor 21"
+      },
+      {
+        "id": "bootstrap_seed[11b]",
+        "ok": true,
+        "detail": "404063983 regenerated"
+      },
+      {
+        "id": "bootstrap_regenerated_and_classified[11b]",
+        "ok": true,
+        "detail": "hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json']; exact-literal hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json'] (validator requires regeneration only; no tree-cleanliness gate for bootstrap)"
+      },
+      {
+        "id": "replay_seeds[53b]",
+        "ok": true,
+        "detail": "10 identities regenerated + collision-rule verified"
+      },
+      {
+        "id": "replay_skips[53b]",
+        "ok": true,
+        "detail": "10 skips regenerated identically"
+      },
+      {
+        "id": "indices_consumed[53b]",
+        "ok": true,
+        "detail": "20 == accepted 10 + skipped 10"
+      },
+      {
+        "id": "next_candidate_index[53b]",
+        "ok": true,
+        "detail": "cursor 21"
+      },
+      {
+        "id": "bootstrap_seed[53b]",
+        "ok": true,
+        "detail": "627625019 regenerated"
+      },
+      {
+        "id": "bootstrap_regenerated_and_classified[53b]",
+        "ok": true,
+        "detail": "hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json']; exact-literal hits=['docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA.json', 'docs/work/executions/EX-NL5-ACCEPTANCE-POLICY-R2/evidence/repro-v0-2-seed-record-PRE_DATA_R2.json'] (validator requires regeneration only; no tree-cleanliness gate for bootstrap)"
+      },
+      {
+        "id": "pool_start_is_cursor[0b]",
+        "ok": true,
+        "detail": "start 75"
+      },
+      {
+        "id": "replay_pool[0b]",
+        "ok": true,
+        "detail": "12 pool identities regenerated from cursor 75"
+      },
+      {
+        "id": "pool_indices[0b]",
+        "ok": true,
+        "detail": "next 87, skipped 0"
+      },
+      {
+        "id": "pool_clean[0b]",
+        "ok": true,
+        "detail": "pool identities CLEAN outside allowlist (independent rescan)"
+      },
+      {
+        "id": "pool_start_is_cursor[32b]",
+        "ok": true,
+        "detail": "start 76"
+      },
+      {
+        "id": "replay_pool[32b]",
+        "ok": true,
+        "detail": "12 pool identities regenerated from cursor 76"
+      },
+      {
+        "id": "pool_indices[32b]",
+        "ok": true,
+        "detail": "next 88, skipped 0"
+      },
+      {
+        "id": "pool_clean[32b]",
+        "ok": true,
+        "detail": "pool identities CLEAN outside allowlist (independent rescan)"
+      },
+      {
+        "id": "pool_start_is_cursor[11b]",
+        "ok": true,
+        "detail": "start 21"
+      },
+      {
+        "id": "replay_pool[11b]",
+        "ok": true,
+        "detail": "2 pool identities regenerated from cursor 21"
+      },
+      {
+        "id": "pool_indices[11b]",
+        "ok": true,
+        "detail": "next 23, skipped 0"
+      },
+      {
+        "id": "pool_clean[11b]",
+        "ok": true,
+        "detail": "pool identities CLEAN outside allowlist (independent rescan)"
+      },
+      {
+        "id": "pool_start_is_cursor[53b]",
+        "ok": true,
+        "detail": "start 21"
+      },
+      {
+        "id": "replay_pool[53b]",
+        "ok": true,
+        "detail": "2 pool identities regenerated from cursor 21"
+      },
+      {
+        "id": "pool_indices[53b]",
+        "ok": true,
+        "detail": "next 23, skipped 0"
+      },
+      {
+        "id": "pool_clean[53b]",
+        "ok": true,
+        "detail": "pool identities CLEAN outside allowlist (independent rescan)"
+      },
+      {
+        "id": "rescan_confirmatory_clean",
+        "ok": true,
+        "detail": "all 148 recorded confirmatory identities CLEAN outside allowlist (independent corpus rescan)"
+      },
+      {
+        "id": "rescan_pool_clean",
+        "ok": true,
+        "detail": "all 28 pool identities CLEAN outside allowlist"
+      },
+      {
+        "id": "rescan_skips_backed",
+        "ok": true,
+        "detail": "all 41 recorded skips have >=1 non-allowlisted pinned-tree hit"
+      },
+      {
+        "id": "fresh_seed_total",
+        "ok": true,
+        "detail": "counted 148 = {'0b': 64, '32b': 64, '11b': 10, '53b': 10}"
+      },
+      {
+        "id": "bootstrap_total",
+        "ok": true,
+        "detail": "counted 4"
+      },
+      {
+        "id": "pool_total",
+        "ok": true,
+        "detail": "counted 28 = quotas {'0b': 12, '32b': 12, '11b': 2, '53b': 2}"
+      },
+      {
+        "id": "global_uniqueness",
+        "ok": true,
+        "detail": "180 distinct of 180 identities"
+      },
+      {
+        "id": "no_historical_exclusion_reuse",
+        "ok": true,
+        "detail": "0 overlap with 34 historical exclusions"
+      },
+      {
+        "id": "confirmatory_runs",
+        "ok": true,
+        "detail": "148 fresh identities x 2 runs/pair = 296"
+      },
+      {
+        "id": "replacement_cap",
+        "ok": true,
+        "detail": "28 pool identities x 2 runs/pair = 56"
+      },
+      {
+        "id": "max_runs",
+        "ok": true,
+        "detail": "296+56 = 352"
+      },
+      {
+        "id": "wall_hours",
+        "ok": true,
+        "detail": "560h/platform in contract and HG-B"
+      },
+      {
+        "id": "cpu_only",
+        "ok": true,
+        "detail": "cuda=OFF, mpi=OFF (CPU-only)"
+      },
+      {
+        "id": "n_min_rule[0b]",
+        "ok": true,
+        "detail": "ceil(0.8*64)=52"
+      },
+      {
+        "id": "quota_rule[0b]",
+        "ok": true,
+        "detail": "floor(0.2*64)=12"
+      },
+      {
+        "id": "hgb_grid[0b]",
+        "ok": true,
+        "detail": "HG-B n=64 n_min=52 == F2 contract"
+      },
+      {
+        "id": "role[0b]",
+        "ok": true,
+        "detail": "primary"
+      },
+      {
+        "id": "n_min_rule[32b]",
+        "ok": true,
+        "detail": "ceil(0.8*64)=52"
+      },
+      {
+        "id": "quota_rule[32b]",
+        "ok": true,
+        "detail": "floor(0.2*64)=12"
+      },
+      {
+        "id": "hgb_grid[32b]",
+        "ok": true,
+        "detail": "HG-B n=64 n_min=52 == F2 contract"
+      },
+      {
+        "id": "role[32b]",
+        "ok": true,
+        "detail": "primary"
+      },
+      {
+        "id": "n_min_rule[11b]",
+        "ok": true,
+        "detail": "ceil(0.8*10)=8"
+      },
+      {
+        "id": "quota_rule[11b]",
+        "ok": true,
+        "detail": "floor(0.2*10)=2"
+      },
+      {
+        "id": "hgb_grid[11b]",
+        "ok": true,
+        "detail": "HG-B n=10 n_min=8 == F2 contract"
+      },
+      {
+        "id": "role[11b]",
+        "ok": true,
+        "detail": "control"
+      },
+      {
+        "id": "n_min_rule[53b]",
+        "ok": true,
+        "detail": "ceil(0.8*10)=8"
+      },
+      {
+        "id": "quota_rule[53b]",
+        "ok": true,
+        "detail": "floor(0.2*10)=2"
+      },
+      {
+        "id": "hgb_grid[53b]",
+        "ok": true,
+        "detail": "HG-B n=10 n_min=8 == F2 contract"
+      },
+      {
+        "id": "role[53b]",
+        "ok": true,
+        "detail": "control"
+      },
+      {
+        "id": "hgb_decision",
+        "ok": true,
+        "detail": "HG-B APPROVED"
+      },
+      {
+        "id": "hgb_confirmatory",
+        "ok": true,
+        "detail": "HG-B 296"
+      },
+      {
+        "id": "hgb_max_runs",
+        "ok": true,
+        "detail": "HG-B 352"
+      },
+      {
+        "id": "hgb_seed_rule",
+        "ok": true,
+        "detail": "HG-B cursor policy == record cursors 75/76/21/21"
+      },
+      {
+        "id": "selected_n_grid",
+        "ok": true,
+        "detail": "grid [40, 48, 64, 80, 96, 128], selected 64, headroom 0.8"
+      },
+      {
+        "id": "contract_seeds_match_record",
+        "ok": true,
+        "detail": "contract confirmatory_seeds == record seeds"
+      },
+      {
+        "id": "contract_pools_match_record",
+        "ok": true,
+        "detail": "contract pools == record pools"
+      },
+      {
+        "id": "contract_seed_cursors",
+        "ok": true,
+        "detail": "cursors identical"
+      },
+      {
+        "id": "exclusion_list_size",
+        "ok": true,
+        "detail": "34 exclusions"
+      }
+    ]
+  },
+  "validator_offline_run": {
+    "command": "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-freeze-contract-FROZEN_R2.json --protocol docs/research/NANOLAB_REPRO_V0_2_FROZEN_R2.md --record docs/work/executions/EX-NL5-V02-DIRECTOR-FREEZE-R2/evidence/repro-v0-2-seed-record-FROZEN_R2.json --repo-root .",
+    "input_bytes": "worktree checkout, byte-identical to F2 blobs (sha256 verified 3/3 before the run); scan rerun enabled (pinned tree a9d7d07 available in the repo object store)",
+    "exit_code": 0,
+    "report": {
+      "kind": "r4_freeze_contract_gate",
+      "contract_revision": "r4",
+      "gate": "PASS",
+      "failures": [],
+      "validation_stage": "PREFREEZE_VALIDATION_PASS",
+      "freeze_status": "FROZEN",
+      "dispatch_ready": false,
+      "dispatch": "DISPATCH_BLOCKED",
+      "dispatch_blockers": [
+        "no validated nanolab_v02_dispatch_authority object was supplied (Director FREEZE record + HG-B APPROVED + review PASS + verify VERIFIED + R2 ACTIVE with both executor legs authorized)"
+      ],
+      "integer_rounding_policy": "ceil-nmin-floor-replacement-pairs-v1",
+      "budget": {
+        "confirmatory_runs": 296,
+        "replacement_runs_cap": 56,
+        "max_runs": 352,
+        "wall_hours_per_platform": 560
+      },
+      "frozen_declared": true
+    },
+    "verdict": "PASS / PREFREEZE_VALIDATION_PASS / FROZEN / DISPATCH_BLOCKED (dispatch_ready=false exactly because no validated nanolab_v02_dispatch_authority exists - correct fail-closed state)"
+  },
+  "adversarial_fail_closed_preflight": {
+    "method": "negative tests only, on temporary copies under /tmp/f05_adv OUTSIDE the repository; nothing committed; no authority A schema v3 was created; fixture authorities carry the SYNTHETIC TEST FIXTURE ONLY marker and are second-class by design",
+    "tests": [
+      {
+        "id": "ADV-1",
+        "target": "tampered contract copy (variants.0b.n 64->63)",
+        "command_shape": "gate --contract /tmp/f05_adv/contract_tampered.json ...",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "observed_failures_head": [
+          "variants.0b.n must be 64",
+          "confirmatory_seeds.0b: length 64 != N 63",
+          "run_budget.confirmatory_runs 296 != policy derivation 294",
+          "run_budget.max_runs 352 != policy derivation 350",
+          "protocol N for 0b = 64 != contract 63",
+          "protocol machine block n_0b = '64' != contract '63' (contradicting authoritative declarations are fail-closed)"
+        ],
+        "verdict": "REJECTED (scientific drift caught: N, seeds length, budget derivation, protocol cross-check)"
+      },
+      {
+        "id": "ADV-2",
+        "target": "tampered seed record copy (one seed literal +1)",
+        "command_shape": "gate --record /tmp/f05_adv/seed_tampered.json ...",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "observed_failures_head": [
+          "seed record confirmatory arrays != contract confirmatory_seeds (drift)",
+          "seed record logical digest stale (record_sha256 mismatch)",
+          "seed record logical digest != contract seed_record_logical_sha256",
+          "integrity: seed record record_r4_sha256 51a8819236bd780b6034e83e3b89f4594ac176df3397a9c6b47806e09651fe91 != recomputed 04c3dbabdda488ab1c98ee81c4a89336907a03f9393e7c8b86f26d0ae4dc0e68 (stale full-record digest, M-2)"
+        ],
+        "verdict": "REJECTED (record<->contract drift + logical digest stale)"
+      },
+      {
+        "id": "ADV-3",
+        "target": "tampered protocol copy (non-machine prose line 'N = 64' -> 'N = 65' at line 263)",
+        "command_shape": "gate --protocol /tmp/f05_adv/protocol_tampered.md ...",
+        "expected": "reject",
+        "exit_code": 0,
+        "gate": "PASS",
+        "observed": "gate PASSED: the edited line is NOT the machine-bound cardinality declaration (CARDINALITY_RE binds the exact '0b = .., 32b = .., 11b = .., 53b = ..' line and the machine-contract-v1 block, which stayed pristine)",
+        "verdict": "NOT_REJECTED_AT_GATE_SCOPE -> recorded as finding F05-F-1 (see gate_scope_findings); compensated at authority stage"
+      },
+      {
+        "id": "ADV-4",
+        "target": "empty authority object {}",
+        "command_shape": "plan --authority auth_empty.json",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority rejected: dispatch_authority: missing keys ['schema_version', 'kind', 'authority_revision', 'fixture', 'fixture_note', 'frozen', 'subject_head', 'subject_tree', 'contract_sha256', 'seed_record_sha256', 'frozen_subject_binding', 'freeze_recor",
+        "verdict": "REJECTED (all 20 required top-level keys enforced)"
+      },
+      {
+        "id": "ADV-5",
+        "target": "authority with r2_record removed (R2-not-active case)",
+        "command_shape": "plan --authority auth_neg1_no_r2.json",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority rejected: dispatch_authority: missing keys ['r2_record']",
+        "verdict": "REJECTED (incomplete authority: R2 activation record is mandatory)"
+      },
+      {
+        "id": "ADV-6",
+        "target": "authority with schema_version=2 (obsolete schema)",
+        "command_shape": "plan --authority auth_neg2_schema2.json",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority rejected: dispatch_authority.schema_version 2 != 3; dispatch_authority: fixture authorities are not valid for real dispatch (allow_fixture=True is required even for synthetic use); freeze_record: missing keys ['path', 'canonical_sha256', 'gi",
+        "verdict": "REJECTED (schema evolution fail-closed: v1/v2 rejected; fixture without allow_fixture also rejected)"
+      },
+      {
+        "id": "ADV-7",
+        "target": "authority with hg_b_record removed",
+        "command_shape": "plan --authority auth_neg3_no_hgb.json",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority rejected: dispatch_authority: missing keys ['hg_b_record']",
+        "verdict": "REJECTED (HG-B owner approval is a mandatory machine precondition)"
+      },
+      {
+        "id": "ADV-8",
+        "target": "nonexistent authority file",
+        "command_shape": "plan --authority auth_nonexistent.json",
+        "expected": "reject",
+        "exit_code": 3,
+        "gate": "FREEZE_GATE_FAIL",
+        "error": "dispatch authority read error auth_nonexistent.json: [Errno 2] No such file or directory: 'auth_nonexistent.json'",
+        "verdict": "REJECTED (read error mapped to ContractError; OSError path also fails closed)"
+      }
+    ],
+    "authority_stage_protocol_binding": "scripts/nl5/repro_v02_freeze_contract.py lines ~1933-1945: at dispatch authority validation the protocol bytes are sha256-bound to frozen_subject_binding.protocol.canonical_sha256 (== F2 blob 2658ee3e...), so ANY protocol byte drift (including ADV-3-class prose) is rejected before a plan can be built; verified by code inspection this session (validator executed read-only, not modified)"
+  },
+  "gate_scope_findings": [
+    {
+      "id": "F05-F-1",
+      "severity": "LOW",
+      "class": "gate_scope_limitation_compensated",
+      "text": "The offline `gate` machine-binds the authoritative protocol declarations (cardinality line, machine-contract-v1 block, scan-allowlist-v1 block) but does not bind arbitrary protocol prose; a one-character prose edit outside machine blocks passed the gate (ADV-3, exit 0). Compensation chain: (a) F2 is an immutable Git commit - the canonical protocol blob is pinned by HEAD/TREE in D2 and by future authority A frozen_subject_binding; (b) the dispatch `plan` stage rejects any protocol byte drift against the authority-embedded canonical_sha256 (validator code ~L1933-1945); (c) fresh Reviewer/Verifier pinned exact F2. No action required for C0; authority A must include the protocol binding (schema v3 already requires it)."
+    },
+    {
+      "id": "F05-F-2",
+      "severity": "INFO",
+      "class": "documentation_accuracy",
+      "text": "WO-NL5-V02-DIRECTOR-FREEZE-R2 states the allowlist paths 'exist in the pinned historical scan tree a9d7d07'; the candidate doc does, but docs/work/executions/EX-NL5-V02-PREFREEZE-HARDENING-R4/evidence/repro-v0-2-seed-record-PRE_DATA_R4.json does NOT exist in that tree (git show exit 128). Mechanically inert: the pinned scan classifies hits by exact-path exclusion and does not require allowlist files to exist in the scanned tree; ordered-exact binding protocol<->contract is intact and the scan rerun is PASS. Recorded for documentation accuracy only; no change to frozen bytes is permitted or needed."
+    },
+    {
+      "id": "F05-F-3",
+      "severity": "INFO",
+      "class": "bootstrap_seed_observation",
+      "text": "The 4 bootstrap statistics seeds regenerate exactly but occur as literals in historical PRE_DATA/PRE_DATA_R2 seed records inside the pinned tree; the collision rule covers run identities only (confirmatory+pools, all CLEAN). No gate violation; recorded for completeness."
+    }
+  ],
+  "budget_ledger_ref": "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/budget-ledger-R1.json",
+  "state_ceiling": {
+    "SCIENTIFIC_RUNS": 0,
+    "NL5": "IN_PROGRESS",
+    "NL6_001": "LOCKED",
+    "AUTHOR_U1": "NOT_ASSIGNED",
+    "R2": "WAITING_HOST / NOT_ACTIVE",
+    "R2_ACTIVE": false,
+    "machine_launch_authorized": false,
+    "launch_gate": "HUMAN_PROTECTED_WRITER",
+    "authority_A_created_in_this_wo": false
+  },
+  "pre_launch_gate": {
+    "principle": "NO_RUN until every item below is satisfied; Human approval to CREATE a launch plan is NOT permission to EXECUTE 296 runs (Issue #86)",
+    "items": [
+      {
+        "order": 1,
+        "id": "GATE-F04-R2-ACTIVE",
+        "condition": "F04 completes R2 activation: U1 host assigned (AUTHOR_U1 != NOT_ASSIGNED), fingerprint frozen, gates U1-U5 + NC-U1..U5 green, independent review + verify of the activation, recorded R2_ACTIVATION_RECORD",
+        "status": "OPEN (F04 #85 not started; no U1 host)"
+      },
+      {
+        "order": 2,
+        "id": "GATE-AUTHORITY-A",
+        "condition": "fresh nanolab_v02_dispatch_authority schema v3 created in a SEPARATE follow-up WO (not this one): subject_head/tree pin exact F2, frozen_subject_binding binds contract/protocol/seed blobs of F2, records bind freeze D2 + HG-B blob b68dd341... + Reviewer(F2) PASS + Verifier(F2) VERIFIED (by exact tip SHA or integrated commits) + R2 record, both executor legs authorized",
+        "status": "OPEN (deliberately NOT created in F05-prep)"
+      },
+      {
+        "order": 3,
+        "id": "GATE-HG-A-LAUNCH-APPROVAL",
+        "condition": "distinct explicit owner (HUMAN_GATE_OWNER / protected writer) scientific launch approval for THIS campaign - separate from any approval to write the plan",
+        "status": "OPEN"
+      },
+      {
+        "order": 4,
+        "id": "GATE-BUDGET-AUTHORIZATION",
+        "condition": "owner budget authorization referencing budget-ledger-R1 (352 runs ceiling, 560h/platform, CPU-only, storage provisioning >= 64 GB total, pricing decisions if any non-owner compute is proposed)",
+        "status": "OPEN"
+      },
+      {
+        "order": 5,
+        "id": "GATE-RV-INTEGRATION-OR-PIN",
+        "condition": "Reviewer(F2)/Verifier(F2) records either integrated into main or bound by exact tip SHA (d63eb5c / f12d0b4) inside authority A (F01-F-1)",
+        "status": "OPEN"
+      }
+    ],
+    "machine_ceiling": "even with items 1-5 satisfied, the validator caps its own conclusion at DISPATCH_PRECONDITIONS_RECORDED; DISPATCH_AUTHORIZED exists only via the external Human/Protected-Writer gate"
+  },
+  "next_work_order": {
+    "action": "create authority A (nanolab_v02_dispatch_authority schema v3) as a separate Work Order AFTER F04 R2 ACTIVE + Human launch approval; protected writer provenance required",
+    "explicitly_out_of_scope_here": true
+  },
+  "issue_vs_repo_discrepancies": [
+    "Issue #86 says 'unique 148 frozen seed identities + replacements' - confirmed: 148 fresh identities (identity count), 296 = 148x2 is the RUN count; no discrepancy, terminology clarified.",
+    "Issue #86 wording 'D2 freeze record, independently confirmed Reviewer(F2) PASS + Verifier(F2) VERIFIED, N-grid feasibility PASS' - all reconfirmed from primary Git bytes this session; the R/V records live on unmerged branches (see F01-F-1).",
+    "No numeric discrepancies found between Issue #86, HG-B record, D2 record and F2 frozen bytes; documentation-level findings are F05-F-1..F05-F-3 above."
+  ],
+  "honest_result_class": "READY_WITH_OPEN_GATES",
+  "readiness_statement": "All offline freeze preconditions reconfirmed from primary Git bytes; offline validator PASS; adversarial fail-closed behavior demonstrated (7/8 rejections + 1 documented gate-scope limitation compensated at authority stage). DISPATCH of real science remains BLOCKED by design: R2 ACTIVE=false, AUTHOR_U1=NOT_ASSIGNED, no authority A (next WO), no owner launch approval. No BLOCKED/INCONCLUSIVE result exists for the C0-prep scope itself.",
+  "recorded_at_utc": "2026-10-25T17:40:00Z"
+}
