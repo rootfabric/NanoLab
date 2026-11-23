@@ -3,18 +3,25 @@
   "id": "INTEGRATION-R1",
   "title": "Один пакет C0 и актуальная очередь",
   "track": "CONTROL",
-  "status": "READY",
-  "actor": "DIRECTOR",
+  "status": "WAITING_HUMAN",
+  "actor": "HUMAN",
   "priority": 25,
   "depends_on": [],
-  "blockers": [],
-  "resume_condition": "",
-  "next_action": "Подготовить одну интеграцию совместимых C0 материалов F01/F02/F03/F05; проверить зависимости и действующее разрешение. Не требовать нового Verifier только из-за отчётного SHA.",
+  "blockers": [
+    "NL5_C0_INTEGRATION_MERGE_PENDING"
+  ],
+  "resume_condition": "Владелец принял merge-решение по PR #98 (один Human Gate на 7 exact subjects); после merge — fresh drive/operations и перевод карточки в DONE следующим C0 package.",
+  "next_action": "Merge-решение по https://github.com/rootfabric/NanoLab/pull/98 (ветка integration/nl5-c0-r1, base main ddf8a25): F01 c7c5be6 + F02 9b24f93 + F03 1831585 + F05 4c9d8fd + batch review 906d55d + batch verify 9be1964 + integration map 8585c06 собраны в один candidate; 58 путей blob-идентичны subjects, 0 удалений/изменений; WORK_QUEUE.md сохранён в форме FLOW-R1. Локальные gates G1–G4 PASS, unittest differential = fresh main (0 новых failures); авторитетный gate — hosted CI на PR. Научная приёмка, AUTHOR_U1, R2 и authority A не меняются.",
   "evidence_refs": [
     "docs/control/FLOW_THROUGHPUT_R1.md",
-    "https://github.com/rootfabric/NanoLab/issues/81"
+    "docs/control/NL5_C0_INTEGRATION_MAP_R1.md",
+    "docs/control/NL5_C0_INTEGRATION_RECORD_R1.md",
+    "docs/work/WO-INTEGRATION-NL5-C0-R1.md",
+    "docs/work/executions/EX-INTEGRATION-NL5-C0-R1/summary.md",
+    "https://github.com/rootfabric/NanoLab/issues/81",
+    "https://github.com/rootfabric/NanoLab/pull/98"
   ],
-  "updated_at_utc": "2026-10-28T03:20:00Z",
+  "updated_at_utc": "2026-11-23T14:37:00Z",
   "claim_class": "C0_SOFTWARE_ONLY",
   "scientific_runs_allowed": false
 }
