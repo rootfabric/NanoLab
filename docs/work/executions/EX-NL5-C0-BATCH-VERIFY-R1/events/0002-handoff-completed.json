@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-handoff-completed",
+  "timestamp_utc": "2026-10-25T18:24:20Z",
+  "execution_id": "EX-NL5-C0-BATCH-VERIFY-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-VERIFY-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "VERIFIER",
+  "actor_id": "nl5-c0-batch-verify-r1",
+  "subject_sha": "8dfe8c5b7cdf4dc731a1825c59833369680d99c0",
+  "subject_sha_note": "branch HEAD at verification time (Director identity-binding commit 8dfe8c5b); the verdict-publication commit itself is the subject of the NEXT Director action",
+  "summary": "HANDOFF_COMPLETED for WO-NL5-C0-BATCH-VERIFY-R1 (documentary exact-head batch verification to Director; no scientific acceptance declared - self-accept forbidden; SCIENTIFIC_RUNS = 0). BATCH VERDICT = VERIFIED: F02 VERIFIED (origin/work/nl5-f02-u1-host-r1 @ c38ad687d87bfa0c33d69bfee4fe40020d34ba45 / tree 8dbfeb02311d659c1a961434d3eb0a55502de569), F03 VERIFIED (origin/work/nl5-f03-u2-readiness-r1 @ 1831585fa70169c4e473acfe38e9603e45cfe22c / tree 8a89d2a446e4f05fcec7a6daade6572ff5a75212), F05-prep VERIFIED (origin/work/nl5-f05-dispatch-prep-r1 @ 4c9d8fd30300a2f48504d1b914693f0a66bb3555 / tree 17e2a7141295c9f6e5bf6fc302bc8d977b210a4d). Fresh fetch confirmed origin/main = BASE 3b567ae33f247b182b2ae451d2cc4598a9e76019 unmoved and no subject moved after REVIEWER PASS (906d55d). Evidence, all recomputed independently on fresh git-archive trees without git history: (1) work_cli validate ok:true errors:[] x3 (statuses BLOCKED_OWNER_U1 / HANDOFF_READY / HANDOFF_READY; passport_sha256 3/3 re-hashed MATCH). (2) Scope 3/3: only allowed paths (WO file + WORK_QUEUE + own EX dir); WORK_QUEUE numstat F02 1/0, F03 2/0, F05 1/0, 0 deletions anywhere. (3) Frozen integrity: F2 = 60da9a846511265a8ac7564da088c3d74cb073f0 / tree e565c8a6cee9e829fac14008ebc9c2ea1609931d; diff of frozen protocol/contract/seed paths F2..each subject and F2..origin/main EMPTY; canonical SHA-256 9/9 == DIRECTOR_FREEZE_R2.json (2658ee3e / 7e647654 / 8e844bff), blob SHA-1 9/9 MATCH (48357196 / d6a9ccde / 0164e0e3). (4) SHA-256 control: CHECKOUT_SHA256 baselines recorded for the 9 key evidence files (U1_HOST_ELIGIBILITY_R1.{json,md}, U2_READINESS_R1.{json,md}, U2_LIVE_HOST_OBSERVATION_R1.{json,md}, DISPATCH_READINESS_R1.{json,md}, budget-ledger-R1.json), each 9/9 equal to the SHA-256 of its exact Git object; no external self-SHA claims exist for these files in subjects or review (verified by grep), so they are first baselines; all EXISTING claims verified: HG_B blob 61d14912/canonical b68dd341, engine binary 6effd00a/3380728 (read-only host check), passport digests. (5) Claims recomputed: F2 changes 8 files, 8/8 blob-SAME vs main; seed recount 148+4+28(12/12/2/2)=180 distinct unique, skips 41; budget 296=148x2, 56=28x2, 352 max, 176/platform, wall 560h == HG_B approved_parameters (decision APPROVED); checks_log 85/85 ok; F05-F-1 compensation code exists at repro_v02_freeze_contract.py L1900. (6) Review-verdict consistency: BATCH_REVIEWER_VERDICT_NL5_C0_R1.{md,json} claims all reproduced; findings list complete and each confirmed first-hand (F02-NF-1 dispatch-proof 'ACCEPTED (documentary)' wording; F03-NF-1 39e9aec edited events 0001/0002 changing ONLY actor_role; F03-NF-2 8-not-9 files; F03-NF-3 +1 entry +1 separator; F03-NF-4 legacy actor_id nl5-f03-u2-preflight-r1; F05-NF-1 all events in single commit 4c9d8fd). Discrepancies vs review verdict: NONE. (7) NEGATIVE CONTROL PASSED: 1-byte tamper (scientific_runs 0->1, offset 352) in /tmp copy of F05 DISPATCH_READINESS_R1.json changed sha256 3c799cb8... -> 764b722a...; mismatch vs expected detected - method sensitivity proven (tamper only on /tmp copy; no subject/repo bytes modified). Ceilings preserved: machine_launch_authorized=false; AUTHOR_U1=NOT_ASSIGNED; R2=WAITING_HOST/NOT_ACTIVE; VERIFIED != scientific accept != R2 activation; merge to main = Human Gate; any new subject commit invalidates this verdict for the new HEAD.",
+  "command_refs": [
+    "PYTHONPATH=/tmp/verify-<wo>/scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F0{2,3,5}-* -> ok:true x3",
+    "git diff --name-only 3b567ae..<subject> x3 -> allowed paths only; git diff --numstat .. -- docs/work/WORK_QUEUE.md -> 1/0, 2/0, 1/0",
+    "git diff --name-only 60da9a8..<subject> -- <frozen paths> -> empty x3 (+ vs origin/main)",
+    "git show <subject>:<frozen path> | sha256sum; git rev-parse <subject>:<frozen path> -> 9/9 canonical + 9/9 blob match vs DIRECTOR_FREEZE_R2.json",
+    "sha256sum of 9 key evidence files in /tmp/verify-* trees; git show <subject>:<file> | sha256sum -> 9/9 checkout==git-object",
+    "python3 seed recount / budget arithmetic / checks_log count from frozen + F05 evidence JSONs",
+    "tamper test: cp + 1-byte replace in /tmp/nc_f05_DISPATCH_READINESS_R1.json; sha256sum before/after -> 3c799cb8... vs 764b722a... -> DETECTED"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/evidence/VERIFIER_VERDICT_NL5_C0_R1.md",
+    "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/evidence/VERIFIER_VERDICT_NL5_C0_R1.json",
+    "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/summary.md",
+    "docs/work/WORK_QUEUE.md (single append-only line)"
+  ],
+  "next_action": "Director: принять вердикт VERIFIED по batch F02+F03+F05-prep после REVIEWER PASS; следующий шаг программы - Human Gate по merge этих веток в main (merge остаётся за Human Gate); F04 остаётся заблокированным до реального выделения U1 (owner actions A1-A6); U2 storage L-03 (96% used) требует remediation или owner accept-risk до F07.",
+  "blocker": null
+}

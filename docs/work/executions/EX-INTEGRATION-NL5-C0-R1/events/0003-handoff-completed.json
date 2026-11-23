@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "sequence": 3,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-23T14:37:51.674391Z",
+  "execution_id": "EX-INTEGRATION-NL5-C0-R1",
+  "work_order_id": "WO-INTEGRATION-NL5-C0-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "87b11b402f92fc50bcb9a0a0a1e8e95732893592",
+  "summary": "Handoff: один C0 integration candidate NL5-CLOSE-R1 готов — PR #98 (integration/nl5-c0-r1, base main ddf8a25), 7 exact subjects, 58 blob-identical paths, gates G1–G4 PASS, unittest differential = fresh main (0 новых failures). Merge = Human Gate владельца; научная приёмка/U1/R2/authority A не меняются; scientific runs=0.",
+  "evidence_refs": [
+    "docs/control/NL5_C0_INTEGRATION_RECORD_R1.md",
+    "docs/work/executions/EX-INTEGRATION-NL5-C0-R1/summary.md"
+  ],
+  "next_action": "Owner Human Gate: merge-решение по PR #98 (hosted CI на финальном HEAD — авторитетный gate); после merge — drive/operations на fresh main и INTEGRATION-R1 -> DONE."
+}

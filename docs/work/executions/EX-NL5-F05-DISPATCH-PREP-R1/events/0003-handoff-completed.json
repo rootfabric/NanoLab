@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "0003-handoff-completed",
+  "timestamp_utc": "2026-10-25T17:37:44Z",
+  "execution_id": "EX-NL5-F05-DISPATCH-PREP-R1",
+  "work_order_id": "WO-NL5-F05-DISPATCH-PREP-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f05-dispatch-implementer-r1",
+  "subject_sha": "cfaea0aad8eadf54076eac6879715250930c946e",
+  "summary": "HANDOFF_COMPLETED for WO-NL5-F05-DISPATCH-PREP-R1 (documentary C0 handoff to Director; no scientific acceptance declared - self-accept forbidden; NO authority A created; SCIENTIFIC_RUNS = 0). Verified subject = evidence commit cfaea0aad8eadf54076eac6879715250930c946e (HEAD at verification; the handoff commit itself is recorded here as subject of the NEXT Director action). Established facts, all recomputed first-hand from primary Git bytes: origin/main = BASE 3b567ae33f247b182b2ae451d2cc4598a9e76019 (no epoch change); HG-B owner record APPROVED (blob 61d14912/canonical b68dd341, MATCH vs D2 binding, source commit in main ancestry); F2 = 60da9a846511265a8ac7564da088c3d74cb073f0 / tree e565c8a6cee9e829fac14008ebc9c2ea1609931d ancestor of main with protocol/contract/seed blob identities 3/3 MATCH (48357196/2658ee3e, d6a9ccde/7e647654, 0164e0e3/8e844bff); D2 freeze record (commit a2f7304, in main) pins exact F2; Reviewer(F2) = PASS @ d63eb5c088133f92ebd20501835a159cc3e4b865 and Verifier(F2) = VERIFIED @ f12d0b497cb28a2f18476ded90b4b1bd079bb414, append-only, pin exact F2, NOT merged into main (F01-F-1 reconfirmed -> authority A must pin exact tips or records must be integrated first). Feasibility CONFIRMED_FROM_FROZEN_BYTES: 0b/32b primary N=64 (n_min 52), 11b/53b controls N=10 (n_min 8); frozen seed identities recounted by independent replay = 148 fresh (64/64/10/10; the 296 figure is RUNS = 148 pairs x 2 legs) + 4 bootstrap + 28 replacement-pool identities (12/12/2/2) = 180 distinct, 41 recorded collision skips reproduced bit-exact; 296 + <=56 <= 352 runs, <=560 h/platform, CPU-only (cuda=OFF/mpi=OFF); HG-B <-> F2 grid equality PASS. Offline validator rerun read-only on F2 bytes: exit 0 = PASS / PREFREEZE_VALIDATION_PASS / FROZEN / DISPATCH_BLOCKED (dispatch_ready=false exactly because no validated nanolab_v02_dispatch_authority exists). Adversarial fail-closed preflight on temporary copies OUTSIDE the repo: 7/8 negative cases rejected with exit 3 (tampered contract, tampered seed record, empty authority, authority missing r2_record, schema v2 authority, authority missing hg_b_record, missing authority file); 1 documented gate-scope limitation (protocol PROSE drift passes the gate alone) recorded as F05-F-1 LOW with compensation chain (F2 immutability + authority-stage protocol byte binding at validator ~L1933-1945 + exact-F2 R/V pins); findings F05-F-2/F05-F-3 INFO. Budget ledger published (immutable, revision-only): 352-run ceiling, 560h/platform, CPU-only, storage estimate from NL5-002 facts (mean ~106 MB/run, upper bound ~21 GB/platform, provision >=64 GB total), zero purchases, pricing NOT_PRICED, stop rules STOP-1..STOP-7. Pre-launch gate list (NO_RUN until all satisfied): (1) F04 R2 ACTIVE with U1-U5 + NC-U1..U5 gates, review+verify, AUTHOR_U1 assigned; (2) authority A schema v3 - SEPARATE follow-up WO after F04, protected writer provenance, binding D2 + HG-B blob + R/V exact tips + R2 record; (3) distinct explicit owner scientific launch approval (plan approval != run permission); (4) budget authorization referencing budget-ledger-R1; (5) R/V records integrated into main or pinned by exact tip SHA inside authority A. Machine ceiling stays DISPATCH_PRECONDITIONS_RECORDED; launch_gate = HUMAN_PROTECTED_WRITER; machine_launch_authorized = false; AUTHOR_U1 = NOT_ASSIGNED; R2 = WAITING_HOST/NOT_ACTIVE; SCIENTIFIC_RUNS = 0. Honest result class: READY_WITH_OPEN_GATES; no BLOCKED/INCONCLUSIVE within the C0-prep scope. Validation: work_cli validate ok (START -> CONTINUATION -> HANDOFF, summary present), check-consistency ok, workflow_lint 0 blocking, json.tool strict-parse OK for every new JSON.",
+  "command_refs": [
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1 -> ok:true, event_types [WORK_ORDER_STARTED, CONTINUATION_CHECKPOINT, HANDOFF_COMPLETED]",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> ok (final run recorded in evidence JSON)",
+    "PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0 (final run recorded in evidence JSON)",
+    "python3 -m json.tool <every new json> -> strict parse OK",
+    "git push origin work/nl5-f05-dispatch-prep-r1 (non-force)"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/DISPATCH_READINESS_R1.json",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/DISPATCH_READINESS_R1.md",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/evidence/budget-ledger-R1.json",
+    "docs/work/executions/EX-NL5-F05-DISPATCH-PREP-R1/summary.md",
+    "docs/work/WORK_QUEUE.md"
+  ],
+  "next_action": "Director: accept documentary handoff (no scientific acceptance; merge = Human Gate). The follow-up dispatch-authority WO (authority A schema v3) may be DRAFTED only after F04 R2 ACTIVE + distinct Human launch approval + budget authorization; until then machine_launch_authorized stays false and F06/F07 remain hard-blocked behind the Human/Protected-Writer launch gate.",
+  "blocker": null
+}

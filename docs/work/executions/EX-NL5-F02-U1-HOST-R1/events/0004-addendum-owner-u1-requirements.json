@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-addendum-owner-u1-requirements",
+  "timestamp_utc": "2026-10-26T03:17:29Z",
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "actor_id": "director-central",
+  "subject_sha": "c38ad687d87bfa0c33d69bfee4fe40020d34ba45",
+  "summary": "Director append-only addendum: owner published formal U1 minimum spec (x86-64 >=16 physical cores, >=32 GiB MemAvailable, >=100 GiB free, native Ubuntu LTS, physically separate from outenemy, SSH key-only). Allocation still NOT_ASSIGNED; verdict BLOCKED_OWNER_U1 unchanged; corrections-class post-terminal event per harness append-only rule.",
+  "command_refs": [
+    "owner mission directive 2026-10-25/26",
+    "Issue #83 (F02)",
+    "Issue #94 constraint: U1 request != outenemy-as-author"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/evidence/U1_OWNER_REQUIREMENTS_ADDENDUM_R1.md"
+  ],
+  "next_action": "owner allocates physical U1 -> Director dispatches F04 (R2 activation) in a fresh session",
+  "blocker": null
+}

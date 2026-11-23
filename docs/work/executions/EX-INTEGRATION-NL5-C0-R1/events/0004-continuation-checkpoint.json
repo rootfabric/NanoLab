@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0004-continuation-checkpoint",
+  "sequence": 4,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-23T15:03:01.435130Z",
+  "execution_id": "EX-INTEGRATION-NL5-C0-R1",
+  "work_order_id": "WO-INTEGRATION-NL5-C0-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "11fdc6a1799b4ebbce22f8290fb0de3a48951318",
+  "summary": "Post-terminal correction (append-only): опубликован вердикт независимого REVIEWER_R1 (PASS, 0 BLOCKING, fresh DSH teammate-сессия reviewer-nl5-c0-integration на exact HEAD 17ba164) и исправлены 2 NON-BLOCKING неточности текста — (1) ссылки на F02/F03 evidence есть только в card AUTHOR-U1.json, не в EXTERNAL-U2/RESOURCE-R1; (2) число JSON: 1624 на merge-only tree, 1626 на 87b11b4, 1628 на final head. Hosted CI H0 run 45196307985 на 17ba164 = SUCCESS (unittest 1059 OK, skipped=1). Содержимое merges и subjects не менялось.",
+  "evidence_refs": [
+    "docs/work/executions/EX-INTEGRATION-NL5-C0-R1/review/REVIEWER_R1.md",
+    "docs/control/NL5_C0_INTEGRATION_RECORD_R1.md"
+  ],
+  "next_action": "Owner Human Gate: merge-решение по PR #98 на новом head (correction-only delta); после merge — drive/operations на fresh main и INTEGRATION-R1 -> DONE."
+}

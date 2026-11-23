@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-validation-recorded",
+  "sequence": 2,
+  "timestamp_source": "machine",
+  "timestamp_utc": "2026-11-23T14:37:06.305651Z",
+  "execution_id": "EX-INTEGRATION-NL5-C0-R1",
+  "work_order_id": "WO-INTEGRATION-NL5-C0-R1",
+  "event_type": "VALIDATION_RECORDED",
+  "actor_role": "DIRECTOR",
+  "subject_sha": "87b11b402f92fc50bcb9a0a0a1e8e95732893592",
+  "summary": "Integration gates на candidate: Check1 JSON 1626 ok; Check2 consistency ok; Check3 executions 79 ok (6 NL5 C0 records валидны под FLOW-R1 harness); Check4 workflow lint 0 violations; unittest 1054 ran, множество failing-методов идентично fresh main ddf8a25 (73 Windows-окружение), 0 новых failures. Целостность: 58 путей blob-идентичны subjects, 0 удалений/изменений vs main; WORK_QUEUE.md побайтово = main (FLOW-R1). Hosted CI H0 на PR #98 — авторитетный gate; scientific runs=0.",
+  "evidence_refs": [
+    "docs/control/NL5_C0_INTEGRATION_RECORD_R1.md",
+    "docs/control/NL5_C0_INTEGRATION_MAP_R1.md"
+  ],
+  "next_action": "summary.md, terminal handoff, push, confirm hosted CI on final head."
+}

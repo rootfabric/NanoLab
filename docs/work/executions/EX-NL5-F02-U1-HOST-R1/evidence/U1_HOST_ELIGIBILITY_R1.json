@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "record_kind": "U1_HOST_ELIGIBILITY_R1",
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "task_issue": 83,
+  "program": "NL5-CLOSE-R1",
+  "generated_at_utc": "2026-10-25T17:19:04Z",
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "scientific_runs": 0,
+  "verdict": {
+    "status": "BLOCKED_OWNER_U1",
+    "candidate_marking": "CANDIDATE_NOT_ALLOCATED",
+    "author_u1": "NOT_ASSIGNED",
+    "r2_status": "WAITING_HOST / NOT_ACTIVE",
+    "statement": "Владелец не выделил native Ubuntu хост U1 и не опубликовал SSH-доступ. Единственный инспектируемый локальный хост — outenemy — находится в forbidden_hostnames (EXTERNAL_U2_ONLY) и запрещён как U1 по deny-list. Выделение не имитируется; активация U1/R2 невозможна без owner action (HG-A chain).",
+    "blocker_class": "OWNER_ALLOCATION_ABSENT",
+    "next_actor": "owner (human), затем отдельный bounded WO на выделенном U1 (fingerprint -> build -> gates -> NC -> activation-check), затем F04"
+  },
+  "owner_allocation_check": {
+    "method": "read-only: файлы конфигурации окружения исполнителя, env исполнителя, Git-документы после freeze; никаких проб сетей и login-попыток за пределами уже опубликованных аудитов",
+    "checks": [
+      {
+        "id": "OA-1",
+        "check": "~/.ssh/config (SSH-алиасы, которые владелец мог опубликовать для U1)",
+        "result": "ABSENT",
+        "detail": "файл ~/.ssh/config не существует; в ~/.ssh только authorized_keys/id_ed25519(+pub)/known_hosts — личные ключи исполнителя, не owner allocation; содержимое ключей НЕ копировалось в evidence",
+        "implies_allocation": false
+      },
+      {
+        "id": "OA-2",
+        "check": "env исполнителя (U1/NANOLAB/AUTHOR_UBUNTU/HOST allocation переменные)",
+        "result": "NOT_FOUND",
+        "detail": "соответствующих переменных нет (только DSH session / DISPLAY / ROS_LOCALHOST_ONLY — к выделению U1 отношения не имеют)",
+        "implies_allocation": false
+      },
+      {
+        "id": "OA-3",
+        "check": "Git-документы после freeze (новые commits/evidence с выделением U1)",
+        "result": "NOT_FOUND",
+        "detail": "fresh fetch: origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE (не двигался); ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md §10 = WAITING_HOST; NATIVE_UBUNTU_EXECUTION_POLICY_R1.md = AUTHOR_U1 NOT_ASSIGNED; git log --all --grep U1 после freeze содержит только dispatch/checklist записи этого WO (edd7952, 59b59be) — allocation record отсутствует",
+        "implies_allocation": false
+      },
+      {
+        "id": "OA-4",
+        "check": "F01 handoff (свежайший аудит программы, origin/work/nl5-f01-frozen-audit-r1 @ c7c5be6)",
+        "result": "CONFIRMS_NOT_ASSIGNED",
+        "detail": "F01 evidence matrix: F02 READY(C0) / цель BLOCKED — AUTHOR_U1=NOT_ASSIGNED, машины нет; противоречий нет",
+        "implies_allocation": false
+      },
+      {
+        "id": "OA-5",
+        "check": "локальный кандидат: текущий хост исполнения",
+        "result": "FORBIDDEN_AS_U1",
+        "detail": "hostname = outenemy, входящий в config/infra/r2-activation.v1.json forbidden_hostnames (роль EXTERNAL_U2_ONLY); физически это U2 — назначить его U1 означает уничтожить независимость author/external; см. deny_list ниже",
+        "implies_allocation": false
+      }
+    ],
+    "conclusion": "0 из 5 каналов содержат owner allocation -> BLOCKED_OWNER_U1 (ожидаемый честный исход по WO hard gate)"
+  },
+  "candidate_fingerprint": {
+    "marking": "CANDIDATE_NOT_ALLOCATED — этот fingerprint НЕ является frozen U1 fingerprint (§9 ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU не исполнялся и не мог исполняться); хост outenemy = U2, FORBIDDEN_AS_U1; данные собраны только читающими командами в рамках C0",
+    "collected_at_utc": "2026-10-25T17:18:12Z",
+    "hostname": "outenemy",
+    "machine_id": "e06fe756a6ce49cabc9ebaf394fd6837",
+    "os": "Ubuntu 22.04.5 LTS (Jammy), ID=ubuntu, VERSION_ID=22.04",
+    "kernel": "Linux outenemy 5.15.0-190-generic #200-Ubuntu SMP Fri Aug 7 15:06:04 UTC 2026 x86_64 (native, без Microsoft-маркера)",
+    "virtualization": "systemd-detect-virt = none (exit 1 => none)",
+    "init_system": "PID 1 = systemd; systemctl is-system-running = degraded (unit-failures на загруженном desktop/production хосте)",
+    "cpu": "x86_64, Intel(R) Xeon(R) CPU E5-2698 v3 @ 2.30GHz, 2 sockets x 16 cores x 2 threads = 64 CPU, 2 NUMA nodes",
+    "ram": "total 125Gi, available 14Gi на момент замера (swap 8Gi/8Gi used) — под конкурентной нагрузкой; HW-2 (available >= 32Gi) сейчас НЕ выполняется",
+    "filesystem": {
+      "root": "ext4 на /dev/nvme0n1p2 (native)",
+      "df": "458G total, 19G avail, use 96% на /",
+      "extra_drives": "sda1 931.5G ntfs /mnt/sda1; nvme1n1 953.9G ext4 /mnt/gig"
+    },
+    "lsblk_summary": "sda 931.5G (ntfs part), nvme0n1 465.8G (ext4 /), nvme1n1 953.9G (ext4 /mnt/gig); значимое число squashfs loop-монтировок snap",
+    "toolchain": {
+      "gcc": "11.4.0",
+      "gpp": "11.4.0",
+      "cmake": "3.22.1",
+      "make": "4.3",
+      "python3": "3.10.12",
+      "git": "2.34.1"
+    },
+    "listening_tcp_summary": "sshd(22) + широкий набор сторонних сервисов (0.0.0.0:80, 1883, 6379, 2222, 4000, 2580, 41144, dns на libvirt-мостах и др.) — NET-1 (только sshd) НЕ выполняется",
+    "network_egress": "https://github.com -> HTTP 200",
+    "canonical_paths_present": "~/src/NanoLab, ~/nanolab/{workspaces,raw,cache,tools} существуют (среда исполнителя на этом же хосте)",
+    "candidate_observations": [
+      "даже если бы deny-list не применялся, хост в текущем состоянии не прошёл бы HW-2 (available RAM 14Gi < 32Gi), HW-3 (19Gi free < 100Gi на raw), HW-4 (shared desktop/production: snap microk8s/lxd/wine/winbox, множество сервисов), NET-1 (много слушающих сервисов), SYS (systemd degraded)",
+      "это подтверждает правильность политики: U1 — отдельная выделенная машина, а не переиспользование U2"
+    ]
+  },
+  "deny_list_and_roles": {
+    "forbidden_hostnames": ["outenemy"],
+    "outenemy_role": "EXTERNAL_U2_ONLY (независимая внешняя репродукция/верификация; НИКОГДА author/dev host)",
+    "u1_definition": "отдельная физическая native Ubuntu машина (AUTHOR_UBUNTU), не совпадающая с U2 ни целиком, ни как VM/LXD-контейнер на ней",
+    "windows_rule": "WINDOWS_WSL_EXECUTOR = HISTORICAL_ONLY; WINDOWS_ALLOWED_FOR_NEW_SCIENCE = NO; тихий fallback на Windows/WSL2 запрещён",
+    "invariants": {
+      "INV-1_U1_not_U2": "нарушено для локального кандидата по определению (hostname in forbidden_hostnames); machine-id/serial сравнение с реальным U1 станет возможным только после выделения",
+      "INV-2_native_ubuntu": "у кандидата формально native (virt=none, ext4, systemd) — но это свойство U2, не U1",
+      "INV-3_outenemy_never_author": "соблюдается настоящим вердиктом: outenemy оставлен EXTERNAL_U2_ONLY",
+      "INV-4_no_windows": "соблюдается: U1 не назначен, Windows-пути не предлагаются"
+    }
+  },
+  "eligibility_checklist": {
+    "basis": [
+      "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md (§2 host contract, §6 gates U1-U5, §7 NC-U1..U5, §9 freeze procedure)",
+      "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md (§1 статусы, §3 изоляция CI/executor)",
+      "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md (INV-1..4, HW-1..4, OS-1..4, DS-1..3, NET-1..3, SEC-1..4, SYS-1..4, §11 owner actions A1-A6)",
+      "config/infra/r2-activation.v1.json (host_eligibility, forbidden_hostnames)"
+    ],
+    "gates": {
+      "U1_engine_build": "WAITING_HOST — невыполним без выделенного U1 (build на U2 зачёт не принимает: EN-4 требует собственную build-цепочку U1)",
+      "U2_package_verify": "WAITING_HOST",
+      "U3_frame0_fixtures": "WAITING_HOST",
+      "U4_technical_smoke": "WAITING_HOST",
+      "U5_harness": "WAITING_HOST"
+    },
+    "negative_controls": {
+      "NC-U1": "WAITING_HOST — SSH/session close, job выживает",
+      "NC-U2": "WAITING_HOST — agent restart, job выживает",
+      "NC-U3": "WAITING_HOST — GitHub runner service restart, job выживает",
+      "NC-U4": "WAITING_HOST — CI cleanup не трогает raw workspace",
+      "NC-U5": "WAITING_HOST — deliberate kill -> FAILED_TECHNICAL, run ID не переиспользуется"
+    },
+    "hardware_baseline_minimums": {
+      "HW-1": ">= 16 физических ядер x86_64 (CPU-only oxDNA)",
+      "HW-2": ">= 32 GiB RAM available под scientific jobs",
+      "HW-3": ">= 100 GiB free на native FS под ~/nanolab/raw (raw ~15 GiB/нога x запас)",
+      "HW-4": "выделенная машина кампании, не общий desktop"
+    },
+    "isolation_requirements": {
+      "scientific_executor_vs_ci": "nanolab-executor.service / systemd-run --scope отдельно от github-actions-runner.service; CI запрещены systemctl reboot/shutdown и kill executor cgroup; scientific job переживает SSH disconnect / agent crash / CI restart (root cause NL5-002-E исключается конструктивно)",
+      "public_pr_code": "публичный PR-код никогда не запускается на доверенных self-hosted scientific узлах (включая U1): pull_request — только ephemeral GitHub-hosted runners; self-hosted — explicit protected dispatch",
+      "runner_user": "если runner подключается позже — отдельный non-root user, disposable workspace, минимальный GITHUB_TOKEN (отдельный INFRA2 WO)"
+    },
+    "canonical_paths": {
+      "git_checkout": "~/src/NanoLab",
+      "workspaces": "~/nanolab/workspaces/<execution-id>/",
+      "raw": "~/nanolab/raw/<execution-id>/<attempt-id>/ (manifest: sha256, size, producer, retention)",
+      "cache": "~/nanolab/cache/",
+      "tools": "~/nanolab/tools/",
+      "rule": "physics workspaces и raw artifacts НЕ хранятся внутри Git repo"
+    },
+    "credential_scope": {
+      "ssh": "только key-based auth (sshd -T: passwordauthentication no, pubkeyauthentication yes); доступ минимальному кругу исполнителей; host alias публикуется владельцем в своём канале",
+      "git": "core.autocrlf=false, core.safecrlf=true",
+      "python": "pinned venv ~/nanolab/venvs/r2 (exact version + lock); global pip install forbidden",
+      "secrets_rule": "ключи/токены НЕ копируются в Git/логи/evidence; долгоживущие credentials не передаются simulation-процессам; в этом evidence нет ни одного секрета (проверено: только имена файлов конфигурации и их отсутствие/наличие)",
+      "note": "личный ключ исполнителя id_ed25519 — не owner allocation и не U1 credential; в evidence не копировался"
+    }
+  },
+  "evidence_matrix": {
+    "blocking_r2_activation": [
+      "OWNER_ALLOCATION_ABSENT: нет выделенной физической машины U1, нет allocation record (hostname/machine-id/serial + роль AUTHOR_UBUNTU + подтверждение физической отдельности от U2), нет опубликованного SSH host alias",
+      "как следствие: fingerprint freeze (§9), build U1, gates U1-U5, NC-U1..U5, fresh review + fresh verify, HG-A — все WAITING_HOST/NOT_RUN",
+      "R2_STATUS = WAITING_HOST / NOT_ACTIVE; NEW_SCIENCE = HARD_BLOCKED; F04 (R2 activation) не стартует"
+    ],
+    "owner_action_list_exact": {
+      "A1": "выделить/подтвердить отдельную физическую машину под §1 HW-1..4 (НИКОГДА outenemy, никогда VM/LXD на outenemy, не Windows)",
+      "A2": "установить native Ubuntu LTS, создать пользователя исполнителя, disk layout §3 (~/src/NanoLab + ~/nanolab/{workspaces,raw,cache,tools})",
+      "A3": "обеспечить SSH key-only доступ исполнителя (SEC-1) и опубликовать host alias в канале владельца",
+      "A4": "зафиксировать allocation record: hostname/machine-id/serial + роль AUTHOR_UBUNTU + физическая отдельность от U2 (§10 шаги 1-2)",
+      "A5": "после A1-A4 исполнить runbook DIRECTOR_FRESH_AUDIT_R1.md §6 на U1: fingerprint -> build-engine -> gates U1-U5 -> NC-U1..U5 -> activation-check (отдельные bounded WO/execution)",
+      "A6": "далее по политике: fresh review + fresh verify activation package -> HG-A (Human Gate) -> R2 ACTIVE -> dispatch authority v3 -> HUMAN_PROTECTED_WRITER launch gate; только тогда F04"
+    },
+    "handoff_targets": {
+      "on_BLOCKED": "owner action A1-A6; F02 завершает свой C0-scope настоящим evidence",
+      "on_allocated": "новый bounded WO на фактическом U1 (не этот WO): frozen fingerprint + gates + NC; затем F04 при HG-A"
+    }
+  },
+  "boundaries_respected": {
+    "scientific_runs": 0,
+    "physics_or_oxdna_runs": 0,
+    "apt_or_global_installs": 0,
+    "host_modifications": 0,
+    "new_network_scans": 0,
+    "secrets_in_evidence": 0,
+    "canonical_state_changes": 0,
+    "u1_impersonation": "никогда: outenemy не объявлялся U1; fingerprint помечен CANDIDATE_NOT_ALLOCATED"
+  },
+  "issue83_vs_repo_divergences": [
+    "Issue #83 допускает итог 'U1 eligible or BLOCKED_HOST'; WO/факты дают точнее: BLOCKED_OWNER_U1 (блокировка на уровне owner allocation, до любых host-проверок)",
+    "Issue #83 требует 'verified host fingerprint' — по политике верифицируемый fingerprint возможен только на выделенном U1; опубликован read-only fingerprint локального кандидата с явной маркировкой CANDIDATE_NOT_ALLOCATED/FORBIDDEN_AS_U1",
+    "Issue #83 ссылается на 'WO #65 chain' — в репо это docs/work/WO-NATIVE-UBUNTU-EXECUTOR-R1.md + docs/infra/U1_PROVISIONING_CHECKLIST_R1.md (issue #65), ссылки сохранены"
+  ]
+}

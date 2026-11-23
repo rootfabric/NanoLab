@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-25T17:19:04Z",
+  "execution_id": "EX-NL5-F02-U1-HOST-R1",
+  "work_order_id": "WO-NL5-F02-U1-HOST-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f02-u1-host-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate subagent session spawned by Director)",
+    "dsh_session_id": "aa17776a-86cf-45c5-9921-d4fef9ac2c89",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-F02-U1-HOST-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "subject_sha": "59b59beba94690b813aa9ae4af09d57500b4d5d8",
+  "summary": "Started C0 host-eligibility WO-NL5-F02-U1-HOST-R1 (Issue #83, program NL5-CLOSE-R1 #81) as a real separate DSH subagent session (durable id aa17776a-86cf-45c5-9921-d4fef9ac2c89, matching the Director identity-binding commit 59b59be). Fresh git fetch origin --prune confirmed origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE (no epoch change since program publication). F01 handoff acknowledged read-only from origin/work/nl5-f01-frozen-audit-r1 @ c7c5be6edbcdb5a304705ff6d53863fa735d7d0c (events 0001-0003, passport HANDOFF_READY); F01 evidence matrix marks F02 READY(C0)/goal BLOCKED (no U1 host). Scope of this execution: (1) owner-allocation check (SSH aliases, env, Git docs post-freeze); (2) read-only fingerprint of the local candidate host marked CANDIDATE_NOT_ALLOCATED; (3) eligibility checklist per NATIVE_UBUNTU_EXECUTION_POLICY_R1 / ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU / U1_PROVISIONING_CHECKLIST_R1 (gates U1-U5 preliminary, NC-U1..U5, deny-list U2=outenemy != U1, scientific-executor/CI isolation, canonical raw paths, credential scope without secrets); (4) evidence matrix with exact owner action list (HG-A path to F04). Boundaries: SCIENTIFIC_RUNS = 0 (hard zero); read-only host inspection only (no apt upgrade, no global installs, no modifications, no network scans beyond prior published audits); no secrets into Git/logs; canonical AUTHOR_U1=NOT_ASSIGNED / R2=WAITING_HOST never changed by this WO; no self-accept; merge to main = Human Gate (Director). Hard gate: if no owner allocation is found -> publish BLOCKED_OWNER_U1, nothing simulated.",
+  "command_refs": [
+    "git fetch origin --prune (fresh) -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE, no epoch change)",
+    "git rev-parse HEAD -> 59b59beba94690b813aa9ae4af09d57500b4d5d8 (Director dispatch + identity binding commit)",
+    "curl -s https://api.github.com/repos/rootfabric/NanoLab/issues/83 -> task scope confirmed (F02, assigned role HOST-PROVISIONING, hard gate BLOCKED_OWNER_U1)",
+    "git show origin/work/nl5-f01-frozen-audit-r1:docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/passport.json -> status HANDOFF_READY (dependency acknowledged, not merged)",
+    "cat docs/work/WO-NL5-F02-U1-HOST-R1.md + docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md + docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md + docs/infra/U1_PROVISIONING_CHECKLIST_R1.md -> scope/gates confirmed"
+  ],
+  "evidence_refs": [
+    "docs/work/WO-NL5-F02-U1-HOST-R1.md",
+    "docs/work/executions/EX-NL5-F02-U1-HOST-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md",
+    "docs/research/ENGINE_ENVIRONMENT_R2_NATIVE_UBUNTU.md",
+    "docs/infra/U1_PROVISIONING_CHECKLIST_R1.md"
+  ],
+  "next_action": "Check owner allocation (ssh config/env/git post-freeze); collect read-only candidate fingerprint; build U1_HOST_ELIGIBILITY_R1 evidence + eligibility checklist + owner evidence matrix; publish CONTINUATION then HANDOFF with verdict BLOCKED_OWNER_U1 or eligible (only with real owner allocation).",
+  "blocker": null
+}

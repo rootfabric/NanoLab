@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "record_kind": "VERIFIER_VERDICT",
+  "verdict_id": "VERIFIER_VERDICT_NL5_C0_R1",
+  "execution_id": "EX-NL5-C0-BATCH-VERIFY-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-VERIFY-R1",
+  "program": "NL5-CLOSE-R1",
+  "program_issue": 81,
+  "verify_scope_issues": [83, 84, 86],
+  "role": "VERIFIER",
+  "session_ref": {
+    "launcher": "DSH subagent tool (real separate fresh session, distinct from REVIEWER and all IMPLEMENTERs)",
+    "dsh_subagent_id": "bd0c45d7-6bfd-40c4-8aea-879c9afd546c",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "verify_branch": "verify/nl5-c0-batch-f02-f03-f05-r1",
+  "base_sha": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "origin_main_at_verify": "3b567ae33f247b182b2ae451d2cc4598a9e76019",
+  "origin_main_unmoved": true,
+  "scientific_runs": 0,
+  "claim_class": "C0_SOFTWARE_ONLY",
+  "method": "fresh git-archive trees without git history (/tmp/verify-f02, /tmp/verify-f03, /tmp/verify-f05); all validator and hash checks on those trees; git-object checks in local clone after fresh fetch",
+  "review_subject": {
+    "branch": "review/nl5-c0-batch-f02-f03-f05-r1",
+    "head": "906d55dffebb606570bb6ff6b3cd17778d314202",
+    "verdict": "PASS",
+    "evidence": "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/evidence/BATCH_REVIEWER_VERDICT_NL5_C0_R1.{md,json}"
+  },
+  "subjects": [
+    {
+      "wo": "F02",
+      "issue": 83,
+      "branch": "work/nl5-f02-u1-host-r1",
+      "head": "c38ad687d87bfa0c33d69bfee4fe40020d34ba45",
+      "tree": "8dbfeb02311d659c1a961434d3eb0a55502de569",
+      "head_matched": true,
+      "tree_matched": true,
+      "moved_after_review": false,
+      "verdict": "VERIFIED",
+      "work_cli_validate": {"ok": true, "errors": [], "status": "BLOCKED_OWNER_U1"},
+      "scope_compliance": "PASS (10 files, allowed paths only)",
+      "frozen_integrity": "PASS (3/3 canonical SHA-256 + 3/3 blob SHA-1; diff frozen paths F2..subject empty)",
+      "work_queue_numstat": "1 0",
+      "evidence_sha256": {
+        "U1_HOST_ELIGIBILITY_R1.json": "cc34ae99245678be48fcc492aca67483b9e9faa9b4c58a0a75923e60a04709e7",
+        "U1_HOST_ELIGIBILITY_R1.md": "f42b1b144beb443dea351afab6ed24ff22d75b183e33b30bb969e17646f0f315"
+      },
+      "findings_confirmed": ["F02-NF-1"]
+    },
+    {
+      "wo": "F03",
+      "issue": 84,
+      "branch": "work/nl5-f03-u2-readiness-r1",
+      "head": "1831585fa70169c4e473acfe38e9603e45cfe22c",
+      "tree": "8a89d2a446e4f05fcec7a6daade6572ff5a75212",
+      "head_matched": true,
+      "tree_matched": true,
+      "moved_after_review": false,
+      "verdict": "VERIFIED",
+      "work_cli_validate": {"ok": true, "errors": [], "status": "HANDOFF_READY"},
+      "scope_compliance": "PASS (13 files, allowed paths only)",
+      "frozen_integrity": "PASS (3/3 canonical SHA-256 + 3/3 blob SHA-1; diff frozen paths F2..subject empty)",
+      "work_queue_numstat": "2 0 (1 entry + 1 blank separator)",
+      "evidence_sha256": {
+        "U2_READINESS_R1.json": "3440e116595c3b20782f354b52bcf026dc35e300773f2040957319023447a241",
+        "U2_READINESS_R1.md": "4b4d9e362972bf5c0a68fb98532880c00133d3e6ccb09de937f24225e6f0e5c0",
+        "U2_LIVE_HOST_OBSERVATION_R1.json": "2c27a99bfb36742dd93f09bd899a905c3b359e4879abd6dd7fa0971b41ca03d1",
+        "U2_LIVE_HOST_OBSERVATION_R1.md": "1660b254fe2031c1498d1d7c9447d358f5fa6474e61fb2e979317c8f1e6f6b50"
+      },
+      "independent_recomputations": [
+        "engine binary sha256 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78, size 3380728 == claim L-04 (read-only host check)",
+        "seed recount from frozen record: 148 fresh (64/64/10/10) + 4 bootstrap + 28 pools (12/12/2/2) = 180 distinct, all unique, 0 seed-pool overlaps; skips 41",
+        "F2 changed-file blobs F2 vs main: 8/8 SAME (basis of '9/9' claim; 9th composition entry DIRECTOR_FREEZE_R2.json added by F2 descendant)",
+        "HG_B blob 61d1491233aeb2537f9800d6183def5b8fb0c8e0 / canonical b68dd341a5671d6314da3fcf6d32fae54f88b385b7b5a631edb07b0f6f49d2c9 at origin/main == claims",
+        "machine_launch_authorized=false (x3); AUTHOR_U1=NOT_ASSIGNED; R2=WAITING_HOST / NOT_ACTIVE"
+      ],
+      "findings_confirmed": ["F03-NF-1", "F03-NF-2", "F03-NF-3", "F03-NF-4"]
+    },
+    {
+      "wo": "F05-prep",
+      "issue": 86,
+      "branch": "work/nl5-f05-dispatch-prep-r1",
+      "head": "4c9d8fd30300a2f48504d1b914693f0a66bb3555",
+      "tree": "17e2a7141295c9f6e5bf6fc302bc8d977b210a4d",
+      "head_matched": true,
+      "tree_matched": true,
+      "moved_after_review": false,
+      "verdict": "VERIFIED",
+      "work_cli_validate": {"ok": true, "errors": [], "status": "HANDOFF_READY"},
+      "scope_compliance": "PASS (11 files, allowed paths only)",
+      "frozen_integrity": "PASS (3/3 canonical SHA-256 + 3/3 blob SHA-1; diff frozen paths F2..subject empty)",
+      "work_queue_numstat": "1 0",
+      "evidence_sha256": {
+        "DISPATCH_READINESS_R1.json": "3c799cb8cbd222575af498a98fc63a227b5fb1f107774bf9d72e532415e56301",
+        "DISPATCH_READINESS_R1.md": "a2ccc3f718fb323610ce81332416281a558eedb8ceea89b5d47444149ebf1c1c",
+        "budget-ledger-R1.json": "4e7cfbc079db9897decdc37fa7d0c58bce1a84d6cbf1d35c3d787aedd1c3464b"
+      },
+      "independent_recomputations": [
+        "budget arithmetic: 296 = 148x2; 56 = 28x2; max_runs 352; per-platform 176; HG_B wall_hours_per_platform 560, decision APPROVED, quotas 12/12/2/2",
+        "checks_log 85 entries, all ok:true, checks_failed=[]",
+        "F05-F-1 compensation code exists: scripts/nl5/repro_v02_freeze_contract.py L1900 hashlib.sha256(raw).hexdigest() != art_digest (also L1928/L1935)",
+        "machine_launch_authorized=false (x8 spellings); launch_gate=HUMAN_PROTECTED_WRITER"
+      ],
+      "findings_confirmed": ["F05-NF-1"]
+    }
+  ],
+  "frozen_integrity": {
+    "f2_head": "60da9a846511265a8ac7564da088c3d74cb073f0",
+    "f2_tree": "e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "canonical_sha256_matches_director_freeze_r2": "9/9 (3 subjects x protocol/contract/seed)",
+    "blob_sha1_matches": "9/9",
+    "diff_frozen_paths_f2_vs_subjects": "empty x3",
+    "diff_frozen_paths_f2_vs_origin_main": "empty",
+    "director_freeze_record": "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json"
+  },
+  "review_verdict_consistency": {
+    "checked": true,
+    "head_tree_claims": "3/3 match",
+    "pass_verdicts": "3/3 match",
+    "passport_statuses": "BLOCKED_OWNER_U1 / HANDOFF_READY / HANDOFF_READY == review passport_status_at_subject",
+    "findings_list_complete": true,
+    "findings_confirmed": ["F02-NF-1", "F03-NF-1", "F03-NF-2", "F03-NF-3", "F03-NF-4", "F05-NF-1"],
+    "discrepancies": []
+  },
+  "negative_control": {
+    "performed": true,
+    "target": "/tmp copy of F05 evidence/DISPATCH_READINESS_R1.json",
+    "tamper": "1 byte: \"scientific_runs\": 0 -> 1 (offset 352)",
+    "expected_sha256": "3c799cb8cbd222575af498a98fc63a227b5fb1f107774bf9d72e532415e56301",
+    "tampered_sha256": "764b722a97f75a83090804ac11e9230c56a9480ac1150150d28c072929c34fc0",
+    "detected": true,
+    "conclusion": "hash-check method is sensitive to a single-byte change; negative control PASSED"
+  },
+  "evidence_sha256_note": "None of the 9 key evidence files carries an externally claimed self-SHA-256 in subject passports/summaries or in the review verdict (verified by 64-hex grep); CHECKOUT_SHA256 baselines recorded here, each verified equal to the SHA-256 of its Git object (9/9 MATCH).",
+  "hash_terminology_note": "Values above are CHECKOUT_SHA256 of fresh git-archive trees, each cross-checked against the SHA-256 of the exact Git blob; frozen-artifact values are the canonical SHA-256 pins of DIRECTOR_FREEZE_R2.json recomputed from Git object bytes.",
+  "batch_verdict": "VERIFIED",
+  "blocking_findings": [],
+  "launch_gates_preserved": {
+    "machine_launch_authorized": false,
+    "r2_active": false,
+    "author_u1": "NOT_ASSIGNED",
+    "scientific_authorization_declared_by_any_subject": false
+  },
+  "recorded_at_utc": "2026-10-25T18:21:14Z"
+}

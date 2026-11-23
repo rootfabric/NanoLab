@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-review-verdict-pass",
+  "timestamp_utc": "2026-10-25T18:07:03Z",
+  "execution_id": "EX-NL5-C0-BATCH-REVIEW-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-REVIEW-R1",
+  "event_type": "HANDOFF_COMPLETED",
+  "actor_role": "REVIEWER",
+  "actor_id": "nl5-c0-batch-review-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate session, fresh, no implementer context)",
+    "dsh_session_id": "b8eca5d9-8ad0-419d-8092-58da4d471487",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md"
+  },
+  "subject_sha": "904ca4415263417b553ef263ce3df004e457a7a5",
+  "summary": "BATCH REVIEW VERDICT = PASS (F02 PASS; F03 PASS; F05-prep PASS; 0 blocking findings, 6 non-blocking). Documentary C0 review only: SCIENTIFIC_RUNS=0, no code changes, no subject-branch writes, no self-accept, no scientific authorization declared. Subjects pinned at exact HEAD/TREE (3/3 match passport, tips unmoved): F02 origin/work/nl5-f02-u1-host-r1 @ c38ad687d87bfa0c33d69bfee4fe40020d34ba45 / tree 8dbfeb02311d659c1a961434d3eb0a55502de569; F03 origin/work/nl5-f03-u2-readiness-r1 @ 1831585fa70169c4e473acfe38e9603e45cfe22c / tree 8a89d2a446e4f05fcec7a6daade6572ff5a75212; F05 origin/work/nl5-f05-dispatch-prep-r1 @ 4c9d8fd30300a2f48504d1b914693f0a66bb3555 / tree 17e2a7141295c9f6e5bf6fc302bc8d977b210a4d. Per-subject: (1) scope compliance PASS x3 (git diff BASE..subject = allowed paths only; 0 deletions in WORK_QUEUE; forbidden surfaces untouched); (2) frozen integrity PASS x3 (git diff F2=60da9a8..subject empty over protocol/contract/seed, also empty F2..origin/main; canonical SHA-256 recomputed 9/9 match DIRECTOR_FREEZE_R2.json: protocol 2658ee3e..., contract 7e647654..., seed 8e844bff...; blob SHA-1 3/3 match); (3) events chains monotonic real timestamps; F03 addendum 0004 is corrections-class post-terminal (allowed); F03 pre-terminal events 0001/0002 had actor_role edited in 39e9aec -> finding F03-NF-1 (non-blocking, no facts/timestamps changed, original in git history); (4) claims vs evidence independently recomputed: F02 hostname/forbidden_hostnames/allocation 0/5 -> BLOCKED_OWNER_U1 correct; F03 engine binary sha256 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78 size 3380728 exact match, F2 blobs 8/8 SAME at main (9th composition entry = DIRECTOR_FREEZE_R2.json SAME_DIR -> F03-NF-2 wording imprecision), L-03 disks 96%/19G matches honest MEASURED_FAIL_ON_THRESHOLD; F05 seed recount from frozen record 148/4/28/41=180 unique identities 0 overlap, checks_log 85/85 ok, budget 296=148x2 + 56=28x2 = 352 <= 352 (176/platform), wall 560h == HG_B_OWNER_DECISION_R1.json (sha256 b68dd341... recomputed, blob 61d14912...), storage 176x119.8MB=21.08GB<=21.2GB (P1 basis mean 105.9/max 119.8 MB recomputed from run_output_digests_p1.json n=20), adversarial 7/8 logical (ADV-3 the single miss), gate reproduced read-only: pristine PASS exit0, prose tamper N=64->65 PASS exit0 (F05-F-1 real), machine-block tamper FAIL exit3, compensation verified (repro_v02_freeze_contract.py recomputes canonical_sha256 from Git object bytes ~L1893-1905; tampered prose sha256 23666bf6... != canonical 2658ee3e...); (5) launch gates preserved everywhere: machine_launch_authorized=false, R2_ACTIVE=false, AUTHOR_U1=NOT_ASSIGNED, authority A not created, no ACCEPTED declared by any subject. WORK_QUEUE: exactly one append entry per subject (F02 +1, F03 +1 entry +1 blank separator -> F03-NF-3, F05 +1; 0 deletions; existing lines unchanged). Harness validators green on git-archive trees of all three subjects (work_cli validate ok:true errors:[] x3) and on this review branch (check-consistency exit 0, workflow_lint blocking 0). Non-blocking findings: F02-NF-1, F03-NF-1..NF-4, F05-NF-1 (full text in verdict evidence). Passport status -> REVIEW_PASS. Event-type note: directive wording REVIEW_PASS mapped to canonical enum HANDOFF_COMPLETED (terminal) with id 0002-review-verdict-pass; ALLOWED_EVENTS has no REVIEW_* terminal type.",
+  "command_refs": [
+    "git diff --name-only 3b567ae..<subject> per subject -> allowed paths only (3/3)",
+    "git diff --name-only 60da9a8..<subject> -- <frozen paths> -> empty (3/3); same for 60da9a8..origin/main",
+    "git show <subject>:<path> | sha256sum for protocol/contract/seed -> 9/9 canonical match; git rev-parse <subject>:<path> -> 3/3 blob SHA-1 match",
+    "hostname; test -f ~/.ssh/config; env | grep -iE 'u1|author_ubuntu'; grep forbidden_hostnames config/infra/r2-activation.v1.json; git rev-parse origin/main",
+    "sha256sum ~/nanolab/cache/oxdna-build-r2-u2/bin/oxDNA && stat -c %s -> 6effd00a09628895fac48b8b4c60c4dc82557d05910da6bebe276b8355126b78 / 3380728",
+    "git diff --name-only 60da9a8^ 60da9a8 (8 files); per-file git rev-parse 60da9a8:<p> vs origin/main:<p> -> 8/8 SAME",
+    "python3 recount of frozen seed record (seeds/bootstrap/pools/skips/uniqueness) -> 148/4/28/41, 180 unique, 0 overlap; len(checks_log)=85 all ok",
+    "python3 budget arithmetic + HG_B_OWNER_DECISION_R1.json sha256/blob recomputation -> 296/56/352/176/560h/storage 21.08GB<=21.2GB; b68dd341...; 61d14912...",
+    "python3 per-run aggregation of run_output_digests_p1.json -> mean 105.9 MB / max 119.8 MB (n=20)",
+    "gate reproduction (read-only, /tmp copies, script from subject tree, --repo-root review worktree): T1 pristine -> PASS exit0; T2 prose tamper line263 N=64->65 -> PASS exit0; T3 machine tamper n_0b=63 -> FREEZE_GATE_FAIL exit3; sha256 pristine vs tampered -> 2658ee3e... vs 23666bf6...",
+    "df -h / -> 96% used, 19G available",
+    "PYTHONPATH=scripts python3 -m harness.work_cli validate on /tmp git-archive trees of F02/F03/F05 -> ok:true errors:[] x3",
+    "PYTHONPATH=scripts python3 -m harness.cli check-consistency --root . -> exit 0; PYTHONPATH=scripts python3 -m harness.workflow_lint --root . -> blocking 0",
+    "python3 -m json.tool on passport.json, events/0001, verdict .json -> strict parse OK"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/evidence/BATCH_REVIEWER_VERDICT_NL5_C0_R1.md",
+    "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/evidence/BATCH_REVIEWER_VERDICT_NL5_C0_R1.json",
+    "docs/work/executions/EX-NL5-C0-BATCH-REVIEW-R1/summary.md",
+    "docs/work/WORK_QUEUE.md",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json"
+  ],
+  "next_action": "Director: принять batch REVIEW_PASS и dispatch свежего Verifier по тем же exact HEAD/TREE трёх subjects (отдельная сессия), затем Human Gate. Никакой автоактивации: F04 заблокирован до реального выделения U1 (owner actions A1-A6); U2 storage L-03 (96% used, 19G free, порог 80% превышен) требует remediation или owner accept-risk до любого F07 dispatch.",
+  "blocker": null
+}
