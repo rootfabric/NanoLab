@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "0001-work-order-started",
+  "timestamp_utc": "2026-10-25T18:09:58Z",
+  "execution_id": "EX-NL5-C0-BATCH-VERIFY-R1",
+  "work_order_id": "WO-NL5-C0-BATCH-VERIFY-R1",
+  "event_type": "WORK_ORDER_STARTED",
+  "actor_role": "VERIFIER",
+  "actor_id": "nl5-c0-batch-verify-r1",
+  "actor_session": {
+    "launcher": "DSH subagent tool (real separate fresh session; distinct from REVIEWER and all IMPLEMENTERs)",
+    "dsh_session_id": "bd0c45d7-6bfd-40c4-8aea-879c9afd546c",
+    "director_dispatch_proof": "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "timestamp_note": "session-start stamp equals passport started_at_utc (Director identity-binding commit 8dfe8c5b, 2026-10-25T18:09:58Z)"
+  },
+  "subject_sha": "8dfe8c5b7cdf4dc731a1825c59833369680d99c0",
+  "summary": "Started exact-head batch verification of three C0 handoffs after REVIEWER PASS (program NL5-CLOSE-R1 #81; subjects #83 F02 / #84 F03 / #86 F05-prep) as a real separate fresh DSH session (durable id above; Director dispatch proof in dispatch/0000). Subjects pinned: origin/work/nl5-f02-u1-host-r1 @ c38ad687d87bfa0c33d69bfee4fe40020d34ba45 (tree 8dbfeb02), origin/work/nl5-f03-u2-readiness-r1 @ 1831585fa70169c4e473acfe38e9603e45cfe22c (tree 8a89d2a4), origin/work/nl5-f05-dispatch-prep-r1 @ 4c9d8fd30300a2f48504d1b914693f0a66bb3555 (tree 17e2a714); review subject origin/review/nl5-c0-batch-f02-f03-f05-r1 @ 906d55dffebb606570bb6ff6b3cd17778d314202 (PASS). Method: fresh git fetch + exact HEAD/TREE pinning; fresh git-archive trees WITHOUT git history in /tmp/verify-f02|f03|f05; harness work_cli validate on those trees; SHA-256 control of key evidence files vs Git objects and vs all claims in passports/summaries/verdicts; frozen integrity vs DIRECTOR_FREEZE_R2.json; scope diff BASE..subject x3; review-verdict consistency incl. findings F02-NF-1, F03-NF-1..4, F05-NF-1; mandatory negative control (1-byte tamper test in /tmp). Hard boundaries: SCIENTIFIC_RUNS = 0; read-only on subject/review branches, main, project/*.json, scripts/**, tests/**, frozen paths; writes only to docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/** and one append-only WORK_QUEUE.md line; no force-push; offline only.",
+  "command_refs": [
+    "git fetch origin && git rev-parse origin/main -> 3b567ae33f247b182b2ae451d2cc4598a9e76019 (= BASE, unmoved)",
+    "git rev-parse origin/work/nl5-f02-u1-host-r1 origin/work/nl5-f03-u2-readiness-r1 origin/work/nl5-f05-dispatch-prep-r1 -> 3/3 == pinned HEADs",
+    "git rev-parse <subject>^{tree} x3 -> 3/3 == pinned TREEs",
+    "git archive <head> | tar -x -C /tmp/verify-f02|f03|f05 -> fresh trees without git history"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/passport.json",
+    "docs/work/executions/EX-NL5-C0-BATCH-VERIFY-R1/dispatch/0000-DIRECTOR-DISPATCH-PROOF.md",
+    "origin/review/nl5-c0-batch-f02-f03-f05-r1 @ 906d55dffebb606570bb6ff6b3cd17778d314202 (read-only input)"
+  ],
+  "next_action": "Run validators + hash controls + frozen integrity + scope + review-consistency + negative control on the fresh trees; publish VERIFIER_VERDICT_NL5_C0_R1.{md,json}; append WORK_QUEUE line; set passport status.",
+  "blocker": null
+}
