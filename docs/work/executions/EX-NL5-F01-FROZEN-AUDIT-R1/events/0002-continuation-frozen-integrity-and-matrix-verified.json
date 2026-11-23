@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "0002-continuation-frozen-integrity-and-matrix-verified",
+  "timestamp_utc": "2026-10-25T17:06:30Z",
+  "execution_id": "EX-NL5-F01-FROZEN-AUDIT-R1",
+  "work_order_id": "WO-NL5-F01-FROZEN-AUDIT-R1",
+  "event_type": "CONTINUATION_CHECKPOINT",
+  "actor_role": "IMPLEMENTER",
+  "actor_id": "nl5-f01-auditor-r1",
+  "subject_sha": "dd46c531da1b47e3364150c213459b1227720b0b",
+  "summary": "Audit phase complete, evidence published. (1) Epoch: fresh git fetch -> origin/main = 3b567ae33f247b182b2ae451d2cc4598a9e76019 = BASE, no epoch change. (2) Frozen integrity: GIT_BLOB_SHA1 + CANONICAL_BLOB_SHA256 recomputed at exact F2 = 60da9a846511265a8ac7564da088c3d74cb073f0 for protocol/contract/seed record -> 3/3 MATCH vs docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json (48357196/2658ee3e, d6a9ccde/7e647654, 0164e0e3/8e844bff). (3) Authority: F2 ancestor of origin/main (exit 0); D2 record commit a2f7304 in main; HG_B_OWNER_DECISION_R1 = APPROVED (HUMAN_GATE_OWNER); fresh Reviewer(F2) PASS tip d63eb5c and fresh Verifier(F2) VERIFIED tip f12d0b4 descend from exact F2, evidence files append-only (zero modifications on any ref) - FINDING F01-F-1: R/V tips are NOT merged into main. (4) Feasibility grid read from frozen bytes: 0b/32b primary N=64 (n_min 52), 11b/53b control N=10 (n_min 8), confirmatory 296, replacement cap 56 (pools 12/12/2/2, 2 runs/pair), max 352, <=560h/platform, CPU-only, n_grid selected 64 headroom 0.8. (5) Machine freeze gate independently re-run read-only on pinned F2 bytes: gate=PASS, PREFREEZE_VALIDATION_PASS, dispatch=DISPATCH_BLOCKED, dispatch_ready=false, exit 0 (report copy frozen-gate-rerun-F2-audit-R1.json, sha256 300575f54a07743127936ccbd6124e9792da6e6735165485e763485a587f7e23); git-less extraction fails closed by design. machine_launch_authorized=false, launch_gate=HUMAN_PROTECTED_WRITER. (6) Current status confirmed fresh: AUTHOR_U1=NOT_ASSIGNED, R2=WAITING_HOST/NOT_ACTIVE, NEW_SCIENCE=HARD_BLOCKED; science_runs since freeze = 0 (no new run artifacts in F2..origin/main; physics_runs 35=35, external_reproductions 0=0). (7) Old NL5-002 terminal MISMATCH preserved: state.json NL5-002=WAITING_HUMAN, NL5=IN_PROGRESS, NL5-001=ACCEPTED; verdict files never modified on any ref. (8) Capability probes (no simulation): real DSH subagent session 454dea06-3e76-4c1e-80bd-d5287bc2cae0; SSH push works as rootfabric; GitHub issue-comment write = HTTP 403 with stored fine-grained PAT (reproduced, empty-body probe, no side effects); unauthenticated API reads 200. (9) Duplication scan: open PRs #78/#16 only, no F01/F02/F03/F05 duplication. Evidence matrix: F02 READY (C0) / goal BLOCKED (no U1 host), F03 READY (C0) / external leg BLOCKED (U2 coordination), F05 READY (C0 prep) / authority A BLOCKED (F04/R2/U1); F06/F07 hard-blocked by science launch gate. Boundaries kept: SCIENTIFIC_RUNS=0, no canonical status changes, no self-accept.",
+  "command_refs": [
+    "git rev-parse 60da9a846511265a8ac7564da088c3d74cb073f0^{tree} -> e565c8a6cee9e829fac14008ebc9c2ea1609931d",
+    "git rev-parse F2:<protocol|contract|seed> + git show F2:<path> | sha256sum -> 3/3 MATCH",
+    "git merge-base --is-ancestor 60da9a8... origin/main -> exit 0; --is-ancestor a2f7304... origin/main -> exit 0",
+    "git log --all --diff-filter=M -- FRESH_SCIENTIFIC_REVIEW_R2* FRESH_VERIFIER_R2* -> empty (append-only)",
+    "PYTHONPATH=scripts python3 -m nl5.repro_v02_freeze_contract gate --contract ... --protocol ... --record ... --repo-root . -> exit 0, PASS/DISPATCH_BLOCKED",
+    "git log --oneline F2..origin/main -- docs/evidence docs/research (25 commits, zero scientific artifacts)",
+    "git log --all --diff-filter=M -- docs/evidence/NL5-002/FRESH_VERIFY_R1.md FRESH_REVIEW_R1.md FRESH_PAIRED_VERIFY_R1.md -> empty",
+    "ssh -T git@github.com -> 'Hi rootfabric!'; POST /issues/82/comments (empty body) -> HTTP 403",
+    "curl -s 'https://api.github.com/repos/rootfabric/NanoLab/pulls?state=open&per_page=50' -> #78, #16"
+  ],
+  "evidence_refs": [
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/NL5_F01_IMMUTABLE_AUDIT_R1.md",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/NL5_F01_IMMUTABLE_AUDIT_R1.json",
+    "docs/work/executions/EX-NL5-F01-FROZEN-AUDIT-R1/evidence/frozen-gate-rerun-F2-audit-R1.json",
+    "docs/evidence/NL5-V02-FREEZE/DIRECTOR_FREEZE_R2.json",
+    "docs/control/NATIVE_UBUNTU_EXECUTION_POLICY_R1.md"
+  ],
+  "next_action": "Record HANDOFF_COMPLETED, append single WORK_QUEUE.md entry, set passport status HANDOFF_READY, run full validation suite, push.",
+  "blocker": null
+}
